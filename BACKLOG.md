@@ -10,28 +10,29 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 ## Value Prioritized Roadmap (updated 2026-10-05)
 
 **NOW**
-1. **-275** -- Ask Agy moves to tool-calling retrieval: answers from profile and conversation, calls search_stories when needed. Evaluator script 101/110 vs 68/110, follow-ups 56/65 vs 29/65 (scoring correction, 50bc068), 0 gate refusals vs 25. Supersedes -273 Issue 1, -253's gate scope, and -128's Sources contract. -268 travels with -275.
-2. **-250** -- In Progress. Ask Agy cannot answer education, certification, or language questions; profile facts never reached its prompt. Steps 5 and 6 still open and wait on -275.
-3. **-251** -- Ask Agy treats adjacent retrieved stories as evidence for the question asked. Visitor-visible correctness defect: unsupported claims (real estate sector from Cendant Mortgage; "including France" with no source) read as fact to recruiters.
-4. **-266** -- Role Match labels responsibility-derived rows as "Required Qualifications". Every visitor sees job duties presented as must-have credentials. Fix is in `_flatten_extraction()`, not the prompt. -264 is sequenced after it.
-5. **-255** -- The meta-commentary strip regex corrupts decimal amounts (`$2.5M` becomes an unclosed `**$2.`) and merges paragraphs. Visible correctness bug. Ticket's fix: remove the strip, run structural meta-commentary tests without it, then a live acceptance run on stories with decimal amounts, including story controls. Acceptance counts evaluative sentences before and after (252 coupling).
-6. **-228** -- Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
-7. **-146** -- Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
-8. **-160** -- In Progress. JD extraction split into three concurrent calls (required / preferred / implicit) landed at `5aee8a4`. After-measurement on the AT&T fixture (count spread 1-2 across five runs) not yet recorded. No longer gates -244.
-9. **-244** -- In Progress; prep Greens landed. Role Match assessor calibration: cited evidence doesn't address the specific claim; `confidence` field deletion. Not gated on -160: qualifier preservation was resolved by the `source_text` instruction fix (`5aee8a4`/`b28a080`), not the split. Next: verify the CI/CD-qualifier row after that fix; fixture count and the 22% over-called figure depend on it. Land before -249 (see -249 ordering constraint).
-10. **-168** -- Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data. Re-measure after -275 (tunes behavior 275 replaces).
-11. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
-12. **-128** -- Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up. Re-measure after -275 (tunes behavior 275 replaces).
-13. **-129 stories 3-5** -- Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+1. **-279** -- MATT_DNA's Industry Experience block is half hand-typed (tier labels, Healthcare line, NOT-industries, AT&T / Norfolk Southern fallbacks) and drifts from the corpus (three Cendian stories under a second transportation label never reach it). Derive the block from the Industry field with story counts. Follows the corpus round; ahead of -275, whose acceptance run needs clean grounding.
+2. **-275** -- Ask Agy moves to tool-calling retrieval: answers from profile and conversation, calls search_stories when needed. Evaluator script 101/110 vs 68/110, follow-ups 56/65 vs 29/65 (scoring correction, 50bc068), 0 gate refusals vs 25. Supersedes -273 Issue 1, -253's gate scope, and -128's Sources contract. -268 travels with -275.
+3. **-250** -- In Progress. Ask Agy cannot answer education, certification, or language questions; profile facts never reached its prompt. Steps 5 and 6 still open and wait on -275.
+4. **-251** -- Ask Agy treats adjacent retrieved stories as evidence for the question asked. Visitor-visible correctness defect: unsupported claims (real estate sector from Cendant Mortgage; "including France" with no source) read as fact to recruiters.
+5. **-266** -- Role Match labels responsibility-derived rows as "Required Qualifications". Every visitor sees job duties presented as must-have credentials. Fix is in `_flatten_extraction()`, not the prompt. -264 is sequenced after it.
+6. **-255** -- The meta-commentary strip regex corrupts decimal amounts (`$2.5M` becomes an unclosed `**$2.`) and merges paragraphs. Visible correctness bug. Ticket's fix: remove the strip, run structural meta-commentary tests without it, then a live acceptance run on stories with decimal amounts, including story controls. Acceptance counts evaluative sentences before and after (252 coupling).
+7. **-228** -- Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
+8. **-146** -- Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
+9. **-160** -- In Progress. JD extraction split into three concurrent calls (required / preferred / implicit) landed at `5aee8a4`. After-measurement on the AT&T fixture (count spread 1-2 across five runs) not yet recorded. No longer gates -244.
+10. **-244** -- In Progress; prep Greens landed. Role Match assessor calibration: cited evidence doesn't address the specific claim; `confidence` field deletion. Not gated on -160: qualifier preservation was resolved by the `source_text` instruction fix (`5aee8a4`/`b28a080`), not the split. Next: verify the CI/CD-qualifier row after that fix; fixture count and the 22% over-called figure depend on it. Land before -249 (see -249 ordering constraint).
+11. **-168** -- Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data. Re-measure after -275 (tunes behavior 275 replaces).
+12. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
+13. **-128** -- Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up. Re-measure after -275 (tunes behavior 275 replaces).
+14. **-129 stories 3-5** -- Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 
 **NEXT**
-14. **-252** -- Ask Agy writes evaluative sentences about Matt despite prompt instructions against it. Visitor-visible; isolating probe spec in the detail block.
-15. **-253** -- Blocked on -275. Confidence gate refuses ordinary evaluator questions, including follow-ups scored on bare text, before the LLM sees profile or history. No threshold change; gate scope superseded by -275.
-16. **-254** -- Five Role Match BDD scenarios describe the old 30-word gate behavior; passing or xfailed against stale assertions, so current behavior is untested. Also an em dash in a CHANGELOG entry.
-17. **-235** -- Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-18. **-223** -- Add router_score and router_family columns to Sheet query row; unblocks -239's floor threshold decision.
-19. **-222** -- Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
-20. Rest of Role Match: -173, -014, -012, -081, -099, -017.
+15. **-252** -- Ask Agy writes evaluative sentences about Matt despite prompt instructions against it. Visitor-visible; isolating probe spec in the detail block.
+16. **-253** -- Blocked on -275. Confidence gate refuses ordinary evaluator questions, including follow-ups scored on bare text, before the LLM sees profile or history. No threshold change; gate scope superseded by -275.
+17. **-254** -- Five Role Match BDD scenarios describe the old 30-word gate behavior; passing or xfailed against stale assertions, so current behavior is untested. Also an em dash in a CHANGELOG entry.
+18. **-235** -- Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
+19. **-223** -- Add router_score and router_family columns to Sheet query row; unblocks -239's floor threshold decision.
+20. **-222** -- Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
+21. Rest of Role Match: -173, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
 -177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- better ranking surfaces more adjacent candidates into verdict definitions that still absorb them as partial, so ranking before calibrating makes over-calling worse before better; full constraint in -249 detail block)
@@ -126,6 +127,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-275](#mattgpt-275) | Ask Agy moves to tool-calling retrieval: the model answers from profile and conversation, and calls search_stories when needed | Open | High | Action | October 6, 2026 |
 | [MATTGPT-277](#mattgpt-277) | Stale BDD tests on main: role_match_logging, query_logger_top_score, pn_exclusion background family | Open | Medium | Bug | October 6, 2026 |
 | [MATTGPT-278](#mattgpt-278) | Tool-path and short-form client names go unbolded | Open | Medium | Issue | October 6, 2026 |
+| [MATTGPT-279](#mattgpt-279) | MATT_DNA's Industry Experience block is half hand-typed and drifts from the corpus | Open | High | Bug | October 7, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -2133,17 +2135,19 @@ These only affect behavior if tags feed filters or counts. Fix is in the master 
 - **Type:** Action
 - **File:** `ui/pages/ask_mattgpt/backend_service.py` (`rag_answer()`, `_generate_agy_response()`, the confidence gate), `semantic_search()` (backs the tool)
 - **Logged:** October 6, 2026
-- **Dependencies:** MATTGPT-269 (Done, 9744634)
+- **Dependencies:** MATTGPT-269 (Done, 9744634); MATTGPT-279
 
 **Evidence (Oct 6, 2026; `docs/evidence/MATTGPT-273/tool_vs_pipeline_20261006_140406/`, 5f9d9bf):** The nine conversations in `tests/fixtures/evaluator_conversations.md`, 5 runs per arm, hand-scored per turn. Tool design 101/110 vs today's pipeline 68/110; follow-ups 56/65 vs 29/65, after the scoring correction in `scoring_correction.md` (50bc068): conversation 9 turn 4 tool run 3 passes. `hand_scores.json` and the 5f9d9bf message carry the uncorrected 100/110 and 55/65. Gate refusals 0 vs 25. Median time to first token 0.56s vs 1.72s (pipeline median over its 85 non-refused turns). The tool arm cited MATT_DNA figures not backed by a story in 6 answers; the pipeline in none (5f9d9bf).
 
 **Browser, Oct 6:** Agy's own closers ('There's more to this story', 'the deep dive on this one') invite follow-ups that retrieve unrelated stories on every turn. The closers promise a continuation the pipeline can't deliver; 275's acceptance should include accepting a closer.
 
-**Requirement:** Everything in the model's context is grounded; MATT_DNA is held to the same story-or-profile backing as retrieval (MATTGPT-269, Done). Carried over from 269's "moves to data" (verified Oct 6, 2026, still hardcoded in `generate_dynamic_dna()`): Career Arc employer dates and status, Leadership Philosophy, and the industry tier labels (Primary / Secondary / Limited) with the NOT-industries line. Move each to `matt_profile.json` or derive it from the corpus. Also carried over: 269 item 5. Drop the "How Matt Wins Business (NOT a sales role)" heading and its sales framing; keep the backed `$100M+` repeat-business fact, moved under Signature Achievements.
+**Requirement:** Everything in the model's context is grounded; MATT_DNA is held to the same story-or-profile backing as retrieval (MATTGPT-269, Done). Carried over from 269's "moves to data" (verified Oct 6, 2026, still hardcoded in `generate_dynamic_dna()`): Career Arc employer dates and status, and Leadership Philosophy. Move each to `matt_profile.json` or derive it from the corpus. Also carried over: 269 item 5. Drop the "How Matt Wins Business (NOT a sales role)" heading and its sales framing; keep the backed `$100M+` repeat-business fact, moved under Signature Achievements. The Industry Experience block is MATTGPT-279.
 
 **Constraint:** Do not change `CONFIDENCE_HIGH`; the gate leaves the answer path.
 
 **Acceptance:** `tests/fixtures/evaluator_conversations.md`, with its approved expected answers (0f6a465), scored on correct referent, materially correct facts, honest uncertainty and contextual continuity.
+
+Surface parity with My Work: a question in the 0.20-0.25 band (My Work's "Relevance may be low" tier, e.g. "Where does Matt live?" at 0.242, MATTGPT-253) is answered, with an explicit hedge when the evidence is thin ("that isn't recorded"), not refused and not invented.
 
 If the tool design offers a continuation, accepting it resolves to the story it referred to. Add a closer-acceptance conversation to `tests/fixtures/evaluator_conversations.md` before 275's acceptance run (dev session).
 
@@ -2196,6 +2200,29 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 **Candidate:** Match client short forms derived from data, not a hardcoded alias list.
 
 **Note (Oct 6, 2026, f3eded2):** The 275 prep commit moved client bolding into `_postprocess_agy_text(response_text, stories)` and describes it as "clients of the given stories, today's rule". That description is off: `get_known_clients()` returns the corpus-wide `_KNOWN_CLIENTS` cache whatever stories are passed.
+
+---
+
+### MATTGPT-279
+**MATT_DNA's Industry Experience block is half hand-typed and drifts from the corpus**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **File:** `ui/pages/ask_mattgpt/backend_service.py` (`generate_dynamic_dna()`, Industry Experience block)
+- **Logged:** October 7, 2026
+- **Dependencies:** The corpus round (retail cells, the transportation label, IHG) lands first.
+
+**Issue:** Verified Oct 7, 2026: the Industry Experience block in `generate_dynamic_dna()` mixes derived client names with hand-typed text. Hand-typed: the tier labels (Primary / Secondary / Limited), "Limited: Healthcare (one engagement)", "NOT Matt's industries: Consumer products, retail", and the fallback client names used when a derived list is empty (`"AT&T"`, `"Norfolk Southern"`). Derived: only the client names under "Financial Services / Banking", "Telecommunications" and "Transportation & Logistics", read with `clients_by_industry.get()` on those exact labels.
+
+**Drift from the corpus (Oct 7, 2026):**
+- The three Cendian stories carry Industry "Logistics & Transportation", a second label the block never reads, so they never reach it. "Transportation & Logistics" has 6 stories.
+- "retail" in the NOT-industries line is not grounded in any Industry value; no story's Industry is retail, and two stories' 5PSummary mention retail (Sparkfly, multi-client customization).
+- Corpus Industry counts: Cross Industry 57, Financial Services / Banking 35, Technology & Software 10, Telecommunications 7, Transportation & Logistics 6, Logistics & Transportation 3, Healthcare / Life Sciences 2, Aerospace & Defense 2, Education 1. The block names neither Technology & Software nor Aerospace & Defense.
+
+**Fix:** Derive the whole block from the Industry field, with story counts. Delete the NOT-industries line and the hardcoded fallbacks.
+
+**Blocks:** MATTGPT-275's acceptance run (everything in the model's context must be grounded).
 
 ---
 
