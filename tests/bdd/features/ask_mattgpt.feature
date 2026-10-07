@@ -103,19 +103,25 @@ Feature: Ask Agy — Nonsense rejection banner + contextual chip sets
     Then that chip's prompt should appear as the next user message
 
   # ---------------------------------------------------------------------------
-  # BRANCH 4: low_confidence (Pinecone confidence below threshold)
+  # BRANCH 4: low search confidence is no longer an Ask Agy refusal
   # ---------------------------------------------------------------------------
-  # Step definition for the trigger phrase mocks the Pinecone score below
-  # CONFIDENCE_LOW. Mock approach chosen over a known-low-confidence query
-  # because (a) corpus changes would break a stable trigger query and
-  # (b) production-side debug flags would leak test infra into prod code.
+  # MATTGPT-275 takes the confidence gate off Ask Agy's answer path; search
+  # confidence stays in semantic_search() for My Work's "Relevance may be
+  # low" tier. 275's Acceptance, surface parity with My Work: a question in
+  # the 0.20-0.25 band ("Where does Matt live?" at 0.242, MATTGPT-253) is
+  # answered, not refused. Gibberish reaches the model too and gets Agy's
+  # own reply. DOM-only here: honesty and the rephrase wording are scored in
+  # 275's acceptance run.
 
-  Scenario: low_confidence rejection shows rephrase prompt and OUT_OF_SCOPE_CHIPS
-    When the user submits a query that scores below the confidence threshold
-    Then the low_confidence rejection banner should be displayed
-    And the banner displays the low_confidence copy from BANNER_COPY
-    And all OUT_OF_SCOPE_CHIPS should be visible
-    And a rephrase prompt should be displayed
+  Scenario: A question in My Work's low-relevance band gets an answer, not a refusal
+    When the user asks "Where does Matt live?"
+    Then Agy's answer should be displayed
+    And no low_confidence rejection banner should be displayed
+
+  Scenario: Gibberish gets Agy's reply, not the low_confidence banner
+    When the user asks "qzwxvnpfrk plmqcvjxk floogerblerg"
+    Then Agy's answer should be displayed
+    And no low_confidence rejection banner should be displayed
 
   # ---------------------------------------------------------------------------
   # STATE LIFECYCLE
