@@ -493,7 +493,8 @@ def then_agy_answer_displayed(browser_page, ask_turn):
     """The newest chat message is Agy's: it carries an avatar image that
     differs from the visitor's message just before it. Both srcs must be
     non-empty, so a change to either image cannot make this pass vacuously.
-    No text comparison and no hardcoded image."""
+    It must also hold no .no-match-banner, since a refusal renders under
+    Agy's avatar too. No text comparison and no hardcoded image."""
     messages = browser_page.locator("[data-testid='stChatMessage']")
     count = messages.count()
     assert count >= ask_turn["messages_before"] + 2, (
@@ -511,6 +512,10 @@ def then_agy_answer_displayed(browser_page, ask_turn):
     assert (
         newest_src != visitor_src
     ), "The newest chat message has the visitor's avatar, so it is not Agy's reply."
+    banners_inside = messages.nth(count - 1).locator(".no-match-banner").count()
+    assert (
+        banners_inside == 0
+    ), "The newest Agy message holds a rejection banner, so it is a refusal, not an answer."
 
 
 @then("no low_confidence rejection banner should be displayed")
