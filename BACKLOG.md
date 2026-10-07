@@ -1643,6 +1643,8 @@ Same class as the no-inference clause in MATTGPT-250: retrieved text that sits n
 
 **Observed (Oct 6, 2026; `docs/evidence/MATTGPT-269/not_clients_20261006_164532/`, b2f2d4a):** Agy calls Accenture, Matt's employer, a client: 10/75 answers before removing the NOT-clients list, 6/75 after (by pattern; 9744634).
 
+**Observed (browser, Oct 7, 2026, pre-275 pipeline; not on disk):** "Tell me about Matt's legacy-to-cloud work" included the Lockheed Martin STRATCOM work (paper operational plans to TIBCO workflows) as legacy-to-cloud. On a rerun, quote marks around the question shifted retrieval and TICARA took its place. Re-check under 275's tool path per 275's On-close list.
+
 ---
 
 ### MATTGPT-252
