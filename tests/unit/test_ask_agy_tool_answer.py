@@ -345,13 +345,15 @@ class TestPostProcessingAndContract:
         assert result["profile_categories"] == ["certifications"]
         assert "[[" not in result["answer_md"]
 
-    def test_clients_of_stories_used_and_numbers_are_bolded(self):
-        result, _, _, _, _ = _run(
-            [
-                _response(tool_query="ledger"),
-                _response("At Zephyrine Bank he led 40 engineers."),
-            ]
-        )
+    def test_known_clients_and_numbers_are_bolded(self):
+        # Today's rule: get_known_clients() returns the _KNOWN_CLIENTS cache
+        # that sync_portfolio_metadata() fills from the whole corpus, so any
+        # known client is bolded, searched or not. Patched so the test does
+        # not depend on test order.
+        with patch.object(bs, "_KNOWN_CLIENTS", {"Zephyrine Bank"}):
+            result, _, _, _, _ = _run(
+                [_response("At Zephyrine Bank he led 40 engineers.")]
+            )
         assert "**Zephyrine Bank**" in result["answer_md"]
         assert "**40 engineers**" in result["answer_md"]
 
