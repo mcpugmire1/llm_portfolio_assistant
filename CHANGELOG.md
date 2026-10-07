@@ -14,6 +14,14 @@ Cited probe output copied byte-identical into docs/evidence/MATTGPT-<n>/ (42ddbe
 
 ---
 
+### Tests
+
+**October 6, 2026 -- Sequential-rejection BDD step waits for the new banner (MATTGPT-142)** -- `49606d0`
+
+`when_user_submits()` waited for any `.no-match-banner`, and banners persist in the transcript, so on a second rejection the first query's banner matched at once and "Sequential rejections swap chip sets per branch" checked chips before the new banner rendered (3 of 8 runs failed). The step now counts banners before submitting and waits for one more. ask_mattgpt.feature 9 passed; the scenario 10 of 10 in isolation. Test-only.
+
+---
+
 ### Ask Agy
 
 **October 6, 2026 -- MATT_DNA carries only story- or profile-backed facts (MATTGPT-269)** -- Red `a310514`, `771aa52`, `9c2e997`, `d1a8c30`, `f442f24`, `fdd8c4f`, `3143e60`, `c773234`; Green `5439c8f`, `d94367e`, `bbb20d6`, `a3d1015`, `187c5a5`, `b1adf0d`, `9744634`

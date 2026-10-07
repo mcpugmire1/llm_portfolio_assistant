@@ -26,7 +26,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 **NEXT**
 14. **-252** -- Ask Agy writes evaluative sentences about Matt despite prompt instructions against it. Visitor-visible; isolating probe spec in the detail block.
-15. **-253** -- Confidence gate refuses ordinary evaluator questions, including follow-ups scored on bare text, before the LLM sees profile or history. No threshold change; gate scope superseded by -275.
+15. **-253** -- Blocked on -275. Confidence gate refuses ordinary evaluator questions, including follow-ups scored on bare text, before the LLM sees profile or history. No threshold change; gate scope superseded by -275.
 16. **-254** -- Five Role Match BDD scenarios describe the old 30-word gate behavior; passing or xfailed against stale assertions, so current behavior is untested. Also an em dash in a CHANGELOG entry.
 17. **-235** -- Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
 18. **-223** -- Add router_score and router_family columns to Sheet query row; unblocks -239's floor threshold decision.
@@ -90,7 +90,6 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-130](#mattgpt-130) | "practitioners" canonical everywhere — UI, eval golden set, corpus re-embed in lockstep | Open | Medium | Action | June 14, 2026 |
 | [MATTGPT-131](#mattgpt-131) | BDD selector bug — `test_industry_and_capability_labels_visible_inline_on_mobile` fails in marathon run | Open | Low | Bug | June 15, 2026 |
 | [MATTGPT-140](#mattgpt-140) | Fix hardcoded model names in backend_service.py and jd_assessor.py — use constants.py | Open | Low | Refactor | June 20, 2026 |
-| [MATTGPT-142](#mattgpt-142) | BDD sequential rejection test: wait_for_banner is not count-aware, assertion runs before second rejection renders | Open | Low | Bug | June 23, 2026 |
 | [MATTGPT-143](#mattgpt-143) | BDD app_url fixture hardcodes port 8501 with no env-var override | Parked | Low | Bug | June 23, 2026 |
 | [MATTGPT-145](#mattgpt-145) | Mobile filter breakpoints overlap — r2-label show/hide depends on !important cascade order, not design | Open | Low | Refactor | Jun 24, 2026 |
 | [MATTGPT-146](#mattgpt-146) | Professional Narrative stories leak into My Work filtered results — filter branch leaks; search stays as-is | Open | Medium | Bug | Jun 25, 2026 |
@@ -105,7 +104,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-250](#mattgpt-250) | Ask Agy cannot answer queries about education, certifications, or languages -- profile block missing from Ask Agy's system prompt | In Progress | High | Issue | September 21, 2026 |
 | [MATTGPT-251](#mattgpt-251) | Ask Agy treats adjacent retrieved stories as evidence for the question asked | Open | High | Issue | September 23, 2026 |
 | [MATTGPT-252](#mattgpt-252) | Ask Agy writes evaluative sentences about Matt despite repeated prompt instructions against it | Open | High | Issue | September 26, 2026 |
-| [MATTGPT-253](#mattgpt-253) | Confidence gate refuses ordinary evaluator questions before the LLM sees profile or history | Open | Medium | Issue | September 26, 2026 |
+| [MATTGPT-253](#mattgpt-253) | Confidence gate refuses ordinary evaluator questions before the LLM sees profile or history | Blocked | Medium | Issue | September 26, 2026 |
 | [MATTGPT-254](#mattgpt-254) | Stale BDD scenarios in role_match.feature and jd_extraction.feature; CHANGELOG em dash | Open | Medium | Bug | September 26, 2026 |
 | [MATTGPT-255](#mattgpt-255) | Meta-commentary strip regex corrupts decimal amounts and merges paragraphs | Open | High | Bug | October 2, 2026 |
 | [MATTGPT-256](#mattgpt-256) | Synthesis opening "Great question" contradicts BASE_PROMPT VOICE rule; 154 commented-out lines and stale prompts.py comment also pending | Open | Medium | Bug | October 2, 2026 |
@@ -139,7 +138,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-183](#mattgpt-183) | has_metric filter dead -- nothing in UI sets it to True; remove rather than fix | Open | Low | Refactor | August 13, 2026 |
 | [MATTGPT-185](#mattgpt-185) | Query negation unsupported -- "outside of MattGPT" returns MattGPT stories | Open | Medium | Enhancement | August 13, 2026 |
 | [MATTGPT-187](#mattgpt-187) | diversify_results max_per_client parameter is documented but never implemented | Open | Medium | Bug | August 13, 2026 |
-| [MATTGPT-188](#mattgpt-188) | Semantic router accepts off-topic queries about other people | Open | Medium | Bug | August 13, 2026 |
+| [MATTGPT-188](#mattgpt-188) | Semantic router accepts off-topic queries about other people | Decided Against | Medium | Bug | August 13, 2026 |
 | [MATTGPT-190](#mattgpt-190) | Tokenizer character-set divergence: _tokenize keeps +#-. while token_overlap_ratio splits on non-\w | Open | Medium | Bug | August 16, 2026 |
 | [MATTGPT-195](#mattgpt-195) | Production incident queries scatter across six intent families -- delivery family has no incident vocabulary | Open | Medium | Bug | August 16, 2026 |
 | [MATTGPT-196](#mattgpt-196) | Defensive pytest.skip in test_explore_stories.py masks UI regressions as green runs | Open | Medium | Bug | August 16, 2026 |
@@ -150,7 +149,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-202](#mattgpt-202) | id-skip predicate copied verbatim in app.py and corpus_loader.py -- divergence risk, no shared source | Open | Medium | Bug | August 18, 2026 |
 | [MATTGPT-203](#mattgpt-203) | Chip grid disable test asserts the wrong mechanism | Open | Low | Bug (Test) | August 18, 2026 |
 | [MATTGPT-204](#mattgpt-204) | Explore Stories zero-filter-match: Table view renders empty grid chrome; Cards/Timeline empty-state text hidden by CSS | Open | Low | Bug | August 18, 2026 |
-| [MATTGPT-205](#mattgpt-205) | BDD marathon flake: test_error_state_extraction_failure fails in marathon, passes in isolation | Open | Low | Bug (Test) | August 19, 2026 |
+| [MATTGPT-205](#mattgpt-205) | BDD marathon flake: test_error_state_extraction_failure fails in marathon, passes in isolation | Decided Against | Low | Bug (Test) | August 19, 2026 |
 | [MATTGPT-206](#mattgpt-206) | Eval suite ~1-in-70 stochastic flap; Q28 confirmed non-deterministic | Open | Medium | Bug (Test) | August 19, 2026 |
 | [MATTGPT-209](#mattgpt-209) | MATT_DNA drift guard passes for wrong reason: employer check searches whole string, not Career Arc block | Open | Low | Bug (Test) | August 24, 2026 |
 | [MATTGPT-210](#mattgpt-210) | Ask Agy landing page suggestion chips are static; stories like STRATCOM invisible on career queries | Open | Low | Enhancement | August 24, 2026 |
@@ -525,8 +524,8 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Catch-all architecture note:** The pipeline is positive-classification all the way down — every layer matches to known categories (nonsense regex categories, semantic router intent families, Pinecone top-K retrieval). When a query matches NO known pattern at any layer, the default behavior is "best-effort answer." The Trump query is what that long-tail looks like. None of the layers has a "I don't know what this is" reject path; they all assume positive classification will catch what needs catching. This is the architectural shape, not a bug — and changing it adds false-rejection risk to legitimate queries.
 - **Possible directions (open — needs prototyping, no guaranteed solution):**
   - **A. Post-retrieval subject-mismatch check (most concrete option).** After Pinecone returns top stories, extract proper-noun candidates from the question. If any proper noun in the question doesn't appear in the retrieved stories, refuse with "I don't have stories about that." Deterministic, no embeddings, no canonical phrase maintenance. Edge cases to think through: queries mentioning places vs people, queries mentioning Matt's collaborators (already in stories), queries with novel-but-legitimate proper nouns.
-  - **B. Prompt-level refusal (re-prototype).** Restore the pre-Jan-26 subject-refusal instruction in BASE_PROMPT, possibly with stronger phrasing. Historical evidence is mixed — wasn't reliable on the older model, but GPT-4o-mini's instruction-following is better than what the original was tuned for. Worth empirical retest against the Trump query and similar shapes.
-  - **C. Retrieval-confidence floor (harden existing partial implementation).** Currently low confidence shows a warning banner but answers anyway. Could be hardened to refuse when top-story relevance is below a threshold. Risk: legit niche queries might fall below the threshold and get rejected.
+  - **B. Prompt-level refusal (re-prototype).** Restore the pre-Jan-26 subject-refusal instruction in BASE_PROMPT, possibly with stronger phrasing. Historical evidence is mixed: it wasn't reliable on the older model. Verified Oct 6, 2026: Ask Agy's response model is gpt-4o (`_generate_agy_response()`), not gpt-4o-mini. Worth empirical retest against the Trump query and similar shapes.
+  - **C. Retrieval-confidence floor (harden existing partial implementation).** Verified Oct 6, 2026: the gate in `rag_answer()` already refuses when confidence is "low" or "none" (top score under `CONFIDENCE_HIGH`), unless the query came from a suggestion or is trusted behavioral; queries above it are answered. Could be hardened to refuse when top-story relevance is below a threshold. Risk: legit niche queries might fall below the threshold and get rejected.
   - **D. Extend nonsense regex periodically.** Manually add high-profile names as they appear in query logs. Manual but tractable for low-volume traffic.
   - **E. Defer.** Accept the long-tail failure rate; monitor query logs and revisit when frequency/brand-damage warrants action. Current de facto state.
 - **Design connection to MATTGPT-077 (August 8, 2026):** The Phase 1 strip work in -077 built `_substitute_matt_subject`, a token-level detector that classifies each query token as "Matt-or-a-variant" or "not." That detector is one branch away from -063's trigger: asking "is this a name token that isn't Matt?" is the same detection logic with a different branch outcome -- instead of substituting, emit a mismatch response ("I only have Matt's work; did you mean...?"). When -063 is picked up, `_substitute_matt_subject`'s token layer is the right starting point. Do not build a separate name detector; extend what's already there. This is not scope for -077's ship -- it's a handoff note for whoever opens -063 next.
@@ -1153,22 +1152,6 @@ None of these stories is cited in the answer. This is the "retrieved, not cited"
 
 ---
 
-### MATTGPT-142
-**BDD: sequential rejection test wait_for_banner not count-aware**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Bug
-- **Run note (August 16, 2026):** Passed in the August 16 run. Cannot disposition from a single pass -- need to confirm whether the underlying code was fixed (would close Done) or the test structure changed (Parked/DA). Verify before closing.
-- **Issue:** `test_sequential_rejections_swap_chip_sets_per_branch` fails because `wait_for_banner` waits for `.no-match-banner` to exist, not for a new one. After the first rejection renders a banner, subsequent `wait_for_banner` calls return immediately. The `all PERSONAL_CHIPS should be visible` assertion runs before the second rejection has processed, so `get_visible_chip_labels` sees only the first rejection's RULE_CHIPS (highest transcript_banner_N is still the first rejection's index).
-- **Root cause:** `wait_for_banner` is not count-aware. `then_banner_displayed` also only checks `.no-match-banner` presence without verifying it is the banner for the current query.
-- **Production behavior:** Correct. "Is Matt married?" returns "I'm focused on Matt's professional experience." and PERSONAL_CHIPS render as expected (confirmed manually June 23, 2026).
-- **Fix:** In the sequential scenario, count existing `.no-match-banner` elements before submission and wait for that count to increase. Pass expected count into `wait_for_banner`, or add a dedicated `wait_for_nth_banner(n)` helper.
-- **Affects:** `tests/bdd/steps/test_ask_mattgpt.py` — `test_sequential_rejections_swap_chip_sets_per_branch`
-- **Logged:** June 23, 2026
-
----
-
 ### MATTGPT-143
 **BDD: app_url fixture hardcodes port 8501 with no override**
 
@@ -1701,7 +1684,8 @@ Same class as the no-inference clause in MATTGPT-250: retrieved text that sits n
 ### MATTGPT-253
 **Confidence gate refuses ordinary evaluator questions before the LLM sees profile or history**
 
-- **Status:** Open
+- **Status:** Blocked
+- **Dependencies:** MATTGPT-275
 - **Priority:** Medium
 - **Type:** Issue
 - **Logged:** September 26, 2026
@@ -1954,14 +1938,14 @@ e. Source-vs-output check: for each fixture JD, the row count and wording under 
 - **Status:** Open
 - **Priority:** Medium
 - **Type:** Issue
-- **File:** `ui/pages/ask_mattgpt/prompts.py`, `config/constants.py` (`META_COMMENTARY_REGEX_PATTERNS`), `ui/pages/ask_mattgpt/backend_service.py` (`OFF_TOPIC_GUARD`)
+- **File:** `ui/pages/ask_mattgpt/prompts.py` (bold instructions, `OFF_TOPIC_GUARD`), `ui/pages/ask_mattgpt/backend_service.py` (`_postprocess_agy_text()` bolding)
 - **Logged:** October 2, 2026
 
 **Issue:** Two candidate removals surfaced in the Oct 2 audit, each needing a live acceptance run before any code change.
 
-**Candidate 1 -- duplicate bolding.** The prompt asks for bold formatting three times; the meta-commentary regex in `config/constants.py` also bolds output. Four bolding instructions for the same output create collision risk (unclosed `**` on decimal amounts, per MATTGPT-255). Removing the regex bolding (as part of MATTGPT-255) may be sufficient; the three prompt instructions may or may not be redundant.
+**Candidate 1 -- duplicate bolding.** The prompt asks for bold formatting three times, and `_postprocess_agy_text()` also bolds client names and numbers after the model answers. Corrected Oct 6, 2026: the meta-commentary regex (`META_COMMENTARY_REGEX_PATTERNS`) strips sentences; it does not bold. Prompt bolding plus post-processing bolding is the collision risk (unclosed `**`, per MATTGPT-255). The three prompt instructions may or may not be redundant once post-processing bolds.
 
-**Candidate 2 -- OFF_TOPIC_GUARD.** `OFF_TOPIC_GUARD` is a fourth off-topic check that runs after the semantic router, the filters, and `is_query_on_topic_llm()`. It is unknown from logs whether its canned reply has ever appeared in production.
+**Candidate 2 -- OFF_TOPIC_GUARD.** Corrected Oct 6, 2026: `OFF_TOPIC_GUARD` is a prompt string defined in `prompts.py` and appended to the system prompt (`prompt += OFF_TOPIC_GUARD`), not a runtime check in `backend_service.py`. It instructs the model after the semantic router, the filters and `is_query_on_topic_llm()` have already run. It is unknown from logs whether its canned reply has ever appeared in production.
 
 **First step for each:** Run an acceptance probe that includes the story controls and check whether the guard's canned reply appears in any log record with `redirect_reason`. Do not remove either without that measurement.
 
@@ -1997,7 +1981,7 @@ e. Source-vs-output check: for each fixture JD, the row count and wording under 
 - **File:** `services/jd_assessor.py` (`_flatten_extraction()`), `ui/pages/role_match.py` (rendering)
 - **Logged:** October 3, 2026
 
-**Issue:** `_flatten_extraction()` maps rows from the `key_responsibilities` section of the extraction output into the Required Qualifications group in the UI. Responsibility-derived rows carry a different confidence profile than genuine required qualifications (they describe the job's duties, not the candidate's must-have credentials), so labeling them as Required Qualifications overstates the match signal for that category.
+**Issue:** `_flatten_extraction()` labels `implicit_requirements` rows (requirements the model infers, typically from the JD's responsibilities) with `"category": "required"`, so they render in the Required Qualifications group. Corrected Oct 6, 2026: `_flatten_extraction()` never reads `key_responsibilities`; the earlier text named the wrong field. Responsibility-derived rows carry a different confidence profile than genuine required qualifications (they describe the job's duties, not the candidate's must-have credentials), so labeling them as Required Qualifications overstates the match signal for that category.
 
 **Two decisions recorded (Oct 3, 2026):**
 
@@ -2163,7 +2147,7 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 
 **Scope (Oct 6, 2026):** Restore Agy's closers (a deliberate call to action) as part of acceptance, once accepted offers resolve to the story they referred to. They were removed for now in MATTGPT-276 (7850ed2).
 
-**On close:** Re-check MATTGPT-251, -252, -253, -255, -168, -128, -268 (MATTGPT-273's residual: the CS leading no and the PMP follow-up pivot) and -278 against the tool path; close or re-scope each with evidence.
+**On close:** Re-check MATTGPT-063, -096, -128, -153, -166, -167, -168, -185, -187, -190, -195, -199, -201, -206, -209, -217, -239, -251, -252, -253, -255, -259, -263, -268 (MATTGPT-273's residual: the CS leading no and the PMP follow-up pivot) and -278 against the tool path; close or re-scope each with evidence. The list is the Oct 6, 2026 audit's Waits-on-275 set plus -253 and -255.
 
 ---
 
@@ -2206,6 +2190,8 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 **Gaps:** (1) short-form client names miss the exact match; (2) MATTGPT-275's tool path must run the same bolding step.
 
 **Candidate:** Match client short forms derived from data, not a hardcoded alias list.
+
+**Note (Oct 6, 2026, f3eded2):** The 275 prep commit moved client bolding into `_postprocess_agy_text(response_text, stories)` and describes it as "clients of the given stories, today's rule". That description is off: `get_known_clients()` returns the corpus-wide `_KNOWN_CLIENTS` cache whatever stories are passed.
 
 ---
 
@@ -2394,9 +2380,9 @@ The phrase is not invisible to keyword scoring. It scores on a single stopword t
 
 **Revised consequence:** The original test instruction ("confirm W_KW=0 and W_KW=current produce identical rankings") may not hold, since "you" is a real scoring token. The affected query class is not zero-token phrases but single-token phrases where the surviving token is a stopword with broad corpus distribution.
 
-**Coupling to MATTGPT-178 (closed):** MATTGPT-178 raised the question of whether `_STOPWORDS` was intended to apply to `_tokenize` as well as `token_overlap_ratio`. That question is resolved: -178 shipped at 049e203 (August 13, 2026) and `_tokenize` now applies `_STOPWORDS`. As a consequence, "you" now drops from the example above, and the original empty-token-set framing becomes retroactively true for any phrase where all tokens are stopwords or shorter than 3 chars. The mechanism this ticket is investigating has shifted -- see revised scope below.
+**Coupling to MATTGPT-178 (closed):** MATTGPT-178 raised the question of whether `_STOPWORDS` was intended to apply to `_tokenize` as well as `token_overlap_ratio`. That question is resolved: -178 shipped at 049e203 (August 13, 2026) and `_tokenize` now applies `_STOPWORDS`. Corrected Oct 6, 2026: "you" is not in `_STOPWORDS`, so `_tokenize("I do, we do, you do")` still returns `['you']` (run Oct 6). The phrase still scores on the single token "you"; the empty-token-set framing applies only to phrases whose surviving tokens are all in `_STOPWORDS`.
 
-**Investigation scope (updated August 16, 2026):** (1) With "you" now filtered by `_STOPWORDS`, re-verify what `_tokenize("I do, we do, you do")` returns. (2) Determine whether single-surviving-stopword queries that are now fully invisible to keyword scoring surface retrieval problems in production. (3) Assess whether the -178 fix changes the severity of this ticket -- if phrases that previously scored on a stopword now score zero, that may improve or worsen real query behavior depending on the phrase class.
+**Investigation scope (updated August 16, 2026; corrected Oct 6, 2026):** (1) Done Oct 6: `_tokenize("I do, we do, you do")` returns `['you']`; "you" is not a stopword. (2) Determine whether single-surviving-stopword queries that are now fully invisible to keyword scoring surface retrieval problems in production. (3) Assess whether the -178 fix changes the severity of this ticket -- if phrases that previously scored on a stopword now score zero, that may improve or worsen real query behavior depending on the phrase class.
 
 ---
 
@@ -2451,7 +2437,7 @@ The phrase is not invisible to keyword scoring. It scores on a single stopword t
 - **Priority:** Medium
 - **Type:** Bug
 - **File:** `utils/validation.py` (last two lines of `token_overlap_ratio`)
-- **Failing test:** `tests/unit/test_scoring_contracts.py::test_token_overlap_ratio_stays_within_unit_interval` (failing by design -- pre-registers the expected fix)
+- **Failing test:** `tests/unit/test_scoring_contracts.py::test_token_overlap_ratio_stays_within_unit_interval`. Verified Oct 6, 2026: it is xfailed (`strict=False`) with a reason string that cites MATTGPT-180, not this ticket; the xfail reason should name -177.
 - **Logged:** August 11, 2026
 
 **Issue:** `hits = sum(1 for t in toks if t in vocab)` iterates the non-deduped token list. Dividing by `max(1, len(set(toks)))` dedupes the denominator but not the numerator. Any repeated in-vocab token inflates the ratio above the documented [0.0, 1.0] range.
@@ -2577,7 +2563,7 @@ Note the second test also asserts score ordering, which the function cannot pres
 ### MATTGPT-188
 **Semantic router accepts off-topic queries about other people**
 
-- **Status:** Open
+- **Status:** Decided Against (October 6, 2026)
 - **Priority:** Medium
 - **Type:** Bug
 - **File:** `services/semantic_router.py`
@@ -2600,6 +2586,8 @@ All clear `SOFT_ACCEPT = 0.40`.
 Note: the eval suite already contains "Tell me about Elon Musk" as a golden query, so whatever the intended behavior is, it is specified somewhere.
 
 **Cross-references:** MATTGPT-174 (closed -- three thresholds now found outside their operating range: CONFIDENCE_HIGH too low, HARD_ACCEPT too high, SOFT_ACCEPT here), MATTGPT-063 (wrong-person query detection -- same failure mode, different ticket).
+
+**Decided Against (Oct 6, 2026):** Proposed: stop the semantic router accepting off-topic people queries. Ruled out: e307d6d removed the three router test cases as the wrong layer; the joke, Musk and Bezos queries are caught by `nonsense_filters.jsonl` (`jokes_riddles`, `celebrity`) before the router in `rag_answer()`. Instead: the residual, names outside the regex, is MATTGPT-063.
 
 ---
 
@@ -2741,12 +2729,14 @@ Note: the eval suite already contains "Tell me about Elon Musk" as a golden quer
 - **Status:** Open
 - **Priority:** Low
 - **Type:** Bug
-- **File:** `tests/bdd/steps/test_navbar_brand_layout.py:98`
+- **File:** `tests/bdd/steps/test_navbar_brand_layout.py` (`click_my_work`)
 - **Logged:** August 17, 2026
 
 **Observation (August 17, 2026):** Fails in full BDD suite with `AssertionError: Nav button labeled 'My Work' not found`. MATTGPT-100 renamed Explore Stories → My Work; MATTGPT-106 must preserve the label. Passes on isolation retry -- the label exists and the selector logic is correct.
 
 **Diagnosed (August 17, 2026):** The test navigates by URL (e.g., `/my_work`) rather than clicking the nav label. Streamlit routing does not respond to arbitrary URL paths in this manner; navigation does not land where the test expects. The marathon failure is likely this URL routing gap, not session state mutation.
+
+**Corrected (Oct 6, 2026):** The diagnosis does not match the code. `navigate_to_home` calls `goto(app_url)`, not `/my_work`, and the test reaches My Work by clicking the label. `click_my_work` asserts `btn.count() > 0` immediately, with no wait for the nav button to render. Hypothesis, not measured: under marathon load the button has not rendered when the count runs.
 
 **Related:** MATTGPT-100 (Explore Stories → My Work rename), MATTGPT-106 (navbar refactor). Same marathon-run failure class as MATTGPT-142, MATTGPT-145, MATTGPT-197 -- four instances.
 
@@ -2875,14 +2865,14 @@ Chrome Claude's test report under "The five interactions that collapsed the grid
 - **Status:** Open
 - **Priority:** Low
 - **Type:** Bug (Test)
-- **File:** `utils/validation.py` (drift guard assertions)
+- **File:** `tests/bdd/steps/test_matt_dna_grounding_drift.py` (`then_every_employer_in_dna`)
 - **Logged:** August 24, 2026
 
 **Issue:** The drift guard's Employer check searches the entire MATT_DNA string. An employer that is also a client (Cendian, AIU) passes the check via the client list without appearing in the Career Arc section. The assertion is satisfied for the wrong reason -- it cannot distinguish "employer appears in Career Arc" from "employer appears anywhere in the string."
 
 **Verified August 24, 2026:** Cendian and AIU currently pass this way. The Career Arc may or may not list them correctly; the guard cannot tell.
 
-**Fix:** Scope the assertion to the Career Arc or Career Eras block specifically. Parse or slice the relevant section before checking.
+**Fix:** Scope the assertion to the Career Arc block. Parse or slice the relevant section before checking. Verified Oct 6, 2026: `then_every_employer_in_dna` checks `e not in bs.MATT_DNA` against the whole string; the Career Eras block no longer exists (b1adf0d), and MATTGPT-275 moves Career Arc employer data out of `generate_dynamic_dna()`.
 
 **Cross-references:** MATTGPT-207 (drift guards shipped here; this is the known gap in that work).
 
@@ -3292,7 +3282,7 @@ Two more inert-selector patterns confirmed during the -242 dark-mode scan:
 ### MATTGPT-205
 **BDD marathon flake: test_error_state_extraction_failure fails in marathon, passes in isolation**
 
-- **Status:** Open
+- **Status:** Decided Against (October 6, 2026)
 - **Priority:** Low
 - **Type:** Bug (Test)
 - **File:** the relevant step in `tests/bdd/steps/test_role_match.py`, the relevant scenario in `tests/bdd/features/role_match.feature`
@@ -3303,6 +3293,8 @@ Two more inert-selector patterns confirmed during the -242 dark-mode scan:
 **Bisect artifact (August 19, 2026):** Pre-Green marathon at HEAD=2c4f5e2 (b9nw3kuyv): PASSED. Post-Green marathon run 1 (boysul2ff): FAILED. Post-Green marathon run 2 (bf1npksc5): PASSED. Same command, same HEAD; working tree diff = Green applied vs stashed. Failure was intermittent, not deterministic with Green. Isolation retry with Green applied: PASSES (9.96s). Confirms suite-order sensitivity, not a Green regression.
 
 **Mechanism not measured.** See MATTGPT-197 and MATTGPT-198 for prior work on the same class.
+
+**Decided Against (Oct 6, 2026):** Proposed: stabilize the marathon flake in `test_error_state_extraction_failure`. Ruled out: the test no longer exists. badde42 (MATTGPT-240 Red) replaced it with `test_non_jd_rejected_by_gate`, a gate-before-LLM rejection with new copy; `git grep error_state_extraction_failure -- tests` returns nothing. Instead: nothing; a flake in the new test gets its own ticket.
 
 ---
 
