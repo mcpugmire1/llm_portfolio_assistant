@@ -54,8 +54,11 @@ def test_startups_not_listed_as_outside_matts_industries(matt_dna):
     assert "early-stage startups" not in matt_dna.lower()
 
 
-def test_rest_of_not_industries_line_kept(matt_dna):
-    assert "NOT Matt's industries: Consumer products, retail" in matt_dna
+def test_not_industries_line_removed(matt_dna):
+    """MATTGPT-279: the hand-typed NOT-industries line is gone; grounding
+    rule 1 covers industries no story backs (it named retail, which no
+    story's Industry carries)."""
+    assert "NOT Matt's industries" not in matt_dna
 
 
 # Self-description: Matt's own words, rendered for Ask Agy under a label that
@@ -128,7 +131,6 @@ def test_overstated_claim_absent(matt_dna, claim):
     "kept",
     [
         "Execution & Delivery is Matt's primary strength",
-        "Limited: Healthcare (one engagement)",
     ],
 )
 def test_supported_part_of_line_kept(matt_dna, kept):
