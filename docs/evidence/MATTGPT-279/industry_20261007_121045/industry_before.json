@@ -1,0 +1,617 @@
+[
+  {
+    "label": "before",
+    "kind": "industry",
+    "question": "Which industries has Matt worked in?",
+    "run": 1,
+    "rejection_reason": null,
+    "listed_names": [
+      "Cendian"
+    ],
+    "figures": [],
+    "unbacked_figures": [],
+    "sources": [
+      "Why Hire Matt?",
+      "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+      "Owning the P&L: From Engagement Margin to Center Cost Base",
+      "Building Smart, Connected Devices at Accenture's Liquid Studio",
+      "Integrating a Chemical Logistics Network Across Every Partner Capability"
+    ],
+    "answer_md": "🐾 Perfect, here's what I found.\n\nMatt has worked across several industries throughout his career. His primary industry experience lies in **Financial Services/Banking**, where he has worked with clients such as **JP Morgan Chase**, **RBC**, **Capital One**, and **HSBC**. In addition to financial services, he has experience in the **Telecommunications** industry, having worked with clients like **AT&T** and **Level 3 Communications**. He also has experience in the **Transportation** sector, with engagements at **Cendian Chemical Logistics** and **Norfolk Southern**. Furthermore, Matt has worked on projects in the **Technology & Software** industry, particularly during his independent project, MattGPT. His work at **Accenture**'s Liquid Studio also exposed him to **Life Sciences**, **Entertainment**, **Agriculture**, and **Consumer Goods** industries through rapid prototyping and innovation projects. His industry experience is broad, encompassing both primary and secondary sectors, with limited exposure to **Healthcare** through one engagement."
+  },
+  {
+    "label": "before",
+    "kind": "industry",
+    "question": "Which industries has Matt worked in?",
+    "run": 2,
+    "rejection_reason": null,
+    "listed_names": [
+      "Cendian"
+    ],
+    "figures": [],
+    "unbacked_figures": [],
+    "sources": [
+      "Why Hire Matt?",
+      "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+      "Owning the P&L: From Engagement Margin to Center Cost Base",
+      "Building Smart, Connected Devices at Accenture's Liquid Studio",
+      "Integrating a Chemical Logistics Network Across Every Partner Capability"
+    ],
+    "answer_md": "Got it! 🐾\n\nMatt has worked across multiple industries throughout his career. In the **financial services and banking** sector, he has been involved with clients such as **JP Morgan**, **RBC**, **Capital One**, and **HSBC**, where he led modernization efforts and built enterprise payment platforms. His work in the **transportation and logistics** industry is highlighted by his role at **Cendian Chemical Logistics**, where he engineered integrations in a complex network involving over **300 carriers** across **80 countries**. Additionally, Matt has experience in the **technology and software** industry, demonstrated by his independent project, MattGPT, which involved modern AI/ML technologies. Furthermore, his work at **Accenture**'s Liquid Studio spanned industries including **life sciences**, **transportation**, **entertainment**, **agriculture**, and **consumer goods**, where he prototyped IoT and emerging-tech solutions. These experiences showcase his broad industry exposure and the diverse challenges he has tackled."
+  },
+  {
+    "label": "before",
+    "kind": "industry",
+    "question": "Which industries has Matt worked in?",
+    "run": 3,
+    "rejection_reason": null,
+    "listed_names": [
+      "Cendian"
+    ],
+    "figures": [],
+    "unbacked_figures": [],
+    "sources": [
+      "Why Hire Matt?",
+      "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+      "Owning the P&L: From Engagement Margin to Center Cost Base",
+      "Building Smart, Connected Devices at Accenture's Liquid Studio",
+      "Integrating a Chemical Logistics Network Across Every Partner Capability"
+    ],
+    "answer_md": "🐾 On it!\n\nMatt has worked across several industries throughout his career. His primary industry experience is in **Financial Services and Banking**, having led modernization efforts for clients like **JP Morgan**, **RBC**, **Capital One**, and **HSBC**. He also has experience in the **Telecommunications** sector, working with clients such as **AT&T** and **Level 3 Communications**. In the **Transportation and Logistics** industry, Matt worked with **Cendian Chemical Logistics**, where he was involved in integrating a chemical logistics network. Additionally, he has limited experience in the **Healthcare** sector, having worked on one engagement with a major U.S. health system. His work in the **Technology and Software** industry is highlighted by his independent project, MattGPT, during his sabbatical."
+  },
+  {
+    "label": "before",
+    "kind": "industry",
+    "question": "Has Matt worked in retail?",
+    "run": 1,
+    "rejection_reason": "semantic_router:out_of_scope",
+    "listed_names": [],
+    "figures": [],
+    "unbacked_figures": [],
+    "sources": [],
+    "answer_md": "🐾 I don't have experience in that industry. Matt's work is primarily in **Financial Services**, **Healthcare/Life Sciences**, **Telecom**, and **Technology/SaaS**.\n\nWould you like to explore how his work in **platform modernization**, **payments systems**, or **enterprise transformation** might apply to your context?"
+  },
+  {
+    "label": "before",
+    "kind": "industry",
+    "question": "Has Matt worked in retail?",
+    "run": 2,
+    "rejection_reason": "semantic_router:out_of_scope",
+    "listed_names": [],
+    "figures": [],
+    "unbacked_figures": [],
+    "sources": [],
+    "answer_md": "🐾 I don't have experience in that industry. Matt's work is primarily in **Financial Services**, **Healthcare/Life Sciences**, **Telecom**, and **Technology/SaaS**.\n\nWould you like to explore how his work in **platform modernization**, **payments systems**, or **enterprise transformation** might apply to your context?"
+  },
+  {
+    "label": "before",
+    "kind": "industry",
+    "question": "Has Matt worked in retail?",
+    "run": 3,
+    "rejection_reason": "semantic_router:out_of_scope",
+    "listed_names": [],
+    "figures": [],
+    "unbacked_figures": [],
+    "sources": [],
+    "answer_md": "🐾 I don't have experience in that industry. Matt's work is primarily in **Financial Services**, **Healthcare/Life Sciences**, **Telecom**, and **Technology/SaaS**.\n\nWould you like to explore how his work in **platform modernization**, **payments systems**, or **enterprise transformation** might apply to your context?"
+  },
+  {
+    "label": "before",
+    "kind": "industry",
+    "question": "Has Matt worked in healthcare?",
+    "run": 1,
+    "rejection_reason": null,
+    "listed_names": [],
+    "figures": [],
+    "unbacked_figures": [],
+    "sources": [
+      "Why Hire Matt?",
+      "Delivering AI-Powered Chronic Disease Management for Healthcare",
+      "MattGPT: Human-Centered UX Design & Information Architecture",
+      "Delivering Multi-Client Customization and Compliance for the White-Label Card Portal",
+      "Replacing a Mainframe Underwriting System at Cendant Mortgage"
+    ],
+    "answer_md": "🐾 Found it!\n\nMatt has worked in the healthcare industry. He led a project for a **Major U.S. Health System** where he developed AI-powered capabilities for managing chronic diseases such as diabetes and hypertension. The existing system relied on reactive care with limited real-time patient insights. Matt's initiative aimed to pilot AI-powered capabilities, starting with diabetes management, leveraging generative AI, machine learning, and health-tracking devices to deliver personalized care and enable proactive intervention.\n\nHe designed and implemented a data lake, machine learning pipeline, and LLM instance to process and analyze data from various devices in real-time. The project delivered a working MVP in **16 weeks**, using iterative product slicing and building an extensible software foundation. This pilot proved the approach could deliver personalized care at scale, shifting clinical teams from reactive to proactive, data-driven intervention. The successful outcomes built executive confidence for broader implementation across the health system."
+  },
+  {
+    "label": "before",
+    "kind": "industry",
+    "question": "Has Matt worked in healthcare?",
+    "run": 2,
+    "rejection_reason": null,
+    "listed_names": [],
+    "figures": [],
+    "unbacked_figures": [],
+    "sources": [
+      "Why Hire Matt?",
+      "Delivering AI-Powered Chronic Disease Management for Healthcare",
+      "MattGPT: Human-Centered UX Design & Information Architecture",
+      "Delivering Multi-Client Customization and Compliance for the White-Label Card Portal",
+      "Replacing a Mainframe Underwriting System at Cendant Mortgage"
+    ],
+    "answer_md": "🐾 This is a strong one.\n\nMatt has worked in the healthcare industry. He led an initiative for a major U.S. health system to enhance their chronic disease management application by integrating AI-powered capabilities. The existing system relied on reactive care with limited real-time insights. Matt's approach involved building a scalable, data-driven platform that aggregated and analyzed vast amounts of patient data in real-time. This included designing and implementing a data lake, machine learning pipeline, and LLM instance to process data from various devices like EMRs and glucometers.\n\nMatt applied generative AI to deliver actionable health insights and personalized recommendations through a mobile app. This enabled patients to receive AI-driven guidance, medication reminders, and lifestyle adjustments. He also trained healthcare teams to interpret these AI-generated insights, fostering a shift from reactive care to proactive, data-driven intervention. The project was delivered as a working MVP in **16 weeks**, which built executive confidence for broader implementation across the health system."
+  },
+  {
+    "label": "before",
+    "kind": "industry",
+    "question": "Has Matt worked in healthcare?",
+    "run": 3,
+    "rejection_reason": null,
+    "listed_names": [],
+    "figures": [],
+    "unbacked_figures": [],
+    "sources": [
+      "Why Hire Matt?",
+      "Delivering AI-Powered Chronic Disease Management for Healthcare",
+      "MattGPT: Human-Centered UX Design & Information Architecture",
+      "Delivering Multi-Client Customization and Compliance for the White-Label Card Portal",
+      "Replacing a Mainframe Underwriting System at Cendant Mortgage"
+    ],
+    "answer_md": "🐾 On it!\n\nYes, Matt has worked in the healthcare industry. He led an initiative for a **Major U.S. Health System** to enhance their existing condition management application with AI-powered capabilities. The project focused on chronic diseases like diabetes and hypertension, aiming to shift from reactive care to proactive, data-driven intervention. Matt's team developed a scalable, data-driven healthcare platform that aggregated and analyzed vast amounts of patient data in real-time. They delivered a working MVP in **16 weeks**, which included a data lake, machine learning pipeline, LLM-driven chat, and proactive alerting. This pilot project not only validated the AI-powered approach but also built executive confidence for broader implementation across the health system."
+  },
+  {
+    "label": "before",
+    "kind": "industry",
+    "question": "Has Matt worked in transportation?",
+    "run": 1,
+    "rejection_reason": null,
+    "listed_names": [
+      "Cendian"
+    ],
+    "figures": [],
+    "unbacked_figures": [],
+    "sources": [
+      "About Matt – My Leadership Journey",
+      "Integrating a Chemical Logistics Network Across Every Partner Capability",
+      "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+      "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+      "Building the Payment Engine Behind JP Morgan ACCESS"
+    ],
+    "answer_md": "🐾 Here's a great example.\n\nMatt has worked in the transportation and logistics industry. At **Cendian Chemical Logistics**, he was involved in integrating a complex logistics network that coordinated shipments across more than **300 carriers** in over **80 countries**. His work focused on building and maintaining the integration layer between Cendian’s systems and its partner network, using technologies like Java and webMethods. He engineered integrations for various transaction sets and developed common data representation XML standards. This allowed partners with varying capabilities to exchange data with Cendian effectively, whether through EDI, XML services, or a portal for those unable to integrate by code. The result was a seamless exchange of information, improving operational efficiency and reducing manual processes.\n\nAdditionally, Matt led a modernization project at **Norfolk Southern**, where he transitioned legacy revenue management and shipment planning systems to a cloud-native architecture. This modernization improved revenue tracking accuracy, reduced operational costs, and enabled real-time insights for dynamic shipment planning. The transition established a scalable foundation for future growth, enhancing customer satisfaction and maximizing asset utilization. These projects demonstrate Matt's involvement in the transportation sector, focusing on integration and modernization to drive efficiency and scalability."
+  },
+  {
+    "label": "before",
+    "kind": "industry",
+    "question": "Has Matt worked in transportation?",
+    "run": 2,
+    "rejection_reason": null,
+    "listed_names": [
+      "Cendian"
+    ],
+    "figures": [],
+    "unbacked_figures": [],
+    "sources": [
+      "About Matt – My Leadership Journey",
+      "Integrating a Chemical Logistics Network Across Every Partner Capability",
+      "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+      "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+      "Building the Payment Engine Behind JP Morgan ACCESS"
+    ],
+    "answer_md": "🐾 Here's a great example.\n\nMatt has indeed worked in the transportation industry. At **Cendian Chemical Logistics**, he was involved in integrating a chemical logistics network across more than **300 carriers** and **80-plus countries**. He engineered integrations in Java and webMethods, developed common data representation XML standards, and created a portal for partners who couldn't integrate by code. This work allowed partners across various capabilities to exchange data with Cendian, ensuring the transportation management system (GC3) had a unified representation of shipments.\n\nAdditionally, at **Norfolk Southern**, Matt led the modernization of legacy revenue management and shipment planning systems. He transitioned these systems to a modular cloud-native architecture, which improved revenue tracking accuracy, reduced operational costs, and established a scalable foundation for future growth. The modernization enabled real-time revenue tracking and adjustments based on dynamic shipment data, replacing the older batch-processed legacy reporting system."
+  },
+  {
+    "label": "before",
+    "kind": "industry",
+    "question": "Has Matt worked in transportation?",
+    "run": 3,
+    "rejection_reason": null,
+    "listed_names": [
+      "Cendian"
+    ],
+    "figures": [],
+    "unbacked_figures": [],
+    "sources": [
+      "About Matt – My Leadership Journey",
+      "Integrating a Chemical Logistics Network Across Every Partner Capability",
+      "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+      "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+      "Building the Payment Engine Behind JP Morgan ACCESS"
+    ],
+    "answer_md": "🐾 On it!\n\nMatt has worked in the transportation industry, notably with **Cendian Chemical Logistics** and **Norfolk Southern**. At **Cendian Chemical Logistics**, he was involved in integrating a complex logistics network that coordinated shipments across more than **300 carriers** into and out of **80-plus countries**. His role as a Software Engineer included engineering integrations in Java and webMethods, building common data standards, and developing a transaction tracking system that provided operations with visibility into message flows. This integration allowed partners, regardless of their technical capabilities, to exchange data with Cendian, improving operational efficiency and reducing manual data entry.\n\nAt **Norfolk Southern**, Matt led the modernization of legacy revenue management and shipment planning systems. These systems were costly and lacked real-time analytics capabilities, which hindered revenue accuracy and scalability. Matt transitioned these systems to a cloud-native architecture, which improved revenue tracking accuracy and reduced operational costs. This modernization enabled real-time shipment adjustments, improving customer satisfaction and asset utilization. The project established a scalable foundation for future growth, allowing **Norfolk Southern** to adapt and expand its systems as needed."
+  },
+  {
+    "label": "before",
+    "kind": "industry",
+    "question": "Has Matt worked in aerospace or defense?",
+    "run": 1,
+    "rejection_reason": null,
+    "listed_names": [],
+    "figures": [],
+    "unbacked_figures": [],
+    "sources": [
+      "Why Hire Matt?",
+      "Keeping the F-22's As-Built Configuration Data Accurate",
+      "MattGPT: Human-Centered UX Design & Information Architecture",
+      "Driving Modern Software Engineering with Project Octane",
+      "Owning the P&L: From Engagement Margin to Center Cost Base"
+    ],
+    "answer_md": "🐾 This is a strong one.\n\nMatt has worked in the aerospace and defense industry. During his time at **Wellfound Technology**, he was involved in a project with **Lockheed Martin** on the F-22 program. His role was to ensure the accuracy of the as-built configuration data, which is a critical requirement in defense contracting. This involved owning the daily ETL process that bridged shop-floor material tracking with the master configuration status accounting system. He automated the ingestion process using a Unix C shell wrapper, which was a new skill for him at the time, and built the Oracle 8i backend in PL/SQL. This work was done with anonymized data due to clearance restrictions, and the system was validated through cycles with Lockheed resources. The pipeline was maintained for over a year, ensuring the configuration data remained accurate and current, which was essential for the airworthiness of the aircraft."
+  },
+  {
+    "label": "before",
+    "kind": "industry",
+    "question": "Has Matt worked in aerospace or defense?",
+    "run": 2,
+    "rejection_reason": null,
+    "listed_names": [],
+    "figures": [],
+    "unbacked_figures": [],
+    "sources": [
+      "Why Hire Matt?",
+      "Keeping the F-22's As-Built Configuration Data Accurate",
+      "MattGPT: Human-Centered UX Design & Information Architecture",
+      "Driving Modern Software Engineering with Project Octane",
+      "Owning the P&L: From Engagement Margin to Center Cost Base"
+    ],
+    "answer_md": "🐾 I know just the story.\n\nMatt worked in the aerospace and defense industry during his time at **Wellfound Technology** on a program with **Lockheed Martin**. He was involved in the F-22 program, which required a certified as-built configuration baseline. This baseline was a serial-level record of what was installed on each aircraft, matched against master engineering records. Configuration status accounting is a formal defense requirement, essential for tracing failed components back through their assembly and manufacturing lot to every other aircraft carrying the same batch.\n\nMatt owned the daily ETL process that bridged the shop-floor material tracking feed and the master configuration status accounting system. He automated the ingestion process, protected the data from corruption, and ensured the accuracy of the as-built tree as the program moved from flight test toward production. He wrote a Unix C shell wrapper to automate the daily interface and built the Oracle 8i backend in PL/SQL. Despite not holding clearance to see production data, he built and tested against anonymized extracts and validated through cycles with Lockheed resources on-site. Matt maintained the system for over a year, including implementing a fix that prevented duplicate serial values from being inserted as the program scaled toward production volume."
+  },
+  {
+    "label": "before",
+    "kind": "industry",
+    "question": "Has Matt worked in aerospace or defense?",
+    "run": 3,
+    "rejection_reason": null,
+    "listed_names": [],
+    "figures": [],
+    "unbacked_figures": [],
+    "sources": [
+      "Why Hire Matt?",
+      "Keeping the F-22's As-Built Configuration Data Accurate",
+      "MattGPT: Human-Centered UX Design & Information Architecture",
+      "Driving Modern Software Engineering with Project Octane",
+      "Owning the P&L: From Engagement Margin to Center Cost Base"
+    ],
+    "answer_md": "🐾 Found it!\n\nMatt worked in the aerospace and defense industry with **Lockheed Martin** on the F-22 program while at Wellfound Technology. During this engagement, he was responsible for maintaining the accuracy of the as-built configuration data, which is a critical requirement for defense contracting. This involved owning the daily ETL process that bridged shop-floor material tracking with the master configuration status accounting system. He automated the ingestion process with a Unix C shell wrapper and built the Oracle 8i backend using PL/SQL. Despite not having clearance to see production data, Matt successfully validated the system through repeated test cycles with Lockheed personnel. His work ensured the configuration data remained accurate, which was essential for the program's airworthiness as it moved from flight test to production."
+  },
+  {
+    "label": "before",
+    "kind": "industry",
+    "question": "Tell me about Matt's legacy-to-cloud work",
+    "run": 1,
+    "rejection_reason": null,
+    "listed_names": [],
+    "figures": [],
+    "unbacked_figures": [],
+    "sources": [
+      "Driving Cloud-Native Innovation through TICARA Framework",
+      "Designing Cloud Integration Architecture for JP Morgan's Asset Management",
+      "Architecting Enhancements for AT&T's Network Engineering Platform",
+      "Turning STRATCOM's Paper Operational Plans into Executable Workflow",
+      "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices"
+    ],
+    "answer_md": "🐾 On it!\n\nAt **Norfolk Southern**, Matt tackled the challenge of modernizing mission-critical applications that ran on a mainframe dating back to the 1970s. These applications were monolithic and fragile under load, making them difficult to scale and adapt to new business needs. The critical nature of these systems meant that a complete replacement was too risky, so Matt led an incremental rearchitecture process. He decomposed the monoliths into microservices, ensuring that each component could be developed, deployed, and scaled independently. This approach allowed for the gradual replacement of mainframe components without disrupting live rail operations.\n\nMatt utilized API gateways and anti-corruption layers to maintain interoperability between the old and new systems, and reconciliation reports were generated to ensure no functionality or data was lost during the transition. By implementing Docker and Kubernetes, he enabled successful scaling and improved system reliability. The introduction of automated CI/CD pipelines reduced manual deployment errors and accelerated feature delivery.\n\nThe transformation resulted in faster deployment cycles, improved scalability, and reduced downtime, positioning **Norfolk Southern** for future innovation with a modular, cloud-native foundation. This approach allowed the company to handle peak loads without performance degradation, increasing overall platform reliability and customer satisfaction."
+  },
+  {
+    "label": "before",
+    "kind": "industry",
+    "question": "Tell me about Matt's legacy-to-cloud work",
+    "run": 2,
+    "rejection_reason": null,
+    "listed_names": [],
+    "figures": [],
+    "unbacked_figures": [],
+    "sources": [
+      "Driving Cloud-Native Innovation through TICARA Framework",
+      "Designing Cloud Integration Architecture for JP Morgan's Asset Management",
+      "Architecting Enhancements for AT&T's Network Engineering Platform",
+      "Turning STRATCOM's Paper Operational Plans into Executable Workflow",
+      "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices"
+    ],
+    "answer_md": "🐾 Found it!\n\nAt **Norfolk Southern**, Matt tackled the challenge of modernizing mission-critical applications that were running on a mainframe from the 1970s. These applications were monolithic, fragile under load, and slow to adapt to evolving business needs. Given their criticality, a wholesale replacement was too risky, necessitating an incremental approach to modernization without disrupting live rail operations.\n\nMatt led the rearchitecture by decomposing the monoliths into microservices, allowing for independent development, deployment, and scaling of each service. He employed the Strangler pattern to incrementally replace components, using API gateways and anti-corruption layers to maintain interoperability. This approach ensured that business operations continued smoothly without relying on a big-bang cutover. The use of Docker and Kubernetes facilitated the packaging and management of services, enhancing system reliability and scalability. Automated CI/CD pipelines were implemented to reduce manual deployment errors and accelerate feature delivery.\n\nThe results were significant: faster deployment cycles, improved scalability, and reduced downtime, which increased platform reliability and customer satisfaction. This transformation positioned **Norfolk Southern** for future innovation by establishing a modular, cloud-native foundation that could adapt agilely to new business demands."
+  },
+  {
+    "label": "before",
+    "kind": "industry",
+    "question": "Tell me about Matt's legacy-to-cloud work",
+    "run": 3,
+    "rejection_reason": null,
+    "listed_names": [],
+    "figures": [],
+    "unbacked_figures": [],
+    "sources": [
+      "Driving Cloud-Native Innovation through TICARA Framework",
+      "Designing Cloud Integration Architecture for JP Morgan's Asset Management",
+      "Architecting Enhancements for AT&T's Network Engineering Platform",
+      "Turning STRATCOM's Paper Operational Plans into Executable Workflow",
+      "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices"
+    ],
+    "answer_md": "🐾 I know just the story.\n\nAt **Norfolk Southern**, the mission-critical applications were running on a mainframe system dating back to the 1970s. These applications were monolithic and fragile, struggling under high loads and unable to quickly adapt to business changes. The challenge was to modernize this legacy system without disrupting live rail operations, as a complete overhaul was too risky. \n\nMatt led the rearchitecture of these systems, breaking down the monoliths into microservices, which allowed for independent development, deployment, and scaling. He used API gateways and anti-corruption layers to ensure interoperability during the transition, maintaining business continuity. Kubernetes and CI/CD automation were implemented to manage the new services, significantly improving system reliability and scalability. \n\nThe results were transformative: faster deployment cycles, improved scalability, and reduced downtime. This modernization not only increased platform reliability and customer satisfaction but also positioned **Norfolk Southern** for future innovation with a modular, cloud-native foundation. The human impact was significant, as technology and operations leaders at **Norfolk Southern** could now rely on a stable and adaptable system that supported agile development and new digital services."
+  },
+  {
+    "label": "before",
+    "kind": "control",
+    "question": "Tell me about Matt's payments work at JPMorgan",
+    "run": 1,
+    "rejection_reason": null,
+    "listed_names": [],
+    "figures": [
+      "180+"
+    ],
+    "unbacked_figures": [],
+    "sources": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+    ],
+    "answer_md": "🐾 Perfect, here's what I found.\n\nAt **JP Morgan Chase**, Matt played a pivotal role as the Senior Technology Architecture Manager during the development of the ACCESS Next Generation platform. This platform was designed to be a unified global corporate banking portal, serving over **135,000** corporations, financial institutions, governments, and municipalities across **180+** countries. The challenge was to build a system that went beyond the capabilities of the Bottomline Technologies' WebSeries platform, accommodating the diverse needs of JP Morgan's extensive client base.\n\nMatt led a blended team of over **40** professionals from **Accenture** and JP Morgan, managing resources across Mumbai, Bangalore, and the US. He spent a significant amount of time embedded at Bottomline Technologies' Portsmouth, NH offices, ensuring seamless collaboration between teams. His leadership focused on designing and delivering bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. These modules required custom engineering to meet the specific formatting, validation, compliance, and workflow requirements of JP Morgan's operations.\n\nMatt's efforts resulted in the successful launch of the ACCESS platform in April 2011, which provided real-time global reporting, SSO across treasury functions, and trade finance lifecycle visibility. The platform was recognized as the #1 digital channel by Coalition Greenwich. Additionally, Matt managed the integration of the payment engine with JP Morgan's centralized transaction monitoring system, ensuring robust compliance and risk management. His work was instrumental in consolidating previously separate regional systems into a single digital experience, transforming the corporate treasurer experience for JP Morgan's clients."
+  },
+  {
+    "label": "before",
+    "kind": "control",
+    "question": "Tell me about Matt's payments work at JPMorgan",
+    "run": 2,
+    "rejection_reason": null,
+    "listed_names": [],
+    "figures": [
+      "180+"
+    ],
+    "unbacked_figures": [],
+    "sources": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+    ],
+    "answer_md": "🐾 Perfect, here's what I found.\n\nAt **JP Morgan Chase**, Matt served as the Senior Technology Architecture Manager, where he played a pivotal role in developing the ACCESS Next Generation platform. This platform was designed to be JP Morgan's flagship corporate digital banking portal, catering to over **135,000** corporations, financial institutions, governments, and municipalities across **180+** countries. The project was challenging due to the need for bespoke payment modules and security controls that went beyond the capabilities of the underlying WebSeries platform from Bottomline Technologies.\n\nMatt led a blended team of over **40** professionals from **Accenture** and JP Morgan, managing resources across Mumbai, Bangalore, and the US. He was instrumental in designing and delivering custom payment modules for ACH, wire, FX/cross-border, and EFTPS tax, along with a MAC security layer and contextual help features. His leadership extended to managing the integration with JP Morgan's centralized transaction monitoring system, ensuring compliance and security across the platform.\n\nThe ACCESS platform launched in April 2011, consolidating previously separate regional systems into a single digital experience. This transformation provided real-time global reporting, Single Sign-On across treasury functions, and trade finance lifecycle visibility, significantly enhancing the corporate treasurer experience. The platform was recognized as #1 in digital channels by Coalition Greenwich, highlighting its success in the financial services industry."
+  },
+  {
+    "label": "before",
+    "kind": "control",
+    "question": "Tell me about Matt's payments work at JPMorgan",
+    "run": 3,
+    "rejection_reason": null,
+    "listed_names": [],
+    "figures": [
+      "180+"
+    ],
+    "unbacked_figures": [],
+    "sources": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+    ],
+    "answer_md": "🐾 Tracking this down...\n\nAt **JP Morgan Chase**, Matt played a pivotal role in building the payment engine behind the ACCESS Next Generation platform. As the Technology Delivery Lead, he was tasked with designing and delivering bespoke payment modules tailored to the needs of over **135,000** corporations, financial institutions, governments, and municipalities across **180+ countries**. The challenge was to extend the capabilities of Bottomline Technologies' WebSeries platform to meet the distinct requirements of JP Morgan's vast client base. This involved developing custom modules for ACH, wire, FX/cross-border payments, and EFTPS tax, each with specific compliance and workflow needs.\n\nMatt managed a blended team of over **40** professionals from **Accenture** and JP Morgan, coordinating efforts across multiple locations, including Portsmouth, NH, Mumbai, Bangalore, and the US. He was deeply involved in the technical interface with Bottomline Technologies, spending a significant amount of time at their offices to ensure seamless integration and delivery.\n\nThe ACCESS platform launched in April 2011 as JP Morgan's unified global corporate banking portal. It consolidated previously separate regional systems into a single digital experience, offering real-time global reporting, Single Sign-On (SSO) across treasury functions, and trade finance lifecycle visibility. The platform was recognized as the #1 digital channel by Coalition Greenwich, highlighting its impact on the corporate treasurer experience."
+  },
+  {
+    "label": "before",
+    "kind": "control",
+    "question": "What's Matt's leadership philosophy?",
+    "run": 1,
+    "rejection_reason": null,
+    "listed_names": [],
+    "figures": [
+      "$100M+",
+      "150+",
+      "4x"
+    ],
+    "unbacked_figures": [],
+    "sources": [
+      "Leadership Philosophy – How I Lead",
+      "About Matt – My Leadership Journey",
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Leading People: From Delivery Teams to a 150-Person Organization",
+      "Building Effective AI-Assisted Development Workflows"
+    ],
+    "answer_md": "Got it! 🐾\n\nMatt's leadership philosophy centers on creating an environment where teams can thrive and deliver meaningful work. He emphasizes building trust, clarity, and shared purpose among team members. Across his roles, particularly at the Cloud Innovation Center, Matt focused on removing barriers that hinder teams, such as over-processing and lack of trust. He fostered psychological safety, allowing team members to speak honestly and take ownership of their outcomes. Decisions were pushed to those closest to the work, ensuring that the people with the most context were empowered to make choices.\n\nMatt's approach blends empathy and clarity with modern engineering rigor. He leads with purpose, making his intentions explicit and ensuring that communication is transparent and direct. By grounding engineering culture in automation and quality-first practices, he enabled teams to accelerate delivery by **4x**, improve quality, and strengthen cross-functional trust. This philosophy not only improved delivery speed but also instilled pride and ownership in the teams' work.\n\nThrough his leadership, Matt scaled the Cloud Innovation Center from 0 to **150+ practitioners** and drove **\\$100M+** in repeat business. His consistent approach of listening first, aligning around purpose, and moving intentionally has defined his career and resulted in teams that trust each other and deliver work they are proud of."
+  },
+  {
+    "label": "before",
+    "kind": "control",
+    "question": "What's Matt's leadership philosophy?",
+    "run": 2,
+    "rejection_reason": null,
+    "listed_names": [],
+    "figures": [
+      "4x"
+    ],
+    "unbacked_figures": [],
+    "sources": [
+      "Leadership Philosophy – How I Lead",
+      "About Matt – My Leadership Journey",
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Leading People: From Delivery Teams to a 150-Person Organization",
+      "Building Effective AI-Assisted Development Workflows"
+    ],
+    "answer_md": "Got it! 🐾\n\nMatt's leadership philosophy centers on creating an environment where teams can thrive by focusing on trust, clarity, and shared purpose rather than just process or tools. He has consistently applied this approach across various roles, including leading a **150-person Cloud Innovation Center** at **Accenture**. Matt's leadership style is characterized by removing barriers for teams, such as over-processing and lack of trust, which often leave teams waiting for permission rather than owning their outcomes. He emphasizes psychological safety, allowing team members to speak honestly and take risks, and pushes decision-making to those closest to the work.\n\nAt the Cloud Innovation Center, Matt's approach led to a **4x delivery acceleration** once teams embraced lean product and modern engineering practices. This was achieved through a blend of empathy, clarity, and engineering rigor. He focused on building psychological safety, promoting transparency, and using direct feedback and open communication. By grounding the engineering culture in automation, continuous delivery, and quality-first practices, Matt enabled teams to deliver high-quality work with pride and ownership.\n\nThis philosophy not only accelerated delivery but also improved quality, strengthened cross-functional trust, and empowered teams to deliver meaningful work. Through his leadership, Matt has built high-trust engineering cultures and helped organizations shift how they think about technology, fostering environments where engineers, designers, and product teams can do the best work of their careers."
+  },
+  {
+    "label": "before",
+    "kind": "control",
+    "question": "What's Matt's leadership philosophy?",
+    "run": 3,
+    "rejection_reason": null,
+    "listed_names": [],
+    "figures": [
+      "4x"
+    ],
+    "unbacked_figures": [],
+    "sources": [
+      "Leadership Philosophy – How I Lead",
+      "About Matt – My Leadership Journey",
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Leading People: From Delivery Teams to a 150-Person Organization",
+      "Building Effective AI-Assisted Development Workflows"
+    ],
+    "answer_md": "🐾 I know just the story.\n\nMatt's leadership philosophy centers on creating an environment where teams can thrive by focusing on trust, clarity, and shared purpose. Across his roles, including leading the **150-person Cloud Innovation Center** at **Accenture**, Matt found that many engineering teams were over-processed and under-trusted, often waiting for permission rather than owning their outcomes. His approach involved removing these barriers by fostering psychological safety, empowering teams to make decisions closest to their work, and grounding engineering culture in automation and continuous delivery.\n\nMatt's methodology stands out for its blend of empathy, clarity, and modern engineering rigor. He leads with purpose, making intent explicit, and builds psychological safety so team members can take risks and speak honestly. Decisions are pushed to those closest to the work, and transparency, direct feedback, and open communication are emphasized. By coaching teams to think clearly, not just execute tasks, he instills confidence in what they ship.\n\nThis leadership philosophy has yielded significant results. At the Cloud Innovation Center, teams achieved a **4x delivery acceleration**, improved quality, and strengthened cross-functional trust. These outcomes were possible because Matt's approach wasn't just about implementing processes but about transforming the culture to enable meaningful work with pride and ownership."
+  },
+  {
+    "label": "before",
+    "kind": "control",
+    "question": "Why hire Matt?",
+    "run": 1,
+    "rejection_reason": null,
+    "listed_names": [],
+    "figures": [
+      "$100M",
+      "$10M"
+    ],
+    "unbacked_figures": [],
+    "sources": [
+      "Why Hire Matt?",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "About Matt – My Leadership Journey",
+      "Driving HSBC's Mortgage Transformation from Assessment to $10M Contract",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology"
+    ],
+    "answer_md": "🐾 Looking across Matt's portfolio, I see clear patterns. Organizations often struggle with modernizing their technology and transforming their engineering practices to meet the demands of a rapidly evolving digital landscape. This challenge is compounded by legacy systems, compliance requirements, and the need for cross-functional collaboration. At **Accenture**, Matt addressed these issues by building the Cloud Innovation Center from the ground up, scaling it to over **150 professionals**. This center delivered at four times the velocity with zero-defect deployments, leveraging modern engineering practices like test-driven development and automated pipelines. This approach not only improved delivery outcomes but also generated over **\\$100M** in repeat business through delivery excellence. He led the technology assessment and transformation roadmap for **HSBC**'s mortgage operations, which were under regulatory pressure. By developing a solution architecture that automated workflows and eliminated compliance risks, he secured a **\\$10M** implementation contract.\n\nIn addition to these achievements, Matt's leadership journey at **Accenture** involved creating an innovation ecosystem that connected clients with emerging technology. By partnering with institutions like Georgia Tech and engaging in the local tech community, he strengthened client relationships and improved solution relevance. This proactive approach to client engagement contributed to the CIC's reputation as a trusted transformation partner, driving repeat business and long-term client relationships.\n\nOverall, Matt's career is characterized by building lasting capabilities, whether through modernizing platforms, creating high-trust engineering cultures, or delivering measurable outcomes across industries."
+  },
+  {
+    "label": "before",
+    "kind": "control",
+    "question": "Why hire Matt?",
+    "run": 2,
+    "rejection_reason": null,
+    "listed_names": [],
+    "figures": [
+      "$100M",
+      "$100M+",
+      "$10M",
+      "150+",
+      "4x"
+    ],
+    "unbacked_figures": [],
+    "sources": [
+      "Why Hire Matt?",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "About Matt – My Leadership Journey",
+      "Driving HSBC's Mortgage Transformation from Assessment to $10M Contract",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology"
+    ],
+    "answer_md": "🐾 Here's what connects the dots across Matt's work.\n\nMatt has consistently demonstrated a pattern of building and transforming organizations and teams to deliver exceptional results. At **Accenture**, he grew the Cloud Innovation Center from 0 to **150+ professionals**, achieving **4x** faster velocity and zero-defect deployments through modern engineering practices like TDD and automated pipelines. This effort generated over **\\$100M** in repeat business, underscoring the impact of delivery excellence. His leadership extended to modernizing enterprise platforms across major financial institutions, including **JP Morgan**, **RBC**, **Capital One**, and **HSBC**, where he led a mortgage transformation that secured a **\\$10M** implementation contract.\n\nThroughout his career, Matt has focused on solving ambiguous problems and building high-trust engineering cultures. He has a track record of creating environments where cross-functional teams can thrive, as seen in his work with the Cloud Innovation Centers in Atlanta and Tampa. These centers embodied Silicon Valley product culture, adapted for Fortune 500 enterprises, and contributed to **\\$100M+** in repeatable business by FY23. His approach involved developing a talent pipeline, adapting Lean XP methodologies for enterprise complexity, and creating playbooks that enabled consistent delivery across diverse clients and industries. This ecosystem improved solution relevance and client retention, positioning the Cloud Innovation Center as a bridge between enterprise needs and cutting-edge technology. His intentional client engagement model further solidified the CIC's reputation, generating over **\\$100M+** in repeatable business through trusted relationships and delivery reputation."
+  },
+  {
+    "label": "before",
+    "kind": "control",
+    "question": "Why hire Matt?",
+    "run": 3,
+    "rejection_reason": null,
+    "listed_names": [],
+    "figures": [
+      "$100M",
+      "$10M",
+      "4x"
+    ],
+    "unbacked_figures": [],
+    "sources": [
+      "Why Hire Matt?",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "About Matt – My Leadership Journey",
+      "Driving HSBC's Mortgage Transformation from Assessment to $10M Contract",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology"
+    ],
+    "answer_md": "🐾 Stepping back to see the themes in Matt's career, a consistent pattern emerges: he builds enduring capabilities that extend beyond the immediate engagement. At **Accenture**, Matt grew the Cloud Innovation Center from 0 to over **150 professionals**, delivering at **4x** velocity with zero-defect deployments. This achievement was grounded in modern engineering practices like TDD and automated pipelines, which contributed to **\\$100M**+ in repeat business through delivery excellence alone.\n\nMatt's work spans multiple industries, including financial services, where he led modernization efforts for major banks like **JP Morgan**, **RBC**, **Capital One**, and **HSBC**. At **HSBC**, he addressed regulatory pressures by leading workshops that resulted in a **\\$10M** implementation contract, aligning business and IT teams on a unified transformation approach.\n\nIn addition to his technical leadership, Matt has been instrumental in fostering innovation ecosystems. He established strategic partnerships with institutions like Georgia Tech, enhancing **Accenture**'s access to emerging technology and talent. This approach not only improved solution relevance but also increased client retention, positioning the Cloud Innovation Center as a bridge between enterprise needs and cutting-edge technology.\n\nMatt's career is defined by a hands-on approach to leadership, where he remains deeply involved in the work itself. Available immediately, Matt is seeking senior leadership roles in platform engineering, AI-era transformation, and enterprise modernization, where he can continue to build, drive change, and solve complex problems as part of a team."
+  },
+  {
+    "label": "before",
+    "kind": "control",
+    "question": "Tell me about a time Matt failed",
+    "run": 1,
+    "rejection_reason": null,
+    "listed_names": [],
+    "figures": [],
+    "unbacked_figures": [],
+    "sources": [
+      "What I Learned About Assumptions",
+      "Why Hire Matt?",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+      "Recovering Fiserv's $8.5M White-Label Card Portal",
+      "Keeping the F-22's As-Built Configuration Data Accurate"
+    ],
+    "answer_md": "🐾 I know just the story.\n\nDuring a platform delivery for a **Fortune 500 financial services client**, Matt assumed that the IAM controls, environment boundaries, and data masking were correctly configured. This assumption led to an incident where an offshore tester accidentally triggered an email job in the UAT environment, sending unmasked production data to thousands of real clients. The pressure to deliver, combined with inherited configurations from prior phases, contributed to this oversight.\n\nMatt took full accountability for the incident. He led his team through a root cause analysis and remediation process, emphasizing the importance of verifying IAM configurations and environment boundaries. He worked with the team to understand the incident's causes and implemented corrective controls to prevent future occurrences. This experience taught Matt that assumptions are risks in disguise, and he now prioritizes IAM validation, environment verification, PII scrubbing, and risk ownership as day-one responsibilities in his delivery approach.\n\nDespite the systemic nature of the failure, the client demanded the removal of the tester from the project, highlighting the individual consequences of systemic issues. This reinforced Matt's belief that leaders must own the environments their teams operate in, ensuring safety and integrity in all processes."
+  },
+  {
+    "label": "before",
+    "kind": "control",
+    "question": "Tell me about a time Matt failed",
+    "run": 2,
+    "rejection_reason": null,
+    "listed_names": [],
+    "figures": [],
+    "unbacked_figures": [],
+    "sources": [
+      "What I Learned About Assumptions",
+      "Why Hire Matt?",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+      "Recovering Fiserv's $8.5M White-Label Card Portal",
+      "Keeping the F-22's As-Built Configuration Data Accurate"
+    ],
+    "answer_md": "🐾 Tracking this down...\n\nIn a project with a **Fortune 500 financial services client**, Matt faced a significant challenge when assumptions about IAM controls, environment boundaries, and data masking led to an error. An offshore tester accidentally triggered an email job in the UAT environment, sending communications with unmasked production data to thousands of real clients. This incident highlighted the risks of relying on inherited documentation and assumptions without verification.\n\nMatt took full accountability for the incident and led the team through a root cause analysis and remediation process. He worked with his team to understand the failure and implement corrective controls. This experience taught him that assumptions are risks in disguise, and he now prioritizes IAM validation, environment verification, PII scrubbing, and risk ownership as day-one leadership responsibilities in his delivery approach.\n\nDespite the systemic nature of the failure, the client demanded the removal of the tester from the project. This consequence reinforced Matt's belief that leaders must own the environment in which their teams operate, ensuring that such incidents do not recur."
+  },
+  {
+    "label": "before",
+    "kind": "control",
+    "question": "Tell me about a time Matt failed",
+    "run": 3,
+    "rejection_reason": null,
+    "listed_names": [],
+    "figures": [],
+    "unbacked_figures": [],
+    "sources": [
+      "What I Learned About Assumptions",
+      "Why Hire Matt?",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+      "Recovering Fiserv's $8.5M White-Label Card Portal",
+      "Keeping the F-22's As-Built Configuration Data Accurate"
+    ],
+    "answer_md": "🐾 Perfect, here's what I found.\n\nMatt shared an experience where he assumed that the Identity and Access Management (IAM) controls, environment boundaries, and data masking were correctly set up during a platform delivery for a **Fortune 500** financial services client. This assumption led to an incident where an offshore tester inadvertently triggered an email job in the User Acceptance Testing (UAT) environment. The job sent communications containing unmasked production data to thousands of real clients, highlighting a significant oversight.\n\nMatt was the tech lead on this global platform modernization project, which involved multiple environments such as development, QA, UAT, and production. The project was under delivery pressure, and the IAM controls and environment configurations had been inherited from previous phases, with existing documentation assumed to be accurate. Matt focused on delivery pressures and relied on these assumptions without verifying the IAM configuration and downstream access controls.\n\nWhen the incident occurred, Matt took accountability and led the team through a root cause analysis and remediation process. He learned that assumptions can be risks in disguise and that IAM validation, environment verification, PII scrubbing, and risk ownership should be day-one leadership responsibilities in his delivery approach. Despite his efforts to address the situation, the client demanded the removal of the tester from the project, which reinforced Matt's belief that leaders must own the environments their teams operate in."
+  },
+  {
+    "label": "before",
+    "kind": "control",
+    "question": "How did Matt build the AWS certification program?",
+    "run": 1,
+    "rejection_reason": null,
+    "listed_names": [],
+    "figures": [],
+    "unbacked_figures": [],
+    "sources": [
+      "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+      "Teaching Entry-Level Developers to Build Their First Java Web Application",
+      "Keeping the F-22's As-Built Configuration Data Accurate",
+      "Building Sparkfly's Platform Alongside Its Founder",
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices"
+    ],
+    "answer_md": "🐾 Perfect, here's what I found.\n\nAt **Accenture's** Liquid Studio, traditional training programs struggled to keep up with the fast-evolving AWS technologies, leading to skill gaps and slowing down cloud adoption. To address this challenge, Matt led the AWS Launchpad program at the Atlanta Innovation Hub. The program was designed to build deep cloud competencies across **Accenture**, certifying engineers and accelerating cloud adoption. \n\nMatt developed the AWS Launchpad program in collaboration with AWS, focusing on structured learning paths and certification programs that emphasized AWS core services like Lambda, API Gateway, DynamoDB, Kubernetes, and ECS/Fargate. He delivered interactive workshops and labs, immersing engineers in real-world AWS environments to reinforce practical application over theory. Additionally, Matt established cloud expert mentorship teams to embed best practices and foster institutional knowledge for long-term competency growth.\n\nThe program successfully supported over **200** professionals in earning AWS certifications, such as AWS Solutions Architect and DevOps Engineer. This initiative not only accelerated cloud adoption but also strengthened **Accenture**'s cloud expertise, positioning the company as a leader in AWS competency and increasing its market credibility. The program fostered a sustainable learning culture, ensuring ongoing cloud innovation and capability-building across teams."
+  },
+  {
+    "label": "before",
+    "kind": "control",
+    "question": "How did Matt build the AWS certification program?",
+    "run": 2,
+    "rejection_reason": null,
+    "listed_names": [],
+    "figures": [],
+    "unbacked_figures": [],
+    "sources": [
+      "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+      "Teaching Entry-Level Developers to Build Their First Java Web Application",
+      "Keeping the F-22's As-Built Configuration Data Accurate",
+      "Building Sparkfly's Platform Alongside Its Founder",
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices"
+    ],
+    "answer_md": "🐾 Tracking this down...\n\nAt **Accenture's Liquid Studio**, traditional training programs struggled to keep pace with rapidly evolving AWS technologies, creating skill gaps and slowing cloud adoption. Matt led the AWS Launchpad program to address these challenges. He developed a structured cloud enablement program in collaboration with AWS, focusing on building deep cloud competencies across **Accenture**. The program included hands-on labs, structured learning paths, and mentor-based training, emphasizing practical application over theory. \n\nMatt's approach involved designing learning paths and certification programs that focused on AWS core services like Lambda, API Gateway, DynamoDB, Kubernetes, and ECS/Fargate. He delivered interactive workshops and labs, immersing engineers in real-world AWS environments. Additionally, he established cloud expert mentorship teams to embed best practices and foster institutional knowledge. \n\nThe program resulted in over **200 professionals** earning AWS certifications, including AWS Solutions Architect and DevOps Engineer. This accelerated cloud adoption and strengthened **Accenture**'s cloud expertise, positioning the company as a leader in AWS competency and increasing its market credibility. The initiative fostered a sustainable learning culture, ensuring ongoing cloud innovation and capability-building across teams."
+  },
+  {
+    "label": "before",
+    "kind": "control",
+    "question": "How did Matt build the AWS certification program?",
+    "run": 3,
+    "rejection_reason": null,
+    "listed_names": [],
+    "figures": [],
+    "unbacked_figures": [],
+    "sources": [
+      "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+      "Teaching Entry-Level Developers to Build Their First Java Web Application",
+      "Keeping the F-22's As-Built Configuration Data Accurate",
+      "Building Sparkfly's Platform Alongside Its Founder",
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices"
+    ],
+    "answer_md": "🐾 Perfect, here's what I found.\n\nAt **Accenture's Liquid Studio**, traditional training programs struggled to keep up with the rapid evolution of AWS technologies, leading to skill gaps and slowed cloud adoption. To address this, Matt led the AWS Launchpad program, which was developed in collaboration with AWS to build deep cloud competencies across **Accenture**. The program aimed to certify engineers, accelerate cloud adoption, and embed an innovation-first mindset.\n\nMatt's approach was distinct in its emphasis on practical application over theory. He designed structured learning paths and certification programs that focused on AWS core services such as Lambda, API Gateway, DynamoDB, Kubernetes, and ECS/Fargate. The program included interactive workshops and labs that immersed engineers in real-world AWS environments. Additionally, Matt established cloud expert mentorship teams to embed best practices and foster institutional knowledge, driving long-term competency growth.\n\nThe results were significant. Over **200 professionals** earned AWS certifications, which accelerated adoption and strengthened **Accenture**'s cloud expertise. This positioned **Accenture** as a leader in AWS competency, increasing market credibility and the ability to secure cloud-native engagements. The program also fostered a sustainable learning culture, ensuring ongoing cloud innovation and capability-building across teams."
+  }
+]
