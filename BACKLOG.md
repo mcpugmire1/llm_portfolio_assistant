@@ -1955,6 +1955,10 @@ e. Source-vs-output check: for each fixture JD, the row count and wording under 
 
 **First step for each:** Run an acceptance probe that includes the story controls and check whether the guard's canned reply appears in any log record with `redirect_reason`. Do not remove either without that measurement.
 
+**Tool path (Oct 7, 2026; local, untracked: `probes/output/275/answer_dom_20261007_100712/q2.png`):** With the confidence gate off the answer path (MATTGPT-275), `OFF_TOPIC_GUARD` is what answers gibberish. "qzwxvnpfrk plmqcvjxk floogerblerg" got the random opener "Tracking this down..." followed by the guard's scripted string verbatim: "I can only discuss Matt's transformation experience. Ask me about application modernization, digital innovation, agile transformation, or leadership."
+
+**Decision needed:** Does the guard stay a scripted reply, or become guidance for Agy's own reply (say the question isn't about Matt's work, in Agy's voice, and offer what Agy can answer)? Candidate 2's measurement question (has the canned reply ever appeared in production) is now answered for the tool path: it appears whenever the model judges a query off-topic.
+
 ---
 
 ### MATTGPT-264
