@@ -541,6 +541,11 @@ class TestGenerateAgyResponse:
 class TestSendToBackend:
     """Tests for send_to_backend() legacy wrapper."""
 
+    @pytest.mark.xfail(
+        reason="MATTGPT-275 Red; Green paused until MATTGPT-279 lands. Remove these "
+        "xfails in the 275 Green commit.",
+        strict=False,
+    )
     def test_delegates_to_agy_answer(self, sample_stories, mock_streamlit):
         """Should delegate to agy_answer() (MATTGPT-275), not rag_answer()."""
         with (

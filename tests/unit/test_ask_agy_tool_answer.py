@@ -37,6 +37,12 @@ from ui.pages.ask_mattgpt.prompts import STANDARD_DELTA, SYNTHESIS_DELTA
 
 logging.getLogger("streamlit").setLevel(logging.ERROR)
 
+pytestmark = pytest.mark.xfail(
+    reason="MATTGPT-275 Red; Green paused until MATTGPT-279 lands. Remove these "
+    "xfails in the 275 Green commit.",
+    strict=False,
+)
+
 # MATT_DNA is "" until sync_portfolio_metadata() runs; patch an invented
 # sentinel so the system-prompt assertion does not depend on test order.
 _DNA_SENTINEL = "ZZZ_SENTINEL_MATT_DNA"

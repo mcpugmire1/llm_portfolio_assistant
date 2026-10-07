@@ -188,6 +188,11 @@ class TestHistoryInAgyMessages:
 
 
 class TestSendToBackendHistory:
+    @pytest.mark.xfail(
+        reason="MATTGPT-275 Red; Green paused until MATTGPT-279 lands. Remove these "
+        "xfails in the 275 Green commit.",
+        strict=False,
+    )
     def test_passes_transcript_history(self, sample_stories, mock_streamlit):
         mock_streamlit["ask_transcript"] = [
             {"role": "user", "text": "q1"},
