@@ -37,6 +37,10 @@ from ui.pages.ask_mattgpt.prompts import STANDARD_DELTA, SYNTHESIS_DELTA
 
 logging.getLogger("streamlit").setLevel(logging.ERROR)
 
+# MATT_DNA is "" until sync_portfolio_metadata() runs; patch an invented
+# sentinel so the system-prompt assertion does not depend on test order.
+_DNA_SENTINEL = "ZZZ_SENTINEL_MATT_DNA"
+
 _STORY_A = {
     "id": "zzz-story-a",
     "Title": "ZZZ Sentinel Ledger Rebuild",
@@ -151,6 +155,7 @@ def _run(
         patch.object(bs, "is_nonsense", return_value=nonsense),
         patch.object(bs, "log_query", log_query_mock),
         patch.object(bs, "log_offdomain", MagicMock()),
+        patch.object(bs, "MATT_DNA", _DNA_SENTINEL),
     ):
         result = bs.agy_answer(question, _STORIES, history=history)
     return result, fake, search_mock, log_query_mock, session
@@ -294,7 +299,7 @@ class TestVoiceCarriesOver:
     def test_system_prompt_has_dna_and_profile(self):
         _, fake, _, _, _ = _run([_response("ok")])
         system = fake.requests[0]["messages"][0]["content"]
-        assert "**Leadership Philosophy:**" in system
+        assert _DNA_SENTINEL in system
         assert "**About Matt (attested facts):**" in system
 
     def test_per_answer_voice_instructions_reach_the_model(self):
