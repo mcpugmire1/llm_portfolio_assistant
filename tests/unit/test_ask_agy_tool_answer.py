@@ -391,3 +391,50 @@ class TestPostProcessingAndContract:
         )
         assert log_query_mock.call_count == 1
         assert log_query_mock.call_args.kwargs["result_count"] == 2
+
+
+# ---------------------------------------------------------------------------
+# Class E: model errors
+# ---------------------------------------------------------------------------
+
+
+class _FailingOpenAI:
+    def __init__(self, message):
+        self.message = message
+        self.chat = SimpleNamespace(completions=SimpleNamespace(create=self._create))
+
+    def _create(self, **kwargs):
+        raise RuntimeError(self.message)
+
+
+def _run_failing(message):
+    mock_st = MagicMock()
+    mock_st.session_state = {}
+    with (
+        patch("openai.OpenAI", return_value=_FailingOpenAI(message)),
+        patch.object(bs, "st", mock_st),
+        patch.object(bs, "semantic_search", MagicMock()),
+        patch.object(
+            bs,
+            "is_portfolio_query_semantic",
+            return_value=(True, 0.6, "zzz-intent", "behavioral"),
+        ),
+        patch.object(bs, "is_nonsense", return_value=None),
+        patch.object(bs, "log_query", MagicMock()),
+        patch.object(bs, "log_offdomain", MagicMock()),
+        patch.object(bs, "MATT_DNA", _DNA_SENTINEL),
+    ):
+        return bs.agy_answer("Tell me about his ledger work", _STORIES)
+
+
+class TestModelErrors:
+    def test_rate_limit_returns_the_breather_message_with_no_sources(self):
+        result = _run_failing("Error code: 429 rate_limit_exceeded")
+        assert "breather" in result["answer_md"]
+        assert result["sources"] == []
+
+    def test_other_errors_return_rag_answers_degraded_fallback(self):
+        result = _run_failing("upstream exploded")
+        assert result["degraded"] is True
+        assert result["answer_md"]
+        assert result["sources"]
