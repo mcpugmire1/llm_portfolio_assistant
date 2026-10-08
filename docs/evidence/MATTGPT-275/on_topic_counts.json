@@ -1,0 +1,785 @@
+{
+  "what": "On-topic stories reaching the model for six no-client topic questions, 3 runs per arm (MATTGPT-275).",
+  "method": "The on-topic stories for each question were fixed in no_client_20261008_113819/expected_on_topic.json before any run. A story counts when it is in that list and among the stories the arm passed to the model (see 'counted_from' per arm). Denominator per arm: the sum of expected stories over the 6 questions (23) times 3 runs = 69.",
+  "expected_on_topic": {
+    "Tell me about Matt's legacy-to-cloud work": [
+      "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+      "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+      "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+      "Transforming Legacy Systems through Incremental App Modernization"
+    ],
+    "What has Matt done with mainframe modernization?": [
+      "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+      "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+      "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine"
+    ],
+    "How has Matt handled a quality crisis?": [
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+    ],
+    "Tell me about Matt's work building engineering academies or training programs": [
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+      "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+      "Launching a Self-Paced Learning Program for Emerging Technologies",
+      "Building Tangible Cloud Tech Skills for HBCU Students"
+    ],
+    "What payments platforms has Matt built?": [
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform",
+      "Transforming Developer Experience for the American Express Virtual Payments Platform"
+    ],
+    "Has Matt worked on identity and access management?": [
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift",
+      "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation",
+      "Overhauling Entitlement Management for JP Morgan ACCESS"
+    ]
+  },
+  "arms": {
+    "old": {
+      "source": "no_client_20261008_113819/no_client.json",
+      "counted_from": "stories the model answered from (rag_answer's ranked sources)",
+      "total": "30/69",
+      "per_question": {
+        "Tell me about Matt's legacy-to-cloud work": [
+          {
+            "run": 1,
+            "on_topic": 2,
+            "of": 4,
+            "stories": [
+              "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+              "Transforming Legacy Systems through Incremental App Modernization"
+            ]
+          },
+          {
+            "run": 2,
+            "on_topic": 2,
+            "of": 4,
+            "stories": [
+              "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+              "Transforming Legacy Systems through Incremental App Modernization"
+            ]
+          },
+          {
+            "run": 3,
+            "on_topic": 2,
+            "of": 4,
+            "stories": [
+              "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+              "Transforming Legacy Systems through Incremental App Modernization"
+            ]
+          }
+        ],
+        "What has Matt done with mainframe modernization?": [
+          {
+            "run": 1,
+            "on_topic": 2,
+            "of": 3,
+            "stories": [
+              "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+              "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices"
+            ]
+          },
+          {
+            "run": 2,
+            "on_topic": 2,
+            "of": 3,
+            "stories": [
+              "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+              "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices"
+            ]
+          },
+          {
+            "run": 3,
+            "on_topic": 2,
+            "of": 3,
+            "stories": [
+              "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+              "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices"
+            ]
+          }
+        ],
+        "How has Matt handled a quality crisis?": [
+          {
+            "run": 1,
+            "on_topic": 1,
+            "of": 2,
+            "stories": [
+              "Confronting a Quality Crisis Through Coaching and Culture Change"
+            ]
+          },
+          {
+            "run": 2,
+            "on_topic": 1,
+            "of": 2,
+            "stories": [
+              "Confronting a Quality Crisis Through Coaching and Culture Change"
+            ]
+          },
+          {
+            "run": 3,
+            "on_topic": 1,
+            "of": 2,
+            "stories": [
+              "Confronting a Quality Crisis Through Coaching and Culture Change"
+            ]
+          }
+        ],
+        "Tell me about Matt's work building engineering academies or training programs": [
+          {
+            "run": 1,
+            "on_topic": 1,
+            "of": 4,
+            "stories": [
+              "Unifying Norfolk Southern's Teams Around Cloud-Native Practices"
+            ]
+          },
+          {
+            "run": 2,
+            "on_topic": 1,
+            "of": 4,
+            "stories": [
+              "Unifying Norfolk Southern's Teams Around Cloud-Native Practices"
+            ]
+          },
+          {
+            "run": 3,
+            "on_topic": 1,
+            "of": 4,
+            "stories": [
+              "Unifying Norfolk Southern's Teams Around Cloud-Native Practices"
+            ]
+          }
+        ],
+        "What payments platforms has Matt built?": [
+          {
+            "run": 1,
+            "on_topic": 3,
+            "of": 6,
+            "stories": [
+              "Building the Payment Engine Behind JP Morgan ACCESS",
+              "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform",
+              "Designing Cross-Border Payment Workflows for RBC Express"
+            ]
+          },
+          {
+            "run": 2,
+            "on_topic": 3,
+            "of": 6,
+            "stories": [
+              "Building the Payment Engine Behind JP Morgan ACCESS",
+              "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform",
+              "Designing Cross-Border Payment Workflows for RBC Express"
+            ]
+          },
+          {
+            "run": 3,
+            "on_topic": 3,
+            "of": 6,
+            "stories": [
+              "Building the Payment Engine Behind JP Morgan ACCESS",
+              "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform",
+              "Designing Cross-Border Payment Workflows for RBC Express"
+            ]
+          }
+        ],
+        "Has Matt worked on identity and access management?": [
+          {
+            "run": 1,
+            "on_topic": 1,
+            "of": 4,
+            "stories": [
+              "Overhauling Entitlement Management for JP Morgan ACCESS"
+            ]
+          },
+          {
+            "run": 2,
+            "on_topic": 1,
+            "of": 4,
+            "stories": [
+              "Overhauling Entitlement Management for JP Morgan ACCESS"
+            ]
+          },
+          {
+            "run": 3,
+            "on_topic": 1,
+            "of": 4,
+            "stories": [
+              "Overhauling Entitlement Management for JP Morgan ACCESS"
+            ]
+          }
+        ]
+      }
+    },
+    "arm_a": {
+      "source": "arm_a_20261008_145724/arm_a_no_client.json",
+      "counted_from": "the raw semantic_search top 5 passed to the model",
+      "total": "45/69",
+      "per_question": {
+        "Tell me about Matt's legacy-to-cloud work": [
+          {
+            "run": 1,
+            "on_topic": 1,
+            "of": 4,
+            "stories": [
+              "Transforming Legacy Systems through Incremental App Modernization"
+            ]
+          },
+          {
+            "run": 2,
+            "on_topic": 1,
+            "of": 4,
+            "stories": [
+              "Transforming Legacy Systems through Incremental App Modernization"
+            ]
+          },
+          {
+            "run": 3,
+            "on_topic": 1,
+            "of": 4,
+            "stories": [
+              "Transforming Legacy Systems through Incremental App Modernization"
+            ]
+          }
+        ],
+        "What has Matt done with mainframe modernization?": [
+          {
+            "run": 1,
+            "on_topic": 3,
+            "of": 3,
+            "stories": [
+              "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+              "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+              "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine"
+            ]
+          },
+          {
+            "run": 2,
+            "on_topic": 3,
+            "of": 3,
+            "stories": [
+              "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+              "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+              "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine"
+            ]
+          },
+          {
+            "run": 3,
+            "on_topic": 3,
+            "of": 3,
+            "stories": [
+              "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+              "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+              "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine"
+            ]
+          }
+        ],
+        "How has Matt handled a quality crisis?": [
+          {
+            "run": 1,
+            "on_topic": 1,
+            "of": 2,
+            "stories": [
+              "Confronting a Quality Crisis Through Coaching and Culture Change"
+            ]
+          },
+          {
+            "run": 2,
+            "on_topic": 1,
+            "of": 2,
+            "stories": [
+              "Confronting a Quality Crisis Through Coaching and Culture Change"
+            ]
+          },
+          {
+            "run": 3,
+            "on_topic": 1,
+            "of": 2,
+            "stories": [
+              "Confronting a Quality Crisis Through Coaching and Culture Change"
+            ]
+          }
+        ],
+        "Tell me about Matt's work building engineering academies or training programs": [
+          {
+            "run": 1,
+            "on_topic": 3,
+            "of": 4,
+            "stories": [
+              "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+              "Launching a Self-Paced Learning Program for Emerging Technologies",
+              "Building Tangible Cloud Tech Skills for HBCU Students"
+            ]
+          },
+          {
+            "run": 2,
+            "on_topic": 3,
+            "of": 4,
+            "stories": [
+              "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+              "Launching a Self-Paced Learning Program for Emerging Technologies",
+              "Building Tangible Cloud Tech Skills for HBCU Students"
+            ]
+          },
+          {
+            "run": 3,
+            "on_topic": 3,
+            "of": 4,
+            "stories": [
+              "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+              "Launching a Self-Paced Learning Program for Emerging Technologies",
+              "Building Tangible Cloud Tech Skills for HBCU Students"
+            ]
+          }
+        ],
+        "What payments platforms has Matt built?": [
+          {
+            "run": 1,
+            "on_topic": 4,
+            "of": 6,
+            "stories": [
+              "Building the Payment Engine Behind JP Morgan ACCESS",
+              "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform",
+              "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+              "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform"
+            ]
+          },
+          {
+            "run": 2,
+            "on_topic": 4,
+            "of": 6,
+            "stories": [
+              "Building the Payment Engine Behind JP Morgan ACCESS",
+              "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform",
+              "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+              "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform"
+            ]
+          },
+          {
+            "run": 3,
+            "on_topic": 4,
+            "of": 6,
+            "stories": [
+              "Building the Payment Engine Behind JP Morgan ACCESS",
+              "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform",
+              "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+              "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform"
+            ]
+          }
+        ],
+        "Has Matt worked on identity and access management?": [
+          {
+            "run": 1,
+            "on_topic": 3,
+            "of": 4,
+            "stories": [
+              "Overhauling Entitlement Management for JP Morgan ACCESS",
+              "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift",
+              "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation"
+            ]
+          },
+          {
+            "run": 2,
+            "on_topic": 3,
+            "of": 4,
+            "stories": [
+              "Overhauling Entitlement Management for JP Morgan ACCESS",
+              "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift",
+              "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation"
+            ]
+          },
+          {
+            "run": 3,
+            "on_topic": 3,
+            "of": 4,
+            "stories": [
+              "Overhauling Entitlement Management for JP Morgan ACCESS",
+              "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift",
+              "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation"
+            ]
+          }
+        ]
+      }
+    },
+    "arm_c": {
+      "source": "arm_c_20261008_152205/arm_c_no_client.json",
+      "counted_from": "the raw top 5 for the condensed query, passed to the model",
+      "total": "39/69",
+      "per_question": {
+        "Tell me about Matt's legacy-to-cloud work": [
+          {
+            "run": 1,
+            "on_topic": 0,
+            "of": 4,
+            "stories": []
+          },
+          {
+            "run": 2,
+            "on_topic": 0,
+            "of": 4,
+            "stories": []
+          },
+          {
+            "run": 3,
+            "on_topic": 0,
+            "of": 4,
+            "stories": []
+          }
+        ],
+        "What has Matt done with mainframe modernization?": [
+          {
+            "run": 1,
+            "on_topic": 3,
+            "of": 3,
+            "stories": [
+              "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+              "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+              "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine"
+            ]
+          },
+          {
+            "run": 2,
+            "on_topic": 3,
+            "of": 3,
+            "stories": [
+              "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+              "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+              "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine"
+            ]
+          },
+          {
+            "run": 3,
+            "on_topic": 3,
+            "of": 3,
+            "stories": [
+              "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+              "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+              "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine"
+            ]
+          }
+        ],
+        "How has Matt handled a quality crisis?": [
+          {
+            "run": 1,
+            "on_topic": 2,
+            "of": 2,
+            "stories": [
+              "Confronting a Quality Crisis Through Coaching and Culture Change",
+              "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+            ]
+          },
+          {
+            "run": 2,
+            "on_topic": 2,
+            "of": 2,
+            "stories": [
+              "Confronting a Quality Crisis Through Coaching and Culture Change",
+              "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+            ]
+          },
+          {
+            "run": 3,
+            "on_topic": 2,
+            "of": 2,
+            "stories": [
+              "Confronting a Quality Crisis Through Coaching and Culture Change",
+              "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+            ]
+          }
+        ],
+        "Tell me about Matt's work building engineering academies or training programs": [
+          {
+            "run": 1,
+            "on_topic": 1,
+            "of": 4,
+            "stories": [
+              "Launching a Self-Paced Learning Program for Emerging Technologies"
+            ]
+          },
+          {
+            "run": 2,
+            "on_topic": 1,
+            "of": 4,
+            "stories": [
+              "Launching a Self-Paced Learning Program for Emerging Technologies"
+            ]
+          },
+          {
+            "run": 3,
+            "on_topic": 1,
+            "of": 4,
+            "stories": [
+              "Launching a Self-Paced Learning Program for Emerging Technologies"
+            ]
+          }
+        ],
+        "What payments platforms has Matt built?": [
+          {
+            "run": 1,
+            "on_topic": 4,
+            "of": 6,
+            "stories": [
+              "Building the Payment Engine Behind JP Morgan ACCESS",
+              "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform",
+              "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+              "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform"
+            ]
+          },
+          {
+            "run": 2,
+            "on_topic": 4,
+            "of": 6,
+            "stories": [
+              "Building the Payment Engine Behind JP Morgan ACCESS",
+              "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform",
+              "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+              "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform"
+            ]
+          },
+          {
+            "run": 3,
+            "on_topic": 4,
+            "of": 6,
+            "stories": [
+              "Building the Payment Engine Behind JP Morgan ACCESS",
+              "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform",
+              "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+              "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform"
+            ]
+          }
+        ],
+        "Has Matt worked on identity and access management?": [
+          {
+            "run": 1,
+            "on_topic": 3,
+            "of": 4,
+            "stories": [
+              "Overhauling Entitlement Management for JP Morgan ACCESS",
+              "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift",
+              "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation"
+            ]
+          },
+          {
+            "run": 2,
+            "on_topic": 3,
+            "of": 4,
+            "stories": [
+              "Overhauling Entitlement Management for JP Morgan ACCESS",
+              "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift",
+              "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation"
+            ]
+          },
+          {
+            "run": 3,
+            "on_topic": 3,
+            "of": 4,
+            "stories": [
+              "Overhauling Entitlement Management for JP Morgan ACCESS",
+              "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift",
+              "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation"
+            ]
+          }
+        ]
+      }
+    },
+    "lever_2": {
+      "source": "no_client_20261008_113819/no_client.json",
+      "counted_from": "the top 5 results of the model's search_stories call(s)",
+      "total": "51/69",
+      "per_question": {
+        "Tell me about Matt's legacy-to-cloud work": [
+          {
+            "run": 1,
+            "on_topic": 1,
+            "of": 4,
+            "stories": [
+              "Transforming Legacy Systems through Incremental App Modernization"
+            ]
+          },
+          {
+            "run": 2,
+            "on_topic": 1,
+            "of": 4,
+            "stories": [
+              "Transforming Legacy Systems through Incremental App Modernization"
+            ]
+          },
+          {
+            "run": 3,
+            "on_topic": 1,
+            "of": 4,
+            "stories": [
+              "Transforming Legacy Systems through Incremental App Modernization"
+            ]
+          }
+        ],
+        "What has Matt done with mainframe modernization?": [
+          {
+            "run": 1,
+            "on_topic": 3,
+            "of": 3,
+            "stories": [
+              "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+              "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+              "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine"
+            ]
+          },
+          {
+            "run": 2,
+            "on_topic": 3,
+            "of": 3,
+            "stories": [
+              "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+              "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+              "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine"
+            ]
+          },
+          {
+            "run": 3,
+            "on_topic": 3,
+            "of": 3,
+            "stories": [
+              "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+              "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+              "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine"
+            ]
+          }
+        ],
+        "How has Matt handled a quality crisis?": [
+          {
+            "run": 1,
+            "on_topic": 2,
+            "of": 2,
+            "stories": [
+              "Confronting a Quality Crisis Through Coaching and Culture Change",
+              "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+            ]
+          },
+          {
+            "run": 2,
+            "on_topic": 2,
+            "of": 2,
+            "stories": [
+              "Confronting a Quality Crisis Through Coaching and Culture Change",
+              "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+            ]
+          },
+          {
+            "run": 3,
+            "on_topic": 2,
+            "of": 2,
+            "stories": [
+              "Confronting a Quality Crisis Through Coaching and Culture Change",
+              "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+            ]
+          }
+        ],
+        "Tell me about Matt's work building engineering academies or training programs": [
+          {
+            "run": 1,
+            "on_topic": 2,
+            "of": 4,
+            "stories": [
+              "Launching a Self-Paced Learning Program for Emerging Technologies",
+              "Unifying Norfolk Southern's Teams Around Cloud-Native Practices"
+            ]
+          },
+          {
+            "run": 2,
+            "on_topic": 2,
+            "of": 4,
+            "stories": [
+              "Launching a Self-Paced Learning Program for Emerging Technologies",
+              "Unifying Norfolk Southern's Teams Around Cloud-Native Practices"
+            ]
+          },
+          {
+            "run": 3,
+            "on_topic": 2,
+            "of": 4,
+            "stories": [
+              "Launching a Self-Paced Learning Program for Emerging Technologies",
+              "Unifying Norfolk Southern's Teams Around Cloud-Native Practices"
+            ]
+          }
+        ],
+        "What payments platforms has Matt built?": [
+          {
+            "run": 1,
+            "on_topic": 5,
+            "of": 6,
+            "stories": [
+              "Building the Payment Engine Behind JP Morgan ACCESS",
+              "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+              "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform",
+              "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+              "Designing Cross-Border Payment Workflows for RBC Express"
+            ]
+          },
+          {
+            "run": 2,
+            "on_topic": 5,
+            "of": 6,
+            "stories": [
+              "Building the Payment Engine Behind JP Morgan ACCESS",
+              "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+              "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform",
+              "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+              "Designing Cross-Border Payment Workflows for RBC Express"
+            ]
+          },
+          {
+            "run": 3,
+            "on_topic": 5,
+            "of": 6,
+            "stories": [
+              "Building the Payment Engine Behind JP Morgan ACCESS",
+              "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+              "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform",
+              "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+              "Designing Cross-Border Payment Workflows for RBC Express"
+            ]
+          }
+        ],
+        "Has Matt worked on identity and access management?": [
+          {
+            "run": 1,
+            "on_topic": 4,
+            "of": 4,
+            "stories": [
+              "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation",
+              "Overhauling Entitlement Management for JP Morgan ACCESS",
+              "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift",
+              "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications"
+            ]
+          },
+          {
+            "run": 2,
+            "on_topic": 4,
+            "of": 4,
+            "stories": [
+              "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation",
+              "Overhauling Entitlement Management for JP Morgan ACCESS",
+              "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift",
+              "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications"
+            ]
+          },
+          {
+            "run": 3,
+            "on_topic": 4,
+            "of": 4,
+            "stories": [
+              "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation",
+              "Overhauling Entitlement Management for JP Morgan ACCESS",
+              "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift",
+              "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
