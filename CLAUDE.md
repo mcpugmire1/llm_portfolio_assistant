@@ -159,7 +159,7 @@ Before committing, answer for each:
 - **ARCHITECTURE.md and `docs/ADR.md`:** Does this change a pattern, surface, or fact in ARCHITECTURE.md? Describe the change fully in the commit message. Does it make a design decision, or remove a layer, component, prompt clause, or gate? Add trailers: `--trailer "Decision: <what was decided or removed>" --trailer "Rejected: <alternative> (<why>)"`. The Architecture Sync pass turns both into ARCHITECTURE.md edits and ADRs.
 - **mattgpt-design-spec** (Jekyll repo): Does this change anything in the user-facing spec?
 - **`ui/components/how_agy_dialog.py`:** Does this change anything described in the Ask MattGPT architecture exposition?
-- **about_matt.py:** Does this change anything described in the "How I Built MattGPT" section?
+- **`ui/components/how_i_built_dialog.py`:** Does this change anything described in "How I Built MattGPT"?
 
 If yes to any of the last three: the doc-update commit pairs with this code commit. Same session, same push. Not a follow-up.
 
