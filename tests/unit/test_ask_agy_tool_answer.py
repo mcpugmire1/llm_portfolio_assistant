@@ -240,14 +240,11 @@ class TestToolLoop:
         tools = fake.requests[0]["tools"]
         assert [t["function"]["name"] for t in tools] == ["search_stories"]
 
-    def test_answers_directly_without_searching(self):
-        result, fake, search, _, session = _run([_response("He has no PMP.")])
-        assert "He has no PMP." in result["answer_md"]
-        assert result["sources"] == []
-        assert result["rejection_reason"] is None
-        assert "ask_last_reason" not in session
-        search.assert_not_called()
-        assert len(fake.requests) == 1
+    def test_first_call_is_a_forced_search(self):
+        # MATTGPT-275 contract: every turn retrieves; the model never decides
+        # whether to search (test_ask_agy_turn_contract.py pins the full contract).
+        _, fake, _, _, _ = _run([_response(tool_query="ledger"), _response("ok")])
+        assert fake.requests[0].get("tool_choice") == "required"
 
     def test_tool_call_searches_with_the_models_query(self):
         result, fake, search, _, _ = _run(
@@ -280,8 +277,9 @@ class TestToolLoop:
         # Three search rounds, then one call that may not search.
         assert search.call_count == 3
         assert len(fake.requests) == 4
+        assert fake.requests[0].get("tool_choice") == "required"
         assert fake.requests[-1].get("tool_choice") == "none"
-        assert all("tool_choice" not in r for r in fake.requests[:-1])
+        assert all("tool_choice" not in r for r in fake.requests[1:-1])
 
     def test_history_sits_between_system_and_current_question(self):
         history = [
@@ -292,8 +290,7 @@ class TestToolLoop:
         msgs = fake.requests[0]["messages"]
         assert msgs[0]["role"] == "system"
         assert msgs[1:3] == history
-        assert msgs[3]["role"] == "user"
-        assert "Tell me about his ledger work" in msgs[3]["content"]
+        assert msgs[3] == {"role": "user", "content": "Tell me about his ledger work"}
 
 
 # ---------------------------------------------------------------------------
@@ -309,13 +306,18 @@ class TestVoiceCarriesOver:
         assert "**About Matt (attested facts):**" in system
 
     def test_per_answer_voice_instructions_reach_the_model(self):
+        # MATTGPT-275: the instruction block moved to the system prompt with
+        # the openers as examples; the user message is the question as asked.
         _, fake, _, _, _ = _run([_response("ok")])
+        system = fake.requests[0]["messages"][0]["content"]
+        assert "Examples of how Agy opens" in system
+        assert "**FOCUS:**" in system
+        assert "Write natural prose paragraphs" in system
+        assert "**Bold ALL client names and numbers.**" in system
+        assert "State facts. Do not evaluate Matt." in system
         user = fake.requests[0]["messages"][-1]["content"]
-        assert "Start your response with this exact text:" in user
-        assert "**FOCUS:**" in user
-        assert "Write natural prose paragraphs after the opening." in user
-        assert "**Bold ALL client names and numbers.**" in user
-        assert "State facts. Do not evaluate Matt." in user
+        assert user == "Tell me about his ledger work"
+        assert "Start your response with this exact text" not in system + user
 
     def test_synthesis_voice_follows_the_router(self):
         _, fake, _, _, _ = _run([_response("ok")], family="synthesis")
