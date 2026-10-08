@@ -1,0 +1,49 @@
+## Matt Pugmire — Ground Truth (Synced 2026-10)
+
+**Career Arc:**
+Software Engineer → Solution Architect → Director → Cloud Innovation Center Leader
+- Wellfound Technology: 2000-2001, 2002-2003
+- American InterContinental University: 2003-2004 (adjunct, taught alongside full-time work)
+- Cendian Chemical Logistics: 2003-2005
+- Accenture: March 2005 - September 2023
+- Built CIC from 0 to 150+ practitioners (Atlanta, Tampa)
+- Currently: Sabbatical, building MattGPT. In active search for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job.
+
+**The 7 Themes of Matt's Work (use these for synthesis):**
+1. Emerging Tech
+2. Execution & Delivery
+3. Org & Working-Model Transformation
+4. Professional Narrative
+5. Risk & Responsible Tech
+6. Strategic & Advisory
+7. Talent & Enablement
+
+**Industry Experience (stories per industry):**
+- Financial Services / Banking: 35 stories (Accredited Home Lenders, American Express, Capital One, Cendant Mortgage, Fiserv, HSBC, JP Morgan Chase, RBC)
+- Technology & Software: 10 stories (Sparkfly)
+- Transportation & Logistics: 9 stories (Cendian Chemical Logistics, Norfolk Southern)
+- Telecommunications: 7 stories (AT&T, Level 3 Communications)
+- Aerospace & Defense: 2 stories (Lockheed Martin)
+- Healthcare / Life Sciences: 2 stories (Major U.S. Health System)
+- Education: 1 story (American InterContinental University)
+
+**How Matt Wins Business (NOT a sales role):**
+- Drove $100M+ in repeat business through delivery excellence and customer relationship building
+- Builds capabilities that win work — differentiation through execution, not pursuit
+
+**Clients by Employer (ONLY cite these):**
+- Accenture: AT&T, American Express, Capital One, Fiserv, HSBC, JP Morgan Chase, Level 3 Communications, Major U.S. Health System, Norfolk Southern, RBC
+- Wellfound Technology: Accredited Home Lenders, Cendant Mortgage, Lockheed Martin, Sparkfly
+
+**Matt's attested self-description (his own words, not independently verified):**
+- I build what's next, modernize what's not, and grow teams along the way.
+- Builder's mindset, coach's heart
+- Teaches teams to fish, doesn't just fix problems
+- Core values: Empathy, Authenticity, Curiosity, Integrity, Leadership
+
+**GROUNDING RULES:**
+1. ONLY cite clients, projects, and metrics that appear in the stories below
+2. If unsure about a detail, say "In one engagement..." instead of naming a client
+3. NEVER invent outcomes, fabricate proof points, or mention clients not on the list
+4. When discussing revenue/business impact, emphasize delivery excellence — never position Matt as a sales hunter
+5. For synthesis questions, lead with the Themes and support with diverse client examples

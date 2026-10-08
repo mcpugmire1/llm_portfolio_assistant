@@ -1,0 +1,298 @@
+diff --git a/config/constants.py b/config/constants.py
+index e6369da..493d6d1 100644
+--- a/config/constants.py
++++ b/config/constants.py
+@@ -76,6 +76,11 @@ SUBSTITUTION_FAMILIES = frozenset({"technical", "team_scaling", "agile_transform
+ # LLM as user/assistant turns (two exchanges). Retrieval does not use them.
+ ASK_HISTORY_MAX_MESSAGES = 4
+ 
++# Ask Agy tool loop: search rounds the model may take before its answer. After
++# this many search_stories rounds, one more call is made with tool_choice
++# "none" so the model must answer from what it has.
++ASK_TOOL_MAX_ROUNDS = 3
++
+ # =============================================================================
+ # META-COMMENTARY PATTERNS
+ # =============================================================================
+diff --git a/ui/pages/ask_mattgpt/backend_service.py b/ui/pages/ask_mattgpt/backend_service.py
+index 8a23197..1e98f45 100644
+--- a/ui/pages/ask_mattgpt/backend_service.py
++++ b/ui/pages/ask_mattgpt/backend_service.py
+@@ -6,6 +6,7 @@ Includes nonsense detection, semantic search orchestration, and Agy response gen
+ """
+ 
+ import csv
++import json
+ import logging
+ import os
+ import random
+@@ -18,6 +19,8 @@ import streamlit as st
+ 
+ from config.constants import (
+     ASK_HISTORY_MAX_MESSAGES,
++    ASK_TOOL_MAX_ROUNDS,
++    DEFAULT_CHAT_MODEL,
+     ENTITY_ALIASES,
+     ENTITY_DETECTION_FIELDS,
+     EXCLUDED_DIVISION_VALUES,
+@@ -28,6 +31,7 @@ from config.constants import (
+ )
+ from config.debug import DEBUG
+ from services import matt_profile
++from services.jd_assessor import load_matt_profile
+ from services.pinecone_service import (
+     PINECONE_NAMESPACE,
+     _embed,
+@@ -1762,12 +1766,219 @@ Ask me about his **transformation work**, **platform engineering**, or **how he
+     return None
+ 
+ 
++# Ask Agy tool loop (MATTGPT-275). The model decides when to search: it answers
++# from the profile, MATT_DNA and the conversation, or calls search_stories.
++_SEARCH_STORIES_TOOL = {
++    "type": "function",
++    "function": {
++        "name": "search_stories",
++        "description": (
++            "Semantic search over Matt's STAR career stories. Returns the top 5 stories."
++        ),
++        "parameters": {
++            "type": "object",
++            "properties": {
++                "query": {"type": "string", "description": "A standalone search query."}
++            },
++            "required": ["query"],
++        },
++    },
++}
++
++# Takes the place of preloaded stories in build_user_message().
++_TOOL_STORY_NOTE = (
++    "No stories are preloaded. Call search_stories when the question needs "
++    "evidence from Matt's work history. Answer directly from the facts about "
++    "Matt above or from the conversation when they already answer it."
++)
++
++
++def _run_search_tool(
++    arguments: str, stories: list[dict[str, Any]]
++) -> tuple[str, list[dict[str, Any]], float]:
++    """Run one search_stories call. Returns (tool content, stories, top score).
++
++    Each returned story is rendered with build_story_context_for_rag(); a
++    Professional Narrative story also carries its verbatim requirement.
++    """
++    try:
++        query = json.loads(arguments or "{}").get("query", "")
++    except json.JSONDecodeError:
++        query = ""
++    result = semantic_search(query, {}, stories=stories, top_k=SEARCH_TOP_K)
++    found = (result.get("results") or [])[:5]
++    blocks = []
++    for story in found:
++        block = f'<story title="{story.get("Title", "")}">\n{build_story_context_for_rag(story)}\n</story>'
++        if story.get("Theme") == "Professional Narrative":
++            summary = story.get("5PSummary", "") or story.get("5p_summary", "")
++            block += get_verbatim_requirement(summary)
++        blocks.append(block)
++    return (
++        "\n\n".join(blocks) or "No stories found.",
++        found,
++        result.get("top_score") or 0.0,
++    )
++
++
+ def agy_answer(
+     question: str,
+     stories: list[dict[str, Any]],
+     history: list[dict[str, str]] | None = None,
+ ) -> dict[str, Any]:
+-    raise NotImplementedError
++    """Answer an Ask Agy question through the tool-calling loop (MATTGPT-275).
++
++    The nonsense rules and the router's out_of_scope / personal redirects
++    still run first. The model then gets the system prompt (persona,
++    MATT_DNA, profile; synthesis voice when the router says synthesis), the
++    conversation, and the same per-answer instructions as before (opener,
++    focus angle, prose, bolding), and may call search_stories up to
++    ASK_TOOL_MAX_ROUNDS times before it must answer. Search confidence does
++    not gate the answer. The text goes through _postprocess_agy_text() with
++    the stories the searches returned, which are also the sources.
++
++    Returns the same dict shape as rag_answer() for the UI.
++    """
++    force_answer = bool(st.session_state.pop("__ask_force_answer__", False))
++    from_suggestion = (
++        bool(st.session_state.pop("__ask_from_suggestion__", False)) or force_answer
++    )
++    obs: dict[str, Any] = {
++        "intent_family": None,
++        "confidence": None,
++        "entity_match": None,
++        "rejection_reason": None,
++    }
++
++    rejected = _nonsense_rejection(question, from_suggestion, obs)
++    if rejected:
++        return rejected
++
++    intent_family, semantic_score = "", 1.0
++    if not from_suggestion:
++        _valid, semantic_score, _matched, intent_family = is_portfolio_query_semantic(
++            question or ""
++        )
++        obs["intent_family"] = intent_family
++    rejected = _router_rejection(
++        question, intent_family, semantic_score, from_suggestion, obs
++    )
++    if rejected:
++        return rejected
++
++    is_synthesis = intent_family == "synthesis"
++    # Source cards use the 3-card layout: they are the stories the model used.
++    st.session_state["__ask_query_intent__"] = None
++
++    profile_facts = load_matt_profile()
++    opening, focus = _choose_opening_and_focus(is_synthesis)
++    messages: list[dict[str, Any]] = [
++        {
++            "role": "system",
++            "content": build_system_prompt(
++                is_synthesis=is_synthesis,
++                matt_dna=MATT_DNA,
++                profile_facts=profile_facts,
++            ),
++        },
++        *(history or []),
++        {
++            "role": "user",
++            "content": build_user_message(
++                question=question,
++                story_context=_TOOL_STORY_NOTE,
++                opening=opening,
++                is_synthesis=is_synthesis,
++                focus_angle=focus if not is_synthesis else "",
++                profile_facts=profile_facts,
++            ),
++        },
++    ]
++
++    used: list[dict[str, Any]] = []
++    top_score = 0.0
++    text = ""
++    try:
++        client = _openai_client()
++        for round_no in range(ASK_TOOL_MAX_ROUNDS + 1):
++            call: dict[str, Any] = {
++                "model": DEFAULT_CHAT_MODEL,
++                "messages": messages,
++                "tools": [_SEARCH_STORIES_TOOL],
++                "temperature": 0.2 if is_synthesis else 0.4,
++                "max_tokens": 700,
++            }
++            last_round = round_no == ASK_TOOL_MAX_ROUNDS
++            if last_round:
++                call["tool_choice"] = "none"
++            message = client.chat.completions.create(**call).choices[0].message
++            tool_calls = getattr(message, "tool_calls", None) or []
++            if not tool_calls or last_round:
++                text = message.content or ""
++                break
++            messages.append(
++                {
++                    "role": "assistant",
++                    "content": message.content,
++                    "tool_calls": [
++                        {
++                            "id": c.id,
++                            "type": "function",
++                            "function": {
++                                "name": c.function.name,
++                                "arguments": c.function.arguments,
++                            },
++                        }
++                        for c in tool_calls
++                    ],
++                }
++            )
++            for c in tool_calls:
++                content, found, score = _run_search_tool(c.function.arguments, stories)
++                top_score = max(top_score, score)
++                seen = {s.get("id") for s in used}
++                used.extend(s for s in found if s.get("id") not in seen)
++                messages.append(
++                    {"role": "tool", "tool_call_id": c.id, "content": content}
++                )
++    except Exception as e:
++        err_lower = str(e).lower()
++        if "429" in str(e) or "rate_limit" in err_lower or "rate limit" in err_lower:
++            return {
++                "answer_md": "🐾 I need a quick breather. Try again in about 15 seconds!",
++                "sources": [],
++                "modes": {},
++                "default_mode": "narrative",
++                **obs,
++            }
++        if DEBUG:
++            print(f"DEBUG agy_answer fatal error: {e}")
++        logger.exception("agy_answer fatal error: %s", e)
++        return _degraded_fallback(question, stories, obs)
++
++    answer_md, profile_categories = _postprocess_agy_text(text, used)
++    sources = [
++        {"id": s["id"], "title": s.get("Title", ""), "client": s.get("Client", "")}
++        for s in used
++    ]
++
++    log_query(
++        question or "",
++        "Ask Agy",
++        intent_family=intent_family,
++        result_count=len(sources),
++        top_score=top_score,
++    )
++
++    return {
++        "answer_md": answer_md,
++        "sources": sources,
++        "profile_categories": profile_categories,
++        "modes": {"narrative": answer_md},
++        "default_mode": "narrative",
++        "degraded": False,
++        **obs,
++    }
+ 
+ 
+ def send_to_backend(
+@@ -1776,22 +1987,25 @@ def send_to_backend(
+     ctx: dict[str, Any] | None,
+     stories: list[dict[str, Any]],
+ ) -> dict[str, Any]:
+-    """Legacy wrapper for rag_answer.
++    """Ask Agy's entry point from the UI.
+ 
+-    Maintained for backward compatibility. Delegates to rag_answer(), passing
+-    the recent conversation from st.session_state["ask_transcript"] as history.
++    Delegates to agy_answer() (MATTGPT-275), passing the recent conversation
++    from st.session_state["ask_transcript"] as history. rag_answer() is no
++    longer called from here; its tests and the golden eval still call it.
+ 
+     Args:
+         prompt: User query string.
+-        filters: Search filters dictionary (passed to semantic_search).
++        filters: Unused (agy_answer's search tool takes no facet filters);
++            kept for API compatibility.
+         ctx: Context dictionary (unused, kept for API compatibility).
+         stories: Full list of portfolio stories.
+ 
+     Returns:
+-        RAG answer dictionary with keys: answer_md, sources, modes, default_mode.
++        Answer dictionary with keys: answer_md, sources, profile_categories,
++        modes, default_mode.
+     """
+     history = _build_history_messages(st.session_state.get("ask_transcript", []))
+-    return rag_answer(prompt, filters, stories, history=history)
++    return agy_answer(prompt, stories, history=history)
+ 
+ 
+ def _build_history_messages(transcript: list[dict]) -> list[dict[str, str]]:

@@ -1,0 +1,37 @@
+{
+  "basis": "Turn-level pass (P) / fail (F) per run against the expected answers in tests/fixtures/evaluator_conversations.md: correct referent, materially correct facts, honest uncertainty, contextual continuity. Transcribed from the verdicts reported in the Oct 6-8, 2026 Code session; not rescored. Turns not listed under 'turns' were not hand-scored.",
+  "arm": "Simplest with MATT_DNA trimmed (Theme Strengths, Signature Achievements, Leadership Philosophy removed)",
+  "runs": 5,
+  "turns": {
+    "4.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "F",
+        "F"
+      ],
+      "note": "r4/r5 'Nothing I know about Matt covers that.'"
+    },
+    "10.3": {
+      "runs": [
+        "F",
+        "F",
+        "F",
+        "P",
+        "F"
+      ],
+      "note": "r1-r3 '18 months'; r5 six months as the whole modernization; none searched"
+    }
+  },
+  "not_scored": "follow-ups and turn 1s; the run failed criteria first (stop rule)",
+  "criteria": {
+    "10.3_no_invented_figure": "1/5 FAIL",
+    "4.2": "3/5 FAIL",
+    "first_answer_median_words": "63.5 FAIL",
+    "follow_ups": "not scored"
+  },
+  "other_measurements": {
+    "searched_turns": "44/125"
+  }
+}

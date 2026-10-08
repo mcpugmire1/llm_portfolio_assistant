@@ -1,0 +1,168 @@
+[new | 1. Payments experience   | run 1 | t1] 5.47s searches=1 reason=None | '🐾 Tracking this down...\n\nMatt played a significant role in the payment'
+[new | 1. Payments experience   | run 1 | t2] 3.69s searches=1 reason=None | "🐾 Perfect, here's what I found.\n\nIn his work with **JP Morgan Chase**,"
+[new | 1. Payments experience   | run 1 | t3] 3.91s searches=1 reason=None | "🐾 Perfect, here's what I found.\n\nIn one notable experience, Matt encou"
+[new | 1. Payments experience   | run 2 | t1] 4.29s searches=1 reason=None | '🐾 Found it!\n\nAt **JP Morgan Chase**, Matt played a pivotal role in bui'
+[new | 1. Payments experience   | run 2 | t2] 3.33s searches=1 reason=None | '🐾 This is a strong one.\n\nIn his role at **JP Morgan Chase**, Matt led '
+[new | 1. Payments experience   | run 2 | t3] 3.6s searches=1 reason=None | '🐾 On it!\n\nIn one engagement with a Fortune 500 financial services clie'
+[new | 1. Payments experience   | run 3 | t1] 4.43s searches=1 reason=None | '🐾 On it!\n\nAt **JP Morgan Chase**, Matt played a pivotal role in buildi'
+[new | 1. Payments experience   | run 3 | t2] 3.44s searches=1 reason=None | '🐾 This is a strong one.\n\nIn his role at **JP Morgan Chase**, Matt led '
+[new | 1. Payments experience   | run 3 | t3] 3.5s searches=1 reason=None | '🐾 I know just the story.\n\nIn one engagement with a Fortune 500 financi'
+[new | 1. Payments experience   | run 4 | t1] 4.58s searches=1 reason=None | '🐾 Found it!\n\nAt **JP Morgan Chase**, Matt played a pivotal role in tra'
+[new | 1. Payments experience   | run 4 | t2] 3.64s searches=1 reason=None | "🐾 Perfect, here's what I found.\n\nIn his work with **JP Morgan Chase**,"
+[new | 1. Payments experience   | run 4 | t3] 3.64s searches=1 reason=None | '🐾 On it!\n\nOne significant challenge Matt encountered was during a glob'
+[new | 1. Payments experience   | run 5 | t1] 4.58s searches=1 reason=None | 'Got it! 🐾\n\nMatt played a pivotal role in transforming payment systems '
+[new | 1. Payments experience   | run 5 | t2] 5.79s searches=1 reason=None | 'Got it! 🐾\n\nIn his work at the **Accenture Cloud Innovation Center (CIC'
+[new | 1. Payments experience   | run 5 | t3] 4.07s searches=1 reason=None | '🦴 On it!\n\nAt a Fortune 500 financial services client, Matt faced a sig'
+[new | 2. Education             | run 1 | t1] 1.47s searches=0 reason=None | '🐾 Tracking this down...\n\nMatt does not have a traditional Computer Sci'
+[new | 2. Education             | run 1 | t2] 4.98s searches=1 reason=None | "🐾 Here's what connects the dots across Matt's work. At **Accenture**, "
+[new | 2. Education             | run 2 | t1] 1.5s searches=0 reason=None | '🐾 This is a strong one.\n\nMatt does not have a Computer Science degree.'
+[new | 2. Education             | run 2 | t2] 4.86s searches=1 reason=None | "🐾 Here's what connects the dots across Matt's work.\n\nMatt's educationa"
+[new | 2. Education             | run 3 | t1] 1.52s searches=0 reason=None | "Got it! 🐾\n\nMatt holds a Master's degree in Information Technology from"
+[new | 2. Education             | run 3 | t2] 5.35s searches=1 reason=None | "🐾 Let me show you what ties Matt's work together. At **Accenture**, he"
+[new | 2. Education             | run 4 | t1] 1.36s searches=0 reason=None | "🐾 Perfect, here's what I found.\n\nMatt does not have a Computer Science"
+[new | 2. Education             | run 4 | t2] 4.63s searches=1 reason=None | "🐾 Let me show you what ties Matt's work together.\n\nMatt's career is de"
+[new | 2. Education             | run 5 | t1] 1.26s searches=0 reason=None | "🐾 On it!\n\nMatt holds a Master's degree in Information Technology from "
+[new | 2. Education             | run 5 | t2] 4.44s searches=1 reason=None | "🐾 Here's what connects the dots across Matt's work.\n\nMatt's career is "
+[new | 3. Leadership            | run 1 | t1] 3.86s searches=1 reason=None | "🐾 Found it!\n\nMatt's leadership style is centered around creating envir"
+[new | 3. Leadership            | run 1 | t2] 4.37s searches=1 reason=None | "🐾 Here's a great example.\n\nAt **Norfolk Southern**, during the early s"
+[new | 3. Leadership            | run 2 | t1] 4.21s searches=1 reason=None | "🐾 This is a strong one.\n\nMatt's leadership style is rooted in creating"
+[new | 3. Leadership            | run 2 | t2] 4.22s searches=1 reason=None | 'Got it! 🐾\n\nAt **Norfolk Southern**, Matt faced a significant challenge'
+[new | 3. Leadership            | run 3 | t1] 4.5s searches=1 reason=None | "🐾 On it!\n\nMatt's leadership style is characterized by a blend of empat"
+[new | 3. Leadership            | run 3 | t2] 4.44s searches=1 reason=None | '🐾 I know just the story.\n\nAt **Norfolk Southern**, Matt encountered a '
+[new | 3. Leadership            | run 4 | t1] 4.06s searches=1 reason=None | "Got it! 🐾\n\nMatt's leadership style is characterized by a blend of empa"
+[new | 3. Leadership            | run 4 | t2] 4.45s searches=1 reason=None | '🐾 This is a strong one.\n\nAt **Norfolk Southern**, Matt faced a signifi'
+[new | 3. Leadership            | run 5 | t1] 3.84s searches=1 reason=None | "🐾 Tracking this down...\n\nMatt's leadership style is characterized by a"
+[new | 3. Leadership            | run 5 | t2] 4.31s searches=1 reason=None | '🐾 On it!\n\nAt **Norfolk Southern**, Matt faced a situation where his le'
+[new | 4. Certifications        | run 1 | t1] 1.55s searches=0 reason=None | '🐾 This is a strong one.\n\nMatt holds several certifications, though non'
+[new | 4. Certifications        | run 1 | t2] 2.77s searches=0 reason=None | '🐾 Tracking this down...\n\nMatt does not hold a PMP certification. Howev'
+[new | 4. Certifications        | run 1 | t3] 1.36s searches=0 reason=None | "🐾 Let me show you what ties Matt's work together.\n\nNone of Matt's cert"
+[new | 4. Certifications        | run 2 | t1] 1.73s searches=0 reason=None | 'Got it! 🐾\n\nMatt has held several certifications, although none are cur'
+[new | 4. Certifications        | run 2 | t2] 1.62s searches=0 reason=None | 'Got it! 🐾\n\nNo, Matt does not hold a PMP certification. However, he has'
+[new | 4. Certifications        | run 2 | t3] 1.44s searches=0 reason=None | "🦮 Let me show you what ties Matt's work together.\n\nNone of Matt's cert"
+[new | 4. Certifications        | run 3 | t1] 2.85s searches=0 reason=None | '🐾 Found it!\n\nMatt holds several certifications, although none are curr'
+[new | 4. Certifications        | run 3 | t2] 1.74s searches=0 reason=None | "🐾 Perfect, here's what I found.\n\nMatt does not hold a PMP certificatio"
+[new | 4. Certifications        | run 3 | t3] 1.6s searches=0 reason=None | "🐾 Here's what connects the dots across Matt's work.\n\nNone of Matt's ce"
+[new | 4. Certifications        | run 4 | t1] 2.22s searches=0 reason=None | "🐾 Perfect, here's what I found.\n\nMatt holds several certifications, al"
+[new | 4. Certifications        | run 4 | t2] 1.97s searches=0 reason=None | '🐾 I know just the story.\n\nMatt does not hold a PMP certification. Howe'
+[new | 4. Certifications        | run 4 | t3] 1.53s searches=0 reason=None | "🐾 Stepping back to see the themes...\n\nNone of Matt's certifications ar"
+[new | 4. Certifications        | run 5 | t1] 1.7s searches=0 reason=None | '🐾 On it!\n\nMatt holds several certifications, although none are current'
+[new | 4. Certifications        | run 5 | t2] 1.83s searches=0 reason=None | '🐾 Tracking this down...\n\nMatt does not hold a PMP certification. Howev'
+[new | 4. Certifications        | run 5 | t3] 1.52s searches=0 reason=None | "🐾 Let me show you what ties Matt's work together.\n\nNone of Matt's cert"
+[new | 5. Career motivation     | run 1 | t1] 2.29s searches=0 reason=None | '🐾 This is a strong one.\n\nMatt is currently on a sabbatical, actively s'
+[new | 5. Career motivation     | run 1 | t2] 5.26s searches=1 reason=None | "🐾 Looking across Matt's portfolio, I see clear patterns.\n\nMatt has a p"
+[new | 5. Career motivation     | run 2 | t1] 1.69s searches=0 reason=None | '🐾 Tracking this down...\n\nMatt is currently on a sabbatical, focusing o'
+[new | 5. Career motivation     | run 2 | t2] 4.4s searches=1 reason=None | "🐾 Here's what connects the dots across Matt's work.\n\nMatt has a proven"
+[new | 5. Career motivation     | run 3 | t1] 1.85s searches=0 reason=None | '🦴 Matt is currently on a sabbatical and actively searching for a role '
+[new | 5. Career motivation     | run 3 | t2] 4.24s searches=1 reason=None | "🐾 Let me show you what ties Matt's work together. At **Accenture**, he"
+[new | 5. Career motivation     | run 4 | t1] 1.62s searches=0 reason=None | '🐾 This is a strong one.\n\nMatt is currently on a sabbatical, focusing o'
+[new | 5. Career motivation     | run 4 | t2] 4.11s searches=1 reason=None | "🐾 Looking across Matt's portfolio, I see clear patterns.\n\nMatt has a p"
+[new | 5. Career motivation     | run 5 | t1] 1.82s searches=0 reason=None | 'Got it! 🐾\n\nMatt is currently on a sabbatical, focusing on building Mat'
+[new | 5. Career motivation     | run 5 | t2] 4.8s searches=1 reason=None | '🐾 Stepping back to see the themes... At **Accenture**, he grew the Clo'
+[new | 6. Healthcare experience | run 1 | t1] 1.48s searches=0 reason=None | '🐾 This is a strong one.\n\nMatt has limited experience in the healthcare'
+[new | 6. Healthcare experience | run 1 | t2] 3.93s searches=1 reason=None | '🐾 Tracking this down...\n\nAt the **Major U.S. Health System**, Matt led'
+[new | 6. Healthcare experience | run 2 | t1] 1.5s searches=0 reason=None | '🐾 I know just the story.\n\nMatt has worked in the healthcare industry, '
+[new | 6. Healthcare experience | run 2 | t2] 3.97s searches=1 reason=None | '🐾 Found it!\n\nIn his healthcare engagement, Matt played a pivotal role '
+[new | 6. Healthcare experience | run 3 | t1] 1.37s searches=0 reason=None | '🐾 I know just the story.\n\nMatt has limited experience in the healthcar'
+[new | 6. Healthcare experience | run 3 | t2] 3.91s searches=1 reason=None | '🐾 Tracking this down...\n\nIn his healthcare engagement with a **Major U'
+[new | 6. Healthcare experience | run 4 | t1] 1.54s searches=0 reason=None | "🐾 Here's a great example.\n\nMatt has limited experience in the healthca"
+[new | 6. Healthcare experience | run 4 | t2] 3.61s searches=1 reason=None | '🐾 Found it!\n\nIn the healthcare sector, Matt worked with a **Major U.S.'
+[new | 6. Healthcare experience | run 5 | t1] 1.32s searches=0 reason=None | 'Got it! 🐾\n\nMatt has limited experience in the healthcare industry. He '
+[new | 6. Healthcare experience | run 5 | t2] 4.77s searches=1 reason=None | 'Got it! 🐾\n\nAt a major U.S. health system, Matt led an initiative to in'
+[new | 7. Location              | run 1 | t1] 1.0s searches=0 reason=None | "🐾 Here's a great example.\n\nMatt is based in **Atlanta, GA**. He is ope"
+[new | 7. Location              | run 1 | t2] 1.23s searches=0 reason=None | '🐾 This is a strong one.\n\nMatt is open to relocation and travel. This f'
+[new | 7. Location              | run 2 | t1] 1.07s searches=0 reason=None | "🐾 Here's a great example.\n\nMatt is based in **Atlanta, GA**. He is ope"
+[new | 7. Location              | run 2 | t2] 1.39s searches=0 reason=None | '🐾 This is a strong one.\n\nMatt is open to relocation and travel. His cu'
+[new | 7. Location              | run 3 | t1] 1.19s searches=0 reason=None | '🐾 Found it!\n\nMatt is based in **Atlanta, GA**. He is open to relocatio'
+[new | 7. Location              | run 3 | t2] 1.5s searches=0 reason=None | "🐾 Perfect, here's what I found.\n\nMatt is open to relocation and travel"
+[new | 7. Location              | run 4 | t1] 1.07s searches=0 reason=None | '🐾 I know just the story.\n\nMatt is based in **Atlanta, GA**. He is open'
+[new | 7. Location              | run 4 | t2] 1.05s searches=0 reason=None | "🐾 Perfect, here's what I found.\n\nMatt is based in **Atlanta, GA** and "
+[new | 7. Location              | run 5 | t1] 1.24s searches=0 reason=None | '🐾 This is a strong one.\n\nMatt is based in **Atlanta, GA**. He is open '
+[new | 7. Location              | run 5 | t2] 1.29s searches=0 reason=None | '🐾 Tracking this down...\n\nMatt is open to relocation and travel. He is '
+[new | 8. Failure and growth    | run 1 | t1] 3.68s searches=1 reason=None | 'Got it! 🐾\n\nMatt encountered a significant failure while leading a glob'
+[new | 8. Failure and growth    | run 1 | t2] 4.06s searches=1 reason=None | '🐾 I know just the story.\n\nAfter the failure in the platform modernizat'
+[new | 8. Failure and growth    | run 2 | t1] 4.1s searches=1 reason=None | '🐾 I know just the story.\n\nIn a project for a **Fortune 500 financial s'
+[new | 8. Failure and growth    | run 2 | t2] 3.91s searches=1 reason=None | "🐾 Here's a great example.\n\nAfter the incident involving the accidental"
+[new | 8. Failure and growth    | run 3 | t1] 3.12s searches=1 reason=None | '🐾 I know just the story.\n\nDuring a global platform modernization deliv'
+[new | 8. Failure and growth    | run 3 | t2] 3.73s searches=1 reason=None | "🐾 Here's a great example.\n\nAfter the failure with the **Fortune 500 fi"
+[new | 8. Failure and growth    | run 4 | t1] 3.6s searches=1 reason=None | '🐾 Found it!\n\nDuring a global platform modernization delivery for a **F'
+[new | 8. Failure and growth    | run 4 | t2] 4.74s searches=1 reason=None | 'Got it! 🐾\n\nAfter the incident with the email job sending unmasked prod'
+[new | 8. Failure and growth    | run 5 | t1] 4.25s searches=1 reason=None | "🐾 Perfect, here's what I found.\n\nIn one notable instance, Matt experie"
+[new | 8. Failure and growth    | run 5 | t2] 4.42s searches=1 reason=None | '🐾 On it!\n\nAfter the failure in the global platform modernization deliv'
+[new | 9. Topic switch          | run 1 | t1] 3.91s searches=1 reason=None | "🐾 This is a strong one.\n\nMatt's work in the payments domain is highlig"
+[new | 9. Topic switch          | run 1 | t2] 5.46s searches=1 reason=None | "🐾 I know just the story.\n\nMatt's leadership style is characterized by "
+[new | 9. Topic switch          | run 1 | t3] 3.36s searches=1 reason=None | "🐾 Perfect, here's what I found.\n\nAt the **Accenture Cloud Innovation C"
+[new | 9. Topic switch          | run 1 | t4] 3.75s searches=1 reason=None | "🐾 Here's a great example.\n\nAt the **Accenture Cloud Innovation Center*"
+[new | 9. Topic switch          | run 2 | t1] 4.23s searches=1 reason=None | '🐾 Found it!\n\nAt **JP Morgan Chase**, Matt played a pivotal role in the'
+[new | 9. Topic switch          | run 2 | t2] 3.18s searches=0 reason=None | "🐾 Found it!\n\nMatt's leadership style is characterized by empathy, clar"
+[new | 9. Topic switch          | run 2 | t3] 4.15s searches=1 reason=None | 'Got it! 🐾\n\nAt the **Accenture Cloud Innovation Center (CIC)**, Matt de'
+[new | 9. Topic switch          | run 2 | t4] 3.11s searches=1 reason=None | '🐾 Found it!\n\nAt the **Accenture Cloud Innovation Center (CIC)**, Matt '
+[new | 9. Topic switch          | run 3 | t1] 4.2s searches=1 reason=None | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt played a pivot"
+[new | 9. Topic switch          | run 3 | t2] 3.88s searches=1 reason=None | "🐾 This is a strong one.\n\nMatt's leadership style is characterized by a"
+[new | 9. Topic switch          | run 3 | t3] 4.04s searches=1 reason=None | "🐾 Perfect, here's what I found.\n\nAt the **Accenture Cloud Innovation C"
+[new | 9. Topic switch          | run 3 | t4] 4.76s searches=1 reason=None | '🐾 I know just the story.\n\nAt the **Accenture Cloud Innovation Center**'
+[new | 9. Topic switch          | run 4 | t1] 4.8s searches=1 reason=None | "🐾 Perfect, here's what I found.\n\nMatt played a pivotal role in transfo"
+[new | 9. Topic switch          | run 4 | t2] 4.53s searches=1 reason=None | "🐾 Tracking this down...\n\nMatt's leadership style is rooted in empathy,"
+[new | 9. Topic switch          | run 4 | t3] 4.09s searches=1 reason=None | '🐾 Found it!\n\nAt the **Accenture Cloud Innovation Center**, Matt faced '
+[new | 9. Topic switch          | run 4 | t4] 2.99s searches=1 reason=None | '🐾 Found it!\n\nAt the **Accenture Cloud Innovation Center**, Matt scaled'
+[new | 9. Topic switch          | run 5 | t1] 5.43s searches=1 reason=None | '🐾 I know just the story.\n\nAt **JP Morgan Chase**, Matt was instrumenta'
+[new | 9. Topic switch          | run 5 | t2] 5.01s searches=1 reason=None | "🐾 I know just the story.\n\nMatt's leadership style is characterized by "
+[new | 9. Topic switch          | run 5 | t3] 3.47s searches=1 reason=None | '🐾 Found it!\n\nAt the **Accenture Cloud Innovation Center**, Matt demons'
+[new | 9. Topic switch          | run 5 | t4] 3.12s searches=1 reason=None | "🐾 Perfect, here's what I found.\n\nAt the **Accenture Cloud Innovation C"
+[new | 10. Accepting an offer   | run 1 | t1] 4.36s searches=1 reason=None | '🐾 This is a strong one.\n\nAt **Norfolk Southern**, Matt led a significa'
+[new | 10. Accepting an offer   | run 1 | t2] 4.1s searches=1 reason=None | '🐾 This is a strong one.\n\nAt **Norfolk Southern**, Matt spearheaded a c'
+[new | 10. Accepting an offer   | run 1 | t3] 5.02s searches=1 reason=None | "🐾 Here's a great example.\n\nThe transformation project at **Norfolk Sou"
+[new | 10. Accepting an offer   | run 2 | t1] 4.99s searches=1 reason=None | '🐾 This is a strong one.\n\nAt **Norfolk Southern**, Matt led a significa'
+[new | 10. Accepting an offer   | run 2 | t2] 4.74s searches=1 reason=None | 'Got it! 🐾\n\nAt **Norfolk Southern**, Matt undertook a comprehensive mod'
+[new | 10. Accepting an offer   | run 2 | t3] 3.97s searches=1 reason=None | "🦴 Here's a great example.\n\nThe modernization project at **Norfolk Sout"
+[new | 10. Accepting an offer   | run 3 | t1] 4.05s searches=1 reason=None | "🐾 Perfect, here's what I found.\n\nAt **Norfolk Southern**, Matt led a s"
+[new | 10. Accepting an offer   | run 3 | t2] 5.58s searches=1 reason=None | 'Got it! 🐾\n\nAt **Norfolk Southern**, Matt led a comprehensive moderniza'
+[new | 10. Accepting an offer   | run 3 | t3] 3.84s searches=1 reason=None | 'Got it! 🐾\n\nThe modernization work at **Norfolk Southern** involved a c'
+[new | 10. Accepting an offer   | run 4 | t1] 4.23s searches=1 reason=None | '🐾 This is a strong one.\n\nAt **Norfolk Southern**, the challenge was to'
+[new | 10. Accepting an offer   | run 4 | t2] 4.14s searches=1 reason=None | '🐾 This is a strong one.\n\nAt **Norfolk Southern**, Matt led a comprehen'
+[new | 10. Accepting an offer   | run 4 | t3] 4.19s searches=1 reason=None | "🐾 Perfect, here's what I found.\n\nThe modernization efforts at **Norfol"
+[new | 10. Accepting an offer   | run 5 | t1] 4.69s searches=1 reason=None | '🐾 This is a strong one.\n\nAt **Norfolk Southern**, Matt led a significa'
+[new | 10. Accepting an offer   | run 5 | t2] 4.42s searches=1 reason=None | '🐾 On it!\n\nAt **Norfolk Southern**, Matt spearheaded a comprehensive mo'
+[new | 10. Accepting an offer   | run 5 | t3] 4.44s searches=1 reason=None | 'Got it! 🐾\n\nThe transformation work at **Norfolk Southern** was extensi'
+[voice_old | 1. Payments experience   | run 1] 3.92s | "🐾 Perfect, here's what I found.\n\nAt **JP Morgan Chase**, Matt played a"
+[voice_new | 1. Payments experience   | run 1] 3.8s | "🐾 Tracking this down...\n\nMatt's work in payments is highlighted by his"
+[voice_old | 1. Payments experience   | run 2] 3.68s | "🐾 Perfect, here's what I found.\n\nAt **JP Morgan Chase**, Matt was inst"
+[voice_new | 1. Payments experience   | run 2] 4.5s | '🐾 On it!\n\nMatt played a pivotal role in transforming payments systems '
+[voice_old | 2. Education             | run 1] 2.39s | "🐾 Perfect, here's what I found.\n\nMatt holds a Master's degree in Infor"
+[voice_new | 2. Education             | run 1] 1.47s | "🐾 Perfect, here's what I found.\n\nMatt does not have a degree specifica"
+[voice_old | 2. Education             | run 2] 2.2s | "🐾 Perfect, here's what I found.\n\nMatt holds a Master's degree in Infor"
+[voice_new | 2. Education             | run 2] 1.77s | "🐾 Tracking this down...\n\nMatt holds a Master's degree in Information T"
+[voice_old | 3. Leadership            | run 1] 5.07s | "🐾 Found it!\n\nMatt's leadership style is centered around creating an en"
+[voice_new | 3. Leadership            | run 1] 4.1s | "🐾 Found it!\n\nMatt's leadership style is characterized by a blend of em"
+[voice_old | 3. Leadership            | run 2] 3.67s | "🐾 This is a strong one.\n\nMatt's leadership style is characterized by c"
+[voice_new | 3. Leadership            | run 2] 3.88s | "Got it! 🐾\n\nMatt's leadership style is characterized by a focus on buil"
+[voice_old | 4. Certifications        | run 1] 2.41s | '🐾 This is a strong one.\n\nMatt holds several certifications, though non'
+[voice_new | 4. Certifications        | run 1] 1.74s | '🐾 Found it!\n\nMatt holds several certifications, though none are curren'
+[voice_old | 4. Certifications        | run 2] 2.51s | '🐾 Found it!\n\nMatt holds several certifications, although none are curr'
+[voice_new | 4. Certifications        | run 2] 1.72s | 'Got it! 🐾\n\nMatt held several certifications, though none are currently'
+[QUERY_REJECTED] reason=low_pinecone, router_family=narrative, router_score=0.490, pinecone_score=0.214, query=Why is he looking?...
+[voice_old | 5. Career motivation     | run 1] 1.17s | ''
+[voice_new | 5. Career motivation     | run 1] 1.88s | "🐾 Perfect, here's what I found.\n\nMatt is currently on a sabbatical, du"
+[QUERY_REJECTED] reason=low_pinecone, router_family=narrative, router_score=0.490, pinecone_score=0.214, query=Why is he looking?...
+[voice_old | 5. Career motivation     | run 2] 1.07s | ''
+[voice_new | 5. Career motivation     | run 2] 2.2s | '🐾 Tracking this down...\n\nMatt is currently on a sabbatical, focusing o'
+[voice_old | 6. Healthcare experience | run 1] 3.31s | '🐾 I know just the story.\n\nMatt worked in the healthcare industry with '
+[voice_new | 6. Healthcare experience | run 1] 1.46s | "🐾 Here's a great example.\n\nMatt has worked in the healthcare industry."
+[voice_old | 6. Healthcare experience | run 2] 2.74s | 'Got it! 🐾\n\nMatt has worked in the healthcare industry. He led an initi'
+[voice_new | 6. Healthcare experience | run 2] 1.65s | '🐾 I know just the story.\n\nMatt has limited experience in the healthcar'
+[voice_old | 7. Location              | run 1] 2.62s | '🐾 I know just the story.\n\nMatt is based in Atlanta, GA. He is open to '
+[voice_new | 7. Location              | run 1] 1.58s | '🐾 This is a strong one.\n\nMatt is based in **Atlanta, GA**. He is open '
+[voice_old | 7. Location              | run 2] 2.1s | '🐾 This is a strong one.\n\nMatt is based in Atlanta, GA. He is open to r'
+[voice_new | 7. Location              | run 2] 1.56s | '🐾 This is a strong one.\n\nMatt is based in **Atlanta, GA**. He is open '
+[voice_old | 8. Failure and growth    | run 1] 3.73s | "🐾 Here's a great example.\n\nDuring a project with a **Fortune 500 finan"
+[voice_new | 8. Failure and growth    | run 1] 3.85s | "🐾 Here's a great example.\n\nDuring a global platform modernization deli"
+[voice_old | 8. Failure and growth    | run 2] 3.46s | "🐾 Here's a great example.\n\nDuring a global platform modernization deli"
+[voice_new | 8. Failure and growth    | run 2] 4.2s | "🐾 Perfect, here's what I found.\n\nIn a significant engagement with a Fo"
+[voice_old | 9. Topic switch          | run 1] 3.67s | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt played a key r"
+[voice_new | 9. Topic switch          | run 1] 4.02s | '🐾 I know just the story.\n\nAt **JP Morgan Chase**, Matt played a pivota'
+[voice_old | 9. Topic switch          | run 2] 4.35s | '🐾 This is a strong one.\n\nAt **JP Morgan Chase**, Matt led the developm'
+[voice_new | 9. Topic switch          | run 2] 4.75s | '🐾 I know just the story.\n\nAt **JP Morgan Chase**, Matt played a pivota'
+[voice_old | 10. Accepting an offer   | run 1] 3.8s | '🐾 On it!\n\nAt **Norfolk Southern**, Matt faced the challenge of moderni'
+[voice_new | 10. Accepting an offer   | run 1] 3.63s | "🐾 Perfect, here's what I found.\n\nAt **Norfolk Southern**, Matt led a s"
+[voice_old | 10. Accepting an offer   | run 2] 3.75s | '🐾 This is a strong one.\n\nAt **Norfolk Southern**, Matt led a significa'
+[voice_new | 10. Accepting an offer   | run 2] 3.88s | '🐾 This is a strong one.\n\nAt **Norfolk Southern**, Matt led a significa'
+done 165

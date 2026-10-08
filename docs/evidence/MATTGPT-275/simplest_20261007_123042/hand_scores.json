@@ -1,0 +1,249 @@
+{
+  "basis": "Turn-level pass (P) / fail (F) per run against the expected answers in tests/fixtures/evaluator_conversations.md: correct referent, materially correct facts, honest uncertainty, contextual continuity. Transcribed from the verdicts reported in the Oct 6-8, 2026 Code session; not rescored. Turns not listed under 'turns' were not hand-scored.",
+  "arm": "Instructions in the system prompt, Matt's opener lines as examples, nothing inserted by Python; model decides when to search",
+  "runs": 5,
+  "turns": {
+    "1.1": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "1.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "1.3": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ],
+      "note": "ACCESS WebSeries challenges"
+    },
+    "2.1": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "2.2": {
+      "runs": [
+        "F",
+        "F",
+        "F",
+        "F",
+        "F"
+      ],
+      "note": "ignores the degree, closes on evaluation"
+    },
+    "3.1": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ],
+      "note": "thin, from MATT_DNA"
+    },
+    "3.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "4.1": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "4.2": {
+      "runs": [
+        "F",
+        "P",
+        "P",
+        "F",
+        "F"
+      ],
+      "note": "r1/r4/r5 'Nothing I know about Matt covers that.'"
+    },
+    "4.3": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "5.1": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "5.2": {
+      "runs": [
+        "F",
+        "F",
+        "F",
+        "F",
+        "F"
+      ],
+      "note": "no explicit in-house comparison; generic pitch"
+    },
+    "6.1": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ],
+      "note": "one sentence"
+    },
+    "6.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "7.1": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "7.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "8.1": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "8.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "9.1": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "9.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "9.3": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "9.4": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "10.1": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "10.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ],
+      "note": "overlaps heavily with turn 1"
+    },
+    "10.3": {
+      "runs": [
+        "F",
+        "F",
+        "F",
+        "P",
+        "F"
+      ],
+      "note": "r2/r3/r5 '18 months' with no search; r1 academy six months as the whole effort; r4 correct"
+    }
+  },
+  "totals": {
+    "conversations_1_9": "97/110",
+    "follow_ups_1_9": "52/65",
+    "conversation_10": "11/15"
+  },
+  "other_measurements": {
+    "searched_turns": "41/125",
+    "first_answer_median_words": 56
+  }
+}

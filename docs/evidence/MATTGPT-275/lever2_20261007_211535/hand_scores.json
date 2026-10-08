@@ -1,0 +1,153 @@
+{
+  "basis": "Turn-level pass (P) / fail (F) per run against the expected answers in tests/fixtures/evaluator_conversations.md: correct referent, materially correct facts, honest uncertainty, contextual continuity. Transcribed from the verdicts reported in the Oct 6-8, 2026 Code session; not rescored. Turns not listed under 'turns' were not hand-scored.",
+  "arm": "Simplest plus tool_choice='required' on the first call of every turn",
+  "runs": 5,
+  "turns": {
+    "1.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "1.3": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "2.2": {
+      "runs": [
+        "F",
+        "F",
+        "F",
+        "F",
+        "F"
+      ],
+      "note": "drops the degree facts, closes on evaluation"
+    },
+    "3.2": {
+      "runs": [
+        "F",
+        "F",
+        "P",
+        "P",
+        "P"
+      ],
+      "note": "r1/r2 offer the CIC culture fix (a success) as where leadership didn't work"
+    },
+    "4.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "4.3": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "5.2": {
+      "runs": [
+        "P",
+        "P",
+        "F",
+        "P",
+        "P"
+      ],
+      "note": "r3 spreads '12 countries' across JP Morgan, RBC, Capital One, HSBC"
+    },
+    "6.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "7.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "8.2": {
+      "runs": [
+        "F",
+        "P",
+        "P",
+        "P",
+        "P"
+      ],
+      "note": "r1 invented 'in subsequent projects' consequence"
+    },
+    "9.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "9.3": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "9.4": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "10.3": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ],
+      "note": "criterion: no invented figure; r2 'over several months' unhedged (borderline); r1/r3/r4 say the duration isn't stated"
+    }
+  },
+  "not_scored": "turn 1s were spot-checked (2, 4, 5, 6, 7), not fully scored; 10.1-10.2 not scored",
+  "totals": {
+    "follow_ups_1_9": "56/65"
+  },
+  "criteria": {
+    "10.3_no_invented_figure": "5/5",
+    "4.2": "5/5",
+    "first_answer_median_words": 180,
+    "follow_ups": "56/65 vs simplest 52/65",
+    "topic_switch_9x": "15/15"
+  },
+  "other_measurements": {
+    "searched_turns": "125/125",
+    "median_seconds": 4.16
+  }
+}

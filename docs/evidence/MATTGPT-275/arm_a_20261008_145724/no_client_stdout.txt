@@ -1,0 +1,19 @@
+[armA r1] Tell me about Matt's legacy-to-cloud work    reason=None on_topic=1/4
+[armA r2] Tell me about Matt's legacy-to-cloud work    reason=None on_topic=1/4
+[armA r3] Tell me about Matt's legacy-to-cloud work    reason=None on_topic=1/4
+[armA r1] What has Matt done with mainframe modernizat reason=None on_topic=3/3
+[armA r2] What has Matt done with mainframe modernizat reason=None on_topic=3/3
+[armA r3] What has Matt done with mainframe modernizat reason=None on_topic=3/3
+[armA r1] How has Matt handled a quality crisis?       reason=None on_topic=1/2
+[armA r2] How has Matt handled a quality crisis?       reason=None on_topic=1/2
+[armA r3] How has Matt handled a quality crisis?       reason=None on_topic=1/2
+[armA r1] Tell me about Matt's work building engineeri reason=None on_topic=3/4
+[armA r2] Tell me about Matt's work building engineeri reason=None on_topic=3/4
+[armA r3] Tell me about Matt's work building engineeri reason=None on_topic=3/4
+[armA r1] What payments platforms has Matt built?      reason=None on_topic=4/6
+[armA r2] What payments platforms has Matt built?      reason=None on_topic=4/6
+[armA r3] What payments platforms has Matt built?      reason=None on_topic=4/6
+[armA r1] Has Matt worked on identity and access manag reason=None on_topic=3/4
+[armA r2] Has Matt worked on identity and access manag reason=None on_topic=3/4
+[armA r3] Has Matt worked on identity and access manag reason=None on_topic=3/4
+done 18

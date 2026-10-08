@@ -1,0 +1,180 @@
+[old  1. Payments expe r1 t1] reason=None "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt play"
+[old  1. Payments expe r1 t2] reason=None '🐾 I know just the story.\n\nAt **JP Morgan Chase**, Matt led a'
+[old  1. Payments expe r1 t3] reason=None '🐾 Found it!\n\nDuring a platform modernization delivery for a '
+[armA 1. Payments expe r1 t1] reason=None '🐾 Tracking this down...\n\nAt **JP Morgan Chase**, Matt played'
+[armA 1. Payments expe r1 t2] reason=None 'Got it! 🐾\n\nIn his work at **JP Morgan Chase**, Matt led a te'
+[armA 1. Payments expe r1 t3] reason=None "🟢 Perfect, here's what I found.\n\nIn one engagement with a **"
+[old  1. Payments expe r2 t1] reason=None 'Got it! 🐾\n\nAt **JP Morgan Chase**, Matt played a pivotal rol'
+[old  1. Payments expe r2 t2] reason=None "🐾 Here's a great example.\n\nIn his work at **JP Morgan Chase*"
+[old  1. Payments expe r2 t3] reason=None 'Got it! 🐾\n\nIn one notable incident during a global platform '
+[armA 1. Payments expe r2 t1] reason=None 'Got it! 🐾\n\nAt **JP Morgan Chase**, Matt played a pivotal rol'
+[armA 1. Payments expe r2 t2] reason=None "🐾 Here's a great example.\n\nAt **JP Morgan**, Matt led a team"
+[armA 1. Payments expe r2 t3] reason=None "🐾 Perfect, here's what I found.\n\nIn one engagement with a **"
+[old  1. Payments expe r3 t1] reason=None "🐾 Perfect, here's what I found.\n\nAt **JP Morgan Chase**, Mat"
+[old  1. Payments expe r3 t2] reason=None '🐾 On it!\n\nAt **JP Morgan**, Matt led a team of over **40** p'
+[old  1. Payments expe r3 t3] reason=None '🐾 This is a strong one.\n\nIn a project with a **Fortune 500 f'
+[armA 1. Payments expe r3 t1] reason=None '🐾 I know just the story.\n\nAt **JP Morgan Chase**, Matt playe'
+[armA 1. Payments expe r3 t2] reason=None 'Got it! 🐾\n\nAt **JP Morgan Chase**, Matt led a blended team o'
+[armA 1. Payments expe r3 t3] reason=None "🐾 Perfect, here's what I found.\n\nIn one instance, Matt encou"
+[old  2. Education     r1 t1] reason=None "🐾 Tracking this down...\n\nMatt holds a Master's degree in Inf"
+[QUERY_REJECTED] reason=low_pinecone, router_family=synthesis, router_score=0.230, pinecone_score=0.154, query=Why shouldn’t that worry me?...
+[old  2. Education     r1 t2] reason=low_confidence ''
+[armA 2. Education     r1 t1] reason=None '🐾 Found it!\n\nMatt does not have a Computer Science degree. H'
+[QUERY_REJECTED] reason=low_pinecone, router_family=synthesis, router_score=0.230, pinecone_score=0.154, query=Why shouldn’t that worry me?...
+[armA 2. Education     r1 t2] reason=low_confidence ''
+[old  2. Education     r2 t1] reason=None '🐾 Tracking this down...\n\nMatt does not have a degree specifi'
+[QUERY_REJECTED] reason=low_pinecone, router_family=synthesis, router_score=0.230, pinecone_score=0.154, query=Why shouldn’t that worry me?...
+[old  2. Education     r2 t2] reason=low_confidence ''
+[armA 2. Education     r2 t1] reason=None 'Got it! 🐾\n\nMatt does not have a degree specifically labeled '
+[QUERY_REJECTED] reason=low_pinecone, router_family=synthesis, router_score=0.230, pinecone_score=0.154, query=Why shouldn’t that worry me?...
+[armA 2. Education     r2 t2] reason=low_confidence ''
+[old  2. Education     r3 t1] reason=None '🐾 This is a strong one.\n\nMatt does not have a degree specifi'
+[QUERY_REJECTED] reason=low_pinecone, router_family=synthesis, router_score=0.230, pinecone_score=0.154, query=Why shouldn’t that worry me?...
+[old  2. Education     r3 t2] reason=low_confidence ''
+[armA 2. Education     r3 t1] reason=None "🐾 Perfect, here's what I found.\n\nMatt holds a Master's degre"
+[QUERY_REJECTED] reason=low_pinecone, router_family=synthesis, router_score=0.230, pinecone_score=0.154, query=Why shouldn’t that worry me?...
+[armA 2. Education     r3 t2] reason=low_confidence ''
+[old  3. Leadership    r1 t1] reason=None "🐾 On it!\n\nMatt's leadership style is characterized by empath"
+[old  3. Leadership    r1 t2] reason=None "🐾 On it!\n\nDuring Matt's sabbatical in 2026, while working on"
+[armA 3. Leadership    r1 t1] reason=None "🐾 I know just the story.\n\nMatt's leadership style is rooted "
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.463, pinecone_score=0.250, query=Give me an example where that didn’t work....
+[armA 3. Leadership    r1 t2] reason=low_confidence ''
+[old  3. Leadership    r2 t1] reason=None "🐾 Found it!\n\nMatt's leadership style is centered around crea"
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.463, pinecone_score=0.250, query=Give me an example where that didn’t work....
+[old  3. Leadership    r2 t2] reason=low_confidence ''
+[armA 3. Leadership    r2 t1] reason=None "🐾 Here's a great example.\n\nMatt's leadership style is ground"
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.463, pinecone_score=0.250, query=Give me an example where that didn’t work....
+[armA 3. Leadership    r2 t2] reason=low_confidence ''
+[old  3. Leadership    r3 t1] reason=None "🐾 On it!\n\nMatt's leadership style is centered around creatin"
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.463, pinecone_score=0.250, query=Give me an example where that didn’t work....
+[old  3. Leadership    r3 t2] reason=low_confidence ''
+[armA 3. Leadership    r3 t1] reason=None "Got it! 🐾\n\nMatt's leadership style is centered around creati"
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.463, pinecone_score=0.250, query=Give me an example where that didn’t work....
+[armA 3. Leadership    r3 t2] reason=low_confidence ''
+[old  4. Certification r1 t1] reason=None 'Got it! 🐾\n\nMatt held several certifications, although none a'
+[old  4. Certification r1 t2] reason=None '🐾 I know just the story.\n\nMatt does not hold a PMP certifica'
+[old  4. Certification r1 t3] reason=None "🐾 Here's what connects the dots across Matt's work.\n\nNone of"
+[armA 4. Certification r1 t1] reason=None "🐾 Here's a great example.\n\nMatt holds several certifications"
+[armA 4. Certification r1 t2] reason=None "🐾 Here's a great example.\n\nNo, Matt does not hold a PMP cert"
+[armA 4. Certification r1 t3] reason=None "🐾 Let me show you what ties Matt's work together.\n\nNone of M"
+[old  4. Certification r2 t1] reason=None '🐾 Tracking this down...\n\nMatt holds several certifications, '
+[old  4. Certification r2 t2] reason=None '🐾 I know just the story.\n\nMatt does not hold a PMP certifica'
+[old  4. Certification r2 t3] reason=None "🐾 Stepping back to see the themes...\n\nNone of Matt's certifi"
+[armA 4. Certification r2 t1] reason=None "🐾 Here's a great example.\n\nMatt holds several certifications"
+[armA 4. Certification r2 t2] reason=None '🐾 On it!\n\nMatt does not hold a Project Management Profession'
+[armA 4. Certification r2 t3] reason=None "🐾 Let me show you what ties Matt's work together.\n\nNone of M"
+[old  4. Certification r3 t1] reason=None "🐾 Perfect, here's what I found.\n\nMatt held several certifica"
+[old  4. Certification r3 t2] reason=None "🐾 Perfect, here's what I found.\n\nMatt does not hold a PMP ce"
+[old  4. Certification r3 t3] reason=None "🐾 Let me show you what ties Matt's work together.\n\nNone of M"
+[armA 4. Certification r3 t1] reason=None '🐾 I know just the story.\n\nMatt holds several certifications,'
+[armA 4. Certification r3 t2] reason=None "🐾 Here's a great example.\n\nMatt does not hold a PMP certific"
+[armA 4. Certification r3 t3] reason=None "🐾 Stepping back to see the themes...\n\nNone of Matt's certifi"
+[QUERY_REJECTED] reason=low_pinecone, router_family=narrative, router_score=0.490, pinecone_score=0.214, query=Why is he looking?...
+[old  5. Career motiva r1 t1] reason=low_confidence ''
+[old  5. Career motiva r1 t2] reason=None '🐾 Stepping back to see the themes, Matt offers a unique blen'
+[QUERY_REJECTED] reason=low_pinecone, router_family=narrative, router_score=0.490, pinecone_score=0.214, query=Why is he looking?...
+[armA 5. Career motiva r1 t1] reason=low_confidence ''
+[armA 5. Career motiva r1 t2] reason=None "🐾 Looking across Matt's portfolio, I see clear patterns. Mat"
+[QUERY_REJECTED] reason=low_pinecone, router_family=narrative, router_score=0.490, pinecone_score=0.214, query=Why is he looking?...
+[old  5. Career motiva r2 t1] reason=low_confidence ''
+[old  5. Career motiva r2 t2] reason=None "🐾 Looking across Matt's portfolio, I see clear patterns. He "
+[QUERY_REJECTED] reason=low_pinecone, router_family=narrative, router_score=0.490, pinecone_score=0.214, query=Why is he looking?...
+[armA 5. Career motiva r2 t1] reason=low_confidence ''
+[armA 5. Career motiva r2 t2] reason=None "🐾 Let me show you what ties Matt's work together.\n\nMatt has "
+[QUERY_REJECTED] reason=low_pinecone, router_family=narrative, router_score=0.490, pinecone_score=0.214, query=Why is he looking?...
+[old  5. Career motiva r3 t1] reason=low_confidence ''
+[old  5. Career motiva r3 t2] reason=None "🐾 Here's what connects the dots across Matt's work. Matt is "
+[QUERY_REJECTED] reason=low_pinecone, router_family=narrative, router_score=0.490, pinecone_score=0.214, query=Why is he looking?...
+[armA 5. Career motiva r3 t1] reason=low_confidence ''
+[armA 5. Career motiva r3 t2] reason=None "🐾 Here's what connects the dots across Matt's work. Matt's c"
+[old  6. Healthcare ex r1 t1] reason=None '🐾 This is a strong one.\n\nMatt has indeed worked in the healt'
+[QUERY_REJECTED] reason=low_pinecone, router_family=background, router_score=0.387, pinecone_score=0.248, query=What did he actually do there?...
+[old  6. Healthcare ex r1 t2] reason=low_confidence ''
+[armA 6. Healthcare ex r1 t1] reason=None '🐾 On it!\n\nMatt has indeed worked in the healthcare industry.'
+[QUERY_REJECTED] reason=low_pinecone, router_family=background, router_score=0.387, pinecone_score=0.248, query=What did he actually do there?...
+[armA 6. Healthcare ex r1 t2] reason=low_confidence ''
+[old  6. Healthcare ex r2 t1] reason=None '🐾 This is a strong one.\n\nMatt has indeed worked in the healt'
+[QUERY_REJECTED] reason=low_pinecone, router_family=background, router_score=0.387, pinecone_score=0.248, query=What did he actually do there?...
+[old  6. Healthcare ex r2 t2] reason=low_confidence ''
+[armA 6. Healthcare ex r2 t1] reason=None '🐾 I know just the story.\n\nMatt worked with a **Major U.S. He'
+[QUERY_REJECTED] reason=low_pinecone, router_family=background, router_score=0.387, pinecone_score=0.248, query=What did he actually do there?...
+[armA 6. Healthcare ex r2 t2] reason=low_confidence ''
+[old  6. Healthcare ex r3 t1] reason=None "🐾 Perfect, here's what I found.\n\nMatt has worked in the heal"
+[QUERY_REJECTED] reason=low_pinecone, router_family=background, router_score=0.387, pinecone_score=0.248, query=What did he actually do there?...
+[old  6. Healthcare ex r3 t2] reason=low_confidence ''
+[armA 6. Healthcare ex r3 t1] reason=None '🐾 I know just the story.\n\nMatt worked with a **Major U.S. He'
+[QUERY_REJECTED] reason=low_pinecone, router_family=background, router_score=0.387, pinecone_score=0.248, query=What did he actually do there?...
+[armA 6. Healthcare ex r3 t2] reason=low_confidence ''
+[old  7. Location      r1 t1] reason=None 'Got it! 🐾\n\nMatt is based in **Atlanta, GA**. He is open to r'
+[old  7. Location      r1 t2] reason=None 'Got it! 🐾\n\nMatt is open to relocation and travel. He is base'
+[armA 7. Location      r1 t1] reason=None '🐾 Tracking this down...\n\nMatt is based in Atlanta, GA. He is'
+[armA 7. Location      r1 t2] reason=None "🐾 Here's a great example.\n\nMatt is open to relocation and tr"
+[old  7. Location      r2 t1] reason=None '🐾 Found it!\n\nMatt is based in Atlanta, GA. He is open to rel'
+[old  7. Location      r2 t2] reason=None '🐾 I know just the story.\n\nMatt is open to relocation and tra'
+[armA 7. Location      r2 t1] reason=None '🐾 Found it!\n\nMatt is based in Atlanta, GA. He is open to rel'
+[armA 7. Location      r2 t2] reason=None '🐾 On it!\n\nMatt is indeed open to relocation. He is based in '
+[old  7. Location      r3 t1] reason=None '🐾 Found it!\n\nMatt is based in Atlanta, GA. He is open to rel'
+[old  7. Location      r3 t2] reason=None '🐾 Tracking this down...\n\nMatt is open to relocation and trav'
+[armA 7. Location      r3 t1] reason=None '🐾 This is a strong one.\n\nMatt is based in Atlanta, GA. He is'
+[armA 7. Location      r3 t2] reason=None '🐾 On it!\n\nMatt is open to relocation and travel. He is curre'
+[old  8. Failure and g r1 t1] reason=None '🐾 Tracking this down...\n\nDuring a global platform modernizat'
+[old  8. Failure and g r1 t2] reason=None '🐾 I know just the story.\n\nAfter the incident with the Fortun'
+[armA 8. Failure and g r1 t1] reason=None '🐾 Tracking this down...\n\nDuring a platform delivery for a **'
+[armA 8. Failure and g r1 t2] reason=None '🐾 Tracking this down...\n\nAfter the incident with the **Fortu'
+[old  8. Failure and g r2 t1] reason=None 'Got it! 🐾\n\nDuring a global platform modernization delivery f'
+[old  8. Failure and g r2 t2] reason=None '🦴 On it!\n\nAfter the incident involving the accidental releas'
+[armA 8. Failure and g r2 t1] reason=None '🐾 I know just the story.\n\nMatt encountered a significant fai'
+[armA 8. Failure and g r2 t2] reason=None '🐾 I know just the story.\n\nAfter the incident with the unmask'
+[old  8. Failure and g r3 t1] reason=None "🐾 Here's a great example.\n\nWhile working as a Senior Technol"
+[old  8. Failure and g r3 t2] reason=None 'Got it! 🐾\n\nAfter the failure with the **Fortune 500** financ'
+[armA 8. Failure and g r3 t1] reason=None '🐾 Found it!\n\nMatt faced a significant failure during a globa'
+[armA 8. Failure and g r3 t2] reason=None '🐾 This is a strong one.\n\nAfter the failure with the **Fortun'
+[old  9. Topic switch  r1 t1] reason=None 'Got it! 🐾\n\nAt **JP Morgan Chase**, Matt served as the Senior'
+[old  9. Topic switch  r1 t2] reason=None "🐾 On it!\n\nMatt's leadership style is centered around creatin"
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.606, pinecone_score=0.247, query=Give me an example....
+[old  9. Topic switch  r1 t3] reason=low_confidence ''
+[old  9. Topic switch  r1 t4] reason=None '🐾 On it!\n\nDuring the **AT&T** Southeast CRM replacement proj'
+[armA 9. Topic switch  r1 t1] reason=None "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt play"
+[armA 9. Topic switch  r1 t2] reason=None "🐾 Perfect, here's what I found.\n\nMatt's leadership style is "
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.606, pinecone_score=0.247, query=Give me an example....
+[armA 9. Topic switch  r1 t3] reason=low_confidence ''
+[armA 9. Topic switch  r1 t4] reason=None '🐾 On it!\n\nDuring the **AT&T Southeast CRM Replacement** proj'
+[old  9. Topic switch  r2 t1] reason=None '🐾 I know just the story.\n\nAt **JP Morgan Chase**, Matt playe'
+[old  9. Topic switch  r2 t2] reason=None "🐾 Here's a great example.\n\nMatt's leadership style is center"
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.606, pinecone_score=0.247, query=Give me an example....
+[old  9. Topic switch  r2 t3] reason=low_confidence ''
+[old  9. Topic switch  r2 t4] reason=None '🐾 I know just the story.\n\nIn the project with **AT&T** for t'
+[armA 9. Topic switch  r2 t1] reason=None '🐾 On it!\n\nAt **JP Morgan Chase**, Matt played a pivotal role'
+[armA 9. Topic switch  r2 t2] reason=None "🐾 Perfect, here's what I found.\n\nMatt's leadership style is "
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.606, pinecone_score=0.247, query=Give me an example....
+[armA 9. Topic switch  r2 t3] reason=low_confidence ''
+[armA 9. Topic switch  r2 t4] reason=None '🐾 I know just the story.\n\nIn the **AT&T** Southeast CRM Repl'
+[old  9. Topic switch  r3 t1] reason=None "🐾 Perfect, here's what I found.\n\nAt **JP Morgan Chase**, Mat"
+[old  9. Topic switch  r3 t2] reason=None "🐾 Tracking this down...\n\nMatt's leadership style is rooted i"
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.606, pinecone_score=0.247, query=Give me an example....
+[old  9. Topic switch  r3 t3] reason=low_confidence ''
+[old  9. Topic switch  r3 t4] reason=None '🐾 Found it!\n\nOn the **AT&T** Southeast CRM Replacement proje'
+[armA 9. Topic switch  r3 t1] reason=None '🐾 On it!\n\nAt **JP Morgan Chase**, Matt played a pivotal role'
+[armA 9. Topic switch  r3 t2] reason=None "🐾 Here's a great example.\n\nMatt's leadership style is center"
+[QUERY_REJECTED] reason=low_pinecone, router_family=behavioral, router_score=0.606, pinecone_score=0.247, query=Give me an example....
+[armA 9. Topic switch  r3 t3] reason=low_confidence ''
+[armA 9. Topic switch  r3 t4] reason=None '🐾 This is a strong one.\n\nDuring the **AT&T** Southeast CRM r'
+[old  10. Accepting an r1 t1] reason=None "🐾 Perfect, here's what I found.\n\nAt **Norfolk Southern**, Ma"
+[old  10. Accepting an r1 t2] reason=None "🐾 Tracking this down...\n\nDuring Matt's engagement with **Nor"
+[old  10. Accepting an r1 t3] reason=None '🐾 Tracking this down...\n\nThe modernization effort at **Norfo'
+[armA 10. Accepting an r1 t1] reason=None 'Got it! 🐾\n\nAt **Norfolk Southern**, Matt led a significant m'
+[armA 10. Accepting an r1 t2] reason=None '🐾 Found it!\n\nAt **Norfolk Southern**, Matt led a comprehensi'
+[armA 10. Accepting an r1 t3] reason=None "🐾 Perfect, here's what I found.\n\nThe modernization effort at"
+[old  10. Accepting an r2 t1] reason=None '🐾 On it!\n\nAt **Norfolk Southern**, Matt led a comprehensive '
+[old  10. Accepting an r2 t2] reason=None '🐾 This is a strong one.\n\nAt **Norfolk Southern**, Matt faced'
+[old  10. Accepting an r2 t3] reason=None '🐾 I know just the story.\n\nThe modernization project at **Nor'
+[armA 10. Accepting an r2 t1] reason=None '🐾 On it!\n\nAt **Norfolk Southern**, Matt faced the challenge '
+[armA 10. Accepting an r2 t2] reason=None '🐾 Found it!\n\nAt **Norfolk Southern**, Matt tackled the moder'
+[armA 10. Accepting an r2 t3] reason=None "🐾 Perfect, here's what I found.\n\nThe modernization project f"
+[old  10. Accepting an r3 t1] reason=None '🐾 I know just the story.\n\nAt **Norfolk Southern**, Matt face'
+[old  10. Accepting an r3 t2] reason=None '🐾 On it!\n\nAt **Norfolk Southern**, Matt was tasked with mode'
+[old  10. Accepting an r3 t3] reason=None '🐾 I know just the story.\n\nAt **Norfolk Southern**, the moder'
+[armA 10. Accepting an r3 t1] reason=None '🐾 Found it!\n\nAt **Norfolk Southern**, Matt led a significant'
+[armA 10. Accepting an r3 t2] reason=None '🐾 This is a strong one.\n\nAt **Norfolk Southern**, Matt led a'
+[armA 10. Accepting an r3 t3] reason=None '🐾 Tracking this down...\n\nThe modernization initiative at **N'
+done 150

@@ -1,0 +1,37 @@
+{
+  "Tell me about Matt's legacy-to-cloud work": [
+    "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+    "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+    "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+    "Transforming Legacy Systems through Incremental App Modernization"
+  ],
+  "What has Matt done with mainframe modernization?": [
+    "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+    "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+    "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine"
+  ],
+  "How has Matt handled a quality crisis?": [
+    "Confronting a Quality Crisis Through Coaching and Culture Change",
+    "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+  ],
+  "Tell me about Matt's work building engineering academies or training programs": [
+    "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+    "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+    "Launching a Self-Paced Learning Program for Emerging Technologies",
+    "Building Tangible Cloud Tech Skills for HBCU Students"
+  ],
+  "What payments platforms has Matt built?": [
+    "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+    "Building the Payment Engine Behind JP Morgan ACCESS",
+    "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+    "Designing Cross-Border Payment Workflows for RBC Express",
+    "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform",
+    "Transforming Developer Experience for the American Express Virtual Payments Platform"
+  ],
+  "Has Matt worked on identity and access management?": [
+    "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+    "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift",
+    "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation",
+    "Overhauling Entitlement Management for JP Morgan ACCESS"
+  ]
+}

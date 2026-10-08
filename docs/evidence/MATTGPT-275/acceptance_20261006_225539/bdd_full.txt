@@ -1,0 +1,611 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.3, pytest-9.0.1, pluggy-1.6.0 -- /Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/venv/bin/python
+rootdir: /Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant
+configfile: pytest.ini
+plugins: anyio-4.11.0, langsmith-0.4.37, bdd-8.1.0, cov-7.0.0
+collecting ... collected 306 items
+
+tests/bdd/steps/test_about_matt.py::test_redundant_cta_footer_copy_is_absent_from_the_see_it_in_action_card <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  0%]
+tests/bdd/steps/test_about_matt.py::test_see_it_in_action_heading_is_not_present_on_the_page <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  0%]
+tests/bdd/steps/test_about_matt.py::test_career_evolution_timeline_has_exactly_seven_entries <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  0%]
+tests/bdd/steps/test_about_matt.py::test_concurrent_accenture_roles_20192023_and_20162023_are_both_present <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  1%]
+tests/bdd/steps/test_about_matt.py::test_liquid_studio_row_is_present_in_the_timeline <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  1%]
+tests/bdd/steps/test_about_matt.py::test_preaccenture_row_names_both_cendian_corporation_and_wellfound_technology <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  1%]
+tests/bdd/steps/test_about_matt.py::test_sabbatical_row_shows_20232026_not_2023present <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  2%]
+tests/bdd/steps/test_about_matt.py::test_core_competencies_show_the_six_current_headings <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  2%]
+tests/bdd/steps/test_about_matt.py::test_leadership_section_is_titled_how_i_lead <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  2%]
+tests/bdd/steps/test_about_matt.py::test_how_i_lead_section_contains_the_four_locked_values <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  3%]
+tests/bdd/steps/test_about_matt.py::test_replaced_leadership_values_are_absent_from_how_i_lead <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  3%]
+tests/bdd/steps/test_about_matt.py::test_stats_bar_is_not_present_in_the_dom_on_my_profile <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  3%]
+tests/bdd/steps/test_about_matt.py::test_signals_panel_is_present_with_six_tiles <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  4%]
+tests/bdd/steps/test_about_matt.py::test_signals_panel_tile_values_match_the_wireframe_spec <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  4%]
+tests/bdd/steps/test_about_matt.py::test_in_my_own_words_section_is_present_with_correct_heading <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  4%]
+tests/bdd/steps/test_about_matt.py::test_in_my_own_words_voice_block_contains_the_brand_line_and_referral_close <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  5%]
+tests/bdd/steps/test_about_matt.py::test_for_a_referrer_section_is_present_with_correct_heading <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  5%]
+tests/bdd/steps/test_about_matt.py::test_for_a_referrer_section_contains_snippet_text_and_action_buttons <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  5%]
+tests/bdd/steps/test_about_matt.py::test_clicking_copy_snippet_shows_a_copied_confirmation_then_reverts <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  6%]
+tests/bdd/steps/test_about_matt.py::test_profile_header_subtitle_matches_the_locked_production_text <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  6%]
+tests/bdd/steps/test_ask_agy_button_alignment.py::test_landing_ask_button_has_zero_top_margin_on_desktop <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  6%]
+tests/bdd/steps/test_ask_agy_button_alignment.py::test_landing_ask_button_minheight_matches_the_input_height <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  7%]
+tests/bdd/steps/test_ask_agy_button_alignment.py::test_conversation_submit_button_minheight_does_not_override_the_container <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  7%]
+tests/bdd/steps/test_ask_agy_button_alignment.py::test_conversation_submit_button_has_no_vertical_translation <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  7%]
+tests/bdd/steps/test_ask_mattgpt.py::test_rule_rejection_shows_banner_and_the_capability_chip_set <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  8%]
+tests/bdd/steps/test_ask_mattgpt.py::test_clicking_a_rule_chip_injects_its_prompt <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  8%]
+tests/bdd/steps/test_ask_mattgpt.py::test_personal_rejection_shows_banner_and_the_character_chip_set <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  8%]
+tests/bdd/steps/test_ask_mattgpt.py::test_clicking_a_personal_chip_injects_its_prompt <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  9%]
+tests/bdd/steps/test_ask_mattgpt.py::test_out_of_scope_rejection_shows_banner_and_the_namedanchor_chip_set <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  9%]
+tests/bdd/steps/test_ask_mattgpt.py::test_clicking_an_out_of_scope_chip_injects_its_prompt <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [  9%]
+tests/bdd/steps/test_ask_mattgpt.py::test_low_confidence_rejection_shows_rephrase_prompt_and_out_of_scope_chips <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py FAILED [ 10%]
+tests/bdd/steps/test_ask_mattgpt.py::test_sequential_rejections_swap_chip_sets_per_branch <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 10%]
+tests/bdd/steps/test_ask_mattgpt.py::test_my_work_suppresses_rejection_chips_entirely <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 10%]
+tests/bdd/steps/test_banking_landing.py::test_banking_capability_click_resets_scroll <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 11%]
+tests/bdd/steps/test_banking_landing.py::test_top_banking_capability_lands_with_results <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 11%]
+tests/bdd/steps/test_cluster_promotion_kw.py::test_entity_name_in_one_story_title_no_longer_disperses_kw <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 11%]
+tests/bdd/steps/test_cluster_promotion_kw.py::test_content_tokens_beyond_the_entity_name_still_disperse_kw <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 12%]
+tests/bdd/steps/test_cluster_promotion_kw.py::test_query_that_resolves_via_alias_strips_the_alias_key_as_well_as_the_canonical_tokens <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 12%]
+tests/bdd/steps/test_cluster_promotion_kw.py::test_aliasmatched_query_with_specific_content_tokens_still_disperses_kw <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 12%]
+tests/bdd/steps/test_cluster_promotion_kw.py::test_stripped_query_with_no_content_tokens_left_promotes_to_synthesis <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 13%]
+tests/bdd/steps/test_cluster_promotion_kw.py::test_possessive_entity_query_promotes_when_ambient_words_do_not_appear_in_story_fields <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 13%]
+tests/bdd/steps/test_cluster_promotion_kw.py::test_gate_strips_entity_tokens_from_the_retrieval_query_not_the_original_question <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 13%]
+tests/bdd/steps/test_cluster_promotion_kw.py::test_fewer_than_3_entity_stories_does_not_promote_even_with_uniform_kw <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 14%]
+tests/bdd/steps/test_corpus_loader.py::test_normalize_story_coerces_commaseparated_public_tags_string_to_a_list <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 14%]
+tests/bdd/steps/test_corpus_loader.py::test_normalize_story_leaves_public_tags_list_unchanged <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 14%]
+tests/bdd/steps/test_corpus_loader.py::test_normalize_story_coerces_a_present_pascalcase_list_field_from_string_to_list <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 15%]
+tests/bdd/steps/test_corpus_loader.py::test_normalize_story_does_not_add_absent_list_fields <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 15%]
+tests/bdd/steps/test_corpus_loader.py::test_load_stories_skips_a_story_with_no_id_field <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 15%]
+tests/bdd/steps/test_corpus_loader.py::test_load_stories_skips_a_story_with_an_emptystring_id <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 16%]
+tests/bdd/steps/test_corpus_loader.py::test_load_stories_skips_a_story_with_id_set_to_0 <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 16%]
+tests/bdd/steps/test_corpus_loader.py::test_load_stories_returns_a_story_with_id_stripped_of_surrounding_whitespace <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 16%]
+tests/bdd/steps/test_corpus_loader.py::test_load_stories_includes_a_story_with_a_valid_id <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 16%]
+tests/bdd/steps/test_corpus_loader.py::test_load_stories_raises_on_malformed_json <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 17%]
+tests/bdd/steps/test_corpus_loader.py::test_load_stories_skips_empty_lines_silently <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 17%]
+tests/bdd/steps/test_corpus_loader.py::test_normalization_enables_public_tags_tokens_to_reach_the_keyword_scorer <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 17%]
+tests/bdd/steps/test_cross_industry_landing.py::test_cross_industry_landing_has_core_capabilities_header <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 18%]
+tests/bdd/steps/test_cross_industry_landing.py::test_top_cross_industry_capability_lands_with_results <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 18%]
+tests/bdd/steps/test_cross_industry_landing.py::test_cross_industry_capability_click_resets_scroll <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 18%]
+tests/bdd/steps/test_explore_stories.py::test_search_returns_relevant_results <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 19%]
+tests/bdd/steps/test_explore_stories.py::test_search_clears_stale_state <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 19%]
+tests/bdd/steps/test_explore_stories.py::test_clearing_search_restores_full_list <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 19%]
+tests/bdd/steps/test_explore_stories.py::test_industry_filter_narrows_results <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 20%]
+tests/bdd/steps/test_explore_stories.py::test_capability_filter_narrows_results <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 20%]
+tests/bdd/steps/test_explore_stories.py::test_combined_industry_and_capability_filters <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 20%]
+tests/bdd/steps/test_explore_stories.py::test_filter_chip_removal_restores_results <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 21%]
+tests/bdd/steps/test_explore_stories.py::test_client_filter_narrows_results <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 21%]
+tests/bdd/steps/test_explore_stories.py::test_multiple_filters_combine <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 21%]
+tests/bdd/steps/test_explore_stories.py::test_era_filter_from_timeline_view <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 22%]
+tests/bdd/steps/test_explore_stories.py::test_reset_clears_all_filters <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 22%]
+tests/bdd/steps/test_explore_stories.py::test_table_view_displays_stories_in_rows <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 22%]
+tests/bdd/steps/test_explore_stories.py::test_cards_view_displays_stories_in_cards <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 23%]
+tests/bdd/steps/test_explore_stories.py::test_timeline_view_groups_stories_by_era <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 23%]
+tests/bdd/steps/test_explore_stories.py::test_view_switching_preserves_search_query <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 23%]
+tests/bdd/steps/test_explore_stories.py::test_view_switching_preserves_filters <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 24%]
+tests/bdd/steps/test_explore_stories.py::test_view_switching_preserves_open_story_detail <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 24%]
+tests/bdd/steps/test_explore_stories.py::test_clicking_story_opens_detail_panel <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 24%]
+tests/bdd/steps/test_explore_stories.py::test_story_detail_shows_star_format <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 25%]
+tests/bdd/steps/test_explore_stories.py::test_closing_detail_returns_to_list <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 25%]
+tests/bdd/steps/test_explore_stories.py::test_helpful_button_enters_confirmed_state <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 25%]
+tests/bdd/steps/test_explore_stories.py::test_export_opens_a_printable_story_view <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 26%]
+tests/bdd/steps/test_explore_stories.py::test_ask_agy_button_appears_in_story_detail <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 26%]
+tests/bdd/steps/test_explore_stories.py::test_ask_agy_navigates_to_ask_agy_with_context <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 26%]
+tests/bdd/steps/test_explore_stories.py::test_ask_agy_works_from_cards_view <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 27%]
+tests/bdd/steps/test_explore_stories.py::test_valid_deeplink_opens_story_detail <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 27%]
+tests/bdd/steps/test_explore_stories.py::test_deeplink_opens_story_detail_from_nondefault_view <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 27%]
+tests/bdd/steps/test_explore_stories.py::test_share_link_generates_correct_url <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 28%]
+tests/bdd/steps/test_explore_stories.py::test_share_button_shows_copied_confirmation_then_reverts <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 28%]
+tests/bdd/steps/test_explore_stories.py::test_pagination_shows_correct_page_count <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 28%]
+tests/bdd/steps/test_explore_stories.py::test_next_page_loads_more_stories <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 29%]
+tests/bdd/steps/test_explore_stories.py::test_page_size_selector_works <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 29%]
+tests/bdd/steps/test_explore_stories.py::test_pagination_resets_on_new_search <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 29%]
+tests/bdd/steps/test_explore_stories.py::test_navigation_to_my_work_always_starts_fresh <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 30%]
+tests/bdd/steps/test_explore_stories.py::test_return_from_ask_agy_starts_fresh <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 30%]
+tests/bdd/steps/test_explore_stories.py::test_return_from_my_profile_page_starts_fresh <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 30%]
+tests/bdd/steps/test_explore_stories.py::test_deeplinks_still_work_exception_to_fresh_start <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 31%]
+tests/bdd/steps/test_explore_stories.py::test_mobile_layout_stacks_filters <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 31%]
+tests/bdd/steps/test_explore_stories.py::test_desktop_layout_shows_full_filters <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 31%]
+tests/bdd/steps/test_explore_stories.py::test_rapid_filter_changes_dont_cause_errors <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 32%]
+tests/bdd/steps/test_explore_stories.py::test_search_with_special_characters <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 32%]
+tests/bdd/steps/test_explore_stories.py::test_very_long_search_query <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 32%]
+tests/bdd/steps/test_explore_stories.py::test_personal_question_is_rejected_before_pinecone <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 33%]
+tests/bdd/steps/test_explore_stories.py::test_out_of_scope_industry_is_rejected_before_pinecone <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 33%]
+tests/bdd/steps/test_explore_stories.py::test_filter_change_after_rejection_preserves_banner_and_shows_filtered_corpus <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 33%]
+tests/bdd/steps/test_explore_stories.py::test_filter_first_then_rejected_query_preserves_banner_and_filtered_corpus <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 33%]
+tests/bdd/steps/test_explore_stories.py::test_valid_query_after_rejection_returns_clean_results <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 34%]
+tests/bdd/steps/test_explore_stories.py::test_reset_after_rejection_restores_full_corpus <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 34%]
+tests/bdd/steps/test_explore_stories.py::test_row_2_filters_always_visible_on_desktop_without_toggle <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 34%]
+tests/bdd/steps/test_explore_stories.py::test_row_2_filters_hidden_on_mobile_viewport <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 35%]
+tests/bdd/steps/test_explore_stories.py::test_filters_toggle_button_is_visible_on_mobile <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 35%]
+tests/bdd/steps/test_explore_stories.py::test_filters_toggle_button_is_hidden_on_desktop <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 35%]
+tests/bdd/steps/test_explore_stories.py::test_tapping_filters_toggle_shows_row_2_on_mobile <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 36%]
+tests/bdd/steps/test_explore_stories.py::test_tapping_filters_toggle_again_hides_row_2_on_mobile <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 36%]
+tests/bdd/steps/test_explore_stories.py::test_industry_and_capability_labels_visible_inline_on_mobile <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 36%]
+tests/bdd/steps/test_explore_stories.py::test_advanced_filter_dropdowns_all_accessible_in_row_2_on_mobile <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 37%]
+tests/bdd/steps/test_explore_stories.py::test_reset_filters_visible_when_row_2_is_open_on_mobile <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 37%]
+tests/bdd/steps/test_explore_stories.py::test_desktop_regression__row_2_layout_unaffected_at_1280px <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 37%]
+tests/bdd/steps/test_explore_stories.py::test_nonsensefilter_query_gets_the_rule_banner_copy_on_my_work <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 38%]
+tests/bdd/steps/test_explore_stories_default_state.py::test_default_view_excludes_professional_narrative_stories <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 38%]
+tests/bdd/steps/test_explore_stories_default_state.py::test_default_view_sorts_stories_by_start_date_descending <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 38%]
+tests/bdd/steps/test_fatal_fallback_handler.py::test_pipeline_crash_inside_the_outer_try_produces_a_marked_logged_degraded_response <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 39%]
+tests/bdd/steps/test_fatal_fallback_handler.py::test_successful_responses_are_not_marked_degraded <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 39%]
+tests/bdd/steps/test_home.py::test_card3_product_innovation_prefilter <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 39%]
+tests/bdd/steps/test_home.py::test_ask_agy_button_no_prefill <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 40%]
+tests/bdd/steps/test_home.py::test_chip_click_sets_seed_prompt <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 40%]
+tests/bdd/steps/test_home.py::test_chips_render_with_arrow <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 40%]
+tests/bdd/steps/test_home_category_cards.py::test_all_six_category_cards_render_in_a_3column_grid_on_desktop <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 41%]
+tests/bdd/steps/test_home_category_cards.py::test_all_six_category_cards_share_the_unified_lightbackground_treatment <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 41%]
+tests/bdd/steps/test_home_category_cards.py::test_each_category_card_uses_compact_content_icon__title__meta_only <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 41%]
+tests/bdd/steps/test_home_category_cards.py::test_clicking_anywhere_on_the_banking_card_routes_to_the_banking_landing_surface <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 42%]
+tests/bdd/steps/test_home_hero.py::test_hero_surfaces_a_recruiterrouting_cta_and_an_ask_agy_cta <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 42%]
+tests/bdd/steps/test_home_hero.py::test_recruiter_cta_navigates_to_role_match <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 42%]
+tests/bdd/steps/test_home_seniority.py::test_home_page_carries_the_locked_positioning_clause <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 43%]
+tests/bdd/steps/test_home_seniority.py::test_home_page_does_not_declare_a_level_title_in_the_positioning_region <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 43%]
+tests/bdd/steps/test_how_agy_dialog_css.py::test_footer_button_renders_as_a_styled_button_not_a_bare_text_link <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 43%]
+tests/bdd/steps/test_how_agy_dialog_css.py::test_dialog_elements_use_app_design_system_css_variables <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 44%]
+tests/bdd/steps/test_how_agy_dialog_css.py::test_modal_renders_singlecolumn_cards_on_mobile[375] <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 44%]
+tests/bdd/steps/test_how_agy_dialog_css.py::test_modal_renders_singlecolumn_cards_on_mobile[430] <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 44%]
+tests/bdd/steps/test_how_agy_searches_dialog.py::test_how_agy_searches_button_opens_a_dialog_overlay <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 45%]
+tests/bdd/steps/test_how_agy_searches_dialog.py::test_dialog_closes_when_dismissed <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 45%]
+tests/bdd/steps/test_how_agy_searches_dialog.py::test_inline_modal_wrapper_is_no_longer_present_in_the_page_body <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 45%]
+tests/bdd/steps/test_how_agy_searches_dialog.py::test_dialog_contains_a_footer_button_linking_to_how_i_built <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 46%]
+tests/bdd/steps/test_how_agy_searches_dialog.py::test_how_agy_searches_dialog_works_on_the_conversation_view <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 46%]
+tests/bdd/steps/test_how_agy_searches_dialog.py::test_dialog_opens_scrolled_to_top_when_page_has_been_scrolled_down <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 46%]
+tests/bdd/steps/test_how_i_built.py::test_my_profile_page_no_longer_contains_the_how_i_built_section <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 47%]
+tests/bdd/steps/test_how_i_built.py::test_why_agy_footer_button_opens_how_i_built_dialog <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 47%]
+tests/bdd/steps/test_how_i_built.py::test_how_agy_searches_footer_button_opens_how_i_built_dialog <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 47%]
+tests/bdd/steps/test_how_i_built.py::test_how_i_built_dialog_contains_a_see_it_in_action_section_with_4_prompt_chips <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 48%]
+tests/bdd/steps/test_how_i_built.py::test_clicking_a_prompt_chip_in_the_how_i_built_dialog_routes_to_ask_agy <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 48%]
+tests/bdd/steps/test_landing_page.py::test_landing_page_displays_agy_introduction <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 48%]
+tests/bdd/steps/test_landing_page.py::test_status_bar_shows_system_readiness <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 49%]
+tests/bdd/steps/test_landing_page.py::test_six_suggestion_chips_are_displayed_on_desktop <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 49%]
+tests/bdd/steps/test_landing_page.py::test_suggestion_chips_are_static_html_on_desktop <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 49%]
+tests/bdd/steps/test_landing_page.py::test_clicking_a_suggestion_chip_routes_to_conversation <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 50%]
+tests/bdd/steps/test_landing_page.py::test_chip_grid_is_not_interactive_during_processing <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 50%]
+tests/bdd/steps/test_landing_page.py::test_mobile_path_uses_html_chips_with_short_labels <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 50%]
+tests/bdd/steps/test_landing_page.py::test_input_field_is_ready_for_questions <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 50%]
+tests/bdd/steps/test_landing_page.py::test_input_and_button_stay_on_same_line <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 51%]
+tests/bdd/steps/test_landing_page.py::test_submit_question_via_enter_key <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 51%]
+tests/bdd/steps/test_landing_page.py::test_submit_button_is_disabled_on_fresh_load <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 51%]
+tests/bdd/steps/test_landing_page.py::test_submit_button_has_correct_label_and_is_a_primary_button <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 52%]
+tests/bdd/steps/test_landing_page.py::test_layout_adapts_to_narrow_screens <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 52%]
+tests/bdd/steps/test_landing_page.py::test_layout_adapts_to_wide_screens <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 52%]
+tests/bdd/steps/test_matt_dna_career_span.py::test_derivation_returns_2000_when_the_story_list_contains_a_pre2005_record <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 53%]
+tests/bdd/steps/test_matt_dna_career_span.py::test_derivation_returns_2000_the_current_corpus_earliest_start_year <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 53%]
+tests/bdd/steps/test_matt_dna_career_span.py::test_matt_dna_output_contains_no__years_assertion <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 53%]
+tests/bdd/steps/test_matt_dna_career_span.py::test_accenture_date_range_survives_in_matt_dna <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 54%]
+tests/bdd/steps/test_matt_dna_grounding_drift.py::test_every_employer_in_the_corpus_appears_as_a_literal_string_in_matt_dna <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 54%]
+tests/bdd/steps/test_matt_dna_grounding_drift.py::test_every_nongeneric_client_in_the_corpus_appears_in__known_clients <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 54%]
+tests/bdd/steps/test_matt_dna_grounding_drift.py::test_matt_dna_contains_no_what_matt_is_not_heading <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 55%]
+tests/bdd/steps/test_matt_dna_grounding_drift.py::test_matt_dna_contains_no_notclients_list <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 55%]
+tests/bdd/steps/test_nav_labels.py::test_navigation_renders_the_wireframelocked_labels <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 55%]
+tests/bdd/steps/test_nav_labels.py::test_navigation_does_not_display_any_prerename_labels <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 56%]
+tests/bdd/steps/test_nav_labels.py::test_clicking_a_renamed_label_routes_to_the_same_underlying_surface <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 56%]
+tests/bdd/steps/test_navbar_brand_layout.py::test_desktop_navbar_anchors_the_mattgpt_brand_to_the_left_of_the_nav_buttons <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 56%]
+tests/bdd/steps/test_navbar_brand_layout.py::test_all_five_wireframelocked_nav_labels_still_render_after_the_layout_change <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 57%]
+tests/bdd/steps/test_navbar_brand_layout.py::test_clicking_a_nav_label_still_routes_to_its_surface_no_regression <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 57%]
+tests/bdd/steps/test_navbar_css_scope.py::test_navbar_css_does_not_collapse_ask_agy_chip_grid_spacing <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 57%]
+tests/bdd/steps/test_navbar_mobile_viewport_gate.py::test_on_desktop_viewport_no_mobile_elements_injected_into_parent_document <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 58%]
+tests/bdd/steps/test_navbar_mobile_viewport_gate.py::test_on_mobile_viewport_mobile_header_renders_correctly <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 58%]
+tests/bdd/steps/test_navigation_stale_hero.py::test_navigating_away_from_ask_agy_hides_the_stale_landing_hero <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 58%]
+tests/bdd/steps/test_navigation_stale_hero.py::test_streamlit_still_marks_priorpage_elements_stale_during_navigation <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 59%]
+tests/bdd/steps/test_navigation_stale_hero.py::test_the_ask_agy_landing_exposes_the_staleguard_hooks <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 59%]
+tests/bdd/steps/test_nonsense_filter_behavior.py::test_credit_card_portal_query_reaches_retrieval_after_line_1_deletion <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 59%]
+tests/bdd/steps/test_nonsense_filter_behavior.py::test_swift_payment_rails_query_reaches_retrieval_after_line_2_edit <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 60%]
+tests/bdd/steps/test_nonsense_filter_behavior.py::test_taylor_swift_celebrity_query_is_still_blocked_by_the_fullnames_celebrity_pattern <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 60%]
+tests/bdd/steps/test_nonsense_filter_behavior.py::test_credit_card_number_query_is_still_blocked_by_the_personal_sensitive_pattern <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 60%]
+tests/bdd/steps/test_nonsense_loader_guard.py::test_loader_raises_on_duplicate_category_pattern_pair <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 61%]
+tests/bdd/steps/test_nonsense_loader_guard.py::test_loader_raises_on_a_nondict_rule <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 61%]
+tests/bdd/steps/test_nonsense_loader_guard.py::test_loader_raises_on_a_dict_missing_required_fields <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 61%]
+tests/bdd/steps/test_nonsense_loader_guard.py::test_loader_raises_on_a_dict_with_an_uncompilable_regex <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 62%]
+tests/bdd/steps/test_nonsense_loader_guard.py::test_preload_nonsense_rules_is_invoked_at_apppy_module_top_level_inside_usersafe_error_handling <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 62%]
+tests/bdd/steps/test_pn_exclusion.py::test_technical_family_excludes_professional_narrative_stories_from_sources <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 62%]
+tests/bdd/steps/test_pn_exclusion.py::test_nontechnical_family_preserves_professional_narrative_stories_in_sources <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py FAILED [ 63%]
+tests/bdd/steps/test_pn_exclusion.py::test_guard_prevents_empty_pool_when_all_candidates_are_professional_narrative <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 63%]
+tests/bdd/steps/test_post_era_project_counts.py::test_banking_landing_displays_postera_project_count_in_hero_and_stats_bar <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py FAILED [ 63%]
+tests/bdd/steps/test_post_era_project_counts.py::test_crossindustry_landing_displays_postera_project_count_in_hero_and_stats_bar <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py FAILED [ 64%]
+tests/bdd/steps/test_post_era_project_counts.py::test_home_category_cards_display_descriptive_copy <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 64%]
+tests/bdd/steps/test_profile_grounding.py::test_load_matt_profile_omits_skills_array_content_from_grounding_string <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 64%]
+tests/bdd/steps/test_profile_grounding.py::test_load_matt_profile_excludes_career_summary_from_grounding_string <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 65%]
+tests/bdd/steps/test_profile_grounding.py::test_load_matt_profile_retains_both_degree_and_institution_in_grounding_string <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 65%]
+tests/bdd/steps/test_profile_grounding.py::test_load_matt_profile_retains_certifications_in_grounding_string <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 65%]
+tests/bdd/steps/test_profile_grounding.py::test_build_assessment_prompt_contains_template_keys_and_omits_skills_array_content <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 66%]
+tests/bdd/steps/test_profile_grounding.py::test_build_assessment_prompt_contains_the_discretefactsonly_profile_evidence_rule <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 66%]
+tests/bdd/steps/test_profile_grounding.py::test_build_assessment_prompt_does_not_contain_the_counterfactual_verdict_clause <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 66%]
+tests/bdd/steps/test_query_logger_top_score.py::test_top_score_is_the_last_column_in_headers <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py FAILED [ 66%]
+tests/bdd/steps/test_query_logger_top_score.py::test_top_score_is_written_to_the_row_when_supplied <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 67%]
+tests/bdd/steps/test_query_logger_top_score.py::test_top_score_defaults_to_empty_string_when_not_supplied <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 67%]
+tests/bdd/steps/test_query_substitution_077.py::test_substitution_replaces_possessive_matts_with_his <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 67%]
+tests/bdd/steps/test_query_substitution_077.py::test_substitution_replaces_subject_matt_with_he <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 68%]
+tests/bdd/steps/test_query_substitution_077.py::test_substitution_is_a_noop_when_query_contains_no_matt_token <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 68%]
+tests/bdd/steps/test_query_substitution_077.py::test_query_starting_with_matt_capitalizes_the_substitution <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 68%]
+tests/bdd/steps/test_query_substitution_077.py::test_midsentence_substitution_does_not_capitalize <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 69%]
+tests/bdd/steps/test_query_substitution_077.py::test_query_consisting_only_of_matt_substitutes_without_error <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 69%]
+tests/bdd/steps/test_query_substitution_077.py::test_gate_fires_for_technical_intent_family <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 69%]
+tests/bdd/steps/test_query_substitution_077.py::test_gate_fires_for_team_scaling_intent_family <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 70%]
+tests/bdd/steps/test_query_substitution_077.py::test_gate_fires_for_agile_transformation_intent_family <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 70%]
+tests/bdd/steps/test_query_substitution_077.py::test_gate_does_not_fire_for_narrative_intent_family_regression_anchor <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 70%]
+tests/bdd/steps/test_query_substitution_077.py::test_gate_does_not_fire_for_background_intent_family <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 71%]
+tests/bdd/steps/test_query_substitution_077.py::test_gate_does_not_fire_for_synthesis_intent_family <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 71%]
+tests/bdd/steps/test_query_substitution_077.py::test_youphrasing_with_no_matt_token_is_unchanged_under_technical_family <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 71%]
+tests/bdd/steps/test_query_substitution_077.py::test_caseinsensitive_match_substitutes_lowercase_matt_without_capitalizing <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 72%]
+tests/bdd/steps/test_role_match.py::test_role_match_tab_in_navigation <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 72%]
+tests/bdd/steps/test_role_match.py::test_clicking_role_match_navigates <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 72%]
+tests/bdd/steps/test_role_match.py::test_textarea_accepts_paste <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 73%]
+tests/bdd/steps/test_role_match.py::test_mobile_desktop_only_message <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPEDpose the
+mobile dropdown <a> link. The desktop nav buttons exist in the DOM at
+mobile viewport but extend past the right edge of the viewport, so
+Playwright's click() can't scroll them into view. Needs hamburger
+interaction.)                                                            [ 73%]
+tests/bdd/steps/test_role_match.py::test_desktop_shows_full_interface <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 73%]
+tests/bdd/steps/test_role_match.py::test_role_match_shows_mobile_gate_at_375px <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 74%]
+tests/bdd/steps/test_role_match.py::test_action_buttons_hidden_without_results <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 74%]
+tests/bdd/steps/test_role_match.py::test_empty_text_area_disables_button <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py FAILED [ 74%]
+tests/bdd/steps/test_role_match.py::test_action_buttons_after_results_render <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPED [ 75%]
+tests/bdd/steps/test_role_match.py::test_share_copies_summary <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPED [ 75%]
+tests/bdd/steps/test_role_match.py::test_export_opens_printable_document <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPED [ 75%]
+tests/bdd/steps/test_role_match.py::test_helpful_logs_feedback <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPED [ 76%]
+tests/bdd/steps/test_role_match.py::test_action_buttons_hidden_on_mobile <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPED [ 76%]
+tests/bdd/steps/test_role_match.py::test_results_come_from_pipeline <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPED [ 76%]
+tests/bdd/steps/test_role_match.py::test_pipeline_no_preferred_qualifications <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPED [ 77%]
+tests/bdd/steps/test_role_match.py::test_pipeline_empty_pinecone_results <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPED [ 77%]
+tests/bdd/steps/test_role_match.py::test_match_results_required_status_badges <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPED [ 77%]
+tests/bdd/steps/test_role_match.py::test_match_results_preferred_separate <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPED [ 78%]
+tests/bdd/steps/test_role_match.py::test_results_no_summary_count <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPED [ 78%]
+tests/bdd/steps/test_role_match.py::test_partial_match_gap_explanation <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPED [ 78%]
+tests/bdd/steps/test_role_match.py::test_gap_no_story_chips <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPED [ 79%]
+tests/bdd/steps/test_role_match.py::test_no_fit_score_recruiter_view <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPED [ 79%]
+tests/bdd/steps/test_role_match.py::test_profile_evidence_block_above_chips <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPED [ 79%]
+tests/bdd/steps/test_role_match.py::test_lock_icon_visible_on_results_panel <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPED) [ 80%]
+tests/bdd/steps/test_role_match.py::test_clicking_lock_opens_popover <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPEDoverlay. Re-enable when lock CSS hide is removed and private view
+ships.)                                                                  [ 80%]
+tests/bdd/steps/test_role_match.py::test_correct_password_unlocks <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPEDoverlay. Re-
+enable when lock CSS hide is removed and private view ships.)            [ 80%]
+tests/bdd/steps/test_role_match.py::test_incorrect_password_keeps_locked <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPEDps.) [ 81%]
+tests/bdd/steps/test_role_match.py::test_private_mode_persists <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPEDoverlay. Re-
+enable when lock CSS hide is removed and private view ships.)            [ 81%]
+tests/bdd/steps/test_role_match.py::test_empty_password_no_op <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPEDoverlay. Re-
+enable when lock CSS hide is removed and private view ships.)            [ 81%]
+tests/bdd/steps/test_role_match.py::test_retry_after_wrong_unlocks <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPEDoverlay. Re-enable when lock CSS hide is removed and private view
+ships.)                                                                  [ 82%]
+tests/bdd/steps/test_role_match.py::test_password_input_masked <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPEDoverlay. Re-
+enable when lock CSS hide is removed and private view ships.)            [ 82%]
+tests/bdd/steps/test_role_match.py::test_lock_glyph_reflects_state <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPEDoverlay. Re-enable when lock CSS hide is removed and private view
+ships.)                                                                  [ 82%]
+tests/bdd/steps/test_role_match.py::test_unlocked_icon_relocks <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPEDoverlay. Re-
+enable when lock CSS hide is removed and private view ships.)            [ 83%]
+tests/bdd/steps/test_role_match.py::test_escape_closes_popover <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPEDwright
+(popover stays open after keyboard.press('Escape'); also stays open on
+click-outside). Implementing this would require a custom JS handler
+injected via st.markdown. Out of scope for slice 1 UI shell. The Gherkin
+scenario is kept in the feature file as design intent.)                  [ 83%]
+tests/bdd/steps/test_role_match.py::test_lock_icon_hidden_on_mobile <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 83%]
+tests/bdd/steps/test_role_match.py::test_refresh_relocks <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPEDoverlay. Re-enable
+when lock CSS hide is removed and private view ships.)                   [ 83%]
+tests/bdd/steps/test_role_match.py::test_new_tab_does_not_inherit <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPEDoverlay. Re-
+enable when lock CSS hide is removed and private view ships.)            [ 84%]
+tests/bdd/steps/test_role_match.py::test_match_button_disabled_when_empty <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py FAILED [ 84%]
+tests/bdd/steps/test_role_match.py::test_match_button_enables_with_text <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 84%]
+tests/bdd/steps/test_role_match.py::test_clear_button_hidden_when_empty <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 85%]
+tests/bdd/steps/test_role_match.py::test_clear_button_visible_with_text <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 85%]
+tests/bdd/steps/test_role_match.py::test_clear_empties_textarea_and_disables_button <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py FAILED [ 85%]
+tests/bdd/steps/test_role_match.py::test_no_followup_cta_before_submission <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 86%]
+tests/bdd/steps/test_role_match.py::test_match_button_disabled_below_30_words <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py FAILED [ 86%]
+tests/bdd/steps/test_role_match.py::test_match_button_enables_at_30_words <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 86%]
+tests/bdd/steps/test_role_match.py::test_summary_block_renders_between_legend_and_requirements <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 87%]
+tests/bdd/steps/test_role_match.py::test_summary_counts_color_coded <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 87%]
+tests/bdd/steps/test_role_match.py::test_clear_returns_to_state_1_full <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py FAILED [ 87%]
+tests/bdd/steps/test_role_match.py::test_non_jd_rejected_by_gate <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 88%]
+tests/bdd/steps/test_role_match.py::test_real_jd_passes_gate <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 88%]
+tests/bdd/steps/test_role_match.py::test_post_result_cta_renders <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 88%]
+tests/bdd/steps/test_role_match.py::test_export_button_present_after_match <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 89%]
+tests/bdd/steps/test_role_match.py::test_hero_subtitle_copy <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 89%]
+tests/bdd/steps/test_role_match_logging.py::test_successful_assessment_logs <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py FAILED [ 89%]
+tests/bdd/steps/test_role_match_logging.py::test_narrative_jd_format <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py FAILED [ 90%]
+tests/bdd/steps/test_role_match_logging.py::test_bulleted_jd_format <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py FAILED [ 90%]
+tests/bdd/steps/test_role_match_logging.py::test_failed_assessment_no_log <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 90%]
+tests/bdd/steps/test_role_match_logging.py::test_chip_click_logs <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPED [ 91%]
+tests/bdd/steps/test_role_match_logging.py::test_chip_close_no_log <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPED [ 91%]
+tests/bdd/steps/test_role_match_logging.py::test_helpful_logs <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPED [ 91%]
+tests/bdd/steps/test_role_match_logging.py::test_copy_report_logs <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPED [ 92%]
+tests/bdd/steps/test_role_match_logging.py::test_export_logs <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPED [ 92%]
+tests/bdd/steps/test_role_match_logging.py::test_utm_present <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py FAILED [ 92%]
+tests/bdd/steps/test_role_match_logging.py::test_utm_missing <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py FAILED [ 93%]
+tests/bdd/steps/test_role_match_logging.py::test_bot_no_log <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 93%]
+tests/bdd/steps/test_role_match_logging.py::test_real_browser_logs <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 93%]
+tests/bdd/steps/test_role_match_logging.py::test_session_correlation <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py SKIPPED [ 94%]
+tests/bdd/steps/test_story_detail_sidebar.py::test_core_competencies_pills_match_the_storys_competencies_field_length <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 94%]
+tests/bdd/steps/test_story_detail_sidebar.py::test_technologies_and_practices_pills_match_the_storys_public_tags_field_length <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 94%]
+tests/bdd/steps/test_synthesis_guard.py::test_synthesis_path_with_empty_theme_pool_degrades_gracefully_instead_of_raising <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 95%]
+tests/bdd/steps/test_why_agy_dialog.py::test_badge_renders_on_home_hero_illustration_on_desktop <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 95%]
+tests/bdd/steps/test_why_agy_dialog.py::test_badge_renders_on_home_hero_illustration_on_mobile <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 95%]
+tests/bdd/steps/test_why_agy_dialog.py::test_badge_renders_on_ask_agy_landing_body_avatar_on_desktop <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 96%]
+tests/bdd/steps/test_why_agy_dialog.py::test_badge_renders_on_ask_agy_landing_body_avatar_on_mobile <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 96%]
+tests/bdd/steps/test_why_agy_dialog.py::test_badge_renders_on_ask_agy_header_avatar_on_desktop <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 96%]
+tests/bdd/steps/test_why_agy_dialog.py::test_badge_renders_on_ask_agy_header_avatar_on_mobile <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 97%]
+tests/bdd/steps/test_why_agy_dialog.py::test_badge_renders_on_banking_landing_header_avatar_on_desktop <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 97%]
+tests/bdd/steps/test_why_agy_dialog.py::test_badge_renders_on_crossindustry_landing_header_avatar_on_desktop <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 97%]
+tests/bdd/steps/test_why_agy_dialog.py::test_badge_renders_on_role_match_header_avatar_on_desktop <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 98%]
+tests/bdd/steps/test_why_agy_dialog.py::test_badge_renders_on_my_work_header_avatar_on_desktop <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 98%]
+tests/bdd/steps/test_why_agy_dialog.py::test_clicking_badge_opens_why_agy_dialog <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 98%]
+tests/bdd/steps/test_why_agy_dialog.py::test_why_agy_dialog_body_contains_plott_hound_copy_and_story_count <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 99%]
+tests/bdd/steps/test_why_agy_dialog.py::test_why_agy_dialog_has_italicized_closing_line <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 99%]
+tests/bdd/steps/test_why_agy_dialog.py::test_why_agy_dialog_footer_button_text_matches_spec <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [ 99%]
+tests/bdd/steps/test_why_agy_dialog.py::test_clicking_footer_button_closes_the_why_agy_dialog <- venv/lib/python3.13/site-packages/pytest_bdd/scenario.py PASSED [100%]
+
+=================================== FAILURES ===================================
+__ test_low_confidence_rejection_shows_rephrase_prompt_and_out_of_scope_chips __
+venv/lib/python3.13/site-packages/_pytest/fixtures.py:915: in call_fixture_func
+    fixture_result = fixturefunc(**kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^
+tests/bdd/steps/test_ask_mattgpt.py:286: in when_user_submits_low_confidence
+    wait_for_banner(browser_page)
+tests/bdd/steps/test_ask_mattgpt.py:140: in wait_for_banner
+    page.wait_for_selector(".no-match-banner", timeout=LONG_WAIT)
+venv/lib/python3.13/site-packages/playwright/sync_api/_generated.py:8182: in wait_for_selector
+    self._sync(
+venv/lib/python3.13/site-packages/playwright/_impl/_page.py:422: in wait_for_selector
+    return await self._main_frame.wait_for_selector(**locals_to_params(locals()))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv/lib/python3.13/site-packages/playwright/_impl/_frame.py:369: in wait_for_selector
+    await self._channel.send(
+venv/lib/python3.13/site-packages/playwright/_impl/_connection.py:69: in send
+    return await self._connection.wrap_api_call(
+venv/lib/python3.13/site-packages/playwright/_impl/_connection.py:559: in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E   playwright._impl._errors.TimeoutError: Page.wait_for_selector: Timeout 3000ms exceeded.
+E   Call log:
+E     - waiting for locator(".no-match-banner") to be visible
+_ test_nontechnical_family_preserves_professional_narrative_stories_in_sources _
+venv/lib/python3.13/site-packages/_pytest/fixtures.py:915: in call_fixture_func
+    fixture_result = fixturefunc(**kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^
+tests/bdd/steps/test_pn_exclusion.py:142: in then_pn_in_sources
+    assert pn_found, (
+E   AssertionError: Expected a Professional Narrative story in sources but found none. Sources: ['Delivery Story 0', 'Delivery Story 1', 'Delivery Story 2']
+E   assert []
+----------------------------- Captured stderr call -----------------------------
+2026-10-06 23:12:49.138 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.138 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.138 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.138 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.138 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.138 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.138 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.138 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.138 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.138 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.138 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.138 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.138 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.138 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.138 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-06 23:12:49.139 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+__ test_banking_landing_displays_postera_project_count_in_hero_and_stats_bar ___
+venv/lib/python3.13/site-packages/_pytest/fixtures.py:915: in call_fixture_func
+    fixture_result = fixturefunc(**kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^
+tests/bdd/steps/test_post_era_project_counts.py:186: in assert_banking_stats_post_era
+    actual = _read_stats_projects_delivered(browser_page)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/bdd/steps/test_post_era_project_counts.py:123: in _read_stats_projects_delivered
+    stat.wait_for(state="visible", timeout=LONG_TIMEOUT)
+venv/lib/python3.13/site-packages/playwright/sync_api/_generated.py:18005: in wait_for
+    self._sync(self._impl_obj.wait_for(timeout=timeout, state=state))
+venv/lib/python3.13/site-packages/playwright/_impl/_locator.py:692: in wait_for
+    await self._frame.wait_for_selector(
+venv/lib/python3.13/site-packages/playwright/_impl/_frame.py:369: in wait_for_selector
+    await self._channel.send(
+venv/lib/python3.13/site-packages/playwright/_impl/_connection.py:69: in send
+    return await self._connection.wrap_api_call(
+venv/lib/python3.13/site-packages/playwright/_impl/_connection.py:559: in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E   playwright._impl._errors.TimeoutError: Locator.wait_for: Timeout 30000ms exceeded.
+E   Call log:
+E     - waiting for locator(".stats-bar .stat:has(.stat-label:has-text('Projects Delivered'))").first to be visible
+_ test_crossindustry_landing_displays_postera_project_count_in_hero_and_stats_bar _
+venv/lib/python3.13/site-packages/_pytest/fixtures.py:915: in call_fixture_func
+    fixture_result = fixturefunc(**kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^
+tests/bdd/steps/test_post_era_project_counts.py:214: in assert_cross_industry_stats_post_era
+    actual = _read_stats_projects_delivered(browser_page)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/bdd/steps/test_post_era_project_counts.py:123: in _read_stats_projects_delivered
+    stat.wait_for(state="visible", timeout=LONG_TIMEOUT)
+venv/lib/python3.13/site-packages/playwright/sync_api/_generated.py:18005: in wait_for
+    self._sync(self._impl_obj.wait_for(timeout=timeout, state=state))
+venv/lib/python3.13/site-packages/playwright/_impl/_locator.py:692: in wait_for
+    await self._frame.wait_for_selector(
+venv/lib/python3.13/site-packages/playwright/_impl/_frame.py:369: in wait_for_selector
+    await self._channel.send(
+venv/lib/python3.13/site-packages/playwright/_impl/_connection.py:69: in send
+    return await self._connection.wrap_api_call(
+venv/lib/python3.13/site-packages/playwright/_impl/_connection.py:559: in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E   playwright._impl._errors.TimeoutError: Locator.wait_for: Timeout 30000ms exceeded.
+E   Call log:
+E     - waiting for locator(".stats-bar .stat:has(.stat-label:has-text('Projects Delivered'))").first to be visible
+_________________ test_top_score_is_the_last_column_in_headers _________________
+venv/lib/python3.13/site-packages/_pytest/fixtures.py:915: in call_fixture_func
+    fixture_result = fixturefunc(**kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^
+tests/bdd/steps/test_query_logger_top_score.py:66: in then_last_header
+    assert HEADERS[-1] == header, (
+E   AssertionError: Expected 'Top Score' to be the last HEADERS entry; got 'Preferred Unassessed Count'. Full HEADERS length=44: ['Event Type', 'Timestamp', 'Query', 'Page', 'Intent Family', 'Confidence', 'Result Count', 'Redirect Reason', 'User-Agent', 'Screen Width', 'Timezone', 'Referrer', 'Sources', 'Rating', 'Turn Index', 'Msg Hash', 'UTM Source', 'UTM Medium', 'UTM Campaign', 'UTM Content', 'UTM Term', 'Role Title', 'Company', 'JD Format', 'Required Count', 'Preferred Count', 'Strong Count', 'Partial Count', 'Gap Count', 'Session ID', 'Story Title', 'Client', 'Top Score', 'Unassessed Count', 'Failure Type', 'Env', 'Required Strong Count', 'Required Partial Count', 'Required Gap Count', 'Required Unassessed Count', 'Preferred Strong Count', 'Preferred Partial Count', 'Preferred Gap Count', 'Preferred Unassessed Count']
+E   assert 'Preferred Unassessed Count' == 'Top Score'
+E     
+E     - Top Score
+E     + Preferred Unassessed Count
+_____________________ test_empty_text_area_disables_button _____________________
+venv/lib/python3.13/site-packages/_pytest/fixtures.py:915: in call_fixture_func
+    fixture_result = fixturefunc(**kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^
+tests/bdd/steps/test_role_match.py:1396: in then_match_role_button_disabled_no_emoji
+    assert btn.is_disabled(), "Expected 'Match this role' button to be disabled"
+E   AssertionError: Expected 'Match this role' button to be disabled
+E   assert False
+E    +  where False = is_disabled()
+E    +    where is_disabled = <Locator frame=<Frame name= url='http://localhost:8501/'> selector='.st-key-role_match_submit button >> nth=0'>.is_disabled
+____________________ test_match_button_disabled_when_empty _____________________
+venv/lib/python3.13/site-packages/_pytest/fixtures.py:915: in call_fixture_func
+    fixture_result = fixturefunc(**kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^
+tests/bdd/steps/test_role_match.py:1342: in then_match_button_disabled
+    assert btn.is_disabled(), "Expected 'Match this role 🐾' button to be disabled"
+E   AssertionError: Expected 'Match this role 🐾' button to be disabled
+E   assert False
+E    +  where False = is_disabled()
+E    +    where is_disabled = <Locator frame=<Frame name= url='http://localhost:8501/'> selector='.st-key-role_match_submit button >> nth=0'>.is_disabled
+_______________ test_clear_empties_textarea_and_disables_button ________________
+venv/lib/python3.13/site-packages/_pytest/fixtures.py:915: in call_fixture_func
+    fixture_result = fixturefunc(**kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^
+tests/bdd/steps/test_role_match.py:1342: in then_match_button_disabled
+    assert btn.is_disabled(), "Expected 'Match this role 🐾' button to be disabled"
+E   AssertionError: Expected 'Match this role 🐾' button to be disabled
+E   assert False
+E    +  where False = is_disabled()
+E    +    where is_disabled = <Locator frame=<Frame name= url='http://localhost:8501/'> selector='.st-key-role_match_submit button >> nth=0'>.is_disabled
+__________________ test_match_button_disabled_below_30_words ___________________
+venv/lib/python3.13/site-packages/_pytest/fixtures.py:915: in call_fixture_func
+    fixture_result = fixturefunc(**kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^
+tests/bdd/steps/test_role_match.py:1342: in then_match_button_disabled
+    assert btn.is_disabled(), "Expected 'Match this role 🐾' button to be disabled"
+E   AssertionError: Expected 'Match this role 🐾' button to be disabled
+E   assert False
+E    +  where False = is_disabled()
+E    +    where is_disabled = <Locator frame=<Frame name= url='http://localhost:8501/'> selector='.st-key-role_match_submit button >> nth=0'>.is_disabled
+______________________ test_clear_returns_to_state_1_full ______________________
+venv/lib/python3.13/site-packages/_pytest/fixtures.py:915: in call_fixture_func
+    fixture_result = fixturefunc(**kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^
+tests/bdd/steps/test_role_match.py:1342: in then_match_button_disabled
+    assert btn.is_disabled(), "Expected 'Match this role 🐾' button to be disabled"
+E   AssertionError: Expected 'Match this role 🐾' button to be disabled
+E   assert False
+E    +  where False = is_disabled()
+E    +    where is_disabled = <Locator frame=<Frame name= url='http://localhost:8501/'> selector='.st-key-role_match_submit button >> nth=0'>.is_disabled
+_______________________ test_successful_assessment_logs ________________________
+venv/lib/python3.13/site-packages/_pytest/fixtures.py:915: in call_fixture_func
+    fixture_result = fixturefunc(**kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^
+tests/bdd/steps/test_role_match_logging.py:176: in given_assessment_success
+    log_role_match_assessment(
+E   TypeError: log_role_match_assessment() missing 10 required positional arguments: 'unassessed_count', 'failure_type', 'required_strong_count', 'required_partial_count', 'required_gap_count', 'required_unassessed_count', 'preferred_strong_count', 'preferred_partial_count', 'preferred_gap_count', and 'preferred_unassessed_count'
+___________________________ test_narrative_jd_format ___________________________
+venv/lib/python3.13/site-packages/_pytest/fixtures.py:915: in call_fixture_func
+    fixture_result = fixturefunc(**kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^
+tests/bdd/steps/test_role_match_logging.py:176: in given_assessment_success
+    log_role_match_assessment(
+E   TypeError: log_role_match_assessment() missing 10 required positional arguments: 'unassessed_count', 'failure_type', 'required_strong_count', 'required_partial_count', 'required_gap_count', 'required_unassessed_count', 'preferred_strong_count', 'preferred_partial_count', 'preferred_gap_count', and 'preferred_unassessed_count'
+___________________________ test_bulleted_jd_format ____________________________
+venv/lib/python3.13/site-packages/_pytest/fixtures.py:915: in call_fixture_func
+    fixture_result = fixturefunc(**kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^
+tests/bdd/steps/test_role_match_logging.py:176: in given_assessment_success
+    log_role_match_assessment(
+E   TypeError: log_role_match_assessment() missing 10 required positional arguments: 'unassessed_count', 'failure_type', 'required_strong_count', 'required_partial_count', 'required_gap_count', 'required_unassessed_count', 'preferred_strong_count', 'preferred_partial_count', 'preferred_gap_count', and 'preferred_unassessed_count'
+_______________________________ test_utm_present _______________________________
+venv/lib/python3.13/site-packages/_pytest/fixtures.py:915: in call_fixture_func
+    fixture_result = fixturefunc(**kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^
+tests/bdd/steps/test_role_match_logging.py:287: in when_assessment_completes
+    log_role_match_assessment(
+E   TypeError: log_role_match_assessment() missing 10 required positional arguments: 'unassessed_count', 'failure_type', 'required_strong_count', 'required_partial_count', 'required_gap_count', 'required_unassessed_count', 'preferred_strong_count', 'preferred_partial_count', 'preferred_gap_count', and 'preferred_unassessed_count'
+_______________________________ test_utm_missing _______________________________
+venv/lib/python3.13/site-packages/_pytest/fixtures.py:915: in call_fixture_func
+    fixture_result = fixturefunc(**kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^
+tests/bdd/steps/test_role_match_logging.py:287: in when_assessment_completes
+    log_role_match_assessment(
+E   TypeError: log_role_match_assessment() missing 10 required positional arguments: 'unassessed_count', 'failure_type', 'required_strong_count', 'required_partial_count', 'required_gap_count', 'required_unassessed_count', 'preferred_strong_count', 'preferred_partial_count', 'preferred_gap_count', and 'preferred_unassessed_count'
+=============================== warnings summary ===============================
+venv/lib/python3.13/site-packages/gherkin/gherkin_line.py:79: 22 warnings
+  /Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/venv/lib/python3.13/site-packages/gherkin/gherkin_line.py:79: DeprecationWarning: 'maxsplit' is passed as positional argument
+    uncommented_line = re.split(r"\s#", self._trimmed_line_text.strip(), 2)[0]
+
+tests/bdd/steps/test_role_match.py:921
+  /Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/tests/bdd/steps/test_role_match.py:921: PytestUnknownMarkWarning: Unknown pytest.mark.smoke - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.smoke
+
+venv/lib/python3.13/site-packages/pytest_bdd/plugin.py:137
+  /Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/venv/lib/python3.13/site-packages/pytest_bdd/plugin.py:137: PytestUnknownMarkWarning: Unknown pytest.mark.smoke - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    mark = getattr(pytest.mark, tag)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/bdd/steps/test_ask_mattgpt.py::test_low_confidence_rejection_shows_rephrase_prompt_and_out_of_scope_chips - playwright._impl._errors.TimeoutError: Page.wait_for_selector: Timeout 3000ms exceeded.
+Call log:
+  - waiting for locator(".no-match-banner") to be visible
+FAILED tests/bdd/steps/test_pn_exclusion.py::test_nontechnical_family_preserves_professional_narrative_stories_in_sources - AssertionError: Expected a Professional Narrative story in sources but found none. Sources: ['Delivery Story 0', 'Delivery Story 1', 'Delivery Story 2']
+assert []
+FAILED tests/bdd/steps/test_post_era_project_counts.py::test_banking_landing_displays_postera_project_count_in_hero_and_stats_bar - playwright._impl._errors.TimeoutError: Locator.wait_for: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator(".stats-bar .stat:has(.stat-label:has-text('Projects Delivered'))").first to be visible
+FAILED tests/bdd/steps/test_post_era_project_counts.py::test_crossindustry_landing_displays_postera_project_count_in_hero_and_stats_bar - playwright._impl._errors.TimeoutError: Locator.wait_for: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator(".stats-bar .stat:has(.stat-label:has-text('Projects Delivered'))").first to be visible
+FAILED tests/bdd/steps/test_query_logger_top_score.py::test_top_score_is_the_last_column_in_headers - AssertionError: Expected 'Top Score' to be the last HEADERS entry; got 'Preferred Unassessed Count'. Full HEADERS length=44: ['Event Type', 'Timestamp', 'Query', 'Page', 'Intent Family', 'Confidence', 'Result Count', 'Redirect Reason', 'User-Agent', 'Screen Width', 'Timezone', 'Referrer', 'Sources', 'Rating', 'Turn Index', 'Msg Hash', 'UTM Source', 'UTM Medium', 'UTM Campaign', 'UTM Content', 'UTM Term', 'Role Title', 'Company', 'JD Format', 'Required Count', 'Preferred Count', 'Strong Count', 'Partial Count', 'Gap Count', 'Session ID', 'Story Title', 'Client', 'Top Score', 'Unassessed Count', 'Failure Type', 'Env', 'Required Strong Count', 'Required Partial Count', 'Required Gap Count', 'Required Unassessed Count', 'Preferred Strong Count', 'Preferred Partial Count', 'Preferred Gap Count', 'Preferred Unassessed Count']
+assert 'Preferred Unassessed Count' == 'Top Score'
+  
+  - Top Score
+  + Preferred Unassessed Count
+FAILED tests/bdd/steps/test_role_match.py::test_empty_text_area_disables_button - AssertionError: Expected 'Match this role' button to be disabled
+assert False
+ +  where False = is_disabled()
+ +    where is_disabled = <Locator frame=<Frame name= url='http://localhost:8501/'> selector='.st-key-role_match_submit button >> nth=0'>.is_disabled
+FAILED tests/bdd/steps/test_role_match.py::test_match_button_disabled_when_empty - AssertionError: Expected 'Match this role 🐾' button to be disabled
+assert False
+ +  where False = is_disabled()
+ +    where is_disabled = <Locator frame=<Frame name= url='http://localhost:8501/'> selector='.st-key-role_match_submit button >> nth=0'>.is_disabled
+FAILED tests/bdd/steps/test_role_match.py::test_clear_empties_textarea_and_disables_button - AssertionError: Expected 'Match this role 🐾' button to be disabled
+assert False
+ +  where False = is_disabled()
+ +    where is_disabled = <Locator frame=<Frame name= url='http://localhost:8501/'> selector='.st-key-role_match_submit button >> nth=0'>.is_disabled
+FAILED tests/bdd/steps/test_role_match.py::test_match_button_disabled_below_30_words - AssertionError: Expected 'Match this role 🐾' button to be disabled
+assert False
+ +  where False = is_disabled()
+ +    where is_disabled = <Locator frame=<Frame name= url='http://localhost:8501/'> selector='.st-key-role_match_submit button >> nth=0'>.is_disabled
+FAILED tests/bdd/steps/test_role_match.py::test_clear_returns_to_state_1_full - AssertionError: Expected 'Match this role 🐾' button to be disabled
+assert False
+ +  where False = is_disabled()
+ +    where is_disabled = <Locator frame=<Frame name= url='http://localhost:8501/'> selector='.st-key-role_match_submit button >> nth=0'>.is_disabled
+FAILED tests/bdd/steps/test_role_match_logging.py::test_successful_assessment_logs - TypeError: log_role_match_assessment() missing 10 required positional arguments: 'unassessed_count', 'failure_type', 'required_strong_count', 'required_partial_count', 'required_gap_count', 'required_unassessed_count', 'preferred_strong_count', 'preferred_partial_count', 'preferred_gap_count', and 'preferred_unassessed_count'
+FAILED tests/bdd/steps/test_role_match_logging.py::test_narrative_jd_format - TypeError: log_role_match_assessment() missing 10 required positional arguments: 'unassessed_count', 'failure_type', 'required_strong_count', 'required_partial_count', 'required_gap_count', 'required_unassessed_count', 'preferred_strong_count', 'preferred_partial_count', 'preferred_gap_count', and 'preferred_unassessed_count'
+FAILED tests/bdd/steps/test_role_match_logging.py::test_bulleted_jd_format - TypeError: log_role_match_assessment() missing 10 required positional arguments: 'unassessed_count', 'failure_type', 'required_strong_count', 'required_partial_count', 'required_gap_count', 'required_unassessed_count', 'preferred_strong_count', 'preferred_partial_count', 'preferred_gap_count', and 'preferred_unassessed_count'
+FAILED tests/bdd/steps/test_role_match_logging.py::test_utm_present - TypeError: log_role_match_assessment() missing 10 required positional arguments: 'unassessed_count', 'failure_type', 'required_strong_count', 'required_partial_count', 'required_gap_count', 'required_unassessed_count', 'preferred_strong_count', 'preferred_partial_count', 'preferred_gap_count', and 'preferred_unassessed_count'
+FAILED tests/bdd/steps/test_role_match_logging.py::test_utm_missing - TypeError: log_role_match_assessment() missing 10 required positional arguments: 'unassessed_count', 'failure_type', 'required_strong_count', 'required_partial_count', 'required_gap_count', 'required_unassessed_count', 'preferred_strong_count', 'preferred_partial_count', 'preferred_gap_count', and 'preferred_unassessed_count'
+===== 15 failed, 256 passed, 35 skipped, 24 warnings in 1072.82s (0:17:52) =====

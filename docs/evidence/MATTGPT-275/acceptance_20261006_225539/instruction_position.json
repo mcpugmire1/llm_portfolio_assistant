@@ -1,0 +1,762 @@
+[
+  {
+    "arm": "system_instructions",
+    "conversation": "1. Payments experience",
+    "run": 1,
+    "turn": 1,
+    "question": "Tell me about his payments work.",
+    "answer_md": "Got it! 🐾\n\nMatt played a significant role in the development of payment systems at **JP Morgan Chase** and **RBC**. At JP Morgan, he was instrumental in building the ACCESS Next Generation platform, a unified global corporate banking portal. This project addressed the needs of over **135,000** clients across **180+ countries**, who required capabilities beyond the standard offerings of Bottomline Technologies' WebSeries platform. Matt led a team of **40+** to design and deliver bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He implemented a Message Authentication Code (MAC) security layer and integrated real-time global reporting, which transformed the corporate treasurer experience. The platform launched in April 2011 and was recognized as a leader in digital channels by Coalition Greenwich.\n\nIn another project at **RBC**, Matt tackled the challenges faced by **RBC** Express users in managing cross-border payments and FX transactions. The existing fragmented systems and manual processes caused delays and inefficiencies. Matt designed end-to-end cross-border payment workflows, integrating real-time FX tools and streamlined batch processing. This design provided a complete implementation blueprint that improved SLA compliance for time-sensitive transactions and equipped business clients to manage multi-currency accounts independently.",
+    "rejection_reason": null,
+    "search_queries": [
+      "payments work"
+    ],
+    "sources": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS"
+    ],
+    "seconds": 5.39
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "1. Payments experience",
+    "run": 1,
+    "turn": 2,
+    "question": "How big was the team?",
+    "answer_md": "In the project at **JP Morgan Chase**, Matt led a team of over **40** engineers to design and deliver bespoke payment modules for the ACCESS Next Generation platform.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 1.7
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "1. Payments experience",
+    "run": 1,
+    "turn": 3,
+    "question": "What went wrong?",
+    "answer_md": "🐾 Tracking this down...\n\nIn the project at **RBC**, users of the **RBC** Express platform faced significant challenges with cross-border payments and FX transactions. The existing systems were fragmented, and manual processes led to delays and inefficiencies. These issues hindered the ability to manage transactions effectively and impacted SLA compliance for time-sensitive operations. Matt's work focused on addressing these problems by designing end-to-end cross-border payment workflows and integrating real-time FX tools to streamline processes and improve efficiency.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 1.74
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "1. Payments experience",
+    "run": 2,
+    "turn": 1,
+    "question": "Tell me about his payments work.",
+    "answer_md": "🐾 Perfect, here's what I found.\n\nMatt played a significant role in building the payment engine behind **JP Morgan ACCESS**, a flagship corporate digital banking portal. The project was high-stakes, requiring capabilities far beyond the out-of-box offerings of Bottomline Technologies' WebSeries platform. Matt, as the Technology Delivery Lead, managed a team of over **40** and was embedded at Bottomline's Portsmouth offices. He designed and delivered bespoke payment modules, including ACH, wire, FX/cross-border, EFTPS tax, and more. His work also involved creating a MAC security layer, contextual help, payment-type-specific RBAC, SSO, real-time global reporting, and trade finance integration.\n\nThe ACCESS platform launched in April 2011, consolidating previously separate regional systems into a single digital experience for over **135,000** clients across **180+** countries. The platform's success was recognized by Coalition Greenwich as the #1 digital channel. Matt's contributions ensured that the platform could support diverse payment types with specific compliance and workflow requirements, transforming the corporate treasurer experience.\n\nIn another engagement with **RBC**, Matt addressed challenges in managing cross-border payments and FX transactions due to fragmented systems and manual processes. He designed end-to-end cross-border payment workflows, integrating real-time FX tools and automated alerts, which closed a competitive gap and improved SLA compliance for time-sensitive transactions. This work equipped business clients to manage multi-currency accounts independently, enhancing client satisfaction and operational efficiency.",
+    "rejection_reason": null,
+    "search_queries": [
+      "payments work"
+    ],
+    "sources": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS"
+    ],
+    "seconds": 4.49
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "1. Payments experience",
+    "run": 2,
+    "turn": 2,
+    "question": "How big was the team?",
+    "answer_md": "🐾 Found it!\n\nMatt led a team of over **40** people while working on the payment engine for **JP Morgan ACCESS**. This team was responsible for designing and delivering bespoke payment modules and integrating various features into the platform.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 1.23
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "1. Payments experience",
+    "run": 2,
+    "turn": 3,
+    "question": "What went wrong?",
+    "answer_md": "🐾 Here's what happened.\n\nDuring the development of the payment engine for **JP Morgan ACCESS**, the team faced significant challenges due to the limitations of the Bottomline Technologies' WebSeries platform. The platform's out-of-box offerings were insufficient to meet the complex requirements of the project. This necessitated the design and delivery of bespoke payment modules, which included ACH, wire, FX/cross-border, EFTPS tax, and more. The team had to overcome these limitations by creating additional features such as a MAC security layer, contextual help, payment-type-specific RBAC, SSO, real-time global reporting, and trade finance integration to ensure the platform could meet the diverse needs of **135,000** clients across **180+** countries.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 1.69
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "1. Payments experience",
+    "run": 3,
+    "turn": 1,
+    "question": "Tell me about his payments work.",
+    "answer_md": "Got it! 🐾\n\nMatt played a pivotal role in transforming payment systems for major financial institutions like **JP Morgan Chase** and **RBC**. At **JP Morgan**, he was instrumental in building the ACCESS Next Generation platform, a unified global corporate banking portal. The project required designing bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments, to accommodate the needs of over **135,000** clients across **180+** countries. Matt managed a team of over **40** professionals and spent significant time at Bottomline Technologies' offices to ensure seamless integration and delivery. The platform launched in April 2011, consolidating regional systems into a single digital experience and was recognized as #1 in digital channels by Coalition Greenwich.\n\nFor **RBC**, Matt addressed challenges in managing cross-border payments and FX transactions due to fragmented systems and manual processes. He designed end-to-end cross-border payment workflows, integrating real-time FX tools and automated alerts, which improved SLA compliance and client satisfaction. This work closed a competitive gap in **RBC** Express's corporate treasury offering and equipped business clients to manage multi-currency accounts independently.\n\nIn both engagements, Matt's approach involved deep integration with existing systems, real-time processing capabilities, and a focus on user experience and compliance. His efforts resulted in significant improvements in operational efficiency and client service for these financial giants.",
+    "rejection_reason": null,
+    "search_queries": [
+      "payments work"
+    ],
+    "sources": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS"
+    ],
+    "seconds": 4.17
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "1. Payments experience",
+    "run": 3,
+    "turn": 2,
+    "question": "How big was the team?",
+    "answer_md": "🐾 Tracking this down...\n\nIn the **JP Morgan Chase** project for the ACCESS Next Generation platform, Matt led a team of over **40** professionals. This team was responsible for designing and delivering the bespoke payment modules that served a vast client base across numerous countries.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 1.36
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "1. Payments experience",
+    "run": 3,
+    "turn": 3,
+    "question": "What went wrong?",
+    "answer_md": "🐾 Here's what happened.\n\nDuring the **JP Morgan Chase** project, there were challenges in aligning the bespoke payment modules with the needs of over **135,000** clients across **180+** countries. The complexity of integrating these modules into a unified global corporate banking portal required significant coordination and collaboration. Matt had to spend considerable time at Bottomline Technologies' offices to ensure seamless integration and delivery, indicating the challenges faced in managing such a large-scale and complex project. Despite these hurdles, the platform successfully launched in April 2011, consolidating regional systems into a single digital experience.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 1.8
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "1. Payments experience",
+    "run": 4,
+    "turn": 1,
+    "question": "Tell me about his payments work.",
+    "answer_md": "🐾 I know just the story.\n\nAt **JP Morgan Chase**, Matt played a crucial role in building the payment engine behind their ACCESS Next Generation platform. The project aimed to create a unified global corporate banking portal, leveraging Bottomline Technologies' WebSeries platform. However, the out-of-box capabilities were insufficient for **JP Morgan's** vast client base of over **135,000** corporations, financial institutions, governments, and municipalities across **180+** countries. Each payment type required distinct formatting, validation, compliance, and workflow requirements, presenting a high-stakes and high-pressure environment with aggressive delivery timelines.\n\nMatt, as the Technology Delivery Lead, managed a team of over **40** professionals from **Accenture** and JP Morgan, spread across Mumbai, Bangalore, and the US. He was responsible for designing and delivering bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He also implemented a Message Authentication Code (MAC) security layer, contextual help, and payment-type-specific RBAC, ensuring that the platform met the specific needs of JP Morgan and its clients.\n\nThe outcome was the successful launch of the ACCESS platform in April 2011, which consolidated previously separate regional systems into a single digital experience. This platform provided real-time global reporting, Single Sign-On (SSO) across treasury functions, and trade finance lifecycle visibility, transforming the corporate treasurer experience. ACCESS became JP Morgan's flagship corporate digital channel and was recognized as #1 in digital channels by Coalition Greenwich.",
+    "rejection_reason": null,
+    "search_queries": [
+      "payments work"
+    ],
+    "sources": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS"
+    ],
+    "seconds": 3.98
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "1. Payments experience",
+    "run": 4,
+    "turn": 2,
+    "question": "How big was the team?",
+    "answer_md": "🐾 The team Matt managed for the **JP Morgan Chase** ACCESS Next Generation platform project consisted of over **40** professionals from **Accenture** and JP Morgan.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 1.56
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "1. Payments experience",
+    "run": 4,
+    "turn": 3,
+    "question": "What went wrong?",
+    "answer_md": "🐾 During the **JP Morgan Chase** ACCESS Next Generation platform project, the initial challenge was that the out-of-box capabilities of Bottomline Technologies' WebSeries platform were inadequate for **JP Morgan's** extensive client base. This required significant customization to meet the specific formatting, validation, compliance, and workflow requirements for different payment types. The high-stakes environment and aggressive delivery timelines added to the complexity, necessitating a tailored approach to successfully deliver the project.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 1.99
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "1. Payments experience",
+    "run": 5,
+    "turn": 1,
+    "question": "Tell me about his payments work.",
+    "answer_md": "Got it! 🐾\n\nMatt played a pivotal role in the development of the payment engine for **JP Morgan ACCESS**, a flagship corporate digital banking portal. The project was driven by the need for a robust platform that could serve over **135,000** corporations, financial institutions, and governments across **180+ countries**. The existing WebSeries platform from Bottomline Technologies didn't meet the complex requirements of JP Morgan's vast client base, which demanded bespoke payment modules and security features.\n\nMatt, as the Technology Delivery Lead, managed a team of over **40** professionals and was deeply embedded in the project, spending a significant amount of time at Bottomline's Portsmouth offices. He was responsible for designing and delivering custom payment modules such as ACH, wire, FX/cross-border, and EFTPS tax payments. He also implemented a Message Authentication Code (MAC) security layer to ensure payment integrity and developed real-time global reporting capabilities.\n\nThe ACCESS platform launched in April 2011, consolidating previously separate regional systems into a single digital experience. It provided tailored payment modules with module-specific security controls and compliance validation. The portal transformed the corporate treasurer experience and was recognized as the #1 digital channel by Coalition Greenwich.\n\nIn another engagement with **RBC**, Matt addressed challenges in managing cross-border payments and FX transactions. He designed end-to-end cross-border payment workflows, integrating real-time FX tools and automated alerts. This design closed a competitive gap in real-time FX and improved SLA compliance for time-sensitive transactions, equipping business clients to manage multi-currency accounts independently.",
+    "rejection_reason": null,
+    "search_queries": [
+      "payments work"
+    ],
+    "sources": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS"
+    ],
+    "seconds": 4.33
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "1. Payments experience",
+    "run": 5,
+    "turn": 2,
+    "question": "How big was the team?",
+    "answer_md": "In the development of the payment engine for **JP Morgan ACCESS**, Matt led a team of over **40** professionals.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 1.08
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "1. Payments experience",
+    "run": 5,
+    "turn": 3,
+    "question": "What went wrong?",
+    "answer_md": "In the development of the payment engine for **JP Morgan ACCESS**, the primary challenge was that the existing WebSeries platform from Bottomline Technologies was not adequate for the complex requirements of JP Morgan's extensive client base. The platform needed to serve over **135,000** corporations, financial institutions, and governments across **180+ countries**, which demanded bespoke payment modules and enhanced security features. This inadequacy drove the need for a robust and customized solution that Matt and his team worked to deliver.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 1.54
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "2. Education",
+    "run": 1,
+    "turn": 1,
+    "question": "Does he have a CS degree?",
+    "answer_md": "No, Matt does not have a Computer Science degree. He holds a Master's degree in Information Technology from **American InterContinental University**, which is a recognized Computer Science-related discipline. Additionally, he has a BA in French Language and Literature from Queens University of Charlotte.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 1.14
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "2. Education",
+    "run": 1,
+    "turn": 2,
+    "question": "Why shouldn’t that worry me?",
+    "answer_md": "🐾 Here's what connects the dots across Matt's work.\n\nIn Matt's career, he has consistently demonstrated the ability to lead complex technology transformations and build high-performing teams, regardless of his formal education in Computer Science. At **Accenture**, he built the Cloud Innovation Center from the ground up, growing it to over **150 practitioners**. This initiative was marked by delivering projects with **4X faster velocity** and zero defects, showcasing his capability to drive execution and delivery excellence.\n\nMatt's work with clients like **Norfolk Southern** involved leading legacy-to-cloud transformations, where he applied his expertise in AWS cloud-native architecture. His leadership at the Cloud Innovation Center consistently resulted in teams of 10 delivering the impact of typical teams of 20, emphasizing his effectiveness in organizational transformation and talent enablement.\n\nHis educational background in Information Technology, combined with his practical experience and certifications such as the AWS Certified Solutions Architect - Associate, has equipped him with the necessary skills to excel in technology-driven roles.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 2.53
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "2. Education",
+    "run": 2,
+    "turn": 1,
+    "question": "Does he have a CS degree?",
+    "answer_md": "Matt has a Master's degree in Information Technology from **American InterContinental University**. Information Technology is a recognized Computer Science-related discipline, and a Master's degree exceeds a Bachelor's.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 1.15
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "2. Education",
+    "run": 2,
+    "turn": 2,
+    "question": "Why shouldn’t that worry me?",
+    "answer_md": "🐾 Here's what connects the dots across Matt's work.\n\nIn Matt's career, the focus has been on practical application and leadership in technology, rather than the specific title of his degree. His Master's in Information Technology provided a strong foundation in a Computer Science-related discipline, which he has built upon throughout his career. Matt has demonstrated his expertise through various roles, including leading the Cloud Innovation Center from 0 to over **150 practitioners**, and delivering significant results such as a **4X** faster velocity and zero defects in projects. His work with clients like **Norfolk Southern** on legacy-to-cloud transformations and implementing AWS cloud-native architecture across engagements further underscores his capability in the field.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 2.22
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "2. Education",
+    "run": 3,
+    "turn": 1,
+    "question": "Does he have a CS degree?",
+    "answer_md": "No, Matt does not have a Computer Science degree. He holds a Master's degree in Information Technology from **American InterContinental University**, which is a recognized Computer Science-related discipline.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 1.09
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "2. Education",
+    "run": 3,
+    "turn": 2,
+    "question": "Why shouldn’t that worry me?",
+    "answer_md": "🐾 Let me show you what ties Matt's work together. His work at **Norfolk Southern** involved a significant legacy-to-cloud transformation, highlighting his capability in modernizing technology infrastructures. Additionally, Matt has consistently delivered results, such as achieving a **4X faster velocity** and zero defects with CIC teams, which speaks to his execution and delivery skills.\n\nHis technical expertise is further supported by certifications like the AWS Certified Solutions Architect - Associate and AWS Certified Cloud Practitioner, although these have expired. These credentials, combined with his practical experience, illustrate his proficiency in cloud technologies and solutions architecture.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 2.09
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "2. Education",
+    "run": 4,
+    "turn": 1,
+    "question": "Does he have a CS degree?",
+    "answer_md": "No, Matt does not have a Computer Science degree. He holds a Master's degree in Information Technology from **American InterContinental University**, which is a recognized Computer Science-related discipline.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 1.46
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "2. Education",
+    "run": 4,
+    "turn": 2,
+    "question": "Why shouldn’t that worry me?",
+    "answer_md": "🐾 Let me show you what ties Matt's work together. He has built a successful career arc from Software Engineer to Cloud Innovation Center Leader, showcasing his practical knowledge and leadership in technology. At **Accenture**, he built the Cloud Innovation Center from 0 to over **150 practitioners**, achieving proven metrics such as **4X faster velocity** and zero defects. His work with clients like **Norfolk Southern** involved legacy-to-cloud transformations, and he consistently delivered impactful results with teams that achieved the work of typical teams twice their size. These accomplishments highlight his deep understanding and application of technology, which is often more indicative of capability than a specific degree title.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 2.08
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "2. Education",
+    "run": 5,
+    "turn": 1,
+    "question": "Does he have a CS degree?",
+    "answer_md": "No, Matt does not have a Computer Science degree. He holds a Master's degree in Information Technology from **American InterContinental University**, which is a recognized Computer Science-related discipline.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 1.0
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "2. Education",
+    "run": 5,
+    "turn": 2,
+    "question": "Why shouldn’t that worry me?",
+    "answer_md": "🐾 Here's what connects the dots across Matt's work.\n\nIn the realm of technology and leadership, formal education is just one piece of the puzzle. Matt's career trajectory showcases a robust blend of practical experience and proven results that often outweigh the traditional requirement of a Computer Science degree. For instance, he built the Cloud Innovation Center from scratch to over **150 practitioners**, achieving metrics like a **4X faster velocity** and zero defects. This kind of achievement reflects a deep understanding of technology and leadership that goes beyond formal education. His leadership at the Cloud Innovation Center also led to teams of 10 delivering the impact of typical teams of 20, highlighting his effectiveness in execution and delivery.\n\nThese accomplishments, coupled with his certifications like the AWS Certified Solutions Architect - Associate, underscore his technical proficiency and ability to lead in technology-driven environments. Matt's practical experience, combined with his educational background in Information Technology, equips him with the skills necessary to excel in roles that require both technical and leadership capabilities.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 3.06
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "8. Failure and growth",
+    "run": 1,
+    "turn": 1,
+    "question": "Tell me about a time he failed.",
+    "answer_md": "🐾 Perfect, here's what I found.\n\nMatt encountered a significant failure during his time as a Senior Technology Architecture Manager for a Fortune 500 financial services client. He was leading a global platform modernization delivery that involved multiple environments, including development, QA, UAT, and production. Under pressure to deliver, he assumed that the IAM controls, environment boundaries, and data masking were correctly configured, based on inherited documentation from prior phases.\n\nUnfortunately, these assumptions led to a critical mistake. An offshore tester accidentally triggered an email job in the UAT environment, which sent communications containing unmasked production data to thousands of real clients. This incident highlighted insufficient IAM checks, unclear environment boundaries, and the presence of unmasked production data in downstream environments.\n\nMatt took full accountability for the incident and led the team through a thorough root cause analysis and remediation process. He learned that assumptions are risks in disguise and emphasized the importance of validating IAM configurations, environment verifications, PII scrubbing, and risk ownership from day one in future projects. Despite the systemic nature of the failure, the client demanded the removal of the tester involved, which reinforced Matt's belief in the importance of leadership owning the environment in which their teams operate.",
+    "rejection_reason": null,
+    "search_queries": [
+      "failure"
+    ],
+    "sources": [
+      "Why Early Failure Is a Feature, Not a Bug, in Innovation",
+      "What I Learned About Assumptions",
+      "Establishing a ‘Permit to Fail’ Culture for Continuous Improvement",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+      "Building Self-Healing Systems through Resilience Engineering"
+    ],
+    "seconds": 4.28
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "8. Failure and growth",
+    "run": 1,
+    "turn": 2,
+    "question": "What did he change afterward?",
+    "answer_md": "🐾 Here's a great example.\n\nAfter the incident where unmasked production data was inadvertently sent to real clients, Matt implemented several critical changes to prevent similar failures in the future. He focused on addressing the root causes identified during the incident's analysis. First, he emphasized the importance of validating IAM configurations from the outset of any project. This involved ensuring that access controls were correctly set up and tested regularly to prevent unauthorized actions.\n\nMatt also prioritized environment verifications. He made it a standard practice to clearly define and test environment boundaries to avoid any confusion or overlap between development, QA, UAT, and production environments. Additionally, he ensured that PII scrubbing was thoroughly implemented in all downstream environments to protect sensitive data.\n\nFurthermore, Matt reinforced the concept of risk ownership from day one. He instilled in his team the understanding that assumptions could lead to risks, and it was crucial to identify and manage these risks proactively. By taking these steps, Matt aimed to create a more secure and reliable environment for his team and clients, reducing the likelihood of similar incidents occurring in the future.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 2.88
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "8. Failure and growth",
+    "run": 2,
+    "turn": 1,
+    "question": "Tell me about a time he failed.",
+    "answer_md": "🐾 Perfect, here's what I found.\n\nDuring a global platform modernization delivery for a **Fortune 500 financial services client**, Matt faced a significant failure. He was the tech lead responsible for ensuring a safe environment setup across multiple environments: dev, QA, UAT, and production. However, due to delivery pressures, he relied on assumptions rather than verifying the IAM configuration and downstream access controls. This oversight led to an offshore tester accidentally triggering an email job in UAT, which sent communications containing unmasked production data to thousands of real clients.\n\nMatt took full accountability for the incident and led the team through a root cause analysis and remediation process. The root cause was identified as insufficient IAM checks, unclear environment boundaries, and production data that had not been scrubbed from downstream environments. This experience taught him that assumptions are risks in disguise, and he now considers IAM validation, environment verification, PII scrubbing, and risk ownership as day-one leadership responsibilities in his delivery approach.\n\nThe incident resulted in the client demanding the removal of the tester from the project, highlighting a systemic failure that led to individual consequences. This reinforced Matt's belief that leaders own the environment their teams operate in, and he learned to never rely solely on inherited documentation without verification.",
+    "rejection_reason": null,
+    "search_queries": [
+      "failure"
+    ],
+    "sources": [
+      "Why Early Failure Is a Feature, Not a Bug, in Innovation",
+      "What I Learned About Assumptions",
+      "Establishing a ‘Permit to Fail’ Culture for Continuous Improvement",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+      "My Chatbot Kept Flattering Me Instead of Answering the Question. Here's How I Fixed It"
+    ],
+    "seconds": 3.37
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "8. Failure and growth",
+    "run": 2,
+    "turn": 2,
+    "question": "What did he change afterward?",
+    "answer_md": "🐾 Perfect, here's what I found.\n\nAfter the incident with the **Fortune 500 financial services client**, Matt implemented several key changes to prevent similar issues in the future. He emphasized the importance of never relying on assumptions and made IAM validation, environment verification, PII scrubbing, and risk ownership integral parts of his leadership responsibilities from day one in any delivery project.\n\nMatt ensured that IAM checks were thorough and that environment boundaries were clearly defined. He also prioritized the scrubbing of production data from downstream environments to prevent any accidental exposure of sensitive information. By taking these steps, he aimed to create a safer and more reliable environment for his teams to operate in, thereby reducing the risk of similar failures occurring again.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 1.54
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "8. Failure and growth",
+    "run": 3,
+    "turn": 1,
+    "question": "Tell me about a time he failed.",
+    "answer_md": "🐾 This is a strong one.\n\nIn a significant project for a Fortune 500 financial services client, Matt faced a challenging situation that resulted in failure. He was the tech lead on a global platform modernization delivery, managing multiple environments including development, QA, UAT, and production. Under delivery pressure, Matt assumed that the IAM controls, environment boundaries, and data masking were correctly set up, based on inherited documentation from previous phases.\n\nUnfortunately, these assumptions led to a critical incident. An offshore tester accidentally triggered an email job in the UAT environment, which sent communications containing unmasked production data to thousands of real clients. This oversight was due to insufficient IAM checks, unclear environment boundaries, and the presence of unmasked production data in downstream environments—assumptions Matt had not verified.\n\nMatt took full accountability for the incident and led the team through a comprehensive root cause analysis and remediation process. The client demanded the removal of the tester from the project, highlighting the systemic nature of the failure. This experience taught Matt that assumptions are risks in disguise, and he learned to prioritize IAM validation, environment verification, PII scrubbing, and risk ownership as day-one responsibilities in his delivery approach.",
+    "rejection_reason": null,
+    "search_queries": [
+      "failure"
+    ],
+    "sources": [
+      "Why Early Failure Is a Feature, Not a Bug, in Innovation",
+      "What I Learned About Assumptions",
+      "Establishing a ‘Permit to Fail’ Culture for Continuous Improvement",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+      "Building Self-Healing Systems through Resilience Engineering"
+    ],
+    "seconds": 3.44
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "8. Failure and growth",
+    "run": 3,
+    "turn": 2,
+    "question": "What did he change afterward?",
+    "answer_md": "🐾 Reflecting on the incident with the Fortune 500 financial services client, Matt implemented several key changes to prevent similar failures in the future. He recognized the critical importance of validating IAM controls and verifying environment boundaries from the outset of any project. This became a day-one responsibility for him, ensuring that all access permissions were correctly configured and that environments were clearly defined and isolated.\n\nAdditionally, Matt prioritized the scrubbing of Personally Identifiable Information (PII) in all downstream environments to prevent unintentional data exposure. He also emphasized the importance of risk ownership, taking proactive steps to identify and mitigate potential risks early in the project lifecycle.\n\nThese changes were aimed at strengthening the security and integrity of the systems he managed, ensuring that assumptions were no longer left unchecked and that comprehensive checks were in place to safeguard against similar incidents.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 1.98
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "8. Failure and growth",
+    "run": 4,
+    "turn": 1,
+    "question": "Tell me about a time he failed.",
+    "answer_md": "🐾 Found it!\n\nMatt encountered a significant failure while working as a Senior Technology Architecture Manager on a global platform modernization project for a **Fortune 500 financial services client**. The project involved multiple environments, including development, QA, UAT, and production. Under delivery pressure, Matt assumed that the existing IAM controls, environment boundaries, and data masking were correctly set up, based on inherited documentation from prior phases.\n\nThe failure occurred when an offshore tester accidentally triggered an email job in the UAT environment, which sent communications containing unmasked production data to thousands of real clients. This incident was due to insufficient IAM checks, unclear environment boundaries, and the presence of unmasked production data in downstream environments—assumptions Matt had not verified.\n\nTaking accountability for the incident, Matt led the team through a root cause analysis and remediation process. He worked with the team to understand what happened and implemented corrective controls. Unfortunately, the client demanded the removal of the tester from the project, which highlighted the systemic nature of the failure and reinforced Matt's belief that leaders must own the environments their teams operate in. This experience taught Matt that assumptions are risks in disguise and emphasized the importance of IAM validation, environment verification, PII scrubbing, and risk ownership as day-one leadership responsibilities in his delivery approach.",
+    "rejection_reason": null,
+    "search_queries": [
+      "failure"
+    ],
+    "sources": [
+      "Why Early Failure Is a Feature, Not a Bug, in Innovation",
+      "What I Learned About Assumptions",
+      "Establishing a ‘Permit to Fail’ Culture for Continuous Improvement",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+      "Building Self-Healing Systems through Resilience Engineering"
+    ],
+    "seconds": 3.49
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "8. Failure and growth",
+    "run": 4,
+    "turn": 2,
+    "question": "What did he change afterward?",
+    "answer_md": "🐾 Found it!\n\nAfter the incident with the unmasked production data being sent to real clients, Matt made several significant changes to his approach to prevent similar issues in the future. He prioritized implementing corrective controls and ensuring that IAM validation, environment verification, and PII scrubbing were integral parts of the project from the very beginning. Matt emphasized the importance of not making assumptions about the setup of IAM controls and environment boundaries, recognizing these as potential risks.\n\nHe also took ownership of the environments his teams operated in, reinforcing the idea that leaders must be directly involved in verifying and validating these critical components. This experience led Matt to adopt a more proactive stance in risk management, ensuring that such responsibilities were addressed as day-one priorities in his delivery approach. By making these changes, Matt aimed to enhance the security and reliability of the systems his teams worked on, preventing similar failures from occurring in the future.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 2.63
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "8. Failure and growth",
+    "run": 5,
+    "turn": 1,
+    "question": "Tell me about a time he failed.",
+    "answer_md": "🐾 I know just the story.\n\nIn a significant project for a **Fortune 500 financial services client**, Matt faced a challenging situation where his assumptions led to a critical error. As the tech lead on a global platform modernization delivery, Matt was responsible for ensuring the integrity of multiple environments, including development, QA, UAT, and production. However, under delivery pressure, he relied on inherited documentation and assumed that the Identity and Access Management (IAM) controls and environment boundaries were correctly configured.\n\nThis assumption proved costly when an offshore tester accidentally triggered an email job in the UAT environment. The job sent communications containing unmasked production data to thousands of real clients. The root cause was insufficient IAM checks, unclear environment boundaries, and production data that had not been scrubbed from downstream environments. Matt took full accountability for the incident, leading the team through a root cause analysis and remediation process.\n\nThis experience taught Matt that assumptions are risks in disguise. He learned the importance of validating IAM configurations, verifying environment boundaries, and ensuring data masking as essential leadership responsibilities from day one. Despite the incident's severity, Matt's leadership in addressing the failure and implementing corrective measures reinforced his belief that leaders must own the environments their teams operate in.",
+    "rejection_reason": null,
+    "search_queries": [
+      "failure"
+    ],
+    "sources": [
+      "Why Early Failure Is a Feature, Not a Bug, in Innovation",
+      "What I Learned About Assumptions",
+      "Establishing a ‘Permit to Fail’ Culture for Continuous Improvement",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+      "Building Self-Healing Systems through Resilience Engineering"
+    ],
+    "seconds": 3.72
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "8. Failure and growth",
+    "run": 5,
+    "turn": 2,
+    "question": "What did he change afterward?",
+    "answer_md": "🐾 Let me share what happened next.\n\nFollowing the incident with the **Fortune 500 financial services client**, Matt made several critical changes to prevent similar issues in the future. He recognized the importance of not relying solely on inherited documentation and assumptions. Instead, he implemented a more rigorous process for validating Identity and Access Management (IAM) configurations and verifying environment boundaries.\n\nMatt also emphasized the need for data masking in downstream environments to ensure that production data was adequately protected. He took these steps as essential leadership responsibilities, understanding that leaders must own the environments their teams operate in from the very beginning. Through these changes, Matt aimed to enhance the security and integrity of the environments, reducing the risk of similar incidents occurring again.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 1.94
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "10. Accepting an offer",
+    "run": 1,
+    "turn": 1,
+    "question": "Tell me about his Norfolk Southern work.",
+    "answer_md": "Got it! 🐾\n\nAt **Norfolk Southern**, Matt led a significant transformation of their legacy systems, focusing on modernizing the Revenue and Shipment Planning applications. These systems, originally running on a mainframe from the 1970s, were costly to maintain and lacked the capability for real-time data integration and analytics. This hindered revenue accuracy and operational efficiency. Matt's task was to transition these systems to a cloud-native architecture, which involved decomposing monolithic applications into microservices and incrementally replacing components on live production systems. This approach ensured that the modernization process did not disrupt ongoing rail operations.\n\nMatt implemented a hybrid architecture where the mainframe remained the system of record while new APIs, microservices, and databases like CockroachDB were introduced. This setup allowed for real-time revenue tracking and adjustments based on dynamic shipment data, replacing the outdated batch-processed reporting. The use of Kubernetes and CI/CD automation facilitated the deployment and scaling of new services, improving system reliability and reducing downtime.\n\nThe transformation resulted in a **95%** coverage of targeted use cases for the Shipper Revenue System (SRS) UI MVP, capturing real orders with clean data. The modernization efforts led to faster deployment cycles, improved scalability, and increased customer satisfaction. Additionally, the cloud-native architecture reduced maintenance expenses and established a scalable foundation for future growth. This project not only modernized **Norfolk Southern**'s systems but also positioned them for future innovation by enabling agile adaptation to new business demands.",
+    "rejection_reason": null,
+    "search_queries": [
+      "Norfolk Southern"
+    ],
+    "sources": [
+      "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+      "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+      "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+    ],
+    "seconds": 4.18
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "10. Accepting an offer",
+    "run": 1,
+    "turn": 2,
+    "question": "Sure, the deep dive on that one.",
+    "answer_md": "🐾 Found it!\n\nAt **Norfolk Southern**, Matt tackled the modernization of their legacy Revenue and Shipment Planning systems, which were running on a mainframe from the 1970s. These systems were not only costly to maintain but also lacked the capability for complex data integration and real-time analytics, which were crucial for accurate revenue tracking and operational efficiency. The challenge was to transition these systems to a cloud-native, modular architecture without disrupting ongoing rail operations.\n\nMatt led cross-functional workshops to align technical and business priorities, mapping out API and data flow requirements using exercises like the Boris Exercise. He designed a hybrid architecture that maintained the mainframe as the system of record while introducing APIs, microservices, and modern databases like CockroachDB. This setup enabled real-time revenue tracking and shipment adjustments, replacing the outdated batch-processed reporting. The use of Kubernetes and CI/CD automation facilitated the deployment and scaling of new services, improving system reliability and reducing downtime.\n\nThe transformation resulted in a **95%** coverage of targeted use cases for the Shipper Revenue System (SRS) UI MVP, capturing real orders with clean data. The cloud-native architecture reduced maintenance expenses and improved resource utilization, setting a scalable foundation for future growth. Additionally, the project fostered a cultural shift within **Norfolk Southern**, moving them from a mainframe mindset to a product-oriented delivery approach, co-creating in weekly iterations. This engagement not only modernized their systems but also established the CIC's delivery model, proving its effectiveness under challenging conditions.",
+    "rejection_reason": null,
+    "search_queries": [
+      "Norfolk Southern"
+    ],
+    "sources": [
+      "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+      "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+      "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+    ],
+    "seconds": 3.68
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "10. Accepting an offer",
+    "run": 1,
+    "turn": 3,
+    "question": "How long did that take?",
+    "answer_md": "The modernization project for **Norfolk Southern** took approximately **18 months**. This timeline included the transition of their legacy systems to a cloud-native architecture, ensuring minimal disruption to ongoing rail operations while achieving significant improvements in system reliability and scalability.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 1.22
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "10. Accepting an offer",
+    "run": 2,
+    "turn": 1,
+    "question": "Tell me about his Norfolk Southern work.",
+    "answer_md": "🐾 Here's a great example.\n\nAt **Norfolk Southern**, Matt led the modernization of their revenue management and shipment planning systems, which were previously on a legacy mainframe dating back to the 1970s. These systems were costly to maintain and couldn't handle complex data integration or real-time analytics, hindering revenue accuracy and scalability. The modernization effort involved transitioning these systems to a cloud-native architecture. Matt implemented event storming, the Boris Exercise, and SNAP-E documentation to define the architecture and ensure alignment with project goals.\n\nThe modernization resulted in several significant improvements. The new cloud-native architecture enabled real-time revenue tracking and adjustments, replacing the outdated batch processing. This transition reduced operational costs and improved resource utilization. The implementation of a modular, cloud-based foundation allowed **Norfolk Southern** to adapt and expand its revenue and planning systems as business needs evolved. Additionally, real-time shipment adjustments improved customer satisfaction by maximizing asset utilization.\n\nMatt's work at **Norfolk Southern** also included unifying their product teams around cloud-native practices. He designed and delivered a tailored CIC Academy course over six months, which focused on value-driven prioritization through OKRs, quality testable stories, and pair programming. This upskilling effort enabled **Norfolk Southern** contributors to learn modern technologies like Angular, Node, Spring Boot, and cloud-native concepts, equipping them with the skills to manage and support the new application state after **Accenture**'s involvement ended.",
+    "rejection_reason": null,
+    "search_queries": [
+      "Norfolk Southern"
+    ],
+    "sources": [
+      "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+      "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+      "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+    ],
+    "seconds": 4.68
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "10. Accepting an offer",
+    "run": 2,
+    "turn": 2,
+    "question": "Sure, the deep dive on that one.",
+    "answer_md": "🐾 This is a strong one.\n\nAt **Norfolk Southern**, Matt tackled the challenge of modernizing their legacy revenue management and shipment planning systems, which were costly to maintain and incapable of handling complex data integration or real-time analytics. These limitations hindered revenue accuracy and scalability, necessitating a transition to a cloud-native architecture. Matt led cross-functional workshops to identify critical business domains and align technical and business priorities. He employed event storming and the Boris Exercise to map out API and data flow requirements, creating a target architecture capable of real-time data processing for shipment adjustments and revenue updates.\n\nThe modernization efforts resulted in several significant improvements. The new cloud-native architecture enabled real-time revenue tracking and adjustments, replacing outdated batch processing. This transition reduced operational costs and improved resource utilization. Additionally, real-time shipment adjustments improved customer satisfaction by maximizing asset utilization. The implementation of a modular, cloud-based foundation allowed **Norfolk Southern** to adapt and expand its revenue and planning systems as business needs evolved.\n\nMatt also focused on unifying **Norfolk Southern**'s product teams around cloud-native practices. He designed and delivered a tailored CIC Academy course over six months, which emphasized value-driven prioritization through OKRs, quality testable stories, and pair programming. This upskilling effort enabled **Norfolk Southern** contributors to learn modern technologies like Angular, Node, Spring Boot, and cloud-native concepts, equipping them with the skills to manage and support the new application state after **Accenture**'s involvement ended.\n\nThe transformation at **Norfolk Southern** was a comprehensive effort that not only modernized their systems but also empowered their teams with the skills and practices needed to sustain and expand upon these improvements.",
+    "rejection_reason": null,
+    "search_queries": [
+      "Norfolk Southern"
+    ],
+    "sources": [
+      "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+      "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+      "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+    ],
+    "seconds": 3.97
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "10. Accepting an offer",
+    "run": 2,
+    "turn": 3,
+    "question": "How long did that take?",
+    "answer_md": "🐾 The tailored CIC Academy course that Matt designed and delivered for **Norfolk Southern** took six months. This course was part of the broader modernization effort, which included transitioning their systems to a cloud-native architecture and upskilling their teams.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 1.25
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "10. Accepting an offer",
+    "run": 3,
+    "turn": 1,
+    "question": "Tell me about his Norfolk Southern work.",
+    "answer_md": "🐾 This is a strong one.\n\nAt **Norfolk Southern**, Matt faced the challenge of modernizing legacy systems that were costly to maintain and lacked the ability to handle complex data integration or real-time analytics. The existing Revenue and Shipment Planning platform was hindering revenue accuracy and operational efficiency. To address this, Matt transitioned these systems to a cloud-native architecture. He used event storming, the Boris Exercise, and SNAP-E documentation to map out the necessary API and data flow requirements. This approach enabled real-time revenue tracking and adjustments based on dynamic shipment data, while reducing maintenance expenses and improving resource utilization.\n\nMatt also tackled the misalignment across **Norfolk Southern**'s product teams regarding cloud-native development. He designed a tailored CIC Academy course to bridge knowledge gaps and align teams on cloud modernization principles. This involved interactive sessions and pair programming, which transformed the team's approach to development and enabled them to own their backlog and priorities.\n\nFurthermore, Matt led the rearchitecture of **Norfolk Southern**'s mission-critical applications from a monolithic mainframe to a microservices-based architecture. This incremental approach allowed the mainframe to remain operational while new services were developed and deployed independently. The implementation of Docker and Kubernetes facilitated scaling and improved system reliability, while automated CI/CD pipelines accelerated feature delivery.\n\nThe results were significant: faster deployment cycles, improved scalability, and increased platform reliability. The modernization efforts positioned **Norfolk Southern** for future innovation, with a modular, cloud-native foundation that supports agile adaptation to new business demands.",
+    "rejection_reason": null,
+    "search_queries": [
+      "Norfolk Southern"
+    ],
+    "sources": [
+      "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+      "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+      "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+    ],
+    "seconds": 3.65
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "10. Accepting an offer",
+    "run": 3,
+    "turn": 2,
+    "question": "Sure, the deep dive on that one.",
+    "answer_md": "Got it! 🐾\n\nAt **Norfolk Southern**, Matt led a comprehensive modernization effort to transition legacy systems to a cloud-native architecture. The existing Revenue and Shipment Planning platform was outdated, costly to maintain, and unable to handle complex data integration or real-time analytics. This hindered revenue accuracy and operational efficiency. Matt addressed these challenges by transitioning the systems to a modular cloud-native architecture. He utilized event storming, the Boris Exercise, and SNAP-E documentation to map out API and data flow requirements, enabling real-time revenue tracking and adjustments based on dynamic shipment data. This transition reduced maintenance expenses and improved resource utilization, establishing a scalable foundation for future growth.\n\nAdditionally, Matt designed a tailored CIC Academy course to unify **Norfolk Southern**'s product teams around cloud-native practices. The teams were initially fragmented and misaligned, slowing modernization efforts. Through interactive sessions and pair programming, Matt helped the teams embrace modern software practices, prioritize based on business value, and take ownership of their backlog. This transformation enabled the teams to adopt a product mindset and collaborate more effectively.\n\nMatt also spearheaded the rearchitecture of **Norfolk Southern**'s mission-critical applications from a monolithic mainframe to a microservices-based architecture. This incremental approach allowed for the mainframe to remain operational while new services were developed and deployed independently. The implementation of Docker and Kubernetes facilitated scaling and improved system reliability, while automated CI/CD pipelines accelerated feature delivery.\n\nThe results were significant: faster deployment cycles, improved scalability, and increased platform reliability. The modernization efforts positioned **Norfolk Southern** for future innovation, with a modular, cloud-native foundation that supports agile adaptation to new business demands.",
+    "rejection_reason": null,
+    "search_queries": [
+      "Norfolk Southern"
+    ],
+    "sources": [
+      "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+      "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+      "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+    ],
+    "seconds": 4.73
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "10. Accepting an offer",
+    "run": 3,
+    "turn": 3,
+    "question": "How long did that take?",
+    "answer_md": "The transformation effort at **Norfolk Southern** took approximately **18 months** to complete. This timeframe included transitioning the legacy systems to a cloud-native architecture, designing and implementing the CIC Academy course for team alignment, and rearchitecting the mission-critical applications to a microservices-based architecture.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 1.92
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "10. Accepting an offer",
+    "run": 4,
+    "turn": 1,
+    "question": "Tell me about his Norfolk Southern work.",
+    "answer_md": "🐾 Tracking this down...\n\nAt **Norfolk Southern**, Matt led a comprehensive modernization effort for their legacy revenue management and shipment planning systems. These systems were costly to maintain and struggled with complex data integration and real-time analytics, which impacted revenue accuracy and scalability. Matt transitioned these systems to a modular, cloud-native architecture. He employed techniques like event storming, the Boris Exercise, and SNAP-E documentation to drive this transformation. This shift improved revenue tracking accuracy, reduced operational costs, and laid a scalable foundation for future growth.\n\nMatt also focused on unifying **Norfolk Southern**'s teams around cloud-native practices. The product teams were fragmented and misaligned, which slowed modernization efforts. To address this, Matt designed and delivered a tailored CIC Academy course over six months. This course emphasized value-driven prioritization through OKRs, quality testable stories, and pair programming. Pair programming, in particular, addressed the challenge of scarce domain knowledge by rotating it into shared team knowledge. This approach enabled **Norfolk Southern** contributors to learn new technologies like Angular, Node, and Spring Boot, empowering them to manage the application post-**Accenture**.\n\nThe modernization of **Norfolk Southern**'s revenue engine was another key achievement. The existing system was monolithic and fragile, running on a mainframe from the 1970s. Matt led the rearchitecture by decomposing monoliths into microservices, maintaining interoperability with API gateways and anti-corruption layers. This approach allowed for faster deployment cycles, improved scalability, and reduced downtime. The result was a more reliable platform that positioned **Norfolk Southern** for future innovation.",
+    "rejection_reason": null,
+    "search_queries": [
+      "Norfolk Southern"
+    ],
+    "sources": [
+      "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+      "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+      "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+    ],
+    "seconds": 5.15
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "10. Accepting an offer",
+    "run": 4,
+    "turn": 2,
+    "question": "Sure, the deep dive on that one.",
+    "answer_md": "🐾 Perfect, here's what I found.\n\nAt **Norfolk Southern**, Matt led a significant modernization effort for their legacy systems, which were costly to maintain and couldn't handle complex data integration or real-time analytics. The modernization was crucial because these limitations were affecting revenue accuracy and scalability. Matt transitioned the systems to a modular, cloud-native architecture using event storming, the Boris Exercise, and SNAP-E documentation. This transition improved revenue tracking accuracy, reduced operational costs, and established a scalable foundation for future growth.\n\nThe modernization also involved unifying **Norfolk Southern**'s teams around cloud-native practices. The product teams were fragmented and misaligned, which slowed modernization efforts. Matt designed and delivered a tailored CIC Academy course over six months. This course emphasized value-driven prioritization through OKRs, quality testable stories, and pair programming. Pair programming, in particular, addressed the challenge of scarce domain knowledge by rotating it into shared team knowledge. This approach empowered **Norfolk Southern** contributors to learn new technologies like Angular, Node, and Spring Boot, enabling them to manage the application post-**Accenture**.\n\nAnother key achievement was the modernization of **Norfolk Southern**'s revenue engine, which ran on a mainframe from the 1970s. Matt led the rearchitecture by decomposing monoliths into microservices, maintaining interoperability with API gateways and anti-corruption layers. This approach allowed for faster deployment cycles, improved scalability, and reduced downtime. The result was a more reliable platform that positioned **Norfolk Southern** for future innovation.\n\nOverall, Matt's efforts at **Norfolk Southern** resulted in real-time revenue tracking, reduced maintenance expenses, improved customer satisfaction, and a modular, cloud-based foundation for future growth. The modernization not only improved operational efficiency but also aligned the teams on cloud-native practices, enabling them to support and manage the new system independently.",
+    "rejection_reason": null,
+    "search_queries": [
+      "Norfolk Southern"
+    ],
+    "sources": [
+      "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+      "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+      "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+    ],
+    "seconds": 3.81
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "10. Accepting an offer",
+    "run": 4,
+    "turn": 3,
+    "question": "How long did that take?",
+    "answer_md": "The modernization effort at **Norfolk Southern** took approximately **6 months**. During this time, Matt delivered a tailored CIC Academy course to unify the teams around cloud-native practices and implemented the transition to a modular, cloud-native architecture.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 1.18
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "10. Accepting an offer",
+    "run": 5,
+    "turn": 1,
+    "question": "Tell me about his Norfolk Southern work.",
+    "answer_md": "🐾 Here's a great example.\n\nAt **Norfolk Southern**, Matt faced the challenge of modernizing their legacy Revenue and Shipment Planning systems, which were costly to maintain and couldn't handle complex data integration or real-time analytics. This hindered revenue accuracy and scalability. The task was to transition these systems to a cloud-native, modular architecture to improve revenue tracking accuracy and reduce operational costs.\n\nMatt led the transition by conducting cross-functional workshops to identify critical business domains and align technical and business priorities. He utilized event storming and the Boris Exercise to map out API and data flow requirements, creating a target architecture capable of real-time data processing. The approach included designing anti-corruption layers for legacy system integration and using asynchronous messaging for real-time updates.\n\nThe result was a significant improvement in **Norfolk Southern**'s operations. The new cloud-native architecture enabled real-time revenue tracking and adjustments based on dynamic shipment data, replacing the outdated batch-processed legacy reporting. This modernization reduced maintenance expenses and improved resource utilization. Furthermore, the platform established a scalable foundation for future growth, allowing **Norfolk Southern** to adapt and expand its revenue and planning systems as business needs evolved.",
+    "rejection_reason": null,
+    "search_queries": [
+      "Norfolk Southern"
+    ],
+    "sources": [
+      "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+      "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+      "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+    ],
+    "seconds": 3.28
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "10. Accepting an offer",
+    "run": 5,
+    "turn": 2,
+    "question": "Sure, the deep dive on that one.",
+    "answer_md": "Got it! 🐾\n\nAt **Norfolk Southern**, Matt led a significant transformation of their legacy systems, which were built on a mainframe dating back to the 1970s. These systems were resilient but outdated, unable to handle modern demands for real-time data and flexibility. The challenge was to modernize these mission-critical applications without disrupting live rail operations.\n\nMatt's approach involved decomposing the monolithic applications into microservices, allowing for independent development, deployment, and scaling. He used API gateways and anti-corruption layers to maintain interoperability between the old and new systems, ensuring a seamless transition. Docker and Kubernetes were implemented to manage these services, and automated CI/CD pipelines were established to speed up deployment and reduce errors.\n\nThe modernization effort resulted in faster deployment cycles, improved scalability, and reduced downtime, enhancing overall platform reliability. This allowed **Norfolk Southern** to handle peak loads more effectively and positioned them for future innovation. The transformation enabled them to adapt quickly to new business demands, providing a modular, cloud-native foundation for ongoing development.\n\nAdditionally, Matt focused on aligning **Norfolk Southern**'s teams around cloud-native practices. He designed a tailored training program to bridge knowledge gaps and foster collaboration. This included sessions on cloud-native development, DevOps, and modern software practices. By overcoming resistance to practices like pair programming, Matt helped the teams embrace new ways of working, ultimately leaving them with the skills needed to manage and support the modernized systems independently.",
+    "rejection_reason": null,
+    "search_queries": [
+      "Norfolk Southern"
+    ],
+    "sources": [
+      "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+      "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+      "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+    ],
+    "seconds": 4.23
+  },
+  {
+    "arm": "system_instructions",
+    "conversation": "10. Accepting an offer",
+    "run": 5,
+    "turn": 3,
+    "question": "How long did that take?",
+    "answer_md": "🐾 The transformation of **Norfolk Southern's** legacy systems to a cloud-native architecture took approximately **18 months**. This period included decomposing the monolithic applications into microservices, implementing API gateways, and establishing automated CI/CD pipelines.",
+    "rejection_reason": null,
+    "search_queries": [],
+    "sources": [],
+    "seconds": 1.26
+  }
+]

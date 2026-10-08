@@ -1,0 +1,118 @@
+{
+  "basis": "Turn-level pass (P) / fail (F) per run against the expected answers in tests/fixtures/evaluator_conversations.md: correct referent, materially correct facts, honest uncertainty, contextual continuity. Transcribed from the verdicts reported in the Oct 6-8, 2026 Code session; not rescored. Turns not listed under 'turns' were not hand-scored.",
+  "arm": "Arm A plus a condense call (DEFAULT_CLASSIFICATION_MODEL) and no gate on the answer path",
+  "runs": 3,
+  "turns": {
+    "1.2": {
+      "runs": [
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "1.3": {
+      "runs": [
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "2.2": {
+      "runs": [
+        "F",
+        "F",
+        "F"
+      ]
+    },
+    "3.2": {
+      "runs": [
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "4.2": {
+      "runs": [
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "4.3": {
+      "runs": [
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "5.2": {
+      "runs": [
+        "F",
+        "P",
+        "F"
+      ],
+      "note": "only r2 makes the in-house comparison"
+    },
+    "6.2": {
+      "runs": [
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "7.2": {
+      "runs": [
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "8.2": {
+      "runs": [
+        "P",
+        "F",
+        "F"
+      ],
+      "note": "r2/r3 invented 'in subsequent projects' consequences"
+    },
+    "9.2": {
+      "runs": [
+        "F",
+        "F",
+        "F"
+      ],
+      "note": "condensed query carried payments into 'leadership style'"
+    },
+    "9.3": {
+      "runs": [
+        "F",
+        "F",
+        "F"
+      ],
+      "note": "payments example"
+    },
+    "9.4": {
+      "runs": [
+        "P",
+        "P",
+        "P"
+      ],
+      "note": "consistent with its own (wrong) turn-3 example"
+    },
+    "10.3": {
+      "runs": [
+        "F",
+        "F",
+        "F"
+      ],
+      "note": "no invented number, but 'several months' unhedged and none says the duration isn't recorded"
+    }
+  },
+  "not_scored": "turn 1s spot-checked only; 10.1-10.2",
+  "totals": {
+    "follow_ups_1_9": "26/39"
+  },
+  "other_measurements": {
+    "gate_would_refuse_condensed": "0/75"
+  }
+}

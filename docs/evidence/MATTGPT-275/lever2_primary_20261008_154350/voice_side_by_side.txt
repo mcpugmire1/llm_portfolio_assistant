@@ -1,0 +1,242 @@
+Voice check: first answers, runs 1 and 2. OLD = production pipeline today (from the Arm A probe's old arm). LEVER 2 + PRIMARY = lever 2 with the first search rendered as <primary_story>/<supporting_story>. LEVER 2 (as before) for reference.
+
+################ PAYMENTS | run 1 | Q: Tell me about his payments work.
+
+--- OLD (production today)
+🐾 Here's a great example.
+
+At **JP Morgan Chase**, Matt played a pivotal role in building the payment engine behind the ACCESS Next Generation platform. The challenge was significant: the platform needed to serve over **135,000** clients across **180+ countries** with capabilities far beyond the out-of-box offerings of Bottomline Technologies' WebSeries platform. Matt, as the Technology Delivery Lead, managed a team of over **40** professionals and was embedded at Bottomline's offices to design and deliver bespoke payment modules. These included ACH, wire, FX/cross-border, and EFTPS tax payments, each with unique formatting, validation, compliance, and workflow requirements.
+
+Matt's innovative approach involved creating a custom Message Authentication Code (MAC) security layer and integrating real-time global reporting, which provided unified visibility into cash positions across various accounts. He also implemented payment-type-specific entitlement controls and integrated the payment engine with JP Morgan's centralized transaction monitoring system. This integration screened trillions of daily transactions for suspicious activity, enhancing security and compliance.
+
+The result was the successful launch of the ACCESS platform in April 2011, which consolidated multiple regional systems into a single digital experience. This transformation not only improved the user experience for corporate treasurers but also positioned ACCESS as JP Morgan's flagship corporate digital channel, later recognized as #1 in digital channels by Coalition Greenwich.
+
+--- LEVER 2 + PRIMARY (query: ['payments'])
+🐾 Here's a detailed look at Matt's work in the payments domain, particularly with **JP Morgan Chase**.
+
+Matt played a crucial role in building the payment engine behind JP Morgan's ACCESS platform. The initiative was high-stakes, aiming to create a unified global corporate banking portal for over **135,000** clients across **180+** countries. The existing platform, based on Bottomline Technologies' WebSeries, needed extensive customization to meet the diverse needs of JP Morgan's vast client base. Each payment type had unique formatting, validation, compliance, and workflow requirements, which the out-of-box solution could not support.
+
+As the Technology Delivery Lead, Matt managed a team of over **40** professionals across **Accenture** and JP Morgan, working closely with Bottomline Technologies. He designed and delivered bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. Additionally, he implemented a Message Authentication Code (MAC) security layer, contextual help, payment-type-specific RBAC, SSO, and real-time global reporting. His leadership ensured the platform's seamless integration with JP Morgan's centralized transaction monitoring system, enhancing security and compliance.
+
+The result was the successful launch of the ACCESS Next Generation platform in April 2011, consolidating previously separate regional systems into a single digital experience. This transformation made ACCESS JP Morgan's flagship corporate digital channel, recognized as #1 in digital channels by Coalition Greenwich.
+
+--- LEVER 2, as before (query: ['payments'])
+🐾 Here's a great example of Matt's work in the payments domain.
+
+At **JP Morgan Chase**, Matt played a pivotal role in building the ACCESS Next Generation platform, which served as a unified global corporate banking portal. This initiative was driven by the need to support **135,000+** corporations, financial institutions, governments, and municipalities across **180+** countries with payment modules, security controls, and user experience capabilities far beyond the out-of-box offerings of Bottomline Technologies' WebSeries platform.
+
+Matt, as the Technology Delivery Lead, managed a team of over **40** professionals and was deeply embedded at Bottomline's Portsmouth offices. He was responsible for designing and delivering bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He also implemented a Message Authentication Code (MAC) security layer, contextual help, payment-type-specific RBAC, SSO, and real-time global reporting. The platform's launch in April 2011 marked a significant transformation, consolidating previously separate regional systems into a single digital experience. This platform has since been recognized as the #1 digital channel by Coalition Greenwich.
+
+In another engagement, Matt designed the centralized Integrated Global Payments Interface for JP Morgan, which launched in April 2011. This interface provided corporate treasurers with a single entry point for initiating various payment types across **12 countries**, eliminating the need for separate local logins and regional payment systems. The gateway handled message translation across multiple formats and protocols, thus reducing operational complexity and compliance risk in the legacy environment.
+
+################ PAYMENTS | run 2 | Q: Tell me about his payments work.
+
+--- OLD (production today)
+Got it! 🐾
+
+At **JP Morgan Chase**, Matt played a pivotal role in building the payment engine behind the ACCESS Next Generation platform. This initiative was crucial for JP Morgan's 135,**000+ clients** across **180+ countries**, who required advanced payment modules beyond the capabilities of the existing platform. Matt led a blended team of over **40 members**, working closely with Bottomline Technologies to design and deliver bespoke payment modules such as ACH, wire, FX/cross-border, and EFTPS tax payments. He also implemented a MAC security layer, contextual help, and payment-type-specific RBAC, amongst other features. The ACCESS platform launched in April 2011, consolidating regional systems into a unified global corporate banking portal, recognized as the #1 digital channel by Coalition Greenwich.
+
+In another engagement with **RBC**, Matt addressed challenges in managing cross-border payments and FX transactions. He designed end-to-end workflows, integrating real-time FX tools and automated alerts, which improved SLA compliance and equipped business clients with multi-currency management capabilities. This work closed a competitive gap in **RBC** Express's corporate treasury offering.
+
+At **American Express**, Matt focused on transforming the developer experience for the Virtual Payments Platform. He led the redesign of the developer portal, incorporating environment virtualization and lean XP practices. This resulted in a reduction of onboarding time and integration complexities, delivering over 261 additional story points of customer-focused value.
+
+--- LEVER 2 + PRIMARY (query: ['payments'])
+🐾 Here's a strong example of Matt's work in payments.
+
+At **JP Morgan Chase**, Matt played a pivotal role in building the ACCESS Next Generation platform, which became the bank's flagship corporate digital banking portal. The project was high-stakes, with the need to serve over **135,000** corporations, financial institutions, governments, and municipalities across **180+** countries. The challenge was that JP Morgan's client base required payment modules, security controls, and user experience capabilities that went beyond the out-of-box offerings of Bottomline Technologies' WebSeries Global Cash Management platform.
+
+Matt, as the Technology Delivery Lead, managed a team of over **40** professionals and was responsible for designing and delivering bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He implemented a Message Authentication Code (MAC) security layer and contextual help features, ensuring compliance and reducing errors. Matt's work also involved integrating payment-type-specific entitlement controls and real-time global reporting, which transformed the corporate treasurer experience.
+
+The ACCESS platform launched in April 2011, consolidating previously separate regional systems into a unified digital experience. It provided purpose-built payment modules with module-specific security controls and compliance validation. This initiative not only enhanced operational efficiency but also positioned JP Morgan as a leader in digital channels, recognized as #1 by Coalition Greenwich.
+
+In another engagement with **RBC**, Matt designed end-to-end cross-border payment workflows for **RBC** Express, addressing challenges in managing cross-border payments and FX transactions. He integrated real-time FX tools and automated alerts, streamlining batch processing and improving SLA compliance for time-sensitive transactions. This work closed a competitive gap in **RBC**'s corporate treasury offering and equipped business clients to manage multi-currency accounts independently.
+
+--- LEVER 2, as before (query: ['payments'])
+🐾 Here's a great example of Matt's work in the payments domain.
+
+At **JP Morgan Chase**, Matt played a pivotal role in building the ACCESS Next Generation platform, a unified global corporate banking portal. The challenge was to create a system that could handle the needs of **135,000+** corporations, financial institutions, governments, and municipalities across **180+** countries. The existing platform from Bottomline Technologies was insufficient for JP Morgan's requirements, necessitating bespoke development for payment modules like ACH, wire, FX/cross-border, and EFTPS tax payments.
+
+Matt, as the Technology Delivery Lead, managed a team of over **40** professionals across **Accenture** and JP Morgan. He designed and delivered custom payment modules and security layers, including ACH Credits and Direct Debits, FX integration, and wire payment capabilities. He also implemented a Message Authentication Code (MAC) security layer for payment verification and developed contextual help to reduce errors and support calls.
+
+The result was the successful launch of the ACCESS platform in April 2011. This platform provided real-time global reporting, single sign-on across treasury functions, and trade finance integration, transforming the corporate treasurer experience. The ACCESS platform was recognized as the #1 digital channel by Coalition Greenwich, consolidating previously separate regional systems into a single digital experience.
+
+################ LEADERSHIP | run 1 | Q: What’s his leadership style?
+
+--- OLD (production today)
+🐾 On it!
+
+Matt's leadership style is characterized by empathy, clarity, and a focus on creating environments where teams can excel. Throughout his career, including his role as a Technology & Innovation Leader at **Accenture**, Matt has consistently worked to dismantle barriers that hinder team performance. He emphasizes psychological safety, enabling team members to speak honestly and take ownership of their work. Decisions are pushed to those closest to the work, fostering a sense of empowerment and accountability.
+
+At the Cloud Innovation Center, Matt's approach resulted in a **4x delivery acceleration** as teams adopted lean product and modern engineering practices. By grounding the engineering culture in automation and continuous delivery, he ensured that teams had the confidence to deliver high-quality work. His leadership philosophy also includes transparency, direct feedback, and open communication, which have been crucial in building trust and delivering meaningful work.
+
+In his role at **Norfolk Southern**, Matt addressed a quality crisis by implementing hands-on coaching and cultural transformation. He used the Samman coaching style, which involved boot camps, coding katas, and practice learning sessions, to rebuild the team's discipline. This approach not only reduced defect rates but also restored client confidence through transparency and visible improvement.
+
+Matt's leadership extends beyond immediate team dynamics to organizational structure. At the Cloud Innovation Center, he built and managed a **150+ practitioner organization** with a deliberately flat structure, maintaining near-zero attrition in the first two years. His management practices included a four-channel hiring engine, a real-time peer feedback model, and a focus on sustainable leadership. Matt's leadership style is deeply rooted in his commitment to creating environments where intensity is balanced with humanity, ensuring a sustainable pace for both himself and his teams.
+
+--- LEVER 2 + PRIMARY (query: ['leadership style'])
+🐾 Matt's leadership style is grounded in empathy, clarity, and purpose. He focuses on creating environments where teams can thrive and perform at their best. At **Accenture**, he led the Cloud Innovation Center, emphasizing psychological safety, decentralized decision-making, and a culture of trust and shared purpose. This approach enabled teams to accelerate delivery by **4x** and improve quality through modern engineering practices.
+
+Matt prioritizes pushing decisions to those closest to the work, fostering an atmosphere where team members feel safe to take risks and speak honestly. He uses transparency, direct feedback, and open communication to build high-trust engineering cultures. His leadership philosophy also includes sustainable practices, where he emphasizes the importance of work-life balance and self-care as essential components of effective leadership.
+
+In the Cloud Innovation Center, Matt transformed team dynamics by shifting the focus from individual recognition to collective ownership. He established weekly brainstorming sessions to encourage open communication and innovation, resulting in more efficient ways to achieve project milestones. By embedding agile and lean practices, he empowered teams to adjust strategies based on real-time feedback and user needs.
+
+Overall, Matt's leadership style is about building teams that trust each other, delivering work they are proud of, and maintaining a sustainable pace that balances intensity with humanity.
+
+--- LEVER 2, as before (query: ['leadership style'])
+🐾 Here's what defines Matt's leadership style.
+
+Matt's leadership approach is centered around creating environments where teams can thrive, emphasizing trust, clarity, and shared purpose over rigid processes. At the **Accenture Cloud Innovation Center**, he focused on removing barriers by fostering psychological safety, empowering teams to make decisions closest to the work, and grounding engineering culture in modern practices like automation and continuous delivery. This approach led to a **4x acceleration in delivery** once teams embraced lean product and modern engineering practices.
+
+He also emphasizes sustainable leadership, having learned from his experiences of leading at an unsustainable pace. Matt has redefined his leadership to include boundaries and self-care as essential disciplines. He prioritizes health and recovery, ensuring that a sustainable pace is expected, not exceptional. This shift has provided him with renewed energy and clarity about the kind of leader he wants to be.
+
+Additionally, Matt transformed team cultures by shifting focus from individual recognition to collective ownership. He established weekly brainstorming sessions, aligned teams around shared goals, and celebrated contributions that advanced the mission. This approach led to innovative solutions and strengthened team cohesion and collaboration.
+
+Overall, Matt's leadership style blends empathy, clarity, and modern engineering rigor, creating high-trust environments where teams are empowered to deliver impactful outcomes.
+
+################ LEADERSHIP | run 2 | Q: What’s his leadership style?
+
+--- OLD (production today)
+🐾 Found it!
+
+Matt's leadership style is centered around creating an environment where teams can thrive by fostering trust, clarity, and shared purpose. He emphasizes psychological safety, allowing team members to speak honestly and take risks. At the Cloud Innovation Center, this approach led to a **4x delivery acceleration** as teams adopted lean product and modern engineering practices. Matt's leadership blends empathy, clarity, and engineering rigor, pushing decisions to those closest to the work and grounding the engineering culture in automation and continuous delivery.
+
+In his role at **Norfolk Southern**, Matt addressed a quality crisis by taking ownership of failures and focusing on coaching and cultural transformation. He implemented hands-on coaching, restructured agile ceremonies, and improved backlog quality, which resulted in a significant drop in defect rates and restored client confidence. This experience reinforced his belief that cultural transformation requires consistent coaching.
+
+Matt's management scope expanded to leading a **150+ person organization** at **Accenture**'s Cloud Innovation Centers. He maintained a deliberately flat structure, promoting autonomy and collective code ownership. His hiring engine sustained **4-6 net-new practitioners per week** during scaling pushes, and his evaluation system emphasized peer-driven evidence over managing up.
+
+After reflecting on his tenure at **Accenture**, Matt redefined his leadership to include boundaries, sustainable pace, and self-care. He now seeks environments where intensity is balanced with humanity and is committed to modeling sustainable leadership for his teams.
+
+--- LEVER 2 + PRIMARY (query: ['leadership style'])
+🐾 Here's a great example of Matt's leadership style.
+
+Matt's leadership approach is centered on creating an environment where teams can thrive by removing barriers and fostering trust, clarity, and shared purpose. Throughout his career, particularly at the **Accenture Cloud Innovation Center**, Matt focused on building high-trust engineering cultures and modernizing platforms. He emphasizes psychological safety, enabling team members to speak honestly and take risks. Decisions are pushed to those closest to the work, and engineering practices are grounded in automation and continuous delivery.
+
+Matt's leadership philosophy blends empathy, clarity, and modern engineering rigor. He leads with purpose, makes intent explicit, and uses transparency and open communication. His approach has resulted in a **4x acceleration in delivery** and improved quality, strengthening cross-functional trust.
+
+Additionally, Matt has redefined his leadership to include sustainable practices, such as setting clear boundaries and prioritizing health and recovery. He believes in balancing intensity with humanity and models sustainable leadership for his teams.
+
+By decentralizing decision-making and adopting servant leadership models, Matt has empowered teams to deliver high-quality, innovative solutions. This approach has led to higher engagement, improved retention, and consistently meeting project milestones.
+
+--- LEVER 2, as before (query: ['leadership style'])
+🐾 Here's a glimpse into Matt's leadership style.
+
+Matt's leadership philosophy centers on creating an environment where teams can thrive by fostering trust, clarity, and shared purpose. He emphasizes psychological safety, allowing team members to take risks and speak honestly. At the **Cloud Innovation Center**, he implemented a leadership approach that blends empathy, clarity, and modern engineering rigor. This approach led to a **4x** acceleration in delivery once teams embraced lean product and modern engineering practices.
+
+Matt's leadership style also involves decentralized decision-making. He established autonomous, cross-functional teams comprising product managers, designers, and engineers, ensuring shared ownership and decision-making authority. By adopting a servant leadership model, he acted as a facilitator, guiding teams toward solutions while allowing them to take ownership of decisions. This approach removed bottlenecks, enabling teams to deliver high-quality, innovative solutions aligned with client needs.
+
+Additionally, Matt values sustainable leadership. After reflecting on his time at **Accenture**, he redefined his leadership to include boundaries, sustainable pace, and self-care as disciplines. He prioritizes health, recovery, and focus, modeling these values for the teams he leads. This shift has led to stronger boundaries and a clearer sense of the kind of environment he needs to thrive.
+
+Overall, Matt's leadership style is characterized by empowering teams, fostering a culture of accountability and innovation, and ensuring a sustainable work environment.
+
+################ FAILURE | run 1 | Q: Tell me about a time he failed.
+
+--- OLD (production today)
+🐾 Tracking this down...
+
+During a global platform modernization delivery for a **Fortune 500 financial services client**, Matt encountered a significant failure. He assumed that the IAM controls, environment boundaries, and data masking were correctly configured. However, an offshore tester accidentally triggered an email job in the UAT environment, which sent communications containing unmasked production data to thousands of real clients. The incident was a result of relying on inherited documentation and not verifying the IAM configuration and downstream access controls.
+
+Matt took accountability for the failure and led the team through a root cause analysis and remediation process. He learned that assumptions are risks in disguise and emphasized the importance of IAM validation, environment verification, PII scrubbing, and risk ownership. These became day-one leadership responsibilities in his delivery approach. Despite his efforts to rectify the situation, the client demanded the removal of the tester from the project, highlighting the systemic nature of the failure. This experience reinforced Matt's belief that leaders must own the environments their teams operate in.
+
+--- LEVER 2 + PRIMARY (query: ['failure'])
+🐾 Here's a story about a significant challenge Matt faced.
+
+While working as the tech lead on a global platform modernization delivery for a **Fortune 500 financial services client**, Matt encountered a failure due to assumptions that were not verified. The project involved multiple environments, including development, QA, UAT, and production. Under delivery pressure, Matt assumed the IAM controls, environment boundaries, and data masking were correct based on inherited documentation from prior phases. This oversight led to an offshore tester accidentally triggering an email job in UAT, which sent communications containing unmasked production data to thousands of real clients.
+
+Matt took accountability for the incident and led the team through a root cause analysis and remediation process. He learned that assumptions are risks in disguise and emphasized the importance of IAM validation, environment verification, PII scrubbing, and risk ownership as day-one leadership responsibilities in his delivery approach. Unfortunately, the client demanded the removal of the tester from the project, highlighting a systemic failure that resulted in an individual consequence. This experience reinforced Matt's belief that leaders must own the environment their teams operate in.
+
+--- LEVER 2, as before (query: ['failure'])
+🐾 Here's a story where Matt faced a significant challenge.
+
+During a global platform modernization delivery for a **Fortune 500 financial services client**, Matt encountered a critical failure. He was the tech lead responsible for ensuring a safe environment setup across multiple environments: dev, QA, UAT, and production. Under delivery pressure, Matt assumed that the IAM controls, environment boundaries, and data masking were correctly configured based on inherited documentation from prior phases. This assumption led to a severe oversight.
+
+An offshore tester accidentally triggered an email job in the UAT environment, which sent communications containing unmasked production data to thousands of real clients. This incident highlighted the risks of relying on assumptions rather than verifying critical configurations. Matt took full accountability for the failure and led the team through root cause analysis and remediation. The root cause was insufficient IAM checks, unclear environment boundaries, and production data that had not been scrubbed from downstream environments.
+
+The client demanded the removal of the tester from the project, which reinforced Matt's belief that leaders must own the environments their teams operate in. As a result, Matt learned to treat assumptions as risks in disguise and made IAM validation, environment verification, PII scrubbing, and risk ownership day-one leadership responsibilities in his delivery approach.
+
+################ FAILURE | run 2 | Q: Tell me about a time he failed.
+
+--- OLD (production today)
+Got it! 🐾
+
+During a global platform modernization delivery for a **Fortune 500 financial services client**, Matt faced a significant failure. As the tech lead, he assumed that the IAM controls, environment boundaries, and data masking were correctly set up. However, an offshore tester accidentally triggered an email job in the UAT environment, sending unmasked production data to thousands of real clients. This incident was rooted in assumptions about the inherited IAM configurations and downstream access controls, which Matt did not verify.
+
+In response, Matt took full accountability and led the team through a root cause analysis and remediation process. He recognized that assumptions are risks in disguise and learned the importance of validating IAM configurations, environment boundaries, and ensuring that production data is scrubbed in downstream environments. The client demanded the removal of the tester involved, highlighting a systemic failure that resulted in individual consequences. This experience reinforced Matt's belief that leaders must own the environment their teams operate in, making IAM validation, environment verification, PII scrubbing, and risk ownership essential responsibilities from day one in his delivery approach.
+
+--- LEVER 2 + PRIMARY (query: ['failure'])
+🐾 Here's a moment from Matt's career where assumptions led to a significant issue.
+
+While working as a Senior Technology Architecture Manager on a global platform modernization delivery for a **Fortune 500 financial services client**, Matt encountered a challenging situation. The project involved multiple environments, including dev, QA, UAT, and production, with offshore teams executing test cycles. Under delivery pressure, Matt relied on existing documentation for IAM controls, environment segregation, and downstream access configurations, assuming they were correct without verification.
+
+This assumption proved costly when an offshore tester accidentally triggered an email job in UAT, sending communications containing unmasked production data to thousands of real clients. The root cause was insufficient IAM checks, unclear environment boundaries, and production data that hadn't been scrubbed from downstream environments. Matt took accountability for the incident and led the team through root cause analysis and remediation. Unfortunately, the client demanded the tester be removed from the project, highlighting a systemic failure that resulted in an individual consequence.
+
+This experience taught Matt that assumptions are risks in disguise. He learned the importance of IAM validation, environment verification, PII scrubbing, and risk ownership, which are now day-one leadership responsibilities in his delivery approach.
+
+--- LEVER 2, as before (query: ['failure'])
+🐾 Here's a story about a challenging moment Matt faced.
+
+While working on a global platform modernization for a **Fortune 500 financial services client**, Matt encountered a significant issue due to assumptions he made about the system's security controls. As the tech lead, he was responsible for ensuring a safe environment setup across multiple environments, including development, QA, UAT, and production. However, he relied on existing documentation and did not verify the IAM configuration and downstream access controls. This oversight led to an offshore tester accidentally triggering an email job in UAT, which sent communications containing unmasked production data to thousands of real clients.
+
+Matt took full accountability for the incident and led the team through a root cause analysis and remediation process. He learned that assumptions could be risks in disguise and emphasized the importance of IAM validation, environment verification, PII scrubbing, and risk ownership in his future leadership responsibilities. Despite the systemic failure, the client demanded the removal of the tester from the project, which reinforced Matt's belief that leaders must own the environments their teams operate in.
+
+################ NORFOLK SOUTHERN | run 1 | Q: Tell me about his Norfolk Southern work.
+
+--- OLD (production today)
+🐾 Perfect, here's what I found.
+
+At **Norfolk Southern**, Matt led a comprehensive modernization effort to transition their legacy Revenue and Shipment Planning systems to a cloud-native architecture. The existing systems were costly to maintain and couldn't handle complex data integration or real-time analytics, which were crucial for accurate revenue tracking and operational efficiency. Matt's task was to transition these systems to a modular, cloud-native architecture that could support real-time insights and dynamic shipment planning.
+
+He facilitated cross-functional workshops to align business and technical priorities, using techniques like event storming and the Boris Exercise to map out API and data flow requirements. This approach enabled the creation of a target architecture capable of real-time data processing, which replaced the batch-processed legacy reporting. The result was a significant improvement in revenue tracking accuracy and a reduction in operational costs. The new architecture also provided a scalable foundation for future growth, allowing **Norfolk Southern** to adapt and expand its systems as business needs evolved.
+
+In addition to the technical transformation, Matt addressed the organizational challenges by designing a tailored training program to align **Norfolk Southern**'s teams on cloud-native practices. This involved overcoming resistance to new working methods, such as pair programming, and teaching the teams to prioritize based on business value through OKRs. The training empowered the client to own their backlog and priorities, fostering a product mindset and enhancing collaboration across teams.
+
+The modernization effort not only improved system performance and customer satisfaction but also positioned **Norfolk Southern** for future innovation with a modular, cloud-native foundation. The engagement established a delivery model that could absorb changes and fostered a culture of co-creation and iterative development.
+
+--- LEVER 2 + PRIMARY (query: ['Norfolk Southern'])
+🐾 Here's a great example of Matt's work with **Norfolk Southern**.
+
+Matt led the modernization of **Norfolk Southern**'s legacy revenue management and shipment planning systems, which were costly to maintain and lacked the ability to handle complex data integration or real-time analytics. This was a significant challenge as it hindered revenue accuracy, operational efficiency, and scalability. To address these issues, Matt transitioned the systems to a modular cloud-native architecture. He utilized event storming, the Boris Exercise, and SNAP-E documentation to map out API and data flow requirements, creating a target architecture capable of real-time data processing for shipment adjustments and revenue updates.
+
+The results were substantial. Revenue tracking accuracy improved, operational costs declined, and the platform established a scalable foundation for future growth. The modernization enabled real-time revenue tracking and adjustments based on dynamic shipment data, replacing the batch-processed legacy reporting. Additionally, the cloud-native architecture reduced maintenance expenses and improved resource utilization compared to legacy mainframe systems. This transformation not only improved customer satisfaction through real-time shipment adjustments but also maximized asset utilization, positioning **Norfolk Southern** for future innovation and growth.
+
+--- LEVER 2, as before (query: ['Norfolk Southern'])
+🐾 Here's a great example of Matt's work with **Norfolk Southern**.
+
+Matt led a significant modernization effort for **Norfolk Southern**'s revenue and shipment planning systems, which were running on a legacy mainframe dating back to the 1970s. These systems were monolithic, difficult to scale, and slow to adapt, introducing bottlenecks in development and hindering modernization efforts. The criticality of these systems made a complete replacement too risky, so Matt opted for an incremental approach.
+
+He decomposed the monolithic applications into microservices, allowing for independent development, deployment, and scaling. This was done using the Strangler pattern, where traffic was gradually routed to new services while maintaining the mainframe as the system of record. Matt implemented API gateways and anti-corruption layers to ensure interoperability throughout the migration. He also utilized Docker and Kubernetes for managing services, which improved system reliability and scalability.
+
+The modernization led to faster deployment cycles, improved scalability, and reduced downtime, enhancing overall platform reliability and customer satisfaction. This transformation positioned **Norfolk Southern** for future innovation, providing a modular, cloud-native foundation that enabled agile adaptation to new business demands. The modernization was carried out without disrupting live rail operations, proving the effectiveness of Matt's incremental approach.
+
+################ NORFOLK SOUTHERN | run 2 | Q: Tell me about his Norfolk Southern work.
+
+--- OLD (production today)
+🐾 On it!
+
+At **Norfolk Southern**, Matt led a comprehensive modernization of their legacy revenue management and shipment planning systems. These systems, which were increasingly costly and hindered by their inability to handle complex data integration or real-time analytics, required a significant overhaul to improve revenue accuracy and scalability. Matt transitioned the systems to a modular cloud-native architecture, employing techniques like event storming, the Boris Exercise, and SNAP-E documentation. This transition enabled real-time revenue tracking and adjustments, reduced operational costs, and laid a scalable foundation for future growth.
+
+The transformation involved decomposing monolithic applications into microservices, allowing for independent development, deployment, and scaling. This was achieved incrementally, ensuring that the mainframe remained operational throughout the process. API gateways and anti-corruption layers maintained interoperability, while reconciliation reports validated that no data or functionality was lost. This approach improved system reliability and scalability, reduced downtime, and positioned **Norfolk Southern** for future innovation.
+
+Additionally, Matt addressed significant misalignment within **Norfolk Southern's** product teams regarding cloud-native development. He designed and delivered a tailored CIC Academy course, which included interactive sessions and coding exercises. This initiative helped align teams on cloud modernization principles, strengthened collaboration, and equipped **Norfolk Southern** resources with the skills to manage the new state themselves. The result was a client organization that embraced modern engineering practices and co-created in iterations, significantly enhancing their ability to support and manage the new platform.
+
+--- LEVER 2 + PRIMARY (query: ['Norfolk Southern'])
+🐾 Here's a great example of Matt's work with **Norfolk Southern**.
+
+At **Norfolk Southern**, the legacy Revenue and Shipment Planning systems were outdated, costly, and unable to handle complex data integration or real-time analytics. This hindered revenue accuracy and scalability. Matt led the transition from these legacy systems to a modular, cloud-native architecture. He used techniques such as event storming, the Boris Exercise, and SNAP-E documentation to map out API and data flow requirements. This approach enabled real-time revenue tracking and reduced operational costs, establishing a scalable foundation for future growth.
+
+Matt also addressed team misalignment regarding cloud-native development. He designed a tailored CIC Academy course to bridge knowledge gaps and align teams on modern software practices. This included interactive sessions and coding exercises, which helped participants embrace new methodologies like pair programming. The training empowered **Norfolk Southern**'s teams to own their backlog and priorities, fostering a product mindset and improving collaboration.
+
+Additionally, Matt tackled the modernization of **Norfolk Southern**'s revenue engine, which ran on a 1970s mainframe. He led the development of a hybrid platform that integrated APIs, microservices, and CockroachDB, allowing for real-time data processing and reconciliation. This modernization effort resulted in a **95%** coverage of targeted use cases and improved customer satisfaction through proactive EDI validation.
+
+Through these initiatives, Matt not only modernized critical systems but also transformed how teams worked, ensuring sustainable practices and continuous improvement.
+
+--- LEVER 2, as before (query: ['Norfolk Southern'])
+🐾 Here's a great example of Matt's work with **Norfolk Southern**.
+
+**Norfolk Southern** was grappling with outdated systems and fragmented teams, which hindered their ability to modernize effectively. Their legacy Revenue and Shipment Planning systems were costly to maintain and lacked the capability for complex data integration and real-time analytics. This created a pressing need for modernization to improve revenue accuracy and scalability.
+
+Matt led the transition of these systems to a cloud-native architecture, employing innovative techniques like event storming and the Boris Exercise to map out API and data flow requirements. He introduced modular architectures with anti-corruption layers for legacy system integration and asynchronous messaging for real-time updates. This approach enabled real-time revenue tracking and adjustments based on dynamic shipment data, significantly reducing operational costs and improving resource utilization.
+
+In another engagement, Matt focused on unifying **Norfolk Southern**'s product teams around cloud-native practices. He designed a tailored CIC Academy course, delivered over six months, which included interactive sessions on cloud-native development and modern software practices. This initiative helped bridge knowledge gaps and align teams on cloud modernization principles. It also overcame resistance to pair programming, transforming scarce domain knowledge into shared team knowledge and equipping **Norfolk Southern**'s contributors with the skills needed to manage the application post-engagement.
+
+The modernization efforts resulted in a **95%** coverage of targeted use cases with an MVP that captured real orders with clean data. The cloud-native architecture established a scalable foundation for future growth, and the teams left with modern skills to support and manage the new state themselves.
+

@@ -1,0 +1,605 @@
+[
+  {
+    "arm": "armA",
+    "question": "Tell me about Matt's legacy-to-cloud work",
+    "run": 1,
+    "rejection_reason": null,
+    "searches": [
+      {
+        "query": "Tell me about his legacy-to-cloud work",
+        "top_score": 0.47885415,
+        "results": [
+          "About Matt – My Leadership Journey",
+          "Driving Cloud-Native Innovation through TICARA Framework",
+          "Driving Modern Software Engineering with Project Octane",
+          "Transforming Legacy Systems through Incremental App Modernization",
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Self-Healing Systems through Resilience Engineering",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500"
+        ]
+      }
+    ],
+    "model_stories": [
+      "About Matt – My Leadership Journey",
+      "Driving Cloud-Native Innovation through TICARA Framework",
+      "Driving Modern Software Engineering with Project Octane",
+      "Transforming Legacy Systems through Incremental App Modernization",
+      "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications"
+    ],
+    "on_topic_seen": [
+      "Transforming Legacy Systems through Incremental App Modernization"
+    ],
+    "answer_md": "🐾 Here's a great example.\n\nMatt's work in legacy-to-cloud transformation involved leading incremental modernization efforts for **Fortune **500 client**s** across industries. These clients faced challenges with legacy applications that were expensive to maintain, inflexible, and unable to scale effectively. This situation hindered their ability to innovate and adapt to changing business needs and technology trends.\n\nTo address these challenges, Matt orchestrated the transition of monolithic applications to microservices-based architectures. He employed Domain-Driven Design (DDD) principles and event storming to identify key components for migration, ensuring a modular and scalable approach. Automated CI/CD pipelines were established to support seamless feature delivery, minimizing downtime during deployments. By partnering with cross-functional teams, Matt facilitated the migration of critical workloads to cloud-native environments, incorporating advanced monitoring and horizontal scaling.\n\nThe results of these efforts were significant. Clients experienced rapid feature releases due to reduced development bottlenecks, and their applications became more robust and scalable, capable of handling fluctuating workloads. Technical debt was reduced, and downtime was minimized through real-time monitoring and automated deployment processes. Additionally, teams were empowered to embrace modern engineering principles, fostering a culture of continuous improvement and innovation."
+  },
+  {
+    "arm": "armA",
+    "question": "Tell me about Matt's legacy-to-cloud work",
+    "run": 2,
+    "rejection_reason": null,
+    "searches": [
+      {
+        "query": "Tell me about his legacy-to-cloud work",
+        "top_score": 0.479015172,
+        "results": [
+          "About Matt – My Leadership Journey",
+          "Driving Cloud-Native Innovation through TICARA Framework",
+          "Driving Modern Software Engineering with Project Octane",
+          "Transforming Legacy Systems through Incremental App Modernization",
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Self-Healing Systems through Resilience Engineering",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500"
+        ]
+      }
+    ],
+    "model_stories": [
+      "About Matt – My Leadership Journey",
+      "Driving Cloud-Native Innovation through TICARA Framework",
+      "Driving Modern Software Engineering with Project Octane",
+      "Transforming Legacy Systems through Incremental App Modernization",
+      "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications"
+    ],
+    "on_topic_seen": [
+      "Transforming Legacy Systems through Incremental App Modernization"
+    ],
+    "answer_md": "🐾 I know just the story.\n\nMatt led significant legacy-to-cloud transformations across various industries while at **Accenture**. Clients faced challenges with legacy systems that were costly, inflexible, and unable to scale effectively. These systems hindered innovation and adaptability, making it difficult for organizations to respond to evolving business needs and technology trends. Matt orchestrated incremental modernization using Domain-Driven Design (DDD) strategies, transitioning monolithic applications to microservices architectures. This approach ensured modularity and scalability, aligning with 12- and 15-Factor principles.\n\nHe established automated CI/CD pipelines, supporting successful feature delivery with zero downtime during deployments. By partnering with cross-functional teams, Matt facilitated the migration of critical workloads to cloud-native environments, incorporating advanced monitoring and horizontal scaling. He used bridge and queuing techniques to maintain interoperability between legacy systems and new microservices during the transition, reducing disruption and supporting the coexistence of legacy and modernized services.\n\nThe results were significant: development bottlenecks decreased, system scalability improved, and teams adopted cloud-native practices. Applications became more robust and capable of handling fluctuating workloads, reducing technical debt and minimizing downtime through real-time monitoring and automated deployment processes. This empowered teams to embrace modern engineering principles, fostering a culture of continuous improvement and innovation."
+  },
+  {
+    "arm": "armA",
+    "question": "Tell me about Matt's legacy-to-cloud work",
+    "run": 3,
+    "rejection_reason": null,
+    "searches": [
+      {
+        "query": "Tell me about his legacy-to-cloud work",
+        "top_score": 0.479015172,
+        "results": [
+          "About Matt – My Leadership Journey",
+          "Driving Cloud-Native Innovation through TICARA Framework",
+          "Driving Modern Software Engineering with Project Octane",
+          "Transforming Legacy Systems through Incremental App Modernization",
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Self-Healing Systems through Resilience Engineering",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500"
+        ]
+      }
+    ],
+    "model_stories": [
+      "About Matt – My Leadership Journey",
+      "Driving Cloud-Native Innovation through TICARA Framework",
+      "Driving Modern Software Engineering with Project Octane",
+      "Transforming Legacy Systems through Incremental App Modernization",
+      "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications"
+    ],
+    "on_topic_seen": [
+      "Transforming Legacy Systems through Incremental App Modernization"
+    ],
+    "answer_md": "🐾 Found it!\n\nMatt's work in legacy-to-cloud transformation is marked by his leadership in modernizing platforms and enabling organizations to shift their technology strategies. At **Accenture**, he led the incremental modernization of legacy systems across various industries. These systems were costly to maintain, inflexible, and unable to scale effectively, hindering innovation and adaptability. Matt's approach involved using Domain-Driven Design (DDD) principles and microservices transitions to gradually transform these applications. He established automated CI/CD pipelines to ensure zero downtime during deployments and partnered with cross-functional teams to migrate critical workloads to cloud-native environments. This approach reduced development bottlenecks, improved system scalability, and enabled rapid feature releases.\n\nIn another initiative, Matt designed TICARA, a cloud-native architecture framework, to address inefficiencies in cloud provisioning at **Accenture**'s Liquid Studio. By using Terraform for infrastructure provisioning and the Serverless Framework for deployment, he cut environment setup time from days to under an hour. TICARA's modular frameworks and plug-and-play microservices allowed for rapid application development and were applied across diverse client engagements, including **Coca-Cola**.\n\nAdditionally, Matt led Project Octane, which standardized cloud-native architecture practices across **Accenture**'s CloudFirst community. This initiative closed onboarding gaps and accelerated client time-to-market by providing reusable reference applications and automated infrastructure provisioning.\n\nThrough these efforts, Matt enabled organizations to embrace modern engineering principles, reduce technical debt, and foster a culture of continuous improvement and innovation."
+  },
+  {
+    "arm": "armA",
+    "question": "What has Matt done with mainframe modernization?",
+    "run": 1,
+    "rejection_reason": null,
+    "searches": [
+      {
+        "query": "What has he done with mainframe modernization?",
+        "top_score": 0.560519874,
+        "results": [
+          "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Transforming Legacy Systems through Incremental App Modernization",
+          "Transitioning to Microservices with Domain-Driven Design (DDD)",
+          "Modernizing What Matters Most through Value-Driven OKRs",
+          "Building the PMO for RBC's Commercial Banking Modernization"
+        ]
+      }
+    ],
+    "model_stories": [
+      "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+      "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+      "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+      "Transforming Legacy Systems through Incremental App Modernization",
+      "Transitioning to Microservices with Domain-Driven Design (DDD)"
+    ],
+    "on_topic_seen": [
+      "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+      "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+      "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine"
+    ],
+    "answer_md": "Got it! 🐾\n\nMatt has been involved in multiple mainframe modernization projects, each with its own scope and complexity. At **Cendant Mortgage**, he played a key role in replacing a mainframe underwriting system with a modernized application. This involved developing a Java and JSP front end to replace the mainframe green screens and moving the underwriting workflow into a TIBCO BPM layer. He also identified and corrected flaws in the Oracle stored procedures that calculated risk factors, ensuring accurate risk assessments. This project transitioned underwriters and loan officers from a mainframe environment to a more efficient web application, with the underwriting logic executing in a process engine.\n\nIn another significant project with **Norfolk Southern**, Matt led the rearchitecture of mission-critical applications that ran on a mainframe dating back to the 1970s. The mainframe's monolithic structure was decomposed into microservices, allowing for incremental replacement of components while maintaining live production. This approach ensured that rail operations were not disrupted during the modernization process. The use of API gateways and anti-corruption layers preserved interoperability, and the implementation of Kubernetes and CI/CD automation enhanced system scalability and reliability. This transformation resulted in faster deployment cycles, improved scalability, and reduced downtime.\n\nThese projects highlight the scale and reach of Matt's work in mainframe modernization, impacting critical systems in financial services and transportation logistics."
+  },
+  {
+    "arm": "armA",
+    "question": "What has Matt done with mainframe modernization?",
+    "run": 2,
+    "rejection_reason": null,
+    "searches": [
+      {
+        "query": "What has he done with mainframe modernization?",
+        "top_score": 0.560519874,
+        "results": [
+          "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Transforming Legacy Systems through Incremental App Modernization",
+          "Transitioning to Microservices with Domain-Driven Design (DDD)",
+          "Modernizing What Matters Most through Value-Driven OKRs",
+          "Building the PMO for RBC's Commercial Banking Modernization"
+        ]
+      }
+    ],
+    "model_stories": [
+      "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+      "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+      "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+      "Transforming Legacy Systems through Incremental App Modernization",
+      "Transitioning to Microservices with Domain-Driven Design (DDD)"
+    ],
+    "on_topic_seen": [
+      "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+      "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+      "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine"
+    ],
+    "answer_md": "🐾 On it!\n\nAt **Cendant Mortgage**, Matt played a key role in modernizing a mainframe underwriting system. The existing system was a mainframe green-screen application used by underwriters and loan officers. The goal was to replace it with a more modern architecture. Matt was selected for the project after a competitive interview process that screened for expertise in Java and TIBCO. He worked on-site in Mount Laurel alongside a senior developer.\n\nMatt built a JSP and MVC front end to replace the green screens and configured a TIBCO BPM layer to handle the underwriting workflow. This included modeling workflow steps such as credit report requests and verification flows. He also identified and corrected flaws in the Oracle stored procedures that calculated risk factors. The modernization resulted in underwriters and loan officers moving to a web application, with the underwriting workflow executing in a process engine rather than inside the application.\n\nIn another engagement with **Norfolk Southern**, Matt led the rearchitecture of mission-critical applications that ran on a 1970s mainframe. The applications were monolithic and fragile, making them difficult to scale and adapt. Matt decomposed these monoliths into microservices and incrementally replaced components on live production. This approach ensured that business operations were not disrupted. The modernization improved scalability, reduced downtime, and positioned **Norfolk Southern** for future innovation.\n\nAcross various industries, Matt has led incremental modernization efforts, transitioning legacy applications to microservices-based architectures. He developed modernization blueprints using Domain-Driven Design and established automated CI/CD pipelines. These efforts enabled rapid feature releases, improved system scalability, and reduced technical debt."
+  },
+  {
+    "arm": "armA",
+    "question": "What has Matt done with mainframe modernization?",
+    "run": 3,
+    "rejection_reason": null,
+    "searches": [
+      {
+        "query": "What has he done with mainframe modernization?",
+        "top_score": 0.560519874,
+        "results": [
+          "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Transforming Legacy Systems through Incremental App Modernization",
+          "Transitioning to Microservices with Domain-Driven Design (DDD)",
+          "Modernizing What Matters Most through Value-Driven OKRs",
+          "Building the PMO for RBC's Commercial Banking Modernization"
+        ]
+      }
+    ],
+    "model_stories": [
+      "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+      "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+      "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+      "Transforming Legacy Systems through Incremental App Modernization",
+      "Transitioning to Microservices with Domain-Driven Design (DDD)"
+    ],
+    "on_topic_seen": [
+      "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+      "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+      "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine"
+    ],
+    "answer_md": "🐾 On it!\n\nAt **Cendant Mortgage**, Matt was involved in a significant mainframe modernization project. The existing system was a mainframe green-screen application used by underwriters and loan officers. The goal was to transition to a more modern architecture with a Java and JSP front end and a TIBCO BPM layer for the underwriting workflow. This modernization effort required Matt to build and refactor the application, replacing the green screens with a web-based interface for capturing borrower data such as income, credit score, and home value. He also configured the TIBCO layer to handle underwriting logic, including credit report requests and verification flows.\n\nMatt worked on-site in Mount Laurel, collaborating with a senior developer who introduced him to the discipline of refactoring, a practice that has influenced his work since. He also identified and corrected flaws in the Oracle stored procedures responsible for calculating risk factors, ensuring the accuracy of the system's outputs.\n\nThe result of this modernization was a successful transition from the mainframe to a web application, with the underwriting workflow executing in a process engine rather than being embedded within the application itself. This shift not only improved the user experience for underwriters and loan officers but also corrected existing errors in risk calculations, setting a foundation for more accurate and efficient operations at **Cendant Mortgage**."
+  },
+  {
+    "arm": "armA",
+    "question": "How has Matt handled a quality crisis?",
+    "run": 1,
+    "rejection_reason": null,
+    "searches": [
+      {
+        "query": "How has Matt handled a quality crisis?",
+        "top_score": 0.503642738,
+        "results": [
+          "Confronting a Quality Crisis Through Coaching and Culture Change",
+          "Recovering Fiserv's $8.5M White-Label Card Portal",
+          "Rescuing and Stabilizing JP Morgan's TS Dynamics CRM Program",
+          "About Matt – My Leadership Journey",
+          "Why Hire Matt?",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+          "What I Learned About Assumptions"
+        ]
+      }
+    ],
+    "model_stories": [
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Recovering Fiserv's $8.5M White-Label Card Portal",
+      "Rescuing and Stabilizing JP Morgan's TS Dynamics CRM Program",
+      "About Matt – My Leadership Journey",
+      "Why Hire Matt?"
+    ],
+    "on_topic_seen": [
+      "Confronting a Quality Crisis Through Coaching and Culture Change"
+    ],
+    "answer_md": "🐾 Here's a great example.\n\nAt **Norfolk Southern**, Matt faced a quality crisis during the modernization of their legacy Revenue and Shipment Planning platform. Despite near-complete test coverage, the client raised concerns about rising defects, which caught Matt and his team off guard. The credibility hit was significant, especially in front of both the **Norfolk Southern** client and **Accenture** account leadership, who were accustomed to waterfall delivery methods. This situation demanded a deep dive into the root causes rather than defending the existing metrics.\n\nMatt discovered that an engineer had been creating solutions based on personal interpretation rather than the backlog story, writing tests post-code, which made the coverage appear complete while defects went undetected. The backlog itself was problematic, with vague stories lacking defined scenarios or a definition of done. To address this, Matt conducted a thorough audit of the codebase and test suite, openly showing the gaps. He rebuilt the backlog with SMART, testable stories and brought in TDD experts to work directly with the team, demonstrating the discipline by redoing the code and test cases properly.\n\nThrough consistent coaching using the Samman approach, including boot camps, coding katas, and practice learning sessions, Matt transformed the team's approach. The result was a significant drop in defect rates as story quality and test-first discipline improved. The client stopped finding defects that the dashboard could not see, restoring confidence through transparency and visible improvement. This experience reinforced the importance of consistent coaching and cultural transformation, not just process change."
+  },
+  {
+    "arm": "armA",
+    "question": "How has Matt handled a quality crisis?",
+    "run": 2,
+    "rejection_reason": null,
+    "searches": [
+      {
+        "query": "How has Matt handled a quality crisis?",
+        "top_score": 0.503572702,
+        "results": [
+          "Confronting a Quality Crisis Through Coaching and Culture Change",
+          "Recovering Fiserv's $8.5M White-Label Card Portal",
+          "Rescuing and Stabilizing JP Morgan's TS Dynamics CRM Program",
+          "About Matt – My Leadership Journey",
+          "Why Hire Matt?",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+          "What I Learned About Assumptions"
+        ]
+      }
+    ],
+    "model_stories": [
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Recovering Fiserv's $8.5M White-Label Card Portal",
+      "Rescuing and Stabilizing JP Morgan's TS Dynamics CRM Program",
+      "About Matt – My Leadership Journey",
+      "Why Hire Matt?"
+    ],
+    "on_topic_seen": [
+      "Confronting a Quality Crisis Through Coaching and Culture Change"
+    ],
+    "answer_md": "🐾 Perfect, here's what I found.\n\nAt **Norfolk Southern**, Matt encountered a quality crisis during the initial engagement of **Accenture**'s Cloud Innovation Center. The client raised concerns about a rising number of defects despite near-complete test coverage, which was a surprise given the metrics. The issue stemmed from an engineer interpreting backlog stories independently, writing tests post-code, and vague backlog stories lacking defined scenarios or a definition of done. This situation was exacerbated by the transition to remote work due to the pandemic, and the credibility hit was felt by both the client and **Accenture**'s account leadership.\n\nMatt addressed the crisis by taking ownership of the failure and conducting a thorough audit of the codebase and test suite. He identified gaps and openly communicated these, including issues with the backlog itself. Matt rebuilt the backlog using SMART, testable stories, and brought in TDD experts to work directly with the team. He used the Samman coaching approach, which included boot camps, coding katas, and practice learning sessions, to rebuild the team's discipline. Agile rituals were restructured to ensure alignment among stakeholders, developers, and product managers.\n\nThe result was significant: the client stopped finding defects that the dashboard could not see, and defect rates dropped as story quality and test-first discipline improved. Client confidence was restored through transparency and visible improvement, and the team learned the importance of practice behind metrics. This experience reinforced that cultural transformation requires consistent coaching, not just process changes."
+  },
+  {
+    "arm": "armA",
+    "question": "How has Matt handled a quality crisis?",
+    "run": 3,
+    "rejection_reason": null,
+    "searches": [
+      {
+        "query": "How has Matt handled a quality crisis?",
+        "top_score": 0.503572702,
+        "results": [
+          "Confronting a Quality Crisis Through Coaching and Culture Change",
+          "Recovering Fiserv's $8.5M White-Label Card Portal",
+          "Rescuing and Stabilizing JP Morgan's TS Dynamics CRM Program",
+          "About Matt – My Leadership Journey",
+          "Why Hire Matt?",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+          "What I Learned About Assumptions"
+        ]
+      }
+    ],
+    "model_stories": [
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Recovering Fiserv's $8.5M White-Label Card Portal",
+      "Rescuing and Stabilizing JP Morgan's TS Dynamics CRM Program",
+      "About Matt – My Leadership Journey",
+      "Why Hire Matt?"
+    ],
+    "on_topic_seen": [
+      "Confronting a Quality Crisis Through Coaching and Culture Change"
+    ],
+    "answer_md": "🐾 Found it!\n\nAt **Norfolk Southern**, Matt faced a quality crisis during the modernization of their Revenue and Shipment Planning platform. Despite near-complete test coverage, the client raised concerns about rising defects, which caught Matt off guard. The credibility hit was significant, especially in front of both the **Norfolk Southern** client and **Accenture** account leadership, who were used to waterfall delivery. This situation forced Matt to pause and dig deeper into the root causes.\n\nMatt discovered that an engineer was interpreting backlog stories independently and writing tests after the code, making the coverage appear complete while defects remained undetected. The backlog itself was problematic, with vague stories lacking defined scenarios or a definition of done. Matt took ownership of the failure and conducted a thorough audit of the codebase and test suite, revealing the gaps openly. He rebuilt the backlog with SMART, testable stories and brought in TDD experts to work alongside the team, demonstrating the discipline through hands-on coaching.\n\nThe result was a significant drop in defect rates as story quality and test-first discipline improved. The client stopped finding defects that the dashboard couldn't see, restoring their confidence. This experience reinforced the importance of consistent coaching and cultural transformation, not just process changes. The team learned that metrics like test coverage mean nothing without the practice behind them, and the transparency of the audit helped rebuild trust with both the client and account leadership."
+  },
+  {
+    "arm": "armA",
+    "question": "Tell me about Matt's work building engineering academies or training programs",
+    "run": 1,
+    "rejection_reason": null,
+    "searches": [
+      {
+        "query": "Tell me about his work building engineering academies or training programs",
+        "top_score": 0.436617404,
+        "results": [
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "Enhancing Team Proficiency through Servant Leadership and Mentorship",
+          "Launching a Self-Paced Learning Program for Emerging Technologies",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Building Tangible Cloud Tech Skills for HBCU Students",
+          "Driving Modern Software Engineering with Project Octane",
+          "Leadership Philosophy – How I Lead"
+        ]
+      }
+    ],
+    "model_stories": [
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+      "Enhancing Team Proficiency through Servant Leadership and Mentorship",
+      "Launching a Self-Paced Learning Program for Emerging Technologies",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Building Tangible Cloud Tech Skills for HBCU Students"
+    ],
+    "on_topic_seen": [
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+      "Launching a Self-Paced Learning Program for Emerging Technologies",
+      "Building Tangible Cloud Tech Skills for HBCU Students"
+    ],
+    "answer_md": "🐾 On it!\n\nAt **Norfolk Southern**, Matt identified significant misalignment in cloud-native development practices across product teams, which was hindering modernization efforts. To address this, he designed and delivered a tailored CIC Academy course over six months. This program included interactive Miro sessions, coding exercises, and design thinking workshops, engaging participants in hands-on learning. He emphasized ruthless, value-driven prioritization through OKRs and facilitated difficult conversations about prioritizing business value over having everything at once. Pair programming was initially met with resistance, but Matt allowed the client to experience its benefits firsthand, which helped convert skeptics. This approach helped **Norfolk Southern**'s teams embrace modern software practices, such as Angular, Node, and Spring Boot, and enabled them to own their backlog and priorities.\n\nAt **Accenture**, Matt spearheaded the creation of a mentorship-driven culture at the Cloud Innovation Center. He implemented a tiered coaching framework that paired senior engineers with junior team members, facilitating skill-building and leadership development. He also built peer learning communities focused on cloud-native engineering, DevOps, and Agile methodologies. This approach improved engineering proficiency, accelerated skill adoption, and reduced onboarding time for new hires.\n\nAdditionally, Matt launched the \"NEW IT SKILLS NOW\" self-paced learning program at **Accenture**, which trained over **300** professionals in critical skills like Spring Boot, Docker, AWS, and DevOps. This program became the standard upskilling path across CloudFirst, improving staffing readiness and enabling participants to apply their skills directly to client engagements.\n\nThrough these initiatives, Matt consistently demonstrated his commitment to building people's skills and aligning teams with modern engineering practices."
+  },
+  {
+    "arm": "armA",
+    "question": "Tell me about Matt's work building engineering academies or training programs",
+    "run": 2,
+    "rejection_reason": null,
+    "searches": [
+      {
+        "query": "Tell me about his work building engineering academies or training programs",
+        "top_score": 0.436617404,
+        "results": [
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "Enhancing Team Proficiency through Servant Leadership and Mentorship",
+          "Launching a Self-Paced Learning Program for Emerging Technologies",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Building Tangible Cloud Tech Skills for HBCU Students",
+          "Driving Modern Software Engineering with Project Octane",
+          "Leadership Philosophy – How I Lead"
+        ]
+      }
+    ],
+    "model_stories": [
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+      "Enhancing Team Proficiency through Servant Leadership and Mentorship",
+      "Launching a Self-Paced Learning Program for Emerging Technologies",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Building Tangible Cloud Tech Skills for HBCU Students"
+    ],
+    "on_topic_seen": [
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+      "Launching a Self-Paced Learning Program for Emerging Technologies",
+      "Building Tangible Cloud Tech Skills for HBCU Students"
+    ],
+    "answer_md": "🐾 Here's a great example.\n\nAt **Norfolk Southern**, Matt faced significant challenges with fragmented product teams that were misaligned on cloud-native development. These disconnects spanned all levels, including leadership, creating silos and hindering collaboration, which slowed progress on cloud modernization initiatives. To address these issues, Matt designed and delivered a tailored CIC Academy course over six months. This program included topics on cloud-native development, DevOps, workload patterns, and modern software practices. He incorporated interactive Miro sessions, coding exercises, and design thinking workshops to engage participants actively. The training emphasized ruthless prioritization through OKRs and value-driven roadmaps, and it tackled resistance to pair programming by allowing clients to experience its benefits firsthand.\n\nThe results were transformative. The client teams learned to write quality, testable stories and took ownership of their backlog and priorities, effectively putting **Norfolk Southern** in the driver's seat. Pair programming converted its loudest skeptics and solved the constraint of scarce domain knowledge by turning it into shared team knowledge. Additionally, **Norfolk Southern** resources left with the modern skills needed to support and manage the new state themselves, which was the ultimate goal of the enablement effort.\n\nIn another initiative, Matt built a mentorship-driven culture at **Accenture**'s Cloud Innovation Center. He implemented a tiered coaching framework, established peer learning communities, and embedded learning opportunities within live client projects. This approach improved engineering proficiency, increased retention, and accelerated skill adoption, reducing onboarding time for new hires. Through these programs, Matt trained over **300** professionals, equipping them with critical skills in Agile, Modern Frontend Engineering, Spring Boot, Docker, AWS, DevOps, and more, directly improving staffing readiness across CloudFirst and contributing to **Accenture**'s success."
+  },
+  {
+    "arm": "armA",
+    "question": "Tell me about Matt's work building engineering academies or training programs",
+    "run": 3,
+    "rejection_reason": null,
+    "searches": [
+      {
+        "query": "Tell me about his work building engineering academies or training programs",
+        "top_score": 0.436617404,
+        "results": [
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "Enhancing Team Proficiency through Servant Leadership and Mentorship",
+          "Launching a Self-Paced Learning Program for Emerging Technologies",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Building Tangible Cloud Tech Skills for HBCU Students",
+          "Driving Modern Software Engineering with Project Octane",
+          "Leadership Philosophy – How I Lead"
+        ]
+      }
+    ],
+    "model_stories": [
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+      "Enhancing Team Proficiency through Servant Leadership and Mentorship",
+      "Launching a Self-Paced Learning Program for Emerging Technologies",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Building Tangible Cloud Tech Skills for HBCU Students"
+    ],
+    "on_topic_seen": [
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+      "Launching a Self-Paced Learning Program for Emerging Technologies",
+      "Building Tangible Cloud Tech Skills for HBCU Students"
+    ],
+    "answer_md": "🐾 This is a strong one.\n\nAt **Norfolk Southern**, Matt faced significant challenges with fragmented product teams misaligned on cloud-native development. To address these issues, he designed and delivered a tailored CIC Academy course over six months. This program focused on ruthless, value-driven prioritization through OKRs, quality testable stories, and pair programming. Despite initial resistance, particularly to pair programming, Matt's approach led to the conversion of skeptics and resolved the constraint of scarce domain knowledge. The result was that **Norfolk Southern**'s resources left with the modern skills necessary to support and manage the new state themselves.\n\nIn another initiative, Matt built a mentorship-driven culture at **Accenture's Cloud Innovation Center**. He implemented a tiered coaching framework, peer learning communities, and embedded learning opportunities within live projects. This approach improved engineering proficiency, increased retention, and accelerated onboarding for new hires.\n\nAdditionally, Matt spearheaded the \"NEW IT SKILLS NOW\" self-paced learning program at **Accenture**, training over **300** professionals in critical New IT skills like Spring Boot, Docker, AWS, and DevOps. This program became the standard for upskilling across CloudFirst, directly improving staffing readiness and client engagement capabilities.\n\nMatt also played a pivotal role in coordinating the AWS technology training track for **Accenture**'s annual ARISE HBCU Conference. Over four years, more than **250** students participated annually, gaining tangible cloud skills and AWS certification opportunities, thereby strengthening **Accenture**'s diversity talent pipeline."
+  },
+  {
+    "arm": "armA",
+    "question": "What payments platforms has Matt built?",
+    "run": 1,
+    "rejection_reason": null,
+    "searches": [
+      {
+        "query": "What payments platforms has Matt built?",
+        "top_score": 0.47971,
+        "results": [
+          "Why Hire Matt?",
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Transforming Developer Experience for the American Express Virtual Payments Platform"
+        ]
+      }
+    ],
+    "model_stories": [
+      "Why Hire Matt?",
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform"
+    ],
+    "on_topic_seen": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform"
+    ],
+    "answer_md": "🐾 This is a strong one.\n\nMatt has been instrumental in building several payments platforms, particularly during his tenure at **JP Morgan Chase** and **American Express**. At **JP Morgan Chase**, he played a pivotal role in developing the ACCESS Next Generation platform, which served as the bank's unified global corporate banking portal. This platform consolidated regional systems into a single digital experience for over **135,000** clients across **180+ countries**. Matt was responsible for designing and delivering bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He also implemented security layers, real-time global reporting, and trade finance integration, making ACCESS a leading digital channel recognized by Coalition Greenwich.\n\nIn addition to his work at JP Morgan, Matt led efforts to enhance the adoption of **American Express's** Virtual Payments Platform. He addressed barriers to integration by creating a frictionless developer experience. This included developing SDKs across multiple tech stacks, creating use case-driven API documentation, and building a secure sandbox environment. These efforts resulted in increased API consumption, reduced client onboarding time, and accelerated platform adoption among prestige clients.\n\nAcross these projects, Matt's approach was characterized by a focus on client-specific needs, robust security measures, and seamless integration capabilities. His work ensured that these platforms not only met but exceeded the operational and compliance requirements of their respective financial institutions."
+  },
+  {
+    "arm": "armA",
+    "question": "What payments platforms has Matt built?",
+    "run": 2,
+    "rejection_reason": null,
+    "searches": [
+      {
+        "query": "What payments platforms has Matt built?",
+        "top_score": 0.479697824,
+        "results": [
+          "Why Hire Matt?",
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Transforming Developer Experience for the American Express Virtual Payments Platform"
+        ]
+      }
+    ],
+    "model_stories": [
+      "Why Hire Matt?",
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform"
+    ],
+    "on_topic_seen": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform"
+    ],
+    "answer_md": "🐾 This is a strong one.\n\nMatt has built significant payments platforms across several major financial institutions. At **JP Morgan Chase**, he played a pivotal role as the Technology Delivery Lead in developing the ACCESS Next Generation platform. This platform served as JP Morgan's unified global corporate banking portal, consolidating regional systems into a single digital experience for over **135,000** corporations, financial institutions, governments, and municipalities across **180+ countries**. Matt designed and delivered bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments, along with a comprehensive MAC security layer and real-time global reporting capabilities. The platform was recognized as #1 in digital channels by Coalition Greenwich.\n\nIn another engagement with **JP Morgan Chase**, Matt led the creation of the Integrated Global Payments Interface. This centralized payments gateway handled message transformation, protocol translation, and routing across ACH, Fedwire, international wire, FX, and multi-currency channels. It provided a single entry point for corporate treasurers to manage payments across **12 countries**, replacing fragmented legacy integrations.\n\nAdditionally, at **American Express**, Matt addressed adoption challenges for their Virtual Payments Platform (VPP). He enhanced the developer experience by creating SDKs, comprehensive API documentation, and a secure sandbox environment, which significantly reduced client onboarding time and increased API trial usage within three months. This effort facilitated faster integration and migration from legacy systems for prestige clients."
+  },
+  {
+    "arm": "armA",
+    "question": "What payments platforms has Matt built?",
+    "run": 3,
+    "rejection_reason": null,
+    "searches": [
+      {
+        "query": "What payments platforms has Matt built?",
+        "top_score": 0.479697824,
+        "results": [
+          "Why Hire Matt?",
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Transforming Developer Experience for the American Express Virtual Payments Platform"
+        ]
+      }
+    ],
+    "model_stories": [
+      "Why Hire Matt?",
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform"
+    ],
+    "on_topic_seen": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform"
+    ],
+    "answer_md": "🐾 Tracking this down...\n\nMatt has built several significant payments platforms throughout his career, particularly during his time with **JP Morgan Chase** and **American Express**. At **JP Morgan Chase**, he played a pivotal role in developing the ACCESS Next Generation platform, which was launched as a unified global corporate banking portal. This platform consolidated previously separate regional systems into a single digital experience serving over **135,000** corporations, financial institutions, governments, and municipalities across **180+ countries**. Matt was responsible for designing and delivering bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax modules, along with security layers, real-time global reporting, and trade finance integration. The ACCESS platform was recognized as the #1 digital channel by Coalition Greenwich.\n\nAdditionally, Matt led the creation of **JP Morgan's** Integrated Global Payments Interface, a centralized payments gateway that handled message transformation, protocol translation, and routing across various payment types and channels. This initiative provided corporate treasurers with a single entry point for all payment types across regions, replacing fragmented legacy integrations.\n\nAt **American Express**, Matt focused on enhancing the Virtual Payments Platform (VPP) by creating a frictionless developer experience. He co-created a developer portal, developed SDKs across multiple tech stacks, and built a secure sandbox environment. These efforts led to increased API consumption and trial usage within three months, significantly reducing client onboarding time and boosting platform adoption among prestige clients."
+  },
+  {
+    "arm": "armA",
+    "question": "Has Matt worked on identity and access management?",
+    "run": 1,
+    "rejection_reason": null,
+    "searches": [
+      {
+        "query": "Has he worked on identity and access management?",
+        "top_score": 0.469724476,
+        "results": [
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift",
+          "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Resolving Cross-Domain Data Issues for AT&T's Order Management",
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building an HR Portal for a Subprime Lender Scaling Faster Than It Could Hire"
+        ]
+      }
+    ],
+    "model_stories": [
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift",
+      "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Resolving Cross-Domain Data Issues for AT&T's Order Management"
+    ],
+    "on_topic_seen": [
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift",
+      "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation"
+    ],
+    "answer_md": "🐾 Here's a great example.\n\nMatt has worked extensively on identity and access management (I&AM), particularly with **JP Morgan Chase**. One significant project involved overhauling the legacy entitlement management system for JP Morgan's ACCESS platform. The old system required days of manual configuration per user, which led to poor visibility and increased risks of unauthorized access. Matt designed and delivered an advanced user administration engine that introduced role-based access control (RBAC) with bulk grouping capabilities and payment-type-specific access controls. This overhaul reduced entitlement management time from days to minutes and strengthened compliance governance. The new engine became a headline feature of the ACCESS Next Generation launch in April 2011.\n\nIn another engagement, following a major data breach in 2014, **JP Morgan** launched a firm-wide I&AM Uplift requiring 341 CIB SOX/SSAE16 applications to implement new security controls. Matt led outreach to application and business owners, educating teams on RBAC and security fundamentals, and coordinated tiger teams to augment remediation. This initiative moved the portfolio from zero awareness to active remediation planning, with tailored paths for each application's technology and risk profile."
+  },
+  {
+    "arm": "armA",
+    "question": "Has Matt worked on identity and access management?",
+    "run": 2,
+    "rejection_reason": null,
+    "searches": [
+      {
+        "query": "Has he worked on identity and access management?",
+        "top_score": 0.469724476,
+        "results": [
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift",
+          "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Resolving Cross-Domain Data Issues for AT&T's Order Management",
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building an HR Portal for a Subprime Lender Scaling Faster Than It Could Hire"
+        ]
+      }
+    ],
+    "model_stories": [
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift",
+      "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Resolving Cross-Domain Data Issues for AT&T's Order Management"
+    ],
+    "on_topic_seen": [
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift",
+      "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation"
+    ],
+    "answer_md": "🐾 Found it!\n\nMatt has worked extensively on identity and access management (I&AM) projects, particularly with **JP Morgan Chase**. In one notable engagement, he overhauled the entitlement management system for JP Morgan's ACCESS platform. The legacy system was cumbersome, requiring days of manual configuration per user and posing significant risks of unauthorized access. Matt designed and implemented an advanced user administration engine that introduced role-based access control (RBAC) with bulk grouping capabilities and payment-type-specific access controls. This transformation reduced entitlement management from days to minutes, strengthened compliance governance, and became a headline feature of the ACCESS Next Generation launch in April 2011.\n\nFollowing a significant data breach in 2014, Matt led efforts for JP Morgan's I&AM Uplift, which required implementing new security controls across **341** CIB SOX/SSAE16 applications. He educated application teams on RBAC and security fundamentals, coordinated \"tiger teams\" to assist with remediation, and tailored remediation paths to each application's context. This initiative moved teams from zero awareness to active remediation planning and execution, despite the lack of additional budget or staffing.\n\nAdditionally, Matt played a crucial role in driving Agile adoption for JP Morgan's I&AM transformation. He configured Jira workflows, led Agile onboarding, and fostered consistent practice adoption, which improved collaboration and delivery tracking across application teams. These efforts provided centralized visibility into remediation status and enabled coordinated delivery tracking, enhancing stakeholder confidence in the program's execution."
+  },
+  {
+    "arm": "armA",
+    "question": "Has Matt worked on identity and access management?",
+    "run": 3,
+    "rejection_reason": null,
+    "searches": [
+      {
+        "query": "Has he worked on identity and access management?",
+        "top_score": 0.469724476,
+        "results": [
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift",
+          "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Resolving Cross-Domain Data Issues for AT&T's Order Management",
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building an HR Portal for a Subprime Lender Scaling Faster Than It Could Hire"
+        ]
+      }
+    ],
+    "model_stories": [
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift",
+      "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Resolving Cross-Domain Data Issues for AT&T's Order Management"
+    ],
+    "on_topic_seen": [
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift",
+      "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation"
+    ],
+    "answer_md": "🐾 Found it!\n\nMatt worked extensively on identity and access management (I&AM) at **JP Morgan Chase**. He played a pivotal role in overhauling the legacy entitlement management system for JP Morgan's ACCESS platform. The existing system required days of manual configuration per user and posed significant risks due to poor visibility and unauthorized access. Matt designed and delivered an advanced user administration engine that introduced Role-Based Access Control (RBAC) with bulk grouping capabilities, payment-type-specific access controls, and a centralized dashboard. This overhaul reduced entitlement management from days to minutes, significantly improving operational efficiency and strengthening compliance governance.\n\nFollowing a major data breach in 2014, Matt also led efforts for JP Morgan's I&AM Uplift Program. This initiative required 341 SOX/SSAE16 applications to implement new security controls. He educated application teams on RBAC and security fundamentals, conducted app-by-app impact analyses, and coordinated tiger teams to support remediation efforts. This engagement moved the portfolio from zero awareness to active remediation planning, tailored to each application's technology and risk profile.\n\nAdditionally, Matt was instrumental in driving Agile adoption for the I&AM transformation at JP Morgan. He configured Jira workflows and led Agile onboarding to improve collaboration and delivery tracking across the program. This provided centralized visibility into remediation status and enabled coordinated delivery tracking across application teams."
+  }
+]

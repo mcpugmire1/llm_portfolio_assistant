@@ -1,0 +1,76 @@
+[armC 1. Payments expe r1 t1] 'Tell me about his payments' -> "Matt's payments work." real={'top_score': 0.332, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 1. Payments expe r1 t2] 'How big was the team?' -> "Matt's team size for the payments work at JP Morgan Chase." real={'top_score': 0.539, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 1. Payments expe r1 t3] 'What went wrong?' -> 'What challenges did Matt face while working on the ACCESS Next Generation payment platform at JP Morgan Chase?' real={'top_score': 0.706, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 1. Payments expe r2 t1] 'Tell me about his payments' -> "Matt's payments work" real={'top_score': 0.362, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 1. Payments expe r2 t2] 'How big was the team?' -> "Matt's payments work team size at JP Morgan Chase." real={'top_score': 0.537, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 1. Payments expe r2 t3] 'What went wrong?' -> 'What challenges did Matt face in his payments work at JP Morgan Chase?' real={'top_score': 0.571, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 1. Payments expe r3 t1] 'Tell me about his payments' -> "Matt's payments work" real={'top_score': 0.362, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 1. Payments expe r3 t2] 'How big was the team?' -> "What was the size of the team that worked on Matt's payments project at JP Morgan Chase?" real={'top_score': 0.586, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 1. Payments expe r3 t3] 'What went wrong?' -> 'What challenges did Matt face during the development of the ACCESS Next Generation platform at JP Morgan Chase?' real={'top_score': 0.681, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 2. Education     r1 t1] 'Does he have a CS degree?' -> 'Does Matt have a computer science degree?' real={'top_score': 0.325, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 2. Education     r1 t2] 'Why shouldn’t that worry m' -> "Why shouldn't Matt's lack of a Computer Science degree worry me?" real={'top_score': 0.333, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 2. Education     r2 t1] 'Does he have a CS degree?' -> 'Does Matt have a computer science degree?' real={'top_score': 0.325, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 2. Education     r2 t2] 'Why shouldn’t that worry m' -> "Why shouldn't Matt's lack of a traditional Computer Science degree worry me?" real={'top_score': 0.363, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 2. Education     r3 t1] 'Does he have a CS degree?' -> 'Does Matt have a computer science degree?' real={'top_score': 0.325, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 2. Education     r3 t2] 'Why shouldn’t that worry m' -> "Why shouldn't it worry me that Matt doesn't have a Computer Science degree?" real={'top_score': 0.281, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 3. Leadership    r1 t1] 'What’s his leadership styl' -> "Matt's leadership style" real={'top_score': 0.44, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 3. Leadership    r1 t2] 'Give me an example where t' -> "Example of a situation where Matt's leadership style didn't work." real={'top_score': 0.371, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 3. Leadership    r2 t1] 'What’s his leadership styl' -> "Matt's leadership style" real={'top_score': 0.44, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 3. Leadership    r2 t2] 'Give me an example where t' -> "Examples of challenges or failures in Matt's leadership style and approach." real={'top_score': 0.476, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 3. Leadership    r3 t1] 'What’s his leadership styl' -> "Matt's leadership style" real={'top_score': 0.44, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 3. Leadership    r3 t2] 'Give me an example where t' -> "Example of a situation where Matt's leadership style didn't work effectively." real={'top_score': 0.365, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 4. Certification r1 t1] 'Is he certified?' -> 'Is Matt certified in his field of work?' real={'top_score': 0.39, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 4. Certification r1 t2] 'What about PMP?' -> 'Is Matt PMP certified?' real={'top_score': 0.352, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 4. Certification r1 t3] 'Are any of those current?' -> "Are any of Matt's certifications currently active?" real={'top_score': 0.393, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 4. Certification r2 t1] 'Is he certified?' -> 'Is Matt certified in his field of work?' real={'top_score': 0.39, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 4. Certification r2 t2] 'What about PMP?' -> 'Is Matt PMP certified?' real={'top_score': 0.353, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 4. Certification r2 t3] 'Are any of those current?' -> "Are any of Matt's certifications currently active?" real={'top_score': 0.393, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 4. Certification r3 t1] 'Is he certified?' -> 'Is Matt certified in his field of work?' real={'top_score': 0.39, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 4. Certification r3 t2] 'What about PMP?' -> 'Is Matt PMP certified?' real={'top_score': 0.352, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 4. Certification r3 t3] 'Are any of those current?' -> "Are any of Matt's certifications currently active?" real={'top_score': 0.393, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 5. Career motiva r1 t1] 'Why is he looking?' -> 'Why is Matt looking?' real={'top_score': 0.336, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 5. Career motiva r1 t2] 'Why should we hire him ove' -> 'Why should we hire Matt over candidates who have remained in-house?' real={'top_score': 0.533, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 5. Career motiva r2 t1] 'Why is he looking?' -> 'Why is Matt looking?' real={'top_score': 0.336, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 5. Career motiva r2 t2] 'Why should we hire him ove' -> 'Why should we hire Matt over candidates who have remained in-house?' real={'top_score': 0.533, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 5. Career motiva r3 t1] 'Why is he looking?' -> 'Why is Matt looking?' real={'top_score': 0.336, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 5. Career motiva r3 t2] 'Why should we hire him ove' -> 'Why should we hire Matt over candidates who have remained in-house?' real={'top_score': 0.533, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 6. Healthcare ex r1 t1] 'Has he worked in healthcar' -> "Matt's work in healthcare" real={'top_score': 0.435, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 6. Healthcare ex r1 t2] 'What did he actually do th' -> 'What did Matt do at Accenture in the healthcare industry?' real={'top_score': 0.521, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 6. Healthcare ex r2 t1] 'Has he worked in healthcar' -> "Matt's work in healthcare" real={'top_score': 0.435, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 6. Healthcare ex r2 t2] 'What did he actually do th' -> "What were Matt's specific contributions and responsibilities in his healthcare project?" real={'top_score': 0.42, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 6. Healthcare ex r3 t1] 'Has he worked in healthcar' -> "Matt's work in healthcare" real={'top_score': 0.435, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 6. Healthcare ex r3 t2] 'What did he actually do th' -> 'What did Matt do at Accenture in the healthcare sector?' real={'top_score': 0.509, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 7. Location      r1 t1] 'Where is he based?' -> "Matt's work location." real={'top_score': 0.32, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 7. Location      r1 t2] 'Would he relocate?' -> 'Is Matt open to relocation for work?' real={'top_score': 0.403, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 7. Location      r2 t1] 'Where is he based?' -> "Matt's work location." real={'top_score': 0.32, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 7. Location      r2 t2] 'Would he relocate?' -> "Matt's willingness to relocate for work." real={'top_score': 0.419, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 7. Location      r3 t1] 'Where is he based?' -> "Matt's work location." real={'top_score': 0.32, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 7. Location      r3 t2] 'Would he relocate?' -> "Matt's willingness to relocate for work." real={'top_score': 0.419, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 8. Failure and g r1 t1] 'Tell me about a time he fa' -> "Matt's work failures and lessons learned." real={'top_score': 0.473, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 8. Failure and g r1 t2] 'What did he change afterwa' -> 'What changes did Matt implement after the incident with the Fortune 500 client?' real={'top_score': 0.462, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 8. Failure and g r2 t1] 'Tell me about a time he fa' -> "Matt's work failures and lessons learned." real={'top_score': 0.473, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 8. Failure and g r2 t2] 'What did he change afterwa' -> 'What changes did Matt implement after the critical failure in the project?' real={'top_score': 0.528, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 8. Failure and g r3 t1] 'Tell me about a time he fa' -> "Matt's work failures and lessons learned." real={'top_score': 0.473, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 8. Failure and g r3 t2] 'What did he change afterwa' -> 'What changes did Matt implement after the failure during the platform modernization delivery?' real={'top_score': 0.52, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 9. Topic switch  r1 t1] 'Tell me about his payments' -> "Matt's payments work" real={'top_score': 0.362, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 9. Topic switch  r1 t2] 'What’s his leadership styl' -> "Matt's leadership style in payments work at JP Morgan Chase." real={'top_score': 0.575, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 9. Topic switch  r1 t3] 'Give me an example.' -> "Example of Matt's work in payments at JP Morgan Chase." real={'top_score': 0.607, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 9. Topic switch  r1 t4] 'How big was the team on th' -> 'What was the size of the team that Matt led for the ACCESS Next Generation platform project at JP Morgan Chase?' real={'top_score': 0.639, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 9. Topic switch  r2 t1] 'Tell me about his payments' -> "Matt's payments work" real={'top_score': 0.362, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 9. Topic switch  r2 t2] 'What’s his leadership styl' -> "Matt's leadership style in payments work at JP Morgan Chase." real={'top_score': 0.575, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 9. Topic switch  r2 t3] 'Give me an example.' -> "Example of Matt's work in payments at JP Morgan Chase." real={'top_score': 0.607, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 9. Topic switch  r2 t4] 'How big was the team on th' -> 'What was the size of the team Matt led on the ACCESS Next Generation platform project at JP Morgan Chase?' real={'top_score': 0.646, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 9. Topic switch  r3 t1] 'Tell me about his payments' -> "Matt's payments work" real={'top_score': 0.362, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 9. Topic switch  r3 t2] 'What’s his leadership styl' -> "Matt's leadership style in developing the ACCESS Next Generation platform at JP Morgan Chase." real={'top_score': 0.623, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 9. Topic switch  r3 t3] 'Give me an example.' -> "Example of Matt's work in payments at JP Morgan Chase." real={'top_score': 0.607, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 9. Topic switch  r3 t4] 'How big was the team on th' -> 'What was the size of the team Matt led on the ACCESS Next Generation platform project at JP Morgan Chase?' real={'top_score': 0.646, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 10. Accepting an r1 t1] 'Tell me about his Norfolk ' -> "Matt's work with Norfolk Southern." real={'top_score': 0.453, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 10. Accepting an r1 t2] 'Sure, the deep dive on tha' -> "Matt's work at Norfolk Southern: modernization initiatives and team alignment strategies." real={'top_score': 0.57, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 10. Accepting an r1 t3] 'How long did that take?' -> "Duration of Matt's work on Norfolk Southern's modernization projects." real={'top_score': 0.487, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 10. Accepting an r2 t1] 'Tell me about his Norfolk ' -> "Matt's work with Norfolk Southern." real={'top_score': 0.453, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 10. Accepting an r2 t2] 'Sure, the deep dive on tha' -> "Matt's work at Norfolk Southern: modernization of Revenue and Shipment Planning systems, cloud-native architecture, CIC Academy training, and revenue engine transformation." real={'top_score': 0.675, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 10. Accepting an r2 t3] 'How long did that take?' -> "Duration of Matt's work on Norfolk Southern's modernization projects." real={'top_score': 0.487, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 10. Accepting an r3 t1] 'Tell me about his Norfolk ' -> "Matt's work with Norfolk Southern." real={'top_score': 0.453, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 10. Accepting an r3 t2] 'Sure, the deep dive on tha' -> "Matt's work on Norfolk Southern's modernization efforts and cloud-native practices." real={'top_score': 0.596, 'confidence': 'high'} gate_would_refuse=False reason=None
+[armC 10. Accepting an r3 t3] 'How long did that take?' -> "Duration of Matt's modernization work at Norfolk Southern." real={'top_score': 0.488, 'confidence': 'high'} gate_would_refuse=False reason=None
+done 75

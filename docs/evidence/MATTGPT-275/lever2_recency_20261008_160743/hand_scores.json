@@ -1,0 +1,146 @@
+{
+  "basis": "Turn-level pass (P) / fail (F) per run against the expected answers in tests/fixtures/evaluator_conversations.md: correct referent, materially correct facts, honest uncertainty, contextual continuity. Transcribed from the verdicts reported in the Oct 6-8, 2026 Code session; not rescored. Turns not listed under 'turns' were not hand-scored.",
+  "arm": "Lever 2 with the per-answer instruction block sent after the tool results",
+  "runs": 5,
+  "turns": {
+    "1.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "1.3": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "2.2": {
+      "runs": [
+        "F",
+        "F",
+        "F",
+        "F",
+        "F"
+      ],
+      "note": "r3/r5 mention the IT degree but evaluate ('instrumental')"
+    },
+    "3.2": {
+      "runs": [
+        "P",
+        "F",
+        "P",
+        "P",
+        "P"
+      ],
+      "note": "r2 CIC decision-making challenge as failure"
+    },
+    "4.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ],
+      "note": "all 5 open 'Perfect, here's what I found.' before the no"
+    },
+    "4.3": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "5.2": {
+      "runs": [
+        "F",
+        "P",
+        "P",
+        "P",
+        "P"
+      ],
+      "note": "r1 spreads '12 countries'"
+    },
+    "6.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "7.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "8.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "9.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "9.3": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "9.4": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "10.3": {
+      "runs": [
+        "F",
+        "F",
+        "P",
+        "F",
+        "F"
+      ],
+      "note": "no invented figure in any run (5/5 on that criterion), but only r3 answers how long; the rest retell the story"
+    }
+  },
+  "not_scored": "turn 1s; 10.1-10.2",
+  "totals": {
+    "follow_ups_1_9": "58/65"
+  },
+  "other_measurements": {
+    "synthesis_line_openers": "17/125 (lever 2: 6/125)"
+  },
+  "matt_voice_read": "rejected: synthesis opener on leadership, connective filler; not a voice fix"
+}

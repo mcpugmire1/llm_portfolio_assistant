@@ -1,0 +1,36 @@
+{
+  "basis": "Turn-level pass (P) / fail (F) per run against the expected answers in tests/fixtures/evaluator_conversations.md: correct referent, materially correct facts, honest uncertainty, contextual continuity. Transcribed from the verdicts reported in the Oct 6-8, 2026 Code session; not rescored. Turns not listed under 'turns' were not hand-scored.",
+  "arm": "Simplest plus one sentence in search_stories' description",
+  "runs": 5,
+  "turns": {
+    "4.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "10.3": {
+      "runs": [
+        "F",
+        "P",
+        "F",
+        "P",
+        "P"
+      ],
+      "note": "r1 '18 months' (no search); r3 academy six months as the whole modernization (no search)"
+    }
+  },
+  "not_scored": "follow-ups and turn 1s; the run failed criteria first (stop rule)",
+  "criteria": {
+    "10.3_no_invented_figure": "3/5 FAIL",
+    "4.2": "5/5 pass",
+    "first_answer_median_words": "59 FAIL",
+    "follow_ups": "not scored"
+  },
+  "other_measurements": {
+    "searched_turns": "41/125"
+  }
+}

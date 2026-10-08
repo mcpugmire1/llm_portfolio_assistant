@@ -1,0 +1,38 @@
+{
+  "basis": "Turn-level pass (P) / fail (F) per run against the expected answers in tests/fixtures/evaluator_conversations.md: correct referent, materially correct facts, honest uncertainty, contextual continuity. Transcribed from the verdicts reported in the Oct 6-8, 2026 Code session; not rescored. Turns not listed under 'turns' were not hand-scored.",
+  "arm": "old: rag_answer as shipped; armA: rag_answer with the raw top 5 (no ranking/diversification)",
+  "runs": 3,
+  "turns": {
+    "old 1.2": {
+      "runs": [
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "old 1.3": {
+      "runs": [
+        "F",
+        "F",
+        "F"
+      ],
+      "note": "Fortune 500 data-exposure story"
+    },
+    "armA 1.2": {
+      "runs": [
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "armA 1.3": {
+      "runs": [
+        "F",
+        "F",
+        "F"
+      ],
+      "note": "Fortune 500 data-exposure story"
+    }
+  },
+  "not_scored": "all other follow-ups; refusals counted instead: old 14/75, armA 15/75 (2.2, 3.2, 5.1, 6.2, 9.3)"
+}

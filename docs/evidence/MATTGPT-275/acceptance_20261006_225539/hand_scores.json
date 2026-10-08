@@ -1,0 +1,249 @@
+{
+  "basis": "Turn-level pass (P) / fail (F) per run against the expected answers in tests/fixtures/evaluator_conversations.md: correct referent, materially correct facts, honest uncertainty, contextual continuity. Transcribed from the verdicts reported in the Oct 6-8, 2026 Code session; not rescored. Turns not listed under 'turns' were not hand-scored.",
+  "arm": "275 Green as first written: instruction wrapper in the user message, model decides when to search",
+  "runs": 5,
+  "turns": {
+    "1.1": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "1.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "F"
+      ],
+      "note": "r5 answered about CIC teams with no size; r3 also added an unrelated CIC paragraph"
+    },
+    "1.3": {
+      "runs": [
+        "F",
+        "F",
+        "F",
+        "F",
+        "F"
+      ],
+      "note": "all 5 searched the literal 'what went wrong' and told the Fortune 500 data-exposure story"
+    },
+    "2.1": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "2.2": {
+      "runs": [
+        "F",
+        "P",
+        "F",
+        "F",
+        "F"
+      ],
+      "note": "routed synthesis; r1/r3/r5 ignore the degree, r4 ignores it (its 'retail' claim was later found story-backed); r2 gives the equivalence with mild evaluation"
+    },
+    "3.1": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "3.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ],
+      "note": "Norfolk Southern quality crisis"
+    },
+    "4.1": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "4.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "4.3": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "5.1": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "5.2": {
+      "runs": [
+        "F",
+        "P",
+        "F",
+        "P",
+        "P"
+      ],
+      "note": "r1 no in-house comparison; r3 no comparison"
+    },
+    "6.1": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "6.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "7.1": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "7.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "8.1": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "8.2": {
+      "runs": [
+        "P",
+        "P",
+        "F",
+        "F",
+        "F"
+      ],
+      "note": "r3-r5 present another engagement (JP Morgan I&AM, Norfolk Southern) as a consequence of the incident"
+    },
+    "9.1": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "9.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "9.3": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "9.4": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "10.1": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "10.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ],
+      "note": "overlaps heavily with turn 1"
+    },
+    "10.3": {
+      "runs": [
+        "F",
+        "F",
+        "F",
+        "P",
+        "P"
+      ],
+      "note": "r1 'several months'; r2 gives the academy's six months as the whole effort; r3 'spanned several months'; r4 hedged, no figure; r5 says the duration isn't detailed"
+    }
+  },
+  "totals": {
+    "conversations_1_9": "95/110",
+    "follow_ups_1_9": "50/65",
+    "conversation_10": "12/15"
+  },
+  "other_measurements": {
+    "searched_turns": "84/125",
+    "exact_listed_opener": "121/125 paw in first line"
+  }
+}
