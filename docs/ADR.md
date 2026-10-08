@@ -1043,3 +1043,38 @@ Probe scripts and their output accumulated at the repo root, some tracked and so
 **Consequences:**
 - A citation points at `docs/evidence/`, never at `probes/`, which a fresh clone does not have.
 - Current-state docs describe a measurement by what it does, not by a probe script's path.
+
+---
+
+## ADR 040: Ask Agy Is a Conversational System; Retrieval Is Its Evidence Step
+
+**Date:** 2026-10-08
+**Status:** Planned
+**Related tickets:** MATTGPT-275, MATTGPT-273, MATTGPT-253, MATTGPT-276
+
+**Context:**
+Ask Agy was designed as a conversational guide to Matt's work: a visitor asks, Agy answers from Matt's stories in its own voice, offers to go deeper, and the next question builds on the last. The closers were its call to action. As built, each turn is single-shot search: a gate and a router on the visitor's literal words, a Pinecone search on those same words, a diversification reshuffle, and a prompt to narrate what came back. Each step assumes the question stands alone, and the step that makes conversation work, rewriting a follow-up into a standalone query, was never built. When visitors behaved conversationally, failures were fixed one at a time with prompt clauses, post-processing, and gates. Probes from Oct 6 to 8 found:
+- Literal queries miss follow-ups and topic questions; a short resolved query retrieved more on-topic stories than the visitor's literal words (local probe output, `probes/output/275/no_client_20261008_113819/`, to be frozen into `docs/evidence/MATTGPT-275/`).
+- The confidence gate refuses evaluator questions: 25 refused turns in the evaluator run (`docs/evidence/MATTGPT-273/tool_vs_pipeline_20261006_140406/`).
+- A model left to decide whether to search skips the search on follow-ups (local probe output, `probes/output/275/simplest_20261007_123042/` and `search_sentence_20261007_143054/`, to be frozen).
+- The reshuffle discards on-topic stories (local probe output, `probes/output/275/arm_a_20261008_145724/`, to be frozen).
+
+**Decision:**
+Ask Agy is a conversational system, and retrieval is an evidence step inside it, not the system. Each turn:
+1. Understand the turn: rewrite the latest question into a standalone query using the conversation.
+2. Retrieve deterministically: always search on that query, and pass the raw top results with no reshuffle.
+3. Answer from evidence: the profile, the conversation history (ADR 034), and the retrieved stories, in Agy's voice under the honesty rules, saying plainly when something isn't recorded.
+4. Offer to continue only when the next step can be delivered; that is when the closers return (ADR 035).
+
+Role Match remains a separate, retrieval-heavy workflow.
+
+**Rationale:**
+- The failures share one cause: a single-shot search pipeline asked to hold a conversation. The gate, the reliance on the router, the reshuffle, and query substitution exist to compensate for literal single-shot search.
+- Arm A (remove the reshuffle; the gate stays) tests step 2. Arm C (rewrite the question into a standalone query) tests step 1. If they recover the conversational behavior, this design is simpler than today's pipeline and than a tool-calling loop.
+- Alternative measured: let the model decide whether to search (the tool-calling design first scoped in MATTGPT-275). It skips the search on follow-ups.
+- Alternative: keep patching the pipeline per failure. Rejected; that is the remediation history this design ends.
+
+**Consequences:**
+- Accepted once the Arm A and Arm C evaluator scores support it, read against this design. It will then supersede the parts of ADRs 033 and 035 it replaces, and the gate, router dependence, reshuffle, and substitution become candidates for removal, each with its own removal ADR.
+- Follow-ups such as "What went wrong?" depend on step 1; Arm A alone cannot fix them.
+- MATTGPT-275's scope (tool-calling retrieval) needs reconciling with this ADR in the backlog pass.
