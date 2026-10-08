@@ -33,7 +33,6 @@ from unittest.mock import MagicMock, patch
 import pytest
 
 from ui.pages.ask_mattgpt import backend_service as bs
-from ui.pages.ask_mattgpt.prompts import STANDARD_DELTA, SYNTHESIS_DELTA
 
 logging.getLogger("streamlit").setLevel(logging.ERROR)
 
@@ -322,13 +321,13 @@ class TestVoiceCarriesOver:
     def test_synthesis_voice_follows_the_router(self):
         _, fake, _, _, _ = _run([_response("ok")], family="synthesis")
         system = fake.requests[0]["messages"][0]["content"]
-        assert SYNTHESIS_DELTA.strip()[:80] in system
-        assert STANDARD_DELTA.strip()[:80] not in system
+        assert "## ANSWER SHAPE: BIG-PICTURE QUESTION" in system
+        assert "## ANSWER SHAPE: SPECIFIC QUESTION" not in system
 
     def test_standard_voice_otherwise(self):
         _, fake, _, _, _ = _run([_response("ok")], family="behavioral")
         system = fake.requests[0]["messages"][0]["content"]
-        assert STANDARD_DELTA.strip()[:80] in system
+        assert "## ANSWER SHAPE: SPECIFIC QUESTION" in system
 
     def test_professional_narrative_result_carries_the_verbatim_requirement(self):
         _, fake, _, _, _ = _run(

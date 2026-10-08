@@ -13,8 +13,9 @@ The four unit assertions:
      call carries the history and the current question as-is.
   4. Evidence comes before the answer: semantic_search() runs before the
      model call that writes the answer.
-Plus the voice placement: the per-answer instruction block sits in the system
-prompt with Matt's opener lines as examples, never as exact text to copy.
+Plus the voice placement: the per-answer voice rules sit in the system prompt
+with Matt's opener lines as examples, never as exact text to copy. The full
+system-prompt contract is in test_ask_agy_tool_system_prompt.py.
 
 The behavioral half is evidenced by the lever 2 acceptance run
 (docs/evidence/MATTGPT-275/lever2_20261007_211535/, f7c1de2): searched
@@ -129,11 +130,10 @@ class TestEveryTurnRetrievesInContext:
 
 
 class TestVoicePlacement:
-    def test_instruction_block_is_in_the_system_prompt(self):
+    def test_voice_rules_are_in_the_system_prompt(self):
         _, fake, _, _ = _turn(_FOLLOW_UP, _HISTORY, _SEARCH_THEN_ANSWER)
         system = fake.requests[0]["messages"][0]["content"]
         for line in (
-            "## INSTRUCTIONS",
             "**FOCUS:**",
             "Write natural prose paragraphs",
             "**Bold ALL client names and numbers.**",

@@ -380,6 +380,16 @@ def build_user_message(
     )
 
 
+def build_tool_system_prompt(
+    is_synthesis: bool,
+    matt_dna: str,
+    profile_facts: str,
+    opener_examples: list[str],
+    focus_angle: str = "",
+) -> str:
+    raise NotImplementedError
+
+
 def build_answer_instructions(
     opening_line: str,
     is_synthesis: bool,
