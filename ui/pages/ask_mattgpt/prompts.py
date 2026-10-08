@@ -363,11 +363,6 @@ def build_user_message(
     Returns:
         Complete user message string
     """
-    focus_line = (
-        f"\n**FOCUS:** {focus_angle}" if focus_angle and not is_synthesis else ""
-    )
-    rule_0a = f"\n{_CITATION_RULE_0A}" if profile_facts else ""
-
     return f"""User Question: {question}
 
 ## Stories from Matt's Portfolio:
@@ -376,9 +371,36 @@ def build_user_message(
 
 ---
 
-## INSTRUCTIONS
+""" + build_answer_instructions(
+        opening_line=f"Start your response with this exact text: {opening}",
+        is_synthesis=is_synthesis,
+        verbatim_requirement=verbatim_requirement,
+        focus_angle=focus_angle,
+        profile_facts=profile_facts,
+    )
 
-Start your response with this exact text: {opening}
+
+def build_answer_instructions(
+    opening_line: str,
+    is_synthesis: bool,
+    verbatim_requirement: str = "",
+    focus_angle: str = "",
+    profile_facts: str = "",
+) -> str:
+    """The per-answer instruction block: opener line, focus angle, verbatim
+    requirement, prose, bolding, "State facts", and citation rule 0a.
+
+    build_user_message() ends with it (opener as exact text); the tool path
+    (agy_answer) puts it in the system prompt with the openers as examples.
+    """
+    focus_line = (
+        f"\n**FOCUS:** {focus_angle}" if focus_angle and not is_synthesis else ""
+    )
+    rule_0a = f"\n{_CITATION_RULE_0A}" if profile_facts else ""
+
+    return f"""## INSTRUCTIONS
+
+{opening_line}
 
 {focus_line}
 {verbatim_requirement}

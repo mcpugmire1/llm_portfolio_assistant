@@ -994,6 +994,38 @@ def _postprocess_agy_text(
     return response_text, cited_categories
 
 
+# Agy's opener lines and focus angles, chosen at random per answer by
+# _choose_opening_and_focus(); the tool path also shows the opener lines to
+# the model as examples of how Agy opens.
+SYNTHESIS_OPENERS = [
+    "🐾 Looking across Matt's portfolio, I see clear patterns.",
+    "🐾 Here's what connects the dots across Matt's work.",
+    "🐾 Stepping back to see the themes...",
+    "🐾 Let me show you what ties Matt's work together.",
+]
+STANDARD_OPENERS = [
+    "🐾 Found it!",
+    "🐾 Tracking this down...",
+    "🐾 On it!",
+    "🐾 Perfect, here's what I found.",
+    "Got it! 🐾",
+    "🐾 This is a strong one.",
+    "🐾 Here's a great example.",
+    "🐾 I know just the story.",
+]
+FOCUS_ANGLES = [
+    "Include specific details about HUMAN IMPACT: who was struggling and how their work life improved.",
+    "Include specific details about METHODOLOGY: what made Matt's approach different from the obvious solution.",
+    "Include specific details about SCALE: the scope, complexity, and reach of the transformation.",
+    "Include specific details about LEADERSHIP: how Matt brought people together and drove alignment.",
+    "Include specific details about OUTCOMES: hard numbers and measurable business results.",
+    "Include specific details about INNOVATION: what was new, creative, or unconventional about this.",
+]
+SYNTHESIS_BREADTH = (
+    "Cover patterns across multiple stories rather than depth on any single one."
+)
+
+
 def _choose_opening_and_focus(is_synthesis: bool) -> tuple[str, str]:
     """Pick Agy's opener and focus angle at random. Returns (opening, focus).
 
@@ -1001,42 +1033,8 @@ def _choose_opening_and_focus(is_synthesis: bool) -> tuple[str, str]:
     standard answers get a standard opener and a random focus angle.
     """
     if is_synthesis:
-        # Synthesis mode openings - for big-picture questions
-        openings = [
-            "🐾 Looking across Matt's portfolio, I see clear patterns.",
-            "🐾 Here's what connects the dots across Matt's work.",
-            "🐾 Stepping back to see the themes...",
-            "🐾 Let me show you what ties Matt's work together.",
-        ]
-        chosen_opening = random.choice(openings)
-
-        # No focus angle for synthesis: we want breadth
-        chosen_focus = "Cover patterns across multiple stories rather than depth on any single one."
-    else:
-        # Standard mode openings - for specific questions
-        openings = [
-            "🐾 Found it!",
-            "🐾 Tracking this down...",
-            "🐾 On it!",
-            "🐾 Perfect, here's what I found.",
-            "Got it! 🐾",
-            "🐾 This is a strong one.",
-            "🐾 Here's a great example.",
-            "🐾 I know just the story.",
-        ]
-        chosen_opening = random.choice(openings)
-
-        # Random focus angle - adds variety to which aspect gets included
-        focus_angles = [
-            "Include specific details about HUMAN IMPACT: who was struggling and how their work life improved.",
-            "Include specific details about METHODOLOGY: what made Matt's approach different from the obvious solution.",
-            "Include specific details about SCALE: the scope, complexity, and reach of the transformation.",
-            "Include specific details about LEADERSHIP: how Matt brought people together and drove alignment.",
-            "Include specific details about OUTCOMES: hard numbers and measurable business results.",
-            "Include specific details about INNOVATION: what was new, creative, or unconventional about this.",
-        ]
-        chosen_focus = random.choice(focus_angles)
-    return chosen_opening, chosen_focus
+        return random.choice(SYNTHESIS_OPENERS), SYNTHESIS_BREADTH
+    return random.choice(STANDARD_OPENERS), random.choice(FOCUS_ANGLES)
 
 
 def _openai_client():
