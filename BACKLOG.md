@@ -43,7 +43,7 @@ New stories: -078, -091, -155, -022 (-181 closed Aug 19)
 Meta: -079, -156, -096
 
 **LATER — tier 3:** blocked or dependent
--077 (re-measure after -181) · -171 (coupled to -190) · -185 (negation) · -239 (router confidence floor, blocked on -223 Sheet data) · -281 (openers by answer type; Matt writes the lists) · -280 (narrative tone depends on which story leads; measure after -281)
+-077 (re-measure after -181) · -171 (coupled to -190) · -185 (negation) · -239 (router confidence floor, blocked on -223 Sheet data) · -281 (openers by answer type; Matt writes the lists) · -280 (narrative tone depends on which story leads; measure after -281) · -282 (answering model measured only as gpt-4o; after -275 and -140)
 
 **LATER — tier 4:** hygiene
 Dead code: -176, -183, -199, -201 · -241 (dead prose: out_of_scope_response + personal_response, backend_service.py (out_of_scope_response + personal_response in rag_answer())) · Hidden error: -204 (zero-filter-match only -- st.stop() blanking was MATTGPT-224, shipped `92370b3`)
@@ -130,6 +130,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-279](#mattgpt-279) | MATT_DNA's Industry Experience block is half hand-typed and drifts from the corpus | Open | High | Bug | October 7, 2026 |
 | [MATTGPT-280](#mattgpt-280) | Tool-path narrative tone depends on which story leads | Open | Medium | Issue | October 8, 2026 |
 | [MATTGPT-281](#mattgpt-281) | Openers chosen by answer type after the answer is known | Open | Low | Issue | October 8, 2026 |
+| [MATTGPT-282](#mattgpt-282) | Ask Agy's answering model has only been measured as gpt-4o | Open | Medium | Issue | October 8, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -1959,7 +1960,7 @@ e. Source-vs-output check: for each fixture JD, the row count and wording under 
 
 **First step for each:** Run an acceptance probe that includes the story controls and check whether the guard's canned reply appears in any log record with `redirect_reason`. Do not remove either without that measurement.
 
-**Tool path (Oct 7, 2026; local, untracked: `probes/output/275/answer_dom_20261007_100712/q2.png`):** With the confidence gate off the answer path (MATTGPT-275), `OFF_TOPIC_GUARD` is what answers gibberish. "qzwxvnpfrk plmqcvjxk floogerblerg" got the random opener "Tracking this down..." followed by the guard's scripted string verbatim: "I can only discuss Matt's transformation experience. Ask me about application modernization, digital innovation, agile transformation, or leadership."
+**Tool path (Oct 7, 2026; `docs/evidence/MATTGPT-275/answer_dom_20261007_100712/q2.png`, f7c1de2):** With the confidence gate off the answer path (MATTGPT-275), `OFF_TOPIC_GUARD` is what answers gibberish. "qzwxvnpfrk plmqcvjxk floogerblerg" got the random opener "Tracking this down..." followed by the guard's scripted string verbatim: "I can only discuss Matt's transformation experience. Ask me about application modernization, digital innovation, agile transformation, or leadership."
 
 **Decision needed:** Does the guard stay a scripted reply, or become guidance for Agy's own reply (say the question isn't about Matt's work, in Agy's voice, and offer what Agy can answer)? Candidate 2's measurement question (has the canned reply ever appeared in production) is now answered for the tool path: it appears whenever the model judges a query off-topic.
 
@@ -2243,7 +2244,7 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 - **Logged:** October 8, 2026
 - **Dependencies:** MATTGPT-275, MATTGPT-281
 
-**Issue:** Narrative answers on the tool path can read as polished summaries rather than Agy-style stories; which story leads appears to influence the tone (`lever2_recency_20261008_160743/voice_side_by_side.txt`, local under `probes/output/275/` until the 275 evidence commit freezes it in `docs/evidence/MATTGPT-275/`). Measure after the opener lists land.
+**Issue:** Narrative answers on the tool path can read as polished summaries rather than Agy-style stories; which story leads appears to influence the tone (`docs/evidence/MATTGPT-275/lever2_recency_20261008_160743/voice_side_by_side.txt`, f7c1de2). Measure after the opener lists land.
 
 ---
 
@@ -2257,6 +2258,21 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 - **Dependencies:** MATTGPT-275
 
 **Issue:** Openers chosen by answer type (fact, story, synthesis, gap/no) after the answer is known, in Agy's hound voice; Matt writes the lists. Source: MATTGPT-276's open question (the random opener and focus angle) and the Oct 6 browser evidence of mismatched openers (e.g. "This is a strong one" before a "no"; "Tracking this down..." before the scripted off-topic reply, MATTGPT-263).
+
+---
+
+### MATTGPT-282
+**Ask Agy's answering model has only been measured as gpt-4o**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Issue
+- **Logged:** October 8, 2026
+- **Dependencies:** MATTGPT-275, MATTGPT-140
+
+**Issue:** Ask Agy's answering model has only been measured as gpt-4o. Run the evaluator script (`tests/fixtures/evaluator_conversations.md`) on one or two current models; compare follow-ups, honesty, voice, latency and cost against lever 2's gpt-4o baseline (`docs/evidence/MATTGPT-275/`, f7c1de2).
+
+**First candidate:** GPT-6.1 Sol (balanced capability for multi-step reasoning, at lower cost than Astra). Confirm `tool_choice="required"` support before the run; compare time to first token alongside cost.
 
 ---
 
