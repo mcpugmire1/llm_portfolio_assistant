@@ -268,6 +268,106 @@ def assert_no_hardcoded_drift(stories: list[dict]) -> tuple[bool, dict[str, list
 
 
 # =============================================================================
+# CORPUS LITERALS (MATTGPT-258)
+# =============================================================================
+
+CORPUS_LITERAL_DIRS = ("ui", "services", "config", "utils")
+CORPUS_LITERAL_FIELDS = ("Client", "Project", "Title")
+CORPUS_LITERAL_ALLOWLIST = (
+    Path(__file__).parent / "fixtures" / "corpus_literal_allowlist.json"
+)
+
+# A figure as a claim: a dollar amount, a multiplier with what it multiplies,
+# a count with its unit, or a percentage with what it changes. Bare numbers
+# (CSS sizes, limits) and story counts (an app fact, not a corpus fact) are
+# not claims. "Fortune 500" is a name, so "500 clients" after it is skipped.
+FIGURE_PATTERN = re.compile(
+    r"\$\d[\d.,]*\s?[MKB]\+?"
+    r"|\b\d+(?:\.\d+)?[xX]\s+(?:faster|velocity|more)\b"
+    r"|(?<!Fortune )\b\d[\d,]*\+?(?:\s|-)(?:person|people|countries|practitioners"
+    r"|professionals|clients|applications|products|engineers|engagements"
+    r"|Fortune|teams?|years)\b"
+    r"|\b\d+%\**\s+(?:faster|reduction|increase|fewer|more|less|of)\b"
+)
+# The figure's own number, which must be on record for an allowed figure.
+FIGURE_CORE = re.compile(r"\$\d[\d.,]*\s?[MKB]\+?|\d[\d,.]*[xX+%]")
+
+
+def _figure_core(figure: str) -> str:
+    """The marked number ("$100M+", "150+", "4x", "60%"), or the whole figure
+    when its number is bare ("12 countries"), so a bare "12" can't vouch."""
+    match = FIGURE_CORE.match(figure)
+    return match.group(0) if match else figure
+
+
+def find_corpus_literals(stories: list[dict], root: Path) -> list[tuple]:
+    """Corpus values written as string literals in code and prompts.
+
+    Scans string constants (not comments or docstrings) in CORPUS_LITERAL_DIRS
+    for Client, Project and Title values from the corpus, and for figures.
+    A multi-word value matches as whole words inside a string; a one-word value
+    matches only as the whole string, which is how guards and maps hold it.
+
+    Returns:
+        (file, function, kind, value) for every occurrence.
+    """
+    import ast
+
+    values: dict[str, str] = {}
+    for story in stories:
+        for fld in CORPUS_LITERAL_FIELDS:
+            value = (story.get(fld) or "").strip()
+            if value:
+                values.setdefault(value, fld)
+
+    hits = []
+    for folder in CORPUS_LITERAL_DIRS:
+        for path in sorted((root / folder).rglob("*.py")):
+            tree = ast.parse(path.read_text(encoding="utf-8"))
+            docstrings, scopes = set(), []
+            for node in ast.walk(tree):
+                if isinstance(
+                    node,
+                    ast.Module | ast.FunctionDef | ast.AsyncFunctionDef | ast.ClassDef,
+                ):
+                    body = node.body
+                    if (
+                        body
+                        and isinstance(body[0], ast.Expr)
+                        and isinstance(body[0].value, ast.Constant)
+                        and isinstance(body[0].value.value, str)
+                    ):
+                        docstrings.add(id(body[0].value))
+                    if not isinstance(node, ast.Module):
+                        scopes.append((node.lineno, node.end_lineno, node.name))
+
+            def scope_of(line, scopes=scopes):
+                inner = [s for s in scopes if s[0] <= line <= s[1]]
+                return max(inner)[2] if inner else "<module>"
+
+            rel = path.relative_to(root).as_posix()
+            for node in ast.walk(tree):
+                if not (
+                    isinstance(node, ast.Constant)
+                    and isinstance(node.value, str)
+                    and id(node) not in docstrings
+                ):
+                    continue
+                text = node.value
+                func = scope_of(node.lineno)
+                for value, fld in values.items():
+                    if " " in value:
+                        found = re.search(rf"(?<!\w){re.escape(value)}(?!\w)", text)
+                    else:
+                        found = text.strip() == value
+                    if found:
+                        hits.append((rel, func, fld, value))
+                for match in FIGURE_PATTERN.finditer(text):
+                    hits.append((rel, func, "figure", match.group(0)))
+    return hits
+
+
+# =============================================================================
 # COMBINED STRUCTURAL CHECK
 # =============================================================================
 
@@ -420,6 +520,77 @@ class TestHardcodedDrift:
                     errors.append(f"  - {item}")
 
         assert passed, f"Hardcoded drift detected:{' '.join(errors)}"
+
+
+class TestCorpusLiterals:
+    """Corpus values in code and prompts appear only where the allowed list
+    gives a reason (MATTGPT-258). Industry, Theme and Era are schema values
+    used as guards and are out of scope here."""
+
+    ROOT = Path(__file__).parent.parent
+
+    @pytest.fixture(scope="class")
+    def allowed(self):
+        return json.loads(CORPUS_LITERAL_ALLOWLIST.read_text(encoding="utf-8"))
+
+    @staticmethod
+    def _key(entry):
+        return (entry["file"], entry["function"], entry["kind"], entry["value"])
+
+    def test_every_literal_is_allowed(self, stories, allowed):
+        from collections import Counter
+
+        found = Counter(find_corpus_literals(stories, self.ROOT))
+        listed = {self._key(e): e["count"] for e in allowed}
+        unlisted = [
+            f"{f} :: {fn}: {kind} {value!r} x{n}"
+            + (
+                f" (allowed x{listed[(f, fn, kind, value)]})"
+                if (f, fn, kind, value) in listed
+                else ""
+            )
+            for (f, fn, kind, value), n in sorted(found.items())
+            if n > listed.get((f, fn, kind, value), 0)
+        ]
+        assert not unlisted, "Corpus literals not on the allowed list:\n" + "\n".join(
+            unlisted
+        )
+
+    def test_every_allowed_entry_still_matches(self, stories, allowed):
+        from collections import Counter
+
+        found = Counter(find_corpus_literals(stories, self.ROOT))
+        stale = [
+            f"{e['file']} :: {e['function']}: {e['kind']} {e['value']!r}"
+            f" allowed x{e['count']}, found x{found.get(self._key(e), 0)}"
+            for e in allowed
+            if found.get(self._key(e), 0) < e["count"]
+        ]
+        assert not stale, (
+            "Allowed-list entries with fewer matches than listed:\n" + "\n".join(stale)
+        )
+
+    def test_every_allowed_entry_has_a_reason(self, allowed):
+        missing = [
+            f"{e['file']} :: {e['function']}: {e['value']!r}"
+            for e in allowed
+            if not e.get("reason", "").strip()
+        ]
+        assert not missing, "Allowed-list entries without a reason:\n" + "\n".join(
+            missing
+        )
+
+    def test_every_allowed_figure_is_on_record(self, stories, allowed):
+        profile = (self.ROOT / "data" / "matt_profile.json").read_text(encoding="utf-8")
+        record = (" ".join(json.dumps(s) for s in stories) + profile).lower()
+        off_record = [
+            f"{e['file']} :: {e['function']}: {e['value']!r}"
+            for e in allowed
+            if e["kind"] == "figure" and _figure_core(e["value"]).lower() not in record
+        ]
+        assert not off_record, (
+            "Allowed figures not in the corpus or profile:\n" + "\n".join(off_record)
+        )
 
 
 class TestAllStructuralChecks:
