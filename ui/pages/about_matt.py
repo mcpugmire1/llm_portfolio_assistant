@@ -81,8 +81,8 @@ def render_about_matt():
         )
         st.markdown(
             '<p class="prof-voice-p">I build what\'s next, modernize what\'s not, and grow teams along the way.</p>'
-            '<p class="prof-voice-p">My foundation is in financial services technology at JPMorgan, Fiserv, RBC, and HSBC. '
-            'At JPMorgan I led several programs, the largest a 60+ person global team delivering the ACCESS payments platform '
+            '<p class="prof-voice-p">My foundation is in financial services technology at JP Morgan, Fiserv, RBC, and HSBC. '
+            'At JP Morgan I led several programs, the largest a 60+ person global team delivering the ACCESS payments platform '
             'across 12 countries. That\'s where I learned to modernize regulated, high-stakes platforms without breaking them.</p>'
             '<p class="prof-voice-p">Most recently I built Accenture\'s Cloud Innovation Center from zero to a 150+ practitioner '
             'practice of engineers, architects, product managers, and HCD designers, serving 15+ Fortune 500 clients with no '
@@ -227,8 +227,8 @@ def render_about_matt():
             "</div>"
             "<h2>In My Own Words</h2>"
             "<p class='voice'>I build what&#39;s next, modernize what&#39;s not, and grow teams along the way.</p>"
-            "<p class='voice'>My foundation is in financial services technology at JPMorgan, Fiserv, RBC, and HSBC. "
-            "At JPMorgan I led several programs, the largest a 60+ person global team delivering the ACCESS payments platform "
+            "<p class='voice'>My foundation is in financial services technology at JP Morgan, Fiserv, RBC, and HSBC. "
+            "At JP Morgan I led several programs, the largest a 60+ person global team delivering the ACCESS payments platform "
             "across 12 countries. That&#39;s where I learned to modernize regulated, high-stakes platforms without breaking them.</p>"
             "<p class='voice'>Most recently I built Accenture&#39;s Cloud Innovation Center from zero to a 150+ practitioner "
             "practice of engineers, architects, product managers, and HCD designers, serving 15+ Fortune 500 clients with no "
