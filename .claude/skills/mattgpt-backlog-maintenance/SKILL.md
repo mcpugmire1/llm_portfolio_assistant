@@ -11,7 +11,7 @@ description: "Backlog session only. Use when running the MattGPT Backlog Mainten
 
 Run git and repo commands yourself against the local repo. Never clone the repo or work from any other copy: a clone only sees pushed commits.
 
-**Scope:** This process writes `BACKLOG.md` and `CHANGELOG.md` only. It reads `docs/ADR.md` but never writes it; Architecture Sync owns ADRs. CLAUDE.md, ARCHITECTURE.md, source files, and all other documents are out of scope. Any finding that would require a change to CLAUDE.md, `.claude/rules/`, hooks, or skills gets flagged to Matt, not written.
+**Scope:** This process writes `BACKLOG.md` and `CHANGELOG.md` only. It reads `docs/ADR.md` but never writes it; Architecture Sync owns ADRs. CLAUDE.md, ARCHITECTURE.md, source files, and all other documents are out of scope. Any finding that would require a change to CLAUDE.md, hooks, or skills gets flagged to Matt, not written.
 
 **Handoff:** Commit messages from dev sessions feed this pass. Dev sessions never create, modify, or close tickets.
 

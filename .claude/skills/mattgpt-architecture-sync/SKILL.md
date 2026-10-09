@@ -11,7 +11,7 @@ description: "Arch sync session only. Use when running the MattGPT Architecture 
 
 Run git and repo commands yourself against the local repo. Never clone the repo or work from any other copy: a clone only sees pushed commits.
 
-**Scope:** This pass is the only writer of `ARCHITECTURE.md` and `docs/ADR.md`. It reads BACKLOG.md but never writes it. Any finding that would require a change to CLAUDE.md, `.claude/rules/`, hooks, or skills gets flagged to Matt, not written.
+**Scope:** This pass is the only writer of `ARCHITECTURE.md` and `docs/ADR.md`. It reads BACKLOG.md but never writes it. Any finding that would require a change to CLAUDE.md, hooks, or skills gets flagged to Matt, not written.
 
 **Trigger:** On demand. Run this pass before the backlog pass in a cycle. Matt may also hand this pass a one-off migration batch (see Step 1b); apply the same ADR and content rules to it.
 

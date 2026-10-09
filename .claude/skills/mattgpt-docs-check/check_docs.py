@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Report-only MattGPT docs check. Never edits files; exit code is always 0.
 
-History markers are checked in CLAUDE.md, ARCHITECTURE.md and .claude/rules/*.md.
+History markers are checked in CLAUDE.md and ARCHITECTURE.md.
 BACKLOG.md gets the link check only: dated evidence in ticket bodies is by design.
 docs/ADR.md, CHANGELOG.md and archive/ are append-only history and are not checked.
 """
@@ -13,7 +13,6 @@ import sys
 from urllib.parse import unquote
 
 CURRENT_STATE = ["CLAUDE.md", "ARCHITECTURE.md", "BACKLOG.md"]
-RULES_DIR = ".claude/rules"
 BUDGET = {"ARCHITECTURE.md": 2000}
 MONTH = (
     r"(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|June?|July?|"
@@ -48,12 +47,7 @@ def tracked():
 
 
 def current_state_files():
-    out = [f for f in CURRENT_STATE if os.path.exists(f)]
-    if os.path.isdir(RULES_DIR):
-        out += sorted(
-            f"{RULES_DIR}/{p}" for p in os.listdir(RULES_DIR) if p.endswith(".md")
-        )
-    return out
+    return [f for f in CURRENT_STATE if os.path.exists(f)]
 
 
 def links(md, files, dirs):

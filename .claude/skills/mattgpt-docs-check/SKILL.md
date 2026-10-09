@@ -12,8 +12,8 @@ From the repo root, run:
 Paste the output in full. The script never edits anything and never blocks a commit; it always exits 0.
 
 ## What it checks
-1. **History markers.** CLAUDE.md, ARCHITECTURE.md and `.claude/rules/*.md` hold current state only. It reports ticket IDs, any "(Month ... YYYY)" parenthetical as an incident note, and other dates under "fact or history?". Some dates are facts (career dates, certification dates); say which each one is.
-2. **Links.** Every relative link in CLAUDE.md, ARCHITECTURE.md, BACKLOG.md, `.claude/rules/*.md`, and any path passed as an argument must resolve to a path tracked in git, with matching case. A file on disk that is untracked or gitignored counts as broken.
+1. **History markers.** CLAUDE.md and ARCHITECTURE.md hold current state only. It reports ticket IDs, any "(Month ... YYYY)" parenthetical as an incident note, and other dates under "fact or history?". Some dates are facts (career dates, certification dates); say which each one is.
+2. **Links.** Every relative link in CLAUDE.md, ARCHITECTURE.md, BACKLOG.md, and any path passed as an argument must resolve to a path tracked in git, with matching case. A file on disk that is untracked or gitignored counts as broken.
 3. **Size.** ARCHITECTURE.md line count against 2,000, the point past which it can't be read in one pass. Report-only.
 
 ## Not checked
@@ -25,4 +25,4 @@ Paste the output in full. The script never edits anything and never blocks a com
 Pass the file's path as an argument. The report lists every tracked file that links to it. Fix or remove those links in the same change, and move any durable content into `docs/ADR.md` or CHANGELOG.md first.
 
 ## Reporting
-Paste the output. For each finding, propose the fix and name the owner: Matt for CLAUDE.md and `.claude/rules/`; Architecture Sync for ARCHITECTURE.md; Backlog Maintenance for BACKLOG.md. Don't apply fixes to files outside your own pass's ownership.
+Paste the output. For each finding, propose the fix and name the owner: Matt for CLAUDE.md; Architecture Sync for ARCHITECTURE.md; Backlog Maintenance for BACKLOG.md. Don't apply fixes to files outside your own pass's ownership.
