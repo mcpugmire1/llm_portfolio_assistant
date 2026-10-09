@@ -1794,6 +1794,8 @@ Scenarios by name:
 
 **Fix:** Remove the strip. Run structural meta-commentary tests without it, then a live acceptance run on stories with decimal amounts, including story controls.
 
+**Evidence (Oct 9, 2026):** The strip's `[^.]*{pattern}[^.]*\.` treats a period inside a token (`$8.5M`, `app.py`) as a sentence boundary, so a deleted meta sentence takes text from its neighbour ("talent.5M program", "zero defects.py by 82%"). Reproduced with the real `META_COMMENTARY_REGEX_PATTERNS` in `_postprocess_agy_text()`, no model call: `docs/evidence/MATTGPT-275/candidate_20261009_085832/strip_repro.txt` (6d41ff8). In that run, 6 of 130 answers are garbled across the old path, lever 2 and the candidate, so it's live in production: one token-boundary case ("zero defects.py by 82%", candidate) and five consistent with a matched sentence removed whole (one on the old `rag_answer()` path); which pattern matched is not recorded, since pre-strip text isn't captured. "talent.5M program" is from `arm_theme1_20261009_083210` (d65fdc5).
+
 **Coupling with MATTGPT-252 (Oct 5, 2026):** The strip also removes some of the evaluative sentences 252 is about (252's measurement gap: probe outputs are counted after the strip). With 255 at NOW #5 and 252 at NEXT #14, removing the strip lets more evaluative sentences through until 252 lands. The acceptance run counts evaluative sentences in raw LLM text and in final `answer_md`, before and after the removal, so the trade is measured, not discovered.
 
 **Unverified Oct 2:** Check whether `_log_bandaid` exists and what it shows before removing anything.
