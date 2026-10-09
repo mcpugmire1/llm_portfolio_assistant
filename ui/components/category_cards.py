@@ -203,14 +203,17 @@ def render_category_cards(stories: list[dict]):
         line-height: 1;
         margin-bottom: 6px;
     }
-    .home-cat-title {
-        font-size: 12px;
+    /* Card-scoped (0-2-0) so these beat Streamlit's markdown-container
+       `p { font-size: inherit }` rule (0-1-1) on their own; a bare
+       .home-cat-title (0-1-0) loses it and inherits the container size. */
+    .home-cat-card .home-cat-title {
+        font-size: 16px;
         font-weight: 500;
         margin: 0 0 3px 0;
         color: var(--text-primary);
     }
-    .home-cat-meta {
-        font-size: 11px;
+    .home-cat-card .home-cat-meta {
+        font-size: 16px;
         color: var(--text-secondary);
         margin: 0;
         line-height: 1.5;

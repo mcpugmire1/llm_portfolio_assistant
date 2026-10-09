@@ -1496,7 +1496,7 @@ div[data-testid="stMarkdownContainer"]:has(.prof-section-h) {
 }
 
 .prof-signal-lbl {
-    font-size: 10px !important;
+    font-size: 12px !important;
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.4px;
@@ -1504,7 +1504,7 @@ div[data-testid="stMarkdownContainer"]:has(.prof-section-h) {
 }
 
 .prof-signal-val {
-    font-size: 12px !important;
+    font-size: 16px !important;
     font-weight: 500;
     margin: 0;
     color: var(--text-primary);
@@ -1512,7 +1512,7 @@ div[data-testid="stMarkdownContainer"]:has(.prof-section-h) {
 
 /* Voice block — wireframe: .prof-voice-p per paragraph */
 .prof-voice-p {
-    font-size: 13px !important;
+    font-size: 15px !important;
     line-height: 1.65 !important;
     color: var(--text-primary) !important;
     margin: 0 0 10px !important;
@@ -1532,7 +1532,7 @@ div[data-testid="stMarkdownContainer"]:has(.prof-section-h) {
 }
 
 .prof-copy-h {
-    font-size: 12px !important;
+    font-size: 16px !important;
     font-weight: 500 !important;
     color: var(--accent-purple) !important;
     margin: 0 0 6px 0 !important;
@@ -1545,9 +1545,9 @@ div[data-testid="stMarkdownContainer"]:has(.prof-section-h) {
     border-radius: 6px !important;
     padding: 9px 11px !important;
     margin: 6px 0 !important;
-    font-size: 12px !important;
+    font-size: 14px !important;
     font-style: italic !important;
-    line-height: 1.5 !important;
+    line-height: 1.55 !important;
     color: var(--text-secondary) !important;
 }
 
@@ -1564,7 +1564,7 @@ div[data-testid="stMarkdownContainer"]:has(.prof-section-h) {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 500;
     padding: 5px 10px;
     border: 0.5px solid var(--border-color) !important;
@@ -1605,18 +1605,26 @@ div[data-testid="stMarkdownContainer"]:has(.prof-section-h) {
    padding: 0 overrides Streamlit's h4 { padding: 8px 0 16px } default */
 .competency-card.prof-comp-card h4,
 .competency-card.prof-comp-card .prof-comp-name {
-    font-size: 12px !important;
+    font-size: 16px !important;
     font-weight: 500 !important;
     color: var(--text-primary) !important;
     margin: 0 0 3px !important;
     padding: 0 !important;
 }
 
+/* Streamlit appends a 16px anchor-link element to every heading. Its link is
+   hidden but the element keeps its width, so a title that nearly fills the
+   column wraps it onto an empty second line. Same treatment as
+   .section-header in render_section_title(). */
+.competency-card.prof-comp-card [data-testid="stHeaderActionElements"] {
+    display: none !important;
+}
+
 .competency-card.prof-comp-card p,
 .competency-card.prof-comp-card .prof-comp-desc {
-    font-size: 11px !important;
+    font-size: 14px !important;
     color: var(--text-secondary) !important;
-    line-height: 1.4 !important;
+    line-height: 1.55 !important;
     margin: 0 !important;
 }
 
@@ -1638,15 +1646,15 @@ div[data-testid="stMarkdownContainer"]:has(.prof-section-h) {
 }
 
 .prof-phil-h {
-    font-size: 12px !important;
+    font-size: 16px !important;
     font-weight: 500 !important;
     color: var(--accent-purple) !important;
     margin: 0 0 3px !important;
 }
 
 .prof-phil-p {
-    font-size: 11px !important;
-    line-height: 1.45 !important;
+    font-size: 14px !important;
+    line-height: 1.55 !important;
     color: var(--text-primary) !important;
     margin: 0 !important;
 }
@@ -1654,15 +1662,15 @@ div[data-testid="stMarkdownContainer"]:has(.prof-section-h) {
 /* Compound selectors (0-2-0 / 0-2-1) beat Streamlit's internal
    [data-testid="stMarkdownContainer"] p (0-1-1) rule for font-size */
 .prof-phil-card .prof-phil-h {
-    font-size: 12px !important;
+    font-size: 16px !important;
     font-weight: 500 !important;
     color: var(--accent-purple) !important;
     margin: 0 0 3px !important;
 }
 
 .prof-phil-card .prof-phil-p {
-    font-size: 11px !important;
-    line-height: 1.45 !important;
+    font-size: 14px !important;
+    line-height: 1.55 !important;
     color: var(--text-primary) !important;
     margin: 0 !important;
 }
@@ -1739,46 +1747,54 @@ div[data-testid="stMarkdownContainer"]:has(.prof-section-h) {
     border: none !important;
 }
 
-.prof-timeline-period { font-size: 11px !important; color: var(--accent-purple) !important; font-weight: 500 !important; margin: 0 !important; }
-.prof-timeline-role   { font-size: 13px !important; font-weight: 500 !important; margin: 2px 0 1px !important; color: var(--text-primary) !important; }
-.prof-timeline-org    { font-size: 11px !important; color: var(--text-secondary) !important; margin: 0 0 3px !important; }
-.prof-timeline-desc   { font-size: 11px !important; color: var(--text-primary) !important; margin: 0 !important; line-height: 1.45 !important; }
+.prof-timeline-period { font-size: 13px !important; color: var(--accent-purple) !important; font-weight: 500 !important; margin: 0 !important; }
+.prof-timeline-role   { font-size: 16px !important; font-weight: 500 !important; margin: 2px 0 1px !important; color: var(--text-primary) !important; }
+.prof-timeline-org    { font-size: 13px !important; color: var(--text-secondary) !important; margin: 0 0 3px !important; }
+.prof-timeline-desc   { font-size: 14px !important; color: var(--text-primary) !important; margin: 0 !important; line-height: 1.55 !important; }
 
-/* prof-* mobile overrides — use !important to beat existing am-*/timeline-*
-   mobile overrides that also use !important */
+/* prof-* mobile overrides: use !important to beat the existing am-* and
+   timeline-* mobile overrides that also use !important. Never write a
+   glob followed by a slash in this comment: it closes the comment early
+   and the browser drops this whole block. */
 @media (max-width: 768px) {
     .prof-section-h {
         font-size: 12px !important;
         margin: 0 0 8px !important;
     }
+    /* Dual-classed eyebrows also carry .am-section-title, whose mobile rule
+       later in this file sets 20px !important. 0-2-0 wins on font-size only;
+       its mobile margin is left as is. */
+    .am-section-title.prof-section-h {
+        font-size: 12px !important;
+    }
     .prof-signals-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr) !important;
     }
     .prof-comp-grid {
         grid-template-columns: repeat(2, 1fr) !important;
         padding: 0 !important;
     }
     .prof-comp-name {
-        font-size: 12px !important;
+        font-size: 16px !important;
         margin: 0 0 3px !important;
     }
     .prof-comp-desc {
-        font-size: 11px !important;
+        font-size: 14px !important;
     }
     .prof-philosophy {
         grid-template-columns: 1fr !important;
         gap: 8px !important;
     }
     .prof-phil-h {
-        font-size: 12px !important;
+        font-size: 16px !important;
     }
     .prof-phil-p {
-        font-size: 11px !important;
+        font-size: 14px !important;
     }
     .prof-timeline .timeline-item {
         padding: 0 0 10px 14px !important;
     }
-    .prof-timeline-role { font-size: 12px !important; }
+    .prof-timeline-role { font-size: 16px !important; }
 }
 
 /* Contact section - gradient works in both modes */
