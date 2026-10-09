@@ -1,0 +1,76 @@
+[new | 1. Payments experience   | run 1 | t1] 6.12s searches=1 reason=None | "🐾 Here's a great example of Matt's work in payments.\n\nAt **JP Morgan C"
+[new | 1. Payments experience   | run 1 | t2] 3.08s searches=1 reason=None | "🐾 Found it!\n\nIn Matt's work at **JP Morgan Chase**, he managed a blend"
+[new | 1. Payments experience   | run 1 | t3] 3.76s searches=1 reason=None | '🐾 Tracking this down...\n\nIn the development of the ACCESS Next Generat'
+[new | 1. Payments experience   | run 2 | t1] 4.35s searches=1 reason=None | "🐾 Here's a great example of Matt's work in payments.\n\nAt **JP Morgan C"
+[new | 1. Payments experience   | run 2 | t2] 2.5s searches=1 reason=None | 'Matt managed a blended team of over **40** members across **Accenture*'
+[new | 1. Payments experience   | run 2 | t3] 4.18s searches=1 reason=None | '🐾 Found it!\n\nDuring the development of the ACCESS Next Generation plat'
+[new | 1. Payments experience   | run 3 | t1] 4.29s searches=1 reason=None | "🐾 Here's a great example of Matt's work in the payments domain.\n\nAt **"
+[new | 1. Payments experience   | run 3 | t2] 2.76s searches=1 reason=None | '🐾 Found it!\n\nIn his work on the JP Morgan ACCESS platform, Matt manage'
+[new | 1. Payments experience   | run 3 | t3] 4.23s searches=1 reason=None | "🐾 Here's what I found about the challenges Matt faced during the JP Mo"
+[new | 2. Education             | run 1 | t1] 2.85s searches=1 reason=None | 'Matt does not have a degree specifically in Computer Science. He holds'
+[new | 2. Education             | run 1 | t2] 5.07s searches=1 reason=None | "🐾 Looking across Matt's portfolio, his technical expertise and achieve"
+[new | 2. Education             | run 2 | t1] 2.31s searches=1 reason=None | "Matt holds a Master's degree in Information Technology from **American"
+[new | 2. Education             | run 2 | t2] 4.63s searches=1 reason=None | "🐾 Looking across Matt's portfolio, I see clear patterns of technical e"
+[new | 2. Education             | run 3 | t1] 2.65s searches=1 reason=None | "Matt does not have a Computer Science degree. He holds a Master's degr"
+[new | 2. Education             | run 3 | t2] 5.14s searches=2 reason=None | "🐾 Looking across Matt's portfolio, I see clear patterns of technical e"
+[new | 3. Leadership            | run 1 | t1] 3.41s searches=1 reason=None | "🐾 Here's a great example of Matt's leadership style.\n\nMatt's leadershi"
+[new | 3. Leadership            | run 1 | t2] 3.36s searches=1 reason=None | '🐾 I know just the story.\n\nAt the **Accenture Cloud Innovation Center**'
+[new | 3. Leadership            | run 2 | t1] 5.75s searches=2 reason=None | "🐾 Here's a great example of Matt's leadership style.\n\nMatt's leadershi"
+[new | 3. Leadership            | run 2 | t2] 6.24s searches=1 reason=None | "🐾 Here's a story where Matt's leadership approach faced challenges.\n\nD"
+[new | 3. Leadership            | run 3 | t1] 4.18s searches=1 reason=None | "🐾 Matt's leadership style is centered around creating environments whe"
+[new | 3. Leadership            | run 3 | t2] 3.56s searches=1 reason=None | "🐾 Here's a story where Matt's leadership approach faced challenges.\n\nD"
+[new | 4. Certifications        | run 1 | t1] 3.46s searches=1 reason=None | 'Matt held several certifications, though none are current. He was an "'
+[new | 4. Certifications        | run 1 | t2] 2.5s searches=1 reason=None | 'No, Matt does not have a PMP certification. His certifications include'
+[new | 4. Certifications        | run 1 | t3] 2.56s searches=1 reason=None | 'No, none of Matt\'s certifications are current. He held the "AWS Certif'
+[new | 4. Certifications        | run 2 | t1] 2.96s searches=1 reason=None | 'Matt holds several certifications, though none are currently active. H'
+[new | 4. Certifications        | run 2 | t2] 2.59s searches=1 reason=None | 'No, Matt does not hold a PMP certification. His certifications include'
+[new | 4. Certifications        | run 2 | t3] 2.79s searches=1 reason=None | "None of Matt's certifications are currently active. His certifications"
+[new | 4. Certifications        | run 3 | t1] 3.5s searches=1 reason=None | '🐾 Matt holds several certifications, though none are current. He was a'
+[new | 4. Certifications        | run 3 | t2] 2.9s searches=1 reason=None | 'No, Matt does not hold a PMP certification. His certifications include'
+[new | 4. Certifications        | run 3 | t3] 3.06s searches=1 reason=None | "🐾 None of Matt's certifications are current. His certifications includ"
+[new | 5. Career motivation     | run 1 | t1] 3.95s searches=1 reason=None | '🐾 Matt is currently exploring new opportunities after his tenure at **'
+[new | 5. Career motivation     | run 1 | t2] 4.45s searches=1 reason=None | "🐾 Matt's experience offers a unique blend of hands-on engineering and "
+[new | 5. Career motivation     | run 2 | t1] 3.92s searches=1 reason=None | '🐾 Matt is actively seeking new opportunities after a significant tenur'
+[new | 5. Career motivation     | run 2 | t2] 4.29s searches=1 reason=None | "🐾 Matt's career journey offers a unique perspective that sets him apar"
+[new | 5. Career motivation     | run 3 | t1] 4.89s searches=1 reason=None | "🐾 Here's a great example.\n\nAfter a long tenure at **Accenture**, where"
+[new | 5. Career motivation     | run 3 | t2] 5.57s searches=1 reason=None | "🐾 Here's what connects the dots across Matt's work.\n\nMatt's career tra"
+[new | 6. Healthcare experience | run 1 | t1] 3.34s searches=1 reason=None | '🐾 Matt has indeed worked in the healthcare sector. At a **Major U.S. H'
+[new | 6. Healthcare experience | run 1 | t2] 4.23s searches=1 reason=None | "🐾 Here's a great example.\n\nAt a **Major U.S. Health System**, Matt pla"
+[new | 6. Healthcare experience | run 2 | t1] 3.62s searches=1 reason=None | '🐾 Matt has indeed worked in the healthcare sector. At a **Major U.S. H'
+[new | 6. Healthcare experience | run 2 | t2] 4.36s searches=1 reason=None | "🐾 Here's a great example.\n\nAt a **Major U.S. Health System**, Matt led"
+[new | 6. Healthcare experience | run 3 | t1] 3.92s searches=1 reason=None | '🐾 Matt has indeed worked in the healthcare industry. At a **Major U.S.'
+[new | 6. Healthcare experience | run 3 | t2] 3.85s searches=1 reason=None | "🐾 Here's a detailed look at Matt's work in healthcare.\n\nAt a **Major U"
+[new | 7. Location              | run 1 | t1] 2.84s searches=1 reason=None | '🐾 Matt is based in Atlanta, GA. He is open to relocation and travel, a'
+[new | 7. Location              | run 1 | t2] 2.71s searches=1 reason=None | '🐾 Matt is open to relocation. He is based in Atlanta, GA, but is willi'
+[new | 7. Location              | run 2 | t1] 2.59s searches=1 reason=None | '🐾 Matt is based in Atlanta, GA. He is open to relocation and travel.'
+[new | 7. Location              | run 2 | t2] 2.39s searches=1 reason=None | '🐾 Matt is open to relocation and travel. He is currently based in Atla'
+[new | 7. Location              | run 3 | t1] 2.36s searches=1 reason=None | '🐾 Matt is based in Atlanta, GA. He is open to relocation and travel.'
+[new | 7. Location              | run 3 | t2] 2.72s searches=1 reason=None | '🐾 Matt is open to relocation and travel. He prefers an in-office work '
+[new | 8. Failure and growth    | run 1 | t1] 4.23s searches=1 reason=None | "🐾 Here's a story about a challenging situation Matt faced.\n\nWhile work"
+[new | 8. Failure and growth    | run 1 | t2] 3.94s searches=1 reason=None | '🐾 After the incident with the unmasked production data being sent to r'
+[new | 8. Failure and growth    | run 2 | t1] 3.91s searches=1 reason=None | "🐾 Here's a story about a challenging experience Matt faced.\n\nWhile lea"
+[new | 8. Failure and growth    | run 2 | t2] 3.75s searches=1 reason=None | '🐾 After the incident with the email job in the UAT environment, Matt m'
+[new | 8. Failure and growth    | run 3 | t1] 3.85s searches=1 reason=None | "🐾 Here's a story about a challenging experience Matt faced.\n\nWhile lea"
+[new | 8. Failure and growth    | run 3 | t2] 3.62s searches=1 reason=None | '🐾 After the incident with the Fortune 500 financial services client, M'
+[new | 9. Topic switch          | run 1 | t1] 5.06s searches=1 reason=None | "🐾 Here's a great example of Matt's work in the payments domain.\n\nAt **"
+[new | 9. Topic switch          | run 1 | t2] 3.97s searches=1 reason=None | "🐾 Looking across Matt's portfolio, I see clear patterns in his leaders"
+[new | 9. Topic switch          | run 1 | t3] 3.51s searches=1 reason=None | "🐾 Here's a strong example of Matt's leadership style in action.\n\nAt th"
+[new | 9. Topic switch          | run 1 | t4] 2.8s searches=1 reason=None | '🐾 Found it!\n\nAt the **Accenture Cloud Innovation Center**, Matt led a '
+[new | 9. Topic switch          | run 2 | t1] 4.44s searches=1 reason=None | "🐾 Here's a great example from Matt's work in the payments domain.\n\nAt "
+[new | 9. Topic switch          | run 2 | t2] 5.27s searches=1 reason=None | "🐾 Let me show you what ties Matt's leadership style together.\n\nMatt's "
+[new | 9. Topic switch          | run 2 | t3] 3.61s searches=1 reason=None | "🐾 Here's a strong example of Matt's leadership style in action.\n\nIn th"
+[new | 9. Topic switch          | run 2 | t4] 2.96s searches=1 reason=None | '🐾 Found it!\n\nAt the **Accenture** Cloud Innovation Centers in Atlanta '
+[new | 9. Topic switch          | run 3 | t1] 4.36s searches=1 reason=None | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt played a pivot"
+[new | 9. Topic switch          | run 3 | t2] 4.16s searches=1 reason=None | "🐾 Stepping back to see the themes in Matt's leadership style, it's cle"
+[new | 9. Topic switch          | run 3 | t3] 3.98s searches=1 reason=None | "🐾 Here's a great example of Matt's leadership style in action.\n\nIn the"
+[new | 9. Topic switch          | run 3 | t4] 4.46s searches=1 reason=None | '🐾 Found it!\n\nIn the **Cloud Innovation Center** at **Accenture**, Matt'
+[new | 10. Accepting an offer   | run 1 | t1] 5.7s searches=1 reason=None | "🐾 Here's a great example of Matt's work with **Norfolk Southern**.\n\nMa"
+[new | 10. Accepting an offer   | run 1 | t2] 4.24s searches=1 reason=None | '🐾 This is a strong one.\n\nAt **Norfolk Southern**, Matt faced the chall'
+[new | 10. Accepting an offer   | run 1 | t3] 3.77s searches=1 reason=None | 'The modernization work at **Norfolk Southern** was a comprehensive eff'
+[new | 10. Accepting an offer   | run 2 | t1] 4.58s searches=1 reason=None | "🐾 Here's a great example of Matt's work with **Norfolk Southern**.\n\n**"
+[new | 10. Accepting an offer   | run 2 | t2] 5.25s searches=1 reason=None | "🐾 Here's a deep dive into Matt's work with **Norfolk Southern**.\n\nMatt"
+[new | 10. Accepting an offer   | run 2 | t3] 10.36s searches=1 reason=None | "🐾 Found it!\n\nMatt's work with **Norfolk Southern** spanned multiple ph"
+[new | 10. Accepting an offer   | run 3 | t1] 6.99s searches=1 reason=None | "🐾 Here's a great example of Matt's work with **Norfolk Southern**.\n\nAt"
+[new | 10. Accepting an offer   | run 3 | t2] 4.92s searches=1 reason=None | '🐾 Found it!\n\nAt **Norfolk Southern**, Matt faced the challenge of mode'
+[new | 10. Accepting an offer   | run 3 | t3] 3.41s searches=1 reason=None | 'The modernization effort at **Norfolk Southern** was a comprehensive i'
+done 75

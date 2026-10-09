@@ -1,0 +1,377 @@
+[
+  {
+    "run": 1,
+    "turn": 1,
+    "question": "How did Matt scale engineering teams from 4 to 150+ people?",
+    "searches": [
+      {
+        "query": "scaling engineering teams from 4 to 150+",
+        "results": [
+          "Leading People: From Delivery Teams to a 150-Person Organization",
+          "Scaling Development Capacity with Modern Engineering Practices",
+          "Scaling Talent and Practices for Agile Product Innovation",
+          "Building Self-Healing Systems through Resilience Engineering",
+          "Breaking Silos Between Engineering, Design, and Product"
+        ]
+      }
+    ],
+    "sources": [
+      "Leading People: From Delivery Teams to a 150-Person Organization",
+      "Scaling Development Capacity with Modern Engineering Practices",
+      "Scaling Talent and Practices for Agile Product Innovation",
+      "Building Self-Healing Systems through Resilience Engineering",
+      "Breaking Silos Between Engineering, Design, and Product"
+    ],
+    "answer_md": "🐾 Here's a great example.\n\nMatt scaled engineering teams from a small pilot to a 150+ person organization at **Accenture**'s Cloud Innovation Centers. Initially, the teams were assembled for delivery with a mix of onshore and offshore resources. As the scope grew, Matt's role evolved to building an organization rather than just delivering projects. He designed a deliberately flat structure where **150+ practitioners** reported through two layers with 11-13 practice and client leads directly under him. This model emphasized autonomy at the team level, collective code ownership, and fluid role rotation, avoiding traditional middle management layers.\n\nTo support this structure, Matt built a comprehensive management system. He established a four-channel hiring engine, which included pairing auditions and his closing interview on every offer. This system processed 15-20 auditions per week and produced 4-6 new practitioners weekly, even during the pandemic. He also implemented a real-time peer feedback model to evaluate team members, ensuring that advancement was based on peer-driven evidence rather than managerial impressions.\n\nThe result was a 150+ person organization with near-zero attrition in the first two years. The hiring and evaluation systems maintained integrity through continuous scaling, allowing teams to deliver high-quality work without adding unnecessary management layers. This approach not only scaled the team but also ensured that they were capable of executing at a high standard independently."
+  },
+  {
+    "run": 1,
+    "turn": 2,
+    "question": "Tell me about his payments work",
+    "searches": [
+      {
+        "query": "payments work",
+        "results": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS"
+        ]
+      }
+    ],
+    "sources": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS"
+    ],
+    "answer_md": "🐾 Found it!\n\nMatt played a pivotal role in transforming payment systems at **JP Morgan Chase**. As the Technology Delivery Lead, he managed a team of over 40 people to build the ACCESS Next Generation platform, JP Morgan's flagship corporate digital banking portal. This platform was constructed on Bottomline Technologies' WebSeries platform but required significant customization to meet the needs of over **135,000** clients across **180+ countries**.\n\nMatt designed and delivered bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He implemented a Message Authentication Code (MAC) security layer to ensure payment verification and built payment-type-specific entitlement controls, enhancing the platform's role-based access control (RBAC) model. He also integrated real-time global reporting and Single Sign-On (SSO) capabilities, providing a unified experience for corporate treasurers.\n\nThe ACCESS platform launched in April 2011, consolidating previously separate regional systems into a single digital experience. It was recognized as the #1 digital channel by Coalition Greenwich, transforming the corporate treasurer experience with its comprehensive payment modules and enhanced security features."
+  },
+  {
+    "run": 1,
+    "turn": 3,
+    "question": "how big was his teams",
+    "searches": [
+      {
+        "query": "team size",
+        "results": [
+          "Empowering Teams through Decentralized Decision-Making",
+          "Replacing Velocity Metrics with Lead Time, Cycle Time, and Throughput",
+          "Establishing Team Rhythm for Predictable, High-Quality Delivery",
+          "Matching Task Complexity to Skill Level for Predictable Sprints",
+          "Enhancing Team Proficiency through Servant Leadership and Mentorship"
+        ]
+      }
+    ],
+    "sources": [
+      "Empowering Teams through Decentralized Decision-Making",
+      "Replacing Velocity Metrics with Lead Time, Cycle Time, and Throughput",
+      "Establishing Team Rhythm for Predictable, High-Quality Delivery",
+      "Matching Task Complexity to Skill Level for Predictable Sprints",
+      "Enhancing Team Proficiency through Servant Leadership and Mentorship"
+    ],
+    "answer_md": "🐾 Perfect, here's what I found.\n\nMatt's teams varied in size depending on the project and the needs of the Cloud Innovation Center at **Accenture**. For example, he led cross-functional teams that were structured to include engineers, product managers, and designers. These teams were designed to be balanced and collaborative, ensuring equal participation and ownership in all phases of the product lifecycle.\n\nIn the context of the Cloud Innovation Center, Matt's approach involved building an organization from a small pilot to over **150 practitioners**. The teams were deliberately kept flat, with minimal middle management layers, to promote autonomy and efficient decision-making. This structure allowed for flexibility and adaptability, enabling the teams to respond quickly to changing client requirements and deliver high-quality solutions efficiently.\n\nMatt's leadership style emphasized servant leadership and mentorship, which helped in scaling the teams effectively. By fostering a culture of continuous learning and development, he ensured that team members were equipped with the necessary skills to handle complex tasks and grow within their roles. This approach not only facilitated the scaling of teams but also enhanced team cohesion and productivity across the organization."
+  },
+  {
+    "run": 2,
+    "turn": 1,
+    "question": "How did Matt scale engineering teams from 4 to 150+ people?",
+    "searches": [
+      {
+        "query": "scale engineering teams from 4 to 150+ people",
+        "results": [
+          "Leading People: From Delivery Teams to a 150-Person Organization",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Scaling Development Capacity with Modern Engineering Practices",
+          "Breaking Silos Between Engineering, Design, and Product",
+          "Scaling Talent and Practices for Agile Product Innovation"
+        ]
+      }
+    ],
+    "sources": [
+      "Leading People: From Delivery Teams to a 150-Person Organization",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Scaling Development Capacity with Modern Engineering Practices",
+      "Breaking Silos Between Engineering, Design, and Product",
+      "Scaling Talent and Practices for Agile Product Innovation"
+    ],
+    "answer_md": "🐾 Here's a great example.\n\nMatt scaled engineering teams from an initial **10-person pilot** to over **150 practitioners** at **Accenture**'s Cloud Innovation Centers (CIC) in Atlanta and Tampa. This growth was achieved through a combination of strategic recruitment, tailored onboarding, and embedding modern engineering practices. He established a robust talent acquisition strategy, focusing on high-potential graduates and experienced professionals with a collaborative mindset. The onboarding program was designed to blend technical training with user-centered methodologies, ensuring new hires quickly adapted to the CIC's ways of working.\n\nMatt implemented a flat organizational structure that emphasized autonomy and collective ownership within teams. He created a hiring engine that processed **15-20 auditions per week**, sustaining a net growth of **4-**6 practitioners** weekly** during scaling phases. The evaluation system was peer-driven, focusing on collaboration and effectiveness rather than traditional managerial oversight. This approach led to near-zero attrition in the first two years and multiple promotions within the team.\n\nThe result was a thriving organization that delivered **4X faster velocity** with zero-defect deployments, contributing to over **\\$100M** in repeatable business across **15+ Fortune **500 client**s**. This model demonstrated that modern product engineering could scale beyond boutique consulting to become a core capability within a large enterprise consulting firm."
+  },
+  {
+    "run": 2,
+    "turn": 2,
+    "question": "Tell me about his payments work",
+    "searches": [
+      {
+        "query": "payments work",
+        "results": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS"
+        ]
+      }
+    ],
+    "sources": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS"
+    ],
+    "answer_md": "🐾 Here's a strong example of Matt's work in payments.\n\nAt **JP Morgan Chase**, Matt played a pivotal role in building the payment engine behind the **ACCESS Next Generation** platform. The project aimed to create a unified global corporate banking portal, addressing the needs of over **135,000** corporations, financial institutions, governments, and municipalities across **180+ countries**. The challenge was to extend the capabilities of Bottomline Technologies' WebSeries platform to meet the specific requirements of JP Morgan's diverse client base.\n\nMatt, as the Technology Delivery Lead, managed a team of over **40** professionals, including both **Accenture** and JP Morgan resources. He was embedded at Bottomline's offices in Portsmouth, NH, and coordinated closely with stakeholders in Chicago and NY/NJ. His responsibilities included designing and delivering bespoke payment modules such as ACH, wire, FX/cross-border, and EFTPS tax payments. He also implemented a MAC security layer, contextual help, payment-type-specific RBAC, SSO, real-time global reporting, and trade finance integration.\n\nThe ACCESS platform launched in April 2011, consolidating previously separate regional systems into a single digital experience. It provided purpose-built payment modules with module-specific MAC security controls, compliance validation, and contextual user guidance. The platform's success was recognized as it became JP Morgan's flagship corporate digital channel, earning the #1 spot in digital channels by Coalition Greenwich."
+  },
+  {
+    "run": 2,
+    "turn": 3,
+    "question": "how big was his teams",
+    "searches": [
+      {
+        "query": "team size",
+        "results": [
+          "Empowering Teams through Decentralized Decision-Making",
+          "Replacing Velocity Metrics with Lead Time, Cycle Time, and Throughput",
+          "Establishing Team Rhythm for Predictable, High-Quality Delivery",
+          "Matching Task Complexity to Skill Level for Predictable Sprints",
+          "Enhancing Team Proficiency through Servant Leadership and Mentorship"
+        ]
+      }
+    ],
+    "sources": [
+      "Empowering Teams through Decentralized Decision-Making",
+      "Replacing Velocity Metrics with Lead Time, Cycle Time, and Throughput",
+      "Establishing Team Rhythm for Predictable, High-Quality Delivery",
+      "Matching Task Complexity to Skill Level for Predictable Sprints",
+      "Enhancing Team Proficiency through Servant Leadership and Mentorship"
+    ],
+    "answer_md": "🐾 Found it!\n\nMatt's teams at **Accenture**'s Cloud Innovation Center (CIC) grew significantly, starting from a **10-person pilot** and expanding to over **150 practitioners**. This scaling was achieved through a strategic approach that emphasized cross-functional collaboration, decentralized decision-making, and continuous learning. \n\nHe structured the teams to be cross-functional, comprising engineers, product managers, and UX designers, ensuring shared ownership and decision-making authority. By adopting a servant leadership model, leaders acted as facilitators rather than decision-makers, allowing teams to take ownership of their decisions. This approach fostered a culture of accountability and innovation, enabling teams to deliver high-quality solutions efficiently.\n\nMatt also implemented a mentorship-driven culture to bridge knowledge gaps as cloud-native technologies evolved. This involved pairing senior engineers with junior team members and creating learning communities focused on cloud-native engineering, DevOps, and Agile methodologies. These efforts improved engineering proficiency, increased retention, and accelerated onboarding for new hires. \n\nThe result was a thriving organization that delivered **4X faster velocity** with zero-defect deployments, contributing to over **\\$100M** in repeatable business across **15+ Fortune **500 client**s**."
+  },
+  {
+    "run": 3,
+    "turn": 1,
+    "question": "How did Matt scale engineering teams from 4 to 150+ people?",
+    "searches": [
+      {
+        "query": "scale engineering teams from 4 to 150+ people",
+        "results": [
+          "Leading People: From Delivery Teams to a 150-Person Organization",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Scaling Development Capacity with Modern Engineering Practices",
+          "Breaking Silos Between Engineering, Design, and Product",
+          "Scaling Talent and Practices for Agile Product Innovation"
+        ]
+      }
+    ],
+    "sources": [
+      "Leading People: From Delivery Teams to a 150-Person Organization",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Scaling Development Capacity with Modern Engineering Practices",
+      "Breaking Silos Between Engineering, Design, and Product",
+      "Scaling Talent and Practices for Agile Product Innovation"
+    ],
+    "answer_md": "🐾 Here's a great example.\n\nMatt scaled engineering teams from an initial 10-person pilot to over **150 practitioners** at **Accenture**'s Cloud Innovation Centers (CIC) in Atlanta and Tampa. He built a deliberately flat organizational structure, with engineers reporting to practice leads and client delivery leads, ensuring a two-layer model that avoided traditional hierarchical management. This approach fostered autonomy and collective code ownership, with balanced teams holding execution power.\n\nTo support this growth, Matt developed a four-channel hiring engine that included bench search, campus recruiting, contract-to-hire, and governed job requisitions. He implemented pairing auditions as part of the hiring process to ensure candidates could work collaboratively. His hiring engine processed **15-20 auditions per week**, resulting in **4-6 net-new practitioners** weekly during scaling pushes.\n\nMatt also introduced a real-time 360 evaluation system, leveraging peer feedback rather than traditional top-down evaluations. This system emphasized effective teamwork and collaboration, which were critical for advancement. The result was near-zero attrition in the first two years and multiple promotions within the organization.\n\nThe CIC's success was marked by **4X faster velocity** and zero-defect deployments, contributing to over **\\$100M** in repeatable business across **15+ Fortune **500 client**s** by FY23. This achievement demonstrated the scalability of modern engineering practices and the effectiveness of a flat, team-based organizational model."
+  },
+  {
+    "run": 3,
+    "turn": 2,
+    "question": "Tell me about his payments work",
+    "searches": [
+      {
+        "query": "payments work",
+        "results": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS"
+        ]
+      }
+    ],
+    "sources": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS"
+    ],
+    "answer_md": "🐾 Here's a strong one.\n\nAt **JP Morgan Chase**, Matt played a pivotal role in building the payment engine behind JP Morgan ACCESS, the bank's flagship corporate digital banking portal. The project aimed to serve over **135,000** corporations, financial institutions, governments, and municipalities across **180+ countries**. The existing platform, Bottomline Technologies' WebSeries, needed significant customization to meet the diverse and complex needs of JP Morgan's clients.\n\nMatt, as the Technology Delivery Lead, managed a blended team of over **40** professionals from **Accenture** and JP Morgan. He was responsible for designing and delivering bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He also implemented a Message Authentication Code (MAC) security layer, contextual help features, and payment-type-specific Role-Based Access Control (RBAC). His efforts ensured compliance with various regulatory requirements and provided real-time global reporting capabilities.\n\nThe ACCESS platform launched in April 2011, consolidating previously separate regional systems into a unified global portal. It provided purpose-built payment modules with enhanced security controls, compliance validation, and user guidance. The platform's success was recognized by Coalition Greenwich as the #1 in digital channels, transforming the corporate treasurer experience by integrating cash, trade, and investment operations into a single portal."
+  },
+  {
+    "run": 3,
+    "turn": 3,
+    "question": "how big was his teams",
+    "searches": [
+      {
+        "query": "team size",
+        "results": [
+          "Empowering Teams through Decentralized Decision-Making",
+          "Replacing Velocity Metrics with Lead Time, Cycle Time, and Throughput",
+          "Establishing Team Rhythm for Predictable, High-Quality Delivery",
+          "Matching Task Complexity to Skill Level for Predictable Sprints",
+          "Enhancing Team Proficiency through Servant Leadership and Mentorship"
+        ]
+      }
+    ],
+    "sources": [
+      "Empowering Teams through Decentralized Decision-Making",
+      "Replacing Velocity Metrics with Lead Time, Cycle Time, and Throughput",
+      "Establishing Team Rhythm for Predictable, High-Quality Delivery",
+      "Matching Task Complexity to Skill Level for Predictable Sprints",
+      "Enhancing Team Proficiency through Servant Leadership and Mentorship"
+    ],
+    "answer_md": "🐾 Found it!\n\nMatt's teams at the **Accenture Cloud Innovation Center (CIC)** were structured to be cross-functional and autonomous, comprising engineers, product managers, and UX designers. The teams were designed to work collaboratively, owning the full lifecycle of product development. This approach allowed them to operate with minimal hierarchical layers, fostering agility and rapid decision-making.\n\nThe CIC grew from an initial **10-person pilot** to over **150 practitioners**. Matt implemented a hiring engine that processed **15-20 auditions per week**, resulting in **4-6 net-new practitioners** weekly during scaling pushes. This growth was supported by a flat organizational structure, where engineers reported to practice leads and client delivery leads, avoiding traditional hierarchical management.\n\nBy embedding agile and lean practices such as iterative development, user-centered design, and continuous retrospectives, Matt's teams were able to adjust strategies based on real-time feedback and user needs. This structure and approach enabled Matt to scale the teams effectively while maintaining high levels of engagement and productivity."
+  },
+  {
+    "run": 4,
+    "turn": 1,
+    "question": "How did Matt scale engineering teams from 4 to 150+ people?",
+    "searches": [
+      {
+        "query": "scaling engineering teams from 4 to 150+ people",
+        "results": [
+          "Leading People: From Delivery Teams to a 150-Person Organization",
+          "Scaling Talent and Practices for Agile Product Innovation",
+          "Scaling Development Capacity with Modern Engineering Practices",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Breaking Silos Between Engineering, Design, and Product"
+        ]
+      }
+    ],
+    "sources": [
+      "Leading People: From Delivery Teams to a 150-Person Organization",
+      "Scaling Talent and Practices for Agile Product Innovation",
+      "Scaling Development Capacity with Modern Engineering Practices",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Breaking Silos Between Engineering, Design, and Product"
+    ],
+    "answer_md": "🐾 Here's a great example.\n\nMatt scaled engineering teams from an initial 10-person pilot to over **150 practitioners** at **Accenture**'s Cloud Innovation Centers in Atlanta and Tampa. This growth was driven by a combination of strategic recruitment, tailored onboarding, and embedding modern engineering practices. He focused on recruiting talent with diverse backgrounds and a collaborative mindset, emphasizing enthusiasm for learning and adaptability to modern practices. The onboarding program blended technical training with user-centered methodologies, such as design thinking and Lean Product Development, ensuring new hires were equipped to deliver MVPs aligned with user needs.\n\nMatt's approach included the integration of XP practices like pair programming and continuous delivery, fostering a culture of psychological safety and continuous learning. This environment enabled teams to work collaboratively, maintaining high quality and achieving near-zero attrition in the first two years. The deliberate flat structure of the organization, with 11-13 practice and client leads reporting directly to him, ensured autonomy at the team level and fluid role rotation, which distributed knowledge horizontally.\n\nThe result was a scalable, high-performing organization that consistently delivered results, such as **4X faster velocity** and zero-defect deployments, contributing to over **\\$100 million** in repeatable business across multiple Fortune **500 clients**. This success demonstrated the viability of bringing Silicon Valley product culture to large enterprises, proving that modern product engineering could be scaled beyond boutique consulting to become a core capability within a large enterprise consulting firm."
+  },
+  {
+    "run": 4,
+    "turn": 2,
+    "question": "Tell me about his payments work",
+    "searches": [
+      {
+        "query": "payments work",
+        "results": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS"
+        ]
+      }
+    ],
+    "sources": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS"
+    ],
+    "answer_md": "🐾 Here's a detailed look at Matt's work in the payments domain.\n\nAt **JP Morgan Chase**, Matt played a pivotal role in building the payment engine behind the ACCESS Next Generation platform. This platform was designed to serve over **135,000** corporations, financial institutions, governments, and municipalities across more than **180 countries**. The challenge was to create bespoke payment modules that went beyond the capabilities of the out-of-box WebSeries platform from Bottomline Technologies.\n\nMatt led a team of over **40** blended onshore and offshore resources from **Accenture** and JP Morgan. He was responsible for designing and delivering various bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He also developed a Message Authentication Code (MAC) security layer, contextual help, payment-type-specific RBAC, SSO, and real-time global reporting. This comprehensive approach ensured the platform could handle the distinct formatting, validation, compliance, and workflow requirements for each payment type at JP Morgan's operational scale.\n\nThe ACCESS platform launched in April 2011 as JP Morgan's unified global corporate banking portal. It consolidated previously separate regional systems into a single digital experience, transforming the corporate treasurer experience. The platform was recognized as the #1 digital channel by Coalition Greenwich, highlighting its success in the financial services industry."
+  },
+  {
+    "run": 4,
+    "turn": 3,
+    "question": "how big was his teams",
+    "searches": [
+      {
+        "query": "team size",
+        "results": [
+          "Empowering Teams through Decentralized Decision-Making",
+          "Replacing Velocity Metrics with Lead Time, Cycle Time, and Throughput",
+          "Establishing Team Rhythm for Predictable, High-Quality Delivery",
+          "Matching Task Complexity to Skill Level for Predictable Sprints",
+          "Enhancing Team Proficiency through Servant Leadership and Mentorship"
+        ]
+      }
+    ],
+    "sources": [
+      "Empowering Teams through Decentralized Decision-Making",
+      "Replacing Velocity Metrics with Lead Time, Cycle Time, and Throughput",
+      "Establishing Team Rhythm for Predictable, High-Quality Delivery",
+      "Matching Task Complexity to Skill Level for Predictable Sprints",
+      "Enhancing Team Proficiency through Servant Leadership and Mentorship"
+    ],
+    "answer_md": "🐾 Here's what I found about the size of Matt's teams.\n\nAt **Accenture**, Matt led the growth of the Cloud Innovation Center from an initial team of **10 practitioners** to over **150 practitioners**. This expansion was achieved by creating a flat organizational structure that emphasized autonomy and collective ownership. The teams were cross-functional, comprising engineers, product managers, and UX designers, and were empowered to make decisions independently, fostering a culture of accountability and innovation.\n\nMatt's leadership style focused on decentralized decision-making and servant leadership, where leaders acted as facilitators rather than decision-makers. This approach allowed teams to move faster, deliver higher-quality solutions, and maintain high engagement levels. The result was a scalable, high-performing organization capable of delivering impactful outcomes consistently."
+  },
+  {
+    "run": 5,
+    "turn": 1,
+    "question": "How did Matt scale engineering teams from 4 to 150+ people?",
+    "searches": [
+      {
+        "query": "scale engineering teams from 4 to 150+ people",
+        "results": [
+          "Leading People: From Delivery Teams to a 150-Person Organization",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Scaling Development Capacity with Modern Engineering Practices",
+          "Breaking Silos Between Engineering, Design, and Product",
+          "Scaling Talent and Practices for Agile Product Innovation"
+        ]
+      }
+    ],
+    "sources": [
+      "Leading People: From Delivery Teams to a 150-Person Organization",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Scaling Development Capacity with Modern Engineering Practices",
+      "Breaking Silos Between Engineering, Design, and Product",
+      "Scaling Talent and Practices for Agile Product Innovation"
+    ],
+    "answer_md": "🐾 Here's a great example.\n\nMatt scaled engineering teams from an initial 10-person pilot to over **150 practitioners** at **Accenture**'s Cloud Innovation Centers in Atlanta and Tampa. This growth was driven by a deliberate approach to talent acquisition, team structure, and cultural adaptation. He built a four-channel hiring engine that included campus recruiting, contract-to-hire programs, and governed job requisitions. This engine processed **15-20 auditions per week**, resulting in **4-6 net-new practitioners** weekly, even during the pandemic.\n\nMatt's methodology emphasized a flat organizational structure, avoiding traditional hierarchical layers. Instead, he implemented a model where engineers reported to practice leads, and client leads managed relationships and delivery without adding middle management. This approach fostered autonomy and collective code ownership within teams.\n\nTo ensure quality and alignment, Matt developed a real-time peer feedback system that replaced traditional managing-up dynamics. This system relied on evidence from daily pair programming sessions, allowing for accurate evaluations and promoting a culture of collaboration and continuous improvement.\n\nThe result was a thriving organization with near-zero attrition in the first two years and multiple promotions from within. The Cloud Innovation Centers achieved **4X faster velocity** and zero-defect deployments, contributing to over **\\$100M** in repeatable business across **15+ Fortune **500 client**s**."
+  },
+  {
+    "run": 5,
+    "turn": 2,
+    "question": "Tell me about his payments work",
+    "searches": [
+      {
+        "query": "payments work",
+        "results": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS"
+        ]
+      }
+    ],
+    "sources": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS"
+    ],
+    "answer_md": "🐾 Found it!\n\nMatt played a pivotal role in building the payment engine behind **JP Morgan ACCESS**, a unified global corporate banking portal. The project aimed to serve over **135,**000 client**s** across **180+ countries**, requiring bespoke payment modules beyond the capabilities of the out-of-box platform. As the Technology Delivery Lead, Matt managed a team of over **40** blended onshore and offshore resources, focusing on designing and delivering custom payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments.\n\nHe implemented a Message Authentication Code (MAC) security layer and built payment-type-specific entitlement controls, enhancing security and compliance. Matt also integrated the payment engine with JP Morgan's centralized transaction monitoring system, which screened trillions of daily transactions for suspicious activity. This integration included sanctions and politically-exposed-person screening to ensure compliance with international regulations.\n\nThe ACCESS platform launched in April 2011, consolidating previously separate regional systems into a single digital experience. It provided real-time global reporting and seamless Single Sign-On (SSO) across treasury functions, transforming the corporate treasurer experience. The platform was recognized as a leader in digital channels by Coalition Greenwich, highlighting its impact on JP Morgan's global payment operations."
+  },
+  {
+    "run": 5,
+    "turn": 3,
+    "question": "how big was his teams",
+    "searches": [
+      {
+        "query": "team size",
+        "results": [
+          "Empowering Teams through Decentralized Decision-Making",
+          "Replacing Velocity Metrics with Lead Time, Cycle Time, and Throughput",
+          "Establishing Team Rhythm for Predictable, High-Quality Delivery",
+          "Matching Task Complexity to Skill Level for Predictable Sprints",
+          "Enhancing Team Proficiency through Servant Leadership and Mentorship"
+        ]
+      }
+    ],
+    "sources": [
+      "Empowering Teams through Decentralized Decision-Making",
+      "Replacing Velocity Metrics with Lead Time, Cycle Time, and Throughput",
+      "Establishing Team Rhythm for Predictable, High-Quality Delivery",
+      "Matching Task Complexity to Skill Level for Predictable Sprints",
+      "Enhancing Team Proficiency through Servant Leadership and Mentorship"
+    ],
+    "answer_md": "🐾 Perfect, here's what I found.\n\nMatt's teams varied in size depending on the project and the phase of development. For instance, while leading the Cloud Innovation Centers at **Accenture**, Matt built a team from an initial **10-person** pilot to over **150 practitioners**. This growth was achieved through a strategic hiring engine that processed **15-20 auditions per week**, resulting in **4-6 net-new practitioners** weekly. The team structure emphasized autonomy and collective ownership, avoiding traditional hierarchical layers, which allowed for efficient scaling and adaptation to client needs.\n\nIn specific projects, such as the development of the payment engine for **JP Morgan**, Matt managed a team of over **40** blended onshore and offshore resources. This team was responsible for designing and delivering custom payment modules, integrating security layers, and ensuring compliance with international regulations. The size and composition of the teams were tailored to meet the specific demands and complexities of each project, ensuring effective delivery and innovation."
+  }
+]

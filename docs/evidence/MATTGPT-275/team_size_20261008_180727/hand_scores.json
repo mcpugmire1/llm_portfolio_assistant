@@ -1,0 +1,16 @@
+{
+  "basis": "Conversation 11 turn 3 against its expected answer in tests/fixtures/evaluator_conversations.md. Scored by hand in the Oct 8, 2026 Code session.",
+  "runs": 5,
+  "arm": "pre-contract Green (browser FAIL repro)",
+  "turn3": {
+    "runs": [
+      "F",
+      "F",
+      "F",
+      "F",
+      "F"
+    ],
+    "turn3_query": "team size 5/5",
+    "note": "all lead with CIC 10 to 150+; r5 mentions other projects but opens with CIC"
+  }
+}

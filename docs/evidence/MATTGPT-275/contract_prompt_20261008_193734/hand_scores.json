@@ -1,0 +1,154 @@
+{
+  "basis": "Turn-level pass (P) / fail (F) per run against the expected answers in tests/fixtures/evaluator_conversations.md: correct referent, materially correct facts, honest uncertainty, contextual continuity. Scored by hand in the Oct 8, 2026 Code session.",
+  "arm": "Contract prompt: build_tool_system_prompt() wired into agy_answer() (working tree on Red 3a682ec; see working_tree.diff)",
+  "runs": 5,
+  "turns": {
+    "1.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "1.3": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ],
+      "note": "r1 weakest: challenges rather than failures, same engagement"
+    },
+    "2.2": {
+      "runs": [
+        "F",
+        "F",
+        "F",
+        "F",
+        "F"
+      ],
+      "note": "none restates the profile explanation; all evaluate ('strong foundation', 'demonstrated'); 4 of 5 use synthesis openers"
+    },
+    "3.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ],
+      "note": "all give the data-exposure incident"
+    },
+    "4.2": {
+      "runs": [
+        "F",
+        "P",
+        "F",
+        "F",
+        "F"
+      ],
+      "note": "r1, r3, r4, r5 answer 'Nothing I know about Matt covers that.' (rule 0b on PMP) instead of no PMP plus the list"
+    },
+    "4.3": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ],
+      "note": "several list only the AWS pair; all say none current"
+    },
+    "5.2": {
+      "runs": [
+        "F",
+        "P",
+        "P",
+        "P",
+        "F"
+      ],
+      "note": "r1 generic sabbatical pitch, no in-house comparison; r5 '12 countries ... JP Morgan, RBC, Capital One, and HSBC'"
+    },
+    "6.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "7.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "8.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "F"
+      ],
+      "note": "r5 presents Norfolk Southern work as a consequence of the incident"
+    },
+    "9.2": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "9.3": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "9.4": {
+      "runs": [
+        "P",
+        "P",
+        "P",
+        "P",
+        "P"
+      ]
+    },
+    "10.3": {
+      "runs": [
+        "P",
+        "P",
+        "F",
+        "P",
+        "P"
+      ],
+      "note": "r3 assigns the Academy course's six months to the whole modernization; r5 adds a generic 'typically several months to a couple of years'"
+    },
+    "11.3": {
+      "runs": [
+        "P",
+        "F",
+        "F",
+        "P",
+        "P"
+      ],
+      "note": "r5 ideal (JPM 40+, RBC size not recorded); r1, r4 JPM only (RBC omitted, not a fail condition); r2, r3 bring in CIC. Passing runs searched 'team size payments...'; failing runs searched 'team size'"
+    }
+  },
+  "voice_slips": "3.1 r2, r3, r5 close with 'Overall' / 'In summary'; 1.1 r4 and 10.2 r3 evaluative endings; 2.2 r2 'showcasing'",
+  "not_scored": "turn 1s spot-checked, not fully scored; 10.2 not scored (not scored in lever 2)",
+  "totals_vs_lever2": "57/70 vs 61/70 on lever 2's 14 turns; follow-ups excluding 10.3 53/65 vs 56/65; topic switch 15/15 both"
+}

@@ -1,0 +1,654 @@
+diff --git a/config/constants.py b/config/constants.py
+index e6369da..493d6d1 100644
+--- a/config/constants.py
++++ b/config/constants.py
+@@ -76,6 +76,11 @@ SUBSTITUTION_FAMILIES = frozenset({"technical", "team_scaling", "agile_transform
+ # LLM as user/assistant turns (two exchanges). Retrieval does not use them.
+ ASK_HISTORY_MAX_MESSAGES = 4
+ 
++# Ask Agy tool loop: search rounds the model may take before its answer. After
++# this many search_stories rounds, one more call is made with tool_choice
++# "none" so the model must answer from what it has.
++ASK_TOOL_MAX_ROUNDS = 3
++
+ # =============================================================================
+ # META-COMMENTARY PATTERNS
+ # =============================================================================
+diff --git a/tests/fixtures/evaluator_conversations.md b/tests/fixtures/evaluator_conversations.md
+index d33f330..706457b 100644
+--- a/tests/fixtures/evaluator_conversations.md
++++ b/tests/fixtures/evaluator_conversations.md
+@@ -30,6 +30,9 @@
+ 10. Accepting an offer
+ “Tell me about his Norfolk Southern work.” → “Sure, the deep dive on that one.” → “How long did that take?”
+ 
++11. Ambiguous follow-up after a topic change
++“How did Matt scale engineering teams from 4 to 150+ people?” → “Tell me about his payments work” → “how big was his teams”
++
+ ## Acceptance Criteria
+ 
+ Score every conversation on three dimensions:
+@@ -78,3 +81,6 @@ A strong implementation should demonstrate that it can answer from profile and c
+ 10. Accepting an offer
+ - "Sure, the deep dive on that one.": more depth on the same Norfolk Southern engagement from its story (his role, the approach, the outcomes), not a repeat of the first answer and not a different engagement. If the first answer ended with an offer, this delivers what was offered, for that story.
+ - "How long did that take?": the duration of that engagement if its story gives one; if not, it says so. Fails if it gives another project's timeline.
++
++11. Ambiguous follow-up after a topic change
++- "how big was his teams": the teams from the previous answer: JP Morgan ACCESS (40+) and RBC (its size if the story records one; if not, it says so), or a clarifying question asking which. Fails if it answers about the Cloud Innovation Center or another engagement not in the previous answer.
+diff --git a/tests/unit/test_ask_agy_history.py b/tests/unit/test_ask_agy_history.py
+index fbe1725..b8e10fe 100644
+--- a/tests/unit/test_ask_agy_history.py
++++ b/tests/unit/test_ask_agy_history.py
+@@ -188,11 +188,6 @@ class TestHistoryInAgyMessages:
+ 
+ 
+ class TestSendToBackendHistory:
+-    @pytest.mark.xfail(
+-        reason="MATTGPT-275 Red; Green paused until MATTGPT-279 lands. Remove these "
+-        "xfails in the 275 Green commit.",
+-        strict=False,
+-    )
+     def test_passes_transcript_history(self, sample_stories, mock_streamlit):
+         mock_streamlit["ask_transcript"] = [
+             {"role": "user", "text": "q1"},
+diff --git a/tests/unit/test_ask_agy_tool_answer.py b/tests/unit/test_ask_agy_tool_answer.py
+index d06f138..17ae17f 100644
+--- a/tests/unit/test_ask_agy_tool_answer.py
++++ b/tests/unit/test_ask_agy_tool_answer.py
+@@ -36,11 +36,6 @@ from ui.pages.ask_mattgpt import backend_service as bs
+ 
+ logging.getLogger("streamlit").setLevel(logging.ERROR)
+ 
+-pytestmark = pytest.mark.xfail(
+-    reason="MATTGPT-275 Red; Green paused until MATTGPT-279 lands. Remove these "
+-    "xfails in the 275 Green commit.",
+-    strict=False,
+-)
+ 
+ # MATT_DNA is "" until sync_portfolio_metadata() runs; patch an invented
+ # sentinel so the system-prompt assertion does not depend on test order.
+diff --git a/tests/unit/test_backend_service.py b/tests/unit/test_backend_service.py
+index 44bb8e0..b6aca53 100644
+--- a/tests/unit/test_backend_service.py
++++ b/tests/unit/test_backend_service.py
+@@ -541,11 +541,6 @@ class TestGenerateAgyResponse:
+ class TestSendToBackend:
+     """Tests for send_to_backend() legacy wrapper."""
+ 
+-    @pytest.mark.xfail(
+-        reason="MATTGPT-275 Red; Green paused until MATTGPT-279 lands. Remove these "
+-        "xfails in the 275 Green commit.",
+-        strict=False,
+-    )
+     def test_delegates_to_agy_answer(self, sample_stories, mock_streamlit):
+         """Should delegate to agy_answer() (MATTGPT-275), not rag_answer()."""
+         with (
+diff --git a/ui/components/how_agy_dialog.py b/ui/components/how_agy_dialog.py
+index 1372a6c..0ec05d4 100644
+--- a/ui/components/how_agy_dialog.py
++++ b/ui/components/how_agy_dialog.py
+@@ -182,7 +182,7 @@ def render_how_agy_dialog():
+ 
+         # Step 2: Agy Searches
+         st.markdown(
+-            """<div class="step-header"><div class="step-num">2</div><p class="step-title">Agy Searches</p></div><div class="step-content"><div class="pipeline-flow desktop-only"><span class="pill-stage">Filters noisy input</span><span class="pill-arrow">→</span><span class="pill-stage">Detects interview intent</span><span class="pill-arrow">→</span><span class="pill-stage">Retrieves stories</span><span class="pill-arrow">→</span><span class="pill-stage">Refuses weak matches</span><span class="pill-arrow">→</span><span class="pill-stage">Synthesizes response</span></div><p class="pipeline-summary mobile-only">Filters noisy input · Detects interview intent · Retrieves stories · Refuses weak matches · Synthesizes response</p><div class="cards-row"><div class="search-card"><div class="card-title">Filters irrelevant/noisy input</div><div class="card-desc">Homework requests, gibberish, and off-domain queries get bounced before they reach the model — no wasted cost, no off-topic answers</div></div><div class="search-card"><div class="card-title">Detects interview intent</div><div class="card-desc">Recognizes behavioral, technical, leadership, and background questions — and adapts the response style to fit hiring context</div></div></div><div class="search-card hero"><div class="card-title">Retrieves grounded experience stories</div><div class="card-desc">Pulls from Matt's real project experience — never invents examples, never paraphrases someone else's resume</div></div><div class="cards-row"><div class="search-card"><div class="card-title">Refuses weak matches / avoids fabrication</div><div class="card-desc">If the closest story isn't a strong fit, says "I don't know" instead of bluffing a stretch answer</div></div><div class="search-card"><div class="card-title">Synthesizes a tailored interview response</div><div class="card-desc">Structures the answer for hiring decisions — situation, action, outcome — grounded in the retrieved stories, with distinctive phrases preserved verbatim</div></div></div></div><div class="flow-arrow">↓</div>""",
++            """<div class="step-header"><div class="step-num">2</div><p class="step-title">Agy Searches</p></div><div class="step-content"><div class="pipeline-flow desktop-only"><span class="pill-stage">Filters noisy input</span><span class="pill-arrow">→</span><span class="pill-stage">Detects interview intent</span><span class="pill-arrow">→</span><span class="pill-stage">Retrieves stories</span><span class="pill-arrow">→</span><span class="pill-stage">Says what it doesn't know</span><span class="pill-arrow">→</span><span class="pill-stage">Synthesizes response</span></div><p class="pipeline-summary mobile-only">Filters noisy input · Detects interview intent · Retrieves stories · Says what it doesn't know · Synthesizes response</p><div class="cards-row"><div class="search-card"><div class="card-title">Filters irrelevant/noisy input</div><div class="card-desc">Homework requests, personal questions, and off-domain queries get a polite redirect before they reach the model.</div></div><div class="search-card"><div class="card-title">Detects interview intent</div><div class="card-desc">Recognizes behavioral, technical, leadership, and background questions, and adapts the response style to fit hiring context</div></div></div><div class="search-card hero"><div class="card-title">Retrieves grounded experience stories</div><div class="card-desc">Every question gets its own search, written from your question and the conversation so far, so follow-ups like "What went wrong?" stay on the project you were discussing. Pulls from Matt's real project experience.</div></div><div class="cards-row"><div class="search-card"><div class="card-title">Says what it doesn't know</div><div class="card-desc">If no story covers your question, Agy says so plainly instead of bluffing a stretch answer.</div></div><div class="search-card"><div class="card-title">Synthesizes a tailored interview response</div><div class="card-desc">Structures the answer for hiring decisions (situation, action, outcome), grounded in the retrieved stories, with distinctive phrases preserved verbatim</div></div></div></div><div class="flow-arrow">↓</div>""",
+             unsafe_allow_html=True,
+         )
+ 
+diff --git a/ui/components/how_i_built_dialog.py b/ui/components/how_i_built_dialog.py
+index ef5186d..fd0bcbd 100644
+--- a/ui/components/how_i_built_dialog.py
++++ b/ui/components/how_i_built_dialog.py
+@@ -55,9 +55,9 @@ def render_how_i_built_dialog():
+     <div class="tech-grid" style="grid-template-columns:repeat(3,1fr);">
+         <div class="tech-item"><div style="font-size:28px;">🐍</div><div style="font-size:11px;font-weight:600;">Python 3.11</div></div>
+         <div class="tech-item"><div style="font-size:28px;">⚡</div><div style="font-size:11px;font-weight:600;">Streamlit</div></div>
+-        <div class="tech-item"><div style="font-size:28px;">⊙</div><div style="font-size:11px;font-weight:600;">OpenAI GPT-4o</div></div>
++        <div class="tech-item"><div style="font-size:28px;">⊙</div><div style="font-size:11px;font-weight:600;">OpenAI chat model</div></div>
+         <div class="tech-item"><div style="font-size:28px;">📌</div><div style="font-size:11px;font-weight:600;">Pinecone</div></div>
+-        <div class="tech-item"><div style="font-size:28px;">🧠</div><div style="font-size:11px;font-weight:600;">text-embedding-3-small</div></div>
++        <div class="tech-item"><div style="font-size:28px;">🧠</div><div style="font-size:11px;font-weight:600;">OpenAI embeddings</div></div>
+         <div class="tech-item"><div style="font-size:28px;">🔀</div><div style="font-size:11px;font-weight:600;">GitHub Webhook</div></div>
+     </div>
+ </div>""",
+@@ -71,10 +71,10 @@ def render_how_i_built_dialog():
+     <p style="font-size:14px;color:var(--text-secondary);margin:0 0 16px;">How data moves through the system, from raw Excel stories to a deployed RAG pipeline.</p>
+     <div class="flow-grid">
+         <div class="flow-step"><div class="flow-num">1</div><div class="flow-step-title">Data Ingestion</div><div class="flow-step-desc">Excel → JSONL with STAR format</div></div>
+-        <div class="flow-step"><div class="flow-num">2</div><div class="flow-step-title">Embeddings</div><div class="flow-step-desc">OpenAI text-embedding-3-small</div></div>
++        <div class="flow-step"><div class="flow-num">2</div><div class="flow-step-title">Embeddings</div><div class="flow-step-desc">OpenAI embeddings</div></div>
+         <div class="flow-step"><div class="flow-num">3</div><div class="flow-step-title">Vector Store</div><div class="flow-step-desc">Pinecone with metadata filters</div></div>
+         <div class="flow-step"><div class="flow-num">4</div><div class="flow-step-title">Intent &amp; Entity</div><div class="flow-step-desc">Query classification + entity pinning</div></div>
+-        <div class="flow-step"><div class="flow-num">5</div><div class="flow-step-title">RAG + GPT-4o</div><div class="flow-step-desc">XML-isolated context → generation</div></div>
++        <div class="flow-step"><div class="flow-num">5</div><div class="flow-step-title">RAG</div><div class="flow-step-desc">XML-isolated context → generation</div></div>
+     </div>
+ </div>""",
+         unsafe_allow_html=True,
+@@ -86,11 +86,11 @@ def render_how_i_built_dialog():
+     <h3 style="margin:0 0 24px;">Per-query Runtime Pipeline</h3>
+     <p style="font-size:14px;color:var(--text-secondary);margin:0 0 14px;">What happens on every query, from the moment a user types to the moment Agy responds.</p>
+     <div class="hib-runtime-wrapper">
+-        <div class="hib-runtime-step"><div class="hib-runtime-num">1</div><div class="hib-runtime-card"><h4>Filters irrelevant/noisy input</h4><ul><li>Regex-based nonsense rejection, sub-millisecond</li><li>Catches homework asks, gibberish, off-domain queries</li><li>No LLM cost for rejected queries</li></ul></div></div>
+-        <div class="hib-runtime-step"><div class="hib-runtime-num">2</div><div class="hib-runtime-card"><h4>Detects interview intent</h4><ul><li>Semantic router classifies into 15 intent families</li><li>Background, behavioral, technical, leadership, synthesis</li><li>Detects out-of-scope and personal queries before retrieval</li></ul></div></div>
+-        <div class="hib-runtime-step"><div class="hib-runtime-num">3</div><div class="hib-runtime-card"><h4>Retrieves grounded experience stories</h4><ul><li>Pinecone top-K vector search</li><li>text-embedding-3-small, 1536 dimensions</li><li>Entity-aware pinning for known clients, employers, divisions</li></ul></div></div>
+-        <div class="hib-runtime-step"><div class="hib-runtime-num">4</div><div class="hib-runtime-card"><h4>Refuses weak matches / avoids fabrication</h4><ul><li>Confidence gate inspects top match similarity</li><li>Below threshold, returns a "no strong matches" response</li><li>Prevents low-quality fabrication</li></ul></div></div>
+-        <div class="hib-runtime-step"><div class="hib-runtime-num">5</div><div class="hib-runtime-card"><h4>Synthesizes a tailored interview response</h4><ul><li>GPT-4o grounded synthesis</li><li>primary_story + supporting_story XML tags prevent cross-story bleed</li><li>STAR format, distinctive phrases preserved verbatim</li></ul></div></div>
++        <div class="hib-runtime-step"><div class="hib-runtime-num">1</div><div class="hib-runtime-card"><h4>Filters irrelevant/noisy input</h4><ul><li>Regex-based nonsense rejection, sub-millisecond</li><li>Catches homework asks and off-domain queries</li><li>No LLM cost for rejected queries</li></ul></div></div>
++        <div class="hib-runtime-step"><div class="hib-runtime-num">2</div><div class="hib-runtime-card"><h4>Detects interview intent</h4><ul><li>Semantic router classifies intent</li><li>Background, behavioral, technical, leadership, synthesis</li><li>Detects out-of-scope and personal queries before retrieval</li></ul></div></div>
++        <div class="hib-runtime-step"><div class="hib-runtime-num">3</div><div class="hib-runtime-card"><h4>Retrieves grounded experience stories</h4><ul><li>Pinecone top-K vector search</li><li>Vector embeddings</li><li>A search query written by the model from the question and the conversation, every turn</li></ul></div></div>
++        <div class="hib-runtime-step"><div class="hib-runtime-num">4</div><div class="hib-runtime-card"><h4>Answers from retrieved stories, Matt's profile and the conversation</h4><ul><li>Every turn retrieves before answering</li><li>Says plainly when no story covers the question</li><li>Reduces fabrication</li></ul></div></div>
++        <div class="hib-runtime-step"><div class="hib-runtime-num">5</div><div class="hib-runtime-card"><h4>Synthesizes a tailored interview response</h4><ul><li>Grounded synthesis</li><li>Each retrieved story passed separately, so the model can tell them apart</li><li>STAR format, distinctive phrases preserved verbatim</li></ul></div></div>
+     </div>
+ </div>""",
+         unsafe_allow_html=True,
+@@ -111,7 +111,7 @@ def render_how_i_built_dialog():
+     <div class="detail-card">
+         <h4>Embeddings Strategy</h4>
+         <ul>
+-            <li><strong>Model:</strong> OpenAI text-embedding-3-small (1536 dim)</li>
++            <li><strong>Model:</strong> OpenAI embeddings</li>
+             <li><strong>Chunking:</strong> Full STAR story per vector</li>
+             <li><strong>Metadata:</strong> Category, client, themes indexed</li>
+             <li><strong>Refresh:</strong> Excel → JSONL → enrich → embed → Pinecone</li>
+@@ -128,9 +128,9 @@ def render_how_i_built_dialog():
+         </ul>
+     </div>
+     <div class="detail-card">
+-        <h4>RAG with GPT-4o</h4>
++        <h4>RAG</h4>
+         <ul>
+-            <li><strong>Context Isolation:</strong> XML tags prevent cross-story bleed</li>
++            <li><strong>Context Isolation:</strong> XML tags, so the model can tell stories apart</li>
+             <li><strong>Texture Preservation:</strong> Quotes distinctive phrases verbatim</li>
+             <li><strong>Synthesis Mode:</strong> Multi-theme responses for broad queries</li>
+             <li><strong>Source Citations:</strong> Links to full STAR stories</li>
+diff --git a/ui/pages/ask_mattgpt/backend_service.py b/ui/pages/ask_mattgpt/backend_service.py
+index ac66af8..29a96ca 100644
+--- a/ui/pages/ask_mattgpt/backend_service.py
++++ b/ui/pages/ask_mattgpt/backend_service.py
+@@ -6,6 +6,7 @@ Includes nonsense detection, semantic search orchestration, and Agy response gen
+ """
+ 
+ import csv
++import json
+ import logging
+ import os
+ import random
+@@ -18,6 +19,8 @@ import streamlit as st
+ 
+ from config.constants import (
+     ASK_HISTORY_MAX_MESSAGES,
++    ASK_TOOL_MAX_ROUNDS,
++    DEFAULT_CHAT_MODEL,
+     ENTITY_ALIASES,
+     ENTITY_DETECTION_FIELDS,
+     EXCLUDED_DIVISION_VALUES,
+@@ -28,6 +31,7 @@ from config.constants import (
+ )
+ from config.debug import DEBUG
+ from services import matt_profile
++from services.jd_assessor import load_matt_profile
+ from services.pinecone_service import (
+     PINECONE_NAMESPACE,
+     _embed,
+@@ -52,6 +56,7 @@ from utils.validation import _tokenize, is_nonsense, token_overlap_ratio
+ 
+ from .prompts import (
+     build_system_prompt,
++    build_tool_system_prompt,
+     build_user_message,
+     get_verbatim_requirement,
+ )
+@@ -1751,12 +1756,211 @@ Ask me about his **transformation work**, **platform engineering**, or **how he
+     return None
+ 
+ 
++# Ask Agy tool loop (MATTGPT-275). The model decides when to search: it answers
++# from the profile, MATT_DNA and the conversation, or calls search_stories.
++_SEARCH_STORIES_TOOL = {
++    "type": "function",
++    "function": {
++        "name": "search_stories",
++        "description": (
++            "Semantic search over Matt's STAR career stories. Returns the top 5 stories."
++        ),
++        "parameters": {
++            "type": "object",
++            "properties": {
++                "query": {
++                    "type": "string",
++                    "description": "The search query for the current question, with references to the conversation resolved.",
++                }
++            },
++            "required": ["query"],
++        },
++    },
++}
++
++
++def _run_search_tool(
++    arguments: str, stories: list[dict[str, Any]]
++) -> tuple[str, list[dict[str, Any]], float]:
++    """Run one search_stories call. Returns (tool content, stories, top score).
++
++    Each returned story is rendered with build_story_context_for_rag(); a
++    Professional Narrative story also carries its verbatim requirement.
++    """
++    try:
++        query = json.loads(arguments or "{}").get("query", "")
++    except json.JSONDecodeError:
++        query = ""
++    result = semantic_search(query, {}, stories=stories, top_k=SEARCH_TOP_K)
++    found = (result.get("results") or [])[:5]
++    blocks = []
++    for story in found:
++        block = f'<story title="{story.get("Title", "")}">\n{build_story_context_for_rag(story)}\n</story>'
++        if story.get("Theme") == "Professional Narrative":
++            summary = story.get("5PSummary", "") or story.get("5p_summary", "")
++            block += get_verbatim_requirement(summary)
++        blocks.append(block)
++    return (
++        "\n\n".join(blocks) or "No stories found.",
++        found,
++        result.get("top_score") or 0.0,
++    )
++
++
+ def agy_answer(
+     question: str,
+     stories: list[dict[str, Any]],
+     history: list[dict[str, str]] | None = None,
+ ) -> dict[str, Any]:
+-    raise NotImplementedError
++    """Answer an Ask Agy question through the tool-calling loop (MATTGPT-275).
++
++    The nonsense rules and the router's out_of_scope / personal redirects
++    still run first. The model then gets the system prompt (persona,
++    MATT_DNA, profile; synthesis voice when the router says synthesis), the
++    conversation, and the same per-answer instructions as before (opener,
++    focus angle, prose, bolding), and may call search_stories up to
++    ASK_TOOL_MAX_ROUNDS times before it must answer. Search confidence does
++    not gate the answer. The text goes through _postprocess_agy_text() with
++    the stories the searches returned, which are also the sources.
++
++    Returns the same dict shape as rag_answer() for the UI.
++    """
++    force_answer = bool(st.session_state.pop("__ask_force_answer__", False))
++    from_suggestion = (
++        bool(st.session_state.pop("__ask_from_suggestion__", False)) or force_answer
++    )
++    obs: dict[str, Any] = {
++        "intent_family": None,
++        "confidence": None,
++        "entity_match": None,
++        "rejection_reason": None,
++    }
++
++    rejected = _nonsense_rejection(question, from_suggestion, obs)
++    if rejected:
++        return rejected
++
++    intent_family, semantic_score = "", 1.0
++    if not from_suggestion:
++        _valid, semantic_score, _matched, intent_family = is_portfolio_query_semantic(
++            question or ""
++        )
++        obs["intent_family"] = intent_family
++    rejected = _router_rejection(
++        question, intent_family, semantic_score, from_suggestion, obs
++    )
++    if rejected:
++        return rejected
++
++    is_synthesis = intent_family == "synthesis"
++    # Source cards use the 3-card layout: they are the stories the model used.
++    st.session_state["__ask_query_intent__"] = None
++
++    profile_facts = load_matt_profile()
++    # The opener itself is the model's, written in Agy's voice from the
++    # examples; only the focus angle is picked here.
++    _opening, focus = _choose_opening_and_focus(is_synthesis)
++    system_prompt = build_tool_system_prompt(
++        is_synthesis=is_synthesis,
++        matt_dna=MATT_DNA,
++        profile_facts=profile_facts,
++        opener_examples=SYNTHESIS_OPENERS if is_synthesis else STANDARD_OPENERS,
++        focus_angle=focus if not is_synthesis else "",
++    )
++    messages: list[dict[str, Any]] = [
++        {"role": "system", "content": system_prompt},
++        *(history or []),
++        {"role": "user", "content": question},
++    ]
++
++    used: list[dict[str, Any]] = []
++    top_score = 0.0
++    text = ""
++    try:
++        client = _openai_client()
++        for round_no in range(ASK_TOOL_MAX_ROUNDS + 1):
++            call: dict[str, Any] = {
++                "model": DEFAULT_CHAT_MODEL,
++                "messages": messages,
++                "tools": [_SEARCH_STORIES_TOOL],
++                "temperature": 0.2 if is_synthesis else 0.4,
++                "max_tokens": 700,
++            }
++            last_round = round_no == ASK_TOOL_MAX_ROUNDS
++            if last_round:
++                call["tool_choice"] = "none"
++            elif round_no == 0:
++                # Every turn retrieves: the first call must search, with a query
++                # the model writes from this question and the conversation.
++                call["tool_choice"] = "required"
++            message = client.chat.completions.create(**call).choices[0].message
++            tool_calls = getattr(message, "tool_calls", None) or []
++            if not tool_calls or last_round:
++                text = message.content or ""
++                break
++            messages.append(
++                {
++                    "role": "assistant",
++                    "content": message.content,
++                    "tool_calls": [
++                        {
++                            "id": c.id,
++                            "type": "function",
++                            "function": {
++                                "name": c.function.name,
++                                "arguments": c.function.arguments,
++                            },
++                        }
++                        for c in tool_calls
++                    ],
++                }
++            )
++            for c in tool_calls:
++                content, found, score = _run_search_tool(c.function.arguments, stories)
++                top_score = max(top_score, score)
++                seen = {s.get("id") for s in used}
++                used.extend(s for s in found if s.get("id") not in seen)
++                messages.append(
++                    {"role": "tool", "tool_call_id": c.id, "content": content}
++                )
++    except Exception as e:
++        err_lower = str(e).lower()
++        if "429" in str(e) or "rate_limit" in err_lower or "rate limit" in err_lower:
++            return {
++                "answer_md": "🐾 I need a quick breather. Try again in about 15 seconds!",
++                "sources": [],
++                "modes": {},
++                "default_mode": "narrative",
++                **obs,
++            }
++        if DEBUG:
++            print(f"DEBUG agy_answer fatal error: {e}")
++        logger.exception("agy_answer fatal error: %s", e)
++        return _degraded_fallback(question, stories, obs)
++
++    answer_md, profile_categories = _postprocess_agy_text(text, used)
++    sources = [
++        {"id": s["id"], "title": s.get("Title", ""), "client": s.get("Client", "")}
++        for s in used
++    ]
++
++    log_query(
++        question or "",
++        "Ask Agy",
++        intent_family=intent_family,
++        result_count=len(sources),
++        top_score=top_score,
++    )
++
++    return {
++        "answer_md": answer_md,
++        "sources": sources,
++        "profile_categories": profile_categories,
++        "modes": {"narrative": answer_md},
++        "default_mode": "narrative",
++        "degraded": False,
++        **obs,
++    }
+ 
+ 
+ def send_to_backend(
+@@ -1765,22 +1969,25 @@ def send_to_backend(
+     ctx: dict[str, Any] | None,
+     stories: list[dict[str, Any]],
+ ) -> dict[str, Any]:
+-    """Legacy wrapper for rag_answer.
++    """Ask Agy's entry point from the UI.
+ 
+-    Maintained for backward compatibility. Delegates to rag_answer(), passing
+-    the recent conversation from st.session_state["ask_transcript"] as history.
++    Delegates to agy_answer() (MATTGPT-275), passing the recent conversation
++    from st.session_state["ask_transcript"] as history. rag_answer() is no
++    longer called from here; its tests and the golden eval still call it.
+ 
+     Args:
+         prompt: User query string.
+-        filters: Search filters dictionary (passed to semantic_search).
++        filters: Unused (agy_answer's search tool takes no facet filters);
++            kept for API compatibility.
+         ctx: Context dictionary (unused, kept for API compatibility).
+         stories: Full list of portfolio stories.
+ 
+     Returns:
+-        RAG answer dictionary with keys: answer_md, sources, modes, default_mode.
++        Answer dictionary with keys: answer_md, sources, profile_categories,
++        modes, default_mode.
+     """
+     history = _build_history_messages(st.session_state.get("ask_transcript", []))
+-    return rag_answer(prompt, filters, stories, history=history)
++    return agy_answer(prompt, stories, history=history)
+ 
+ 
+ def _build_history_messages(transcript: list[dict]) -> list[dict[str, str]]:
+diff --git a/ui/pages/ask_mattgpt/prompts.py b/ui/pages/ask_mattgpt/prompts.py
+index bffd015..b3b20c8 100644
+--- a/ui/pages/ask_mattgpt/prompts.py
++++ b/ui/pages/ask_mattgpt/prompts.py
+@@ -380,6 +380,160 @@ def build_user_message(
+     )
+ 
+ 
++# =============================================================================
++# TOOL PATH (agy_answer): one system prompt stating the MATTGPT-275 contract.
++# Agy's identity and voice, how each turn works (the app forces a search; the
++# model writes the query), the conversation, grounding, and the answer shape.
++# Wording is carried over from BASE_PROMPT, the deltas and the instruction
++# block where it still holds; the old rag_answer() prompts above are unchanged.
++# =============================================================================
++
++TOOL_PROMPT_HEAD = """You are Agy 🐾, Matt Pugmire's Plott Hound assistant.
++
++## YOUR JOB
++Relay the facts from Matt's stories and profile. You are a messenger, not an evaluator. State facts. Do not evaluate Matt.
++
++## HOW EACH TURN WORKS
++Before every answer you search Matt's stories, and you write the search query. Write it for the question asked now. When the question refers back to the conversation ("his teams", "that project", "what went wrong"), put the client, project or topic it refers to in the query. The search returns the top 5 stories, each in its own <story> tag. Use the ones that answer the question. Answer directly from the facts about Matt below or from the conversation when they already answer it.
++
++## THE CONVERSATION
++- A follow-up is about what the previous answer discussed. Stay on that client, project or engagement.
++- When the visitor changes the subject, the new question sets the topic.
++- If a follow-up could refer to more than one thing in the previous answer, answer for each of them, or ask which one.
++
++## WHAT YOU DO
++- Read the stories your search returns
++- Extract the facts: who, what, where, when, outcomes
++- Present them in third person (Matt did X, he achieved Y)
++- Use Matt's exact vocabulary and phrases from the stories
++
++## WHAT YOU NEVER DO
++- Evaluate Matt ("Matt's ability to...", "This demonstrates...", "His approach shows...")
++- Interpret patterns ("This reflects...", "In essence...", "What this reveals...")
++- Praise skills ("strong leadership", "excellent communication", "unique capability")
++- Summarize with meta-commentary ("Overall...", "In summary...")
++- End with a reflection paragraph about Matt's qualities
++
++If you catch yourself writing "Matt's ability to..." or "This demonstrates...", stop.
++Delete it. State the fact instead.
++
++BAD: "Matt's ability to align stakeholders enabled the transformation."
++GOOD: "Matt aligned 12 stakeholders across 3 regions. The transformation shipped on time."
++
++BAD: "This demonstrates his technical leadership."
++GOOD: "He led a team of 40 engineers. They shipped the platform in 6 months."
++
++## BANNED PHRASES (Never use these)
++- "meaningful outcomes" → state the actual outcomes
++- "strategic mindset" → describe what Matt did
++- "foster collaboration" → describe the specific collaboration
++- "stakeholder alignment" → name the actual stakeholders and what happened
++- "bridge the gap" → describe the specific connection
++- "his ability to" → delete this phrase entirely
++- "Matt's ability to" → delete this phrase entirely
++- "This demonstrates" → delete and state the fact
++- "This reflects" → delete and state the fact
++- "In essence" → delete and state the fact
++- "showcasing" → delete and state the fact
++
++## VOICE
++- Warm, steady, grounded
++- Confident and calm
++- Exactly ONE 🐾 per response (in the opening)
++- No corporate jargon walls
++- No sycophantic openers ("Great question!")
++- Write natural prose paragraphs. Do NOT use section headers or labels in your output.
++- **Bold ALL client names and numbers.**
++
++## PRONOUN TRANSFORMATION
++Stories are written in first person (I, me, my). Transform to third person:
++- "I led" → "Matt led"
++- "my team" → "his team"
++- "I was responsible" → "Matt was responsible"
++"""
++
++TOOL_PROMPT_GROUNDING = """## GROUNDING
++{citation_rules}1. ONLY cite clients, projects, and metrics that appear in the stories your search returns or in the facts about Matt above.
++2. If unsure about a detail, say "In one engagement..." instead of naming a client
++3. NEVER invent outcomes, fabricate proof points, or mention clients not in the facts about Matt or the returned stories
++4. When discussing revenue/business impact, emphasize delivery excellence, never position Matt as a sales hunter
++
++FACT-PAIRING RULE
++A metric is only valid if BOTH the number AND what it measures appear in the same story.
++- Story says "40% cycle time reduction" → You can say "40% cycle time reduction"
++- Story says "40% cycle time reduction" → You CANNOT say "40% onboarding reduction"
++
++CONTEXT ISOLATION
++Each story is in its own <story> tag. Keep facts pinned to their source:
++- Don't mix metrics between stories
++- Don't attribute one story's outcomes to another
++"""
++
++_TOOL_OPENER_LINE = (
++    "Begin with a short opening line in Agy's voice. Examples of how Agy opens: "
++    "{examples}."
++)
++
++TOOL_STANDARD_SHAPE = """## ANSWER SHAPE: SPECIFIC QUESTION
++{opener_line}
++
++A direct question (team size, how long, yes or no, a follow-up asking for one fact) gets a direct answer first, in a few sentences. A question asking for the story ('Tell me about…', 'How did he…') follows the WHY → HOW → WHAT flow below.
++
++Internally, follow this WHY → HOW → WHAT flow (but don't show these labels to the user):
++- WHY (30-40%): The tension: what was broken, who was pushing back, what wasn't working. Use the [SITUATION] field. If it describes resistance or failure, lead with that. The outcome matters because the starting point was hard.
++- HOW (40-50%): What Matt did differently: specific practices, anecdotes, what he did instead of the standard approach. Include metrics here as evidence of the approach working.
++- WHAT (10-20%): The proof: measurable results with bolded numbers, client context, scale.
++
++BAD (don't do this):
++WHY: Engineers faced...
++HOW: Matt implemented...
++WHAT: This resulted in...
++
++GOOD (do this):
++🐾 Found it!
++
++At [Client], engineers were spending [N]% of their time on manual
++deployments. Releases were monthly and defects were slipping through...
++
++Matt redesigned the pipeline, CI/CD automation and pair programming
++instead of the manual review cycle...
++
++The result: **[N]%** faster deployments across **[N] countries**...
++
++- Lead with the Situation when the query asks about approach, differentiation, or adoption: what was broken, what resistance Matt faced, why the conventional approach wasn't working. The [SITUATION] field is the hook. If it describes pushback or a challenge, that IS the story.
++- Surface what made Matt's approach different: not just what he did, but what he did INSTEAD of the standard approach
++- Name real people affected: teams, customers, engineers
++- Name specific practices (pair programming, TDD, not "agile methodologies")
++- Include anecdotes from the story if available
++- Preserve the story's texture: specific details ARE the value
++- For personal projects: frame as Matt's goal, not fictional users
++{focus_line}
++Story answers: 200-350 words
++"""
++
++TOOL_SYNTHESIS_SHAPE = """## ANSWER SHAPE: BIG-PICTURE QUESTION
++{opener_line}
++
++Show breadth across the stories your search returns. Lead with the Themes and support with diverse client examples.
++
++Internally, follow this WHY → HOW → WHAT flow (but don't show these labels to the user):
++- WHY (30-40%): Open with the tension or pattern of difficulty: what keeps failing across organizations, what resistance Matt encountered repeatedly. Use the [SITUATION] fields. Not metrics.
++- HOW (40-50%): What Matt did differently: the repeatable approach across these stories, how it contrasts with standard practice. Include metrics here as evidence of the approach working.
++- WHAT (10-20%): Proof: measurable outcomes across clients, scale, pattern confirmation.
++
++- Lead with the tension from the 2-3 most relevant stories. Remaining stories are optional: use them only if they reinforce the thread. Do not force-fit every story.
++- State facts: "At **[Client]**, Matt reduced cycle time by **[N]%**."
++- For connections, state the shared difficulty: "In both cases, teams were stuck on...", not "This demonstrates Matt's pattern of..."
++
++Length: 250-400 words
++"""
++
++TOOL_OFF_TOPIC_GUARD = """## OFF-TOPIC GUARD
++If the query is about shopping, weather, celebrities, or anything unrelated to Matt's professional work:
++"🐾 I'm focused on Matt's professional experience, including the projects, teams, and outcomes."
++"""
++
++
+ def build_tool_system_prompt(
+     is_synthesis: bool,
+     matt_dna: str,
+@@ -387,7 +541,40 @@ def build_tool_system_prompt(
+     opener_examples: list[str],
+     focus_angle: str = "",
+ ) -> str:
+-    raise NotImplementedError
++    """The tool path's system prompt: the MATTGPT-275 contract as one document.
++
++    matt_dna's own grounding-rules list is dropped (the GROUNDING section
++    states the rules once); its facts are kept as they are. The attested
++    profile block follows the facts, and rules 0a/0b lead GROUNDING. One
++    answer shape is included, chosen by is_synthesis, with that mode's
++    opener examples; the focus angle applies to the standard shape only.
++    """
++    facts = matt_dna.split(_GROUNDING_RULES_HEADER, 1)[0].rstrip()
++    profile_block = (
++        f"\n\n{_ATTESTED_FACTS_HEADER}\n{profile_facts}" if profile_facts else ""
++    )
++    opener_line = _TOOL_OPENER_LINE.format(
++        examples="; ".join(f'"{o}"' for o in opener_examples)
++    )
++    if is_synthesis:
++        shape = TOOL_SYNTHESIS_SHAPE.format(opener_line=opener_line)
++    else:
++        focus_line = f"\n**FOCUS:** {focus_angle}\n" if focus_angle else ""
++        shape = TOOL_STANDARD_SHAPE.format(
++            opener_line=opener_line, focus_line=focus_line
++        )
++    grounding = TOOL_PROMPT_GROUNDING.format(
++        citation_rules=_CITATION_RULES_0A_0B if profile_facts else ""
++    )
++    return "\n".join(
++        [
++            TOOL_PROMPT_HEAD,
++            facts + profile_block + "\n",
++            grounding,
++            shape,
++            TOOL_OFF_TOPIC_GUARD,
++        ]
++    )
+ 
+ 
+ def build_answer_instructions(
