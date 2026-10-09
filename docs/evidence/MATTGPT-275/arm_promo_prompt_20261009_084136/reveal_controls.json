@@ -1,0 +1,706 @@
+[
+  {
+    "key": "C1-r1-A",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments work at JP Morgan"
+    ],
+    "model_search_queries": [
+      "payments work at JP Morgan"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+    ]
+  },
+  {
+    "key": "C1-r1-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 2,
+    "search_queries": [
+      "JP Morgan payments"
+    ],
+    "model_search_queries": [
+      "JP Morgan payments"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 1,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "promo_prompt",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+    ]
+  },
+  {
+    "key": "C1-r2-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 2,
+    "search_queries": [
+      "payments work at JP Morgan"
+    ],
+    "model_search_queries": [
+      "payments work at JP Morgan"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 1,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "promo_prompt",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+    ]
+  },
+  {
+    "key": "C1-r2-B",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments work at JP Morgan"
+    ],
+    "model_search_queries": [
+      "payments work at JP Morgan"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+    ]
+  },
+  {
+    "key": "C1-r3-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 2,
+    "search_queries": [
+      "payments work at JP Morgan"
+    ],
+    "model_search_queries": [
+      "payments work at JP Morgan"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 1,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "promo_prompt",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+    ]
+  },
+  {
+    "key": "C1-r3-B",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments work at JP Morgan"
+    ],
+    "model_search_queries": [
+      "payments work at JP Morgan"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+    ]
+  },
+  {
+    "key": "C1-r4-A",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "JP Morgan payments work"
+    ],
+    "model_search_queries": [
+      "JP Morgan payments work"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+    ]
+  },
+  {
+    "key": "C1-r4-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 2,
+    "search_queries": [
+      "JP Morgan payments"
+    ],
+    "model_search_queries": [
+      "JP Morgan payments"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 1,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "promo_prompt",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+    ]
+  },
+  {
+    "key": "C1-r5-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 2,
+    "search_queries": [
+      "JP Morgan payments work"
+    ],
+    "model_search_queries": [
+      "JP Morgan payments work"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 1,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "promo_prompt",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+    ]
+  },
+  {
+    "key": "C1-r5-B",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments work at JP Morgan"
+    ],
+    "model_search_queries": [
+      "payments work at JP Morgan"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+    ]
+  },
+  {
+    "key": "C2-r1-A",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership philosophy"
+    ],
+    "model_search_queries": [
+      "leadership philosophy"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "Work Philosophy – Where I Do My Best Work",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey"
+    ]
+  },
+  {
+    "key": "C2-r1-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership philosophy"
+    ],
+    "model_search_queries": [
+      "leadership philosophy"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "promo_prompt",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "Work Philosophy – Where I Do My Best Work",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey"
+    ]
+  },
+  {
+    "key": "C2-r2-A",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership philosophy"
+    ],
+    "model_search_queries": [
+      "leadership philosophy"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "Work Philosophy – Where I Do My Best Work",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey"
+    ]
+  },
+  {
+    "key": "C2-r2-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership philosophy"
+    ],
+    "model_search_queries": [
+      "leadership philosophy"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "promo_prompt",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "Work Philosophy – Where I Do My Best Work",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey"
+    ]
+  },
+  {
+    "key": "C2-r3-A",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership philosophy"
+    ],
+    "model_search_queries": [
+      "leadership philosophy"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "Work Philosophy – Where I Do My Best Work",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey"
+    ]
+  },
+  {
+    "key": "C2-r3-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership philosophy"
+    ],
+    "model_search_queries": [
+      "leadership philosophy"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "promo_prompt",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "Work Philosophy – Where I Do My Best Work",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey"
+    ]
+  },
+  {
+    "key": "C2-r4-A",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership philosophy"
+    ],
+    "model_search_queries": [
+      "leadership philosophy"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "Work Philosophy – Where I Do My Best Work",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey"
+    ]
+  },
+  {
+    "key": "C2-r4-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership philosophy"
+    ],
+    "model_search_queries": [
+      "leadership philosophy"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "promo_prompt",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "Work Philosophy – Where I Do My Best Work",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey"
+    ]
+  },
+  {
+    "key": "C2-r5-A",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership philosophy"
+    ],
+    "model_search_queries": [
+      "leadership philosophy"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "Work Philosophy – Where I Do My Best Work",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey"
+    ]
+  },
+  {
+    "key": "C2-r5-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership philosophy"
+    ],
+    "model_search_queries": [
+      "leadership philosophy"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "promo_prompt",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "Work Philosophy – Where I Do My Best Work",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey"
+    ]
+  }
+]

@@ -1,0 +1,25 @@
+{
+ "C1-r1-A": "P",
+ "C1-r1-B": "P",
+ "C1-r2-A": "P",
+ "C1-r2-B": "P",
+ "C1-r3-A": "P",
+ "C1-r3-B": "P",
+ "C1-r4-A": "P",
+ "C1-r4-B": "P",
+ "C1-r5-A": "P",
+ "C1-r5-B": "P",
+ "C2-r1-A": "P",
+ "C2-r1-B": "P",
+ "C2-r2-A": "P",
+ "C2-r2-B": "P",
+ "C2-r3-A": "P",
+ "C2-r3-B": "P",
+ "C2-r4-A": "P",
+ "C2-r4-B": "P",
+ "C2-r5-A": "P",
+ "C2-r5-B": "P",
+ "_notes": {
+  "criteria": "C1 JP Morgan payments from JP Morgan stories only; C2 leadership philosophy from the stories, nothing invented"
+ }
+}
