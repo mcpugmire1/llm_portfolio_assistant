@@ -1,0 +1,27 @@
+{
+ "C1-r1-A": "P",
+ "C1-r1-B": "P",
+ "C1-r2-A": "P",
+ "C1-r2-B": "P",
+ "C1-r3-A": "P",
+ "C1-r3-B": "P",
+ "C1-r4-A": "P",
+ "C1-r4-B": "P",
+ "C1-r5-A": "P",
+ "C1-r5-B": "P",
+ "C2-r1-A": "P",
+ "C2-r1-B": "P",
+ "C2-r2-A": "P",
+ "C2-r2-B": "P",
+ "C2-r3-A": "P",
+ "C2-r3-B": "P",
+ "C2-r4-A": "P",
+ "C2-r4-B": "P",
+ "C2-r5-A": "P",
+ "C2-r5-B": "P",
+ "_notes": {
+  "method": "every answer read in full",
+  "C1": "all JP Morgan only",
+  "C2": "all from the stories, nothing invented"
+ }
+}

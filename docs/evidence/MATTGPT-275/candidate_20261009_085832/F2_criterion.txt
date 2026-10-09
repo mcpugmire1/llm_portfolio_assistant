@@ -1,0 +1,1 @@
+F.2 criterion (fixed before reading): passes if it connects patterns across Matt's payments work (more than one payments engagement) and stays on payments; fails if it drifts to general career themes or non-payments work, or covers one engagement without connecting.

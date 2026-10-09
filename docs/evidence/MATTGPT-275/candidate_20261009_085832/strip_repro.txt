@@ -1,0 +1,50 @@
+Deterministic repro: _postprocess_agy_text() meta-commentary strip garbles answers when a period sits inside a token.
+No model or network call. Regex and META_COMMENTARY_REGEX_PATTERNS taken from HEAD b49f821.
+
+$ git grep -n "sentence_pattern = rf" HEAD -- ui
+HEAD:ui/pages/ask_mattgpt/backend_service.py:981:        sentence_pattern = rf'[^.]*{pattern}[^.]*\.'
+
+$ git show HEAD:config/constants.py > constants_head.py; python strip_repro.py constants_head.py
+--- strip_repro.py ---
+import importlib.util, re, sys
+spec = importlib.util.spec_from_file_location("constants_head", sys.argv[1])
+c = importlib.util.module_from_spec(spec); spec.loader.exec_module(c)
+P = c.META_COMMENTARY_REGEX_PATTERNS
+
+def strip(t):
+    # The loop in _postprocess_agy_text(), verbatim regex
+    for pattern in P:
+        sentence_pattern = rf'[^.]*{pattern}[^.]*\.'
+        t = re.sub(sentence_pattern, '', t, flags=re.IGNORECASE)
+    return re.sub(r'  +', ' ', t)
+
+for t in [
+    "He recovered an $8.5M program at Fiserv. This demonstrates his capability to lead. He delivered it 3% under budget.",
+    "He converted contractors to recover margin and talent. This demonstrates his financial discipline, recovering an $8.5M program. He delivered it 3% under budget.",
+    "He cut defects to zero defects. Matt's ability to refactor showed when he reduced app.py by 82%. Next sentence.",
+]:
+    print("IN :", t)
+    print("OUT:", strip(t))
+    print()
+--- output ---
+IN : He recovered an $8.5M program at Fiserv. This demonstrates his capability to lead. He delivered it 3% under budget.
+OUT: He recovered an $8.5M program at Fiserv. He delivered it 3% under budget.
+
+IN : He converted contractors to recover margin and talent. This demonstrates his financial discipline, recovering an $8.5M program. He delivered it 3% under budget.
+OUT: He converted contractors to recover margin and talent.5M program. He delivered it 3% under budget.
+
+IN : He cut defects to zero defects. Matt's ability to refactor showed when he reduced app.py by 82%. Next sentence.
+OUT: He cut defects to zero defects.py by 82%. Next sentence.
+
+--- observed (blind keys; path from each run's reveal) ---
+candidate_20261009_085832:
+  Q17-r3-A (candidate): '...achieving a **4X** faster velocity with zero defects.py by **82%**.'
+  Q17-r4-A (candidate): opens 'He built this center from scratch' with no antecedent; 'This integration reduced...' follows a missing sentence
+  Q45-r2-B (candidate): stray 12-country sentence after the Director paragraph
+  Q45-r3-A (old rag_answer): no opener, starts mid-answer
+  Q45-r4-B (candidate): opens 'He led this organization' with no antecedent
+  F.2-r2-B (lever 2): no opener, starts mid-answer
+arm_theme1_20261009_083210:
+  Q45-r3-A (arm): '...converted contractors to internal hires to recover both margin and talent.5M** program...'
+  Q17-r5-B (arm): starts mid-thought ('For instance, he built...')
+The two token-boundary cases (talent.5M, defects.py) match the repro exactly. The others are consistent with a matched sentence being removed whole; which pattern matched is not recorded (pre-strip text is not captured).

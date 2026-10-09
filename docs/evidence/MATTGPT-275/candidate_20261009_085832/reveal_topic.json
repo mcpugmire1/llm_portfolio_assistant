@@ -1,0 +1,2183 @@
+[
+  {
+    "key": "9.1-r1-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments"
+    ],
+    "model_search_queries": [
+      "payments"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express"
+    ]
+  },
+  {
+    "key": "9.1-r1-B",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments work"
+    ],
+    "model_search_queries": [
+      "payments work"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS"
+    ]
+  },
+  {
+    "key": "9.1-r2-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments"
+    ],
+    "model_search_queries": [
+      "payments"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express"
+    ]
+  },
+  {
+    "key": "9.1-r2-B",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments"
+    ],
+    "model_search_queries": [
+      "payments"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express"
+    ]
+  },
+  {
+    "key": "9.1-r3-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments"
+    ],
+    "model_search_queries": [
+      "payments"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express"
+    ]
+  },
+  {
+    "key": "9.1-r3-B",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments"
+    ],
+    "model_search_queries": [
+      "payments"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express"
+    ]
+  },
+  {
+    "key": "9.1-r4-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments"
+    ],
+    "model_search_queries": [
+      "payments"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express"
+    ]
+  },
+  {
+    "key": "9.1-r4-B",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments"
+    ],
+    "model_search_queries": [
+      "payments"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express"
+    ]
+  },
+  {
+    "key": "9.1-r5-A",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase",
+      "RBC"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments work"
+    ],
+    "model_search_queries": [
+      "payments work"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS"
+    ]
+  },
+  {
+    "key": "9.1-r5-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments work"
+    ],
+    "model_search_queries": [
+      "payments work"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS"
+    ]
+  },
+  {
+    "key": "9.2-r1-A",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style"
+    ],
+    "model_search_queries": [
+      "leadership style"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ]
+  },
+  {
+    "key": "9.2-r1-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style"
+    ],
+    "model_search_queries": [
+      "leadership style"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ]
+  },
+  {
+    "key": "9.2-r2-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style"
+    ],
+    "model_search_queries": [
+      "leadership style"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ]
+  },
+  {
+    "key": "9.2-r2-B",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style"
+    ],
+    "model_search_queries": [
+      "leadership style"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ]
+  },
+  {
+    "key": "9.2-r3-A",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style"
+    ],
+    "model_search_queries": [
+      "leadership style"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ]
+  },
+  {
+    "key": "9.2-r3-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style"
+    ],
+    "model_search_queries": [
+      "leadership style"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ]
+  },
+  {
+    "key": "9.2-r4-A",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style"
+    ],
+    "model_search_queries": [
+      "leadership style"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ]
+  },
+  {
+    "key": "9.2-r4-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style"
+    ],
+    "model_search_queries": [
+      "leadership style"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ]
+  },
+  {
+    "key": "9.2-r5-A",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style"
+    ],
+    "model_search_queries": [
+      "leadership style"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ]
+  },
+  {
+    "key": "9.2-r5-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style"
+    ],
+    "model_search_queries": [
+      "leadership style"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ]
+  },
+  {
+    "key": "9.3-r1-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style example"
+    ],
+    "model_search_queries": [
+      "leadership style example"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "What I Learned About Sustainable Leadership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ]
+  },
+  {
+    "key": "9.3-r1-B",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style"
+    ],
+    "model_search_queries": [
+      "leadership style"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ]
+  },
+  {
+    "key": "9.3-r2-A",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style example"
+    ],
+    "model_search_queries": [
+      "leadership style example"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "What I Learned About Sustainable Leadership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ]
+  },
+  {
+    "key": "9.3-r2-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style"
+    ],
+    "model_search_queries": [
+      "leadership style"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ]
+  },
+  {
+    "key": "9.3-r3-A",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style example"
+    ],
+    "model_search_queries": [
+      "leadership style example"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "What I Learned About Sustainable Leadership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ]
+  },
+  {
+    "key": "9.3-r3-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style"
+    ],
+    "model_search_queries": [
+      "leadership style"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ]
+  },
+  {
+    "key": "9.3-r4-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style"
+    ],
+    "model_search_queries": [
+      "leadership style"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ]
+  },
+  {
+    "key": "9.3-r4-B",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style example"
+    ],
+    "model_search_queries": [
+      "leadership style example"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "What I Learned About Sustainable Leadership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ]
+  },
+  {
+    "key": "9.3-r5-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style example"
+    ],
+    "model_search_queries": [
+      "leadership style example"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "What I Learned About Sustainable Leadership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ]
+  },
+  {
+    "key": "9.3-r5-B",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style example"
+    ],
+    "model_search_queries": [
+      "leadership style example"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "What I Learned About Sustainable Leadership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ]
+  },
+  {
+    "key": "9.4-r1-A",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "Cloud Innovation Center team size"
+    ],
+    "model_search_queries": [
+      "Cloud Innovation Center team size"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Scaling Talent and Practices for Agile Product Innovation",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "Enhancing Team Proficiency through Servant Leadership and Mentorship"
+    ]
+  },
+  {
+    "key": "9.4-r1-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "model_search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Scaling Talent and Practices for Agile Product Innovation",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+      "Building Mentorship Programs for Long-Term Growth and Retention"
+    ]
+  },
+  {
+    "key": "9.4-r2-A",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "model_search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Scaling Talent and Practices for Agile Product Innovation",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+      "Building Mentorship Programs for Long-Term Growth and Retention"
+    ]
+  },
+  {
+    "key": "9.4-r2-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "model_search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Scaling Talent and Practices for Agile Product Innovation",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+      "Building Mentorship Programs for Long-Term Growth and Retention"
+    ]
+  },
+  {
+    "key": "9.4-r3-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "model_search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Scaling Talent and Practices for Agile Product Innovation",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+      "Building Mentorship Programs for Long-Term Growth and Retention"
+    ]
+  },
+  {
+    "key": "9.4-r3-B",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "model_search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Scaling Talent and Practices for Agile Product Innovation",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+      "Building Mentorship Programs for Long-Term Growth and Retention"
+    ]
+  },
+  {
+    "key": "9.4-r4-A",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "model_search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Scaling Talent and Practices for Agile Product Innovation",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+      "Building Mentorship Programs for Long-Term Growth and Retention"
+    ]
+  },
+  {
+    "key": "9.4-r4-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "model_search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Scaling Talent and Practices for Agile Product Innovation",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+      "Building Mentorship Programs for Long-Term Growth and Retention"
+    ]
+  },
+  {
+    "key": "9.4-r5-A",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "model_search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Scaling Talent and Practices for Agile Product Innovation",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+      "Building Mentorship Programs for Long-Term Growth and Retention"
+    ]
+  },
+  {
+    "key": "9.4-r5-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "model_search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Scaling Talent and Practices for Agile Product Innovation",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+      "Building Mentorship Programs for Long-Term Growth and Retention"
+    ]
+  },
+  {
+    "key": "F.1-r1-A",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments"
+    ],
+    "model_search_queries": [
+      "payments"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express"
+    ]
+  },
+  {
+    "key": "F.1-r1-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments"
+    ],
+    "model_search_queries": [
+      "payments"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express"
+    ]
+  },
+  {
+    "key": "F.1-r2-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "JP Morgan Chase",
+      "RBC"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments work"
+    ],
+    "model_search_queries": [
+      "payments work"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS"
+    ]
+  },
+  {
+    "key": "F.1-r2-B",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments"
+    ],
+    "model_search_queries": [
+      "payments"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express"
+    ]
+  },
+  {
+    "key": "F.1-r3-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments"
+    ],
+    "model_search_queries": [
+      "payments"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express"
+    ]
+  },
+  {
+    "key": "F.1-r3-B",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments"
+    ],
+    "model_search_queries": [
+      "payments"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express"
+    ]
+  },
+  {
+    "key": "F.1-r4-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments work"
+    ],
+    "model_search_queries": [
+      "payments work"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS"
+    ]
+  },
+  {
+    "key": "F.1-r4-B",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments"
+    ],
+    "model_search_queries": [
+      "payments"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express"
+    ]
+  },
+  {
+    "key": "F.1-r5-A",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments work"
+    ],
+    "model_search_queries": [
+      "payments work"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS"
+    ]
+  },
+  {
+    "key": "F.1-r5-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments"
+    ],
+    "model_search_queries": [
+      "payments"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express"
+    ]
+  },
+  {
+    "key": "F.2-r1-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "American Express",
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Emerging Tech",
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 7,
+    "search_queries": [],
+    "model_search_queries": [
+      "payments work"
+    ],
+    "synth_decision": "router",
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [
+      7
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Building Effective AI-Assisted Development Workflows",
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Conducting Discovery and Framing to Build Cross-Functional Alignment",
+      "Delivering Through a Company's Wind-Down",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "De-Risking RBC’s Corporate Banking Platform Investment",
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices"
+    ]
+  },
+  {
+    "key": "F.2-r1-B",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase",
+      "RBC"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments work"
+    ],
+    "model_search_queries": [
+      "payments work"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS"
+    ]
+  },
+  {
+    "key": "F.2-r2-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase",
+      "RBC"
+    ],
+    "source_themes": [
+      "Emerging Tech",
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 7,
+    "search_queries": [],
+    "model_search_queries": [
+      "payments work"
+    ],
+    "synth_decision": "router",
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [
+      7
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Building Effective AI-Assisted Development Workflows",
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Conducting Discovery and Framing to Build Cross-Functional Alignment",
+      "Delivering Through a Company's Wind-Down",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "De-Risking RBC’s Corporate Banking Platform Investment",
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices"
+    ]
+  },
+  {
+    "key": "F.2-r2-B",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase",
+      "RBC"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments work"
+    ],
+    "model_search_queries": [
+      "payments work"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS"
+    ]
+  },
+  {
+    "key": "F.2-r3-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "American Express",
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Emerging Tech",
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 7,
+    "search_queries": [],
+    "model_search_queries": [
+      "payments work"
+    ],
+    "synth_decision": "router",
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [
+      7
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Building Effective AI-Assisted Development Workflows",
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Conducting Discovery and Framing to Build Cross-Functional Alignment",
+      "Delivering Through a Company's Wind-Down",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "De-Risking RBC’s Corporate Banking Platform Investment",
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices"
+    ]
+  },
+  {
+    "key": "F.2-r3-B",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase",
+      "RBC"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments work"
+    ],
+    "model_search_queries": [
+      "payments work"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS"
+    ]
+  },
+  {
+    "key": "F.2-r4-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "American Express",
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Emerging Tech",
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 7,
+    "search_queries": [],
+    "model_search_queries": [
+      "payments work"
+    ],
+    "synth_decision": "router",
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [
+      7
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Building Effective AI-Assisted Development Workflows",
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Conducting Discovery and Framing to Build Cross-Functional Alignment",
+      "Delivering Through a Company's Wind-Down",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "De-Risking RBC’s Corporate Banking Platform Investment",
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices"
+    ]
+  },
+  {
+    "key": "F.2-r4-B",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase",
+      "RBC"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments work"
+    ],
+    "model_search_queries": [
+      "payments work"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS"
+    ]
+  },
+  {
+    "key": "F.2-r5-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "American Express",
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Emerging Tech",
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 7,
+    "search_queries": [],
+    "model_search_queries": [
+      "payments work"
+    ],
+    "synth_decision": "router",
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [
+      7
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "candidate",
+    "source_titles": [
+      "Building Effective AI-Assisted Development Workflows",
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Conducting Discovery and Framing to Build Cross-Functional Alignment",
+      "Delivering Through a Company's Wind-Down",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "De-Risking RBC’s Corporate Banking Platform Investment",
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices"
+    ]
+  },
+  {
+    "key": "F.2-r5-B",
+    "path": "lever2",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase",
+      "RBC"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments work"
+    ],
+    "model_search_queries": [
+      "payments work"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "prompt_forced": 0,
+    "arm": "lever2",
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS"
+    ]
+  }
+]
