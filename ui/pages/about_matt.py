@@ -88,8 +88,8 @@ def render_about_matt():
         st.markdown(
             '<p class="prof-voice-p">I build what\'s next, modernize what\'s not, and grow teams along the way.</p>'
             '<p class="prof-voice-p">My foundation is in financial services technology at JP Morgan, Fiserv, RBC, and HSBC. '
-            'At JP Morgan I led several programs, the largest a 60+ person global team delivering the ACCESS payments platform '
-            'across 12 countries. That\'s where I learned to modernize regulated, high-stakes platforms without breaking them.</p>'
+            'At JP Morgan I led several programs with globally dispersed teams: developers across India, testers in the Philippines, '
+            'designers in Costa Rica. The largest was a 40+ person team delivering the ACCESS payments platform. That\'s where I learned to modernize regulated, high-stakes platforms without breaking them.</p>'
             '<p class="prof-voice-p">Most recently I built Accenture\'s Cloud Innovation Center from zero to a 150+ practitioner '
             'practice of engineers, architects, product managers, and HCD designers, serving 15+ Fortune 500 clients with no '
             'dedicated sales team and generating $100M+ in repeat business. The work itself created the demand.</p>'
@@ -127,7 +127,7 @@ def render_about_matt():
     )
     _REFERRER_SNIPPET = (
         "Matt Pugmire is a senior product engineering leader who builds engineering organizations, modernizes platforms, "
-        "and grows teams along the way. He has led teams of 60+ across 12 countries, built a practice from zero to "
+        "and grows teams along the way. He has led globally dispersed teams across the US, India, the Philippines and Costa Rica, built a practice from zero to "
         "150+ practitioners, and delivered for 15+ Fortune 500 clients across financial services, healthcare, telecom, "
         "and government. In active conversations for senior engineering leadership roles. Atlanta-based, open to relocate."
     )
@@ -234,8 +234,8 @@ def render_about_matt():
             "<h2>In My Own Words</h2>"
             "<p class='voice'>I build what&#39;s next, modernize what&#39;s not, and grow teams along the way.</p>"
             "<p class='voice'>My foundation is in financial services technology at JP Morgan, Fiserv, RBC, and HSBC. "
-            "At JP Morgan I led several programs, the largest a 60+ person global team delivering the ACCESS payments platform "
-            "across 12 countries. That&#39;s where I learned to modernize regulated, high-stakes platforms without breaking them.</p>"
+            "At JP Morgan I led several programs with globally dispersed teams: developers across India, testers in the Philippines, "
+            "designers in Costa Rica. The largest was a 40+ person team delivering the ACCESS payments platform. That&#39;s where I learned to modernize regulated, high-stakes platforms without breaking them.</p>"
             "<p class='voice'>Most recently I built Accenture&#39;s Cloud Innovation Center from zero to a 150+ practitioner "
             "practice of engineers, architects, product managers, and HCD designers, serving 15+ Fortune 500 clients with no "
             "dedicated sales team and generating $100M+ in repeat business. The work itself created the demand.</p>"
@@ -259,7 +259,7 @@ def render_about_matt():
             "</div>"
             "<h2>Career Evolution</h2><div class='tl'>"
             "<div class='tl-item'><p class='tl-period'>2023&#8211;2026</p><p class='tl-role'>Sabbatical | Innovation &amp; Upskilling</p><p class='tl-org'>Independent</p><p class='tl-desc'>Sabbatical to recharge, refocus, and reskill. MattGPT is tangible proof of the work.</p></div>"
-            "<div class='tl-item'><p class='tl-period'>2019&#8211;2023</p><p class='tl-role'>Director, Cloud Innovation Center</p><p class='tl-org'>Accenture</p><p class='tl-desc'>Launched Innovation Centers (150+ practitioners) &#183; 30+ products &#183; $100M+ in repeat business &#183; 4x faster delivery.</p></div>"
+            "<div class='tl-item'><p class='tl-period'>2019&#8211;2023</p><p class='tl-role'>Director, Cloud Innovation Center</p><p class='tl-org'>Accenture</p><p class='tl-desc'>Launched Innovation Centers (150+ practitioners) &#183; 30+ product engagements &#183; $100M+ in repeat business &#183; 4x faster delivery.</p></div>"
             "<div class='tl-item'><p class='tl-period'>2016&#8211;2023</p><p class='tl-role'>Capability Development Lead, CloudFirst</p><p class='tl-org'>Accenture</p><p class='tl-desc'>Enterprise capability development, engineering enablement, and culture transformation.</p></div>"
             "<div class='tl-item'><p class='tl-period'>2018&#8211;2019</p><p class='tl-role'>Cloud Native Architecture Lead, Liquid Studio</p><p class='tl-org'>Accenture</p><p class='tl-desc'>Cloud-native prototyping and product shaping through rapid experimentation and modern engineering practices.</p></div>"
             "<div class='tl-item'><p class='tl-period'>2009&#8211;2017</p><p class='tl-role'>Sr. Technology Architecture Manager, Financial Services</p><p class='tl-org'>Accenture</p><p class='tl-desc'>Financial services platform modernization and architecture at global scale.</p></div>"
@@ -389,7 +389,7 @@ def render_about_matt():
         <p class="timeline-year prof-timeline-period">2019–2023</p>
         <p class="prof-timeline-role">Director, Cloud Innovation Center</p>
         <p class="prof-timeline-org">Accenture</p>
-        <p class="prof-timeline-desc">Launched Innovation Centers (150+ practitioners) • 30+ products • $100M+ in repeat business • 4x faster delivery.</p>
+        <p class="prof-timeline-desc">Launched Innovation Centers (150+ practitioners) • 30+ product engagements • $100M+ in repeat business • 4x faster delivery.</p>
     </div>
     <div class="timeline-item prof-timeline-item">
         <p class="timeline-year prof-timeline-period">2016–2023</p>
