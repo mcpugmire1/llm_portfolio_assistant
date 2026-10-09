@@ -43,6 +43,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
 New stories: -078, -091, -155, -022 (-181 closed Aug 19)
 Meta: -079, -156, -096
+Answer mode: -284 (synthesis mode decided in four places; a promoted query such as RBC gets 3 source cards, not 6 (code path); after -275, ahead of tier 3 tuning)
 
 **LATER — tier 3:** blocked or dependent
 -077 (re-measure after -181) · -171 (coupled to -190) · -185 (negation) · -239 (router confidence floor, blocked on -223 Sheet data) · -281 (openers by answer type; Matt writes the lists) · -280 (narrative tone depends on which story leads; measure after -281) · -283 (embedding model PoC; after -282)
