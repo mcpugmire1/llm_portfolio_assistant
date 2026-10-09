@@ -194,4 +194,4 @@ Feature: My Profile — Content polish bundle (MATTGPT-068)
   # ---------------------------------------------------------------------------
 
   Scenario: Profile header subtitle matches the locked production text
-    Then the profile header should contain "Engineering leader · platform modernization · AI · Atlanta · open to relocate"
+    Then the profile header should contain "Engineering leader · AI-enabled product · platform modernization · builds organizations from zero · Atlanta · open to relocate"
