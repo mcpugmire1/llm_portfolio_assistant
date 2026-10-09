@@ -134,6 +134,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-281](#mattgpt-281) | Openers chosen by answer type after the answer is known | Open | Low | Issue | October 8, 2026 |
 | [MATTGPT-282](#mattgpt-282) | Ask Agy's answering model has only been measured as gpt-4o | Open | Medium | Issue | October 8, 2026 |
 | [MATTGPT-283](#mattgpt-283) | PoC a newer embedding model for retrieval | Open | Medium | Issue | October 8, 2026 |
+| [MATTGPT-284](#mattgpt-284) | Synthesis mode is decided in four places, and the UI re-derives it | Open | Medium | Refactor | October 9, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -2299,6 +2300,26 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 **Measure:** Re-embed the corpus into a separate Pinecone namespace or index (production untouched). Offline first, no answer generation: on-topic stories per evaluator question (`tests/fixtures/evaluator_conversations.md`), new embedding against text-embedding-3-small, using the 69-slot on-topic count from the 275 runs (old 30/69, Arm A 45/69, Arm C 39/69, lever 2 51/69; 6 questions x 3 runs per arm). The per-question counts are to be committed by the 275 session as `docs/evidence/MATTGPT-275/on_topic_counts.json`.
 
 **If it wins (follow-on steps):** Re-embed the semantic router's intent anchors (same embedding model). Recalibrate `CONFIDENCE_HIGH` and `HARD_ACCEPT` for My Work's tiers, since a new model shifts every score.
+
+---
+
+### MATTGPT-284
+**Synthesis mode is decided in four places, and the UI re-derives it**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Refactor
+- **Logged:** October 9, 2026
+- **Dependencies:** MATTGPT-275 (scope depends on what 275 keeps of HEAD's synthesis retrieval)
+
+**Issue:** The synthesis decision is made in four places and the UI re-derives it, so they can disagree. Verified Oct 9, 2026 on HEAD (d65fdc5): `rag_answer()` sets `is_synthesis` from the router family, entity cluster promotion can set it to True, and the empty-ranked guard can set it back to False. `rag_answer()` stores the router family, not the final `is_synthesis`, in `st.session_state["__ask_query_intent__"]`, and `conversation_helpers.py` recomputes `is_synthesis = msg_query_intent == "synthesis"` before `_sources_layout()`. A promoted query such as "What did Matt do at RBC?" therefore gets the synthesis prompt but only 3 source cards (`SOURCES_MAX_SURGICAL`, not `SOURCES_MAX_SYNTHESIS = 6`). Derived from the code path, not observed in a browser.
+
+**Fix, in order:**
+1. Resolve the answer mode once and return it in the result; the UI reads only that.
+2. One `AnswerMode` value for temperature, story limit, per-theme count, opener pool and source cap. Verified Oct 9, 2026 on HEAD: `_generate_agy_response()` hardcodes `7 if is_synthesis else 5` and `0.2 if is_synthesis else 0.4`, and `rag_answer()` passes `top_per_theme=3` at the call site.
+3. Search behind an interface, with embed failures as a return value, not session state. Verified Oct 9, 2026 on HEAD: `get_synthesis_stories()` reports embed failures through `st.session_state["__embed_failure__"]`, which `rag_answer()` pops.
+
+**Source:** the read-only Clean Architecture assessment, Oct 9, 2026: `docs/evidence/MATTGPT-275/ca_synthesis_20261009_090024/clean_architecture_assessment.md` (65e0621).
 
 ---
 
