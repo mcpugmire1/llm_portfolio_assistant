@@ -10,6 +10,12 @@ import streamlit.components.v1 as components
 
 from ui.image_assets import MATT_CARTOON_B64
 
+# One subtitle for the page header and the Download PDF, so they can't drift.
+_PROFILE_SUBTITLE = (
+    "Engineering leader · AI-enabled product · platform modernization · "
+    "builds organizations from zero · Atlanta · open to relocate"
+)
+
 _ABOUT_HTML = f"""
 <div class="about-header">
     <div class="about-header-content">
@@ -19,7 +25,7 @@ _ABOUT_HTML = f"""
         <div class="about-header-text">
             <h1>Matt Pugmire</h1>
             <p>
-                Engineering leader · platform modernization · AI · Atlanta · open to relocate
+                {_PROFILE_SUBTITLE}
             </p>
         </div>
     </div>
@@ -216,7 +222,7 @@ def render_about_matt():
             "@media print{body{margin:20px}}"
             "</style></head><body>"
             "<h1>Matt Pugmire</h1>"
-            "<p class='sub'>Engineering leader &middot; builds organizations from zero &middot; platform modernization &middot; AI &middot; Atlanta &middot; open to relocate</p>"
+            f"<p class='sub'>{_PROFILE_SUBTITLE}</p>"
             "<h2>Signals</h2><div class='signals'>"
             "<div class='tile'><p class='tile-lbl'>Level</p><p class='tile-val'>Senior leader</p></div>"
             "<div class='tile'><p class='tile-lbl'>Most recent</p><p class='tile-val'>Director, Cloud Innovation Center</p></div>"
