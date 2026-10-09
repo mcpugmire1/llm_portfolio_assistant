@@ -1,0 +1,4544 @@
+[
+  {
+    "key": "1-r1-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "payments"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "payments team size"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Replacing Velocity Metrics with Lead Time, Cycle Time, and Throughput",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Designing Cross-Border Payment Workflows for RBC Express",
+          "Establishing Team Rhythm for Predictable, High-Quality Delivery"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "JP Morgan payments challenges"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "1-r1-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "payments"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "JP Morgan Chase payment engine team size"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Designing Cloud Integration Architecture for JP Morgan's Asset Management"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "JP Morgan Chase payment engine challenges"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Designing Cloud Integration Architecture for JP Morgan's Asset Management"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "1-r2-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "payments work"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "JP Morgan Chase payment engine team size"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Designing Cloud Integration Architecture for JP Morgan's Asset Management"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "JP Morgan Chase payment engine issues"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Orchestrating Data Migration Tranche Rollout for JP Morgan"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "1-r2-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "payments work"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "JP Morgan Chase payment engine team size"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Designing Cloud Integration Architecture for JP Morgan's Asset Management"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "JP Morgan Chase payments challenges"
+        ],
+        "sources": [
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "1-r3-A",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "payments"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "JP Morgan Chase ACCESS Next Generation platform team size"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "JP Morgan Chase ACCESS Next Generation platform challenges"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "1-r3-B",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "payments"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "payments work team size"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Matching Task Complexity to Skill Level for Predictable Sprints",
+          "Designing Cross-Border Payment Workflows for RBC Express",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Building a Sustainable Delivery Rhythm for Work-Life Balance"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "JP Morgan Chase payments problems"
+        ],
+        "sources": [
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "1-r4-A",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "payments"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "JP Morgan Chase payment engine team size"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Designing Cloud Integration Architecture for JP Morgan's Asset Management"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "JP Morgan Chase payments project challenges"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "1-r4-B",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "payments"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "payments work team size"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Matching Task Complexity to Skill Level for Predictable Sprints",
+          "Designing Cross-Border Payment Workflows for RBC Express",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Building a Sustainable Delivery Rhythm for Work-Life Balance"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "JP Morgan Chase payment engine challenges"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Designing Cloud Integration Architecture for JP Morgan's Asset Management"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "1-r5-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "payments"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "JP Morgan Chase payment engine team size"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Designing Cloud Integration Architecture for JP Morgan's Asset Management"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "JP Morgan Chase payments project challenges"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "1-r5-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "payments work"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "JP Morgan Chase payment engine team size"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Designing Cloud Integration Architecture for JP Morgan's Asset Management"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "JP Morgan Chase payments challenges"
+        ],
+        "sources": [
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "2-r1-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "education background computer science degree"
+        ],
+        "sources": [
+          "Building Tangible Cloud Tech Skills for HBCU Students",
+          "Teaching Entry-Level Developers to Build Their First Java Web Application",
+          "Mentoring Underserved High School Students into Technology Careers",
+          "About Matt – My Leadership Journey",
+          "Launching a Self-Paced Learning Program for Emerging Technologies"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Matt's technical expertise and achievements"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "About Matt – My Leadership Journey",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Transition Story – Why I’m Exploring Opportunities",
+          "I Let Speed Win Over Structure. Here's How I Fixed It."
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "2-r1-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Matt's education background"
+        ],
+        "sources": [
+          "About Matt – My Leadership Journey",
+          "Why Hire Matt?",
+          "Teaching Entry-Level Developers to Build Their First Java Web Application",
+          "MattGPT: Human-Centered UX Design & Information Architecture",
+          "Transition Story – Why I’m Exploring Opportunities"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Matt's technical expertise and achievements"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "About Matt – My Leadership Journey",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Transition Story – Why I’m Exploring Opportunities",
+          "I Let Speed Win Over Structure. Here's How I Fixed It."
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "2-r2-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Computer Science degree"
+        ],
+        "sources": [
+          "Teaching Entry-Level Developers to Build Their First Java Web Application",
+          "Mentoring Underserved High School Students into Technology Careers",
+          "Building Tangible Cloud Tech Skills for HBCU Students",
+          "I Let Speed Win Over Structure. Here's How I Fixed It.",
+          "Integrating a Chemical Logistics Network Across Every Partner Capability"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Matt's technical expertise and achievements"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "About Matt – My Leadership Journey",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Transition Story – Why I’m Exploring Opportunities",
+          "I Let Speed Win Over Structure. Here's How I Fixed It."
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "2-r2-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Matt Pugmire education degree"
+        ],
+        "sources": [
+          "MattGPT: Human-Centered UX Design & Information Architecture",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Why Hire Matt?",
+          "Teaching Entry-Level Developers to Build Their First Java Web Application",
+          "Owning the P&L: From Engagement Margin to Center Cost Base"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Matt's technical expertise and achievements"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "About Matt – My Leadership Journey",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Transition Story – Why I’m Exploring Opportunities",
+          "I Let Speed Win Over Structure. Here's How I Fixed It."
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "2-r3-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Matt Pugmire education Computer Science degree"
+        ],
+        "sources": [
+          "MattGPT: Human-Centered UX Design & Information Architecture",
+          "Teaching Entry-Level Developers to Build Their First Java Web Application",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Why Hire Matt?",
+          "I Let Speed Win Over Structure. Here's How I Fixed It."
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Matt's technical expertise and achievements"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "About Matt – My Leadership Journey",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Transition Story – Why I’m Exploring Opportunities",
+          "I Let Speed Win Over Structure. Here's How I Fixed It."
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "2-r3-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Matt Pugmire education degree"
+        ],
+        "sources": [
+          "MattGPT: Human-Centered UX Design & Information Architecture",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Why Hire Matt?",
+          "Teaching Entry-Level Developers to Build Their First Java Web Application",
+          "Owning the P&L: From Engagement Margin to Center Cost Base"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Matt's technical expertise and achievements"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "About Matt – My Leadership Journey",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Transition Story – Why I’m Exploring Opportunities",
+          "I Let Speed Win Over Structure. Here's How I Fixed It."
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "2-r4-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Matt's education background"
+        ],
+        "sources": [
+          "About Matt – My Leadership Journey",
+          "Why Hire Matt?",
+          "Teaching Entry-Level Developers to Build Their First Java Web Application",
+          "MattGPT: Human-Centered UX Design & Information Architecture",
+          "Transition Story – Why I’m Exploring Opportunities"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Matt's technical expertise and achievements"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "About Matt – My Leadership Journey",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Transition Story – Why I’m Exploring Opportunities",
+          "I Let Speed Win Over Structure. Here's How I Fixed It."
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "2-r4-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "education background"
+        ],
+        "sources": [
+          "Teaching Entry-Level Developers to Build Their First Java Web Application",
+          "About Matt – My Leadership Journey",
+          "Building Tangible Cloud Tech Skills for HBCU Students",
+          "Mentoring Underserved High School Students into Technology Careers",
+          "Work Philosophy – Where I Do My Best Work"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Information Technology degree impact"
+        ],
+        "sources": [
+          "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+          "Resolving Cross-Domain Data Issues for AT&T's Order Management",
+          "Architecting AT&T's Scalable Order Management Platform",
+          "Mentoring Underserved High School Students into Technology Careers",
+          "Building Tangible Cloud Tech Skills for HBCU Students"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "2-r5-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Matt Pugmire education computer science degree"
+        ],
+        "sources": [
+          "MattGPT: Human-Centered UX Design & Information Architecture",
+          "Teaching Entry-Level Developers to Build Their First Java Web Application",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Why Hire Matt?",
+          "I Let Speed Win Over Structure. Here's How I Fixed It."
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Matt's technical expertise and achievements"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "About Matt – My Leadership Journey",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Transition Story – Why I’m Exploring Opportunities",
+          "I Let Speed Win Over Structure. Here's How I Fixed It."
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "2-r5-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Matt Pugmire education degree"
+        ],
+        "sources": [
+          "MattGPT: Human-Centered UX Design & Information Architecture",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Why Hire Matt?",
+          "Teaching Entry-Level Developers to Build Their First Java Web Application",
+          "Owning the P&L: From Engagement Margin to Center Cost Base"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Matt's technical expertise and achievements"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "About Matt – My Leadership Journey",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Transition Story – Why I’m Exploring Opportunities",
+          "I Let Speed Win Over Structure. Here's How I Fixed It."
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "3-r1-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "leadership style"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "leadership style failure"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "Why Early Failure Is a Feature, Not a Bug, in Innovation",
+          "What I Learned About Assumptions",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "3-r1-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "leadership style"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "leadership style failure"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "Why Early Failure Is a Feature, Not a Bug, in Innovation",
+          "What I Learned About Assumptions",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "3-r2-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "leadership style"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "leadership challenges"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Making It Safe to Take Risks and Be Wrong",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "Building Mentorship Programs for Long-Term Growth and Retention"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "3-r2-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "leadership style"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "leadership style challenge"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "Empowering Teams through Decentralized Decision-Making",
+          "Breaking Silos Between Engineering, Design, and Product"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "3-r3-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "leadership style"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "leadership style failure"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "Why Early Failure Is a Feature, Not a Bug, in Innovation",
+          "What I Learned About Assumptions",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "3-r3-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "leadership style"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "leadership style failure"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "Why Early Failure Is a Feature, Not a Bug, in Innovation",
+          "What I Learned About Assumptions",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "3-r4-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "leadership style"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "leadership style challenge"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "Empowering Teams through Decentralized Decision-Making",
+          "Breaking Silos Between Engineering, Design, and Product"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "3-r4-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "leadership style"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "leadership style failure"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "Why Early Failure Is a Feature, Not a Bug, in Innovation",
+          "What I Learned About Assumptions",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "3-r5-A",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "leadership style"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "leadership style challenge"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "Empowering Teams through Decentralized Decision-Making",
+          "Breaking Silos Between Engineering, Design, and Product"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "3-r5-B",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "leadership style"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "leadership style failure"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "Why Early Failure Is a Feature, Not a Bug, in Innovation",
+          "What I Learned About Assumptions",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "4-r1-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "certifications"
+        ],
+        "sources": [
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Tangible Cloud Tech Skills for HBCU Students",
+          "Balancing Execution Speed with Security and Compliance",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Keeping the F-22's As-Built Configuration Data Accurate"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "PMP certification"
+        ],
+        "sources": [
+          "Building the PMO for RBC's Commercial Banking Modernization",
+          "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+          "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+          "Owning the P&L: From Engagement Margin to Center Cost Base",
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "certifications"
+        ],
+        "sources": [
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Tangible Cloud Tech Skills for HBCU Students",
+          "Balancing Execution Speed with Security and Compliance",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Keeping the F-22's As-Built Configuration Data Accurate"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "4-r1-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "certifications"
+        ],
+        "sources": [
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Tangible Cloud Tech Skills for HBCU Students",
+          "Balancing Execution Speed with Security and Compliance",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Keeping the F-22's As-Built Configuration Data Accurate"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "PMP certification"
+        ],
+        "sources": [
+          "Building the PMO for RBC's Commercial Banking Modernization",
+          "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+          "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+          "Owning the P&L: From Engagement Margin to Center Cost Base",
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "current certifications"
+        ],
+        "sources": [
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Enabling New Ways of Working Through Immersive Coaching and Transformation Labs",
+          "Keeping the F-22's As-Built Configuration Data Accurate",
+          "Teaching Entry-Level Developers to Build Their First Java Web Application",
+          "Building Tangible Cloud Tech Skills for HBCU Students"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "4-r2-A",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "certifications"
+        ],
+        "sources": [
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Tangible Cloud Tech Skills for HBCU Students",
+          "Balancing Execution Speed with Security and Compliance",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Keeping the F-22's As-Built Configuration Data Accurate"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "PMP certification"
+        ],
+        "sources": [
+          "Building the PMO for RBC's Commercial Banking Modernization",
+          "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+          "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+          "Owning the P&L: From Engagement Margin to Center Cost Base",
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "certifications"
+        ],
+        "sources": [
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Tangible Cloud Tech Skills for HBCU Students",
+          "Balancing Execution Speed with Security and Compliance",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Keeping the F-22's As-Built Configuration Data Accurate"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "4-r2-B",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "certification"
+        ],
+        "sources": [
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Tangible Cloud Tech Skills for HBCU Students",
+          "Keeping the F-22's As-Built Configuration Data Accurate",
+          "Balancing Execution Speed with Security and Compliance",
+          "Confronting a Quality Crisis Through Coaching and Culture Change"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "PMP certification"
+        ],
+        "sources": [
+          "Building the PMO for RBC's Commercial Banking Modernization",
+          "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+          "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+          "Owning the P&L: From Engagement Margin to Center Cost Base",
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "certifications"
+        ],
+        "sources": [
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Tangible Cloud Tech Skills for HBCU Students",
+          "Balancing Execution Speed with Security and Compliance",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Keeping the F-22's As-Built Configuration Data Accurate"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "4-r3-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "certification"
+        ],
+        "sources": [
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Tangible Cloud Tech Skills for HBCU Students",
+          "Keeping the F-22's As-Built Configuration Data Accurate",
+          "Balancing Execution Speed with Security and Compliance",
+          "Confronting a Quality Crisis Through Coaching and Culture Change"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "PMP certification"
+        ],
+        "sources": [
+          "Building the PMO for RBC's Commercial Banking Modernization",
+          "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+          "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+          "Owning the P&L: From Engagement Margin to Center Cost Base",
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "certifications"
+        ],
+        "sources": [
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Tangible Cloud Tech Skills for HBCU Students",
+          "Balancing Execution Speed with Security and Compliance",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Keeping the F-22's As-Built Configuration Data Accurate"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "4-r3-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "certifications"
+        ],
+        "sources": [
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Tangible Cloud Tech Skills for HBCU Students",
+          "Balancing Execution Speed with Security and Compliance",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Keeping the F-22's As-Built Configuration Data Accurate"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "PMP certification"
+        ],
+        "sources": [
+          "Building the PMO for RBC's Commercial Banking Modernization",
+          "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+          "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+          "Owning the P&L: From Engagement Margin to Center Cost Base",
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "certifications"
+        ],
+        "sources": [
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Tangible Cloud Tech Skills for HBCU Students",
+          "Balancing Execution Speed with Security and Compliance",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Keeping the F-22's As-Built Configuration Data Accurate"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "4-r4-A",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "certifications"
+        ],
+        "sources": [
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Tangible Cloud Tech Skills for HBCU Students",
+          "Balancing Execution Speed with Security and Compliance",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Keeping the F-22's As-Built Configuration Data Accurate"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "PMP certification"
+        ],
+        "sources": [
+          "Building the PMO for RBC's Commercial Banking Modernization",
+          "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+          "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+          "Owning the P&L: From Engagement Margin to Center Cost Base",
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "current certifications"
+        ],
+        "sources": [
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Enabling New Ways of Working Through Immersive Coaching and Transformation Labs",
+          "Keeping the F-22's As-Built Configuration Data Accurate",
+          "Teaching Entry-Level Developers to Build Their First Java Web Application",
+          "Building Tangible Cloud Tech Skills for HBCU Students"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "4-r4-B",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "certifications"
+        ],
+        "sources": [
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Tangible Cloud Tech Skills for HBCU Students",
+          "Balancing Execution Speed with Security and Compliance",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Keeping the F-22's As-Built Configuration Data Accurate"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "PMP certification"
+        ],
+        "sources": [
+          "Building the PMO for RBC's Commercial Banking Modernization",
+          "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+          "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+          "Owning the P&L: From Engagement Margin to Center Cost Base",
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "current certifications"
+        ],
+        "sources": [
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Enabling New Ways of Working Through Immersive Coaching and Transformation Labs",
+          "Keeping the F-22's As-Built Configuration Data Accurate",
+          "Teaching Entry-Level Developers to Build Their First Java Web Application",
+          "Building Tangible Cloud Tech Skills for HBCU Students"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "4-r5-A",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "certifications"
+        ],
+        "sources": [
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Tangible Cloud Tech Skills for HBCU Students",
+          "Balancing Execution Speed with Security and Compliance",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Keeping the F-22's As-Built Configuration Data Accurate"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "PMP certification"
+        ],
+        "sources": [
+          "Building the PMO for RBC's Commercial Banking Modernization",
+          "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+          "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+          "Owning the P&L: From Engagement Margin to Center Cost Base",
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "certifications"
+        ],
+        "sources": [
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Tangible Cloud Tech Skills for HBCU Students",
+          "Balancing Execution Speed with Security and Compliance",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Keeping the F-22's As-Built Configuration Data Accurate"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "4-r5-B",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "certifications"
+        ],
+        "sources": [
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Tangible Cloud Tech Skills for HBCU Students",
+          "Balancing Execution Speed with Security and Compliance",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Keeping the F-22's As-Built Configuration Data Accurate"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "PMP certification"
+        ],
+        "sources": [
+          "Building the PMO for RBC's Commercial Banking Modernization",
+          "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+          "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+          "Owning the P&L: From Engagement Margin to Center Cost Base",
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "certifications"
+        ],
+        "sources": [
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Tangible Cloud Tech Skills for HBCU Students",
+          "Balancing Execution Speed with Security and Compliance",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Keeping the F-22's As-Built Configuration Data Accurate"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "5-r1-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Matt's current career goals"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "Transition Story – Why I’m Exploring Opportunities",
+          "About Matt – My Leadership Journey",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Career Intent – What I’m Looking For Next"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Matt's experience compared to in-house candidates"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "About Matt – My Leadership Journey",
+          "MattGPT: Human-Centered UX Design & Information Architecture",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Transition Story – Why I’m Exploring Opportunities"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "5-r1-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Matt's current career goals or reasons for job search"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "Transition Story – Why I’m Exploring Opportunities",
+          "About Matt – My Leadership Journey",
+          "Career Intent – What I’m Looking For Next",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Matt's experience compared to in-house roles"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "About Matt – My Leadership Journey",
+          "MattGPT: Human-Centered UX Design & Information Architecture",
+          "Transition Story – Why I’m Exploring Opportunities",
+          "Career Intent – What I’m Looking For Next"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "5-r2-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Matt's current job search"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "Transition Story – Why I’m Exploring Opportunities",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "About Matt – My Leadership Journey",
+          "Career Intent – What I’m Looking For Next"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Matt's unique experience compared to in-house candidates"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "About Matt – My Leadership Journey",
+          "MattGPT: Human-Centered UX Design & Information Architecture",
+          "Transition Story – Why I’m Exploring Opportunities",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "5-r2-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Matt's current job search"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "Transition Story – Why I’m Exploring Opportunities",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "About Matt – My Leadership Journey",
+          "Career Intent – What I’m Looking For Next"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Matt's experience compared to in-house candidates"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "About Matt – My Leadership Journey",
+          "MattGPT: Human-Centered UX Design & Information Architecture",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Transition Story – Why I’m Exploring Opportunities"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "5-r3-A",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Matt Pugmire career transition"
+        ],
+        "sources": [
+          "Transition Story – Why I’m Exploring Opportunities",
+          "Why Hire Matt?",
+          "About Matt – My Leadership Journey",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "MattGPT: Human-Centered UX Design & Information Architecture"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Matt's experience compared to in-house candidates"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "About Matt – My Leadership Journey",
+          "MattGPT: Human-Centered UX Design & Information Architecture",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Transition Story – Why I’m Exploring Opportunities"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "5-r3-B",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Matt's current job search reasons"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "Transition Story – Why I’m Exploring Opportunities",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "About Matt – My Leadership Journey",
+          "Career Intent – What I’m Looking For Next"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Matt's unique experience compared to in-house candidates"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "About Matt – My Leadership Journey",
+          "MattGPT: Human-Centered UX Design & Information Architecture",
+          "Transition Story – Why I’m Exploring Opportunities",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "5-r4-A",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "sabbatical building MattGPT"
+        ],
+        "sources": [
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Building Effective AI-Assisted Development Workflows",
+          "Transition Story – Why I’m Exploring Opportunities",
+          "MattGPT: Human-Centered UX Design & Information Architecture",
+          "MattGPT: RAG Architecture & Semantic Search Implementation"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Matt's experience compared to in-house candidates"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "About Matt – My Leadership Journey",
+          "MattGPT: Human-Centered UX Design & Information Architecture",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Transition Story – Why I’m Exploring Opportunities"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "5-r4-B",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Matt's current job search reasons"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "Transition Story – Why I’m Exploring Opportunities",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "About Matt – My Leadership Journey",
+          "Career Intent – What I’m Looking For Next"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Matt's experience compared to in-house roles"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "About Matt – My Leadership Journey",
+          "MattGPT: Human-Centered UX Design & Information Architecture",
+          "Transition Story – Why I’m Exploring Opportunities",
+          "Career Intent – What I’m Looking For Next"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "5-r5-A",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Matt's current career goals and reasons for seeking new opportunities"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "Transition Story – Why I’m Exploring Opportunities",
+          "About Matt – My Leadership Journey",
+          "Career Intent – What I’m Looking For Next",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Matt's experience compared to in-house candidates"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "About Matt – My Leadership Journey",
+          "MattGPT: Human-Centered UX Design & Information Architecture",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Transition Story – Why I’m Exploring Opportunities"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "5-r5-B",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Matt's current career goals"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "Transition Story – Why I’m Exploring Opportunities",
+          "About Matt – My Leadership Journey",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Career Intent – What I’m Looking For Next"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Matt's experience compared to in-house roles"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "About Matt – My Leadership Journey",
+          "MattGPT: Human-Centered UX Design & Information Architecture",
+          "Transition Story – Why I’m Exploring Opportunities",
+          "Career Intent – What I’m Looking For Next"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "6-r1-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "healthcare"
+        ],
+        "sources": [
+          "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+          "Delivering AI-Powered Chronic Disease Management for Healthcare",
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Delivering Multi-Client Customization and Compliance for the White-Label Card Portal"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "healthcare AI governance patient data privacy HIPAA compliance",
+          "healthcare AI-powered chronic disease management MVP",
+          "Major U.S. Health System healthcare initiatives"
+        ],
+        "sources": [
+          "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+          "Delivering AI-Powered Chronic Disease Management for Healthcare",
+          "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout",
+          "Balancing Execution Speed with Security and Compliance",
+          "Delivering Multi-Client Customization and Compliance for the White-Label Card Portal",
+          "Building Effective AI-Assisted Development Workflows",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Accelerating Product Delivery Through Lean Innovation at Capital One",
+          "Discovery & Framing - De-Risking Product Development at Fortune 500 Scale",
+          "Recovering Fiserv's $8.5M White-Label Card Portal",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "6-r1-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "healthcare"
+        ],
+        "sources": [
+          "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+          "Delivering AI-Powered Chronic Disease Management for Healthcare",
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Delivering Multi-Client Customization and Compliance for the White-Label Card Portal"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "healthcare AI governance HIPAA compliance"
+        ],
+        "sources": [
+          "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+          "Delivering AI-Powered Chronic Disease Management for Healthcare",
+          "Balancing Execution Speed with Security and Compliance",
+          "Delivering Multi-Client Customization and Compliance for the White-Label Card Portal",
+          "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "6-r2-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "healthcare"
+        ],
+        "sources": [
+          "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+          "Delivering AI-Powered Chronic Disease Management for Healthcare",
+          "Delivering Multi-Client Customization and Compliance for the White-Label Card Portal",
+          "Building the Payment Engine Behind JP Morgan ACCESS"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "healthcare AI governance patient data privacy compliance"
+        ],
+        "sources": [
+          "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+          "Delivering AI-Powered Chronic Disease Management for Healthcare",
+          "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout",
+          "Balancing Execution Speed with Security and Compliance",
+          "Delivering Global Data Conversion for JP Morgan's TS Dynamics CRM Across Four Regions"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "6-r2-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "healthcare"
+        ],
+        "sources": [
+          "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+          "Delivering AI-Powered Chronic Disease Management for Healthcare",
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Delivering Multi-Client Customization and Compliance for the White-Label Card Portal"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "healthcare AI chronic disease management"
+        ],
+        "sources": [
+          "Delivering AI-Powered Chronic Disease Management for Healthcare",
+          "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+          "Building Effective AI-Assisted Development Workflows",
+          "Building Self-Healing Systems through Resilience Engineering",
+          "Overhauling Entitlement Management for JP Morgan ACCESS"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "6-r3-A",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "healthcare"
+        ],
+        "sources": [
+          "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+          "Delivering AI-Powered Chronic Disease Management for Healthcare",
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Delivering Multi-Client Customization and Compliance for the White-Label Card Portal"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "healthcare AI governance patient data privacy compliance"
+        ],
+        "sources": [
+          "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+          "Delivering AI-Powered Chronic Disease Management for Healthcare",
+          "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout",
+          "Balancing Execution Speed with Security and Compliance",
+          "Delivering Global Data Conversion for JP Morgan's TS Dynamics CRM Across Four Regions"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "6-r3-B",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "healthcare"
+        ],
+        "sources": [
+          "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+          "Delivering AI-Powered Chronic Disease Management for Healthcare",
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Delivering Multi-Client Customization and Compliance for the White-Label Card Portal"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "healthcare AI governance chronic disease management"
+        ],
+        "sources": [
+          "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+          "Delivering AI-Powered Chronic Disease Management for Healthcare",
+          "Building Effective AI-Assisted Development Workflows",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Building the PMO for RBC's Commercial Banking Modernization"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "6-r4-A",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "healthcare"
+        ],
+        "sources": [
+          "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+          "Delivering AI-Powered Chronic Disease Management for Healthcare",
+          "Delivering Multi-Client Customization and Compliance for the White-Label Card Portal",
+          "Building the Payment Engine Behind JP Morgan ACCESS"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "healthcare AI governance chronic disease management"
+        ],
+        "sources": [
+          "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+          "Delivering AI-Powered Chronic Disease Management for Healthcare",
+          "Building Effective AI-Assisted Development Workflows",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Building the PMO for RBC's Commercial Banking Modernization"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "6-r4-B",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "healthcare"
+        ],
+        "sources": [
+          "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+          "Delivering AI-Powered Chronic Disease Management for Healthcare",
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Delivering Multi-Client Customization and Compliance for the White-Label Card Portal"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "healthcare"
+        ],
+        "sources": [
+          "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+          "Delivering AI-Powered Chronic Disease Management for Healthcare",
+          "Delivering Multi-Client Customization and Compliance for the White-Label Card Portal",
+          "Building the Payment Engine Behind JP Morgan ACCESS"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "6-r5-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "healthcare industry"
+        ],
+        "sources": [
+          "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+          "Delivering AI-Powered Chronic Disease Management for Healthcare",
+          "Solving Ambiguous Problems by Finding Root Causes, Not Treating Symptoms",
+          "Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD",
+          "Building Tangible Cloud Tech Skills for HBCU Students"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "healthcare AI governance chronic disease management"
+        ],
+        "sources": [
+          "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+          "Delivering AI-Powered Chronic Disease Management for Healthcare",
+          "Building Effective AI-Assisted Development Workflows",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Building the PMO for RBC's Commercial Banking Modernization"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "6-r5-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "healthcare"
+        ],
+        "sources": [
+          "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+          "Delivering AI-Powered Chronic Disease Management for Healthcare",
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Delivering Multi-Client Customization and Compliance for the White-Label Card Portal"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "healthcare AI integration chronic disease management"
+        ],
+        "sources": [
+          "Delivering AI-Powered Chronic Disease Management for Healthcare",
+          "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+          "Designing Cloud Integration Architecture for JP Morgan's Asset Management",
+          "Building Self-Healing Systems through Resilience Engineering",
+          "Building Effective AI-Assisted Development Workflows"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "7-r1-A",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "location"
+        ],
+        "sources": [],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "relocation"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+          "Orchestrating Data Migration Tranche Rollout for JP Morgan",
+          "Mobilizing HSBC’s Mortgage Transformation Program",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "7-r1-B",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "location"
+        ],
+        "sources": [],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "relocation"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+          "Orchestrating Data Migration Tranche Rollout for JP Morgan",
+          "Mobilizing HSBC’s Mortgage Transformation Program",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "7-r2-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Matt's location"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "About Matt – My Leadership Journey",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Transition Story – Why I’m Exploring Opportunities",
+          "I Let Speed Win Over Structure. Here's How I Fixed It."
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "relocation"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+          "Orchestrating Data Migration Tranche Rollout for JP Morgan",
+          "Mobilizing HSBC’s Mortgage Transformation Program",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "7-r2-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Matt's location"
+        ],
+        "sources": [
+          "Why Hire Matt?",
+          "About Matt – My Leadership Journey",
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Transition Story – Why I’m Exploring Opportunities",
+          "I Let Speed Win Over Structure. Here's How I Fixed It."
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "relocation"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+          "Orchestrating Data Migration Tranche Rollout for JP Morgan",
+          "Mobilizing HSBC’s Mortgage Transformation Program",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "7-r3-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Matt Pugmire location"
+        ],
+        "sources": [
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Owning the P&L: From Engagement Margin to Center Cost Base",
+          "MattGPT: Human-Centered UX Design & Information Architecture",
+          "Implementing BDD for System Behavior Specification",
+          "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "relocation"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+          "Orchestrating Data Migration Tranche Rollout for JP Morgan",
+          "Mobilizing HSBC’s Mortgage Transformation Program",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "7-r3-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "location"
+        ],
+        "sources": [],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "relocation"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+          "Orchestrating Data Migration Tranche Rollout for JP Morgan",
+          "Mobilizing HSBC’s Mortgage Transformation Program",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "7-r4-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "location"
+        ],
+        "sources": [],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "relocation"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+          "Orchestrating Data Migration Tranche Rollout for JP Morgan",
+          "Mobilizing HSBC’s Mortgage Transformation Program",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "7-r4-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "location"
+        ],
+        "sources": [],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "relocation"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+          "Orchestrating Data Migration Tranche Rollout for JP Morgan",
+          "Mobilizing HSBC’s Mortgage Transformation Program",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "7-r5-A",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "location"
+        ],
+        "sources": [],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "relocation"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+          "Orchestrating Data Migration Tranche Rollout for JP Morgan",
+          "Mobilizing HSBC’s Mortgage Transformation Program",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "7-r5-B",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Matt Pugmire location"
+        ],
+        "sources": [
+          "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+          "Owning the P&L: From Engagement Margin to Center Cost Base",
+          "MattGPT: Human-Centered UX Design & Information Architecture",
+          "Implementing BDD for System Behavior Specification",
+          "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "relocation"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Replacing a Mainframe Underwriting System at Cendant Mortgage",
+          "Orchestrating Data Migration Tranche Rollout for JP Morgan",
+          "Mobilizing HSBC’s Mortgage Transformation Program",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "8-r1-A",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "failure"
+        ],
+        "sources": [
+          "Why Early Failure Is a Feature, Not a Bug, in Innovation",
+          "What I Learned About Assumptions",
+          "Establishing a ‘Permit to Fail’ Culture for Continuous Improvement",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+          "Building Self-Healing Systems through Resilience Engineering"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "change after failure IAM validation environment verification PII scrubbing"
+        ],
+        "sources": [
+          "What I Learned About Assumptions",
+          "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Keeping the F-22's As-Built Configuration Data Accurate",
+          "Orchestrating Data Migration Tranche Rollout for JP Morgan"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "8-r1-B",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "failure"
+        ],
+        "sources": [
+          "Why Early Failure Is a Feature, Not a Bug, in Innovation",
+          "What I Learned About Assumptions",
+          "Establishing a ‘Permit to Fail’ Culture for Continuous Improvement",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+          "Building Self-Healing Systems through Resilience Engineering"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "changes after failure"
+        ],
+        "sources": [
+          "Why Early Failure Is a Feature, Not a Bug, in Innovation",
+          "What I Learned About Assumptions",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+          "Establishing a ‘Permit to Fail’ Culture for Continuous Improvement",
+          "Delivering Through a Company's Wind-Down"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "8-r2-A",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "failure"
+        ],
+        "sources": [
+          "Why Early Failure Is a Feature, Not a Bug, in Innovation",
+          "What I Learned About Assumptions",
+          "Establishing a ‘Permit to Fail’ Culture for Continuous Improvement",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+          "Building Self-Healing Systems through Resilience Engineering"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "changes after failure in IAM controls and data masking"
+        ],
+        "sources": [
+          "What I Learned About Assumptions",
+          "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift",
+          "Resolving Cross-Domain Data Issues for AT&T's Order Management",
+          "Orchestrating Data Migration Tranche Rollout for JP Morgan",
+          "Delivering Global Data Conversion for JP Morgan's TS Dynamics CRM Across Four Regions"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "8-r2-B",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "failure"
+        ],
+        "sources": [
+          "Why Early Failure Is a Feature, Not a Bug, in Innovation",
+          "What I Learned About Assumptions",
+          "Establishing a ‘Permit to Fail’ Culture for Continuous Improvement",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+          "Building Self-Healing Systems through Resilience Engineering"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "changes after failure with Fortune 500 financial services client"
+        ],
+        "sources": [
+          "What I Learned About Assumptions",
+          "Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD",
+          "Recovering Fiserv's $8.5M White-Label Card Portal",
+          "Rescuing and Stabilizing JP Morgan's TS Dynamics CRM Program",
+          "Scaling Development Capacity with Modern Engineering Practices"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "8-r3-A",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "failure"
+        ],
+        "sources": [
+          "Why Early Failure Is a Feature, Not a Bug, in Innovation",
+          "What I Learned About Assumptions",
+          "Establishing a ‘Permit to Fail’ Culture for Continuous Improvement",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+          "Building Self-Healing Systems through Resilience Engineering"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "changes after failure in platform modernization project"
+        ],
+        "sources": [
+          "Transforming Legacy Systems through Incremental App Modernization",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Modernizing What Matters Most through Value-Driven OKRs",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "De-Risking RBC’s Corporate Banking Platform Investment"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "8-r3-B",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "failure"
+        ],
+        "sources": [
+          "Why Early Failure Is a Feature, Not a Bug, in Innovation",
+          "What I Learned About Assumptions",
+          "Establishing a ‘Permit to Fail’ Culture for Continuous Improvement",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+          "Building Self-Healing Systems through Resilience Engineering"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "changes after failure in platform modernization project"
+        ],
+        "sources": [
+          "Transforming Legacy Systems through Incremental App Modernization",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Modernizing What Matters Most through Value-Driven OKRs",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "De-Risking RBC’s Corporate Banking Platform Investment"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "8-r4-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "failure"
+        ],
+        "sources": [
+          "Why Early Failure Is a Feature, Not a Bug, in Innovation",
+          "What I Learned About Assumptions",
+          "Establishing a ‘Permit to Fail’ Culture for Continuous Improvement",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+          "Building Self-Healing Systems through Resilience Engineering"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "corrective measures after email job incident"
+        ],
+        "sources": [
+          "What I Learned About Assumptions",
+          "My Chatbot Kept Flattering Me Instead of Answering the Question. Here's How I Fixed It",
+          "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift",
+          "Confronting a Quality Crisis Through Coaching and Culture Change",
+          "Recovering Fiserv's $8.5M White-Label Card Portal"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "8-r4-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "failure"
+        ],
+        "sources": [
+          "Why Early Failure Is a Feature, Not a Bug, in Innovation",
+          "What I Learned About Assumptions",
+          "Establishing a ‘Permit to Fail’ Culture for Continuous Improvement",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+          "Building Self-Healing Systems through Resilience Engineering"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "IAM controls environment boundaries remediation"
+        ],
+        "sources": [
+          "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift",
+          "What I Learned About Assumptions",
+          "Integrating a Chemical Logistics Network Across Every Partner Capability",
+          "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout",
+          "Keeping the F-22's As-Built Configuration Data Accurate"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "8-r5-A",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "failure"
+        ],
+        "sources": [
+          "Why Early Failure Is a Feature, Not a Bug, in Innovation",
+          "What I Learned About Assumptions",
+          "Establishing a ‘Permit to Fail’ Culture for Continuous Improvement",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+          "Building Self-Healing Systems through Resilience Engineering"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "changes after failure in platform modernization delivery"
+        ],
+        "sources": [
+          "Transforming Legacy Systems through Incremental App Modernization",
+          "Modernizing What Matters Most through Value-Driven OKRs",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "What I Learned About Assumptions"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "8-r5-B",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "failure"
+        ],
+        "sources": [
+          "Why Early Failure Is a Feature, Not a Bug, in Innovation",
+          "What I Learned About Assumptions",
+          "Establishing a ‘Permit to Fail’ Culture for Continuous Improvement",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+          "Building Self-Healing Systems through Resilience Engineering"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "change after failure infrastructure assumptions"
+        ],
+        "sources": [
+          "What I Learned About Assumptions",
+          "Why Early Failure Is a Feature, Not a Bug, in Innovation",
+          "Confronting a Quality Crisis Through Coaching and Culture Change",
+          "Establishing a ‘Permit to Fail’ Culture for Continuous Improvement",
+          "Building Self-Healing Systems through Resilience Engineering"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "9-r1-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "payments work"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "leadership style"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "leadership style"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 4,
+        "search_queries": [
+          "Accenture Cloud Innovation Center team size"
+        ],
+        "sources": [
+          "Scaling Talent and Practices for Agile Product Innovation",
+          "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Mentorship Programs for Long-Term Growth and Retention"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "9-r1-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "payments"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "leadership style"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "leadership style example"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "What I Learned About Sustainable Leadership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 4,
+        "search_queries": [
+          "Accenture Cloud Innovation Center team size"
+        ],
+        "sources": [
+          "Scaling Talent and Practices for Agile Product Innovation",
+          "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Mentorship Programs for Long-Term Growth and Retention"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "9-r2-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "payments work"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "leadership style"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "leadership style example"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "What I Learned About Sustainable Leadership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 4,
+        "search_queries": [
+          "Accenture Cloud Innovation Center team size"
+        ],
+        "sources": [
+          "Scaling Talent and Practices for Agile Product Innovation",
+          "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Mentorship Programs for Long-Term Growth and Retention"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "9-r2-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "payments work"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "leadership style"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "leadership style example"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "What I Learned About Sustainable Leadership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 4,
+        "search_queries": [
+          "Cloud Innovation Center team size"
+        ],
+        "sources": [
+          "Scaling Talent and Practices for Agile Product Innovation",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "Enhancing Team Proficiency through Servant Leadership and Mentorship"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "9-r3-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "payments"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "leadership style"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "leadership style"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 4,
+        "search_queries": [
+          "Accenture Cloud Innovation Center team size"
+        ],
+        "sources": [
+          "Scaling Talent and Practices for Agile Product Innovation",
+          "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Mentorship Programs for Long-Term Growth and Retention"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "9-r3-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "payments"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "leadership style"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "leadership style example"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "What I Learned About Sustainable Leadership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 4,
+        "search_queries": [
+          "Accenture Cloud Innovation Center team size"
+        ],
+        "sources": [
+          "Scaling Talent and Practices for Agile Product Innovation",
+          "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Mentorship Programs for Long-Term Growth and Retention"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "9-r4-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "payments"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "leadership style"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "leadership style"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 4,
+        "search_queries": [
+          "Cloud Innovation Center team size"
+        ],
+        "sources": [
+          "Scaling Talent and Practices for Agile Product Innovation",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "Enhancing Team Proficiency through Servant Leadership and Mentorship"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "9-r4-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "payments"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "leadership style"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "leadership style example"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "What I Learned About Sustainable Leadership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 4,
+        "search_queries": [
+          "Cloud Innovation Center team size"
+        ],
+        "sources": [
+          "Scaling Talent and Practices for Agile Product Innovation",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "Enhancing Team Proficiency through Servant Leadership and Mentorship"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "9-r5-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "payments"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "leadership style"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "leadership style example"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "What I Learned About Sustainable Leadership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 4,
+        "search_queries": [
+          "Accenture Cloud Innovation Center team size"
+        ],
+        "sources": [
+          "Scaling Talent and Practices for Agile Product Innovation",
+          "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Mentorship Programs for Long-Term Growth and Retention"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "9-r5-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "payments"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "leadership style"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "leadership style"
+        ],
+        "sources": [
+          "Leadership Philosophy – How I Lead",
+          "What I Learned About Sustainable Leadership",
+          "Shifting Teams from Individual Recognition to Collective Ownership",
+          "About Matt – My Leadership Journey",
+          "Empowering Teams through Decentralized Decision-Making"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 4,
+        "search_queries": [
+          "Accenture Cloud Innovation Center team size"
+        ],
+        "sources": [
+          "Scaling Talent and Practices for Agile Product Innovation",
+          "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+          "Building Mentorship Programs for Long-Term Growth and Retention"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "10-r1-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Norfolk Southern"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Norfolk Southern"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "Norfolk Southern modernization timeline"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "10-r1-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Norfolk Southern"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Norfolk Southern"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "Norfolk Southern project duration"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Stabilizing and Delivering AT&T's Southeast CRM Replacement"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "10-r2-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Norfolk Southern"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Norfolk Southern"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "Norfolk Southern modernization timeline"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "10-r2-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Norfolk Southern"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Norfolk Southern"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "Norfolk Southern modernization timeline"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "10-r3-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Norfolk Southern"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Norfolk Southern"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "Norfolk Southern modernization timeline"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "10-r3-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Norfolk Southern"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Norfolk Southern revenue management modernization"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Confronting a Quality Crisis Through Coaching and Culture Change"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "Norfolk Southern modernization duration"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "10-r4-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Norfolk Southern"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Norfolk Southern modernization"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "Norfolk Southern modernization timeline"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "10-r4-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Norfolk Southern"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Norfolk Southern"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "Norfolk Southern modernization duration"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "10-r5-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Norfolk Southern"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Norfolk Southern"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "Norfolk Southern modernization duration"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "10-r5-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "Norfolk Southern"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "Norfolk Southern"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "Norfolk Southern modernization timeline"
+        ],
+        "sources": [
+          "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud",
+          "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+          "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices",
+          "Unifying Norfolk Southern's Teams Around Cloud-Native Practices",
+          "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "11-r1-A",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "scale engineering teams from 4 to 150+ people"
+        ],
+        "sources": [
+          "Leading People: From Delivery Teams to a 150-Person Organization",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Scaling Development Capacity with Modern Engineering Practices",
+          "Breaking Silos Between Engineering, Design, and Product",
+          "Scaling Talent and Practices for Agile Product Innovation"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "payments work"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "team size"
+        ],
+        "sources": [
+          "Empowering Teams through Decentralized Decision-Making",
+          "Replacing Velocity Metrics with Lead Time, Cycle Time, and Throughput",
+          "Establishing Team Rhythm for Predictable, High-Quality Delivery",
+          "Matching Task Complexity to Skill Level for Predictable Sprints",
+          "Enhancing Team Proficiency through Servant Leadership and Mentorship"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "11-r1-B",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "scale engineering teams from 4 to 150+ people"
+        ],
+        "sources": [
+          "Leading People: From Delivery Teams to a 150-Person Organization",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Scaling Development Capacity with Modern Engineering Practices",
+          "Breaking Silos Between Engineering, Design, and Product",
+          "Scaling Talent and Practices for Agile Product Innovation"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "payments"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "team size"
+        ],
+        "sources": [
+          "Empowering Teams through Decentralized Decision-Making",
+          "Replacing Velocity Metrics with Lead Time, Cycle Time, and Throughput",
+          "Establishing Team Rhythm for Predictable, High-Quality Delivery",
+          "Matching Task Complexity to Skill Level for Predictable Sprints",
+          "Enhancing Team Proficiency through Servant Leadership and Mentorship"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "11-r2-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "scale engineering teams from 4 to 150+ people"
+        ],
+        "sources": [
+          "Leading People: From Delivery Teams to a 150-Person Organization",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Scaling Development Capacity with Modern Engineering Practices",
+          "Breaking Silos Between Engineering, Design, and Product",
+          "Scaling Talent and Practices for Agile Product Innovation"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "payments work"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "team size"
+        ],
+        "sources": [
+          "Empowering Teams through Decentralized Decision-Making",
+          "Replacing Velocity Metrics with Lead Time, Cycle Time, and Throughput",
+          "Establishing Team Rhythm for Predictable, High-Quality Delivery",
+          "Matching Task Complexity to Skill Level for Predictable Sprints",
+          "Enhancing Team Proficiency through Servant Leadership and Mentorship"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "11-r2-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "scale engineering teams from 4 to 150+ people"
+        ],
+        "sources": [
+          "Leading People: From Delivery Teams to a 150-Person Organization",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Scaling Development Capacity with Modern Engineering Practices",
+          "Breaking Silos Between Engineering, Design, and Product",
+          "Scaling Talent and Practices for Agile Product Innovation"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "payments"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "team size"
+        ],
+        "sources": [
+          "Empowering Teams through Decentralized Decision-Making",
+          "Replacing Velocity Metrics with Lead Time, Cycle Time, and Throughput",
+          "Establishing Team Rhythm for Predictable, High-Quality Delivery",
+          "Matching Task Complexity to Skill Level for Predictable Sprints",
+          "Enhancing Team Proficiency through Servant Leadership and Mentorship"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "11-r3-A",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "scale engineering teams from 4 to 150+ people"
+        ],
+        "sources": [
+          "Leading People: From Delivery Teams to a 150-Person Organization",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Scaling Development Capacity with Modern Engineering Practices",
+          "Breaking Silos Between Engineering, Design, and Product",
+          "Scaling Talent and Practices for Agile Product Innovation"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "payments work"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "team size"
+        ],
+        "sources": [
+          "Empowering Teams through Decentralized Decision-Making",
+          "Replacing Velocity Metrics with Lead Time, Cycle Time, and Throughput",
+          "Establishing Team Rhythm for Predictable, High-Quality Delivery",
+          "Matching Task Complexity to Skill Level for Predictable Sprints",
+          "Enhancing Team Proficiency through Servant Leadership and Mentorship"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "11-r3-B",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "scale engineering teams from 4 to 150+ people"
+        ],
+        "sources": [
+          "Leading People: From Delivery Teams to a 150-Person Organization",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Scaling Development Capacity with Modern Engineering Practices",
+          "Breaking Silos Between Engineering, Design, and Product",
+          "Scaling Talent and Practices for Agile Product Innovation"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "payments work"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "team size"
+        ],
+        "sources": [
+          "Empowering Teams through Decentralized Decision-Making",
+          "Replacing Velocity Metrics with Lead Time, Cycle Time, and Throughput",
+          "Establishing Team Rhythm for Predictable, High-Quality Delivery",
+          "Matching Task Complexity to Skill Level for Predictable Sprints",
+          "Enhancing Team Proficiency through Servant Leadership and Mentorship"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "11-r4-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "scaling engineering teams from 4 to 150+ people"
+        ],
+        "sources": [
+          "Leading People: From Delivery Teams to a 150-Person Organization",
+          "Scaling Talent and Practices for Agile Product Innovation",
+          "Scaling Development Capacity with Modern Engineering Practices",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Breaking Silos Between Engineering, Design, and Product"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "payments"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "team size"
+        ],
+        "sources": [
+          "Empowering Teams through Decentralized Decision-Making",
+          "Replacing Velocity Metrics with Lead Time, Cycle Time, and Throughput",
+          "Establishing Team Rhythm for Predictable, High-Quality Delivery",
+          "Matching Task Complexity to Skill Level for Predictable Sprints",
+          "Enhancing Team Proficiency through Servant Leadership and Mentorship"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "11-r4-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "scale engineering teams from 4 to 150+ people"
+        ],
+        "sources": [
+          "Leading People: From Delivery Teams to a 150-Person Organization",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Scaling Development Capacity with Modern Engineering Practices",
+          "Breaking Silos Between Engineering, Design, and Product",
+          "Scaling Talent and Practices for Agile Product Innovation"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "payments work"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "team size"
+        ],
+        "sources": [
+          "Empowering Teams through Decentralized Decision-Making",
+          "Replacing Velocity Metrics with Lead Time, Cycle Time, and Throughput",
+          "Establishing Team Rhythm for Predictable, High-Quality Delivery",
+          "Matching Task Complexity to Skill Level for Predictable Sprints",
+          "Enhancing Team Proficiency through Servant Leadership and Mentorship"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "11-r5-A",
+    "path": "lever2",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "scale engineering teams from 4 to 150+ people"
+        ],
+        "sources": [
+          "Leading People: From Delivery Teams to a 150-Person Organization",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Scaling Development Capacity with Modern Engineering Practices",
+          "Breaking Silos Between Engineering, Design, and Product",
+          "Scaling Talent and Practices for Agile Product Innovation"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "payments work"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "team size"
+        ],
+        "sources": [
+          "Empowering Teams through Decentralized Decision-Making",
+          "Replacing Velocity Metrics with Lead Time, Cycle Time, and Throughput",
+          "Establishing Team Rhythm for Predictable, High-Quality Delivery",
+          "Matching Task Complexity to Skill Level for Predictable Sprints",
+          "Enhancing Team Proficiency through Servant Leadership and Mentorship"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  },
+  {
+    "key": "11-r5-B",
+    "path": "arm",
+    "turns": [
+      {
+        "turn": 1,
+        "search_queries": [
+          "scaling engineering teams from 4 to 150+ people"
+        ],
+        "sources": [
+          "Leading People: From Delivery Teams to a 150-Person Organization",
+          "Scaling Talent and Practices for Agile Product Innovation",
+          "Scaling Development Capacity with Modern Engineering Practices",
+          "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+          "Breaking Silos Between Engineering, Design, and Product"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 2,
+        "search_queries": [
+          "payments work"
+        ],
+        "sources": [
+          "Building the Payment Engine Behind JP Morgan ACCESS",
+          "Designing Cross-Border Payment Workflows for RBC Express",
+          "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+          "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+          "Overhauling Entitlement Management for JP Morgan ACCESS"
+        ],
+        "rejection_reason": null
+      },
+      {
+        "turn": 3,
+        "search_queries": [
+          "team size"
+        ],
+        "sources": [
+          "Empowering Teams through Decentralized Decision-Making",
+          "Replacing Velocity Metrics with Lead Time, Cycle Time, and Throughput",
+          "Establishing Team Rhythm for Predictable, High-Quality Delivery",
+          "Matching Task Complexity to Skill Level for Predictable Sprints",
+          "Enhancing Team Proficiency through Servant Leadership and Mentorship"
+        ],
+        "rejection_reason": null
+      }
+    ]
+  }
+]

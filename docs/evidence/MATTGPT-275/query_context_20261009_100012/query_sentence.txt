@@ -1,0 +1,5 @@
+QUERY_SENTENCE = (
+    "Write your search query from the conversation's context: when the question "
+    "refers back to something earlier in the conversation, name the client or "
+    "project it refers to in the query."
+)
