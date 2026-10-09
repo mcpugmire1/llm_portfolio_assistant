@@ -358,7 +358,7 @@ components.html("""
 
 #### Pattern 3 — Per-element `addEventListener` (deprecated, do not use)
 
-Per-element bindings inside `components.html` iframes. Dies on Streamlit rerun (iframe is recreated, destroying the JS context). **Do not introduce new instances.** See Interactive Click Handling in `.claude/rules/streamlit-ui.md`.
+Per-element bindings inside `components.html` iframes. Dies on Streamlit rerun (iframe is recreated, destroying the JS context). **Do not introduce new instances.** See the click-handling rule under Streamlit UI in `CLAUDE.md`.
 
 ---
 
