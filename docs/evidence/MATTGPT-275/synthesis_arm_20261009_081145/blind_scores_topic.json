@@ -1,0 +1,25 @@
+{
+ "9.2-r1-A": "P",
+ "9.2-r1-B": "P",
+ "9.2-r2-A": "P",
+ "9.2-r2-B": "P",
+ "9.2-r3-A": "P",
+ "9.2-r3-B": "P",
+ "9.3-r1-A": "P",
+ "9.3-r1-B": "P",
+ "9.3-r2-A": "P",
+ "9.3-r2-B": "P",
+ "9.3-r3-A": "P",
+ "9.3-r3-B": "P",
+ "9.4-r1-A": "P",
+ "9.4-r1-B": "P",
+ "9.4-r2-A": "P",
+ "9.4-r2-B": "P",
+ "9.4-r3-A": "P",
+ "9.4-r3-B": "P",
+ "_notes": {
+  "criteria": "tests/fixtures/evaluator_conversations.md conversation 9 (turns 2-4; turn 1 has no criterion and is not scored)",
+  "9.4": "each run's two 9.3 answers both use a Cloud Innovation Center example, so 9.4 is scored without linking labels across turns: all report CIC 150+",
+  "9.1-r3-B": "not scored; adds an RBC cross-border engagement to the payments answer"
+ }
+}

@@ -1,0 +1,2794 @@
+[
+  {
+    "phase": "breadth",
+    "qid": "Q65",
+    "turn": 1,
+    "question": "Why hire Matt?",
+    "run": 1,
+    "path": "old",
+    "answer_md": "🐾 Looking across Matt's portfolio, I see clear patterns. At **Accenture**, Matt built the Cloud Innovation Center from the ground up, scaling it to over **150 professionals**. This center delivered at **4x** the velocity with zero-defect deployments, earning over **\\$100M** in repeat business through delivery excellence. He led major modernization programs across industries, including financial services, where he played a pivotal role in transforming mortgage operations at **HSBC**. Here, he secured a **\\$10M** implementation contract by aligning business and IT teams on a unified transformation approach. He has consistently translated complex technology challenges into clear, people-centered strategies, enabling teams to deliver real outcomes. His work at the Cloud Innovation Center exemplifies this, where he adapted Silicon Valley practices for Fortune 500 enterprises, resulting in significant improvements in delivery speed and quality.\n\nIn addition to his technical and leadership accomplishments, Matt has engaged directly with the tech community, strengthening talent pipelines and client relationships. He built an innovation ecosystem that connected clients with emerging technologies, improving solution relevance and client retention. His approach to client engagement focused on partnership over pursuit, contributing to the CIC's reputation as a trusted transformation partner.\n\nMatt's career is defined by a series of impactful builds that have lasted beyond his engagements, from enterprise payment platforms rolled out across **12 countries** to cloud-native systems architected from prototype to production. His readiness for senior leadership roles in platform engineering and enterprise modernization is demonstrated through his continuous hands-on work, including the development of MattGPT during his sabbatical.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "HSBC"
+    ],
+    "source_titles": [
+      "Why Hire Matt?",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "About Matt – My Leadership Journey",
+      "Driving HSBC's Mortgage Transformation from Assessment to $10M Contract",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Scaling CIC Impact Through Intentional Client Engagement",
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Scaling Talent and Practices for Agile Product Innovation"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [
+      "Why hire Matt?"
+    ],
+    "model_search_queries": [
+      "Why hire Matt?"
+    ],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "breadth",
+    "qid": "Q65",
+    "turn": 1,
+    "question": "Why hire Matt?",
+    "run": 1,
+    "path": "synth",
+    "answer_md": "🐾 Here's a great example of why hiring Matt could be a strategic move for any organization. He has a proven track record of building and scaling teams, products, and platforms that endure beyond the initial engagement. At **Accenture**, he grew the Cloud Innovation Center from zero to over **150 professionals**, delivering at four times the velocity with zero-defect deployments through test-driven development and automated pipelines. This achievement alone contributed to over **\\$100** million in repeat business, solely through delivery excellence.\n\nMatt's expertise spans multiple industries, including financial services, healthcare, and technology, where he has led significant modernization programs. For instance, he played a pivotal role in modernizing banking systems across **JP Morgan**, **RBC**, **Capital One**, and **HSBC**, including a product rollout across **12 countries**. His leadership in these projects ensured that complex technology challenges were translated into clear, people-centered strategies, resulting in real outcomes rather than just artifacts.\n\nMoreover, Matt's approach to leadership is grounded in building high-trust engineering cultures and fostering environments where teams can thrive. He emphasizes psychological safety, continuous learning, and cross-functional collaboration, which are critical for driving innovation and transformation in today's fast-paced digital landscape.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "Capital One",
+      "HSBC",
+      "RBC"
+    ],
+    "source_titles": [
+      "Building Effective AI-Assisted Development Workflows",
+      "Simplifying MattGPT's RAG Pipeline Through Entity Gate Removal",
+      "Shifting Client Focus from What They Build to How They Work",
+      "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+      "Owning the P&L: From Engagement Margin to Center Cost Base",
+      "I Let Speed Win Over Structure. Here's How I Fixed It.",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Scaling CIC Impact Through Intentional Client Engagement",
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Why Hire Matt?",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "About Matt – My Leadership Journey",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Balancing Execution Speed with Security and Compliance",
+      "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+      "MattGPT: Human-Centered UX Design & Information Architecture",
+      "Driving HSBC's Mortgage Transformation from Assessment to $10M Contract",
+      "Discovery & Framing - De-Risking Product Development at Fortune 500 Scale",
+      "Leading People: From Delivery Teams to a 150-Person Organization",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Scaling Talent and Practices for Agile Product Innovation"
+    ],
+    "source_themes": [
+      "Emerging Tech",
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 7,
+    "search_queries": [],
+    "model_search_queries": [
+      "Why hire Matt?"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": "router",
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [
+      21
+    ]
+  },
+  {
+    "phase": "breadth",
+    "qid": "Q65",
+    "turn": 1,
+    "question": "Why hire Matt?",
+    "run": 2,
+    "path": "old",
+    "answer_md": "🐾 Looking across Matt's portfolio, I see clear patterns. At **Accenture**, Matt built the Cloud Innovation Center from the ground up, scaling it to over **150 professionals** and delivering at **4x velocity** with zero-defect deployments. This achievement was rooted in modern engineering practices like test-driven development and automated pipelines. His leadership in this role contributed to **\\$100M+** in repeat business, demonstrating a consistent ability to deliver high-quality outcomes that clients valued. \n\nMatt's work at **HSBC** further exemplifies his impact. He led a comprehensive technology assessment that addressed regulatory pressures by modernizing mortgage operations. This effort resulted in a **\\$10M implementation contract**, aligning **HSBC**'s business and IT leadership on a unified transformation approach.\n\nIn addition to his technical acumen, Matt has a strong focus on building high-trust engineering cultures. He created environments where cross-functional teams could thrive, as seen in his work at the Cloud Innovation Center. By adapting Silicon Valley practices for Fortune 500 enterprises, he established a repeatable model that balanced innovation with enterprise needs. This approach not only transformed product development culture but also ensured sustainable business growth.\n\nMatt's career is marked by a pattern of building lasting capabilities, whether through modernizing platforms, leading major transformation programs, or developing high-performing teams. His readiness for senior leadership roles in platform engineering and enterprise modernization is underscored by his hands-on experience and proven track record of solving hard problems as part of a team.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "HSBC"
+    ],
+    "source_titles": [
+      "Why Hire Matt?",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "About Matt – My Leadership Journey",
+      "Driving HSBC's Mortgage Transformation from Assessment to $10M Contract",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Scaling CIC Impact Through Intentional Client Engagement",
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Scaling Talent and Practices for Agile Product Innovation"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [
+      "Why hire Matt?"
+    ],
+    "model_search_queries": [
+      "Why hire Matt?"
+    ],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "breadth",
+    "qid": "Q65",
+    "turn": 1,
+    "question": "Why hire Matt?",
+    "run": 2,
+    "path": "synth",
+    "answer_md": "🐾 Looking across Matt's portfolio, I see clear patterns. He has built and scaled the Cloud Innovation Center (CIC) from 0 to over **150 practitioners**, delivering at **4x** velocity with zero-defect deployments. This achievement alone generated over **\\$100M** in repeat business through delivery excellence. His work spans across industries, including financial services, healthcare, and technology, where he has led major modernization programs and developed cloud-native systems.\n\nMatt's approach to leadership is grounded in his hands-on experience as an engineer. He has led teams through complex transformations, such as the modernization of JP Morgan's systems, and has been instrumental in shifting organizations from IT-centric to product-centric operating models. His leadership style emphasizes building high-trust engineering cultures and fostering environments where teams can thrive.\n\nIn addition to his technical and leadership capabilities, Matt has a strong focus on innovation and emerging technologies. This project highlights his skill in integrating AI into development workflows and his commitment to continuous learning and improvement. He is available immediately and is seeking senior leadership roles in platform engineering, AI-era transformation, and enterprise modernization, where he can continue to build, drive change, and solve challenging problems as part of a team.",
+    "rejection_reason": null,
+    "clients_named": [],
+    "source_titles": [
+      "Building Effective AI-Assisted Development Workflows",
+      "Simplifying MattGPT's RAG Pipeline Through Entity Gate Removal",
+      "Shifting Client Focus from What They Build to How They Work",
+      "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+      "Owning the P&L: From Engagement Margin to Center Cost Base",
+      "I Let Speed Win Over Structure. Here's How I Fixed It.",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Scaling CIC Impact Through Intentional Client Engagement",
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Why Hire Matt?",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "About Matt – My Leadership Journey",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Balancing Execution Speed with Security and Compliance",
+      "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+      "MattGPT: Human-Centered UX Design & Information Architecture",
+      "Driving HSBC's Mortgage Transformation from Assessment to $10M Contract",
+      "Discovery & Framing - De-Risking Product Development at Fortune 500 Scale",
+      "Leading People: From Delivery Teams to a 150-Person Organization",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Scaling Talent and Practices for Agile Product Innovation"
+    ],
+    "source_themes": [
+      "Emerging Tech",
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 7,
+    "search_queries": [],
+    "model_search_queries": [
+      "Why hire Matt?"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": "router",
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [
+      21
+    ]
+  },
+  {
+    "phase": "breadth",
+    "qid": "Q65",
+    "turn": 1,
+    "question": "Why hire Matt?",
+    "run": 3,
+    "path": "old",
+    "answer_md": "🐾 Stepping back to see the themes, Matt's career is marked by a consistent pattern of building and transforming organizations, products, and teams. At **Accenture**, he led the creation of the Cloud Innovation Center (CIC), scaling it from 0 to over **150 professionals**. This initiative delivered at **4x** velocity with zero-defect deployments, generating over **\\$100M** in repeat business. His approach focused on modern engineering practices like test-driven development and automated pipelines, which were instrumental in achieving these outcomes.\n\nMatt's leadership extended beyond technical execution to strategic client partnerships. He built an innovation ecosystem that connected Fortune **500 clients** with emerging technologies, leveraging partnerships with institutions like Georgia Tech. This ecosystem improved solution relevance and client retention, positioning the CIC as a bridge between enterprise needs and cutting-edge technology. He led the assessment and development of a target state architecture for **HSBC**'s mortgage operations, which resulted in a **\\$10M** implementation contract. This engagement aligned business and IT teams on a unified transformation approach, replacing fragmented legacy systems with automated workflows. His tenure at **Accenture** saw him lead major modernization programs across various industries, consistently delivering real outcomes. His readiness for senior leadership roles in platform engineering and enterprise modernization is demonstrated through his hands-on work with AI and GenAI, including the development of MattGPT.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "HSBC"
+    ],
+    "source_titles": [
+      "Why Hire Matt?",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "About Matt – My Leadership Journey",
+      "Driving HSBC's Mortgage Transformation from Assessment to $10M Contract",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Scaling CIC Impact Through Intentional Client Engagement",
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Scaling Talent and Practices for Agile Product Innovation"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [
+      "Why hire Matt?"
+    ],
+    "model_search_queries": [
+      "Why hire Matt?"
+    ],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "breadth",
+    "qid": "Q65",
+    "turn": 1,
+    "question": "Why hire Matt?",
+    "run": 3,
+    "path": "synth",
+    "answer_md": "🐾 Looking across Matt's portfolio, I see clear patterns. He built the Cloud Innovation Center (CIC) from the ground up, scaling it from 0 to over **150 practitioners**. This initiative delivered at four times the velocity of traditional teams and maintained zero-defect deployments through test-driven development and automated pipelines. His leadership in this area contributed to over **\\$100** million in repeat business, driven by delivery excellence alone.\n\nMatt's experience spans multiple industries, including financial services, technology, and healthcare. At **JP Morgan**, he mobilized a PMO to support a firm-wide security uplift, delivering a roadmap and migration plan for 341 applications. This enabled JP Morgan to execute a critical security migration on their timeline. In the healthcare sector, he led a cross-functional team to establish responsible AI governance, achieving **100%** HIPAA compliance and building executive confidence for broader AI implementation.\n\nIn addition to his technical and strategic capabilities, Matt has a strong focus on talent development and organizational transformation. He has built and led cross-functional teams, fostering environments where engineers, designers, and product teams can thrive. His approach emphasizes empathy, authenticity, and a \"permit to fail\" learning environment, which has resulted in high-trust teams and sustainable practices.\n\nMatt's hands-on experience with modern AI/ML technologies, as demonstrated by his work on MattGPT, shows his commitment to staying current and sharp. He is actively seeking senior leadership roles in platform engineering, AI-era transformation, and enterprise modernization, where he can continue to build, drive change, and solve complex problems as part of a team.",
+    "rejection_reason": null,
+    "clients_named": [],
+    "source_titles": [
+      "Building Effective AI-Assisted Development Workflows",
+      "Simplifying MattGPT's RAG Pipeline Through Entity Gate Removal",
+      "Shifting Client Focus from What They Build to How They Work",
+      "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+      "Owning the P&L: From Engagement Margin to Center Cost Base",
+      "I Let Speed Win Over Structure. Here's How I Fixed It.",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Scaling CIC Impact Through Intentional Client Engagement",
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Why Hire Matt?",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "About Matt – My Leadership Journey",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Balancing Execution Speed with Security and Compliance",
+      "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+      "MattGPT: Human-Centered UX Design & Information Architecture",
+      "Driving HSBC's Mortgage Transformation from Assessment to $10M Contract",
+      "Discovery & Framing - De-Risking Product Development at Fortune 500 Scale",
+      "Leading People: From Delivery Teams to a 150-Person Organization",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Scaling Talent and Practices for Agile Product Innovation"
+    ],
+    "source_themes": [
+      "Emerging Tech",
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 7,
+    "search_queries": [],
+    "model_search_queries": [
+      "Why hire Matt?"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": "router",
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [
+      21
+    ]
+  },
+  {
+    "phase": "breadth",
+    "qid": "Q17",
+    "turn": 1,
+    "question": "What are Matt's core themes?",
+    "run": 1,
+    "path": "old",
+    "answer_md": "🐾 Let me show you what ties Matt's work together.\n\nMatt's core themes revolve around Execution & Delivery, Org & Working-Model Transformation, and Talent & Enablement. At **Accenture**, he built the Cloud Innovation Center from scratch, scaling it to over **150 professionals**. This center delivered at four times the velocity with zero-defect deployments, demonstrating his focus on Execution & Delivery. He drove **\\$100M**+ in repeat business through delivery excellence, emphasizing the importance of results over mere process.\n\nIn terms of Org & Working-Model Transformation, Matt has a track record of modernizing platforms and shifting organizational mindsets towards technology. He led major modernization programs across industries, including banking and telecommunications, and helped organizations transition to product-centric ways of working. At **Norfolk Southern**, he addressed a quality crisis by transforming team practices and reinforcing test-first discipline, ensuring that the improvements were sustainable even after external experts left.\n\nTalent & Enablement is another key theme in Matt's work. He has consistently focused on building high-trust engineering cultures and fostering psychological safety. At **Accenture**, he developed competency frameworks and transformation roadmaps to assess and close skill gaps, enabling teams to transition to modern engineering practices. His efforts in creating supportive environments led to improved team morale, increased innovation, and reduced turnover.\n\nThese themes are evident across his career, from building and integrating enterprise platforms to leading cloud-native system architecture and coaching teams through transformation. Matt's work is characterized by a hands-on approach, where he is deeply involved in building, driving change, and solving complex problems as part of a team.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "Norfolk Southern"
+    ],
+    "source_titles": [
+      "Why Hire Matt?",
+      "About Matt – My Leadership Journey",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+      "Making It Safe to Take Risks and Be Wrong",
+      "Enabling New Ways of Working Through Immersive Coaching and Transformation Labs",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Accelerating Modernization with Reusable Solution Patterns"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [
+      "What are Matt's core themes?"
+    ],
+    "model_search_queries": [
+      "What are Matt's core themes?"
+    ],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "breadth",
+    "qid": "Q17",
+    "turn": 1,
+    "question": "What are Matt's core themes?",
+    "run": 1,
+    "path": "synth",
+    "answer_md": "🐾 Matt's work is characterized by several core themes that consistently appear across his career. The primary theme is Execution & Delivery, where he has demonstrated a strong ability to lead teams in delivering complex projects efficiently. For example, at **Accenture**, he built the Cloud Innovation Center from 0 to over **150 practitioners**, achieving a **4X** faster velocity with zero defects. This theme is supported by his focus on Org & Working-Model Transformation, as seen in his efforts to institutionalize pairing and test-first discipline at **Norfolk Southern**, ensuring practices held even after external experts left.\n\nAnother significant theme is Strategic & Advisory, where Matt has provided guidance on technology strategy and modernization. His work with **JP Morgan Chase** on the I&AM Uplift Program exemplifies this, where he mobilized the PMO and delivered a comprehensive implementation roadmap. Talent & Enablement is also a key theme, highlighted by his role in developing competency frameworks and transformation roadmaps at **Accenture**, enabling teams to transition to product-centric ways of working. Risk & Responsible Tech is another theme, demonstrated by his leadership in implementing responsible AI governance for patient data privacy at a major U.S. health system, achieving **100%** HIPAA compliance.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "JP Morgan Chase",
+      "Major U.S. Health System",
+      "Norfolk Southern"
+    ],
+    "source_titles": [
+      "Building Effective AI-Assisted Development Workflows",
+      "MattGPT: RAG Architecture & Semantic Search Implementation",
+      "Simplifying MattGPT's RAG Pipeline Through Entity Gate Removal",
+      "I Let Speed Win Over Structure. Here's How I Fixed It.",
+      "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+      "Driving Modern Software Engineering with Project Octane",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+      "Integrating Play into Work to Enhance Team Motivation",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "Why Hire Matt?",
+      "Work Philosophy – Where I Do My Best Work",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "Balancing Execution Speed with Security and Compliance",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+      "MattGPT: Human-Centered UX Design & Information Architecture",
+      "Accelerating Modernization with Reusable Solution Patterns",
+      "Discovery & Framing - De-Risking Product Development at Fortune 500 Scale",
+      "Enabling New Ways of Working Through Immersive Coaching and Transformation Labs",
+      "Teaching Entry-Level Developers to Build Their First Java Web Application",
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices"
+    ],
+    "source_themes": [
+      "Emerging Tech",
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 7,
+    "search_queries": [],
+    "model_search_queries": [
+      "core themes of Matt's work"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": "router",
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [
+      21
+    ]
+  },
+  {
+    "phase": "breadth",
+    "qid": "Q17",
+    "turn": 1,
+    "question": "What are Matt's core themes?",
+    "run": 2,
+    "path": "old",
+    "answer_md": "🐾 Stepping back to see the themes in Matt's work, several core patterns emerge. Execution & Delivery stands out as a primary strength, demonstrated by his leadership in building **Accenture**'s Cloud Innovation Center from the ground up to a team of over **150 professionals**. This center delivered at **4x faster velocity** with zero-defect deployments, earning over **\\$100M** in repeat business through delivery excellence.\n\nOrg & Working-Model Transformation is another significant theme. At **Norfolk Southern**, Matt addressed a quality crisis by implementing cultural and process changes, such as coaching in the Samman style and restructuring agile ceremonies. This led to a reduction in defects and restored client confidence. He also institutionalized pairing and test-first discipline, ensuring these practices held even after external experts left, and adapted them for remote work during the pandemic. He engaged with team members to understand their challenges, conducted open retrospectives, and celebrated team wins, which improved morale, increased innovation, and reduced turnover. Additionally, he developed competency frameworks and transformation roadmaps to help **Accenture** teams shift to product-centric ways of working, closing competency gaps and improving retention rates.\n\nStrategic & Advisory work is reflected in his role in translating complex technology challenges into clear, people-centered strategies. He consistently aligned teams around purpose and moved intentionally to deliver real outcomes. Emerging Tech is present in his hands-on work with AI and GenAI during his sabbatical, building MattGPT to stay current and sharp.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "Norfolk Southern"
+    ],
+    "source_titles": [
+      "Why Hire Matt?",
+      "About Matt – My Leadership Journey",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+      "Making It Safe to Take Risks and Be Wrong",
+      "Enabling New Ways of Working Through Immersive Coaching and Transformation Labs",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Accelerating Modernization with Reusable Solution Patterns"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [
+      "What are Matt's core themes?"
+    ],
+    "model_search_queries": [
+      "What are Matt's core themes?"
+    ],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "breadth",
+    "qid": "Q17",
+    "turn": 1,
+    "question": "What are Matt's core themes?",
+    "run": 2,
+    "path": "synth",
+    "answer_md": "🐾 Matt's work is characterized by seven core themes that define his approach and impact across various industries. These themes are:\n\n1. **Emerging Tech**: Matt explores pragmatic solutions, as seen in his independent projects like MattGPT, where he developed AI-assisted development workflows and addressed LLM failures through prompt engineering.\n\n2. **Execution & Delivery**: This is Matt's primary strength. He consistently delivers results, such as building the Cloud Innovation Center from 0 to **150+ practitioners** and achieving **4X** faster velocity with zero defects.\n\n3. **Org & Working-Model Transformation**: Matt transforms how teams work, as demonstrated in his engagements with **Norfolk Southern**, where he modernized their legacy systems and established new ways of working through immersive coaching.\n\n4. **Professional Narrative**: Matt knows who he is and articulates his career journey clearly, focusing on building capabilities that last beyond engagements and driving transformation at organizations like **Accenture**.\n\n5. **Risk & Responsible Tech**: He manages risk effectively, as shown in his work with **Fortune **500 client**s**, where he led the shift to DevSecOps, achieving **100%** compliance with standards like PCI DSS, GDPR, and SOX.\n\n6. **Strategic & Advisory**: Matt advises on user-centered product strategy and innovation, embedding customer journey insights throughout product development for clients like **JP Morgan** and **Norfolk Southern**.\n\n7. **Talent & Enablement**: He builds people and organizations, creating competency frameworks and transformation roadmaps that enable teams to transition to product-centric ways of working, as seen in his leadership at the Cloud Innovation Center.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "Norfolk Southern"
+    ],
+    "source_titles": [
+      "Building Effective AI-Assisted Development Workflows",
+      "My Chatbot Kept Flattering Me Instead of Answering the Question. Here's How I Fixed It",
+      "Simplifying MattGPT's RAG Pipeline Through Entity Gate Removal",
+      "I Let Speed Win Over Structure. Here's How I Fixed It.",
+      "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+      "Owning the P&L: From Engagement Margin to Center Cost Base",
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+      "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+      "Why Hire Matt?",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "About Matt – My Leadership Journey",
+      "Balancing Execution Speed with Security and Compliance",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+      "MattGPT: Human-Centered UX Design & Information Architecture",
+      "Discovery & Framing - De-Risking Product Development at Fortune 500 Scale",
+      "User-Centered Design - Embedding Customer Journey in Enterprise Product Development",
+      "Enabling New Ways of Working Through Immersive Coaching and Transformation Labs",
+      "Making It Safe to Take Risks and Be Wrong",
+      "Leading People: From Delivery Teams to a 150-Person Organization"
+    ],
+    "source_themes": [
+      "Emerging Tech",
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 7,
+    "search_queries": [],
+    "model_search_queries": [
+      "Matt's core themes"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": "router",
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [
+      21
+    ]
+  },
+  {
+    "phase": "breadth",
+    "qid": "Q17",
+    "turn": 1,
+    "question": "What are Matt's core themes?",
+    "run": 3,
+    "path": "old",
+    "answer_md": "🐾 Let me show you what ties Matt's work together.\n\nMatt's career is characterized by a focus on execution and delivery, organizational transformation, and talent enablement. At **Accenture**, he built the Cloud Innovation Center from the ground up, scaling it to over **150 professionals** and achieving a **4x faster velocity** with zero-defect deployments. His work consistently involves solving ambiguous problems, modernizing platforms, and shifting organizational mindsets towards technology.\n\nIn his leadership journey, Matt has demonstrated a pattern of building products, platforms, and teams that last beyond the engagement. He has led major modernization programs across industries, including banking, healthcare, and telecommunications, driving **\\$100M+ in repeat business** through delivery excellence. His approach involves listening first, aligning around purpose, and moving intentionally, which has resulted in platforms modernized across payments, cloud, and digital banking.\n\nMatt's work at **Norfolk Southern** further illustrates his focus on transforming how teams work. He addressed a quality crisis by implementing hands-on coaching and cultural change, resulting in a significant drop in defect rates and restored client confidence. By institutionalizing practices like pair programming and test-first discipline, he ensured that the improvements were sustainable even after external experts left.\n\nAdditionally, Matt has been instrumental in fostering psychological safety and innovation culture within teams. At **Accenture**, he addressed gaps in team culture by promoting empathy-driven leadership and transparent feedback loops, leading to improved morale, increased innovation, and reduced turnover. His efforts in talent enablement involved developing competency frameworks and transformation roadmaps, enabling teams to transition to product-centric ways of working.\n\nThese themes of execution, transformation, and talent development are evident across Matt's career, demonstrating his commitment to building lasting capabilities and driving meaningful change in organizations.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "Norfolk Southern"
+    ],
+    "source_titles": [
+      "Why Hire Matt?",
+      "About Matt – My Leadership Journey",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+      "Making It Safe to Take Risks and Be Wrong",
+      "Enabling New Ways of Working Through Immersive Coaching and Transformation Labs",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Accelerating Modernization with Reusable Solution Patterns"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [
+      "What are Matt's core themes?"
+    ],
+    "model_search_queries": [
+      "What are Matt's core themes?"
+    ],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "breadth",
+    "qid": "Q17",
+    "turn": 1,
+    "question": "What are Matt's core themes?",
+    "run": 3,
+    "path": "synth",
+    "answer_md": "🐾 Looking across Matt's portfolio, I see clear patterns. Matt's work is characterized by seven core themes: Emerging Tech, Execution & Delivery, Org & Working-Model Transformation, Professional Narrative, Risk & Responsible Tech, Strategic & Advisory, and Talent & Enablement. Execution & Delivery stands out as his primary strength, with a strong secondary focus on Organizational Transformation. Strategic Advisory, Talent & Enablement, Emerging Tech, and Risk are also present but to a narrower extent. These themes are woven throughout his career, from building the Cloud Innovation Center from scratch to leading modernization programs and fostering high-trust engineering cultures.",
+    "rejection_reason": null,
+    "clients_named": [],
+    "source_titles": [
+      "Building Effective AI-Assisted Development Workflows",
+      "My Chatbot Kept Flattering Me Instead of Answering the Question. Here's How I Fixed It",
+      "Simplifying MattGPT's RAG Pipeline Through Entity Gate Removal",
+      "I Let Speed Win Over Structure. Here's How I Fixed It.",
+      "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+      "Owning the P&L: From Engagement Margin to Center Cost Base",
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+      "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+      "Why Hire Matt?",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "About Matt – My Leadership Journey",
+      "Balancing Execution Speed with Security and Compliance",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+      "MattGPT: Human-Centered UX Design & Information Architecture",
+      "Discovery & Framing - De-Risking Product Development at Fortune 500 Scale",
+      "Accelerating Modernization with Reusable Solution Patterns",
+      "Enabling New Ways of Working Through Immersive Coaching and Transformation Labs",
+      "Making It Safe to Take Risks and Be Wrong",
+      "Leading People: From Delivery Teams to a 150-Person Organization"
+    ],
+    "source_themes": [
+      "Emerging Tech",
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 7,
+    "search_queries": [],
+    "model_search_queries": [
+      "Matt's core themes"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": "router",
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [
+      21
+    ]
+  },
+  {
+    "phase": "breadth",
+    "qid": "Q45",
+    "turn": 1,
+    "question": "What evidence shows Matt can operate at Director or VP level?",
+    "run": 1,
+    "path": "old",
+    "answer_md": "🐾 This is a strong one.\n\nMatt's capability to operate at the Director or VP level is demonstrated through his extensive experience in building and leading high-impact initiatives across multiple industries. At **Accenture**, he built the Cloud Innovation Center from the ground up, expanding it to over **150 professionals**. This center delivered projects at **4x the velocity** with zero defects, securing over **\\$100M** in repeat business through delivery excellence. He achieved this by implementing modern engineering practices such as Test-Driven Development (TDD) and automated pipelines, fostering high-trust teams grounded in servant leadership and psychological safety.\n\nAt **Capital One**, Matt faced the challenge of delivering Federal Reserve Board-mandated compliance updates under tight deadlines. He embedded Lean XP, pairing, and automation, which enabled his teams to deliver defect-free code at **4x the output** of **Capital One**'s internal teams. This approach not only improved development efficiency but also secured additional engagements for **Accenture**.\n\nIn another engagement, Matt was brought in to stabilize and deliver **JP Morgan's** Asset Management Salesforce solution, a global initiative spanning **12 countries**. He aligned stakeholders on a single roadmap, managed compliance across multiple jurisdictions, and delivered the platform on schedule. The result was a **3× increase** in tracked sales opportunities post-launch.\n\nAt **Fiserv**, Matt took over a troubled **\\$8.5M** project serving over **2 million cardholders**. He stabilized delivery within three months, recovered a critical release, and delivered the program **3% under budget** with zero critical defects. This achievement avoided **\\$500K** in penalties and secured a **\\$3M** contract extension.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "Capital One",
+      "Fiserv"
+    ],
+    "source_titles": [
+      "Why Hire Matt?",
+      "Scaling Development Capacity with Modern Engineering Practices",
+      "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+      "Recovering Fiserv's $8.5M White-Label Card Portal",
+      "Building AT&T's Service Delivery Platform",
+      "Turning STRATCOM's Paper Operational Plans into Executable Workflow",
+      "Delivering Through a Company's Wind-Down"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "What evidence shows Matt can operate at Director or VP level?"
+    ],
+    "model_search_queries": [
+      "What evidence shows Matt can operate at Director or VP level?"
+    ],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "breadth",
+    "qid": "Q45",
+    "turn": 1,
+    "question": "What evidence shows Matt can operate at Director or VP level?",
+    "run": 1,
+    "path": "synth",
+    "answer_md": "🐾 Here's a strong one.\n\nMatt's capability to operate at a Director or VP level is well-demonstrated through his leadership at **Accenture's Cloud Innovation Center (CIC)**. He built and scaled the organization from a 10-person pilot to over **150 practitioners**, maintaining a deliberately flat structure with 11-13 practice and client leads reporting directly to him. This approach fostered autonomy and collective code ownership, avoiding traditional hierarchical layers. His management scope included designing and running the full management machinery, such as a four-channel hiring engine and a real-time peer feedback model, which led to near-zero attrition in the first two years.\n\nMatt's leadership philosophy emphasizes psychological safety, pushing decisions to those closest to the work, and grounding engineering culture in modern practices like automation and continuous delivery. This approach resulted in a **4x acceleration in delivery** at the CIC once teams embraced lean product and modern engineering practices.\n\nIn terms of people development, Matt implemented a mentorship-driven culture that improved engineering proficiency and retention. He also facilitated a shift from individual recognition to collective ownership, encouraging innovation and collaboration among team members.\n\nThese efforts contributed to delivering **\\$100M+ in repeat business** through delivery excellence and trusted client relationships. The CIC teams consistently delivered the impact of typical teams twice their size, underscoring the effectiveness of Matt's leadership at a high organizational level.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_titles": [
+      "Leading People: From Delivery Teams to a 150-Person Organization",
+      "What I Learned About Sustainable Leadership",
+      "About Matt – My Leadership Journey",
+      "Leadership Philosophy – How I Lead",
+      "Enhancing Team Proficiency through Servant Leadership and Mentorship",
+      "Shifting Teams from Individual Recognition to Collective Ownership"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 2,
+    "search_queries": [
+      "Director level leadership evidence",
+      "VP level leadership examples"
+    ],
+    "model_search_queries": [
+      "Director level leadership evidence",
+      "VP level leadership examples"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "breadth",
+    "qid": "Q45",
+    "turn": 1,
+    "question": "What evidence shows Matt can operate at Director or VP level?",
+    "run": 2,
+    "path": "old",
+    "answer_md": "🐾 Here's a great example.\n\nMatt has demonstrated his capability to operate at a Director or VP level through his extensive experience in leading complex projects and building high-performing teams. At **Accenture**, he built the Cloud Innovation Center from scratch, growing it to over **150 professionals** who delivered projects at **4x velocity** with zero-defect deployments.\n\nIn his role as Director at **Capital One**, Matt faced the challenge of delivering Federal Reserve Board-mandated compliance updates under intense pressure. He embedded Lean XP, pairing, and automation, which allowed his team to deliver defect-free code at **4x the output** of internal teams. This not only secured additional engagements but also established **Accenture**'s leadership in digital transformation.\n\nAt **JP Morgan Chase**, Matt was brought in to stabilize and deliver a Salesforce rollout across **12 countries**. He aligned regional stakeholders on a single roadmap, managed cross-workstream dependencies, and ensured compliance across jurisdictions. His leadership resulted in the platform being delivered on schedule, with a **3× increase** in tracked sales opportunities post-launch.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "Capital One",
+      "JP Morgan Chase"
+    ],
+    "source_titles": [
+      "Why Hire Matt?",
+      "Scaling Development Capacity with Modern Engineering Practices",
+      "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+      "Recovering Fiserv's $8.5M White-Label Card Portal",
+      "Building AT&T's Service Delivery Platform",
+      "Turning STRATCOM's Paper Operational Plans into Executable Workflow",
+      "Delivering Through a Company's Wind-Down"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "What evidence shows Matt can operate at Director or VP level?"
+    ],
+    "model_search_queries": [
+      "What evidence shows Matt can operate at Director or VP level?"
+    ],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "breadth",
+    "qid": "Q45",
+    "turn": 1,
+    "question": "What evidence shows Matt can operate at Director or VP level?",
+    "run": 2,
+    "path": "synth",
+    "answer_md": "🐾 Here's a great example.\n\nMatt has demonstrated his capability to operate at a Director level through his leadership at **Accenture's Cloud Innovation Centers**. He grew the organization from a 10-person pilot to over **150 practitioners**, maintaining a deliberately flat structure with two layers and 11-13 direct-report practice and client leads. This structure emphasized autonomy at the team level, collective code ownership, and fluid role rotation, allowing for efficient execution without adding traditional management layers. Matt built and managed the full management machinery, including a four-channel hiring engine, a real-time peer feedback model, and promotion machinery. His approach resulted in near-zero attrition in the first two years and sustained hiring of 4-6 net-new practitioners per week during scaling pushes. The evaluation system he implemented replaced traditional managing-up with peer-driven evidence, ensuring that advancement required being an effective teammate.\n\nIn terms of financial accountability, Matt owned engagement margins across several high-profile engagements at **JP Morgan**, **RBC**, **Fiserv**, and **HSBC**. He managed resource pyramids, forecast variance, and scope changes, recovering a negative EAC program at JP Morgan and delivering an **\\$8.5M** program at **Fiserv** **3%** under budget with **\\$500K** in penalties avoided. As a Director, he ran two Cloud Innovation Centers, focusing on chargeability, unbillable downtime, and contractor spend, enforcing internal bench deployment to preserve contract margin.\n\nMatt's career intent further highlights his readiness for Director or VP roles, as he seeks opportunities that involve leading platform or product transformation, real delivery with engineers and product managers, and building organizations from 0 to 1. He is a self-described \"builder,\" looking for environments that value clarity, empathy, and purpose, where he can bridge strategy and execution.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "Fiserv",
+      "HSBC",
+      "RBC"
+    ],
+    "source_titles": [
+      "Leading People: From Delivery Teams to a 150-Person Organization",
+      "Career Intent – What I’m Looking For Next",
+      "Owning the P&L: From Engagement Margin to Center Cost Base",
+      "Delivering SOA for Level 3's Network Inventory System",
+      "Breaking Silos Between Engineering, Design, and Product",
+      "Recovering Fiserv's $8.5M White-Label Card Portal",
+      "Building the PMO for RBC's Commercial Banking Modernization"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 2,
+    "search_queries": [
+      "Director level responsibilities and outcomes",
+      "VP level responsibilities and outcomes"
+    ],
+    "model_search_queries": [
+      "Director level responsibilities and outcomes",
+      "VP level responsibilities and outcomes"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "breadth",
+    "qid": "Q45",
+    "turn": 1,
+    "question": "What evidence shows Matt can operate at Director or VP level?",
+    "run": 3,
+    "path": "old",
+    "answer_md": "🐾 Perfect, here's what I found. At **Accenture**, he built the Cloud Innovation Center from the ground up, growing it to over **150 professionals** who delivered at **4x velocity** with zero-defect deployments. This achievement was supported by his implementation of TDD and automated pipelines, which earned **\\$100M+** in repeat business through delivery excellence.\n\nAt **Capital One**, Matt served as Director and was responsible for scaling development capacity to meet Federal Reserve Board-mandated compliance updates. He embedded Lean XP, pairing, and automation, resulting in defect-free code delivered at **4x the output** of internal teams. This success secured additional engagements and reinforced **Accenture**'s leadership in digital transformation.\n\nIn his role at **JP Morgan Chase**, Matt led the global delivery of an Asset Management Salesforce solution across **12 countries** and **1,200 users**. He aligned stakeholders on a single roadmap, established governance across seven workstreams, and navigated complex compliance requirements. The project was delivered on schedule with no scope renegotiations, resulting in a **3× increase** in tracked sales opportunities.\n\nAdditionally, at **Fiserv**, Matt recovered a troubled **\\$8.5M** white-label card portal initiative, stabilizing delivery within three months and delivering the program **3% under budget** with zero critical defects. His leadership ensured the recovery of a critical Q4 release, avoiding **\\$500K** in penalties and securing a **\\$3M** contract extension.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "Capital One",
+      "Fiserv",
+      "JP Morgan Chase"
+    ],
+    "source_titles": [
+      "Why Hire Matt?",
+      "Scaling Development Capacity with Modern Engineering Practices",
+      "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+      "Recovering Fiserv's $8.5M White-Label Card Portal",
+      "Building AT&T's Service Delivery Platform",
+      "Turning STRATCOM's Paper Operational Plans into Executable Workflow",
+      "Delivering Through a Company's Wind-Down"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "What evidence shows Matt can operate at Director or VP level?"
+    ],
+    "model_search_queries": [
+      "What evidence shows Matt can operate at Director or VP level?"
+    ],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "breadth",
+    "qid": "Q45",
+    "turn": 1,
+    "question": "What evidence shows Matt can operate at Director or VP level?",
+    "run": 3,
+    "path": "synth",
+    "answer_md": "🐾 Here's a great example. He built and managed a **150+ practitioner** organization, running the full management machinery without traditional hierarchy. This included a four-channel hiring engine, a real-time peer feedback model, and promotion machinery. The organization grew from a 10-person pilot to over **150 practitioners** with near-zero attrition in the first two years. Matt designed a deliberately flat organizational model, emphasizing autonomy at the team level and collective code ownership. He implemented a synchronized weekly rhythm across the organization, including office standups, daily team standups, and tech talks. This structure allowed him to maintain a high level of engagement and efficiency without adding layers of management.\n\nIn terms of financial accountability, Matt owned the P&L for two Cloud Innovation Centers, managing chargeability, unbillable downtime, and contractor spend. His leadership led to the centers contributing to over **\\$100M** in repeatable business by FY23, with consistent delivery excellence generating organic referrals and strategic partnerships.",
+    "rejection_reason": null,
+    "clients_named": [],
+    "source_titles": [
+      "Leading People: From Delivery Teams to a 150-Person Organization",
+      "Owning the P&L: From Engagement Margin to Center Cost Base",
+      "Delivering SOA for Level 3's Network Inventory System",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Enhancing Team Proficiency through Servant Leadership and Mentorship",
+      "Recovering Fiserv's $8.5M White-Label Card Portal",
+      "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+      "Conducting Discovery and Framing to Build Cross-Functional Alignment"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 2,
+    "search_queries": [
+      "Director level achievements",
+      "VP level responsibilities"
+    ],
+    "model_search_queries": [
+      "Director level achievements",
+      "VP level responsibilities"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "breadth",
+    "qid": "RBC",
+    "turn": 1,
+    "question": "What did Matt do at RBC?",
+    "run": 1,
+    "path": "old",
+    "answer_md": "🐾 Let me show you what ties Matt's work together.\n\nAt **RBC**, Matt served as a Senior Technology Architecture Manager, where he played a pivotal role in several modernization and strategic initiatives. One of his key projects involved assessing the bank's legacy infrastructure to support a mobile-first strategy. He identified gaps in mobile capabilities, API integration, and platform scalability, providing **RBC** with a clear roadmap for mobile adoption and real-time banking across devices.\n\nIn another engagement, Matt tackled the challenge of limited data visibility on **RBC**'s corporate banking platform, which restricted transaction history access to **180 days**. He defined requirements for extended reporting access and designed solutions for scheduled report generation and scalable export capabilities, enhancing audit-readiness and financial planning for clients.\n\nMatt also conducted a rigorous architecture assessment for **RBC** when the bank was evaluating Bottomline WebSeries as a potential payment hub engine. His analysis revealed that WebSeries could not meet **RBC**'s requirements, preventing a costly investment and allowing the bank to redirect resources to more critical initiatives.\n\nAdditionally, Matt led the data conversion planning for **RBC**'s corporate banking migration, developing an end-to-end migration plan that ensured data integrity and compliance. He also designed cross-border payment workflows for **RBC Express**, integrating real-time FX tools and automated processes to improve efficiency and client satisfaction.\n\nFinally, Matt established the Program Management Office (PMO) for **RBC**'s commercial banking modernization. He developed the project management plan, coordinated program-level measurement and reporting, and maintained the program roadmap, ensuring strategic alignment and predictable execution across all workstreams.",
+    "rejection_reason": null,
+    "clients_named": [
+      "RBC"
+    ],
+    "source_titles": [
+      "Assessing Mobile Readiness for RBC's Corporate Banking Platform",
+      "Solving RBC's 180-Day Data Visibility Problem",
+      "De-Risking RBC’s Corporate Banking Platform Investment",
+      "Leading Data Conversion Planning for RBC's Corporate Banking Migration",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building the PMO for RBC's Commercial Banking Modernization"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Strategic & Advisory"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [
+      "What did Matt do at RBC?"
+    ],
+    "model_search_queries": [
+      "What did Matt do at RBC?"
+    ],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "breadth",
+    "qid": "RBC",
+    "turn": 1,
+    "question": "What did Matt do at RBC?",
+    "run": 1,
+    "path": "synth",
+    "answer_md": "🐾 Here's a great example of Matt's work at **RBC**.\n\nAt **RBC**, Matt played a pivotal role in several initiatives as a Senior Technology Architecture Manager. One significant project involved leading the data conversion planning for **RBC**'s corporate banking migration. The challenge arose when the previous conversion lead left, and Matt had to take over the workstream from scratch. He analyzed legacy data structures and developed transformation rules, planning mock conversion cycles and establishing data quality reconciliation processes. This comprehensive conversion plan ensured the migration of payment data with full integrity and compliance.\n\nIn another engagement, Matt designed cross-border payment workflows for **RBC Express**. Users faced challenges due to fragmented systems and manual processes, which affected operational efficiency and client satisfaction. Matt addressed these issues by integrating real-time FX tools, automated alerts, and streamlined batch processing. This design not only closed a competitive gap but also improved SLA compliance for time-sensitive transactions.\n\nAdditionally, Matt was responsible for building the PMO for **RBC's** commercial banking modernization. He developed the project management plan, coordinated program-level measurement and reporting, and established a centralized communication framework. This governance structure provided visibility across all workstreams, improved cross-team coordination, and enabled predictable execution.\n\nThrough these efforts, Matt delivered significant outcomes, such as an end-to-end data conversion plan, a complete implementation blueprint for cross-border payments, and a robust governance structure for modernization initiatives.",
+    "rejection_reason": null,
+    "clients_named": [
+      "RBC"
+    ],
+    "source_titles": [
+      "Leading Data Conversion Planning for RBC's Corporate Banking Migration",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building the PMO for RBC's Commercial Banking Modernization",
+      "Assessing Mobile Readiness for RBC's Corporate Banking Platform",
+      "Solving RBC's 180-Day Data Visibility Problem",
+      "De-Risking RBC’s Corporate Banking Platform Investment"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Strategic & Advisory"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [],
+    "model_search_queries": [
+      "RBC"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": "promotion",
+    "decision_pinecone": 1,
+    "synth_pool_sizes": [
+      6
+    ]
+  },
+  {
+    "phase": "breadth",
+    "qid": "RBC",
+    "turn": 1,
+    "question": "What did Matt do at RBC?",
+    "run": 2,
+    "path": "old",
+    "answer_md": "🐾 Let me show you what ties Matt's work together.\n\nAt **RBC**, Matt played a pivotal role in several modernization and strategic initiatives. He assessed the legacy infrastructure of **RBC**'s corporate banking platform, which lacked mobile capabilities and API integration with external financial applications. By defining API integration points, mobile capability gaps, and platform scalability needs, Matt provided **RBC** with a clear implementation roadmap for mobile adoption and real-time banking across devices. This effort aligned **RBC**'s mobile-first strategy with evolving customer expectations and business goals.\n\nIn another engagement, Matt tackled the issue of limited data visibility on **RBC**'s corporate banking platform, which restricted transaction and chargeback history to **180 days**. This limitation forced audit teams into manual cold storage requests and hindered clients' ability to defend late-stage chargebacks. Matt defined reporting requirements and designed scheduled report generation and scalable export capabilities, extending data visibility and supporting audit-readiness and financial planning.\n\nMatt also conducted a rigorous architecture assessment and gap/fit analysis for **RBC**'s evaluation of Bottomline WebSeries as the payment hub engine for its Day**2Day** platform. His assessment revealed that WebSeries couldn't meet **RBC**'s requirements, preventing a costly investment and enabling the bank to redirect resources to higher-priority initiatives.\n\nAdditionally, Matt led the data conversion planning for **RBC**'s Day**2Day** modernization, developing an end-to-end migration plan for corporate payment data from the legacy **RBC** Express platform to Bottomline WebSeries. His plan ensured data integrity and compliance throughout the migration process.\n\nFinally, Matt designed cross-border payment workflows for **RBC** Express, integrating real-time FX tools and automated alerts to improve operational efficiency and client satisfaction. He also established the PMO for **RBC**'s commercial banking modernization, providing a governance structure that improved cross-team coordination and enabled predictable execution across all workstreams.",
+    "rejection_reason": null,
+    "clients_named": [
+      "RBC"
+    ],
+    "source_titles": [
+      "Assessing Mobile Readiness for RBC's Corporate Banking Platform",
+      "Solving RBC's 180-Day Data Visibility Problem",
+      "De-Risking RBC’s Corporate Banking Platform Investment",
+      "Leading Data Conversion Planning for RBC's Corporate Banking Migration",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building the PMO for RBC's Commercial Banking Modernization"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Strategic & Advisory"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [
+      "What did Matt do at RBC?"
+    ],
+    "model_search_queries": [
+      "What did Matt do at RBC?"
+    ],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "breadth",
+    "qid": "RBC",
+    "turn": 1,
+    "question": "What did Matt do at RBC?",
+    "run": 2,
+    "path": "synth",
+    "answer_md": "🐾 Matt played a pivotal role in several initiatives at **RBC**, focusing on corporate banking modernization and cross-border payment solutions. \n\nIn one engagement, Matt led the data conversion planning for **RBC**'s corporate banking migration. He took over the workstream from scratch after the previous lead left, analyzing legacy data structures, developing transformation rules, and planning mock conversion cycles. His efforts ensured that the migration of corporate payment data from the legacy **RBC** Express platform to Bottomline WebSeries maintained full integrity and compliance. The conversion plan he delivered provided a robust framework for data migration, aligning **RBC**, **Accenture**, and vendor teams on the roadmap.\n\nIn another project, Matt designed cross-border payment workflows for **RBC Express**. Users faced challenges due to fragmented systems and manual processes, which hindered efficiency. Matt integrated real-time FX tools, automated alerts, and streamlined batch processing, delivering a complete implementation blueprint. This closed a competitive gap by improving SLA compliance and enabling business clients to manage multi-currency accounts independently.\n\nAdditionally, Matt established the PMO for **RBC**'s commercial banking modernization. He developed a project management plan, coordinated program-level measurement and reporting, and maintained the program roadmap. This governance structure provided visibility across all workstreams, improved cross-team coordination, and enabled predictable execution.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "RBC"
+    ],
+    "source_titles": [
+      "Leading Data Conversion Planning for RBC's Corporate Banking Migration",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building the PMO for RBC's Commercial Banking Modernization",
+      "Assessing Mobile Readiness for RBC's Corporate Banking Platform",
+      "Solving RBC's 180-Day Data Visibility Problem",
+      "De-Risking RBC’s Corporate Banking Platform Investment"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Strategic & Advisory"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [],
+    "model_search_queries": [
+      "RBC"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": "promotion",
+    "decision_pinecone": 1,
+    "synth_pool_sizes": [
+      6
+    ]
+  },
+  {
+    "phase": "breadth",
+    "qid": "RBC",
+    "turn": 1,
+    "question": "What did Matt do at RBC?",
+    "run": 3,
+    "path": "old",
+    "answer_md": "🐾 Let me show you what ties Matt's work together.\n\nAt **RBC**, Matt played a pivotal role in several initiatives aimed at modernizing and enhancing their corporate banking platform. He assessed the legacy infrastructure to support a mobile-first strategy, identifying API integration points and mobile capability gaps. This assessment provided **RBC** with a clear roadmap for mobile adoption and real-time banking across devices. In another engagement, Matt tackled the 180-day data visibility limitation of **RBC**'s platform. He defined reporting requirements and designed scheduled report generation and export capabilities, which extended data visibility and improved financial planning.\n\nMatt also conducted a rigorous architecture assessment for **RBC** when they were evaluating Bottomline WebSeries as a potential payment hub engine. His analysis revealed that WebSeries couldn't meet **RBC**'s requirements, preventing a costly investment and allowing the bank to redirect resources to higher-priority initiatives. Additionally, he led the data conversion planning for **RBC**'s modernization, developing transformation rules and establishing data quality reconciliation processes to ensure the integrity of migrated payment data.\n\nIn designing cross-border payment workflows for **RBC Express**, Matt integrated real-time FX tools and streamlined batch processing, closing a competitive gap in real-time FX and improving SLA compliance. He also established the PMO for **RBC**'s commercial banking modernization, developing a governance structure that provided visibility across workstreams and enabled predictable execution. Through these efforts, Matt aligned strategic goals with technical execution, ensuring that **RBC**'s modernization initiatives were both effective and efficient.",
+    "rejection_reason": null,
+    "clients_named": [
+      "RBC"
+    ],
+    "source_titles": [
+      "Assessing Mobile Readiness for RBC's Corporate Banking Platform",
+      "Solving RBC's 180-Day Data Visibility Problem",
+      "De-Risking RBC’s Corporate Banking Platform Investment",
+      "Leading Data Conversion Planning for RBC's Corporate Banking Migration",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building the PMO for RBC's Commercial Banking Modernization"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Strategic & Advisory"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [
+      "What did Matt do at RBC?"
+    ],
+    "model_search_queries": [
+      "What did Matt do at RBC?"
+    ],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "breadth",
+    "qid": "RBC",
+    "turn": 1,
+    "question": "What did Matt do at RBC?",
+    "run": 3,
+    "path": "synth",
+    "answer_md": "🐾 Here's a detailed look at Matt's work with **RBC**.\n\nMatt played a pivotal role in several initiatives at **RBC** as a Senior Technology Architecture Manager. One of his key contributions was leading the data conversion planning for **RBC**'s corporate banking migration. The project involved migrating corporate payment data from the legacy **RBC** Express platform to Bottomline WebSeries. The previous conversion lead had left early, and Matt took over the workstream from scratch. He analyzed legacy data structures, developed transformation rules, planned mock conversion cycles, and established data quality reconciliation processes. This comprehensive conversion plan ensured the migration of payment data with full integrity and compliance.\n\nIn another engagement, Matt designed cross-border payment workflows for **RBC** Express. Users faced challenges due to fragmented systems and manual processes, which delayed bulk processing and lacked real-time FX tools. Matt's design integrated real-time FX tools, automated alerts, and streamlined batch processing, delivering a complete implementation blueprint that improved SLA compliance and equipped business clients to manage multi-currency transactions independently.\n\nAdditionally, Matt established the PMO for **RBC**'s commercial banking modernization. He developed the project management plan, coordinated program-level measurement and reporting, and maintained the program roadmap. This governance structure provided visibility across all workstreams, improved cross-team coordination, and enabled predictable execution.\n\nOverall, Matt's work at **RBC** involved strategic planning, architecture design, and governance, resulting in improved operational efficiency, compliance, and client satisfaction.",
+    "rejection_reason": null,
+    "clients_named": [
+      "RBC"
+    ],
+    "source_titles": [
+      "Leading Data Conversion Planning for RBC's Corporate Banking Migration",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building the PMO for RBC's Commercial Banking Modernization",
+      "Assessing Mobile Readiness for RBC's Corporate Banking Platform",
+      "Solving RBC's 180-Day Data Visibility Problem",
+      "De-Risking RBC’s Corporate Banking Platform Investment"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Strategic & Advisory"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [],
+    "model_search_queries": [
+      "RBC"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": "promotion",
+    "decision_pinecone": 1,
+    "synth_pool_sizes": [
+      6
+    ]
+  },
+  {
+    "phase": "breadth",
+    "qid": "JPM",
+    "turn": 1,
+    "question": "What did he do at JP Morgan?",
+    "run": 1,
+    "path": "old",
+    "answer_md": "🐾 Here's what connects the dots across Matt's work.\n\nAt **JP Morgan Chase**, Matt played a pivotal role in several high-impact projects. As the Technology Delivery Lead, he managed a team of over **40 professionals** to design and deliver the bespoke payment modules for the ACCESS Next Generation platform. This included ACH, wire, FX/cross-border, and EFTPS tax payment modules, along with a MAC security layer, contextual help, and payment-type-specific RBAC. The platform launched in April 2011, consolidating regional systems into a unified global portal serving over 135,**000 clients** across **180+ countries**. It was recognized as the #1 digital channel by Coalition Greenwich.\n\nIn another engagement, Matt led the development of the Integrated Global Payments Interface, a centralized gateway for JP Morgan's global payment operations across **12 countries**. This project involved handling message transformation, protocol translation, and routing across various payment channels. The gateway provided a single entry point for corporate treasurers, replacing fragmented legacy integrations and reducing operational complexity.\n\nFollowing a significant data breach in 2014, Matt was instrumental in JP Morgan's I&AM Uplift Program. He mobilized the PMO, delivered an implementation roadmap, and provided business analysis support for the migration of 341 CIB applications to meet new security requirements. This effort established the structure and clarity needed for JP Morgan to proceed with the migration on their timeline.\n\nMatt also overhauled the entitlement management system for JP Morgan ACCESS, introducing an advanced user administration engine with RBAC and payment-type-specific access controls. This reduced entitlement management time from days to minutes, strengthened compliance governance, and became a headline feature of the ACCESS Next Generation launch.\n\nIn the realm of Agile transformation, Matt configured Jira workflows and led Agile onboarding for JP Morgan's I&AM program, improving collaboration and delivery tracking. This adoption enabled centralized visibility into remediation status and coordinated delivery across application teams.",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation",
+      "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+      "Rescuing and Stabilizing JP Morgan's TS Dynamics CRM Program",
+      "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [
+      "What did he do at JP Morgan?"
+    ],
+    "model_search_queries": [
+      "What did he do at JP Morgan?"
+    ],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "breadth",
+    "qid": "JPM",
+    "turn": 1,
+    "question": "What did he do at JP Morgan?",
+    "run": 1,
+    "path": "synth",
+    "answer_md": "🐾 Found it!\n\nAt **JP Morgan**, Matt played a pivotal role in building the ACCESS Next Generation platform, which was designed to be the bank's flagship corporate digital banking portal. The project leveraged Bottomline Technologies' WebSeries platform, but JP Morgan's vast client base of over **135,000** corporations, financial institutions, and governments across **180+** countries required bespoke capabilities far beyond the standard offering.\n\nMatt served as the Technology Delivery Lead, managing a blended team of over **40** members from **Accenture** and JP Morgan. He was responsible for designing and delivering custom payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. Additionally, he implemented a Message Authentication Code (MAC) security layer, contextual help, payment-type-specific RBAC, Single Sign-On (SSO), and real-time global reporting. These enhancements transformed the platform into a unified global corporate banking portal.\n\nThe ACCESS platform launched in April 2011 and became recognized as the #1 digital channel by Coalition Greenwich. It consolidated previously separate regional systems into a single digital experience, offering corporate treasurers a seamless interface for managing cash positions and transactions globally.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation",
+      "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+      "Rescuing and Stabilizing JP Morgan's TS Dynamics CRM Program",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [],
+    "model_search_queries": [
+      "JP Morgan"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": "promotion",
+    "decision_pinecone": 1,
+    "synth_pool_sizes": [
+      8
+    ]
+  },
+  {
+    "phase": "breadth",
+    "qid": "JPM",
+    "turn": 1,
+    "question": "What did he do at JP Morgan?",
+    "run": 2,
+    "path": "old",
+    "answer_md": "🐾 Let me show you what ties Matt's work together.\n\nAt **JP Morgan Chase**, Matt played a pivotal role in the development and delivery of the ACCESS Next Generation platform. As the Technology Delivery Lead, he managed a team of over **40 professionals** to design and implement bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He also developed a robust security layer, contextual help, and payment-type-specific RBAC, among other features. This platform launched in April 2011, serving over 135,**000 clients** across **180+ countries**, and was recognized as the top digital channel by Coalition Greenwich.\n\nIn another significant project, Matt led the creation of JP Morgan's Integrated Global Payments Interface. This centralized gateway facilitated message transformation, protocol translation, and routing across multiple payment channels, connecting the ACCESS platform to both internal and external systems. This initiative replaced fragmented legacy integrations, providing a unified entry point for corporate treasurers to manage payments across **12 countries**.\n\nFollowing a major data breach in 2014, Matt was instrumental in mobilizing the PMO for JP Morgan's I&AM Uplift Program. He delivered an implementation roadmap and migration plan for 341 applications, enabling the bank to enhance its security posture with new access controls and compliance measures. Additionally, he configured Jira workflows and led Agile onboarding to improve collaboration and delivery tracking across the program.\n\nMatt also stabilized JP Morgan's Asset Management Salesforce rollout, aligning stakeholders across **12 countries** on a single roadmap. This effort resulted in a 3× increase in tracked sales opportunities. Furthermore, he turned around a failing Dynamics CRM implementation for Treasury & Securities Services, transitioning the delivery model and adopting Agile practices to stabilize the program and enable JP Morgan to own the platform long-term.",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation",
+      "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+      "Rescuing and Stabilizing JP Morgan's TS Dynamics CRM Program",
+      "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [
+      "What did he do at JP Morgan?"
+    ],
+    "model_search_queries": [
+      "What did he do at JP Morgan?"
+    ],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "breadth",
+    "qid": "JPM",
+    "turn": 1,
+    "question": "What did he do at JP Morgan?",
+    "run": 2,
+    "path": "synth",
+    "answer_md": "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt played a pivotal role in building the ACCESS Next Generation platform, a flagship corporate digital banking portal. The challenge was significant: the existing platform couldn't meet the needs of **135,000+** clients across **180+** countries, requiring custom payment modules and enhanced security features. Matt, as the Technology Delivery Lead, managed a team of over **40** people from both **Accenture** and JP Morgan, and worked closely with Bottomline Technologies to design and deliver bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments.\n\nHe introduced a Message Authentication Code (MAC) security layer to ensure payment verification and built a centralized transaction monitoring system to screen trillions of daily transactions for suspicious activity. Matt also developed a real-time global reporting system, providing unified visibility into cash positions and transaction details. The platform launched in April 2011, consolidating regional systems into a single digital experience and was recognized as the #1 digital channel by Coalition Greenwich.\n\nAdditionally, Matt designed and delivered the Integrated Global Payments Interface, which provided a single entry point for all payment types across **12 countries**, replacing fragmented legacy integrations. This centralized gateway handled message transformation and protocol translation, significantly reducing operational complexity and compliance risks.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "JP Morgan Chase"
+    ],
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation",
+      "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+      "Rescuing and Stabilizing JP Morgan's TS Dynamics CRM Program",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [],
+    "model_search_queries": [
+      "JP Morgan"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": "promotion",
+    "decision_pinecone": 1,
+    "synth_pool_sizes": [
+      8
+    ]
+  },
+  {
+    "phase": "breadth",
+    "qid": "JPM",
+    "turn": 1,
+    "question": "What did he do at JP Morgan?",
+    "run": 3,
+    "path": "old",
+    "answer_md": "🐾 Looking across Matt's portfolio, I see clear patterns. At **JP Morgan Chase**, Matt played a pivotal role in several high-impact projects. As the Senior Technology Architecture Manager, he led the design and delivery of the ACCESS Next Generation platform, which launched in April 2011 as JP Morgan's unified global corporate banking portal. This platform consolidated previously separate regional systems into a single digital experience for over **135,000** corporations, financial institutions, governments, and municipalities across **180+** countries. Matt managed a blended team of over **40** professionals and was responsible for creating bespoke payment modules, a MAC security layer, and real-time global reporting, among other features. The platform was recognized as #1 in digital channels by Coalition Greenwich.\n\nIn another significant project, Matt delivered the Integrated Global Payments Interface, which provided a centralized entry point for initiating various payment types across **12** countries. This replaced fragmented legacy integrations and enabled seamless processing across multiple regions. Additionally, Matt mobilized the PMO for JP Morgan's I&AM Uplift Program, establishing a framework that allowed the bank to modernize its security posture following a major data breach.\n\nMatt also overhauled JP Morgan's entitlement management system, reducing the time required for configuration from days to minutes. He introduced role-based access controls and a centralized dashboard, significantly improving operational efficiency and compliance governance. Furthermore, he stabilized and delivered the Asset Management Salesforce platform across **12** countries, aligning regional leadership on a single roadmap and achieving a **3×** increase in tracked sales opportunities.",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation",
+      "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+      "Rescuing and Stabilizing JP Morgan's TS Dynamics CRM Program",
+      "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [
+      "What did he do at JP Morgan?"
+    ],
+    "model_search_queries": [
+      "What did he do at JP Morgan?"
+    ],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "breadth",
+    "qid": "JPM",
+    "turn": 1,
+    "question": "What did he do at JP Morgan?",
+    "run": 3,
+    "path": "synth",
+    "answer_md": "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt played a pivotal role in the development of the ACCESS Next Generation platform, which became the bank's flagship corporate digital banking portal. The situation was challenging, as JP Morgan needed to build a platform capable of serving over **135,000** corporations, financial institutions, governments, and municipalities across **180+** countries. The existing WebSeries platform from Bottomline Technologies was insufficient for JP Morgan's needs, requiring custom engineering solutions.\n\nMatt, as the Technology Delivery Lead, managed a team of over **40** professionals across **Accenture** and JP Morgan, working primarily from Bottomline's offices in Portsmouth, NH. He was responsible for designing and delivering bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He also implemented critical security features like the Message Authentication Code (MAC) security layer and developed a contextual help system to guide users through complex payment processes.\n\nThe result was the successful launch of the ACCESS platform in April 2011, consolidating previously separate regional systems into a single digital experience. This platform provided real-time global reporting, single sign-on across treasury functions, and trade finance lifecycle visibility, significantly enhancing the corporate treasurer experience. ACCESS was recognized as the #1 digital channel by Coalition Greenwich, showcasing its impact and success.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "JP Morgan Chase"
+    ],
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation",
+      "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+      "Rescuing and Stabilizing JP Morgan's TS Dynamics CRM Program",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [],
+    "model_search_queries": [
+      "JP Morgan"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": "promotion",
+    "decision_pinecone": 1,
+    "synth_pool_sizes": [
+      8
+    ]
+  },
+  {
+    "phase": "topic",
+    "qid": "9.1",
+    "turn": 1,
+    "question": "Tell me about his payments work.",
+    "run": 1,
+    "path": "lever2",
+    "answer_md": "🐾 Here's a great example of Matt's work in payments.\n\nAt **JP Morgan Chase**, Matt played a pivotal role in building the payment engine behind the ACCESS platform. The challenge was significant: **JP Morgan** was constructing ACCESS Next Generation as its flagship corporate digital banking portal, but the existing platform, Bottomline Technologies' WebSeries, couldn't meet the needs of **135,000+** clients across **180+** countries. Each payment type required custom formatting, validation, compliance, and workflow capabilities that went beyond the out-of-box offerings.\n\nMatt, as the Technology Delivery Lead, managed a team of over **40** professionals across multiple locations, including the US, Mumbai, and Bangalore. He designed and delivered bespoke payment modules for ACH, wire, FX/cross-border, and EFTPS tax payments. He also implemented a Message Authentication Code (MAC) security layer for payment verification, contextual help for users, and payment-type-specific entitlement controls. His work ensured that the platform could handle real-time global reporting and integrate seamlessly with JP Morgan's centralized transaction monitoring system.\n\nThe result was the successful launch of the ACCESS platform in April 2011, which became JP Morgan's unified global corporate banking portal. It consolidated separate regional systems into a single digital experience, serving a vast array of corporations, financial institutions, governments, and municipalities. The platform was later recognized as #1 in digital channels by Coalition Greenwich, highlighting its impact and success.",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments"
+    ],
+    "model_search_queries": [
+      "payments"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "topic",
+    "qid": "9.2",
+    "turn": 2,
+    "question": "What’s his leadership style?",
+    "run": 1,
+    "path": "lever2",
+    "answer_md": "🐾 Looking across Matt's portfolio, I see clear patterns in his leadership style.\n\nMatt's leadership is grounded in empathy, clarity, and purpose. He focuses on creating an environment where teams can do their best work by fostering psychological safety, pushing decisions to those closest to the work, and grounding engineering culture in automation and continuous delivery. At the Cloud Innovation Center, this approach led to a **4x** acceleration in delivery once teams embraced lean product and modern engineering practices.\n\nIn his leadership journey, Matt realized the importance of sustainable leadership. He redefined his approach to include boundaries, sustainable pace, and self-care as essential disciplines. This shift came after recognizing the unsustainable pace he maintained while leading a **150-person** Cloud Innovation Center. He now prioritizes environments where intensity is balanced with humanity and models this for his teams.\n\nMatt also transformed team cultures from individual recognition to collective ownership. At the Cloud Innovation Center, he established weekly brainstorming sessions, aligned teams around shared goals, and celebrated contributions that advanced the mission. This led to innovative solutions, strengthened team cohesion, and improved collaboration.\n\nAdditionally, Matt empowered teams through decentralized decision-making, building autonomous teams and adopting servant leadership models. This approach removed bottlenecks, improved team engagement, and resulted in high-quality, innovative solutions.\n\nOverall, Matt's leadership style is about creating high-trust environments, enabling teams to thrive, and balancing intensity with humanity.",
+    "rejection_reason": null,
+    "clients_named": [],
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style"
+    ],
+    "model_search_queries": [
+      "leadership style"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "topic",
+    "qid": "9.3",
+    "turn": 3,
+    "question": "Give me an example.",
+    "run": 1,
+    "path": "lever2",
+    "answer_md": "🐾 Here's a strong example of Matt's leadership style in action.\n\nAt the **Accenture** Cloud Innovation Center, Matt faced a challenge with teams that were over-processed and under-trusted, often waiting for permission instead of owning outcomes. His leadership philosophy was centered around creating an environment where engineers, designers, and product teams could do their best work. He focused on removing barriers by fostering psychological safety, pushing decisions to those closest to the work, and grounding the engineering culture in automation and continuous delivery.\n\nMatt's approach blended empathy, clarity, and modern engineering rigor. He led with purpose, made intent explicit, and built psychological safety so people could take risks and speak honestly. He pushed decisions to the people closest to the work and used transparency, direct feedback, and open communication. This philosophy enabled teams to accelerate delivery by **4x**, improve quality, strengthen cross-functional trust, and deliver meaningful work with pride and ownership.\n\nThrough these efforts, Matt transformed the team culture from individual recognition to collective ownership. He established weekly brainstorming sessions, aligned teams around shared goals, and celebrated contributions that advanced the mission. This led to innovative solutions, strengthened team cohesion, and improved collaboration, demonstrating the impact of his leadership style.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "What I Learned About Sustainable Leadership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style example"
+    ],
+    "model_search_queries": [
+      "leadership style example"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "topic",
+    "qid": "9.4",
+    "turn": 4,
+    "question": "How big was the team on that project?",
+    "run": 1,
+    "path": "lever2",
+    "answer_md": "🐾 Found it!\n\nAt the **Accenture** Cloud Innovation Center, Matt scaled the team to over **150 practitioners**. This team was built from the ground up to embody modern product culture and Silicon Valley practices, including pair programming, test-driven development, and balanced team collaboration. They consistently delivered innovative solutions and achieved a **4x** acceleration in delivery, demonstrating the effectiveness of Matt's leadership and approach.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_titles": [
+      "Scaling Talent and Practices for Agile Product Innovation",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+      "Building Mentorship Programs for Long-Term Growth and Retention"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "model_search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "topic",
+    "qid": "9.1",
+    "turn": 1,
+    "question": "Tell me about his payments work.",
+    "run": 1,
+    "path": "synth",
+    "answer_md": "🐾 Here's a great example of Matt's work in payments.\n\nAt **JP Morgan Chase**, Matt played a pivotal role in building the payment engine behind the JP Morgan ACCESS platform. The situation was challenging, as JP Morgan was developing ACCESS Next Generation on Bottomline Technologies' WebSeries platform. However, the existing system's capabilities were insufficient for the bank's **135,000+** clients, which included corporations, financial institutions, governments, and municipalities across **180+ countries**. Each payment type required distinct formatting, validation, compliance, and workflow requirements, necessitating custom development.\n\nAs the Technology Delivery Lead, Matt managed a team of over **40** professionals and was responsible for designing and delivering bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He implemented a Message Authentication Code (MAC) security layer, contextual help, payment-type-specific RBAC, and Single Sign-On (SSO) integration. His work ensured that the platform could handle real-time global reporting and trade finance integration.\n\nThe outcome was significant. The ACCESS Next Generation platform launched in April 2011, consolidating previously separate regional systems into a unified digital experience. This transformation served over **135,000** clients across **180+ countries** and was recognized as the #1 digital channel by Coalition Greenwich. The platform provided purpose-built payment modules with enhanced security controls, compliance validation, and user guidance, transforming the corporate treasurer experience.",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments work"
+    ],
+    "model_search_queries": [
+      "payments work"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "topic",
+    "qid": "9.2",
+    "turn": 2,
+    "question": "What’s his leadership style?",
+    "run": 1,
+    "path": "synth",
+    "answer_md": "🐾 Here's what connects the dots across Matt's leadership style.\n\nMatt's leadership philosophy is rooted in creating environments where teams can thrive through trust, clarity, and shared purpose. He emphasizes psychological safety, allowing team members to take risks and speak honestly. By pushing decisions to those closest to the work, Matt fosters a sense of ownership and accountability. His approach blends empathy, clarity, and modern engineering rigor, focusing on automation, continuous delivery, and quality-first practices.\n\nAt the **Accenture** Cloud Innovation Center, Matt implemented a decentralized decision-making model, empowering cross-functional teams to own their work. He adopted a servant leadership style, acting as a facilitator rather than a decision-maker. This approach enabled teams to move faster, deliver higher-quality solutions, and improve engagement. The result was a **4x** acceleration in delivery and a culture where teams felt safe to share ideas and collaborate toward collective success.\n\nMatt also emphasizes sustainable leadership, recognizing the importance of work-life balance and self-care. He has redefined his leadership to include boundaries and sustainable pace as disciplines, ensuring that intensity is balanced with humanity. This commitment to sustainable impact over heroic effort helps build teams and cultures where a sustainable pace is expected, not exceptional.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style"
+    ],
+    "model_search_queries": [
+      "leadership style"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "topic",
+    "qid": "9.3",
+    "turn": 3,
+    "question": "Give me an example.",
+    "run": 1,
+    "path": "synth",
+    "answer_md": "🐾 Here's a strong example of Matt's leadership in action.\n\nAt the **Accenture** Cloud Innovation Center, Matt faced a challenge with teams that were over-processed and under-trusted, often waiting for permission rather than owning outcomes. His leadership approach focused on removing these barriers by fostering psychological safety, pushing decisions to those closest to the work, and grounding the engineering culture in automation and continuous delivery.\n\nMatt's leadership style blends empathy, clarity, and modern engineering rigor. He leads with purpose, makes intent explicit, and builds psychological safety so team members can take risks and speak honestly. By pushing decisions to the people closest to the work and using transparency, direct feedback, and open communication, he creates an environment where teams feel confident in what they ship.\n\nThe result of this leadership philosophy was a **4x** acceleration in delivery once teams embraced lean product and modern engineering practices. This transformation improved quality, strengthened cross-functional trust, and allowed teams to deliver meaningful work with pride and ownership. Matt's emphasis on trust, clarity, and shared purpose enabled the teams at the Cloud Innovation Center to thrive and achieve significant results.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "What I Learned About Sustainable Leadership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style example"
+    ],
+    "model_search_queries": [
+      "leadership style example"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "topic",
+    "qid": "9.4",
+    "turn": 4,
+    "question": "How big was the team on that project?",
+    "run": 1,
+    "path": "synth",
+    "answer_md": "🐾 Found it!\n\nAt the **Accenture** Cloud Innovation Center, Matt built and scaled the team from the ground up to over **150** practitioners. These teams were trained in Lean XP methodology across product management, customer experience design, and software engineering disciplines. The goal was to bring Silicon Valley product culture to Fortune 500 enterprises, and the team grew from an initial 10-person pilot to over 150 trained practitioners over four years. This transformation led to significant improvements in delivery speed and quality, with a **4x** increase in velocity and zero-defect deployments.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_titles": [
+      "Scaling Talent and Practices for Agile Product Innovation",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+      "Building Mentorship Programs for Long-Term Growth and Retention"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "model_search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "topic",
+    "qid": "9.1",
+    "turn": 1,
+    "question": "Tell me about his payments work.",
+    "run": 2,
+    "path": "lever2",
+    "answer_md": "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt played a pivotal role in developing the ACCESS Next Generation platform, which served as the bank's unified global corporate banking portal. The project aimed to consolidate multiple regional and legacy systems into a single digital experience for over **135,000** corporations, financial institutions, governments, and municipalities across **180+** countries. The existing systems were fragmented, each with different data models, client configurations, and compliance records, which posed significant operational and compliance challenges.\n\nMatt was the Technology Delivery Lead responsible for designing and delivering bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He managed a blended team of over **40** onshore and offshore resources, working closely with Bottomline Technologies. His efforts included implementing a Message Authentication Code (MAC) security layer, developing contextual help, and building payment-type-specific entitlement controls. These enhancements allowed for real-time global reporting and improved user experience.\n\nThe result was the successful launch of the ACCESS platform in April 2011, which transformed JP Morgan's corporate treasurer experience. The platform's payment modules, security controls, and user guidance were purpose-built for JP Morgan's operational scale, earning recognition as the #1 digital channel by Coalition Greenwich. This initiative not only streamlined payment operations but also enhanced compliance and risk management across the bank's global payment operations.",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments"
+    ],
+    "model_search_queries": [
+      "payments"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "topic",
+    "qid": "9.2",
+    "turn": 2,
+    "question": "What’s his leadership style?",
+    "run": 2,
+    "path": "lever2",
+    "answer_md": "🐾 Found it!\n\nMatt's leadership style is centered around creating an environment where teams can thrive by building trust, clarity, and shared purpose. He focuses on removing barriers such as over-processing and lack of trust, which often hinder teams from owning their outcomes. At the Cloud Innovation Center, he implemented a leadership approach that emphasized psychological safety, empowering teams to take risks and speak honestly. Decisions were pushed to those closest to the work, fostering a sense of ownership and enabling a **4x** delivery acceleration through lean product and modern engineering practices.\n\nMatt's leadership philosophy also includes sustainable practices. After reflecting on his tenure at **Accenture**, he recognized the importance of maintaining a sustainable pace and setting clear boundaries to ensure long-term effectiveness. He prioritizes health, recovery, and focus, and models these values for his teams, ensuring that intensity is balanced with humanity.\n\nIn transforming team cultures, Matt shifted focus from individual recognition to collective ownership. By establishing weekly brainstorming sessions and emphasizing shared goals, he encouraged open communication and collaboration, leading to innovative solutions and stronger team cohesion.\n\nOverall, Matt's leadership is characterized by empathy, clarity, and a commitment to sustainable impact, creating environments where teams feel empowered, engaged, and capable of delivering meaningful work.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style"
+    ],
+    "model_search_queries": [
+      "leadership style"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "topic",
+    "qid": "9.3",
+    "turn": 3,
+    "question": "Give me an example.",
+    "run": 2,
+    "path": "lever2",
+    "answer_md": "🐾 Here's a strong example.\n\nAt the **Accenture Cloud Innovation Center**, Matt transformed team dynamics by shifting from a hierarchical culture to one focused on collective ownership and innovation. Initially, the team was hesitant to share ideas due to a rigid structure, which led to missed opportunities and limited innovation. Matt addressed this by establishing weekly brainstorming sessions where all ideas were considered without judgment. This created a collaborative atmosphere and encouraged open communication.\n\nHe emphasized the importance of shared goals over individual recognition, aligning the team around a common mission. By celebrating contributions that advanced the project goals, Matt reinforced the value of collective success. This approach led to innovative solutions that positively impacted project timelines and quality. The open communication and shared goals strengthened team cohesion and collaboration, allowing new ideas to flow freely and enabling the team to identify more efficient ways to achieve project milestones.\n\nMatt's leadership style in this context was characterized by fostering an environment where team members felt safe to share bold ideas and collaborate toward collective success, demonstrating his commitment to empowering teams through decentralized decision-making and shared ownership.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style"
+    ],
+    "model_search_queries": [
+      "leadership style"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "topic",
+    "qid": "9.4",
+    "turn": 4,
+    "question": "How big was the team on that project?",
+    "run": 2,
+    "path": "lever2",
+    "answer_md": "🐾 Perfect, here's what I found.\n\nAt the **Accenture Cloud Innovation Center**, Matt built and scaled the team to over **150+ practitioners** across engineering, architecture, product, and design. This expansion was part of his effort to bring Silicon Valley product culture to Fortune **500 clients**. The team was trained in Lean XP methodology, which included practices such as pair programming, test-driven development, and balanced team collaboration. This approach enabled the team to achieve a **4x** faster velocity and zero-defect deployments, contributing to over **\\$100M** in repeatable business across **15+ Fortune **500 client**s** by FY23.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_titles": [
+      "Scaling Talent and Practices for Agile Product Innovation",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+      "Building Mentorship Programs for Long-Term Growth and Retention"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "model_search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "topic",
+    "qid": "9.1",
+    "turn": 1,
+    "question": "Tell me about his payments work.",
+    "run": 2,
+    "path": "synth",
+    "answer_md": "🐾 Here's a great example of Matt's work in the payments domain.\n\nAt **JP Morgan Chase**, Matt played a crucial role in building the ACCESS Next Generation platform, which served as the bank's flagship corporate digital banking portal. The challenge was significant: **JP Morgan** needed to cater to over **135,000** corporations, financial institutions, governments, and municipalities across **180+ countries**. The existing platform, based on Bottomline Technologies' WebSeries, required extensive customization to meet the diverse needs of its global client base.\n\nMatt, as the Technology Delivery Lead, was responsible for designing and delivering bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He managed a team of over **40** people, working across **Accenture** and JP Morgan resources, and spent a significant amount of time embedded at Bottomline's Portsmouth offices. His work included creating a Message Authentication Code (MAC) security layer, developing contextual help, and implementing payment-type-specific entitlement controls.\n\nThe result was the successful launch of the ACCESS platform in April 2011, which consolidated previously separate regional systems into a single digital experience. This platform provided real-time global reporting, Single Sign-On (SSO) across treasury functions, and trade finance lifecycle visibility. It transformed the corporate treasurer experience and earned recognition as the #1 digital channel by Coalition Greenwich.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "JP Morgan Chase"
+    ],
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments"
+    ],
+    "model_search_queries": [
+      "payments"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "topic",
+    "qid": "9.2",
+    "turn": 2,
+    "question": "What’s his leadership style?",
+    "run": 2,
+    "path": "synth",
+    "answer_md": "🐾 Here's what ties Matt's leadership style together.\n\nMatt's leadership philosophy is centered around trust, clarity, and shared purpose. He believes in creating an environment where teams can do their best work by removing barriers and fostering psychological safety. This approach encourages team members to speak honestly and take ownership of their work. At the Cloud Innovation Center, he implemented lean product and modern engineering practices, leading to a **4x delivery acceleration** once teams embraced these methods.\n\nMatt emphasizes the importance of sustainable leadership. After reflecting on his tenure at **Accenture**, he realized the need to balance intensity with humanity. He now prioritizes work-life integration, health, and recovery as essential leadership disciplines. This shift has allowed him to model sustainable leadership for his teams, ensuring that they operate at a sustainable pace.\n\nIn terms of team dynamics, Matt focuses on collective ownership over individual recognition. By establishing weekly brainstorming sessions and aligning around shared goals, he transformed a rigid hierarchical culture into one where ideas flowed freely. This change led to innovative solutions and strengthened team cohesion.\n\nMatt also practices decentralized decision-making, empowering teams with autonomy and fostering a culture of accountability and innovation. By structuring cross-functional teams and adopting a servant leadership model, he removed bottlenecks and improved team engagement and satisfaction. This approach consistently resulted in high-quality, innovative solutions that aligned with client needs.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style"
+    ],
+    "model_search_queries": [
+      "leadership style"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "topic",
+    "qid": "9.3",
+    "turn": 3,
+    "question": "Give me an example.",
+    "run": 2,
+    "path": "synth",
+    "answer_md": "🐾 I know just the story.\n\nAt the **Accenture Cloud Innovation Center**, Matt faced the challenge of transforming a rigid hierarchical culture into one that embraced collective ownership and innovation. Initially, the team was slow to share ideas, which led to missed opportunities and limited innovation. Matt addressed this by establishing weekly brainstorming sessions where all ideas were considered without judgment. This created a collaborative atmosphere and encouraged open communication.\n\nMatt emphasized the importance of aligning around shared goals over individual recognition. By celebrating contributions that advanced the mission, team members felt safe to share bold ideas and collaborate toward collective success. This shift in culture led to innovative solutions that positively impacted project timelines and quality. The team identified more efficient ways to achieve project milestones, strengthening cohesion and collaboration.\n\nHis leadership approach blended empathy, clarity, and modern engineering rigor. He prioritized psychological safety, pushed decisions to those closest to the work, and grounded the engineering culture in automation and continuous delivery. This philosophy enabled teams to accelerate delivery **4x**, improve quality, and deliver meaningful work with pride and ownership.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style"
+    ],
+    "model_search_queries": [
+      "leadership style"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "topic",
+    "qid": "9.4",
+    "turn": 4,
+    "question": "How big was the team on that project?",
+    "run": 2,
+    "path": "synth",
+    "answer_md": "🐾 Here's a great example.\n\nAt the **Accenture Cloud Innovation Center**, Matt built and scaled the team from the ground up, growing it to over **150 practitioners**. This expansion was part of his effort to bring Silicon Valley product culture to Fortune **500 clients**. The team was composed of professionals across engineering, architecture, product management, and design disciplines. They were trained in Lean XP methodology and modern engineering practices, which were adapted for the enterprise context to address compliance, security, and legacy system complexities. This comprehensive approach enabled the team to deliver consistent, high-quality results across diverse clients and industries.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_titles": [
+      "Scaling Talent and Practices for Agile Product Innovation",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+      "Building Mentorship Programs for Long-Term Growth and Retention"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "model_search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "topic",
+    "qid": "9.1",
+    "turn": 1,
+    "question": "Tell me about his payments work.",
+    "run": 3,
+    "path": "lever2",
+    "answer_md": "🐾 Here's a great example of Matt's work in payments.\n\nAt **JP Morgan Chase**, Matt played a pivotal role in building the ACCESS Next Generation platform, a unified global corporate banking portal. The project aimed to consolidate disparate regional systems into a single platform, serving over **135,000** corporations, financial institutions, governments, and municipalities across **180+** countries. The challenge was to design and deliver bespoke payment modules that exceeded the capabilities of Bottomline Technologies' WebSeries platform, which was used as the foundation.\n\nMatt managed a blended team of over **40** professionals, working closely with Bottomline Technologies at their Portsmouth offices. He was responsible for designing and delivering custom payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He also implemented a Message Authentication Code (MAC) security layer, real-time global reporting, and integrated trade finance capabilities. The platform's launch in April 2011 marked a significant transformation in JP Morgan's digital banking services, earning recognition as the #1 digital channel by Coalition Greenwich.\n\nIn another engagement with **RBC**, Matt addressed challenges in managing cross-border payments and FX transactions. He designed end-to-end cross-border payment workflows, integrating real-time FX tools and automated alerts, which improved SLA compliance and equipped business clients for independent multi-currency management. This work closed a competitive gap in **RBC** Express's corporate treasury offering, enhancing client satisfaction and operational efficiency.",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase",
+      "RBC"
+    ],
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments"
+    ],
+    "model_search_queries": [
+      "payments"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "topic",
+    "qid": "9.2",
+    "turn": 2,
+    "question": "What’s his leadership style?",
+    "run": 3,
+    "path": "lever2",
+    "answer_md": "🐾 Here's what ties Matt's leadership style together.\n\nMatt's leadership philosophy centers on creating an environment where teams can thrive by fostering trust, clarity, and shared purpose. He focuses on removing barriers that hinder team performance, such as over-processing and lack of trust, and emphasizes psychological safety. This approach allows team members to speak honestly and take ownership of their work. At the Cloud Innovation Center, Matt's leadership enabled a **4x** acceleration in delivery by embracing lean product and modern engineering practices.\n\nHe believes in pushing decisions to the people closest to the work, using transparency, direct feedback, and open communication to build high-trust engineering cultures. Matt also prioritizes sustainable leadership, recognizing the importance of maintaining a balance between intensity and humanity. He has redefined his leadership to include boundaries, sustainable pace, and self-care as essential disciplines, ensuring that he models this approach for his teams.\n\nMatt's leadership style also involves shifting team focus from individual recognition to collective ownership. By establishing weekly brainstorming sessions and aligning around shared goals, he encourages open communication and collaboration. This cultural shift has led to innovative solutions and strengthened team cohesion, resulting in more efficient ways to achieve project milestones.\n\nOverall, Matt's leadership is characterized by empowering teams through decentralized decision-making, fostering an environment of psychological safety, and emphasizing sustainable practices that prioritize both team and personal well-being.",
+    "rejection_reason": null,
+    "clients_named": [],
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style"
+    ],
+    "model_search_queries": [
+      "leadership style"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "topic",
+    "qid": "9.3",
+    "turn": 3,
+    "question": "Give me an example.",
+    "run": 3,
+    "path": "lever2",
+    "answer_md": "🐾 Here's a great example of Matt's leadership in action.\n\nAt the **Accenture** Cloud Innovation Center, Matt faced the challenge of transforming a rigid hierarchical culture that stifled innovation and slowed down idea sharing. The team was hesitant to share ideas, leading to missed opportunities. Matt shifted the culture by establishing weekly brainstorming sessions, where all ideas were considered without judgment. This created a collaborative atmosphere and emphasized the shared mission over individual accolades.\n\nMatt's leadership style focused on collective ownership, recognizing team members for contributions that advanced project goals. This approach reinforced the value of shared purpose, leading to innovative solutions that positively impacted project timelines and quality. Open communication and shared goals strengthened team cohesion, allowing new ideas to flow freely and enabling the team to identify more efficient ways to achieve project milestones.\n\nBy fostering an environment where team members felt safe to share bold ideas and collaborate toward collective success, Matt successfully transformed the team's culture. This example highlights his commitment to empowering teams through decentralized decision-making and creating a culture of psychological safety, where innovation and collaboration thrive.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style"
+    ],
+    "model_search_queries": [
+      "leadership style"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "topic",
+    "qid": "9.4",
+    "turn": 4,
+    "question": "How big was the team on that project?",
+    "run": 3,
+    "path": "lever2",
+    "answer_md": "🐾 Perfect, here's what I found.\n\nAt the **Accenture** Cloud Innovation Center, Matt built and scaled the team to over **150** practitioners. This team was composed of professionals across engineering, architecture, product, and design disciplines. Matt focused on recruiting individuals with diverse backgrounds and potential, then providing them with tailored onboarding and enablement programs. This approach ensured that the team adopted modern engineering practices and user-centered design methodologies, enabling them to deliver high-quality solutions to clients.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_titles": [
+      "Scaling Talent and Practices for Agile Product Innovation",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications",
+      "Building Mentorship Programs for Long-Term Growth and Retention"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "model_search_queries": [
+      "Accenture Cloud Innovation Center team size"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "topic",
+    "qid": "9.1",
+    "turn": 1,
+    "question": "Tell me about his payments work.",
+    "run": 3,
+    "path": "synth",
+    "answer_md": "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt played a pivotal role in building the payment engine behind JP Morgan ACCESS. The project was a high-stakes initiative to develop ACCESS Next Generation, a flagship corporate digital banking portal. This platform needed to cater to over **135,000** clients, including corporations, financial institutions, governments, and municipalities across **180+** countries. The challenge was that the existing WebSeries platform from Bottomline Technologies couldn't meet the complex requirements of JP Morgan's vast client base, which demanded bespoke payment modules and enhanced security controls.\n\nMatt, as the Technology Delivery Lead, managed a team of over **40** people and was embedded at Bottomline's Portsmouth offices. He designed and delivered custom payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He also implemented a Message Authentication Code (MAC) security layer and developed payment-type-specific entitlement controls. This work ensured that the platform could handle the distinct formatting, validation, compliance, and workflow needs of each payment type.\n\nThe result was the successful launch of the ACCESS platform in April 2011. It became JP Morgan's unified global corporate banking portal, recognized as #1 in digital channels by Coalition Greenwich. The platform provided real-time global reporting and a seamless user experience, transforming the corporate treasurer's experience and consolidating previously separate regional systems into a single digital experience.",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Designing Cross-Border Payment Workflows for RBC Express"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments"
+    ],
+    "model_search_queries": [
+      "payments"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "topic",
+    "qid": "9.2",
+    "turn": 2,
+    "question": "What’s his leadership style?",
+    "run": 3,
+    "path": "synth",
+    "answer_md": "🐾 Here's what connects the dots across Matt's leadership style.\n\nMatt's leadership philosophy is deeply rooted in creating environments where teams can thrive by fostering trust, clarity, and shared purpose. He believes in removing barriers that prevent teams from owning their outcomes. At the Cloud Innovation Center, he implemented a leadership approach that emphasized psychological safety, allowing team members to speak honestly and make decisions closest to their work. This approach led to a **4x** acceleration in delivery once teams embraced lean product and modern engineering practices.\n\nMatt's leadership style also includes a focus on sustainable practices. After reflecting on his time at **Accenture**, he recognized the importance of maintaining a sustainable pace and setting boundaries. He redefined his leadership to include self-care and work-life integration as essential disciplines. This shift allowed him to model sustainable leadership for his teams, emphasizing that sustainable impact is more important than heroic effort.\n\nFurthermore, Matt transformed team cultures by shifting focus from individual recognition to collective ownership. He established weekly brainstorming sessions and celebrated contributions that advanced shared goals, leading to innovative solutions and strengthened team cohesion. His leadership also involved decentralizing decision-making, empowering teams with autonomy and fostering a culture of accountability and innovation.\n\nOverall, Matt's leadership style is characterized by empathy, clarity, and a commitment to creating high-trust engineering cultures where teams can deliver meaningful work with pride and ownership.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style"
+    ],
+    "model_search_queries": [
+      "leadership style"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "topic",
+    "qid": "9.3",
+    "turn": 3,
+    "question": "Give me an example.",
+    "run": 3,
+    "path": "synth",
+    "answer_md": "🐾 Here's a strong example of Matt's leadership style in action.\n\nIn the early stages of the Cloud Innovation Center at **Accenture**, Matt faced a challenge with a rigid hierarchical culture that made the team slow to share ideas. This culture led to missed opportunities and limited innovation. To address this, Matt transformed the team culture by shifting the focus from individual recognition to collective ownership. He established weekly brainstorming sessions where all ideas were considered without judgment, creating a collaborative atmosphere. This approach emphasized the shared mission and de-emphasized individual accolades, focusing the team on collective success.\n\nMatt also recognized team members for contributions that advanced project goals, reinforcing the value of shared purpose over personal recognition. As a result, the brainstorming sessions led to innovative solutions that positively impacted project timelines and quality. Open communication and shared goals strengthened team cohesion and collaboration. With new ideas flowing freely, the team identified more efficient ways to achieve project milestones, demonstrating the effectiveness of Matt's leadership style in fostering an environment of innovation and collaboration.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey",
+      "Empowering Teams through Decentralized Decision-Making"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership style"
+    ],
+    "model_search_queries": [
+      "leadership style"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "topic",
+    "qid": "9.4",
+    "turn": 4,
+    "question": "How big was the team on that project?",
+    "run": 3,
+    "path": "synth",
+    "answer_md": "🐾 Perfect, here's what I found.\n\nThe team at the Cloud Innovation Center that Matt led grew to over **150 practitioners**. This expansion was part of his efforts to establish two new centers in **Atlanta** and **Tampa**. Matt's leadership focused on recruiting talent with diverse backgrounds and onboarding them with user-centered design and modern engineering practices. This approach created a culture of continuous learning and experimentation, enabling the team to adopt modern practices that significantly enhanced delivery quality and speed.",
+    "rejection_reason": null,
+    "clients_named": [],
+    "source_titles": [
+      "Scaling Talent and Practices for Agile Product Innovation",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "Enhancing Team Proficiency through Servant Leadership and Mentorship"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "Cloud Innovation Center team size"
+    ],
+    "model_search_queries": [
+      "Cloud Innovation Center team size"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "controls",
+    "qid": "C1",
+    "turn": 1,
+    "question": "Tell me about Matt's payments work at JP Morgan",
+    "run": 1,
+    "path": "lever2",
+    "answer_md": "🐾 Here's a great example of Matt's work at **JP Morgan**.\n\nMatt played a pivotal role in building the payment engine behind JP Morgan's ACCESS platform. The project aimed to create a unified global corporate banking portal for over **135,000** clients across **180+ countries**. The existing platform, based on Bottomline Technologies' WebSeries, required significant customization to meet JP Morgan's needs. Each payment type, such as ACH, wire, and FX, had unique formatting, compliance, and workflow requirements, demanding bespoke engineering.\n\nMatt led a blended team of over **40** professionals from **Accenture** and JP Morgan, managing the delivery of custom payment modules and security features. He designed modules for ACH payments, wire transfers, and FX/cross-border transactions, integrating them with JP Morgan's existing systems. Matt also implemented a robust Message Authentication Code (MAC) security layer to ensure payment integrity and developed contextual help and entitlement controls to enhance user experience and compliance.\n\nThe ACCESS platform launched in April 2011, consolidating regional systems into a single digital experience. It provided real-time global reporting, SSO across treasury functions, and trade finance lifecycle visibility. This transformation positioned ACCESS as JP Morgan's flagship corporate digital channel, recognized as #1 in digital channels by Coalition Greenwich.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "JP Morgan payments"
+    ],
+    "model_search_queries": [
+      "JP Morgan payments"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "controls",
+    "qid": "C1",
+    "turn": 1,
+    "question": "Tell me about Matt's payments work at JP Morgan",
+    "run": 1,
+    "path": "synth",
+    "answer_md": "🐾 Here's a great example from Matt's work with **JP Morgan Chase** on their ACCESS platform.\n\nMatt played a pivotal role as the Senior Technology Architecture Manager in building the payment engine for JP Morgan's ACCESS Next Generation platform. The project aimed to create a unified global corporate banking portal, leveraging Bottomline Technologies' WebSeries platform. However, the existing out-of-box solution was insufficient for JP Morgan's extensive client base of over **135,000** corporations, financial institutions, governments, and municipalities across **180+** countries. Each payment type required distinct formatting, validation, compliance, and workflow requirements, demanding a custom-built solution.\n\nMatt led a team of over **40** professionals from **Accenture** and JP Morgan, working closely with Bottomline Technologies in Portsmouth, NH. He designed and delivered bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He also implemented a Message Authentication Code (MAC) security layer and payment-type-specific RBAC controls. His efforts ensured that the platform provided real-time global reporting, SSO, and trade finance integration, transforming the corporate treasurer experience.\n\nThe ACCESS platform launched in April 2011, consolidating regional systems into a single digital experience. It became JP Morgan's flagship corporate digital channel and was recognized as #1 in digital channels by Coalition Greenwich.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "JP Morgan Chase"
+    ],
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 2,
+    "search_queries": [
+      "JP Morgan payments"
+    ],
+    "model_search_queries": [
+      "JP Morgan payments"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 1,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "controls",
+    "qid": "C1",
+    "turn": 1,
+    "question": "Tell me about Matt's payments work at JP Morgan",
+    "run": 2,
+    "path": "lever2",
+    "answer_md": "🐾 Here's a great example of Matt's work at **JP Morgan**.\n\nMatt played a pivotal role in building the payment engine behind JP Morgan ACCESS, a unified global corporate banking portal. The challenge was to create a platform that could serve over **135,000** clients, including corporations, financial institutions, and governments across **180+** countries. The existing platform, Bottomline Technologies' WebSeries, needed significant customization to meet the diverse needs of JP Morgan's clients. Each payment type had unique formatting, validation, compliance, and workflow requirements, which necessitated bespoke engineering.\n\nAs the Technology Delivery Lead, Matt managed a team of over **40** professionals from both **Accenture** and JP Morgan. He was responsible for designing and delivering custom payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He also implemented a Message Authentication Code (MAC) security layer to ensure payment integrity and developed contextual help features to guide users through complex payment processes. Additionally, Matt built payment-type-specific entitlement controls and integrated the payment engine with JP Morgan's centralized transaction monitoring system.\n\nThe result was the successful launch of the ACCESS platform in April 2011, which consolidated regional systems into a single digital experience. This platform provided real-time global reporting, SSO across treasury functions, and trade finance lifecycle visibility, transforming the corporate treasurer experience. ACCESS became JP Morgan's flagship corporate digital channel and was recognized as #1 in digital channels by Coalition Greenwich.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "JP Morgan payments"
+    ],
+    "model_search_queries": [
+      "JP Morgan payments"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "controls",
+    "qid": "C1",
+    "turn": 1,
+    "question": "Tell me about Matt's payments work at JP Morgan",
+    "run": 2,
+    "path": "synth",
+    "answer_md": "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt played a pivotal role in building the payment engine behind JP Morgan ACCESS, their flagship corporate digital banking portal. The project aimed to create a unified platform for over **135,000** clients across **180+** countries, leveraging Bottomline Technologies' WebSeries platform. However, the out-of-box capabilities were insufficient for JP Morgan's extensive requirements, which included diverse payment modules and robust security controls.\n\nMatt, as the Technology Delivery Lead, managed a blended team of over **40** professionals from **Accenture** and JP Morgan. He was responsible for designing and delivering bespoke payment modules such as ACH, wire, FX/cross-border, and EFTPS tax payments. His work also included implementing a Message Authentication Code (MAC) security layer, real-time global reporting, and a Single Sign-On integration. Matt's efforts ensured that the platform supported various payment types with distinct formatting, compliance, and workflow requirements.\n\nThe ACCESS platform launched in April 2011, consolidating previously separate regional systems into a single digital experience. It provided purpose-built payment modules with module-specific security controls, compliance validation, and user guidance. The platform transformed the corporate treasurer experience and was recognized as the #1 digital channel by Coalition Greenwich.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "JP Morgan Chase"
+    ],
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 2,
+    "search_queries": [
+      "payments work at JP Morgan"
+    ],
+    "model_search_queries": [
+      "payments work at JP Morgan"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 1,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "controls",
+    "qid": "C1",
+    "turn": 1,
+    "question": "Tell me about Matt's payments work at JP Morgan",
+    "run": 3,
+    "path": "lever2",
+    "answer_md": "🐾 Here's a great example of Matt's work at **JP Morgan Chase** in the payments domain.\n\nMatt played a pivotal role in building the payment engine behind **JP Morgan ACCESS**, a unified global corporate banking portal. The project aimed to transform JP Morgan's digital banking capabilities, leveraging Bottomline Technologies' WebSeries platform. However, the out-of-box features were insufficient for JP Morgan's vast client base of over **135,000** corporations, financial institutions, governments, and municipalities across **180+ countries**.\n\nAs the Technology Delivery Lead, Matt managed a blended team of over **40** professionals from **Accenture** and JP Morgan. He was responsible for designing and delivering bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He also implemented a Message Authentication Code (MAC) security layer, contextual help, and payment-type-specific Role-Based Access Control (RBAC). His efforts ensured that the platform could handle the distinct formatting, validation, compliance, and workflow requirements of each payment type.\n\nThe ACCESS platform launched in April 2011, consolidating previously separate regional systems into a single digital experience. It provided real-time global reporting, Single Sign-On (SSO) across treasury functions, and trade finance lifecycle visibility, significantly enhancing the corporate treasurer experience. The platform was recognized as the #1 digital channel by Coalition Greenwich, marking a significant achievement in digital banking for JP Morgan.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "JP Morgan Chase"
+    ],
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "payments work at JP Morgan"
+    ],
+    "model_search_queries": [
+      "payments work at JP Morgan"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "controls",
+    "qid": "C1",
+    "turn": 1,
+    "question": "Tell me about Matt's payments work at JP Morgan",
+    "run": 3,
+    "path": "synth",
+    "answer_md": "🐾 Here's a great example of Matt's work at **JP Morgan**.\n\nMatt played a pivotal role in building the payment engine behind JP Morgan ACCESS, a unified global corporate banking portal. The project aimed to address the needs of over **135,000** clients across **180+** countries, requiring capabilities far beyond the out-of-box offerings of the Bottomline Technologies' WebSeries platform. As the Technology Delivery Lead, Matt managed a team of over **40** members, blending onshore and offshore resources from **Accenture** and JP Morgan.\n\nHe was responsible for designing and delivering bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. Matt also implemented a Message Authentication Code (MAC) security layer, contextual help, payment-type-specific Role-Based Access Control (RBAC), Single Sign-On (SSO), real-time global reporting, and trade finance integration. His work ensured that the platform could handle the distinct formatting, validation, compliance, and workflow requirements of each payment type at JP Morgan's operational scale.\n\nThe ACCESS platform launched in April 2011, consolidating previously separate regional systems into a single digital experience. It provided purpose-built payment modules, real-time global reporting, and trade finance lifecycle visibility, transforming the corporate treasurer experience. The platform was later recognized as the #1 in digital channels by Coalition Greenwich.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout"
+    ],
+    "source_themes": [
+      "Execution & Delivery"
+    ],
+    "pinecone_queries": 2,
+    "search_queries": [
+      "payments work at JP Morgan"
+    ],
+    "model_search_queries": [
+      "payments work at JP Morgan"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 1,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "controls",
+    "qid": "C2",
+    "turn": 1,
+    "question": "What's Matt's leadership philosophy?",
+    "run": 1,
+    "path": "lever2",
+    "answer_md": "🐾 Here's a great example.\n\nMatt's leadership philosophy emphasizes creating environments where teams can thrive through trust, clarity, and shared purpose. He believes in removing barriers that prevent teams from owning their outcomes, such as over-processing and lack of trust. His approach involves building psychological safety, pushing decision-making to those closest to the work, and grounding engineering culture in automation and continuous delivery.\n\nAt the Cloud Innovation Center, Matt's leadership enabled a **4x delivery acceleration** by fostering a culture of lean product and modern engineering practices. He leads with empathy, clarity, and purpose, ensuring that teams have the confidence to take risks and speak honestly. This philosophy not only accelerated delivery but also improved quality and strengthened cross-functional trust.\n\nMatt's leadership is also about sustainable practices. He redefined his approach to include boundaries and self-care, ensuring a sustainable pace for himself and his teams. This focus on sustainable leadership helps maintain energy and clarity, creating high-performing cultures where teams deliver meaningful work with pride and ownership.",
+    "rejection_reason": null,
+    "clients_named": [],
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "Work Philosophy – Where I Do My Best Work",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership philosophy"
+    ],
+    "model_search_queries": [
+      "leadership philosophy"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "controls",
+    "qid": "C2",
+    "turn": 1,
+    "question": "What's Matt's leadership philosophy?",
+    "run": 1,
+    "path": "synth",
+    "answer_md": "🐾 Here's what ties Matt's leadership philosophy together.\n\nMatt leads with empathy, clarity, and purpose, focusing on creating an environment where teams can perform at their best. He emphasizes psychological safety, allowing team members to speak honestly and take risks. Decisions are pushed to those closest to the work, fostering ownership and accountability. His approach combines modern engineering rigor with a strong emphasis on transparency, direct feedback, and open communication.\n\nAt the Cloud Innovation Center, Matt's leadership philosophy enabled a **4x acceleration** in delivery once teams embraced lean product and modern engineering practices. This transformation was driven by building trust, clarity, and a shared purpose, rather than relying solely on processes or tools. The result was improved quality, strengthened cross-functional trust, and teams delivering meaningful work with pride and ownership.\n\nMatt also prioritizes sustainable leadership, recognizing the importance of balancing intensity with humanity. He has redefined his leadership to include boundaries, sustainable pace, and self-care as essential disciplines. This commitment to a balanced approach ensures that both he and his teams can maintain high performance over the long term.",
+    "rejection_reason": null,
+    "clients_named": [],
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "Work Philosophy – Where I Do My Best Work",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership philosophy"
+    ],
+    "model_search_queries": [
+      "leadership philosophy"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "controls",
+    "qid": "C2",
+    "turn": 1,
+    "question": "What's Matt's leadership philosophy?",
+    "run": 2,
+    "path": "lever2",
+    "answer_md": "🐾 Here's a great example of Matt's leadership philosophy.\n\nMatt's leadership philosophy centers on creating an environment where teams can thrive by fostering trust, clarity, and shared purpose. He emphasizes psychological safety, allowing team members to take risks and speak honestly. This approach involves pushing decisions to those closest to the work, ensuring transparency, and maintaining open communication. Matt integrates modern engineering practices such as automation and continuous delivery, which help teams gain confidence in their outputs. \n\nAt the Cloud Innovation Center, Matt's leadership approach resulted in a **4x acceleration in delivery** as teams embraced lean product and modern engineering practices. This transformation was not immediate but became sustainable as teams internalized these principles. By focusing on outcomes rather than optics, and prioritizing continuous learning and improvement, Matt has consistently built high-performing cultures across various industries.",
+    "rejection_reason": null,
+    "clients_named": [],
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "Work Philosophy – Where I Do My Best Work",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership philosophy"
+    ],
+    "model_search_queries": [
+      "leadership philosophy"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "controls",
+    "qid": "C2",
+    "turn": 1,
+    "question": "What's Matt's leadership philosophy?",
+    "run": 2,
+    "path": "synth",
+    "answer_md": "🐾 Here's a great example.\n\nMatt's leadership philosophy centers on creating environments where teams can thrive. He emphasizes psychological safety, clarity of purpose, and empowering teams to make decisions closest to the work. At the **Cloud Innovation Center**, Matt led by removing barriers, fostering an atmosphere where engineers, designers, and product teams could do their best work. His approach included building psychological safety, promoting open communication, and grounding engineering culture in automation and continuous delivery.\n\nMatt's leadership style blends empathy and clarity with modern engineering rigor. He focuses on leading with purpose, making intent explicit, and pushing decisions to those closest to the work. This approach resulted in a **4x delivery acceleration** and improved quality, demonstrating the effectiveness of his leadership in creating high-performing teams.\n\nAdditionally, Matt values sustainable leadership, recognizing the importance of work-life balance and setting clear boundaries to maintain a sustainable pace. He prioritizes health and recovery as essential components of leadership, ensuring that both he and his teams can maintain their energy and focus over time. This philosophy has guided him in building teams and cultures where sustainable pace is expected, not exceptional.",
+    "rejection_reason": null,
+    "clients_named": [],
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "Work Philosophy – Where I Do My Best Work",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership philosophy"
+    ],
+    "model_search_queries": [
+      "leadership philosophy"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "controls",
+    "qid": "C2",
+    "turn": 1,
+    "question": "What's Matt's leadership philosophy?",
+    "run": 3,
+    "path": "lever2",
+    "answer_md": "🐾 Here's a look into Matt's leadership philosophy.\n\nMatt's leadership approach is grounded in creating environments where teams can thrive. He emphasizes the importance of trust, clarity, and shared purpose over rigid processes or tools. In his roles, particularly at **Accenture**'s Cloud Innovation Center, he focused on removing barriers that hindered teams, such as over-processing and lack of trust. By fostering psychological safety, he encouraged team members to speak honestly and take ownership of their work. He pushed decision-making to those closest to the work, promoting transparency, direct feedback, and open communication.\n\nMatt's leadership style blends empathy and clarity with modern engineering rigor. He leads with purpose, making intent explicit, and grounds the engineering culture in automation and quality-first practices. This approach enabled teams to accelerate delivery by **4x**, improve quality, and strengthen cross-functional trust.\n\nHe also prioritizes sustainable leadership, recognizing the need for boundaries, work-life integration, and self-care as essential components of effective leadership. This philosophy has helped him build high-performing cultures where sustainable pace is expected, not exceptional.\n\nIn summary, Matt's leadership is about empowering teams to deliver meaningful work with pride and ownership, while maintaining a balance between intensity and humanity.",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "Work Philosophy – Where I Do My Best Work",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership philosophy"
+    ],
+    "model_search_queries": [
+      "leadership philosophy"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  },
+  {
+    "phase": "controls",
+    "qid": "C2",
+    "turn": 1,
+    "question": "What's Matt's leadership philosophy?",
+    "run": 3,
+    "path": "synth",
+    "answer_md": "🐾 Matt's leadership philosophy is grounded in creating environments where teams can thrive and do their best work. He emphasizes the importance of psychological safety, clarity, and shared purpose over mere processes or tools. Matt believes in leading with empathy and purpose, making intentions explicit, and building a culture of trust where people feel safe to take risks and speak honestly. He pushes decisions to those closest to the work and uses transparency, direct feedback, and open communication as foundational practices.\n\nIn his role at the Cloud Innovation Center, Matt's approach resulted in a **4x delivery acceleration**. He achieved this by fostering lean product and modern engineering practices, which improved quality and strengthened cross-functional trust. Matt's leadership style also includes a commitment to sustainable leadership, where he prioritizes health, recovery, and work-life integration as essential components of effective leadership.\n\nMatt's philosophy is further exemplified by his focus on collective ownership over individual recognition. He established weekly brainstorming sessions to encourage idea sharing and collaboration, which led to innovative solutions and improved project timelines and quality. His leadership journey is defined by building high-trust engineering cultures, modernizing platforms, and helping organizations shift their approach to technology, resulting in significant business impacts and team cohesion.",
+    "rejection_reason": null,
+    "clients_named": [],
+    "source_titles": [
+      "Leadership Philosophy – How I Lead",
+      "Work Philosophy – Where I Do My Best Work",
+      "What I Learned About Sustainable Leadership",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "About Matt – My Leadership Journey"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "leadership philosophy"
+    ],
+    "model_search_queries": [
+      "leadership philosophy"
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": []
+  }
+]

@@ -1,0 +1,16 @@
+{
+ "Q65-r1-A": "P", "Q65-r1-B": "P", "Q65-r2-A": "P*", "Q65-r2-B": "P", "Q65-r3-A": "P", "Q65-r3-B": "P",
+ "Q17-r1-A": "P", "Q17-r1-B": "P", "Q17-r2-A": "P", "Q17-r2-B": "P", "Q17-r3-A": "F", "Q17-r3-B": "P",
+ "Q45-r1-A": "P", "Q45-r1-B": "F", "Q45-r2-A": "P", "Q45-r2-B": "F", "Q45-r3-A": "P", "Q45-r3-B": "P",
+ "RBC-r1-A": "P", "RBC-r1-B": "P", "RBC-r2-A": "P", "RBC-r2-B": "P", "RBC-r3-A": "P", "RBC-r3-B": "P",
+ "JPM-r1-A": "F", "JPM-r1-B": "P", "JPM-r2-A": "P", "JPM-r2-B": "P", "JPM-r3-A": "P", "JPM-r3-B": "F",
+ "_notes": {
+  "criteria": "same as breadth_lever2_20261009_075912 (Q17 mechanical check_synthesis_mode min 2; Q45 >=2 ground-truth terms and no closing evaluation of Matt; client-broad >1 engagement, no other client's facts)",
+  "Q65-r2-A": "P*: 'This project highlights his skill...' refers to a project never named",
+  "Q17-r3-A": "one paragraph listing theme names, no client named (golden 0)",
+  "Q45-r1-B": "closes 'underscoring the effectiveness of Matt's leadership at a high organizational level'",
+  "Q45-r2-B": "closing paragraph 'further highlights his readiness for Director or VP roles'",
+  "JPM-r2-A": "ACCESS plus the Integrated Global Payments Interface as a separate engagement; 'trillions of daily transactions' checked: it is in the ACCESS story",
+  "JPM-r1-A, JPM-r3-B": "ACCESS only"
+ }
+}

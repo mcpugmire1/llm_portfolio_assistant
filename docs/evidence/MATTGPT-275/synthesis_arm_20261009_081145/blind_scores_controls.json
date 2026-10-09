@@ -1,0 +1,18 @@
+{
+ "C1-r1-A": "P",
+ "C1-r1-B": "P",
+ "C1-r2-A": "P",
+ "C1-r2-B": "P",
+ "C1-r3-A": "P",
+ "C1-r3-B": "P",
+ "C2-r1-A": "P",
+ "C2-r1-B": "P",
+ "C2-r2-A": "P",
+ "C2-r2-B": "P",
+ "C2-r3-A": "P",
+ "C2-r3-B": "P",
+ "_notes": {
+  "criteria": "C1 answers Matt's JP Morgan payments work from JP Morgan stories only; C2 answers his leadership philosophy from the stories, nothing invented",
+  "C2-r3-A": "P; voice slip 'In summary' close"
+ }
+}

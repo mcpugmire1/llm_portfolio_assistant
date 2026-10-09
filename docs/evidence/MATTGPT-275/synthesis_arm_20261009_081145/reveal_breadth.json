@@ -1,0 +1,1263 @@
+[
+  {
+    "key": "JPM-r1-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [],
+    "model_search_queries": [
+      "JP Morgan"
+    ],
+    "synth_decision": "promotion",
+    "decision_pinecone": 1,
+    "synth_pool_sizes": [
+      8
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation",
+      "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+      "Rescuing and Stabilizing JP Morgan's TS Dynamics CRM Program",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift"
+    ]
+  },
+  {
+    "key": "JPM-r1-B",
+    "path": "old",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [
+      "What did he do at JP Morgan?"
+    ],
+    "model_search_queries": [
+      "What did he do at JP Morgan?"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation",
+      "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+      "Rescuing and Stabilizing JP Morgan's TS Dynamics CRM Program",
+      "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift"
+    ]
+  },
+  {
+    "key": "JPM-r2-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [],
+    "model_search_queries": [
+      "JP Morgan"
+    ],
+    "synth_decision": "promotion",
+    "decision_pinecone": 1,
+    "synth_pool_sizes": [
+      8
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation",
+      "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+      "Rescuing and Stabilizing JP Morgan's TS Dynamics CRM Program",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift"
+    ]
+  },
+  {
+    "key": "JPM-r2-B",
+    "path": "old",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [
+      "What did he do at JP Morgan?"
+    ],
+    "model_search_queries": [
+      "What did he do at JP Morgan?"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation",
+      "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+      "Rescuing and Stabilizing JP Morgan's TS Dynamics CRM Program",
+      "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift"
+    ]
+  },
+  {
+    "key": "JPM-r3-A",
+    "path": "old",
+    "rejection_reason": null,
+    "clients_named": [
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [
+      "What did he do at JP Morgan?"
+    ],
+    "model_search_queries": [
+      "What did he do at JP Morgan?"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation",
+      "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+      "Rescuing and Stabilizing JP Morgan's TS Dynamics CRM Program",
+      "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift"
+    ]
+  },
+  {
+    "key": "JPM-r3-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [],
+    "model_search_queries": [
+      "JP Morgan"
+    ],
+    "synth_decision": "promotion",
+    "decision_pinecone": 1,
+    "synth_pool_sizes": [
+      8
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "source_titles": [
+      "Building the Payment Engine Behind JP Morgan ACCESS",
+      "Building JP Morgan's Global Payments Gateway Across 12 Countries",
+      "Overhauling Entitlement Management for JP Morgan ACCESS",
+      "Driving Agile Adoption for JP Morgan's Identity & Access Management Transformation",
+      "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+      "Rescuing and Stabilizing JP Morgan's TS Dynamics CRM Program",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Leading RBAC Remediation and Application Team Enablement for JP Morgan's I&AM Uplift"
+    ]
+  },
+  {
+    "key": "Q17-r1-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "JP Morgan Chase",
+      "Major U.S. Health System",
+      "Norfolk Southern"
+    ],
+    "source_themes": [
+      "Emerging Tech",
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 7,
+    "search_queries": [],
+    "model_search_queries": [
+      "core themes of Matt's work"
+    ],
+    "synth_decision": "router",
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [
+      21
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "source_titles": [
+      "Building Effective AI-Assisted Development Workflows",
+      "MattGPT: RAG Architecture & Semantic Search Implementation",
+      "Simplifying MattGPT's RAG Pipeline Through Entity Gate Removal",
+      "I Let Speed Win Over Structure. Here's How I Fixed It.",
+      "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+      "Driving Modern Software Engineering with Project Octane",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+      "Integrating Play into Work to Enhance Team Motivation",
+      "Shifting Teams from Individual Recognition to Collective Ownership",
+      "Why Hire Matt?",
+      "Work Philosophy – Where I Do My Best Work",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "Balancing Execution Speed with Security and Compliance",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+      "MattGPT: Human-Centered UX Design & Information Architecture",
+      "Accelerating Modernization with Reusable Solution Patterns",
+      "Discovery & Framing - De-Risking Product Development at Fortune 500 Scale",
+      "Enabling New Ways of Working Through Immersive Coaching and Transformation Labs",
+      "Teaching Entry-Level Developers to Build Their First Java Web Application",
+      "Unifying Norfolk Southern's Teams Around Cloud-Native Practices"
+    ]
+  },
+  {
+    "key": "Q17-r1-B",
+    "path": "old",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "Norfolk Southern"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [
+      "What are Matt's core themes?"
+    ],
+    "model_search_queries": [
+      "What are Matt's core themes?"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "source_titles": [
+      "Why Hire Matt?",
+      "About Matt – My Leadership Journey",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+      "Making It Safe to Take Risks and Be Wrong",
+      "Enabling New Ways of Working Through Immersive Coaching and Transformation Labs",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Accelerating Modernization with Reusable Solution Patterns"
+    ]
+  },
+  {
+    "key": "Q17-r2-A",
+    "path": "old",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "Norfolk Southern"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [
+      "What are Matt's core themes?"
+    ],
+    "model_search_queries": [
+      "What are Matt's core themes?"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "source_titles": [
+      "Why Hire Matt?",
+      "About Matt – My Leadership Journey",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+      "Making It Safe to Take Risks and Be Wrong",
+      "Enabling New Ways of Working Through Immersive Coaching and Transformation Labs",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Accelerating Modernization with Reusable Solution Patterns"
+    ]
+  },
+  {
+    "key": "Q17-r2-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "Norfolk Southern"
+    ],
+    "source_themes": [
+      "Emerging Tech",
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 7,
+    "search_queries": [],
+    "model_search_queries": [
+      "Matt's core themes"
+    ],
+    "synth_decision": "router",
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [
+      21
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "source_titles": [
+      "Building Effective AI-Assisted Development Workflows",
+      "My Chatbot Kept Flattering Me Instead of Answering the Question. Here's How I Fixed It",
+      "Simplifying MattGPT's RAG Pipeline Through Entity Gate Removal",
+      "I Let Speed Win Over Structure. Here's How I Fixed It.",
+      "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+      "Owning the P&L: From Engagement Margin to Center Cost Base",
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+      "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+      "Why Hire Matt?",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "About Matt – My Leadership Journey",
+      "Balancing Execution Speed with Security and Compliance",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+      "MattGPT: Human-Centered UX Design & Information Architecture",
+      "Discovery & Framing - De-Risking Product Development at Fortune 500 Scale",
+      "User-Centered Design - Embedding Customer Journey in Enterprise Product Development",
+      "Enabling New Ways of Working Through Immersive Coaching and Transformation Labs",
+      "Making It Safe to Take Risks and Be Wrong",
+      "Leading People: From Delivery Teams to a 150-Person Organization"
+    ]
+  },
+  {
+    "key": "Q17-r3-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [],
+    "source_themes": [
+      "Emerging Tech",
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 7,
+    "search_queries": [],
+    "model_search_queries": [
+      "Matt's core themes"
+    ],
+    "synth_decision": "router",
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [
+      21
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "source_titles": [
+      "Building Effective AI-Assisted Development Workflows",
+      "My Chatbot Kept Flattering Me Instead of Answering the Question. Here's How I Fixed It",
+      "Simplifying MattGPT's RAG Pipeline Through Entity Gate Removal",
+      "I Let Speed Win Over Structure. Here's How I Fixed It.",
+      "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+      "Owning the P&L: From Engagement Margin to Center Cost Base",
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+      "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine",
+      "Why Hire Matt?",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "About Matt – My Leadership Journey",
+      "Balancing Execution Speed with Security and Compliance",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+      "MattGPT: Human-Centered UX Design & Information Architecture",
+      "Discovery & Framing - De-Risking Product Development at Fortune 500 Scale",
+      "Accelerating Modernization with Reusable Solution Patterns",
+      "Enabling New Ways of Working Through Immersive Coaching and Transformation Labs",
+      "Making It Safe to Take Risks and Be Wrong",
+      "Leading People: From Delivery Teams to a 150-Person Organization"
+    ]
+  },
+  {
+    "key": "Q17-r3-B",
+    "path": "old",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "Norfolk Southern"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [
+      "What are Matt's core themes?"
+    ],
+    "model_search_queries": [
+      "What are Matt's core themes?"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "source_titles": [
+      "Why Hire Matt?",
+      "About Matt – My Leadership Journey",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern",
+      "Making It Safe to Take Risks and Be Wrong",
+      "Enabling New Ways of Working Through Immersive Coaching and Transformation Labs",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Accelerating Modernization with Reusable Solution Patterns"
+    ]
+  },
+  {
+    "key": "Q45-r1-A",
+    "path": "old",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "Capital One",
+      "Fiserv"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "What evidence shows Matt can operate at Director or VP level?"
+    ],
+    "model_search_queries": [
+      "What evidence shows Matt can operate at Director or VP level?"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "source_titles": [
+      "Why Hire Matt?",
+      "Scaling Development Capacity with Modern Engineering Practices",
+      "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+      "Recovering Fiserv's $8.5M White-Label Card Portal",
+      "Building AT&T's Service Delivery Platform",
+      "Turning STRATCOM's Paper Operational Plans into Executable Workflow",
+      "Delivering Through a Company's Wind-Down"
+    ]
+  },
+  {
+    "key": "Q45-r1-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 2,
+    "search_queries": [
+      "Director level leadership evidence",
+      "VP level leadership examples"
+    ],
+    "model_search_queries": [
+      "Director level leadership evidence",
+      "VP level leadership examples"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "source_titles": [
+      "Leading People: From Delivery Teams to a 150-Person Organization",
+      "What I Learned About Sustainable Leadership",
+      "About Matt – My Leadership Journey",
+      "Leadership Philosophy – How I Lead",
+      "Enhancing Team Proficiency through Servant Leadership and Mentorship",
+      "Shifting Teams from Individual Recognition to Collective Ownership"
+    ]
+  },
+  {
+    "key": "Q45-r2-A",
+    "path": "old",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "Capital One",
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "What evidence shows Matt can operate at Director or VP level?"
+    ],
+    "model_search_queries": [
+      "What evidence shows Matt can operate at Director or VP level?"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "source_titles": [
+      "Why Hire Matt?",
+      "Scaling Development Capacity with Modern Engineering Practices",
+      "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+      "Recovering Fiserv's $8.5M White-Label Card Portal",
+      "Building AT&T's Service Delivery Platform",
+      "Turning STRATCOM's Paper Operational Plans into Executable Workflow",
+      "Delivering Through a Company's Wind-Down"
+    ]
+  },
+  {
+    "key": "Q45-r2-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "Fiserv",
+      "HSBC",
+      "RBC"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 2,
+    "search_queries": [
+      "Director level responsibilities and outcomes",
+      "VP level responsibilities and outcomes"
+    ],
+    "model_search_queries": [
+      "Director level responsibilities and outcomes",
+      "VP level responsibilities and outcomes"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "source_titles": [
+      "Leading People: From Delivery Teams to a 150-Person Organization",
+      "Career Intent – What I’m Looking For Next",
+      "Owning the P&L: From Engagement Margin to Center Cost Base",
+      "Delivering SOA for Level 3's Network Inventory System",
+      "Breaking Silos Between Engineering, Design, and Product",
+      "Recovering Fiserv's $8.5M White-Label Card Portal",
+      "Building the PMO for RBC's Commercial Banking Modernization"
+    ]
+  },
+  {
+    "key": "Q45-r3-A",
+    "path": "old",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "Capital One",
+      "Fiserv",
+      "JP Morgan Chase"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Professional Narrative"
+    ],
+    "pinecone_queries": 1,
+    "search_queries": [
+      "What evidence shows Matt can operate at Director or VP level?"
+    ],
+    "model_search_queries": [
+      "What evidence shows Matt can operate at Director or VP level?"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "source_titles": [
+      "Why Hire Matt?",
+      "Scaling Development Capacity with Modern Engineering Practices",
+      "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+      "Recovering Fiserv's $8.5M White-Label Card Portal",
+      "Building AT&T's Service Delivery Platform",
+      "Turning STRATCOM's Paper Operational Plans into Executable Workflow",
+      "Delivering Through a Company's Wind-Down"
+    ]
+  },
+  {
+    "key": "Q45-r3-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [],
+    "source_themes": [
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 2,
+    "search_queries": [
+      "Director level achievements",
+      "VP level responsibilities"
+    ],
+    "model_search_queries": [
+      "Director level achievements",
+      "VP level responsibilities"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "source_titles": [
+      "Leading People: From Delivery Teams to a 150-Person Organization",
+      "Owning the P&L: From Engagement Margin to Center Cost Base",
+      "Delivering SOA for Level 3's Network Inventory System",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Enhancing Team Proficiency through Servant Leadership and Mentorship",
+      "Recovering Fiserv's $8.5M White-Label Card Portal",
+      "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution",
+      "Conducting Discovery and Framing to Build Cross-Functional Alignment"
+    ]
+  },
+  {
+    "key": "Q65-r1-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "Capital One",
+      "HSBC",
+      "RBC"
+    ],
+    "source_themes": [
+      "Emerging Tech",
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 7,
+    "search_queries": [],
+    "model_search_queries": [
+      "Why hire Matt?"
+    ],
+    "synth_decision": "router",
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [
+      21
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "source_titles": [
+      "Building Effective AI-Assisted Development Workflows",
+      "Simplifying MattGPT's RAG Pipeline Through Entity Gate Removal",
+      "Shifting Client Focus from What They Build to How They Work",
+      "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+      "Owning the P&L: From Engagement Margin to Center Cost Base",
+      "I Let Speed Win Over Structure. Here's How I Fixed It.",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Scaling CIC Impact Through Intentional Client Engagement",
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Why Hire Matt?",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "About Matt – My Leadership Journey",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Balancing Execution Speed with Security and Compliance",
+      "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+      "MattGPT: Human-Centered UX Design & Information Architecture",
+      "Driving HSBC's Mortgage Transformation from Assessment to $10M Contract",
+      "Discovery & Framing - De-Risking Product Development at Fortune 500 Scale",
+      "Leading People: From Delivery Teams to a 150-Person Organization",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Scaling Talent and Practices for Agile Product Innovation"
+    ]
+  },
+  {
+    "key": "Q65-r1-B",
+    "path": "old",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "HSBC"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [
+      "Why hire Matt?"
+    ],
+    "model_search_queries": [
+      "Why hire Matt?"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "source_titles": [
+      "Why Hire Matt?",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "About Matt – My Leadership Journey",
+      "Driving HSBC's Mortgage Transformation from Assessment to $10M Contract",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Scaling CIC Impact Through Intentional Client Engagement",
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Scaling Talent and Practices for Agile Product Innovation"
+    ]
+  },
+  {
+    "key": "Q65-r2-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [],
+    "source_themes": [
+      "Emerging Tech",
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 7,
+    "search_queries": [],
+    "model_search_queries": [
+      "Why hire Matt?"
+    ],
+    "synth_decision": "router",
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [
+      21
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "source_titles": [
+      "Building Effective AI-Assisted Development Workflows",
+      "Simplifying MattGPT's RAG Pipeline Through Entity Gate Removal",
+      "Shifting Client Focus from What They Build to How They Work",
+      "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+      "Owning the P&L: From Engagement Margin to Center Cost Base",
+      "I Let Speed Win Over Structure. Here's How I Fixed It.",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Scaling CIC Impact Through Intentional Client Engagement",
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Why Hire Matt?",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "About Matt – My Leadership Journey",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Balancing Execution Speed with Security and Compliance",
+      "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+      "MattGPT: Human-Centered UX Design & Information Architecture",
+      "Driving HSBC's Mortgage Transformation from Assessment to $10M Contract",
+      "Discovery & Framing - De-Risking Product Development at Fortune 500 Scale",
+      "Leading People: From Delivery Teams to a 150-Person Organization",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Scaling Talent and Practices for Agile Product Innovation"
+    ]
+  },
+  {
+    "key": "Q65-r2-B",
+    "path": "old",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "HSBC"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [
+      "Why hire Matt?"
+    ],
+    "model_search_queries": [
+      "Why hire Matt?"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "source_titles": [
+      "Why Hire Matt?",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "About Matt – My Leadership Journey",
+      "Driving HSBC's Mortgage Transformation from Assessment to $10M Contract",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Scaling CIC Impact Through Intentional Client Engagement",
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Scaling Talent and Practices for Agile Product Innovation"
+    ]
+  },
+  {
+    "key": "Q65-r3-A",
+    "path": "old",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "HSBC"
+    ],
+    "source_themes": [
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [
+      "Why hire Matt?"
+    ],
+    "model_search_queries": [
+      "Why hire Matt?"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "source_titles": [
+      "Why Hire Matt?",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "About Matt – My Leadership Journey",
+      "Driving HSBC's Mortgage Transformation from Assessment to $10M Contract",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Scaling CIC Impact Through Intentional Client Engagement",
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Scaling Talent and Practices for Agile Product Innovation"
+    ]
+  },
+  {
+    "key": "Q65-r3-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [],
+    "source_themes": [
+      "Emerging Tech",
+      "Execution & Delivery",
+      "Org & Working-Model Transformation",
+      "Professional Narrative",
+      "Risk & Responsible Tech",
+      "Strategic & Advisory",
+      "Talent & Enablement"
+    ],
+    "pinecone_queries": 7,
+    "search_queries": [],
+    "model_search_queries": [
+      "Why hire Matt?"
+    ],
+    "synth_decision": "router",
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [
+      21
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "source_titles": [
+      "Building Effective AI-Assisted Development Workflows",
+      "Simplifying MattGPT's RAG Pipeline Through Entity Gate Removal",
+      "Shifting Client Focus from What They Build to How They Work",
+      "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery",
+      "Owning the P&L: From Engagement Margin to Center Cost Base",
+      "I Let Speed Win Over Structure. Here's How I Fixed It.",
+      "Building an Innovation Ecosystem to Connect Clients with Emerging Technology",
+      "Scaling CIC Impact Through Intentional Client Engagement",
+      "Confronting a Quality Crisis Through Coaching and Culture Change",
+      "Why Hire Matt?",
+      "Transition Story – Why I’m Exploring Opportunities",
+      "About Matt – My Leadership Journey",
+      "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications",
+      "Balancing Execution Speed with Security and Compliance",
+      "Implementing Responsible AI Governance for Patient Data Privacy and Compliance at Fortune 500 healthcare company",
+      "MattGPT: Human-Centered UX Design & Information Architecture",
+      "Driving HSBC's Mortgage Transformation from Assessment to $10M Contract",
+      "Discovery & Framing - De-Risking Product Development at Fortune 500 Scale",
+      "Leading People: From Delivery Teams to a 150-Person Organization",
+      "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+      "Scaling Talent and Practices for Agile Product Innovation"
+    ]
+  },
+  {
+    "key": "RBC-r1-A",
+    "path": "old",
+    "rejection_reason": null,
+    "clients_named": [
+      "RBC"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Strategic & Advisory"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [
+      "What did Matt do at RBC?"
+    ],
+    "model_search_queries": [
+      "What did Matt do at RBC?"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "source_titles": [
+      "Assessing Mobile Readiness for RBC's Corporate Banking Platform",
+      "Solving RBC's 180-Day Data Visibility Problem",
+      "De-Risking RBC’s Corporate Banking Platform Investment",
+      "Leading Data Conversion Planning for RBC's Corporate Banking Migration",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building the PMO for RBC's Commercial Banking Modernization"
+    ]
+  },
+  {
+    "key": "RBC-r1-B",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "RBC"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Strategic & Advisory"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [],
+    "model_search_queries": [
+      "RBC"
+    ],
+    "synth_decision": "promotion",
+    "decision_pinecone": 1,
+    "synth_pool_sizes": [
+      6
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "source_titles": [
+      "Leading Data Conversion Planning for RBC's Corporate Banking Migration",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building the PMO for RBC's Commercial Banking Modernization",
+      "Assessing Mobile Readiness for RBC's Corporate Banking Platform",
+      "Solving RBC's 180-Day Data Visibility Problem",
+      "De-Risking RBC’s Corporate Banking Platform Investment"
+    ]
+  },
+  {
+    "key": "RBC-r2-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "Accenture",
+      "RBC"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Strategic & Advisory"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [],
+    "model_search_queries": [
+      "RBC"
+    ],
+    "synth_decision": "promotion",
+    "decision_pinecone": 1,
+    "synth_pool_sizes": [
+      6
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "source_titles": [
+      "Leading Data Conversion Planning for RBC's Corporate Banking Migration",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building the PMO for RBC's Commercial Banking Modernization",
+      "Assessing Mobile Readiness for RBC's Corporate Banking Platform",
+      "Solving RBC's 180-Day Data Visibility Problem",
+      "De-Risking RBC’s Corporate Banking Platform Investment"
+    ]
+  },
+  {
+    "key": "RBC-r2-B",
+    "path": "old",
+    "rejection_reason": null,
+    "clients_named": [
+      "RBC"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Strategic & Advisory"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [
+      "What did Matt do at RBC?"
+    ],
+    "model_search_queries": [
+      "What did Matt do at RBC?"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "source_titles": [
+      "Assessing Mobile Readiness for RBC's Corporate Banking Platform",
+      "Solving RBC's 180-Day Data Visibility Problem",
+      "De-Risking RBC’s Corporate Banking Platform Investment",
+      "Leading Data Conversion Planning for RBC's Corporate Banking Migration",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building the PMO for RBC's Commercial Banking Modernization"
+    ]
+  },
+  {
+    "key": "RBC-r3-A",
+    "path": "synth",
+    "rejection_reason": null,
+    "clients_named": [
+      "RBC"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Strategic & Advisory"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [],
+    "model_search_queries": [
+      "RBC"
+    ],
+    "synth_decision": "promotion",
+    "decision_pinecone": 1,
+    "synth_pool_sizes": [
+      6
+    ],
+    "lever2_patch": {
+      "calls": 2,
+      "moved": 2,
+      "required": 1
+    },
+    "source_titles": [
+      "Leading Data Conversion Planning for RBC's Corporate Banking Migration",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building the PMO for RBC's Commercial Banking Modernization",
+      "Assessing Mobile Readiness for RBC's Corporate Banking Platform",
+      "Solving RBC's 180-Day Data Visibility Problem",
+      "De-Risking RBC’s Corporate Banking Platform Investment"
+    ]
+  },
+  {
+    "key": "RBC-r3-B",
+    "path": "old",
+    "rejection_reason": null,
+    "clients_named": [
+      "RBC"
+    ],
+    "source_themes": [
+      "Execution & Delivery",
+      "Strategic & Advisory"
+    ],
+    "pinecone_queries": 8,
+    "search_queries": [
+      "What did Matt do at RBC?"
+    ],
+    "model_search_queries": [
+      "What did Matt do at RBC?"
+    ],
+    "synth_decision": null,
+    "decision_pinecone": 0,
+    "synth_pool_sizes": [],
+    "lever2_patch": {
+      "calls": 0,
+      "moved": 0,
+      "required": 0
+    },
+    "source_titles": [
+      "Assessing Mobile Readiness for RBC's Corporate Banking Platform",
+      "Solving RBC's 180-Day Data Visibility Problem",
+      "De-Risking RBC’s Corporate Banking Platform Investment",
+      "Leading Data Conversion Planning for RBC's Corporate Banking Migration",
+      "Designing Cross-Border Payment Workflows for RBC Express",
+      "Building the PMO for RBC's Commercial Banking Modernization"
+    ]
+  }
+]
