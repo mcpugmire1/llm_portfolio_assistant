@@ -28,24 +28,44 @@ Rules marked "Enforced" are also blocked by hooks. If a hook blocks a command, s
 - `scripts/arch-sync-session.sh` and `scripts/backlog-session.sh`: launch the two docs sessions, one per pass.
 - `mattgpt-architecture-sync` skill (`.claude/skills/`): ARCHITECTURE.md and `docs/ADR.md` from recent commits. Arch sync session only.
 - `mattgpt-backlog-maintenance` skill (`.claude/skills/`): BACKLOG.md and CHANGELOG.md. Backlog session only.
-- `.claude/rules/streamlit-ui.md`: CSS rules and Streamlit patterns. Loads when UI files are read.
-- `.claude/rules/rag-pipeline.md`: RAG pipeline, entity filters, Pinecone casing, nonsense filters. Loads when pipeline files are read.
 - `ARCHITECTURE.md`: full system context, including the file structure.
 - [Design Specification](https://mcpugmire1.github.io/mattgpt-design-spec/): canonical tech stack and system architecture. Do not duplicate tech stack facts here.
 
 ## Document Ownership
 - **Read this entire file before proposing any edit to it.** Synthesize across all sections first. Do not add a section after reading two lines.
-- **Current state only.** CLAUDE.md, `.claude/rules/`, and ARCHITECTURE.md hold current rules and current state: no dates, ticket IDs, incident history, or change narrative. History goes to `docs/ADR.md` (decisions, removals, rejections) or CHANGELOG.md (shipped work).
-- **CLAUDE.md and `.claude/rules/`:** Matt writes these himself. No Claude session edits them.
+- **Current state only.** CLAUDE.md and ARCHITECTURE.md hold current rules and current state: no dates, ticket IDs, incident history, or change narrative. History goes to `docs/ADR.md` (decisions, removals, rejections) or CHANGELOG.md (shipped work).
+- **CLAUDE.md:** Matt writes it himself. No Claude session edits it.
 - **`.claude/settings.json`, `.claude/hooks/`, `.githooks/`, `.pre-commit-config.yaml`:** Matt owns these. No automated process writes to them on its own initiative; Code applies a change only when Matt directs that specific change.
 - **ARCHITECTURE.md and `docs/ADR.md`:** written only by the arch sync session. **BACKLOG.md and CHANGELOG.md:** written only by the backlog session. Dev sessions never write any of the four; their commit messages are the handoff. (Enforced: the pre-commit role check limits each session to its own files.)
 
 ## Code Conventions
 - Filter state lives in `st.session_state["filters"]`
-- CSS variables defined in `global_styles.py` (use them, don't hardcode colors)
 - Widget versioning pattern: `key=f"widget_name_v{version}"` for forced refreshes
 - Use `safe_container()` wrapper for bordered sections
-- Container keys for CSS targeting: `.st-key-{key_name}` selectors
+
+## Streamlit UI
+### CSS
+- **Use the CSS variables in `global_styles.py`** (`--accent-purple`, `--bg-card`, `--bg-surface`, `--text-primary`, `--text-secondary`, `--border-color`, `--hover-shadow`). Never hardcode a value that is one.
+- **Target containers by key:** `st.container(key="my_container")`, then `.st-key-my_container`. Streamlit turns spaces in `key=` into dashes: `key="topnav_My Work"` produces `.st-key-topnav_My-Work`. Use the dash form in CSS, JS and BDD selectors.
+- **Never target Streamlit's dynamically-hashed class names:** `st-emotion-cache-*`, `.st-bz`, `.st-c0`, and any short `.st-XX` atomic class change between builds and can migrate onto different DOM elements. Even an "unmatched no-op" selector becomes an active override the moment the hash drifts onto a new element. Target `data-testid`, `data-baseweb`, or `.st-key-*` instead. (Enforced on added lines in `ui/` and `app.py`.)
+- **Scope mobile CSS** with wrapper classes (`.explore-page`) or page-specific selectors. Generic selectors like `div[data-testid="stColumn"]` leak everywhere.
+- **Mobile changes go in `@media (max-width: 767px)` blocks** and must not break desktop: check both at the breakpoints in Testing Protocol.
+
+### Session state, HTML, and clicks
+- **Never modify a session state key after its widget renders:** it raises `StreamlitAPIException`.
+- **Cross-page navigation uses the prefilter pattern:** the source page sets `st.session_state["prefilter_<field>"]` and reruns; the target page pops it into the filters before any widget renders. See `banking_landing.py` to `explore_stories.py`.
+- **`st.markdown()` with complex nested HTML often renders as raw text:** use single-line HTML strings.
+- **JS in a `components.html()` iframe can't reach the page directly:** use `window.parent.document`, with a timeout for DOM readiness.
+- **Click handling:** start with Pattern 1, `st.button` with a `stable_key` and CSS targeting `[class*="st-key-{stable_key}"] button` (see `_render_ask_transcript()` in `conversation_helpers.py`). Use Pattern 2, a delegated listener on `parentDoc` (see the Cards view in `explore_stories.py`), only when Pattern 1 can't meet the visual requirement. Never add per-element bindings inside `components.html`, and don't build another pattern without a documented reason neither works. Details: Interactive Click Handling in ARCHITECTURE.md.
+- **Each `st.markdown()` call is a DOM element.** On pages using `.conversation-header`, the header's negative margin is tuned to the number of markdown elements before it, so an extra call, even one holding only `<style>`, breaks alignment. Consolidate CSS injections, and put any extra one after the hero content, before `render_footer()`.
+
+## RAG Pipeline
+`Query → Nonsense Filters → Semantic Router → out_of_scope check → Pinecone → Confidence Gate → LLM`. Intent families are defined in `services/semantic_router.py`.
+- **Entity detection:** `detect_entity()` checks Client, Employer and Division (`ENTITY_DETECTION_FIELDS`), then story titles. A Client, Employer or Division match becomes a hard Pinecone filter: one `$or` across `ENTITY_SEARCH_FIELDS` using the detected value. A Title match adds no Pinecone filter. The synthesis path filters on the detected field only. Detection is deliberately narrower than search; see the comments on both constants in `config/constants.py`. `EXCLUSION_PREFIXES` in `ui/pages/ask_mattgpt/backend_service.py` turn entity filtering off.
+- **Pinecone metadata:** field names are lowercase. Stored values are lowercase for the fields in `PINECONE_LOWERCASE_FIELDS` and as written in the corpus for the rest, so match with `entity_value.lower() if pc_field in PINECONE_LOWERCASE_FIELDS else entity_value`.
+- **Confidence thresholds live in `config/constants.py`.** Never duplicate the values.
+- **"builder" is used verbatim in Professional Narrative responses.** Preserve it exactly when editing the prompts or code that produce them.
+- **Nonsense filters (`nonsense_filters.jsonl`):** test a new pattern against real queries ("Tell me about Matt's X") before adding it. Avoid common verbs ("solve", "build", "create", "manage"), prefer multi-word phrases, and use `\b` word boundaries. Don't duplicate the semantic scoring gate, which already catches gibberish.
 
 ## Behavioral Rules
 
