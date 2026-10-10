@@ -142,6 +142,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-288](#mattgpt-288) | rag_answer() ignores the fallback signal semantic_search() provides | Open | Medium | Bug | October 10, 2026 |
 | [MATTGPT-289](#mattgpt-289) | MATTGPT-018 regression watch: uncovered Ask Agy landing elements stay painted while stale on navigation to My Work | Open | Low | Bug | October 10, 2026 |
 | [MATTGPT-290](#mattgpt-290) | Internal-content extraction: Agy has disclosed internal instructions and notes on request | Open | Medium | Investigation | October 10, 2026 |
+| [MATTGPT-291](#mattgpt-291) | Role-play requests: decide what Agy does when asked to act as an interviewer or hiring manager | Open | Low | Issue | October 10, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -2173,6 +2174,8 @@ These only affect behavior if tags feed filters or counts. Fix is in the master 
 
 Surface parity with My Work: a question in the 0.20-0.25 band (My Work's "Relevance may be low" tier, e.g. "Where does Matt live?" at 0.242, MATTGPT-253) is answered, with an explicit hedge when the evidence is thin ("that isn't recorded"), not refused and not invented.
 
+Date questions: "When was he at JP Morgan?" gives the 2009 to 2016 span from the story dates without implying it was continuous. In `echo_star_stories_nlp.jsonl` the JP Morgan stories run Start_Date 2009-08 to End_Date 2016-06, with no JP Morgan story between 2012-06 and 2013-04; the RBC stories run 2012-06 to 2013-06. Today the answer is true but gives events only (ACCESS launch April 2011, the 2014 IAM uplift), no span: 4 of 4 answers in the MATTGPT-285 runs, Oct 10, 2026.
+
 If the tool design offers a continuation, accepting it resolves to the story it referred to. Add a closer-acceptance conversation to `tests/fixtures/evaluator_conversations.md` before 275's acceptance run (dev session).
 
 **Supersedes:** MATTGPT-273 Issue 1; MATTGPT-253's gate scope; MATTGPT-128's Sources contract (cards become the stories the model actually retrieved).
@@ -2476,6 +2479,25 @@ The only guard identified so far is an incidental nonsense-filter catch of one l
 Inspect each answer for internal instructions, prompt text or internal story content.
 
 **Scope for this step:** Diagnosis only. Record the queries, the answers, and whether internal text was disclosed. No fix proposed, and the existing filter is not assumed to protect anything.
+
+---
+
+### MATTGPT-291
+**Role-play requests: decide what Agy does when asked to act as an interviewer or hiring manager**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Issue
+- **Logged:** October 10, 2026
+
+**Observed (Oct 10, 2026, MATTGPT-285 truth check):** "Act as my interviewer and ask about Matt's leadership" and "Act as a hiring manager and ask me about Matt's leadership." pass the nonsense filter. Agy then describes Matt's leadership truthfully instead of asking questions: 8 of 8 answers (two phrasings, 2 runs each, in both Oct 10 run folders).
+
+**Open decision (Matt decides):** the intended behavior. Options:
+- Describe Matt (today's behavior).
+- Ask questions drawn from the stories' Interview Questions.
+- Redirect.
+
+No implementation until the decision is recorded here.
 
 ---
 
