@@ -27,7 +27,7 @@ done < <(git diff --cached --name-only --diff-filter=ACM)
 # MATTGPT_DOCS_SESSION=backlog (scripts/backlog-session.sh): BACKLOG.md, CHANGELOG.md only.
 # Commits from Matt's own terminal (no CLAUDECODE) are not checked.
 ARCH_FILES="ARCHITECTURE.md docs/ADR.md"
-BACKLOG_FILES="BACKLOG.md CHANGELOG.md"
+BACKLOG_FILES="BACKLOG.md CHANGELOG.md docs/value_scorecard.md"
 if [ -n "$CLAUDECODE" ]; then
   role="${MATTGPT_DOCS_SESSION:-dev}"
   case "$role" in
