@@ -2181,6 +2181,8 @@ Surface parity with My Work: a question in the 0.20-0.25 band (My Work's "Releva
 
 Date questions: "When was he at JP Morgan?" gives the 2009 to 2016 span from the story dates without implying it was continuous. In `echo_star_stories_nlp.jsonl` the JP Morgan stories run Start_Date 2009-08 to End_Date 2016-06, with no JP Morgan story between 2012-06 and 2013-04; the RBC stories run 2012-06 to 2013-06. Today the answer is true but gives events only (ACCESS launch April 2011, the 2014 IAM uplift), no span: 4 of 4 answers in the MATTGPT-285 runs, Oct 10, 2026.
 
+**Evidence (Oct 10, 2026, production; not on disk):** "When was he at JP Morgan?" varies run to run between a short answer and a four-engagement synthesis answer. The synthesis answers open with a `SYNTHESIS_OPENERS` line, which suggests entity-cluster promotion (untraced). Wording isn't the cause: the router scores both forms 0.51 to 0.52. Neither gives the 2009 to 2016 span. The local MATTGPT-285 run (`acceptance_20261010_150618`, untracked) shows the same: both answers open with a `SYNTHESIS_OPENERS` line ("Looking across Matt's portfolio, I see clear patterns.", "Let me show you what ties Matt's work together.").
+
 If the tool design offers a continuation, accepting it resolves to the story it referred to. Add a closer-acceptance conversation to `tests/fixtures/evaluator_conversations.md` before 275's acceptance run (dev session).
 
 **Supersedes:** MATTGPT-273 Issue 1; MATTGPT-253's gate scope; MATTGPT-128's Sources contract (cards become the stories the model actually retrieved).
