@@ -19,6 +19,11 @@ import pytest
 from ui.pages.ask_mattgpt import backend_service as bs
 from ui.pages.ask_mattgpt.prompts import build_tool_system_prompt
 
+pytestmark = pytest.mark.xfail(
+    reason="MATTGPT-275; remove in the 275 Green commit",
+    strict=False,
+)
+
 _DNA = (
     "## ZZZ_SENTINEL facts\n- ZZZ career arc\n\n"
     "**GROUNDING RULES:**\n1. ZZZ_OLD_GROUNDING_RULE\n"

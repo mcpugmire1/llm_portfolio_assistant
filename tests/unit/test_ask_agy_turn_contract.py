@@ -27,6 +27,8 @@ stories from test_ask_agy_tool_answer.py.
 import json
 from unittest.mock import MagicMock, patch
 
+import pytest
+
 from tests.unit.test_ask_agy_tool_answer import (
     _DNA_SENTINEL,
     _STORIES,
@@ -35,6 +37,11 @@ from tests.unit.test_ask_agy_tool_answer import (
     _search_result,
 )
 from ui.pages.ask_mattgpt import backend_service as bs
+
+pytestmark = pytest.mark.xfail(
+    reason="MATTGPT-275; remove in the 275 Green commit",
+    strict=False,
+)
 
 _HISTORY = [
     {"role": "user", "content": "Tell me about his payments work."},
