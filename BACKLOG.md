@@ -50,7 +50,7 @@ Answer mode: -284 (synthesis mode decided in four places; a promoted query such 
 
 **LATER — tier 4:** hygiene
 Dead code: -176, -183, -199, -201 · -241 (dead prose: out_of_scope_response + personal_response, backend_service.py (out_of_scope_response + personal_response in rag_answer())) · Hidden error: -204 (zero-filter-match only -- st.stop() blanking was MATTGPT-224, shipped `92370b3`)
-Untraced flash: -229 (My Work flashes before Ask Agy conversation -- needs DevTools trace)
+Untraced flash: -229 (My Work flashes before Ask Agy conversation -- needs DevTools trace) · -289 (MATTGPT-018 regression watch: stale landing elements painted 240-370 ms, one mixed frame in 3 runs)
 BDD flakes: -122, -131, -142, -145, -197, -198, -205
 Wrong-assertion test: -203 · -209 (drift guard searches wrong scope)
 Small refactors: -153, -062, -082, -083, -084, -150, -060, -217 (pronoun grammar in substitution)
@@ -140,6 +140,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-286](#mattgpt-286) | Meta-commentary strip can delete whole paragraphs, the opener included | Open | Medium | Bug | October 10, 2026 |
 | [MATTGPT-287](#mattgpt-287) | Docs and comments describe an overlap gate that no longer exists | Open | Low | Hygiene | October 10, 2026 |
 | [MATTGPT-288](#mattgpt-288) | rag_answer() ignores the fallback signal semantic_search() provides | Open | Medium | Bug | October 10, 2026 |
+| [MATTGPT-289](#mattgpt-289) | MATTGPT-018 regression watch: uncovered Ask Agy landing elements stay painted while stale on navigation to My Work | Open | Low | Bug | October 10, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -2425,6 +2426,29 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 **Related:** An unfiled fallback investigation draft (silent local fallback), which this extends.
 
 **Scope:** What Ask Agy shows when retrieval fails. Any change re-tests the outage behavior from MATTGPT-162 and -230.
+
+---
+
+### MATTGPT-289
+**MATTGPT-018 regression watch: uncovered Ask Agy landing elements stay painted while stale on navigation to My Work**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Bug
+- **File:** `ui/styles/global_styles.py` (the `data-stale="true"` rule from a6b427c, scoped to `.main-intro-section` and `.ask-header-landing`)
+- **Logged:** October 10, 2026
+
+**Watch:** no fix proposed.
+
+**Observed (Oct 10, 2026, production b2add9a, Ask Agy landing to My Work, 3 runs):**
+- The a6b427c rule hid the avatar intro and landing header in all 3 runs.
+- The landing elements it doesn't cover (status bar, "TRY ASKING:", chips, input, footer) stay painted while stale for about 240-370 ms.
+- In 1 of 3 runs, My Work's hero rendered 57 ms before those elements were removed: a mixed frame.
+- The post-reboot avatar case was not reproduced.
+
+**Doc conflict:** ARCHITECTURE.md Pattern 6 says Streamlit "applies no opacity or visibility treatment to stale content containers". Some stale containers were observed at opacity 0.33. Flagged for Architecture Sync.
+
+**History:** MATTGPT-018 closed Done in 2f2635b (fix a6b427c). The BDD regression lock, MATTGPT-138, is Decided Against.
 
 ---
 
