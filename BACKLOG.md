@@ -136,7 +136,6 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-282](#mattgpt-282) | Ask Agy's answering model has only been measured as gpt-4o | Open | Medium | Issue | October 8, 2026 |
 | [MATTGPT-283](#mattgpt-283) | PoC a newer embedding model for retrieval | Open | Medium | Issue | October 8, 2026 |
 | [MATTGPT-284](#mattgpt-284) | Synthesis mode is decided in four places, and the UI re-derives it | Open | Medium | Refactor | October 9, 2026 |
-| [MATTGPT-285](#mattgpt-285) | Nonsense filter rejects legitimate portfolio questions | Open | Medium | Bug | October 10, 2026 |
 | [MATTGPT-286](#mattgpt-286) | Meta-commentary strip can delete whole paragraphs, the opener included | Open | Medium | Bug | October 10, 2026 |
 | [MATTGPT-287](#mattgpt-287) | Docs and comments describe an overlap gate that no longer exists | Open | Low | Hygiene | October 10, 2026 |
 | [MATTGPT-288](#mattgpt-288) | rag_answer() ignores the fallback signal semantic_search() provides | Open | Medium | Bug | October 10, 2026 |
@@ -1653,6 +1652,8 @@ Same class as the no-inference clause in MATTGPT-250: retrieved text that sits n
 
 **Open question:** Would a general rule cover the over-claim? Candidate rule: claim an industry or domain only when a retrieved story's `Industry` or `Domain` field names it. Neither run captured the Cendant story's `Industry` value. Confirm the field value before writing a rule that depends on it.
 
+**Held nonsense rules (Oct 10, 2026, MATTGPT-285 Green 017117f):** "Has Matt worked on trading platforms?" (`stocks_crypto`) and "How did Matt calculate ROI?" (`homework`) stay refused. Unblocked in the Oct 10 live run, Agy answered untruthfully ("worked extensively on trading platforms"; RBC framed as an ROI calculation). Both are `xfail(strict=True)` in `tests/unit/test_nonsense_portfolio_questions.py` with reason "MATTGPT-251: answer misattributes when unblocked"; they XPASS once the rules change, so the markers come off in the same commit.
+
 **Rejected (do not re-derive):** Pairwise rules such as "do not treat mortgage as real estate." Each one fixes a single pairing and misses the next.
 
 **Out of scope:** Agriculture under-claim (September 23, 2026). The Liquid Studio story was not in the top 25 for that query -- retrieval miss, not synthesis, and it covers a single PoC mention.
@@ -2335,34 +2336,6 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 3. Search behind an interface, with embed failures as a return value, not session state. Verified Oct 9, 2026 on HEAD: `get_synthesis_stories()` reports embed failures through `st.session_state["__embed_failure__"]`, which `rag_answer()` pops.
 
 **Source:** the read-only Clean Architecture assessment, Oct 9, 2026: `docs/evidence/MATTGPT-275/ca_synthesis_20261009_090024/clean_architecture_assessment.md` (65e0621).
-
----
-
-### MATTGPT-285
-**Nonsense filter rejects legitimate portfolio questions**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Bug
-- **File:** `nonsense_filters.jsonl` (50 rules), `utils/validation.py` (`is_nonsense()`), `ui/pages/ask_mattgpt/backend_service.py` (`_nonsense_rejection()`)
-- **Logged:** October 10, 2026
-
-**Issue:** `is_nonsense()` runs each rule with `re.search(pattern, q, re.IGNORECASE)` and returns the first match's category. `_nonsense_rejection()` then sets `ask_last_reason = "rule:<category>"`, which shows the "Wrong trail" banner (`BANNER_COPY["rule"]` in `utils/ui_helpers.py`). Suggestion-chip questions skip it.
-
-**Observed (Oct 10, 2026):** The production rules, run locally the way `is_nonsense()` runs them, no app or API calls:
-- "When did Matt join Accenture?" and "What year did Matt start the CIC?": `general_knowledge`
-- "Tell me a story about Matt's leadership": `creative_writing`
-- "Explain Matt's philosophy on leadership": `general_knowledge`
-- "Has Matt worked on trading platforms?": `stocks_crypto`
-- "How did Matt calculate ROI?": `homework`
-- "Has Matt worked on gaming platforms?": `gaming`
-- Controls: "Tell me about his payments work" passes; "What is the weather today?" gets `weather`.
-
-**Not yet shown:** that these reach visitors on the live path (semantic checks L3 to L5 would show it), or any real visitor hits.
-
-**History:** Added in a933944 (Sept 12, 2025). ADR 013: "Out-of-scope or nonsensical queries (e.g., "weather today", "McDonald's salaries") are filtered via a lightweight rules/config file, not hardcoded." CLAUDE.md asks that patterns be tested against real queries ("Tell me about Matt's X") and avoid common verbs.
-
-**Scope:** Judge each matching rule against its original target. Any change re-tests the failures the rule prevents.
 
 ---
 

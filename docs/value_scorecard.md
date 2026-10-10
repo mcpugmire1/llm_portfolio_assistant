@@ -38,8 +38,7 @@ synonyms, misspellings, missing punctuation and natural phrasing.
 
 **Status:** not measured.
 
-**Open tickets:** -285 (nonsense filter rejects portfolio questions), -283
-(embedding model PoC), -185 (negation), -190
+**Open tickets:** -283 (embedding model PoC), -185 (negation), -190
 (tokenizer divergence), -171 (phrase matching), -177 (token_overlap_ratio
 bound), -199 (AT&T content-kw gate), -063 (wrong-person queries), -077
 (pronoun and noun-overlap contamination), -195 (incident vocabulary
