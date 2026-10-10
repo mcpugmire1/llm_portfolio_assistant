@@ -1,17 +1,17 @@
 ---
 name: "mattgpt-backlog-maintenance"
-description: "Backlog session only. Use when running the MattGPT Backlog Maintenance pass or creating, updating, or closing tickets in BACKLOG.md and CHANGELOG.md."
+description: "Backlog session only. Use when running the MattGPT Backlog Maintenance pass or creating, updating, or closing tickets in BACKLOG.md and CHANGELOG.md, with docs/value_scorecard.md kept in step."
 ---
 
 ## Backlog Maintenance
 
 **Runner check, before anything else:**
 1. Run `printenv MATTGPT_DOCS_SESSION`. If it doesn't print `backlog`, stop and tell Matt to launch `scripts/backlog-session.sh`.
-2. Run `git status --short -- BACKLOG.md CHANGELOG.md`. If it shows any changes, stop and show Matt the diff. Never stage this pass's edits on top of changes you didn't make.
+2. Run `git status --short -- BACKLOG.md CHANGELOG.md docs/value_scorecard.md`. If it shows any changes, stop and show Matt the diff. Never stage this pass's edits on top of changes you didn't make.
 
 Run git and repo commands yourself against the local repo. Never clone the repo or work from any other copy: a clone only sees pushed commits.
 
-**Scope:** This process writes `BACKLOG.md` and `CHANGELOG.md` only. It reads `docs/ADR.md` but never writes it; Architecture Sync owns ADRs. CLAUDE.md, ARCHITECTURE.md, source files, and all other documents are out of scope. Any finding that would require a change to CLAUDE.md, hooks, or skills gets flagged to Matt, not written.
+**Scope:** This process writes `BACKLOG.md`, `CHANGELOG.md` and `docs/value_scorecard.md` only. It reads `docs/ADR.md` but never writes it; Architecture Sync owns ADRs. CLAUDE.md, ARCHITECTURE.md, source files, and all other documents are out of scope. Any finding that would require a change to CLAUDE.md, hooks, or skills gets flagged to Matt, not written.
 
 **Handoff:** Commit messages from dev sessions feed this pass. Dev sessions never create, modify, or close tickets.
 
@@ -61,6 +61,13 @@ Six values only. Do not invent others.
 - **CHANGELOG.md:** Done items only. Ship record. Written by this pass.
 - **docs/ADR.md:** Decided Against items, as Rejected ADRs. Written by Architecture Sync.
 - **BACKLOG.md:** Open, In Progress, Blocked, Parked, plus Decided Against tickets waiting for their ADR.
+- **docs/value_scorecard.md:** the value drivers, each with its outcome, criteria, status, evidence and ticket list. Written by this pass.
+
+### Value Scorecard
+Every ticket change in this pass is reflected in `docs/value_scorecard.md`, in the same edit:
+- **New ticket:** it gets one primary value driver and is added to that driver's ticket list.
+- **Closed ticket** (Done or Decided Against): it is removed from its driver's ticket list, and its close note (the CHANGELOG.md entry, or the Decided Against reason) says which driver it targeted.
+- **Driver status** changes only on cited evidence: a run, a test result or a check, named with its commit or file. A ticket closing never changes a driver's status by itself.
 
 ### Matrix and Detail Block Invariant
 Always in sync. Touch one, touch the other. A matrix row without a detail block is invalid. A detail block without a matrix row is invalid. Matrix row and detail block must land in the same edit with matching Priority and Type fields. Fields that disagree are invalid and must be corrected before the session proceeds.
@@ -96,4 +103,4 @@ The end is the SHA after `..` in that trailer. If no `Sync-Range` trailer is new
 4. Update `<!-- last-backlog-sync: <sha> -->` to `<end>`.
 5. Run `python3 .claude/skills/mattgpt-docs-check/check_docs.py` and include the report. Findings in files this pass owns go into this pass's proposed diff; everything else gets flagged to Matt.
 6. Nothing writes until Matt approves the proposed diff.
-7. After Matt approves, write the files, stage `BACKLOG.md` and `CHANGELOG.md` by name, show Matt the commit message, and commit on his OK by pathspec, so nothing else that is staged gets included: `git commit -m "<summary>" -m "<body>" -- BACKLOG.md CHANGELOG.md`. Use repeated `-m` arguments for multi-paragraph messages. Never push.
+7. After Matt approves, write the files, stage `BACKLOG.md`, `CHANGELOG.md` and `docs/value_scorecard.md` by name, show Matt the commit message, and commit on his OK by pathspec, so nothing else that is staged gets included: `git commit -m "<summary>" -m "<body>" -- BACKLOG.md CHANGELOG.md docs/value_scorecard.md`. Use repeated `-m` arguments for multi-paragraph messages. Never push.
