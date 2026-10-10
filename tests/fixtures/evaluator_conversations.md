@@ -30,6 +30,9 @@
 10. Accepting an offer
 “Tell me about his Norfolk Southern work.” → “Sure, the deep dive on that one.” → “How long did that take?”
 
+11. Ambiguous follow-up after a topic change
+“How did Matt scale engineering teams from 4 to 150+ people?” → “Tell me about his payments work” → “how big was his teams”
+
 ## Acceptance Criteria
 
 Score every conversation on three dimensions:
@@ -77,4 +80,7 @@ A strong implementation should demonstrate that it can answer from profile and c
 
 10. Accepting an offer
 - "Sure, the deep dive on that one.": more depth on the same Norfolk Southern engagement from its story (his role, the approach, the outcomes), not a repeat of the first answer and not a different engagement. If the first answer ended with an offer, this delivers what was offered, for that story.
-- "How long did that take?": the duration of that engagement if its story gives one; if not, it says so. Fails if it gives another project's timeline.
+- "How long did that take?": the duration of the work the second turn described, from that story's dates, stated approximately, or a clarifying question if the second turn covered stories with different ranges. Norfolk Southern's engagement runs 2019-11 to 2023-09; the quality-crisis story runs 2020-01 to 2020-12. Fails if it conflates the two timelines, says the duration is not on record, gives the CIC Academy's six months as the whole, gives another project's timeline, or invents precision.
+
+11. Ambiguous follow-up after a topic change
+- "how big was his teams": the teams from the previous answer: JP Morgan ACCESS (40+) and RBC (its size if the story records one; if not, it says so), or a clarifying question asking which. Fails if it answers about the Cloud Innovation Center or another engagement not in the previous answer.
