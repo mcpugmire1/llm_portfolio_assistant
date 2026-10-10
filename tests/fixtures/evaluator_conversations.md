@@ -33,6 +33,33 @@
 11. Ambiguous follow-up after a topic change
 “How did Matt scale engineering teams from 4 to 150+ people?” → “Tell me about his payments work” → “how big was his teams”
 
+12. Comparing two engagements
+“Compare his Fiserv and JP Morgan ACCESS work.” → “Which was bigger?”
+
+13. Unambiguous follow-up
+“Tell me about his Fiserv work.” → “How big was the team?”
+
+14. Evaluating for a role
+“I’m hiring a VP of Platform Engineering. Would Matt be a fit?”
+
+15. Getting in touch
+“How do I get in touch with Matt?”
+
+16. Résumé
+“Can I see his résumé?”
+
+17. Accepting a seeded offer
+(seeded answer) → “Sure.”
+
+The first assistant turn is seeded with this answer, verbatim, so every run starts from the same offer:
+
+> 🐾 Found it! Matt was brought in roughly seven months into **Fiserv**'s 14-month, **$8.5M** white-label card portal program, the shared platform behind branded credit card sites for **2M+** cardholders across **15** financial institutions. The **45-person** globally dispersed team had missed multiple consecutive deadlines, and client stakeholders were threatening contract cancellation. He recovered a Q4 release that was **3 weeks** behind, avoiding **$500K** in penalties, and the program was delivered **3%** under budget with zero critical defects at launch.
+>
+> Want to hear how he moved that team from 6-month waterfall releases to 2-week sprints?
+
+18. Earlier topic competing with the latest
+“Tell me about his Norfolk Southern work.” → “Tell me about his RBC work.” → “How long did that take?”
+
 ## Acceptance Criteria
 
 Score every conversation on three dimensions:
@@ -84,3 +111,26 @@ A strong implementation should demonstrate that it can answer from profile and c
 
 11. Ambiguous follow-up after a topic change
 - "how big was his teams": the teams from the previous answer: JP Morgan ACCESS (40+) and RBC (its size if the story records one; if not, it says so), or a clarifying question asking which. Fails if it answers about the Cloud Innovation Center or another engagement not in the previous answer.
+
+12. Comparing two engagements
+- "Compare his Fiserv and JP Morgan ACCESS work.": both engagements from their stories. Fails if it leaves out either engagement.
+- "Which was bigger?": asks bigger by what (team, budget, reach), or names the dimension and compares both engagements accurately on it. The stories hold: Fiserv, a 45-person team and an $8.5M program; ACCESS, a blended team of 40+ and 135,000+ clients. Fails if it picks one without naming the dimension, compares on a dimension inaccurately, or leaves out one engagement.
+
+13. Unambiguous follow-up
+- "How big was the team?": the Fiserv team size from its story (45). Fails if it asks a clarifying question or gives another figure.
+
+14. Evaluating for a role
+- "I'm hiring a VP of Platform Engineering. Would Matt be a fit?": the facts relevant to the role's scope from the stories (organization size, platforms, delivery), with no level label ("VP-level", "Director-level", "Senior Director"), no vouching ("a strong fit"), and no refusal because of the VP title. It closes with an offer to run Role Match against the job description. Fails if it asserts or denies a level, evaluates fit itself, or has no Role Match close.
+
+15. Getting in touch
+- "How do I get in touch with Matt?": a close carrying Contact and LinkedIn links that work in the conversation view. Fails if either link is missing or invented.
+
+16. Résumé
+- "Can I see his résumé?": points to About Matt (his profile) and LinkedIn. Fails if it invents a file or a link.
+
+17. Accepting a seeded offer
+- "Sure.": delivers the offered thread, how he moved the Fiserv team from 6-month waterfall releases to 2-week sprints, from its story. Fails if it gives a different thread, a different engagement, or a repeat of the seeded answer.
+
+18. Earlier topic competing with the latest
+- "Tell me about his RBC work.": a new topic, answered from the RBC stories with no Norfolk Southern carry-over.
+- "How long did that take?": RBC's duration from its dates (June 2012 to June 2013, about a year), or a clarifying question between Norfolk Southern and RBC. Fails if it says the duration is not on record, gives Norfolk Southern's six months (the CIC Academy course) or any other Norfolk Southern figure (2019-11 to 2023-09; 2020-01 to 2020-12), or invents precision (days, weeks, an exact month count, or dates the corpus doesn't hold).
