@@ -38,7 +38,8 @@ synonyms, misspellings, missing punctuation and natural phrasing.
 
 **Status:** not measured.
 
-**Open tickets:** -283 (embedding model PoC), -185 (negation), -190
+**Open tickets:** -285 (nonsense filter rejects portfolio questions), -283
+(embedding model PoC), -185 (negation), -190
 (tokenizer divergence), -171 (phrase matching), -177 (token_overlap_ratio
 bound), -199 (AT&T content-kw gate), -063 (wrong-person queries), -077
 (pronoun and noun-overlap contamination), -195 (incident vocabulary
@@ -120,7 +121,8 @@ coverage), -282 (answering model beyond gpt-4o), -281 (openers), -280
 
 **Open tickets:** -251, -252, -255, -128 (source cards substantiate
 claims), -168 (slot 1 amplification), -250 (profile facts in Ask Agy, In
-Progress), -257, -263, -278, -279, -096, -217 (pronoun grammar).
+Progress), -257, -263, -278, -279, -096, -217 (pronoun grammar), -286 (meta-commentary
+strip deletes paragraphs).
 
 ## 4. Role Match
 
@@ -229,12 +231,14 @@ experience reliably and sustainably; failures are visible, not silent.
 
 **Open tickets:**
 - Alarms and telemetry: -222, -223.
+- Silent failures: -288 (Ask Agy ignores the Pinecone fallback signal).
 - Regression gates and test reliability: -039, -233, -235, -206, -153,
   -274, -084, -180, -277, -198, -035, -060, -082, -143 (Parked), -203,
   -209, -213.
 - Architecture and maintainability: -258, -259, -260, -261, -262, -140,
   -201, -202, -214, -226, -256.
-- Dead code and hygiene: -176, -232, -241, -152 (Parked), -270.
+- Dead code and hygiene: -176, -232, -241, -152 (Parked), -270, -287 (docs
+  describe a removed overlap gate).
 - Visible glitches: -229.
 
 ## 8. Professional demonstration

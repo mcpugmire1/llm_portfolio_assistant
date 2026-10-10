@@ -136,6 +136,10 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-282](#mattgpt-282) | Ask Agy's answering model has only been measured as gpt-4o | Open | Medium | Issue | October 8, 2026 |
 | [MATTGPT-283](#mattgpt-283) | PoC a newer embedding model for retrieval | Open | Medium | Issue | October 8, 2026 |
 | [MATTGPT-284](#mattgpt-284) | Synthesis mode is decided in four places, and the UI re-derives it | Open | Medium | Refactor | October 9, 2026 |
+| [MATTGPT-285](#mattgpt-285) | Nonsense filter rejects legitimate portfolio questions | Open | Medium | Bug | October 10, 2026 |
+| [MATTGPT-286](#mattgpt-286) | Meta-commentary strip can delete whole paragraphs, the opener included | Open | Medium | Bug | October 10, 2026 |
+| [MATTGPT-287](#mattgpt-287) | Docs and comments describe an overlap gate that no longer exists | Open | Low | Hygiene | October 10, 2026 |
+| [MATTGPT-288](#mattgpt-288) | rag_answer() ignores the fallback signal semantic_search() provides | Open | Medium | Bug | October 10, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -2325,6 +2329,102 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 3. Search behind an interface, with embed failures as a return value, not session state. Verified Oct 9, 2026 on HEAD: `get_synthesis_stories()` reports embed failures through `st.session_state["__embed_failure__"]`, which `rag_answer()` pops.
 
 **Source:** the read-only Clean Architecture assessment, Oct 9, 2026: `docs/evidence/MATTGPT-275/ca_synthesis_20261009_090024/clean_architecture_assessment.md` (65e0621).
+
+---
+
+### MATTGPT-285
+**Nonsense filter rejects legitimate portfolio questions**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `nonsense_filters.jsonl` (50 rules), `utils/validation.py` (`is_nonsense()`), `ui/pages/ask_mattgpt/backend_service.py` (`_nonsense_rejection()`)
+- **Logged:** October 10, 2026
+
+**Issue:** `is_nonsense()` runs each rule with `re.search(pattern, q, re.IGNORECASE)` and returns the first match's category. `_nonsense_rejection()` then sets `ask_last_reason = "rule:<category>"`, which shows the "Wrong trail" banner (`BANNER_COPY["rule"]` in `utils/ui_helpers.py`). Suggestion-chip questions skip it.
+
+**Observed (Oct 10, 2026):** The production rules, run locally the way `is_nonsense()` runs them, no app or API calls:
+- "When did Matt join Accenture?" and "What year did Matt start the CIC?": `general_knowledge`
+- "Tell me a story about Matt's leadership": `creative_writing`
+- "Explain Matt's philosophy on leadership": `general_knowledge`
+- "Has Matt worked on trading platforms?": `stocks_crypto`
+- "How did Matt calculate ROI?": `homework`
+- "Has Matt worked on gaming platforms?": `gaming`
+- Controls: "Tell me about his payments work" passes; "What is the weather today?" gets `weather`.
+
+**Not yet shown:** that these reach visitors on the live path (semantic checks L3 to L5 would show it), or any real visitor hits.
+
+**History:** Added in a933944 (Sept 12, 2025). ADR 013: "Out-of-scope or nonsensical queries (e.g., "weather today", "McDonald's salaries") are filtered via a lightweight rules/config file, not hardcoded." CLAUDE.md asks that patterns be tested against real queries ("Tell me about Matt's X") and avoid common verbs.
+
+**Scope:** Judge each matching rule against its original target. Any change re-tests the failures the rule prevents.
+
+---
+
+### MATTGPT-286
+**Meta-commentary strip can delete whole paragraphs, the opener included**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `ui/pages/ask_mattgpt/backend_service.py` (`_postprocess_agy_text()`), `config/constants.py` (`META_COMMENTARY_REGEX_PATTERNS`)
+- **Logged:** October 10, 2026
+
+**Issue:** The strip loops over `META_COMMENTARY_REGEX_PATTERNS` with `rf'[^.]*{pattern}[^.]*\.'`. `[^.]` also matches newlines, so a match deletes everything back to the previous period, across paragraphs.
+
+**Observed (Oct 10, 2026):** Local checks with the real patterns, no model call. "Matt led the payments rebuild at JP Morgan\n\nThe team grew to 40 and this demonstrates his range. He shipped it on time." returns " He shipped it on time.": the opener paragraph is gone. The reporting session's three-paragraph answer (opener, a JP Morgan paragraph, then "...and this demonstrates his range" plus a final sentence) returned an empty string.
+
+**History:** Added in c5a5785 (Jan 29, 2026): "Strips sentences containing patterns like showcases his ability". The code comment: "LLM sometimes ignores "don't evaluate Matt" instruction".
+
+**Related:** MATTGPT-255 (the same strip corrupting decimal amounts), a different defect in the same layer.
+
+**Scope:** Any change re-tests the meta-commentary failure the strip prevents, with story controls.
+
+---
+
+### MATTGPT-287
+**Docs and comments describe an overlap gate that no longer exists**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Hygiene
+- **Logged:** October 10, 2026
+
+**Issue:** Verified Oct 10, 2026: on the Ask path, `rag_answer()` computes `token_overlap_ratio()` only for the `ask_last_overlap` banner field, and both of its `semantic_search()` calls omit `enforce_overlap` (default False).
+
+**History:** The gate (overlap < 0.15) arrived with a933944. Per the reporting session's layer inventory, it left the Ask path in 0c5a785 (Dec 3, 2025), when the semantic router replaced the LLM guard; `git log -S` also lists a224cee (Dec 9, 2025, a legacy-file archive).
+
+**Still described as live in:**
+- `_router_rejection()`'s docstring ("caught by the overlap:0.00 gate")
+- `ui/pages/explore_stories.py` (a comment)
+- `tests/unit/test_semantic_router_gating.py` (a docstring)
+- MATTGPT-239's Copy discipline and acceptance ("the existing `overlap:0.00` off-topic path")
+- CHANGELOG.md (the MATTGPT-234 entry)
+
+**Also:** The comment above the RAG confidence thresholds in `config/constants.py` says the only "rejection path is CONFIDENCE_LOW below". The nonsense filter and router rejection also reject, and the gate that refuses is `CONFIDENCE_HIGH`.
+
+**Scope:** Decide what catches off-topic questions today (per the inventory, the confidence gate), and correct the docs and MATTGPT-239's acceptance to match.
+
+---
+
+### MATTGPT-288
+**rag_answer() ignores the fallback signal semantic_search() provides**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `services/rag_service.py` (`semantic_search()`), `ui/pages/ask_mattgpt/backend_service.py` (`rag_answer()`)
+- **Logged:** October 10, 2026
+
+**Issue:** `semantic_search()` sets `reason="fallback:pinecone_unavailable"` when Pinecone fails and it falls back to local keyword search (013d9ac, MATTGPT-230: "Sets reason="fallback:pinecone_unavailable" on upstream failure only; empty-list return stays unlabeled"). Explore Stories reads it and shows the breather banner. ADR 001 covers the fallback.
+
+**Observed (Oct 10, 2026):**
+- `git grep pinecone_unavailable -- ui services` finds it only in `services/rag_service.py` and `ui/pages/explore_stories.py`; `rag_answer()` never reads it.
+- For typed questions, the fallback's "low" confidence is refused anyway, with the "lost the trail" copy rather than the breather.
+- Suggestion clicks and router-trusted behavioral questions skip the gate and are answered from the fallback pool. Code-read only; never run.
+
+**Related:** An unfiled fallback investigation draft (silent local fallback), which this extends.
+
+**Scope:** What Ask Agy shows when retrieval fails. Any change re-tests the outage behavior from MATTGPT-162 and -230.
 
 ---
 
