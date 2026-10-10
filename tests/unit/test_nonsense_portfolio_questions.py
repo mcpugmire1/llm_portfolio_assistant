@@ -41,8 +41,23 @@ LEGITIMATE = [
     "Tell me a story about Matt's leadership",
     "Tell me a story about his time at JP Morgan",
     "Explain Matt's philosophy on leadership",
-    "Has Matt worked on trading platforms?",
-    "How did Matt calculate ROI?",
+    # Held: unblocking these lets Agy answer untruthfully (Oct 10, 2026 live
+    # run: "worked extensively on trading platforms"; RBC framed as an ROI
+    # calculation). Lines 4 and 32 stay unchanged until MATTGPT-251.
+    pytest.param(
+        "Has Matt worked on trading platforms?",
+        marks=pytest.mark.xfail(
+            strict=True,
+            reason="MATTGPT-251: answer misattributes when unblocked",
+        ),
+    ),
+    pytest.param(
+        "How did Matt calculate ROI?",
+        marks=pytest.mark.xfail(
+            strict=True,
+            reason="MATTGPT-251: answer misattributes when unblocked",
+        ),
+    ),
     "Has Matt worked on gaming platforms?",
     "What has Matt done in the gaming industry?",
     "When was he at JP Morgan?",

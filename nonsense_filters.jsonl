@@ -15,10 +15,10 @@
 {"category":"personal_trivia","pattern":"favorite (color|food|movie|song|book|animal|sport)"}
 {"category":"personal_trivia","pattern":"what('s| is) matt('s)? (favorite|least favorite)"}
 {"category":"sports","pattern":"\\b(super bowl|world series|world cup|olympics|championship|playoffs|stanley cup|march madness)\\b"}
-{"category":"creative_writing","pattern":"\\b(write|compose|create)\\b.*(poem|story|song|haiku|limerick|essay|fiction)\\b"}
-{"category":"creative_writing","pattern":"\\b(poem|story|haiku|limerick)\\b.*\\b(about|for|regarding)\\b"}
-{"category":"general_knowledge","pattern":"\\b(capital of|president of|who (is|was) the|when (did|was)|what year)\\b"}
-{"category":"general_knowledge","pattern":"\\b(explain|define|what is)\\b.*(quantum|physics|chemistry|biology|calculus|philosophy)\\b"}
+{"category":"creative_writing","pattern":"^(?!.*\\b(matt|matt's|pugmire|he|his|him)\\b).*\\b(write|compose|create)\\b.*(poem|story|song|haiku|limerick|essay|fiction)\\b"}
+{"category":"creative_writing","pattern":"^(?!.*\\b(matt|matt's|pugmire|he|his|him)\\b).*\\b(poem|story|haiku|limerick)\\b.*\\b(about|for|regarding)\\b"}
+{"category":"general_knowledge","pattern":"^(?!.*\\b(matt|matt's|pugmire|he|his|him)\\b).*\\b(capital of|president of|who (is|was) the|when (did|was)|what year)\\b"}
+{"category":"general_knowledge","pattern":"^(?!.*\\b(matt|matt's|pugmire|he|his|him)\\b).*\\b(explain|define|what is)\\b.*(quantum|physics|chemistry|biology|calculus|philosophy)\\b"}
 {"category":"recruiter_logistics","pattern":"\\b(salary|compensation|pay|rate)\\b.*(expectation|requirement|range|target)\\b"}
 {"category":"cooking_recipes","pattern":"\\b(recipe|how to (cook|make|bake|prepare)|ingredients for)\\b"}
 {"category":"directions_travel","pattern":"\\b(directions to|how (do i|to) get to|route to|distance from)\\b"}
@@ -33,7 +33,7 @@
 {"category":"jokes_riddles","pattern":"\\b(tell me a joke|make me laugh|riddle|knock knock|funny story)\\b"}
 {"category":"dating_relationships","pattern":"\\b(how to (ask out|break up|get over)|relationship advice|dating tips|tinder|bumble)\\b"}
 {"category":"news_current_events","pattern":"\\b(what happened (today|yesterday)|breaking news|latest news|current events)\\b"}
-{"category":"gaming","pattern":"\\b(fortnite|minecraft|call of duty|playstation|xbox|nintendo|gaming|video game cheats)\\b"}
+{"category":"gaming","pattern":"^(?!.*\\b(matt|matt's|pugmire|he|his|him)\\b).*\\b(fortnite|minecraft|call of duty|playstation|xbox|nintendo|gaming|video game cheats)\\b"}
 {"category":"astrology","pattern":"\\b(mercury retrograde|birth chart|rising sign|moon sign|compatibility|aries|taurus|gemini|cancer|leo|virgo|libra|scorpio|sagittarius|capricorn|aquarius|pisces)\\b.*\\b(horoscope|astrology|zodiac)\\b"}
 {"category":"religious_spiritual","pattern":"\\b(bible verse|quran|torah|prayer|god says|what does god|spiritual meaning)\\b"}
 {"category":"adult_content","pattern":"\\b(nsfw|porn|xxx|nude|naked|sex)\\b"}
@@ -48,3 +48,4 @@
 {"category":"code_garbage","pattern":"^\\s*[{\\[].*[}\\]]\\s*$"}
 {"category":"personal_compensation","pattern":"\\b(salary|salaries|compensation|income|earnings?|wages?|bonus(?:es)?|paycheck)\\b"}
 {"category":"personal_compensation","pattern":"\\bhow much money\\b.{1,25}?\\b(make|makes|made|earn|earns|earned|paid|paying)\\b"}
+{"category":"roleplay_impersonation","pattern":"\\b(roleplay|role-play|role play|pretend|act)\\b[^.?!]{0,40}\\b(as|to be|you are|you're)\\s+(her|him|them|my\\s+(late\\s+)?(grandmother|grandma|granny|grandfather|grandpa|mother|mom|father|dad|aunt|uncle|sister|brother|wife|husband))\\b"}
