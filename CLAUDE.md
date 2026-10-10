@@ -27,7 +27,7 @@ Rules marked "Enforced" are also blocked by hooks. If a hook blocks a command, s
 ## Where Things Live
 - `scripts/arch-sync-session.sh` and `scripts/backlog-session.sh`: launch the two docs sessions, one per pass.
 - `mattgpt-architecture-sync` skill (`.claude/skills/`): ARCHITECTURE.md and `docs/ADR.md` from recent commits. Arch sync session only.
-- `mattgpt-backlog-maintenance` skill (`.claude/skills/`): BACKLOG.md and CHANGELOG.md. Backlog session only.
+- `mattgpt-backlog-maintenance` skill (`.claude/skills/`): BACKLOG.md, CHANGELOG.md and `docs/value_scorecard.md`. Backlog session only.
 - `ARCHITECTURE.md`: full system context, including the file structure.
 - [Design Specification](https://mcpugmire1.github.io/mattgpt-design-spec/): canonical tech stack and system architecture. Do not duplicate tech stack facts here.
 
@@ -36,7 +36,7 @@ Rules marked "Enforced" are also blocked by hooks. If a hook blocks a command, s
 - **Current state only.** CLAUDE.md and ARCHITECTURE.md hold current rules and current state: no dates, ticket IDs, incident history, or change narrative. History goes to `docs/ADR.md` (decisions, removals, rejections) or CHANGELOG.md (shipped work).
 - **CLAUDE.md:** Matt writes it himself. No Claude session edits it.
 - **`.claude/settings.json`, `.claude/hooks/`, `.githooks/`, `.pre-commit-config.yaml`:** Matt owns these. No automated process writes to them on its own initiative; Code applies a change only when Matt directs that specific change.
-- **ARCHITECTURE.md and `docs/ADR.md`:** written only by the arch sync session. **BACKLOG.md and CHANGELOG.md:** written only by the backlog session. Dev sessions never write any of the four; their commit messages are the handoff. (Enforced: the pre-commit role check limits each session to its own files.)
+- **ARCHITECTURE.md and `docs/ADR.md`:** written only by the arch sync session. **BACKLOG.md, CHANGELOG.md and `docs/value_scorecard.md`:** written only by the backlog session. Dev sessions never write any of these; their commit messages are the handoff. (Enforced: the pre-commit role check limits each session to its own files.)
 
 ## Code Conventions
 - Filter state lives in `st.session_state["filters"]`
