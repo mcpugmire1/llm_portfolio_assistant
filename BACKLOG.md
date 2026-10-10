@@ -2124,6 +2124,8 @@ These only affect behavior if tags feed filters or counts. Fix is in the master 
 
 **Acceptance:** After re-export and re-embed, Role Match no longer returns a blanket gap on the thought-leadership requirement. No claim in any new story lacks a named artifact.
 
+**Awaiting validation (Oct 10, 2026):** A thought leadership story landed in ab65efc (Oct 9). Re-embed and the Acceptance run are not recorded. Closing waits on that run. The gap also affects Ask Agy retrieval; the scorecard lists the ticket under Role Match as its primary driver.
+
 ---
 
 ### MATTGPT-274
