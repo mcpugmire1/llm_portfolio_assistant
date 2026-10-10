@@ -22,9 +22,9 @@ while IFS= read -r f; do
   esac
 done < <(git diff --cached --name-only --diff-filter=ACM)
 
-# Role check: each docs session commits only its own two files; a dev session commits none of the four.
+# Role check: each docs session commits only its own files; a dev session commits none of them.
 # MATTGPT_DOCS_SESSION=arch (scripts/arch-sync-session.sh): ARCHITECTURE.md, docs/ADR.md only.
-# MATTGPT_DOCS_SESSION=backlog (scripts/backlog-session.sh): BACKLOG.md, CHANGELOG.md only.
+# MATTGPT_DOCS_SESSION=backlog (scripts/backlog-session.sh): BACKLOG.md, CHANGELOG.md, docs/value_scorecard.md only.
 # Commits from Matt's own terminal (no CLAUDECODE) are not checked.
 ARCH_FILES="ARCHITECTURE.md docs/ADR.md"
 BACKLOG_FILES="BACKLOG.md CHANGELOG.md docs/value_scorecard.md"
