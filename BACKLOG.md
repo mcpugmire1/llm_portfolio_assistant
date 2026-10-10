@@ -1482,6 +1482,7 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 - Demo JD row 22 ("partnering with C-suite") no longer returns SUPPORTED with a Build-Measure-Learn citation.
 - CI/CD-qualifier requirement: if still over-calling after `5aee8a4`/`b28a080`, assessed correctly relative to corpus evidence actually present.
 - No regression on the demo JD (requirements with clear corpus evidence still return SUPPORTED).
+- Under-calls count too: a requirement isn't scored Partial when the cited story records evidence that meets the requirement's plain wording, internal or external. Case: the Oct 10 "Published thought leadership or conference speaking..." row above. That story is being updated in the current corpus round (Townhall presentation, ARISE conference sessions), so re-check this row after the next ingestion.
 - `confidence` field absent from assessment prompt, response schema, and all downstream consumers. No references to `confidence` remain in the Role Match pipeline.
 
 **Cross-references:**
