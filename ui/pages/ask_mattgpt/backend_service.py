@@ -583,7 +583,7 @@ def get_synthesis_stories(
                         pc_field: {"$eq": pc_value},
                     },
                     top_k=top_per_theme,
-                    include_metadata=True,
+                    include_metadata=False,  # ids and scores only; stories are looked up locally
                     namespace=PINECONE_NAMESPACE,
                 )
                 matches = getattr(results, "matches", []) or []
@@ -604,7 +604,7 @@ def get_synthesis_stories(
                     vector=query_vector,
                     filter={"Theme": {"$eq": theme}},
                     top_k=top_per_theme,
-                    include_metadata=True,
+                    include_metadata=False,  # ids and scores only; stories are looked up locally
                     namespace=PINECONE_NAMESPACE,
                 )
 

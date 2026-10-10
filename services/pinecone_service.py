@@ -296,7 +296,9 @@ def pinecone_semantic_search(
         res = idx.query(
             vector=qvec,
             top_k=top_k,
-            include_metadata=True,
+            # Ids and scores only: each story's full text is stored as metadata
+            # (about 8 KB a match), and the app looks stories up locally.
+            include_metadata=False,
             namespace=PINECONE_NAMESPACE,
             filter=pc_filter or None,
         )
@@ -308,10 +310,13 @@ def pinecone_semantic_search(
             try:
                 preview = []
                 for m in matches[:8]:
-                    sid, score, meta = _extract_match_fields(m)
-                    found = any(str(s.get("id")) == str(sid) for s in stories)
-                    title = (meta or {}).get("title") or ""
-                    client = (meta or {}).get("client") or ""
+                    sid, score, _meta = _extract_match_fields(m)
+                    local = next(
+                        (s for s in stories if str(s.get("id")) == str(sid)), None
+                    )
+                    found = local is not None
+                    title = (local or {}).get("Title") or ""
+                    client = (local or {}).get("Client") or ""
                     if title and client:
                         title = f"{client} — {title}"
                     if len(title) > 72:
@@ -365,7 +370,7 @@ def pinecone_semantic_search(
             if not story:
                 continue
 
-            snip = meta.get("summary") or meta.get("snippet") or ""
+            snip = story.get("5PSummary") or ""
             if snip and pc_snippets is not None:
                 try:
                     pc_snippets[str(sid)] = snip
