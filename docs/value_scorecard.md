@@ -232,7 +232,7 @@ experience reliably and sustainably; failures are visible, not silent.
 
 **Open tickets:**
 - Alarms and telemetry: -222, -223.
-- Silent failures: -288 (Ask Agy ignores the Pinecone fallback signal).
+- Silent failures: -292 (silent file-order fallback), -288 (Ask Agy ignores the Pinecone fallback signal).
 - Regression gates and test reliability: -039, -233, -235, -206, -153,
   -274, -084, -180, -277, -198, -035, -060, -082, -143 (Parked), -203,
   -209, -213.

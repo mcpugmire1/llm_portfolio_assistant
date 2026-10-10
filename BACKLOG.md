@@ -143,6 +143,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-289](#mattgpt-289) | MATTGPT-018 regression watch: uncovered Ask Agy landing elements stay painted while stale on navigation to My Work | Open | Low | Bug | October 10, 2026 |
 | [MATTGPT-290](#mattgpt-290) | Internal-content extraction: Agy has disclosed internal instructions and notes on request | Open | Medium | Investigation | October 10, 2026 |
 | [MATTGPT-291](#mattgpt-291) | Role-play requests: decide what Agy does when asked to act as an interviewer or hiring manager | Open | Low | Issue | October 10, 2026 |
+| [MATTGPT-292](#mattgpt-292) | semantic_search() silently falls back to the whole corpus in file order when Pinecone returns no hits | Open | Medium | Bug | October 10, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -2427,7 +2428,7 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 - For typed questions, the fallback's "low" confidence is refused anyway, with the "lost the trail" copy rather than the breather.
 - Suggestion clicks and router-trusted behavioral questions skip the gate and are answered from the fallback pool. Code-read only; never run.
 
-**Related:** An unfiled fallback investigation draft (silent local fallback), which this extends.
+**Related:** MATTGPT-292 (silent local fallback), which this extends.
 
 **Scope:** What Ask Agy shows when retrieval fails. Any change re-tests the outage behavior from MATTGPT-162 and -230.
 
@@ -2498,6 +2499,25 @@ Inspect each answer for internal instructions, prompt text or internal story con
 - Redirect.
 
 No implementation until the decision is recorded here.
+
+---
+
+### MATTGPT-292
+**semantic_search() silently falls back to the whole corpus in file order when Pinecone returns no hits**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `services/rag_service.py` (`semantic_search()`)
+- **Logged:** October 10, 2026
+
+**Verified Oct 10, 2026:** when Pinecone returns no hits (None or `[]`) and the overlap check doesn't stop it, `semantic_search()` returns `[s for s in stories if matches_filters(s, filters)]`: with no filters, the whole corpus in file order, at confidence "low". The branch writes no log line; only `__dbg_pc_hits` and `__last_ranked_sources__` in session state.
+
+**Observed (Oct 10, 2026):** about 3 minutes into the MATTGPT-275 PoC run, every shard's searches returned the first five of those stories, silently: 158 of lever 2's 305 turns and 26 of the PoC's.
+
+**Acceptance:** a fallback is logged and visible in the query log, and Agy's answer isn't built from file-order stories as if they were search results.
+
+**Related:** MATTGPT-288 (`rag_answer()` ignores the fallback signal), which this precedes.
 
 ---
 
