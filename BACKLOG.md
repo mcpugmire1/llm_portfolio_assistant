@@ -144,6 +144,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-291](#mattgpt-291) | Role-play requests: decide what Agy does when asked to act as an interviewer or hiring manager | Open | Low | Issue | October 10, 2026 |
 | [MATTGPT-292](#mattgpt-292) | semantic_search() silently falls back to the whole corpus in file order when Pinecone returns no hits | Open | Medium | Bug | October 10, 2026 |
 | [MATTGPT-293](#mattgpt-293) | Router out_of_scope copy says "I don't have experience in that industry" and hardcodes an industry list | Open | Low | Bug | October 11, 2026 |
+| [MATTGPT-294](#mattgpt-294) | Split MATT_DNA by responsibility: background may orient, not substitute for evidence | Blocked | Medium | Refactor | October 11, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -2176,7 +2177,7 @@ These only affect behavior if tags feed filters or counts. Fix is in the master 
 
 **Browser, Oct 6:** Agy's own closers ('There's more to this story', 'the deep dive on this one') invite follow-ups that retrieve unrelated stories on every turn. The closers promise a continuation the pipeline can't deliver; 275's acceptance should include accepting a closer.
 
-**Requirement:** Everything in the model's context is grounded; MATT_DNA is held to the same story-or-profile backing as retrieval (MATTGPT-269, Done). Carried over from 269's "moves to data" (verified Oct 6, 2026, still hardcoded in `generate_dynamic_dna()`): Career Arc employer dates and status, and Leadership Philosophy. Move each to `matt_profile.json` or derive it from the corpus. Also carried over: 269 item 5. Drop the "How Matt Wins Business (NOT a sales role)" heading and its sales framing; keep the backed `$100M+` repeat-business fact, moved under Signature Achievements. The Industry Experience block is MATTGPT-279.
+**Requirement:** Everything in the model's context is grounded; MATT_DNA is held to the same story-or-profile backing as retrieval (MATTGPT-269, Done). The MATT_DNA split (Career Arc, Leadership Philosophy, How Matt Wins Business, Signature Achievements, Theme Strengths, the client and industry lists) moved to MATTGPT-294 (Oct 11, 2026), so 275's Green is about the tool path only. The Industry Experience block is MATTGPT-279.
 
 **Constraint:** Do not change `CONFIDENCE_HIGH`; the gate leaves the answer path.
 
@@ -2520,6 +2521,46 @@ No implementation until the decision is recorded here.
 - The industry list is hand-typed, the MATTGPT-279 class. Derive it from the corpus or drop it.
 
 **Copy wording is Matt's.**
+
+---
+
+### MATTGPT-294
+**Split MATT_DNA by responsibility: background may orient, not substitute for evidence**
+
+- **Status:** Blocked
+- **Priority:** Medium
+- **Type:** Refactor
+- **File:** `ui/pages/ask_mattgpt/backend_service.py` (`generate_dynamic_dna()`), `ui/pages/ask_mattgpt/prompts.py`, `data/matt_profile.json`, `config/constants.py` (`PROFILE_FACT_CATEGORIES`)
+- **Logged:** October 11, 2026
+- **Dependencies:** MATTGPT-275. Set to Open at 275's Green, not its close.
+
+**Principle (Matt, Oct 11, 2026):** background may orient, not substitute for evidence.
+
+**Evidence:**
+- x1, Oct 11 (`docs/evidence/MATTGPT-275/poc_rerun_20261011_084138/NOTES.md`, 0a9ce56): "the gap action's search returned no stories; answers named Accredited and Cendant and called the work real estate." Matt's reading: the empty retrieval was filled from DNA's client list.
+- c09 t3/t4, same notes: clarify plans that gathered no evidence still gave content, including an unsourced "team of 40 engineers". Instructions don't reliably bind.
+- MATTGPT-269 (Done): DNA carried unbacked figures and the NOT-clients list, which Agy recited.
+- MATTGPT-279: the Industry Experience block is half hand-typed.
+
+**Verified Oct 11, 2026 (`generate_dynamic_dna()`):**
+- Hand-written in DNA: the Career Arc block (employers and dates, "Currently: Sabbatical, building MattGPT. In active search for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job."), the three Leadership Philosophy bullets, Theme Strengths, Signature Achievements and "How Matt Wins Business".
+- `self_description_block` already comes from the profile.
+- Two sources of permission: the header "Clients by Employer (ONLY cite these)" and grounding rule 1, "ONLY cite clients, projects, and metrics that appear in the stories below".
+- `data/matt_profile.json` keys: name, career_summary, education, certifications, languages, logistics, self_description. No employment history.
+- The "same job" sentence was quoted in 9 PoC answers (same notes).
+
+**Split:**
+1. **Voice and grounding rules move into the prompt.** The stories and the profile become the only sources of permission; the "ONLY cite these" client list stops being one.
+2. **Client and industry lists:** derived from the corpus and used in code only (validating names, entity detection, post-checks). Not shown to the answering model: a list in the prompt becomes an answer source when retrieval comes back thin (x1). Questions like "Which companies has Matt worked with?" (a MATTGPT-269 probe question) or "What industries?" then need a real source: a derived summary passed in as evidence for that question type, or a profile fact.
+3. **Career arc:** derive what the corpus can give (Employer plus story dates). Only the rest goes in the profile: 18.5 years at Accenture and the sabbatical (the "Currently" line, item 4). A new profile category is a schema change: rule 0a, the `[[profile:...]]` markers and `PROFILE_FACT_CATEGORIES` all need it.
+4. **Self-description:** the Leadership Philosophy bullets and the "Currently" line move to the profile, next to `self_description`.
+5. **Signature Achievements:** remove. They're story facts, and the stories already carry them (ADR 036: MATT_DNA doesn't restate story facts). This includes the `$100M+` repeat-business fact, from the Building Cloud Innovation Centers story.
+6. **Theme Strengths:** derive from the corpus in code, or drop. They're not facts about Matt.
+7. **How Matt Wins Business:** drop the heading and its sales framing (MATTGPT-269 item 5, carried over from MATTGPT-275's Requirement).
+
+**Tests to update:** `tests/unit/test_matt_dna_grounding.py` and the `matt_dna_grounding_drift` and `matt_dna_career_span` BDD features pin MATT_DNA content (ADR 036, Consequences).
+
+**Acceptance:** a removal in the answer pipeline, so a live acceptance run comes before it ships (CLAUDE.md subtract-first rule): `tests/fixtures/evaluator_conversations.md` plus the MATTGPT-251 extras, same rubric and rules as MATTGPT-275's runs, DNA trimmed vs present. Lever 1's earlier trim measured only the search rate, not answer quality.
 
 ---
 
