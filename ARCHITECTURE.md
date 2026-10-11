@@ -364,6 +364,10 @@ Per-element bindings inside `components.html` iframes. Dies on Streamlit rerun (
 
 ### My Profile Page (`ui/pages/about_matt.py`)
 
+The page subtitle is `_PROFILE_SUBTITLE`, read by both the page header (`_ABOUT_HTML`) and the Download PDF's sub line, so the two cannot drift.
+
+Type scale follows Home's rendered scale (`prof-*` rules in `global_styles.py`): body 15px, secondary body 14px, item titles 16px, labels 12-13px. The mobile block (`@media (max-width: 768px)`) keeps the desktop sizes and takes the signals and competency grids to 2 columns. See ADR 044 in `docs/ADR.md`.
+
 The "For a referrer" section has two interactions, Copy snippet and Download PDF.
 
 - **Copy snippet:** HTML `<span id="am-copy-snippet-btn">` wired via Pattern 2 delegated listener. Calls `window.parent.navigator.clipboard.writeText()`. Both `.then` and `.catch` change the span label to `✓ Copied!` (green, 2s timeout) so feedback fires regardless of clipboard permission state.
@@ -659,6 +663,7 @@ This section defines the **job, rules, and constraints** for each retrieval comp
 - **Cost:** Zero (pure regex, no API calls)
 - **Rule:** Runs FIRST before any embedding or LLM cost
 - **Categories:** `celebrity_earnings` (salary/net-worth questions about named public figures), `recruiter_logistics` (compensation range or expectation questions framed as recruiter screens), `personal_compensation` (Matt's own pay). `personal_compensation` uses two patterns: a broad-vocabulary pattern covering salary terminology and a contextual pattern covering indirect phrasings ("how much money does he make"). Two patterns are needed because the indirect form bypasses the broad-vocabulary match. `recruiter_logistics` covers compensation only; location, relocation, start-date, and availability questions are answered from the profile fact surface.
+- **Questions about Matt:** five rules (`creative_writing` and `general_knowledge`, two each, and `gaming`) start with the lookahead `^(?!.*\b(matt|matt's|pugmire|he|his|him)\b)`, so a question that names Matt or uses he, his or him passes them. `stocks_crypto` and `homework` have no lookahead. `roleplay_impersonation` rejects requests to roleplay, pretend or act as a person named by a pronoun or by "my" plus a family word; role phrasings ("a hiring manager", "my interviewer") pass. Both key on wording, not intent. See ADR 043 in `docs/ADR.md`.
 
 #### Semantic Router
 - **Job:** Embedding-based intent classification to reject borderline off-topic queries
@@ -895,7 +900,7 @@ Checks fields in order: Client, Employer, Division. Project and Place are not de
 ```
 query_vector → Pinecone.query(top_k=SEARCH_TOP_K, filter=entity_filters)  # 25
 ↓
-Returns: [(story_id, score, metadata), ...] sorted by cosine similarity
+Returns: [(story_id, score), ...] sorted by cosine similarity; stories are looked up locally by id
 ```
 
 **2. Entity Pinning (backend_service.py)**
@@ -956,10 +961,10 @@ Synthesis: up to 9 (3 per theme × 3 themes)
 - **Standard mode:** WHY (tension/stakes — what wasn't working) → HOW (what Matt did differently) → WHAT (proof — measurable results)
 - **Synthesis mode:** Name patterns → Prove with client examples → Connect the thread
 
-**Python-Driven Randomization** (for variety):
-- 10 standard mode openings ("🐾 Found it!", "🐾 Great question!", etc.)
-- 5 synthesis mode openings ("🐾 Looking across Matt's portfolio...", etc.)
-- 6 focus angles: human impact, methodology, scale, leadership, outcomes, innovation
+**Python-Driven Randomization** (for variety), picked by `_choose_opening_and_focus()` from module constants in `backend_service.py`:
+- 8 standard mode openings, `STANDARD_OPENERS` ("🐾 Found it!", "🐾 On it!", etc.)
+- 4 synthesis mode openings, `SYNTHESIS_OPENERS` ("🐾 Looking across Matt's portfolio, I see clear patterns.", etc.), plus the `SYNTHESIS_BREADTH` line
+- 6 focus angles, `FOCUS_ANGLES`: human impact, methodology, scale, leadership, outcomes, innovation
 
 Responses end without a closing offer. See ADR 035 in `docs/ADR.md`.
 
@@ -971,11 +976,11 @@ MATT_DNA states only facts that a story or `data/matt_profile.json` backs. It do
 - Practitioner count, parsed from the Cloud Innovation Center story (fallback 150)
 - Clients by Employer ("ONLY cite these"): each employer's named clients, excluding generic placeholder clients, Professional Narrative stories, and employers whose only client is themselves
 - The themes list, from `SYNTHESIS_THEMES`
-- Client lists for Financial Services / Banking, Telecommunications, and Transportation & Logistics
+- Industry Experience: every Industry value except "Cross Industry", as "{Industry}: {n} stories ({clients})", most stories first, with the non-generic clients of that industry's stories. See ADR 042 in `docs/ADR.md`.
 
 **Read from the profile:** `self_description` in `data/matt_profile.json`, rendered under its own label as Matt's self-description, not as verified fact. If the profile can't be read, the block is omitted and the failure is logged. Role Match grounding (`jd_assessor.load_matt_profile()`) does not include it. See ADR 038 in `docs/ADR.md`.
 
-**Curated sections:** Career Arc (employers and date ranges), Theme Strengths (tiered by story count: Execution & Delivery primary, Org Transformation a strong secondary theme, the rest narrower), Industry Experience (including the industries that are not Matt's), Signature Achievements, How Matt Wins Business, and Leadership Philosophy.
+**Curated sections:** Career Arc (employers and date ranges), Theme Strengths (tiered by story count: Execution & Delivery primary, Org Transformation a strong secondary theme, the rest narrower), Signature Achievements, How Matt Wins Business, and Leadership Philosophy.
 
 **Grounding rules:** cite only clients, projects, and metrics in the retrieved stories; say "In one engagement..." when unsure; never invent outcomes or name clients not on the list; frame revenue impact as delivery excellence, not sales; lead synthesis answers with the Themes.
 
@@ -1696,9 +1701,14 @@ def build_system_prompt(is_synthesis: bool, matt_dna: str, client_list: str = ""
     **GROUNDING RULES:** and citation rules 0a/0b immediately after it."""
 
 def build_user_message(question, story_context, opening, is_synthesis, verbatim_requirement="", focus_angle="", profile_facts: str = "") -> str:
-    """Build user message with stories and response instructions.
+    """Build user message with stories, ending with build_answer_instructions()
+    and "Start your response with this exact text: {opening}" as its opening line.
     When profile_facts is non-empty, citation rule 0a is appended at the end of the message.
     The attested-facts block and rule 0b stay in the system prompt only."""
+
+def build_answer_instructions(opening_line, is_synthesis, verbatim_requirement="", focus_angle="", profile_facts="") -> str:
+    """The "## INSTRUCTIONS" block: opener line, focus angle, verbatim requirement,
+    prose, bolding, "State facts", and citation rule 0a."""
 
 def get_verbatim_requirement(summary: str) -> str:
     """Extract required verbatim phrases from Professional Narrative stories."""
@@ -2053,6 +2063,7 @@ def get_pinecone_index():
 - `top_k`: 25 (retrieve top 25 matches, from `SEARCH_TOP_K` in config/constants.py)
 - `min_similarity`: 0.15 (from `PINECONE_MIN_SIM` in config/constants.py)
 - `namespace`: "default"
+- `include_metadata`: False. Queries return ids and scores only; story text and the hit snippet (`5PSummary`) come from the local corpus. Metadata is still stored and used for Pinecone-side filters. The same applies to both query branches of `get_synthesis_stories()`. See ADR 041 in `docs/ADR.md`.
 
 **Metadata Filters:**
 ```python
@@ -2653,7 +2664,7 @@ Two automated gates enforce the hermetic unit suite:
 
 **xfail markers:** 5 known-failure tests carry `@pytest.mark.xfail` so they register as expected failures rather than silently degrading the pass count. If a new persistent failure appears, add `xfail` with a ticket reference rather than deleting the test.
 
-**Commit-time checks:** `.githooks/pre-commit` fails on em dashes in added lines (files under `docs/evidence/` are skipped) and on dynamically hashed Streamlit classes in added lines of `ui/` or `app.py`. `.githooks/commit-msg` fails on an em dash in the message, a `Co-Authored-By` line, or a Green commit that reports a gate as "not run". In a Claude Code session (`CLAUDECODE` set), a role check limits which doc files a commit may contain: `MATTGPT_DOCS_SESSION=arch` (launched by `scripts/arch-sync-session.sh`) commits only `ARCHITECTURE.md` and `docs/ADR.md`; `MATTGPT_DOCS_SESSION=backlog` (`scripts/backlog-session.sh`) commits only `BACKLOG.md` and `CHANGELOG.md`; a session with no value commits none of the four; any other value is refused. Commits from a terminal outside Claude Code are not role-checked. A Claude Code session cannot push: `.claude/settings.json` denies push commands and `.claude/hooks/guard-bash.sh` blocks `git push` in any form, so pushes run from Matt's terminal. See ADR 027 in `docs/ADR.md`.
+**Commit-time checks:** `.githooks/pre-commit` fails on em dashes in added lines (files under `docs/evidence/` are skipped) and on dynamically hashed Streamlit classes in added lines of `ui/` or `app.py`. `.githooks/commit-msg` fails on an em dash in the message, a `Co-Authored-By` line, or a Green commit that reports a gate as "not run". In a Claude Code session (`CLAUDECODE` set), a role check limits which doc files a commit may contain: `MATTGPT_DOCS_SESSION=arch` (launched by `scripts/arch-sync-session.sh`) commits only `ARCHITECTURE.md` and `docs/ADR.md`; `MATTGPT_DOCS_SESSION=backlog` (`scripts/backlog-session.sh`) commits only `BACKLOG.md`, `CHANGELOG.md` and `docs/value_scorecard.md`; a session with no value commits none of these five; any other value is refused. Commits from a terminal outside Claude Code are not role-checked. A Claude Code session cannot push: `.claude/settings.json` denies push commands and `.claude/hooks/guard-bash.sh` blocks `git push` in any form, so pushes run from Matt's terminal. See ADR 027 in `docs/ADR.md`.
 
 **Probes and evidence:** Probe scripts and their output live in `probes/`, which is gitignored; output goes under `probes/output/<ticket>/<timestamp>/`. Output that a ticket, commit, or ADR cites is copied byte-identical into `docs/evidence/MATTGPT-<n>/`, which is tracked. Tracked scripts at the repo root include `probe_assessor.py` (with its `probe_extraction_*.json` caches) and the corpus pipeline's `generate_*.py` tools. `tests/fixtures/evaluator_conversations.md` holds the evaluator conversations and approved expected answers, the acceptance set for Ask Agy conversation changes. See ADR 039 in `docs/ADR.md`.
 

@@ -1078,3 +1078,141 @@ Role Match remains a separate, retrieval-heavy workflow.
 - Accepted once the Arm A and Arm C evaluator scores support it, read against this design. It will then supersede the parts of ADRs 033 and 035 it replaces, and the gate, router dependence, reshuffle, and substitution become candidates for removal, each with its own removal ADR.
 - Follow-ups such as "What went wrong?" depend on step 1; Arm A alone cannot fix them.
 - MATTGPT-275's scope (tool-calling retrieval) needs reconciling with this ADR in the backlog pass.
+
+---
+
+## ADR 041: Pinecone Queries Return Ids and Scores Only
+
+**Date:** 2026-10-10
+**Status:** Accepted
+**Related tickets:** MATTGPT-275
+
+**Context:**
+Every story is uploaded to Pinecone with its full text as metadata, about 8 KB a match. One `top_k=25` query returned 205,342 bytes. The app reads only the match id, because stories are looked up in the local corpus, and the hit snippet, which is the story's own `5PSummary`. On 2026-10-10, probe traffic at that size reached the Starter plan's 1 GB monthly egress cap, and capped queries fell back silently to local results (MATTGPT-275 run `poc_clean_20261010_093712`, labelled invalid).
+
+**Decision:**
+`pinecone_semantic_search()` in `services/pinecone_service.py` and both query branches of `get_synthesis_stories()` in `backend_service.py` pass `include_metadata=False`. The hit snippet comes from the local story's `5PSummary`, and the DEBUG preview reads title and client from the local story. Metadata is still stored at ingestion and still used for Pinecone-side filters.
+
+**Rationale:**
+- Measured with the query "Fiserv white-label card portal", same client and script: 205,342 bytes before, 3,127 after; the same 25 story ids in the same order, scores within 0.001.
+- Rejected: lowering `top_k`, because it changes ranking.
+- Rejected: trimming the uploaded metadata, because it changes ingestion. Ids-only changes neither.
+
+**Consequences:**
+- `tests/unit/test_pinecone_egress.py` pins `include_metadata=False` on all three query sites and the local snippet source.
+- When Pinecone returns no hits, `semantic_search()` falls back silently to the corpus in file order; that is MATTGPT-292.
+
+---
+
+## ADR 042: MATT_DNA's Industry Experience Is Derived From the Corpus
+
+**Date:** 2026-10-07
+**Status:** Accepted
+**Related tickets:** MATTGPT-279, MATTGPT-269, MATTGPT-275
+
+**Context:**
+MATT_DNA's Industry Experience block in `generate_dynamic_dna()` was hand-typed: Primary / Secondary / Limited tier labels, "Limited: Healthcare (one engagement)", "NOT Matt's industries: Consumer products, retail", and fallback client names ("AT&T", "Norfolk Southern", "Various financial services clients"). Signature Achievements carried a derived line, "{transport clients} legacy-to-cloud transformation", which read "Cendian Chemical Logistics, Norfolk Southern legacy-to-cloud transformation" once the corpus unified the transportation label in 3c4b068; that is false for Cendian. ADR 037 recorded that the "NOT Matt's industries" line stays; this decision removes it.
+
+**Decision:**
+The block lists every Industry value except "Cross Industry" as "- {Industry}: {n} stories ({clients})", most stories first, with the non-generic clients of that industry's stories. Removed: the tier labels, the Limited line, the NOT-industries line, the fallback client names, and the derived-client achievements line. A new story's industry reaches the model without a code change.
+
+**Rationale:**
+- Acceptance (`docs/evidence/MATTGPT-279/industry_20261007_121045/`, 3 runs per question, before / after): "Which industries has Matt worked in?" named Aerospace & Defense 0/3 / 3/3, Education 0/3 / 3/3, Healthcare 2/3 / 3/3, Telecom 2/3 / 3/3. Cendian appeared only as logistics integration, never as legacy-to-cloud, in either arm. No figure outside a story or the profile in either arm.
+- Rejected: keeping the achievements line with Norfolk Southern named, because it is a hardcoded client and the Norfolk Southern stories carry the work.
+
+**Consequences:**
+- Consumer goods stays out because TICARA's Industry is Cross Industry; whether an industry appears depends on the corpus Industry field alone.
+- "Has Matt worked in retail?" is answered from the absence of a retail industry, not from a negative list.
+- `tests/unit/test_matt_dna_industry.py` pins the derived block.
+
+---
+
+## ADR 043: Questions Naming Matt Pass Five Nonsense Rules; Roleplay Impersonation Gets Its Own Rule
+
+**Date:** 2026-10-10
+**Status:** Accepted
+**Related tickets:** MATTGPT-285, MATTGPT-251, MATTGPT-290, MATTGPT-291
+
+**Context:**
+Five rules in `nonsense_filters.jsonl` (`creative_writing` twice, `general_knowledge` twice, `gaming`) matched words that also appear in legitimate questions about Matt, so questions such as "When was he at JP Morgan?" were refused before retrieval. No commit, ADR or test recorded the rules' original targets.
+
+**Decision:**
+- The five rules gain a lookahead in front of their unchanged pattern, `^(?!.*\b(matt|matt's|pugmire|he|his|him)\b)`, so a question that names Matt or uses he, his or him passes them.
+- A new `roleplay_impersonation` rule rejects requests to roleplay, pretend or act as a person named by a pronoun or by "my" plus a family word. Role phrasings ("a hiring manager", "my interviewer") pass.
+- `stocks_crypto` and `homework` are unchanged.
+
+**Rationale:**
+- Sweep of 850 distinct queries, before and after: 5 changed, three of them intended passes. The grandmother attempt moved from `creative_writing` to `roleplay_impersonation`; "Tell me about Matt's gaming experience" now reaches the router, which rejects it as out of scope.
+- Live acceptance (`docs/evidence/MATTGPT-285/acceptance_narrowed_20261010_161142/`, 91e825a, 2 runs): 11 / 11 must-answer questions answered; every claim in the 22 newly unblocked answers on record in the corpus or profile.
+- Rejected: unblocking `stocks_crypto` and `homework` now. Unblocked, "Has Matt worked on trading platforms?" and "How did Matt calculate ROI?" misattributed in 2 of 2 runs each. Their tests are `xfail(strict=True)` until MATTGPT-251 lands.
+- Rejected: a fixed roleplay word list, because "act as" and "pretend to be" also start legitimate interview-practice requests.
+
+**Consequences:**
+- Both changes key on wording, not intent. Pronoun questions about other people ("When did Elvis release his first album?") now pass this layer, and the roleplay rule misses phrasings such as "my friend Sarah" or "my mentor".
+- Questions with no name or pronoun ("When did the CIC launch?") are still refused by these rules.
+- The data-extraction request stays rejected only by an incidental match in the second `creative_writing` rule (MATTGPT-290).
+- "Act as a hiring manager" answers describe Matt rather than ask questions (MATTGPT-291).
+
+---
+
+## ADR 044: My Profile Type Scale Follows Home's Rendered Scale
+
+**Date:** 2026-10-09
+**Status:** Accepted
+**Related tickets:** None
+
+**Context:**
+My Profile's body and card text used wireframe v4 sizes (body 13px, secondary 11-12px, item titles 12-13px, labels 10-11px). Home's category cards were also specified at 12/11px, but their single-class rules lost to Streamlit's markdown `p { font-size: inherit }`, so Home rendered at 16px. The Profile mobile block was never applied: a comment above its `@media (max-width: 768px)` closed early, and the browser dropped the block.
+
+**Decision:**
+My Profile follows Home's rendered scale: body 15px, secondary body 14px / 1.55, item titles 16px, labels 12-13px; h1, status badge and section eyebrows unchanged. Home's card title and meta are set at 16px with two-class selectors, so the size no longer depends on inheritance. The Profile mobile block applies, with sizes matching desktop. Wireframe v4's Profile sizes are superseded.
+
+**Rationale:**
+- Rejected: shrinking Home's cards to the wireframe's 12/11px. 16px is what users see on Home, and an 11px body is below readable size.
+
+**Consequences:**
+- `.prof-timeline-period` stays 12px on mobile (13px desktop), because a later `.timeline-year` mobile rule wins.
+- Gates: computed styles before and after at 375, 767 and 1280px; BDD 24 / 24 (About, Home category cards); browser check at 375/440, 767 and 1024+.
+
+---
+
+## ADR 045: Router Rejection of Off-Topic Questions About Other People
+
+**Date:** 2026-10-06
+**Status:** Rejected
+**Ticket:** MATTGPT-188
+**Related tickets:** MATTGPT-063, MATTGPT-174, MATTGPT-016
+
+**Context:**
+Three router test cases failed: "Tell me a joke" (0.429, behavioral), "Tell me about Elon Musk" (0.401, technical) and "What's Jeff Bezos's leadership style?" (0.664, leadership) all cleared `SOFT_ACCEPT = 0.40`. The router matches on question shape, not subject, and logged production behavioral queries score 0.499 to 0.605, so no threshold separates them.
+
+**Decision:**
+Do not change the semantic router to reject off-topic questions about other people.
+
+**Rationale:**
+- The router is the wrong layer. e307d6d removed the three router test cases. The joke, Musk and Bezos queries are caught earlier in `rag_answer()` by `nonsense_filters.jsonl` (`jokes_riddles`, `celebrity`).
+- Raising the threshold above 0.664 would reject legitimate traffic.
+
+**Consequences:**
+- Names outside the nonsense regex are the residual, tracked as MATTGPT-063.
+
+---
+
+## ADR 046: Stabilize the test_error_state_extraction_failure Marathon Flake
+
+**Date:** 2026-10-06
+**Status:** Rejected
+**Ticket:** MATTGPT-205
+**Related tickets:** MATTGPT-240, MATTGPT-197, MATTGPT-198, MATTGPT-203
+
+**Context:**
+`test_error_state_extraction_failure` in `tests/bdd/steps/test_role_match.py` passed in isolation and at file scope but failed intermittently in the full BDD marathon, the same suite-order class as MATTGPT-197, -198 and -203.
+
+**Decision:**
+Do not stabilize it.
+
+**Rationale:**
+- The test no longer exists. badde42 (MATTGPT-240 Red) replaced it with `test_non_jd_rejected_by_gate`, a gate-before-LLM rejection with new copy.
+
+**Consequences:**
+- A flake in the replacement test gets its own ticket.
