@@ -1660,6 +1660,8 @@ Same class as the no-inference clause in MATTGPT-250: retrieved text that sits n
 
 **Acceptance, all absence questions (Oct 11, 2026):** when no story or profile entry covers X, the answer says "not on record" (or "not in Matt's stories"), never "Matt has not worked with X". A flat no can be false whenever the corpus is incomplete. The gaming control's expected answer changes to match: today "Has Matt worked on gaming platforms?" answers "Matt has not worked on gaming platforms." (2 of 2, MATTGPT-285 run `acceptance_narrowed_20261010_161142`, untracked).
 
+**Expected answer, capital markets and trading (Matt, Oct 11, 2026):** capital-markets and trading-platform questions get "not on record". The closest capital-markets-adjacent work is JP Morgan Asset Management (Global Funds), a Salesforce sales-opportunity CRM, not a trading or capital-markets platform. ACCESS is treasury services and cash management; RBC is corporate banking. An answer calling ACCESS or RBC capital markets or a trading platform fails.
+
 **Rejected (do not re-derive):** Pairwise rules such as "do not treat mortgage as real estate." Each one fixes a single pairing and misses the next.
 
 **Out of scope:** Agriculture under-claim (September 23, 2026). The Liquid Studio story was not in the top 25 for that query -- retrieval miss, not synthesis, and it covers a single PoC mention.
