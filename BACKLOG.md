@@ -70,7 +70,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-017](#mattgpt-017) | Wire skipped Role Match logging BDD scenarios (Playwright click + mocked Sheets write) | Open | Medium | Action | Apr 28, 2026 |
 | [MATTGPT-022](#mattgpt-022) | Data Quality Cleanup Journey Story | Open | Medium | Action | Mar 2026 |
 | [MATTGPT-035](#mattgpt-035) | Eval Modernization — Semantic Scoring | Open | Low | Spike | Pre-2026 |
-| [MATTGPT-039](#mattgpt-039) | Automated Regression Detection (GitHub Actions) | Open | Medium | Action | Apr 29, 2026 |
+| [MATTGPT-039](#mattgpt-039) | CI quality pipeline: two tiers, with production deploying only from green | Open | High | Action | Apr 29, 2026 |
 | [MATTGPT-040](#mattgpt-040) | Eval Coverage Gaps — Follow-up Queries | Open | Low | Action | Apr 29, 2026 |
 | [MATTGPT-045](#mattgpt-045) | Analytics Dashboard | Open | Low | Action | Apr 29, 2026 |
 | [MATTGPT-060](#mattgpt-060) | BDD coverage gap — assert post-navigation page state, not just navigation | Open | Medium | Action | May 12, 2026 |
@@ -420,22 +420,26 @@ Each detail block uses these fields. Not every field is required for every item.
 ---
 
 ### MATTGPT-039
-**Automated Regression Detection (GitHub Actions)**
+**CI quality pipeline: two tiers, with production deploying only from green**
 
 - **Status:** Open
-- **Priority:** Medium
+- **Priority:** High
 - **Type:** Action
-- **Issue:** Eval suite and unit tests are run locally only. No CI pipeline runs them on every PR or push. Drift can land before being detected — production deploys via Streamlit Cloud auto-deploy on push to main with no test gate in front of it.
-- **Tiered CI design (added May 14, 2026):** Don't write a "run everything on every PR" workflow — eval suite hits OpenAI (~60 golden queries × per-call cost = real money per run). Cost-vs-coverage trade-off requires tiering:
-  - **Every PR:** unit tests + BDD structural tests (mocked backends). Cheap, fast, catches code regressions.
-  - **Push to main:** above + eval suite. Paid, but catches RAG drift before it reaches users.
-  - **Manual trigger:** full suite for major releases or before significant retrieval-affecting changes.
-- **Soft dependencies (do these first):**
-  - **MATTGPT-014** (reframed May 14 2026 as Action) — audit + split the 17 skipped Role Match BDD scenarios into structural (mocked) and content (evals). Until that lands, CI either fails on skipped tests or skips them silently — neither outcome is useful protection.
-  - **MATTGPT-017** (reframed May 14 2026 as Action) — same shape; 6 skipped logging BDD scenarios need wiring before CI can include them.
-- **Fix:** After 014 + 017 land, wire `eval_rag_quality.py` and `tests/unit/` + BDD into a tiered GitHub Actions workflow. Spec has example YAML in `11-testing-and-quality.md` (the tiered GitHub Actions section) (use as starting point; layer the tiers above on top).
-- **Source:** Cross-reference of design spec vs. implementation, April 29, 2026
-- **Logged:** April 29, 2026 / **Refined:** May 14, 2026
+- **File:** `.github/workflows/`
+- **Logged:** April 29, 2026 / **Refined:** May 14, 2026 / **Rewritten:** October 11, 2026
+- **Source:** Cross-reference of design spec vs. implementation, April 29, 2026. Rewritten Oct 11, 2026 after Architecture Sync's 850071c findings: code assumed things about the data that the data didn't match, and nothing caught it at commit time.
+
+**Verified Oct 11, 2026:** `.github/workflows/test.yml` (MATTGPT-216) runs `pytest tests/unit/` on push and PR to main, and nothing else. ruff appears only in a comment. mypy runs in pre-commit only. Structural and data-contract tests (MATTGPT-258), BDD and the golden eval (`tests/eval_rag_quality.py`) run nowhere automatically. No dependency audit, dead-code or complexity report. A push to main deploys to Streamlit Cloud, so CI on main runs beside the deploy, not in front of it.
+
+**Tier 1, every push (fast, free, deterministic):** ruff (lint and format check), mypy, unit tests, structural and data-contract tests (MATTGPT-258), pip-audit. vulture (dead code) and radon (complexity) report-only at first.
+
+**Tier 2, nightly or on demand (API cost):** BDD against a deployed build, and the golden eval with a small fixed cost budget. Results posted as an artifact.
+
+**Proposed gate (Matt to confirm):** Streamlit deploys from a prod branch that CI advances only when tier 1 is green. Pushes to main stop deploying directly.
+
+**Acceptance:** tier 1 failing keeps the prod branch where it is; tier 2 reports and doesn't block.
+
+**Sequence:** tier 1 first. Tier 2 after MATTGPT-258's data-contract check (check f) exists. BDD in tier 2 also depends on MATTGPT-014 and MATTGPT-017 (skipped Role Match BDD scenarios); until they land, those scenarios are reported as skipped, not run.
 
 ---
 
@@ -2397,6 +2401,8 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 - CHANGELOG.md (the MATTGPT-234 entry)
 
 **Also:** The comment above the RAG confidence thresholds in `config/constants.py` says the only "rejection path is CONFIDENCE_LOW below". The nonsense filter and router rejection also reject, and the gate that refuses is `CONFIDENCE_HIGH`.
+
+**Dead code, added Oct 11, 2026 (Architecture Sync, 850071c):** `initialize_vocab()` in `services/rag_service.py` (called from `app.py`) reads `title`, `client`, `domain` and `tags`, but stories use Title-case keys, so only `5PSummary` feeds its vocabulary. That vocabulary is read only in `semantic_search()`'s `enforce_overlap` branch, and no production caller sets `enforce_overlap` (`git grep`, outside tests and archive). Ask Agy builds its own with `build_known_vocab()`, which reads the Title-case keys. Remove `initialize_vocab()`, its call and the `enforce_overlap` branch; don't fix the keys.
 
 **Scope:** Decide what catches off-topic questions today (per the inventory, the confidence gate), and correct the docs and MATTGPT-239's acceptance to match.
 
