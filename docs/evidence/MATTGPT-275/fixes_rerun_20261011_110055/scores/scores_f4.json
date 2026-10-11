@@ -1,0 +1,802 @@
+[
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC scaling via flat structure, 11-13 leads, 15-20 auditions, 4-6 hires/week, near-zero attrition, $100M+ by FY23: all in leading-people and CIC stories"
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Atlanta/Tampa CIC, 150+ hires, onboarding, near-zero attrition, promotions: matches scaling-talent story; 4-to-150 framing in leadership-philosophy story"
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS payment engine and 12-country gateway facts supported ('40 engineers' loosely restates the 40+ blended team); no scaling carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS payment engine plus RBC Express cross-border design, both from stories; no scaling carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Remembered context: answers with the Cloud Innovation Center (150+), which its second answer (JPM ACCESS only) did not discuss"
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Second answer covered ACCESS and RBC: ACCESS 40+ blended team (Mumbai, Bangalore, US) correct; RBC size correctly stated as not recorded ('leading teams' at RBC is loose framing)"
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "4 to 150+ in Atlanta/Tampa, onboarding, MVPs in weeks, near-zero attrition: scaling-talent story"
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "10-person pilot to 150+, four-channel hiring, 15-20 auditions, 4X velocity, $100M+: all supported"
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS and RBC Express from stories; closing offer on JPM modules is related and deliverable; no carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS (Technology Delivery Lead, 40+, modules, Coalition Greenwich) and RBC Express from stories; no carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Second answer covered ACCESS and RBC: ACCESS 40+ correct; RBC size correctly not on record ('managing a team' at RBC is loose framing)"
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Remembered context: brings in the Cloud Innovation Center (10-person pilot to 150+), not in its second answer"
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Flat model, practice leads, 11-13 leads, hiring engine figures, 4X, $100M+ across 15+ F500 clients: supported"
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Atlanta/Tampa, 150+ hires, XP and UCD training, near-zero attrition: scaling-talent story"
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS (transaction monitoring, entitlements) and RBC Express from stories; no carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS and RBC Express from stories; 'improved operational efficiency' is vague framing; closing offer related; no carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Remembered context: answers with the Cloud Innovation Center, not in its second answer (ACCESS and RBC)"
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Honest: ACCESS 40+ and RBC no-size are right, but states the team 'was embedded at Bottomline Technologies' Portsmouth offices'; stories say Matt spent 70-80% of his time there, not the team"
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "10-person pilot to 150+ over four years, hiring figures, 4X, $100M+, 15+ clients: supported"
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Flat structure, 11-13 leads, hiring engine, peer 360, near-zero attrition, 4x; 'handling remediation personally' is a slight stretch of 'end-of-remediation call'; closing offer on cohesion practices is deliverable"
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS and RBC Express from stories; no carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS only, facts supported; closing offer on modules related and deliverable; no carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Remembered context: answers with the Cloud Innovation Center, not in its second answer (ACCESS and RBC)"
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Second answer covered ACCESS only: 40+ blended team, Mumbai/Bangalore/US, Matt at Portsmouth: correct"
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "10-person pilot to 150+, four-channel hiring, closing interview, audition figures, near-zero attrition: supported"
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Practice-lead reporting, 11-13 leads, audition figures through pandemic, peer 360, 4x zero-defect: supported"
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New topic answered from JP Morgan ACCESS payment stories (135,000+ clients, 180+ countries, 40+ team, modules, MAC, April 2011 launch, Coalition Greenwich); no scaling carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS facts supported; 'client satisfaction' is unbacked vague framing, no figure; closing related; no carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Remembered context: answers with the Cloud Innovation Center, not in its second answer (ACCESS only)"
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Second answer covered ACCESS only: 40+ blended Accenture/JPM team across Mumbai, Bangalore, US: correct"
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "11-13 leads, four channels named correctly, audition figures, 4X, $100M+ across 15+ clients: supported"
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "4 to 150+, Atlanta/Tampa, onboarding and XP practices, minimal attrition: scaling-talent story"
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New topic answered from JP Morgan ACCESS payment stories (135,000+ clients, 180+ countries, 40+ team, modules, MAC, April 2011 launch, Coalition Greenwich); no scaling carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS facts supported; closing offer related; generic 'improved compliance' framing only; no carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Remembered context: answers with the Cloud Innovation Center, not in its second answer (ACCESS only)"
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Second answer covered ACCESS only: 40+ team, locations, Matt at Portsmouth, April 2011: correct"
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC facts supported (10-person pilot, 4X, $100M+, team votes, final call); stitches JPM/Level 3 engagement teams and silo story into an origin narrative, each piece held by some story"
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Honest: says the 10-to-150 scaling 'spanned from March 2005 to September 2023'; CIC runs 2019-11 to 2023-09 (four years), 2005-03 is the start of the multi-role leading-people story"
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS facts supported, Matt correctly placed at Bottomline Portsmouth; no carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS 2009-08 to 2012-06, sanctions/PEP screening, gateway: supported; closing related; no carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Remembered context: answers with the Cloud Innovation Center, not in its second answer (ACCESS only)"
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Second answer covered ACCESS (engine and gateway): 40+ blended team, locations: correct"
+ },
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Atlanta/Tampa, 150+ hires, onboarding, MVPs in weeks, near-zero attrition: scaling-talent story"
+ },
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Flat two-layer structure, four-channel hiring, final hiring decision, 4X, $100M+, expansion to more locations: supported"
+ },
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS facts supported; closing offer on team and integration deliverable; no carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS and RBC Express from stories; 'embedded at Portsmouth' grammatically attachable to Matt; no carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Second answer covered ACCESS only: 40+ team across Mumbai, Bangalore, US: correct"
+ },
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Remembered context: answers with the Cloud Innovation Center, not in its second answer (ACCESS and RBC)"
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "150+ through two layers, 11-13 leads, audition figures, pandemic pivot, peer evaluation, near-zero attrition: supported"
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "10-person pilot to 150+, 4-6 hires/week, 4X, zero-defect, $100M+ across 15+ F500 clients: supported"
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS facts supported ('40 engineers' loose); closing related; no carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "New topic answered from JP Morgan ACCESS payment stories (135,000+ clients, 180+ countries, 40+ team, modules, MAC, April 2011 launch, Coalition Greenwich); no scaling carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Second answer covered ACCESS only: 40+ blended team (called 'engineers', loosely), locations: correct"
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Remembered context: answers with the Cloud Innovation Center, not in its second answer (ACCESS only)"
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "4 to 150+ in Atlanta/Tampa, onboarding, guided-to-independent delivery, near-zero attrition: supported"
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "10-person pilot to 150+, hiring engine, weekly rhythm, 4X, $100M+ across 15+ clients by FY23: supported"
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS facts supported, embedded at Bottomline correct; closing related; no carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "New topic answered from JP Morgan ACCESS payment stories (135,000+ clients, 180+ countries, 40+ team, modules, MAC, April 2011 launch, Coalition Greenwich); no scaling carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Second answer covered ACCESS only: 40+ blended team, locations: correct"
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Remembered context: leads with Cloud Innovation Center teams, not in its second answer, alongside the correct ACCESS 40+"
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Covers both Fiserv (card portal recovery/DevOps/agile/ADA, 45-person team, $8.5M, 3% under budget) and ACCESS (40+, 135,000+ clients, 180+ countries, Coalition Greenwich); figures supported"
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Covers both Fiserv (card portal recovery/DevOps/agile/ADA, 45-person team, $8.5M, 3% under budget) and ACCESS (40+, 135,000+ clients, 180+ countries, Coalition Greenwich); figures supported"
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names dimension (client reach/geographic scope) and compares both: ACCESS 135,000+ clients in 180+ countries vs Fiserv 15 FIs/2M+ cardholders; team (45 vs 40+) and $8.5M stated correctly"
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names dimension (client reach/geographic scope) and compares both: ACCESS 135,000+ clients in 180+ countries vs Fiserv 15 FIs/2M+ cardholders; team (45 vs 40+) and $8.5M stated correctly"
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Covers both Fiserv (card portal recovery/DevOps/agile/ADA, 45-person team, $8.5M, 3% under budget) and ACCESS (40+, 135,000+ clients, 180+ countries, Coalition Greenwich); figures supported"
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Covers both Fiserv (card portal recovery/DevOps/agile/ADA, 45-person team, $8.5M, 3% under budget) and ACCESS (40+, 135,000+ clients, 180+ countries, Coalition Greenwich); figures supported"
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names dimension (client reach/geographic scope) and compares both: ACCESS 135,000+ clients in 180+ countries vs Fiserv 15 FIs/2M+ cardholders; team (45 vs 40+) and $8.5M stated correctly"
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names dimension (client reach/geographic scope) and compares both: ACCESS 135,000+ clients in 180+ countries vs Fiserv 15 FIs/2M+ cardholders; team (45 vs 40+) and $8.5M stated correctly"
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Covers both Fiserv (card portal recovery/DevOps/agile/ADA, 45-person team, $8.5M, 3% under budget) and ACCESS (40+, 135,000+ clients, 180+ countries, Coalition Greenwich); figures supported"
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Covers both Fiserv (card portal recovery/DevOps/agile/ADA, 45-person team, $8.5M, 3% under budget) and ACCESS (40+, 135,000+ clients, 180+ countries, Coalition Greenwich); figures supported"
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names dimension (client reach/geographic scope) and compares both: ACCESS 135,000+ clients in 180+ countries vs Fiserv 15 FIs/2M+ cardholders; team (45 vs 40+) and $8.5M stated correctly"
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names reach/integration as dimension, compares both (135,000+ clients/180+ countries vs 2M+ cardholders/15 FIs); supported"
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Covers both Fiserv (card portal recovery/DevOps/agile/ADA, 45-person team, $8.5M, 3% under budget) and ACCESS (40+, 135,000+ clients, 180+ countries, Coalition Greenwich); figures supported"
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both engagements: Fiserv ADA/DevOps/recovery ($8.5M, $500K) and ACCESS (135,000+, 180+); figures supported"
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names dimension (client reach/geographic scope) and compares both: ACCESS 135,000+ clients in 180+ countries vs Fiserv 15 FIs/2M+ cardholders; team (45 vs 40+) and $8.5M stated correctly"
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names client reach and geographic scope, compares both accurately; ties $500K avoidance to DevOps/ADA loosely (story ties it to Q4 release)"
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Covers both Fiserv (card portal recovery/DevOps/agile/ADA, 45-person team, $8.5M, 3% under budget) and ACCESS (40+, 135,000+ clients, 180+ countries, Coalition Greenwich); figures supported"
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Covers both Fiserv (card portal recovery/DevOps/agile/ADA, 45-person team, $8.5M, 3% under budget) and ACCESS (40+, 135,000+ clients, 180+ countries, Coalition Greenwich); figures supported"
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names dimension (client reach/geographic scope) and compares both: ACCESS 135,000+ clients in 180+ countries vs Fiserv 15 FIs/2M+ cardholders; team (45 vs 40+) and $8.5M stated correctly"
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Compares both on global reach and client base (135,000+ in 180+ countries vs 15 FIs); dimension stated as scale/global impact, accurate"
+ },
+ {
+  "case": "c12",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Covers both Fiserv (card portal recovery/DevOps/agile/ADA, 45-person team, $8.5M, 3% under budget) and ACCESS (40+, 135,000+ clients, 180+ countries, Coalition Greenwich); figures supported"
+ },
+ {
+  "case": "c12",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both engagements from stories; 'deployments took days' loosely restates builds taking a day or longer"
+ },
+ {
+  "case": "c12",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names client base and global footprint, compares both accurately; closing offer on ACCESS impact is related and deliverable"
+ },
+ {
+  "case": "c12",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Inaccurate dimension: says Fiserv was smaller 'in terms of budget'; the corpus holds no ACCESS budget, so the budget comparison is unsupported"
+ },
+ {
+  "case": "c12",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Covers both Fiserv (card portal recovery/DevOps/agile/ADA, 45-person team, $8.5M, 3% under budget) and ACCESS (40+, 135,000+ clients, 180+ countries, Coalition Greenwich); figures supported"
+ },
+ {
+  "case": "c12",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Covers both Fiserv (card portal recovery/DevOps/agile/ADA, 45-person team, $8.5M, 3% under budget) and ACCESS (40+, 135,000+ clients, 180+ countries, Coalition Greenwich); figures supported"
+ },
+ {
+  "case": "c12",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names dimension (client reach/geographic scope) and compares both: ACCESS 135,000+ clients in 180+ countries vs Fiserv 15 FIs/2M+ cardholders; team (45 vs 40+) and $8.5M stated correctly"
+ },
+ {
+  "case": "c12",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Clarifying question asking bigger by scale, impact or complexity: allowed by expected outcome"
+ },
+ {
+  "case": "c12",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Both engagements; Fiserv split across DevOps and recovery stories (called 'another engagement', same program); ACCESS facts supported"
+ },
+ {
+  "case": "c12",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Covers both Fiserv (card portal recovery/DevOps/agile/ADA, 45-person team, $8.5M, 3% under budget) and ACCESS (40+, 135,000+ clients, 180+ countries, Coalition Greenwich); figures supported"
+ },
+ {
+  "case": "c12",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names dimension (client reach/geographic scope) and compares both: ACCESS 135,000+ clients in 180+ countries vs Fiserv 15 FIs/2M+ cardholders; team (45 vs 40+) and $8.5M stated correctly"
+ },
+ {
+  "case": "c12",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names dimension (client reach/geographic scope) and compares both: ACCESS 135,000+ clients in 180+ countries vs Fiserv 15 FIs/2M+ cardholders; team (45 vs 40+) and $8.5M stated correctly"
+ },
+ {
+  "case": "c12",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Covers both Fiserv (card portal recovery/DevOps/agile/ADA, 45-person team, $8.5M, 3% under budget) and ACCESS (40+, 135,000+ clients, 180+ countries, Coalition Greenwich); figures supported"
+ },
+ {
+  "case": "c12",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Covers both Fiserv (card portal recovery/DevOps/agile/ADA, 45-person team, $8.5M, 3% under budget) and ACCESS (40+, 135,000+ clients, 180+ countries, Coalition Greenwich); figures supported"
+ },
+ {
+  "case": "c12",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names dimension (client reach/geographic scope) and compares both: ACCESS 135,000+ clients in 180+ countries vs Fiserv 15 FIs/2M+ cardholders; team (45 vs 40+) and $8.5M stated correctly"
+ },
+ {
+  "case": "c12",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names dimension (client reach/geographic scope) and compares both: ACCESS 135,000+ clients in 180+ countries vs Fiserv 15 FIs/2M+ cardholders; team (45 vs 40+) and $8.5M stated correctly"
+ },
+ {
+  "case": "c12",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Covers both Fiserv (card portal recovery/DevOps/agile/ADA, 45-person team, $8.5M, 3% under budget) and ACCESS (40+, 135,000+ clients, 180+ countries, Coalition Greenwich); figures supported"
+ },
+ {
+  "case": "c12",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both engagements; Fiserv lead-time and deploy-frequency figures exact, $45M, 99.97%, $3M; ACCESS supported; closing line is vague framing"
+ },
+ {
+  "case": "c12",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names dimension (client reach/geographic scope) and compares both: ACCESS 135,000+ clients in 180+ countries vs Fiserv 15 FIs/2M+ cardholders; team (45 vs 40+) and $8.5M stated correctly"
+ },
+ {
+  "case": "c12",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names dimension (client reach/geographic scope) and compares both: ACCESS 135,000+ clients in 180+ countries vs Fiserv 15 FIs/2M+ cardholders; team (45 vs 40+) and $8.5M stated correctly"
+ }
+]

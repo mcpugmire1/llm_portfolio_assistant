@@ -1,0 +1,642 @@
+[
+ {
+  "case": "x1",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "supported: Cendant Mortgage, Software Engineer, Wellfound second stint, late 2002 to 2003, JSP front end, TIBCO BPM, Oracle stored procedure fixes; unsupported: 'improving the efficiency ... of the underwriting process' (story records no efficiency result); absence: answer never says real estate is not on record; it answers 'has he worked in real estate?' with the Cendant Mortgage story, implicitly framing mortgage underwriting (Industry: Financial Services / Banking) as real estate."
+ },
+ {
+  "case": "x1",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported (absence): 'Nothing I know about Matt covers that' is an equivalent of not on record; no story covers real estate (Cendant Mortgage Industry = Financial Services / Banking); no claims about Matt beyond that. Pass."
+ },
+ {
+  "case": "x1",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "supported: Cendant Mortgage, Wellfound 2002 to 2003, green-screen replacement, TIBCO BPM, Oracle fixes, Financial Services / Banking industry; unsupported: 'ensuring the new system executed underwriting processes efficiently', 'crucial role'; absence: answer never says real estate is not on record; it answers 'has he worked in real estate?' with the Cendant Mortgage story, implicitly framing mortgage underwriting (Industry: Financial Services / Banking) as real estate."
+ },
+ {
+  "case": "x1",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported (absence): 'Nothing I know about Matt covers that' is an equivalent of not on record; no story covers real estate (Cendant Mortgage Industry = Financial Services / Banking); no claims about Matt beyond that. Pass."
+ },
+ {
+  "case": "x1",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "supported: Cendant Mortgage, second Wellfound stint 2002 to 2003, JSP front end, TIBCO BPM, Oracle layer, senior developer and refactoring lesson; all facts supported but absence: answer never says real estate is not on record; it answers 'has he worked in real estate?' with the Cendant Mortgage story, implicitly framing mortgage underwriting (Industry: Financial Services / Banking) as real estate."
+ },
+ {
+  "case": "x1",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported (absence): 'Nothing I know about Matt covers that' is an equivalent of not on record; no story covers real estate (Cendant Mortgage Industry = Financial Services / Banking); no claims about Matt beyond that. Pass."
+ },
+ {
+  "case": "x1",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "'Found it!' frames the story as the real-estate answer; supported: Cendant, Software Engineer, 2002 to 2003, JSP/MVC, TIBCO, Oracle risk-factor fixes, mainframe to web; unsupported: 'streamlined their workflow'; absence: answer never says real estate is not on record; it answers 'has he worked in real estate?' with the Cendant Mortgage story, implicitly framing mortgage underwriting (Industry: Financial Services / Banking) as real estate."
+ },
+ {
+  "case": "x1",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported (absence): 'Nothing I know about Matt covers that' is an equivalent of not on record; no story covers real estate (Cendant Mortgage Industry = Financial Services / Banking); no claims about Matt beyond that. Pass."
+ },
+ {
+  "case": "x1",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "supported: Cendant Mortgage, mainframe underwriting modernization, JSP, TIBCO BPM, senior developer, Wellfound 2002 to 2003; unsupported: 'ensuring that the new system was efficient and error-free'; absence: answer never says real estate is not on record; it answers 'has he worked in real estate?' with the Cendant Mortgage story, implicitly framing mortgage underwriting (Industry: Financial Services / Banking) as real estate."
+ },
+ {
+  "case": "x1",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported (absence): 'Nothing I know about Matt covers that' is an equivalent of not on record; no story covers real estate (Cendant Mortgage Industry = Financial Services / Banking); no claims about Matt beyond that. Pass."
+ },
+ {
+  "case": "x1",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported (absence): 'Nothing I know about Matt covers that' is an equivalent of not on record; no story covers real estate (Cendant Mortgage Industry = Financial Services / Banking); no claims about Matt beyond that. Pass."
+ },
+ {
+  "case": "x1",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: Cendant Mortgage in financial services (Industry field), loan underwriting modernization (Project), JSP/MVC capture of borrower income, credit score, home value, TIBCO BPM, second Wellfound stint 2002 to 2003; explicitly says 'this isn't directly real estate', an equivalent of real estate not on record, with mortgage offered as adjacent. 'Closely related to real estate transactions' is a statement about the domain, not a claim that Matt did real estate. Pass (borderline)."
+ },
+ {
+  "case": "x1",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported (absence): 'Nothing I know about Matt covers that' is an equivalent of not on record; no story covers real estate (Cendant Mortgage Industry = Financial Services / Banking); no claims about Matt beyond that. Pass."
+ },
+ {
+  "case": "x1",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "supported: financial services industry, Cendant Mortgage, mainframe to web, Java/JSP, TIBCO BPM; contradicted: 'it involved aspects of real estate through mortgage underwriting' frames mortgage work as real estate (Industry: Financial Services / Banking); absence: never says real estate is not on record."
+ },
+ {
+  "case": "x1",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "supported: Cendant Mortgage, Wellfound late 2002 to 2003, financial services, JSP front end for underwriters and loan officers, TIBCO configure/maintain, Oracle risk-factor fixes, Mount Laurel NJ, refactoring discipline; all facts supported but absence: answer never says real estate is not on record; it answers 'has he worked in real estate?' with the Cendant Mortgage story, implicitly framing mortgage underwriting (Industry: Financial Services / Banking) as real estate."
+ },
+ {
+  "case": "x1",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported (absence): 'Nothing I know about Matt covers that' is an equivalent of not on record; no story covers real estate (Cendant Mortgage Industry = Financial Services / Banking); no claims about Matt beyond that. Pass."
+ },
+ {
+  "case": "x1",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported (absence): 'Nothing I know about Matt covers that' is an equivalent of not on record; no story covers real estate (Cendant Mortgage Industry = Financial Services / Banking); no claims about Matt beyond that. Pass."
+ },
+ {
+  "case": "x1",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "supported: Cendant Mortgage, second Wellfound stint 2002 to 2003, JSP/MVC front end, borrower income/credit score/home value, TIBCO BPM, Oracle fixes; unsupported: 'improving efficiency and accuracy' (no efficiency result in story); absence: answer never says real estate is not on record; it answers 'has he worked in real estate?' with the Cendant Mortgage story, implicitly framing mortgage underwriting (Industry: Financial Services / Banking) as real estate."
+ },
+ {
+  "case": "x1",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported (absence): 'Nothing I know about Matt covers that' is an equivalent of not on record; no story covers real estate (Cendant Mortgage Industry = Financial Services / Banking); no claims about Matt beyond that. Pass."
+ },
+ {
+  "case": "x1",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "supported: Cendant Mortgage, second Wellfound stint 2002 to 2003, JSP front end, TIBCO BPM, Mount Laurel NJ, senior developer refactoring, financial services and banking industry; contradicted: 'it did touch on aspects related to real estate through the mortgage underwriting process' frames mortgage work as real estate; absence: never says real estate is not on record."
+ },
+ {
+  "case": "x2",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported (absence): no SAP in corpus or profile (grep for \\bSAP\\b empty); answer says it is not mentioned / not on record, not a flat denial."
+ },
+ {
+  "case": "x2",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported (absence): no SAP in corpus or profile (grep for \\bSAP\\b empty); answer says it is not mentioned / not on record, not a flat denial. The generic 'feel free to ask' line is not an engage close or unsupported offer."
+ },
+ {
+  "case": "x2",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported (absence): no SAP in corpus or profile (grep for \\bSAP\\b empty); answer says it is not mentioned / not on record, not a flat denial. supported: clients AT&T, Lockheed Martin, Norfolk Southern, JP Morgan Chase (Client field)."
+ },
+ {
+  "case": "x2",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported (absence): no SAP in corpus or profile (grep for \\bSAP\\b empty); answer says it is not mentioned / not on record, not a flat denial."
+ },
+ {
+  "case": "x2",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported (absence): no SAP in corpus or profile (grep for \\bSAP\\b empty); answer says it is not mentioned / not on record, not a flat denial."
+ },
+ {
+  "case": "x2",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported (absence): no SAP in corpus or profile (grep for \\bSAP\\b empty); answer says it is not mentioned / not on record, not a flat denial. The generic 'feel free to ask' line is not an engage close or unsupported offer."
+ },
+ {
+  "case": "x2",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported (absence): no SAP in corpus or profile (grep for \\bSAP\\b empty); answer says it is not mentioned / not on record, not a flat denial. supported: BEA WebLogic, Oracle, Bottomline Technologies appear in stories."
+ },
+ {
+  "case": "x2",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported (absence): no SAP in corpus or profile (grep for \\bSAP\\b empty); answer says it is not mentioned / not on record, not a flat denial."
+ },
+ {
+  "case": "x2",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported (absence): no SAP in corpus or profile (grep for \\bSAP\\b empty); answer says it is not mentioned / not on record, not a flat denial."
+ },
+ {
+  "case": "x2",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported (absence): no SAP in corpus or profile (grep for \\bSAP\\b empty); answer says it is not mentioned / not on record, not a flat denial."
+ },
+ {
+  "case": "x2",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported (absence): no SAP in corpus or profile (grep for \\bSAP\\b empty); answer says it is not mentioned / not on record, not a flat denial."
+ },
+ {
+  "case": "x2",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported (absence): no SAP in corpus or profile (grep for \\bSAP\\b empty); answer says it is not mentioned / not on record, not a flat denial. The generic 'feel free to ask' line is not an engage close or unsupported offer."
+ },
+ {
+  "case": "x2",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported (absence): no SAP in corpus or profile (grep for \\bSAP\\b empty); answer says it is not mentioned / not on record, not a flat denial. supported: BEA WebLogic, Oracle RAC, Bottomline WebSeries appear in stories."
+ },
+ {
+  "case": "x2",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported (absence): no SAP in corpus or profile (grep for \\bSAP\\b empty); answer says it is not mentioned / not on record, not a flat denial."
+ },
+ {
+  "case": "x2",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported (absence): no SAP in corpus or profile (grep for \\bSAP\\b empty); answer says it is not mentioned / not on record, not a flat denial."
+ },
+ {
+  "case": "x2",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported (absence): no SAP in corpus or profile (grep for \\bSAP\\b empty); answer says it is not mentioned / not on record, not a flat denial."
+ },
+ {
+  "case": "x2",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported (absence): no SAP in corpus or profile (grep for \\bSAP\\b empty); answer says it is not mentioned / not on record, not a flat denial."
+ },
+ {
+  "case": "x2",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported (absence): no SAP in corpus or profile (grep for \\bSAP\\b empty); answer says it is not mentioned / not on record, not a flat denial."
+ },
+ {
+  "case": "x2",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported (absence): no SAP in corpus or profile (grep for \\bSAP\\b empty); answer says it is not mentioned / not on record, not a flat denial."
+ },
+ {
+  "case": "x2",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported (absence): no SAP in corpus or profile (grep for \\bSAP\\b empty); answer says it is not mentioned / not on record, not a flat denial."
+ },
+ {
+  "case": "x3",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'Matt has worked on trading platforms, particularly in the context of financial services', framing JP Morgan ACCESS (treasury services and cash management) as a trading platform; supported: ACCESS on Bottomline WebSeries, ACH/wire/FX/EFTPS modules, 135,000+ clients, 180+ countries, 40+ blended team, trade finance integration; supported: Cendian webMethods B2B Trading Networks trading profiles/exchange documents, EDI/XML/flat file, CIDX. Names Cendian but makes a trading-platform claim."
+ },
+ {
+  "case": "x3",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'developing a sophisticated trading platform' for ACCESS (treasury services/cash management, not trading); supported: ACCESS facts (WebSeries, 135,000+, 180+, 40+, modules, April 2011 launch, Coalition Greenwich #1); missing: no Cendian webMethods B2B Trading Networks; no not-on-record."
+ },
+ {
+  "case": "x3",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "'Found it!' presents ACCESS as the trading-platform answer (implicit trading-platform claim, contradicted); supported: ACCESS modules, Technology Delivery Lead, 40+, 135,000+, 180+, April 2011, Coalition Greenwich; supported: RBC WebSeries assessment preventing investment; missing: no Cendian Trading Networks; no not-on-record."
+ },
+ {
+  "case": "x3",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'Matt has indeed worked on trading platforms, particularly in the financial services sector' with ACCESS as the example; supported: ACCESS modules, 135,000+, 180+, transaction monitoring integration, Coalition Greenwich; Cendian named with 'more focused on logistics rather than financial trading' but the opening trading-platform claim fails it; Cendian's Trading Networks product not named."
+ },
+ {
+  "case": "x3",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'Matt has worked on trading platforms' (Cendian Trading Networks is B2B document exchange, not a trading platform; trading platforms are not on record); supported: Cendian webMethods B2B Trading Networks trading profiles/exchange documents, EDI/XML/flat file, CIDX, plastics client onboarding, portal for partners who could not integrate. No not-on-record."
+ },
+ {
+  "case": "x3",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'creating a sophisticated trading platform' for ACCESS; supported: ACCESS facts (135,000+, 180+, WebSeries, 40+ team, modules, April 2011, Coalition Greenwich); unsupported: 'team of over 40 engineers' (story says blended resources, not all engineers); missing: no Cendian Trading Networks."
+ },
+ {
+  "case": "x3",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'These engagements showcase Matt's experience with trading platforms' (ACCESS is treasury services/cash management); supported: ACCESS facts, multi-jurisdictional compliance story (APAC, EMEA, Americas); missing: no Cendian Trading Networks."
+ },
+ {
+  "case": "x3",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "supported: 'not specifically on trading platforms', 'banking and payment solutions rather than trading platforms' (an acceptable not-on-record equivalent); supported: ACCESS facts, RBC WebSeries gap/fit assessment avoiding investment. Fails rule 3 only: does not name Cendian's webMethods B2B Trading Networks work."
+ },
+ {
+  "case": "x3",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'Matt has indeed worked on trading platforms' via Cendian; unsupported: transaction monitoring 'crucial for trading and payment operations' (adds trading framing to ACCESS); supported: Cendian webMethods B2B Trading Networks trading profiles/exchange documents, EDI/XML/flat file, CIDX; supported: ACCESS payment engine, transaction monitoring integration."
+ },
+ {
+  "case": "x3",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'Matt has indeed worked on trading platforms, specifically ... Cendian'; supported: Cendian webMethods B2B Trading Networks trading profiles/exchange documents, EDI/XML/flat file, CIDX, plastics client onboarding on site, clearinghouse routing, contract to live shipment planning, 2003-12 to 2005-02 dates. Trading-platform claim fails it."
+ },
+ {
+  "case": "x3",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'Yes, Matt has worked on trading platforms' via Cendian; supported: Cendian webMethods B2B Trading Networks trading profiles/exchange documents, EDI/XML/flat file, CIDX, plastics onboarding, Java/webMethods Integration Server, GC3 canonical representation."
+ },
+ {
+  "case": "x3",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'Matt worked extensively on trading platforms, particularly ... JP Morgan Chase' (ACCESS is treasury services and cash management, which the answer itself says); supported: ACCESS facts, April 2011, Coalition Greenwich; supported: Cendian webMethods B2B Trading Networks trading profiles/exchange documents, EDI/XML/flat file, CIDX. Names Cendian but makes a trading-platform claim."
+ },
+ {
+  "case": "x3",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'Matt has indeed worked on trading platforms' via Cendian; supported: 300+ carriers, 80+ countries, webMethods B2B Trading Networks, EDI/XML/flat file, CIDX; supported: ACCESS 135,000+, 180+, multi-jurisdiction compliance."
+ },
+ {
+  "case": "x3",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "no explicit trading claim, but 'Here's a relevant engagement' presents ACCESS as the trading answer with no not-on-record; supported: ACCESS treasury services/cash management portal, WebSeries, 135,000+, 180+, Technology Delivery Lead, 40+, modules, transaction monitoring, August 2009 to June 2012, embedded at Bottomline; missing: no Cendian Trading Networks."
+ },
+ {
+  "case": "x3",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'Matt has indeed worked on trading platforms' via Cendian; supported: Cendian webMethods B2B Trading Networks trading profiles/exchange documents, EDI/XML/flat file, CIDX, plastics onboarding in 2004, December 2003 to February 2005."
+ },
+ {
+  "case": "x3",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "no explicit trading claim, but 'Here's a relevant example' presents ACCESS as the trading answer with no not-on-record; supported: ACCESS treasury services/cash management, WebSeries, Technology Delivery Lead, 40+ blended team, Portsmouth, modules, MAC security, RBAC, SSO, April 2011, 135,000+, 180+, Coalition Greenwich; missing: no Cendian Trading Networks."
+ },
+ {
+  "case": "x3",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'Matt has worked on trading platforms' via Cendian; supported: Cendian webMethods B2B Trading Networks trading profiles/exchange documents, EDI/XML/flat file, CIDX, plastics onboarding, 300+ carriers, 80+ countries."
+ },
+ {
+  "case": "x3",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'Matt worked extensively on trading platforms, particularly ... JP Morgan Chase'; supported: ACCESS facts (135,000+, 180+, Technology Delivery Lead, 40+, MAC layer, Coalition Greenwich), multi-jurisdictional compliance; missing: no Cendian Trading Networks."
+ },
+ {
+  "case": "x3",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'Matt worked on trading platforms during his time at Cendian'; supported: Cendian webMethods B2B Trading Networks trading profiles/exchange documents, EDI/XML/flat file, CIDX, 300+ carriers, 80+ countries, X12 across marine/rail/truck, GC3, portal. Closing offer about Cendian integration technologies is supported and related, not a fail on its own."
+ },
+ {
+  "case": "x3",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'Matt has indeed worked on trading platforms' via Cendian; supported: Cendian webMethods B2B Trading Networks trading profiles/exchange documents, EDI/XML/flat file, CIDX, portal for no-capability partners; supported: ACCESS payment engine, WebSeries, 135,000+, 180+, Coalition Greenwich."
+ },
+ {
+  "case": "x5",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported (absence): no gaming-platform story (corpus 'gaming' hits are about metric gaming only); answer says it is not on record / no stories, not a flat denial."
+ },
+ {
+  "case": "x5",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported (absence): no gaming-platform story (corpus 'gaming' hits are about metric gaming only); answer says it is not on record / no stories, not a flat denial."
+ },
+ {
+  "case": "x5",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported (absence): no gaming-platform story (corpus 'gaming' hits are about metric gaming only); answer says it is not on record / no stories, not a flat denial. supported: financial services/banking/technology focus; clients JP Morgan Chase, American Express, Fiserv (Client field)."
+ },
+ {
+  "case": "x5",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported (absence): no gaming-platform story (corpus 'gaming' hits are about metric gaming only); answer says it is not on record / no stories, not a flat denial."
+ },
+ {
+  "case": "x5",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported (absence): no gaming-platform story (corpus 'gaming' hits are about metric gaming only); answer says it is not on record / no stories, not a flat denial."
+ },
+ {
+  "case": "x5",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported (absence): no gaming-platform story (corpus 'gaming' hits are about metric gaming only); answer says it is not on record / no stories, not a flat denial. supported: financial services, technology strategy, platform development (corpus terms present)."
+ },
+ {
+  "case": "x5",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported (absence): no gaming-platform story (corpus 'gaming' hits are about metric gaming only); answer says it is not on record / no stories, not a flat denial."
+ },
+ {
+  "case": "x5",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported (absence): no gaming-platform story (corpus 'gaming' hits are about metric gaming only); answer says it is not on record / no stories, not a flat denial. supported: financial services, technology, Transportation & Logistics industries; platform adoption, compliance, digital transformation appear in stories."
+ },
+ {
+  "case": "x5",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported (absence): no gaming-platform story (corpus 'gaming' hits are about metric gaming only); answer says it is not on record / no stories, not a flat denial."
+ },
+ {
+  "case": "x5",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported (absence): no gaming-platform story (corpus 'gaming' hits are about metric gaming only); answer says it is not on record / no stories, not a flat denial."
+ },
+ {
+  "case": "x5",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported (absence): no gaming-platform story (corpus 'gaming' hits are about metric gaming only); answer says it is not on record / no stories, not a flat denial. supported: Fiserv, JP Morgan Chase, American Express, RBC clients; financial services focus."
+ },
+ {
+  "case": "x5",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported (absence): no gaming-platform story (corpus 'gaming' hits are about metric gaming only); answer says it is not on record / no stories, not a flat denial. supported: industries financial services, technology, transportation, telecommunications, aerospace, defense, healthcare, education all in Industry field."
+ },
+ {
+  "case": "x5",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported (absence): no gaming-platform story (corpus 'gaming' hits are about metric gaming only); answer says it is not on record / no stories, not a flat denial. supported: same eight industry areas, all in Industry field."
+ },
+ {
+  "case": "x5",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported (absence): no gaming-platform story (corpus 'gaming' hits are about metric gaming only); answer says it is not on record / no stories, not a flat denial. supported: financial services, technology, logistics industries."
+ },
+ {
+  "case": "x5",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported (absence): no gaming-platform story (corpus 'gaming' hits are about metric gaming only); answer says it is not on record / no stories, not a flat denial."
+ },
+ {
+  "case": "x5",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported (absence): no gaming-platform story (corpus 'gaming' hits are about metric gaming only); answer says it is not on record / no stories, not a flat denial."
+ },
+ {
+  "case": "x5",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported (absence): no gaming-platform story (corpus 'gaming' hits are about metric gaming only); answer says it is not on record / no stories, not a flat denial. supported: financial services, technology, telecommunications; application modernization, agile transformation in stories; 'digital innovation' loosely supported by innovation themes (Cloud Innovation Center)."
+ },
+ {
+  "case": "x5",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported (absence): no gaming-platform story (corpus 'gaming' hits are about metric gaming only); answer says it is not on record / no stories, not a flat denial."
+ },
+ {
+  "case": "x5",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported (absence): no gaming-platform story (corpus 'gaming' hits are about metric gaming only); answer says it is not on record / no stories, not a flat denial."
+ },
+ {
+  "case": "x5",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported (absence): no gaming-platform story (corpus 'gaming' hits are about metric gaming only); answer says it is not on record / no stories, not a flat denial."
+ }
+]

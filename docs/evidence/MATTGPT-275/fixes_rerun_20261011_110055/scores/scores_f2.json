@@ -1,0 +1,802 @@
+[
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All four certs with correct years (AWS SAA 2020-2023, CP 2019-2023, SAFe expired, Oracle 8i 2002); says none currently active."
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All four certs with correct years incl. SAFe 2017; states none current."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "AWS SAA, CP and Oracle 8i with correct years, says none current; omits SAFe but states nothing incorrect."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All four certs with correct years; none currently active."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All four certs with correct years; none current."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All four certs with correct years; none currently active."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All four certs with correct years; none currently active."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All four certs with correct years; none current."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All four certs with correct years; none currently active."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All four certs with correct years; none current ('holds' wording but expiry stated)."
+ },
+ {
+  "case": "c04",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All four certs with correct years; ends 'none currently active' ('He is' wording offset by expiry dates)."
+ },
+ {
+  "case": "c04",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "AWS SAA, CP, Oracle 8i correct; none current; omits SAFe but nothing incorrect."
+ },
+ {
+  "case": "c04",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All four certs with correct years; none currently active."
+ },
+ {
+  "case": "c04",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All four certs with correct years; none current."
+ },
+ {
+  "case": "c04",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All four certs with correct years; none currently active."
+ },
+ {
+  "case": "c04",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All four certs with correct years; none current."
+ },
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All four certs with correct years; none current."
+ },
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All four certs with correct years; none current."
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All four certs with correct years; none currently active."
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All four certs with correct years; none current."
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "No PMP, then all four profile certs with correct years; none current."
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "No PMP, then all four profile certs with correct years."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "No PMP, then AWS SAA, CP, Oracle 8i with correct years (omits SAFe; nothing incorrect)."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "No PMP, then all four certs with correct years."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "No PMP, then all four certs with correct years."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "No PMP, then all four certs with correct years."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "No PMP, then all four certs with correct years."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "'Nothing I know about Matt covers that.': does not say no PMP or list the profile certifications the expected answer requires."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "No PMP, then all four certs with correct years; none current."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "No PMP, then all four certs with correct years."
+ },
+ {
+  "case": "c04",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "'Nothing I know about Matt covers that.': no 'no PMP' answer and no profile certifications, though the profile holds them."
+ },
+ {
+  "case": "c04",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "No PMP, then AWS SAA, CP, Oracle 8i with correct years (omits SAFe; nothing incorrect)."
+ },
+ {
+  "case": "c04",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "No PMP, then all four certs (years for AWS, SAFe expired)."
+ },
+ {
+  "case": "c04",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "No PMP, then all four certs with correct years."
+ },
+ {
+  "case": "c04",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "No PMP, then all four certs, all stated expired; no incorrect fact."
+ },
+ {
+  "case": "c04",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "No PMP, then all four certs with correct years."
+ },
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "No PMP, then all four certs with correct years."
+ },
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "No PMP, then all four certs with correct years."
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "No PMP, then all four certs with correct years."
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "No PMP, then all four certs with correct years; none current."
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "None current; lists all four with expiry/years."
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "None current, all expired; lists all four correctly."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "No, none current; AWS SAA/CP expired 2023, Oracle 2002; omits SAFe but implies nothing current."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Asks 'certifications or the engagements?' though 'those' clearly refers to the certifications just listed; gives no answer."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "None current; all four with correct years."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "None currently active; all four with correct years."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "None currently active; all four with correct years."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "None current; AWS both expired 2023, SAFe and Oracle 2002 not current."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "None currently active; all four with correct years."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "None current; all four with correct years ('holds' wording but expiry stated)."
+ },
+ {
+  "case": "c04",
+  "run": 6,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "None currently active; AWS SAA/CP and SAFe with correct years (omits Oracle; nothing implied current)."
+ },
+ {
+  "case": "c04",
+  "run": 6,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "None current; AWS SAA/CP expired 2023, Oracle 2002 (omits SAFe; nothing implied current)."
+ },
+ {
+  "case": "c04",
+  "run": 7,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "None currently active; all four listed, expiry correct."
+ },
+ {
+  "case": "c04",
+  "run": 7,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "None current; all four with correct years."
+ },
+ {
+  "case": "c04",
+  "run": 8,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "None currently active; all four with correct years."
+ },
+ {
+  "case": "c04",
+  "run": 8,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "None current; all four with correct years."
+ },
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "None current; all four with correct years."
+ },
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "None current; all four with correct years."
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "None currently active; all four with correct years."
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "None current; AWS SAA/CP expired 2023 'among others, but all have expired'."
+ },
+ {
+  "case": "c05",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Sabbatical, building MattGPT, the supported active-search sentence; no unsupported facts."
+ },
+ {
+  "case": "c05",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Engineer to CIC Director, recharge/reflect, MattGPT, senior roles in PE/AI-era/modernization, builder, available immediately, clarity/empathy/purpose: all in transition/career-intent stories and profile."
+ },
+ {
+  "case": "c05",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Engineer to Director, recharge, AI/GenAI skills via MattGPT, building not idling, target roles, bridge strategy and execution, available immediately: all supported by transition/career-intent stories."
+ },
+ {
+  "case": "c05",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Sabbatical, MattGPT, supported active-search sentence."
+ },
+ {
+  "case": "c05",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC 0 to 150+, 4x faster delivery, $100M+ repeat business, sabbatical/MattGPT, target roles, available immediately, clarity/empathy/purpose: all supported."
+ },
+ {
+  "case": "c05",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Sabbatical and supported active-search sentence; execution/delivery/transformation framing, no unsupported fact."
+ },
+ {
+  "case": "c05",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Sabbatical, MattGPT, supported search sentence, CIC 150+; 'growing teams' matches profile self-description."
+ },
+ {
+  "case": "c05",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Engineer to Director, sabbatical, MattGPT with RAG/semantic search, target roles, not strategy decks, 0 to 1 builder not maintainer, available immediately: all in career-intent/transition stories."
+ },
+ {
+  "case": "c05",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Engineer to Director, sabbatical, MattGPT, building not idling, target roles, clarity/empathy/purpose, bridge strategy and execution, available immediately: all supported."
+ },
+ {
+  "case": "c05",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Sabbatical, MattGPT, supported active-search sentence."
+ },
+ {
+  "case": "c05",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Sabbatical, MattGPT, supported search sentence; no unsupported fact."
+ },
+ {
+  "case": "c05",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC to 150, reflection, energizing work (platforms, product, engineering culture), MattGPT, target roles, builder, available immediately: supported by transition/career-intent stories."
+ },
+ {
+  "case": "c05",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Sabbatical, MattGPT, supported search sentence."
+ },
+ {
+  "case": "c05",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Engineer to Director, sabbatical, MattGPT, builder, target roles, bridge strategy/execution, available immediately: supported (stray opener 'Here's a great example' carries no claim)."
+ },
+ {
+  "case": "c05",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC 0 to 150+, chapter closed, MattGPT, builder, target roles, clarity/empathy/purpose, build not maintain, available immediately: supported."
+ },
+ {
+  "case": "c05",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Sabbatical and supported active-search sentence."
+ },
+ {
+  "case": "c05",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Long Accenture tenure, recharge/reflect, MattGPT, builder, target roles, engineers and PMs, 0 to 1 builder, available immediately: supported."
+ },
+ {
+  "case": "c05",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Sabbatical, MattGPT, supported active-search sentence."
+ },
+ {
+  "case": "c05",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Accenture/CIC, sabbatical, MattGPT with RAG/semantic search/Python, target roles, builder, available immediately: supported."
+ },
+ {
+  "case": "c05",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Sabbatical, MattGPT, supported search sentence."
+ },
+ {
+  "case": "c05",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Argues only from the MattGPT sabbatical project (facts supported: 100+ stories, workflows, NOW/NEXT/LATER); never addresses the in-house comparison or consulting breadth across clients, ends in a generic 'fresh perspective' pitch."
+ },
+ {
+  "case": "c05",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Contradicted: 'modernizing payment systems across 12 countries for clients like JP Morgan, RBC, Capital One, and HSBC'; the 12-country rollouts are JP Morgan only (why-hire-matt), HSBC work is mortgage. Other figures (150, 4x, $100M+) supported."
+ },
+ {
+  "case": "c05",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Contradicted: 'modernizing payment systems across 12 countries for clients like JP Morgan and HSBC'; HSBC stories are mortgage transformation, 12-country rollouts were JP Morgan's. Rest (150, $100M+, MattGPT stack) supported."
+ },
+ {
+  "case": "c05",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC 150+, 4x, zero-defect, flat structure, near-zero attrition first two years, peer evidence, AI workflows, JP Morgan modernization: supported; contrasts with in-house via breadth. Role Match close fits a hiring question."
+ },
+ {
+  "case": "c05",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Contradicted: '12 countries, such as modernizing payment systems for JP Morgan, RBC, Capital One, and HSBC' (12 countries is JP Morgan only); also a dangling 'This project' with no referent and vouching ('strong candidate')."
+ },
+ {
+  "case": "c05",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC 0 to 150+, JP Morgan 341-application I&AM uplift, solo AI workflows, innovation ecosystem with retention, $100M+: supported; directly contrasts diverse environments with a single organizational culture. Role Match close fits."
+ },
+ {
+  "case": "c05",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC 150+, 4x, zero-defect, industries (FS, tech, logistics), JP Morgan PMO 341 apps in three months, $100M+: supported; contrasts breadth with in-house. 'Compelling choice' is soft vouching. Role Match close fits."
+ },
+ {
+  "case": "c05",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Unsupported claim about in-house teams: TDD and automated pipelines 'are not always prevalent in in-house environments' (not in the corpus; disparages in-house). Figures (150, 4x, 12 countries, $100M+) otherwise supported."
+ },
+ {
+  "case": "c05",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Engineer to Director, CIC 150+, $100M+ via delivery, modernization for JPM/RBC/Capital One/HSBC 'including rolling out platforms across 12 countries' (matches why-hire-matt framing); contrasts diverse environments with in-house."
+ },
+ {
+  "case": "c05",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Unsupported: 4x/zero-defect 'achieved through a flat organizational structure' (corpus credits TDD and pipelines) and such systems 'not typical in traditional in-house environments' (invented, disparaging); non-sequitur AI sentence."
+ },
+ {
+  "case": "c05",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Unsupported: 4x/zero-defect 'achieved through a flat organizational structure ... which are not typical in traditional in-house environments' (cause misattributed; in-house claim invented). JP Morgan 341 apps supported. Closes Role Match + About Matt."
+ },
+ {
+  "case": "c05",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Contradicted: 'global programs across 12 countries, including significant projects for JP Morgan, RBC, Capital One, and HSBC' makes the RBC/Capital One/HSBC work 12-country programs; only JP Morgan's were. Also vouching ('compelling choice')."
+ },
+ {
+  "case": "c05",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC 0 to 150+, industries FS/tech/logistics, MattGPT AI workflows, flat structure, near-zero attrition first two years: supported; contrasts breadth with in-house. Role Match close fits."
+ },
+ {
+  "case": "c05",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC 150+, $100M+ via delivery, modernization for JPM/RBC/Capital One/HSBC, separately 'payment and Salesforce platforms across 12 countries' (JP Morgan's, not attributed elsewhere), MattGPT: supported; contrasts sectors and geographies with in-house."
+ },
+ {
+  "case": "c05",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Contradicted: 'rolling out payment platforms across 12 countries for clients like JP Morgan and HSBC'; HSBC work is mortgage, 12-country rollout is JP Morgan's. Other figures supported."
+ },
+ {
+  "case": "c05",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Never addresses the in-house comparison: generic pitch (CIC 150+, 4x, JP Morgan 341 apps, all supported) ending 'makes him a strong candidate'."
+ },
+ {
+  "case": "c05",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Contradicted: 'payment and Salesforce platforms across 12 countries for clients like JP Morgan, RBC, Capital One, and HSBC' (JP Morgan only); also 'Unlike many in-house candidates' is an unsupported, disparaging claim."
+ },
+ {
+  "case": "c05",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC 0 to 150+, 4x, zero-defect, JP Morgan PMO for 341 apps in three months after breach, MattGPT solo build, $100M+: supported; contrasts teams across industries and roles with in-house. Role Match close fits."
+ },
+ {
+  "case": "c05",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC 150+, 4x, zero-defect via TDD/pipelines, $100M+, banking/healthcare/telecom, global programs across 12 countries (no client misattribution): supported; contrasts capabilities with in-house. Dangling 'This project' sentence is a coherence flaw, no false fact."
+ },
+ {
+  "case": "c05",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Contradicted: 'modernizing payment platforms across 12 countries for clients like JP Morgan and HSBC'; HSBC work is mortgage, 12-country rollouts were JP Morgan's."
+ }
+]

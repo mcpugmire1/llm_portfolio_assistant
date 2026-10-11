@@ -1,0 +1,962 @@
+[
+ {
+  "case": "c08",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Correct referent (What I Learned About Assumptions): UAT email job, unmasked production data to thousands of clients, accountability, RCA, tester removed; all facts match the story."
+ },
+ {
+  "case": "c08",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Correct referent (What I Learned About Assumptions): UAT email job, unmasked production data to thousands of clients, accountability, RCA, tester removed; all facts match the story."
+ },
+ {
+  "case": "c08",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Correct referent (What I Learned About Assumptions): UAT email job, unmasked production data to thousands of clients, accountability, RCA, tester removed; all facts match the story."
+ },
+ {
+  "case": "c08",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Correct referent (What I Learned About Assumptions): UAT email job, unmasked production data to thousands of clients, accountability, RCA, tester removed; all facts match the story."
+ },
+ {
+  "case": "c08",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Correct referent (What I Learned About Assumptions): UAT email job, unmasked production data to thousands of clients, accountability, RCA, tester removed; all facts match the story."
+ },
+ {
+  "case": "c08",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Correct referent (What I Learned About Assumptions): UAT email job, unmasked production data to thousands of clients, accountability, RCA, tester removed; all facts match the story."
+ },
+ {
+  "case": "c08",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Correct referent (What I Learned About Assumptions): UAT email job, unmasked production data to thousands of clients, accountability, RCA, tester removed; all facts match the story."
+ },
+ {
+  "case": "c08",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Correct referent (What I Learned About Assumptions): UAT email job, unmasked production data to thousands of clients, accountability, RCA, tester removed; all facts match the story."
+ },
+ {
+  "case": "c08",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Correct referent (What I Learned About Assumptions): UAT email job, unmasked production data to thousands of clients, accountability, RCA, tester removed; all facts match the story."
+ },
+ {
+  "case": "c08",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Correct referent (What I Learned About Assumptions): UAT email job, unmasked production data to thousands of clients, accountability, RCA, tester removed; all facts match the story."
+ },
+ {
+  "case": "c08",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Correct referent (What I Learned About Assumptions): UAT email job, unmasked production data to thousands of clients, accountability, RCA, tester removed; all facts match the story."
+ },
+ {
+  "case": "c08",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Correct referent (What I Learned About Assumptions): UAT email job, unmasked production data to thousands of clients, accountability, RCA, tester removed; all facts match the story."
+ },
+ {
+  "case": "c08",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Correct referent (What I Learned About Assumptions): UAT email job, unmasked production data to thousands of clients, accountability, RCA, tester removed; all facts match the story."
+ },
+ {
+  "case": "c08",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Correct referent (What I Learned About Assumptions): UAT email job, unmasked production data to thousands of clients, accountability, RCA, tester removed; all facts match the story."
+ },
+ {
+  "case": "c08",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Correct referent (What I Learned About Assumptions): UAT email job, unmasked production data to thousands of clients, accountability, RCA, tester removed; all facts match the story."
+ },
+ {
+  "case": "c08",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Correct referent (What I Learned About Assumptions): UAT email job, unmasked production data to thousands of clients, accountability, RCA, tester removed; all facts match the story."
+ },
+ {
+  "case": "c08",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Correct referent (What I Learned About Assumptions): UAT email job, unmasked production data to thousands of clients, accountability, RCA, tester removed; all facts match the story."
+ },
+ {
+  "case": "c08",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Correct referent (What I Learned About Assumptions): UAT email job, unmasked production data to thousands of clients, accountability, RCA, tester removed; all facts match the story."
+ },
+ {
+  "case": "c08",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Correct referent (What I Learned About Assumptions): UAT email job, unmasked production data to thousands of clients, accountability, RCA, tester removed; all facts match the story."
+ },
+ {
+  "case": "c08",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Correct referent (What I Learned About Assumptions): UAT email job, unmasked production data to thousands of clients, accountability, RCA, tester removed; all facts match the story."
+ },
+ {
+  "case": "c08",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Changes come from the incident's own story (IAM validation, environment verification, PII scrubbing/data masking, risk ownership as day-one responsibilities); no other engagement framed as consequence."
+ },
+ {
+  "case": "c08",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Presents Norfolk Southern CI/CD, monitoring and microservices work as Matt 'applying these learnings', a different engagement framed as a consequence of the incident."
+ },
+ {
+  "case": "c08",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Changes are correct from the story, but closes with an offer on 'the impact of these changes on future projects', which no story records: unsupported closing."
+ },
+ {
+  "case": "c08",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Changes come from the incident's own story (IAM validation, environment verification, PII scrubbing/data masking, risk ownership as day-one responsibilities); no other engagement framed as consequence."
+ },
+ {
+  "case": "c08",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Changes come from the incident's own story (IAM validation, environment verification, PII scrubbing/data masking, risk ownership as day-one responsibilities); no other engagement framed as consequence. 'Implemented compensating controls such as data masking and email interception' read as a close inference from the story's missing controls and 'implement corrective controls'."
+ },
+ {
+  "case": "c08",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Answers with DDD, microservices, CI/CD, OKR sprints and Norfolk Southern as lessons from the failure: different engagements framed as consequences; misses the story's actual changes."
+ },
+ {
+  "case": "c08",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Changes come from the incident's own story (IAM validation, environment verification, PII scrubbing/data masking, risk ownership as day-one responsibilities); no other engagement framed as consequence."
+ },
+ {
+  "case": "c08",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "After the correct changes, frames DDD/microservices/CI/CD modernization work and its outcomes as 'integrating these lessons': a different engagement presented as a consequence."
+ },
+ {
+  "case": "c08",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Changes come from the incident's own story (IAM validation, environment verification, PII scrubbing/data masking, risk ownership as day-one responsibilities); no other engagement framed as consequence."
+ },
+ {
+  "case": "c08",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Changes come from the incident's own story (IAM validation, environment verification, PII scrubbing/data masking, risk ownership as day-one responsibilities); no other engagement framed as consequence."
+ },
+ {
+  "case": "c08",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Changes come from the incident's own story (IAM validation, environment verification, PII scrubbing/data masking, risk ownership as day-one responsibilities); no other engagement framed as consequence. Email interception as an implemented control is an inference from the story's missing compensating controls."
+ },
+ {
+  "case": "c08",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Changes come from the incident's own story (IAM validation, environment verification, PII scrubbing/data masking, risk ownership as day-one responsibilities); no other engagement framed as consequence."
+ },
+ {
+  "case": "c08",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Changes come from the incident's own story (IAM validation, environment verification, PII scrubbing/data masking, risk ownership as day-one responsibilities); no other engagement framed as consequence. Email interception as an implemented control is an inference from the story."
+ },
+ {
+  "case": "c08",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Changes come from the incident's own story (IAM validation, environment verification, PII scrubbing/data masking, risk ownership as day-one responsibilities); no other engagement framed as consequence. Auditing who could trigger downstream jobs and email interception are inferred from the story's listed gaps and corrective controls."
+ },
+ {
+  "case": "c08",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Changes come from the incident's own story (IAM validation, environment verification, PII scrubbing/data masking, risk ownership as day-one responsibilities); no other engagement framed as consequence. Email interception inferred from the story's listed gaps."
+ },
+ {
+  "case": "c08",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Changes come from the incident's own story (IAM validation, environment verification, PII scrubbing/data masking, risk ownership as day-one responsibilities); no other engagement framed as consequence. Email interception inferred from the story's listed gaps."
+ },
+ {
+  "case": "c08",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Generic and partly invented: 'clear documentation', a 'culture of accountability and transparency' where team members question assumptions; no story holds these; omits PII scrubbing and risk ownership."
+ },
+ {
+  "case": "c08",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Changes come from the incident's own story (IAM validation, environment verification, PII scrubbing/data masking, risk ownership as day-one responsibilities); no other engagement framed as consequence."
+ },
+ {
+  "case": "c08",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "After the correct changes, says 'in subsequent projects' he built CI/CD pipelines and event-driven bridge/queuing transitions: modernization stories framed as consequences of the incident."
+ },
+ {
+  "case": "c08",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Changes come from the incident's own story (IAM validation, environment verification, PII scrubbing/data masking, risk ownership as day-one responsibilities); no other engagement framed as consequence."
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine/gateway: 40+ blended team, 135,000+ clients, 180+ countries, April 2011 launch, Coalition Greenwich #1; facts match stories."
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine/gateway: 40+ blended team, 135,000+ clients, 180+ countries, April 2011 launch, Coalition Greenwich #1; facts match stories."
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine/gateway: 40+ blended team, 135,000+ clients, 180+ countries, April 2011 launch, Coalition Greenwich #1; facts match stories."
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine/gateway: 40+ blended team, 135,000+ clients, 180+ countries, April 2011 launch, Coalition Greenwich #1; facts match stories."
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine/gateway: 40+ blended team, 135,000+ clients, 180+ countries, April 2011 launch, Coalition Greenwich #1; facts match stories."
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine/gateway: 40+ blended team, 135,000+ clients, 180+ countries, April 2011 launch, Coalition Greenwich #1; facts match stories."
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine/gateway: 40+ blended team, 135,000+ clients, 180+ countries, April 2011 launch, Coalition Greenwich #1; facts match stories. RBC Express cross-border workflow facts (real-time FX, SLA compliance, competitive gap) match its story."
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine/gateway: 40+ blended team, 135,000+ clients, 180+ countries, April 2011 launch, Coalition Greenwich #1; facts match stories."
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine/gateway: 40+ blended team, 135,000+ clients, 180+ countries, April 2011 launch, Coalition Greenwich #1; facts match stories."
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine/gateway: 40+ blended team, 135,000+ clients, 180+ countries, April 2011 launch, Coalition Greenwich #1; facts match stories. RBC Express cross-border workflow facts (real-time FX, SLA compliance, competitive gap) match its story."
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine/gateway: 40+ blended team, 135,000+ clients, 180+ countries, April 2011 launch, Coalition Greenwich #1; facts match stories. RBC Express cross-border workflow facts (real-time FX, SLA compliance, competitive gap) match its story."
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine/gateway: 40+ blended team, 135,000+ clients, 180+ countries, April 2011 launch, Coalition Greenwich #1; facts match stories. RBC Express cross-border workflow facts (real-time FX, SLA compliance, competitive gap) match its story."
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine/gateway: 40+ blended team, 135,000+ clients, 180+ countries, April 2011 launch, Coalition Greenwich #1; facts match stories."
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine/gateway: 40+ blended team, 135,000+ clients, 180+ countries, April 2011 launch, Coalition Greenwich #1; facts match stories. RBC Express cross-border workflow facts (real-time FX, SLA compliance, competitive gap) match its story."
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine/gateway: 40+ blended team, 135,000+ clients, 180+ countries, April 2011 launch, Coalition Greenwich #1; facts match stories. RBC Express cross-border workflow facts (real-time FX, SLA compliance, competitive gap) match its story."
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine/gateway: 40+ blended team, 135,000+ clients, 180+ countries, April 2011 launch, Coalition Greenwich #1; facts match stories."
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine/gateway: 40+ blended team, 135,000+ clients, 180+ countries, April 2011 launch, Coalition Greenwich #1; facts match stories. RBC Express cross-border workflow facts (real-time FX, SLA compliance, competitive gap) match its story."
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine/gateway: 40+ blended team, 135,000+ clients, 180+ countries, April 2011 launch, Coalition Greenwich #1; facts match stories."
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine/gateway: 40+ blended team, 135,000+ clients, 180+ countries, April 2011 launch, Coalition Greenwich #1; facts match stories."
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine/gateway: 40+ blended team, 135,000+ clients, 180+ countries, April 2011 launch, Coalition Greenwich #1; facts match stories."
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; facts from leadership stories and profile self-description (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership, permit to fail, core values)."
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; facts from leadership stories and profile self-description (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership, permit to fail, core values)."
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; facts from leadership stories and profile self-description (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership, permit to fail, core values)."
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; facts from leadership stories and profile self-description (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership, permit to fail, core values)."
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; facts from leadership stories and profile self-description (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership, permit to fail, core values)."
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; facts from leadership stories and profile self-description (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership, permit to fail, core values)."
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; facts from leadership stories and profile self-description (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership, permit to fail, core values)."
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; facts from leadership stories and profile self-description (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership, permit to fail, core values)."
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; facts from leadership stories and profile self-description (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership, permit to fail, core values)."
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; facts from leadership stories and profile self-description (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership, permit to fail, core values)."
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; facts from leadership stories and profile self-description (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership, permit to fail, core values)."
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; facts from leadership stories and profile self-description (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership, permit to fail, core values)."
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; facts from leadership stories and profile self-description (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership, permit to fail, core values)."
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; facts from leadership stories and profile self-description (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership, permit to fail, core values)."
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; facts from leadership stories and profile self-description (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership, permit to fail, core values)."
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; facts from leadership stories and profile self-description (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership, permit to fail, core values)."
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; facts from leadership stories and profile self-description (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership, permit to fail, core values)."
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; facts from leadership stories and profile self-description (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership, permit to fail, core values)."
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; facts from leadership stories and profile self-description (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership, permit to fail, core values)."
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; facts from leadership stories and profile self-description (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership, permit to fail, core values)."
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Example of the leadership style from the CIC collective-ownership / leadership-philosophy / decentralized-decision stories; not payments; facts match."
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Gives JP Morgan ACCESS payments as the leadership example (fixture: not payments); closing offer on ACCESS impact continues the payments topic."
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Example of the leadership style from the CIC collective-ownership / leadership-philosophy / decentralized-decision stories; not payments; facts match."
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Example of the leadership style from the CIC collective-ownership / leadership-philosophy / decentralized-decision stories; not payments; facts match."
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Example of the leadership style from the CIC collective-ownership / leadership-philosophy / decentralized-decision stories; not payments; facts match."
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Example of the leadership style from the CIC collective-ownership / leadership-philosophy / decentralized-decision stories; not payments; facts match."
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Example of the leadership style from the CIC collective-ownership / leadership-philosophy / decentralized-decision stories; not payments; facts match."
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Example of the leadership style from the CIC collective-ownership / leadership-philosophy / decentralized-decision stories; not payments; facts match."
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Example of the leadership style from the CIC collective-ownership / leadership-philosophy / decentralized-decision stories; not payments; facts match."
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Example of the leadership style from the CIC collective-ownership / leadership-philosophy / decentralized-decision stories; not payments; facts match."
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Gives JP Morgan ACCESS payments as the leadership example and attributes a 'permit to fail' environment to ACCESS, which no story holds."
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Example of the leadership style from the CIC collective-ownership / leadership-philosophy / decentralized-decision stories; not payments; facts match."
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Example of the leadership style from the CIC collective-ownership / leadership-philosophy / decentralized-decision stories; not payments; facts match."
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Example of the leadership style from the CIC collective-ownership / leadership-philosophy / decentralized-decision stories; not payments; facts match."
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Example of the leadership style from the CIC collective-ownership / leadership-philosophy / decentralized-decision stories; not payments; facts match."
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Example of the leadership style from the CIC collective-ownership / leadership-philosophy / decentralized-decision stories; not payments; facts match."
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Gives no example; asks which of JP Morgan, RBC or CIC, re-offering the payments engagements for a leadership example."
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Example of the leadership style from the CIC collective-ownership / leadership-philosophy / decentralized-decision stories; not payments; facts match."
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Example of the leadership style from the CIC collective-ownership / leadership-philosophy / decentralized-decision stories; not payments; facts match."
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Example of the leadership style from the CIC collective-ownership / leadership-philosophy / decentralized-decision stories; not payments; facts match."
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "Team size of the CIC example from the previous turn: 150+ (grown from 10-person pilot where stated); supporting figures (4x, zero defects, $100M+, 10 vs 20-person teams, Atlanta/Tampa, four years) match stories."
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "Previous turn's example was JP Morgan ACCESS; gives that project's 40+ blended team, correct referent for its own conversation (the T3 error was scored there). Ambiguous against the fixture's 'fails if payments team'."
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "Team size of the CIC example from the previous turn: 150+ (grown from 10-person pilot where stated); supporting figures (4x, zero defects, $100M+, 10 vs 20-person teams, Atlanta/Tampa, four years) match stories."
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 4,
+  "label": "B",
+  "pass": false,
+  "reason": "Says the exact team size isn't specified, but the CIC story holds 150+ practitioners from a 10-person pilot and 10-person balanced teams."
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "Team size of the CIC example from the previous turn: 150+ (grown from 10-person pilot where stated); supporting figures (4x, zero defects, $100M+, 10 vs 20-person teams, Atlanta/Tampa, four years) match stories."
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "Team size of the CIC example from the previous turn: 150+ (grown from 10-person pilot where stated); supporting figures (4x, zero defects, $100M+, 10 vs 20-person teams, Atlanta/Tampa, four years) match stories."
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "Team size of the CIC example from the previous turn: 150+ (grown from 10-person pilot where stated); supporting figures (4x, zero defects, $100M+, 10 vs 20-person teams, Atlanta/Tampa, four years) match stories. Closing offer is duplicated (cosmetic), offer itself supported."
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "Team size of the CIC example from the previous turn: 150+ (grown from 10-person pilot where stated); supporting figures (4x, zero defects, $100M+, 10 vs 20-person teams, Atlanta/Tampa, four years) match stories."
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "Team size of the CIC example from the previous turn: 150+ (grown from 10-person pilot where stated); supporting figures (4x, zero defects, $100M+, 10 vs 20-person teams, Atlanta/Tampa, four years) match stories."
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "Team size of the CIC example from the previous turn: 150+ (grown from 10-person pilot where stated); supporting figures (4x, zero defects, $100M+, 10 vs 20-person teams, Atlanta/Tampa, four years) match stories."
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "Previous turn's example was JP Morgan ACCESS; gives its 40+ blended team, correct referent for its own conversation. Ambiguous against the fixture's 'fails if payments team'."
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "Team size of the CIC example from the previous turn: 150+ (grown from 10-person pilot where stated); supporting figures (4x, zero defects, $100M+, 10 vs 20-person teams, Atlanta/Tampa, four years) match stories."
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "Team size of the CIC example from the previous turn: 150+ (grown from 10-person pilot where stated); supporting figures (4x, zero defects, $100M+, 10 vs 20-person teams, Atlanta/Tampa, four years) match stories."
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "Team size of the CIC example from the previous turn: 150+ (grown from 10-person pilot where stated); supporting figures (4x, zero defects, $100M+, 10 vs 20-person teams, Atlanta/Tampa, four years) match stories."
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "Team size of the CIC example from the previous turn: 150+ (grown from 10-person pilot where stated); supporting figures (4x, zero defects, $100M+, 10 vs 20-person teams, Atlanta/Tampa, four years) match stories."
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "Team size of the CIC example from the previous turn: 150+ (grown from 10-person pilot where stated); supporting figures (4x, zero defects, $100M+, 10 vs 20-person teams, Atlanta/Tampa, four years) match stories."
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "Previous turn gave no example, so 'that project' has no referent; clarifying between the engagements discussed is honest. Ambiguous."
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "Team size of the CIC example from the previous turn: 150+ (grown from 10-person pilot where stated); supporting figures (4x, zero defects, $100M+, 10 vs 20-person teams, Atlanta/Tampa, four years) match stories."
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "Team size of the CIC example from the previous turn: 150+ (grown from 10-person pilot where stated); supporting figures (4x, zero defects, $100M+, 10 vs 20-person teams, Atlanta/Tampa, four years) match stories."
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "Team size of the CIC example from the previous turn: 150+ (grown from 10-person pilot where stated); supporting figures (4x, zero defects, $100M+, 10 vs 20-person teams, Atlanta/Tampa, four years) match stories."
+ }
+]

@@ -1,0 +1,802 @@
+[
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ blended team, WebSeries, April 2011, Coalition Greenwich #1) match the payment-engine story"
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ blended team, WebSeries, April 2011, Coalition Greenwich #1) match the payment-engine story; Portsmouth embedding supported"
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS 40+ blended Accenture/JPM team, Mumbai/Bangalore/US: correct referent and facts"
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS 40+ blended onshore/offshore team: correct"
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS challenges from same engagement's stories (12-country gateway, aggressive timelines, days-long entitlements); compliance offer is related and supported"
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS gateway complexity, aggressive timelines, Sev-1 incident ownership: from ACCESS stories"
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ blended team, WebSeries, April 2011, Coalition Greenwich #1) match the payment-engine story"
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Honest: 'platform's success was largely attributed to Matt's leadership' is not held by any story; other ACCESS facts supported"
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS 40+ blended team: correct"
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS 40+ blended team; offer on payment modules is related and supported"
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "WebSeries out-of-box gap, aggressive timelines, MAC-layer failure from missing unit tests: ACCESS payment-engine story"
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS 12-country complexity, MAS/Korea compliance, entitlement overhaul: same engagement, facts supported; compliance offer related"
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ blended team, WebSeries, April 2011, Coalition Greenwich #1) match the payment-engine story; adds the ACCESS gateway story (12 countries), supported"
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS payment engine plus RBC Express cross-border workflows; facts match both stories"
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS 40+ blended team: correct (both engagements in turn 1 were ACCESS stories)"
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Clarifying question naming ACCESS and RBC, both discussed in turn 1: allowed by Protocol D4"
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "WebSeries out-of-box gap, aggressive timelines, MAC-layer failure: ACCESS story"
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Clarifying question naming ACCESS and RBC: allowed by Protocol D4"
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ blended team, WebSeries, April 2011, Coalition Greenwich #1) match the payment-engine story; transaction monitoring integration supported"
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ blended team, WebSeries, April 2011, Coalition Greenwich #1) match the payment-engine story"
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS 40+ blended team, Portsmouth embedding: correct"
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS 40+ blended team: correct"
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "WebSeries out-of-box gap, aggressive timelines, MAC-layer failure: ACCESS story"
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS 12-country gateway complexity, timelines, jurisdiction compliance: same engagement; compliance offer related and supported"
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS facts plus RBC Express cross-border workflows; all supported"
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ blended team, WebSeries, April 2011, Coalition Greenwich #1) match the payment-engine story; transaction monitoring supported"
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Clarifying question naming ACCESS and RBC, both in turn 1: allowed by Protocol D4"
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS 40+ blended team: correct"
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Clarifying question naming ACCESS and RBC: allowed by Protocol D4"
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "WebSeries out-of-box gap, MAC-layer failure, transaction monitoring complexity: ACCESS story"
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ blended team, WebSeries, April 2011, Coalition Greenwich #1) match the payment-engine story"
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ blended team, WebSeries, April 2011, Coalition Greenwich #1) match the payment-engine story; '40+ engineers' and 'operational efficiency and client satisfaction' are loose wording, not material (borderline)"
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS 40+ blended team: correct"
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS 40+ team (called engineers; story says resources): referent and figure correct"
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "WebSeries out-of-box gap, timelines, MAC-layer failure from missing unit tests: ACCESS story"
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS legacy consolidation/data migration and jurisdiction compliance challenges: same engagement, facts from migration story"
+ },
+ {
+  "case": "c01",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ blended team, WebSeries, April 2011, Coalition Greenwich #1) match the payment-engine story"
+ },
+ {
+  "case": "c01",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ blended team, WebSeries, April 2011, Coalition Greenwich #1) match the payment-engine story"
+ },
+ {
+  "case": "c01",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS 40+ blended team: correct"
+ },
+ {
+  "case": "c01",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS 40+ blended onshore/offshore team: correct"
+ },
+ {
+  "case": "c01",
+  "run": 7,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS entitlement, 12-country gateway and compliance challenges: same engagement; offer related"
+ },
+ {
+  "case": "c01",
+  "run": 7,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Aggressive timelines, WebSeries gap, entitlement and gateway complexity: ACCESS stories"
+ },
+ {
+  "case": "c01",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ blended team, WebSeries, April 2011, Coalition Greenwich #1) match the payment-engine story"
+ },
+ {
+  "case": "c01",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS payment engine and payments-workstream data migration: supported"
+ },
+ {
+  "case": "c01",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS 40+ blended team, Portsmouth: correct"
+ },
+ {
+  "case": "c01",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS 40+ team, onshore-offshore model, Portsmouth; offer related"
+ },
+ {
+  "case": "c01",
+  "run": 8,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS 12-country gateway complexity and compliance risk: gateway story"
+ },
+ {
+  "case": "c01",
+  "run": 8,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS gateway complexity, aggressive timelines, delivery inefficiencies, production issues, compliance: supported; offer related"
+ },
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS facts plus RBC Express workflows: supported"
+ },
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Honest: 'recognized #1 ... thanks to its advanced payment capabilities and user-friendly design' and 'success was a testament to Matt's leadership' are not in any story"
+ },
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS 40+ blended team: correct (ACCESS was the main engagement of turn 1)"
+ },
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS 40+ blended team: correct"
+ },
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS challenges (WebSeries gap, timelines) and RBC situation, both engagements from turn 1; facts supported (borderline: brings RBC back after turn 2 answered ACCESS)"
+ },
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS gateway, compliance, entitlement challenges: same engagement, supported"
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS gateway story: 12 countries, 40+ team, April 2011, 135,000+/180+: supported"
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS payment engine plus RBC Express workflows: supported"
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS 40+ blended team: correct"
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS 40+ team and correctly says RBC story records no team size; offer related"
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS 12-country complexity, timelines, Sev-1 incident response: gateway story"
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS 12-country complexity and Sev-1; RBC (Day2Day, discussed in turn 1) WebSeries gap finding from de-risking story: supported"
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style from leadership-philosophy and CIC culture stories (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership): supported"
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Short answer: empathy/clarity, permit-to-fail, balanced teams, core values from profile self-description: supported"
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style from leadership-philosophy and CIC culture stories (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership): supported"
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Short answer: empathy/clarity, permit-to-fail, balanced teams, core values from profile self-description: supported"
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style from leadership-philosophy and CIC culture stories (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership): supported"
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style from leadership-philosophy and CIC culture stories (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership): supported; 15-35% cost reduction from Fortune 500 operating-model story"
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Short answer: empathy/clarity, permit-to-fail, balanced teams, core values from profile self-description: supported"
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style from leadership-philosophy and CIC culture stories (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership): supported"
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Short answer: empathy/clarity, permit-to-fail, balanced teams, core values from profile self-description: supported"
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style from leadership-philosophy and CIC culture stories (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership): supported"
+ },
+ {
+  "case": "c03",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Short answer: empathy/clarity, permit-to-fail, balanced teams, core values from profile self-description: supported"
+ },
+ {
+  "case": "c03",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style from leadership-philosophy and CIC culture stories (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership): supported"
+ },
+ {
+  "case": "c03",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style from leadership-philosophy and CIC culture stories (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership): supported"
+ },
+ {
+  "case": "c03",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Short answer: empathy/clarity, permit-to-fail, balanced teams, core values from profile self-description: supported"
+ },
+ {
+  "case": "c03",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style from leadership-philosophy and CIC culture stories (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership): supported"
+ },
+ {
+  "case": "c03",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style from leadership-philosophy and CIC culture stories (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership): supported"
+ },
+ {
+  "case": "c03",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style from leadership-philosophy and CIC culture stories (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership): supported"
+ },
+ {
+  "case": "c03",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Short answer: empathy/clarity, permit-to-fail, balanced teams, core values from profile self-description: supported"
+ },
+ {
+  "case": "c03",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style from leadership-philosophy and CIC culture stories (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership): supported"
+ },
+ {
+  "case": "c03",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style from leadership-philosophy and CIC culture stories (psychological safety, decisions pushed down, 4x, sustainable leadership, collective ownership): supported"
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Sustainable-leadership story (unsustainable pace at 150-person CIC, boundaries after Accenture): corpus presents it as a shortfall; told honestly"
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Clarifying question gives no example; Section 3 has no Protocol allowing clarification for conversation 3"
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "'What I learned about assumptions' story (unverified IAM, UAT email with unmasked data to thousands of clients, tester removed): corpus failure story, told honestly"
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Clarifying question gives no example; Section 3 has no Protocol allowing clarification for conversation 3"
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "'Making it safe to take risks' story (pockets of fear as CIC scaled to 150+): corpus presents as shortfall; told honestly"
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Clarifying question gives no example; Section 3 has no Protocol allowing clarification for conversation 3"
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Clarifying question gives no example; Section 3 has no Protocol allowing clarification for conversation 3"
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "'What I learned about assumptions' story (unverified IAM, UAT email with unmasked data to thousands of clients, tester removed): corpus failure story, told honestly"
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Clarifying question gives no example; Section 3 has no Protocol allowing clarification for conversation 3"
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Sustainable-leadership story (unsustainable pace at 150-person CIC, boundaries after Accenture): corpus presents it as a shortfall; told honestly"
+ },
+ {
+  "case": "c03",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Clarifying question gives no example; Section 3 has no Protocol allowing clarification for conversation 3"
+ },
+ {
+  "case": "c03",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "'Making it safe to take risks' story (pockets of fear as CIC scaled to 150+): corpus presents as shortfall; told honestly"
+ },
+ {
+  "case": "c03",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "'What I learned about assumptions' story (unverified IAM, UAT email with unmasked data to thousands of clients, tester removed): corpus failure story, told honestly"
+ },
+ {
+  "case": "c03",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Clarifying question gives no example; Section 3 has no Protocol allowing clarification for conversation 3"
+ },
+ {
+  "case": "c03",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Clarifying question gives no example; Section 3 has no Protocol allowing clarification for conversation 3"
+ },
+ {
+  "case": "c03",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "'What I learned about assumptions' story (unverified IAM, UAT email with unmasked data to thousands of clients, tester removed): corpus failure story, told honestly"
+ },
+ {
+  "case": "c03",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "'What I learned about assumptions' story (unverified IAM, UAT email with unmasked data to thousands of clients, tester removed): corpus failure story, told honestly"
+ },
+ {
+  "case": "c03",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Clarifying question gives no example; Section 3 has no Protocol allowing clarification for conversation 3"
+ },
+ {
+  "case": "c03",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Clarifying question gives no example; Section 3 has no Protocol allowing clarification for conversation 3"
+ },
+ {
+  "case": "c03",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "'What I learned about assumptions' story (unverified IAM, UAT email with unmasked data to thousands of clients, tester removed): corpus failure story, told honestly"
+ }
+]

@@ -1,0 +1,118 @@
+--- /Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/probes/output/275/fixes_rerun_20261011_110055/probe_275_poc_clean.orig.py	2026-10-11 11:00:55
++++ /Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/probes/output/275/fixes_rerun_20261011_110055/probe_275_poc_clean.py	2026-10-11 11:00:55
+@@ -46,6 +46,8 @@
+ from ui.pages.ask_mattgpt.prompts import build_system_prompt, build_user_message  # noqa: E402
+ from ui.pages.ask_mattgpt.story_intelligence import build_story_context_for_rag  # noqa: E402
+ from utils.corpus_loader import load_stories  # noqa: E402
++from config.constants import ENTITY_ALIASES  # noqa: E402
++from utils.client_utils import is_generic_client  # noqa: E402
+ 
+ stories = load_stories(str(REPO / "echo_star_stories_nlp.jsonl"))
+ bs.sync_portfolio_metadata(stories)
+@@ -314,14 +316,50 @@
+     return out
+ 
+ 
+-def gather(plan):
++# Fix 3: client names derived from the corpus, plus the client aliases.
++_CLIENT_NAMES = {s["Client"].lower(): s["Client"] for s in stories if not is_generic_client(s["Client"])}
++_CLIENT_NAMES.update({k: v[1] for k, v in ENTITY_ALIASES.items() if v[0] == "Client"})
++
++
++def named_clients(text):
++    """Every distinct client the text names, in corpus spelling. detect_entity()
++    returns only the first, so a comparison loses the rest."""
++    low = (text or "").lower()
++    found = []
++    for name, client in _CLIENT_NAMES.items():
++        if re.search(rf"\b{re.escape(name)}\b", low) and client not in found:
++            found.append(client)
++    return found
++
++
++def per_client_stories(query, clients, cap):
++    """Fix 3: one search per named client, filtered to that client."""
++    out = []
++    for c in clients:
++        out.extend((bs.semantic_search(query, {"clients": [c]}, stories=stories, top_k=bs.SEARCH_TOP_K).get("results") or [])[:cap])
++    return out
++
++
++def gather(plan, question=""):
+     act, refs, q = plan["action"], plan.get("referents") or [], plan.get("query") or ""
+     if act == "answer_from_referent":
+         return referent_stories(refs, q, cap=6)
+     if act == "synthesize":
+-        return referent_stories(refs, q, cap=3) if refs else bs.get_synthesis_stories(stories, top_per_theme=1, query=q)
+-    if act in ("search", "gap"):
++        if refs:
++            return referent_stories(refs, q, cap=3)
++        clients = named_clients(f"{question} {q}")
++        if len(clients) > 1:
++            return per_client_stories(q or question, clients, cap=3)
++        return bs.get_synthesis_stories(stories, top_per_theme=1, query=q)
++    if act == "search":
+         return search_top5(q)
++    if act == "gap":
++        # Fix 2: a planner query too short to clear the confidence floor
++        # ("real estate", 0.144) retries with the visitor's full question.
++        found = search_top5(q)
++        if not found and question.strip() and question.strip() != q.strip():
++            found = search_top5(question)
++        return found
+     return []
+ 
+ 
+@@ -358,6 +396,8 @@
+ - engage: only when the visitor's own words show they are evaluating Matt (a role, hiring, fit, why hire him, availability) or ask how to reach him or for his résumé. Quote their words in evaluating_quote. Options: role_match (evaluating for a role), about_matt (his profile; this is what résumé means), linkedin, contact.
+ - none: the default. An answer with no closing is complete; choose explore or engage only when one clearly fits."""
+ 
++GAP_EMPTY_RULE = "- Say it isn't on record. You may add only facts from the profile above; nothing else."
++
+ ACTION_RULES = {
+     "clarify": "- Ask this one short question in Agy's voice and nothing else: {clarify_question}",
+     "gap": "- Say plainly what isn't on record, then what is.",
+@@ -399,13 +439,32 @@
+     raw_plan = plan_turn(client, question, history, render_record(record), open_offer)
+     plan_secs = round(time.time() - t0, 2)
+     plan, problems = validate(raw_plan, question)
+-    evidence = gather(plan)
++    evidence = gather(plan, question)
++    # Fix 1: a clarify turn is the planner's question, rendered as is; no answering
++    # call, so it can't turn into an answer with no evidence (11 of 18 clarify
++    # plans did in poc_rerun_20261011_084138).
++    # Fix 2 (option a): a gap with no stories after the retry keeps the answering
++    # call, without MATT_DNA and under GAP_EMPTY_RULE, so the profile can still
++    # answer (no PMP, then the certifications) and DNA's client list can't.
++    empty_gap = plan["action"] == "gap" and not evidence
++    rendered_text = None
++    if plan["action"] == "clarify":
++        rendered_text = "🐾 " + plan["clarify_question"].strip()
++    if rendered_text is not None:
++        rec = {"action": plan["action"], "referents": plan.get("referents") or [],
++               "used": answer_engagements(rendered_text, evidence, plan), "offer": None}
++        return {
++            "answer_md": rendered_text, "text": rendered_text, "raw_plan": raw_plan, "plan": plan, "plan_problems": problems,
++            "evidence": [], "closing": "none", "closing_raw": {}, "closing_note": "rendered without an answering call",
++            "closing_rendered": "", "record": rec, "finish_reason": "rendered", "router_family": family,
++            "plan_secs": plan_secs, "answer_secs": 0.0,
++        }
+     is_synthesis = family == "synthesis"  # router only, as agy_answer()
+ 
+     profile_facts = bs.load_matt_profile()
+     opening, focus = bs._choose_opening_and_focus(is_synthesis)
+     base = [
+-        {"role": "system", "content": build_system_prompt(is_synthesis=is_synthesis, matt_dna=bs.MATT_DNA, profile_facts=profile_facts)},
++        {"role": "system", "content": build_system_prompt(is_synthesis=is_synthesis, matt_dna="" if empty_gap else bs.MATT_DNA, profile_facts=profile_facts)},
+         *history,
+         {"role": "user", "content": build_user_message(question=question, story_context="NOTE", opening=opening,
+                                                        is_synthesis=is_synthesis, focus_angle=focus if not is_synthesis else "",
+@@ -413,7 +472,7 @@
+     ]
+     note = "Evidence for this turn was gathered before you answer and appears as the search_stories result." if evidence else "No stories were gathered for this turn."
+     msgs = moved(base, note_override=note)
+-    action_rule = ACTION_RULES.get(plan["action"], "").format(clarify_question=plan.get("clarify_question", ""))
++    action_rule = GAP_EMPTY_RULE if empty_gap else ACTION_RULES.get(plan["action"], "").format(clarify_question=plan.get("clarify_question", ""))
+     msgs[0]["content"] += "\n\n" + TURN_RULES.format(action=plan["action"], referents=plan.get("referents") or "none", action_rule=action_rule)
+     if record:
+         msgs[0]["content"] += "\n\n## DISCUSSION RECORD (what earlier turns covered; not evidence)\n" + render_record(record)
