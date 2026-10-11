@@ -1657,6 +1657,8 @@ Same class as the no-inference clause in MATTGPT-250: retrieved text that sits n
 
 **Held nonsense rules (Oct 10, 2026, MATTGPT-285 Green 017117f):** "Has Matt worked on trading platforms?" (`stocks_crypto`) and "How did Matt calculate ROI?" (`homework`) stay refused. Unblocked in the Oct 10 live run, Agy answered untruthfully ("worked extensively on trading platforms"; RBC framed as an ROI calculation). Both are `xfail(strict=True)` in `tests/unit/test_nonsense_portfolio_questions.py` with reason "MATTGPT-251: answer misattributes when unblocked"; they XPASS once the rules change, so the markers come off in the same commit.
 
+**Acceptance, all absence questions (Oct 11, 2026):** when no story or profile entry covers X, the answer says "not on record" (or "not in Matt's stories"), never "Matt has not worked with X". A flat no can be false whenever the corpus is incomplete. The gaming control's expected answer changes to match: today "Has Matt worked on gaming platforms?" answers "Matt has not worked on gaming platforms." (2 of 2, MATTGPT-285 run `acceptance_narrowed_20261010_161142`, untracked).
+
 **Rejected (do not re-derive):** Pairwise rules such as "do not treat mortgage as real estate." Each one fixes a single pairing and misses the next.
 
 **Out of scope:** Agriculture under-claim (September 23, 2026). The Liquid Studio story was not in the top 25 for that query -- retrieval miss, not synthesis, and it covers a single PoC mention.
