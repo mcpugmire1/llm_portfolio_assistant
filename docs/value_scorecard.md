@@ -123,7 +123,7 @@ claims), -168 (slot 1 amplification), -250 (profile facts in Ask Agy, In
 Progress), -257, -263, -278, -279, -096, -217 (pronoun grammar), -286 (meta-commentary
 strip deletes paragraphs), -290 (internal-content
 extraction), -293 (router out_of_scope copy), -294 (split MATT_DNA by
-responsibility).
+responsibility), -296 (closing offer in a prompt example).
 
 ## 4. Role Match
 
@@ -213,7 +213,7 @@ responsibility).
 - The career-narrative field differs by surface (Theme, Era, Category).
 
 **Open tickets:** -146, -228, -204, -196, -150, -122, -131, -197, -145,
--183, -187, -210, -166, -083, -271.
+-183, -187, -210, -166, -083, -271, -295 (Timeline era order).
 
 ## 7. Operational reliability
 
@@ -236,7 +236,7 @@ experience reliably and sustainably; failures are visible, not silent.
 - Regression gates and test reliability: -039, -233, -235, -206, -153,
   -274, -084, -180, -277, -198, -035, -060, -082, -143 (Parked), -203,
   -209, -213.
-- Architecture and maintainability: -258, -259, -260, -261, -262, -140,
+- Architecture and maintainability: -258 (In Progress), -259, -260, -261, -262, -140,
   -201, -202, -214, -226, -256.
 - Dead code and hygiene: -176, -232, -241, -152 (Parked), -270, -287 (docs
   describe a removed overlap gate).

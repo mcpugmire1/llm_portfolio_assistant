@@ -145,6 +145,8 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-292](#mattgpt-292) | semantic_search() silently falls back to the whole corpus in file order when Pinecone returns no hits | Open | Medium | Bug | October 10, 2026 |
 | [MATTGPT-293](#mattgpt-293) | Router out_of_scope copy says "I don't have experience in that industry" and hardcodes an industry list | Open | Low | Bug | October 11, 2026 |
 | [MATTGPT-294](#mattgpt-294) | Split MATT_DNA by responsibility: background may orient, not substitute for evidence | Blocked | Medium | Refactor | October 11, 2026 |
+| [MATTGPT-295](#mattgpt-295) | Timeline ERA_ORDER hardcodes 5 eras; "Technical Foundations & Enterprise Integration" (9 stories) sorts last | Open | Medium | Bug | October 11, 2026 |
+| [MATTGPT-296](#mattgpt-296) | STANDARD_DELTA's GOOD example ends with "Want me to dig deeper?", contradicting ADR 035 | Open | Low | Bug | October 11, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -1868,7 +1870,7 @@ Double-bolding (prompt asks for bold three times alongside the regex) and `OFF_T
 ### MATTGPT-258
 **Architecture fitness tests: dependency direction and coupling limits have no automated enforcement**
 
-- **Status:** Open
+- **Status:** In Progress
 - **Priority:** Medium
 - **Type:** Action
 - **File:** `tests/test_structural_assertions.py` (add checks alongside existing constant-vs-JSONL checks)
@@ -1887,6 +1889,10 @@ c. Live `OpenAI(` client creation sites = 5 or fewer (ignoring commented-out cod
 d. `DATA_FILE` defined in exactly one place. Fails today (app.py, services/pinecone_service.py, ui/pages/explore_stories.py). Mark xfail until MATTGPT-262 lands.
 
 e. Source-vs-output check: for each fixture JD, the row count and wording under each heading match the JD's own sections. Added Oct 3, 2026. Baseline: measure at Red time.
+
+f. Data-contract check against the real corpus (added Oct 11, 2026): field names the code reads exist in the JSONL with that exact name; code-held lists like `ERA_ORDER` match corpus values; Pinecone metadata fields the code filters on are written by the upserter. It would have caught Architecture Sync's 850071c findings at commit time: `initialize_vocab()`'s lowercase keys, `ERA_ORDER` (MATTGPT-295), and `place` and `industry` (MATTGPT-262 items 3 and 5). The Red below leaves Industry, Theme and Era out of scope ("a separate check if needed"); this is that check.
+
+**Red (Oct 9, 2026, fbf6bf6):** `TestCorpusLiterals` in `tests/test_structural_assertions.py`: Client, Project and Title literals and claim figures in `ui/`, `services/`, `config/` and `utils/` string constants must be on `tests/fixtures/corpus_literal_allowlist.json` with a reason. 4 tests, 1 assertion failure. Its Green targets include the MATT_DNA restatements (overlaps MATTGPT-294 item 5) and the `prompts.py` example figures (MATTGPT-296).
 
 **Acceptance:** Checks a-c and e pass; check d is xfail. Each failure message names the offending file.
 
@@ -1956,9 +1962,11 @@ e. Source-vs-output check: for each fixture JD, the row count and wording under 
 
 2. Two story loaders: `load_star_stories()` in `app.py` and `load_stories()` in `utils/corpus_loader.py`. Consolidate to `utils/corpus_loader.load_stories()`.
 
-3. `place` is in `ENTITY_SEARCH_FIELDS` and `PINECONE_LOWERCASE_FIELDS` but `build_custom_embeddings.py` never stores it, so its `$or` clause can never match. Remove the dead field.
+3. `place` is in `ENTITY_SEARCH_FIELDS` and `PINECONE_LOWERCASE_FIELDS` but `build_custom_embeddings.py` never stores it, so its `$or` clause can never match. Remove the dead field. Re-confirmed Oct 11, 2026 by Architecture Sync (850071c): `git grep '"place"'` outside tests finds only the two constants and a mock script. The corpus does carry a `Place` key; `build_metadata()` doesn't write it.
 
 4. Stale comments in `constants.py`: `'5 fields'` (the list has 6) and `'from CLAUDE.md'`. Correct in place.
+
+5. **Added Oct 11, 2026 (Architecture Sync, 850071c):** `build_metadata()` writes `industry` lowercased, but `PINECONE_LOWERCASE_FIELDS` is `{"division", "employer", "project", "place"}`, without industry. The casing comment above it lists industry among the lowercase fields. Whether anything filters Pinecone on `industry` is not checked.
 
 **Update (Oct 6, 2026, e5492b3):** Item 4 partly done: the '5 fields' comment in constants.py now reads "Why more fields here than in detection". Still open: the 'from CLAUDE.md' comment (constants.py casing-rules header), and items 1-3.
 
@@ -2559,6 +2567,38 @@ No implementation until the decision is recorded here.
 **Tests to update:** `tests/unit/test_matt_dna_grounding.py` and the `matt_dna_grounding_drift` and `matt_dna_career_span` BDD features pin MATT_DNA content (ADR 036, Consequences).
 
 **Acceptance:** a removal in the answer pipeline, so a live acceptance run comes before it ships (CLAUDE.md subtract-first rule): `tests/fixtures/evaluator_conversations.md` plus the MATTGPT-251 extras, same rubric and rules as MATTGPT-275's runs, DNA trimmed vs present. Lever 1's earlier trim measured only the search rate, not answer quality.
+
+---
+
+### MATTGPT-295
+**Timeline ERA_ORDER hardcodes 5 eras; "Technical Foundations & Enterprise Integration" (9 stories) sorts last**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `ui/components/timeline_view.py` (`ERA_ORDER`)
+- **Logged:** October 11, 2026
+- **Source:** Architecture Sync findings, 850071c
+
+**Verified Oct 11, 2026:** `ERA_ORDER` lists 5 eras. `echo_star_stories_nlp.jsonl` has 7: Enterprise Innovation & Transformation (57), Financial Services Platform Modernization (26), Leadership & Professional Narrative (10), Independent Product Development (9), Technical Foundations & Enterprise Integration (9), Integration & Platform Foundations (7), Cloud-Native Prototyping & Product Shaping (6). Leadership & Professional Narrative is excluded on purpose. Technical Foundations & Enterprise Integration is missing, and the sort key returns `len(ERA_ORDER)` for an era not in the list, so its 9 stories sort after every listed era.
+
+**Fix:** derive the order from the data (for example, each era's earliest Start_Date), with the deliberate exclusion kept as a named rule. CLAUDE.md: no hardcoded enums for data-derived values.
+
+---
+
+### MATTGPT-296
+**STANDARD_DELTA's GOOD example ends with "Want me to dig deeper?", contradicting ADR 035**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Bug
+- **File:** `ui/pages/ask_mattgpt/prompts.py` (`STANDARD_DELTA`)
+- **Logged:** October 11, 2026
+- **Source:** Architecture Sync findings, 850071c
+
+**Verified Oct 11, 2026:** the example under "GOOD (do this):" in `STANDARD_DELTA` ends with "Want me to dig deeper?". ADR 035 removed closing offers, and the MATTGPT-275 Red (3a682ec) lists this example as old language. An example teaches the model to close with an offer.
+
+**Overlaps:** the MATTGPT-258 Red (fbf6bf6) lists this example's figures ("12 countries", "40% faster", "60% of") as Green targets to remove. MATTGPT-275's tool prompt may replace `STANDARD_DELTA` outright. Whichever lands first takes the line.
 
 ---
 
