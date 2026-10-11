@@ -143,6 +143,7 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-290](#mattgpt-290) | Internal-content extraction: Agy has disclosed internal instructions and notes on request | Open | Medium | Investigation | October 10, 2026 |
 | [MATTGPT-291](#mattgpt-291) | Role-play requests: decide what Agy does when asked to act as an interviewer or hiring manager | Open | Low | Issue | October 10, 2026 |
 | [MATTGPT-292](#mattgpt-292) | semantic_search() silently falls back to the whole corpus in file order when Pinecone returns no hits | Open | Medium | Bug | October 10, 2026 |
+| [MATTGPT-293](#mattgpt-293) | Router out_of_scope copy says "I don't have experience in that industry" and hardcodes an industry list | Open | Low | Bug | October 11, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -2498,6 +2499,25 @@ No implementation until the decision is recorded here.
 **Acceptance:** a fallback is logged and visible in the query log, and Agy's answer isn't built from file-order stories as if they were search results.
 
 **Related:** MATTGPT-288 (`rag_answer()` ignores the fallback signal), which this precedes.
+
+---
+
+### MATTGPT-293
+**Router out_of_scope copy says "I don't have experience in that industry" and hardcodes an industry list**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Bug
+- **File:** `ui/pages/ask_mattgpt/backend_service.py` (`_router_rejection()`, `out_of_scope_response`)
+- **Logged:** October 11, 2026
+
+**Verified Oct 11, 2026:** the out_of_scope branch of `_router_rejection()` returns fixed copy: "🐾 I don't have experience in that industry. Matt's work is primarily in **Financial Services**, **Healthcare/Life Sciences**, **Telecom**, and **Technology/SaaS**." Seen on "Tell me about Matt's gaming experience", 2 of 2 (MATTGPT-285 run `acceptance_narrowed_20261010_161142`, untracked).
+
+**Problem:**
+- The first sentence is a flat no in Matt's voice. It's false whenever the corpus is incomplete. It should say what's on record instead (e.g. "That isn't in Matt's stories"), matching MATTGPT-251's absence acceptance (fixed copy here, model answers there).
+- The industry list is hand-typed, the MATTGPT-279 class. Derive it from the corpus or drop it.
+
+**Copy wording is Matt's.**
 
 ---
 
