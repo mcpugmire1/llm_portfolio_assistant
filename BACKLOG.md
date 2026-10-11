@@ -1667,6 +1667,8 @@ Same class as the no-inference clause in MATTGPT-250: retrieved text that sits n
 
 **Expected answer, capital markets and trading (Matt, Oct 11, 2026):** capital-markets and trading-platform questions get "not on record". The closest capital-markets-adjacent work is JP Morgan Asset Management (Global Funds), a Salesforce sales-opportunity CRM, not a trading or capital-markets platform. ACCESS is treasury services and cash management; RBC is corporate banking. An answer calling ACCESS or RBC capital markets or a trading platform fails.
 
+**Semantic checks (Oct 10, 2026; `docs/evidence/semantic_checks/20261010_132625/`, d66149f; code b2add9a):** pair L5. The variant "Has Matt worked on trading platforms?" is refused by rule:stocks_crypto, 2 of 2 (held, above). Its control "Has Matt worked on capital markets platforms?" was answered "worked extensively on capital markets platforms" through ACCESS, false per the expected answer above. Both halves belong here.
+
 **Rejected (do not re-derive):** Pairwise rules such as "do not treat mortgage as real estate." Each one fixes a single pairing and misses the next.
 
 **Out of scope:** Agriculture under-claim (September 23, 2026). The Liquid Studio story was not in the top 25 for that query -- retrieval miss, not synthesis, and it covers a single PoC mention.
@@ -1764,6 +1766,8 @@ Three of the four are follow-ups, scored on the bare follow-up text. Verified Oc
 **Relationship to MATTGPT-273:** Same root as 273 Issue 1: retrieval and the gate see only the bare current question, so a follow-up is judged without the conversation.
 
 **Relationship to MATTGPT-250:** The MATTGPT-250 DA note covers Stage 2 being dropped and the gate bypass being decided against. MATTGPT-250 item 4 is committed (`d98f63c`, `bbeaa01`). This bypass is a separate follow-on.
+
+**Semantic checks (Oct 10, 2026; `docs/evidence/semantic_checks/20261010_132625/`, d66149f; code b2add9a):** pair L6, "where's he based these days", refused 2 of 2: the router said narrative (0.375), but Pinecone's top score was 0.185, under `CONFIDENCE_LOW` (0.2), so low_confidence. Re-checked on the 6ec9aec index: still 0.185, 0 results. Its control wording was answered.
 
 **Superseded by MATTGPT-275 (Oct 6, 2026):** The gate's scope moves to MATTGPT-275, where the gate leaves the answer path. `CONFIDENCE_HIGH` is not changed.
 

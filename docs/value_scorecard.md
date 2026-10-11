@@ -19,7 +19,7 @@ repo. Evaluator fixture: `tests/fixtures/evaluator_conversations.md` at
 
 | # | Value driver | Outcome written? | Criteria | Status |
 |---|---|---|---|---|
-| 1 | Semantic understanding | Yes (Matt, Oct 10, 2026) | Undefined | Not measured |
+| 1 | Semantic understanding | Yes (Matt, Oct 10, 2026) | Undefined | Failing on 2 of 20 semantic-check pairs (one held by design) |
 | 2 | Conversational continuity | Yes | Per-turn only; aggregate undefined | Not measured (no valid run on 609f903) |
 | 3 | Trust and credibility | Yes | Partly | Failing (reproduced defects); golden eval count unsettled |
 | 4 | Role Match | Yes | Partly | Not measured on the current pipeline; BDD failing |
@@ -36,7 +36,24 @@ synonyms, misspellings, missing punctuation and natural phrasing.
 
 **Criteria:** undefined.
 
-**Status:** not measured.
+**Status:** failing on 2 of 20 pairs at HEAD (L5, held by design until
+MATTGPT-251; L6, MATTGPT-253). Threshold undefined.
+
+**Evidence (Oct 10, 2026; `docs/evidence/semantic_checks/20261010_132625/`,
+d66149f; code b2add9a, 124 stories, 2 runs per wording, health check
+PASS):** 20 pairs, each a variant beside a control wording, through
+`send_to_backend()`. 16 of 20 pass: synonyms 5/5, misspellings 5/5,
+punctuation 4/4, loose phrasing 2/6. Every control was answered; both
+runs agreed on every pair. Failures:
+- L3 "When did Matt join Accenture?" (rule:general_knowledge) and L4
+  "Tell me a story about Matt's leadership" (rule:creative_writing):
+  fixed by MATTGPT-285 (017117f).
+- L5 "Has Matt worked on trading platforms?" (rule:stocks_crypto): held
+  until MATTGPT-251. Its control answer ("worked extensively on capital
+  markets platforms" via ACCESS) is false too.
+- L6 "where's he based these days": confidence gate, top Pinecone score
+  0.185 < CONFIDENCE_LOW 0.2, still 0.185 on the 6ec9aec index:
+  MATTGPT-253 (Blocked on MATTGPT-275).
 
 **Open tickets:** -283 (embedding model PoC), -185 (negation), -190
 (tokenizer divergence), -171 (phrase matching), -177 (token_overlap_ratio
