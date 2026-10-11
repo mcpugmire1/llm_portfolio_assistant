@@ -1,0 +1,497 @@
+[
+  {
+    "answer_md": "Nothing I know about Matt covers that.",
+    "rejection": null,
+    "sources": [],
+    "arm": "lever2",
+    "case": "x1",
+    "run": 1,
+    "turn": 1,
+    "question": "Has Matt worked in real estate?",
+    "nonsense_skipped": true,
+    "search_queries": [
+      "real estate"
+    ],
+    "seconds": 2.36
+  },
+  {
+    "answer_md": "🐾 Nothing I know about Matt covers that.",
+    "rejection": null,
+    "sources": [],
+    "arm": "lever2",
+    "case": "x1",
+    "run": 2,
+    "turn": 1,
+    "question": "Has Matt worked in real estate?",
+    "nonsense_skipped": true,
+    "search_queries": [
+      "real estate"
+    ],
+    "seconds": 2.26
+  },
+  {
+    "answer_md": "🐾 Nothing I know about Matt covers that.",
+    "rejection": null,
+    "sources": [],
+    "arm": "lever2",
+    "case": "x1",
+    "run": 3,
+    "turn": 1,
+    "question": "Has Matt worked in real estate?",
+    "nonsense_skipped": true,
+    "search_queries": [
+      "real estate"
+    ],
+    "seconds": 1.83
+  },
+  {
+    "answer_md": "Nothing I know about Matt covers that.",
+    "rejection": null,
+    "sources": [],
+    "arm": "lever2",
+    "case": "x1",
+    "run": 4,
+    "turn": 1,
+    "question": "Has Matt worked in real estate?",
+    "nonsense_skipped": true,
+    "search_queries": [
+      "real estate"
+    ],
+    "seconds": 2.08
+  },
+  {
+    "answer_md": "🐾 Nothing I know about Matt covers that.",
+    "rejection": null,
+    "sources": [],
+    "arm": "lever2",
+    "case": "x1",
+    "run": 5,
+    "turn": 1,
+    "question": "Has Matt worked in real estate?",
+    "nonsense_skipped": true,
+    "search_queries": [
+      "real estate"
+    ],
+    "seconds": 1.69
+  },
+  {
+    "answer_md": "Nothing in Matt's stories indicates that he has worked with SAP.",
+    "rejection": null,
+    "sources": [
+      "Building AT&T's Service Delivery Platform (AT&T)",
+      "Turning STRATCOM's Paper Operational Plans into Executable Workflow (Lockheed Martin)",
+      "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud (Norfolk Southern)",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout (JP Morgan Chase)",
+      "Orchestrating Data Migration Tranche Rollout for JP Morgan (JP Morgan Chase)"
+    ],
+    "arm": "lever2",
+    "case": "x2",
+    "run": 1,
+    "turn": 1,
+    "question": "Has Matt worked with SAP?",
+    "nonsense_skipped": true,
+    "search_queries": [
+      "SAP"
+    ],
+    "seconds": 2.24
+  },
+  {
+    "answer_md": "Matt's work history does not include any specific mention of working with SAP. If you have any other questions about Matt's experience or projects, feel free to ask!",
+    "rejection": null,
+    "sources": [
+      "Building AT&T's Service Delivery Platform (AT&T)",
+      "Turning STRATCOM's Paper Operational Plans into Executable Workflow (Lockheed Martin)",
+      "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud (Norfolk Southern)",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout (JP Morgan Chase)",
+      "Orchestrating Data Migration Tranche Rollout for JP Morgan (JP Morgan Chase)"
+    ],
+    "arm": "lever2",
+    "case": "x2",
+    "run": 2,
+    "turn": 1,
+    "question": "Has Matt worked with SAP?",
+    "nonsense_skipped": true,
+    "search_queries": [
+      "SAP"
+    ],
+    "seconds": 1.98
+  },
+  {
+    "answer_md": "No, there is no mention of Matt working with SAP in the stories I found. His work has involved various technologies and platforms, but SAP is not listed among them.",
+    "rejection": null,
+    "sources": [
+      "Building AT&T's Service Delivery Platform (AT&T)",
+      "Turning STRATCOM's Paper Operational Plans into Executable Workflow (Lockheed Martin)",
+      "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud (Norfolk Southern)",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout (JP Morgan Chase)",
+      "Orchestrating Data Migration Tranche Rollout for JP Morgan (JP Morgan Chase)"
+    ],
+    "arm": "lever2",
+    "case": "x2",
+    "run": 3,
+    "turn": 1,
+    "question": "Has Matt worked with SAP?",
+    "nonsense_skipped": true,
+    "search_queries": [
+      "SAP"
+    ],
+    "seconds": 1.84
+  },
+  {
+    "answer_md": "🐾 Nothing I know about Matt covers that.",
+    "rejection": null,
+    "sources": [
+      "Building AT&T's Service Delivery Platform (AT&T)",
+      "Turning STRATCOM's Paper Operational Plans into Executable Workflow (Lockheed Martin)",
+      "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud (Norfolk Southern)",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout (JP Morgan Chase)",
+      "Orchestrating Data Migration Tranche Rollout for JP Morgan (JP Morgan Chase)"
+    ],
+    "arm": "lever2",
+    "case": "x2",
+    "run": 4,
+    "turn": 1,
+    "question": "Has Matt worked with SAP?",
+    "nonsense_skipped": true,
+    "search_queries": [
+      "SAP"
+    ],
+    "seconds": 1.98
+  },
+  {
+    "answer_md": "Nothing I know about Matt covers that.",
+    "rejection": null,
+    "sources": [
+      "Building AT&T's Service Delivery Platform (AT&T)",
+      "Turning STRATCOM's Paper Operational Plans into Executable Workflow (Lockheed Martin)",
+      "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud (Norfolk Southern)",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout (JP Morgan Chase)",
+      "Orchestrating Data Migration Tranche Rollout for JP Morgan (JP Morgan Chase)"
+    ],
+    "arm": "lever2",
+    "case": "x2",
+    "run": 5,
+    "turn": 1,
+    "question": "Has Matt worked with SAP?",
+    "nonsense_skipped": true,
+    "search_queries": [
+      "SAP"
+    ],
+    "seconds": 2.4
+  },
+  {
+    "answer_md": "🐾 Here's a relevant story from Matt's work.\n\nMatt worked on the **JP Morgan ACCESS** platform, a unified global corporate banking portal. This platform was built on Bottomline Technologies' WebSeries Global Cash Management platform and required extensive customization to meet the needs of **135,000+** clients across **180+ countries**. As the Technology Delivery Lead, Matt was responsible for designing and delivering bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments. He also developed a security layer, contextual help, and real-time global reporting. The platform launched in April 2011, consolidating regional systems into a single digital experience and was recognized as #1 in digital channels by Coalition Greenwich.\n\nMatt's role involved managing a team of over **40** professionals and working closely with Bottomline Technologies to ensure the platform met JP Morgan's operational scale and compliance requirements. This included integrating with JP Morgan's centralized transaction monitoring system and building sanctions and politically-exposed-person screening into the payment flow. The ACCESS platform became JP Morgan's flagship corporate digital channel, transforming the corporate treasurer experience.",
+    "rejection": null,
+    "sources": [
+      "Onboarding a New Plastics Client onto Cendian's Trading Network (Cendian Chemical Logistics)",
+      "Integrating a Chemical Logistics Network Across Every Partner Capability (Cendian Chemical Logistics)",
+      "De-Risking RBC’s Corporate Banking Platform Investment (RBC)",
+      "Building the Payment Engine Behind JP Morgan ACCESS (JP Morgan Chase)",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout (JP Morgan Chase)"
+    ],
+    "arm": "lever2",
+    "case": "x3",
+    "run": 1,
+    "turn": 1,
+    "question": "Has Matt worked on trading platforms?",
+    "nonsense_skipped": true,
+    "search_queries": [
+      "trading platforms"
+    ],
+    "seconds": 3.33
+  },
+  {
+    "answer_md": "🐾 Matt has indeed worked on trading platforms, particularly in the context of financial services. At **JP Morgan Chase**, he was deeply involved in building the payment engine behind the JP Morgan ACCESS platform. This platform was a flagship corporate digital banking portal for treasury services and cash management, serving over **135,000** corporations, financial institutions, governments, and municipalities across more than **180** countries. His role as Technology Delivery Lead involved designing and delivering bespoke payment modules, security layers, and platform capabilities. The ACCESS platform consolidated regional systems into a single digital experience, recognized as #1 in digital channels by Coalition Greenwich.\n\nAdditionally, Matt worked with **RBC** on their corporate banking platform, where he conducted an architecture assessment to evaluate the suitability of the Bottomline WebSeries as a payment hub engine. His work prevented a costly investment by identifying that WebSeries couldn't meet **RBC**'s requirements, allowing the bank to redirect resources to higher-priority initiatives. \n\nThese engagements demonstrate Matt's involvement in complex trading and financial platforms, focusing on integration, compliance, and customization to meet specific client needs.",
+    "rejection": null,
+    "sources": [
+      "Onboarding a New Plastics Client onto Cendian's Trading Network (Cendian Chemical Logistics)",
+      "Integrating a Chemical Logistics Network Across Every Partner Capability (Cendian Chemical Logistics)",
+      "De-Risking RBC’s Corporate Banking Platform Investment (RBC)",
+      "Building the Payment Engine Behind JP Morgan ACCESS (JP Morgan Chase)",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout (JP Morgan Chase)"
+    ],
+    "arm": "lever2",
+    "case": "x3",
+    "run": 2,
+    "turn": 1,
+    "question": "Has Matt worked on trading platforms?",
+    "nonsense_skipped": true,
+    "search_queries": [
+      "trading platforms"
+    ],
+    "seconds": 3.08
+  },
+  {
+    "answer_md": "🐾 Here's a relevant experience.\n\nMatt worked on JP Morgan's ACCESS Next Generation platform, which is a global corporate banking portal for treasury services and cash management. This project involved building a payment engine with bespoke modules for ACH, wire, FX/cross-border, and EFTPS tax payments, among others. The platform served over **135,000** corporations, financial institutions, governments, and municipalities across **180+ countries**. Matt managed a blended team of over **40** and was responsible for designing and delivering these customized payment modules, security layers, and platform capabilities. The platform launched in April 2011 and was recognized as the #1 digital channel by Coalition Greenwich. While this isn't a traditional trading platform, it involved complex financial transactions and integrations, showcasing Matt's experience in financial services technology.",
+    "rejection": null,
+    "sources": [
+      "Onboarding a New Plastics Client onto Cendian's Trading Network (Cendian Chemical Logistics)",
+      "Integrating a Chemical Logistics Network Across Every Partner Capability (Cendian Chemical Logistics)",
+      "De-Risking RBC’s Corporate Banking Platform Investment (RBC)",
+      "Building the Payment Engine Behind JP Morgan ACCESS (JP Morgan Chase)",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout (JP Morgan Chase)"
+    ],
+    "arm": "lever2",
+    "case": "x3",
+    "run": 3,
+    "turn": 1,
+    "question": "Has Matt worked on trading platforms?",
+    "nonsense_skipped": true,
+    "search_queries": [
+      "trading platforms"
+    ],
+    "seconds": 2.8
+  },
+  {
+    "answer_md": "🐾 Matt has indeed worked on trading platforms, particularly during his time at **JP Morgan Chase**. He played a significant role in building the payment engine behind JP Morgan ACCESS, a global corporate banking portal. This platform was built on Bottomline Technologies' WebSeries platform and required extensive customization to meet the needs of over **135,000** clients across **180+** countries. Matt was responsible for designing and delivering bespoke payment modules, including ACH, wire, FX/cross-border, and EFTPS tax payments, as well as implementing a MAC security layer, contextual help, and real-time global reporting.\n\nAdditionally, Matt was involved in navigating multi-jurisdictional compliance for JP Morgan's global payments platform rollout. He ensured that the platform's data visibility, entitlement configuration, and access control architecture could be adapted per jurisdiction, maintaining a single unified platform codebase while meeting the distinct requirements of regional regulators. This work enabled the successful launch of the ACCESS platform across APAC, EMEA, and the Americas without regulatory blockers.",
+    "rejection": null,
+    "sources": [
+      "Onboarding a New Plastics Client onto Cendian's Trading Network (Cendian Chemical Logistics)",
+      "Integrating a Chemical Logistics Network Across Every Partner Capability (Cendian Chemical Logistics)",
+      "De-Risking RBC’s Corporate Banking Platform Investment (RBC)",
+      "Building the Payment Engine Behind JP Morgan ACCESS (JP Morgan Chase)",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout (JP Morgan Chase)"
+    ],
+    "arm": "lever2",
+    "case": "x3",
+    "run": 4,
+    "turn": 1,
+    "question": "Has Matt worked on trading platforms?",
+    "nonsense_skipped": true,
+    "search_queries": [
+      "trading platforms"
+    ],
+    "seconds": 3.33
+  },
+  {
+    "answer_md": "🐾 Here's a relevant example from Matt's work.\n\nMatt worked on the **JP Morgan ACCESS** platform, which involved building a payment engine for their global corporate banking portal. While this is not a trading platform in the traditional sense, it did involve complex financial transactions and integrations. Matt was the Technology Delivery Lead, managing a team of over **40** people to design and deliver bespoke payment modules such as ACH, wire, FX/cross-border, and EFTPS tax. The platform served over **135,000** corporations, financial institutions, governments, and municipalities across **180+** countries. It was recognized as the #1 digital channel by Coalition Greenwich.\n\nIn this role, Matt was responsible for the custom engineering that made ACCESS a unique JP Morgan product, rather than a standard deployment. He designed and implemented various modules, security layers, and platform capabilities, ensuring that each payment type met the specific formatting, validation, compliance, and workflow requirements for JP Morgan's operational scale.",
+    "rejection": null,
+    "sources": [
+      "Onboarding a New Plastics Client onto Cendian's Trading Network (Cendian Chemical Logistics)",
+      "Integrating a Chemical Logistics Network Across Every Partner Capability (Cendian Chemical Logistics)",
+      "De-Risking RBC’s Corporate Banking Platform Investment (RBC)",
+      "Building the Payment Engine Behind JP Morgan ACCESS (JP Morgan Chase)",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout (JP Morgan Chase)"
+    ],
+    "arm": "lever2",
+    "case": "x3",
+    "run": 5,
+    "turn": 1,
+    "question": "Has Matt worked on trading platforms?",
+    "nonsense_skipped": true,
+    "search_queries": [
+      "trading platforms"
+    ],
+    "seconds": 3.37
+  },
+  {
+    "answer_md": "🐾 Here's a great example.\n\nIn one of his roles at **Accenture**, Matt was responsible for managing the financial aspects of various engagements, including those at **JP Morgan**, **RBC**, **Fiserv**, and **HSBC**. His approach to calculating ROI involved a meticulous focus on engagement margin and cost management. He managed the resource pyramid by staffing senior and specialized resources early, then transitioning to offshore and nearshore teams as the work became more routine. This approach helped in optimizing costs and maintaining a healthy margin.\n\nMatt also pushed scope changes into formal change requests rather than absorbing them, ensuring that any additional work was compensated. He managed contingency releases, forecast variances, and conducted deep-dive reviews under financial scrutiny. For example, in a program at **Fiserv**, he recovered an **\\$8.5M** project to **3%** under budget, avoided **\\$500K** in penalties, and secured a **\\$3M** extension. These actions directly impacted the ROI by preserving margin and converting potential losses into profitable extensions.\n\nAt a broader level, as a Director running two Cloud Innovation Centers, Matt focused on minimizing unassigned and unbillable downtime, enforcing internal bench deployment before approving third-party contractors, and converting contractors to internal hires when roles became permanent. This disciplined approach to financial management helped maintain a strong ROI across his engagements.",
+    "rejection": null,
+    "sources": [
+      "Solving RBC's 180-Day Data Visibility Problem (RBC)",
+      "Owning the P&L: From Engagement Margin to Center Cost Base (Fortune 500 Clients)",
+      "De-Risking RBC’s Corporate Banking Platform Investment (RBC)",
+      "Implementing Eval-Driven Development for RAG Systems (Independent Project)",
+      "Simplifying MattGPT's RAG Pipeline Through Entity Gate Removal (Independent Project)"
+    ],
+    "arm": "lever2",
+    "case": "x4",
+    "run": 1,
+    "turn": 1,
+    "question": "How did Matt calculate ROI?",
+    "nonsense_skipped": true,
+    "search_queries": [
+      "calculate ROI"
+    ],
+    "seconds": 3.66
+  },
+  {
+    "answer_md": "🐾 Here's a story that touches on financial accountability and ROI considerations.\n\nIn his role at **Accenture**, Matt was responsible for financial accountability across various engagements, including those with **JP Morgan**, **RBC**, **Fiserv**, and **HSBC**. He owned the engagement margin directly, managing the resource pyramid, forecast, variance, and contingency release. His approach involved staffing senior and specialized resources early for solution and architecture work, then transitioning to offshore and nearshore resources as the backlog matured. This strategy was designed to optimize costs and maintain knowledge continuity through offshore transitions.\n\nMatt's financial management also extended to engagements that were already in loss. For instance, he took over a **JP Morgan** CRM program where the estimate at completion had gone negative. He managed to turn around the program, reversing the relationship and securing follow-on work. At **Fiserv**, he helped recover an **\\$8.5M** program, delivering **3%** under budget, avoiding **\\$500K** in penalties, and securing a **\\$3M** contract extension.\n\nAs a Director running two Cloud Innovation Centers, Matt's financial accountability included managing the center's cost base, chargeability, and contractor spend. He enforced internal bench deployment to preserve contract margin and converted contractors to internal hires where roles had become permanent. This approach ensured that practitioner costs were tied to billable demand rather than vendor spend, demonstrating a disciplined approach to financial management and ROI.\n\nThese examples illustrate how Matt approached financial accountability and ROI through strategic resource management and cost optimization across multiple high-profile engagements.",
+    "rejection": null,
+    "sources": [
+      "Solving RBC's 180-Day Data Visibility Problem (RBC)",
+      "Owning the P&L: From Engagement Margin to Center Cost Base (Fortune 500 Clients)",
+      "De-Risking RBC’s Corporate Banking Platform Investment (RBC)",
+      "Implementing Eval-Driven Development for RAG Systems (Independent Project)",
+      "Simplifying MattGPT's RAG Pipeline Through Entity Gate Removal (Independent Project)"
+    ],
+    "arm": "lever2",
+    "case": "x4",
+    "run": 2,
+    "turn": 1,
+    "question": "How did Matt calculate ROI?",
+    "nonsense_skipped": true,
+    "search_queries": [
+      "calculate ROI"
+    ],
+    "seconds": 3.43
+  },
+  {
+    "answer_md": "🐾 Here's a great example of how Matt approached financial accountability and ROI calculation.\n\nDuring his tenure at **Accenture**, Matt held financial accountability across various roles, which scaled with each position he undertook. As a delivery lead across seven engagements with clients like **JP Morgan**, **RBC**, **Fiserv**, and **HSBC** between 2009 and 2017, he directly owned engagement margins. He managed the resource pyramid, forecast and variance, and pushed scope changes into requests rather than absorbing them. This approach allowed him to protect and improve the economics of the work he was accountable for.\n\nOne notable instance was when Matt took over a **JP Morgan** CRM program that had a negative estimate at completion. Despite the firm absorbing the loss, Matt's turnaround efforts reversed the client relationship, leading to follow-on work requests. At **Fiserv**, he recovered an **\\$8.5M** program to deliver **3%** under budget, avoiding **\\$500K** in penalties, and securing a **\\$3M** extension. As a Director running two Cloud Innovation Centers, he managed the centers' cost bases, chargeability, and contractor spend, enforcing internal bench deployment to preserve contract margin.\n\nMatt's approach to ROI involved meticulous management of engagement margins, resource optimization, and cost discipline. He ensured that financial accountability was maintained at every scope he held, from individual engagements to the operating cost base of innovation centers.",
+    "rejection": null,
+    "sources": [
+      "Solving RBC's 180-Day Data Visibility Problem (RBC)",
+      "Owning the P&L: From Engagement Margin to Center Cost Base (Fortune 500 Clients)",
+      "De-Risking RBC’s Corporate Banking Platform Investment (RBC)",
+      "Implementing Eval-Driven Development for RAG Systems (Independent Project)",
+      "Simplifying MattGPT's RAG Pipeline Through Entity Gate Removal (Independent Project)"
+    ],
+    "arm": "lever2",
+    "case": "x4",
+    "run": 3,
+    "turn": 1,
+    "question": "How did Matt calculate ROI?",
+    "nonsense_skipped": true,
+    "search_queries": [
+      "calculate ROI"
+    ],
+    "seconds": 3.84
+  },
+  {
+    "answer_md": "🐾 Here's a great example.\n\nMatt's approach to calculating ROI was evident in his work with **Fortune **500 Client**s** during his tenure at **Accenture**. He took on financial accountability across multiple engagements, including those with **JP Morgan**, **RBC**, **Fiserv**, and **HSBC**. His responsibilities included managing the engagement margin, which involved overseeing the resource pyramid, forecasting, and contingency release. He was tasked with improving the economics of the work he was accountable for, whether it was engagement margin as a delivery lead or the cost base of two Cloud Innovation Centers as a Director.\n\nIn one instance, Matt recovered an **\\$8.5M** program at **Fiserv** by delivering **3%** under budget, avoiding **\\$500K** in penalties, and securing a **\\$3M** contract extension. He achieved this by managing the resource pyramid, pushing scope creep into change requests, and enforcing cost discipline at the line-item level.\n\nThrough these actions, Matt ensured that engagements stayed within their margin, and his financial management strategies contributed to the overall success and profitability of the projects he led.",
+    "rejection": null,
+    "sources": [
+      "Solving RBC's 180-Day Data Visibility Problem (RBC)",
+      "Owning the P&L: From Engagement Margin to Center Cost Base (Fortune 500 Clients)",
+      "De-Risking RBC’s Corporate Banking Platform Investment (RBC)",
+      "Implementing Eval-Driven Development for RAG Systems (Independent Project)",
+      "Simplifying MattGPT's RAG Pipeline Through Entity Gate Removal (Independent Project)"
+    ],
+    "arm": "lever2",
+    "case": "x4",
+    "run": 4,
+    "turn": 1,
+    "question": "How did Matt calculate ROI?",
+    "nonsense_skipped": true,
+    "search_queries": [
+      "calculate ROI"
+    ],
+    "seconds": 3.55
+  },
+  {
+    "answer_md": "🐾 Here's a great example.\n\nIn his role as a Director at **Accenture**, Matt was deeply involved in financial accountability across multiple engagements. He owned the engagement margin directly for projects at **JP Morgan**, **RBC**, **Fiserv**, and **HSBC** from 2009 to 2017. This involved managing the resource pyramid, forecasting, and handling contingency releases. Matt was responsible for protecting and improving the economics of the work he was accountable for. He managed the resource pyramid by staffing senior and specialized resources early for solution and architecture work and then transitioning them to offshore and nearshore as the backlog matured.\n\nMatt's approach included pushing scope creep into change requests rather than absorbing it, managing promotion costs as a margin event, and owning contingency release decisions. He also held cost discipline at the line-item level, such as advance travel booking for policy compliance. In one instance, he took over a **JP Morgan** CRM program where the estimate at completion had gone negative and helped recover an **\\$8.5M** program at **Fiserv**, delivering **3%** under budget and avoiding **\\$500K** in penalties while securing a **\\$3M** contract extension.\n\nThrough these actions, Matt demonstrated a rigorous approach to financial management, ensuring that the projects he led stayed within their margins and often turned around engagements that were initially in loss.",
+    "rejection": null,
+    "sources": [
+      "Solving RBC's 180-Day Data Visibility Problem (RBC)",
+      "Owning the P&L: From Engagement Margin to Center Cost Base (Fortune 500 Clients)",
+      "De-Risking RBC’s Corporate Banking Platform Investment (RBC)",
+      "Implementing Eval-Driven Development for RAG Systems (Independent Project)",
+      "Simplifying MattGPT's RAG Pipeline Through Entity Gate Removal (Independent Project)"
+    ],
+    "arm": "lever2",
+    "case": "x4",
+    "run": 5,
+    "turn": 1,
+    "question": "How did Matt calculate ROI?",
+    "nonsense_skipped": true,
+    "search_queries": [
+      "calculate ROI"
+    ],
+    "seconds": 4.26
+  },
+  {
+    "answer_md": "🐾 Nothing I know about Matt covers that.",
+    "rejection": null,
+    "sources": [
+      "Delivering Multi-Client Customization and Compliance for the White-Label Card Portal (Fiserv)",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout (JP Morgan Chase)",
+      "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform (American Express)",
+      "Building the Payment Engine Behind JP Morgan ACCESS (JP Morgan Chase)",
+      "De-Risking RBC’s Corporate Banking Platform Investment (RBC)"
+    ],
+    "arm": "lever2",
+    "case": "x5",
+    "run": 1,
+    "turn": 1,
+    "question": "Has Matt worked on gaming platforms?",
+    "nonsense_skipped": true,
+    "search_queries": [
+      "gaming platforms"
+    ],
+    "seconds": 2.6
+  },
+  {
+    "answer_md": "\"🐾 I can only discuss Matt's transformation experience. Ask me about application modernization, digital innovation, agile transformation, or leadership.\"",
+    "rejection": null,
+    "sources": [
+      "Delivering Multi-Client Customization and Compliance for the White-Label Card Portal (Fiserv)",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout (JP Morgan Chase)",
+      "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform (American Express)",
+      "Building the Payment Engine Behind JP Morgan ACCESS (JP Morgan Chase)",
+      "De-Risking RBC’s Corporate Banking Platform Investment (RBC)"
+    ],
+    "arm": "lever2",
+    "case": "x5",
+    "run": 2,
+    "turn": 1,
+    "question": "Has Matt worked on gaming platforms?",
+    "nonsense_skipped": true,
+    "search_queries": [
+      "gaming platforms"
+    ],
+    "seconds": 2.25
+  },
+  {
+    "answer_md": "🐾 Nothing I know about Matt covers that.",
+    "rejection": null,
+    "sources": [
+      "Delivering Multi-Client Customization and Compliance for the White-Label Card Portal (Fiserv)",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout (JP Morgan Chase)",
+      "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform (American Express)",
+      "Building the Payment Engine Behind JP Morgan ACCESS (JP Morgan Chase)",
+      "De-Risking RBC’s Corporate Banking Platform Investment (RBC)"
+    ],
+    "arm": "lever2",
+    "case": "x5",
+    "run": 3,
+    "turn": 1,
+    "question": "Has Matt worked on gaming platforms?",
+    "nonsense_skipped": true,
+    "search_queries": [
+      "gaming platforms"
+    ],
+    "seconds": 2.02
+  },
+  {
+    "answer_md": "🐾 Nothing I know about Matt covers that. His work has primarily been in financial services, technology, and other sectors, but not specifically on gaming platforms.",
+    "rejection": null,
+    "sources": [
+      "Delivering Multi-Client Customization and Compliance for the White-Label Card Portal (Fiserv)",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout (JP Morgan Chase)",
+      "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform (American Express)",
+      "Building the Payment Engine Behind JP Morgan ACCESS (JP Morgan Chase)",
+      "De-Risking RBC’s Corporate Banking Platform Investment (RBC)"
+    ],
+    "arm": "lever2",
+    "case": "x5",
+    "run": 4,
+    "turn": 1,
+    "question": "Has Matt worked on gaming platforms?",
+    "nonsense_skipped": true,
+    "search_queries": [
+      "gaming platforms"
+    ],
+    "seconds": 2.11
+  },
+  {
+    "answer_md": "🐾 I didn't find any stories about Matt working on gaming platforms. His work has primarily been in financial services, technology, and other sectors. If you have more questions about his experience, feel free to ask!",
+    "rejection": null,
+    "sources": [
+      "Delivering Multi-Client Customization and Compliance for the White-Label Card Portal (Fiserv)",
+      "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout (JP Morgan Chase)",
+      "Lowering Barriers to Adoption for American Express’s Virtual Payments Platform (American Express)",
+      "Building the Payment Engine Behind JP Morgan ACCESS (JP Morgan Chase)",
+      "De-Risking RBC’s Corporate Banking Platform Investment (RBC)"
+    ],
+    "arm": "lever2",
+    "case": "x5",
+    "run": 5,
+    "turn": 1,
+    "question": "Has Matt worked on gaming platforms?",
+    "nonsense_skipped": true,
+    "search_queries": [
+      "gaming platforms"
+    ],
+    "seconds": 2.25
+  }
+]

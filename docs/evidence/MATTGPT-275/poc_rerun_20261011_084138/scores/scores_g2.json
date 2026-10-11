@@ -1,0 +1,882 @@
+[
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Certs and expiries match profile; omits SAFe 4 Agilist but nothing stated is wrong"
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All four profile certs with correct issue/expiry dates, none current"
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "No PMP, then profile certs with correct dates; omits SAFe but states none current"
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "No PMP, then all four profile certs with correct dates"
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "None current, correct expiries; omits SAFe but implies nothing current"
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "None current, all four certs listed accurately"
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All four profile certs with correct dates, none active"
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All four profile certs with correct dates, none active"
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "No PMP, then all four certs; none current"
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Says nothing on record covers PMP, then lists the four profile certs as not active; hedged but answers"
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "None current, all four listed with correct expiries"
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "None current; AWS expired 2023, SAFe and Oracle not current"
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All four profile certs with correct dates"
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All four profile certs with correct dates, none active"
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "No PMP, then all four certs with dates"
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "No PMP, then the four certs, AWS and SAFe expired"
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "None current, all four listed accurately"
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "None current, all four listed accurately"
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All four profile certs with correct dates, none active"
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All four certs, AWS expired 2023, SAFe expired, none active"
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "No PMP, then all four certs; none active"
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Only 'Nothing I know about Matt covers that': no clear no-PMP and no certifications from the profile"
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "None current, all four listed with correct expiries"
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "States none of his certifications are active; correct"
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All four profile certs with correct dates, none current"
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All four certs with correct dates, none currently active"
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "No PMP, then all four certs; none current"
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "No PMP, then all four certs; none active"
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "None current, all four listed accurately"
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "None current, all four listed accurately"
+ },
+ {
+  "case": "c05",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Sabbatical and the kind of role sought, consistent with transition and career-intent stories; thin on why"
+ },
+ {
+  "case": "c05",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Accenture chapter, engineer to CIC Director, MattGPT, senior leadership roles, available immediately: all match transition/career-intent stories"
+ },
+ {
+  "case": "c05",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Attributes hands-on AI/ML and sustainable AI workflows to the CIC ('this project'), conflating the MattGPT story; comparison to in-house is a one-line generic claim"
+ },
+ {
+  "case": "c05",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "States payment platform rollout across 12 countries 'for clients like JP Morgan, RBC, Capital One, and HSBC'; corpus has the 12-country rollouts at JP Morgan only"
+ },
+ {
+  "case": "c05",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Accenture tenure, recharge, MattGPT, senior leadership roles, 0-to-1 builder, available immediately: all from transition/career-intent stories"
+ },
+ {
+  "case": "c05",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Sabbatical, building MattGPT, engineer to CIC leader, seeking build-and-deliver role; consistent with corpus"
+ },
+ {
+  "case": "c05",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "States payment redesign across 12 countries 'for clients like JP Morgan, RBC, Capital One, and HSBC'; 12-country rollouts are JP Morgan only in the corpus"
+ },
+ {
+  "case": "c05",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Addresses in-house comparison via breadth across industries and settings; CIC 150, JPMC I&AM 341 apps PMO, industries all supported; Role Match close fits the hiring signal"
+ },
+ {
+  "case": "c05",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC 0 to 150+, 4x, $100M+, MattGPT roadmap/MVP, roles sought, available immediately: all supported"
+ },
+ {
+  "case": "c05",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Sabbatical, building MattGPT, seeking role; consistent with corpus"
+ },
+ {
+  "case": "c05",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Explicit in-house comparison (building new capabilities across clients); CIC 150+, 4x, TDD, $100M+, JPM/RBC/Capital One/HSBC, 12-country payment and Salesforce rollouts, MattGPT all supported"
+ },
+ {
+  "case": "c05",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Places the MattGPT NOW/NEXT/LATER roadmap inside the CIC narrative as if part of that work; comparison is a generic pitch"
+ },
+ {
+  "case": "c05",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Sabbatical, MattGPT, role sought, plus Location & Availability facts from profile; all supported"
+ },
+ {
+  "case": "c05",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Accenture close, recharge, AI/GenAI upskilling via MattGPT, roles sought, available immediately: all supported"
+ },
+ {
+  "case": "c05",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Never addresses the in-house comparison; a generic pitch (facts themselves supported: flat CIC, near-zero attrition, 15-20 auditions/week, $100M+)"
+ },
+ {
+  "case": "c05",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Explicit comparison: breadth across clients and contexts vs a single organization; CIC, 4x, $100M+, TDD, 12-country payment and Salesforce rollouts all supported"
+ },
+ {
+  "case": "c05",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Sabbatical, MattGPT, seeking build-and-deliver role; consistent with corpus"
+ },
+ {
+  "case": "c05",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Accenture chapter closing, first pause, MattGPT, roles sought, available immediately: all supported"
+ },
+ {
+  "case": "c05",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Does not address the in-house comparison; puts MattGPT solo-developer shipping and product roadmap inside the CIC paragraph as if CIC work"
+ },
+ {
+  "case": "c05",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "States payment systems redesigned across 12 countries 'for clients like JP Morgan and HSBC'; HSBC work is mortgage transformation, 12-country rollouts are JP Morgan only"
+ },
+ {
+  "case": "c06",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Major U.S. Health System governance (100% HIPAA) and chronic disease MVP in 16 weeks, all supported"
+ },
+ {
+  "case": "c06",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both healthcare stories accurately: governance, 100% HIPAA, chronic disease MVP 16 weeks"
+ },
+ {
+  "case": "c06",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Role and actions in both healthcare stories (data lake, ML pipeline, mobile app, cross-functional governance, anonymization/encryption/differential privacy); related supported offer"
+ },
+ {
+  "case": "c06",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Says governance 'led to executive approval for broader AI implementation'; story says executive team approved consideration of broader implementation; also omits the chronic disease build"
+ },
+ {
+  "case": "c06",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Chronic disease MVP with data lake, ML pipeline, LLM chat in 16 weeks; governance 100% HIPAA; supported"
+ },
+ {
+  "case": "c06",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Chronic disease platform, 16-week MVP, governance 100% HIPAA; supported"
+ },
+ {
+  "case": "c06",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Detailed actions from chronic disease story: data sources, gen AI, mobile app, training, 16-week MVP, 4-month pilot; supported"
+ },
+ {
+  "case": "c06",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Actions from both stories accurately; supported offer on healthcare AI"
+ },
+ {
+  "case": "c06",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Both healthcare stories accurately summarized"
+ },
+ {
+  "case": "c06",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both stories; about four months and May 2023 to Sep 2023 match story dates and 16 weeks"
+ },
+ {
+  "case": "c06",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Governance actions and results stated exactly per story (approved consideration of broader implementation); omits chronic disease build but specific and accurate"
+ },
+ {
+  "case": "c06",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Actions from both stories accurately; related offer supported"
+ },
+ {
+  "case": "c06",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Both stories, 16 weeks, 100% HIPAA, May to Sep 2023: supported"
+ },
+ {
+  "case": "c06",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both stories at Accenture accurately"
+ },
+ {
+  "case": "c06",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Actions from both stories accurately, dates correct; related offer supported"
+ },
+ {
+  "case": "c06",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Actions from both stories accurately"
+ },
+ {
+  "case": "c06",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Both stories accurately"
+ },
+ {
+  "case": "c06",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both stories accurately"
+ },
+ {
+  "case": "c06",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Role and actions in both stories accurately"
+ },
+ {
+  "case": "c06",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Actions from both stories accurately; related offer supported"
+ },
+ {
+  "case": "c07",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Atlanta, GA, open to relocation and travel; any extras (work model, availability, citizenship) match profile"
+ },
+ {
+  "case": "c07",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Atlanta, GA, open to relocation and travel; any extras (work model, availability, citizenship) match profile"
+ },
+ {
+  "case": "c07",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Yes, open to relocation and travel, no clarifying question, no invented condition"
+ },
+ {
+  "case": "c07",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Adds 'there are no specific stories mentioning relocation', a hedge that casts doubt on the profile's open-to-relocation"
+ },
+ {
+  "case": "c07",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Atlanta, GA, open to relocation and travel; any extras (work model, availability, citizenship) match profile"
+ },
+ {
+  "case": "c07",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Atlanta, GA, open to relocation and travel; any extras (work model, availability, citizenship) match profile"
+ },
+ {
+  "case": "c07",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Yes, open to relocation and travel, no clarifying question, no invented condition"
+ },
+ {
+  "case": "c07",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Yes, open to relocation and travel, no clarifying question, no invented condition"
+ },
+ {
+  "case": "c07",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Atlanta, GA, open to relocation and travel; any extras (work model, availability, citizenship) match profile"
+ },
+ {
+  "case": "c07",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Atlanta, GA, open to relocation and travel; any extras (work model, availability, citizenship) match profile"
+ },
+ {
+  "case": "c07",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Adds 'for the right opportunity', a condition the profile does not hold"
+ },
+ {
+  "case": "c07",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Yes, open to relocation and travel, no clarifying question, no invented condition"
+ },
+ {
+  "case": "c07",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Atlanta, GA, open to relocation and travel; any extras (work model, availability, citizenship) match profile"
+ },
+ {
+  "case": "c07",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Atlanta, GA, open to relocation and travel; any extras (work model, availability, citizenship) match profile"
+ },
+ {
+  "case": "c07",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Yes, open to relocation and travel, no clarifying question, no invented condition"
+ },
+ {
+  "case": "c07",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Adds 'for the right opportunity', a condition the profile does not hold"
+ },
+ {
+  "case": "c07",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Atlanta, GA, open to relocation and travel; any extras (work model, availability, citizenship) match profile"
+ },
+ {
+  "case": "c07",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Atlanta, GA, open to relocation and travel; any extras (work model, availability, citizenship) match profile"
+ },
+ {
+  "case": "c07",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Yes, open to relocation and travel, no clarifying question, no invented condition"
+ },
+ {
+  "case": "c07",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Yes, open to relocation and travel, no clarifying question, no invented condition"
+ },
+ {
+  "case": "c07",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Atlanta, GA, open to relocation and travel; any extras (work model, availability, citizenship) match profile"
+ },
+ {
+  "case": "c07",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Atlanta, GA, open to relocation and travel; any extras (work model, availability, citizenship) match profile"
+ },
+ {
+  "case": "c07",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Yes, open to relocation and travel, no clarifying question, no invented condition"
+ },
+ {
+  "case": "c07",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Yes, open to relocation and travel, no clarifying question, no invented condition"
+ },
+ {
+  "case": "c07",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Atlanta, GA, open to relocation and travel; any extras (work model, availability, citizenship) match profile"
+ },
+ {
+  "case": "c07",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Atlanta, GA, open to relocation and travel; any extras (work model, availability, citizenship) match profile"
+ },
+ {
+  "case": "c07",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Yes, open to relocation and travel, no clarifying question, no invented condition"
+ },
+ {
+  "case": "c07",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Yes, open to relocation and travel, no clarifying question, no invented condition"
+ },
+ {
+  "case": "c07",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Atlanta, GA, open to relocation and travel; any extras (work model, availability, citizenship) match profile"
+ },
+ {
+  "case": "c07",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Atlanta, GA, open to relocation and travel; any extras (work model, availability, citizenship) match profile"
+ },
+ {
+  "case": "c07",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Yes, open to relocation and travel, no clarifying question, no invented condition"
+ },
+ {
+  "case": "c07",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Yes, open to relocation and travel, no clarifying question, no invented condition"
+ },
+ {
+  "case": "c07",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Atlanta, GA, open to relocation and travel; any extras (work model, availability, citizenship) match profile"
+ },
+ {
+  "case": "c07",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Atlanta, GA, open to relocation and travel; any extras (work model, availability, citizenship) match profile"
+ },
+ {
+  "case": "c07",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Yes, open to relocation and travel, no clarifying question, no invented condition"
+ },
+ {
+  "case": "c07",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Yes, open to relocation and travel, no clarifying question, no invented condition"
+ },
+ {
+  "case": "c07",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Atlanta, GA, open to relocation and travel; any extras (work model, availability, citizenship) match profile"
+ },
+ {
+  "case": "c07",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Atlanta, GA, open to relocation and travel; any extras (work model, availability, citizenship) match profile"
+ },
+ {
+  "case": "c07",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Yes, open to relocation and travel, no clarifying question, no invented condition"
+ },
+ {
+  "case": "c07",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Yes, open to relocation and travel, no clarifying question, no invented condition"
+ }
+]

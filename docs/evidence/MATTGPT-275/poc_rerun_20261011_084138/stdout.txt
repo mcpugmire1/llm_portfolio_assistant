@@ -1,0 +1,724 @@
+PASS fixture file matches 609f903
+PASS parser reads conversations 1 to 18 (got [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18])
+PASS conv 1 'Payments experience': 3 turns, 2 expected lines, runs 10 | “Tell me about his payments work.” → “How big was the team?” → “What went wrong?”
+PASS conv 2 'Education': 2 turns, 1 expected lines, runs 5 | “Does he have a CS degree?” → “Why shouldn’t that worry me?”
+PASS conv 3 'Leadership': 2 turns, 1 expected lines, runs 5 | “What’s his leadership style?” → “Give me an example where that didn’t work.”
+PASS conv 4 'Certifications': 3 turns, 2 expected lines, runs 5 | “Is he certified?” → “What about PMP?” → “Are any of those current?”
+PASS conv 5 'Career motivation': 2 turns, 1 expected lines, runs 5 | “Why is he looking?” → “Why should we hire him over someone who stayed in-house?”
+PASS conv 6 'Healthcare experience': 2 turns, 1 expected lines, runs 5 | “Has he worked in healthcare?” → “What did he actually do there?”
+PASS conv 7 'Location': 2 turns, 1 expected lines, runs 10 | “Where is he based?” → “Would he relocate?”
+PASS conv 8 'Failure and growth': 2 turns, 1 expected lines, runs 5 | “Tell me about a time he failed.” → “What did he change afterward?”
+PASS conv 9 'Topic switch': 4 turns, 3 expected lines, runs 5 | “Tell me about his payments work.” → “What’s his leadership style?” → “Give me an example.” → “How big was the team on that project?”
+PASS conv 10 'Accepting an offer': 3 turns, 2 expected lines, runs 10 | “Tell me about his Norfolk Southern work.” → “Sure, the deep dive on that one.” → “How long did that take?”
+PASS conv 11 'Ambiguous follow-up after a topic change': 3 turns, 1 expected lines, runs 10 | “How did Matt scale engineering teams from 4 to 150+ people?” → “Tell me about his payments work” → “how big was his teams”
+PASS conv 12 'Comparing two engagements': 2 turns, 2 expected lines, runs 10 | “Compare his Fiserv and JP Morgan ACCESS work.” → “Which was bigger?”
+PASS conv 13 'Unambiguous follow-up': 2 turns, 1 expected lines, runs 10 | “Tell me about his Fiserv work.” → “How big was the team?”
+PASS conv 14 'Evaluating for a role': 1 turns, 1 expected lines, runs 10 | “I’m hiring a VP of Platform Engineering. Would Matt be a fit?”
+PASS conv 15 'Getting in touch': 1 turns, 1 expected lines, runs 10 | “How do I get in touch with Matt?”
+PASS conv 16 'Résumé': 1 turns, 1 expected lines, runs 10 | “Can I see his résumé?”
+PASS conv 17 'Accepting a seeded offer': 2 turns, 1 expected lines, runs 10 | (seeded answer) → “Sure.”
+PASS conv 18 'Earlier topic competing with the latest': 3 turns, 2 expected lines, runs 10 | “Tell me about his Norfolk Southern work.” → “Tell me about his RBC work.” → “How long did that take?”
+PASS conv 17: first turn is the seeded answer
+PASS conv 17: parsed seed (answer, offer) equals the fixture's text
+PASS conv 17: seeded text identical in both arms
+PASS conv 17: offer text
+PASS echo_star_stories.jsonl matches 5620dfc
+PASS echo_star_stories_nlp.jsonl matches 5620dfc
+PASS corpus 124 stories, 46 engagements (want 124, 46)
+PASS answering and planner model gpt-4o
+     SEARCH_TOP_K=25; confidence: CONFIDENCE_HIGH=0.25, CONFIDENCE_LOW=0.2
+PASS worktree base b55f9ce
+PASS lever 2 opener examples found (12)
+PASS every RBC story block the PoC builds has 2012-06 and 2013-06 (6 stories)
+PASS no lever 2 RBC block (_run_search_tool) carries the dates
+
+ALL CHECKS PASS
+health check before: top Fiserv 0.439
+[lever2 c01 r1 t1] 4.0s  | "🐾 Here's a great example of Matt's work in the payments doma"
+[lever2 c01 r1 t2] 2.54s  | '🐾 Found it!\n\nAt **JP Morgan Chase**, Matt managed a blended '
+[lever2 c01 r1 t3] 2.87s  | '🐾 Tracking this down...\n\nDuring the development of the ACCES'
+[poc c01 r1 t1] 4.0s new_topic search | '🐾 This is a strong one.\n\nAt **JP Morgan Chase**, Matt played'
+[poc c01 r1 t2] 3.11s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nDuring Matt's work on the A"
+[poc c01 r1 t3] 4.76s follow_up answer_from_referent | '🐾 Tracking this down...\n\nDuring the development of the ACCES'
+[poc c01 r2 t1] 4.44s new_topic search | "🐾 Here's a strong example.\n\nAt **JP Morgan Chase**, Matt pla"
+[poc c01 r2 t2] 3.38s follow_up answer_from_referent | '🐾 On it!\n\nFor the ACCESS Next Generation project at **JP Mor'
+[poc c01 r2 t3] 4.84s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nDuring the development of t"
+[lever2 c01 r2 t1] 3.42s  | "🐾 Here's a great example of Matt's work in the payments doma"
+[lever2 c01 r2 t2] 2.51s  | '🐾 Found it!\n\nIn his work with **JP Morgan Chase**, Matt mana'
+[lever2 c01 r2 t3] 3.4s  | "🐾 On it!\n\nDuring Matt's work with **JP Morgan Chase**, sever"
+[lever2 c01 r3 t1] 3.34s  | "🐾 Here's a great example of Matt's work in the payments doma"
+[lever2 c01 r3 t2] 3.05s  | '🐾 Found it!\n\nAt **JP Morgan Chase**, Matt managed a blended '
+[lever2 c01 r3 t3] 3.57s  | '🐾 On it!\n\nDuring the development of the JP Morgan ACCESS pla'
+[poc c01 r3 t1] 3.99s new_topic search | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt play"
+[poc c01 r3 t2] 2.26s follow_up clarify | '🐾 Are you asking about the team size for **JP Morgan Chase**'
+[poc c01 r3 t3] 3.35s follow_up clarify | '🐾 On it!\n\nAt **JP Morgan Chase**, the ACCESS Next Generation'
+[poc c01 r4 t1] 4.82s new_topic search | '🐾 Found it!\n\nAt **JP Morgan Chase**, Matt played a pivotal r'
+[poc c01 r4 t2] 1.96s follow_up clarify | '🐾 Are you asking about the team size for the **JP Morgan Cha'
+[poc c01 r4 t3] 3.01s follow_up clarify | '🐾 On it!\n\nIn the **JP Morgan Chase** project, the challenge '
+[lever2 c01 r4 t1] 3.67s  | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt play"
+[lever2 c01 r4 t2] 2.35s  | "🐾 Here's what I found.\n\nAt **JP Morgan Chase**, Matt managed"
+[lever2 c01 r4 t3] 3.26s  | '🐾 Tracking this down...\n\nAt **JP Morgan Chase**, the develop'
+[lever2 c01 r5 t1] 3.45s  | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt play"
+[lever2 c01 r5 t2] 2.74s  | '🐾 Found it!\n\nAt **JP Morgan Chase**, Matt managed a blended '
+[lever2 c01 r5 t3] 3.42s  | '🐾 Tracking this down...\n\nAt **JP Morgan Chase**, one of the '
+[poc c01 r5 t1] 3.65s new_topic search | '🐾 Found it!\n\nAt **JP Morgan Chase**, Matt played a pivotal r'
+[poc c01 r5 t2] 2.84s follow_up answer_from_referent | '🐾 Matt managed a blended onshore/offshore team of over **40*'
+[poc c01 r5 t3] 3.98s follow_up answer_from_referent | '🐾 At **JP Morgan Chase**, the ACCESS Next Generation project'
+[poc c01 r6 t1] 3.41s new_topic search | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt play"
+[poc c01 r6 t2] 3.5s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nAt **JP Morgan Chase**, Mat"
+[poc c01 r6 t3] 4.45s follow_up answer_from_referent | "🐾 Here's what I found.\n\nDuring the development of the paymen"
+[lever2 c01 r6 t1] 3.84s  | "🐾 Here's a great example of Matt's work in the payments doma"
+[lever2 c01 r6 t2] 2.39s  | 'Matt managed a blended team of over **40** professionals for'
+[lever2 c01 r6 t3] 3.9s  | '🐾 Tracking this down...\n\nDuring the development of the **JP '
+[lever2 c01 r7 t1] 3.91s  | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt play"
+[lever2 c01 r7 t2] 2.64s  | "🐾 Here's what I found.\n\nAt **JP Morgan Chase**, Matt managed"
+[lever2 c01 r7 t3] 3.97s  | "🐾 Here's what I uncovered.\n\nAt **JP Morgan Chase**, the deve"
+[poc c01 r7 t1] 4.25s new_topic search | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt play"
+[poc c01 r7 t2] 2.13s follow_up clarify | '🐾 Are you asking about the team size for **JP Morgan Chase**'
+[poc c01 r7 t3] 3.57s follow_up clarify | '🐾 On it!\n\nAt **JP Morgan Chase**, the ACCESS Next Generation'
+[poc c01 r8 t1] 4.02s new_topic search | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt play"
+[poc c01 r8 t2] 2.97s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nAt **JP Morgan Chase**, Mat"
+[poc c01 r8 t3] 4.0s follow_up answer_from_referent | '🐾 Tracking this down...\n\nDuring the development of the ACCES'
+[lever2 c01 r8 t1] 3.17s  | "🐾 Here's a great example of Matt's work in the payments doma"
+[lever2 c01 r8 t2] 2.86s  | '🐾 Found it!\n\nIn his work with **JP Morgan Chase**, Matt mana'
+[lever2 c01 r8 t3] 3.1s  | "🐾 Here's what went wrong in Matt's payments work at **JP Mor"
+[lever2 c01 r9 t1] 3.16s  | "🐾 Here's a great example from Matt's work at **JP Morgan Cha"
+[lever2 c01 r9 t2] 2.17s  | 'Matt managed a blended onshore/offshore team of over **40** '
+[lever2 c01 r9 t3] 3.94s  | "🐾 Here's what happened during the **JP Morgan Chase** paymen"
+health check after 51 turns: top Fiserv 0.439
+[poc c01 r9 t1] 3.69s new_topic search | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt play"
+[poc c01 r9 t2] 3.0s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nAt **JP Morgan Chase**, Mat"
+[poc c01 r9 t3] 7.74s follow_up answer_from_referent | '🐾 Found it!\n\nDuring the JP Morgan ACCESS Next Generation pro'
+[poc c01 r10 t1] 3.61s new_topic search | '🐾 Found it!\n\nMatt played a pivotal role in transforming paym'
+[poc c01 r10 t2] 4.19s follow_up answer_from_referent | "🐾 Here's a great example.\n\nFor the **JP Morgan Chase** ACCES"
+[poc c01 r10 t3] 3.48s follow_up clarify | '🐾 Tracking this down...\n\nIn the **JP Morgan Chase** ACCESS N'
+[lever2 c01 r10 t1] 4.07s  | "🐾 Here's a great example of Matt's work in payments.\n\nAt **J"
+[lever2 c01 r10 t2] 2.45s  | 'Matt managed a blended team of over **40** members from **Ac'
+[lever2 c01 r10 t3] 3.64s  | '🐾 Tracking this down...\n\nIn the project at **JP Morgan Chase'
+[lever2 c02 r1 t1] 2.16s  | "Matt holds a Master's degree in Information Technology from "
+[lever2 c02 r1 t2] 8.69s  | 'Despite not holding a traditional Computer Science degree, M'
+[poc c02 r1 t1] 1.86s new_topic profile | "Matt holds a Master's degree in Information Technology from "
+[poc c02 r1 t2] 6.05s follow_up synthesize | "🐾 Looking across Matt's portfolio, his Master's degree in In"
+[poc c02 r2 t1] 2.13s new_topic profile | "Matt holds a Master's degree in Information Technology from "
+[poc c02 r2 t2] 4.58s follow_up synthesize | "🐾 Looking across Matt's portfolio, his educational backgroun"
+[lever2 c02 r2 t1] 3.36s  | "Matt holds a Master's degree in Information Technology from "
+[lever2 c02 r2 t2] 4.16s  | "🐾 Looking across Matt's portfolio, his technical expertise a"
+[lever2 c02 r3 t1] 2.15s  | "Matt holds a Master's degree in Information Technology from "
+[lever2 c02 r3 t2] 4.07s  | 'At **Accenture**, he built the Cloud Innovation Center (CIC)'
+[poc c02 r3 t1] 25.34s new_topic profile | "Matt holds a Master's degree in Information Technology from "
+[poc c02 r3 t2] 4.76s follow_up synthesize | "🐾 Looking across Matt's portfolio, I see clear patterns. His"
+[poc c02 r4 t1] 2.02s new_topic profile | "Matt holds a Master's degree in Information Technology from "
+[poc c02 r4 t2] 2.4s follow_up profile | "🐾 Matt's background in Information Technology provides a str"
+[lever2 c02 r4 t1] 2.92s  | 'Matt does not have a degree specifically in Computer Science'
+[lever2 c02 r4 t2] 3.98s  | "🐾 Looking across Matt's portfolio, I see clear patterns of t"
+[lever2 c02 r5 t1] 2.11s  | "Matt holds a Master's degree in Information Technology from "
+[lever2 c02 r5 t2] 4.05s  | "🐾 Looking across Matt's portfolio, his technical expertise a"
+[poc c02 r5 t1] 4.83s new_topic profile | "Matt holds a Master's degree in Information Technology from "
+[poc c02 r5 t2] 4.16s follow_up synthesize | "🐾 Looking across Matt's portfolio, I see clear patterns. Mat"
+[lever2 c03 r1 t1] 3.64s  | "🐾 Here's a glimpse into Matt's leadership style.\n\nMatt's lea"
+[lever2 c03 r1 t2] 3.07s  | "🐾 Here's a story where Matt's leadership approach faced chal"
+[poc c03 r1 t1] 2.44s new_topic profile | '🐾 Matt leads with empathy, clarity, and purpose. He creates '
+[poc c03 r1 t2] 2.14s follow_up clarify | "🐾 Are you asking for an example from Matt's career narrative"
+[poc c03 r2 t1] 1.96s new_topic profile | '🐾 Matt leads with empathy, clarity, and purpose. He creates '
+[poc c03 r2 t2] 4.11s follow_up synthesize | "🐾 Here's a challenging situation Matt faced.\n\nDuring a platf"
+[lever2 c03 r2 t1] 3.18s  | "🐾 Here's a great example.\n\nMatt's leadership style is charac"
+[lever2 c03 r2 t2] 3.04s  | '🐾 Found it!\n\nIn one notable situation, Matt encountered a le'
+[lever2 c03 r3 t1] 3.76s  | "🐾 Here's a great example of Matt's leadership style.\n\nMatt's"
+[lever2 c03 r3 t2] 3.2s  | "🐾 Here's a story where Matt's leadership style faced challen"
+[poc c03 r3 t1] 2.48s new_topic profile | '🐾 Matt leads with empathy, clarity, and purpose. He creates '
+[poc c03 r3 t2] 5.11s follow_up synthesize | "🐾 Here's a story where Matt's leadership style faced challen"
+[poc c03 r4 t1] 2.23s new_topic profile | '🐾 Matt leads with empathy, clarity, and purpose. He fosters '
+[poc c03 r4 t2] 4.71s follow_up synthesize | '🐾 At **Norfolk Southern**, Matt faced a significant challeng'
+[lever2 c03 r4 t1] 3.12s  | "🐾 Matt's leadership style is deeply rooted in trust, empathy"
+[lever2 c03 r4 t2] 3.04s  | "🐾 Here's a situation where Matt's leadership approach faced "
+[lever2 c03 r5 t1] 3.12s  | "🐾 Found it!\n\nMatt's leadership style is centered around crea"
+[lever2 c03 r5 t2] 3.43s  | "🐾 Here's a story where Matt's leadership approach faced chal"
+[poc c03 r5 t1] 2.33s new_topic profile | '🐾 Matt leads with empathy, clarity, and purpose, creating wh'
+[poc c03 r5 t2] 4.2s follow_up synthesize | "🐾 Here's a situation where Matt's leadership approach faced "
+health check after 100 turns: top Fiserv 0.439
+[lever2 c04 r1 t1] 2.48s  | 'Matt holds several certifications, although none are current'
+[lever2 c04 r1 t2] 2.52s  | 'No, Matt does not hold a PMP certification. His certificatio'
+[lever2 c04 r1 t3] 2.52s  | "None of Matt's certifications are currently active. He held "
+[poc c04 r1 t1] 2.36s new_topic profile | 'Matt holds several certifications, although none are current'
+[poc c04 r1 t2] 2.94s follow_up gap | 'Matt does not hold a PMP certification. His certifications i'
+[poc c04 r1 t3] 3.24s follow_up synthesize | "None of Matt's certifications are current. His certification"
+[poc c04 r2 t1] 2.85s new_topic profile | '🐾 Matt holds several certifications, though none are current'
+[poc c04 r2 t2] 2.61s follow_up gap | '🐾 Nothing I know about Matt covers that. However, he holds s'
+[poc c04 r2 t3] 3.48s follow_up synthesize | "🐾 None of Matt's certifications are currently active. He hel"
+[lever2 c04 r2 t1] 2.86s  | 'Matt holds several certifications, though none are currently'
+[lever2 c04 r2 t2] 2.41s  | 'No, Matt does not hold a PMP certification. His certificatio'
+[lever2 c04 r2 t3] 2.74s  | "None of Matt's certifications are currently active. He held "
+[lever2 c04 r3 t1] 2.8s  | 'Matt holds several certifications, although none are current'
+[lever2 c04 r3 t2] 2.31s  | 'No, Matt does not hold a PMP certification. His certificatio'
+[lever2 c04 r3 t3] 2.48s  | "None of Matt's certifications are currently active. His cert"
+[poc c04 r3 t1] 2.19s new_topic profile | 'Matt holds several certifications, although none are current'
+[poc c04 r3 t2] 2.89s follow_up gap | 'Matt does not hold a PMP certification. His certifications i'
+[poc c04 r3 t3] 3.08s follow_up synthesize | "None of Matt's certifications are currently active. His cert"
+[poc c04 r4 t1] 2.29s new_topic profile | '🐾 Matt holds several certifications. He is an "AWS Certified'
+[poc c04 r4 t2] 2.44s follow_up gap | '🐾 Nothing I know about Matt covers that.'
+[poc c04 r4 t3] 2.59s follow_up search | "🐾 None of Matt's certifications are currently active."
+[lever2 c04 r4 t1] 2.8s  | 'Matt held several certifications, although none are currentl'
+[lever2 c04 r4 t2] 2.37s  | 'No, Matt does not have a PMP certification. His certificatio'
+[lever2 c04 r4 t3] 2.85s  | "None of Matt's certifications are currently active. He held "
+[lever2 c04 r5 t1] 2.63s  | 'Matt held several certifications, although none are current.'
+[lever2 c04 r5 t2] 2.81s  | 'No, Matt does not hold a PMP certification. His certificatio'
+[lever2 c04 r5 t3] 2.27s  | "None of Matt's certifications are current. He previously hel"
+[poc c04 r5 t1] 2.34s new_topic profile | 'Matt holds several certifications. He was an "AWS Certified '
+[poc c04 r5 t2] 7.76s follow_up gap | 'No, Matt does not hold a PMP certification. His certificatio'
+[poc c04 r5 t3] 2.9s follow_up synthesize | "None of Matt's certifications are currently active. His cert"
+[lever2 c05 r1 t1] 2.87s  | "🐾 Here's a great example.\n\nAfter his tenure at **Accenture**"
+[lever2 c05 r1 t2] 3.57s  | "🐾 Here's what connects the dots across Matt's work. At **Acc"
+[poc c05 r1 t1] 2.18s new_topic profile | '🐾 Matt is currently on a sabbatical and is actively searchin'
+[poc c05 r1 t2] 5.05s follow_up synthesize | "🐾 Here's a great example. Matt's experience spans building a"
+[poc c05 r2 t1] 2.34s new_topic profile | '🐾 Matt is currently on sabbatical, building MattGPT, and act'
+[poc c05 r2 t2] 4.96s follow_up synthesize | "🐾 Matt's diverse experience across industries and roles offe"
+[lever2 c05 r2 t1] 2.87s  | '🐾 Matt is currently exploring new opportunities because, aft'
+[lever2 c05 r2 t2] 4.02s  | '🐾 Matt offers a unique perspective and set of experiences th'
+[lever2 c05 r3 t1] 3.98s  | '🐾 Matt is currently exploring new career opportunities after'
+[lever2 c05 r3 t2] 4.56s  | "🐾 Here's why Matt stands out. Unlike many who have stayed in"
+[poc c05 r3 t1] 1.82s new_topic profile | '🐾 Matt is currently on a sabbatical, focusing on building Ma'
+[poc c05 r3 t2] 5.07s new_topic synthesize | '🐾 Matt brings a wealth of experience from leading diverse an'
+[poc c05 r4 t1] 2.21s new_topic profile | '🐾 Matt is currently on a sabbatical, building MattGPT, and i'
+[poc c05 r4 t2] 5.03s new_topic synthesize | "🐾 Here's what sets Matt apart. Over his career, Matt has dem"
+[lever2 c05 r4 t1] 3.56s  | "🐾 Here's why Matt is exploring new opportunities.\n\nAfter con"
+[lever2 c05 r4 t2] 5.0s  | "🐾 Here's why Matt's experience stands out compared to someon"
+[lever2 c05 r5 t1] 4.38s  | '🐾 Matt is currently exploring new opportunities after his te'
+[lever2 c05 r5 t2] 4.49s  | "🐾 Here's why Matt stands out. He has a proven track record o"
+[poc c05 r5 t1] 2.65s new_topic profile | '🐾 Matt is currently on a sabbatical, building MattGPT, and i'
+[poc c05 r5 t2] 6.53s new_topic synthesize | "🐾 Looking across Matt's portfolio, I see clear patterns. Mat"
+health check after 150 turns: top Fiserv 0.439
+[lever2 c06 r1 t1] 4.53s  | "🐾 Here's a great example.\n\nMatt worked with a **Major U.S. H"
+[lever2 c06 r1 t2] 3.41s  | '🐾 Found it!\n\nAt a **Major U.S. Health System**, Matt address'
+[poc c06 r1 t1] 3.94s new_topic search | "🐾 Here's a great example.\n\nMatt worked with a **Major U.S. H"
+[poc c06 r1 t2] 4.26s follow_up answer_from_referent | '🐾 On it!\n\nAt the **Major U.S. Health System**, Matt played a'
+[poc c06 r2 t1] 3.48s new_topic search | '🐾 Matt has indeed worked in the healthcare sector. At a **Ma'
+[poc c06 r2 t2] 3.87s follow_up answer_from_referent | '🐾 At a **Major U.S. Health System**, Matt played a pivotal r'
+[lever2 c06 r2 t1] 3.15s  | '🐾 Matt has indeed worked in the healthcare industry. At a **'
+[lever2 c06 r2 t2] 3.47s  | '🐾 At a **Major U.S. Health System**, Matt led the initiative'
+[lever2 c06 r3 t1] 3.13s  | "🐾 Here's a great example.\n\nMatt worked with a **Major U.S. H"
+[lever2 c06 r3 t2] 3.53s  | "🐾 Here's what Matt did at the **Major U.S. Health System**.\n"
+[poc c06 r3 t1] 3.69s new_topic search | '🐾 Matt has indeed worked in the healthcare sector. At a **Ma'
+[poc c06 r3 t2] 4.15s follow_up answer_from_referent | '🐾 At the **Major U.S. Health System**, Matt led the developm'
+[poc c06 r4 t1] 4.57s new_topic search | '🐾 Matt has worked in the healthcare industry. At a **Major U'
+[poc c06 r4 t2] 4.36s follow_up answer_from_referent | "🐾 Here's a great example.\n\nAt a **Major U.S. Health System**"
+[lever2 c06 r4 t1] 3.51s  | '🐾 Matt has indeed worked in the healthcare sector. He played'
+[lever2 c06 r4 t2] 3.34s  | "🐾 Here's a great example of Matt's work in healthcare.\n\nAt a"
+[lever2 c06 r5 t1] 3.66s  | '🐾 Matt has indeed worked in the healthcare sector. At a **Ma'
+[lever2 c06 r5 t2] 3.61s  | "🐾 Here's a detailed look at Matt's work in healthcare.\n\nAt a"
+[poc c06 r5 t1] 3.56s new_topic search | '🐾 Matt has indeed worked in healthcare. He was involved with'
+[poc c06 r5 t2] 4.19s follow_up answer_from_referent | '🐾 At the **Major U.S. Health System**, Matt played a pivotal'
+[lever2 c07 r1 t1] 2.12s  | '🐾 Matt is based in Atlanta, GA. He is open to relocation and'
+[lever2 c07 r1 t2] 2.3s  | '🐾 Matt is open to relocation and travel. He is based in Atla'
+[poc c07 r1 t1] 1.97s new_topic profile | "🐾 Matt is based in Atlanta, GA. He's open to relocation and "
+[poc c07 r1 t2] 2.06s follow_up profile | "🐾 Yes, Matt is open to relocation. He's also open to travel,"
+[poc c07 r2 t1] 1.99s new_topic profile | "🐾 Matt is based in Atlanta, GA. He's open to relocation and "
+[poc c07 r2 t2] 1.87s follow_up profile | '🐾 Yes, Matt is open to relocation and travel. While he prefe'
+[lever2 c07 r2 t1] 2.43s  | '🐾 Matt is based in Atlanta, GA. He is open to relocation and'
+[lever2 c07 r2 t2] 2.23s  | '🐾 Matt is open to relocation and travel. He prefers an in-of'
+[lever2 c07 r3 t1] 3.13s  | '🐾 Matt is based in Atlanta, GA. He is open to relocation and'
+[lever2 c07 r3 t2] 2.44s  | '🐾 Matt is open to relocation and travel. He is based in Atla'
+[poc c07 r3 t1] 1.75s new_topic profile | "🐾 Matt is based in Atlanta, GA. He's open to relocation and "
+[poc c07 r3 t2] 1.68s follow_up profile | "🐾 Matt is open to relocation and travel, so he's flexible ab"
+[poc c07 r4 t1] 1.76s new_topic profile | "🐾 Matt is based in Atlanta, GA. He's open to relocation and "
+[poc c07 r4 t2] 2.06s follow_up profile | '🐾 Matt is open to relocation and travel, so moving for the r'
+[lever2 c07 r4 t1] 1.97s  | '🐾 Matt is based in Atlanta, GA. He is open to relocation and'
+[lever2 c07 r4 t2] 2.43s  | '🐾 Matt is open to relocation and travel. He is currently bas'
+[lever2 c07 r5 t1] 2.64s  | '🐾 Matt is based in Atlanta, GA. He is open to relocation and'
+[lever2 c07 r5 t2] 2.08s  | '🐾 Matt is open to relocation and travel. He is currently bas'
+[poc c07 r5 t1] 1.68s new_topic profile | "🐾 Matt is based in Atlanta, GA. He's open to relocation and "
+[poc c07 r5 t2] 1.67s follow_up profile | '🐾 Matt is open to relocation and travel.'
+[poc c07 r6 t1] 1.64s new_topic profile | "🐾 Matt is based in Atlanta, GA. He's open to relocation and "
+[poc c07 r6 t2] 1.8s follow_up profile | '🐾 Matt is open to relocation and travel.'
+[lever2 c07 r6 t1] 1.77s  | '🐾 Matt is based in Atlanta, GA. He is open to relocation and'
+[lever2 c07 r6 t2] 1.88s  | '🐾 Matt is open to relocation and travel. He is currently bas'
+[lever2 c07 r7 t1] 2.09s  | '🐾 Matt is based in **Atlanta, GA**. He is open to relocation'
+[lever2 c07 r7 t2] 2.38s  | '🐾 Matt is open to relocation. He is based in **Atlanta, GA**'
+[poc c07 r7 t1] 1.8s new_topic profile | "🐾 Matt is based in Atlanta, GA. He's open to relocation and "
+[poc c07 r7 t2] 1.77s follow_up profile | '🐾 Matt is open to relocation and travel.'
+[poc c07 r8 t1] 1.64s new_topic profile | "🐾 Matt is based in Atlanta, GA. He's open to relocation and "
+[poc c07 r8 t2] 1.67s follow_up profile | "🐾 Matt is open to relocation and travel, so he's flexible wi"
+health check after 200 turns: top Fiserv 0.438
+[lever2 c07 r8 t1] 1.83s  | '🐾 Matt is based in Atlanta, GA. He is open to relocation and'
+[lever2 c07 r8 t2] 2.24s  | '🐾 Matt is open to relocation and travel. He is based in Atla'
+[lever2 c07 r9 t1] 2.37s  | '🐾 Matt is based in Atlanta, GA. He is open to relocation and'
+[lever2 c07 r9 t2] 2.09s  | '🐾 Matt is open to relocation and travel. He prefers an in-of'
+[poc c07 r9 t1] 1.97s new_topic profile | "🐾 Matt is based in Atlanta, GA. He's open to relocation and "
+[poc c07 r9 t2] 1.94s follow_up profile | '🐾 Matt is open to relocation and travel. While he prefers an'
+[poc c07 r10 t1] 1.83s new_topic profile | 'Matt is based in Atlanta, GA. He is open to relocation and t'
+[poc c07 r10 t2] 1.81s follow_up profile | 'Matt is open to relocation and travel.'
+[lever2 c07 r10 t1] 2.37s  | '🐾 Matt is based in Atlanta, GA. He is open to relocation and'
+[lever2 c07 r10 t2] 1.86s  | '🐾 Matt is open to relocation and travel.'
+[lever2 c08 r1 t1] 3.05s  | "🐾 Here's a story where Matt faced a significant challenge.\n\n"
+[lever2 c08 r1 t2] 3.33s  | '🐾 After the incident with the **Fortune 500 financial servic'
+[poc c08 r1 t1] 4.49s new_topic synthesize | "🐾 Here's a story that stands out.\n\nDuring a global platform "
+[poc c08 r1 t2] 3.09s follow_up answer_from_referent | '🐾 After the incident during the platform modernization proje'
+[poc c08 r2 t1] 4.61s new_topic synthesize | "🐾 Here's a story about a time Matt faced a significant chall"
+[poc c08 r2 t2] 3.97s follow_up answer_from_referent | '🐾 After the incident with the **Fortune 500 financial servic'
+[lever2 c08 r2 t1] 3.13s  | "🐾 Here's a story about a challenging situation Matt faced.\n\n"
+[lever2 c08 r2 t2] 2.76s  | '🐾 After the incident with the **Fortune 500 financial servic'
+[lever2 c08 r3 t1] 4.01s  | "🐾 Here's a story where Matt faced a significant challenge.\n\n"
+[lever2 c08 r3 t2] 3.11s  | '🐾 After the incident with the platform modernization project'
+[poc c08 r3 t1] 4.0s new_topic synthesize | '🐾 Found it!\n\nDuring a global platform modernization delivery'
+[poc c08 r3 t2] 3.24s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nAfter the incident during t"
+[poc c08 r4 t1] 4.5s new_topic synthesize | "🐾 Here's a story where Matt faced a significant challenge.\n\n"
+[poc c08 r4 t2] 3.65s follow_up answer_from_referent | '🐾 After the incident with the Fortune 500 financial services'
+[lever2 c08 r4 t1] 3.27s  | "🐾 Here's a story about a challenging situation Matt faced.\n\n"
+[lever2 c08 r4 t2] 2.99s  | '🐾 After the incident with the **Fortune 500 financial servic'
+[lever2 c08 r5 t1] 2.95s  | "🐾 Here's a story where Matt faced a significant challenge.\n\n"
+[lever2 c08 r5 t2] 2.75s  | '🐾 After the incident with the email job, Matt made several c'
+[poc c08 r5 t1] 4.32s new_topic synthesize | "🐾 Here's a story where Matt faced a significant challenge.\n\n"
+[poc c08 r5 t2] 3.96s follow_up answer_from_referent | '🐾 After the failure in the platform modernization project, M'
+[lever2 c09 r1 t1] 5.32s  | "🐾 Here's a great example of Matt's work in payments.\n\nAt **J"
+[lever2 c09 r1 t2] 4.24s  | "🐾 Stepping back to see the themes in Matt's leadership style"
+[lever2 c09 r1 t3] 4.11s  | "🐾 Here's a strong example of Matt's leadership style in acti"
+[lever2 c09 r1 t4] 3.01s  | '🐾 Found it!\n\nAt the **Accenture Cloud Innovation Center**, M'
+[poc c09 r1 t1] 3.76s new_topic search | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt play"
+[poc c09 r1 t2] 2.55s new_topic profile | '🐾 Stepping back to see the themes, Matt leads with empathy, '
+[poc c09 r1 t3] 2.6s follow_up clarify | '🐾 Do you want an example from **JP Morgan Chase**, **Accentu'
+[poc c09 r1 t4] 2.97s follow_up clarify | '🐾 I know just the story.\n\nIn the **JP Morgan Chase** engagem'
+[poc c09 r2 t1] 3.69s new_topic search | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt play"
+[poc c09 r2 t2] 2.49s new_topic profile | '🐾 Stepping back to see the themes...\n\nMatt leads with empath'
+[poc c09 r2 t3] 3.26s follow_up search | "🐾 Here's a great example.\n\nIn the early stages of the Cloud "
+[poc c09 r2 t4] 3.51s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nAt the **Accenture Cloud In"
+[lever2 c09 r2 t1] 3.86s  | "🐾 Here's a great example of Matt's work in payments.\n\nAt **J"
+[lever2 c09 r2 t2] 3.84s  | "🐾 Here's what ties Matt's leadership style together.\n\nMatt's"
+[lever2 c09 r2 t3] 3.1s  | "🐾 Here's a strong example of Matt's leadership style in acti"
+[lever2 c09 r2 t4] 2.99s  | '🐾 Found it!\n\nAt the **Accenture Cloud Innovation Center**, M'
+[lever2 c09 r3 t1] 3.44s  | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt play"
+[lever2 c09 r3 t2] 3.52s  | "🐾 Let me show you what ties Matt's leadership style together"
+[lever2 c09 r3 t3] 3.21s  | "🐾 Here's a strong example of Matt's leadership style in acti"
+[lever2 c09 r3 t4] 2.41s  | '🐾 Found it!\n\nAt the **Accenture Cloud Innovation Center**, M'
+health check after 250 turns: top Fiserv 0.439
+[poc c09 r3 t1] 4.21s new_topic search | '🐾 Found it!\n\nAt **JP Morgan Chase**, Matt played a pivotal r'
+[poc c09 r3 t2] 2.61s new_topic profile | "🐾 Here's a great example.\n\nMatt leads with empathy, clarity,"
+[poc c09 r3 t3] 3.7s follow_up clarify | '🐾 I know just the story.\n\nAt **JP Morgan Chase**, Matt demon'
+[poc c09 r3 t4] 3.12s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nOn the ACCESS Next Generati"
+[poc c09 r4 t1] 3.34s new_topic search | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt play"
+[poc c09 r4 t2] 3.16s new_topic profile | "🐾 Looking across Matt's portfolio, I see clear patterns.\n\nMa"
+[poc c09 r4 t3] 3.89s follow_up answer_from_referent | "🐾 Here's a great example.\n\nAt the **Accenture Cloud Innovati"
+[poc c09 r4 t4] 3.62s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nAt the **Accenture Cloud In"
+[lever2 c09 r4 t1] 3.9s  | "🐾 Here's a great example of Matt's work in the payments doma"
+[lever2 c09 r4 t2] 3.26s  | "🐾 Here's what connects the dots across Matt's leadership sty"
+[lever2 c09 r4 t3] 2.94s  | "🐾 Here's a strong example of Matt's leadership in action.\n\nA"
+[lever2 c09 r4 t4] 2.89s  | '🐾 Found it!\n\nAt the **Accenture Cloud Innovation Center**, M'
+[lever2 c09 r5 t1] 3.4s  | "🐾 Here's a great example of Matt's work in the payments doma"
+[lever2 c09 r5 t2] 3.66s  | "🐾 Here's what defines Matt's leadership style.\n\nMatt's leade"
+[lever2 c09 r5 t3] 2.84s  | '🐾 I know just the story.\n\nAt the **Accenture Cloud Innovatio'
+[lever2 c09 r5 t4] 2.4s  | "🐾 Perfect, here's what I found.\n\nAt the **Accenture Cloud In"
+[poc c09 r5 t1] 3.94s new_topic search | '🐾 Found it!\n\nAt **JP Morgan Chase**, Matt played a pivotal r'
+[poc c09 r5 t2] 2.87s new_topic profile | "🐾 Looking across Matt's portfolio, I see clear patterns.\n\nMa"
+[poc c09 r5 t3] 3.39s follow_up clarify | "🐾 Here's a great example.\n\nIn the Cloud Innovation Center (C"
+[poc c09 r5 t4] 4.01s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nIn the Cloud Innovation Cen"
+[lever2 c10 r1 t1] 3.38s  | "🐾 Here's a great example.\n\nAt **Norfolk Southern**, Matt tac"
+[lever2 c10 r1 t2] 3.78s  | '🐾 This is a strong one.\n\nAt **Norfolk Southern**, Matt led s'
+[lever2 c10 r1 t3] 3.06s  | 'The modernization efforts at **Norfolk Southern** spanned se'
+[poc c10 r1 t1] 4.51s new_topic answer_from_referent | '🐾 Found it!\n\nAt **Norfolk Southern**, Matt led a significant'
+[poc c10 r1 t2] 5.33s follow_up answer_from_referent | "🐾 Here's a deep dive into the techniques Matt used for the *"
+[poc c10 r1 t3] 3.44s follow_up answer_from_referent | 'Matt worked on the **Norfolk Southern** Revenue and Shipment'
+[poc c10 r2 t1] 5.12s new_topic answer_from_referent | "🐾 Here's a great example.\n\nAt **Norfolk Southern**, Matt led"
+[poc c10 r2 t2] 5.78s follow_up answer_from_referent | '🐾 This is a strong one.\n\nAt **Norfolk Southern**, Matt faced'
+[poc c10 r2 t3] 4.0s follow_up answer_from_referent | '🐾 Found it!\n\nThe cultural transformation at **Norfolk Southe'
+[lever2 c10 r2 t1] 3.56s  | "🐾 Here's a great example of Matt's work with **Norfolk South"
+[lever2 c10 r2 t2] 3.61s  | '🐾 This is a strong one.\n\nAt **Norfolk Southern**, Matt led a'
+[lever2 c10 r2 t3] 2.61s  | 'The modernization effort at **Norfolk Southern** involved mu'
+[lever2 c10 r3 t1] 3.76s  | "🐾 Here's a great example from Matt's work with **Norfolk Sou"
+[lever2 c10 r3 t2] 3.86s  | '🐾 Found it!\n\nAt **Norfolk Southern**, Matt faced the challen'
+[lever2 c10 r3 t3] 4.49s  | 'The modernization efforts at **Norfolk Southern** took place'
+[poc c10 r3 t1] 5.7s new_topic answer_from_referent | '🐾 This is a strong one.\n\nAt **Norfolk Southern**, Matt led a'
+[poc c10 r3 t2] 4.35s follow_up answer_from_referent | "🐾 Here's a great example.\n\nAfter addressing the quality cris"
+[poc c10 r3 t3] 3.44s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nMatt worked on the **Norfol"
+[poc c10 r4 t1] 4.27s new_topic answer_from_referent | "🐾 Here's a great example of Matt's leadership at **Norfolk S"
+[poc c10 r4 t2] 3.95s follow_up answer_from_referent | '🐾 This is a strong one.\n\nDuring the modernization of **Norfo'
+[poc c10 r4 t3] 3.15s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nMatt's engagement with **No"
+[lever2 c10 r4 t1] 3.46s  | "🐾 Here's a great example of Matt's work with **Norfolk South"
+[lever2 c10 r4 t2] 4.06s  | '🐾 Found it!\n\nAt **Norfolk Southern**, the challenge was to m'
+[lever2 c10 r4 t3] 2.84s  | "🐾 On it!\n\nThe modernization of **Norfolk Southern**'s legacy"
+[lever2 c10 r5 t1] 3.53s  | "🐾 Here's a great example of Matt's work with **Norfolk South"
+[lever2 c10 r5 t2] 4.13s  | '🐾 Found it!\n\nAt **Norfolk Southern**, Matt faced the challen'
+[lever2 c10 r5 t3] 2.7s  | 'The modernization project for **Norfolk Southern** took plac'
+[poc c10 r5 t1] 5.94s new_topic answer_from_referent | "🐾 Here's a great example.\n\nAt **Norfolk Southern**, Matt led"
+[poc c10 r5 t2] 3.91s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nAt **Norfolk Southern**, Ma"
+[poc c10 r5 t3] 3.83s follow_up answer_from_referent | "🐾 On it!\n\nMatt's work with **Norfolk Southern** on the Reven"
+health check after 300 turns: top Fiserv 0.439
+[poc c10 r6 t1] 4.84s new_topic answer_from_referent | "🐾 Here's a great example.\n\nAt **Norfolk Southern**, Matt led"
+[poc c10 r6 t2] 4.65s follow_up answer_from_referent | '🐾 Found it!\n\nAt **Norfolk Southern**, Matt spearheaded a cul'
+[poc c10 r6 t3] 3.53s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nMatt's engagement with **No"
+[lever2 c10 r6 t1] 3.12s  | "🐾 Here's a great example of Matt's work with **Norfolk South"
+[lever2 c10 r6 t2] 3.55s  | '🐾 Found it!\n\nAt **Norfolk Southern**, Matt faced the challen'
+[lever2 c10 r6 t3] 2.89s  | 'The modernization project at **Norfolk Southern** took place'
+[lever2 c10 r7 t1] 3.94s  | "🐾 Here's a great example of Matt's work with **Norfolk South"
+[lever2 c10 r7 t2] 3.11s  | '🐾 Found it!\n\nAt **Norfolk Southern**, Matt tackled the moder'
+[lever2 c10 r7 t3] 3.26s  | 'The modernization efforts at **Norfolk Southern** took place'
+[poc c10 r7 t1] 6.03s new_topic answer_from_referent | "🐾 Here's a great example of Matt's work with **Norfolk South"
+[poc c10 r7 t2] 4.71s follow_up answer_from_referent | '🐾 This is a strong one.\n\nDuring the modernization of **Norfo'
+[poc c10 r7 t3] 4.22s follow_up answer_from_referent | '🐾 Found it!\n\nThe cultural transformation at **Norfolk Southe'
+[poc c10 r8 t1] 4.63s new_topic answer_from_referent | "🐾 Here's a great example.\n\nAt **Norfolk Southern**, Matt led"
+[poc c10 r8 t2] 4.3s follow_up answer_from_referent | '🐾 Found it!\n\nDuring the modernization project at **Norfolk S'
+[poc c10 r8 t3] 3.66s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nMatt worked on the moderniz"
+[lever2 c10 r8 t1] 3.66s  | "🐾 Here's a great example of Matt's work with **Norfolk South"
+[lever2 c10 r8 t2] 4.44s  | '🐾 This is a strong one.\n\nAt **Norfolk Southern**, Matt was t'
+[lever2 c10 r8 t3] 3.41s  | 'The modernization project at **Norfolk Southern** was a comp'
+[lever2 c10 r9 t1] 3.68s  | "🐾 Here's a great example of Matt's work with **Norfolk South"
+[lever2 c10 r9 t2] 4.95s  | '🐾 Found it!\n\nAt **Norfolk Southern**, Matt tackled the chall'
+[lever2 c10 r9 t3] 3.27s  | 'The modernization efforts at **Norfolk Southern** spanned mu'
+[poc c10 r9 t1] 4.94s new_topic answer_from_referent | "🐾 Here's a great example.\n\nAt **Norfolk Southern**, Matt led"
+[poc c10 r9 t2] 5.07s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nAt **Norfolk Southern**, Ma"
+[poc c10 r9 t3] 4.04s follow_up answer_from_referent | "🐾 On it!\n\nMatt's engagement with **Norfolk Southern** for th"
+[poc c10 r10 t1] 5.58s new_topic answer_from_referent | "🐾 Found it!\n\nMatt's work with **Norfolk Southern** was a com"
+[poc c10 r10 t2] 5.97s follow_up answer_from_referent | '🐾 This is a strong one.\n\nAt **Norfolk Southern**, Matt led a'
+[poc c10 r10 t3] 3.96s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nThe cultural transformation"
+[lever2 c10 r10 t1] 3.52s  | "🐾 Here's a great example of Matt's work with **Norfolk South"
+[lever2 c10 r10 t2] 4.32s  | '🐾 Found it!\n\nAt **Norfolk Southern**, Matt faced the challen'
+[lever2 c10 r10 t3] 4.71s  | 'The modernization project at **Norfolk Southern** was a sign'
+[lever2 c11 r1 t1] 4.87s  | "🐾 Here's how Matt scaled engineering teams from 4 to over **"
+Semantic router error (FAILING OPEN): Request timed out.
+  Query will proceed to entity detection and RAG
+[lever2 c11 r1 t2] 31.64s  | "🐾 Here's a look at Matt's work in payments, particularly wit"
+[lever2 c11 r1 t3] 4.0s  | "🐾 Here's a look at the size of Matt's teams and how he struc"
+[poc c11 r1 t1] 4.72s new_topic synthesize | "🐾 Here's a great example.\n\nAt the **Accenture Cloud Innovati"
+[poc c11 r1 t2] 4.74s new_topic search | '🐾 Found it!\n\nAt **JP Morgan Chase**, Matt played a pivotal r'
+[poc c11 r1 t3] 4.87s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nIn his work at **JP Morgan "
+[poc c11 r2 t1] 4.92s new_topic synthesize | "🐾 Perfect, here's what I found.\n\nMatt scaled engineering tea"
+[poc c11 r2 t2] 4.33s new_topic search | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt play"
+[poc c11 r2 t3] 4.71s follow_up answer_from_referent | '🐾 On it!\n\nIn his work at **JP Morgan Chase**, Matt managed a'
+[lever2 c11 r2 t1] 4.33s  | "🐾 Here's how Matt scaled engineering teams from 4 to over **"
+[lever2 c11 r2 t2] 6.6s  | "🐾 Here's a detailed look at Matt's work in the payments doma"
+[lever2 c11 r2 t3] 4.6s  | "🐾 Here's a look at the scale of Matt's teams at the **Accent"
+[lever2 c11 r3 t1] 4.27s  | "🐾 Here's a great example.\n\nMatt scaled the engineering teams"
+[lever2 c11 r3 t2] 4.92s  | "🐾 Here's a detailed look at Matt's work in payments.\n\nAt **J"
+[lever2 c11 r3 t3] 4.1s  | "🐾 Here's what I found about the team sizes Matt worked with."
+[poc c11 r3 t1] 5.01s new_topic synthesize | "🐾 Here's a great example.\n\nMatt scaled the engineering teams"
+[poc c11 r3 t2] 4.93s new_topic search | '🐾 Found it!\n\nMatt played a pivotal role in building the paym'
+[poc c11 r3 t3] 4.18s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nDuring his time working on "
+[poc c11 r4 t1] 4.41s new_topic synthesize | "🐾 Perfect, here's what I found.\n\nMatt scaled the engineering"
+[poc c11 r4 t2] 4.09s new_topic search | "🐾 Here's a great example.\n\nMatt played a significant role in"
+[poc c11 r4 t3] 4.2s follow_up answer_from_referent | '🐾 This is a strong one.\n\nIn his work with **JP Morgan Chase*'
+health check after 351 turns: top Fiserv 0.439
+[lever2 c11 r4 t1] 5.29s  | "🐾 Here's a great example of how Matt scaled engineering team"
+[lever2 c11 r4 t2] 4.24s  | "🐾 Here's a detailed look at Matt's work in the payments doma"
+[lever2 c11 r4 t3] 3.35s  | "🐾 Looking across Matt's portfolio, I see clear patterns in t"
+[lever2 c11 r5 t1] 4.46s  | "🐾 Here's a great example of Matt's work in scaling engineeri"
+[lever2 c11 r5 t2] 3.89s  | "🐾 Here's a detailed look at Matt's work in the payments sect"
+[lever2 c11 r5 t3] 3.04s  | "🐾 Here's what I found about the size of Matt's teams.\n\nAt **"
+[poc c11 r5 t1] 4.91s new_topic synthesize | "🐾 Perfect, here's what I found.\n\nMatt scaled engineering tea"
+[poc c11 r5 t2] 4.35s new_topic search | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt play"
+[poc c11 r5 t3] 5.41s follow_up answer_from_referent | '🐾 Found it!\n\nAt **JP Morgan Chase**, Matt managed a blended '
+[poc c11 r6 t1] 5.23s new_topic synthesize | "🐾 Here's a great example.\n\nMatt scaled engineering teams fro"
+[poc c11 r6 t2] 5.16s new_topic search | '🐾 Found it!\n\nAt **JP Morgan Chase**, Matt played a crucial r'
+[poc c11 r6 t3] 4.74s follow_up answer_from_referent | "🐾 Here's what I found.\n\nAt **JP Morgan Chase**, Matt managed"
+[lever2 c11 r6 t1] 5.06s  | '🐾 Found it!\n\nMatt scaled engineering teams from a small pilo'
+[lever2 c11 r6 t2] 4.84s  | "🐾 Here's a great example of Matt's work in payments.\n\nAt **J"
+[lever2 c11 r6 t3] 5.74s  | "🐾 Here's what I found about the size of Matt's teams.\n\nAt **"
+[lever2 c11 r7 t1] 4.6s  | "🐾 Here's how Matt scaled engineering teams from 4 to 150+ pe"
+[lever2 c11 r7 t2] 4.25s  | "🐾 Here's a great example of Matt's work in the payments doma"
+[lever2 c11 r7 t3] 3.14s  | "🐾 Here's what I found about the size of Matt's teams.\n\nAt **"
+[poc c11 r7 t1] 4.81s new_topic synthesize | "🐾 Here's a great example.\n\nMatt scaled the engineering teams"
+[poc c11 r7 t2] 4.2s new_topic search | "🐾 Here's a strong one.\n\nMatt played a pivotal role in transf"
+[poc c11 r7 t3] 4.02s follow_up answer_from_referent | "🐾 Here's what I found.\n\nIn his work with **JP Morgan Chase**"
+[poc c11 r8 t1] 5.34s new_topic synthesize | "🐾 Perfect, here's what I found.\n\nMatt scaled the engineering"
+[poc c11 r8 t2] 4.77s new_topic search | '🐾 Found it!\n\nAt **JP Morgan Chase**, Matt was instrumental i'
+[poc c11 r8 t3] 3.64s follow_up answer_from_referent | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt led "
+[lever2 c11 r8 t1] 3.91s  | "🐾 Here's how Matt scaled engineering teams from 4 to over **"
+[lever2 c11 r8 t2] 3.39s  | "🐾 Here's a look at Matt's work in the payments domain, parti"
+[lever2 c11 r8 t3] 3.22s  | "🐾 Here's how Matt structured his teams at **Accenture**'s Cl"
+[lever2 c11 r9 t1] 4.16s  | "🐾 Here's a great example.\n\nMatt scaled engineering teams fro"
+[lever2 c11 r9 t2] 4.09s  | "🐾 Here's a strong one.\n\nAt **JP Morgan Chase**, Matt played "
+[lever2 c11 r9 t3] 3.36s  | '🐾 Found it!\n\nMatt led teams of varying sizes throughout his '
+[poc c11 r9 t1] 4.62s new_topic synthesize | "🐾 Here's a great example.\n\nMatt scaled the engineering teams"
+[poc c11 r9 t2] 4.37s new_topic search | '🐾 Found it!\n\nAt **JP Morgan Chase**, Matt played a pivotal r'
+[poc c11 r9 t3] 3.9s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nAt **JP Morgan Chase**, Mat"
+[poc c11 r10 t1] 5.55s new_topic synthesize | "🐾 Here's how Matt scaled engineering teams from **4** to **1"
+[poc c11 r10 t2] 4.86s new_topic search | "🐾 Here's a deep dive into Matt's work in the payments domain"
+[poc c11 r10 t3] 4.74s follow_up answer_from_referent | "🐾 Here's the team size detail from Matt's payments work.\n\nAt"
+[lever2 c11 r10 t1] 3.95s  | "🐾 Here's a great example.\n\nMatt scaled engineering teams fro"
+[lever2 c11 r10 t2] 3.68s  | "🐾 Here's a detailed look at Matt's work in the payments doma"
+[lever2 c11 r10 t3] 3.44s  | "🐾 Perfect, here's what I found.\n\nMatt's teams at the **Accen"
+[lever2 c12 r1 t1] 5.86s  | "🐾 Here's a comparison of Matt's work with **Fiserv** and **J"
+[lever2 c12 r1 t2] 4.53s  | "🐾 Here's a comparison of the scale of Matt's projects at **F"
+[poc c12 r1 t1] 5.76s new_topic synthesize | "🐾 Let's explore the differences in Matt's work with **JP Mor"
+[poc c12 r1 t2] 4.98s follow_up answer_from_referent | "🐾 Here's a look at the scale of Matt's work with **JP Morgan"
+[poc c12 r2 t1] 4.62s new_topic synthesize | "🐾 Here's a great example.\n\nAt **JP Morgan**, Matt played a p"
+[poc c12 r2 t2] 3.66s follow_up clarify | "🐾 Tracking this down...\n\nAt **JP Morgan**, Matt's work on th"
+[lever2 c12 r2 t1] 11.19s  | "🐾 Here's a comparison of Matt's work with **Fiserv** and **J"
+[lever2 c12 r2 t2] 5.1s  | "🐾 Here's what I found regarding the size of the projects:\n\nT"
+[lever2 c12 r3 t1] 6.24s  | "🐾 Here's a detailed look at Matt's work with **Fiserv** and "
+[lever2 c12 r3 t2] 3.65s  | "🐾 Here's a comparison of the scale and impact of Matt's work"
+health check after 400 turns: top Fiserv 0.439
+[poc c12 r3 t1] 4.69s new_topic synthesize | "🐾 Here's a great example.\n\nAt **JP Morgan**, Matt was instru"
+[poc c12 r3 t2] 4.6s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nThe **JP Morgan ACCESS Next"
+[poc c12 r4 t1] 5.02s new_topic synthesize | "🐾 Here's a great example of Matt's work at **JP Morgan** and"
+[poc c12 r4 t2] 3.5s follow_up clarify | "🐾 On it!\n\nTo determine the size of the projects, let's look "
+[lever2 c12 r4 t1] 4.86s  | "🐾 Here's a comparison of Matt's work with **Fiserv** and **J"
+[lever2 c12 r4 t2] 3.61s  | "🐾 Let's compare the scale of Matt's work at **Fiserv** and *"
+[lever2 c12 r5 t1] 6.17s  | '🐾 Found it!\n\nAt **Fiserv**, Matt was instrumental in moderni'
+[lever2 c12 r5 t2] 5.23s  | "🐾 Here's a comparison of the scale and impact of Matt's work"
+[poc c12 r5 t1] 4.55s new_topic synthesize | "🐾 Here's a great example.\n\nAt **JP Morgan**, Matt led the de"
+[poc c12 r5 t2] 2.74s follow_up clarify | '🐾 Are you asking which project was bigger in terms of team s'
+[poc c12 r6 t1] 5.32s new_topic synthesize | "🐾 Here's a great example of Matt's work at both **Fiserv** a"
+[poc c12 r6 t2] 2.23s follow_up clarify | '🐾 Are you asking which project was bigger in terms of team s'
+[lever2 c12 r6 t1] 5.69s  | "🐾 Here's a comparison of Matt's work with **Fiserv** and **J"
+[lever2 c12 r6 t2] 4.65s  | "🐾 Comparing the scale of Matt's work at **Fiserv** and **JP "
+[lever2 c12 r7 t1] 7.16s  | "🐾 Let's dive into Matt's work with **Fiserv** and **JP Morga"
+[lever2 c12 r7 t2] 3.59s  | "🐾 Here's a comparison of the scale and impact of Matt's work"
+[poc c12 r7 t1] 5.39s new_topic synthesize | "🐾 Here's a great example.\n\nAt **JP Morgan**, Matt played a p"
+[poc c12 r7 t2] 3.41s follow_up clarify | '🐾 On it!\n\nThe **JP Morgan** ACCESS Next Generation platform '
+[poc c12 r8 t1] 5.13s new_topic synthesize | "🐾 Here's a great example.\n\nAt **JP Morgan**, Matt played a p"
+[poc c12 r8 t2] 4.43s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nThe **JP Morgan ACCESS Next"
+[lever2 c12 r8 t1] 5.62s  | "🐾 Here's a comparison of Matt's work with **Fiserv** and **J"
+[lever2 c12 r8 t2] 4.16s  | "🐾 Let's break down the scale of Matt's work at **Fiserv** an"
+[lever2 c12 r9 t1] 5.34s  | "🐾 Here's a comparison of Matt's work with **Fiserv** and **J"
+[lever2 c12 r9 t2] 6.08s  | "🐾 Here's what I found about the scale of Matt's work with **"
+[poc c12 r9 t1] 5.69s new_topic synthesize | "🐾 Here's a detailed look at Matt's work with **Fiserv** and "
+[poc c12 r9 t2] 5.49s follow_up answer_from_referent | "🐾 Here's a comparison of the scale and impact of Matt's work"
+[poc c12 r10 t1] 4.14s new_topic synthesize | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt play"
+[poc c12 r10 t2] 3.9s follow_up clarify | '🐾 On it! Both projects were significant, but they differed i'
+[lever2 c12 r10 t1] 5.26s  | "🐾 Here's a look at Matt's work with **Fiserv** and **JP Morg"
+[lever2 c12 r10 t2] 4.55s  | "🐾 Here's a comparison of Matt's work at **Fiserv** and **JP "
+[lever2 c13 r1 t1] 4.34s  | "🐾 Here's a great example of Matt's work with **Fiserv**.\n\nAt"
+[lever2 c13 r1 t2] 2.69s  | '🐾 Found it!\n\nAt **Fiserv**, Matt coordinated a **45-person**'
+[poc c13 r1 t1] 4.8s new_topic answer_from_referent | "🐾 Here's a great example.\n\nAt **Fiserv**, Matt played a pivo"
+[poc c13 r1 t2] 3.12s follow_up answer_from_referent | '🐾 Found it!\n\nDuring his time at **Fiserv**, Matt managed a *'
+[poc c13 r2 t1] 5.77s new_topic answer_from_referent | "🐾 Here's a great example.\n\nAt **Fiserv**, Matt played a pivo"
+[poc c13 r2 t2] 3.49s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nDuring his time at **Fiserv"
+[lever2 c13 r2 t1] 3.47s  | "🐾 Here's a great example of Matt's work with **Fiserv**.\n\n**"
+[lever2 c13 r2 t2] 2.85s  | 'Matt led a **45-person** globally dispersed team during his '
+[lever2 c13 r3 t1] 4.24s  | "🐾 Here's a great example of Matt's work with **Fiserv**.\n\n**"
+[lever2 c13 r3 t2] 2.74s  | 'Matt coordinated a **45-person** globally dispersed team dur'
+[poc c13 r3 t1] 5.58s new_topic answer_from_referent | "🐾 Here's a great example.\n\nAt **Fiserv**, Matt played a pivo"
+[poc c13 r3 t2] 3.31s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nDuring his work at **Fiserv"
+[poc c13 r4 t1] 4.62s new_topic answer_from_referent | '🐾 Found it!\n\nAt **Fiserv**, Matt played a pivotal role in tr'
+[poc c13 r4 t2] 3.01s follow_up answer_from_referent | 'The team at **Fiserv** was a **45-person** globally disperse'
+[lever2 c13 r4 t1] 4.4s  | "🐾 Here's a great example of Matt's work with **Fiserv**.\n\nAt"
+[lever2 c13 r4 t2] 2.54s  | '🐾 Found it!\n\nIn his work with **Fiserv**, Matt led a globall'
+[lever2 c13 r5 t1] 4.42s  | "🐾 Here's a great example of Matt's work at **Fiserv**.\n\nAt *"
+[lever2 c13 r5 t2] 3.4s  | '🐾 Found it!\n\nAt **Fiserv**, Matt worked with a **45-person**'
+[poc c13 r5 t1] 5.0s new_topic search | "🐾 Here's a great example.\n\nAt **Fiserv**, Matt played a pivo"
+[poc c13 r5 t2] 3.33s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nAt **Fiserv**, Matt led a *"
+health check after 450 turns: top Fiserv 0.439
+[poc c13 r6 t1] 5.13s new_topic answer_from_referent | "🐾 Here's a great example.\n\nAt **Fiserv**, Matt played a cruc"
+[poc c13 r6 t2] 3.41s follow_up answer_from_referent | '🐾 Found it!\n\nAt **Fiserv**, Matt led a **45-person** globall'
+[lever2 c13 r6 t1] 4.79s  | "🐾 Here's a great example of Matt's work with **Fiserv**.\n\nMa"
+[lever2 c13 r6 t2] 2.8s  | '🐾 Found it!\n\nIn his work with **Fiserv**, Matt managed a **4'
+[lever2 c13 r7 t1] 4.33s  | "🐾 Here's what Matt achieved at **Fiserv**.\n\n**Fiserv**'s whi"
+[lever2 c13 r7 t2] 2.33s  | '🐾 At **Fiserv**, Matt managed a globally dispersed team of *'
+[poc c13 r7 t1] 5.23s new_topic search | "🐾 Here's a great example.\n\nAt **Fiserv**, Matt was instrumen"
+[poc c13 r7 t2] 3.22s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nAt **Fiserv**, Matt led a t"
+[poc c13 r8 t1] 5.02s new_topic answer_from_referent | "🐾 Here's a great example.\n\nAt **Fiserv**, Matt played a cruc"
+[poc c13 r8 t2] 4.02s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nAt **Fiserv**, Matt was inv"
+[lever2 c13 r8 t1] 3.8s  | "🐾 Here's a great example of Matt's work with **Fiserv**.\n\nMa"
+[lever2 c13 r8 t2] 2.62s  | '🐾 Found it!\n\nFor the **Fiserv** white-label card portal proj'
+[lever2 c13 r9 t1] 4.29s  | "🐾 Here's a detailed look at Matt's work with **Fiserv**.\n\nMa"
+[lever2 c13 r9 t2] 2.49s  | "🐾 I found the details on the team size for Matt's work with "
+[poc c13 r9 t1] 5.31s new_topic answer_from_referent | "🐾 Here's a great example.\n\nAt **Fiserv**, Matt played a cruc"
+[poc c13 r9 t2] 3.24s follow_up answer_from_referent | '🐾 On it! At **Fiserv**, Matt managed a **45-person** globall'
+[poc c13 r10 t1] 6.13s new_topic answer_from_referent | "🐾 Perfect, here's what I found.\n\nDuring his time at **Fiserv"
+[poc c13 r10 t2] 3.63s follow_up answer_from_referent | '🐾 Found it!\n\nDuring his engagement with **Fiserv**, Matt wor'
+[lever2 c13 r10 t1] 4.74s  | "🐾 Here's a great example of Matt's work with **Fiserv**.\n\nMa"
+[lever2 c13 r10 t2] 2.57s  | "Matt coordinated a team of **45 members** for **Fiserv**'s w"
+[lever2 c14 r1 t1] 3.89s  | "🐾 Looking across Matt's portfolio, I see clear patterns that"
+[poc c14 r1 t1] 3.42s new_topic profile | '🐾 Matt has a rich background in building and leading enginee'
+[poc c14 r2 t1] 3.21s new_topic profile | "🐾 Matt's career arc includes roles from Software Engineer to"
+[lever2 c14 r2 t1] 4.73s  | "🐾 Looking across Matt's portfolio, I see clear patterns that"
+[lever2 c14 r3 t1] 3.99s  | "🐾 Looking across Matt's portfolio, I see clear patterns that"
+[poc c14 r3 t1] 2.97s new_topic profile | '🐾 Matt has a strong background in building and leading engin'
+[poc c14 r4 t1] 3.18s new_topic profile | '🐾 Matt has extensive experience in building and leading engi'
+[lever2 c14 r4 t1] 4.38s  | "🐾 Looking across Matt's portfolio, I see clear patterns that"
+[lever2 c14 r5 t1] 3.56s  | "🐾 Looking across Matt's portfolio, I see clear patterns that"
+[poc c14 r5 t1] 3.0s new_topic profile | '🐾 Matt has a strong background in building and leading engin'
+[poc c14 r6 t1] 2.83s new_topic profile | '🐾 Matt has a strong background in building and leading engin'
+[lever2 c14 r6 t1] 4.71s  | "🐾 Looking across Matt's portfolio, I see clear patterns that"
+[lever2 c14 r7 t1] 4.26s  | "🐾 Looking across Matt's portfolio, I see clear patterns that"
+[poc c14 r7 t1] 3.45s new_topic profile | "🐾 Matt's career arc shows a strong foundation in software en"
+[poc c14 r8 t1] 3.24s new_topic profile | '🐾 Matt has a strong background in building and leading engin'
+[lever2 c14 r8 t1] 4.19s  | "🐾 Looking across Matt's portfolio, I see clear patterns that"
+[lever2 c14 r9 t1] 4.71s  | "🐾 Looking across Matt's portfolio, I see clear patterns that"
+[poc c14 r9 t1] 2.57s new_topic profile | '🐾 Matt has a strong background in building and leading engin'
+[poc c14 r10 t1] 3.14s new_topic profile | '🐾 Matt has a strong background in building and leading engin'
+[lever2 c14 r10 t1] 3.65s  | "🐾 Looking across Matt's portfolio, I see clear patterns that"
+[lever2 c15 r1 t1] 2.11s  | "🐾 I can only discuss Matt's transformation experience. Ask m"
+[poc c15 r1 t1] 2.02s new_topic profile | '🐾 Matt is available for immediate opportunities, preferring '
+[poc c15 r2 t1] 1.67s new_topic profile | '🐾 I can help with that!\n\nLinkedIn: https://www.linkedin.com/'
+[lever2 c15 r2 t1] 2.49s  | '🐾 Matt is currently available for senior leadership roles in'
+[lever2 c15 r3 t1] 1.99s  | "🐾 I can only discuss Matt's transformation experience. Ask m"
+[poc c15 r3 t1] 2.07s new_topic profile | "🐾 I can share details about Matt's professional experience, "
+[poc c15 r4 t1] 2.67s new_topic profile | '🐾 I can help with that. Matt is open to new opportunities an'
+[lever2 c15 r4 t1] 2.22s  | "🐾 I can only discuss Matt's transformation experience. Ask m"
+[lever2 c15 r5 t1] 2.03s  | "🐾 I can only discuss Matt's transformation experience. Ask m"
+[poc c15 r5 t1] 2.22s new_topic profile | '🐾 On it! Matt is based in Atlanta, GA, and is open to reloca'
+health check after 500 turns: top Fiserv 0.439
+[poc c15 r6 t1] 1.89s new_topic profile | "🐾 I can only discuss Matt's transformation experience. Ask m"
+[lever2 c15 r6 t1] 2.08s  | "🐾 I can only discuss Matt's transformation experience. Ask m"
+[lever2 c15 r7 t1] 2.59s  | '🐾 Matt is currently available for senior leadership roles in'
+[poc c15 r7 t1] 2.12s new_topic profile | '🐾 Matt is open to connecting. You can reach him on LinkedIn '
+[poc c15 r8 t1] 1.81s new_topic profile | "🐾 I can only discuss Matt's transformation experience. Ask m"
+[lever2 c15 r8 t1] 2.0s  | "🐾 I can only discuss Matt's transformation experience. Ask m"
+[lever2 c15 r9 t1] 2.07s  | "🐾 I can only discuss Matt's transformation experience. Ask m"
+[poc c15 r9 t1] 1.99s new_topic profile | "🐾 I can share the best ways to connect with Matt. He's open "
+[poc c15 r10 t1] 1.83s new_topic profile | '🐾 You can connect with Matt on LinkedIn or reach out directl'
+[lever2 c15 r10 t1] 2.07s  | "🐾 I can only discuss Matt's transformation experience. Ask m"
+[lever2 c16 r1 t1] 4.33s  | "🐾 Here's a snapshot of Matt's professional journey.\n\nMatt ha"
+[poc c16 r1 t1] 2.59s new_topic profile | "🐾 Matt's profile highlights his extensive experience in soft"
+[poc c16 r2 t1] 2.3s new_topic profile | '🐾 Matt has a diverse background, having built a Cloud Innova'
+[lever2 c16 r2 t1] 4.03s  | "🐾 Here's a glimpse into Matt's professional journey.\n\nMatt i"
+[lever2 c16 r3 t1] 3.92s  | "🐾 Here's a glimpse into Matt's professional journey.\n\nMatt h"
+[poc c16 r3 t1] 3.02s new_topic profile | "🐾 Matt's career spans from Software Engineer to Cloud Innova"
+[poc c16 r4 t1] 2.13s new_topic profile | '🐾 Matt Pugmire has a rich background in software engineering'
+[lever2 c16 r4 t1] 4.72s  | "🐾 Here's a snapshot of Matt's career journey and achievement"
+[lever2 c16 r5 t1] 4.08s  | "🐾 Here's a snapshot of Matt's professional journey.\n\nMatt is"
+[poc c16 r5 t1] 2.4s new_topic profile | '🐾 Matt is currently on a sabbatical, building MattGPT and ac'
+[poc c16 r6 t1] 2.67s new_topic profile | '🐾 Matt Pugmire has a rich career trajectory, starting as a S'
+[lever2 c16 r6 t1] 4.2s  | "🐾 Here's a snapshot of Matt's professional journey:\n\nMatt Pu"
+[lever2 c16 r7 t1] 3.64s  | "🐾 Matt's résumé highlights his extensive experience and lead"
+[poc c16 r7 t1] 2.28s new_topic profile | '🐾 Matt has a diverse career arc, having worked as a Software'
+[poc c16 r8 t1] 2.62s new_topic profile | "🐾 Matt's career spans roles from Software Engineer to Cloud "
+[lever2 c16 r8 t1] 4.04s  | "🐾 Here's a snapshot of Matt's professional journey and key a"
+[lever2 c16 r9 t1] 3.96s  | "🐾 Here's a glimpse into Matt's professional journey:\n\nMatt h"
+[poc c16 r9 t1] 3.21s new_topic profile | "🐾 I can share key facts about Matt's professional journey. M"
+[poc c16 r10 t1] 2.59s new_topic profile | "🐾 Matt's profile highlights his extensive experience in exec"
+[lever2 c16 r10 t1] 3.93s  | "🐾 Here's a glimpse into Matt's professional journey.\n\nMatt h"
+[lever2 c17 r1 t2] 3.89s  | "🐾 Here's a great example. At **Fiserv**, Matt faced a signif"
+[poc c17 r1 t2] 4.37s follow_up answer_from_referent | "🐾 Here's a great example.\n\nAt **Fiserv**, Matt transformed t"
+[poc c17 r2 t2] 4.1s follow_up answer_from_referent | "🐾 Here's a great example.\n\nAt **Fiserv**, Matt led the trans"
+[lever2 c17 r2 t2] 4.18s  | "🐾 Here's a great example.\n\nAt **Fiserv**, Matt faced a signi"
+[lever2 c17 r3 t2] 3.96s  | "🐾 Here's how Matt transformed the team at **Fiserv** from a "
+[poc c17 r3 t2] 4.13s follow_up answer_from_referent | "🐾 Here's a great example.\n\nAt **Fiserv**, the white-label ca"
+[poc c17 r4 t2] 3.89s follow_up answer_from_referent | "🐾 Here's a great example of transformation.\n\nAt **Fiserv**, "
+[lever2 c17 r4 t2] 4.1s  | "🐾 Here's a great example.\n\nAt **Fiserv**, the white-label ca"
+[lever2 c17 r5 t2] 4.4s  | "🐾 Here's a great example of Matt's work at **Fiserv**.\n\nThe "
+[poc c17 r5 t2] 3.96s follow_up answer_from_referent | "🐾 Here's a great example. At **Fiserv**, the white-label car"
+[poc c17 r6 t2] 4.85s follow_up answer_from_referent | "🐾 Here's a great example.\n\nAt **Fiserv**, Matt was tasked wi"
+[lever2 c17 r6 t2] 4.04s  | "🐾 Here's a great example.\n\nAt **Fiserv**, Matt faced a signi"
+[lever2 c17 r7 t2] 4.16s  | "🐾 Here's a great example.\n\nAt **Fiserv**, the card portal pr"
+[poc c17 r7 t2] 4.72s follow_up answer_from_referent | "🐾 Here's a great example.\n\nAt **Fiserv**, Matt faced a team "
+[poc c17 r8 t2] 4.48s follow_up answer_from_referent | "🐾 Here's a great example.\n\nAt **Fiserv**, Matt faced a signi"
+[lever2 c17 r8 t2] 3.95s  | "🐾 Here's a great example of how Matt transformed the way tea"
+[lever2 c17 r9 t2] 5.26s  | "🐾 Here's a great example.\n\nAt **Fiserv**, Matt faced the cha"
+[poc c17 r9 t2] 30.83s follow_up answer_from_referent | "🐾 Here's a great example of Matt's approach.\n\nAt **Fiserv**,"
+[poc c17 r10 t2] 4.38s follow_up answer_from_referent | "🐾 Here's a great example.\n\nAt **Fiserv**, Matt faced the cha"
+[lever2 c17 r10 t2] 4.36s  | "🐾 Here's a great example.\n\nAt **Fiserv**, Matt faced a signi"
+health check after 550 turns: top Fiserv 0.439
+[lever2 c18 r1 t1] 3.04s  | "🐾 Here's a great example.\n\nAt **Norfolk Southern**, the chal"
+[lever2 c18 r1 t2] 3.63s  | "🐾 Here's what Matt accomplished with **RBC**.\n\nIn one engage"
+[lever2 c18 r1 t3] 2.5s  | "The stories related to Matt's work with **RBC** do not speci"
+[poc c18 r1 t1] 3.93s new_topic answer_from_referent | "🐾 Here's a great example.\n\nAt **Norfolk Southern**, Matt led"
+[poc c18 r1 t2] 4.58s new_topic search | "🐾 Here's a great example of Matt's work with **RBC**.\n\nDurin"
+[poc c18 r1 t3] 3.01s follow_up answer_from_referent | "🐾 Perfect, here's what I found.\n\nMatt addressed **RBC**'s 18"
+[poc c18 r2 t1] 4.08s new_topic answer_from_referent | "🐾 Here's a great example.\n\nAt **Norfolk Southern**, Matt fac"
+[poc c18 r2 t2] 3.95s new_topic search | '🐾 This is a strong one.\n\nAt **RBC**, Matt tackled several cr'
+[poc c18 r2 t3] 2.99s follow_up answer_from_referent | "Matt's work with **RBC** spanned approximately a year, from "
+[lever2 c18 r2 t1] 3.82s  | "🐾 Here's a great example of Matt's work with **Norfolk South"
+[lever2 c18 r2 t2] 5.07s  | "🐾 Here's a comprehensive look at Matt's work with **RBC**.\n\n"
+[lever2 c18 r2 t3] 2.59s  | "The stories about Matt's work with **RBC** do not specify th"
+[lever2 c18 r3 t1] 3.77s  | "🐾 Here's a great example of Matt's work with **Norfolk South"
+[lever2 c18 r3 t2] 4.11s  | "🐾 Here's a detailed look at Matt's work with **RBC**.\n\nOne o"
+[lever2 c18 r3 t3] 2.84s  | "The stories related to Matt's work with **RBC** do not speci"
+[poc c18 r3 t1] 5.34s new_topic answer_from_referent | '🐾 Found it!\n\nAt **Norfolk Southern**, Matt led a significant'
+[poc c18 r3 t2] 4.4s new_topic search | "🐾 Here's a great example.\n\nAt **RBC**, Matt played a pivotal"
+[poc c18 r3 t3] 4.2s follow_up answer_from_referent | "Matt's work on the **RBC** Day**2Day** Corporate Banking pro"
+[poc c18 r4 t1] 3.8s new_topic answer_from_referent | "🐾 Here's a great example.\n\nAt **Norfolk Southern**, Matt led"
+[poc c18 r4 t2] 5.61s new_topic search | "🐾 Perfect, here's what I found.\n\nAt **RBC**, Matt played a p"
+[poc c18 r4 t3] 3.41s follow_up answer_from_referent | "🐾 Here's what I found.\n\nMatt's work on **RBC**'s modernizati"
+[lever2 c18 r4 t1] 3.42s  | "🐾 Here's a great example of Matt's work with **Norfolk South"
+[lever2 c18 r4 t2] 3.37s  | "🐾 Here's a detailed look at Matt's work with **RBC**.\n\nIn on"
+[lever2 c18 r4 t3] 2.31s  | "The stories about Matt's work with **RBC** do not specify th"
+[lever2 c18 r5 t1] 3.16s  | "🐾 Here's a great example of Matt's work with **Norfolk South"
+[lever2 c18 r5 t2] 3.67s  | "🐾 Perfect, here's what I found about Matt's work with **RBC*"
+[lever2 c18 r5 t3] 2.89s  | "The stories about Matt's work with **RBC** do not specify th"
+[poc c18 r5 t1] 4.1s new_topic answer_from_referent | "🐾 Here's a great example.\n\nAt **Norfolk Southern**, Matt led"
+[poc c18 r5 t2] 4.7s new_topic search | "🐾 Perfect, here's what I found.\n\nAt **RBC**, Matt played a p"
+[poc c18 r5 t3] 2.93s follow_up answer_from_referent | "🐾 On it! \n\nMatt's work with **RBC** took about a year, from "
+[poc c18 r6 t1] 6.86s new_topic answer_from_referent | "🐾 Here's a detailed look at Matt's work with **Norfolk South"
+[poc c18 r6 t2] 4.68s new_topic search | "🐾 Here's a detailed look at Matt's work with **RBC** on seve"
+[poc c18 r6 t3] 2.85s follow_up answer_from_referent | "Matt's work on the data conversion planning for **RBC**'s Da"
+[lever2 c18 r6 t1] 3.41s  | "🐾 Here's a great example from Matt's work with **Norfolk Sou"
+[lever2 c18 r6 t2] 4.42s  | "🐾 Here's a detailed look at Matt's work with **RBC**.\n\nAt **"
+[lever2 c18 r6 t3] 2.81s  | '🐾 Tracking this down...\n\nThe work Matt did with **RBC** invo'
+[lever2 c18 r7 t1] 3.82s  | "🐾 Here's a great example of Matt's work with **Norfolk South"
+[lever2 c18 r7 t2] 3.21s  | "🐾 Here's a detailed look at Matt's work with **RBC**.\n\nMatt "
+[lever2 c18 r7 t3] 2.49s  | "The stories about Matt's work with **RBC** do not specify th"
+[poc c18 r7 t1] 4.32s new_topic answer_from_referent | "🐾 Here's a great example of Matt's work.\n\nAt **Norfolk South"
+[poc c18 r7 t2] 4.12s new_topic search | "🐾 Here's a comprehensive look at Matt's work with **RBC**.\n\n"
+[poc c18 r7 t3] 2.89s follow_up answer_from_referent | "🐾 Tracking this down...\n\nMatt's engagement with **RBC** span"
+[poc c18 r8 t1] 3.85s new_topic answer_from_referent | "🐾 Here's a great example.\n\nAt **Norfolk Southern**, Matt led"
+[poc c18 r8 t2] 4.27s new_topic search | "🐾 Perfect, here's what I found.\n\nAt **RBC**, Matt played a p"
+[poc c18 r8 t3] 2.92s follow_up answer_from_referent | "🐾 Found it!\n\nMatt's work at **RBC** spanned approximately on"
+[lever2 c18 r8 t1] 3.17s  | "🐾 Here's a great example of Matt's work with **Norfolk South"
+[lever2 c18 r8 t2] 3.86s  | "🐾 Here's a detailed look at Matt's work with **RBC**.\n\nMatt "
+[lever2 c18 r8 t3] 2.19s  | "The specific duration of Matt's projects with **RBC** is not"
+[lever2 c18 r9 t1] 2.94s  | "🐾 Here's a great example of Matt's work with **Norfolk South"
+[lever2 c18 r9 t2] 4.21s  | "🐾 Here's a detailed look at Matt's work with **RBC**.\n\nIn on"
+[lever2 c18 r9 t3] 3.1s  | "The stories about Matt's work with **RBC** do not specify th"
+health check after 601 turns: top Fiserv 0.438
+[poc c18 r9 t1] 4.29s new_topic answer_from_referent | '🐾 Found it!\n\nAt **Norfolk Southern**, Matt led a significant'
+[poc c18 r9 t2] 4.24s new_topic search | "🐾 Here's a great example.\n\nAt **RBC**, Matt played a pivotal"
+[poc c18 r9 t3] 4.6s follow_up answer_from_referent | "🐾 On it!\n\nMatt's work with **RBC** spanned approximately one"
+[poc c18 r10 t1] 3.66s new_topic answer_from_referent | "🐾 Here's a great example.\n\nAt **Norfolk Southern**, Matt led"
+[poc c18 r10 t2] 4.4s new_topic search | "🐾 Perfect, here's what I found.\n\nAt **RBC**, Matt played a p"
+[poc c18 r10 t3] 3.51s follow_up answer_from_referent | '🐾 Tracking this down...\n\nMatt worked on the data visibility '
+[lever2 c18 r10 t1] 3.45s  | '🐾 Found it!\n\nMatt worked extensively with **Norfolk Southern'
+[lever2 c18 r10 t2] 4.59s  | "🐾 Here's a great example of Matt's work with **RBC**.\n\nMatt "
+[lever2 c18 r10 t3] 2.36s  | "The stories about Matt's work with **RBC** do not specify th"
+[lever2 x1 r1 t1] 1.85s  | 'Nothing I know about Matt covers that.'
+[poc x1 r1 t1] 2.54s new_topic gap | '🐾 Matt has worked with **Accredited Home Lenders** and **Cen'
+[poc x1 r2 t1] 2.55s new_topic gap | '🐾 Matt has worked with clients in the real estate sector. Sp'
+[lever2 x1 r2 t1] 2.08s  | '🐾 Nothing I know about Matt covers that.'
+[lever2 x1 r3 t1] 1.87s  | "🐾 I couldn't find any stories about Matt working in real est"
+[poc x1 r3 t1] 2.78s new_topic gap | '🐾 Matt has worked with clients in the financial services and'
+[poc x1 r4 t1] 2.6s new_topic gap | '🐾 Matt worked with **Accredited Home Lenders** and **Cendant'
+[lever2 x1 r4 t1] 1.67s  | '🐾 Nothing I know about Matt covers that.'
+[lever2 x1 r5 t1] 1.7s  | '🐾 Nothing I know about Matt covers that.'
+[poc x1 r5 t1] 2.21s new_topic gap | '🐾 Nothing I know about Matt covers that.'
+[lever2 x2 r1 t1] 1.81s  | 'Nothing I know about Matt covers that.'
+[poc x2 r1 t1] 2.65s new_topic gap | '🐾 Nothing I know about Matt covers that.'
+[poc x2 r2 t1] 2.61s new_topic gap | 'Nothing I know about Matt covers that.'
+[lever2 x2 r2 t1] 1.99s  | 'Nothing I know about Matt covers that.'
+[lever2 x2 r3 t1] 1.79s  | 'Nothing I know about Matt covers that.'
+[poc x2 r3 t1] 2.58s new_topic gap | '🐾 Nothing I know about Matt covers that.'
+[poc x2 r4 t1] 2.54s new_topic gap | '🐾 Nothing I know about Matt covers that.'
+[lever2 x2 r4 t1] 1.94s  | 'Nothing I know about Matt covers that.'
+[lever2 x2 r5 t1] 2.39s  | '🐾 Nothing I know about Matt covers that.'
+[poc x2 r5 t1] 2.36s new_topic gap | '🐾 Nothing I know about Matt covers that.'
+[lever2 x3 r1 t1] 4.43s  | '🐾 Matt has indeed worked on trading platforms, particularly '
+[poc x3 r1 t1] 4.3s new_topic search | "🐾 Here's a great example.\n\nMatt worked extensively on the **"
+[poc x3 r2 t1] 4.06s new_topic gap | "🐾 Here's a great example.\n\nMatt worked on the **JP Morgan AC"
+[lever2 x3 r2 t1] 3.17s  | '🐾 Found it!\n\nMatt worked on the **JP Morgan ACCESS** platfor'
+[lever2 x3 r3 t1] 2.96s  | '🐾 Matt has indeed worked on trading platforms, specifically '
+[poc x3 r3 t1] 3.49s new_topic gap | '🐾 Matt has indeed worked on trading platforms, particularly '
+[poc x3 r4 t1] 4.28s new_topic gap | "🐾 Here's a great example.\n\nMatt worked on the **JP Morgan AC"
+[lever2 x3 r4 t1] 3.49s  | '🐾 Matt has indeed worked on trading platforms, specifically '
+[lever2 x3 r5 t1] 3.13s  | "🐾 Here's a relevant example.\n\nMatt worked on the **JP Morgan"
+[poc x3 r5 t1] 4.44s new_topic gap | "🐾 Here's a great example.\n\nMatt worked on the **JP Morgan AC"
+[lever2 x4 r1 t1] 3.99s  | "🐾 Here's a story that touches on financial accountability an"
+[poc x4 r1 t1] 4.98s new_topic synthesize | "🐾 Perfect, here's what I found.\n\nMatt's approach to calculat"
+[poc x4 r2 t1] 4.08s new_topic synthesize | "🐾 Found it!\n\nMatt's approach to calculating ROI focused on a"
+[lever2 x4 r2 t1] 3.3s  | "🐾 Here's a relevant story about how Matt approached financia"
+[lever2 x4 r3 t1] 5.54s  | "🐾 Here's a great example.\n\nIn his role as a Director at **Ac"
+[poc x4 r3 t1] 4.45s new_topic synthesize | "🐾 Perfect, here's what I found.\n\nIn his role at **Accenture*"
+[poc x4 r4 t1] 4.03s new_topic synthesize | "🐾 Perfect, here's what I found.\n\nMatt calculated ROI by focu"
+[lever2 x4 r4 t1] 3.48s  | "🐾 Here's a great example.\n\nIn his role at **Accenture**, Mat"
+[lever2 x4 r5 t1] 3.43s  | "🐾 Here's a great example.\n\nMatt calculated ROI by focusing o"
+[poc x4 r5 t1] 3.67s new_topic synthesize | "🐾 Here's a great example.\n\nAt **Accenture**, Matt focused on"
+health check after 650 turns: top Fiserv 0.439
+[lever2 x5 r1 t1] 2.1s  | "🐾 I couldn't find any stories about Matt working on gaming p"
+[poc x5 r1 t1] 2.28s new_topic gap | '🐾 Nothing I know about Matt covers that.'
+[poc x5 r2 t1] 2.77s new_topic gap | "🐾 I don't have any information about Matt working on gaming "
+[lever2 x5 r2 t1] 2.19s  | '🐾 Nothing I know about Matt covers that.'
+[lever2 x5 r3 t1] 1.95s  | "🐾 Nothing in Matt's stories indicates work on gaming platfor"
+[poc x5 r3 t1] 2.37s new_topic gap | '🐾 Nothing I know about Matt covers that.'
+[poc x5 r4 t1] 2.1s new_topic gap | '🐾 Nothing I know about Matt covers that.'
+[lever2 x5 r4 t1] 1.85s  | 'Nothing I know about Matt covers that.'
+[lever2 x5 r5 t1] 2.21s  | "🐾 I couldn't find any evidence of Matt working on gaming pla"
+[poc x5 r5 t1] 2.46s new_topic gap | '🐾 Nothing I know about Matt covers that.'
+[lever2 x6 r1 t1] 3.03s  | '🐾 Matt has indeed worked on capital markets platforms. At **'
+[poc x6 r1 t1] 4.01s new_topic search | '🐾 Found it!\n\nMatt has worked on capital markets platforms, n'
+[poc x6 r2 t1] 3.62s new_topic search | "🐾 Perfect, here's what I found.\n\nMatt has indeed worked on c"
+[lever2 x6 r2 t1] 3.22s  | '🐾 Matt has indeed worked on capital markets platforms, parti'
+[lever2 x6 r3 t1] 2.98s  | "🐾 Here's what I found.\n\nMatt has worked on capital markets p"
+[poc x6 r3 t1] 3.68s new_topic search | '🐾 Found it!\n\nMatt has indeed worked on capital markets platf'
+[poc x6 r4 t1] 3.64s new_topic search | "🐾 Here's a great example.\n\nMatt worked extensively on JP Mor"
+[lever2 x6 r4 t1] 2.43s  | '🐾 Matt has indeed worked on capital markets platforms, parti'
+[lever2 x6 r5 t1] 2.61s  | "🐾 Here's a great example.\n\nMatt worked on capital markets pl"
+[poc x6 r5 t1] 3.25s new_topic search | '🐾 Found it!\n\nMatt has worked extensively on capital markets '
+health check after: top Fiserv 0.439
+done | live turns: 670 | splits {'hit': 1005}
+packets: 175

@@ -1,0 +1,90 @@
+PASS fixture file matches 609f903
+PASS parser reads conversations 1 to 18 (got [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18])
+PASS conv 1 'Payments experience': 3 turns, 2 expected lines, runs 10 | “Tell me about his payments work.” → “How big was the team?” → “What went wrong?”
+PASS conv 2 'Education': 2 turns, 1 expected lines, runs 5 | “Does he have a CS degree?” → “Why shouldn’t that worry me?”
+PASS conv 3 'Leadership': 2 turns, 1 expected lines, runs 5 | “What’s his leadership style?” → “Give me an example where that didn’t work.”
+PASS conv 4 'Certifications': 3 turns, 2 expected lines, runs 5 | “Is he certified?” → “What about PMP?” → “Are any of those current?”
+PASS conv 5 'Career motivation': 2 turns, 1 expected lines, runs 5 | “Why is he looking?” → “Why should we hire him over someone who stayed in-house?”
+PASS conv 6 'Healthcare experience': 2 turns, 1 expected lines, runs 5 | “Has he worked in healthcare?” → “What did he actually do there?”
+PASS conv 7 'Location': 2 turns, 1 expected lines, runs 10 | “Where is he based?” → “Would he relocate?”
+PASS conv 8 'Failure and growth': 2 turns, 1 expected lines, runs 5 | “Tell me about a time he failed.” → “What did he change afterward?”
+PASS conv 9 'Topic switch': 4 turns, 3 expected lines, runs 5 | “Tell me about his payments work.” → “What’s his leadership style?” → “Give me an example.” → “How big was the team on that project?”
+PASS conv 10 'Accepting an offer': 3 turns, 2 expected lines, runs 10 | “Tell me about his Norfolk Southern work.” → “Sure, the deep dive on that one.” → “How long did that take?”
+PASS conv 11 'Ambiguous follow-up after a topic change': 3 turns, 1 expected lines, runs 10 | “How did Matt scale engineering teams from 4 to 150+ people?” → “Tell me about his payments work” → “how big was his teams”
+PASS conv 12 'Comparing two engagements': 2 turns, 2 expected lines, runs 10 | “Compare his Fiserv and JP Morgan ACCESS work.” → “Which was bigger?”
+PASS conv 13 'Unambiguous follow-up': 2 turns, 1 expected lines, runs 10 | “Tell me about his Fiserv work.” → “How big was the team?”
+PASS conv 14 'Evaluating for a role': 1 turns, 1 expected lines, runs 10 | “I’m hiring a VP of Platform Engineering. Would Matt be a fit?”
+PASS conv 15 'Getting in touch': 1 turns, 1 expected lines, runs 10 | “How do I get in touch with Matt?”
+PASS conv 16 'Résumé': 1 turns, 1 expected lines, runs 10 | “Can I see his résumé?”
+PASS conv 17 'Accepting a seeded offer': 2 turns, 1 expected lines, runs 10 | (seeded answer) → “Sure.”
+PASS conv 18 'Earlier topic competing with the latest': 3 turns, 2 expected lines, runs 10 | “Tell me about his Norfolk Southern work.” → “Tell me about his RBC work.” → “How long did that take?”
+PASS conv 17: first turn is the seeded answer
+PASS conv 17: parsed seed (answer, offer) equals the fixture's text
+PASS conv 17: seeded text identical in both arms
+PASS conv 17: offer text
+PASS echo_star_stories.jsonl matches 6ec9aec
+PASS echo_star_stories_nlp.jsonl matches 6ec9aec
+PASS corpus 124 stories, 46 engagements (want 124, 46)
+PASS answering and planner model gpt-4o
+     SEARCH_TOP_K=25; confidence: CONFIDENCE_HIGH=0.25, CONFIDENCE_LOW=0.2
+PASS worktree base b55f9ce
+PASS lever 2 opener examples found (12)
+PASS every RBC story block the PoC builds has 2012-06 and 2013-06 (6 stories)
+PASS no lever 2 RBC block (_run_search_tool) carries the dates
+
+ALL CHECKS PASS
+health check before: top Fiserv 0.422
+[lever2 x1 r1 t1] 2.36s  | 'Nothing I know about Matt covers that.'
+[poc x1 r1 t1] 3.05s new_topic gap | '🐾 Nothing I know about Matt covers that.'
+[poc x1 r2 t1] 3.13s new_topic gap | '🐾 Matt has worked with clients in the real estate sector thr'
+[lever2 x1 r2 t1] 2.26s  | '🐾 Nothing I know about Matt covers that.'
+[lever2 x1 r3 t1] 1.83s  | '🐾 Nothing I know about Matt covers that.'
+[poc x1 r3 t1] 2.35s new_topic gap | '🐾 Matt has worked with **Accredited Home Lenders** and **Cen'
+[poc x1 r4 t1] 2.52s new_topic gap | '🐾 Matt has worked with clients in the real estate industry t'
+[lever2 x1 r4 t1] 2.08s  | 'Nothing I know about Matt covers that.'
+[lever2 x1 r5 t1] 1.69s  | '🐾 Nothing I know about Matt covers that.'
+[poc x1 r5 t1] 2.14s new_topic gap | '🐾 Nothing I know about Matt covers that.'
+[lever2 x2 r1 t1] 2.24s  | "Nothing in Matt's stories indicates that he has worked with "
+[poc x2 r1 t1] 2.23s new_topic gap | '🐾 Nothing I know about Matt covers that.'
+[poc x2 r2 t1] 2.36s new_topic gap | 'Nothing I know about Matt covers that'
+[lever2 x2 r2 t1] 1.98s  | "Matt's work history does not include any specific mention of"
+[lever2 x2 r3 t1] 1.84s  | 'No, there is no mention of Matt working with SAP in the stor'
+[poc x2 r3 t1] 2.58s new_topic gap | '🐾 Nothing I know about Matt covers that.'
+[poc x2 r4 t1] 2.42s new_topic gap | "🐾 Matt's work history does not include any engagements speci"
+[lever2 x2 r4 t1] 1.98s  | '🐾 Nothing I know about Matt covers that.'
+[lever2 x2 r5 t1] 2.4s  | 'Nothing I know about Matt covers that.'
+[poc x2 r5 t1] 2.09s new_topic gap | '🐾 Nothing I know about Matt covers that.'
+[lever2 x3 r1 t1] 3.33s  | "🐾 Here's a relevant story from Matt's work.\n\nMatt worked on "
+[poc x3 r1 t1] 4.4s new_topic search | "🐾 Here's a great example.\n\nMatt worked on building the payme"
+[poc x3 r2 t1] 3.55s new_topic search | "🐾 Here's a great example.\n\nMatt worked on the **JP Morgan AC"
+[lever2 x3 r2 t1] 3.08s  | '🐾 Matt has indeed worked on trading platforms, particularly '
+[lever2 x3 r3 t1] 2.8s  | "🐾 Here's a relevant experience.\n\nMatt worked on JP Morgan's "
+[poc x3 r3 t1] 3.66s new_topic gap | "🐾 Here's a great example.\n\nMatt worked on the **JP Morgan AC"
+[poc x3 r4 t1] 3.95s new_topic gap | '🐾 Matt has indeed worked on trading platforms. During his ti'
+[lever2 x3 r4 t1] 3.33s  | '🐾 Matt has indeed worked on trading platforms, particularly '
+[lever2 x3 r5 t1] 3.37s  | "🐾 Here's a relevant example from Matt's work.\n\nMatt worked o"
+[poc x3 r5 t1] 3.22s new_topic gap | "🐾 Looking across Matt's portfolio, he has indeed worked on t"
+[lever2 x4 r1 t1] 3.66s  | "🐾 Here's a great example.\n\nIn one of his roles at **Accentur"
+[poc x4 r1 t1] 4.37s new_topic synthesize | "🐾 Perfect, here's what I found.\n\nMatt's approach to calculat"
+[poc x4 r2 t1] 4.72s new_topic synthesize | "🐾 Perfect, here's what I found.\n\nIn his role at **Accenture*"
+[lever2 x4 r2 t1] 3.43s  | "🐾 Here's a story that touches on financial accountability an"
+[lever2 x4 r3 t1] 3.84s  | "🐾 Here's a great example of how Matt approached financial ac"
+[poc x4 r3 t1] 5.06s new_topic synthesize | "🐾 On it!\n\nMatt's approach to calculating ROI involved a comb"
+[poc x4 r4 t1] 4.93s new_topic synthesize | "🐾 Looking across Matt's portfolio, I see clear patterns in h"
+[lever2 x4 r4 t1] 3.55s  | "🐾 Here's a great example.\n\nMatt's approach to calculating RO"
+[lever2 x4 r5 t1] 4.26s  | "🐾 Here's a great example.\n\nIn his role as a Director at **Ac"
+[poc x4 r5 t1] 4.75s new_topic synthesize | "🐾 Looking across Matt's portfolio, I see clear patterns.\n\nMa"
+[lever2 x5 r1 t1] 2.6s  | '🐾 Nothing I know about Matt covers that.'
+[poc x5 r1 t1] 2.43s new_topic gap | '🐾 Nothing I know about Matt covers that.'
+[poc x5 r2 t1] 2.27s new_topic gap | '"Nothing I know about Matt covers that."'
+[lever2 x5 r2 t1] 2.25s  | '"🐾 I can only discuss Matt\'s transformation experience. Ask '
+[lever2 x5 r3 t1] 2.02s  | '🐾 Nothing I know about Matt covers that.'
+[poc x5 r3 t1] 2.58s new_topic gap | '🐾 Nothing I know about Matt covers that.'
+[poc x5 r4 t1] 2.4s new_topic gap | "🐾 I couldn't find any record of Matt working on gaming platf"
+[lever2 x5 r4 t1] 2.11s  | '🐾 Nothing I know about Matt covers that. His work has primar'
+[lever2 x5 r5 t1] 2.25s  | "🐾 I didn't find any stories about Matt working on gaming pla"
+[poc x5 r5 t1] 2.64s new_topic gap | "🐾 I can only discuss Matt's transformation experience. Ask m"
+health check after 50 turns: top Fiserv 0.422
+health check after: top Fiserv 0.422
+done | live turns: 50 | splits {'hit': 75}
+packets: 25

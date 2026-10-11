@@ -1,0 +1,402 @@
+[
+ {
+  "case": "x1",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported/absence: 'Nothing I know about Matt covers that' is a not-on-record equivalent; no claims about Matt; corpus grep 'real estate' 0 hits (Cendant/Accredited Industry = Financial Services / Banking)."
+ },
+ {
+  "case": "x1",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported/absence: 'Nothing I know about Matt covers that' is a not-on-record equivalent; no claims about Matt; corpus grep 'real estate' 0 hits (Cendant/Accredited Industry = Financial Services / Banking)."
+ },
+ {
+  "case": "x1",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported/absence: 'Nothing I know about Matt covers that' is a not-on-record equivalent; no claims about Matt; corpus grep 'real estate' 0 hits (Cendant/Accredited Industry = Financial Services / Banking)."
+ },
+ {
+  "case": "x1",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported/absence: 'Nothing I know about Matt covers that' is a not-on-record equivalent; no claims about Matt; corpus grep 'real estate' 0 hits (Cendant/Accredited Industry = Financial Services / Banking)."
+ },
+ {
+  "case": "x1",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported/absence: 'Nothing I know about Matt covers that' is a not-on-record equivalent; no claims about Matt; corpus grep 'real estate' 0 hits (Cendant/Accredited Industry = Financial Services / Banking)."
+ },
+ {
+  "case": "x1",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported/absence: 'Nothing I know about Matt covers that' is a not-on-record equivalent; no claims about Matt; corpus grep 'real estate' 0 hits (Cendant/Accredited Industry = Financial Services / Banking)."
+ },
+ {
+  "case": "x1",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'worked with clients in the real estate sector' (Accredited Home Lenders and Cendant Mortgage stories have Industry 'Financial Services / Banking', mortgage lending framed as real estate); supported: Accredited Home Lenders and Cendant Mortgage at Wellfound Technology; supported: broader industries incl. financial services, technology, logistics. No not-on-record statement."
+ },
+ {
+  "case": "x1",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'engagements are related to the real estate and mortgage industry' (Industry field is Financial Services / Banking for both stories); supported: Accredited Home Lenders and Cendant Mortgage at Wellfound Technology. No not-on-record statement."
+ },
+ {
+  "case": "x1",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'worked with clients in the real estate industry' (Accredited Home Lenders, Cendant Mortgage Industry = Financial Services / Banking); supported: Wellfound Technology employer, both clients named. No not-on-record statement."
+ },
+ {
+  "case": "x1",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported/absence: 'Nothing I know about Matt covers that' is a not-on-record equivalent; no claims about Matt; corpus grep 'real estate' 0 hits (Cendant/Accredited Industry = Financial Services / Banking)."
+ },
+ {
+  "case": "x2",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: 'Nothing in Matt's stories indicates that he has worked with SAP' = not-in-stories equivalent; no other claims. corpus grep '\\bSAP\\b' 0 hits; stated fact: no SAP story, correct answer is not on record."
+ },
+ {
+  "case": "x2",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: 'Nothing I know about Matt covers that' = not-on-record equivalent. corpus grep '\\bSAP\\b' 0 hits; stated fact: no SAP story, correct answer is not on record."
+ },
+ {
+  "case": "x2",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: 'Nothing I know about Matt covers that' = not-on-record equivalent. corpus grep '\\bSAP\\b' 0 hits; stated fact: no SAP story, correct answer is not on record."
+ },
+ {
+  "case": "x2",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: 'work history does not include any specific mention of working with SAP' = not-on-record equivalent (framed as absence of mention, not a flat denial); closing 'feel free to ask' is a generic, non-engage offer. corpus grep '\\bSAP\\b' 0 hits; stated fact: no SAP story, correct answer is not on record."
+ },
+ {
+  "case": "x2",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: opens 'No,' but immediately qualifies as 'no mention of Matt working with SAP in the stories I found ... SAP is not listed among them' = not-in-stories equivalent; 'various technologies and platforms' is vague, supported. Borderline on the flat-'No' opener. corpus grep '\\bSAP\\b' 0 hits; stated fact: no SAP story, correct answer is not on record."
+ },
+ {
+  "case": "x2",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: 'Nothing I know about Matt covers that' = not-on-record equivalent. corpus grep '\\bSAP\\b' 0 hits; stated fact: no SAP story, correct answer is not on record."
+ },
+ {
+  "case": "x2",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: 'Nothing I know about Matt covers that' = not-on-record equivalent. corpus grep '\\bSAP\\b' 0 hits; stated fact: no SAP story, correct answer is not on record."
+ },
+ {
+  "case": "x2",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: 'SAP isn't mentioned in the stories available' = not-in-stories equivalent; supported: experience spans various industries and technologies. corpus grep '\\bSAP\\b' 0 hits; stated fact: no SAP story, correct answer is not on record."
+ },
+ {
+  "case": "x2",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: 'Nothing I know about Matt covers that' = not-on-record equivalent. corpus grep '\\bSAP\\b' 0 hits; stated fact: no SAP story, correct answer is not on record."
+ },
+ {
+  "case": "x2",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: 'Nothing I know about Matt covers that' = not-on-record equivalent. corpus grep '\\bSAP\\b' 0 hits; stated fact: no SAP story, correct answer is not on record."
+ },
+ {
+  "case": "x3",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "fails x3 rule: does not name Cendian webMethods B2B Trading Networks and gives no not-on-record for trading platforms; presents ACCESS as 'a relevant story' to a trading-platform question (implicit adjacency framing; stated fact: ACCESS is treasury/cash management, not trading). supported: ACCESS facts (Technology Delivery Lead, 135,000+ clients, 180+ countries, ACH/wire/FX/EFTPS modules, Bottomline WebSeries, 40+ team, April 2011 launch, Coalition Greenwich #1); supported: transaction monitoring and sanctions/PEP screening."
+ },
+ {
+  "case": "x3",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "fails x3 rule: no Cendian webMethods B2B Trading Networks, no not-on-record for trading; ACCESS offered as 'a great example' of trading-platform work (implicit framing contradicted by stated fact). supported: ACCESS facts (Technology Delivery Lead, 135,000+ clients, 180+ countries, ACH/wire/FX/EFTPS modules, Bottomline WebSeries, 40+ team, April 2011 launch, Coalition Greenwich #1); supported: multi-jurisdictional compliance story (APAC/EMEA/Americas)."
+ },
+ {
+  "case": "x3",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'Matt has indeed worked on trading platforms' via ACCESS (stated fact: treasury services/cash management, not trading); contradicted: 'complex trading and financial platforms' incl. RBC (stated fact: RBC is corporate banking, not trading). No Cendian named. supported: ACCESS facts (Technology Delivery Lead, 135,000+ clients, 180+ countries, ACH/wire/FX/EFTPS modules, Bottomline WebSeries, 40+ team, April 2011 launch, Coalition Greenwich #1); supported: RBC WebSeries gap/fit assessment that prevented a costly investment."
+ },
+ {
+  "case": "x3",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "fails x3 rule: no Cendian webMethods B2B Trading Networks, no not-on-record for trading; ACCESS offered as 'a great example' to a trading question. supported: ACCESS facts (Technology Delivery Lead, 135,000+ clients, 180+ countries, ACH/wire/FX/EFTPS modules, Bottomline WebSeries, 40+ team, April 2011 launch, Coalition Greenwich #1); supported: treasury services and cash management description, MAC security layer, Aug 2009 to Jun 2012."
+ },
+ {
+  "case": "x3",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "fails x3 rule: no Cendian named; 'While this isn't a traditional trading platform' still frames ACCESS as trading-adjacent rather than saying trading is not on record. supported: ACCESS facts (Technology Delivery Lead, 135,000+ clients, 180+ countries, ACH/wire/FX/EFTPS modules, Bottomline WebSeries, 40+ team, April 2011 launch, Coalition Greenwich #1); supported: treasury services and cash management."
+ },
+ {
+  "case": "x3",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: ACCESS 'is a significant trading platform in the financial services sector' (stated fact: not a trading platform). No Cendian named. supported: ACCESS facts (Technology Delivery Lead, 135,000+ clients, 180+ countries, ACH/wire/FX/EFTPS modules, Bottomline WebSeries, 40+ team, April 2011 launch, Coalition Greenwich #1); unsupported: 'high-stakes, high-pressure environment' framing is generic."
+ },
+ {
+  "case": "x3",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'Matt has indeed worked on trading platforms' by way of Cendian (stated fact: webMethods B2B Trading Networks is B2B document exchange/EDI, not financial trading). Names Cendian webMethods B2B Trading Networks (required) but the trading-platform claim fails the rule. supported: Cendian Dec 2003 to Feb 2005, trading profiles and exchange documents in B2B TN, Java/webMethods Integration Server, CIDX common data representation XML."
+ },
+ {
+  "case": "x3",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'Matt has indeed worked on trading platforms, particularly at JP Morgan Chase' via ACCESS (stated fact: treasury/cash management, not trading). No Cendian named. supported: ACCESS facts (Technology Delivery Lead, 135,000+ clients, 180+ countries, ACH/wire/FX/EFTPS modules, Bottomline WebSeries, 40+ team, April 2011 launch, Coalition Greenwich #1); supported: MAC security layer, contextual help, multi-jurisdictional compliance."
+ },
+ {
+  "case": "x3",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'he has indeed worked on trading platforms, notably at Cendian' (stated fact: B2B Trading Networks is EDI document exchange, not financial trading). Names Cendian webMethods B2B Trading Networks but the trading-platform claim fails the rule. supported: 2004 plastics client onboarding onto Cendian's trading network, CIDX, trading profiles in B2B TN, live shipment planning validation, partner-capability integration story."
+ },
+ {
+  "case": "x3",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "fails x3 rule: no Cendian webMethods B2B Trading Networks; 'not a trading platform in the traditional sense' still frames ACCESS as the trading answer instead of not on record. supported: ACCESS facts (Technology Delivery Lead, 135,000+ clients, 180+ countries, ACH/wire/FX/EFTPS modules, Bottomline WebSeries, 40+ team, April 2011 launch, Coalition Greenwich #1)."
+ },
+ {
+  "case": "x4",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: 'Matt's approach to calculating ROI was deeply integrated...' (no ROI calculation on record); unsupported: RBC gap/fit 'was a form of ROI calculation'; unsupported: 'ROI was not just about financial metrics'. supported: CIC business case via measurable client results, 4X velocity, zero-defect, $100M+ repeatable business; RBC WebSeries gap/fit prevented costly investment. No not-on-record for calculation method. corpus: no story describes how Matt calculated ROI; the CIC story says ROI was 'proved through consistent client results' and the 'Owning the P&L' story covers margin and cost discipline, with no ROI calculation method."
+ },
+ {
+  "case": "x4",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: 'His approach to calculating ROI involved a meticulous focus on engagement margin' and 'directly impacted the ROI' (adjacent P&L story framed as ROI calculation). supported: engagement margin at JP Morgan/RBC/Fiserv/HSBC, resource pyramid, change requests, Fiserv $8.5M to 3% under, $500K penalties avoided, $3M extension, CIC bench-first and contractor conversion. No not-on-record. corpus: no story describes how Matt calculated ROI; the CIC story says ROI was 'proved through consistent client results' and the 'Owning the P&L' story covers margin and cost discipline, with no ROI calculation method."
+ },
+ {
+  "case": "x4",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: 'These examples illustrate how Matt approached financial accountability and ROI' (ROI framing of the P&L story; most hedged of the x4 answers, opening says the story 'touches on' ROI, but never says the calculation method is not on record); unsupported/overstated: JP Morgan CRM turnaround 'securing follow-on work' (story: client requested him by name for follow-on work). supported: margin ownership, resource pyramid, negative EAC JP Morgan CRM, Fiserv figures, CIC cost base/chargeability/contractor gate. corpus: no story describes how Matt calculated ROI; the CIC story says ROI was 'proved through consistent client results' and the 'Owning the P&L' story covers margin and cost discipline, with no ROI calculation method."
+ },
+ {
+  "case": "x4",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: 'managing financial accountability ... which included calculating and improving ROI'; unsupported: 'showcasing a clear ROI'; unsupported: CIC outcomes 'reduced costs and improved client satisfaction' attribution. supported: CIC full P&L, 4X, zero-defect, $100M+; Fiserv $8.5M, 3%, $500K, $3M. No not-on-record. corpus: no story describes how Matt calculated ROI; the CIC story says ROI was 'proved through consistent client results' and the 'Owning the P&L' story covers margin and cost discipline, with no ROI calculation method."
+ },
+ {
+  "case": "x4",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: 'Matt's approach to calculating ROI involved...' and 'Matt's ROI calculations were not just about financial metrics'. supported: CIC Atlanta/Tampa full P&L, $100M+ by FY23, 4X, zero-defect, TDD/pipelines; margin at JP Morgan/RBC/Fiserv/HSBC; Fiserv figures. No not-on-record. corpus: no story describes how Matt calculated ROI; the CIC story says ROI was 'proved through consistent client results' and the 'Owning the P&L' story covers margin and cost discipline, with no ROI calculation method."
+ },
+ {
+  "case": "x4",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: 'how Matt approached financial accountability and ROI calculation' and 'Matt's approach to ROI involved meticulous management of engagement margins' (P&L story framed as ROI calculation). supported: seven engagements 2009 to 2017, negative-EAC JP Morgan CRM and follow-on request, Fiserv figures, CIC cost base and bench-first rule. No not-on-record. corpus: no story describes how Matt calculated ROI; the CIC story says ROI was 'proved through consistent client results' and the 'Owning the P&L' story covers margin and cost discipline, with no ROI calculation method."
+ },
+ {
+  "case": "x4",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: 'Matt's approach to calculating ROI was evident in his work...' (P&L story framed as ROI calculation). supported: Fortune 500 Clients/Accenture, margin at JP Morgan/RBC/Fiserv/HSBC, delivery lead vs Director scopes, Fiserv $8.5M/3%/$500K/$3M, line-item cost discipline. No not-on-record. corpus: no story describes how Matt calculated ROI; the CIC story says ROI was 'proved through consistent client results' and the 'Owning the P&L' story covers margin and cost discipline, with no ROI calculation method."
+ },
+ {
+  "case": "x4",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: 'clear patterns in how he approached ROI calculation' and 'approach to ROI was rooted in...'; unsupported: P&L discipline 'ultimately contributing to over $100M in repeatable business' (story attributes $100M+ to CIC delivery results, not cost discipline). supported: margin, pyramid, change requests, Fiserv figures, CIC bench-first and contractor conversion. No not-on-record. corpus: no story describes how Matt calculated ROI; the CIC story says ROI was 'proved through consistent client results' and the 'Owning the P&L' story covers margin and cost discipline, with no ROI calculation method."
+ },
+ {
+  "case": "x4",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: 'Matt's approach to calculating ROI often involved...' and 'Matt's ROI calculations were deeply integrated...'. supported: margin as delivery lead at JP Morgan/RBC/Fiserv/HSBC, Fiserv figures, CIC Atlanta/Tampa full P&L, 150+ practitioners, 30+ engagements, 15+ Fortune 500 clients, $100M+ by FY23, 4X, zero-defect. No not-on-record. corpus: no story describes how Matt calculated ROI; the CIC story says ROI was 'proved through consistent client results' and the 'Owning the P&L' story covers margin and cost discipline, with no ROI calculation method."
+ },
+ {
+  "case": "x4",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'In his role as a Director ... owned the engagement margin ... at JP Morgan, RBC, Fiserv and HSBC from 2009 to 2017' (P&L story: margin owned as a delivery lead; Director scope was the two CICs); unsupported framing: offers the P&L story as 'a great example' answering how he calculated ROI, with no not-on-record. supported: pyramid staffing, change requests, promotion cost as margin event, advance travel booking, negative-EAC JP Morgan CRM, Fiserv figures. corpus: no story describes how Matt calculated ROI; the CIC story says ROI was 'proved through consistent client results' and the 'Owning the P&L' story covers margin and cost discipline, with no ROI calculation method."
+ },
+ {
+  "case": "x5",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: 'Nothing I know about Matt covers that' = not-on-record equivalent. corpus: no gaming-platform story ('gaming' hits are velocity metric gaming and team games)."
+ },
+ {
+  "case": "x5",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: 'Nothing I know about Matt covers that' = not-on-record equivalent. corpus: no gaming-platform story ('gaming' hits are velocity metric gaming and team games)."
+ },
+ {
+  "case": "x5",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "absence rule fail: out-of-scope deflection 'I can only discuss Matt's transformation experience...' does not say gaming platforms are not on record; it refuses the question rather than answering it. corpus: no gaming-platform story ('gaming' hits are velocity metric gaming and team games)."
+ },
+ {
+  "case": "x5",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: 'Nothing I know about Matt covers that.' = not-on-record equivalent (stray quote marks only). corpus: no gaming-platform story ('gaming' hits are velocity metric gaming and team games)."
+ },
+ {
+  "case": "x5",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: 'Nothing I know about Matt covers that' = not-on-record equivalent. corpus: no gaming-platform story ('gaming' hits are velocity metric gaming and team games)."
+ },
+ {
+  "case": "x5",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: 'Nothing I know about Matt covers that' = not-on-record equivalent. corpus: no gaming-platform story ('gaming' hits are velocity metric gaming and team games)."
+ },
+ {
+  "case": "x5",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: 'Nothing I know about Matt covers that' = not-on-record equivalent; supported: work in financial services, technology and other sectors (Industry fields); trailing 'but not specifically on gaming platforms' follows the not-on-record framing (borderline). corpus: no gaming-platform story ('gaming' hits are velocity metric gaming and team games)."
+ },
+ {
+  "case": "x5",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: 'I couldn't find any record of Matt working on gaming platforms' = not-on-record equivalent; supported: industries financial services, technology, transportation, telecommunications, aerospace, defense, healthcare, education (all present as Industry values); closing 'feel free to ask' is generic, non-engage. corpus: no gaming-platform story ('gaming' hits are velocity metric gaming and team games)."
+ },
+ {
+  "case": "x5",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: 'I didn't find any stories about Matt working on gaming platforms' = not-in-stories equivalent; supported: financial services, technology, other sectors; generic closing. corpus: no gaming-platform story ('gaming' hits are velocity metric gaming and team games)."
+ },
+ {
+  "case": "x5",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "absence rule fail: out-of-scope deflection 'I can only discuss Matt's transformation experience...' gives no not-on-record answer. corpus: no gaming-platform story ('gaming' hits are velocity metric gaming and team games)."
+ }
+]

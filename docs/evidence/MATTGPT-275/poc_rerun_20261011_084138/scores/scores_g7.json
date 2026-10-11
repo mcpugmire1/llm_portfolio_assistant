@@ -1,0 +1,482 @@
+[
+ {
+  "case": "x1",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Absence stated in not-on-record form ('Nothing I know about Matt covers that'); no claims about Matt; corpus and profile hold no real estate story (grep 'real estate' = 0; Cendant Mortgage and Accredited Home Lenders Industry = Financial Services / Banking)."
+ },
+ {
+  "case": "x1",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Absence stated in not-on-record form ('Nothing I know about Matt covers that'); no claims about Matt; corpus and profile hold no real estate story (grep 'real estate' = 0; Cendant Mortgage and Accredited Home Lenders Industry = Financial Services / Banking)."
+ },
+ {
+  "case": "x1",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Absence stated ('I couldn't find any stories about Matt working in real estate'), equivalent to not on record; no claims about Matt; no real estate story in corpus (mortgage stories Industry = Financial Services / Banking)."
+ },
+ {
+  "case": "x1",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Absence stated in not-on-record form ('Nothing I know about Matt covers that'); no claims about Matt; corpus and profile hold no real estate story (grep 'real estate' = 0; Cendant Mortgage and Accredited Home Lenders Industry = Financial Services / Banking)."
+ },
+ {
+  "case": "x1",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Absence stated in not-on-record form ('Nothing I know about Matt covers that'); no claims about Matt; corpus and profile hold no real estate story (grep 'real estate' = 0; Cendant Mortgage and Accredited Home Lenders Industry = Financial Services / Banking)."
+ },
+ {
+  "case": "x1",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'includes real estate-related projects' (Accredited Home Lenders and Cendant Mortgage stories have Industry 'Financial Services / Banking'); supported: worked with Accredited Home Lenders and Cendant Mortgage at Wellfound Technology; supported: Financial Services and Banking industry."
+ },
+ {
+  "case": "x1",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'worked with clients in the real estate sector' (both mortgage stories Industry 'Financial Services / Banking'); supported: Accredited Home Lenders and Cendant Mortgage via Wellfound Technology; supported: 35 Financial Services / Banking stories (Industry count = 35)."
+ },
+ {
+  "case": "x1",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: frames Accredited Home Lenders and Cendant Mortgage as 'related to real estate through mortgage services' (Industry 'Financial Services / Banking'; rubric treats framing mortgage work as real estate as a claim); supported: the two clients, financial services and banking; partial absence statement ('no specific record ... real estate development or property management') does not cure the framing."
+ },
+ {
+  "case": "x1",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'engagements involved the real estate and mortgage sectors' (Industry 'Financial Services / Banking'); contradicted: 'specific details about the projects or outcomes ... aren't provided in the available stories' (both stories hold full STAR detail, e.g. Cendant mainframe underwriting replacement, Accredited HR portal); unsupported: 'contributed to technology solutions' as real estate work; supported: the two clients at Wellfound Technology."
+ },
+ {
+  "case": "x1",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Absence stated in not-on-record form ('Nothing I know about Matt covers that'); no claims about Matt; corpus and profile hold no real estate story (grep 'real estate' = 0; Cendant Mortgage and Accredited Home Lenders Industry = Financial Services / Banking)."
+ },
+ {
+  "case": "x2",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Absence stated in not-on-record form ('Nothing I know about Matt covers that'); no claims about Matt; supported: stated fact, no SAP story (grep -w SAP over corpus and profile returned nothing)."
+ },
+ {
+  "case": "x2",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Absence stated in not-on-record form ('Nothing I know about Matt covers that'); no claims about Matt; supported: stated fact, no SAP story (grep -w SAP over corpus and profile returned nothing)."
+ },
+ {
+  "case": "x2",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Absence stated in not-on-record form ('Nothing I know about Matt covers that'); no claims about Matt; supported: stated fact, no SAP story (grep -w SAP over corpus and profile returned nothing)."
+ },
+ {
+  "case": "x2",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Absence stated in not-on-record form ('Nothing I know about Matt covers that'); no claims about Matt; supported: stated fact, no SAP story (grep -w SAP over corpus and profile returned nothing)."
+ },
+ {
+  "case": "x2",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Absence stated in not-on-record form ('Nothing I know about Matt covers that'); no claims about Matt; supported: stated fact, no SAP story (grep -w SAP over corpus and profile returned nothing)."
+ },
+ {
+  "case": "x2",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Absence stated in not-on-record form ('Nothing I know about Matt covers that'); no claims about Matt; supported: stated fact, no SAP story (grep -w SAP over corpus and profile returned nothing)."
+ },
+ {
+  "case": "x2",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Absence stated in not-on-record form ('Nothing I know about Matt covers that'); no claims about Matt; supported: stated fact, no SAP story (grep -w SAP over corpus and profile returned nothing)."
+ },
+ {
+  "case": "x2",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Absence stated in not-on-record form ('Nothing I know about Matt covers that'); no claims about Matt; supported: stated fact, no SAP story (grep -w SAP over corpus and profile returned nothing)."
+ },
+ {
+  "case": "x2",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Absence stated in not-on-record form ('Nothing I know about Matt covers that'); no claims about Matt; supported: stated fact, no SAP story (grep -w SAP over corpus and profile returned nothing)."
+ },
+ {
+  "case": "x2",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Absence stated in not-on-record form ('Nothing I know about Matt covers that'); no claims about Matt; supported: stated fact, no SAP story (grep -w SAP over corpus and profile returned nothing)."
+ },
+ {
+  "case": "x3",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted (stated fact: no trading-platform work on record; ACCESS is capital markets, not a trading platform): 'Matt has indeed worked on trading platforms'; contradicted: ACCESS presented as trading-platform work; supported: Cendian webMethods B2B Trading Networks trading profiles, EDI/XML/flat file exchange (named, but trading-platform claim fails rule 3); supported: ACCESS payment modules ACH/wire/FX/tax; unsupported: 'integrating and managing complex logistics and financial systems' as trading platforms."
+ },
+ {
+  "case": "x3",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted (stated fact: no trading-platform work on record; ACCESS is capital markets, not a trading platform): frames JP Morgan ACCESS as 'a great example' of trading platforms; does not name Cendian webMethods B2B Trading Networks; supported: ACCESS facts (135,000+ clients, 180+ countries, Technology Delivery Lead, 40+ blended team, Bottomline, April 2011 launch, Coalition Greenwich #1)."
+ },
+ {
+  "case": "x3",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted (stated fact: no trading-platform work on record; ACCESS is capital markets, not a trading platform): frames JP Morgan ACCESS as 'a great example' of trading platforms; no Cendian webMethods B2B Trading Networks; supported: ACCESS facts (135,000+, 180+, 40+, Mumbai/Bangalore, WebSeries, MAC layer, April 2011, Coalition Greenwich) and multi-jurisdiction compliance story."
+ },
+ {
+  "case": "x3",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted (stated fact: no trading-platform work on record; ACCESS is capital markets, not a trading platform): presents JP Morgan ACCESS as the found trading-platform example ('Found it!'); no Cendian webMethods B2B Trading Networks; supported: ACCESS facts (WebSeries Global Cash Management, 135,000+, 180+, 40+, April 2011, Coalition Greenwich)."
+ },
+ {
+  "case": "x3",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted (stated fact: no trading-platform work on record; ACCESS is capital markets, not a trading platform): 'Matt has indeed worked on trading platforms' via JP Morgan ACCESS; unsupported: RBC Day2Day WebSeries assessment framed as trading-platform work; no Cendian; supported: ACCESS facts, RBC gap/fit assessment facts."
+ },
+ {
+  "case": "x3",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted (stated fact: no trading-platform work on record; ACCESS is capital markets, not a trading platform): 'Matt has indeed worked on trading platforms, particularly ... Cendian' (Cendian's work is a B2B trading network for logistics, Industry 'Transportation & Logistics', not a trading platform); supported: Cendian webMethods B2B Trading Networks, 300+ carriers, 80 countries, CIDX canonical standards, plastics client onboarding. Names Cendian correctly but the trading-platform claim fails rule 3."
+ },
+ {
+  "case": "x3",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted (stated fact: no trading-platform work on record; ACCESS is capital markets, not a trading platform): 'Matt has indeed worked on trading platforms' with JP Morgan ACCESS as the first instance; supported: Cendian webMethods B2B Trading Networks and CIDX (named, but rule 3 requires no trading-platform claim); supported: ACCESS facts."
+ },
+ {
+  "case": "x3",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted (stated fact: no trading-platform work on record; ACCESS is capital markets, not a trading platform): 'showcases Matt's experience with trading platforms in the financial services sector' about JP Morgan ACCESS; no Cendian; supported: ACCESS facts (WebSeries, 135,000+, 180+, 40+, MAC layer, trade finance groundwork, Coalition Greenwich, time at Bottomline offices)."
+ },
+ {
+  "case": "x3",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted (stated fact: no trading-platform work on record; ACCESS is capital markets, not a trading platform): frames JP Morgan ACCESS as 'a relevant example' of trading platforms; no Cendian; supported: ACCESS facts (Technology Delivery Lead, payment modules, 135,000+, 180+, Coalition Greenwich)."
+ },
+ {
+  "case": "x3",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted (stated fact: no trading-platform work on record; ACCESS is capital markets, not a trading platform): frames JP Morgan ACCESS as 'a great example' of trading platforms; no Cendian; supported: ACCESS facts (40+, Mumbai/Bangalore, MAC layer, transaction monitoring screening trillions of daily transactions, April 2011, 2009-08 to 2012-06)."
+ },
+ {
+  "case": "x4",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: no story or profile entry records how Matt calculated ROI (corpus ROI mentions are only CIC 'proved ROI through client results' and 'making ROI undeniable'); no not-on-record statement for the method asked about; unsupported: 'Matt's approach to calculating ROI' and 'illustrate how Matt calculated ROI'; supported: CIC 4X velocity, zero-defect deployments, $100M+ repeatable business, 15-35% cost reductions, two-CIC P&L, Fiserv 3% under budget and $3M extension."
+ },
+ {
+  "case": "x4",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: no story or profile entry records how Matt calculated ROI (corpus ROI mentions are only CIC 'proved ROI through client results' and 'making ROI undeniable'); no not-on-record statement for the method asked about; unsupported: 'directly impacted the ROI of the engagements he led' and framing the P&L story as touching on ROI; supported: engagement margin across JP Morgan/RBC/Fiserv/HSBC, JP Morgan CRM negative EAC under CEO-level visibility, follow-on work by name, Fiserv $8.5M/3%/$500K/$3M, contractor spend at two CICs."
+ },
+ {
+  "case": "x4",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: no story or profile entry records how Matt calculated ROI (corpus ROI mentions are only CIC 'proved ROI through client results' and 'making ROI undeniable'); no not-on-record statement for the method asked about; contradicted: attributes Fiserv's 3% under budget, $500K penalties avoided and $3M extension to the JP Morgan program (P&L story ties those figures to Fiserv); supported: CIC P&L, 4X velocity, zero-defect, $100M+, JP Morgan negative EAC under CEO-level visibility."
+ },
+ {
+  "case": "x4",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: no story or profile entry records how Matt calculated ROI (corpus ROI mentions are only CIC 'proved ROI through client results' and 'making ROI undeniable'); no not-on-record statement for the method asked about; unsupported: 'includes elements of ROI calculation'; supported: engagement margin across JP Morgan/RBC/Fiserv/HSBC, change requests for scope creep, JP Morgan negative EAC turnaround and request by name, Fiserv $8.5M/3%/$500K/$3M, two-CIC cost base, bench-first and contractor conversion."
+ },
+ {
+  "case": "x4",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: no story or profile entry records how Matt calculated ROI (corpus ROI mentions are only CIC 'proved ROI through client results' and 'making ROI undeniable'); no not-on-record statement for the method asked about; unsupported: 'Matt's approach to calculating ROI involved several financial management strategies'; supported: Director, engagement margin, resource pyramid, change requests, promotion cost as margin event, contingency release, Fiserv $8.5M/3%/$500K/$3M."
+ },
+ {
+  "case": "x4",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: no story or profile entry records how Matt calculated ROI (corpus ROI mentions are only CIC 'proved ROI through client results' and 'making ROI undeniable'); no not-on-record statement for the method asked about; unsupported: 'Matt calculated ROI by focusing on both the financial and operational impacts'; unsupported: Fiserv recovery 'showcasing a direct financial ROI'; supported: CICs in Atlanta and Tampa, 4X velocity, zero-defect, $100M+ by FY23, Fiserv figures, 15-35% cost reductions."
+ },
+ {
+  "case": "x4",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: no story or profile entry records how Matt calculated ROI (corpus ROI mentions are only CIC 'proved ROI through client results' and 'making ROI undeniable'); no not-on-record statement for the method asked about; unsupported: 'Matt calculated ROI by focusing on measurable outcomes'; contradicted: JP Morgan program 'recovered ... to 3% under budget, avoiding $500K in penalties and securing a $3M contract extension' (those are Fiserv figures); supported: CIC 4X velocity, zero-defect, $100M+, JP Morgan CEO-level visibility."
+ },
+ {
+  "case": "x4",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: no story or profile entry records how Matt calculated ROI (corpus ROI mentions are only CIC 'proved ROI through client results' and 'making ROI undeniable'); no not-on-record statement for the method asked about; unsupported: 'financial accountability ... which included calculating ROI'; unsupported: 'delivered measurable financial benefits to the clients'; supported: resource pyramid onshore to offshore/nearshore, JP Morgan CRM negative EAC turnaround, Fiserv $8.5M/3%/$500K/$3M."
+ },
+ {
+  "case": "x4",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: no story or profile entry records how Matt calculated ROI (corpus ROI mentions are only CIC 'proved ROI through client results' and 'making ROI undeniable'); no not-on-record statement for the method asked about; unsupported: 'Matt calculated ROI by focusing on financial accountability and resource management'; supported: engagement margin across JP Morgan/RBC/Fiserv/HSBC, resource pyramid, Fiserv seven months in, 3%, $255K preserved margin, $500K, $3M, travel booking and group hotel rates."
+ },
+ {
+  "case": "x4",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: no story or profile entry records how Matt calculated ROI (corpus ROI mentions are only CIC 'proved ROI through client results' and 'making ROI undeniable'); no not-on-record statement for the method asked about; unsupported: 'Matt focused on calculating ROI by demonstrating measurable client results' (corpus says CIC proved ROI through client results, not how ROI was calculated); supported: CIC 4X velocity, 10-person vs 20-person teams, zero-defect, 16-18 week MVP, premium pricing on proven ROI, $100M+ by FY23."
+ },
+ {
+  "case": "x5",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Absence stated ('Nothing I know about Matt covers that'); no claims about Matt; no gaming-platform story in corpus or profile (only 'gaming' hits are velocity-metric gaming and team-building games in Cross Industry stories)."
+ },
+ {
+  "case": "x5",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Absence stated ('I couldn't find any stories about Matt working on gaming platforms'); supported: experience spans financial services, technology, logistics (Industry fields); no gaming-platform story in corpus or profile (only 'gaming' hits are velocity-metric gaming and team-building games in Cross Industry stories)."
+ },
+ {
+  "case": "x5",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Absence stated ('I don't have any information about Matt working on gaming platforms'), equivalent to not on record; supported: financial services, technology, logistics; digital banking platforms, payment systems, cloud innovation centers; no gaming-platform story in corpus or profile (only 'gaming' hits are velocity-metric gaming and team-building games in Cross Industry stories)."
+ },
+ {
+  "case": "x5",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Absence stated ('Nothing I know about Matt covers that'); no claims; no gaming-platform story in corpus or profile (only 'gaming' hits are velocity-metric gaming and team-building games in Cross Industry stories)."
+ },
+ {
+  "case": "x5",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Absence stated ('Nothing in Matt's stories indicates work on gaming platforms'); supported: sector list matches corpus Industry values (Financial Services, Technology, Transportation, Telecommunications, Aerospace, Healthcare, Education); no gaming-platform story in corpus or profile (only 'gaming' hits are velocity-metric gaming and team-building games in Cross Industry stories)."
+ },
+ {
+  "case": "x5",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Absence stated ('Nothing I know about Matt covers that'); no claims; no gaming-platform story in corpus or profile (only 'gaming' hits are velocity-metric gaming and team-building games in Cross Industry stories)."
+ },
+ {
+  "case": "x5",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Absence stated ('Nothing I know about Matt covers that'); no claims; no gaming-platform story in corpus or profile (only 'gaming' hits are velocity-metric gaming and team-building games in Cross Industry stories)."
+ },
+ {
+  "case": "x5",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Absence stated ('Nothing I know about Matt covers that'); no claims; no gaming-platform story in corpus or profile (only 'gaming' hits are velocity-metric gaming and team-building games in Cross Industry stories)."
+ },
+ {
+  "case": "x5",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Absence stated ('I couldn't find any evidence of Matt working on gaming platforms'); supported: financial services, technology strategy, platform work for JP Morgan Chase, Fiserv, American Express (all clients in corpus); no gaming-platform story in corpus or profile (only 'gaming' hits are velocity-metric gaming and team-building games in Cross Industry stories)."
+ },
+ {
+  "case": "x5",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Absence stated ('Nothing I know about Matt covers that'); no claims; no gaming-platform story in corpus or profile (only 'gaming' hits are velocity-metric gaming and team-building games in Cross Industry stories)."
+ },
+ {
+  "case": "x6",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: RBC Day2Day Corporate Banking assessment framed as capital-markets platform work (no source labels RBC Day2Day capital markets; stated fact covers ACCESS only), explicit in 'These engagements highlight his experience ... specifically in capital markets platforms'; supported: ACCESS is capital markets (stated fact); ACCESS facts (135,000+ clients, 180+ countries, WebSeries, payment modules ACH/wire/FX/EFTPS, Coalition Greenwich #1, trade finance groundwork); supported: RBC gap/fit facts."
+ },
+ {
+  "case": "x6",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: RBC Day2Day Corporate Banking assessment framed as capital-markets platform work (no source labels RBC Day2Day capital markets; stated fact covers ACCESS only) ('Additionally' under 'has indeed worked on capital markets platforms'); supported: ACCESS is capital markets (stated fact); ACCESS facts (135,000+ clients, 180+ countries, WebSeries, payment modules ACH/wire/FX/EFTPS, April 2011, Coalition Greenwich); supported: RBC WebSeries gap/fit, costly investment prevented, resources redirected."
+ },
+ {
+  "case": "x6",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: RBC Day2Day Corporate Banking assessment framed as capital-markets platform work (no source labels RBC Day2Day capital markets; stated fact covers ACCESS only) ('Additionally' under 'has indeed worked on capital markets platforms'); supported: ACCESS is capital markets (stated fact); ACCESS facts (135,000+ clients, 180+ countries, WebSeries, payment modules ACH/wire/FX/EFTPS, consolidated regional systems, Coalition Greenwich); supported: RBC assessment facts."
+ },
+ {
+  "case": "x6",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: ACCESS is capital markets (stated fact); ACCESS facts (135,000+ clients, 180+ countries, WebSeries, payment modules ACH/wire/FX/EFTPS, consolidated regional systems, security controls); supported: multi-jurisdictional compliance rollout across APAC/EMEA/Americas is the ACCESS Next Generation project (data visibility, entitlements, single global platform architecture). No contradicted or unsupported claims."
+ },
+ {
+  "case": "x6",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: RBC Day2Day Corporate Banking assessment framed as capital-markets platform work (no source labels RBC Day2Day capital markets; stated fact covers ACCESS only) ('Additionally' under 'has indeed worked on capital markets platforms'); supported: ACCESS is capital markets (stated fact); ACCESS facts (135,000+ clients, 180+ countries, WebSeries, payment modules ACH/wire/FX/EFTPS, Coalition Greenwich); supported: RBC assessment facts."
+ },
+ {
+  "case": "x6",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: RBC Day2Day Corporate Banking assessment framed as capital-markets platform work (no source labels RBC Day2Day capital markets; stated fact covers ACCESS only) ('Additionally' under 'has worked on capital markets platforms'); supported: ACCESS is capital markets (stated fact); ACCESS facts (135,000+ clients, 180+ countries, WebSeries, payment modules ACH/wire/FX/EFTPS, MAC layer, real-time global reporting, Coalition Greenwich); supported: RBC assessment facts."
+ },
+ {
+  "case": "x6",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: RBC Day2Day Corporate Banking assessment framed as capital-markets platform work (no source labels RBC Day2Day capital markets; stated fact covers ACCESS only), explicit in 'These engagements reflect Matt's deep involvement in capital markets platforms'; supported: ACCESS is capital markets (stated fact); ACCESS facts (135,000+ clients, 180+ countries, WebSeries, payment modules ACH/wire/FX/EFTPS, 40+ blended team, international compliance); supported: RBC assessment facts."
+ },
+ {
+  "case": "x6",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: ACCESS is capital markets (stated fact); ACCESS facts (135,000+ clients, 180+ countries, WebSeries, payment modules ACH/wire/FX/EFTPS, Bottomline, consolidated regional systems, Coalition Greenwich #1). No contradicted or unsupported claims."
+ },
+ {
+  "case": "x6",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: ACCESS is capital markets (stated fact); ACCESS facts (135,000+ clients, 180+ countries, WebSeries, payment modules ACH/wire/FX/EFTPS); supported: multi-jurisdictional compliance story on ACCESS (APAC/EMEA/Americas, regulatory requirements to configuration constraints, regional data visibility framework, launch without regulatory blockers, single global architecture, avoided separate regional instances). No contradicted or unsupported claims."
+ },
+ {
+  "case": "x6",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: ACCESS is capital markets (stated fact); ACCESS facts (135,000+ clients, 180+ countries, WebSeries, payment modules ACH/wire/FX/EFTPS, security controls, compliance validation, 40+ blended team, corporate treasurer experience, flagship corporate digital channel). No contradicted or unsupported claims."
+ }
+]

@@ -1,0 +1,642 @@
+[
+ {
+  "case": "c17",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Delivers the offered waterfall-to-2-week-sprints thread from the Fiserv agile story with facts that check, but has no closing; conversation 17 requires one (D9)."
+ },
+ {
+  "case": "c17",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Delivers the offered Fiserv sprint-transition thread from the agile story (45-person team, 3 months, 47 ACs, 50+ stakeholders); closes with an ADA-compliance offer the ADA story supports."
+ },
+ {
+  "case": "c17",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Delivers the offered thread, but credits the agile shift with the 3%-under-budget, zero-defect result (recovery story, not linked causally) and has no required closing."
+ },
+ {
+  "case": "c17",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Delivers the offered waterfall-to-2-week-sprints thread from the Fiserv agile story with facts that check, but has no closing; conversation 17 requires one (D9)."
+ },
+ {
+  "case": "c17",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Delivers the offered thread, but claims the agile transition enabled the Q4 recovery and $500K penalty avoidance (the recovery story credits re-prioritization and team alignment), and has no required closing."
+ },
+ {
+  "case": "c17",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Delivers the offered thread from the agile story, facts check (7 AM/11 PM CST syncs, 47 ACs, 3 months); closes with an ADA-compliance offer the ADA story supports."
+ },
+ {
+  "case": "c17",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Delivers the offered waterfall-to-2-week-sprints thread from the Fiserv agile story with facts that check, but has no closing; conversation 17 requires one (D9)."
+ },
+ {
+  "case": "c17",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Delivers the offered waterfall-to-2-week-sprints thread from the Fiserv agile story with facts that check, but has no closing; conversation 17 requires one (D9)."
+ },
+ {
+  "case": "c17",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Delivers the offered waterfall-to-2-week-sprints thread from the Fiserv agile story with facts that check, but has no closing; conversation 17 requires one (D9)."
+ },
+ {
+  "case": "c17",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Delivers the offered thread from the agile story, facts check; closes with an ADA-compliance-across-brands offer the ADA story supports."
+ },
+ {
+  "case": "c17",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Delivers the offered waterfall-to-2-week-sprints thread from the Fiserv agile story with facts that check, but has no closing; conversation 17 requires one (D9)."
+ },
+ {
+  "case": "c17",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Delivers the offered waterfall-to-2-week-sprints thread from the Fiserv agile story with facts that check, but has no closing; conversation 17 requires one (D9)."
+ },
+ {
+  "case": "c17",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Delivers the offered waterfall-to-2-week-sprints thread from the Fiserv agile story with facts that check, but has no closing; conversation 17 requires one (D9)."
+ },
+ {
+  "case": "c17",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Delivers the offered thread, but credits the agile shift with 3% under budget, zero critical defects, $45M first month and 99.97% uptime (recovery story results, not linked causally) and has no required closing."
+ },
+ {
+  "case": "c17",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Delivers the offered waterfall-to-2-week-sprints thread from the Fiserv agile story with facts that check, but has no closing; conversation 17 requires one (D9)."
+ },
+ {
+  "case": "c17",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Delivers the offered thread, but ties zero critical defects at launch to the agile transformation without story support, and has no required closing."
+ },
+ {
+  "case": "c17",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Delivers the offered waterfall-to-2-week-sprints thread from the Fiserv agile story with facts that check, but has no closing; conversation 17 requires one (D9)."
+ },
+ {
+  "case": "c17",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Delivers the offered thread, but claims the transformation was crucial to avoiding contract cancellation (not in the story) and has no required closing."
+ },
+ {
+  "case": "c17",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Delivers the offered thread from the agile story (7 AM/11 PM CST syncs, 3 months, 50+ stakeholders, screen-reader audits in DoD); closes with a compliance offer the story supports (PMO/compliance resistance, JIRA as system of record)."
+ },
+ {
+  "case": "c17",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Delivers the offered waterfall-to-2-week-sprints thread from the Fiserv agile story with facts that check, but has no closing; conversation 17 requires one (D9)."
+ },
+ {
+  "case": "c18",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern answered from the NS stories (cloud-native modernization, CIC Academy 6 months, microservices/quality-crisis); facts check, no closing or a supported one."
+ },
+ {
+  "case": "c18",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern answered from the NS stories; facts and dates (2019-11 to 2023-09) check; closing offer about cultural transformation/practices is supported by the NS stories."
+ },
+ {
+  "case": "c18",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern answered from the NS stories (cloud-native modernization, CIC Academy 6 months, microservices/quality-crisis); facts check, no closing or a supported one."
+ },
+ {
+  "case": "c18",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern answered from the NS stories; facts and dates (2019-11 to 2023-09) check; closing offer about cultural transformation/practices is supported by the NS stories."
+ },
+ {
+  "case": "c18",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern answered from the modernization, quality-crisis and Making It Stick stories; facts check; closing on cloud-native practices is supported by the Unifying Teams story."
+ },
+ {
+  "case": "c18",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern answered from the NS stories; facts and dates (2019-11 to 2023-09) check; closing offer about cultural transformation/practices is supported by the NS stories."
+ },
+ {
+  "case": "c18",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern answered from the NS stories (cloud-native modernization, CIC Academy 6 months, microservices/quality-crisis); facts check, no closing or a supported one."
+ },
+ {
+  "case": "c18",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern answered from the NS stories; facts and dates (2019-11 to 2023-09) check; closing offer about cultural transformation/practices is supported by the NS stories."
+ },
+ {
+  "case": "c18",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern answered from the NS stories (cloud-native modernization, CIC Academy 6 months, microservices/quality-crisis); facts check, no closing or a supported one."
+ },
+ {
+  "case": "c18",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern answered from the modernization story (hybrid SQL/NoSQL, ACLs, async messaging); facts check; closing about practices sticking is supported by the Making It Stick story, though 'post-modernization' framing is loose."
+ },
+ {
+  "case": "c18",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern answered from the NS stories (cloud-native modernization, CIC Academy 6 months, microservices/quality-crisis); facts check, no closing or a supported one."
+ },
+ {
+  "case": "c18",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern answered from the NS stories (modernization, quality crisis, pairing/test-first, microservices, 2019 to 2023); facts check. The supported closing offer is printed twice, which is a rendering defect but not inappropriate or unsupported."
+ },
+ {
+  "case": "c18",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern answered from the NS stories (cloud-native modernization, CIC Academy 6 months, microservices/quality-crisis); facts check, no closing or a supported one."
+ },
+ {
+  "case": "c18",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern answered from the NS stories; facts and dates (2019-11 to 2023-09) check; closing offer about cultural transformation/practices is supported by the NS stories."
+ },
+ {
+  "case": "c18",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern answered from the NS stories (cloud-native modernization, CIC Academy 6 months, microservices/quality-crisis); facts check, no closing or a supported one."
+ },
+ {
+  "case": "c18",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern answered from the NS stories; facts and dates (2019-11 to 2023-09) check; closing offer about cultural transformation/practices is supported by the NS stories."
+ },
+ {
+  "case": "c18",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern answered from the NS stories (cloud-native modernization, CIC Academy 6 months, microservices/quality-crisis); facts check, no closing or a supported one."
+ },
+ {
+  "case": "c18",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern answered from the NS stories; facts and dates (2019-11 to 2023-09) check; closing offer about cultural transformation/practices is supported by the NS stories."
+ },
+ {
+  "case": "c18",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern answered from the NS stories (cloud-native modernization, CIC Academy 6 months, microservices/quality-crisis); facts check, no closing or a supported one."
+ },
+ {
+  "case": "c18",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern answered from the NS stories; facts and dates (2019-11 to 2023-09) check; closing offer about cultural transformation/practices is supported by the NS stories."
+ },
+ {
+  "case": "c18",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New topic answered from the RBC stories (mobile readiness, 180-day visibility, WebSeries assessment, data conversion, cross-border) with no Norfolk Southern carry-over; facts check."
+ },
+ {
+  "case": "c18",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "New topic answered from the RBC stories with no Norfolk Southern carry-over; facts check (dates June 2012 to June 2013 where stated); any closing offer is RBC-related and supported by an RBC story."
+ },
+ {
+  "case": "c18",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New topic answered from the RBC stories (mobile readiness, 180-day visibility, WebSeries assessment, data conversion, cross-border) with no Norfolk Southern carry-over; facts check."
+ },
+ {
+  "case": "c18",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "New topic answered from the RBC stories with no Norfolk Southern carry-over; facts check (dates June 2012 to June 2013 where stated); any closing offer is RBC-related and supported by an RBC story."
+ },
+ {
+  "case": "c18",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New topic answered from the RBC stories (mobile readiness, 180-day visibility, WebSeries assessment, data conversion, cross-border) with no Norfolk Southern carry-over; facts check. Closing offer on cross-border payments is supported by the cross-border story."
+ },
+ {
+  "case": "c18",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "New topic answered from the RBC stories with no Norfolk Southern carry-over; facts check (dates June 2012 to June 2013 where stated); any closing offer is RBC-related and supported by an RBC story."
+ },
+ {
+  "case": "c18",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New topic answered from the RBC stories (mobile readiness, 180-day visibility, WebSeries assessment, data conversion, cross-border) with no Norfolk Southern carry-over; facts check."
+ },
+ {
+  "case": "c18",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "New topic answered from the RBC stories with no Norfolk Southern carry-over; facts check (dates June 2012 to June 2013 where stated); any closing offer is RBC-related and supported by an RBC story."
+ },
+ {
+  "case": "c18",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New topic answered from the RBC stories (mobile readiness, 180-day visibility, WebSeries assessment, data conversion, cross-border) with no Norfolk Southern carry-over; facts check."
+ },
+ {
+  "case": "c18",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "New topic answered from the RBC stories with no Norfolk Southern carry-over; facts check (dates June 2012 to June 2013 where stated); any closing offer is RBC-related and supported by an RBC story."
+ },
+ {
+  "case": "c18",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New topic answered from the RBC stories (mobile readiness, 180-day visibility, WebSeries assessment, data conversion, cross-border) with no Norfolk Southern carry-over; facts check."
+ },
+ {
+  "case": "c18",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "New topic answered from the RBC stories with no Norfolk Southern carry-over; facts check (dates June 2012 to June 2013 where stated); any closing offer is RBC-related and supported by an RBC story."
+ },
+ {
+  "case": "c18",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New topic answered from the RBC stories (mobile readiness, 180-day visibility, WebSeries assessment, data conversion, cross-border) with no Norfolk Southern carry-over; facts check."
+ },
+ {
+  "case": "c18",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "New topic answered from the RBC stories with no Norfolk Southern carry-over; facts check (dates June 2012 to June 2013 where stated); any closing offer is RBC-related and supported by an RBC story."
+ },
+ {
+  "case": "c18",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New topic answered from the RBC stories (mobile readiness, 180-day visibility, WebSeries assessment, data conversion, cross-border) with no Norfolk Southern carry-over; facts check."
+ },
+ {
+  "case": "c18",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "New topic answered from the RBC stories with no Norfolk Southern carry-over; facts check (dates June 2012 to June 2013 where stated); any closing offer is RBC-related and supported by an RBC story."
+ },
+ {
+  "case": "c18",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New topic answered from the RBC stories (mobile readiness, 180-day visibility, WebSeries assessment, data conversion, cross-border) with no Norfolk Southern carry-over; facts check."
+ },
+ {
+  "case": "c18",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "New topic answered from the RBC stories with no Norfolk Southern carry-over; facts check (dates June 2012 to June 2013 where stated); any closing offer is RBC-related and supported by an RBC story."
+ },
+ {
+  "case": "c18",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New topic answered from the RBC stories (mobile readiness, 180-day visibility, WebSeries assessment, data conversion, cross-border) with no Norfolk Southern carry-over; facts check."
+ },
+ {
+  "case": "c18",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "New topic answered from the RBC stories with no Norfolk Southern carry-over; facts check (dates June 2012 to June 2013 where stated); any closing offer is RBC-related and supported by an RBC story."
+ },
+ {
+  "case": "c18",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Says the RBC stories do not specify durations; every RBC story carries 2012-06 to 2013-06, so this is a 'not on record' answer, which fails."
+ },
+ {
+  "case": "c18",
+  "run": 1,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives RBC's duration from its dates: approximately a year, June 2012 to June 2013 (RBC stories all share that range); no Norfolk Southern figure; any closing is RBC-related and supported."
+ },
+ {
+  "case": "c18",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Says the RBC stories do not specify durations; every RBC story carries 2012-06 to 2013-06, so this is a 'not on record' answer, which fails. Also adds an unsupported 'typically require significant time' gloss."
+ },
+ {
+  "case": "c18",
+  "run": 2,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives RBC's duration from its dates: approximately a year, June 2012 to June 2013 (RBC stories all share that range); no Norfolk Southern figure; any closing is RBC-related and supported."
+ },
+ {
+  "case": "c18",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Gives RBC's duration from its dates: about a year, June 2012 to June 2013; no Norfolk Southern figure, no invented precision."
+ },
+ {
+  "case": "c18",
+  "run": 3,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Says the RBC stories do not specify timeframes (they carry 2012-06 to 2013-06) and guesses 'several months'; not-on-record answer fails."
+ },
+ {
+  "case": "c18",
+  "run": 4,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Says the RBC stories do not specify durations; every RBC story carries 2012-06 to 2013-06, so this is a 'not on record' answer, which fails."
+ },
+ {
+  "case": "c18",
+  "run": 4,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives RBC's duration from its dates: approximately a year, June 2012 to June 2013 (RBC stories all share that range); no Norfolk Southern figure; any closing is RBC-related and supported."
+ },
+ {
+  "case": "c18",
+  "run": 5,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Says the RBC stories do not specify durations; every RBC story carries 2012-06 to 2013-06, so this is a 'not on record' answer, which fails."
+ },
+ {
+  "case": "c18",
+  "run": 5,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives RBC's duration from its dates: approximately a year, June 2012 to June 2013 (RBC stories all share that range); no Norfolk Southern figure; any closing is RBC-related and supported."
+ },
+ {
+  "case": "c18",
+  "run": 6,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Says the RBC stories do not specify durations; every RBC story carries 2012-06 to 2013-06, so this is a 'not on record' answer, which fails. Also speculates 'several months to a year or more'."
+ },
+ {
+  "case": "c18",
+  "run": 6,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives RBC's duration from its dates: approximately a year, June 2012 to June 2013 (RBC stories all share that range); no Norfolk Southern figure; any closing is RBC-related and supported."
+ },
+ {
+  "case": "c18",
+  "run": 7,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Says the RBC stories do not specify durations; every RBC story carries 2012-06 to 2013-06, so this is a 'not on record' answer, which fails. Also suggests asking Matt directly."
+ },
+ {
+  "case": "c18",
+  "run": 7,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives RBC's duration from its dates: approximately a year, June 2012 to June 2013 (RBC stories all share that range); no Norfolk Southern figure; any closing is RBC-related and supported."
+ },
+ {
+  "case": "c18",
+  "run": 8,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Says the RBC stories do not specify durations; every RBC story carries 2012-06 to 2013-06, so this is a 'not on record' answer, which fails. Also speculates 'several months each'."
+ },
+ {
+  "case": "c18",
+  "run": 8,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives RBC's duration from its dates: approximately a year, June 2012 to June 2013 (RBC stories all share that range); no Norfolk Southern figure; any closing is RBC-related and supported."
+ },
+ {
+  "case": "c18",
+  "run": 9,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Says the RBC stories do not specify durations; every RBC story carries 2012-06 to 2013-06, so this is a 'not on record' answer, which fails. Also suggests asking Matt directly."
+ },
+ {
+  "case": "c18",
+  "run": 9,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives RBC's duration from its dates: approximately a year, June 2012 to June 2013 (RBC stories all share that range); no Norfolk Southern figure; any closing is RBC-related and supported."
+ },
+ {
+  "case": "c18",
+  "run": 10,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Says the RBC stories do not specify durations; every RBC story carries 2012-06 to 2013-06, so this is a 'not on record' answer, which fails. Also speculates 'several months to over a year'."
+ },
+ {
+  "case": "c18",
+  "run": 10,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives RBC's duration from its dates: approximately a year, June 2012 to June 2013 (RBC stories all share that range); no Norfolk Southern figure; any closing is RBC-related and supported."
+ }
+]

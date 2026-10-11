@@ -1,0 +1,962 @@
+[
+ {
+  "case": "c08",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Correct failure story (What I Learned About Assumptions, Fortune 500 FS client): IAM/environment assumptions, offshore tester UAT email incident, accountability, lessons; facts match story."
+ },
+ {
+  "case": "c08",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Correct failure story (What I Learned About Assumptions, Fortune 500 FS client): IAM/environment assumptions, offshore tester UAT email incident, accountability, lessons; facts match story."
+ },
+ {
+  "case": "c08",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Correct failure story (What I Learned About Assumptions, Fortune 500 FS client): IAM/environment assumptions, offshore tester UAT email incident, accountability, lessons; facts match story."
+ },
+ {
+  "case": "c08",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Correct failure story (What I Learned About Assumptions, Fortune 500 FS client): IAM/environment assumptions, offshore tester UAT email incident, accountability, lessons; facts match story."
+ },
+ {
+  "case": "c08",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Correct failure story (What I Learned About Assumptions, Fortune 500 FS client): IAM/environment assumptions, offshore tester UAT email incident, accountability, lessons; facts match story."
+ },
+ {
+  "case": "c08",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Correct failure story (What I Learned About Assumptions, Fortune 500 FS client): IAM/environment assumptions, offshore tester UAT email incident, accountability, lessons; facts match story."
+ },
+ {
+  "case": "c08",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Correct failure story (What I Learned About Assumptions, Fortune 500 FS client): IAM/environment assumptions, offshore tester UAT email incident, accountability, lessons; facts match story."
+ },
+ {
+  "case": "c08",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Correct failure story (What I Learned About Assumptions, Fortune 500 FS client): IAM/environment assumptions, offshore tester UAT email incident, accountability, lessons; facts match story."
+ },
+ {
+  "case": "c08",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Correct failure story (What I Learned About Assumptions, Fortune 500 FS client): IAM/environment assumptions, offshore tester UAT email incident, accountability, lessons; facts match story."
+ },
+ {
+  "case": "c08",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Correct failure story (What I Learned About Assumptions, Fortune 500 FS client): IAM/environment assumptions, offshore tester UAT email incident, accountability, lessons; facts match story."
+ },
+ {
+  "case": "c08",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Changes from same incident: IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities; 'implemented data masking and email interception' is an inference from the story's omissions plus 'implement corrective controls', not a stated fact but not contradicted."
+ },
+ {
+  "case": "c08",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Same incident's changes: IAM validation, environment verification, PII scrubbing, risk ownership; consistent with Performance/Process fields."
+ },
+ {
+  "case": "c08",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Same incident; verification of IAM/environment/masking as day-one responsibilities, RCA and corrective controls; matches story."
+ },
+ {
+  "case": "c08",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Same incident; IAM validation, environment verification, PII scrubbing in non-prod, risk ownership; matches story."
+ },
+ {
+  "case": "c08",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Same incident; IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities; matches story."
+ },
+ {
+  "case": "c08",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Same incident; day-one IAM/environment/PII checks and risk ownership; generic but supported."
+ },
+ {
+  "case": "c08",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Same incident; four day-one responsibilities from the story, verify not assume; correct."
+ },
+ {
+  "case": "c08",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Same incident's four changes; 'implemented compensating controls (data masking, email interception)' and auditing triggers inferred from the story's omission list plus corrective controls, not contradicted."
+ },
+ {
+  "case": "c08",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Same incident; IAM validation, environment verification, PII scrubbing, risk ownership; matches story."
+ },
+ {
+  "case": "c08",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Body is the incident's changes (with inferred compensating controls), but closes 'Want to know more about the specific controls Matt implemented?': the story names no further specific controls beyond those already given, so the offer is unsupported."
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine: 135,000+ clients, 180+ countries, 40+ blended team, ACH/wire/FX/EFTPS modules, MAC layer, April 2011 launch, Coalition Greenwich #1; all match story."
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine: 135,000+ clients, 180+ countries, 40+ blended team, ACH/wire/FX/EFTPS modules, MAC layer, April 2011 launch, Coalition Greenwich #1; all match story."
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine: 135,000+ clients, 180+ countries, 40+ blended team, ACH/wire/FX/EFTPS modules, MAC layer, April 2011 launch, Coalition Greenwich #1; all match story."
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine: 135,000+ clients, 180+ countries, 40+ blended team, ACH/wire/FX/EFTPS modules, MAC layer, April 2011 launch, Coalition Greenwich #1; all match story. RBC cross-border workflow paragraph also matches its story."
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine: 135,000+ clients, 180+ countries, 40+ blended team, ACH/wire/FX/EFTPS modules, MAC layer, April 2011 launch, Coalition Greenwich #1; all match story. RBC cross-border workflow paragraph also matches its story."
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine: 135,000+ clients, 180+ countries, 40+ blended team, ACH/wire/FX/EFTPS modules, MAC layer, April 2011 launch, Coalition Greenwich #1; all match story."
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine: 135,000+ clients, 180+ countries, 40+ blended team, ACH/wire/FX/EFTPS modules, MAC layer, April 2011 launch, Coalition Greenwich #1; all match story."
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine: 135,000+ clients, 180+ countries, 40+ blended team, ACH/wire/FX/EFTPS modules, MAC layer, April 2011 launch, Coalition Greenwich #1; all match story."
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine: 135,000+ clients, 180+ countries, 40+ blended team, ACH/wire/FX/EFTPS modules, MAC layer, April 2011 launch, Coalition Greenwich #1; all match story."
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine: 135,000+ clients, 180+ countries, 40+ blended team, ACH/wire/FX/EFTPS modules, MAC layer, April 2011 launch, Coalition Greenwich #1; all match story."
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; facts from leadership philosophy / decentralized decision-making / sustainable leadership / CIC stories and profile (4x, psychological safety, servant leadership)."
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; empathy/clarity/purpose, permit-to-fail, balanced teams, profile core values and 'teaches teams to fish' all supported."
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; facts from leadership philosophy / decentralized decision-making / sustainable leadership / CIC stories and profile (4x, psychological safety, servant leadership)."
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; empathy/clarity/purpose, permit-to-fail, balanced teams, profile core values and 'teaches teams to fish' all supported."
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; empathy/clarity/purpose, permit-to-fail, balanced teams, profile core values and 'teaches teams to fish' all supported. 'Builder's mindset, coach's heart' and 'build what's next' are profile self-description."
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; facts from leadership philosophy / decentralized decision-making / sustainable leadership / CIC stories and profile (4x, psychological safety, servant leadership)."
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; empathy/clarity/purpose, permit-to-fail, balanced teams, profile core values and 'teaches teams to fish' all supported. CIC 0 to 150+, 4X, 10-person teams matching 20-person output supported by CIC story."
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; facts from leadership philosophy / decentralized decision-making / sustainable leadership / CIC stories and profile (4x, psychological safety, servant leadership)."
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; facts from leadership philosophy / decentralized decision-making / sustainable leadership / CIC stories and profile (4x, psychological safety, servant leadership). 'Listen first, align around purpose, move intentionally' from leadership journey story."
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; empathy/clarity/purpose, permit-to-fail, balanced teams, profile core values and 'teaches teams to fish' all supported. CIC 150+, 4X, zero defects supported."
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC collective-ownership example (weekly brainstorming, shared mission, recognition) matches story; consistent with the style described; not payments."
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Gives no example: a garbled clarifying question offering JP Morgan Chase (payments carry-over), 'Accenture's Career Narrative' or 'Fortune 500 Clients' Organization Leadership'; expected an example of the style just described."
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "Team of the CIC example: 10-person pilot to 150+, 10-member balanced teams; matches CIC story."
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 4,
+  "label": "B",
+  "pass": false,
+  "reason": "Reports the JP Morgan payments team (40) for an invented 'next-generation access management platform'; wrong referent and unsupported project description; closing offers challenges of that project."
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC collective-ownership example matching story; not payments."
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC collective-ownership example matching story; not payments."
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC team: 10-person pilot to 150+; matches story."
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC 150+ across Atlanta and Tampa centers, diverse-background recruiting supported; closing offer on CIC innovation is related and supported."
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Example is the JP Morgan ACCESS payments project (payments carry-over, expected not payments), framed as leadership with unsupported 'rooted in empathy and a balanced team approach'; then closes with a clarifying question between JP Morgan and RBC, both payments."
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC example from leadership philosophy story (over-processed teams, psychological safety, decisions pushed down, 4x); supported, not payments."
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 4,
+  "label": "A",
+  "pass": false,
+  "reason": "Reports the payments team (ACCESS, 40+ blended): consistent with its own prior turn, but the expected outcome fails reporting the payments team; the payments carry-over persists."
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC example's team: 150+ practitioners; supported."
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Example is the 'Cutting Time-to-Market' CIC story, but attributes the 15-35% cost reduction from a different story (Shifting Client Focus) to it; misattributed figure fails Honest."
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC collective-ownership example matching story."
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 4,
+  "label": "A",
+  "pass": false,
+  "reason": "Says team size not specified for that story (acceptable), but repeats the misattributed 15-35% cost reduction as this project's result; fails Honest."
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC team 150+; supported."
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC collective-ownership example matching story."
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC example: 0 to 150+, balanced teams, pairing and CI/CD, 4X, zero defects, 10-person teams equal to 20; supported. Trailing 'CIC or another engagement?' question is odd but related."
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC team 150+ across disciplines; supported."
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC 150+ and balanced teams; supported; related closing offer."
+ },
+ {
+  "case": "c10",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern engagement from its stories (cloud-native transition, event storming/Boris/SNAP-E, quality crisis, pairing, CIC Academy, rearchitecture as applicable); facts match; closing, if any, is a related supported NS offer."
+ },
+ {
+  "case": "c10",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern engagement from its stories (cloud-native transition, event storming/Boris/SNAP-E, quality crisis, pairing, CIC Academy, rearchitecture as applicable); facts match; closing, if any, is a related supported NS offer."
+ },
+ {
+  "case": "c10",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern engagement from its stories (cloud-native transition, event storming/Boris/SNAP-E, quality crisis, pairing, CIC Academy, rearchitecture as applicable); facts match; closing, if any, is a related supported NS offer."
+ },
+ {
+  "case": "c10",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern engagement from its stories (cloud-native transition, event storming/Boris/SNAP-E, quality crisis, pairing, CIC Academy, rearchitecture as applicable); facts match; closing, if any, is a related supported NS offer."
+ },
+ {
+  "case": "c10",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern engagement from its stories (cloud-native transition, event storming/Boris/SNAP-E, quality crisis, pairing, CIC Academy, rearchitecture as applicable); facts match; closing, if any, is a related supported NS offer."
+ },
+ {
+  "case": "c10",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern engagement from its stories (cloud-native transition, event storming/Boris/SNAP-E, quality crisis, pairing, CIC Academy, rearchitecture as applicable); facts match; closing, if any, is a related supported NS offer."
+ },
+ {
+  "case": "c10",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern engagement from its stories (cloud-native transition, event storming/Boris/SNAP-E, quality crisis, pairing, CIC Academy, rearchitecture as applicable); facts match; closing, if any, is a related supported NS offer."
+ },
+ {
+  "case": "c10",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern engagement from its stories (cloud-native transition, event storming/Boris/SNAP-E, quality crisis, pairing, CIC Academy, rearchitecture as applicable); facts match; closing, if any, is a related supported NS offer."
+ },
+ {
+  "case": "c10",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern engagement from its stories (cloud-native transition, event storming/Boris/SNAP-E, quality crisis, pairing, CIC Academy, rearchitecture as applicable); facts match; closing, if any, is a related supported NS offer."
+ },
+ {
+  "case": "c10",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern engagement from its stories (cloud-native transition, event storming/Boris/SNAP-E, quality crisis, pairing, CIC Academy, rearchitecture as applicable); facts match; closing, if any, is a related supported NS offer."
+ },
+ {
+  "case": "c10",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern engagement from its stories (cloud-native transition, event storming/Boris/SNAP-E, quality crisis, pairing, CIC Academy, rearchitecture as applicable); facts match; closing, if any, is a related supported NS offer."
+ },
+ {
+  "case": "c10",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern engagement from its stories (cloud-native transition, event storming/Boris/SNAP-E, quality crisis, pairing, CIC Academy, rearchitecture as applicable); facts match; closing, if any, is a related supported NS offer."
+ },
+ {
+  "case": "c10",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern engagement from its stories (cloud-native transition, event storming/Boris/SNAP-E, quality crisis, pairing, CIC Academy, rearchitecture as applicable); facts match; closing, if any, is a related supported NS offer."
+ },
+ {
+  "case": "c10",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern engagement from its stories (cloud-native transition, event storming/Boris/SNAP-E, quality crisis, pairing, CIC Academy, rearchitecture as applicable); facts match; closing, if any, is a related supported NS offer."
+ },
+ {
+  "case": "c10",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern engagement from its stories (cloud-native transition, event storming/Boris/SNAP-E, quality crisis, pairing, CIC Academy, rearchitecture as applicable); facts match; closing, if any, is a related supported NS offer."
+ },
+ {
+  "case": "c10",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern engagement from its stories (cloud-native transition, event storming/Boris/SNAP-E, quality crisis, pairing, CIC Academy, rearchitecture as applicable); facts match; closing, if any, is a related supported NS offer."
+ },
+ {
+  "case": "c10",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern engagement from its stories (cloud-native transition, event storming/Boris/SNAP-E, quality crisis, pairing, CIC Academy, rearchitecture as applicable); facts match; closing, if any, is a related supported NS offer."
+ },
+ {
+  "case": "c10",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern engagement from its stories (cloud-native transition, event storming/Boris/SNAP-E, quality crisis, pairing, CIC Academy, rearchitecture as applicable); facts match; closing, if any, is a related supported NS offer."
+ },
+ {
+  "case": "c10",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern engagement from its stories (cloud-native transition, event storming/Boris/SNAP-E, quality crisis, pairing, CIC Academy, rearchitecture as applicable); facts match; closing, if any, is a related supported NS offer."
+ },
+ {
+  "case": "c10",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern engagement from its stories (cloud-native transition, event storming/Boris/SNAP-E, quality crisis, pairing, CIC Academy, rearchitecture as applicable); facts match; closing, if any, is a related supported NS offer."
+ },
+ {
+  "case": "c10",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Largely a repeat of the first answer (same paragraphs restated) with little added depth; expected new depth on the same engagement, not a repeat. Adds only Samman/daily-rotation details; architecture and CIC Academy paragraphs repeat turn 1."
+ },
+ {
+  "case": "c10",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Largely a repeat of the first answer (same paragraphs restated) with little added depth; expected new depth on the same engagement, not a repeat. Rearchitecture paragraph verbatim from turn 1."
+ },
+ {
+  "case": "c10",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Nov 2019 to Sep 2023, about four years, for the NS modernization the deep dive covered; quality crisis placed within it, not conflated."
+ },
+ {
+  "case": "c10",
+  "run": 1,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Gives the CIC Academy's six months and says the rearchitecture timeline 'isn't detailed in the stories', though stories hold 2019-11 to 2023-09; not-on-record claim fails."
+ },
+ {
+  "case": "c10",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Largely a repeat of the first answer (same paragraphs restated) with little added depth; expected new depth on the same engagement, not a repeat. Three of four paragraphs verbatim from turn 1; only the SRS MVP paragraph is new."
+ },
+ {
+  "case": "c10",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Delivers the offered cultural-transformation thread: quality crisis root cause, Samman coaching, making practices stick remotely, OKRs; from the NS stories."
+ },
+ {
+  "case": "c10",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Gives only the CIC Academy's six months as 'one component' and no duration for the modernization the deep dive described."
+ },
+ {
+  "case": "c10",
+  "run": 2,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "About four years, Nov 2019 to Sep 2023, for the NS cultural transformation (making-it-stick dates); approximate and from story dates."
+ },
+ {
+  "case": "c10",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Delivers the offered thread (how practices stuck after experts left) from the Making It Stick story; facts match."
+ },
+ {
+  "case": "c10",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Largely a repeat of the first answer (same paragraphs restated) with little added depth; expected new depth on the same engagement, not a repeat. Near-verbatim restatement of turn 1."
+ },
+ {
+  "case": "c10",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Nov 2019 to Sep 2023, nearly four years, matching the Making It Stick story's dates."
+ },
+ {
+  "case": "c10",
+  "run": 3,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Six-month CIC Academy plus 'exact duration isn't specified... several months'; not-on-record claim and wrong timeline."
+ },
+ {
+  "case": "c10",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Delivers offered cultural-challenges thread: Samman coaching, agile rituals, pairing resistance, SME knowledge rotation; from NS stories."
+ },
+ {
+  "case": "c10",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Largely a repeat of the first answer (same paragraphs restated) with little added depth; expected new depth on the same engagement, not a repeat. Restates the turn 1 modernization story, adding a CIC Academy paragraph."
+ },
+ {
+  "case": "c10",
+  "run": 4,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Nov 2019 to Sep 2023, nearly four years; matches NS story dates."
+ },
+ {
+  "case": "c10",
+  "run": 4,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "'Several months' for the modernization (stories hold 2019-11 to 2023-09) plus the CIC Academy's six months; wrong timeline."
+ },
+ {
+  "case": "c10",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Largely a repeat of the first answer (same paragraphs restated) with little added depth; expected new depth on the same engagement, not a repeat. Near-verbatim turn 1 plus one MVP sentence."
+ },
+ {
+  "case": "c10",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Largely a repeat of the first answer (same paragraphs restated) with little added depth; expected new depth on the same engagement, not a repeat. Offered 'specific practices' but restates turn 1 paragraphs without added depth."
+ },
+ {
+  "case": "c10",
+  "run": 5,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Says the modernization took six months: gives the CIC Academy's six months as the whole."
+ },
+ {
+  "case": "c10",
+  "run": 5,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Nov 2019 to Sep 2023 engagement; matches story dates; crisis mentioned as within, not conflated."
+ },
+ {
+  "case": "c10",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Largely a repeat of the first answer (same paragraphs restated) with little added depth; expected new depth on the same engagement, not a repeat. Near-verbatim turn 1 plus one upskilling sentence."
+ },
+ {
+  "case": "c10",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Delivers offered cultural transformation: quality crisis audit, SMART backlog, TDD experts, pairing remote, SRS MVP 95%; from NS stories."
+ },
+ {
+  "case": "c10",
+  "run": 6,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Says the modernization took six months: CIC Academy's six months given as the whole."
+ },
+ {
+  "case": "c10",
+  "run": 6,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Nov 2019 to Sep 2023 engagement; matches story dates; related supported closing."
+ },
+ {
+  "case": "c10",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Delivers offered cultural-transformation thread (quality crisis audit, Samman, pairing rotations, remote) from NS stories; the closing offer line is rendered twice, a duplicate but supported offer."
+ },
+ {
+  "case": "c10",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Largely a repeat of the first answer (same paragraphs restated) with little added depth; expected new depth on the same engagement, not a repeat. Verbatim restatement of turn 1."
+ },
+ {
+  "case": "c10",
+  "run": 7,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Quality crisis about a year (Jan to Dec 2020) within the broader engagement Nov 2019 to Sep 2023; both ranges stated separately and correctly."
+ },
+ {
+  "case": "c10",
+  "run": 7,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Gives only the CIC Academy's six months and 'a significant period'; no duration for the work described."
+ },
+ {
+  "case": "c10",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Largely a repeat of the first answer (same paragraphs restated) with little added depth; expected new depth on the same engagement, not a repeat. First three paragraphs repeat turn 1; adds a CIC Academy paragraph."
+ },
+ {
+  "case": "c10",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Delivers offered cultural-resistance thread: audit, Samman coaching, daily pair rotation, remote adaptation; from NS stories."
+ },
+ {
+  "case": "c10",
+  "run": 8,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "'Spanned several months' with the CIC Academy's six months; no correct duration (stories hold 2019-11 to 2023-09)."
+ },
+ {
+  "case": "c10",
+  "run": 8,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "About four years, Nov 2019 to Sep 2023; matches story dates; related closing."
+ },
+ {
+  "case": "c10",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Largely a repeat of the first answer (same paragraphs restated) with little added depth; expected new depth on the same engagement, not a repeat. First two paragraphs verbatim from turn 1; adds rearchitecture paragraph."
+ },
+ {
+  "case": "c10",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Delivers offered cultural-changes thread: quality crisis, test-first workflow checked at standup, CIC Academy, SME rotation; from NS stories."
+ },
+ {
+  "case": "c10",
+  "run": 9,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Says timeframes 'aren't detailed in the stories' and speculates 'several months to a few years'; stories hold 2019-11 to 2023-09."
+ },
+ {
+  "case": "c10",
+  "run": 9,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Nov 2019 to Sep 2023; matches story dates."
+ },
+ {
+  "case": "c10",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Largely a repeat of the first answer (same paragraphs restated) with little added depth; expected new depth on the same engagement, not a repeat. Adds only mainframe/COBOL context sentences; remaining paragraphs restate turn 1."
+ },
+ {
+  "case": "c10",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Delivers offered cultural-transformation thread: crisis RCA, Samman coaching, daily pair rotation, CIC Academy, pairing resistance; from NS stories."
+ },
+ {
+  "case": "c10",
+  "run": 10,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "'Several months... exact timeline is not specified... multi-month effort'; stories hold 2019-11 to 2023-09."
+ },
+ {
+  "case": "c10",
+  "run": 10,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "About four years, Nov 2019 to Sep 2023, for the making-it-stick cultural work; matches story dates."
+ }
+]

@@ -1,0 +1,802 @@
+[
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC scaling from story facts (10-person pilot, 150+, 8-week cohorts, 4-6/week, 4X, $100M+, 15+ F500); all supported"
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC scaling from Scaling Talent story; '4 to 150+' supported by leadership-philosophy story"
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC scaling from Scaling Talent story; facts supported"
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Flat model, team anchors, 15-20 auditions, 4-6/week, peer feedback, near-zero attrition; all from Leading People story"
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Says $100M+ came 'through delivery excellence alone'; CIC story attributes growth to delivery plus demonstration plus business development: embellished claim fails Honest"
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC scaling; 15-20 auditions, 4-6/week, 4X, $100M+, 15+ F500 by FY23 all supported"
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Scaling Talent story facts (hired 150+, onboarding, XP, near-zero attrition) supported"
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "10-person pilot, four-channel hiring, 15-20/4-6 weekly, 4X, $100M+ supported"
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Leading People story: JPM 40+, TS Dynamics 20-25, hiring engine, 11-13 leads, 4x, $100M+ via delivery excellence; supported"
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC story: 10-person pilot, 8-week cohorts, 4X, $100M+, 15+ F500, near-zero attrition; supported"
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Scaling Talent story facts supported"
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Mix of CIC stories; two layers, 11-13 leads, four-channel hiring, 4X, $100M+ supported"
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Leading People story facts (10-person pilot, 11-13 leads, anchors, 15-20/4-6) supported"
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Hiring engine, month of enablement, round-robin pairing, 4X, $100M+, 15+ F500 supported"
+ },
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Scaling Talent story facts supported"
+ },
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Flat model, hiring engine, remote auditions; zero-defect and team satisfaction supported by Breaking Silos story; sustain-after-left supported"
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "10-person pilot, 4-6/week, remote auditions, 4X, $100M+ supported"
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Says $100M+ earned 'through delivery excellence alone'; CIC story credits a combination of delivery, demonstration and business development: embellished claim"
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC facts (10-person pilot, 4-6/week, 4X, $100M+, 15+ F500 by FY23) supported"
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Scaling Talent story facts supported"
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New topic, no scaling carry-over; JPM ACCESS (40+, Apr 2011, 135,000+, 180+, Coalition Greenwich) and RBC Express from stories"
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "JPM ACCESS payment engine from story, facts correct; closing offer (compliance/security) supported by story"
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "JPM part correct, but says RBC Express work 'improved SLA compliance and client satisfaction'; story results record no client-satisfaction improvement (design blueprint only)"
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "JPM ACCESS and RBC Express from stories; closing on ACCESS impact supported"
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "JPM ACCESS from story; closing on challenges supported"
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "JPM ACCESS incl. gateway story (same program); facts correct; '40 engineers' loose wording only"
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "JPM ACCESS facts correct; closing on payment modules supported"
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "JPM ACCESS incl. transaction monitoring and risk scores; supported"
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Claims ACCESS 'enhanced client satisfaction'; no story holds a client-satisfaction outcome"
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "RBC work 'improving SLA compliance and client satisfaction'; client-satisfaction outcome not in RBC story"
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "RBC 'modernization effort ... improved client satisfaction'; not in story results"
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "RBC work 'enhancing client satisfaction and operational efficiency'; client-satisfaction outcome not in story"
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "JPM ACCESS and RBC Express from stories; closing supported"
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "JPM ACCESS from story, facts correct"
+ },
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "JPM ACCESS and RBC Express; 'a leading digital channel' softens #1 but not wrong"
+ },
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "JPM ACCESS payment engine plus gateway (12 countries) from stories; closing supported"
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "JPM ACCESS from story, facts correct"
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "JPM ACCESS and RBC Express from stories; closing supported"
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "JPM ACCESS from story, facts correct"
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "RBC work 'improved operational efficiency and client satisfaction' not in story; adds evaluative 'innovative approach was pivotal'"
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Leads with Cloud Innovation Center 150+ (not in turn-2 answer); explicit fail condition"
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Turn 2 discussed JPM ACCESS only; gives 40+ blended team, Mumbai/Bangalore/US, correct"
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Answers about Cloud Innovation Center teams; turn 2 discussed JPM ACCESS and RBC"
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "JPM ACCESS 40+ and RBC with 'specific team sizes aren't detailed'; matches turn-2 engagements (mild inference about substantial teams)"
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Turn 2 discussed JPM ACCESS only; 40+ blended team, locations correct"
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Answers about Cloud Innovation Center; turn 2 discussed JPM ACCESS only"
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Turn 2 discussed JPM ACCESS only; adds RBC, an engagement the second answer didn't discuss, with speculation ('likely involved')"
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Answers about Cloud Innovation Center; turn 2 discussed JPM ACCESS only"
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Turn 2 discussed JPM ACCESS (incl. gateway); 40+ blended team correct"
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Answers about Cloud Innovation Center; turn 2 discussed JPM ACCESS and RBC"
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "JPM ACCESS 40+ and RBC with sizes not detailed; matches turn 2"
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Answers about Cloud Innovation Center; turn 2 discussed JPM ACCESS and RBC"
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "JPM ACCESS 40+ and RBC size not recorded; matches turn 2; generic follow-up line, no engage close"
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Answers about Cloud Innovation Center; turn 2 discussed JPM ACCESS only"
+ },
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Frames answer around Cloud Innovation Centers (4 to 150+), not in turn 2, alongside JPM 40+"
+ },
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Turn 2 discussed JPM ACCESS only; 40+ blended team, locations correct"
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Includes Cloud Innovation Center teams; turn 2 discussed JPM ACCESS only"
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Right referents (JPM 40+, RBC not recorded) but says the team 'was embedded at Bottomline Technologies' offices'; story says Matt was embedded, team was in Mumbai/Bangalore/US"
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Answers about Cloud Innovation Center; turn 2 discussed JPM ACCESS only"
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "JPM ACCESS 40+ and RBC size not specified; matches turn 2"
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fiserv part invented (card management, transaction history, customer support) and falsely says Fiserv metrics aren't detailed"
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both engagements from stories: Fiserv DevOps and $8.5M recovery ($500K, 3%), ACCESS 135,000+/180+/40+"
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Both from stories: Fiserv $8.5M, 45, agile/DevOps, 50+ stakeholders; ACCESS facts correct"
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fiserv described with invented facts (single major client, modular architecture, millions of transactions daily)"
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Both from stories; Fiserv DevOps and recovery, ACCESS facts correct"
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fiserv invented: 'major U.S. bank', microservices architecture, customer satisfaction/retention"
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Says Fiserv details aren't provided and speculates ('likely'); Fiserv engagement not given from its stories"
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both from stories; facts correct ('180 countries' vs 180+ minor)"
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fiserv invented: 'global card issuer', product-team collaboration, wide range of card types"
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both from stories; Fiserv 2M+/15 FIs, 45, 47 criteria, 3%; ACCESS correct"
+ },
+ {
+  "case": "c12",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fiserv portal described as for community banks and credit unions; contradicted by story (Home Depot, Citi, Meijer)"
+ },
+ {
+  "case": "c12",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both from stories; entitlement overhaul supported"
+ },
+ {
+  "case": "c12",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Says Fiserv story details not provided and describes 'typical engagements'; no Fiserv facts"
+ },
+ {
+  "case": "c12",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both from stories, facts correct"
+ },
+ {
+  "case": "c12",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fiserv part invented (card management, transaction history, customer support features)"
+ },
+ {
+  "case": "c12",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both from stories, facts correct"
+ },
+ {
+  "case": "c12",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fiserv invented: 'major U.S. bank', personalized card services, modular architecture"
+ },
+ {
+  "case": "c12",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both from stories incl. $3M extension, 45-person agile transition, entitlement days-to-minutes"
+ },
+ {
+  "case": "c12",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fiserv invented: team of 30+, cloud migration, 30% engagement, 20% cost reduction, two years"
+ },
+ {
+  "case": "c12",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both from stories, facts correct"
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names dimensions (client count, geographic reach); states 40+ vs 45 and 135,000+ vs 15 FIs/2M+ accurately; closing supported"
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names global reach/clients/countries; Fiserv $8.5M, 45, 3 vendors, $3M extension and ACCESS 40+/135,000+ accurate"
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names client impact and geographic scale; both engagements' facts accurate"
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Claims ACCESS larger in team size (40+ vs Fiserv 45: inaccurate) and repeats invented 'millions of transactions daily'"
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names global reach/client base; Fiserv $8.5M, 2M+, 45, $45M, 99.97% and ACCESS facts accurate"
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names reach/client base; facts accurate; closing supported"
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Says Fiserv team size and reach aren't on record (story holds 45, 15 FIs, 2M+) and calls ACCESS larger by team size: inaccurate"
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names broader client base; both engagements' figures accurate"
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Clarifying question: bigger by team size, budget or impact"
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names global reach/integration; Fiserv 45, $8.5M, $45M, 99.97% and ACCESS figures accurate"
+ },
+ {
+  "case": "c12",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Clarifying question: team size, client impact or other metric"
+ },
+ {
+  "case": "c12",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names client reach and global impact; both engagements' figures accurate"
+ },
+ {
+  "case": "c12",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Picks ACCESS as bigger on vague 'scope and scale' with no Fiserv figures, then asks the dimension afterwards"
+ },
+ {
+  "case": "c12",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names client reach and geography; both engagements' figures accurate"
+ },
+ {
+  "case": "c12",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names geographic reach/client base; 40+ vs 45, 2M+/15 FIs accurate"
+ },
+ {
+  "case": "c12",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names global reach/client base; figures accurate"
+ },
+ {
+  "case": "c12",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names global scale/client base; dates 2009-08 to 2012-06 and 2014-12 to 2015-06, 45, 2M+/15 FIs accurate; closing supported"
+ },
+ {
+  "case": "c12",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names scale/global impact/client base; figures accurate"
+ },
+ {
+  "case": "c12",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Repeats invented Fiserv team of 30+ and engagement/cost impacts"
+ },
+ {
+  "case": "c12",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names client base and countries; Fiserv 45, $8.5M, $45M, 99.97% and ACCESS figures accurate"
+ }
+]

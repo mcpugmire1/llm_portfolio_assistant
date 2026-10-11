@@ -1,0 +1,802 @@
+[
+ {
+  "case": "c13",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Fiserv DevOps, recovery ($8.5M, 45-person, $500K, 3% under) and agile stories; facts match corpus (calls same program 'another engagement', minor framing)"
+ },
+ {
+  "case": "c13",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Recovery story: 2M+/15 FIs, 45 team, 3 vendors, 3 weeks, $500K, 3%, 47, $45M, 99.97%, $3M all match corpus; agile offer supported"
+ },
+ {
+  "case": "c13",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Fiserv team size 45, India/Philippines/Ireland, matches corpus; no clarifying question"
+ },
+ {
+  "case": "c13",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Fiserv team size 45, India/Philippines/Ireland, matches corpus; no clarifying question"
+ },
+ {
+  "case": "c13",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Fiserv recovery story: $8.5M, 2M+/15 FIs, 45 team, 3 vendors, 47 criteria, $45M, 99.97%, $3M; all match corpus"
+ },
+ {
+  "case": "c13",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "ADA, agile (45, 50+), DevOps and recovery figures; all match corpus; related offer supported"
+ },
+ {
+  "case": "c13",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Fiserv team size 45, India/Philippines/Ireland, matches corpus; no clarifying question"
+ },
+ {
+  "case": "c13",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Fiserv team size 45, India/Philippines/Ireland, matches corpus; no clarifying question"
+ },
+ {
+  "case": "c13",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "ADA, agile (45-person, 2-week sprints) and DevOps stories plus recovery figures; all match corpus; agile offer is supported"
+ },
+ {
+  "case": "c13",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Recovery ($8.5M, 2M+, 45, 3 vendors, $500K, 3%, 47), DevOps and agile stories; facts match corpus"
+ },
+ {
+  "case": "c13",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Fiserv team size 45, India/Philippines/Ireland, matches corpus; no clarifying question"
+ },
+ {
+  "case": "c13",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Fiserv team size 45, India/Philippines/Ireland, matches corpus; no clarifying question"
+ },
+ {
+  "case": "c13",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "DevOps, recovery and agile stories; figures ($8.5M, 2M+, 15 FIs, $500K, 3%, 47, 50+) match corpus"
+ },
+ {
+  "case": "c13",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "ADA, agile (45, 6-month to 2-week), DevOps, recovery figures; match corpus; compliance offer supported by ADA story"
+ },
+ {
+  "case": "c13",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Fiserv team size 45, India/Philippines/Ireland, matches corpus; no clarifying question"
+ },
+ {
+  "case": "c13",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Fiserv team size 45, India/Philippines/Ireland, matches corpus; no clarifying question"
+ },
+ {
+  "case": "c13",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "DevOps, recovery ($8.5M, $500K, 3%, $3M) and agile stories; facts match corpus"
+ },
+ {
+  "case": "c13",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Agile (45, India/Philippines/Ireland, 50+), DevOps and recovery figures; match corpus"
+ },
+ {
+  "case": "c13",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Fiserv team size 45, India/Philippines/Ireland, matches corpus; no clarifying question"
+ },
+ {
+  "case": "c13",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Fiserv team size 45, India/Philippines/Ireland, matches corpus; no clarifying question"
+ },
+ {
+  "case": "c13",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "ADA, agile, DevOps plus recovery figures (47, $45M, 99.97%, $3M, $500K); match corpus; related offer supported"
+ },
+ {
+  "case": "c13",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "DevOps, recovery (45 members, 3 vendors, $500K, 3%, 47) and agile stories; facts match corpus"
+ },
+ {
+  "case": "c13",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Fiserv team size 45, India/Philippines/Ireland, matches corpus; no clarifying question"
+ },
+ {
+  "case": "c13",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Fiserv team size 45, India/Philippines/Ireland, matches corpus; no clarifying question"
+ },
+ {
+  "case": "c13",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "DevOps, recovery (45 members, 3 vendors, VisionPLUS) and agile (50+ stakeholders); facts match corpus"
+ },
+ {
+  "case": "c13",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Agile story (200-page BRDs, 45, 50+) with recovery outcomes (47, 3%, $3M); facts match corpus"
+ },
+ {
+  "case": "c13",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Fiserv team size 45, India/Philippines/Ireland, matches corpus; no clarifying question"
+ },
+ {
+  "case": "c13",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Fiserv team size 45, India/Philippines/Ireland, matches corpus; no clarifying question"
+ },
+ {
+  "case": "c13",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "DevOps, recovery and agile stories; facts match corpus"
+ },
+ {
+  "case": "c13",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "ADA, agile (45, 50+), DevOps, recovery outcomes (3%, $3M); match corpus; related offer"
+ },
+ {
+  "case": "c13",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Fiserv team size 45, India/Philippines/Ireland, matches corpus; no clarifying question"
+ },
+ {
+  "case": "c13",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Fiserv team size 45, India/Philippines/Ireland, matches corpus; no clarifying question"
+ },
+ {
+  "case": "c13",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "ADA, agile, DevOps, recovery figures; facts match corpus; related offer supported"
+ },
+ {
+  "case": "c13",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "DevOps, recovery ($8.5M, 2M+, 15, 47, $500K, $3M), agile, ADA; facts match corpus"
+ },
+ {
+  "case": "c13",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Fiserv team size 45, India/Philippines/Ireland, matches corpus; no clarifying question"
+ },
+ {
+  "case": "c13",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Fiserv team size 45, India/Philippines/Ireland, matches corpus; no clarifying question"
+ },
+ {
+  "case": "c13",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "ADA, agile (50+ stakeholders), DevOps (build days to hours), recovery figures; match corpus; related offer"
+ },
+ {
+  "case": "c13",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "DevOps, recovery (45 members, 3 vendors), agile stories; facts match corpus"
+ },
+ {
+  "case": "c13",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Fiserv team size 45, India/Philippines/Ireland, matches corpus; no clarifying question"
+ },
+ {
+  "case": "c13",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Fiserv team size 45, India/Philippines/Ireland, matches corpus; no clarifying question"
+ },
+ {
+  "case": "c14",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Facts from stories/profile (150+ CIC, 4X velocity, zero defects, sabbatical, location/work model); no level label or vouching; Role Match close present, with About Matt"
+ },
+ {
+  "case": "c14",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "No Role Match close (required); vouches ('strong candidate', 'aligns well')"
+ },
+ {
+  "case": "c14",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Honest: 'teams consistently delivered the impact of typical teams twice their size' is in no story or the profile; otherwise has Role Match close"
+ },
+ {
+  "case": "c14",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "No Role Match close (required); frames experience as aligning with VP responsibilities (evaluates fit)"
+ },
+ {
+  "case": "c14",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Facts (150+ CIC, 4X, zero defects, career-intent values, profile Location & Availability); no level label or vouching; Role Match close present, with About Matt"
+ },
+ {
+  "case": "c14",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "No Role Match close (required); evaluates fit ('aligns well with the demands of a VP ... role')"
+ },
+ {
+  "case": "c14",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Honest: 'teams twice their size' is in no story or the profile; otherwise no vouching and Role Match close present"
+ },
+ {
+  "case": "c14",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "No Role Match close (required); evaluates fit ('aligns well with the responsibilities')"
+ },
+ {
+  "case": "c14",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Thin but factual (4X velocity, zero defects, sabbatical, profile work model); omits org size; no vouching or level label; Role Match close present, with About Matt"
+ },
+ {
+  "case": "c14",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "No Role Match close (required); evaluates fit ('aligns well with the demands')"
+ },
+ {
+  "case": "c14",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Facts (150+ CIC, 4X, zero defects, permit-to-fail story, profile); no vouching or level label; Role Match close present, with About Matt"
+ },
+ {
+  "case": "c14",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "No Role Match close (required); evaluates fit ('align well with a VP of Platform Engineering role')"
+ },
+ {
+  "case": "c14",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Facts (150+ CIC, $100M+ repeat business, sabbatical, profile); no vouching or level label; Role Match close present, with About Matt"
+ },
+ {
+  "case": "c14",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "No Role Match close (required); evaluates fit ('aligns well with the demands')"
+ },
+ {
+  "case": "c14",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Facts (150+ CIC, 4X, zero defects, sabbatical, profile); no vouching or level label; Role Match close present, with About Matt"
+ },
+ {
+  "case": "c14",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "No Role Match close (required); evaluates fit ('aligns well with the demands')"
+ },
+ {
+  "case": "c14",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Facts (150+ CIC, 4X, zero defects, sabbatical, profile); no vouching or level label; Role Match close present, with About Matt"
+ },
+ {
+  "case": "c14",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "No Role Match close (required); evaluates fit ('underscores his fit for a senior leadership role')"
+ },
+ {
+  "case": "c14",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "No Role Match close (required); evaluates fit itself ('aligns well with the expectations for a VP of Platform Engineering role')"
+ },
+ {
+  "case": "c14",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Facts (150+ CIC, 4X, zero defects, career-intent values, sabbatical, profile); no vouching or level label; Role Match close present, with About Matt"
+ },
+ {
+  "case": "c15",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "No contact or LinkedIn link: out-of-scope refusal"
+ },
+ {
+  "case": "c15",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "LinkedIn and Email Matt contact links both present (identical in every packet; not verifiable against corpus/profile; conversation view not tested); profile facts correct"
+ },
+ {
+  "case": "c15",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "No contact or LinkedIn link; availability text only"
+ },
+ {
+  "case": "c15",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "LinkedIn and Email Matt contact links both present (identical in every packet; not verifiable against corpus/profile; conversation view not tested)"
+ },
+ {
+  "case": "c15",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "LinkedIn and Email Matt contact links both present (identical in every packet; not verifiable against corpus/profile; conversation view not tested)"
+ },
+ {
+  "case": "c15",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "No contact or LinkedIn link: out-of-scope refusal"
+ },
+ {
+  "case": "c15",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "LinkedIn and Email Matt contact links both present (identical in every packet; not verifiable against corpus/profile; conversation view not tested); sabbatical/MattGPT and profile facts supported"
+ },
+ {
+  "case": "c15",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "No contact or LinkedIn link: out-of-scope refusal"
+ },
+ {
+  "case": "c15",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "LinkedIn and Email Matt contact links both present (identical in every packet; not verifiable against corpus/profile; conversation view not tested); profile facts correct"
+ },
+ {
+  "case": "c15",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "No contact or LinkedIn link: out-of-scope refusal"
+ },
+ {
+  "case": "c15",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "No contact or LinkedIn link: out-of-scope refusal"
+ },
+ {
+  "case": "c15",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "LinkedIn and Email Matt contact links both present (identical in every packet; not verifiable against corpus/profile; conversation view not tested); body text is an out-of-scope refusal, but both links render (ambiguous)"
+ },
+ {
+  "case": "c15",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "No contact or LinkedIn link; availability text only"
+ },
+ {
+  "case": "c15",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "LinkedIn and Email Matt contact links both present (identical in every packet; not verifiable against corpus/profile; conversation view not tested)"
+ },
+ {
+  "case": "c15",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "LinkedIn and Email Matt contact links both present (identical in every packet; not verifiable against corpus/profile; conversation view not tested); body text is an out-of-scope refusal, but both links render (ambiguous)"
+ },
+ {
+  "case": "c15",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "No contact or LinkedIn link: out-of-scope refusal"
+ },
+ {
+  "case": "c15",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "LinkedIn and Email Matt contact links both present (identical in every packet; not verifiable against corpus/profile; conversation view not tested)"
+ },
+ {
+  "case": "c15",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "No contact or LinkedIn link: out-of-scope refusal"
+ },
+ {
+  "case": "c15",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "LinkedIn and Email Matt contact links both present (identical in every packet; not verifiable against corpus/profile; conversation view not tested)"
+ },
+ {
+  "case": "c15",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "No contact or LinkedIn link: out-of-scope refusal"
+ },
+ {
+  "case": "c16",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "No About Matt or LinkedIn pointer (required close missing); summary facts themselves match why-hire-matt/transition stories"
+ },
+ {
+  "case": "c16",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Points to About Matt and LinkedIn; facts (150+ CIC, industries, sabbatical) supported; no invented file"
+ },
+ {
+  "case": "c16",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "No About Matt or LinkedIn pointer (required close missing); summary facts themselves match why-hire-matt/transition stories"
+ },
+ {
+  "case": "c16",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Points to About Matt but not LinkedIn (brief requires both); also states 'He's also an AWS Certified Solutions Architect' as current, but it expired 2023 (profile)"
+ },
+ {
+  "case": "c16",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "No About Matt or LinkedIn pointer (required close missing); summary facts themselves match why-hire-matt/transition stories"
+ },
+ {
+  "case": "c16",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Points to About Matt but not LinkedIn (brief requires both); facts (150+, $100M+, certs none current, AIU Master's) correct"
+ },
+ {
+  "case": "c16",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "No About Matt or LinkedIn pointer (required close missing); summary facts themselves match why-hire-matt/transition stories"
+ },
+ {
+  "case": "c16",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Points to About Matt but not LinkedIn (brief requires both); facts correct"
+ },
+ {
+  "case": "c16",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "No About Matt or LinkedIn pointer (required close missing); summary facts themselves match why-hire-matt/transition stories"
+ },
+ {
+  "case": "c16",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Points to About Matt but not LinkedIn (brief requires both); facts correct"
+ },
+ {
+  "case": "c16",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Points to About Matt but not LinkedIn (brief requires both); facts (clients, Master's, Romance Languages coursework, Atlanta) correct"
+ },
+ {
+  "case": "c16",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "No About Matt or LinkedIn pointer (required close missing); summary facts themselves match why-hire-matt/transition stories"
+ },
+ {
+  "case": "c16",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Points to About Matt but not LinkedIn (brief requires both); facts (industries, Master's, BA French, certs not active) correct"
+ },
+ {
+  "case": "c16",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "No About Matt or LinkedIn pointer (required close missing); summary facts themselves match why-hire-matt/transition stories"
+ },
+ {
+  "case": "c16",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Points to About Matt but not LinkedIn (brief requires both); facts correct, certs noted as not current"
+ },
+ {
+  "case": "c16",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "No About Matt or LinkedIn pointer (required close missing); summary facts themselves match why-hire-matt/transition stories"
+ },
+ {
+  "case": "c16",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "No About Matt or LinkedIn pointer (required close missing); summary facts themselves match why-hire-matt/transition stories"
+ },
+ {
+  "case": "c16",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Points to About Matt but not LinkedIn (brief requires both); facts correct"
+ },
+ {
+  "case": "c16",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "No About Matt or LinkedIn pointer (required close missing); summary facts themselves match why-hire-matt/transition stories"
+ },
+ {
+  "case": "c16",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Points to About Matt but not LinkedIn (brief requires both); facts correct (AWS SA expired 2023, Wellfound)"
+ }
+]

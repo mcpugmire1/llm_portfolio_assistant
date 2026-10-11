@@ -1,0 +1,802 @@
+[
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS payment engine facts (135,000+, 180+ countries, 40+ team, MAC, April 2011, Coalition Greenwich) match the story"
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS payment engine facts (135,000+, 180+ countries, 40+ team, MAC, April 2011, Coalition Greenwich) match the story"
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS payment engine facts (135,000+, 180+ countries, 40+ team, MAC, April 2011, Coalition Greenwich) match the story"
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS payment engine facts (135,000+, 180+ countries, 40+ team, MAC, April 2011, Coalition Greenwich) match the story"
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS payment engine facts (135,000+, 180+ countries, 40+ team, MAC, April 2011, Coalition Greenwich) match the story"
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS facts match the story; the RBC Express cross-border paragraph matches the RBC story (design work, loosely worded as integration)"
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS payment engine facts (135,000+, 180+ countries, 40+ team, MAC, April 2011, Coalition Greenwich) match the story"
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS facts match the story; the RBC Express cross-border paragraph matches the RBC story (design work, loosely worded as integration)"
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS payment engine and gateway facts supported"
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Global Payments Gateway story: 12 countries, 40+ team, April 2011, 135,000+ clients all supported"
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS payment engine facts (135,000+, 180+ countries, 40+ team, MAC, April 2011, Coalition Greenwich) match the story"
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS payment engine facts (135,000+, 180+ countries, 40+ team, MAC, April 2011, Coalition Greenwich) match the story"
+ },
+ {
+  "case": "c01",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS facts match the story; the RBC Express cross-border paragraph matches the RBC story (design work, loosely worded as integration)"
+ },
+ {
+  "case": "c01",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS payment engine facts (135,000+, 180+ countries, 40+ team, MAC, April 2011, Coalition Greenwich) match the story"
+ },
+ {
+  "case": "c01",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS facts match the story; the RBC Express cross-border paragraph matches the RBC story (design work, loosely worded as integration)"
+ },
+ {
+  "case": "c01",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS payment engine facts (135,000+, 180+ countries, 40+ team, MAC, April 2011, Coalition Greenwich) match the story"
+ },
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS payment engine facts (135,000+, 180+ countries, 40+ team, MAC, April 2011, Coalition Greenwich) match the story"
+ },
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS payment engine facts (135,000+, 180+ countries, 40+ team, MAC, April 2011, Coalition Greenwich) match the story"
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS payment engine facts (135,000+, 180+ countries, 40+ team, MAC, April 2011, Coalition Greenwich) match the story"
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS facts match the story; the RBC Express cross-border paragraph matches the RBC story (design work, loosely worded as integration); the closing offer is duplicated verbatim but is related to the topic"
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS 40+ blended team, supported; related closing offer"
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives the ACCESS blended team of 40+ (Accenture and JPM, Mumbai/Bangalore/US), supported"
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Gives the ACCESS blended team of 40+ (Accenture and JPM, Mumbai/Bangalore/US), supported"
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives the ACCESS blended team of 40+ (Accenture and JPM, Mumbai/Bangalore/US), supported"
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Gives the ACCESS blended team of 40+ (Accenture and JPM, Mumbai/Bangalore/US), supported"
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Turn 1 covered JPM and RBC; asks a clarifying question naming both, which passes under D4"
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Gives the ACCESS blended team of 40+ (Accenture and JPM, Mumbai/Bangalore/US), supported"
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Turn 1 covered JPM and RBC; asks a clarifying question naming both, which passes under D4"
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Gives the ACCESS blended team of 40+ (Accenture and JPM, Mumbai/Bangalore/US), supported"
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives the ACCESS blended team of 40+ (Accenture and JPM, Mumbai/Bangalore/US), supported"
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Gives the ACCESS blended team of 40+ (Accenture and JPM, Mumbai/Bangalore/US), supported"
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS 40+ blended team, supported; related closing offer"
+ },
+ {
+  "case": "c01",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Turn 1 covered JPM and RBC; asks a clarifying question naming both, which passes under D4"
+ },
+ {
+  "case": "c01",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives the ACCESS blended team of 40+ (Accenture and JPM, Mumbai/Bangalore/US), supported"
+ },
+ {
+  "case": "c01",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Turn 1 also covered RBC, but it gives the ACCESS 40+ team, the fixture's expected referent; facts supported"
+ },
+ {
+  "case": "c01",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives the ACCESS blended team of 40+ (Accenture and JPM, Mumbai/Bangalore/US), supported"
+ },
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Gives the ACCESS blended team of 40+ (Accenture and JPM, Mumbai/Bangalore/US), supported"
+ },
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives the ACCESS blended team of 40+ (Accenture and JPM, Mumbai/Bangalore/US), supported"
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Gives the ACCESS blended team of 40+ (Accenture and JPM, Mumbai/Bangalore/US), supported"
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Turn 1 covered JPM and RBC: gives ACCESS 40+ and correctly says the RBC stories give no team size"
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Same ACCESS engagement: migration complexity, Wall Street timelines, multi-jurisdiction compliance, legacy entitlements taking days per user; all from ACCESS stories"
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Same engagement: payment-type complexity, timelines, and the MAC-layer failure caused by missing unit tests and weak error handling, which the story holds"
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Same engagement: 12-country connectivity, Sev-1 incidents, and production issues requiring root-cause analysis, from the gateway story"
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Same engagement: 12-country gateway, compliance across APAC/EMEA/Americas, entitlements from days to minutes; supported; related offer"
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Same engagement: the MAC-layer defect from missing unit tests, break-glass SQL triage, and the WebSeries build-vs-configure boundary; supported"
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Covers both turn-1 engagements: JPM's existing platform could not meet 135,000+ clients' needs (the expected WebSeries point) and RBC's fragmented systems; related offer"
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Same engagement: the MAC-layer failure plus legacy schema mapping during consolidation; supported"
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Thin and generic, but correct referents (JPM, RBC from turn 1) with facts the stories support (fragmented systems)"
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Same engagement: 12-country fragmentation, Wall Street timelines, and Sev-1 incident response he owned; supported; related offer"
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Same engagement: the WebSeries build-vs-configure boundary and production-issue root-cause analysis; supported"
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Same engagement: MAC-layer failure, migration complexity, cumbersome legacy entitlements; supported"
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Same engagement: legacy consolidation and jurisdiction-specific compliance; supported"
+ },
+ {
+  "case": "c01",
+  "run": 7,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Covers both turn-1 engagements: JPM needs exceeding WebSeries out of the box (expected point) and RBC fragmentation; related offer"
+ },
+ {
+  "case": "c01",
+  "run": 7,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Same engagement: needs beyond the standard WebSeries platform (expected point), timelines, legacy migration; supported"
+ },
+ {
+  "case": "c01",
+  "run": 8,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Same engagement: the MAC-layer failure from missing unit tests and the build-vs-configure boundary; supported"
+ },
+ {
+  "case": "c01",
+  "run": 8,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Same engagement: multi-jurisdiction compliance and the entitlement overhaul (days to minutes); supported; related offer"
+ },
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Same engagement: 12-country gateway complexity and the Sev-1 incident response he repeatedly owned; supported"
+ },
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Same engagement: MAS/Korea compliance and the legacy entitlement overhaul; supported; related offer"
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Same engagement: needs beyond WebSeries out of the box (expected point), legacy entitlements, multi-jurisdiction compliance; supported"
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Unsupported claims: a distributed-team challenge resolved by 'fostering collaboration' and that Matt designed and implemented RBC workflows (the RBC story is a design blueprint); also unsupported 'client satisfaction'; ends with a clarifying question after already answering, plus a second offer"
+ },
+ {
+  "case": "c02",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Master's in Information Technology, American InterContinental University, CS-related, matches the profile"
+ },
+ {
+  "case": "c02",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Master's in Information Technology, American InterContinental University, CS-related, matches the profile"
+ },
+ {
+  "case": "c02",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Master's in Information Technology, American InterContinental University, CS-related, matches the profile"
+ },
+ {
+  "case": "c02",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Master's in Information Technology, American InterContinental University, CS-related, matches the profile"
+ },
+ {
+  "case": "c02",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Master's in Information Technology, American InterContinental University, CS-related, matches the profile"
+ },
+ {
+  "case": "c02",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Master's in Information Technology, American InterContinental University, CS-related, matches the profile"
+ },
+ {
+  "case": "c02",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Master's in Information Technology, American InterContinental University, CS-related, matches the profile"
+ },
+ {
+  "case": "c02",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Master's in Information Technology, American InterContinental University, CS-related, matches the profile"
+ },
+ {
+  "case": "c02",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Master's in Information Technology, American InterContinental University, CS-related, matches the profile"
+ },
+ {
+  "case": "c02",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Master's in Information Technology, American InterContinental University, CS-related, matches the profile"
+ },
+ {
+  "case": "c02",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Leaves out the profile explanation (IT Master's is CS-related and exceeds a Bachelor's), just says 'despite not holding a traditional CS degree'; evaluative 'significant technical prowess'"
+ },
+ {
+  "case": "c02",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Inflates the degree: 'solid foundation', 'equipped him', 'played a crucial role' are unsupported causal claims about the degree"
+ },
+ {
+  "case": "c02",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Leaves out the profile explanation of the IT Master's; track record facts (CIC 150+, 4x, zero-defect) are supported but don't address the degree as the expected outcome requires"
+ },
+ {
+  "case": "c02",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Inflates the degree ('equipped him with the necessary skills') and wrongly ties AI-assisted development practices to the AT&T project (that is MattGPT)"
+ },
+ {
+  "case": "c02",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Credits UCD/designer integration that prevented costly redesigns to the JPM I&AM uplift, which is a different story; also leaves out the profile explanation of the degree"
+ },
+ {
+  "case": "c02",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Inflates the degree ('instrumental', 'value of his IT background'), unsupported causal claims; no profile explanation"
+ },
+ {
+  "case": "c02",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Generic and evaluative ('equips him with the necessary skills to excel'); no concrete track-record facts and only a vague restatement of the degree"
+ },
+ {
+  "case": "c02",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Evaluates fit itself ('more than sufficient to compensate for the absence of a traditional CS degree'); leaves out the profile explanation"
+ },
+ {
+  "case": "c02",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Inflates the degree ('instrumental', 'valuable asset') with unsupported causal claims; AIU teaching and AT&T facts supported but framed as products of the degree"
+ },
+ {
+  "case": "c02",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Leaves out the profile explanation of the IT Master's (CS-related, exceeds a Bachelor's); track record facts (150+, 4x, $100M+, 82%) supported but the degree point is missing; 'proving his capability' is evaluative"
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Permit to fail, balanced teams, core values from the profile and stories"
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership Philosophy facts (empathy, clarity, rigor, 4x), Collective Ownership and Sustainable Leadership stories, all supported"
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership Philosophy (4x, psychological safety, decisions closest to the work) and Sustainable Leadership, supported"
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Permit to fail, balanced teams, core values, supported"
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Permit to fail, balanced teams, teaches teams to fish, core values, supported"
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership Philosophy, Sustainable Leadership, Collective Ownership, Decentralized Decision-Making, supported"
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership Philosophy (4x), servant leadership and decentralization, sustainable leadership, supported"
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Permit to fail, balanced teams, core values, builder's mindset with a coach's heart, supported"
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Permit to fail, balanced teams, teaches teams to fish, core values, builder/coach, supported"
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership Philosophy (4x), 150-person CIC, sustainable leadership, brainstorming and decentralization, supported"
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Gives no example; asks a clarifying question that doesn't fit the request"
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Recasts the Collective Ownership success story (an inherited hierarchical culture he fixed) as his leadership not working; 'transformation wasn't immediate' is unsupported"
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "'What I Learned About Assumptions' data-exposure incident, a corpus failure story, told accurately with his accountability"
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Assumptions data-exposure incident told accurately, with IAM and environment verification lessons"
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern quality crisis, which the corpus presents as a failure he owned; details (tests after code, vague backlog, SMART stories, TDD experts) supported"
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Decentralized Decision-Making: the story's own Situation records the model not taking hold at first (decisions drifting upward, enforcement needed several times); told accurately"
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Assumptions data-exposure incident told accurately, including root cause and the tester's removal"
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern quality crisis told accurately (engineer solutioning around stories, audit, SMART backlog, coaching)"
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Assumptions data-exposure incident told accurately; lessons (IAM, environment verification, PII scrubbing, risk ownership) supported"
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Assumptions data-exposure incident told accurately; day-one responsibilities supported"
+ }
+]
