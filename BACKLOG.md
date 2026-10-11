@@ -146,6 +146,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-294](#mattgpt-294) | Split MATT_DNA by responsibility: background may orient, not substitute for evidence | Blocked | Medium | Refactor | October 11, 2026 |
 | [MATTGPT-295](#mattgpt-295) | Timeline ERA_ORDER hardcodes 5 eras; "Technical Foundations & Enterprise Integration" (9 stories) sorts last | Open | Medium | Bug | October 11, 2026 |
 | [MATTGPT-296](#mattgpt-296) | STANDARD_DELTA's GOOD example ends with "Want me to dig deeper?", contradicting ADR 035 | Open | Low | Bug | October 11, 2026 |
+| [MATTGPT-297](#mattgpt-297) | Dog-stereotype humor ("good boy") is allowed in loading messages only; nothing checks that answers stay free of it | Open | Low | Test | October 11, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -2585,6 +2586,27 @@ No implementation until the decision is recorded here.
 **Verified Oct 11, 2026:** the example under "GOOD (do this):" in `STANDARD_DELTA` ends with "Want me to dig deeper?". ADR 035 removed closing offers, and the MATTGPT-275 Red (3a682ec) lists this example as old language. An example teaches the model to close with an offer.
 
 **Overlaps:** the MATTGPT-258 Red (fbf6bf6) lists this example's figures ("12 countries", "40% faster", "60% of") as Green targets to remove. MATTGPT-275's tool prompt may replace `STANDARD_DELTA` outright. Whichever lands first takes the line.
+
+---
+
+### MATTGPT-297
+**Dog-stereotype humor ("good boy") is allowed in loading messages only; nothing checks that answers stay free of it**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Test
+- **File:** `tests/eval_rag_quality.py`, `tests/test_structural_assertions.py`
+- **Logged:** October 11, 2026
+
+**Decision (Matt, Oct 11, 2026):** "Tail wagging, almost there..." and "Good boy mode activated..." in `ui/components/thinking_indicator.py` stay. Light dog humor is allowed in thinking-indicator loading messages only, never in Agy's answers. The design spec's doc 05 DON'T list, which bans "good boy" and dog stereotypes, is being updated to say so (design-spec session).
+
+**Verified Oct 11, 2026:** outside `archive/`, `git grep -i 'good boy\|tail wag'` finds only those two lines; no prompt or opener contains either. `grep -ri` over `docs/evidence/` and `probes/output/` finds neither in any recorded answer.
+
+**Fix:** two checks, so a stray one is caught automatically:
+1. **Answers (golden eval):** every answer is checked for "good boy" and similar dog-stereotype phrases, next to the existing `check_meta_commentary()` in `tests/eval_rag_quality.py`. A model answer can only be checked where answers are generated.
+2. **Source (structural, with MATTGPT-258):** the phrases appear nowhere in `ui/`, `services/`, `config/` or `utils/` string constants except `thinking_indicator.py`, so they can't reach a prompt or an opener.
+
+Kept off the roadmap's NOW.
 
 ---
 

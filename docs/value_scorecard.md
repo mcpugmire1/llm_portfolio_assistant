@@ -140,7 +140,8 @@ claims), -168 (slot 1 amplification), -250 (profile facts in Ask Agy, In
 Progress), -257, -263, -278, -096, -217 (pronoun grammar), -286 (meta-commentary
 strip deletes paragraphs), -290 (internal-content
 extraction), -293 (router out_of_scope copy), -294 (split MATT_DNA by
-responsibility), -296 (closing offer in a prompt example).
+responsibility), -296 (closing offer in a prompt example), -297 (no dog humor in
+answers).
 
 ## 4. Role Match
 
