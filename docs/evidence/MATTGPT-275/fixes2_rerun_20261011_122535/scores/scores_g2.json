@@ -1,0 +1,802 @@
+[
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years, says none current; matches profile."
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years, says none current; matches profile."
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "States no PMP, then lists the profile certifications with correct dates."
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Says not in stories, then pivots to PMO stories (RBC/JP Morgan) in place of the answer: explicit fail condition."
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none are current and lists the certifications with correct expiry facts; implies none current."
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none are current and lists the certifications with correct expiry facts; implies none current."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years, says none current; matches profile."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years, says none current; matches profile."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "States no PMP, then lists the profile certifications with correct dates."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Only 'That isn't in Matt's stories.': no clear 'no PMP' and no certifications listed, as the expected outcome requires."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none are current and lists the certifications with correct expiry facts; implies none current."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none are current and lists the certifications with correct expiry facts; implies none current."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years, says none current; matches profile."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years, says none current; matches profile."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Only 'That isn't in Matt's stories.': no clear 'no PMP' and no certifications listed, as the expected outcome requires."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "States no PMP, then lists the profile certifications with correct dates."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none are current and lists the certifications with correct expiry facts; implies none current."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none are current and lists the certifications with correct expiry facts; implies none current."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years, says none current; matches profile."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years, says none current; matches profile."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "States no PMP, then lists the profile certifications with correct dates."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Only 'That isn't in Matt's stories.': no clear 'no PMP' and no certifications listed, as the expected outcome requires."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none are current and lists the certifications with correct expiry facts; implies none current."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says 'None of Matt's certifications are current.': correct answer, no listing but materially correct referent (turn 1 certifications)."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years, says none current; matches profile."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years, says none current; matches profile."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "States no PMP, then lists the profile certifications with correct dates."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Only 'That isn't in Matt's stories.': no clear 'no PMP' and no certifications listed, as the expected outcome requires."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none are current and lists the certifications with correct expiry facts; implies none current."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none are current and lists the certifications with correct expiry facts; implies none current."
+ },
+ {
+  "case": "c04",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years, says none current; matches profile."
+ },
+ {
+  "case": "c04",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years, says none current; matches profile."
+ },
+ {
+  "case": "c04",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Only 'That isn't in Matt's stories.': no clear 'no PMP' and no certifications listed, as the expected outcome requires."
+ },
+ {
+  "case": "c04",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "States no PMP, then lists the profile certifications with correct dates."
+ },
+ {
+  "case": "c04",
+  "run": 6,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none current, lists AWS and SAFe with correct dates (omits Oracle); no implication any current."
+ },
+ {
+  "case": "c04",
+  "run": 6,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none are current and lists the certifications with correct expiry facts; implies none current."
+ },
+ {
+  "case": "c04",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years, says none current; matches profile."
+ },
+ {
+  "case": "c04",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years, says none current; matches profile."
+ },
+ {
+  "case": "c04",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "States no PMP, then lists the profile certifications with correct dates."
+ },
+ {
+  "case": "c04",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Only 'That isn't in Matt's stories.': no clear 'no PMP' and no certifications listed, as the expected outcome requires."
+ },
+ {
+  "case": "c04",
+  "run": 7,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none are current and lists the certifications with correct expiry facts; implies none current."
+ },
+ {
+  "case": "c04",
+  "run": 7,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none are current and lists the certifications with correct expiry facts; implies none current."
+ },
+ {
+  "case": "c04",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years, says none current; matches profile."
+ },
+ {
+  "case": "c04",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years, says none current; matches profile."
+ },
+ {
+  "case": "c04",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "States no PMP, then lists the profile certifications (AWS dates correct, SAFe expired, Oracle exams); none current."
+ },
+ {
+  "case": "c04",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Says not in stories, then pivots to PMO stories (RBC/JP Morgan) in place of the answer: explicit fail condition."
+ },
+ {
+  "case": "c04",
+  "run": 8,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none current, AWS dates correct, 'among others... all expired'; correct."
+ },
+ {
+  "case": "c04",
+  "run": 8,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none are current and lists the certifications with correct expiry facts; implies none current."
+ },
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years, says none current; matches profile."
+ },
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years, says none current; matches profile."
+ },
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Says not in stories, then pivots to PMO stories (RBC/JP Morgan) in place of the answer: explicit fail condition. (RBC PMO story)"
+ },
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "States no PMP, lists the four profile certifications without dates, says none current; correct."
+ },
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none are current and lists the certifications with correct expiry facts; implies none current."
+ },
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none are current and lists the certifications with correct expiry facts; implies none current."
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years, says none current; matches profile."
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years, says none current; matches profile."
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Only 'That isn't in Matt's stories.': no clear 'no PMP' and no certifications listed, as the expected outcome requires."
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "States no PMP, then lists the profile certifications with correct dates."
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none current, AWS dates correct, 'among others, but all have expired'; correct."
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none are current and lists the certifications with correct expiry facts; implies none current."
+ },
+ {
+  "case": "c05",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Restates Matt's supported sabbatical / active-search sentence; no unsupported facts."
+ },
+ {
+  "case": "c05",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Draws on transition-story/career-intent stories (Accenture chapter closed, engineer to Director of CIC, MattGPT, target roles, available immediately); facts supported. 4x, zero-defect, $100M+ also supported (why-hire-matt)."
+ },
+ {
+  "case": "c05",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Answers comparison via cross-industry breadth; CIC 0-150+, 4x, zero-defect, MattGPT solo at team velocity, JP Morgan I&AM PMO for 341 apps all supported; Role Match close appropriate (hiring signal)."
+ },
+ {
+  "case": "c05",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Disparages in-house candidates: 'Unlike someone who stayed in-house, Matt has a proven track record of ...' denies them a track record rather than comparing breadth. ('building capabilities that last beyond the engagement'); facts otherwise supported."
+ },
+ {
+  "case": "c05",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Draws on transition-story/career-intent stories (Accenture chapter closed, engineer to Director of CIC, MattGPT, target roles, available immediately); facts supported."
+ },
+ {
+  "case": "c05",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Restates Matt's supported sabbatical / active-search sentence; no unsupported facts. 'Software Engineer to Director' close to corpus 'engineer to Director'."
+ },
+ {
+  "case": "c05",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Conflates the JP Morgan-only 12-country rollout with RBC, Capital One and HSBC (Capital One/HSBC work was not payments, and only JP Morgan platforms spanned 12 countries per why-hire-matt): materially incorrect, fails Honest. ('rolled out enterprise payment platforms across 12 countries for clients like JP Morgan, RBC, Capital One, and HSBC')."
+ },
+ {
+  "case": "c05",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Addresses comparison via adapting to different environments; flat structure, peer evaluation, 4-6 hires/week, JP Morgan 12-country payments, 341-app I&AM, MattGPT all supported; Role Match close appropriate. 'Managed risk effectively' is mild characterization."
+ },
+ {
+  "case": "c05",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Draws on transition-story/career-intent stories (Accenture chapter closed, engineer to Director of CIC, MattGPT, target roles, available immediately); facts supported. 'first pause in his career' supported."
+ },
+ {
+  "case": "c05",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Restates Matt's supported sabbatical / active-search sentence; no unsupported facts. Career arc engineer to CIC lead supported."
+ },
+ {
+  "case": "c05",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Disparages in-house candidates: 'Unlike someone who stayed in-house, Matt has a proven track record of ...' denies them a track record rather than comparing breadth. Also Conflates the JP Morgan-only 12-country rollout with RBC, Capital One and HSBC (Capital One/HSBC work was not payments, and only JP Morgan platforms spanned 12 countries per why-hire-matt): materially incorrect, fails Honest."
+ },
+ {
+  "case": "c05",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Contrasts diverse environments with in-house; CIC 150+, 4x, flat structure, near-zero attrition first two years, 341-app PMO in 3-month window all supported; Role Match and About Matt closes appropriate (hiring signal)."
+ },
+ {
+  "case": "c05",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Restates Matt's supported sabbatical / active-search sentence; no unsupported facts."
+ },
+ {
+  "case": "c05",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Draws on transition-story/career-intent stories (Accenture chapter closed, engineer to Director of CIC, MattGPT, target roles, available immediately); facts supported. 0 to 150+ supported."
+ },
+ {
+  "case": "c05",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Answers via breadth across industries (financial services, technology, logistics supported by Industry fields); CIC 0-150+, JP Morgan 341-app PMO roadmap, MattGPT solo velocity supported; Role Match close appropriate."
+ },
+ {
+  "case": "c05",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Disparages in-house candidates: 'Unlike someone who stayed in-house, Matt has a proven track record of ...' denies them a track record rather than comparing breadth. ('Unlike many who have remained in-house...'). Also redesigning payment systems across 12 countries for JPM, RBC, Capital One, HSBC is a conflation; dangling 'This project' reference."
+ },
+ {
+  "case": "c05",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Draws on transition-story/career-intent stories (Accenture chapter closed, engineer to Director of CIC, MattGPT, target roles, available immediately); facts supported."
+ },
+ {
+  "case": "c05",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Restates Matt's supported sabbatical / active-search sentence; no unsupported facts."
+ },
+ {
+  "case": "c05",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "'redesigning payment systems across 12 countries for clients like JP Morgan and RBC' attributes the JP Morgan-only 12-country figure to RBC: materially incorrect. Other facts (CIC, $100M+) supported."
+ },
+ {
+  "case": "c05",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Generic pitch that never addresses the in-house comparison or consulting breadth; facts (CIC flat structure, near-zero attrition, $100M+) supported."
+ },
+ {
+  "case": "c05",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Restates Matt's supported sabbatical / active-search sentence; no unsupported facts."
+ },
+ {
+  "case": "c05",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Draws on transition-story/career-intent stories (Accenture chapter closed, engineer to Director of CIC, MattGPT, target roles, available immediately); facts supported. 0-to-1 builder not maintainer supported."
+ },
+ {
+  "case": "c05",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Misattributes: after the Fiserv recovery ($8.5M, 3% under budget, $3M extension: supported) says 'This project allowed him to ship a complete product as a solo developer', tying the MattGPT result to Fiserv. Fails Honest."
+ },
+ {
+  "case": "c05",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Compares via breadth across industries; CIC 0-150+, 4x, zero-defect, $100M+, banking/healthcare/telecom, payments across 12 countries, servant leadership all supported. Vouching close noted but no fail condition."
+ },
+ {
+  "case": "c05",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Restates Matt's supported sabbatical / active-search sentence; no unsupported facts."
+ },
+ {
+  "case": "c05",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Draws on transition-story/career-intent stories (Accenture chapter closed, engineer to Director of CIC, MattGPT, target roles, available immediately); facts supported."
+ },
+ {
+  "case": "c05",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Answers via breadth across environments; CIC 150+, 4x, zero-defect, MattGPT solo velocity, JP Morgan I&AM PMO roadmap supported; Role Match close appropriate."
+ },
+ {
+  "case": "c05",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Disparages in-house candidates: 'Unlike someone who stayed in-house, Matt has a proven track record of ...' denies them a track record rather than comparing breadth. ('Unlike someone who may have stayed in a single organization, Matt has a proven track record of driving transformation and delivering real outcomes')."
+ },
+ {
+  "case": "c05",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Draws on transition-story/career-intent stories (Accenture chapter closed, engineer to Director of CIC, MattGPT, target roles, available immediately); facts supported."
+ },
+ {
+  "case": "c05",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Restates Matt's supported sabbatical / active-search sentence; no unsupported facts. Interest list (application modernization, agile transformation, innovation, leadership) matches corpus themes."
+ },
+ {
+  "case": "c05",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Conflates the JP Morgan-only 12-country rollout with RBC, Capital One and HSBC (Capital One/HSBC work was not payments, and only JP Morgan platforms spanned 12 countries per why-hire-matt): materially incorrect, fails Honest. Also asserts TDD/pipelines 'are often challenging to implement in traditional in-house settings', an unsupported claim aimed at in-house candidates."
+ },
+ {
+  "case": "c05",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Compares breadth vs single-organization candidates; CIC 150+, 4x, 341-app I&AM PMO, MattGPT MVP with Streamlit/Python/OpenAI embeddings, peer evaluation, flat structure, near-zero attrition all supported; Role Match and About Matt closes appropriate."
+ },
+ {
+  "case": "c05",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Draws on transition-story/career-intent stories (Accenture chapter closed, engineer to Director of CIC, MattGPT, target roles, available immediately); facts supported. RAG, semantic search, Python supported by MattGPT RAG story."
+ },
+ {
+  "case": "c05",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Restates Matt's supported sabbatical / active-search sentence; no unsupported facts."
+ },
+ {
+  "case": "c05",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Conflates the JP Morgan-only 12-country rollout with RBC, Capital One and HSBC (Capital One/HSBC work was not payments, and only JP Morgan platforms spanned 12 countries per why-hire-matt): materially incorrect, fails Honest. ('delivered global programs across 12 countries for clients like JP Morgan, RBC, Capital One, and HSBC, modernizing payment systems')."
+ },
+ {
+  "case": "c05",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Compares via breadth across industries (financial services, technology, logistics supported); CIC 0-150+, 341-app PMO after data breach, MattGPT solo velocity supported; Role Match close appropriate."
+ },
+ {
+  "case": "c05",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Draws on transition-story/career-intent stories (Accenture chapter closed, engineer to Director of CIC, MattGPT, target roles, available immediately); facts supported."
+ },
+ {
+  "case": "c05",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Restates Matt's supported sabbatical / active-search sentence; no unsupported facts."
+ },
+ {
+  "case": "c05",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "'modernized payment systems across 12 countries for clients like JP Morgan and HSBC': HSBC work was mortgage, and the 12-country rollout was JP Morgan's. Contradicted, fails Honest."
+ },
+ {
+  "case": "c05",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Compares via breadth across industries; CIC 150+, 4x, JP Morgan I&AM PMO roadmap, MattGPT solo velocity and transferability to multi-person teams, Georgia Tech innovation hub with solution relevance and client retention all supported; Role Match close appropriate."
+ }
+]

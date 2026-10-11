@@ -1,0 +1,802 @@
+[
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC scaling answer; facts (10-person pilot/4 to 150+, hiring engine, near-zero attrition, $100M+, 4X) match CIC, scaling-talent, leading-people and leadership-philosophy stories"
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS payment engine, no scaling carry-over; 40+, 135,000+, 180+, April 2011, Coalition Greenwich all in story"
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Answers about the Cloud Innovation Center (10-person pilot to 150+); its turn 2 discussed only JP Morgan ACCESS"
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC scaling answer; facts (10-person pilot/4 to 150+, hiring engine, near-zero attrition, $100M+, 4X) match CIC, scaling-talent, leading-people and leadership-philosophy stories; '4 to over 150' backed by leadership-philosophy story"
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS payment engine, no carry-over; facts match story; closing offer on technical challenges is deliverable"
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "JP Morgan ACCESS team 40+ (Accenture/JPM, Mumbai/Bangalore/US, Portsmouth NH) matches turn 2 engagement and story"
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC scaling answer; facts (10-person pilot/4 to 150+, hiring engine, near-zero attrition, $100M+, 4X) match CIC, scaling-talent, leading-people and leadership-philosophy stories"
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS and RBC Express cross-border work, both from stories; no carry-over; closing deliverable"
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Both turn 2 engagements: ACCESS 40+ and RBC team size not recorded, stated honestly; RBC facts in RBC stories"
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC scaling; four-channel hiring, 15-20 auditions, 4-6 weekly, team anchors, 4X, $100M+ all in leading-people/CIC stories"
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS payment engine, no carry-over; facts match story"
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Answers about Cloud Innovation Center team sizes; its turn 2 discussed only JP Morgan ACCESS"
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC scaling answer; facts (10-person pilot/4 to 150+, hiring engine, near-zero attrition, $100M+, 4X) match CIC, scaling-talent, leading-people and leadership-philosophy stories"
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS payment engine plus global payments gateway (12 countries), both JP Morgan stories; no carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Answers about Cloud Innovation Center (150+, hiring engine); its turn 2 discussed ACCESS and the gateway, not CIC"
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC scaling answer; facts (10-person pilot/4 to 150+, hiring engine, near-zero attrition, $100M+, 4X) match CIC, scaling-talent, leading-people and leadership-philosophy stories"
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS payment engine, facts from story, no carry-over; closing deliverable"
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS team 40+ with onshore/offshore locations, matches turn 2 engagement and story"
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC scaling answer; facts (10-person pilot/4 to 150+, hiring engine, near-zero attrition, $100M+, 4X) match CIC, scaling-talent, leading-people and leadership-philosophy stories"
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS payment engine, facts match story, no carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Answers about Cloud Innovation Center ('initial team of 4' to 150+); turn 2 discussed only ACCESS"
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC scaling answer; facts (10-person pilot/4 to 150+, hiring engine, near-zero attrition, $100M+, 4X) match CIC, scaling-talent, leading-people and leadership-philosophy stories"
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS payment engine, facts match story incl. transaction monitoring; closing deliverable"
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS team 40+ blended Accenture/JPM, matches turn 2 engagement"
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC scaling answer; facts (10-person pilot/4 to 150+, hiring engine, near-zero attrition, $100M+, 4X) match CIC, scaling-talent, leading-people and leadership-philosophy stories"
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "ACCESS and gateway facts correct, but closes with 'improving efficiency, compliance, and client satisfaction': no ACCESS story records improved client satisfaction as a result (fails Honest)"
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Answers about Cloud Innovation Center teams; turn 2 discussed ACCESS and the payments gateway"
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC scaling answer; facts (10-person pilot/4 to 150+, hiring engine, near-zero attrition, $100M+, 4X) match CIC, scaling-talent, leading-people and leadership-philosophy stories"
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS payment engine, facts match story, no carry-over; closing deliverable"
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS team 40+ from story, matches turn 2 engagement"
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC scaling answer; facts (10-person pilot/4 to 150+, hiring engine, near-zero attrition, $100M+, 4X) match CIC, scaling-talent, leading-people and leadership-philosophy stories"
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS payment engine; role, 40+, monitoring, risk scores from story; no carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Answers about Cloud Innovation Center (10 to 150+); turn 2 discussed only ACCESS"
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC scaling answer; facts (10-person pilot/4 to 150+, hiring engine, near-zero attrition, $100M+, 4X) match CIC, scaling-talent, leading-people and leadership-philosophy stories"
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS payment engine, facts match story; closing deliverable"
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS blended team 40+ with locations, matches turn 2 engagement and story"
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC scaling answer; facts (10-person pilot/4 to 150+, hiring engine, near-zero attrition, $100M+, 4X) match CIC, scaling-talent, leading-people and leadership-philosophy stories"
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS and RBC Express cross-border, both from stories; no carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Answers about Cloud Innovation Center; turn 2 discussed ACCESS and RBC"
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC scaling answer; facts (10-person pilot/4 to 150+, hiring engine, near-zero attrition, $100M+, 4X) match CIC, scaling-talent, leading-people and leadership-philosophy stories"
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS payment engine, facts match story; closing on transaction monitoring deliverable"
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS team 40+ from story (gateway work is the same 40+ team per gateway story)"
+ },
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC scaling via leading-people story; facts (four channels, 15-20 auditions, 4-6 weekly, near-zero attrition) match"
+ },
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS payment engine, facts match story; closing deliverable"
+ },
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS team 40+ from story, matches turn 2 engagement"
+ },
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC scaling answer; facts (10-person pilot/4 to 150+, hiring engine, near-zero attrition, $100M+, 4X) match CIC, scaling-talent, leading-people and leadership-philosophy stories"
+ },
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS payment engine, facts match story, no carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Answers about Cloud Innovation Center (150+); turn 2 discussed only ACCESS; also 'reduced turnover' style claims off-topic"
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC scaling answer; facts (10-person pilot/4 to 150+, hiring engine, near-zero attrition, $100M+, 4X) match CIC, scaling-talent, leading-people and leadership-philosophy stories"
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS payment engine, facts match story; closing on compliance/security deliverable"
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS team 40+ with locations and Portsmouth NH, matches turn 2 engagement"
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC scaling answer; facts (10-person pilot/4 to 150+, hiring engine, near-zero attrition, $100M+, 4X) match CIC, scaling-talent, leading-people and leadership-philosophy stories"
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS plus Integrated Global Payments Interface, both JP Morgan stories; no carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Gives ACCESS 40+ but also the Cloud Innovation Center (10 to 150+), an engagement turn 2 did not discuss"
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC scaling answer; facts (10-person pilot/4 to 150+, hiring engine, near-zero attrition, $100M+, 4X) match CIC, scaling-talent, leading-people and leadership-philosophy stories"
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS payment engine, facts (risk scores, sanctions screening) from story; closing deliverable"
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS team 40+ from story, the only engagement turn 2 discussed"
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC scaling answer; facts (10-person pilot/4 to 150+, hiring engine, near-zero attrition, $100M+, 4X) match CIC, scaling-talent, leading-people and leadership-philosophy stories"
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS and RBC cross-border from stories; RBC client satisfaction framed as the situation's motive, supported; no carry-over"
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Leads with Cloud Innovation Center (150+), not in turn 2; omits RBC which turn 2 discussed"
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Covers both Fiserv and ACCESS from their stories; figures checked (ADA, DevOps, gateway, 135,000+, 180+)"
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Asks a clarifying question on dimension (scope or impact)"
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Covers both Fiserv and ACCESS from their stories; figures checked ($8.5M, 45, $500K, 3%, 47 criteria, 40+, April 2011)"
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names dimension (client base, global reach) and compares both; $8.5M, 2M+, 15 FIs, 45, 40+, 135,000+ accurate"
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Covers both Fiserv and ACCESS from their stories; figures checked ($500K, 3%, $45M first month, 40+)"
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names geographic reach/scale; both engagements' figures accurate incl. 45 vs 40+ teams"
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Covers both Fiserv and ACCESS from their stories; figures checked; minor compression of deploy frequency (less-than-monthly to weekly-to-monthly) not material"
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names client base/global reach; $8.5M, 2M+, 15 FIs, 135,000+, 180+ accurate"
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Covers both Fiserv and ACCESS from their stories; figures checked (DevOps, recovery, 40+, 135,000+)"
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names global reach and client base; figures incl. $45M and 99.97% uptime accurate"
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Covers both Fiserv and ACCESS from their stories; figures checked (ADA, DevOps, 12-country gateway)"
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names global scale; Fiserv 45/$8.5M/2M+ and ACCESS 40+/135,000+/180+ accurate"
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Covers both Fiserv and ACCESS from their stories; figures checked ($8.5M, $500K, $3M extension)"
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names client base and geographic scope; 45 and 40+ teams and other figures accurate"
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Covers both Fiserv and ACCESS from their stories; figures checked (2M+, 15 FIs, $500K, 3%)"
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names global scale/reach; both engagements described accurately"
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Covers both Fiserv and ACCESS from their stories; figures checked (lead time 1 day to 1 week, $500K, 3%, 40+)"
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names global reach and client base; $8.5M, 2M+, 45, 3 vendors, 135,000+ accurate"
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Covers both Fiserv and ACCESS from their stories; figures checked (seven months in, Omaha, 45, 3 vendors, April 2011)"
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names client reach and geographic scope; minor wording '45-member team, including 3 external vendors' not material to comparison"
+ },
+ {
+  "case": "c12",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Covers both Fiserv and ACCESS from their stories; figures checked (ADA, DevOps cadence, 40+, Bottomline)"
+ },
+ {
+  "case": "c12",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names client base/global reach; figures accurate"
+ },
+ {
+  "case": "c12",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Covers both Fiserv and ACCESS from their stories; figures checked ($8.5M, $500K, $3M extension, entitlement days to minutes)"
+ },
+ {
+  "case": "c12",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names broader global reach; figures accurate ('40 engineers' minor)"
+ },
+ {
+  "case": "c12",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Covers both Fiserv and ACCESS from their stories; figures checked ($8.5M, 2M+, 45, $500K)"
+ },
+ {
+  "case": "c12",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names global reach; figures accurate"
+ },
+ {
+  "case": "c12",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Covers both Fiserv and ACCESS from their stories; figures checked (seven months, 45, 3 vendors, ADA/AODA, April 2011)"
+ },
+ {
+  "case": "c12",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names global scale; 135,000+, 180+, 2M+, 15 FIs accurate"
+ },
+ {
+  "case": "c12",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Covers both Fiserv and ACCESS from their stories; figures checked ('180 countries' vs 180+ minor)"
+ },
+ {
+  "case": "c12",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names client reach and global scale; figures accurate"
+ },
+ {
+  "case": "c12",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Covers both Fiserv and ACCESS from their stories; figures checked (47 criteria, 3%, 40+, gateway)"
+ },
+ {
+  "case": "c12",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names global reach and complexity; 40+, 45, 2M+, 15 FIs accurate"
+ },
+ {
+  "case": "c12",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Covers both Fiserv and ACCESS from their stories; figures checked ($255K savings, 47 criteria, 45, 3 vendors)"
+ },
+ {
+  "case": "c12",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Asks a clarifying question naming team, clients, impact"
+ },
+ {
+  "case": "c12",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Covers both Fiserv and ACCESS from their stories; figures checked (DevOps, $8.5M recovery, Bottomline)"
+ },
+ {
+  "case": "c12",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names number of clients and geographic reach; figures accurate"
+ },
+ {
+  "case": "c12",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Covers both Fiserv and ACCESS from their stories; figures checked (lead time and deploy frequency exact, 40+, April 2011)"
+ },
+ {
+  "case": "c12",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Asks a clarifying question naming team, budget, impact"
+ },
+ {
+  "case": "c12",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Covers both Fiserv and ACCESS from their stories; figures checked (DevOps, $8.5M, 3%, MAC, RBAC)"
+ },
+ {
+  "case": "c12",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names global reach and client base; $45M, 99.97%, 45, 40+ accurate"
+ }
+]

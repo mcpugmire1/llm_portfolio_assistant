@@ -1,0 +1,802 @@
+[
+ {
+  "case": "x1",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated ('That isn't in Matt's stories'); supported: Cendant Mortgage, financial services industry (Industry 'Financial Services / Banking'); supported: mainframe underwriting system modernization (Cendant story Situation/Result). Not framed as real estate. Note: duplicated sentence, wording issue only."
+ },
+ {
+  "case": "x1",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('Nothing I know about Matt covers that'); no corpus story or profile entry covers real estate (grep 'real estate' empty; only Cendant Mortgage, Industry Financial Services / Banking). No other claims."
+ },
+ {
+  "case": "x1",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('That isn't in Matt's stories'); no corpus story or profile entry covers real estate (grep 'real estate' empty; only Cendant Mortgage, Industry Financial Services / Banking). No other claims."
+ },
+ {
+  "case": "x1",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('Nothing I know about Matt covers that'); no corpus story or profile entry covers real estate (grep 'real estate' empty; only Cendant Mortgage, Industry Financial Services / Banking). No other claims."
+ },
+ {
+  "case": "x1",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('That isn't in Matt's stories'); no corpus story or profile entry covers real estate (grep 'real estate' empty; only Cendant Mortgage, Industry Financial Services / Banking). No other claims."
+ },
+ {
+  "case": "x1",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('Nothing I know about Matt covers that'); no corpus story or profile entry covers real estate (grep 'real estate' empty; only Cendant Mortgage, Industry Financial Services / Banking). No other claims."
+ },
+ {
+  "case": "x1",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated ('That isn't in Matt's stories'); supported: Cendant Mortgage, financial services industry (Industry 'Financial Services / Banking'); supported: mainframe underwriting system modernization (Cendant story Situation/Result). Not framed as real estate. Note: duplicated sentence, wording issue only."
+ },
+ {
+  "case": "x1",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('Nothing I know about Matt covers that'); no corpus story or profile entry covers real estate (grep 'real estate' empty; only Cendant Mortgage, Industry Financial Services / Banking). No other claims."
+ },
+ {
+  "case": "x1",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated ('That isn't in Matt's stories'); supported: Cendant Mortgage, financial services industry (Industry 'Financial Services / Banking'); supported: mainframe underwriting system modernization (Cendant story Situation/Result). Not framed as real estate. "
+ },
+ {
+  "case": "x1",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('I couldn't find any stories about Matt working in real estate'); no corpus story or profile entry covers real estate (grep 'real estate' empty; only Cendant Mortgage, Industry Financial Services / Banking). No other claims."
+ },
+ {
+  "case": "x1",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('Nothing I know about Matt covers that'); no corpus story or profile entry covers real estate (grep 'real estate' empty; only Cendant Mortgage, Industry Financial Services / Banking). No other claims."
+ },
+ {
+  "case": "x1",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('That isn't in Matt's stories'); no corpus story or profile entry covers real estate (grep 'real estate' empty; only Cendant Mortgage, Industry Financial Services / Banking). No other claims."
+ },
+ {
+  "case": "x1",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('Nothing I know about Matt covers that'); no corpus story or profile entry covers real estate (grep 'real estate' empty; only Cendant Mortgage, Industry Financial Services / Banking). No other claims."
+ },
+ {
+  "case": "x1",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('That isn't in Matt's stories'); no corpus story or profile entry covers real estate (grep 'real estate' empty; only Cendant Mortgage, Industry Financial Services / Banking). No other claims."
+ },
+ {
+  "case": "x1",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated ('That isn't in Matt's stories'); supported: Cendant Mortgage, financial services industry (Industry 'Financial Services / Banking'); supported: mainframe underwriting system modernization (Cendant story Situation/Result). Not framed as real estate. Note: duplicated sentence, wording issue only."
+ },
+ {
+  "case": "x1",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('Nothing I know about Matt covers that'); no corpus story or profile entry covers real estate (grep 'real estate' empty; only Cendant Mortgage, Industry Financial Services / Banking). No other claims."
+ },
+ {
+  "case": "x1",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('I didn't find any stories related to real estate'); no corpus story or profile entry covers real estate (grep 'real estate' empty; only Cendant Mortgage, Industry Financial Services / Banking). No other claims."
+ },
+ {
+  "case": "x1",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('That isn't in Matt's stories'); no corpus story or profile entry covers real estate (grep 'real estate' empty; only Cendant Mortgage, Industry Financial Services / Banking). No other claims."
+ },
+ {
+  "case": "x1",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('I couldn't find any stories about Matt working in real estate'); no corpus story or profile entry covers real estate (grep 'real estate' empty; only Cendant Mortgage, Industry Financial Services / Banking). No other claims."
+ },
+ {
+  "case": "x1",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('That isn't in Matt's stories'); no corpus story or profile entry covers real estate (grep 'real estate' empty; only Cendant Mortgage, Industry Financial Services / Banking). No other claims."
+ },
+ {
+  "case": "x2",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('That isn't in Matt's stories'); stated fact: no SAP story (grep SAP over corpus and profile empty). No other claims."
+ },
+ {
+  "case": "x2",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('Nothing I know about Matt covers that'); stated fact: no SAP story (grep SAP over corpus and profile empty). No other claims."
+ },
+ {
+  "case": "x2",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('Nothing I know about Matt covers that'); stated fact: no SAP story (grep SAP over corpus and profile empty). No other claims."
+ },
+ {
+  "case": "x2",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('That isn't in Matt's stories'); stated fact: no SAP story (grep SAP over corpus and profile empty). No other claims."
+ },
+ {
+  "case": "x2",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('No stories mention Matt working with SAP'); stated fact: no SAP story (grep SAP over corpus and profile empty). No other claims. Generic 'feel free to ask' close, not an engage close."
+ },
+ {
+  "case": "x2",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated ('That isn't in Matt's stories', duplicated); supported: Payment Engine Behind JP Morgan ACCESS, JP Morgan Chase, financial services, 2009 to 2012 (story dates 2009-08 to 2012-06, Industry Financial Services / Banking). Not framed as SAP."
+ },
+ {
+  "case": "x2",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('That isn't in Matt's stories'); stated fact: no SAP story (grep SAP over corpus and profile empty). No other claims."
+ },
+ {
+  "case": "x2",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('Nothing I know about Matt covers that'); stated fact: no SAP story (grep SAP over corpus and profile empty). No other claims."
+ },
+ {
+  "case": "x2",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated ('That isn't in Matt's stories', duplicated); supported: JP Morgan Chase, Financial Services industry; supported: managed compliance and data migration projects (Navigating Multi-Jurisdictional Compliance story: owned compliance coordination; Orchestrating Data Migration Tranche Rollout: led migration). Not framed as SAP."
+ },
+ {
+  "case": "x2",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('Nothing I know about Matt covers that'); stated fact: no SAP story (grep SAP over corpus and profile empty). No other claims."
+ },
+ {
+  "case": "x2",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('That isn't in Matt's stories'); stated fact: no SAP story (grep SAP over corpus and profile empty). No other claims."
+ },
+ {
+  "case": "x2",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('Nothing I know about Matt covers that'); stated fact: no SAP story (grep SAP over corpus and profile empty). No other claims."
+ },
+ {
+  "case": "x2",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated ('That isn't in Matt's stories', duplicated); supported: JP Morgan Chase, financial services; supported: managed multi-jurisdictional compliance (global payments platform rollout story) and data migration across 12 countries (Data Migration Tranche story). Not framed as SAP."
+ },
+ {
+  "case": "x2",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('Nothing I know about Matt covers that'); stated fact: no SAP story (grep SAP over corpus and profile empty). No other claims."
+ },
+ {
+  "case": "x2",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('That isn't in Matt's stories'); stated fact: no SAP story (grep SAP over corpus and profile empty). No other claims."
+ },
+ {
+  "case": "x2",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('Nothing I know about Matt covers that'); stated fact: no SAP story (grep SAP over corpus and profile empty). No other claims."
+ },
+ {
+  "case": "x2",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('That isn't in Matt's stories'); stated fact: no SAP story (grep SAP over corpus and profile empty). No other claims."
+ },
+ {
+  "case": "x2",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('Nothing I know about Matt covers that'); stated fact: no SAP story (grep SAP over corpus and profile empty). No other claims."
+ },
+ {
+  "case": "x2",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('That isn't in Matt's stories'); stated fact: no SAP story (grep SAP over corpus and profile empty). No other claims."
+ },
+ {
+  "case": "x2",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('Nothing I know about Matt covers that'); stated fact: no SAP story (grep SAP over corpus and profile empty). No other claims."
+ },
+ {
+  "case": "x3",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "supported: absence stated ('That isn't in Matt's stories'); supported: ACCESS payment engine, JP Morgan Chase, Financial Services / Banking, global corporate banking portal. Fails x3 rule: Cendian webMethods B2B Trading Networks not named."
+ },
+ {
+  "case": "x3",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'Matt has worked on trading platforms' (stated fact: trading-platform questions are not on record; Cendian Trading Networks is B2B EDI document exchange, not financial trading); supported: Cendian 300+ carriers, 80+ countries, trading profiles and exchange documents in webMethods B2B Trading Networks, EDI/XML/portal paths; supported: ACCESS payment engine, 135,000+ clients, 180+ countries, APAC/EMEA/Americas compliance. Fails on the trading-platform claim."
+ },
+ {
+  "case": "x3",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: ACCESS offered as 'a great example' answering 'worked on trading platforms' (stated fact: ACCESS is treasury services/cash management, not a trading platform); supported: 135,000+ clients, 180+ countries, Technology Delivery Lead, ACH/wire/FX/EFTPS modules, team of 40+, Bottomline WebSeries, April 2011 launch, Coalition Greenwich #1. Cendian not named. Fail."
+ },
+ {
+  "case": "x3",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'Matt has indeed worked on trading platforms' with ACCESS and RBC as the evidence (stated facts: ACCESS and RBC Day2Day are not trading); supported: ACCESS facts (WebSeries, 135,000+, 180+, payment modules); supported: RBC WebSeries assessment avoided a costly investment. Cendian not named. Fail."
+ },
+ {
+  "case": "x3",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'Matt has worked on trading platforms' and 'efficient logistics and trading operations' (Cendian Trading Networks is B2B document exchange, not trading); supported: webMethods B2B Trading Networks configuration, EDI/flat file/XML clearinghouse, Java and Integration Server, CIDX standards, plastics client onboarding via CIDX validated against live shipment planning. Names Cendian but makes the trading-platform claim. Fail."
+ },
+ {
+  "case": "x3",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'Matt has indeed worked on trading platforms'; supported: Cendian Trading Networks configuration, CIDX, canonical shape for the TMS, 300+ carriers, 80+ countries. Trading-platform claim fails x3."
+ },
+ {
+  "case": "x3",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: ACCESS presented as 'a strong example' of trading platform work (stated fact: not a trading platform); supported: 135,000+, 180+, Technology Delivery Lead, modules, WebSeries customization, team of 40+ across US/Mumbai/Bangalore, embedded at Bottomline, April 2011, Coalition Greenwich, Aug 2009 to Jun 2012; minor unsupported: 'next-generation global payments and treasury services platform' wording ok, '40 engineers' (story says team of 40+ resources). Cendian not named. Fail."
+ },
+ {
+  "case": "x3",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: ACCESS offered as 'a relevant example' of trading platforms (stated fact); supported: treasury services and cash management portal, WebSeries customization, Technology Delivery Lead, 40+ team, modules, 135,000+, 180+, Coalition Greenwich. Cendian not named. Fail."
+ },
+ {
+  "case": "x3",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'a notable example of Matt's involvement in trading and financial platforms' for ACCESS (stated fact); supported: ACCESS Next Generation, treasury services/cash management, WebSeries, 135,000+, 180+, 40+ team, ACH/wire/FX/EFTPS, MAC security layer, real-time global reporting, trade finance visibility, April 2011, Coalition Greenwich. Cendian not named. Fail."
+ },
+ {
+  "case": "x3",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'Matt has indeed worked on trading platforms' at JP Morgan ACCESS (stated fact); supported: ACCESS facts, MAC layer, contextual help, payment-type RBAC; supported: Cendian webMethods B2B Trading Networks, EDI/XML/flat files. Names Cendian but makes trading-platform claim. Fail."
+ },
+ {
+  "case": "x3",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'Matt has indeed worked on trading platforms' (Cendian) and ACCESS 'aligns closely with the complexities of trading platform integration' (stated facts); supported: Cendian Trading Networks configuration, EDI/flat file/XML, web services/Java/DB queries, CIDX; supported: ACCESS payment engine, bespoke modules and security controls. Fail."
+ },
+ {
+  "case": "x3",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'Matt has worked on trading platforms' (Cendian); supported: 300+ carriers, 80+ countries, Trading Networks, EDI/XML/flat file; supported: ACCESS bespoke payment modules, 135,000+, 180+. Fail."
+ },
+ {
+  "case": "x3",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'Matt has worked on trading platforms' and 'enhancing the trading platform's functionality' (Cendian is B2B document exchange, not trading); supported: 300+ carriers, 80+ countries, Trading Networks, Java/Integration Server, CIDX, canonical objects, portal, in-house document generation. Fail."
+ },
+ {
+  "case": "x3",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported framing: ACCESS offered as the answer to trading platforms, hedged 'wasn't a trading platform in the traditional sense' (stated fact: not a trading platform at all; no 'not on record'); supported: ACCESS modules, 135,000+, 180+, Coalition Greenwich, 40+ team, Bottomline/WebSeries. Cendian not named. Fail."
+ },
+ {
+  "case": "x3",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "supported: absence stated ('That isn't in Matt's stories', duplicated); supported: ACCESS Next Generation payment engine and multi-jurisdictional compliance, JP Morgan Chase, Financial Services / Banking. Fails x3 rule: Cendian webMethods B2B Trading Networks not named."
+ },
+ {
+  "case": "x3",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'Matt has worked on trading platforms, particularly in the context of financial services and logistics' (stated facts); supported: Cendian Trading Networks, Java/webMethods, CIDX; supported: ACCESS 135,000+, 180+, modules, compliance mapping, regional data visibility framework. Fail."
+ },
+ {
+  "case": "x3",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "supported: absence stated ('That isn't in Matt's stories'); supported: JP Morgan Chase ACCESS Next Generation, global corporate banking portal. Fails x3 rule: Cendian webMethods B2B Trading Networks not named."
+ },
+ {
+  "case": "x3",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'Matt worked on trading platforms during his time with Cendian' (stated fact); supported: 300+ carriers, 80+ countries, Trading Networks, X12 and EDIFACT, CIDX; supported: ACCESS 135,000+, 180+. Fail."
+ },
+ {
+  "case": "x3",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'These engagements demonstrate Matt's experience with trading and banking platforms' for ACCESS and RBC (stated facts: neither is trading); supported: ACCESS WebSeries, 135,000+, 180+, Technology Delivery Lead, modules, April 2011, Coalition Greenwich; supported: RBC Day2Day WebSeries gap/fit assessment. Cendian not named. Fail."
+ },
+ {
+  "case": "x3",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'Matt has indeed worked on trading platforms' (Cendian plastics onboarding); supported: plastics client onboarding on site, CIDX, Trading Networks profiles and flows, contract to live shipment planning; supported: ACCESS integration with FX engine, real-time global reporting. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: an ROI calculation method is asserted; no story or profile entry records how Matt calculated ROI (corpus says only that CIC 'proved ROI through consistent client results' and made ROI 'undeniable' via measured outcomes), and the answer never says the method is not on record. unsupported: 'calculating and managing ROI' and 'demonstrate how he calculated and improved ROI' (margin management framed as ROI calculation); unsupported: 'In his role as a Director' for the 2009-2017 engagement-margin work (story: Director level came with the CICs); supported: owned margin at JP Morgan, RBC, Fiserv, HSBC; resource pyramid, forecast/variance, change requests; JP Morgan CRM negative EAC, CEO-level visibility, follow-on request; Fiserv $8.5M, 3% under budget, $500K, $3M; two CICs, unbillable downtime, bench-first. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: an ROI calculation method is asserted; no story or profile entry records how Matt calculated ROI (corpus says only that CIC 'proved ROI through consistent client results' and made ROI 'undeniable' via measured outcomes), and the answer never says the method is not on record. unsupported: 'approached ROI calculation' / 'calculated ROI through direct cost savings' (no method on record); supported: CIC 4X velocity, zero-defect deployments, TDD and pipelines; Fortune 500 15-35% cost reduction via balanced teams; Fiserv $8.5M, 3% under budget, $500K, $3M, resource pyramid, change requests. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: an ROI calculation method is asserted; no story or profile entry records how Matt calculated ROI (corpus says only that CIC 'proved ROI through consistent client results' and made ROI 'undeniable' via measured outcomes), and the answer never says the method is not on record. unsupported: 'central to calculating and improving the ROI' (margin management framed as ROI calculation); supported: margin at JP Morgan, RBC, Fiserv, HSBC; JP Morgan negative-EAC CRM turnaround; Fiserv figures; loaded-rate promotion planning, travel booking, group hotel rates; CIC unbillable downtime, contractor approval, contractor conversion. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: an ROI calculation method is asserted; no story or profile entry records how Matt calculated ROI (corpus says only that CIC 'proved ROI through consistent client results' and made ROI 'undeniable' via measured outcomes), and the answer never says the method is not on record. unsupported: 'which included calculating ROI'; supported: CIC P&L, chargeability, unbillable downtime, contractor spend; Fiserv $8.5M, 3% under, $500K, $3M. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: an ROI calculation method is asserted; no story or profile entry records how Matt calculated ROI (corpus says only that CIC 'proved ROI through consistent client results' and made ROI 'undeniable' via measured outcomes), and the answer never says the method is not on record. unsupported: 'He calculated ROI by focusing on engagement margin, cost base, and delivery reputation' and partnership model 'demonstrating a strong ROI'; supported: CIC engagement model 'partnership over pursuit', $100M+ repeatable business; resource pyramid, change requests, promotion cost as margin event; Fiserv figures. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: an ROI calculation method is asserted; no story or profile entry records how Matt calculated ROI (corpus says only that CIC 'proved ROI through consistent client results' and made ROI 'undeniable' via measured outcomes), and the answer never says the method is not on record. unsupported: 'He calculated ROI by managing the engagement margin directly'; unsupported: 'In his role as a Director' for the 2009-2017 engagements; supported: JP Morgan, RBC, Fiserv, HSBC margin ownership, pyramid, forecast, contingency, change requests; JP Morgan negative EAC under CEO visibility; Fiserv figures. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: an ROI calculation method is asserted; no story or profile entry records how Matt calculated ROI (corpus says only that CIC 'proved ROI through consistent client results' and made ROI 'undeniable' via measured outcomes), and the answer never says the method is not on record. unsupported: 'Matt's ROI calculations were...' and 'These metrics were used to justify the investment in the Cloud Innovation Centers'; contradicted/garbled: 'In another engagement with JP Morgan' then credits the $8.5M recovery as part of it (the recovery is Fiserv); supported: CIC Standard of Value, Lean XP, 4X velocity, zero-defect code; resource pyramid, change requests; Fiserv 3% under budget, $500K. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: an ROI calculation method is asserted; no story or profile entry records how Matt calculated ROI (corpus says only that CIC 'proved ROI through consistent client results' and made ROI 'undeniable' via measured outcomes), and the answer never says the method is not on record. unsupported: 'To calculate ROI, Matt focused on protecting and improving the economics' (margin framed as ROI calculation); supported: margin at JP Morgan, RBC, Fiserv, HSBC; pyramid senior-early then offshore/nearshore; change request handling; travel and hotel discipline; Fiserv seven months in, 3%, $500K, $3M. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: an ROI calculation method is asserted; no story or profile entry records how Matt calculated ROI (corpus says only that CIC 'proved ROI through consistent client results' and made ROI 'undeniable' via measured outcomes), and the answer never says the method is not on record. unsupported: 'ROI calculations across multiple engagements' and CICs 'showcasing the ROI'; supported: margin at JP Morgan, RBC, Fiserv, HSBC 2009 to 2017; Fiserv figures; two CICs cost base, chargeability, contractor spend, bench-first, contractor conversion; $100M+ repeatable business; 4X velocity and zero-defect. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: an ROI calculation method is asserted; no story or profile entry records how Matt calculated ROI (corpus says only that CIC 'proved ROI through consistent client results' and made ROI 'undeniable' via measured outcomes), and the answer never says the method is not on record. unsupported: 'approach to calculating ROI involved...' ; supported: margin ownership 2009 to 2017; pyramid, forecast, contingency, change requests; JP Morgan negative EAC, CEO visibility, follow-on request; two CICs with 150+ practitioners, unbillable downtime, bench deployment. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: an ROI calculation method is asserted; no story or profile entry records how Matt calculated ROI (corpus says only that CIC 'proved ROI through consistent client results' and made ROI 'undeniable' via measured outcomes), and the answer never says the method is not on record. unsupported: 'Matt calculated ROI by focusing on financial accountability'; supported: margin at JP Morgan, RBC, Fiserv, HSBC; pyramid, forecast, change requests; Fiserv figures; two CICs cost base, chargeability, contractor spend, bench-first, contractor conversion. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: an ROI calculation method is asserted; no story or profile entry records how Matt calculated ROI (corpus says only that CIC 'proved ROI through consistent client results' and made ROI 'undeniable' via measured outcomes), and the answer never says the method is not on record. unsupported: 'Matt calculated ROI by focusing on measurable outcomes' and 'Matt's ROI calculation extended to the center's cost base'; supported: margin 2009 to 2017; Fiserv figures; CIC chargeability, bench deployment, contractor conversion; $100M+ repeatable business. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: an ROI calculation method is asserted; no story or profile entry records how Matt calculated ROI (corpus says only that CIC 'proved ROI through consistent client results' and made ROI 'undeniable' via measured outcomes), and the answer never says the method is not on record. unsupported: 'Matt's approach to calculating ROI involved protecting and improving the economics'; supported: margin across JP Morgan, RBC, Fiserv, HSBC; pyramid senior-early then offshore/nearshore; promotion cost as margin event; travel booking; Fiserv figures; CIC unbillable downtime, practitioner cost tied to billable demand. Also 'In his role as a Director' for those engagements: unsupported. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: an ROI calculation method is asserted; no story or profile entry records how Matt calculated ROI (corpus says only that CIC 'proved ROI through consistent client results' and made ROI 'undeniable' via measured outcomes), and the answer never says the method is not on record. unsupported: 'Matt calculated ROI by focusing on the economics of engagement margins and cost bases'; supported: pyramid across JP Morgan, RBC, Fiserv, HSBC 2009 to 2017; Fiserv figures; two CICs P&L, chargeability, billable demand; $100M+ repeatable business. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: an ROI calculation method is asserted; no story or profile entry records how Matt calculated ROI (corpus says only that CIC 'proved ROI through consistent client results' and made ROI 'undeniable' via measured outcomes), and the answer never says the method is not on record. unsupported: 'calculating ROI as part of managing engagement margins' and 'financial metrics, including ROI, were consistently met or exceeded'; supported: margin ownership at JP Morgan, RBC, Fiserv, HSBC; pyramid, forecast, variance, change requests, promotion cost; JP Morgan negative EAC turnaround; Fiserv figures. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: an ROI calculation method is asserted; no story or profile entry records how Matt calculated ROI (corpus says only that CIC 'proved ROI through consistent client results' and made ROI 'undeniable' via measured outcomes), and the answer never says the method is not on record. contradicted: JP Morgan negative-EAC recovery 'helped avoid $500K in penalties and secure a $3M contract extension' (story: those are the Fiserv results); unsupported: 'approach to calculating ROI was deeply embedded in the transformation work'; supported: CIC 4X velocity, zero-defect, TDD, $100M+; CIC P&L in Atlanta and Tampa, chargeability, contractor spend. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: an ROI calculation method is asserted; no story or profile entry records how Matt calculated ROI (corpus says only that CIC 'proved ROI through consistent client results' and made ROI 'undeniable' via measured outcomes), and the answer never says the method is not on record. unsupported: 'Matt calculated ROI by focusing on financial accountability'; supported: margin at JP Morgan, RBC, Fiserv, HSBC; pyramid, forecast, variance, scope changes; Fiserv figures; two CICs, bench-first, contractor conversion, denied external contractor request. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: an ROI calculation method is asserted; no story or profile entry records how Matt calculated ROI (corpus says only that CIC 'proved ROI through consistent client results' and made ROI 'undeniable' via measured outcomes), and the answer never says the method is not on record. unsupported: 'Matt's approach to calculating ROI' and 'methodology ... ensuring that every project delivered value that justified its investment'; supported: two CICs cost base, chargeability, unbillable downtime, bench deployment; pyramid and change requests at JP Morgan and Fiserv; Fiserv figures; $100M+ repeatable business. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: an ROI calculation method is asserted; no story or profile entry records how Matt calculated ROI (corpus says only that CIC 'proved ROI through consistent client results' and made ROI 'undeniable' via measured outcomes), and the answer never says the method is not on record. unsupported: 'demonstrate how Matt calculated and improved ROI'; supported: margin at JP Morgan, RBC, Fiserv, HSBC; pyramid, forecast variance, contingency release, change requests; JP Morgan CRM negative EAC reversed, follow-on request; Fiserv figures. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: an ROI calculation method is asserted; no story or profile entry records how Matt calculated ROI (corpus says only that CIC 'proved ROI through consistent client results' and made ROI 'undeniable' via measured outcomes), and the answer never says the method is not on record. unsupported: 'Matt calculated ROI by focusing on measurable client results' and 'central to his ROI calculation strategy'; supported: two CICs in Atlanta and Tampa, 4X velocity, zero-defect, $100M+, pair programming and TDD; seven engagements at JP Morgan, RBC, Fiserv, HSBC; pyramid, change requests; Fiserv figures; capability showcases and workshops. Fail."
+ },
+ {
+  "case": "x5",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('That isn't in Matt's stories'); no gaming-platform story (grep 'gaming' hits only metric gaming and team games)."
+ },
+ {
+  "case": "x5",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('I didn't find any stories indicating that Matt has worked on gaming platforms'); no gaming-platform story (grep 'gaming' hits only metric gaming and team games). supported: industries financial services, technology, transportation, telecommunications, aerospace, defense, healthcare, education (corpus Industry values). Generic 'feel free to ask' close, not an engage close."
+ },
+ {
+  "case": "x5",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated ('That isn't in Matt's stories', duplicated); supported: American Express Virtual Payments Platform, Industry Financial Services / Banking. Not framed as gaming."
+ },
+ {
+  "case": "x5",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('Nothing I know about Matt covers that'); no gaming-platform story (grep 'gaming' hits only metric gaming and team games)."
+ },
+ {
+  "case": "x5",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated ('That isn't in Matt's stories', duplicated); supported: American Express Virtual Payments Platform, Industry Financial Services / Banking; lowering barriers to adoption story. Not framed as gaming."
+ },
+ {
+  "case": "x5",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('Nothing I know about Matt covers that'); no gaming-platform story (grep 'gaming' hits only metric gaming and team games)."
+ },
+ {
+  "case": "x5",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('Nothing I know about Matt covers that'); no gaming-platform story (grep 'gaming' hits only metric gaming and team games)."
+ },
+ {
+  "case": "x5",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated ('That isn't in Matt's stories', duplicated); supported: American Express Virtual Payments Platform, Industry Financial Services / Banking; led adoption work with SDKs, documentation, sandbox, developer experience (Lowering Barriers story, Role Director). Not framed as gaming."
+ },
+ {
+  "case": "x5",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('Nothing I know about Matt covers that'); no gaming-platform story (grep 'gaming' hits only metric gaming and team games)."
+ },
+ {
+  "case": "x5",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated ('That isn't in Matt's stories', duplicated); supported: American Express Virtual Payments Platform, Industry Financial Services / Banking; platform adoption and client integration. Not framed as gaming."
+ },
+ {
+  "case": "x5",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('I couldn't find any evidence of Matt working on gaming platforms'); no gaming-platform story (grep 'gaming' hits only metric gaming and team games). supported: work for JP Morgan, American Express, RBC in financial services and platform development. Generic close, not an engage close."
+ },
+ {
+  "case": "x5",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('That isn't in Matt's stories'); no gaming-platform story (grep 'gaming' hits only metric gaming and team games)."
+ },
+ {
+  "case": "x5",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('Nothing I know about Matt covers that'); no gaming-platform story (grep 'gaming' hits only metric gaming and team games)."
+ },
+ {
+  "case": "x5",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated ('That isn't in Matt's stories', duplicated); supported: American Express Virtual Payments Platform, Industry Financial Services / Banking. Not framed as gaming."
+ },
+ {
+  "case": "x5",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('I couldn't find any stories related to Matt working on gaming platforms'); no gaming-platform story (grep 'gaming' hits only metric gaming and team games). supported: financial services, technology and software industries (Industry values). Generic close, not an engage close."
+ },
+ {
+  "case": "x5",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated ('That isn't in Matt's stories', duplicated); supported: American Express Virtual Payments Platform, Industry Financial Services / Banking. Not framed as gaming."
+ },
+ {
+  "case": "x5",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('That isn't in Matt's stories'); no gaming-platform story (grep 'gaming' hits only metric gaming and team games)."
+ },
+ {
+  "case": "x5",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('I couldn't find any information about Matt working on gaming platforms'); no gaming-platform story (grep 'gaming' hits only metric gaming and team games). supported: industries financial services, technology, transportation, telecommunications, aerospace, defense, healthcare, education (corpus Industry values). Generic 'feel free to ask' close, not an engage close."
+ },
+ {
+  "case": "x5",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: absence stated as not on record ('Nothing in Matt's work history indicates experience with gaming platforms'); no gaming-platform story (grep 'gaming' hits only metric gaming and team games). supported: financial services, banking, technology strategy; global payments (ACCESS), corporate banking (RBC), card portals (Fiserv)."
+ },
+ {
+  "case": "x5",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: absence stated ('That isn't in Matt's stories', duplicated); supported: American Express Virtual Payments Platform, Industry Financial Services / Banking; SDKs, sandbox, developer-friendly experience. Not framed as gaming. States explicitly it was not gaming."
+ }
+]

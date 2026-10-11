@@ -1,0 +1,802 @@
+[
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ team, April 2011, Coalition Greenwich #1) match story; RBC Express cross-border workflows match story"
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS team: blended 40+ Accenture/JPM across Mumbai, Bangalore, US, matches story; correctly says RBC stories record no team size"
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Answers only RBC challenges (WebSeries gap, mobile, cross-border); drops ACCESS, the primary engagement whose team was just given, without clarifying; facts themselves match RBC stories"
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ team, April 2011, Coalition Greenwich #1) match story; WebSeries out-of-box gap correct"
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS team: blended 40+ Accenture/JPM across Mumbai, Bangalore, US, matches story"
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Same ACCESS engagement: aggressive timelines, MAC-layer failure from missing unit tests, entitlement days-to-minutes; all in ACCESS stories"
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ team, April 2011, Coalition Greenwich #1) match story"
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS team: blended 40+ Accenture/JPM across Mumbai, Bangalore, US, matches story"
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Same ACCESS program: MAC-layer failure, legacy data migration, MAS/FSA/FINMA compliance; all in ACCESS stories"
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ team, April 2011, Coalition Greenwich #1) match story; sanctions/PEP screening and SSO in story"
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS team: blended 40+ Accenture/JPM across Mumbai, Bangalore, US, matches story"
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Same ACCESS program: timelines, legacy schema migration, jurisdictional compliance, entitlement overhaul; closing offer on compliance is supported"
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ team, April 2011, Coalition Greenwich #1) match story"
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS team: blended 40+ Accenture/JPM across Mumbai, Bangalore, US, matches story"
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Same ACCESS engagement: aggressive timelines, bespoke modules beyond platform, regional consolidation; facts from stories, soft on failures but correct referent"
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ team, April 2011, Coalition Greenwich #1) match story; RBC Express cross-border workflows match story"
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS team: blended 40+ Accenture/JPM across Mumbai, Bangalore, US, matches story; correctly says RBC stories record no team size"
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS (12-country gateway, timelines, Sev-1 incident response) and RBC WebSeries gap, both from stories and both discussed in turn 1"
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ team, April 2011, Coalition Greenwich #1) match story; Integrated Global Payments Interface across 12 countries matches gateway story"
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS team: blended 40+ Accenture/JPM across Mumbai, Bangalore, US, matches story"
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Same ACCESS engagement: WebSeries out-of-box gap, MAC-layer failure, migration; all in stories"
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ team, April 2011, Coalition Greenwich #1) match story; RBC Express cross-border workflows match story"
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Clarifying question naming both engagements from turn 1 (ACCESS and RBC); passes per D4"
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS (12 countries, Sev-1 response, timelines) and RBC WebSeries assessment, both from stories; closing offer supported"
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ team, April 2011, Coalition Greenwich #1) match story; RBC Express cross-border workflows match story"
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Clarifying question naming both engagements from turn 1 (ACCESS and RBC); passes per D4"
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS gateway complexity/timelines and RBC WebSeries assessment, both from stories; compliance closing offer supported"
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ team, April 2011, Coalition Greenwich #1) match story"
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS team: blended 40+ Accenture/JPM across Mumbai, Bangalore, US, matches story"
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Same ACCESS engagement: per-payment-type requirements, NACHA/tax formatting issues, MAC failure, build-vs-configure boundary; all in story"
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ team, April 2011, Coalition Greenwich #1) match story; compliance dashboards and transaction monitoring in ACCESS stories"
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS team: blended 40+ Accenture/JPM across Mumbai, Bangalore, US, matches story"
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Same ACCESS engagement: out-of-box gap, timelines, legacy entitlement days to minutes; all in stories"
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ team, April 2011, Coalition Greenwich #1) match story; closing offer on integration challenges supported by gateway story"
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS team: blended 40+ Accenture/JPM across Mumbai, Bangalore, US, matches story; repeated integration-challenges offer is related and supported"
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Same ACCESS program: 12-country gateway, Sev-1 incident response, April 2011 launch; closing offer on regulatory challenges supported"
+ },
+ {
+  "case": "c01",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ team, April 2011, Coalition Greenwich #1) match story; RBC Express cross-border workflows match story"
+ },
+ {
+  "case": "c01",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Clarifying question naming both engagements from turn 1 (ACCESS and RBC); passes per D4"
+ },
+ {
+  "case": "c01",
+  "run": 7,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS (12-country gateway, timelines, Sev-1) and RBC cross-border, both from stories and turn 1; closing offer supported"
+ },
+ {
+  "case": "c01",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ team, April 2011, Coalition Greenwich #1) match story; transaction monitoring of trillions of daily transactions in story"
+ },
+ {
+  "case": "c01",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS team: blended 40+ Accenture/JPM across Mumbai, Bangalore, US, matches story"
+ },
+ {
+  "case": "c01",
+  "run": 7,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Same ACCESS engagement: out-of-box gap, NACHA/tax formatting, MAC-layer defect, break-glass SQL triage; all in story"
+ },
+ {
+  "case": "c01",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ team, April 2011, Coalition Greenwich #1) match story"
+ },
+ {
+  "case": "c01",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS team: blended 40+ Accenture/JPM across Mumbai, Bangalore, US, matches story"
+ },
+ {
+  "case": "c01",
+  "run": 8,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Same ACCESS engagement: WebSeries out-of-box gap, timelines, build-vs-configure boundary; matches expected"
+ },
+ {
+  "case": "c01",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ team, April 2011, Coalition Greenwich #1) match story; sanctions screening and risk-based constraints in story"
+ },
+ {
+  "case": "c01",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS team: blended 40+ Accenture/JPM across Mumbai, Bangalore, US, matches story"
+ },
+ {
+  "case": "c01",
+  "run": 8,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Same ACCESS program: 12-country gateway, Sev-1 response, jurisdictional compliance sequencing; closing offer supported"
+ },
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ team, April 2011, Coalition Greenwich #1) match story"
+ },
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS team: blended 40+ Accenture/JPM across Mumbai, Bangalore, US, matches story"
+ },
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Same ACCESS engagement: out-of-box gap, per-type requirements, MAC-layer failure from missing unit tests; all in story"
+ },
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ team, April 2011, Coalition Greenwich #1) match story"
+ },
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS team: blended 40+ Accenture/JPM across Mumbai, Bangalore, US, matches story"
+ },
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Same ACCESS program: 12-country gateway, Sev-1 incident coordination, APAC/EMEA/Americas compliance; all in stories"
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ team, April 2011, Coalition Greenwich #1) match story; Role Senior Technology Architecture Manager matches"
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS team: blended 40+ Accenture/JPM across Mumbai, Bangalore, US, matches story"
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Same ACCESS program: legacy data-model migration, timelines, entitlement redesign, zero disruption; all in stories"
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JP Morgan ACCESS payment engine facts (135,000+ clients, 180+ countries, 40+ team, April 2011, Coalition Greenwich #1) match story; RBC Express cross-border workflows match story"
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Clarifying question naming both engagements from turn 1 (ACCESS and RBC); passes per D4"
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS (12-country gateway, Sev-1 response) and RBC WebSeries assessment, both from stories and turn 1; compliance offer supported"
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style from leadership philosophy, sustainable leadership and culture stories (4x, psychological safety, decisions to those closest to work); facts supported, no imported context; weekly brainstorming in story"
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "What I Learned About Assumptions: Fortune 500 FS client, IAM/environment assumptions, UAT email with unmasked data to thousands, tester removed; a genuine failure told honestly"
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style from leadership philosophy, sustainable leadership and culture stories (4x, psychological safety, decisions to those closest to work); facts supported, no imported context; permit to fail and servant leadership in stories"
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Permit-to-fail story reframed as his approach not working: invents initial reluctance/resistance to his culture; corpus gives risk-aversion only as the prior state and the intervention as a success"
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style from leadership philosophy, sustainable leadership and culture stories (4x, psychological safety, decisions to those closest to work); facts supported, no imported context"
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Making It Safe to Take Risks: isolated pockets of fear as CIC scaled to 150+ from command-and-control cultures; corpus presents as a shortfall, told honestly"
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Short summary: empathy/clarity/purpose, permit to fail, balanced teams, core values from profile; all supported"
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Garbled answer (begins mid-quote) about the MattGPT prompt-filter bug; not a leadership shortfall, and incoherent"
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style from leadership philosophy, sustainable leadership and culture stories (4x, psychological safety, decisions to those closest to work); facts supported, no imported context; 0 to 150+, $100M+ repeat business supported"
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "What I Learned About Assumptions: Fortune 500 FS client, IAM/environment assumptions, UAT email with unmasked data to thousands, tester removed; a genuine failure told honestly; lessons incl. PII scrubbing"
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style from leadership philosophy, sustainable leadership and culture stories (4x, psychological safety, decisions to those closest to work); facts supported, no imported context; balanced teams 15-35% cost reduction supported"
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Permit-to-fail story reframed as his approach not working: invents initial reluctance/resistance to his culture; corpus gives risk-aversion only as the prior state and the intervention as a success; 'initially met with resistance' unsupported"
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Short summary: empathy/clarity/purpose, permit to fail, balanced teams, core values from profile; all supported"
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern quality crisis: defects rising despite coverage, engineer writing tests after code, he owned the failure, Samman coaching; corpus-presented shortfall, facts match"
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style from leadership philosophy, sustainable leadership and culture stories (4x, psychological safety, decisions to those closest to work); facts supported, no imported context; over-processed/under-trusted barriers in corpus"
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "What I Learned About Assumptions: Fortune 500 FS client, IAM/environment assumptions, UAT email with unmasked data to thousands, tester removed; a genuine failure told honestly"
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Short summary: empathy/clarity/purpose, permit to fail, balanced teams, core values from profile; all supported"
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "MattGPT prompt-filter bug (32.3% to 3-6%): a solo technical fix in a personal project, not a shortfall of his leadership; wrong kind of example"
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style from leadership philosophy, sustainable leadership and culture stories (4x, psychological safety, decisions to those closest to work); facts supported, no imported context"
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "What I Learned About Assumptions: Fortune 500 FS client, IAM/environment assumptions, UAT email with unmasked data to thousands, tester removed; a genuine failure told honestly"
+ },
+ {
+  "case": "c03",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Short summary: empathy/clarity/purpose, permit to fail, balanced teams, core values from profile; all supported"
+ },
+ {
+  "case": "c03",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "MattGPT prompt-filter bug (32.3% to 3-6%): a solo technical fix in a personal project, not a shortfall of his leadership; wrong kind of example"
+ },
+ {
+  "case": "c03",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style from leadership philosophy, sustainable leadership and culture stories (4x, psychological safety, decisions to those closest to work); facts supported, no imported context; 150+ team supported"
+ },
+ {
+  "case": "c03",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Decentralized decision-making story: command-and-control habits reasserted, enforcement and revalidation multiple times; corpus presents as a bumpy shortfall, told honestly"
+ },
+ {
+  "case": "c03",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style from leadership philosophy, sustainable leadership and culture stories (4x, psychological safety, decisions to those closest to work); facts supported, no imported context; hierarchical-to-collective culture shift in corpus"
+ },
+ {
+  "case": "c03",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "What I Learned About Assumptions: Fortune 500 FS client, IAM/environment assumptions, UAT email with unmasked data to thousands, tester removed; a genuine failure told honestly"
+ },
+ {
+  "case": "c03",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Short summary: empathy/clarity/purpose, permit to fail, balanced teams, core values from profile; all supported; builder's mindset/coach's heart from profile self-description"
+ },
+ {
+  "case": "c03",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "MattGPT prompt-filter bug (32.3% to 3-6%): a solo technical fix in a personal project, not a shortfall of his leadership; wrong kind of example"
+ },
+ {
+  "case": "c03",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Short summary: empathy/clarity/purpose, permit to fail, balanced teams, core values from profile; all supported"
+ },
+ {
+  "case": "c03",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Garbled answer (mid-quote fragment) about the MattGPT prompt-filter bug; not a leadership shortfall"
+ },
+ {
+  "case": "c03",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style from leadership philosophy, sustainable leadership and culture stories (4x, psychological safety, decisions to those closest to work); facts supported, no imported context"
+ },
+ {
+  "case": "c03",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Making It Safe to Take Risks: isolated pockets of fear as CIC scaled to 150+ from command-and-control cultures; corpus presents as a shortfall, told honestly"
+ },
+ {
+  "case": "c03",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style from leadership philosophy, sustainable leadership and culture stories (4x, psychological safety, decisions to those closest to work); facts supported, no imported context; servant leadership, $100M+ supported"
+ },
+ {
+  "case": "c03",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "What I Learned About Assumptions: Fortune 500 FS client, IAM/environment assumptions, UAT email with unmasked data to thousands, tester removed; a genuine failure told honestly"
+ },
+ {
+  "case": "c03",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style from leadership philosophy, sustainable leadership and culture stories (4x, psychological safety, decisions to those closest to work); facts supported, no imported context; permit to fail, servant leadership supported"
+ },
+ {
+  "case": "c03",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Permit-to-fail story reframed as his approach not working: invents initial reluctance/resistance to his culture; corpus gives risk-aversion only as the prior state and the intervention as a success; 'didn't immediately resonate' unsupported"
+ },
+ {
+  "case": "c03",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Short summary: empathy/clarity/purpose, permit to fail, balanced teams, core values from profile; all supported"
+ },
+ {
+  "case": "c03",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern quality crisis: defects rising despite coverage, engineer writing tests after code, he owned the failure, Samman coaching; corpus-presented shortfall, facts match; SMART story rebuild matches"
+ },
+ {
+  "case": "c03",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style from leadership philosophy, sustainable leadership and culture stories (4x, psychological safety, decisions to those closest to work); facts supported, no imported context"
+ },
+ {
+  "case": "c03",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "What I Learned About Assumptions: Fortune 500 FS client, IAM/environment assumptions, UAT email with unmasked data to thousands, tester removed; a genuine failure told honestly"
+ }
+]

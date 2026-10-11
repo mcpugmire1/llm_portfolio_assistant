@@ -1,0 +1,126 @@
+--- probes_fix/probe_275_poc_clean.py	2026-10-11 11:00:45
++++ probes_fix2/probe_275_poc_clean.py	2026-10-11 12:25:27
+@@ -263,9 +263,19 @@
+     return json.loads(msg.tool_calls[0].function.arguments)
+ 
+ 
+-def validate(plan, question):
+-    """Shape only. Returns (plan, problems); any problem -> search on the
+-    model's query (or the question), and the problems are logged."""
++# Change 2: the question refers back to an engagement, not to a concept.
++# "Give me an example where that didn't work" refers to a leadership style,
++# so it does not qualify; "How big was the team?" and "Which was bigger?" do.
++REFERS_BACK = re.compile(
++    r"\b(?:that|this|those|these) (?:project|engagement|program|one|ones|work|client|team|role)s?\b"
++    r"|\bthe (?:team|project|engagement|program)\b|\bthere\b|\bwhich (?:one|was|is|were)\b|\bboth\b",
++    re.I,
++)
++
++
++def validate(plan, question, record=None):
++    """Shape, plus one rule for clarify. Returns (plan, problems); any problem
++    -> search on the model's query (or the question), and the problems are logged."""
+     problems = []
+     if plan.get("turn_type") not in ("follow_up", "new_topic"):
+         problems.append(f"turn_type {plan.get('turn_type')!r}")
+@@ -283,6 +293,19 @@
+             problems.append("clarify names fewer than 2 candidates")
+         if not (plan.get("clarify_question") or "").strip():
+             problems.append("clarify without a question")
++        # Change 2: clarify only when the latest turn used 2+ distinct
++        # engagements and the question refers back to one of them; otherwise
++        # answer from the latest turn's engagements (search if it used none).
++        latest_used = list(dict.fromkeys(record[-1].get("used") or [])) if record else []
++        disallowed = []
++        if len(latest_used) < 2:
++            disallowed.append(f"clarify with {len(latest_used)} engagement(s) in the latest turn")
++        if not REFERS_BACK.search(question or ""):
++            disallowed.append("clarify on a question that does not refer back to an engagement")
++        if disallowed and not problems and latest_used:
++            return {"turn_type": plan.get("turn_type"), "action": "answer_from_referent", "referents": latest_used,
++                    "query": plan.get("query") or question, "clarify_question": "", "reason": "clarify disallowed"}, disallowed
++        problems += disallowed
+     if act in ("search", "gap") and not (plan.get("query") or "").strip():
+         problems.append(f"{act} without a query")
+     if act == "synthesize" and not refs and not (plan.get("query") or "").strip():
+@@ -396,7 +419,15 @@
+ - engage: only when the visitor's own words show they are evaluating Matt (a role, hiring, fit, why hire him, availability) or ask how to reach him or for his résumé. Quote their words in evaluating_quote. Options: role_match (evaluating for a role), about_matt (his profile; this is what résumé means), linkedin, contact.
+ - none: the default. An answer with no closing is complete; choose explore or engage only when one clearly fits."""
+ 
+-GAP_EMPTY_RULE = "- Say it isn't on record. You may add only facts from the profile above; nothing else."
++GAP_OPENING = "🐾 That isn't in Matt's stories."
++CLOSEST_PREFIX = "The closest work on record is"
++GAP_RULE = (
++    f'- The answer\'s first sentence is already written and shown to the visitor: "{GAP_OPENING[2:]}" Do not repeat or soften it.\n'
++    f'- You may add, in at most two sentences: work from the stories in the search result, starting exactly "{CLOSEST_PREFIX}" and '
++    "labelling it for what it is (its client and industry as the story gives them); and/or facts from the profile above, stated as facts "
++    "with their category markers. Never call adjacent work the thing the visitor asked about.\n"
++    "- If nothing in the stories or the profile is close, write nothing: return empty text."
++)
+ 
+ ACTION_RULES = {
+     "clarify": "- Ask this one short question in Agy's voice and nothing else: {clarify_question}",
+@@ -438,15 +469,15 @@
+     t0 = time.time()
+     raw_plan = plan_turn(client, question, history, render_record(record), open_offer)
+     plan_secs = round(time.time() - t0, 2)
+-    plan, problems = validate(raw_plan, question)
++    plan, problems = validate(raw_plan, question, record)
+     evidence = gather(plan, question)
+     # Fix 1: a clarify turn is the planner's question, rendered as is; no answering
+     # call, so it can't turn into an answer with no evidence (11 of 18 clarify
+     # plans did in poc_rerun_20261011_084138).
+-    # Fix 2 (option a): a gap with no stories after the retry keeps the answering
+-    # call, without MATT_DNA and under GAP_EMPTY_RULE, so the profile can still
+-    # answer (no PMP, then the certifications) and DNA's client list can't.
+-    empty_gap = plan["action"] == "gap" and not evidence
++    # Change 1: every gap opens with GAP_OPENING, rendered by code. The answering
++    # call runs without MATT_DNA and may add only a CLOSEST_PREFIX line drawn from
++    # the stories; anything else it writes is dropped (logged).
++    is_gap = plan["action"] == "gap"
+     rendered_text = None
+     if plan["action"] == "clarify":
+         rendered_text = "🐾 " + plan["clarify_question"].strip()
+@@ -464,7 +495,7 @@
+     profile_facts = bs.load_matt_profile()
+     opening, focus = bs._choose_opening_and_focus(is_synthesis)
+     base = [
+-        {"role": "system", "content": build_system_prompt(is_synthesis=is_synthesis, matt_dna="" if empty_gap else bs.MATT_DNA, profile_facts=profile_facts)},
++        {"role": "system", "content": build_system_prompt(is_synthesis=is_synthesis, matt_dna="" if is_gap else bs.MATT_DNA, profile_facts=profile_facts)},
+         *history,
+         {"role": "user", "content": build_user_message(question=question, story_context="NOTE", opening=opening,
+                                                        is_synthesis=is_synthesis, focus_angle=focus if not is_synthesis else "",
+@@ -472,7 +503,7 @@
+     ]
+     note = "Evidence for this turn was gathered before you answer and appears as the search_stories result." if evidence else "No stories were gathered for this turn."
+     msgs = moved(base, note_override=note)
+-    action_rule = GAP_EMPTY_RULE if empty_gap else ACTION_RULES.get(plan["action"], "").format(clarify_question=plan.get("clarify_question", ""))
++    action_rule = GAP_RULE if is_gap else ACTION_RULES.get(plan["action"], "").format(clarify_question=plan.get("clarify_question", ""))
+     msgs[0]["content"] += "\n\n" + TURN_RULES.format(action=plan["action"], referents=plan.get("referents") or "none", action_rule=action_rule)
+     if record:
+         msgs[0]["content"] += "\n\n## DISCUSSION RECORD (what earlier turns covered; not evidence)\n" + render_record(record)
+@@ -488,6 +519,15 @@
+     answer_secs = round(time.time() - t1, 2)
+     resp = json.loads(choice.message.tool_calls[0].function.arguments)
+     text, _cats = bs._postprocess_agy_text(resp.get("text", ""), evidence)
++    gap_note = ""
++    if is_gap:
++        added = (text or "").strip().lstrip("🐾").strip()
++        # Kept only if it is the closest-work line (stories) or cites profile
++        # facts (the [[profile:...]] markers that _postprocess_agy_text extracts).
++        if added and not added.startswith(CLOSEST_PREFIX) and not _cats:
++            gap_note, added = f"gap: dropped model text not starting {CLOSEST_PREFIX!r}: {added[:80]!r}", ""
++        text = GAP_OPENING + (f" {added}" if added else "")
++        resp["closing"] = "none"
+ 
+     closing, closing_note, offer, rendered = resp.get("closing"), "", None, ""
+     visitor_text = " ".join(e.get("text", "") for e in transcript if (e.get("role") or e.get("Role")) == "user").lower()
+@@ -511,7 +551,7 @@
+         "answer_md": answer_md, "text": text, "raw_plan": raw_plan, "plan": plan, "plan_problems": problems,
+         "evidence": [f"{s.get('Title')} [{KEY_OF[(s['Client'], s['Project'])]}]" for s in evidence],
+         "closing": closing, "closing_raw": {k: resp.get(k) for k in ("closing", "explore_key", "explore_offer", "engage_options", "evaluating_quote")},
+-        "closing_note": closing_note, "closing_rendered": rendered, "record": rec, "finish_reason": choice.finish_reason,
++        "closing_note": closing_note or gap_note, "closing_rendered": rendered, "record": rec, "finish_reason": choice.finish_reason,
+         "router_family": family, "plan_secs": plan_secs, "answer_secs": answer_secs,
+     }
+ 

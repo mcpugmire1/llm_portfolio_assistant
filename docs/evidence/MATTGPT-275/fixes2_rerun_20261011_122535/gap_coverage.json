@@ -1,0 +1,389 @@
+[
+ {
+  "id": "c04_r01_t2",
+  "question": "What about PMP?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No PMP/PMI mention in any story; profile certifications list AWS SA-Associate, AWS Cloud Practitioner, SAFe 4 Agilist, Oracle 8i OCP exams, no PMP. Profile lets the answer name his actual certs, but does not cover PMP."
+ },
+ {
+  "id": "c04_r02_t2",
+  "question": "What about PMP?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No PMP/PMI mention in any story; profile certifications list AWS SA-Associate, AWS Cloud Practitioner, SAFe 4 Agilist, Oracle 8i OCP exams, no PMP. Profile lets the answer name his actual certs, but does not cover PMP."
+ },
+ {
+  "id": "c04_r03_t2",
+  "question": "What about PMP?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No PMP/PMI mention in any story; profile certifications list AWS SA-Associate, AWS Cloud Practitioner, SAFe 4 Agilist, Oracle 8i OCP exams, no PMP. Profile lets the answer name his actual certs, but does not cover PMP."
+ },
+ {
+  "id": "c04_r04_t2",
+  "question": "What about PMP?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No PMP/PMI mention in any story; profile certifications list AWS SA-Associate, AWS Cloud Practitioner, SAFe 4 Agilist, Oracle 8i OCP exams, no PMP. Profile lets the answer name his actual certs, but does not cover PMP."
+ },
+ {
+  "id": "c04_r05_t2",
+  "question": "What about PMP?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No PMP/PMI mention in any story; profile certifications list AWS SA-Associate, AWS Cloud Practitioner, SAFe 4 Agilist, Oracle 8i OCP exams, no PMP. Profile lets the answer name his actual certs, but does not cover PMP."
+ },
+ {
+  "id": "c04_r06_t2",
+  "question": "What about PMP?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No PMP/PMI mention in any story; profile certifications list AWS SA-Associate, AWS Cloud Practitioner, SAFe 4 Agilist, Oracle 8i OCP exams, no PMP. Profile lets the answer name his actual certs, but does not cover PMP."
+ },
+ {
+  "id": "c04_r07_t2",
+  "question": "What about PMP?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No PMP/PMI mention in any story; profile certifications list AWS SA-Associate, AWS Cloud Practitioner, SAFe 4 Agilist, Oracle 8i OCP exams, no PMP. Profile lets the answer name his actual certs, but does not cover PMP."
+ },
+ {
+  "id": "c04_r08_t2",
+  "question": "What about PMP?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No PMP/PMI mention in any story; profile certifications list AWS SA-Associate, AWS Cloud Practitioner, SAFe 4 Agilist, Oracle 8i OCP exams, no PMP. Profile lets the answer name his actual certs, but does not cover PMP."
+ },
+ {
+  "id": "c04_r09_t2",
+  "question": "What about PMP?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No PMP/PMI mention in any story; profile certifications list AWS SA-Associate, AWS Cloud Practitioner, SAFe 4 Agilist, Oracle 8i OCP exams, no PMP. Profile lets the answer name his actual certs, but does not cover PMP."
+ },
+ {
+  "id": "c04_r10_t2",
+  "question": "What about PMP?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No PMP/PMI mention in any story; profile certifications list AWS SA-Associate, AWS Cloud Practitioner, SAFe 4 Agilist, Oracle 8i OCP exams, no PMP. Profile lets the answer name his actual certs, but does not cover PMP."
+ },
+ {
+  "id": "x1_r01_t1",
+  "question": "Has Matt worked in real estate?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No real estate/property/realty in corpus; Cendant Mortgage underwriting, HSBC mortgage, Accredited Home Lenders HR portal are mortgage lending/HR, not real estate."
+ },
+ {
+  "id": "x1_r02_t1",
+  "question": "Has Matt worked in real estate?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No real estate/property/realty in corpus; Cendant Mortgage underwriting, HSBC mortgage, Accredited Home Lenders HR portal are mortgage lending/HR, not real estate."
+ },
+ {
+  "id": "x1_r03_t1",
+  "question": "Has Matt worked in real estate?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No real estate/property/realty in corpus; Cendant Mortgage underwriting, HSBC mortgage, Accredited Home Lenders HR portal are mortgage lending/HR, not real estate."
+ },
+ {
+  "id": "x1_r04_t1",
+  "question": "Has Matt worked in real estate?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No real estate/property/realty in corpus; Cendant Mortgage underwriting, HSBC mortgage, Accredited Home Lenders HR portal are mortgage lending/HR, not real estate."
+ },
+ {
+  "id": "x1_r05_t1",
+  "question": "Has Matt worked in real estate?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No real estate/property/realty in corpus; Cendant Mortgage underwriting, HSBC mortgage, Accredited Home Lenders HR portal are mortgage lending/HR, not real estate."
+ },
+ {
+  "id": "x1_r06_t1",
+  "question": "Has Matt worked in real estate?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No real estate/property/realty in corpus; Cendant Mortgage underwriting, HSBC mortgage, Accredited Home Lenders HR portal are mortgage lending/HR, not real estate."
+ },
+ {
+  "id": "x1_r07_t1",
+  "question": "Has Matt worked in real estate?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No real estate/property/realty in corpus; Cendant Mortgage underwriting, HSBC mortgage, Accredited Home Lenders HR portal are mortgage lending/HR, not real estate."
+ },
+ {
+  "id": "x1_r08_t1",
+  "question": "Has Matt worked in real estate?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No real estate/property/realty in corpus; Cendant Mortgage underwriting, HSBC mortgage, Accredited Home Lenders HR portal are mortgage lending/HR, not real estate."
+ },
+ {
+  "id": "x1_r09_t1",
+  "question": "Has Matt worked in real estate?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No real estate/property/realty in corpus; Cendant Mortgage underwriting, HSBC mortgage, Accredited Home Lenders HR portal are mortgage lending/HR, not real estate."
+ },
+ {
+  "id": "x1_r10_t1",
+  "question": "Has Matt worked in real estate?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No real estate/property/realty in corpus; Cendant Mortgage underwriting, HSBC mortgage, Accredited Home Lenders HR portal are mortgage lending/HR, not real estate."
+ },
+ {
+  "id": "x2_r01_t1",
+  "question": "Has Matt worked with SAP?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No SAP, HANA, or ERP mention anywhere in corpus or profile."
+ },
+ {
+  "id": "x2_r02_t1",
+  "question": "Has Matt worked with SAP?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No SAP, HANA, or ERP mention anywhere in corpus or profile."
+ },
+ {
+  "id": "x2_r03_t1",
+  "question": "Has Matt worked with SAP?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No SAP, HANA, or ERP mention anywhere in corpus or profile."
+ },
+ {
+  "id": "x2_r04_t1",
+  "question": "Has Matt worked with SAP?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No SAP, HANA, or ERP mention anywhere in corpus or profile."
+ },
+ {
+  "id": "x2_r05_t1",
+  "question": "Has Matt worked with SAP?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No SAP, HANA, or ERP mention anywhere in corpus or profile."
+ },
+ {
+  "id": "x2_r06_t1",
+  "question": "Has Matt worked with SAP?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No SAP, HANA, or ERP mention anywhere in corpus or profile."
+ },
+ {
+  "id": "x2_r07_t1",
+  "question": "Has Matt worked with SAP?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No SAP, HANA, or ERP mention anywhere in corpus or profile."
+ },
+ {
+  "id": "x2_r08_t1",
+  "question": "Has Matt worked with SAP?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No SAP, HANA, or ERP mention anywhere in corpus or profile."
+ },
+ {
+  "id": "x2_r09_t1",
+  "question": "Has Matt worked with SAP?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No SAP, HANA, or ERP mention anywhere in corpus or profile."
+ },
+ {
+  "id": "x2_r10_t1",
+  "question": "Has Matt worked with SAP?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "No SAP, HANA, or ERP mention anywhere in corpus or profile."
+ },
+ {
+  "id": "x3_r01_t1",
+  "question": "Has Matt worked on trading platforms?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "Only 'trading' hits are webMethods B2B Trading Networks / EDI trading partners (Cendian, Norfolk Southern) and ACCESS trade-finance/FX payments (treasury), none a financial trading platform."
+ },
+ {
+  "id": "x3_r08_t1",
+  "question": "Has Matt worked on trading platforms?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "Only 'trading' hits are webMethods B2B Trading Networks / EDI trading partners (Cendian, Norfolk Southern) and ACCESS trade-finance/FX payments (treasury), none a financial trading platform."
+ },
+ {
+  "id": "x3_r09_t1",
+  "question": "Has Matt worked on trading platforms?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "Only 'trading' hits are webMethods B2B Trading Networks / EDI trading partners (Cendian, Norfolk Southern) and ACCESS trade-finance/FX payments (treasury), none a financial trading platform."
+ },
+ {
+  "id": "x5_r01_t1",
+  "question": "Has Matt worked on gaming platforms?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "Only 'gaming' hits are metric gaming (velocity) and team-building games/gamification at the CIC; no gaming platform work."
+ },
+ {
+  "id": "x5_r02_t1",
+  "question": "Has Matt worked on gaming platforms?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "Only 'gaming' hits are metric gaming (velocity) and team-building games/gamification at the CIC; no gaming platform work."
+ },
+ {
+  "id": "x5_r03_t1",
+  "question": "Has Matt worked on gaming platforms?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "Only 'gaming' hits are metric gaming (velocity) and team-building games/gamification at the CIC; no gaming platform work."
+ },
+ {
+  "id": "x5_r04_t1",
+  "question": "Has Matt worked on gaming platforms?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "Only 'gaming' hits are metric gaming (velocity) and team-building games/gamification at the CIC; no gaming platform work."
+ },
+ {
+  "id": "x5_r05_t1",
+  "question": "Has Matt worked on gaming platforms?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "Only 'gaming' hits are metric gaming (velocity) and team-building games/gamification at the CIC; no gaming platform work."
+ },
+ {
+  "id": "x5_r06_t1",
+  "question": "Has Matt worked on gaming platforms?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "Only 'gaming' hits are metric gaming (velocity) and team-building games/gamification at the CIC; no gaming platform work."
+ },
+ {
+  "id": "x5_r07_t1",
+  "question": "Has Matt worked on gaming platforms?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "Only 'gaming' hits are metric gaming (velocity) and team-building games/gamification at the CIC; no gaming platform work."
+ },
+ {
+  "id": "x5_r08_t1",
+  "question": "Has Matt worked on gaming platforms?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "Only 'gaming' hits are metric gaming (velocity) and team-building games/gamification at the CIC; no gaming platform work."
+ },
+ {
+  "id": "x5_r09_t1",
+  "question": "Has Matt worked on gaming platforms?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "Only 'gaming' hits are metric gaming (velocity) and team-building games/gamification at the CIC; no gaming platform work."
+ },
+ {
+  "id": "x5_r10_t1",
+  "question": "Has Matt worked on gaming platforms?",
+  "covered_by_story": false,
+  "covering_story": null,
+  "covering_story_in_retrieved": null,
+  "covered_by_profile": false,
+  "note": "Only 'gaming' hits are metric gaming (velocity) and team-building games/gamification at the CIC; no gaming platform work."
+ }
+]
