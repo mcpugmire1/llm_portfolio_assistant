@@ -1,5 +1,5 @@
 # MattGPT Backlog
-<!-- last-backlog-sync: da15d1d -->
+<!-- last-backlog-sync: 0a9ce56 -->
 <!-- BEFORE EDITING: read the mattgpt-backlog-maintenance skill for status enum, ticket lifecycle, and archiving rules -->
 <!-- Next ticket ID: run grep -ohE 'MATTGPT-[0-9]+' BACKLOG.md CHANGELOG.md docs/ADR.md | sort -t- -k2 -n | tail -1 to find current max, then add 1 -->
 
@@ -37,7 +37,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 23. Rest of Role Match: -173, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
--177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -188 (off-topic people) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- better ranking surfaces more adjacent candidates into verdict definitions that still absorb them as partial, so ranking before calibrating makes over-calling worse before better; full constraint in -249 detail block)
+-177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- better ranking surfaces more adjacent candidates into verdict definitions that still absorb them as partial, so ranking before calibrating makes over-calling worse before better; full constraint in -249 detail block)
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
@@ -51,7 +51,7 @@ Answer mode: -284 (synthesis mode decided in four places; a promoted query such 
 **LATER — tier 4:** hygiene
 Dead code: -176, -183, -199, -201 · -241 (dead prose: out_of_scope_response + personal_response, backend_service.py (out_of_scope_response + personal_response in rag_answer())) · Hidden error: -204 (zero-filter-match only -- st.stop() blanking was MATTGPT-224, shipped `92370b3`)
 Untraced flash: -229 (My Work flashes before Ask Agy conversation -- needs DevTools trace) · -289 (MATTGPT-018 regression watch: stale landing elements painted 240-370 ms, one mixed frame in 3 runs)
-BDD flakes: -122, -131, -142, -145, -197, -198, -205
+BDD flakes: -122, -131, -142, -145, -197, -198
 Wrong-assertion test: -203 · -209 (drift guard searches wrong scope)
 Small refactors: -153, -062, -082, -083, -084, -150, -060, -217 (pronoun grammar in substitution)
 BDD structure: -213 (shared step definitions)
@@ -157,7 +157,6 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-183](#mattgpt-183) | has_metric filter dead -- nothing in UI sets it to True; remove rather than fix | Open | Low | Refactor | August 13, 2026 |
 | [MATTGPT-185](#mattgpt-185) | Query negation unsupported -- "outside of MattGPT" returns MattGPT stories | Open | Medium | Enhancement | August 13, 2026 |
 | [MATTGPT-187](#mattgpt-187) | diversify_results max_per_client parameter is documented but never implemented | Open | Medium | Bug | August 13, 2026 |
-| [MATTGPT-188](#mattgpt-188) | Semantic router accepts off-topic queries about other people | Decided Against | Medium | Bug | August 13, 2026 |
 | [MATTGPT-190](#mattgpt-190) | Tokenizer character-set divergence: _tokenize keeps +#-. while token_overlap_ratio splits on non-\w | Open | Medium | Bug | August 16, 2026 |
 | [MATTGPT-195](#mattgpt-195) | Production incident queries scatter across six intent families -- delivery family has no incident vocabulary | Open | Medium | Bug | August 16, 2026 |
 | [MATTGPT-196](#mattgpt-196) | Defensive pytest.skip in test_explore_stories.py masks UI regressions as green runs | Open | Medium | Bug | August 16, 2026 |
@@ -168,7 +167,6 @@ Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to
 | [MATTGPT-202](#mattgpt-202) | id-skip predicate copied verbatim in app.py and corpus_loader.py -- divergence risk, no shared source | Open | Medium | Bug | August 18, 2026 |
 | [MATTGPT-203](#mattgpt-203) | Chip grid disable test asserts the wrong mechanism | Open | Low | Bug (Test) | August 18, 2026 |
 | [MATTGPT-204](#mattgpt-204) | Explore Stories zero-filter-match: Table view renders empty grid chrome; Cards/Timeline empty-state text hidden by CSS | Open | Low | Bug | August 18, 2026 |
-| [MATTGPT-205](#mattgpt-205) | BDD marathon flake: test_error_state_extraction_failure fails in marathon, passes in isolation | Decided Against | Low | Bug (Test) | August 19, 2026 |
 | [MATTGPT-206](#mattgpt-206) | Eval suite ~1-in-70 stochastic flap; Q28 confirmed non-deterministic | Open | Medium | Bug (Test) | August 19, 2026 |
 | [MATTGPT-209](#mattgpt-209) | MATT_DNA drift guard passes for wrong reason: employer check searches whole string, not Career Arc block | Open | Low | Bug (Test) | August 24, 2026 |
 | [MATTGPT-210](#mattgpt-210) | Ask Agy landing page suggestion chips are static; stories like STRATCOM invisible on career queries | Open | Low | Enhancement | August 24, 2026 |
@@ -2929,37 +2927,6 @@ Note the second test also asserts score ordering, which the function cannot pres
 
 ---
 
-### MATTGPT-188
-**Semantic router accepts off-topic queries about other people**
-
-- **Status:** Decided Against (October 6, 2026)
-- **Priority:** Medium
-- **Type:** Bug
-- **File:** `services/semantic_router.py`
-- **Logged:** August 13, 2026
-
-**Issue:** Three `test_rejects_invalid_queries` cases fail. The router scores queries about other people against intent phrases matched on question shape rather than subject:
-
-| Query | Score | Family |
-|---|---|---|
-| "Tell me a joke" | 0.429 | behavioral |
-| "Tell me about Elon Musk" | 0.401 | technical |
-| "What's Jeff Bezos's leadership style?" | 0.664 | leadership |
-
-All clear `SOFT_ACCEPT = 0.40`.
-
-**Not fixable by raising the threshold.** Logged production behavioral queries score 0.499 to 0.605 (query_log_parsed.csv), so a threshold above 0.664 would reject legitimate traffic. The router has no signal distinguishing "Matt's leadership style" from "Bezos's leadership style" -- the phrasings embed nearly identically.
-
-**Live behavior, not just a test failure:** `semantic_valid` is not a rejection gate (see MATTGPT-174, closed), so these queries proceed to Pinecone regardless of score. Determine what a visitor asking about Bezos actually receives before scoping a fix.
-
-Note: the eval suite already contains "Tell me about Elon Musk" as a golden query, so whatever the intended behavior is, it is specified somewhere.
-
-**Cross-references:** MATTGPT-174 (closed -- three thresholds now found outside their operating range: CONFIDENCE_HIGH too low, HARD_ACCEPT too high, SOFT_ACCEPT here), MATTGPT-063 (wrong-person query detection -- same failure mode, different ticket).
-
-**Decided Against (Oct 6, 2026):** Proposed: stop the semantic router accepting off-topic people queries. Ruled out: e307d6d removed the three router test cases as the wrong layer; the joke, Musk and Bezos queries are caught by `nonsense_filters.jsonl` (`jokes_riddles`, `celebrity`) before the router in `rag_answer()`. Instead: the residual, names outside the regex, is MATTGPT-063.
-
----
-
 
 ### MATTGPT-190
 **Tokenizer character-set divergence: _tokenize keeps +#-. while token_overlap_ratio splits on non-\w**
@@ -3645,25 +3612,6 @@ Two more inert-selector patterns confirmed during the -242 dark-mode scan:
 **Issue:** The substitution produces "reported to he at the CIC" -- subject pronoun ("he") used in object position (should be "him"). Cosmetic today: only the embedding sees the substituted query, and the August 26, 2026 probe confirms retrieval is unaffected. Filed rather than deferred on "if a future path leaks retrieval_q to a user-facing surface" -- that condition is not checked for at change time.
 
 **Discovery context:** Surfaced during MATTGPT-163 session, August 26, 2026.
-
----
-
-### MATTGPT-205
-**BDD marathon flake: test_error_state_extraction_failure fails in marathon, passes in isolation**
-
-- **Status:** Decided Against (October 6, 2026)
-- **Priority:** Low
-- **Type:** Bug (Test)
-- **File:** the relevant step in `tests/bdd/steps/test_role_match.py`, the relevant scenario in `tests/bdd/features/role_match.feature`
-- **Logged:** August 19, 2026
-
-**Issue:** `test_error_state_extraction_failure` passes in isolation and at file scope but fails intermittently in the full BDD marathon. Same class as MATTGPT-197, MATTGPT-198, MATTGPT-203 -- browser tests with suite-order sensitivity.
-
-**Bisect artifact (August 19, 2026):** Pre-Green marathon at HEAD=2c4f5e2 (b9nw3kuyv): PASSED. Post-Green marathon run 1 (boysul2ff): FAILED. Post-Green marathon run 2 (bf1npksc5): PASSED. Same command, same HEAD; working tree diff = Green applied vs stashed. Failure was intermittent, not deterministic with Green. Isolation retry with Green applied: PASSES (9.96s). Confirms suite-order sensitivity, not a Green regression.
-
-**Mechanism not measured.** See MATTGPT-197 and MATTGPT-198 for prior work on the same class.
-
-**Decided Against (Oct 6, 2026):** Proposed: stabilize the marathon flake in `test_error_state_extraction_failure`. Ruled out: the test no longer exists. badde42 (MATTGPT-240 Red) replaced it with `test_non_jd_rejected_by_gate`, a gate-before-LLM rejection with new copy; `git grep error_state_extraction_failure -- tests` returns nothing. Instead: nothing; a flake in the new test gets its own ticket.
 
 ---
 
