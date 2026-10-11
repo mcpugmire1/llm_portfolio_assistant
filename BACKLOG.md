@@ -7,34 +7,35 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-10-05)
+## Value Prioritized Roadmap (updated 2026-10-11)
 
 **NOW**
-1. **-279** -- MATT_DNA's Industry Experience block is half hand-typed (tier labels, Healthcare line, NOT-industries, AT&T / Norfolk Southern fallbacks) and drifts from the corpus (three Cendian stories under a second transportation label never reach it). Derive the block from the Industry field with story counts. Follows the corpus round; ahead of -275, whose acceptance run needs clean grounding.
-2. **-275** -- Ask Agy moves to tool-calling retrieval: answers from profile and conversation, calls search_stories when needed. Evaluator script 101/110 vs 68/110, follow-ups 56/65 vs 29/65 (scoring correction, 50bc068), 0 gate refusals vs 25. Supersedes -273 Issue 1, -253's gate scope, and -128's Sources contract. -268 travels with -275.
-3. **-140** -- Move the model names into `config/constants.py` so the answering model is a one-line swap. Prerequisite for -282.
-4. **-282** -- Ask Agy's answering model has only been measured as gpt-4o. Run the evaluator script on a current model (first candidate GPT-6.1 Sol) right after -275 lands, before -280 and -281 tune voice on gpt-4o.
-5. **-250** -- In Progress. Ask Agy cannot answer education, certification, or language questions; profile facts never reached its prompt. Steps 5 and 6 still open and wait on -275.
-6. **-251** -- Ask Agy treats adjacent retrieved stories as evidence for the question asked. Visitor-visible correctness defect: unsupported claims (real estate sector from Cendant Mortgage; "including France" with no source) read as fact to recruiters.
-7. **-266** -- Role Match labels responsibility-derived rows as "Required Qualifications". Every visitor sees job duties presented as must-have credentials. Fix is in `_flatten_extraction()`, not the prompt. -264 is sequenced after it.
-8. **-255** -- The meta-commentary strip regex corrupts decimal amounts (`$2.5M` becomes an unclosed `**$2.`) and merges paragraphs. Visible correctness bug. Ticket's fix: remove the strip, run structural meta-commentary tests without it, then a live acceptance run on stories with decimal amounts, including story controls. Acceptance counts evaluative sentences before and after (252 coupling).
-9. **-228** -- Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
-10. **-146** -- Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
-11. **-160** -- In Progress. JD extraction split into three concurrent calls (required / preferred / implicit) landed at `5aee8a4`. After-measurement on the AT&T fixture (count spread 1-2 across five runs) not yet recorded. No longer gates -244.
-12. **-244** -- In Progress; prep Greens landed. Role Match assessor calibration: cited evidence doesn't address the specific claim; `confidence` field deletion. Not gated on -160: qualifier preservation was resolved by the `source_text` instruction fix (`5aee8a4`/`b28a080`), not the split. Next: verify the CI/CD-qualifier row after that fix; fixture count and the 22% over-called figure depend on it. Land before -249 (see -249 ordering constraint).
-13. **-168** -- Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data. Re-measure after -275 (tunes behavior 275 replaces).
-14. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
-15. **-128** -- Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up. Re-measure after -275 (tunes behavior 275 replaces).
-16. **-129 stories 3-5** -- Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+1. **-275** -- Ask Agy moves to tool-calling retrieval: answers from profile and conversation, calls search_stories when needed. Evaluator script 101/110 vs 68/110, follow-ups 56/65 vs 29/65 (scoring correction, 50bc068), 0 gate refusals vs 25. Supersedes -273 Issue 1, -253's gate scope, and -128's Sources contract. -268 travels with -275.
+2. **-039** -- CI quality pipeline in two tiers: every push runs ruff, mypy, unit, structural and data-contract tests (-258), pip-audit; nightly runs BDD and the golden eval with a cost budget. Proposed gate: Streamlit deploys from a prod branch that CI advances only on green (Matt to confirm). Today CI runs only the unit tests.
+3. **-251** -- Ask Agy treats adjacent retrieved stories as evidence for the question asked. Visitor-visible correctness defect: unsupported claims (real estate sector from Cendant Mortgage; "including France" with no source) read as fact to recruiters.
 
 **NEXT**
-17. **-252** -- Ask Agy writes evaluative sentences about Matt despite prompt instructions against it. Visitor-visible; isolating probe spec in the detail block.
-18. **-253** -- Blocked on -275. Confidence gate refuses ordinary evaluator questions, including follow-ups scored on bare text, before the LLM sees profile or history. No threshold change; gate scope superseded by -275.
-19. **-254** -- Five Role Match BDD scenarios describe the old 30-word gate behavior; passing or xfailed against stale assertions, so current behavior is untested. Also an em dash in a CHANGELOG entry.
-20. **-235** -- Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-21. **-223** -- Add router_score and router_family columns to Sheet query row; unblocks -239's floor threshold decision.
-22. **-222** -- Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
-23. Rest of Role Match: -173, -014, -012, -081, -099, -017.
+4. **-279** -- MATT_DNA's Industry Experience block is half hand-typed (tier labels, Healthcare line, NOT-industries, AT&T / Norfolk Southern fallbacks) and drifts from the corpus (three Cendian stories under a second transportation label never reach it). Derive the block from the Industry field with story counts. Follows the corpus round; ahead of -275, whose acceptance run needs clean grounding.
+5. **-140** -- Move the model names into `config/constants.py` so the answering model is a one-line swap. Prerequisite for -282.
+6. **-282** -- Ask Agy's answering model has only been measured as gpt-4o. Run the evaluator script on a current model (first candidate GPT-6.1 Sol) right after -275 lands, before -280 and -281 tune voice on gpt-4o.
+7. **-250** -- In Progress. Ask Agy cannot answer education, certification, or language questions; profile facts never reached its prompt. Steps 5 and 6 still open and wait on -275.
+8. **-266** -- Role Match labels responsibility-derived rows as "Required Qualifications". Every visitor sees job duties presented as must-have credentials. Fix is in `_flatten_extraction()`, not the prompt. -264 is sequenced after it.
+9. **-255** -- The meta-commentary strip regex corrupts decimal amounts (`$2.5M` becomes an unclosed `**$2.`) and merges paragraphs. Visible correctness bug. Ticket's fix: remove the strip, run structural meta-commentary tests without it, then a live acceptance run on stories with decimal amounts, including story controls. Acceptance counts evaluative sentences before and after (252 coupling).
+10. **-228** -- Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
+11. **-146** -- Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
+12. **-160** -- In Progress. JD extraction split into three concurrent calls (required / preferred / implicit) landed at `5aee8a4`. After-measurement on the AT&T fixture (count spread 1-2 across five runs) not yet recorded. No longer gates -244.
+13. **-244** -- In Progress; prep Greens landed. Role Match assessor calibration: cited evidence doesn't address the specific claim; `confidence` field deletion. Not gated on -160: qualifier preservation was resolved by the `source_text` instruction fix (`5aee8a4`/`b28a080`), not the split. Next: verify the CI/CD-qualifier row after that fix; fixture count and the 22% over-called figure depend on it. Land before -249 (see -249 ordering constraint).
+14. **-168** -- Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data. Re-measure after -275 (tunes behavior 275 replaces).
+15. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
+16. **-128** -- Sources panel split by kind, extracted reason lines, trailing question removed. Design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up. Re-measure after -275 (tunes behavior 275 replaces).
+17. **-129 stories 3-5** -- Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+18. **-252** -- Ask Agy writes evaluative sentences about Matt despite prompt instructions against it. Visitor-visible; isolating probe spec in the detail block.
+19. **-253** -- Blocked on -275. Confidence gate refuses ordinary evaluator questions, including follow-ups scored on bare text, before the LLM sees profile or history. No threshold change; gate scope superseded by -275.
+20. **-254** -- Five Role Match BDD scenarios describe the old 30-word gate behavior; passing or xfailed against stale assertions, so current behavior is untested. Also an em dash in a CHANGELOG entry.
+21. **-235** -- Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
+22. **-223** -- Add router_score and router_family columns to Sheet query row; unblocks -239's floor threshold decision.
+23. **-222** -- Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
+24. Rest of Role Match: -173, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
 -177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- better ranking surfaces more adjacent candidates into verdict definitions that still absorb them as partial, so ranking before calibrating makes over-calling worse before better; full constraint in -249 detail block)
@@ -56,7 +57,7 @@ Wrong-assertion test: -203 · -209 (drift guard searches wrong scope)
 Small refactors: -153, -062, -082, -083, -084, -150, -060, -217 (pronoun grammar in substitution)
 BDD structure: -213 (shared step definitions)
 Correctness audit: -214 (parameters, comments, constants, copied blocks) · -226 (dead `.main` selectors, ~299 declarations matching 0 elements)
-Infrastructure: -035, -039, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/agy-behavior/structural suites) · -232 (requirements_temp.txt removal)
+Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/agy-behavior/structural suites) · -232 (requirements_temp.txt removal)
 
 ---
 
