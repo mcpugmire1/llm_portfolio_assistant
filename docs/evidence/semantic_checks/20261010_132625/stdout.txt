@@ -1,0 +1,85 @@
+health before: PASS
+[01/80] S1 r1 control 3.31s rej=None fam=leadership conf=high | '🐾 Found it!\n\nMatt has indeed run enablement programs. At **N'
+[02/80] S1 r1 variant 3.49s rej=None fam=agile_transformation conf=high | '🐾 This is a strong one.\n\nMatt has indeed run upskilling prog'
+[03/80] S2 r1 control 3.32s rej=None fam=leadership conf=high | "🐾 Here's a great example.\n\nAt **Norfolk Southern**, Matt des"
+[04/80] S2 r1 variant 2.81s rej=None fam=background conf=high | '🐾 I know just the story.\n\nAt **Accenture**, Matt led signifi'
+[05/80] S3 r1 control 3.06s rej=None fam=domain_payments conf=high | '🐾 I know just the story.\n\nAt **JP Morgan Chase**, Matt playe'
+[06/80] S3 r1 variant 4.06s rej=None fam=domain_payments conf=high | '🐾 Found it!\n\nAt **JP Morgan Chase**, Matt played a crucial r'
+[07/80] S4 r1 control 2.98s rej=None fam=leadership conf=high | "🐾 This is a strong one.\n\nAt **Accenture's Cloud Innovation C"
+[08/80] S4 r1 variant 3.33s rej=None fam=leadership conf=high | "Got it! 🐾\n\nMatt's approach to developing people on his teams"
+[09/80] S5 r1 control 3.03s rej=None fam=technical conf=high | "🐾 Here's a great example.\n\nMatt has indeed modernized legacy"
+[10/80] S5 r1 variant 3.41s rej=None fam=technical conf=high | '🐾 This is a strong one.\n\nAt **Norfolk Southern**, Matt led t'
+[11/80] M1 r1 control 2.5s rej=None fam=domain_payments conf=high | '🐾 I know just the story.\n\nAt **JP Morgan Chase**, Matt playe'
+[12/80] M1 r1 variant 2.79s rej=None fam=domain_payments conf=high | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt play"
+[13/80] M2 r1 control 2.86s rej=None fam=leadership conf=high | '🐾 This is a strong one.\n\nMatt has indeed run enablement prog'
+[14/80] M2 r1 variant 3.57s rej=None fam=delivery conf=high | "🐾 Here's a great example.\n\nMatt has indeed run upskilling pr"
+[15/80] M3 r1 control 4.49s rej=None fam=domain_payments conf=high | "🐾 Looking across Matt's portfolio, I see clear patterns. At "
+[16/80] M3 r1 variant 2.88s rej=None fam=domain_payments conf=high | 'Got it! 🐾\n\nAt **JP Morgan Chase**, Matt served as the Senior'
+[17/80] M4 r1 control 4.29s rej=None fam=domain_payments conf=high | '🐾 Found it!\n\nAt **Fiserv**, Matt took over the **\\$8.5M** wh'
+[18/80] M4 r1 variant 2.77s rej=None fam=domain_payments conf=high | 'Got it! 🐾\n\nAt **Fiserv**, Matt took on the role of Developme'
+[19/80] M5 r1 control 4.1s rej=None fam=technical conf=high | '🐾 This is a strong one.\n\nMatt has modernized legacy systems '
+[20/80] M5 r1 variant 3.23s rej=None fam=technical conf=high | '🐾 Tracking this down...\n\nMatt tackled the modernization of l'
+[21/80] P1 r1 control 3.41s rej=None fam=domain_payments conf=high | '🐾 This is a strong one.\n\nAt **JP Morgan Chase**, Matt played'
+[22/80] P1 r1 variant 3.47s rej=None fam=domain_payments conf=high | '🐾 Tracking this down...\n\nAt **JP Morgan Chase**, Matt played'
+[23/80] P2 r1 control 3.21s rej=None fam=leadership conf=high | "Got it! 🐾\n\nMatt's leadership style is rooted in creating an "
+[24/80] P2 r1 variant 2.82s rej=None fam=leadership conf=high | "🐾 On it!\n\nMatt's leadership style is rooted in creating an e"
+[25/80] P3 r1 control 2.26s rej=None fam=background conf=high | '🐾 This is a strong one.\n\nMatt holds several certifications, '
+[26/80] P3 r1 variant 2.19s rej=None fam=background conf=high | "🐾 Perfect, here's what I found.\n\nMatt holds several certific"
+[27/80] P4 r1 control 4.82s rej=None fam=domain_payments conf=high | '🐾 Stepping back to see the themes...\n\nAt **JP Morgan Chase**'
+[28/80] P4 r1 variant 2.57s rej=None fam=domain_payments conf=high | 'Got it! 🐾\n\nMatt worked at **JP Morgan Chase** as a Senior Te'
+[29/80] L1 r1 control 3.46s rej=None fam=domain_payments conf=high | '🐾 This is a strong one.\n\nFor **JP Morgan Chase**, Matt playe'
+[30/80] L1 r1 variant 2.99s rej=None fam=domain_payments conf=high | '🐾 Found it!\n\nMatt has built significant solutions for banks,'
+[31/80] L2 r1 control 2.54s rej=None fam=behavioral conf=high | '🐾 This is a strong one.\n\nDuring a platform modernization pro'
+[32/80] L2 r1 variant 2.53s rej=None fam=behavioral conf=high | "🐾 Here's a great example.\n\nDuring a global platform moderniz"
+[33/80] L3 r1 control 2.1s rej=None fam=narrative conf=high | '🐾 Found it!\n\nMatt was at **Accenture** from March 2005 to Se'
+[34/80] L3 r1 variant 0.0s rej=rule:general_knowledge fam=None conf=None | ''
+[35/80] L4 r1 control 2.78s rej=None fam=behavioral conf=high | '🐾 Found it!\n\nAt **Accenture**, Matt demonstrated leadership '
+[36/80] L4 r1 variant 0.0s rej=rule:creative_writing fam=None conf=None | ''
+[37/80] L5 r1 control 2.86s rej=None fam=background conf=high | 'Got it! 🐾\n\nMatt has worked extensively on capital markets pl'
+[38/80] L5 r1 variant 0.0s rej=rule:stocks_crypto fam=None conf=None | ''
+[39/80] L6 r1 control 2.0s rej=None fam=narrative conf=high | '🐾 Tracking this down...\n\nMatt is based in **Atlanta, GA**. H'
+[QUERY_REJECTED] reason=low_pinecone, router_family=narrative, router_score=0.375, pinecone_score=0.185, query=where's he based these days...
+[40/80] L6 r1 variant 0.61s rej=low_confidence fam=narrative conf=none | ''
+[41/80] S1 r2 control 2.8s rej=None fam=leadership conf=high | '🐾 Tracking this down...\n\nMatt has run several enablement pro'
+[42/80] S1 r2 variant 2.91s rej=None fam=agile_transformation conf=high | '🐾 Found it!\n\nMatt has indeed run upskilling programs, notabl'
+[43/80] S2 r2 control 3.06s rej=None fam=leadership conf=high | "🐾 Perfect, here's what I found.\n\nMatt has indeed run several"
+[44/80] S2 r2 variant 2.62s rej=None fam=background conf=high | '🐾 Tracking this down...\n\nMatt has been actively involved in '
+[45/80] S3 r2 control 3.16s rej=None fam=domain_payments conf=high | '🐾 Found it!\n\nAt **JP Morgan Chase**, Matt played a pivotal r'
+[46/80] S3 r2 variant 2.92s rej=None fam=domain_payments conf=high | '🐾 Tracking this down...\n\nAt **JP Morgan Chase**, Matt played'
+[47/80] S4 r2 control 2.82s rej=None fam=leadership conf=high | "Got it! 🐾\n\nMatt's approach to coaching and mentoring emphasi"
+[48/80] S4 r2 variant 3.31s rej=None fam=leadership conf=high | "🐾 Here's a great example.\n\nMatt developed people on his team"
+[49/80] S5 r2 control 2.74s rej=None fam=technical conf=high | "🐾 Here's a great example.\n\nMatt has been instrumental in mod"
+[50/80] S5 r2 variant 2.89s rej=None fam=technical conf=high | 'Got it! 🐾\n\nMatt has indeed replatformed old core systems. At'
+[51/80] M1 r2 control 2.79s rej=None fam=domain_payments conf=high | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt play"
+[52/80] M1 r2 variant 3.27s rej=None fam=domain_payments conf=high | 'Got it! 🐾\n\nAt **JP Morgan Chase**, Matt played a pivotal rol'
+[53/80] M2 r2 control 3.34s rej=None fam=leadership conf=high | '🐾 This is a strong one.\n\nMatt has indeed run several enablem'
+[54/80] M2 r2 variant 3.24s rej=None fam=delivery conf=high | '🐾 On it!\n\nAt **Accenture**, Matt led the development of a se'
+[55/80] M3 r2 control 4.27s rej=None fam=domain_payments conf=high | '🐾 Stepping back to see the themes, at **JP Morgan Chase**, M'
+[56/80] M3 r2 variant 2.75s rej=None fam=domain_payments conf=high | "🐾 Perfect, here's what I found.\n\nAt **JP Morgan Chase**, Mat"
+[57/80] M4 r2 control 3.53s rej=None fam=domain_payments conf=high | '🐾 On it!\n\nAt **Fiserv**, Matt took over a troubled **\\$8.5M*'
+[58/80] M4 r2 variant 2.5s rej=None fam=domain_payments conf=high | '🐾 Found it!\n\nAt **Fiserv**, Matt took over as Development Ma'
+[59/80] M5 r2 control 3.27s rej=None fam=technical conf=high | "🐾 Here's a great example.\n\nMatt has modernized legacy system"
+[60/80] M5 r2 variant 2.94s rej=None fam=technical conf=high | "🐾 Here's a great example.\n\nAt **Fortune **500 client**s** ac"
+[61/80] P1 r2 control 2.89s rej=None fam=domain_payments conf=high | "🐾 Perfect, here's what I found.\n\nAt **JP Morgan Chase**, Mat"
+[62/80] P1 r2 variant 2.84s rej=None fam=domain_payments conf=high | '🐾 This is a strong one.\n\nAt **JP Morgan Chase**, Matt played'
+[63/80] P2 r2 control 2.68s rej=None fam=leadership conf=high | "🐾 On it!\n\nMatt's leadership style is rooted in creating envi"
+[64/80] P2 r2 variant 3.29s rej=None fam=leadership conf=high | "Got it! 🐾\n\nMatt's leadership style is centered around creati"
+[65/80] P3 r2 control 2.06s rej=None fam=background conf=high | 'Got it! 🐾\n\nMatt holds several certifications, although none '
+[66/80] P3 r2 variant 1.91s rej=None fam=background conf=high | '🐾 On it!\n\nMatt held several certifications, though none are '
+[67/80] P4 r2 control 3.66s rej=None fam=domain_payments conf=high | "🐾 Let me show you what ties Matt's work together.\n\nAt **JP M"
+[68/80] P4 r2 variant 3.35s rej=None fam=domain_payments conf=high | '🐾 This is a strong one.\n\nMatt worked at **JP Morgan Chase** '
+[69/80] L1 r2 control 3.46s rej=None fam=domain_payments conf=high | '🐾 I know just the story.\n\nAt **JP Morgan Chase**, Matt playe'
+[70/80] L1 r2 variant 3.31s rej=None fam=domain_payments conf=high | '🐾 On it!\n\nMatt has built several significant systems for ban'
+[71/80] L2 r2 control 2.51s rej=None fam=behavioral conf=high | '🐾 Tracking this down...\n\nIn a significant engagement with a '
+[72/80] L2 r2 variant 4.51s rej=None fam=behavioral conf=high | "🐾 Perfect, here's what I found.\n\nIn one of his projects with"
+[73/80] L3 r2 control 1.82s rej=None fam=narrative conf=high | "🐾 Perfect, here's what I found.\n\nMatt was at **Accenture** f"
+[74/80] L3 r2 variant 0.01s rej=rule:general_knowledge fam=None conf=None | ''
+[75/80] L4 r2 control 2.91s rej=None fam=behavioral conf=high | '🐾 This is a strong one.\n\nAt **Accenture**, Matt led a signif'
+[76/80] L4 r2 variant 0.0s rej=rule:creative_writing fam=None conf=None | ''
+[77/80] L5 r2 control 2.44s rej=None fam=background conf=high | '🐾 This is a strong one.\n\nMatt has worked extensively on capi'
+[78/80] L5 r2 variant 0.0s rej=rule:stocks_crypto fam=None conf=None | ''
+[79/80] L6 r2 control 1.67s rej=None fam=narrative conf=high | '🐾 On it!\n\nMatt is based in **Atlanta, GA**. He is open to re'
+[QUERY_REJECTED] reason=low_pinecone, router_family=narrative, router_score=0.375, pinecone_score=0.185, query=where's he based these days...
+[80/80] L6 r2 variant 0.67s rej=low_confidence fam=narrative conf=none | ''
+health after: PASS
+STATUS: VALID | rows: 80

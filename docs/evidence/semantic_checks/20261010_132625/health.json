@@ -1,0 +1,792 @@
+[
+ {
+  "label": "before",
+  "time": "2026-10-10T13:26:26",
+  "fails": [],
+  "service": {
+   "dimension": 1536,
+   "namespace": "default",
+   "vector_count": 124
+  },
+  "population": {
+   "index_ids": 124,
+   "missing_from_index": [],
+   "not_in_corpus": []
+  },
+  "canary": [
+   {
+    "q": "Fiserv white-label card portal",
+    "top_pc": 0.439,
+    "top5_clients": [
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "JP Morgan Chase"
+    ]
+   },
+   {
+    "q": "Fiserv card portal recovery",
+    "top_pc": 0.432,
+    "top5_clients": [
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "American Express"
+    ]
+   },
+   {
+    "q": "RBC Day2Day corporate banking",
+    "top_pc": 0.502,
+    "top5_clients": [
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC"
+    ]
+   },
+   {
+    "q": "RBC corporate banking modernization",
+    "top_pc": 0.624,
+    "top5_clients": [
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC"
+    ]
+   },
+   {
+    "q": "Norfolk Southern revenue modernization",
+    "top_pc": 0.631,
+    "top5_clients": [
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern"
+    ]
+   },
+   {
+    "q": "Norfolk Southern railroad systems",
+    "top_pc": 0.434,
+    "top5_clients": [
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern"
+    ]
+   }
+  ]
+ },
+ {
+  "label": "after question 10",
+  "time": "2026-10-10T13:27:02",
+  "fails": [],
+  "service": {
+   "dimension": 1536,
+   "namespace": "default",
+   "vector_count": 124
+  },
+  "canary": [
+   {
+    "q": "Fiserv white-label card portal",
+    "top_pc": 0.439,
+    "top5_clients": [
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "JP Morgan Chase"
+    ]
+   },
+   {
+    "q": "Fiserv card portal recovery",
+    "top_pc": 0.432,
+    "top5_clients": [
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "American Express"
+    ]
+   },
+   {
+    "q": "RBC Day2Day corporate banking",
+    "top_pc": 0.501,
+    "top5_clients": [
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC"
+    ]
+   },
+   {
+    "q": "RBC corporate banking modernization",
+    "top_pc": 0.624,
+    "top5_clients": [
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC"
+    ]
+   },
+   {
+    "q": "Norfolk Southern revenue modernization",
+    "top_pc": 0.631,
+    "top5_clients": [
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern"
+    ]
+   },
+   {
+    "q": "Norfolk Southern railroad systems",
+    "top_pc": 0.434,
+    "top5_clients": [
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern"
+    ]
+   }
+  ]
+ },
+ {
+  "label": "after question 20",
+  "time": "2026-10-10T13:27:37",
+  "fails": [],
+  "service": {
+   "dimension": 1536,
+   "namespace": "default",
+   "vector_count": 124
+  },
+  "canary": [
+   {
+    "q": "Fiserv white-label card portal",
+    "top_pc": 0.439,
+    "top5_clients": [
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "JP Morgan Chase"
+    ]
+   },
+   {
+    "q": "Fiserv card portal recovery",
+    "top_pc": 0.432,
+    "top5_clients": [
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "American Express"
+    ]
+   },
+   {
+    "q": "RBC Day2Day corporate banking",
+    "top_pc": 0.501,
+    "top5_clients": [
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC"
+    ]
+   },
+   {
+    "q": "RBC corporate banking modernization",
+    "top_pc": 0.624,
+    "top5_clients": [
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC"
+    ]
+   },
+   {
+    "q": "Norfolk Southern revenue modernization",
+    "top_pc": 0.631,
+    "top5_clients": [
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern"
+    ]
+   },
+   {
+    "q": "Norfolk Southern railroad systems",
+    "top_pc": 0.434,
+    "top5_clients": [
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern"
+    ]
+   }
+  ]
+ },
+ {
+  "label": "after question 30",
+  "time": "2026-10-10T13:28:10",
+  "fails": [],
+  "service": {
+   "dimension": 1536,
+   "namespace": "default",
+   "vector_count": 124
+  },
+  "canary": [
+   {
+    "q": "Fiserv white-label card portal",
+    "top_pc": 0.439,
+    "top5_clients": [
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "JP Morgan Chase"
+    ]
+   },
+   {
+    "q": "Fiserv card portal recovery",
+    "top_pc": 0.432,
+    "top5_clients": [
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "American Express"
+    ]
+   },
+   {
+    "q": "RBC Day2Day corporate banking",
+    "top_pc": 0.501,
+    "top5_clients": [
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC"
+    ]
+   },
+   {
+    "q": "RBC corporate banking modernization",
+    "top_pc": 0.624,
+    "top5_clients": [
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC"
+    ]
+   },
+   {
+    "q": "Norfolk Southern revenue modernization",
+    "top_pc": 0.631,
+    "top5_clients": [
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern"
+    ]
+   },
+   {
+    "q": "Norfolk Southern railroad systems",
+    "top_pc": 0.434,
+    "top5_clients": [
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern"
+    ]
+   }
+  ]
+ },
+ {
+  "label": "after question 40",
+  "time": "2026-10-10T13:28:28",
+  "fails": [],
+  "service": {
+   "dimension": 1536,
+   "namespace": "default",
+   "vector_count": 124
+  },
+  "canary": [
+   {
+    "q": "Fiserv white-label card portal",
+    "top_pc": 0.439,
+    "top5_clients": [
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "JP Morgan Chase"
+    ]
+   },
+   {
+    "q": "Fiserv card portal recovery",
+    "top_pc": 0.432,
+    "top5_clients": [
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "American Express"
+    ]
+   },
+   {
+    "q": "RBC Day2Day corporate banking",
+    "top_pc": 0.501,
+    "top5_clients": [
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC"
+    ]
+   },
+   {
+    "q": "RBC corporate banking modernization",
+    "top_pc": 0.624,
+    "top5_clients": [
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC"
+    ]
+   },
+   {
+    "q": "Norfolk Southern revenue modernization",
+    "top_pc": 0.631,
+    "top5_clients": [
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern"
+    ]
+   },
+   {
+    "q": "Norfolk Southern railroad systems",
+    "top_pc": 0.434,
+    "top5_clients": [
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern"
+    ]
+   }
+  ]
+ },
+ {
+  "label": "after question 50",
+  "time": "2026-10-10T13:28:59",
+  "fails": [],
+  "service": {
+   "dimension": 1536,
+   "namespace": "default",
+   "vector_count": 124
+  },
+  "canary": [
+   {
+    "q": "Fiserv white-label card portal",
+    "top_pc": 0.439,
+    "top5_clients": [
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "JP Morgan Chase"
+    ]
+   },
+   {
+    "q": "Fiserv card portal recovery",
+    "top_pc": 0.432,
+    "top5_clients": [
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "American Express"
+    ]
+   },
+   {
+    "q": "RBC Day2Day corporate banking",
+    "top_pc": 0.501,
+    "top5_clients": [
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC"
+    ]
+   },
+   {
+    "q": "RBC corporate banking modernization",
+    "top_pc": 0.624,
+    "top5_clients": [
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC"
+    ]
+   },
+   {
+    "q": "Norfolk Southern revenue modernization",
+    "top_pc": 0.631,
+    "top5_clients": [
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern"
+    ]
+   },
+   {
+    "q": "Norfolk Southern railroad systems",
+    "top_pc": 0.434,
+    "top5_clients": [
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern"
+    ]
+   }
+  ]
+ },
+ {
+  "label": "after question 60",
+  "time": "2026-10-10T13:29:33",
+  "fails": [],
+  "service": {
+   "dimension": 1536,
+   "namespace": "default",
+   "vector_count": 124
+  },
+  "canary": [
+   {
+    "q": "Fiserv white-label card portal",
+    "top_pc": 0.439,
+    "top5_clients": [
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "JP Morgan Chase"
+    ]
+   },
+   {
+    "q": "Fiserv card portal recovery",
+    "top_pc": 0.432,
+    "top5_clients": [
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "American Express"
+    ]
+   },
+   {
+    "q": "RBC Day2Day corporate banking",
+    "top_pc": 0.501,
+    "top5_clients": [
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC"
+    ]
+   },
+   {
+    "q": "RBC corporate banking modernization",
+    "top_pc": 0.624,
+    "top5_clients": [
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC"
+    ]
+   },
+   {
+    "q": "Norfolk Southern revenue modernization",
+    "top_pc": 0.631,
+    "top5_clients": [
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern"
+    ]
+   },
+   {
+    "q": "Norfolk Southern railroad systems",
+    "top_pc": 0.434,
+    "top5_clients": [
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern"
+    ]
+   }
+  ]
+ },
+ {
+  "label": "after question 70",
+  "time": "2026-10-10T13:30:04",
+  "fails": [],
+  "service": {
+   "dimension": 1536,
+   "namespace": "default",
+   "vector_count": 124
+  },
+  "canary": [
+   {
+    "q": "Fiserv white-label card portal",
+    "top_pc": 0.439,
+    "top5_clients": [
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "JP Morgan Chase"
+    ]
+   },
+   {
+    "q": "Fiserv card portal recovery",
+    "top_pc": 0.432,
+    "top5_clients": [
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "American Express"
+    ]
+   },
+   {
+    "q": "RBC Day2Day corporate banking",
+    "top_pc": 0.501,
+    "top5_clients": [
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC"
+    ]
+   },
+   {
+    "q": "RBC corporate banking modernization",
+    "top_pc": 0.624,
+    "top5_clients": [
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC"
+    ]
+   },
+   {
+    "q": "Norfolk Southern revenue modernization",
+    "top_pc": 0.631,
+    "top5_clients": [
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern"
+    ]
+   },
+   {
+    "q": "Norfolk Southern railroad systems",
+    "top_pc": 0.434,
+    "top5_clients": [
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern"
+    ]
+   }
+  ]
+ },
+ {
+  "label": "after question 80",
+  "time": "2026-10-10T13:30:23",
+  "fails": [],
+  "service": {
+   "dimension": 1536,
+   "namespace": "default",
+   "vector_count": 124
+  },
+  "canary": [
+   {
+    "q": "Fiserv white-label card portal",
+    "top_pc": 0.439,
+    "top5_clients": [
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "JP Morgan Chase"
+    ]
+   },
+   {
+    "q": "Fiserv card portal recovery",
+    "top_pc": 0.432,
+    "top5_clients": [
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "American Express"
+    ]
+   },
+   {
+    "q": "RBC Day2Day corporate banking",
+    "top_pc": 0.501,
+    "top5_clients": [
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC"
+    ]
+   },
+   {
+    "q": "RBC corporate banking modernization",
+    "top_pc": 0.624,
+    "top5_clients": [
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC"
+    ]
+   },
+   {
+    "q": "Norfolk Southern revenue modernization",
+    "top_pc": 0.631,
+    "top5_clients": [
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern"
+    ]
+   },
+   {
+    "q": "Norfolk Southern railroad systems",
+    "top_pc": 0.434,
+    "top5_clients": [
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern"
+    ]
+   }
+  ]
+ },
+ {
+  "label": "after",
+  "time": "2026-10-10T13:30:25",
+  "fails": [],
+  "service": {
+   "dimension": 1536,
+   "namespace": "default",
+   "vector_count": 124
+  },
+  "population": {
+   "index_ids": 124,
+   "missing_from_index": [],
+   "not_in_corpus": []
+  },
+  "canary": [
+   {
+    "q": "Fiserv white-label card portal",
+    "top_pc": 0.439,
+    "top5_clients": [
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "JP Morgan Chase"
+    ]
+   },
+   {
+    "q": "Fiserv card portal recovery",
+    "top_pc": 0.432,
+    "top5_clients": [
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "Fiserv",
+     "American Express"
+    ]
+   },
+   {
+    "q": "RBC Day2Day corporate banking",
+    "top_pc": 0.501,
+    "top5_clients": [
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC"
+    ]
+   },
+   {
+    "q": "RBC corporate banking modernization",
+    "top_pc": 0.624,
+    "top5_clients": [
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC",
+     "RBC"
+    ]
+   },
+   {
+    "q": "Norfolk Southern revenue modernization",
+    "top_pc": 0.631,
+    "top5_clients": [
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern"
+    ]
+   },
+   {
+    "q": "Norfolk Southern railroad systems",
+    "top_pc": 0.434,
+    "top5_clients": [
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern",
+     "Norfolk Southern"
+    ]
+   }
+  ]
+ }
+]
