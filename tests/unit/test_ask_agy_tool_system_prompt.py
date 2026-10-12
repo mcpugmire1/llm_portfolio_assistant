@@ -1,245 +1,142 @@
-"""MATTGPT-275: the tool-path system prompt contract.
+"""MATTGPT-275: the tool-path system prompt, in the shape lever 2 measured.
 
-build_tool_system_prompt() states the lever 2 contract as one document:
-Agy's identity and voice, grounding in Matt's facts and the returned stories,
-conversational behavior (follow-ups inherit context, topic switches reset it),
-and the tool contract (the app forces a search every turn; the model writes
-the query, resolving references to the conversation).
+build_tool_system_prompt() is the system prompt the lever 2 runs sent
+(docs/evidence/MATTGPT-275/lever2_20261007_211535/ on gpt-4o;
+docs/evidence/MATTGPT-282/sol_arms_20261011_211830/, arm lever2_sol, on
+gpt-6.1-sol): the old pipeline's system prompt for the mode, then the
+tool note, then the per-answer instruction block that used to end the user
+message, with Matt's opener lines given as examples instead of one opener
+as exact text. Those runs built it by splitting the wrapped user message in
+a probe patch; this function builds the same text directly.
 
-These tests pin that the contract's sections are present, each shared rule
-appears once, and the old pipeline's language is gone: primary and preloaded
-stories, deciding whether to search, an opening provided as exact text,
-closers, the unpopulated client list, "stories below", and invented example
-facts under a real client name. The old rag_answer() prompts (BASE_PROMPT,
-STANDARD_DELTA, SYNTHESIS_DELTA, OFF_TOPIC_GUARD) are not under test here.
+These tests pin that composition: the mode's system prompt first and
+unchanged, the "**TOOLS:**" note, then build_answer_instructions() with the
+opener examples line, the focus angle on standard answers only, and citation
+rule 0a when profile facts are present. The parity test holds it to the text
+run 2's lever2_sol arm sent for one standard and one synthesis turn
+(tests/fixtures/ask_agy_lever2_sol_system_prompts.json, with the inputs that
+path received).
 """
+
+import json
+from pathlib import Path
 
 import pytest
 
-from ui.pages.ask_mattgpt import backend_service as bs
-from ui.pages.ask_mattgpt.prompts import build_tool_system_prompt
+from ui.pages.ask_mattgpt.prompts import (
+    build_answer_instructions,
+    build_system_prompt,
+    build_tool_system_prompt,
+)
 
 pytestmark = pytest.mark.xfail(
     reason="MATTGPT-275; remove in the 275 Green commit",
     strict=False,
 )
 
-_DNA = (
-    "## ZZZ_SENTINEL facts\n- ZZZ career arc\n\n"
-    "**GROUNDING RULES:**\n1. ZZZ_OLD_GROUNDING_RULE\n"
-)
+_DNA = "## ZZZ_SENTINEL facts\n- ZZZ career arc\n"
 _PROFILE = "Education: ZZZ_PROFILE_FACT"
-_STANDARD_OPENERS = ["🐾 ZZZ standard opener one.", "🐾 ZZZ standard opener two."]
-_SYNTHESIS_OPENERS = ["🐾 ZZZ synthesis opener one.", "🐾 ZZZ synthesis opener two."]
+_OPENERS = ["🐾 ZZZ opener one.", "Got it! 🐾 ZZZ", "🐾 ZZZ opener three..."]
 _FOCUS = "ZZZ focus angle."
 
-
-def _standard():
-    return build_tool_system_prompt(
-        is_synthesis=False,
-        matt_dna=_DNA,
-        profile_facts=_PROFILE,
-        opener_examples=_STANDARD_OPENERS,
-        focus_angle=_FOCUS,
-    )
-
-
-def _synthesis():
-    return build_tool_system_prompt(
-        is_synthesis=True,
-        matt_dna=_DNA,
-        profile_facts=_PROFILE,
-        opener_examples=_SYNTHESIS_OPENERS,
-        focus_angle=_FOCUS,
-    )
-
-
-_BOTH = pytest.mark.parametrize(
-    "build", [_standard, _synthesis], ids=["standard", "synthesis"]
+# The tool note and opener line as the lever 2 runs sent them.
+_TOOL_NOTE = (
+    "No stories are preloaded. Call search_stories when the question needs "
+    "evidence from Matt's work history. Answer directly from the facts about "
+    "Matt above or from the conversation when they already answer it."
+)
+_OPENER_LINE = (
+    "Begin with a short opening line in Agy's voice. Examples of how Agy opens: "
+    '"🐾 ZZZ opener one."; "Got it! 🐾 ZZZ"; "🐾 ZZZ opener three...".'
 )
 
 
-class TestContractSectionsPresent:
-    @_BOTH
-    def test_sections_in_order(self, build):
-        prompt = build()
-        order = [
-            "## YOUR JOB",
-            "## HOW EACH TURN WORKS",
-            "## THE CONVERSATION",
-            "## WHAT YOU DO",
-            "## WHAT YOU NEVER DO",
-            "## BANNED PHRASES",
-            "## VOICE",
-            "## PRONOUN TRANSFORMATION",
-            "ZZZ_SENTINEL facts",
-            "**About Matt (attested facts):**",
-            "## GROUNDING",
-            "FACT-PAIRING RULE",
-            "CONTEXT ISOLATION",
-            "## ANSWER SHAPE",
-            "## OFF-TOPIC GUARD",
-        ]
-        positions = [prompt.find(marker) for marker in order]
-        assert -1 not in positions, dict(zip(order, positions, strict=False))
-        assert positions == sorted(positions)
-
-    @_BOTH
-    def test_tool_contract(self, build):
-        prompt = build()
-        assert "Before every answer you search Matt's stories" in prompt
-        assert "put the client, project or topic it refers to in the query" in prompt
-        assert "each in its own <story> tag" in prompt
-        assert "Use the ones that answer the question." in prompt
-
-    @_BOTH
-    def test_conversation_contract(self, build):
-        prompt = build()
-        assert "A follow-up is about what the previous answer discussed." in prompt
-        assert "the new question sets the topic" in prompt
-        assert "answer for each of them, or ask which one" in prompt
-
-    @_BOTH
-    def test_grounding_rule_3_names_both_sources(self, build):
-        assert (
-            "NEVER invent outcomes, fabricate proof points, or mention clients "
-            "not in the facts about Matt or the returned stories" in build()
-        )
-
-    @_BOTH
-    def test_reflection_paragraph_ban_is_kept(self, build):
-        assert "End with a reflection paragraph about Matt's qualities" in build()
-
-    @_BOTH
-    def test_off_topic_guard_uses_the_approved_redirect(self, build):
-        assert (
-            "🐾 I'm focused on Matt's professional experience, including the "
-            "projects, teams, and outcomes." in build()
-        )
-
-    @_BOTH
-    def test_facts_and_profile_without_the_old_grounding_list(self, build):
-        prompt = build()
-        assert "ZZZ_PROFILE_FACT" in prompt
-        assert "ZZZ_OLD_GROUNDING_RULE" not in prompt
-        assert "**GROUNDING RULES:**" not in prompt
-
-
-class TestEachRuleOnce:
-    @_BOTH
-    @pytest.mark.parametrize(
-        "rule",
-        [
-            "0a. The facts about Matt above are accurate",
-            "0b. If the question is about a category the profile has no key for",
-            "**Bold ALL client names and numbers.**",
-            "Write natural prose paragraphs.",
-            "State facts. Do not evaluate Matt.",
-        ],
+def _prompt(is_synthesis, profile_facts=_PROFILE, focus_angle=_FOCUS):
+    return build_tool_system_prompt(
+        is_synthesis=is_synthesis,
+        matt_dna=_DNA,
+        profile_facts=profile_facts,
+        opener_examples=_OPENERS,
+        focus_angle=focus_angle,
     )
-    def test_appears_exactly_once(self, build, rule):
-        assert build().count(rule) == 1
 
 
-class TestOldPipelineLanguageGone:
-    @_BOTH
-    @pytest.mark.parametrize(
-        "phrase",
-        [
-            "primary story",
-            "Draw on all the stories",
-            "opening provided",
-            "Start your response with this exact text",
-            "Want me to dig deeper",
-            "No stories are preloaded",
-            "when the question needs evidence",
-            "standalone",
-            "Only cite these clients",
-            "the clients shown in the stories",
-            "stories below",
-            "stories provided",
-            "## INSTRUCTIONS",
-            "**TOOLS:**",
-            "STANDARD MODE",
-            "SYNTHESIS MODE",
-            "JP Morgan",
-            "12 countries",
-            "I can only discuss Matt's transformation experience",
-        ],
-    )
-    def test_absent(self, build, phrase):
-        assert phrase not in build()
-
-
-class TestModeShapes:
-    def test_standard_shape(self):
-        prompt = _standard()
-        assert "## ANSWER SHAPE: SPECIFIC QUESTION" in prompt
-        assert "## ANSWER SHAPE: BIG-PICTURE QUESTION" not in prompt
-        assert (
-            "A direct question (team size, how long, yes or no, a follow-up asking "
-            "for one fact) gets a direct answer first, in a few sentences." in prompt
+class TestComposition:
+    @pytest.mark.parametrize("is_synthesis", [False, True])
+    def test_is_the_mode_prompt_then_the_tool_note_then_the_instructions(
+        self, is_synthesis
+    ):
+        expected = (
+            build_system_prompt(
+                is_synthesis=is_synthesis, matt_dna=_DNA, profile_facts=_PROFILE
+            )
+            + "\n\n**TOOLS:** "
+            + _TOOL_NOTE
+            + "\n\n"
+            + build_answer_instructions(
+                opening_line=_OPENER_LINE,
+                is_synthesis=is_synthesis,
+                focus_angle=_FOCUS if not is_synthesis else "",
+                profile_facts=_PROFILE,
+            )
         )
-        assert (
-            "A question asking for the story ('Tell me about…', 'How did he…') "
-            "follows the WHY → HOW → WHAT flow below." in prompt
-        )
-        assert "Story answers: 200-350 words" in prompt
-        assert "For factual queries" not in prompt
+        assert _prompt(is_synthesis) == expected
+
+    def test_without_profile_facts_there_is_no_rule_0a(self):
+        prompt = _prompt(False, profile_facts="")
+        assert "**About Matt (attested facts):**" not in prompt
+        assert "0a. The facts about Matt above are accurate" not in prompt
+
+
+class TestOpeners:
+    @pytest.mark.parametrize("is_synthesis", [False, True])
+    def test_openers_are_examples_in_order(self, is_synthesis):
+        assert _OPENER_LINE in _prompt(is_synthesis)
+
+    @pytest.mark.parametrize("is_synthesis", [False, True])
+    def test_no_opener_is_given_as_exact_text(self, is_synthesis):
+        assert "Start your response with this exact text" not in _prompt(is_synthesis)
+
+
+class TestModes:
+    def test_standard_answers_get_the_standard_mode_and_the_focus_angle(self):
+        prompt = _prompt(False)
+        assert "## STANDARD MODE" in prompt
+        assert "## SYNTHESIS MODE" not in prompt
         assert f"**FOCUS:** {_FOCUS}" in prompt
 
-    def test_synthesis_shape(self):
-        prompt = _synthesis()
-        assert "## ANSWER SHAPE: BIG-PICTURE QUESTION" in prompt
-        assert "## ANSWER SHAPE: SPECIFIC QUESTION" not in prompt
-        assert "Lead with the Themes" in prompt
-        assert "250-400 words" in prompt
+    def test_synthesis_answers_get_the_synthesis_mode_and_no_focus_angle(self):
+        prompt = _prompt(True)
+        assert "## SYNTHESIS MODE" in prompt
+        assert "## STANDARD MODE" not in prompt
         assert "**FOCUS:**" not in prompt
 
+
+_RUN2 = json.loads(
+    (
+        Path(__file__).parents[1]
+        / "fixtures"
+        / "ask_agy_lever2_sol_system_prompts.json"
+    ).read_text()
+)["turns"]
+
+
+class TestParityWithRun2:
     @pytest.mark.parametrize(
-        "build, own, other",
-        [
-            (_standard, _STANDARD_OPENERS, _SYNTHESIS_OPENERS),
-            (_synthesis, _SYNTHESIS_OPENERS, _STANDARD_OPENERS),
+        "turn",
+        _RUN2,
+        ids=[
+            ("synthesis-" if t["is_synthesis"] else "standard-")
+            + t["source"][-6:].replace(" ", "-")
+            for t in _RUN2
         ],
-        ids=["standard", "synthesis"],
     )
-    def test_opener_examples_sit_in_the_answer_shape(self, build, own, other):
-        prompt = build()
-        shape = prompt[prompt.index("## ANSWER SHAPE") :]
-        assert "Examples of how Agy opens" in shape
-        assert prompt.count("Examples of how Agy opens") == 1
-        for opener in own:
-            assert opener in shape
-        for opener in other:
-            assert opener not in prompt
-
-
-class TestWiredIntoAgyAnswer:
-    """agy_answer() sends this contract as its system prompt."""
-
-    def _first_call(self, family):
-        from tests.unit.test_ask_agy_tool_answer import _response, _run
-
-        _, fake, _, _, _ = _run([_response("ok")], family=family)
-        return fake.requests[0]
-
-    def test_standard_turn(self):
-        call = self._first_call("behavioral")
-        system = call["messages"][0]["content"]
-        assert "## HOW EACH TURN WORKS" in system
-        assert "## ANSWER SHAPE: SPECIFIC QUESTION" in system
-        assert bs.STANDARD_OPENERS[0] in system
-        assert bs.SYNTHESIS_OPENERS[0] not in system
-        assert "## INSTRUCTIONS" not in system
-
-    def test_synthesis_turn(self):
-        system = self._first_call("synthesis")["messages"][0]["content"]
-        assert "## ANSWER SHAPE: BIG-PICTURE QUESTION" in system
-        assert bs.SYNTHESIS_OPENERS[0] in system
-        assert bs.STANDARD_OPENERS[0] not in system
-
-    def test_query_description_is_not_standalone(self):
-        call = self._first_call("behavioral")
-        query = call["tools"][0]["function"]["parameters"]["properties"]["query"]
-        assert "standalone" not in query["description"]
+    def test_equals_the_system_prompt_run_2_sent(self, turn):
+        prompt = build_tool_system_prompt(
+            is_synthesis=turn["is_synthesis"],
+            matt_dna=turn["matt_dna"],
+            profile_facts=turn["profile_facts"],
+            opener_examples=turn["opener_examples"],
+            focus_angle=turn["focus_angle"],
+        )
+        assert prompt == turn["system_prompt"]

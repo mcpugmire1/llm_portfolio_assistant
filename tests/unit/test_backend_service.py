@@ -542,8 +542,7 @@ class TestSendToBackend:
     """Tests for send_to_backend() legacy wrapper."""
 
     @pytest.mark.xfail(
-        reason="MATTGPT-275 Red; Green paused until MATTGPT-279 lands. Remove these "
-        "xfails in the 275 Green commit.",
+        reason="MATTGPT-275 Red; remove these xfails in the 275 Green commit.",
         strict=False,
     )
     def test_delegates_to_agy_answer(self, sample_stories, mock_streamlit):
@@ -567,7 +566,9 @@ class TestSendToBackend:
 
             # filters and ctx are dropped; history comes from ask_transcript
             # (MATTGPT-273), none here.
-            mock_agy.assert_called_once_with("test", sample_stories, history=[])
+            mock_agy.assert_called_once_with(
+                "test", sample_stories, history=[], on_delta=None
+            )
             mock_rag.assert_not_called()
             assert result["answer_md"] == "test"
 

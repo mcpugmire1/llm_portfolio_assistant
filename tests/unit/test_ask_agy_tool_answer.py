@@ -20,9 +20,17 @@ Class P (post-processing and contract): profile markers become
   profile_categories, clients of the stories used and numbers are bolded,
   $ is escaped, sources are the stories the searches returned, log_query
   runs once.
+Class S (the call, MATTGPT-282): every model call is a streamed Responses
+  API call on ASK_ANSWER_MODEL (gpt-6.1-sol, pinned by name; no dated
+  snapshot is listed) at reasoning effort medium with max_output_tokens
+  4000, no temperature and no max_tokens, as the lever2_sol arm of
+  docs/evidence/MATTGPT-282/sol_arms_20261011_211830/ sent it. Answer text
+  deltas reach on_delta as they arrive; answer_md is the post-processed
+  whole text (stream, then swap).
 
-The model is a scripted fake at openai.OpenAI, as in
-test_ask_agy_history.py. Stories are invented fixtures, not corpus titles.
+The model is a scripted fake at openai.OpenAI whose responses.create
+returns a stream of events. Stories are invented fixtures, not corpus
+titles.
 """
 
 import json
@@ -37,8 +45,7 @@ from ui.pages.ask_mattgpt import backend_service as bs
 logging.getLogger("streamlit").setLevel(logging.ERROR)
 
 pytestmark = pytest.mark.xfail(
-    reason="MATTGPT-275 Red; Green paused until MATTGPT-279 lands. Remove these "
-    "xfails in the 275 Green commit.",
+    reason="MATTGPT-275 Red; remove these xfails in the 275 Green commit.",
     strict=False,
 )
 
@@ -82,44 +89,57 @@ _STORY_PN = {
 _STORIES = [_STORY_A, _STORY_B, _STORY_PN]
 
 
-def _response(content=None, tool_query=None):
-    tool_calls = None
+def _response(content=None, tool_query=None, chunks=None, status="completed"):
+    """One streamed Responses API reply: delta events, then the terminal
+    event carrying the whole response. content is answer text (streamed in
+    `chunks` when given); tool_query makes it a search_stories call."""
+    events = []
+    output = []
     if tool_query is not None:
-        tool_calls = [
+        arguments = json.dumps({"query": tool_query})
+        events.append(
             SimpleNamespace(
-                id="call_zzz",
-                type="function",
-                function=SimpleNamespace(
-                    name="search_stories",
-                    arguments=json.dumps({"query": tool_query}),
-                ),
+                type="response.function_call_arguments.delta", delta=arguments
             )
-        ]
-    message = SimpleNamespace(content=content, tool_calls=tool_calls, role="assistant")
-    return SimpleNamespace(
-        choices=[
+        )
+        output.append(
             SimpleNamespace(
-                message=message,
-                finish_reason="tool_calls" if tool_calls else "stop",
+                type="function_call",
+                call_id="call_zzz",
+                name="search_stories",
+                arguments=arguments,
             )
-        ]
+        )
+    if content is not None:
+        for piece in chunks or [content]:
+            events.append(
+                SimpleNamespace(type="response.output_text.delta", delta=piece)
+            )
+        output.append(SimpleNamespace(type="message", role="assistant"))
+    final = SimpleNamespace(
+        status=status,
+        model="gpt-6.1-sol",
+        output=output,
+        output_text=content or "",
     )
+    terminal = "response.completed" if status == "completed" else f"response.{status}"
+    events.append(SimpleNamespace(type=terminal, response=final))
+    return events
 
 
 class _FakeOpenAI:
-    """Scripted chat model. Records every request; replays responses in order,
-    repeating the last one when the script runs out."""
+    """Scripted Responses model. Records every request; replays streamed
+    replies in order, repeating the last one when the script runs out."""
 
     def __init__(self, script):
         self.script = list(script)
         self.requests = []
-        self.chat = SimpleNamespace(completions=SimpleNamespace(create=self._create))
+        self.responses = SimpleNamespace(create=self._create)
 
     def _create(self, **kwargs):
         self.requests.append(json.loads(json.dumps(kwargs, default=str)))
-        if len(self.script) > 1:
-            return self.script.pop(0)
-        return self.script[0]
+        events = self.script.pop(0) if len(self.script) > 1 else self.script[0]
+        return iter(list(events))
 
 
 def _search_result(results, top_score=0.42, confidence="high"):
@@ -139,6 +159,7 @@ def _run(
     search=None,
     history=None,
     nonsense=None,
+    on_delta=None,
 ):
     """Run agy_answer with the model, router, search and loggers faked.
     Returns (result, fake_model, search_mock, log_query_mock, session)."""
@@ -162,12 +183,18 @@ def _run(
         patch.object(bs, "log_offdomain", MagicMock()),
         patch.object(bs, "MATT_DNA", _DNA_SENTINEL),
     ):
-        result = bs.agy_answer(question, _STORIES, history=history)
+        result = bs.agy_answer(question, _STORIES, history=history, on_delta=on_delta)
     return result, fake, search_mock, log_query_mock, session
 
 
-def _tool_messages(request):
-    return [m for m in request["messages"] if m.get("role") == "tool"]
+def _system(request):
+    first = request["input"][0]
+    assert first["role"] == "system"
+    return first["content"]
+
+
+def _tool_outputs(request):
+    return [i for i in request["input"] if i.get("type") == "function_call_output"]
 
 
 # ---------------------------------------------------------------------------
@@ -198,8 +225,24 @@ class TestWiring:
                 {"role": "user", "content": "q1"},
                 {"role": "assistant", "content": "a1"},
             ],
+            on_delta=None,
         )
         mock_rag.assert_not_called()
+
+    def test_send_to_backend_passes_on_delta_through(self):
+        def on_delta(text):
+            return None
+
+        mock_st = MagicMock()
+        mock_st.session_state = {"ask_transcript": []}
+        with (
+            patch.object(bs, "st", mock_st),
+            patch.object(bs, "agy_answer") as mock_agy,
+        ):
+            mock_agy.return_value = {"answer_md": "ok", "sources": []}
+            bs.send_to_backend("q", {}, None, _STORIES, on_delta=on_delta)
+        mock_agy.assert_called_once()
+        assert mock_agy.call_args.kwargs["on_delta"] is on_delta
 
 
 # ---------------------------------------------------------------------------
@@ -234,10 +277,29 @@ class TestRejectionsKept:
 
 
 class TestToolLoop:
-    def test_offers_the_search_stories_tool(self):
+    def test_offers_the_search_stories_tool_as_lever_2_measured_it(self):
         _, fake, _, _, _ = _run([_response("He has no PMP.")])
-        tools = fake.requests[0]["tools"]
-        assert [t["function"]["name"] for t in tools] == ["search_stories"]
+        assert fake.requests[0]["tools"] == [
+            {
+                "type": "function",
+                "name": "search_stories",
+                "description": (
+                    "Semantic search over Matt's STAR career stories. "
+                    "Returns the top 5 stories."
+                ),
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "query": {
+                            "type": "string",
+                            "description": "A standalone search query.",
+                        }
+                    },
+                    "required": ["query"],
+                },
+                "strict": False,
+            }
+        ]
 
     def test_first_call_is_a_forced_search(self):
         # MATTGPT-275 contract: every turn retrieves; the model never decides
@@ -253,9 +315,21 @@ class TestToolLoop:
             ]
         )
         assert search.call_args.args[0] == "ledger settlement team size"
-        tool_msgs = _tool_messages(fake.requests[1])
-        assert len(tool_msgs) == 1
-        assert "ZZZ Sentinel Ledger Rebuild" in tool_msgs[0]["content"]
+        calls = [
+            i for i in fake.requests[1]["input"] if i.get("type") == "function_call"
+        ]
+        assert calls == [
+            {
+                "type": "function_call",
+                "call_id": "call_zzz",
+                "name": "search_stories",
+                "arguments": json.dumps({"query": "ledger settlement team size"}),
+            }
+        ]
+        outputs = _tool_outputs(fake.requests[1])
+        assert len(outputs) == 1
+        assert outputs[0]["call_id"] == "call_zzz"
+        assert "ZZZ Sentinel Ledger Rebuild" in outputs[0]["output"]
         assert "He led" in result["answer_md"]
 
     def test_weak_search_is_answered_not_refused(self):
@@ -278,7 +352,7 @@ class TestToolLoop:
         assert len(fake.requests) == 4
         assert fake.requests[0].get("tool_choice") == "required"
         assert fake.requests[-1].get("tool_choice") == "none"
-        assert all("tool_choice" not in r for r in fake.requests[1:-1])
+        assert all(r.get("tool_choice") == "auto" for r in fake.requests[1:-1])
 
     def test_history_sits_between_system_and_current_question(self):
         history = [
@@ -286,10 +360,10 @@ class TestToolLoop:
             {"role": "assistant", "content": "ZZZ_PRIOR_A"},
         ]
         _, fake, _, _, _ = _run([_response("ok")], history=history)
-        msgs = fake.requests[0]["messages"]
-        assert msgs[0]["role"] == "system"
-        assert msgs[1:3] == history
-        assert msgs[3] == {"role": "user", "content": "Tell me about his ledger work"}
+        items = fake.requests[0]["input"]
+        assert items[0]["role"] == "system"
+        assert items[1:3] == history
+        assert items[3] == {"role": "user", "content": "Tell me about his ledger work"}
 
 
 # ---------------------------------------------------------------------------
@@ -300,7 +374,7 @@ class TestToolLoop:
 class TestVoiceCarriesOver:
     def test_system_prompt_has_dna_and_profile(self):
         _, fake, _, _, _ = _run([_response("ok")])
-        system = fake.requests[0]["messages"][0]["content"]
+        system = _system(fake.requests[0])
         assert _DNA_SENTINEL in system
         assert "**About Matt (attested facts):**" in system
 
@@ -308,33 +382,43 @@ class TestVoiceCarriesOver:
         # MATTGPT-275: the instruction block moved to the system prompt with
         # the openers as examples; the user message is the question as asked.
         _, fake, _, _, _ = _run([_response("ok")])
-        system = fake.requests[0]["messages"][0]["content"]
+        system = _system(fake.requests[0])
         assert "Examples of how Agy opens" in system
         assert "**FOCUS:**" in system
         assert "Write natural prose paragraphs" in system
         assert "**Bold ALL client names and numbers.**" in system
         assert "State facts. Do not evaluate Matt." in system
-        user = fake.requests[0]["messages"][-1]["content"]
+        user = fake.requests[0]["input"][-1]["content"]
         assert user == "Tell me about his ledger work"
         assert "Start your response with this exact text" not in system + user
 
+    @pytest.mark.parametrize("family", ["behavioral", "synthesis"])
+    def test_every_opener_line_is_an_example_synthesis_first(self, family):
+        # As measured: one example list, synthesis openers then standard ones,
+        # in both modes.
+        _, fake, _, _, _ = _run([_response("ok")], family=family)
+        examples = "; ".join(
+            f'"{o}"' for o in bs.SYNTHESIS_OPENERS + bs.STANDARD_OPENERS
+        )
+        assert f"Examples of how Agy opens: {examples}." in _system(fake.requests[0])
+
     def test_synthesis_voice_follows_the_router(self):
         _, fake, _, _, _ = _run([_response("ok")], family="synthesis")
-        system = fake.requests[0]["messages"][0]["content"]
-        assert "## ANSWER SHAPE: BIG-PICTURE QUESTION" in system
-        assert "## ANSWER SHAPE: SPECIFIC QUESTION" not in system
+        system = _system(fake.requests[0])
+        assert "## SYNTHESIS MODE" in system
+        assert "## STANDARD MODE" not in system
 
     def test_standard_voice_otherwise(self):
         _, fake, _, _, _ = _run([_response("ok")], family="behavioral")
-        system = fake.requests[0]["messages"][0]["content"]
-        assert "## ANSWER SHAPE: SPECIFIC QUESTION" in system
+        system = _system(fake.requests[0])
+        assert "## STANDARD MODE" in system
 
     def test_professional_narrative_result_carries_the_verbatim_requirement(self):
         _, fake, _, _, _ = _run(
             [_response(tool_query="who is Matt"), _response("Matt is a builder.")],
             search=_search_result([_STORY_PN]),
         )
-        tool_content = _tool_messages(fake.requests[1])[0]["content"]
+        tool_content = _tool_outputs(fake.requests[1])[0]["output"]
         assert "VERBATIM REQUIREMENT" in tool_content
         assert '"builder"' in tool_content
 
@@ -401,6 +485,72 @@ class TestPostProcessingAndContract:
 
 
 # ---------------------------------------------------------------------------
+# Class S: the call (Responses API, streamed, model pinned)
+# ---------------------------------------------------------------------------
+
+
+class TestTheCall:
+    def test_ask_answer_model_is_one_constant_pinned_by_name(self):
+        from config import constants
+
+        assert getattr(constants, "ASK_ANSWER_MODEL", None) == "gpt-6.1-sol"
+
+    def test_every_call_is_a_streamed_responses_call_with_the_measured_settings(self):
+        _, fake, _, _, _ = _run([_response(tool_query="ledger"), _response("ok")])
+        assert len(fake.requests) == 2
+        for request in fake.requests:
+            assert request["model"] == "gpt-6.1-sol"
+            assert request["stream"] is True
+            assert request["reasoning"] == {"effort": "medium"}
+            assert request["max_output_tokens"] == 4000
+            for absent in ("temperature", "max_tokens", "messages"):
+                assert absent not in request
+
+    def test_answer_deltas_reach_on_delta_in_order(self):
+        received = []
+        _run(
+            [
+                _response(tool_query="ledger"),
+                _response(
+                    "He led 40 engineers.", chunks=["He led ", "40 ", "engineers."]
+                ),
+            ],
+            on_delta=received.append,
+        )
+        assert "".join(received) == "He led 40 engineers."
+
+    def test_answer_md_is_the_post_processed_whole_text(self):
+        # Stream, then swap: the visitor sees raw deltas while the answer
+        # arrives; the transcript keeps the post-processed text.
+        result, _, _, _, _ = _run(
+            [
+                _response(tool_query="ledger"),
+                _response(
+                    "The budget was $2M. [[profile:certifications]]",
+                    chunks=["The budget was $2M. ", "[[profile:certifications]]"],
+                ),
+            ],
+            on_delta=lambda text: None,
+        )
+        assert "\\$" in result["answer_md"]
+        assert "[[" not in result["answer_md"]
+        assert result["profile_categories"] == ["certifications"]
+
+    def test_an_incomplete_response_still_answers_with_its_text(self):
+        # max_output_tokens counts reasoning tokens; a capped reply keeps
+        # whatever text it produced.
+        result, _, _, _, _ = _run(
+            [_response(tool_query="ledger"), _response("He led", status="incomplete")]
+        )
+        assert result["answer_md"] == "He led"
+        assert result.get("degraded") is False
+
+    def test_without_on_delta_the_answer_is_unchanged(self):
+        result, _, _, _, _ = _run([_response(tool_query="ledger"), _response("ok")])
+        assert result["answer_md"] == "ok"
+
+
+# ---------------------------------------------------------------------------
 # Class E: model errors
 # ---------------------------------------------------------------------------
 
@@ -408,7 +558,7 @@ class TestPostProcessingAndContract:
 class _FailingOpenAI:
     def __init__(self, message):
         self.message = message
-        self.chat = SimpleNamespace(completions=SimpleNamespace(create=self._create))
+        self.responses = SimpleNamespace(create=self._create)
 
     def _create(self, **kwargs):
         raise RuntimeError(self.message)

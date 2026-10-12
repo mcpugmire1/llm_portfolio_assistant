@@ -15,7 +15,10 @@ The four unit assertions:
      model call that writes the answer.
 Plus the voice placement: the per-answer voice rules sit in the system prompt
 with Matt's opener lines as examples, never as exact text to copy. The full
-system-prompt contract is in test_ask_agy_tool_system_prompt.py.
+system-prompt composition is in test_ask_agy_tool_system_prompt.py.
+
+The calls are streamed Responses API calls (MATTGPT-282), so the fake
+records Responses requests and the conversation is read from "input".
 
 The behavioral half is evidenced by the lever 2 acceptance run
 (docs/evidence/MATTGPT-275/lever2_20261007_211535/, f7c1de2): searched
@@ -51,21 +54,20 @@ _FOLLOW_UP = "What went wrong?"
 
 
 class _LoggingOpenAI:
-    """Scripted chat model that logs each request into a shared event list."""
+    """Scripted Responses model that logs each request into a shared event list."""
 
     def __init__(self, script, events):
         self.script = list(script)
         self.events = events
         self.requests = []
-        self.chat = MagicMock()
-        self.chat.completions.create = self._create
+        self.responses = MagicMock()
+        self.responses.create = self._create
 
     def _create(self, **kwargs):
         self.requests.append(json.loads(json.dumps(kwargs, default=str)))
         self.events.append(("model", len(self.requests) - 1))
-        if len(self.script) > 1:
-            return self.script.pop(0)
-        return self.script[0]
+        events = self.script.pop(0) if len(self.script) > 1 else self.script[0]
+        return iter(list(events))
 
 
 def _turn(question, history, script):
@@ -121,7 +123,7 @@ class TestEveryTurnRetrievesInContext:
 
     def test_forced_call_carries_the_conversation_and_the_question_as_asked(self):
         _, fake, _, _ = _turn(_FOLLOW_UP, _HISTORY, _SEARCH_THEN_ANSWER)
-        msgs = fake.requests[0]["messages"]
+        msgs = fake.requests[0]["input"]
         assert msgs[0]["role"] == "system"
         assert msgs[1:3] == _HISTORY
         assert msgs[3] == {"role": "user", "content": _FOLLOW_UP}
@@ -139,7 +141,7 @@ class TestEveryTurnRetrievesInContext:
 class TestVoicePlacement:
     def test_voice_rules_are_in_the_system_prompt(self):
         _, fake, _, _ = _turn(_FOLLOW_UP, _HISTORY, _SEARCH_THEN_ANSWER)
-        system = fake.requests[0]["messages"][0]["content"]
+        system = fake.requests[0]["input"][0]["content"]
         for line in (
             "**FOCUS:**",
             "Write natural prose paragraphs",
@@ -151,9 +153,9 @@ class TestVoicePlacement:
     def test_openers_are_examples_not_exact_text(self):
         _, fake, _, _ = _turn(_FOLLOW_UP, _HISTORY, _SEARCH_THEN_ANSWER)
         everything = " ".join(
-            m.get("content") or "" for r in fake.requests for m in r["messages"]
+            m.get("content") or "" for r in fake.requests for m in r["input"]
         )
         assert "Start your response with this exact text" not in everything
-        system = fake.requests[0]["messages"][0]["content"]
+        system = fake.requests[0]["input"][0]["content"]
         assert "Examples of how Agy opens" in system
         assert system.count("🐾") >= 2, "expected several opener lines as examples"

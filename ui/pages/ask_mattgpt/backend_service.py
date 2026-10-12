@@ -10,6 +10,7 @@ import logging
 import os
 import random
 import re
+from collections.abc import Callable
 from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, datetime
 from typing import Any
@@ -1755,6 +1756,7 @@ def agy_answer(
     question: str,
     stories: list[dict[str, Any]],
     history: list[dict[str, str]] | None = None,
+    on_delta: Callable[[str], None] | None = None,
 ) -> dict[str, Any]:
     raise NotImplementedError
 
@@ -1764,6 +1766,7 @@ def send_to_backend(
     filters: dict[str, Any],
     ctx: dict[str, Any] | None,
     stories: list[dict[str, Any]],
+    on_delta: Callable[[str], None] | None = None,
 ) -> dict[str, Any]:
     """Legacy wrapper for rag_answer.
 
