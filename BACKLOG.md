@@ -89,7 +89,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-097](#mattgpt-097) | Career-intent framing refresh — corpus predates current role taxonomy; refresh framing AND tighten register | Open | Medium | Action | May 28, 2026 |
 | [MATTGPT-099](#mattgpt-099) | Role Match — assess and decide comp handling on JDs that include comp expectations | Open | Medium | Investigation + Action | May 29, 2026 |
 | [MATTGPT-122](#mattgpt-122) | My Work — Cards view BDD timing: test_view_switching_preserves_open_story_detail fails (components.html iframe listener not attached at click time) | Open | Low | Issue | June 10, 2026 |
-| [MATTGPT-128](#mattgpt-128) | Displayed-source faithfulness — source cards must substantiate the claims in the answer | Open | High | Issue | June 14, 2026 |
+| [MATTGPT-128](#mattgpt-128) | Displayed-source faithfulness -- split panel by source kind, extract reason lines, drop trailing question | Open | High | Issue | June 14, 2026 |
 | [MATTGPT-129](#mattgpt-129) | Content elaboration per era — expand 5 under-documented operational stories | Open | High | Action | June 14, 2026 |
 | [MATTGPT-130](#mattgpt-130) | "practitioners" canonical everywhere — UI, eval golden set, corpus re-embed in lockstep | Open | Medium | Action | June 14, 2026 |
 | [MATTGPT-131](#mattgpt-131) | BDD selector bug — `test_industry_and_capability_labels_visible_inline_on_mobile` fails in marathon run | Open | Low | Bug | June 15, 2026 |
@@ -1074,7 +1074,9 @@ None of these stories is cited in the answer. This is the "retrieved, not cited"
 - Fiserv figures in "Owning the P&L": deliberate authoring choice. No corpus change.
 - Revenue query routing: closed. Routes to background consistently, two runs two days apart, byte-identical retrieval.
 
-**Superseded in part by MATTGPT-275 (Oct 6, 2026):** The Sources contract: cards become the stories the model actually retrieved.
+**New evidence (Oct 12, 2026, MATTGPT-275 dev session; local Streamlit on the uncommitted 275 Green (lever 2 on gpt-6.1-sol), Oct 12):** "How did Matt modernize payments across 12+ countries at JP Morgan?" The dev session's truth check traced all 23 claims to a story; 7 of them come from "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout" and "Overhauling Entitlement Management for JP Morgan ACCESS". Neither was shown as a card. The cards were three other JP Morgan stories, reported by short name as Engine, Gateway and Migration: "Building the Payment Engine Behind JP Morgan ACCESS", "Building JP Morgan's Global Payments Gateway Across 12 Countries", and a migration story (the corpus has two: "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform" and "Orchestrating Data Migration Tranche Rollout for JP Morgan"; which one was shown is not recorded). A visitor checking the sources can't find where those 7 facts came from. The truth check and screenshots are in the dev session, not in the repo.
+
+**Superseded in part by MATTGPT-275 (Oct 6, 2026, reworded Oct 12):** The Sources contract: cards show the stories the answer cited, not just those retrieved.
 
 ---
 
