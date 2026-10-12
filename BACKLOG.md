@@ -220,7 +220,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-042](#mattgpt-042) | 5P Pattern Taxonomy | Decided Against | Low | Spike | Apr 29, 2026 |
 | [MATTGPT-043](#mattgpt-043) | Humane Framing — Intent-to-Tone Mapping | Decided Against | Low | Spike | Apr 29, 2026 |
 | [MATTGPT-044](#mattgpt-044) | Pattern Insights — Structured Templates | Decided Against | Low | Spike | Apr 29, 2026 |
-| [MATTGPT-046](#mattgpt-046) | Latency Benchmarks | Decided Against | Low | Action | Apr 29, 2026 |
+| [MATTGPT-046](#mattgpt-046) | Latency Benchmarks (superseded by MATTGPT-299) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-047](#mattgpt-047) | Cost Tracking | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-048](#mattgpt-048) | Portfolio Integration (Notion, LinkedIn sync) | Decided Against | Low | Action | Apr 29, 2026 |
 | [MATTGPT-049](#mattgpt-049) | Job Fit Broader Scope (cover letter export, LinkedIn auto-extract) | Decided Against | Low | Action | Apr 29, 2026 |
@@ -2644,7 +2644,7 @@ Kept off the roadmap's NOW.
 - **Priority:** Medium
 - **Type:** Issue
 - **Dependencies:** MATTGPT-275. Set to Open when 275's step 1 (streaming at every entry point) lands, not at 275's close.
-- **Related:** MATTGPT-282 (answering-model comparison), MATTGPT-046 (Decided Against, latency benchmarks)
+- **Related:** MATTGPT-282 (answering-model comparison), MATTGPT-046 (superseded by this ticket)
 - **Logged:** October 12, 2026
 
 **Scope:** MATTGPT-275 builds lever 2 on Sol. Latency experiments live here, as controlled comparisons, so they don't reopen 275's design. Felt speed (streaming every entry point) is 275 step 1, not this ticket.
@@ -2654,6 +2654,10 @@ Kept off the roadmap's NOW.
 - Recomputed from `lever2_sol.json`: round 1 (search-query call) median 1.94 s; final call median 6.48 s, of which 5.16 s is text after the first token, at a median 61.8 output tokens/s; reasoning tokens median 0 per call (mean 5.6; 229 of 268 calls had 0).
 
 **First step:** re-baseline from step 1's run on production code. The probe numbers above are a shim on the Responses API, not production.
+
+**Benchmark (folded from MATTGPT-046, Oct 12, 2026):** the step 1 re-baseline is the benchmark: first visible text and whole turn, median and p90, on production code. Every candidate arm reports against it. Verified Oct 12, 2026: `git grep` at HEAD finds `time.perf_counter()` only in `services/jd_assessor.py` and `ui/pages/role_match.py`; nothing in Ask Agy's answer path is timed. -046's p50/p95 reporting view is not carried over; percentiles are computed from the Sheet.
+
+**First deliverable (from MATTGPT-046, Oct 12, 2026): production timing.** Log first-visible-text seconds and whole-turn seconds per Ask Agy query as `log_query()` fields, so the step 1 re-baseline and any later regression are measured in production, not only in probes. Verified Oct 12, 2026: `log_query()` in `services/query_logger.py` takes `query`, `page`, `intent_family`, `confidence`, `result_count`, `redirect_reason` and `top_score`; no duration field. Adding two fields is a query logger schema change, which triggers the Pre-Commit Doc Checklist.
 
 **Candidates, each a controlled arm with blind scoring:**
 1. Round 1 on gpt-4o, or on Sol at minimal effort.
@@ -4318,6 +4322,7 @@ The concentration is real. The retrieval dominance claim is not supported by the
 - **Status:** Decided Against (May 14, 2026)
 - **Priority:** Low (was)
 - **Type:** Action
+- **Superseded by MATTGPT-299 (Oct 12, 2026):** the Why not below rested on "no production performance issues observed". That premise no longer holds: MATTGPT-282 run 2 (8fa0270) measured Ask Agy on gpt-6.1-sol at a 9.35 s median whole turn and 4.13 s to first visible text, and MATTGPT-299 records it. The benchmark intent moves to -299, where the re-baseline from MATTGPT-275 step 1 is the benchmark. The Rejected ADR should record the original premise and that it no longer holds. The production logger duration column carries over as -299's first deliverable (first-visible-text and whole-turn seconds as `log_query()` fields). The p50/p95 reporting view does not; percentiles are computed from the Sheet.
 - **Why not:** Single-user portfolio with low organic traffic (~7 organic queries in 30 days per May 13 query log audit). No SLA, no performance commitments, no production performance issues observed. Latency tracking is critical for high-traffic systems but overkill here. Would produce sparse, unactionable data. Re-file if traffic scales significantly or if a specific latency complaint surfaces.
 - **Original framing (preserved):**
 - **Issue:** No latency tracking exists. No `time.time()`, no `perf_counter()`, no duration fields in the logger schema. Can't detect performance regressions over time.
