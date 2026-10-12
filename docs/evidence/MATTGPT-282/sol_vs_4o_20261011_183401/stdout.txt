@@ -1,0 +1,324 @@
+PASS fixture file matches 609f903
+PASS parser reads conversations 1 to 18 (got [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18])
+PASS conv 1 'Payments experience': 3 turns, 2 expected lines, runs 10 | “Tell me about his payments work.” → “How big was the team?” → “What went wrong?”
+PASS conv 2 'Education': 2 turns, 1 expected lines, runs 5 | “Does he have a CS degree?” → “Why shouldn’t that worry me?”
+PASS conv 3 'Leadership': 2 turns, 1 expected lines, runs 5 | “What’s his leadership style?” → “Give me an example where that didn’t work.”
+PASS conv 4 'Certifications': 3 turns, 2 expected lines, runs 5 | “Is he certified?” → “What about PMP?” → “Are any of those current?”
+PASS conv 5 'Career motivation': 2 turns, 1 expected lines, runs 5 | “Why is he looking?” → “Why should we hire him over someone who stayed in-house?”
+PASS conv 6 'Healthcare experience': 2 turns, 1 expected lines, runs 5 | “Has he worked in healthcare?” → “What did he actually do there?”
+PASS conv 7 'Location': 2 turns, 1 expected lines, runs 10 | “Where is he based?” → “Would he relocate?”
+PASS conv 8 'Failure and growth': 2 turns, 1 expected lines, runs 5 | “Tell me about a time he failed.” → “What did he change afterward?”
+PASS conv 9 'Topic switch': 4 turns, 3 expected lines, runs 5 | “Tell me about his payments work.” → “What’s his leadership style?” → “Give me an example.” → “How big was the team on that project?”
+PASS conv 10 'Accepting an offer': 3 turns, 2 expected lines, runs 10 | “Tell me about his Norfolk Southern work.” → “Sure, the deep dive on that one.” → “How long did that take?”
+PASS conv 11 'Ambiguous follow-up after a topic change': 3 turns, 1 expected lines, runs 10 | “How did Matt scale engineering teams from 4 to 150+ people?” → “Tell me about his payments work” → “how big was his teams”
+PASS conv 12 'Comparing two engagements': 2 turns, 2 expected lines, runs 10 | “Compare his Fiserv and JP Morgan ACCESS work.” → “Which was bigger?”
+PASS conv 13 'Unambiguous follow-up': 2 turns, 1 expected lines, runs 10 | “Tell me about his Fiserv work.” → “How big was the team?”
+PASS conv 14 'Evaluating for a role': 1 turns, 1 expected lines, runs 10 | “I’m hiring a VP of Platform Engineering. Would Matt be a fit?”
+PASS conv 15 'Getting in touch': 1 turns, 1 expected lines, runs 10 | “How do I get in touch with Matt?”
+PASS conv 16 'Résumé': 1 turns, 1 expected lines, runs 10 | “Can I see his résumé?”
+PASS conv 17 'Accepting a seeded offer': 2 turns, 1 expected lines, runs 10 | (seeded answer) → “Sure.”
+PASS conv 18 'Earlier topic competing with the latest': 3 turns, 2 expected lines, runs 10 | “Tell me about his Norfolk Southern work.” → “Tell me about his RBC work.” → “How long did that take?”
+PASS conv 17: first turn is the seeded answer
+PASS conv 17: parsed seed (answer, offer) equals the fixture's text
+PASS conv 17: seeded text identical in both arms
+PASS conv 17: offer text
+PASS echo_star_stories.jsonl matches 6ec9aec
+PASS echo_star_stories_nlp.jsonl matches 6ec9aec
+PASS corpus 124 stories, 46 engagements (want 124, 46)
+PASS answering and planner model gpt-4o
+     SEARCH_TOP_K=25; confidence: CONFIDENCE_HIGH=0.25, CONFIDENCE_LOW=0.2
+PASS worktree base b55f9ce
+PASS lever 2 opener examples found (12)
+PASS every RBC story block the PoC builds has 2012-06 and 2013-06 (6 stories)
+PASS no lever 2 RBC block (_run_search_tool) carries the dates
+
+ALL CHECKS PASS
+health check before: top Fiserv 0.422
+[poc4o c03 r1 t1] 4.58s synthesize gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nMatt's leadership style is center"
+[poc4o c03 r1 t2] 4.07s answer_from_referent gpt-4o-2024-08-06 | '🐾 This is a strong one.\n\nAt the **Accenture Cloud Innovation'
+[pocsol c03 r1 t1] 6.15s profile gpt-6.1-sol | '🐾 Here’s how Matt describes his leadership style.\n\nMatt lead'
+[pocsol c03 r1 t2] 11.0s search gpt-6.1-sol | '🐾 At **Norfolk Southern**, the initial rollout of his team’s'
+[pocsol c03 r2 t1] 12.54s synthesize gpt-6.1-sol | '🐾 Matt describes his leadership approach as empathy, clarity'
+[pocsol c03 r2 t2] 10.2s answer_from_referent gpt-6.1-sol | '🐾 The closest documented example is inconsistency as the Clo'
+[poc4o c03 r2 t1] 3.59s synthesize gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nMatt's leadership style is deeply"
+[poc4o c03 r2 t2] 4.69s answer_from_referent gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nAt the **Accenture** Cloud Innova"
+[poc4o c03 r3 t1] 3.92s synthesize gpt-4o-2024-08-06 | "🐾 Looking across Matt's portfolio, his leadership style is c"
+[poc4o c03 r3 t2] 3.94s answer_from_referent gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nAt the **Accenture Cloud Innovati"
+[pocsol c03 r3 t1] 12.37s synthesize gpt-6.1-sol | '🐾 Here’s how Matt describes—and practices—his leadership.\n\nM'
+[pocsol c03 r3 t2] 10.58s answer_from_referent gpt-6.1-sol | '🐾 There’s an example of the working model running into probl'
+[pocsol c03 r4 t1] 11.45s synthesize gpt-6.1-sol | '🐾 Here’s how Matt describes—and practices—his leadership sty'
+[pocsol c03 r4 t2] 9.89s answer_from_referent gpt-6.1-sol | '🐾 One example is when team autonomy didn’t work as intended '
+[poc4o c03 r4 t1] 2.22s profile gpt-4o-2024-08-06 | '🐾 Matt leads with empathy, clarity, and purpose. He creates '
+[poc4o c03 r4 t2] 4.6s synthesize gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nAt **Norfolk Southern**, Matt fac"
+[poc4o c03 r5 t1] 2.17s profile gpt-4o-2024-08-06 | '🐾 Matt leads with empathy, clarity, and purpose. He creates '
+[poc4o c03 r5 t2] 5.46s synthesize gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nAt **Norfolk Southern**, Matt fac"
+[pocsol c03 r5 t1] 12.6s synthesize gpt-6.1-sol | '🐾 Matt describes his leadership approach as empathy, clarity'
+[pocsol c03 r5 t2] 12.38s answer_from_referent gpt-6.1-sol | '🐾 The closest documented example is a scaling problem at **A'
+[pocsol c03 r6 t1] 6.15s profile gpt-6.1-sol | '🐾 Here’s how Matt describes his leadership.\n\nMatt leads with'
+[pocsol c03 r6 t2] 8.47s search gpt-6.1-sol | '🐾 At **Norfolk Southern**, the practices Matt introduced did'
+[poc4o c03 r6 t1] 3.33s profile gpt-4o-2024-08-06 | '🐾 Matt leads with empathy, clarity, and purpose. He fosters '
+[poc4o c03 r6 t2] 4.24s search gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nDuring Matt's sabbatical in 2026,"
+[poc4o c03 r7 t1] 3.64s synthesize gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nMatt's leadership style is center"
+[poc4o c03 r7 t2] 4.71s answer_from_referent gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nAt the **Accenture Cloud Innovati"
+[pocsol c03 r7 t1] 11.78s synthesize gpt-6.1-sol | '🐾 Here’s how Matt describes—and practices—his leadership.\n\nM'
+[pocsol c03 r7 t2] 10.77s answer_from_referent gpt-6.1-sol | '🐾 The closest documented example is a scaling problem at **A'
+[pocsol c03 r8 t1] 12.06s synthesize gpt-6.1-sol | '🐾 Here’s how Matt describes—and practices—his leadership.\n\nM'
+[pocsol c03 r8 t2] 9.11s answer_from_referent gpt-6.1-sol | '🐾 Yes—the Cloud Innovation Center’s autonomy model didn’t wo'
+[poc4o c03 r8 t1] 4.69s synthesize gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nMatt's leadership style is rooted"
+[poc4o c03 r8 t2] 3.7s answer_from_referent gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nAt the **Accenture Cloud Innovati"
+[poc4o c03 r9 t1] 4.16s synthesize gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nMatt's leadership style is charac"
+[poc4o c03 r9 t2] 5.06s answer_from_referent gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nAt the **Accenture Cloud Innovati"
+[pocsol c03 r9 t1] 12.71s synthesize gpt-6.1-sol | '🐾 Matt leads with empathy, clarity, and purpose.\n\nHis leader'
+[pocsol c03 r9 t2] 9.87s answer_from_referent gpt-6.1-sol | '🐾 The closest documented example is where the Cloud Innovati'
+[pocsol c03 r10 t1] 5.33s profile gpt-6.1-sol | '🐾 Here’s how Matt describes his leadership.\n\nMatt leads with'
+[pocsol c03 r10 t2] 10.36s synthesize gpt-6.1-sol | '🐾 Yes—at **Norfolk Southern**, the initial working model was'
+[poc4o c03 r10 t1] 2.1s profile gpt-4o-2024-08-06 | '🐾 Matt leads with empathy, clarity, and purpose. He fosters '
+[poc4o c03 r10 t2] 4.21s search gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nDuring Matt's sabbatical in 2026,"
+[poc4o c04 r1 t1] 2.4s profile gpt-4o-2024-08-06 | 'Matt holds several certifications, although none are current'
+[poc4o c04 r1 t2] 3.06s gap gpt-4o-2024-08-06 | "🐾 That isn't in Matt's stories. That isn't in Matt's stories"
+[poc4o c04 r1 t3] 2.87s search gpt-4o-2024-08-06 | "None of Matt's certifications are currently active. He was a"
+[pocsol c04 r1 t1] 6.61s profile gpt-6.1-sol | '🐾 Here’s Matt’s certification history. None is current.\n\n“AW'
+[pocsol c04 r1 t2] 7.33s gap gpt-6.1-sol | "🐾 That isn't in Matt's stories. No—Matt does not have PMP ce"
+[pocsol c04 r1 t3] 4.05s search gpt-6.1-sol | '🐾 No—none of Matt’s certifications is current.'
+[pocsol c04 r2 t1] 6.37s profile gpt-6.1-sol | '🐾 Matt has held certifications, but none is current.\n\nAWS Ce'
+[pocsol c04 r2 t2] 7.15s gap gpt-6.1-sol | "🐾 That isn't in Matt's stories. No, Matt does not hold PMP c"
+[pocsol c04 r2 t3] 4.79s synthesize gpt-6.1-sol | '🐾 No. None of Matt’s certifications is current. Both AWS cer'
+[poc4o c04 r2 t1] 2.46s profile gpt-4o-2024-08-06 | 'Matt has held several certifications, though none are curren'
+[poc4o c04 r2 t2] 2.61s gap gpt-4o-2024-08-06 | "🐾 That isn't in Matt's stories."
+[poc4o c04 r2 t3] 2.94s search gpt-4o-2024-08-06 | "None of Matt's certifications are current. His certification"
+health check after 52 turns: top Fiserv 0.422
+[poc4o c04 r3 t1] 2.02s profile gpt-4o-2024-08-06 | 'Matt holds several certifications, though none are currently'
+[poc4o c04 r3 t2] 2.67s gap gpt-4o-2024-08-06 | "🐾 That isn't in Matt's stories."
+[poc4o c04 r3 t3] 3.04s answer_from_referent gpt-4o-2024-08-06 | "None of Matt's certifications are currently active. His cert"
+[pocsol c04 r3 t1] 6.79s profile gpt-6.1-sol | '🐾 Matt has held certifications, but none is current.\n\nHis ce'
+[pocsol c04 r3 t2] 7.37s gap gpt-6.1-sol | "🐾 That isn't in Matt's stories. No, Matt does not hold PMP c"
+[pocsol c04 r3 t3] 5.4s synthesize gpt-6.1-sol | '🐾 No—none of Matt’s certifications is current.\n\n**AWS Certif'
+[pocsol c04 r4 t1] 5.44s profile gpt-6.1-sol | '🐾 Matt has held certifications, but none is current:\n\n- AWS '
+[pocsol c04 r4 t2] 7.8s gap gpt-6.1-sol | "🐾 That isn't in Matt's stories. No, Matt does not have PMP c"
+[pocsol c04 r4 t3] 3.74s synthesize gpt-6.1-sol | '🐾 No—none of Matt’s certifications is current.'
+[poc4o c04 r4 t1] 2.12s profile gpt-4o-2024-08-06 | 'Matt holds several certifications, though none are currently'
+[poc4o c04 r4 t2] 2.7s gap gpt-4o-2024-08-06 | "🐾 That isn't in Matt's stories. That isn't in Matt's stories"
+[poc4o c04 r4 t3] 2.89s answer_from_referent gpt-4o-2024-08-06 | 'Matt\'s certifications are not current. He was an "AWS Certif'
+[poc4o c04 r5 t1] 2.05s profile gpt-4o-2024-08-06 | '🐾 Matt has several certifications, though none are current. '
+[poc4o c04 r5 t2] 2.75s gap gpt-4o-2024-08-06 | "🐾 That isn't in Matt's stories. That isn't in Matt's stories"
+[poc4o c04 r5 t3] 2.92s search gpt-4o-2024-08-06 | '🐾 None of Matt\'s certifications are current. He was an "AWS '
+[pocsol c04 r5 t1] 5.51s profile gpt-6.1-sol | '🐾 Matt has held certifications, but none is current.\n\nHis ce'
+[pocsol c04 r5 t2] 7.57s gap gpt-6.1-sol | "🐾 That isn't in Matt's stories. No, Matt does not hold PMP c"
+[pocsol c04 r5 t3] 3.79s search gpt-6.1-sol | '🐾 No. None of Matt’s certifications is current.'
+[pocsol c04 r6 t1] 6.28s profile gpt-6.1-sol | '🐾 Here’s Matt’s certification history. None of his certifica'
+[pocsol c04 r6 t2] 7.3s gap gpt-6.1-sol | "🐾 That isn't in Matt's stories. No, Matt does not hold PMP c"
+[pocsol c04 r6 t3] 4.5s synthesize gpt-6.1-sol | '🐾 No—none of Matt’s certifications is current. His AWS certi'
+[poc4o c04 r6 t1] 1.97s profile gpt-4o-2024-08-06 | '🐾 Matt holds several certifications, though none are current'
+[poc4o c04 r6 t2] 3.8s gap gpt-4o-2024-08-06 | "🐾 That isn't in Matt's stories. That isn't in Matt's stories"
+[poc4o c04 r6 t3] 2.73s search gpt-4o-2024-08-06 | "🐾 None of Matt's certifications are currently active. He was"
+[poc4o c04 r7 t1] 2.06s profile gpt-4o-2024-08-06 | 'Matt holds several certifications, although none are current'
+[poc4o c04 r7 t2] 2.52s gap gpt-4o-2024-08-06 | "🐾 That isn't in Matt's stories. That isn't in Matt's stories"
+[poc4o c04 r7 t3] 3.0s answer_from_referent gpt-4o-2024-08-06 | 'Matt holds several certifications, although none are current'
+[pocsol c04 r7 t1] 5.99s profile gpt-6.1-sol | '🐾 Here’s Matt’s certification history. None is current.\n\nHe '
+[pocsol c04 r7 t2] 6.45s gap gpt-6.1-sol | "🐾 That isn't in Matt's stories. No, Matt does not hold PMP c"
+[pocsol c04 r7 t3] 5.08s search gpt-6.1-sol | '🐾 No—none of Matt’s certifications is current.\n\nAWS Certifie'
+[pocsol c04 r8 t1] 5.68s profile gpt-6.1-sol | '🐾 Matt has earned certifications, but none is current.\n\nHis '
+[pocsol c04 r8 t2] 8.22s gap gpt-6.1-sol | "🐾 That isn't in Matt's stories. No—Matt does not hold PMP ce"
+[pocsol c04 r8 t3] 4.71s answer_from_referent gpt-6.1-sol | '🐾 No—none of Matt’s certifications is current.'
+[poc4o c04 r8 t1] 2.25s profile gpt-4o-2024-08-06 | 'Matt holds several certifications, although none are current'
+[poc4o c04 r8 t2] 2.47s gap gpt-4o-2024-08-06 | "🐾 That isn't in Matt's stories."
+[poc4o c04 r8 t3] 3.13s search gpt-4o-2024-08-06 | "None of Matt's certifications are current. His certification"
+[poc4o c04 r9 t1] 2.31s profile gpt-4o-2024-08-06 | 'Matt holds several certifications, although none are current'
+[poc4o c04 r9 t2] 2.54s gap gpt-4o-2024-08-06 | "🐾 That isn't in Matt's stories."
+[poc4o c04 r9 t3] 3.0s search gpt-4o-2024-08-06 | "None of Matt's certifications are current. His certification"
+[pocsol c04 r9 t1] 5.43s profile gpt-6.1-sol | '🐾 Matt has held certifications, but none is current.\n\nAWS Ce'
+[pocsol c04 r9 t2] 8.4s gap gpt-6.1-sol | "🐾 That isn't in Matt's stories. No—Matt does not have PMP ce"
+[pocsol c04 r9 t3] 4.64s synthesize gpt-6.1-sol | '🐾 No—none of Matt’s certifications is current.'
+[pocsol c04 r10 t1] 5.25s profile gpt-6.1-sol | '🐾 Matt has held certifications, but none is current.\n\nAWS Ce'
+[pocsol c04 r10 t2] 7.41s gap gpt-6.1-sol | "🐾 That isn't in Matt's stories. No, Matt does not have PMP c"
+[pocsol c04 r10 t3] 4.68s synthesize gpt-6.1-sol | '🐾 No—none of Matt’s certifications is current. Both AWS cert'
+[poc4o c04 r10 t1] 2.58s profile gpt-4o-2024-08-06 | 'Matt holds several certifications, although none are current'
+[poc4o c04 r10 t2] 2.65s gap gpt-4o-2024-08-06 | "🐾 That isn't in Matt's stories. That isn't in Matt's stories"
+[poc4o c04 r10 t3] 3.09s answer_from_referent gpt-4o-2024-08-06 | "None of Matt's certifications are currently active. He held "
+health check after 100 turns: top Fiserv 0.422
+[poc4o c09 r1 t1] 3.92s search gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt play"
+[poc4o c09 r1 t2] 3.13s profile gpt-4o-2024-08-06 | "🐾 Let me show you what ties Matt's work together.\n\nMatt lead"
+[poc4o c09 r1 t3] 4.58s synthesize gpt-4o-2024-08-06 | '🐾 This is a strong one.\n\nAt the **Accenture Cloud Innovation'
+[poc4o c09 r1 t4] 3.25s answer_from_referent gpt-4o-2024-08-06 | "🐾 Perfect, here's what I found.\n\nAt the **Accenture Cloud In"
+[pocsol c09 r1 t1] 10.52s search gpt-6.1-sol | '🐾 Matt’s payments work includes **JP Morgan Chase**’s ACCESS'
+[pocsol c09 r1 t2] 10.09s profile gpt-6.1-sol | '🐾 Here’s how Matt describes his leadership.\n\nMatt leads with'
+[pocsol c09 r1 t3] 9.8s search gpt-6.1-sol | '🐾 Here’s a concrete example of “teaches teams to fish”: Matt'
+[pocsol c09 r1 t4] 6.03s answer_from_referent gpt-6.1-sol | '🐾 The story doesn’t specify a team size or student count. Th'
+[pocsol c09 r2 t1] 10.23s search gpt-6.1-sol | '🐾 Here’s Matt’s payments work at **JP Morgan Chase** and **R'
+[pocsol c09 r2 t2] 7.32s profile gpt-6.1-sol | '🐾 Here’s how Matt describes his leadership style.\n\nMatt lead'
+[pocsol c09 r2 t3] 9.06s search gpt-6.1-sol | '🐾 Here’s an example from **Accenture’s** Cloud Innovation Ce'
+[pocsol c09 r2 t4] 6.65s answer_from_referent gpt-6.1-sol | '🐾 There are two different team sizes to distinguish here.\n\nM'
+[poc4o c09 r2 t1] 3.71s search gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt play"
+[poc4o c09 r2 t2] 2.56s profile gpt-4o-2024-08-06 | '🐾 Stepping back to see the themes, Matt leads with empathy, '
+[poc4o c09 r2 t3] 3.35s search gpt-4o-2024-08-06 | '🐾 This is a strong one.\n\nIn the early stages of the Cloud In'
+[poc4o c09 r2 t4] 3.52s answer_from_referent gpt-4o-2024-08-06 | "🐾 Perfect, here's what I found.\n\nAt the Cloud Innovation Cen"
+[poc4o c09 r3 t1] 4.27s search gpt-4o-2024-08-06 | "🐾 Here's a great example of Matt's work in the payments doma"
+[poc4o c09 r3 t2] 3.17s profile gpt-4o-2024-08-06 | "🐾 Looking across Matt's portfolio, I see clear patterns in h"
+[poc4o c09 r3 t3] 3.93s answer_from_referent gpt-4o-2024-08-06 | '🐾 This is a strong one.\n\nAt the **Accenture Cloud Innovation'
+[poc4o c09 r3 t4] 3.02s answer_from_referent gpt-4o-2024-08-06 | '🐾 On it!\n\nAt the **Accenture Cloud Innovation Center**, Matt'
+[pocsol c09 r3 t1] 12.35s search gpt-6.1-sol | "🐾 Here's the story behind Matt's payments work.\n\nAt **JP Mor"
+[pocsol c09 r3 t2] 8.15s profile gpt-6.1-sol | '🐾 Here’s how Matt describes his leadership style.\n\nMatt lead'
+[pocsol c09 r3 t3] 10.67s search gpt-6.1-sol | '🐾 Here’s an example from **Accenture’s** Cloud Innovation Ce'
+[pocsol c09 r3 t4] 7.04s answer_from_referent gpt-6.1-sol | '🐾 The specific team size for that brainstorming example isn’'
+[pocsol c09 r4 t1] 12.63s search gpt-6.1-sol | "🐾 Here's the payments work.\n\nAt **JP Morgan Chase**, Matt wo"
+[pocsol c09 r4 t2] 28.13s profile gpt-6.1-sol | '🐾 Here’s how Matt describes his leadership.\n\nMatt leads with'
+[pocsol c09 r4 t3] 10.91s search gpt-6.1-sol | '🐾 Here’s an example from the Cloud Innovation Center.\n\nIn th'
+[pocsol c09 r4 t4] 5.95s answer_from_referent gpt-6.1-sol | '🐾 Matt built **Accenture’s** Cloud Innovation Center from **'
+[poc4o c09 r4 t1] 4.27s search gpt-4o-2024-08-06 | "🐾 Here's a strong example.\n\nAt **JP Morgan Chase**, Matt pla"
+[poc4o c09 r4 t2] 3.28s profile gpt-4o-2024-08-06 | '🐾 Stepping back to see the themes, Matt leads with empathy, '
+[poc4o c09 r4 t3] 5.18s search gpt-4o-2024-08-06 | "🐾 I know just the story.\n\nAt **Accenture**'s Cloud Innovatio"
+[poc4o c09 r4 t4] 3.17s answer_from_referent gpt-4o-2024-08-06 | "🐾 Perfect, here's what I found.\n\nAt the **Accenture** Cloud "
+[poc4o c09 r5 t1] 3.94s search gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt play"
+[poc4o c09 r5 t2] 2.93s profile gpt-4o-2024-08-06 | "🐾 Looking across Matt's portfolio, I see clear patterns.\n\nMa"
+[poc4o c09 r5 t3] 3.33s search gpt-4o-2024-08-06 | '🐾 This is a strong one.\n\nIn the early stages of the Cloud In'
+[poc4o c09 r5 t4] 2.83s answer_from_referent gpt-4o-2024-08-06 | "🐾 Perfect, here's what I found.\n\nIn the Cloud Innovation Cen"
+[pocsol c09 r5 t1] 11.79s search gpt-6.1-sol | '🐾 Here’s the payments work.\n\nMatt designed and delivered pay'
+[pocsol c09 r5 t2] 6.73s profile gpt-6.1-sol | '🐾 Here’s how Matt describes his leadership.\n\nMatt leads with'
+[pocsol c09 r5 t3] 8.83s answer_from_referent gpt-6.1-sol | '🐾 Here’s an example from **RBC’s** corporate banking moderni'
+[pocsol c09 r5 t4] 5.46s answer_from_referent gpt-6.1-sol | '🐾 The **40+** team was on **JP Morgan Chase’s** ACCESS Next '
+[pocsol c09 r6 t1] 11.88s search gpt-6.1-sol | '🐾 Here’s the payments work behind ACCESS and **RBC** Express'
+[pocsol c09 r6 t2] 13.18s profile gpt-6.1-sol | '🐾 Here’s how Matt describes his leadership.\n\nMatt leads with'
+[pocsol c09 r6 t3] 8.75s search gpt-6.1-sol | '🐾 Here’s an example from **Accenture’s** Liquid Studio.\n\nCli'
+[pocsol c09 r6 t4] 5.5s answer_from_referent gpt-6.1-sol | '🐾 The Liquid Studio story doesn’t specify a team headcount. '
+[poc4o c09 r6 t1] 3.84s search gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt play"
+[poc4o c09 r6 t2] 2.34s profile gpt-4o-2024-08-06 | '🐾 Stepping back to see the themes, Matt leads with empathy, '
+[poc4o c09 r6 t3] 4.32s answer_from_referent gpt-4o-2024-08-06 | "🐾 This is a strong one.\n\nAt **JP Morgan Chase**, Matt's lead"
+[poc4o c09 r6 t4] 2.71s answer_from_referent gpt-4o-2024-08-06 | "🐾 Perfect, here's what I found.\n\nOn the ACCESS Next Generati"
+[poc4o c09 r7 t1] 3.53s search gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt led "
+[poc4o c09 r7 t2] 2.11s profile gpt-4o-2024-08-06 | "🐾 Looking across Matt's portfolio, I see clear patterns.\n\nMa"
+[poc4o c09 r7 t3] 3.73s answer_from_referent gpt-4o-2024-08-06 | '🐾 I know just the story.\n\nAt **JP Morgan Chase**, Matt demon'
+[poc4o c09 r7 t4] 2.96s answer_from_referent gpt-4o-2024-08-06 | "🐾 Perfect, here's what I found.\n\nOn the ACCESS Next Generati"
+health check after 152 turns: top Fiserv 0.422
+[pocsol c09 r7 t1] 11.27s search gpt-6.1-sol | "🐾 Here's Matt's payments work at **JP Morgan Chase** and **R"
+[pocsol c09 r7 t2] 7.76s profile gpt-6.1-sol | '🐾 Here’s how Matt describes his leadership style.\n\nMatt lead'
+[pocsol c09 r7 t3] 11.24s search gpt-6.1-sol | '🐾 Here’s an example from **Accenture’s** Cloud Innovation Ce'
+[pocsol c09 r7 t4] 5.1s answer_from_referent gpt-6.1-sol | '🐾 The specific brainstorming example doesn’t give a team hea'
+[pocsol c09 r8 t1] 9.68s search gpt-6.1-sol | '🐾 Here’s Matt’s payments work at **JP Morgan Chase** and **R'
+[pocsol c09 r8 t2] 6.5s profile gpt-6.1-sol | '🐾 Here’s how Matt describes his leadership style.\n\nMatt lead'
+[pocsol c09 r8 t3] 8.98s search gpt-6.1-sol | '🐾 Here’s an example from **Accenture’s** Cloud Innovation Ce'
+[pocsol c09 r8 t4] 5.32s answer_from_referent gpt-6.1-sol | '🐾 Matt built **Accenture’s** Cloud Innovation Center from **'
+[poc4o c09 r8 t1] 3.66s search gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt play"
+[poc4o c09 r8 t2] 2.46s profile gpt-4o-2024-08-06 | '🐾 Stepping back to see the themes, Matt leads with empathy, '
+[poc4o c09 r8 t3] 4.04s answer_from_referent gpt-4o-2024-08-06 | "🐾 Found it!\n\nAt **JP Morgan Chase**, Matt's leadership style"
+[poc4o c09 r8 t4] 3.32s answer_from_referent gpt-4o-2024-08-06 | "🐾 Perfect, here's what I found.\n\nAt **JP Morgan Chase**, Mat"
+[poc4o c09 r9 t1] 3.27s search gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt play"
+[poc4o c09 r9 t2] 2.75s profile gpt-4o-2024-08-06 | "🐾 Let me show you what ties Matt's work together.\n\nMatt lead"
+[poc4o c09 r9 t3] 4.17s synthesize gpt-4o-2024-08-06 | '🐾 This is a strong one.\n\nIn the early stages of the Cloud In'
+[poc4o c09 r9 t4] 3.79s answer_from_referent gpt-4o-2024-08-06 | "🐾 Perfect, here's what I found.\n\nMatt built the Cloud Innova"
+[pocsol c09 r9 t1] 9.52s search gpt-6.1-sol | '🐾 Found it! Matt’s payments work includes the payment engine'
+[pocsol c09 r9 t2] 7.67s profile gpt-6.1-sol | '🐾 Here’s how Matt describes his leadership.\n\nMatt leads with'
+[pocsol c09 r9 t3] 10.0s answer_from_referent gpt-6.1-sol | '🐾 Here’s an example from **JP Morgan Chase**.\n\nACCESS Next G'
+[pocsol c09 r9 t4] 5.7s answer_from_referent gpt-6.1-sol | '🐾 Matt managed a blended onshore/offshore team of **40+ peop'
+[pocsol c09 r10 t1] 10.28s search gpt-6.1-sol | '🐾 Found it!\n\nAt **JP Morgan Chase**, Matt worked on ACCESS N'
+[pocsol c09 r10 t2] 12.2s profile gpt-6.1-sol | '🐾 Here’s how Matt describes his leadership.\n\nMatt leads with'
+[pocsol c09 r10 t3] 9.57s search gpt-6.1-sol | '🐾 Here’s a concrete example of Matt teaching people to build'
+[pocsol c09 r10 t4] 4.87s answer_from_referent gpt-6.1-sol | '🐾 The class size isn’t specified. At **American InterContine'
+[poc4o c09 r10 t1] 3.48s search gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**, Matt play"
+[poc4o c09 r10 t2] 2.9s profile gpt-4o-2024-08-06 | "🐾 Stepping back to see the themes, Matt's leadership style i"
+[poc4o c09 r10 t3] 4.03s synthesize gpt-4o-2024-08-06 | '🐾 This is a strong one.\n\nAt the **Accenture Cloud Innovation'
+[poc4o c09 r10 t4] 3.01s answer_from_referent gpt-4o-2024-08-06 | "🐾 Perfect, here's what I found.\n\nAt the **Accenture Cloud In"
+[poc4o c12 r1 t1] 4.91s synthesize gpt-4o-2024-08-06 | "🐾 Here's a strong comparison of Matt's work with **Fiserv** "
+[poc4o c12 r1 t2] 3.92s answer_from_referent gpt-4o-2024-08-06 | "🐾 Here's what I found about the scale of Matt's work at **Fi"
+[pocsol c12 r1 t1] 12.53s synthesize gpt-6.1-sol | '🐾 Here’s how the two engagements compare.\n\nExecution & Deliv'
+[pocsol c12 r1 t2] 9.66s answer_from_referent gpt-6.1-sol | '🐾 **JP Morgan Chase ACCESS was bigger in geographic reach an'
+[pocsol c12 r2 t1] 13.82s synthesize gpt-6.1-sol | '🐾 Here’s how the two engagements compare.\n\nExecution & Deliv'
+[pocsol c12 r2 t2] 10.71s answer_from_referent gpt-6.1-sol | '🐾 **JP Morgan Chase ACCESS was broader in geographic reach a'
+[poc4o c12 r2 t1] 4.97s synthesize gpt-4o-2024-08-06 | "🐾 Here's a look at Matt's work with **Fiserv** and **JP Morg"
+[poc4o c12 r2 t2] 1.32s clarify None | '🐾 Are you asking which project had a larger team, budget, or'
+[poc4o c12 r3 t1] 5.61s synthesize gpt-4o-2024-08-06 | "🐾 Here's a great comparison of Matt's work with **Fiserv** a"
+[poc4o c12 r3 t2] 3.57s answer_from_referent gpt-4o-2024-08-06 | '🐾 Tracking this down...\n\nThe **JP Morgan** ACCESS project wa'
+[pocsol c12 r3 t1] 13.46s synthesize gpt-6.1-sol | '🐾 Here’s how the two engagements compare.\n\nBoth involved Exe'
+[pocsol c12 r3 t2] 8.3s answer_from_referent gpt-6.1-sol | '🐾 **JP Morgan Chase** ACCESS was bigger in geographic reach '
+[pocsol c12 r4 t1] 14.43s synthesize gpt-6.1-sol | '🐾 Here’s how the two engagements compare.\n\nBoth involved Exe'
+[pocsol c12 r4 t2] 10.4s answer_from_referent gpt-6.1-sol | '🐾 **JP Morgan Chase’s** ACCESS work was broader in geographi'
+[poc4o c12 r4 t1] 4.99s synthesize gpt-4o-2024-08-06 | "🐾 Looking across Matt's work with **Fiserv** and **JP Morgan"
+[poc4o c12 r4 t2] 4.32s answer_from_referent gpt-4o-2024-08-06 | "🐾 Perfect, here's what I found.\n\nThe **JP Morgan ACCESS** pr"
+[poc4o c12 r5 t1] 5.02s synthesize gpt-4o-2024-08-06 | "🐾 Here's a look at Matt's work with **Fiserv** and **JP Morg"
+[poc4o c12 r5 t2] 1.35s clarify None | '🐾 Are you asking which project had a larger scope, impact, o'
+[pocsol c12 r5 t1] 14.1s synthesize gpt-6.1-sol | '🐾 Execution & Delivery connects these engagements, but the s'
+[pocsol c12 r5 t2] 10.25s answer_from_referent gpt-6.1-sol | '🐾 **JP Morgan Chase’s** ACCESS work was bigger in geographic'
+health check after 200 turns: top Fiserv 0.422
+[pocsol c12 r6 t1] 12.22s synthesize gpt-6.1-sol | '🐾 Here’s how the two engagements compare.\n\nBoth involved Exe'
+[pocsol c12 r6 t2] 11.35s answer_from_referent gpt-6.1-sol | '🐾 **JP Morgan Chase** ACCESS was bigger in geographic reach '
+[poc4o c12 r6 t1] 5.27s synthesize gpt-4o-2024-08-06 | '🐾 Found it!\n\nAt **Fiserv**, Matt managed the white-label car'
+[poc4o c12 r6 t2] 4.09s answer_from_referent gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nThe **JP Morgan ACCESS** project "
+[poc4o c12 r7 t1] 4.45s synthesize gpt-4o-2024-08-06 | "🐾 Here's a great example of Matt's work at **Fiserv** and **"
+[poc4o c12 r7 t2] 4.03s answer_from_referent gpt-4o-2024-08-06 | "🐾 Perfect, here's what I found.\n\nThe **JP Morgan ACCESS** pr"
+[pocsol c12 r7 t1] 13.0s synthesize gpt-6.1-sol | '🐾 Here’s how the two engagements compare.\n\nExecution & Deliv'
+[pocsol c12 r7 t2] 9.54s answer_from_referent gpt-6.1-sol | '🐾 **JP Morgan Chase ACCESS** was bigger in geographic reach,'
+[pocsol c12 r8 t1] 14.47s synthesize gpt-6.1-sol | '🐾 Here’s how the two engagements differed.\n\nExecution & Deli'
+[pocsol c12 r8 t2] 10.91s answer_from_referent gpt-6.1-sol | '🐾 **JP Morgan Chase ACCESS was bigger in geographic reach, f'
+[poc4o c12 r8 t1] 4.88s synthesize gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nAt **Fiserv**, Matt faced a signi"
+[poc4o c12 r8 t2] 4.43s synthesize gpt-4o-2024-08-06 | "🐾 Perfect, here's what I found.\n\nMatt's work at **JP Morgan*"
+[poc4o c12 r9 t1] 4.78s synthesize gpt-4o-2024-08-06 | "🐾 Here's a comparison of Matt's work with **Fiserv** and **J"
+[poc4o c12 r9 t2] 3.88s answer_from_referent gpt-4o-2024-08-06 | "🐾 Let's break it down.\n\nThe **JP Morgan ACCESS Next Generati"
+[pocsol c12 r9 t1] 13.6s synthesize gpt-6.1-sol | '🐾 Here’s how the two engagements compare.\n\nExecution & Deliv'
+[pocsol c12 r9 t2] 10.21s answer_from_referent gpt-6.1-sol | '🐾 **JP Morgan Chase** ACCESS was bigger in geographic reach '
+[pocsol c12 r10 t1] 13.94s synthesize gpt-6.1-sol | '🐾 Here’s how the two engagements compare.\n\nBoth involved Exe'
+[pocsol c12 r10 t2] 10.09s answer_from_referent gpt-6.1-sol | '🐾 **JP Morgan Chase** ACCESS was bigger in geographic reach '
+[poc4o c12 r10 t1] 5.03s synthesize gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nAt **Fiserv**, Matt was instrumen"
+[poc4o c12 r10 t2] 3.87s answer_from_referent gpt-4o-2024-08-06 | '🐾 Found it!\n\nThe **JP Morgan ACCESS** project was larger in '
+[poc4o x1 r1 t1] 2.94s gap gpt-4o-2024-08-06 | "🐾 That isn't in Matt's stories."
+[pocsol x1 r1 t1] 5.66s gap gpt-6.1-sol | "🐾 That isn't in Matt's stories. The closest work on record i"
+[pocsol x1 r2 t1] 5.82s gap gpt-6.1-sol | "🐾 That isn't in Matt's stories. The closest work on record i"
+[poc4o x1 r2 t1] 3.04s gap gpt-4o-2024-08-06 | "🐾 That isn't in Matt's stories."
+[poc4o x1 r3 t1] 2.71s gap gpt-4o-2024-08-06 | "🐾 That isn't in Matt's stories. That isn't in Matt's stories"
+[pocsol x1 r3 t1] 5.49s gap gpt-6.1-sol | "🐾 That isn't in Matt's stories. The closest work on record i"
+[pocsol x1 r4 t1] 4.05s gap gpt-6.1-sol | "🐾 That isn't in Matt's stories. The closest work on record i"
+[poc4o x1 r4 t1] 3.0s gap gpt-4o-2024-08-06 | "🐾 That isn't in Matt's stories."
+[poc4o x1 r5 t1] 2.95s gap gpt-4o-2024-08-06 | "🐾 That isn't in Matt's stories."
+[pocsol x1 r5 t1] 4.88s gap gpt-6.1-sol | "🐾 That isn't in Matt's stories. The closest work on record i"
+[pocsol x1 r6 t1] 5.33s gap gpt-6.1-sol | "🐾 That isn't in Matt's stories. The closest work on record i"
+[poc4o x1 r6 t1] 3.05s gap gpt-4o-2024-08-06 | "🐾 That isn't in Matt's stories."
+[poc4o x1 r7 t1] 2.83s gap gpt-4o-2024-08-06 | "🐾 That isn't in Matt's stories."
+[pocsol x1 r7 t1] 5.14s gap gpt-6.1-sol | "🐾 That isn't in Matt's stories. The closest work on record i"
+[pocsol x1 r8 t1] 5.28s gap gpt-6.1-sol | "🐾 That isn't in Matt's stories. The closest work on record i"
+[poc4o x1 r8 t1] 2.73s gap gpt-4o-2024-08-06 | "🐾 That isn't in Matt's stories."
+[poc4o x1 r9 t1] 2.96s gap gpt-4o-2024-08-06 | "🐾 That isn't in Matt's stories. That isn't in Matt's stories"
+[pocsol x1 r9 t1] 4.81s gap gpt-6.1-sol | "🐾 That isn't in Matt's stories. The closest work on record i"
+[pocsol x1 r10 t1] 5.48s gap gpt-6.1-sol | "🐾 That isn't in Matt's stories. The closest work on record i"
+[poc4o x1 r10 t1] 2.43s gap gpt-4o-2024-08-06 | "🐾 That isn't in Matt's stories."
+[poc4o x3 r1 t1] 3.58s search gpt-4o-2024-08-06 | '🐾 Found it!\n\nMatt worked on the **JP Morgan ACCESS** project'
+[pocsol x3 r1 t1] 11.74s search gpt-6.1-sol | '🐾 Here’s the distinction: Matt has worked on FX/cross-border'
+[pocsol x3 r2 t1] 8.47s gap gpt-6.1-sol | "🐾 That isn't in Matt's stories. The closest work on record i"
+[poc4o x3 r2 t1] 3.91s search gpt-4o-2024-08-06 | '🐾 Found it!\n\nMatt worked on trading platforms during his tim'
+[poc4o x3 r3 t1] 2.71s gap gpt-4o-2024-08-06 | "🐾 That isn't in Matt's stories."
+[pocsol x3 r3 t1] 6.4s gap gpt-6.1-sol | "🐾 That isn't in Matt's stories. The closest work on record i"
+[pocsol x3 r4 t1] 9.72s search gpt-6.1-sol | '🐾 Here’s the distinction: Matt has worked on FX/cross-border'
+[poc4o x3 r4 t1] 4.15s search gpt-4o-2024-08-06 | '🐾 Found it!\n\nMatt has indeed worked on trading platforms. At'
+[poc4o x3 r5 t1] 2.57s gap gpt-4o-2024-08-06 | "🐾 That isn't in Matt's stories. The closest work on record i"
+[pocsol x3 r5 t1] 10.09s search gpt-6.1-sol | '🐾 There’s an important distinction: Matt has worked on B2B t'
+health check after 250 turns: top Fiserv 0.422
+[pocsol x3 r6 t1] 7.03s gap gpt-6.1-sol | "🐾 That isn't in Matt's stories. The closest work on record i"
+[poc4o x3 r6 t1] 3.36s search gpt-4o-2024-08-06 | '🐾 Found it!\n\nMatt worked on the **JP Morgan ACCESS** platfor'
+[poc4o x3 r7 t1] 3.88s search gpt-4o-2024-08-06 | '🐾 Found it!\n\nMatt worked on the **JP Morgan ACCESS** platfor'
+[pocsol x3 r7 t1] 6.91s gap gpt-6.1-sol | "🐾 That isn't in Matt's stories. The closest work on record i"
+[pocsol x3 r8 t1] 10.79s search gpt-6.1-sol | '🐾 Here’s the distinction: Matt has worked on B2B trading net'
+[poc4o x3 r8 t1] 3.93s search gpt-4o-2024-08-06 | '🐾 Found it! Matt has indeed worked on trading platforms, par'
+[poc4o x3 r9 t1] 3.04s gap gpt-4o-2024-08-06 | "🐾 That isn't in Matt's stories. The closest work on record i"
+[pocsol x3 r9 t1] 11.04s search gpt-6.1-sol | '🐾 Here’s the distinction: Matt has worked on B2B trading net'
+[pocsol x3 r10 t1] 11.61s search gpt-6.1-sol | '🐾 Here’s the distinction: Matt has worked on FX/cross-border'
+[poc4o x3 r10 t1] 3.55s search gpt-4o-2024-08-06 | "🐾 Here's a strong example.\n\nMatt worked on the **JP Morgan A"
+[poc4o x4 r1 t1] 5.14s synthesize gpt-4o-2024-08-06 | "🐾 Looking across Matt's portfolio, I see clear patterns.\n\nIn"
+[pocsol x4 r1 t1] 11.1s synthesize gpt-6.1-sol | "🐾 Here's how Matt put the numbers behind the investment case"
+[pocsol x4 r2 t1] 39.83s synthesize gpt-6.1-sol | "🐾 Here's how Matt assessed the investment and measured the r"
+[poc4o x4 r2 t1] 4.74s synthesize gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nAt **Accenture**, Matt calculated"
+[poc4o x4 r3 t1] 4.27s synthesize gpt-4o-2024-08-06 | "🐾 Perfect, here's what I found.\n\nMatt approached ROI calcula"
+[pocsol x4 r3 t1] 11.58s synthesize gpt-6.1-sol | '🐾 Here’s how Matt put numbers behind the investment case.\n\nM'
+[pocsol x4 r4 t1] 11.92s synthesize gpt-6.1-sol | '🐾 Here’s how Matt put numbers behind the investment case.\n\nM'
+[poc4o x4 r4 t1] 6.95s synthesize gpt-4o-2024-08-06 | "🐾 Perfect, here's what I found.\n\nMatt's approach to calculat"
+[poc4o x4 r5 t1] 4.43s synthesize gpt-4o-2024-08-06 | "🐾 Perfect, here's what I found.\n\nMatt approached ROI calcula"
+[pocsol x4 r5 t1] 10.71s synthesize gpt-6.1-sol | '🐾 Here’s how Matt measured the financial case.\n\nMatt’s stori'
+[pocsol x4 r6 t1] 11.02s synthesize gpt-6.1-sol | '🐾 Here’s how Matt put numbers behind the investment case.\n\nM'
+[poc4o x4 r6 t1] 4.49s synthesize gpt-4o-2024-08-06 | "🐾 Perfect, here's what I found.\n\nMatt's approach to calculat"
+[poc4o x4 r7 t1] 4.52s synthesize gpt-4o-2024-08-06 | "🐾 Tracking this down...\n\nMatt's approach to calculating ROI "
+[pocsol x4 r7 t1] 12.23s synthesize gpt-6.1-sol | '🐾 Here’s how Matt put numbers behind the investment case.\n\nM'
+[pocsol x4 r8 t1] 12.31s synthesize gpt-6.1-sol | "🐾 Here's how Matt measured the financial return.\n\nThe storie"
+[poc4o x4 r8 t1] 5.8s synthesize gpt-4o-2024-08-06 | "🐾 Perfect, here's what I found.\n\nMatt calculated ROI by focu"
+[poc4o x4 r9 t1] 4.55s synthesize gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nAt **Accenture**, Matt's approach"
+[pocsol x4 r9 t1] 11.01s synthesize gpt-6.1-sol | '🐾 Here’s how Matt put numbers behind the investment case.\n\nM'
+[pocsol x4 r10 t1] 10.86s synthesize gpt-6.1-sol | '🐾 Here’s what Matt measured.\n\nMatt used cost-to-fix versus b'
+[poc4o x4 r10 t1] 4.0s synthesize gpt-4o-2024-08-06 | "🐾 Here's a great example.\n\nIn his work at the **Accenture** "
+health check after: top Fiserv 0.422
+done | live turns: 280
+packets: 70

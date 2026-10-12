@@ -1,0 +1,482 @@
+[
+ {
+  "case": "x1",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Absence: 'isn't in Matt's stories'; supported: Cendant Mortgage Industry 'Financial Services / Banking'; supported: JSP/MVC front end replacing mainframe green screens, TIBCO BPM underwriting workflow, corrected risk-calculation errors in Oracle stored procedures (Cendant story Action/Result); supported: 'not a real estate industry engagement'. No contradicted/unsupported claims."
+ },
+ {
+  "case": "x1",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Absence: 'That isn't in Matt's stories' (no real estate Industry in corpus). No other claims. Pass."
+ },
+ {
+  "case": "x1",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Absence: 'That isn't in Matt's stories' (no real estate Industry in corpus). No other claims. Pass."
+ },
+ {
+  "case": "x1",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Absence stated; supported: Cendant Mortgage Industry 'Financial Services / Banking'; supported: JSP/MVC front end replacing mainframe green screens, TIBCO BPM underwriting workflow, corrected risk-calculation errors in Oracle stored procedures (Cendant story Action/Result); supported: capture of borrower income, credit score, home value (Situation). No contradicted/unsupported claims."
+ },
+ {
+  "case": "x1",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Absence stated (sentence duplicated, a quality defect but not a factual one); supported: Cendant Mortgage in financial services, modernizing a mainframe underwriting system. No contradicted/unsupported claims."
+ },
+ {
+  "case": "x1",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Absence stated; supported: Cendant Mortgage Industry 'Financial Services / Banking'; supported: JSP/MVC front end replacing mainframe green screens, TIBCO BPM underwriting workflow, corrected risk-calculation errors in Oracle stored procedures (Cendant story Action/Result); supported: 'not real estate'. No contradicted/unsupported claims."
+ },
+ {
+  "case": "x1",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Absence: 'That isn't in Matt's stories' (no real estate Industry in corpus). No other claims. Pass."
+ },
+ {
+  "case": "x1",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Absence stated; supported: Cendant Mortgage Industry 'Financial Services / Banking'; supported: JSP/MVC front end replacing mainframe green screens, TIBCO BPM underwriting workflow, corrected risk-calculation errors in Oracle stored procedures (Cendant story Action/Result). No contradicted/unsupported claims."
+ },
+ {
+  "case": "x1",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Absence: 'That isn't in Matt's stories' (no real estate Industry in corpus). No other claims. Pass."
+ },
+ {
+  "case": "x1",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Absence stated; supported: Cendant Mortgage Industry 'Financial Services / Banking'; supported: JSP/MVC front end replacing mainframe green screens, TIBCO BPM underwriting workflow, corrected risk-calculation errors in Oracle stored procedures (Cendant story Action/Result); supported: underwriters and loan officers moved to a web application (Result). No contradicted/unsupported claims."
+ },
+ {
+  "case": "x1",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Absence stated; supported: Cendant Mortgage Industry 'Financial Services / Banking'; supported: JSP/MVC front end replacing mainframe green screens, TIBCO BPM underwriting workflow, corrected risk-calculation errors in Oracle stored procedures (Cendant story Action/Result); supported: 'not real estate'. No contradicted/unsupported claims."
+ },
+ {
+  "case": "x1",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Absence: 'That isn't in Matt's stories' (no real estate Industry in corpus). No other claims. Pass."
+ },
+ {
+  "case": "x1",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Absence stated; supported: Cendant Mortgage Industry 'Financial Services / Banking'; supported: JSP/MVC front end replacing mainframe green screens, TIBCO BPM underwriting workflow, corrected risk-calculation errors in Oracle stored procedures (Cendant story Action/Result); supported: moved from green screens to web application. No contradicted/unsupported claims."
+ },
+ {
+  "case": "x1",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Absence: 'That isn't in Matt's stories' (no real estate Industry in corpus). No other claims. Pass."
+ },
+ {
+  "case": "x1",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Absence stated; supported: Cendant Mortgage Industry 'Financial Services / Banking'; supported: JSP/MVC front end replacing mainframe green screens, TIBCO BPM underwriting workflow, corrected risk-calculation errors in Oracle stored procedures (Cendant story Action/Result); supported: 'mortgage underwriting modernization, not real estate industry work'. No contradicted/unsupported claims."
+ },
+ {
+  "case": "x1",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Absence: 'That isn't in Matt's stories' (no real estate Industry in corpus). No other claims. Pass."
+ },
+ {
+  "case": "x1",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Absence stated (sentence duplicated, quality defect only); supported: Cendant Mortgage financial services, mainframe underwriting modernization. No contradicted/unsupported claims."
+ },
+ {
+  "case": "x1",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Absence stated; supported: Cendant Mortgage Industry 'Financial Services / Banking'; supported: JSP/MVC front end replacing mainframe green screens, TIBCO BPM underwriting workflow, corrected risk-calculation errors in Oracle stored procedures (Cendant story Action/Result); supported: 'not real estate industry work'. No contradicted/unsupported claims."
+ },
+ {
+  "case": "x1",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Absence stated; supported: Cendant Mortgage Industry 'Financial Services / Banking'; supported: JSP/MVC front end replacing mainframe green screens, TIBCO BPM underwriting workflow, corrected risk-calculation errors in Oracle stored procedures (Cendant story Action/Result); supported: 'not a real estate engagement'. No contradicted/unsupported claims."
+ },
+ {
+  "case": "x1",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Absence: 'That isn't in Matt's stories' (no real estate Industry in corpus). No other claims. Pass."
+ },
+ {
+  "case": "x3",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'Found it!' presents JP Morgan ACCESS (and RBC) as the trading-platform answer (stated fact: ACCESS is treasury services/cash management, RBC corporate banking, neither trading); no 'not on record' for trading; Cendian webMethods B2B Trading Networks not named (x3 rule 3). supported: ACCESS 40+, 135,000+/180+, payment modules, Coalition Greenwich; RBC WebSeries assessment. Fail."
+ },
+ {
+  "case": "x3",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "No trading-platform claim; absence: 'I don't have evidence of work on securities trading or exchange execution platforms'; supported: ACCESS 40+ blended team, 135,000+ clients, 180+ countries, FX/cross-border module integrated with FX engine, April 2011 launch (payment-engine story); supported: SSO across cash/trade/investment, trade finance groundwork, jurisdiction compliance validation before launch (multi-jurisdictional compliance story); supported: Cendian webMethods B2B Trading Networks, 300+ carriers, 80+ countries, EDI/XML, portal, transaction tracking (integrating-a-chemical-logistics-network story); supported: 'trading meant exchanging shipment documents, not financial-market trading'; portal replaced phone-order clerks. Names Cendian B2B Trading Networks. Pass."
+ },
+ {
+  "case": "x3",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Absence: 'isn't in Matt's stories' and ACCESS framed as 'not a securities trading platform' (supported); supported: FX/cross-border, ACH, wire, reporting, trade finance integration. Fails x3 rule 3: Cendian webMethods B2B Trading Networks not named."
+ },
+ {
+  "case": "x3",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'Matt worked on trading platforms during his time at Cendian' and 'These experiences demonstrate Matt's involvement in trading platforms' (stated fact: B2B Trading Networks is EDI document exchange, not financial trading; question asks trading platforms). supported: Cendian B2B Trading Networks config, CIDX standards, canonical objects, plastics client onboarding. No 'not on record'. Fail."
+ },
+ {
+  "case": "x3",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Absence stated ('isn't in Matt's stories'), no trading claim, but Cendian webMethods B2B Trading Networks not named (x3 rule 3). Fail."
+ },
+ {
+  "case": "x3",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Absence stated; supported: ACCESS 'treasury services platform, not a securities trading platform', 40+ team, FX module, 135,000+/180+. Fails x3 rule 3: Cendian webMethods B2B Trading Networks not named."
+ },
+ {
+  "case": "x3",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'Matt has indeed worked on trading platforms' at Cendian (stated fact: B2B Trading Networks is EDI document exchange, not financial trading). supported: Cendian trading profiles, CIDX, plastics client onboarding. No 'not on record'. Fail."
+ },
+ {
+  "case": "x3",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "No trading-platform claim; absence: 'I don't have evidence of him building a securities trading or exchange execution platform'; supported: ACCESS 'corporate banking portal, not a securities trading platform'; supported: ACCESS 40+ blended team, 135,000+ clients, 180+ countries, FX/cross-border module integrated with FX engine, April 2011 launch (payment-engine story); supported: SSO, real-time reporting, trade finance groundwork; supported: Cendian webMethods B2B Trading Networks, 300+ carriers, 80+ countries, EDI/XML, portal, transaction tracking (integrating-a-chemical-logistics-network story); supported: RBC corporate banking and payment-hub (WebSeries) assessment, not trading. Pass."
+ },
+ {
+  "case": "x3",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Absence stated; supported: ACCESS payment engine, treasury services and cash management portal. Fails x3 rule 3: Cendian webMethods B2B Trading Networks not named."
+ },
+ {
+  "case": "x3",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "No trading-platform claim; absence: 'I don't have a story documenting work on a securities trading or trade-execution platform'; supported: Cendian webMethods B2B Trading Networks, 300+ carriers, 80+ countries, EDI/XML, portal, transaction tracking (integrating-a-chemical-logistics-network story); supported: CIDX standards, canonical objects, plastics client onboarding in rural Pennsylvania with technology implementation manager, a week on site, whiteboarding, live shipment-planning validation; supported: ACCESS 40+ blended team, 135,000+ clients, 180+ countries, FX/cross-border module integrated with FX engine, April 2011 launch (payment-engine story); supported: coordinated with Bottomline. Pass."
+ },
+ {
+  "case": "x3",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Absence stated; supported: ACCESS corporate banking payment modules incl. FX/cross-border, 'not a securities trading platform'; supported: Cendian Transportation & Logistics industry, webMethods B2B Trading Networks for shipment documents, 'not financial trading'. No trading-platform claim; names Cendian. Pass."
+ },
+ {
+  "case": "x3",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'Found it!' presents JP Morgan ACCESS as the trading-platform answer (stated fact: ACCESS is treasury services/cash management, not trading); no 'not on record' for trading. supported: ACCESS modules, 40+, 135,000+/180+, Coalition Greenwich; Cendian B2B Trading Networks, 300+ carriers, 80+ countries. Names Cendian but makes trading-platform framing. Fail."
+ },
+ {
+  "case": "x3",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Absence stated; supported: ACCESS 'corporate banking and payments platform, not a securities trading platform', FX module. Fails x3 rule 3: Cendian webMethods B2B Trading Networks not named."
+ },
+ {
+  "case": "x3",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'These engagements demonstrate Matt's experience with trading platforms' about ACCESS and RBC Day2Day (stated facts: treasury services and corporate banking, not trading). supported: ACCESS 40+, 135,000+/180+, payment modules; RBC WebSeries assessment. Cendian not named. Fail."
+ },
+ {
+  "case": "x3",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'Matt has indeed worked on trading platforms, particularly ... JP Morgan Chase' ACCESS (stated fact: not a trading platform); contradicted framing: Cendian trading profiles 'essential components of trading platforms'. supported: ACCESS 40+, payment types; Cendian B2B Trading Networks. Fail."
+ },
+ {
+  "case": "x3",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "No trading-platform claim; absence: 'I don't have a story confirming work on a securities trading or exchange execution platform'; supported: Cendian webMethods B2B Trading Networks, 300+ carriers, 80+ countries, EDI/XML, portal, transaction tracking (integrating-a-chemical-logistics-network story); supported: 'logistics trading-partner integration, not financial-market trading', CIDX canonical objects, in-house document generation, plastics client; supported: ACCESS 40+ blended team, 135,000+ clients, 180+ countries, FX/cross-border module integrated with FX engine, April 2011 launch (payment-engine story); supported: SSO, trade finance groundwork; 'corporate treasury and payments'. Pass."
+ },
+ {
+  "case": "x3",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Absence stated; supported: ACCESS corporate banking portal, payment modules, jurisdiction compliance configuration. Fails x3 rule 3: Cendian webMethods B2B Trading Networks not named."
+ },
+ {
+  "case": "x3",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "No trading-platform claim; absence: 'I don't have evidence that he worked on a securities trading or exchange platform'; supported: Cendian webMethods B2B Trading Networks, 300+ carriers, 80+ countries, EDI/XML, portal, transaction tracking (integrating-a-chemical-logistics-network story); supported: in-house document generation removing manual key entry, plastics client validated against production shipment planning; supported: ACCESS 40+ blended team, 135,000+ clients, 180+ countries, FX/cross-border module integrated with FX engine, April 2011 launch (payment-engine story); supported: SSO, trade finance, regional compliance enabling APAC/EMEA/Americas launches without regulatory blockers; '135,000+ institutional clients' is a loose paraphrase of corporations/FIs/governments/municipalities, not counted as contradicted; RBC corporate banking, payment-hub assessment. Pass."
+ },
+ {
+  "case": "x3",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'Here's a strong example' presents JP Morgan ACCESS as the trading-platform answer (stated fact: not trading); unsupported: 'team of over 40 engineers' (story: blended onshore/offshore team of 40+, not stated as engineers). No 'not on record'; Cendian not named. supported: payment modules, 135,000+/180+, April 2011, Coalition Greenwich. Fail."
+ },
+ {
+  "case": "x3",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "No trading-platform claim; absence: 'I don't have a story confirming work on a securities trading platform or an exchange matching engine'; supported: ACCESS 40+ blended team, 135,000+ clients, 180+ countries, FX/cross-border module integrated with FX engine, April 2011 launch (payment-engine story); supported: team across US, Mumbai, Bangalore, trade finance groundwork, regional compliance work; supported: Cendian 'B2B document exchange, not financial-market trading', 300+/80+, EDI/XML, plastics client production validation; RBC payment hub assessment. Pass."
+ },
+ {
+  "case": "x4",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: margin management etc. as 'key components of his ROI calculation' and 'calculating ... ROI' (no story documents an ROI calculation); no absence statement for the method. supported: CIC 4X, zero-defect, $100M+ by FY23; JP Morgan negative-EAC CRM turnaround and request by name; Fiserv $8.5M, 3%, $500K, $3M; change requests. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: states the stories document no single ROI formula or ROI percentage; supported: RBC WebSeries assessment, code reviews, interviews, heat maps, 'transparent cost-to-fix vs. benefit comparison', lacked modularity, resources redirected, no dollar amount (de-risking RBC story); supported: CIC pair-programming cost concerns addressed by velocity and quality gains, 4X velocity, 10-person vs 20-person teams, zero-defect deployments, P&L/budget ownership, $100M+ repeatable business (CIC story); supported: Fiserv $8.5M, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension; forecasts/actuals/variance/contingency/scope changes (owning-the-P&L and Fiserv stories). No contradicted/unsupported claims. Pass."
+ },
+ {
+  "case": "x4",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: states the stories document no single ROI formula or ROI percentage; supported: RBC WebSeries assessment, code reviews, interviews, heat maps, 'transparent cost-to-fix vs. benefit comparison', lacked modularity, resources redirected, no dollar amount (de-risking RBC story); supported: CIC pair-programming cost concerns addressed by velocity and quality gains, 4X velocity, 10-person vs 20-person teams, zero-defect deployments, P&L/budget ownership, $100M+ repeatable business (CIC story); supported: Fiserv $8.5M, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension; forecasts/actuals/variance/contingency/scope changes (owning-the-P&L and Fiserv stories); theme names (Execution & Delivery, Strategic & Advisory, Org & Working-Model Transformation) exist in corpus Theme field. Pass."
+ },
+ {
+  "case": "x4",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: 'Matt calculated ROI by demonstrating measurable client results', 'Matt also tied ROI to cost savings', Fiserv outcomes 'demonstrating a clear ROI' (no ROI calculation in any story); no absence statement. supported: CIC Atlanta/Tampa, 4X, zero-defect, MVP 16-18 weeks, premium pricing based on proven ROI, $100M+; 15-35% cost reduction (operating-model story); Fiserv $8.5M/3%/$500K/$3M. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: states the stories document no single ROI formula or ROI percentage ('do not specify a single ROI formula, a complete investment denominator'); supported: RBC WebSeries assessment, code reviews, interviews, heat maps, 'transparent cost-to-fix vs. benefit comparison', lacked modularity, resources redirected, no dollar amount (de-risking RBC story); supported: CIC pair-programming cost concerns addressed by velocity and quality gains, 4X velocity, 10-person vs 20-person teams, zero-defect deployments, P&L/budget ownership, $100M+ repeatable business (CIC story); supported: executive briefings and client workshops; supported: Fiserv $8.5M, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension; forecasts/actuals/variance/contingency/scope changes (owning-the-P&L and Fiserv stories). Pass."
+ },
+ {
+  "case": "x4",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: 'Matt approached ROI calculation by focusing on measurable outcomes', 'Matt calculated ROI by linking technical improvements ... to quantifiable business benefits'; no absence statement. supported: CIC 4X, zero-defect, Fortune 500 clients, JP Morgan code to production in weeks; RBC assessment preventing investment, resources reallocated. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: 'I don't have a documented ROI formula or a complete investment denominator'; supported: RBC WebSeries assessment, code reviews, interviews, heat maps, 'transparent cost-to-fix vs. benefit comparison', lacked modularity, resources redirected, no dollar amount (de-risking RBC story) (logical and system models); supported: CIC pair-programming cost concerns addressed by velocity and quality gains, 4X velocity, 10-person vs 20-person teams, zero-defect deployments, P&L/budget ownership, $100M+ repeatable business (CIC story); supported: executive briefings and client workshops; supported: Fiserv $8.5M, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension; forecasts/actuals/variance/contingency/scope changes (owning-the-P&L and Fiserv stories); $3M extension as separate outcome. Pass."
+ },
+ {
+  "case": "x4",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: 'Matt's approach to calculating ROI was deeply integrated into the transformation processes', financial outcomes 'part of how he demonstrated ROI', 'significant cost savings and revenue generation'; no absence statement. supported: CIC 4X, zero-defect, MVP 16-18 weeks; resource pyramids, change requests at JP Morgan/Fiserv; Fiserv $8.5M/3%/$500K/$3M. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: states the stories document no single ROI formula or ROI percentage; supported: CIC pair-programming cost concerns addressed by velocity and quality gains, 4X velocity, 10-person vs 20-person teams, zero-defect deployments, P&L/budget ownership, $100M+ repeatable business (CIC story); supported: 30+ engagements, 15+ Fortune 500 clients; 15-35% cost reduction from operating-model restructuring; supported: RBC WebSeries assessment, code reviews, interviews, heat maps, 'transparent cost-to-fix vs. benefit comparison', lacked modularity, resources redirected, no dollar amount (de-risking RBC story); supported: Fiserv $8.5M, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension; forecasts/actuals/variance/contingency/scope changes (owning-the-P&L and Fiserv stories). Pass."
+ },
+ {
+  "case": "x4",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: 'Matt approached ROI calculation by focusing on measurable outcomes', 'demonstrating ROI' via restructuring; unsupported causal: avoiding $500K in penalties 'which secured a $3M contract extension' (stories list them as separate results); no absence statement. supported: CIC 4X, zero-defect, Lean XP, $100M+; 15-35% cost reduction; JP Morgan/Fiserv turnarounds; Fiserv $8.5M/3%. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: states the stories document no single ROI formula or ROI percentage; supported: CIC pair-programming cost concerns addressed by velocity and quality gains, 4X velocity, 10-person vs 20-person teams, zero-defect deployments, P&L/budget ownership, $100M+ repeatable business (CIC story); supported: MVP 16-18 weeks, premium pricing, chargeability, unbillable downtime, contractor spend, bench-first contractor rule; supported: Fiserv $8.5M, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension; forecasts/actuals/variance/contingency/scope changes (owning-the-P&L and Fiserv stories); supported: RBC WebSeries assessment, code reviews, interviews, heat maps, 'transparent cost-to-fix vs. benefit comparison', lacked modularity, resources redirected, no dollar amount (de-risking RBC story); 15-35%. Pass."
+ },
+ {
+  "case": "x4",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: 'Matt's approach to calculating ROI often involved...', 'Matt's ROI calculations were based on measurable improvements'; no absence statement. supported: CIC metrics on practice health, client satisfaction, business impact; 4X; zero-defect; $100M+ by FY23; 15-35% cost reduction from operating-model shift. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: 'Matt's approach to calculating ROI was deeply tied to the transformation outcomes', 'inherently provided a strong ROI for clients', 'The ROI here was calculated not only in terms of cost savings'; no absence statement. supported: CIC client engagement model, partnership over pursuit, capability showcases, workshops, $100M+, trusted transformation partner (scaling-cic story); Business Agility Transformation, 15-35% cost reductions. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: stories 'don't document a single ROI formula, payback period, or complete investment-and-return calculation'; supported: CIC pair-programming cost concerns addressed by velocity and quality gains, 4X velocity, 10-person vs 20-person teams, zero-defect deployments, P&L/budget ownership, $100M+ repeatable business (CIC story); supported: 'CIC Standard of Value' (4X, zero-defect, customer journey-led, lean sustainable delivery), chargeability, unbillable downtime, contractor spend; supported: RBC WebSeries assessment, code reviews, interviews, heat maps, 'transparent cost-to-fix vs. benefit comparison', lacked modularity, resources redirected, no dollar amount (de-risking RBC story); supported: Fiserv $8.5M, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension; forecasts/actuals/variance/contingency/scope changes (owning-the-P&L and Fiserv stories). Pass."
+ },
+ {
+  "case": "x4",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: 'Matt calculated ROI by focusing on measurable outcomes', 'Matt was able to calculate and demonstrate ROI effectively'; unsupported causal: avoiding $500K in penalties 'which secured a $3M contract extension'; no absence statement. supported: CIC 4X, zero-defect, $100M+, pair programming/TDD; engagement margin at JP Morgan, RBC, Fiserv, HSBC, resource pyramids, change requests; Fiserv $8.5M/3%. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: states the stories document no single ROI formula or ROI percentage; supported: CIC pair-programming cost concerns addressed by velocity and quality gains, 4X velocity, 10-person vs 20-person teams, zero-defect deployments, P&L/budget ownership, $100M+ repeatable business (CIC story); supported: tracked actuals, forecast variance, estimate at completion, contingency (owning-the-P&L story, negative-EAC program and forecast reviews); supported: Fiserv $8.5M, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension; forecasts/actuals/variance/contingency/scope changes (owning-the-P&L and Fiserv stories); supported: RBC WebSeries assessment, code reviews, interviews, heat maps, 'transparent cost-to-fix vs. benefit comparison', lacked modularity, resources redirected, no dollar amount (de-risking RBC story); 15-35%. Pass."
+ },
+ {
+  "case": "x4",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: 'Matt's approach to calculating ROI was deeply embedded in the operational and financial management of the CIC'; no absence statement that no ROI calculation is on record. supported: Atlanta/Tampa, full P&L incl. budget and revenue side, 4X, 10 vs 20-person teams, zero-defect, organic referrals, $100M+, premium pricing based on proven ROI, case studies. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: stories 'don't specify a single ROI formula, payback period, or percentage return'; supported: RBC WebSeries assessment, code reviews, interviews, heat maps, 'transparent cost-to-fix vs. benefit comparison', lacked modularity, resources redirected, no dollar amount (de-risking RBC story) (Data, Application, Technology, Business Architecture dimensions); supported: CIC pair-programming cost concerns addressed by velocity and quality gains, 4X velocity, 10-person vs 20-person teams, zero-defect deployments, P&L/budget ownership, $100M+ repeatable business (CIC story); supported: chargeability, contractor spending; 15-35%; supported: Fiserv $8.5M, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension; forecasts/actuals/variance/contingency/scope changes (owning-the-P&L and Fiserv stories). Pass."
+ },
+ {
+  "case": "x4",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: 'Matt demonstrated a clear approach to calculating ROI by focusing on measurable client results'; no absence statement. supported: CIC Atlanta/Tampa from the ground up, Fortune 500, 4X, 10 vs 20-person teams, zero-defect, $100M+ by FY23, premium pricing based on proven ROI, referenceable case studies. Fail."
+ },
+ {
+  "case": "x4",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: stories 'don't specify a single ROI formula, a payback period, or a calculated ROI percentage'; supported: RBC WebSeries assessment, code reviews, interviews, heat maps, 'transparent cost-to-fix vs. benefit comparison', lacked modularity, resources redirected, no dollar amount (de-risking RBC story); supported: CIC pair-programming cost concerns addressed by velocity and quality gains, 4X velocity, 10-person vs 20-person teams, zero-defect deployments, P&L/budget ownership, $100M+ repeatable business (CIC story); supported: executive briefings and client workshops; 15-35%; supported: Fiserv $8.5M, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension; forecasts/actuals/variance/contingency/scope changes (owning-the-P&L and Fiserv stories); $3M extension as separate outcome. Pass."
+ }
+]

@@ -1,0 +1,482 @@
+[
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years (2020/2023, 2019/2023, 2017/expired, Oracle 8i 2002) and says none current; matches profile, no closing."
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years (2020/2023, 2019/2023, 2017/expired, Oracle 8i 2002) and says none current; matches profile, no closing."
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Pivots to RBC/JP Morgan PMO stories in place of the answer (expected fail condition), duplicated absence line, no certification list."
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "States no PMP and lists the profile certifications with correct years; no PMO pivot; profile-backed (no PMP anywhere in corpus or profile)."
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none of the certifications is current; consistent with profile expiry data; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none of the certifications is current; consistent with profile expiry data; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years (2020/2023, 2019/2023, 2017/expired, Oracle 8i 2002) and says none current; matches profile, no closing."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years (2020/2023, 2019/2023, 2017/expired, Oracle 8i 2002) and says none current; matches profile, no closing."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Only 'That isn't in Matt's stories': no explicit 'no PMP' and no certification list from the profile as the expected outcome requires."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "States no PMP and lists the profile certifications with correct years; no PMO pivot; profile-backed (no PMP anywhere in corpus or profile)."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none of the certifications is current; consistent with profile expiry data; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none of the certifications is current; consistent with profile expiry data; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years (2020/2023, 2019/2023, 2017/expired, Oracle 8i 2002) and says none current; matches profile, no closing."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years (2020/2023, 2019/2023, 2017/expired, Oracle 8i 2002) and says none current; matches profile, no closing."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Only 'That isn't in Matt's stories': no explicit 'no PMP' and no certification list from the profile as the expected outcome requires."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "States no PMP and lists the profile certifications with correct years; no PMO pivot; profile-backed (no PMP anywhere in corpus or profile)."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none of the certifications is current; consistent with profile expiry data; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none of the certifications is current; consistent with profile expiry data; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years (2020/2023, 2019/2023, 2017/expired, Oracle 8i 2002) and says none current; matches profile, no closing."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years (2020/2023, 2019/2023, 2017/expired, Oracle 8i 2002) and says none current; matches profile, no closing."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "States no PMP and lists the profile certifications with correct years; no PMO pivot; profile-backed (no PMP anywhere in corpus or profile)."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Pivots to RBC/JP Morgan PMO stories in place of the answer (expected fail condition), duplicated absence line, no certification list."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none of the certifications is current; consistent with profile expiry data; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none of the certifications is current; consistent with profile expiry data; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years (2020/2023, 2019/2023, 2017/expired, Oracle 8i 2002) and says none current; matches profile, no closing."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years (2020/2023, 2019/2023, 2017/expired, Oracle 8i 2002) and says none current; matches profile, no closing."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Pivots to RBC/JP Morgan PMO stories in place of the answer (expected fail condition), duplicated absence line, no certification list."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "States no PMP and lists the profile certifications with correct years; no PMO pivot; profile-backed (no PMP anywhere in corpus or profile)."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none of the certifications is current; consistent with profile expiry data; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none of the certifications is current; consistent with profile expiry data; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years (2020/2023, 2019/2023, 2017/expired, Oracle 8i 2002) and says none current; matches profile, no closing."
+ },
+ {
+  "case": "c04",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years (2020/2023, 2019/2023, 2017/expired, Oracle 8i 2002) and says none current; matches profile, no closing."
+ },
+ {
+  "case": "c04",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "States no PMP and lists the profile certifications with correct years; no PMO pivot; profile-backed (no PMP anywhere in corpus or profile)."
+ },
+ {
+  "case": "c04",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Pivots to RBC/JP Morgan PMO stories in place of the answer (expected fail condition), duplicated absence line, no certification list."
+ },
+ {
+  "case": "c04",
+  "run": 6,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none of the certifications is current; consistent with profile expiry data; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 6,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none of the certifications is current; consistent with profile expiry data; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years (2020/2023, 2019/2023, 2017/expired, Oracle 8i 2002) and says none current; matches profile, no closing."
+ },
+ {
+  "case": "c04",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years (2020/2023, 2019/2023, 2017/expired, Oracle 8i 2002) and says none current; matches profile, no closing."
+ },
+ {
+  "case": "c04",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Pivots to RBC/JP Morgan PMO stories in place of the answer (expected fail condition), duplicated absence line, no certification list."
+ },
+ {
+  "case": "c04",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "States no PMP and lists the profile certifications with correct years; no PMO pivot; profile-backed (no PMP anywhere in corpus or profile)."
+ },
+ {
+  "case": "c04",
+  "run": 7,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none of the certifications is current; consistent with profile expiry data; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 7,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none of the certifications is current; consistent with profile expiry data; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years (2020/2023, 2019/2023, 2017/expired, Oracle 8i 2002) and says none current; matches profile, no closing."
+ },
+ {
+  "case": "c04",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years (2020/2023, 2019/2023, 2017/expired, Oracle 8i 2002) and says none current; matches profile, no closing."
+ },
+ {
+  "case": "c04",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Only 'That isn't in Matt's stories': no explicit 'no PMP' and no certification list from the profile as the expected outcome requires."
+ },
+ {
+  "case": "c04",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "States no PMP and lists the profile certifications with correct years; no PMO pivot; profile-backed (no PMP anywhere in corpus or profile)."
+ },
+ {
+  "case": "c04",
+  "run": 8,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none of the certifications is current; consistent with profile expiry data; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 8,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none of the certifications is current; consistent with profile expiry data; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years (2020/2023, 2019/2023, 2017/expired, Oracle 8i 2002) and says none current; matches profile, no closing."
+ },
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years (2020/2023, 2019/2023, 2017/expired, Oracle 8i 2002) and says none current; matches profile, no closing."
+ },
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Only 'That isn't in Matt's stories': no explicit 'no PMP' and no certification list from the profile as the expected outcome requires."
+ },
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "States no PMP and lists the profile certifications with correct years; no PMO pivot; profile-backed (no PMP anywhere in corpus or profile)."
+ },
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none of the certifications is current; consistent with profile expiry data; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none of the certifications is current; consistent with profile expiry data; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years (2020/2023, 2019/2023, 2017/expired, Oracle 8i 2002) and says none current; matches profile, no closing."
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct issue/expiry years (2020/2023, 2019/2023, 2017/expired, Oracle 8i 2002) and says none current; matches profile, no closing."
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Pivots to RBC/JP Morgan PMO stories in place of the answer (expected fail condition), duplicated absence line, no certification list."
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "States no PMP and lists the profile certifications with correct years; no PMO pivot; profile-backed (no PMP anywhere in corpus or profile)."
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none of the certifications is current; consistent with profile expiry data; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none of the certifications is current; consistent with profile expiry data; no closing."
+ }
+]

@@ -1,0 +1,642 @@
+[
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Profile self-description and values, permit to fail, balanced teams, CIC 0 to 150+ Atlanta/Tampa, 10-person teams matching 20-person output: all supported."
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Permit to fail, psychological safety (morale, turnover), decentralized decisions (engagement/satisfaction), 4x: all supported by CIC stories."
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern Making It Stick / quality crisis: corpus presents practices not sticking and the crisis; facts (Columbus TDD experts, 3-point cap, 1-week iterations, lesson quote) supported; unquantified results flagged honestly."
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Permit-to-fail story reframed as his culture 'initially struggling to take root' with 'initial resistance'; the story's situation predates his intervention and records only success. Reframes a success as a failure, with invented resistance."
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Empathy/clarity, psychological safety, servant leadership, recognition programs, 4x: supported by leadership-philosophy, decentralized and making-it-safe stories."
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Flat CIC model, fear-of-blame pockets, 6-week labs, 15-35%, 100% PCI/GDPR/SOX, RBC migration PoV adopted, Fiserv ADA manifesto: all supported."
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Breaking-silos story reframed as a case where 'entrenched structures made it difficult to fully realize benefits' and the shift 'was slower than anticipated'; the story records success (zero-defect code, reduced delays). Reframes a success; closing offer also tied to the invented failure."
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Reusable-patterns scaling problem is a legitimate shortfall, but it falsely retracts its turn-1 claim ('teams reverting to waiting for direction was more specific than these accounts support'); the decentralized decision-making story states exactly that. Misstates the corpus."
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Permit to fail, decentralized decisions, servant leadership, morale/turnover, 4x at CIC: supported."
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Themes, flat model reverting, 6-week labs, 15-35%, NEW IT SKILLS NOW 300+, security in DoD, 100% compliance, 4x: supported."
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Permit-to-fail story reframed as 'resistance' to his approach and a slow transition; neither is in the story, which records success. Reframes a success as failure."
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Reusable-patterns scaling inconsistency (misaligned architectures, cost) plus fear-of-blame problem, both described accurately and honestly framed as problems addressed, not unresolved failures."
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Short summary from profile and CIC permit-to-fail/balanced-teams material; supported."
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Decentralized model bumpy, permit to fail, 6-week labs, 15-35%, 100% compliance, 4x, 300+ trained, 200+ AWS certifications: supported."
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern quality crisis: defects despite coverage, engineer writing tests after code, audit, SMART backlog, TDD experts, restored confidence: supported."
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Decentralized decision-making story: the corpus says designing the flat model was not living it, habits reasserted, path bumpy; quoted text accurate, honest about lack of quantification."
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership philosophy, flat model reinforcement, 15-35%, 4x, DoD security, 100% compliance, 300+, RBC and Fiserv adoption: supported."
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Short profile-based summary: supported."
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Reusable-patterns scaling problem inside the organization he built, described accurately and honestly framed."
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Norfolk quality crisis facts are accurate, but it frames the crisis as his 'permit to fail' culture not yielding results; no story links the crisis to permit to fail. Unsupported causal claim."
+ },
+ {
+  "case": "c03",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Profile phrases, CIC 0 to 150+, 10 vs 20 person teams, 4X velocity and zero defects: supported."
+ },
+ {
+  "case": "c03",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Profile-based summary; closing line 'resilient and adaptable' is light puffery (adaptability supported by breaking-silos), not a material fact."
+ },
+ {
+  "case": "c03",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern Making It Stick: initial practices didn't stick, missing reinforcement, rotation, 3-point cap, remote driver trading, lesson quote: supported."
+ },
+ {
+  "case": "c03",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "MattGPT regex/prompt story (32.3% to 3-6% figures correct) presented as his leadership approach failing; it is a technical bug fix, not a leadership shortfall. Wrong referent."
+ },
+ {
+  "case": "c03",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Flat model, fear of blame, permit to fail, 15-35%, 4x: supported."
+ },
+ {
+  "case": "c03",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Permit to fail outcomes, decentralized decisions, 4x, morale/innovation/turnover: supported."
+ },
+ {
+  "case": "c03",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Reusable-patterns scaling problem, 150+ across Atlanta/Tampa, actions and results accurate, honest framing."
+ },
+ {
+  "case": "c03",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Breaking-silos story with invented 'initial resistance from team members' and a slow transition; the story records success. Reframes a success as a failure."
+ },
+ {
+  "case": "c03",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Flat model, permit to fail, 6-week labs, 15-35%, 4x, 100% compliance, 300+, 200+ AWS certs: supported."
+ },
+ {
+  "case": "c03",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Removing barriers, permit to fail, servant leadership, 4x, cross-functional trust: supported."
+ },
+ {
+  "case": "c03",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Decentralized model not lived consistently and fear-of-blame pockets: both stories present these as shortfalls; quotes accurate, unquantified outcomes flagged."
+ },
+ {
+  "case": "c03",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Permit-to-fail story with invented 'initially encountered resistance' to his approach; story records only success. Reframes a success as failure."
+ },
+ {
+  "case": "c03",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Permit to fail, psychological safety, decentralized decisions, 4x, cohesion: supported."
+ },
+ {
+  "case": "c03",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Flat model, permit to fail, 6-week labs, 15-35%, 300+, DoD security, 4x, 'didn't happen overnight, but it stuck': supported."
+ },
+ {
+  "case": "c03",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Claims 'his leadership style didn't initially succeed' using the permit-to-fail story, whose risk-avoidance situation predates his intervention; story records success. Reframes a success as failure."
+ },
+ {
+  "case": "c03",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Reusable-patterns scaling problem described accurately and honestly framed as a limitation he addressed."
+ },
+ {
+  "case": "c03",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Profile-based summary: supported."
+ },
+ {
+  "case": "c03",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Profile-based summary with quoted self-description: supported."
+ },
+ {
+  "case": "c03",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "MattGPT regex/prompt story (figures correct) presented as a leadership challenge; a technical bug fix, not a leadership shortfall. Wrong referent."
+ },
+ {
+  "case": "c03",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern quality crisis described accurately: defects despite coverage, audit, Columbus TDD experts, Samman coaching, restored confidence."
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Both engagements: Fiserv DevOps/ADA, 2M+/15 FIs; ACCESS 135,000+/180+, 40+ team, Coalition Greenwich: supported."
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both engagements: Fiserv $8.5M, 45, 3 vendors, 3% under, 47 criteria, $500K; ACCESS 40+, 70-80%, 12 countries, April 2011: supported."
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names dimensions (client reach, geographic scope) and compares both; ACCESS 135,000+/180+ vs Fiserv 15 FIs/2M+ cardholders accurate. Related closing offer."
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names dimensions: ACCESS bigger in reach and duration (2009-08 to 2012-06 vs 2014-12 to 2015-06), Fiserv larger stated team (45 vs 40+), no ACCESS budget: accurate."
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Both engagements with supported figures (45, 3 vendors, $45M, 99.97%, 47/47, 40+, 12 countries, April 2011)."
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both engagements; Fiserv recovery and DevOps, ACCESS modules and gateway: supported."
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names dimensions: reach/scope to ACCESS, team close (45 vs 40+), duration, no ACCESS budget: accurate."
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Clarifying question asking bigger by team, budget or impact: allowed."
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Both engagements; Fiserv ADA/DevOps, ACCESS 40+, 135,000+, Coalition Greenwich: supported."
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both engagements with supported figures; 'Risk & Responsible Tech' theme label is not on these stories but reads as a descriptive label, not a material fact."
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names global reach/complexity as the dimension and compares both (135,000+/180+ vs 45-person team, 15 FIs, 2M+)."
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Reach and scope to ACCESS, team 45 vs 40+, duration, no ACCESS budget: accurate."
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Both engagements: role titles, ADA/DOJ/AODA, DevOps, ACCESS 40+, MAC layer: supported."
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both engagements: builds days to hours, deploy cadence, 47 criteria, zero disruption, 12 countries: supported (theme label as in r03)."
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names scale/reach and compares both, including 40+ vs 45 teams."
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Reach/scope to ACCESS, team similar, dates, no ACCESS budget: accurate."
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Both engagements; lead-time and deploy figures exact; closing summary line is mild generalization."
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both engagements; SOA via MuleSoft/Tibco/WebMethods, 3 months, 47 criteria, $500K, 12 countries: supported."
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Clarifying question asking scope, impact or team size: allowed."
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Dimensions named; cardholder vs client units distinguished, 40+ vs 45, 3 years vs 6 months, $8.5M only budget: accurate."
+ },
+ {
+  "case": "c12",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Both engagements with supported figures (theme label as in r03)."
+ },
+ {
+  "case": "c12",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both engagements; DOJ/AODA, Git/Hudson, 135,000+, 40+, Coalition Greenwich: supported."
+ },
+ {
+  "case": "c12",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Reach/scope to ACCESS, team 40+ vs 45, dates, $8.5M with no ACCESS budget: accurate."
+ },
+ {
+  "case": "c12",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names global reach and complexity, compares both engagements."
+ },
+ {
+  "case": "c12",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Says Fiserv deploy frequency increased 'to weekly cycles'; story says weekly-to-monthly. Inflated figure."
+ },
+ {
+  "case": "c12",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both engagements; 6 months vs nearly 3 years, 1 day-1 week lead time, 12 countries: supported."
+ },
+ {
+  "case": "c12",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names global reach and client base; compares both. Related closing offer."
+ },
+ {
+  "case": "c12",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Reach, scope, duration to ACCESS; Fiserv slightly larger team; budget only for Fiserv: accurate."
+ },
+ {
+  "case": "c12",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Both engagements; 45, 3 vendors, $500K, 3% under, lead time and deploy figures, 40+: supported."
+ },
+ {
+  "case": "c12",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both engagements with supported facts and figures."
+ },
+ {
+  "case": "c12",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names global reach and client impact; compares both with 40+ and 45 figures."
+ },
+ {
+  "case": "c12",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Dimensions named with accurate dates, team figures, $45M, 2-week sprints."
+ },
+ {
+  "case": "c12",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Both engagements; 3% under, $500K, 40+, April 2011, Coalition Greenwich: supported."
+ },
+ {
+  "case": "c12",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both engagements; $3M extension, $45M, 99.97%, 12 countries: supported."
+ },
+ {
+  "case": "c12",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names global reach and integration complexity; compares both."
+ },
+ {
+  "case": "c12",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Reach/functionality to ACCESS, teams similar, 6-month to 2-week cycles, no ACCESS budget: accurate."
+ },
+ {
+  "case": "c12",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Both engagements; Omaha travel, 7 AM/11 PM calls, paternity-leave cover, 47/47, 70-80%: supported."
+ },
+ {
+  "case": "c12",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both engagements; 3 weeks behind, $3M extension, 40+, SSO, trade-finance visibility: supported."
+ },
+ {
+  "case": "c12",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Dimensions named; team, reach, duration, $8.5M, and 14-month initiative vs Matt's 6 months: accurate."
+ },
+ {
+  "case": "c12",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names global reach and consolidation; compares both."
+ }
+]
