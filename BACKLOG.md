@@ -147,6 +147,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-295](#mattgpt-295) | Timeline ERA_ORDER hardcodes 5 eras; "Technical Foundations & Enterprise Integration" (9 stories) sorts last | Open | Medium | Bug | October 11, 2026 |
 | [MATTGPT-296](#mattgpt-296) | STANDARD_DELTA's GOOD example ends with "Want me to dig deeper?", contradicting ADR 035 | Open | Low | Bug | October 11, 2026 |
 | [MATTGPT-297](#mattgpt-297) | Dog-stereotype humor ("good boy") is allowed in loading messages only; nothing checks that answers stay free of it | Open | Low | Test | October 11, 2026 |
+| [MATTGPT-298](#mattgpt-298) | Salary and compensation questions get the nonsense banner ("Wrong trail") instead of a polite pointer to Matt | Open | Low | Bug | October 12, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -2515,6 +2516,8 @@ No implementation until the decision is recorded here.
 
 **Copy wording is Matt's.**
 
+**Correction (Oct 12, 2026):** that copy is the `answer_md` the probe recorded, and in the UI it is likely never shown. The branch also sets `ask_last_reason`, so `conversation_view.py` and `landing_view.py` push a banner entry instead, and the user sees `BANNER_COPY["out_of_scope"]` in `utils/ui_helpers.py`: "🐾 That's outside Matt's experience." (from source; not checked in a browser). That banner is the same flat no. The fix covers the banner copy, and removes or wires the unused `answer_md` (same shape as MATTGPT-298's personal reply).
+
 ---
 
 ### MATTGPT-294
@@ -2607,6 +2610,29 @@ No implementation until the decision is recorded here.
 2. **Source (structural, with MATTGPT-258):** the phrases appear nowhere in `ui/`, `services/`, `config/` or `utils/` string constants except `thinking_indicator.py`, so they can't reach a prompt or an opener.
 
 Kept off the roadmap's NOW.
+
+---
+
+### MATTGPT-298
+**Salary and compensation questions get the nonsense banner ("Wrong trail") instead of a polite pointer to Matt**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Bug
+- **File:** `nonsense_filters.jsonl` (`personal_compensation`, `recruiter_logistics`), `ui/pages/ask_mattgpt/backend_service.py` (`_nonsense_rejection()`, `_router_rejection()`), `utils/ui_helpers.py` (`BANNER_COPY`, `render_no_match_banner()`)
+- **Related:** MATTGPT-090 (Decided Against May 29, 2026, on the grounds that salary got the personal warm pivot; that no longer holds), MATTGPT-293, MATTGPT-275 (engage closing)
+- **Logged:** October 12, 2026
+
+**Verified Oct 12, 2026:**
+- `is_nonsense()` returns `personal_compensation` for "What's Matt's salary?", "What are Matt's salary expectations?" and "How much money did Matt make at Accenture?".
+- `_nonsense_rejection()` sets `ask_last_reason` to `rule:<category>`, and `render_no_match_banner()` maps every `rule:` reason to `BANNER_COPY["rule"]`: "🐾 Wrong trail. I'm a Plott Hound trained to track Matt's transformation work. Give me a real scent to follow."
+- The personal_compensation patterns were added in MATTGPT-163 (`9a05af0`), after -090 was decided. They run before the router, so salary questions no longer reach the personal family.
+
+**Problem:** a recruiter asking about compensation is asking a fair logistics question, and the banner treats it as nonsense.
+
+**Fix:** route `personal_compensation` and `recruiter_logistics` matches to a polite reply pointing to Contact and LinkedIn, for example "🐾 Compensation is best discussed with Matt directly." **Wording is Matt's.** My Work search calls the same `is_nonsense()` (`explore_stories.py`) and shows the same banner; decide whether it changes there too.
+
+**Also: the longer personal reply is never shown.** `_router_rejection()`'s personal branch returns `answer_md` ("🐾 I'm focused on Matt's professional experience, including the projects, teams, and outcomes. ...") but also sets `ask_last_reason`. Both `conversation_view.py` and `landing_view.py` push only a banner entry when `ask_last_reason` is set, so the user sees `BANNER_COPY["personal"]` and `answer_md` is dropped (verified at HEAD from source; not checked in a browser). Confirm, then remove it or wire it. The out_of_scope branch has the same shape (see MATTGPT-293).
 
 ---
 
