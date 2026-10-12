@@ -148,6 +148,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-296](#mattgpt-296) | STANDARD_DELTA's GOOD example ends with "Want me to dig deeper?", contradicting ADR 035 | Open | Low | Bug | October 11, 2026 |
 | [MATTGPT-297](#mattgpt-297) | Dog-stereotype humor ("good boy") is allowed in loading messages only; nothing checks that answers stay free of it | Open | Low | Test | October 11, 2026 |
 | [MATTGPT-298](#mattgpt-298) | Salary and compensation questions get the nonsense banner ("Wrong trail") instead of a polite pointer to Matt | Open | Low | Bug | October 12, 2026 |
+| [MATTGPT-299](#mattgpt-299) | Ask Agy latency on gpt-6.1-sol: whole turn 9.35 s median, first visible text 4.13 s (lever 2, MATTGPT-282 run 2) | Blocked | Medium | Issue | October 12, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -2633,6 +2634,33 @@ Kept off the roadmap's NOW.
 **Fix:** route `personal_compensation` and `recruiter_logistics` matches to a polite reply pointing to Contact and LinkedIn, for example "🐾 Compensation is best discussed with Matt directly." **Wording is Matt's.** My Work search calls the same `is_nonsense()` (`explore_stories.py`) and shows the same banner; decide whether it changes there too.
 
 **Also: the longer personal reply is never shown.** `_router_rejection()`'s personal branch returns `answer_md` ("🐾 I'm focused on Matt's professional experience, including the projects, teams, and outcomes. ...") but also sets `ask_last_reason`. Both `conversation_view.py` and `landing_view.py` push only a banner entry when `ask_last_reason` is set, so the user sees `BANNER_COPY["personal"]` and `answer_md` is dropped (verified at HEAD from source; not checked in a browser). Confirm, then remove it or wire it. The out_of_scope branch has the same shape (see MATTGPT-293).
+
+---
+
+### MATTGPT-299
+**Ask Agy latency on gpt-6.1-sol: whole turn 9.35 s median, first visible text 4.13 s (lever 2, MATTGPT-282 run 2)**
+
+- **Status:** Blocked
+- **Priority:** Medium
+- **Type:** Issue
+- **Dependencies:** MATTGPT-275. Set to Open when 275's step 1 (streaming at every entry point) lands, not at 275's close.
+- **Related:** MATTGPT-282 (answering-model comparison), MATTGPT-046 (Decided Against, latency benchmarks)
+- **Logged:** October 12, 2026
+
+**Scope:** MATTGPT-275 builds lever 2 on Sol. Latency experiments live here, as controlled comparisons, so they don't reopen 275's design. Felt speed (streaming every entry point) is 275 step 1, not this ticket.
+
+**Baseline (Oct 12, 2026; `docs/evidence/MATTGPT-282/sol_arms_20261011_211830/`, 8fa0270; lever 2, every call on Sol medium, 130 turns, streamed in the probe; production does not stream):**
+- `cost_latency.txt`: first visible token median 4.13 s (p90 5.74); whole turn median 9.35 s (p90 12.37); 2.06 calls per turn.
+- Recomputed from `lever2_sol.json`: round 1 (search-query call) median 1.94 s; final call median 6.48 s, of which 5.16 s is text after the first token, at a median 61.8 output tokens/s; reasoning tokens median 0 per call (mean 5.6; 229 of 268 calls had 0).
+
+**First step:** re-baseline from step 1's run on production code. The probe numbers above are a shim on the Responses API, not production.
+
+**Candidates, each a controlled arm with blind scoring:**
+1. Round 1 on gpt-4o, or on Sol at minimal effort.
+2. A faster answering model at equal quality.
+3. Priority processing, if offered.
+
+**Not in scope:** shorter answers. Answer length is a voice decision.
 
 ---
 
