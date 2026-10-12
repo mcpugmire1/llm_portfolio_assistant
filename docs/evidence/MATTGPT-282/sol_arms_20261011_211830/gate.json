@@ -1,0 +1,134 @@
+{
+ "c01 t1": {
+  "poc_sol": 5,
+  "poc_4oplan": 5,
+  "poc_sollow": 5,
+  "lever2_sol": 5
+ },
+ "c01 t2": {
+  "poc_sol": 5,
+  "poc_4oplan": 5,
+  "poc_sollow": 5,
+  "lever2_sol": 5
+ },
+ "c01 t3": {
+  "poc_sol": 5,
+  "poc_4oplan": 5,
+  "poc_sollow": 5,
+  "lever2_sol": 5
+ },
+ "c03 t1": {
+  "poc_sol": 5,
+  "lever2_sol": 5,
+  "poc_sollow": 5,
+  "poc_4oplan": 5
+ },
+ "c03 t2": {
+  "poc_sol": 5,
+  "lever2_sol": 5,
+  "poc_sollow": 5,
+  "poc_4oplan": 4
+ },
+ "c04 t1": {
+  "poc_sollow": 5,
+  "lever2_sol": 5,
+  "poc_4oplan": 5,
+  "poc_sol": 5
+ },
+ "c04 t2": {
+  "poc_sollow": 5,
+  "lever2_sol": 5,
+  "poc_4oplan": 5,
+  "poc_sol": 5
+ },
+ "c04 t3": {
+  "poc_sollow": 5,
+  "lever2_sol": 5,
+  "poc_4oplan": 5,
+  "poc_sol": 5
+ },
+ "c09 t1": {
+  "poc_4oplan": 10,
+  "poc_sol": 10,
+  "poc_sollow": 10,
+  "lever2_sol": 10
+ },
+ "c09 t2": {
+  "poc_4oplan": 10,
+  "poc_sol": 10,
+  "poc_sollow": 10,
+  "lever2_sol": 10
+ },
+ "c09 t3": {
+  "poc_4oplan": 7,
+  "poc_sol": 10,
+  "poc_sollow": 10,
+  "lever2_sol": 10
+ },
+ "c09 t4": {
+  "poc_4oplan": 10,
+  "poc_sol": 10,
+  "poc_sollow": 10,
+  "lever2_sol": 10
+ },
+ "c11 t1": {
+  "poc_4oplan": 5,
+  "poc_sol": 5,
+  "poc_sollow": 5,
+  "lever2_sol": 5
+ },
+ "c11 t2": {
+  "poc_4oplan": 5,
+  "poc_sol": 5,
+  "poc_sollow": 5,
+  "lever2_sol": 5
+ },
+ "c11 t3": {
+  "poc_4oplan": 5,
+  "poc_sol": 5,
+  "poc_sollow": 5,
+  "lever2_sol": 5
+ },
+ "c12 t1": {
+  "lever2_sol": 5,
+  "poc_4oplan": 4,
+  "poc_sol": 5,
+  "poc_sollow": 5
+ },
+ "c12 t2": {
+  "lever2_sol": 4,
+  "poc_4oplan": 2,
+  "poc_sol": 5,
+  "poc_sollow": 4
+ },
+ "x1 t1": {
+  "poc_sol": 4,
+  "poc_4oplan": 5,
+  "poc_sollow": 0,
+  "lever2_sol": 1
+ },
+ "x2 t1": {
+  "poc_4oplan": 5,
+  "poc_sol": 5,
+  "poc_sollow": 5,
+  "lever2_sol": 5
+ },
+ "x3 t1": {
+  "lever2_sol": 3,
+  "poc_4oplan": 2,
+  "poc_sol": 0,
+  "poc_sollow": 0
+ },
+ "x4 t1": {
+  "poc_sollow": 5,
+  "lever2_sol": 5,
+  "poc_sol": 5,
+  "poc_4oplan": 5
+ },
+ "x5 t1": {
+  "lever2_sol": 5,
+  "poc_4oplan": 5,
+  "poc_sol": 5,
+  "poc_sollow": 5
+ }
+}

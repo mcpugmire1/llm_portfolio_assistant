@@ -1,0 +1,20 @@
+== poc_4oplan: 130 turns, errors 0, rejections 0, cost $2.60 ($0.0200/turn)
+   calls (role, model, effort): {('answer', 'gpt-6.1-sol', 'medium'): 126}; planner resolved {'gpt-4o-2024-08-06': 126, None: 4}; calls/turn 0.97; status {'completed': 126}
+   first visible token (turn): median 4.06s p90 5.22s (n=130) | whole turn median 9.13s p90 12.45s
+   final call ttft median 2.22s | reasoning tokens/call mean 44 | output/call mean 330
+   actions {'search': 33, 'clarify': 4, 'answer_from_referent': 30, 'synthesize': 23, 'profile': 17, 'gap': 23}
+== poc_sol: 130 turns, errors 0, rejections 0, cost $2.87 ($0.0221/turn)
+   calls (role, model, effort): {('planner', 'gpt-6.1-sol', 'medium'): 130, ('answer', 'gpt-6.1-sol', 'medium'): 125}; planner resolved {'gpt-6.1-sol': 125, None: 5}; calls/turn 1.96; status {'completed': 255}
+   first visible token (turn): median 6.10s p90 8.13s (n=130) | whole turn median 11.90s p90 14.83s
+   final call ttft median 2.21s | reasoning tokens/call mean 26 | output/call mean 228
+   actions {'search': 34, 'clarify': 5, 'answer_from_referent': 36, 'synthesize': 22, 'profile': 13, 'gap': 20}
+== poc_sollow: 130 turns, errors 0, rejections 0, cost $2.88 ($0.0221/turn)
+   calls (role, model, effort): {('planner', 'gpt-6.1-sol', 'low'): 130, ('answer', 'gpt-6.1-sol', 'low'): 125}; planner resolved {'gpt-6.1-sol': 125, None: 5}; calls/turn 1.96; status {'completed': 255}
+   first visible token (turn): median 4.57s p90 5.49s (n=130) | whole turn median 10.84s p90 12.70s
+   final call ttft median 1.23s | reasoning tokens/call mean 1 | output/call mean 203
+   actions {'search': 47, 'clarify': 5, 'answer_from_referent': 35, 'synthesize': 22, 'profile': 15, 'gap': 6}
+== lever2_sol: 130 turns, errors 0, rejections 0, cost $1.74 ($0.0134/turn)
+   calls (role, model, effort): {('lever2', 'gpt-6.1-sol', 'medium'): 268}; planner resolved {}; calls/turn 2.06; status {'completed': 268}
+   first visible token (turn): median 4.13s p90 5.74s (n=130) | whole turn median 9.35s p90 12.37s
+   final call ttft median 1.21s | reasoning tokens/call mean 6 | output/call mean 157
+total $10.09

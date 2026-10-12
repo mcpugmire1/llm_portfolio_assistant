@@ -1,0 +1,802 @@
+[
+ {
+  "case": "x1",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'Yes... mortgage lending, the real-estate-related side of financial services' frames mortgage work as real estate (Industry: Financial Services / Banking); absence: no 'not on record'; supported: Cendant Mortgage underwriting facts (green screens, JSP/MVC front end, TIBCO BPM routing, Oracle stored-procedure fixes, Mount Laurel); supported: HSBC facts (federal settlement, Buffalo workshops, heat maps/gap analysis, Mortgage Cadence/Black Knight target state, estimates/staffing/SOW, $10M contract, mobilization and handoff)"
+ },
+ {
+  "case": "x1",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: Cendant Mortgage in Financial Services / Banking, not real estate; supported: Cendant Mortgage underwriting facts (green screens, JSP/MVC front end, TIBCO BPM routing, Oracle stored-procedure fixes, Mount Laurel)"
+ },
+ {
+  "case": "x1",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "contradicted: answers 'Yes' to 'worked in real estate?' on the basis of mortgage work, framing mortgage lending as real estate (story Industry: Financial Services / Banking); absence: never says real estate is not on record; supported: Cendant Mortgage underwriting facts (green screens, JSP/MVC front end, TIBCO BPM routing, Oracle stored-procedure fixes, Mount Laurel); supported: HSBC facts (federal settlement, Buffalo workshops, heat maps/gap analysis, Mortgage Cadence/Black Knight target state, estimates/staffing/SOW, $10M contract, mobilization and handoff); supported: Accredited Home Lenders HR portal facts (hiring/onboarding/succession, internal operations)"
+ },
+ {
+  "case": "x1",
+  "run": 1,
+  "turn": 1,
+  "label": "D",
+  "pass": false,
+  "reason": "no real-estate framing (says mortgage lending within financial services and banking, rather than property development/brokerage/management), but absence: never states real estate is not on record or not in Matt's stories, so it fails the absence rule; supported: Cendant 2002-2003 facts, HSBC facts, Accredited HR portal facts (schema, entities, front end, attribute-level access control)"
+ },
+ {
+  "case": "x1",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: HSBC and Cendant mortgage technology in Financial Services / Banking, rather than real estate; HSBC workshops and alignment of HSBC/Accenture/Mortgage Cadence; Cendant web front end and TIBCO workflows"
+ },
+ {
+  "case": "x1",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: Cendant in financial services / banking, web app and TIBCO BPM workflows, Oracle risk-calculation fixes"
+ },
+ {
+  "case": "x1",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "contradicted: answers 'Yes' to 'worked in real estate?' on the basis of mortgage work, framing mortgage lending as real estate (story Industry: Financial Services / Banking); absence: never says real estate is not on record; supported: Cendant Mortgage underwriting facts (green screens, JSP/MVC front end, TIBCO BPM routing, Oracle stored-procedure fixes, Mount Laurel); supported: HSBC facts (federal settlement, Buffalo workshops, heat maps/gap analysis, Mortgage Cadence/Black Knight target state, estimates/staffing/SOW, $10M contract, mobilization and handoff)"
+ },
+ {
+  "case": "x1",
+  "run": 2,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "borderline pass: no real-estate framing (mortgage lending within Financial Services / Banking) and absence carried by 'rather than documented work in property development, brokerage, or property management'; supported: Cendant 2002-2003 facts, HSBC assessment/stakeholder/SOW/$10M facts, Accredited HR portal facts"
+ },
+ {
+  "case": "x1",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'Yes-Matt has worked in mortgage lending' in answer to real estate frames mortgage work as real estate (Industry: Financial Services / Banking); absence: no 'not on record'; supported: Cendant Mortgage underwriting facts (green screens, JSP/MVC front end, TIBCO BPM routing, Oracle stored-procedure fixes, Mount Laurel); supported: HSBC facts (federal settlement, Buffalo workshops, heat maps/gap analysis, Mortgage Cadence/Black Knight target state, estimates/staffing/SOW, $10M contract, mobilization and handoff); supported: Accredited Home Lenders HR portal facts (hiring/onboarding/succession, internal operations)"
+ },
+ {
+  "case": "x1",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: Cendant mortgage underwriting modernization in financial services / banking, 'not real estate industry work'"
+ },
+ {
+  "case": "x1",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "contradicted: answers 'Yes' to 'worked in real estate?' on the basis of mortgage work, framing mortgage lending as real estate (story Industry: Financial Services / Banking); absence: never says real estate is not on record; supported: Cendant Mortgage underwriting facts (green screens, JSP/MVC front end, TIBCO BPM routing, Oracle stored-procedure fixes, Mount Laurel) incl. software engineer role 2002-2003; supported: HSBC facts (federal settlement, Buffalo workshops, heat maps/gap analysis, Mortgage Cadence/Black Knight target state, estimates/staffing/SOW, $10M contract, mobilization and handoff); supported: Accredited Home Lenders HR portal facts (hiring/onboarding/succession, internal operations)"
+ },
+ {
+  "case": "x1",
+  "run": 3,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: Cendant mainframe-to-web replacement, HSBC assessment and $10M contract, Accredited HR portal, all Financial Services / Banking"
+ },
+ {
+  "case": "x1",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: Cendant, HSBC assessment/mobilization/$10M, Accredited HR portal, all Financial Services / Banking"
+ },
+ {
+  "case": "x1",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: opens 'Here's where Matt's work connects to real estate', framing the mortgage engagements as real estate work (Industry: Financial Services / Banking); absence: no 'not on record'; supported: Cendant Mortgage underwriting facts (green screens, JSP/MVC front end, TIBCO BPM routing, Oracle stored-procedure fixes, Mount Laurel); supported: HSBC facts (federal settlement, Buffalo workshops, heat maps/gap analysis, Mortgage Cadence/Black Knight target state, estimates/staffing/SOW, $10M contract, mobilization and handoff); supported: Accredited Home Lenders HR portal facts (hiring/onboarding/succession, internal operations); unsupported-leaning: 'worked with HR, technology... teams' (story names client requirements sessions and the in-house design team)"
+ },
+ {
+  "case": "x1",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: Cendant financial services / banking, JSP/MVC, TIBCO BPM, Oracle fixes"
+ },
+ {
+  "case": "x1",
+  "run": 4,
+  "turn": 1,
+  "label": "D",
+  "pass": false,
+  "reason": "contradicted: answers 'Yes' to 'worked in real estate?' on the basis of mortgage work, framing mortgage lending as real estate (story Industry: Financial Services / Banking); absence: never says real estate is not on record ('Yes-Matt has worked in mortgage lending technology'); supported: Cendant Nov 2002-Oct 2003 about a year, HSBC Dec 2016-Mar 2017 and facts"
+ },
+ {
+  "case": "x1",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: Cendant financial services / banking facts"
+ },
+ {
+  "case": "x1",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: answers 'Yes' to 'worked in real estate?' on the basis of mortgage work, framing mortgage lending as real estate (story Industry: Financial Services / Banking); absence: never says real estate is not on record ('Yes-Matt has worked on mortgage technology'); supported: Cendant Nov 2002-Oct 2003 facts, HSBC Dec 2016-Mar 2017 facts"
+ },
+ {
+  "case": "x1",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: Cendant, HSBC roadmap and $10M, Accredited subprime lender 'not a real estate engagement'"
+ },
+ {
+  "case": "x1",
+  "run": 5,
+  "turn": 1,
+  "label": "D",
+  "pass": false,
+  "reason": "contradicted: 'mortgage lending-the financing side of real estate' frames mortgage work as real estate (Industry: Financial Services / Banking); absence: no 'not on record'; supported: Cendant Mortgage underwriting facts (green screens, JSP/MVC front end, TIBCO BPM routing, Oracle stored-procedure fixes, Mount Laurel); supported: HSBC facts (federal settlement, Buffalo workshops, heat maps/gap analysis, Mortgage Cadence/Black Knight target state, estimates/staffing/SOW, $10M contract, mobilization and handoff); supported: Accredited Home Lenders HR portal facts (hiring/onboarding/succession, internal operations)"
+ },
+ {
+  "case": "x2",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: JP Morgan Salesforce migration from proprietary legacy system across 12 countries, regional coordination"
+ },
+ {
+  "case": "x2",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: Cendian in Transportation & Logistics, Java/webMethods, EDI/XML/flat file, GC3"
+ },
+ {
+  "case": "x2",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "absence equivalent: 'stories available don't establish SAP experience'; supported: Salesforce and Bottomline WebSeries work at JP Morgan Chase"
+ },
+ {
+  "case": "x2",
+  "run": 1,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "absence equivalent: 'can't confirm SAP experience from Matt's stories... stories don't name SAP'; supported: webMethods IS/B2B TN, Java, EDI, XML, GC3 at Cendian; Salesforce integration with data warehouses, compliance, reporting, Marketing Cloud at JPMC"
+ },
+ {
+  "case": "x2",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence equivalent: no confirmed example, engagements don't establish SAP; supported: Salesforce, Dynamics CRM, WebSeries at JP Morgan Chase"
+ },
+ {
+  "case": "x2",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence equivalent: stories don't identify SAP; supported: Salesforce, webMethods, WebSeries"
+ },
+ {
+  "case": "x2",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "absence equivalent: no documented example of SAP; supported: Cendian webMethods B2B TN, Java, EDI, XML, GC3, 300+ carriers, 80+ countries"
+ },
+ {
+  "case": "x2",
+  "run": 2,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; no other claims"
+ },
+ {
+  "case": "x2",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence equivalent: no story confirming SAP; supported: Java/webMethods at Cendian, Salesforce integration architecture at JPMC"
+ },
+ {
+  "case": "x2",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: Accredited Home Lenders HR portal on BEA WebLogic Workshop, Financial Services / Banking, hiring/onboarding/succession"
+ },
+ {
+  "case": "x2",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "absence equivalent: can't confirm, stories don't mention SAP; supported: Cendian Java/webMethods, JPMC Salesforce integration"
+ },
+ {
+  "case": "x2",
+  "run": 3,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: Cendian Transportation & Logistics, Java/webMethods, EDI/XML/flat files, canonical business objects for GC3"
+ },
+ {
+  "case": "x2",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: Cendian Transportation & Logistics, Java/webMethods, EDI/XML/flat files"
+ },
+ {
+  "case": "x2",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: Cendian 300+ carriers, 80+ countries, EDI/XML/flat-file normalization for GC3"
+ },
+ {
+  "case": "x2",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: Accredited HR portal, BEA WebLogic Workshop, SQL Server, Financial Services / Banking"
+ },
+ {
+  "case": "x2",
+  "run": 4,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "absence equivalent: no confirmed example; supported: webMethods IS, B2B TN, Java, GC3 at Cendian; Salesforce integrations at JPMC"
+ },
+ {
+  "case": "x2",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence equivalent: can't confirm, engagements do not name SAP; supported: Cendian webMethods/Java/EDI/XML; JPMC Salesforce integration with data warehouses, compliance, Marketing Cloud"
+ },
+ {
+  "case": "x2",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: Accredited HR portal on BEA WebLogic Workshop, Financial Services / Banking"
+ },
+ {
+  "case": "x2",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: Cendian Transportation & Logistics, Java/webMethods, EDI/XML/flat files"
+ },
+ {
+  "case": "x2",
+  "run": 5,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "absence equivalent: no confirmed SAP engagement; supported: webMethods B2B TN, Java, GC3 at Cendian; Salesforce and Dynamics CRM at JPMC"
+ },
+ {
+  "case": "x3",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "no trading-platform claim; absence equivalent: stories do not establish securities trading or exchange execution work; names Cendian webMethods B2B Trading Networks as document exchange, not financial instruments; supported: ACCESS Next Generation corporate banking portal for treasury services and cash management, Technology Delivery Lead, 40+ blended team, FX/cross-border module with FX engine and rate visibility, SSO across cash/trade/investment, trade finance lifecycle groundwork, April 2011 launch, 135,000+ clients across 180+ countries, 12-country gateway; supported: legacy migration, compliance configuration, CIDX mappings, canonical business objects, plastics client onboarding with production validation"
+ },
+ {
+  "case": "x3",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "no trading-platform claim; absence equivalent: no evidence of securities trading platform; names Cendian webMethods B2B Trading Networks (300+ carriers, 80+ countries, EDI/XML/flat files, CIDX canonical objects, partner portal, plastics client CIDX interface); supported: ACCESS Next Generation corporate banking portal for treasury services and cash management, Technology Delivery Lead, 40+ blended team, FX/cross-border module with FX engine and rate visibility, SSO across cash/trade/investment, trade finance lifecycle groundwork, April 2011 launch, 135,000+ clients across 180+ countries, 12-country gateway"
+ },
+ {
+  "case": "x3",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "fails x3 rule: does not name Cendian's webMethods B2B Trading Networks work; absence: 'That isn't in Matt's stories' and ACCESS correctly called not a trading platform; supported: ACCESS Next Generation corporate banking portal for treasury services and cash management, Technology Delivery Lead, 40+ blended team, FX/cross-border module with FX engine and rate visibility, SSO across cash/trade/investment, trade finance lifecycle groundwork, April 2011 launch, 135,000+ clients across 180+ countries, 12-country gateway"
+ },
+ {
+  "case": "x3",
+  "run": 1,
+  "turn": 1,
+  "label": "D",
+  "pass": false,
+  "reason": "fails x3 rule: does not name Cendian's webMethods B2B Trading Networks work; no trading-platform claim; absence equivalent present; supported: ACCESS Next Generation corporate banking portal for treasury services and cash management, Technology Delivery Lead, 40+ blended team, FX/cross-border module with FX engine and rate visibility, SSO across cash/trade/investment, trade finance lifecycle groundwork, April 2011 launch, 135,000+ clients across 180+ countries, 12-country gateway; supported: ACH/wire modules, permissions, verification controls, JPMC Asset Management Salesforce integration across 12 countries"
+ },
+ {
+  "case": "x3",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "no trading-platform claim; absence equivalent: stories do not document securities trading or trade-execution platform; names Cendian webMethods B2B Trading Networks (shipment/order/invoice documents, plastics client onboarding); supported: ACCESS Next Generation corporate banking portal for treasury services and cash management, Technology Delivery Lead, 40+ blended team, FX/cross-border module with FX engine and rate visibility, SSO across cash/trade/investment, trade finance lifecycle groundwork, April 2011 launch, 135,000+ clients across 180+ countries, 12-country gateway; supported: RBC WebSeries assessment for corporate banking payment hub, payments data migration"
+ },
+ {
+  "case": "x3",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "fails x3 rule: does not name Cendian's webMethods B2B Trading Networks work; no trading-platform claim; absence equivalent present; supported: ACCESS Next Generation corporate banking portal for treasury services and cash management, Technology Delivery Lead, 40+ blended team, FX/cross-border module with FX engine and rate visibility, SSO across cash/trade/investment, trade finance lifecycle groundwork, April 2011 launch, 135,000+ clients across 180+ countries, 12-country gateway; supported: RBC Day2Day assessment, code reviews, heat maps, gap/fit, WebSeries lacked modularity"
+ },
+ {
+  "case": "x3",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "fails x3 rule: does not name Cendian's webMethods B2B Trading Networks work; absence present, ACCESS called not a securities trading platform; supported: ACCESS Next Generation corporate banking portal for treasury services and cash management, Technology Delivery Lead, 40+ blended team, FX/cross-border module with FX engine and rate visibility, SSO across cash/trade/investment, trade finance lifecycle groundwork, April 2011 launch, 135,000+ clients across 180+ countries, 12-country gateway"
+ },
+ {
+  "case": "x3",
+  "run": 2,
+  "turn": 1,
+  "label": "D",
+  "pass": false,
+  "reason": "fails x3 rule: does not name Cendian's webMethods B2B Trading Networks work; absence present, ACCESS called treasury/cash management, not trading; supported: ACH, wire, FX modules"
+ },
+ {
+  "case": "x3",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "fails x3 rule: does not name Cendian's webMethods B2B Trading Networks work; no trading-platform claim; absence equivalent present; supported: ACCESS Next Generation corporate banking portal for treasury services and cash management, Technology Delivery Lead, 40+ blended team, FX/cross-border module with FX engine and rate visibility, SSO across cash/trade/investment, trade finance lifecycle groundwork, April 2011 launch, 135,000+ clients across 180+ countries, 12-country gateway; supported: payment-type entitlements (wire approval vs FX initiation)"
+ },
+ {
+  "case": "x3",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "no trading-platform claim; absence equivalent: no story confirming securities trading or order execution; names Cendian webMethods B2B Trading Networks (EDI/XML/flat files, 300+ carriers, 80+ countries, partner portal replacing phone-order entry, transaction tracking); supported: ACCESS Next Generation corporate banking portal for treasury services and cash management, Technology Delivery Lead, 40+ blended team, FX/cross-border module with FX engine and rate visibility, SSO across cash/trade/investment, trade finance lifecycle groundwork, April 2011 launch, 135,000+ clients across 180+ countries, 12-country gateway; supported: real-time global reporting, jurisdiction-specific compliance"
+ },
+ {
+  "case": "x3",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "fails x3 rule: does not name Cendian's webMethods B2B Trading Networks work; absence present; supported: ACCESS Next Generation corporate banking portal for treasury services and cash management, Technology Delivery Lead, 40+ blended team, FX/cross-border module with FX engine and rate visibility, SSO across cash/trade/investment, trade finance lifecycle groundwork, April 2011 launch, 135,000+ clients across 180+ countries, 12-country gateway; supported: ACH/wire modules, Bottomline coordination"
+ },
+ {
+  "case": "x3",
+  "run": 3,
+  "turn": 1,
+  "label": "D",
+  "pass": false,
+  "reason": "fails x3 rule: does not name Cendian's webMethods B2B Trading Networks work; no trading-platform claim; absence equivalent present; supported: ACCESS Next Generation corporate banking portal for treasury services and cash management, Technology Delivery Lead, 40+ blended team, FX/cross-border module with FX engine and rate visibility, SSO across cash/trade/investment, trade finance lifecycle groundwork, April 2011 launch, 135,000+ clients across 180+ countries, 12-country gateway; supported: Aug 2009-Jun 2012, entitlements days to minutes"
+ },
+ {
+  "case": "x3",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "fails x3 rule: does not name Cendian's webMethods B2B Trading Networks work; absence present, ACCESS called not a trading platform; supported: ACH/wire/FX modules"
+ },
+ {
+  "case": "x3",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "fails x3 rule: does not name Cendian's webMethods B2B Trading Networks work; absence present; supported: ACCESS treasury/cash management, FX module"
+ },
+ {
+  "case": "x3",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "fails x3 rule: does not name Cendian's webMethods B2B Trading Networks work; no trading-platform claim; absence equivalent present; supported: ACCESS Next Generation corporate banking portal for treasury services and cash management, Technology Delivery Lead, 40+ blended team, FX/cross-border module with FX engine and rate visibility, SSO across cash/trade/investment, trade finance lifecycle groundwork, April 2011 launch, 135,000+ clients across 180+ countries, 12-country gateway; supported: JPMC Asset Management Salesforce integration Jun 2015-Jun 2016 incl. Google Analytics and Marketing Cloud"
+ },
+ {
+  "case": "x3",
+  "run": 4,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "no trading-platform claim; absence equivalent: no documented securities trading or trade-execution platform; names Cendian webMethods B2B Trading Networks as shipper/carrier document exchange, normalizing EDI/XML/flat files for the TMS; supported: ACCESS Next Generation corporate banking portal for treasury services and cash management, Technology Delivery Lead, 40+ blended team, FX/cross-border module with FX engine and rate visibility, SSO across cash/trade/investment, trade finance lifecycle groundwork, April 2011 launch, 135,000+ clients across 180+ countries, 12-country gateway; supported: build-vs-configure boundary, entitlements, MAC verification, sanctions screening, real-time reporting"
+ },
+ {
+  "case": "x3",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "fails x3 rule: does not name Cendian's webMethods B2B Trading Networks work; no trading-platform claim; absence equivalent present; supported: ACCESS Next Generation corporate banking portal for treasury services and cash management, Technology Delivery Lead, 40+ blended team, FX/cross-border module with FX engine and rate visibility, SSO across cash/trade/investment, trade finance lifecycle groundwork, April 2011 launch, 135,000+ clients across 180+ countries, 12-country gateway; supported: tax-payment modules, payments data migration"
+ },
+ {
+  "case": "x3",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "fails x3 rule: does not name Cendian's webMethods B2B Trading Networks work; no trading-platform claim; absence equivalent present; supported: ACCESS Next Generation corporate banking portal for treasury services and cash management, Technology Delivery Lead, 40+ blended team, FX/cross-border module with FX engine and rate visibility, SSO across cash/trade/investment, trade finance lifecycle groundwork, April 2011 launch, 135,000+ clients across 180+ countries, 12-country gateway; supported: build-vs-configure boundary, entitlements"
+ },
+ {
+  "case": "x3",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "fails x3 rule: does not name Cendian's webMethods B2B Trading Networks work; absence present; supported: ACCESS corporate banking and payments, FX modules, trade finance visibility"
+ },
+ {
+  "case": "x3",
+  "run": 5,
+  "turn": 1,
+  "label": "D",
+  "pass": false,
+  "reason": "fails x3 rule: does not name Cendian's webMethods B2B Trading Networks work; absence present; supported: ACCESS treasury/cash management, FX modules, 12-country gateway"
+ },
+ {
+  "case": "x4",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: correctly states the stories do not specify an ROI formula or calculated ROI percentage; supported: CIC pair-programming cost concerns answered with velocity/quality gains offsetting investment; 4X velocity, 10-person vs 20-person teams, zero-defect deployments via TDD and pipelines; full P&L for Atlanta and Tampa; supported: chargeability, unbillable downtime, contractor spend, bench-first, forecast/actuals/contingency, ~20% loaded-rate promotion planning, $100M+ by FY23, 30+ engagements, 15+ Fortune 500, 150+; supported: Fiserv $8.5M, 3% under budget, $255K margin, $500K penalties avoided, $3M extension"
+ },
+ {
+  "case": "x4",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: correctly states the stories do not specify an ROI formula or calculated ROI percentage; supported: CIC pair-programming cost concerns answered with velocity/quality gains offsetting investment; 4X velocity, 10-person vs 20-person teams, zero-defect deployments via TDD and pipelines; full P&L for Atlanta and Tampa; supported: chargeability, downtime, contractor spend, bench-first, 150+, 30+ engagements, 15+ Fortune 500, $100M+ by FY23; supported: RBC WebSeries assessment with transparent cost-to-fix vs. benefit comparison, code reviews, heat maps, gap/fit, lacked modularity, resources redirected; avoided spend correctly stated as unquantified"
+ },
+ {
+  "case": "x4",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "absence: correctly states the stories do not specify an ROI formula or calculated ROI percentage; supported: CIC pair-programming cost concerns answered with velocity/quality gains offsetting investment; 4X velocity, 10-person vs 20-person teams, zero-defect deployments via TDD and pipelines; full P&L for Atlanta and Tampa; supported: 4-8 week discovery engagements, CIC Standard of Value, MVP 16-18 weeks, $100M+; supported: RBC WebSeries assessment with transparent cost-to-fix vs. benefit comparison, code reviews, heat maps, gap/fit, lacked modularity, resources redirected; avoided spend correctly stated as unquantified; supported: Fiserv $8.5M, 3% under budget, $255K margin, $500K penalties avoided, $3M extension"
+ },
+ {
+  "case": "x4",
+  "run": 1,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "absence: correctly states the stories do not specify an ROI formula or calculated ROI percentage; supported: themes Strategic & Advisory and Execution & Delivery exist; supported: RBC WebSeries assessment with transparent cost-to-fix vs. benefit comparison, code reviews, heat maps, gap/fit, lacked modularity, resources redirected; avoided spend correctly stated as unquantified incl. Day2Day, enterprise architecture team, leadership workshops; supported: CIC pair-programming cost concerns answered with velocity/quality gains offsetting investment; 4X velocity, 10-person vs 20-person teams, zero-defect deployments via TDD and pipelines; full P&L for Atlanta and Tampa incl. executive briefings and client workshops; supported: forecasts/actuals/contingency; supported: Fiserv $8.5M, 3% under budget, $255K margin, $500K penalties avoided, $3M extension"
+ },
+ {
+  "case": "x4",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: correctly states the stories do not specify an ROI formula or calculated ROI percentage; supported: RBC WebSeries assessment with transparent cost-to-fix vs. benefit comparison, code reviews, heat maps, gap/fit, lacked modularity, resources redirected; avoided spend correctly stated as unquantified; supported: CIC pair-programming cost concerns answered with velocity/quality gains offsetting investment; 4X velocity, 10-person vs 20-person teams, zero-defect deployments via TDD and pipelines; full P&L for Atlanta and Tampa; supported: 150+; actuals, forecast variance, EAC (P&L story), contingency, scope changes; supported: Fiserv $8.5M, 3% under budget, $255K margin, $500K penalties avoided, $3M extension"
+ },
+ {
+  "case": "x4",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: correctly states the stories do not specify an ROI formula or calculated ROI percentage; supported: CIC pair-programming cost concerns answered with velocity/quality gains offsetting investment; 4X velocity, 10-person vs 20-person teams, zero-defect deployments via TDD and pipelines; full P&L for Atlanta and Tampa; supported: 4-8 week discovery, MVP 16-18 weeks, team scorecards (lead time, cycle time, throughput, team stability, backlog health); supported: RBC WebSeries assessment with transparent cost-to-fix vs. benefit comparison, code reviews, heat maps, gap/fit, lacked modularity, resources redirected; avoided spend correctly stated as unquantified; supported: Fiserv $8.5M, 3% under budget, $255K margin, $500K penalties avoided, $3M extension"
+ },
+ {
+  "case": "x4",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "absence: correctly states the stories do not specify an ROI formula or calculated ROI percentage; supported: RBC WebSeries assessment with transparent cost-to-fix vs. benefit comparison, code reviews, heat maps, gap/fit, lacked modularity, resources redirected; avoided spend correctly stated as unquantified; supported: CIC pair-programming cost concerns answered with velocity/quality gains offsetting investment; 4X velocity, 10-person vs 20-person teams, zero-defect deployments via TDD and pipelines; full P&L for Atlanta and Tampa incl. budget/cost base/revenue, $100M+; supported: Fiserv $8.5M, 3% under budget, $255K margin, $500K penalties avoided, $3M extension; supported: JP Morgan legal case management $1.3M saved in lost productivity, 10 weeks to production"
+ },
+ {
+  "case": "x4",
+  "run": 2,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "absence: correctly states the stories do not specify an ROI formula or calculated ROI percentage; supported: RBC WebSeries assessment with transparent cost-to-fix vs. benefit comparison, code reviews, heat maps, gap/fit, lacked modularity, resources redirected; avoided spend correctly stated as unquantified incl. Data/Application/Technology/Business Architecture scoring, enterprise architecture team, leadership workshops; supported: staffing, forecast vs actuals, contingency, scope; supported: Fiserv $8.5M, 3% under budget, $255K margin, $500K penalties avoided, $3M extension"
+ },
+ {
+  "case": "x4",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: correctly states the stories do not specify an ROI formula or calculated ROI percentage; supported: RBC WebSeries assessment with transparent cost-to-fix vs. benefit comparison, code reviews, heat maps, gap/fit, lacked modularity, resources redirected; avoided spend correctly stated as unquantified; supported: CIC pair-programming cost concerns answered with velocity/quality gains offsetting investment; 4X velocity, 10-person vs 20-person teams, zero-defect deployments via TDD and pipelines; full P&L for Atlanta and Tampa; supported: Fiserv $8.5M, 3% under budget, $255K margin, $500K penalties avoided, $3M extension"
+ },
+ {
+  "case": "x4",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: correctly states the stories do not specify an ROI formula or calculated ROI percentage; supported: resource pyramid, forecast/actuals/contingency, offshore/nearshore roll-off, ~20% loaded-rate promotion cost, change requests; supported: Fiserv $8.5M, 3% under budget, $255K margin, $500K penalties avoided, $3M extension (client ready to cancel); supported: CIC cost base, chargeability, downtime, 150+, bench-first, denied 2 contractors on fixed-fee for 2 bench resources"
+ },
+ {
+  "case": "x4",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "absence: correctly states the stories do not specify an ROI formula or calculated ROI percentage; supported: CIC pair-programming cost concerns answered with velocity/quality gains offsetting investment; 4X velocity, 10-person vs 20-person teams, zero-defect deployments via TDD and pipelines; full P&L for Atlanta and Tampa incl. chargeability, downtime, contractor spend, 150+, 30+, 15+ Fortune 500, $100M+; supported: RBC WebSeries assessment with transparent cost-to-fix vs. benefit comparison, code reviews, heat maps, gap/fit, lacked modularity, resources redirected; avoided spend correctly stated as unquantified; supported: Fiserv $8.5M, 3% under budget, $255K margin, $500K penalties avoided, $3M extension; supported: 15-35% cost reductions from lean self-regulating balanced teams"
+ },
+ {
+  "case": "x4",
+  "run": 3,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "absence: correctly states the stories do not specify an ROI formula or calculated ROI percentage; supported: RBC WebSeries assessment with transparent cost-to-fix vs. benefit comparison, code reviews, heat maps, gap/fit, lacked modularity, resources redirected; avoided spend correctly stated as unquantified; supported: CIC pair-programming cost concerns answered with velocity/quality gains offsetting investment; 4X velocity, 10-person vs 20-person teams, zero-defect deployments via TDD and pipelines; full P&L for Atlanta and Tampa incl. 4-8 week discovery, chargeability, downtime; supported: OKRs and KPIs per roadmap item with dashboards; supported: Fiserv $8.5M, 3% under budget, $255K margin, $500K penalties avoided, $3M extension"
+ },
+ {
+  "case": "x4",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: correctly states the stories do not specify an ROI formula or calculated ROI percentage; supported: themes listed exist; supported: RBC WebSeries assessment with transparent cost-to-fix vs. benefit comparison, code reviews, heat maps, gap/fit, lacked modularity, resources redirected; avoided spend correctly stated as unquantified; supported: CIC pair-programming cost concerns answered with velocity/quality gains offsetting investment; 4X velocity, 10-person vs 20-person teams, zero-defect deployments via TDD and pipelines; full P&L for Atlanta and Tampa; supported: 15-35% cost reductions in operating-model engagements; actuals, forecast variance, EAC, contingency; supported: Fiserv $8.5M, 3% under budget, $255K margin, $500K penalties avoided, $3M extension"
+ },
+ {
+  "case": "x4",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: correctly states the stories do not specify an ROI formula or calculated ROI percentage; supported: CIC pair-programming cost concerns answered with velocity/quality gains offsetting investment; 4X velocity, 10-person vs 20-person teams, zero-defect deployments via TDD and pipelines; full P&L for Atlanta and Tampa incl. executive briefings, client workshops, chargeability, downtime, contractor spend, bench-first, $100M+; supported: RBC WebSeries assessment with transparent cost-to-fix vs. benefit comparison, code reviews, heat maps, gap/fit, lacked modularity, resources redirected; avoided spend correctly stated as unquantified; supported: Fiserv $8.5M, 3% under budget, $255K margin, $500K penalties avoided, $3M extension"
+ },
+ {
+  "case": "x4",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "absence: correctly states the stories do not specify an ROI formula or calculated ROI percentage; supported: RBC WebSeries assessment with transparent cost-to-fix vs. benefit comparison, code reviews, heat maps, gap/fit, lacked modularity, resources redirected; avoided spend correctly stated as unquantified incl. performance/scalability limits and four architecture dimensions; supported: CIC pair-programming cost concerns answered with velocity/quality gains offsetting investment; 4X velocity, 10-person vs 20-person teams, zero-defect deployments via TDD and pipelines; full P&L for Atlanta and Tampa; supported: resource pyramid, loaded rates, actuals, forecast variance, contingency, scope; supported: Fiserv $8.5M, 3% under budget, $255K margin, $500K penalties avoided, $3M extension"
+ },
+ {
+  "case": "x4",
+  "run": 4,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "absence: correctly states the stories do not specify an ROI formula or calculated ROI percentage; supported: CIC pair-programming cost concerns answered with velocity/quality gains offsetting investment; 4X velocity, 10-person vs 20-person teams, zero-defect deployments via TDD and pipelines; full P&L for Atlanta and Tampa incl. CIC Standard of Value, executive briefings, chargeability, downtime, contractor spend, bench-first; supported: RBC WebSeries assessment with transparent cost-to-fix vs. benefit comparison, code reviews, heat maps, gap/fit, lacked modularity, resources redirected; avoided spend correctly stated as unquantified; supported: Fiserv $8.5M, 3% under budget, $255K margin, $500K penalties avoided, $3M extension; supported: $100M+"
+ },
+ {
+  "case": "x4",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: correctly states the stories do not specify an ROI formula or calculated ROI percentage; supported: CIC pair-programming cost concerns answered with velocity/quality gains offsetting investment; 4X velocity, 10-person vs 20-person teams, zero-defect deployments via TDD and pipelines; full P&L for Atlanta and Tampa; supported: embedded quality via TDD vs separate QA phase; supported: RBC WebSeries assessment with transparent cost-to-fix vs. benefit comparison, code reviews, heat maps, gap/fit, lacked modularity, resources redirected; avoided spend correctly stated as unquantified; supported: Fiserv $8.5M, 3% under budget, $255K margin, $500K penalties avoided, $3M extension"
+ },
+ {
+  "case": "x4",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: correctly states the stories do not specify an ROI formula or calculated ROI percentage; supported: CIC pair-programming cost concerns answered with velocity/quality gains offsetting investment; 4X velocity, 10-person vs 20-person teams, zero-defect deployments via TDD and pipelines; full P&L for Atlanta and Tampa incl. CIC Standard of Value (4X, zero-defect, customer journey-led, lean sustainable), executive briefings and workshops, JPMC teams outpaced peer velocity within 2 sprints, chargeability, downtime, contractor approval, bench-first; supported: RBC WebSeries assessment with transparent cost-to-fix vs. benefit comparison, code reviews, heat maps, gap/fit, lacked modularity, resources redirected; avoided spend correctly stated as unquantified; supported: Fiserv $255K, $500K, $3M"
+ },
+ {
+  "case": "x4",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "absence: correctly states the stories do not specify an ROI formula or calculated ROI percentage; supported: themes exist; supported: CIC pair-programming cost concerns answered with velocity/quality gains offsetting investment; 4X velocity, 10-person vs 20-person teams, zero-defect deployments via TDD and pipelines; full P&L for Atlanta and Tampa incl. 4-8 week discovery; supported: RBC WebSeries assessment with transparent cost-to-fix vs. benefit comparison, code reviews, heat maps, gap/fit, lacked modularity, resources redirected; avoided spend correctly stated as unquantified; supported: forecast/actuals/contingency/scope-change discipline across engagements incl. Fiserv (P&L story); supported: Fiserv $8.5M, 3% under budget, $255K margin, $500K penalties avoided, $3M extension"
+ },
+ {
+  "case": "x4",
+  "run": 5,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "absence: correctly states the stories do not specify an ROI formula or calculated ROI percentage; supported: CIC pair-programming cost concerns answered with velocity/quality gains offsetting investment; 4X velocity, 10-person vs 20-person teams, zero-defect deployments via TDD and pipelines; full P&L for Atlanta and Tampa incl. inviting clients to observe, 4-8 week discovery, cost base, chargeability, contractor approvals, bench-first, $100M+; supported: Fiserv $8.5M, 3% under budget, $255K margin, $500K penalties avoided, $3M extension; supported: RBC WebSeries assessment with transparent cost-to-fix vs. benefit comparison, code reviews, heat maps, gap/fit, lacked modularity, resources redirected; avoided spend correctly stated as unquantified; supported: RBC PMO aggregating financial management, value measurement, quality, resource reporting"
+ },
+ {
+  "case": "x5",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence equivalent: no documented example of gaming platforms; supported: enterprise payments, banking modernization, cloud-native systems, MattGPT"
+ },
+ {
+  "case": "x5",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; no other claims"
+ },
+ {
+  "case": "x5",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: cross-industry modernization at Accenture, banking payments across 12 countries"
+ },
+ {
+  "case": "x5",
+  "run": 1,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: MattGPT Independent Project, Technology & Software, 100+ career stories; 'builder' from profile self-description"
+ },
+ {
+  "case": "x5",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: Fortune 500 Clients cross-industry modernization, monolith to microservices, CI/CD"
+ },
+ {
+  "case": "x5",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: Fortune 500 modernization, MattGPT Independent Project in Technology & Software, 100+ stories"
+ },
+ {
+  "case": "x5",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "absence equivalent: no documented gaming-platform engagement; supported: payments, banking modernization, cloud-native, MattGPT"
+ },
+ {
+  "case": "x5",
+  "run": 2,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: American Express Virtual Payments Platform, Financial Services / Banking, SDKs, API documentation, sandbox"
+ },
+ {
+  "case": "x5",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: platform modernization for JP Morgan, RBC, Capital One, HSBC"
+ },
+ {
+  "case": "x5",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: MattGPT Independent Project, 100+ stories, semantic search"
+ },
+ {
+  "case": "x5",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: ACCESS payment modules, security controls, real-time global reporting"
+ },
+ {
+  "case": "x5",
+  "run": 3,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "absence equivalent: no gaming-platform engagement in Matt's stories; supported: payments, banking modernization, cloud-native, MattGPT"
+ },
+ {
+  "case": "x5",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: Sparkfly, Technology & Software, led four developers while writing production code, employee discount portal with catalog, checkout, personalization, SparkAlerts admin messaging"
+ },
+ {
+  "case": "x5",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: Fortune 500 legacy-to-microservices modernization with DDD, event storming, CI/CD"
+ },
+ {
+  "case": "x5",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "absence equivalent: no story documenting gaming platforms; supported: JPMC, RBC, Capital One, HSBC modernization; MattGPT RAG and semantic search"
+ },
+ {
+  "case": "x5",
+  "run": 4,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: American Express VPP, Financial Services / Banking, SDKs, API docs, sandbox"
+ },
+ {
+  "case": "x5",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; no other claims"
+ },
+ {
+  "case": "x5",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: modernization across banking, healthcare, telecommunications (career narrative), MattGPT Independent Project, 100+ stories; 'builder' from profile"
+ },
+ {
+  "case": "x5",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "absence: 'That isn't in Matt's stories'; supported: Fiserv white-label card portal, Financial Services / Banking, 45-person team, 3 external vendors, 2M+ cardholders, 15 institutions"
+ },
+ {
+  "case": "x5",
+  "run": 5,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "absence equivalent: no story documenting gaming platforms; supported: JPMC, RBC, Capital One, HSBC, cloud-native, MattGPT"
+ }
+]

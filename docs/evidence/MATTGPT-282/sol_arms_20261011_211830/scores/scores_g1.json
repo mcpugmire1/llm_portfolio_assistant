@@ -1,0 +1,802 @@
+[
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JPMC ACCESS (40+, 12 countries, Apr 2011, 135,000+/180+) and Amex VPP (3 months, 261 points) facts match stories; no closing."
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JPMC ACCESS and RBC cross-border facts (days to minutes, blueprint, cutoff processes) match stories; no closing."
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "JPMC ACCESS and Amex VPP facts (NACHA, MAC, 12 countries, 261 points) match stories; no closing."
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "JPMC ACCESS (40+, 70-80% at Portsmouth, Apr 2011) and Amex VPP facts match stories; no closing."
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Clarifying question naming the two engagements it discussed (JPMC ACCESS, Amex); passes per D4."
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Clarifying question naming the two engagements it discussed (JPMC, RBC); passes per D4."
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Clarifying question naming the two engagements it discussed (JPMC ACCESS, Amex); passes per D4."
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "Gives ACCESS blended onshore/offshore team of 40+ (Accenture and JPMC), as expected."
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS MAC-layer failure, post-cutover data defects, Sev-1 response from stories; Amex adoption problems from its stories; honest on unspecified impact."
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS MAC failure, post-cutover defects, Sev-1 from stories; RBC WebSeries modularity finding and departed conversion lead from RBC stories (same engagements as T1)."
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "ACCESS MAC failure, post-cutover defects, Sev-1; Amex adoption friction; all from the engagements it discussed, facts correct."
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "ACCESS MAC failure, post-cutover defects, Sev-1, WebSeries out-of-box gap: matches expected ACCESS outcome; facts correct."
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JPMC ACCESS, Amex VPP, RBC cross-border facts all match stories; no closing."
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JPMC ACCESS (gateway, entitlements days to minutes) and RBC cross-border facts match stories."
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "JPMC ACCESS and Amex VPP facts match stories ('zero disruption' is the story's wording)."
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "JPMC, Amex, Fiserv ($8.5M, 45, 3 vendors, 47 criteria, $45M, 99.97%) facts match stories."
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Gives ACCESS 40+ blended team, the expected answer, among the engagements it discussed."
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Clarifying question naming JPMC and RBC, the engagements it discussed."
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Clarifying question naming JPMC ACCESS and Amex, the engagements it discussed."
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "Clarifying question naming JPMC, Amex and Fiserv, the three engagements it discussed."
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Stays on ACCESS (the team it answered): MAC failure, post-cutover defects, Sev-1, from stories."
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS defects and RBC platform-fit finding, both engagements from its T1; facts match stories."
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "ACCESS defects plus Amex adoption friction, engagements from its T1; facts correct, honest on unquantified items."
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "Fiserv crisis (45-person, 200-page BRDs, 6-month cycles, Sev-1), Amex, ACCESS: all engagements from its T1, facts match stories."
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JPMC ACCESS, Amex VPP, RBC cross-border facts match stories."
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JPMC ACCESS and Amex VPP facts match stories."
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "JPMC ACCESS (risk scores, gateway) and Amex VPP (CI/CD docs) facts match stories."
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "JPMC ACCESS and RBC cross-border facts match stories."
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Gives ACCESS 40+ blended team, the expected answer."
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Clarifying question naming JPMC ACCESS and Amex, the engagements it discussed."
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Clarifying question naming JPMC ACCESS and Amex, the engagements it discussed."
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "ACCESS 40+ and states RBC stories give no headcount (verified: no RBC team size in corpus)."
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS MAC failure, post-cutover defects, entitlement and connectivity problems, Sev-1: from ACCESS stories."
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS defects and Amex integration barriers, engagements from its T1; facts correct."
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "ACCESS defects and Amex adoption problems, engagements from its T1; facts correct."
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "ACCESS defects and RBC WebSeries modularity finding and conversion-lead departure, engagements from its T1; facts correct."
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JPMC ACCESS and Amex VPP facts match; theme names match story Theme fields."
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JPMC ACCESS facts and RBC PMO (Day2Day, Bottomline, sunsetting RBC Express) match stories."
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "JPMC, Fiserv ($500K, 3 weeks, $3M extension), Amex facts match stories."
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "JPMC ACCESS and RBC cross-border facts match stories."
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Clarifying question naming JPMC ACCESS and Amex, the engagements it discussed."
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives ACCESS 40+ blended team, the expected answer."
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Clarifying question naming Amex, JPMC ACCESS and Fiserv, the engagements it discussed."
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "Clarifying question naming JPMC and RBC, the engagements it discussed."
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS MAC failure, tax-payment formatting debug, post-cutover defects, Sev-1; Amex adoption; facts correct."
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Stays on ACCESS: MAC failure, post-cutover defects, Sev-1, entitlement problems, from stories."
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "Fiserv crisis, Amex friction, ACCESS defects: engagements from its T1, facts match stories."
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "ACCESS defects and RBC WebSeries gap/fit finding, engagements from its T1; facts correct."
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "JPMC ACCESS and Amex VPP facts match stories."
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "JPMC, Amex, Fiserv (2M+ cardholders, 15 FIs, VisionPLUS 350, MuleSoft/Tibco/WebMethods) facts match stories."
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "JPMC ACCESS and Amex VPP facts match stories."
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "JPMC ACCESS and RBC cross-border facts match stories."
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Clarifying question naming JPMC ACCESS and Amex, the engagements it discussed."
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Clarifying question naming Amex, JPMC ACCESS and Fiserv, the engagements it discussed."
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Gives ACCESS 40+ blended team, the expected answer."
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "Clarifying question naming JPMC and RBC, the engagements it discussed."
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS MAC failure, ACH/tax formatting, post-cutover defects, Sev-1; Amex adoption; facts correct."
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Fiserv crisis, Amex friction, ACCESS defects: engagements from its T1, facts match stories."
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "Stays on ACCESS (the team it answered): MAC failure, post-cutover defects, Sev-1, WebSeries gap; facts correct."
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "ACCESS defects and RBC platform-fit and conversion-lead problems, engagements from its T1; facts correct."
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Style from leadership philosophy; CIC mentoring, 150+, P&L, coaching labs 15-35%, Capital One team of 8 at 4x, 100% compliance, sustainable-pace story all supported."
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Philosophy quote, permit-to-fail, balanced teams zero-defect, 4x, Norfolk Southern ownership: all supported."
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Flat org, 11-13 leads, Monday allocation, monthly feedback capture, IAM 341 apps/30+ requirements, near-zero attrition 2 years: all supported."
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Decentralized decision-making, permit-to-fail, 6-week labs 15-35%, RBC/Fiserv adoption, 4x, 100% compliance: all supported."
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern quality crisis, a story the corpus presents as a failure under his leadership; details accurate, unquantified reduction noted."
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern crisis plus making-it-stick follow-up; facts accurate (one-week iteration, rotating pairs, quoted lesson)."
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Decentralized decision-making story, which the corpus presents as a shortfall (habits reasserted, 'path was bumpy'); honest, no reframing."
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 2,
+  "label": "D",
+  "pass": false,
+  "reason": "Picks the reusable-patterns story, a scaling inefficiency the corpus does not present as a leadership shortfall, and calls it the 'closest documented example' though the corpus holds explicit failures; links it to his team style without story support."
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Autonomy reinforcement, balanced teams, permit-to-fail, 6-week labs 15-35%, 100% compliance, 4x: all supported."
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Philosophy quote, permit-to-fail, intentional early failure (JTBD, week by week), mentoring, 4x, zero-defect: all supported."
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Quote, flat 2-layer org with 11-13 leads, monthly feedback, contractor/bench decision escalated and stood, 10-person pilot to 150+: all supported."
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Mentoring, coaching labs, cookbooks, Norfolk Southern meeting overhead/context switching, 10 vs 20-person teams, 4X, sustainable pace: all supported."
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Decentralized decision-making and psychological-safety stories the corpus presents as shortfalls; quotes accurate, honest."
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern quality crisis, described accurately and honestly."
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Decentralized decision-making shortfall with accurate quotes; psychological-safety pockets; honest framing."
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "Decentralized decision-making shortfall and fear-of-blame pockets, accurately described."
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Philosophy, autonomy reinforcement, permit-to-fail, labs 15-35%, NEW IT SKILLS NOW 300+, 100% compliance, 4x: all supported."
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Profile self-description, mentoring, 0 to 150+, labs, Capital One 8 at 4x, roadmap workshops/dashboards, 100% compliance, sustainable pace: all supported."
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Philosophy quote, decentralized decisions, permit-to-fail, intentional early failure, 4x, zero-defect: all supported."
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Mentoring, labs 15-35%, Capital One 8 at 4x, 150-person CIC unsustainable pace: all supported."
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Decentralized decision-making and fear-of-blame shortfalls, described honestly with accurate quotes."
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Sustainable-leadership story, which the corpus presents as his own leadership shortfall; accurate, honest about scope."
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Norfolk Southern quality crisis described accurately (Samman coaching, Columbus TDD experts)."
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "Sustainable-pace shortfall plus decentralized-decision setback; accurate quotes, honest framing."
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Mentoring, business-domain restructuring, labs 15-35%, Capital One 8 at 4x, roadmap quarterly reviews, 100% compliance, 0 to 150+, sustainable pace: all supported."
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Mentoring, 0 to 150+, labs 15-35%, JP Morgan legal two-year case-management, Amex OKRs, security tradeoffs, boundaries: all supported."
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Philosophy quote, permit-to-fail, balanced teams, Norfolk Southern ownership, 4x: all supported."
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Profile self-description and core values verbatim; 0 to 150+, 10 vs 20-person teams, 4X, zero defects supported; role-intent line is a loose paraphrase of the career-intent story."
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern quality crisis, accurate details and quoted lesson."
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern quality crisis, accurate and honest (no numerical reduction claimed)."
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Norfolk Southern crisis and making-it-stick follow-up, accurate details and quote."
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "Norfolk Southern practices not holding, from making-it-stick story (3 points, 1-week iteration, remote pairing); accurate."
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Philosophy quote, weekly brainstorming and shared mission, mentoring, intentional early failure, Norfolk Southern ownership, 4x: all supported."
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "0 to 150+ with P&L, mentoring, 15-35%, Capital One 8 at 4x, 100% compliance, sustainable pace quote: all supported."
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Balanced teams, pairing stations, labs 15-35%, mentoring, Capital One 8 at 4x, roadmap workshops, sustainable pace: all supported."
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Profile self-description and core values verbatim; CIC 0 to 150+, 10 vs 20, 4X, zero defects supported."
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Fortune 500 financial-services data-exposure story, which the corpus presents as his own leadership failure; facts and quotes accurate."
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern quality crisis, accurate and honest."
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Decentralized decision-making and fear-of-blame shortfalls, accurate quotes, honest framing."
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "Norfolk Southern quality crisis plus fear-of-blame pockets; accurate, honest."
+ }
+]

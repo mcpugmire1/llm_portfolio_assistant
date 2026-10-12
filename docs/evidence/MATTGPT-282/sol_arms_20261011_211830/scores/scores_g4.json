@@ -1,0 +1,802 @@
+[
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC 150+ across Atlanta/Tampa, hiring/onboarding/skills matrix/I-do-we-do-you-do, near-zero attrition, 4x; says starting 4 unconfirmed; all supported (scaling-talent, CIC stories)."
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New topic, no scaling carry-over; JPM ACCESS (40+, 70-80% Portsmouth, modules, 12-country gateway, days-to-minutes, April 2011, 135,000+/180+) and RBC cross-border blueprint; supported."
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Turn-2 engagements JPM and RBC: JPM 40+, RBC no headcount stated; RBC data-scrubbing/PMO details and dates supported."
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "10-person pilot (not 4) to 150+, 4-channel hiring, 4-6/week, 2 slots, 3 practice + 8-10 client leads, 10 vs 20-person teams, 4X; all in Leading People/CIC stories."
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "New topic; JPM ACCESS and AmEx VPP (SDKs, sandbox, test drive, 3 months, 261 story points); supported."
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Turn-2 engagements JPM and AmEx: JPM 40+, AmEx headcount not documented; correct."
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "AT&T 3-5 team, 10-person pilot to 150+, 15-20 auditions, 11-13 leads, 30+ engagements, 15+ clients, $100M+ by FY23; all supported."
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "New topic; JPM ACCESS (NACHA, MAC, sanctions, migration) and AmEx VPP; all supported."
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "JPM 40+ and AmEx no headcount; correct referents, innovation-lab project label in corpus."
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "10-person pilot to 150+ over four years, Georgia Tech, auditions, 2 slots, 11-13 leads, 10 vs 20-person teams; supported (growth roadmaps/tiered coaching in corpus)."
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "New topic; JPM ACCESS (build-vs-configure, risk scores, 12 countries) and AmEx VPP; supported."
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "JPM 40+ and AmEx no headcount; notes 150+ is CIC only as disambiguation, not as answer; pass."
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "10-person pilot to 150+ over 4 years, rotating cohorts, 11-13 leads, $100M+ by FY23, 4X; all supported."
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New topic; JPM ACCESS and AmEx VPP (portal, SDKs, sandbox, 3 months); supported."
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "JPM 40+ and AmEx no headcount, matching turn 2; correct."
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "AT&T 3-5, 10-person pilot, hiring engine, Capital One 8-person team 4x internal output and follow-on engagements; supported."
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "New topic; JPM ACCESS and AmEx VPP incl. 261 story points; supported."
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "JPM 40+ and AmEx no confirmed size; correct."
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Same supported CIC facts plus Capital One team of 8 at 4x output securing more engagements; supported."
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "New topic; JPM ACCESS and AmEx VPP; supported."
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "JPM 40+ (not per workstream) and AmEx no headcount; correct."
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "0 to 150+ (CIC story), says 4 not specified, skills matrix, scorecards, MVPs within weeks, 4x; supported."
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "New topic; JPM ACCESS and RBC cross-border (Interac, blueprint, cutoffs); supported."
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "Turn-2 engagements JPM and RBC: JPM 40+, RBC no headcount; correct."
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "AT&T 3-5, 10-person pilot, 3+8-10 leads, 15-20 auditions, 4-6/week, feedback capture, 4X; supported."
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New topic; JPM ACCESS (about 3 years) and AmEx VPP (about 8 months, 2020-07 to 2021-02); supported."
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "JPM 40+ and AmEx no headcount; correct."
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "10-person pilot, 4 channels, round-robin pairing, 11-13 leads, 10 vs 20-person teams; supported."
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "New topic; JPM ACCESS, AmEx VPP and RBC; supported, honest that onboarding reduction unquantified."
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "All three turn-2 engagements: JPM 40+, AmEx and RBC no headcount; CIC 150+ mentioned only to disambiguate; pass."
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "10-person pilot over 4 years, 2 slots, 3+8-10 leads, career frameworks, 10 vs 20; supported."
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "New topic; JPM ACCESS (PEP screening, risk scores) and AmEx VPP; supported."
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "JPM 40+ and AmEx no headcount; correct."
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "10-person pilot, flat structure, month of enablement, 15-20 auditions, 4x and zero-defect; supported."
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "New topic; JPM ACCESS and RBC (about 1 year); supported."
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "JPM 40+ and RBC no headcount, RBC governance facts supported; correct."
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "AT&T 3-5, 10-person pilot, 2 slots, 11-13 leads, 10 vs 20-person teams, 4X; supported."
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New topic; JPM ACCESS, AmEx VPP, Fiserv ($8.5M, 45, 3 vendors, 47 criteria, $45M, 99.97%); supported."
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Turn-2 engagements JPM 40+, Fiserv 45 + 3 vendors, AmEx none; supported."
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "10-person pilot / built from 0, 3+8-10 leads, Friday career conversations, 4x; supported."
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "New topic; JPM ACCESS and RBC; supported."
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "JPM 40+ and RBC no headcount; correct."
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "10-person pilot, skills assessments/custom training (immersive coaching story), $100M+ FY23; supported."
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "New topic; JPM ACCESS and AmEx VPP; supported."
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "JPM 40+ and AmEx no headcount; correct."
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "AT&T 3-5, 10 to 150+ over 4 years, 8-week cohorts, 30+ engagements for 15+ Fortune 500 clients; supported."
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "New topic; JPM ACCESS, Fiserv (MuleSoft/Tibco/WebMethods, $500K) and AmEx VPP; supported."
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "JPM 40+, Fiserv 45 + 3 vendors, AmEx none; supported."
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "AT&T 3-5, 10-person pilot, hiring loop figures, 11-13 leads, 10 vs 20-person teams; supported."
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New topic; JPM ACCESS and AmEx VPP; supported."
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "JPM 40+ and AmEx no headcount; correct."
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "10-person pilot, 3+8-10 leads, 8-week cohorts, playbooks, 10 vs 20; supported."
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "New topic; JPM ACCESS, Fiserv (incl. $3M extension) and AmEx VPP; supported."
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "JPM 40+, Fiserv 45 + 3 vendors, AmEx none; correct."
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "10-person pilot over four years, two-layer structure 11-13 leads, 2 slots; supported."
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "New topic; JPM ACCESS and AmEx VPP; supported."
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "JPM 40+ and AmEx no headcount; correct."
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "10-person pilot / from 0, says 4 not identified, 3+8-10 leads, 15-20 auditions, 4x; supported."
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "New topic; JPM ACCESS (Aug 2009-Jun 2012) and RBC (Jun 2012-Jun 2013); supported."
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "JPM 40+ and RBC no headcount; correct."
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Both engagements; Fiserv ($8.5M, 45, 200-page BRD, 47/47, $500K, 2-week sprints) and ACCESS (40+, 12 countries, April 2011, days-to-minutes, regulatory sequencing) supported."
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names dimensions: ACCESS bigger by reach/platform breadth; teams comparable; no ACCESS budget; customer counts different units; accurate."
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both engagements; Fiserv (2M+/15 FIs, VisionPLUS 350, Git/Maven/Hudson/SonarQube, $3M extension) and ACCESS supported."
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Headline 'Fiserv had the slightly larger stated delivery team' ranks 45 above 40+, an ordering the stories don't establish. Inaccurate comparison on the team dimension, even though the other dimensions are handled correctly."
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Both engagements; Fiserv recovery, accessibility, $45M/99.97%, and ACCESS facts supported."
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "ACCESS broader; teams similar; Fiserv more individual cardholders, noted as a different unit; no ACCESS budget; accurate."
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Both engagements; ~6 months Fiserv vs nearly 3 years ACCESS, $255K, builds days to hours; supported."
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "ACCESS bigger in reach; 'not clearly bigger in team size', so it hedges the 45 vs 40+ comparison; notes no ACCESS budget; accurate."
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Both engagements; Fiserv DevOps/accessibility/47 criteria and ACCESS modules/migration supported."
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Headline 'Fiserv had the larger stated team' ranks 45 above 40+, which the stories don't establish; the rest (reach, dates, no budget comparison) is accurate."
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both engagements; ~6 months vs ~3 years, MuleSoft/Tibco/WebMethods, trade-finance visibility; supported."
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS bigger in scope/duration; explicitly says 45 vs 40+ does not establish which was larger; no ACCESS budget; accurate."
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Both engagements; paternity-leave PM cover, 200-page BRD, 70-80% Bottomline, days-to-minutes; supported."
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "ACCESS bigger in reach; teams comparable; no ACCESS budget; accurate."
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Both engagements; JIRA as compliance record, ACCESS migration dashboards; supported."
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "ACCESS broader; teams similar; cardholders a different measure; durations right; accurate."
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Both engagements; Fiserv recovery details and ACCESS facts supported."
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS broader; teams similar; no ACCESS budget; durations right; accurate."
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both engagements; 7 months in, 7 AM/11 PM calls, ADA manifesto, ACCESS entitlements; supported."
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Headline 'Fiserv had the larger stated delivery team' ranks 45 above 40+, which the stories don't support."
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Both engagements; lead time 1 day-1 week, accessibility SME, ACCESS migration; supported."
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 2,
+  "label": "C",
+  "pass": false,
+  "reason": "Says 'Fiserv had the larger stated team' and 'slightly larger stated delivery team', ranking 45 above 40+ without support; other dimensions accurate."
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Both engagements; supported."
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "ACCESS bigger in reach, 'not necessarily' in team size; similar teams; no ACCESS budget; accurate."
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Both engagements; Fiserv results and ACCESS facts supported."
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS bigger in reach/scope; teams comparable; ~7 months Fiserv approximates Dec 2014-Jun 2015; no budget comparison; accurate."
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both engagements; durations and results supported."
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "ACCESS broader; teams similar; separates the 14-month program from Matt's ~6 months; accurate."
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Both engagements; Omaha travel, 7 AM/11 PM calls, ACCESS compliance dashboards; supported."
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "ACCESS bigger in reach/duration; says teams similarly sized (and adds that Fiserv's stated count is larger); no ACCESS budget; acceptable."
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Both engagements; $255K, 3 weeks behind, regional rollout sequencing; supported."
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "ACCESS broader; says 45 vs 40+ doesn't establish the larger team; no budget or transaction comparison; accurate."
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Both engagements; Fiserv (builds days to hours, $3M) and ACCESS supported."
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "ACCESS broader; teams similar; cardholders vs institutions; no budget; accurate."
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Both engagements; date spans Dec 2014-Jun 2015 and Aug 2009-Jun 2012 supported."
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Headline 'Fiserv had the larger stated team count' ranks 45 above 40+, which the stories don't establish."
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Both engagements covered and story facts supported, but it says both involved 'Emerging Tech' and 'Risk & Responsible Tech'; every Fiserv and ACCESS story is themed Execution & Delivery or Org & Working-Model Transformation, and nothing there is emerging tech. Unsupported claim, fails Honest."
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "ACCESS bigger in reach/scope, 'not in the reported team size'; lists 45 vs 40+; no ACCESS budget; accurate."
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Both engagements; India/Philippines/Ireland, JIRA, days-to-minutes; supported."
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "ACCESS broader; teams comparable; 14-month $8.5M program; no ACCESS budget; accurate."
+ }
+]

@@ -1,0 +1,482 @@
+[
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile entries with correct issue/expiry years and says none is current; matches profile; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile entries with correct issue/expiry years and says none is current; matches profile; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Lists all four profile entries with correct issue/expiry years and says none is current; matches profile; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Lists all four profile entries with correct issue/expiry years and says none is current; matches profile; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "States no PMP (profile lists none; corpus has 0 PMP mentions), then lists the profile certifications with correct years; no PMO pivot."
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "States no PMP (profile lists none; corpus has 0 PMP mentions), then lists the profile certifications with correct years; no PMO pivot."
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Says no PMP ('isn't in Matt's stories' then no PMP, consistent with profile list and 0 corpus PMP hits), then all four profile certs with correct years."
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "Says no PMP ('isn't in Matt's stories' then no PMP, consistent with profile list and 0 corpus PMP hits), then all four profile certs with correct years."
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none is current; any dates or Oracle 'exams passed' framing given match the profile; implies nothing current."
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none is current; any dates or Oracle 'exams passed' framing given match the profile; implies nothing current."
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "Says none is current; any dates or Oracle 'exams passed' framing given match the profile; implies nothing current."
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "Says none is current; any dates or Oracle 'exams passed' framing given match the profile; implies nothing current."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile entries with correct issue/expiry years and says none is current; matches profile; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile entries with correct issue/expiry years and says none is current; matches profile; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Lists all four profile entries with correct issue/expiry years and says none is current; matches profile; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Lists all four profile entries with correct issue/expiry years and says none is current; matches profile; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "States no PMP (profile lists none; corpus has 0 PMP mentions), then lists the profile certifications with correct years; no PMO pivot."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "States no PMP (profile lists none; corpus has 0 PMP mentions), then lists the profile certifications with correct years; no PMO pivot."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "States no PMP (profile lists none; corpus has 0 PMP mentions), then lists the profile certifications with correct years; no PMO pivot."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "States no PMP (profile lists none; corpus has 0 PMP mentions), then lists the profile certifications with correct years; no PMO pivot."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none is current; any dates or Oracle 'exams passed' framing given match the profile; implies nothing current."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none is current; any dates or Oracle 'exams passed' framing given match the profile; implies nothing current."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "Says none is current; any dates or Oracle 'exams passed' framing given match the profile; implies nothing current."
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "Says none is current; any dates or Oracle 'exams passed' framing given match the profile; implies nothing current."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile entries with correct issue/expiry years and says none is current; matches profile; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile entries with correct issue/expiry years and says none is current; matches profile; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Lists all four profile entries with correct issue/expiry years and says none is current; matches profile; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Lists all four profile entries with correct issue/expiry years and says none is current; matches profile; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "States no PMP (profile lists none; corpus has 0 PMP mentions), then lists the profile certifications with correct years; no PMO pivot."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "States no PMP (profile lists none; corpus has 0 PMP mentions), then lists the profile certifications with correct years; no PMO pivot."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "States no PMP (profile lists none; corpus has 0 PMP mentions), then lists the profile certifications with correct years; no PMO pivot."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "States no PMP (profile lists none; corpus has 0 PMP mentions), then lists the profile certifications with correct years; no PMO pivot."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none is current; any dates or Oracle 'exams passed' framing given match the profile; implies nothing current."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none is current; any dates or Oracle 'exams passed' framing given match the profile; implies nothing current."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "Says none is current; any dates or Oracle 'exams passed' framing given match the profile; implies nothing current."
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "Says none is current; any dates or Oracle 'exams passed' framing given match the profile; implies nothing current."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile entries with correct issue/expiry years and says none is current; matches profile; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile entries with correct issue/expiry years and says none is current; matches profile; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Lists all four profile entries with correct issue/expiry years and says none is current; matches profile; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Lists all four profile entries with correct issue/expiry years and says none is current; matches profile; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "States no PMP (profile lists none; corpus has 0 PMP mentions), then lists the profile certifications with correct years; no PMO pivot."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "States no PMP (profile lists none; corpus has 0 PMP mentions), then lists the profile certifications with correct years; no PMO pivot."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "States no PMP (profile lists none; corpus has 0 PMP mentions), then lists the profile certifications with correct years; no PMO pivot."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "States no PMP (profile lists none; corpus has 0 PMP mentions), then lists the profile certifications with correct years; no PMO pivot."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none is current; any dates or Oracle 'exams passed' framing given match the profile; implies nothing current."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none is current; any dates or Oracle 'exams passed' framing given match the profile; implies nothing current."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "Says none is current; any dates or Oracle 'exams passed' framing given match the profile; implies nothing current."
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "Says none is current; any dates or Oracle 'exams passed' framing given match the profile; implies nothing current."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile entries with correct issue/expiry years and says none is current; matches profile; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile entries with correct issue/expiry years and says none is current; matches profile; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Lists all four profile entries with correct issue/expiry years and says none is current; matches profile; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Lists all four profile entries with correct issue/expiry years and says none is current; matches profile; no closing."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "States no PMP (profile lists none; corpus has 0 PMP mentions), then lists the profile certifications with correct years; no PMO pivot."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "States no PMP (profile lists none; corpus has 0 PMP mentions), then lists the profile certifications with correct years; no PMO pivot."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "States no PMP (profile lists none; corpus has 0 PMP mentions), then lists the profile certifications with correct years; no PMO pivot."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "States no PMP (profile lists none; corpus has 0 PMP mentions), then lists the profile certifications with correct years; no PMO pivot."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none is current; any dates or Oracle 'exams passed' framing given match the profile; implies nothing current."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none is current; any dates or Oracle 'exams passed' framing given match the profile; implies nothing current."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "Says none is current; any dates or Oracle 'exams passed' framing given match the profile; implies nothing current."
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "Says none is current; any dates or Oracle 'exams passed' framing given match the profile; implies nothing current."
+ }
+]

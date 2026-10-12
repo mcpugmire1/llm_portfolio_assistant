@@ -1,0 +1,74 @@
+142a143,144
+>         if LEVER2_MODEL != "gpt-4o":
+>             return lever2_sol_create(real, kw)
+256a259,270
+> 
+> # MATTGPT-282 run 2: planner model, effort per call role, and lever 2's answering
+> # model are set per arm by probe_282b.py. Every Sol call is streamed; CALLS
+> # records each one (role, resolved model, effort, usage, start, time to first
+> # output delta, duration) and the runner clears it per turn.
+> PLANNER_MODEL = "gpt-4o"
+> PLANNER_EFFORT = "medium"
+> ANSWER_EFFORT = "medium"
+> LEVER2_MODEL = "gpt-4o"
+> LEVER2_EFFORT = "medium"
+> CALLS = []
+> _FIRST_DELTA = ("response.output_text.delta", "response.function_call_arguments.delta")
+258a273,309
+> def sol_stream(client, role, effort, **kw):
+>     t_start = time.perf_counter()
+>     ttft, final = None, None
+>     for ev in client.responses.create(model="gpt-6.1-sol", stream=True, reasoning={"effort": effort},
+>                                       max_output_tokens=SOL_MAX_OUTPUT, **kw):
+>         if ttft is None and ev.type in _FIRST_DELTA:
+>             ttft = time.perf_counter() - t_start
+>         if ev.type in ("response.completed", "response.incomplete", "response.failed"):
+>             final = ev.response
+>     if final is None:
+>         raise RuntimeError(f"{role}: stream ended without a final response")
+>     u = final.usage
+>     CALLS.append({"role": role, "model": final.model, "effort": final.reasoning.effort if final.reasoning else None,
+>                   "status": final.status, "start": t_start, "ttft": round(ttft, 3) if ttft is not None else None,
+>                   "secs": round(time.perf_counter() - t_start, 3),
+>                   "usage": {"input": u.input_tokens, "cached": u.input_tokens_details.cached_tokens or 0, "output": u.output_tokens,
+>                             "reasoning": u.output_tokens_details.reasoning_tokens or 0, "effort": final.reasoning.effort if final.reasoning else None}})
+>     return final
+> 
+> 
+> def _chat_shaped(r):
+>     """A Responses result shaped like the chat.completions object agy_answer reads."""
+>     tcs = [SimpleNamespace(id=o.call_id, type="function", function=SimpleNamespace(name=o.name, arguments=o.arguments))
+>            for o in r.output if o.type == "function_call"]
+>     msg = SimpleNamespace(content=r.output_text or None, tool_calls=tcs or None)
+>     return SimpleNamespace(model=r.model, choices=[SimpleNamespace(message=msg, finish_reason=r.status)])
+> 
+> 
+> def lever2_sol_create(real, kw):
+>     """Lever 2's chat.completions call routed to gpt-6.1-sol on Responses: temperature and
+>     max_tokens dropped (Sol rejects both), tool_choice passed through ("required" on the
+>     forced round 1, "none" on the last round, auto otherwise)."""
+>     r = sol_stream(real, "lever2", LEVER2_EFFORT, input=_responses_input(kw["messages"]), tools=[_responses_tool(t) for t in kw.get("tools") or []],
+>                    tool_choice=kw.get("tool_choice") or "auto")
+>     return _chat_shaped(r)
+> 
+> 
+274a326,327
+>             if m.get("content"):
+>                 items.append({"role": "assistant", "content": m["content"]})
+293,296c346,347
+<     r = client.responses.create(
+<         model=ANSWER_MODEL, input=_responses_input(msgs), max_output_tokens=SOL_MAX_OUTPUT,
+<         tools=[_responses_tool(bs._SEARCH_STORIES_TOOL), _responses_tool(RESPOND_TOOL)], tool_choice={"type": "function", "name": "respond"},
+<     )
+---
+>     r = sol_stream(client, "answer", ANSWER_EFFORT, input=_responses_input(msgs),
+>                    tools=[_responses_tool(bs._SEARCH_STORIES_TOOL), _responses_tool(RESPOND_TOOL)], tool_choice={"type": "function", "name": "respond"})
+317a369,376
+>     if PLANNER_MODEL != "gpt-4o":
+>         r = sol_stream(client, "planner", PLANNER_EFFORT, input=[{"role": "system", "content": PLAN_SYSTEM}, {"role": "user", "content": user}],
+>                        tools=[_responses_tool(PLAN_TOOL)], tool_choice={"type": "function", "name": "plan_turn"})
+>         calls = [o for o in r.output if o.type == "function_call" and o.name == "plan_turn"]
+>         if not calls:
+>             raise RuntimeError(f"no plan_turn call (status {r.status}, {r.incomplete_details})")
+>         PLANNER_SEEN.update(model=r.model, usage=CALLS[-1]["usage"])
+>         return json.loads(calls[0].arguments)

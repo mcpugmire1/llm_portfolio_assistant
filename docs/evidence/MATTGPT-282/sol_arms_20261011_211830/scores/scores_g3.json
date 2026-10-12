@@ -1,0 +1,1282 @@
+[
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Payments answered: JPM ACCESS (40+, 12 countries, Apr 2011, 135,000+/180+) and RBC cross-border facts all match stories; no closing"
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Payments answered: JPM ACCESS and AmEx VPP facts (40+, Portsmouth, 12 countries, Apr 2011, 261 points, 3 months) match stories; no closing"
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Payments answered: JPM ACCESS (70-80% Portsmouth, 40+, Apr 2011) and AmEx (261 points) facts match stories; no closing"
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Payments answered: JPM ACCESS and AmEx facts match stories (Technology Delivery Lead, 40+, 70-80%, 12 countries, Apr 2011); no closing"
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Payments answered: JPM, AmEx and Fiserv facts ($8.5M, 2M+, 15 FIs, 45, 3 vendors, 47 criteria, $45M, 99.97%) match stories"
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Payments answered: JPM ACCESS (MAC-layer failure, 12 countries, Apr 2011) and AmEx facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Payments answered: JPM ACCESS (NACHA, wire-not-FX permissions) and AmEx facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Payments answered: JPM ACCESS (days to minutes, 70-80%) and RBC facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Payments answered: JPM, AmEx, RBC payments facts match stories; no closing"
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Payments answered: JPM, Fiserv (VisionPLUS 350, 47 criteria, $45M, 99.97%) and AmEx facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Payments answered: JPM ACCESS and RBC facts match stories; honest that RBC was a blueprint"
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Payments answered: JPM ACCESS (Fedwire, Sev-1, MAC-layer root cause) and AmEx facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Payments answered: JPM, AmEx and RBC facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Payments answered: JPM, Fiserv ($500K, 3 weeks, $3M extension) and AmEx facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Payments answered: JPM ACCESS and RBC facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Payments answered: JPM ACCESS (risk scores, embedded FX rate visibility) and AmEx facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Payments answered: JPM ACCESS and AmEx facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Payments answered: JPM, AmEx and Fiserv facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Payments answered: JPM ACCESS (Integrated Global Payments Interface, days to minutes) and RBC facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Payments answered: JPM and AmEx facts match stories; 'Emerging Tech' theme label is loose but no figure/client/date error"
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Payments answered: JPM ACCESS and AmEx facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Payments answered: JPM ACCESS (NY/NJ, Chicago, 70-80%) and AmEx facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Payments answered: JPM ACCESS and AmEx facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Payments answered: JPM ACCESS and RBC facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Payments answered: JPM ACCESS (customer risk scores) and AmEx facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Payments answered: JPM, AmEx and RBC facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Payments answered: JPM ACCESS (Fedwire, international wires, days to minutes) and RBC facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Payments answered: JPM ACCESS and AmEx facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Payments answered: JPM, AmEx and Fiserv facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Payments answered: JPM ACCESS and AmEx (prestige clients) facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Payments answered: JPM (2009-08 to 2012-06) and RBC (2012-06 to 2013-06) dates and facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Payments answered: JPM ACCESS and AmEx (North Star workshops) facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Payments answered: JPM, Fiserv (MuleSoft/Tibco/WebMethods, 45 members) and AmEx facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Payments answered: JPM, AmEx and RBC facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Payments answered: JPM, Fiserv (VisionPLUS COBOL wrap) and AmEx facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Payments answered: JPM ACCESS and RBC facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Payments answered: JPM ACCESS and AmEx facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Payments answered: JPM ACCESS (AML/KYC, sanctions) and AmEx facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Payments answered: JPM ACCESS and RBC facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Payments answered: JPM, Fiserv and AmEx facts match stories"
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "profile-based leadership style (empathy/clarity/purpose, Builder's mindset, permit to fail, balanced teams, CIC 0 to 150+); no payments carry-over"
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC leadership practices from Leading People and leadership stories (11-13 leads, peer feedback, near-zero attrition, 4-6/week); all figures match; no payments carry-over"
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "CIC leadership facts match; Fiserv $8.5M/$255K/$500K/$3M cited as accountability (supported by P&L story), Fiserv not in its payments turn; no payments carry-over"
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "Leadership philosophy, permit-to-fail and CIC practices with 4x figure, all supported; no payments carry-over"
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC leadership practices from Leading People and leadership stories (11-13 leads, peer feedback, near-zero attrition, 4-6/week); all figures match; no payments carry-over; 300+ trained supported"
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership philosophy, permit-to-fail, brainstorming, 4x; supported; no payments carry-over"
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "CIC flat org, 6-week labs, 15-35%, 300+, Fiserv and JPM 341 IAM (non-payments) all supported; no payments carry-over"
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "profile-based leadership style (empathy/clarity/purpose, Builder's mindset, permit to fail, balanced teams, CIC 0 to 150+); no payments carry-over; 10 vs 20, 4X supported"
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership philosophy, decentralized decisions, brainstorming, 4x; supported; no payments carry-over"
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC leadership practices from Leading People and leadership stories (11-13 leads, peer feedback, near-zero attrition, 4-6/week); all figures match; no payments carry-over; bench-first 2 contractors supported"
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "profile-based leadership style (empathy/clarity/purpose, Builder's mindset, permit to fail, balanced teams, CIC 0 to 150+); no payments carry-over"
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "CIC leadership practices from Leading People and leadership stories (11-13 leads, peer feedback, near-zero attrition, 4-6/week); all figures match; no payments carry-over; 6-week labs, 15-35%, contractor decision supported"
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership philosophy, permit-to-fail, balanced teams, Norfolk Southern ownership; supported; no payments carry-over"
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC leadership practices from Leading People and leadership stories (11-13 leads, peer feedback, near-zero attrition, 4-6/week); all figures match; no payments carry-over"
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "profile-based leadership style (empathy/clarity/purpose, Builder's mindset, permit to fail, balanced teams, CIC 0 to 150+); no payments carry-over"
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "CIC leadership practices from Leading People and leadership stories (11-13 leads, peer feedback, near-zero attrition, 4-6/week); all figures match; no payments carry-over"
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership philosophy quoted from story, permit-to-fail, 4x; supported; no payments carry-over"
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC leadership practices from Leading People and leadership stories (11-13 leads, peer feedback, near-zero attrition, 4-6/week); all figures match; no payments carry-over; 6-week labs, 15-35%"
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "profile-based leadership style (empathy/clarity/purpose, Builder's mindset, permit to fail, balanced teams, CIC 0 to 150+); no payments carry-over"
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "CIC, Capital One team of 8 at 4x, 8-week cohorts, sustainable-leadership story all supported; no payments carry-over"
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC leadership practices from Leading People and leadership stories (11-13 leads, peer feedback, near-zero attrition, 4-6/week); all figures match; no payments carry-over; 6-week labs, 15-35%"
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership philosophy, permit-to-fail, Norfolk Southern ownership, 4x; supported; no payments carry-over"
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "CIC practices supported; JPM 341 IAM, RBC PoV adoption, Fiserv cited as accountability, all supported and not payments content"
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "profile-based leadership style (empathy/clarity/purpose, Builder's mindset, permit to fail, balanced teams, CIC 0 to 150+); no payments carry-over"
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC leadership practices from Leading People and leadership stories (11-13 leads, peer feedback, near-zero attrition, 4-6/week); all figures match; no payments carry-over; contractor decision supported"
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership philosophy, permit-to-fail, decentralized decisions, 4x; supported; no payments carry-over"
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "profile-based leadership style (empathy/clarity/purpose, Builder's mindset, permit to fail, balanced teams, CIC 0 to 150+); no payments carry-over; job-search line consistent with career-intent story"
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "CIC leadership practices from Leading People and leadership stories (11-13 leads, peer feedback, near-zero attrition, 4-6/week); all figures match; no payments carry-over; pairing auditions, month of enablement supported"
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC leadership practices from Leading People and leadership stories (11-13 leads, peer feedback, near-zero attrition, 4-6/week); all figures match; no payments carry-over; 6-week labs, 15-35%"
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC leadership practices from Leading People and leadership stories (11-13 leads, peer feedback, near-zero attrition, 4-6/week); all figures match; no payments carry-over; JPM 341 apps / 30+ requirements (IAM, not payments) supported"
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "profile-based leadership style (empathy/clarity/purpose, Builder's mindset, permit to fail, balanced teams, CIC 0 to 150+); no payments carry-over"
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "Leadership philosophy, permit-to-fail, brainstorming, 4x; supported; no payments carry-over"
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC leadership practices from Leading People and leadership stories (11-13 leads, peer feedback, near-zero attrition, 4-6/week); all figures match; no payments carry-over; 6-week labs, contractor decision"
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership philosophy, permit-to-fail, Norfolk Southern ownership, 4x; supported; no payments carry-over"
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "CIC practices, closing interview, 300+, 15-35% supported; Fiserv (from its payments turn) cited only as accountability, borderline but not a payments answer"
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "profile-based leadership style (empathy/clarity/purpose, Builder's mindset, permit to fail, balanced teams, CIC 0 to 150+); no payments carry-over"
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership philosophy, decentralized decisions, Norfolk Southern ownership, 4x; supported; no payments carry-over"
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC leadership practices from Leading People and leadership stories (11-13 leads, peer feedback, near-zero attrition, 4-6/week); all figures match; no payments carry-over"
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "profile-based leadership style (empathy/clarity/purpose, Builder's mindset, permit to fail, balanced teams, CIC 0 to 150+); no payments carry-over"
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "CIC leadership practices from Leading People and leadership stories (11-13 leads, peer feedback, near-zero attrition, 4-6/week); all figures match; no payments carry-over; 6-week labs, 15-35%"
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC weekly brainstorming / shared-goals example (individual-to-collective story), illustrates style described, honest about no numeric measure; not payments"
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC decentralized decision-making example (empowering-teams + making-it-safe stories), illustrates style just described, facts supported; not payments"
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "CIC decentralized decision-making example (empowering-teams + making-it-safe stories), illustrates style just described, facts supported; not payments; 4X/10 vs 20 supported"
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "Norfolk Southern quality-crisis example (ownership, audit, Samman coaching), matches its described style; facts match story; not payments"
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC decentralized decision-making example (empowering-teams + making-it-safe stories), illustrates style just described, facts supported; not payments"
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC decentralized decision-making example (empowering-teams + making-it-safe stories), illustrates style just described, facts supported; not payments plus permit-to-fail"
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "CIC decentralized decision-making example (empowering-teams + making-it-safe stories), illustrates style just described, facts supported; not payments plus velocity scorecards (supported)"
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 3,
+  "label": "D",
+  "pass": false,
+  "reason": "Example is the 2003 AIU classroom course (adjunct teaching students), not an instance of leading a team; does not exemplify a leadership style (facts accurate)"
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern quality-crisis example (ownership, audit, Samman coaching), matches its described style; facts match story; not payments"
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC decentralized decision-making example (empowering-teams + making-it-safe stories), illustrates style just described, facts supported; not payments"
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "CIC weekly brainstorming / shared-goals example (individual-to-collective story), illustrates style described, honest about no numeric measure; not payments"
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "CIC decentralized decision-making example (empowering-teams + making-it-safe stories), illustrates style just described, facts supported; not payments plus brainstorming"
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern quality-crisis example (ownership, audit, Samman coaching), matches its described style; facts match story; not payments plus Making It Stick follow-up (1-week iteration, no recurrence) supported"
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC decentralized decision-making example (empowering-teams + making-it-safe stories), illustrates style just described, facts supported; not payments"
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 3,
+  "label": "C",
+  "pass": false,
+  "reason": "Example is the 2003 AIU classroom course (adjunct teaching students), not an instance of leading a team; does not exemplify a leadership style (facts accurate)"
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "CIC decentralized decision-making example (empowering-teams + making-it-safe stories), illustrates style just described, facts supported; not payments"
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC permit-to-fail example (post-mortems, low-stakes experiments), supported; not payments"
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC decentralized decision-making example (empowering-teams + making-it-safe stories), illustrates style just described, facts supported; not payments"
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "CIC weekly brainstorming / shared-goals example (individual-to-collective story), illustrates style described, honest about no numeric measure; not payments; 4x and zero-defect attributed to broader org"
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "CIC decentralized decision-making example (empowering-teams + making-it-safe stories), illustrates style just described, facts supported; not payments"
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC decentralized decision-making example (empowering-teams + making-it-safe stories), illustrates style just described, facts supported; not payments"
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern quality-crisis example (ownership, audit, Samman coaching), matches its described style; facts match story; not payments plus Making It Stick follow-up"
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "JPM I&AM uplift example (341 apps, 2014 breach, tiger teams, cut short), tied to its described accountability; supported; security not payments"
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "CIC weekly brainstorming / shared-goals example (individual-to-collective story), illustrates style described, honest about no numeric measure; not payments"
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Client operating-model coaching example (Playbook workshops, 6-week labs, 15-35%), tied to its described coaching; supported; not payments"
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern quality-crisis example (ownership, audit, Samman coaching), matches its described style; facts match story; not payments"
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "CIC weekly brainstorming / shared-goals example (individual-to-collective story), illustrates style described, honest about no numeric measure; not payments"
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "CIC decentralized decision-making example (empowering-teams + making-it-safe stories), illustrates style just described, facts supported; not payments"
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC decentralized decision-making example (empowering-teams + making-it-safe stories), illustrates style just described, facts supported; not payments plus brainstorming"
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "JPM I&AM uplift example (341 apps, tiger teams, funding cut), tied to its described program controls; supported; not payments"
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 3,
+  "label": "C",
+  "pass": false,
+  "reason": "Example is RBC Day2Day PMO / Bottomline payment-hub assessment: carries the payments-turn client and topic, and does not illustrate the style it described"
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "Norfolk Southern quality-crisis example (ownership, audit, Samman coaching), matches its described style; facts match story; not payments"
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC decentralized decision-making example (empowering-teams + making-it-safe stories), illustrates style just described, facts supported; not payments"
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern quality-crisis example (ownership, audit, Samman coaching), matches its described style; facts match story; not payments plus Making It Stick follow-up"
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "CIC decentralized decision-making example (empowering-teams + making-it-safe stories), illustrates style just described, facts supported; not payments"
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "CIC weekly brainstorming / shared-goals example (individual-to-collective story), illustrates style described, honest about no numeric measure; not payments"
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern quality-crisis example (ownership, audit, Samman coaching), matches its described style; facts match story; not payments plus Making It Stick follow-up"
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC decentralized decision-making example (empowering-teams + making-it-safe stories), illustrates style just described, facts supported; not payments; zero-defect and 4x supported"
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "CIC weekly brainstorming / shared-goals example (individual-to-collective story), illustrates style described, honest about no numeric measure; not payments"
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "CIC decentralized decision-making example (empowering-teams + making-it-safe stories), illustrates style just described, facts supported; not payments"
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC example's size: 10-person pilot grown to 150+ (Atlanta/Tampa), 10-person delivery teams, says the example names no separate headcount; supported"
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC example's size: 10-person pilot grown to 150+ (Atlanta/Tampa), 10-person delivery teams, says the example names no separate headcount; supported"
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 4,
+  "label": "C",
+  "pass": true,
+  "reason": "CIC example's size: 10-person pilot grown to 150+ (Atlanta/Tampa), 10-person delivery teams, says the example names no separate headcount; supported"
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 4,
+  "label": "D",
+  "pass": true,
+  "reason": "Norfolk Southern example's size: 3 balanced teams, 1 moving to Monterrey (CIC first-engagement story), says crisis headcount not recorded; honest"
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC example's size: 10-person pilot grown to 150+ (Atlanta/Tampa), 10-person delivery teams, says the example names no separate headcount; supported"
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC example's size: 10-person pilot grown to 150+ (Atlanta/Tampa), 10-person delivery teams, says the example names no separate headcount; supported; 11-13 leads"
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 4,
+  "label": "C",
+  "pass": true,
+  "reason": "CIC example's size: 10-person pilot grown to 150+ (Atlanta/Tampa), 10-person delivery teams, says the example names no separate headcount; supported"
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 4,
+  "label": "D",
+  "pass": true,
+  "reason": "Follows its own AIU course example; says class size not recorded; honest, no invented figure"
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern example's size: 3 balanced teams, 1 moving to Monterrey (CIC first-engagement story), says crisis headcount not recorded; honest"
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC example's size: 10-person pilot grown to 150+ (Atlanta/Tampa), 10-person delivery teams, says the example names no separate headcount; supported"
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 4,
+  "label": "C",
+  "pass": true,
+  "reason": "CIC example's size: 10-person pilot grown to 150+ (Atlanta/Tampa), 10-person delivery teams, says the example names no separate headcount; supported"
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 4,
+  "label": "D",
+  "pass": true,
+  "reason": "CIC example's size: 10-person pilot grown to 150+ (Atlanta/Tampa), 10-person delivery teams, says the example names no separate headcount; supported"
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern example's size: 3 balanced teams, 1 moving to Monterrey (CIC first-engagement story), says crisis headcount not recorded; honest"
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC example's size: 10-person pilot grown to 150+ (Atlanta/Tampa), 10-person delivery teams, says the example names no separate headcount; supported"
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 4,
+  "label": "C",
+  "pass": true,
+  "reason": "Follows its own AIU course example; says student count not recorded; honest"
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 4,
+  "label": "D",
+  "pass": true,
+  "reason": "CIC example's size: 10-person pilot grown to 150+ (Atlanta/Tampa), 10-person delivery teams, says the example names no separate headcount; supported"
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC example's size: 10-person pilot grown to 150+ (Atlanta/Tampa), 10-person delivery teams, says the example names no separate headcount; supported"
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC example's size: 10-person pilot grown to 150+ (Atlanta/Tampa), 10-person delivery teams, says the example names no separate headcount; supported"
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 4,
+  "label": "C",
+  "pass": true,
+  "reason": "CIC example's size: 10-person pilot grown to 150+ (Atlanta/Tampa), 10-person delivery teams, says the example names no separate headcount; supported"
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 4,
+  "label": "D",
+  "pass": true,
+  "reason": "CIC example's size: 10-person pilot grown to 150+ (Atlanta/Tampa), 10-person delivery teams, says the example names no separate headcount; supported"
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC example's size: 10-person pilot grown to 150+ (Atlanta/Tampa), 10-person delivery teams, says the example names no separate headcount; supported"
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern example's size: 3 balanced teams, 1 moving to Monterrey (CIC first-engagement story), says crisis headcount not recorded; honest"
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 4,
+  "label": "C",
+  "pass": true,
+  "reason": "JPM I&AM example: says team headcount not recorded, 341 is applications; honest and supported"
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 4,
+  "label": "D",
+  "pass": true,
+  "reason": "CIC example's size: 10-person pilot grown to 150+ (Atlanta/Tampa), 10-person delivery teams, says the example names no separate headcount; supported; 4 years, 30+ engagements, 15+ Fortune 500 supported"
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "Operating-model example: says no headcount recorded, gives 10-person model and 150+ org as context only; honest"
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern example's size: 3 balanced teams, 1 moving to Monterrey (CIC first-engagement story), says crisis headcount not recorded; honest"
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 4,
+  "label": "C",
+  "pass": true,
+  "reason": "CIC example's size: 10-person pilot grown to 150+ (Atlanta/Tampa), 10-person delivery teams, says the example names no separate headcount; supported"
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 4,
+  "label": "D",
+  "pass": true,
+  "reason": "CIC example's size: 10-person pilot grown to 150+ (Atlanta/Tampa), 10-person delivery teams, says the example names no separate headcount; supported"
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC example's size: 10-person pilot grown to 150+ (Atlanta/Tampa), 10-person delivery teams, says the example names no separate headcount; supported"
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "JPM I&AM example: no headcount recorded, 341 is apps, tiger team count not stated; honest"
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 4,
+  "label": "C",
+  "pass": true,
+  "reason": "Follows its own RBC example; says no headcount recorded for RBC teams; honest, supported"
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 4,
+  "label": "D",
+  "pass": true,
+  "reason": "Norfolk Southern example's size: 3 balanced teams, 1 moving to Monterrey (CIC first-engagement story), says crisis headcount not recorded; honest"
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC example's size: 10-person pilot grown to 150+ (Atlanta/Tampa), 10-person delivery teams, says the example names no separate headcount; supported"
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern example's size: 3 balanced teams, 1 moving to Monterrey (CIC first-engagement story), says crisis headcount not recorded; honest"
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 4,
+  "label": "C",
+  "pass": true,
+  "reason": "CIC example's size: 10-person pilot grown to 150+ (Atlanta/Tampa), 10-person delivery teams, says the example names no separate headcount; supported; 10 vs 20 supported"
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 4,
+  "label": "D",
+  "pass": true,
+  "reason": "CIC example's size: 10-person pilot grown to 150+ (Atlanta/Tampa), 10-person delivery teams, says the example names no separate headcount; supported"
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern example's size: 3 balanced teams, 1 moving to Monterrey (CIC first-engagement story), says crisis headcount not recorded; honest"
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "CIC example's size: 10-person pilot grown to 150+ (Atlanta/Tampa), 10-person delivery teams, says the example names no separate headcount; supported"
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 4,
+  "label": "C",
+  "pass": true,
+  "reason": "CIC example's size: 10-person pilot grown to 150+ (Atlanta/Tampa), 10-person delivery teams, says the example names no separate headcount; supported"
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 4,
+  "label": "D",
+  "pass": true,
+  "reason": "CIC example's size: 10-person pilot grown to 150+ (Atlanta/Tampa), 10-person delivery teams, says the example names no separate headcount; supported"
+ }
+]
