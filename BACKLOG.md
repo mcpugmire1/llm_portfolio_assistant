@@ -2647,7 +2647,7 @@ Kept off the roadmap's NOW.
 - **Priority:** Medium
 - **Type:** Issue
 - **Dependencies:** MATTGPT-275. Set to Open when 275's step 1 (streaming at every entry point) lands, not at 275's close.
-- **Related:** MATTGPT-282 (answering-model comparison), MATTGPT-046 (superseded by this ticket)
+- **Related:** MATTGPT-282 (answering-model comparison), MATTGPT-046 (superseded by this ticket), MATTGPT-047 (Decided Against, production cost tracking)
 - **Logged:** October 12, 2026
 
 **Scope:** MATTGPT-275 builds lever 2 on Sol. Latency experiments live here, as controlled comparisons, so they don't reopen 275's design. Felt speed (streaming every entry point) is 275 step 1, not this ticket.
@@ -2669,6 +2669,12 @@ Kept off the roadmap's NOW.
 4. **Direct arm (added Oct 13, 2026):** the first turn's search runs on the question itself, skipping round 1. Smoke run (untracked, `probes/output/MATTGPT-275/direct_smoke_20261013_094321/smoke.txt`): turn 1 first visible 2.98 s direct vs 13.61 s control (lever 2 on Sol), one sample, during the Oct 13 OpenAI incident. Turn 2 kept round 1 in both arms. The full interleaved run is pending until the incident closes.
 
 **Not in scope:** shorter answers. Answer length is a voice decision.
+
+**Cost note (Oct 13, 2026):**
+- **OpenAI usage dashboard (as reported from Matt's screenshots; not in the repo):** $152 over the last 7 days; October at $159.57 against a $100 budget that only alerts and doesn't stop calls; no project spend limit set. 14,429 requests and 75M input tokens in 7 days; attributed to probe and evaluation runs since production traffic is low (a reading, not split by source). Prompt caching: 55.5% hit rate, 0.75 cache reads per write, 27.4M uncached input tokens, mostly Oct 6 to 11, before the Sol path.
+- **Recomputed from `docs/evidence/MATTGPT-282/sol_arms_20261011_211830/lever2_sol.json` (8fa0270):** round 1 input median 3,035 tokens, 2,842 cached (83.5% of round 1 input cached overall); final call input median 7,222 tokens, 3,347 cached (47.3%). Run 2's total was $10.09 (`cost_latency.txt`).
+- **Candidates:** enable OpenAI's prompt cache diagnostics (a comparison response ID on requests, a small code change); keep the system prompt's fixed part first so the prefix caches across visitors. Measure production's hit rate after 275's Green ships.
+- **Controls (Matt, outside the code):** a hard spend limit, and approving each run's cost before it starts.
 
 ---
 
