@@ -141,7 +141,7 @@ Progress), -257, -263, -278, -096, -217 (pronoun grammar), -286 (meta-commentary
 strip deletes paragraphs), -290 (internal-content
 extraction), -293 (router out_of_scope copy), -294 (split MATT_DNA by
 responsibility), -296 (closing offer in a prompt example), -297 (no dog humor in
-answers).
+answers), -300 (thinking indicator shows real progress).
 
 ## 4. Role Match
 

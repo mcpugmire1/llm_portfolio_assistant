@@ -149,6 +149,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-297](#mattgpt-297) | Dog-stereotype humor ("good boy") is allowed in loading messages only; nothing checks that answers stay free of it | Open | Low | Test | October 11, 2026 |
 | [MATTGPT-298](#mattgpt-298) | Salary and compensation questions get the nonsense banner ("Wrong trail") instead of a polite pointer to Matt | Open | Low | Bug | October 12, 2026 |
 | [MATTGPT-299](#mattgpt-299) | Ask Agy latency on gpt-6.1-sol: whole turn 9.35 s median, first visible text 4.13 s (lever 2, MATTGPT-282 run 2) | Blocked | Medium | Issue | October 12, 2026 |
+| [MATTGPT-300](#mattgpt-300) | Thinking indicator: messages by surface, plus a real-progress milestone in Ask Agy ("Reading N of Matt's stories") | Open | Medium | Issue | October 13, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -2665,8 +2666,43 @@ Kept off the roadmap's NOW.
 1. Round 1 on gpt-4o, or on Sol at minimal effort.
 2. A faster answering model at equal quality.
 3. Priority processing, if offered.
+4. **Direct arm (added Oct 13, 2026):** the first turn's search runs on the question itself, skipping round 1. Smoke run (untracked, `probes/output/MATTGPT-275/direct_smoke_20261013_094321/smoke.txt`): turn 1 first visible 2.98 s direct vs 13.61 s control (lever 2 on Sol), one sample, during the Oct 13 OpenAI incident. Turn 2 kept round 1 in both arms. The full interleaved run is pending until the incident closes.
 
 **Not in scope:** shorter answers. Answer length is a voice decision.
+
+---
+
+### MATTGPT-300
+**Thinking indicator: messages by surface, plus a real-progress milestone in Ask Agy ("Reading N of Matt's stories")**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Issue
+- **File:** `ui/components/thinking_indicator.py` (`THINKING_MESSAGES`, `get_thinking_message()`, `render_thinking_indicator()`); callers in `ui/pages/ask_mattgpt/conversation_view.py`, `ui/pages/ask_mattgpt/landing_view.py`, `ui/pages/explore_stories.py`, `ui/pages/role_match.py`
+- **Related:** MATTGPT-299 (latency), MATTGPT-128 (cited Sources cards), MATTGPT-297 (dog humor allowed in loading messages only), MATTGPT-083 (Explore indicator on rejected queries)
+- **Logged:** October 13, 2026
+
+**Verified Oct 13, 2026 (HEAD):** `thinking_indicator.py` has one list, `THINKING_MESSAGES` (15 messages), and `get_thinking_message()` picks one at random, avoiding repeats. `render_thinking_indicator()` is called from Ask Agy (`conversation_view.py`, 3 sites; `landing_view.py`), My Work (`explore_stories.py`) and Role Match (`role_match.py`, `mount="inline"`). Every surface draws from the same list, and within an Ask Agy turn the message never reflects what has actually happened.
+
+**Principle:** show real progress, never fake it. Every change on screen corresponds to something that happened. No invented progress bars or timers.
+
+**Part 1, messages by surface (placeholder):** messages per surface (Ask Agy, Role Match, My Work); pools to be decided by Matt.
+
+**Part 2, the Ask Agy milestone:**
+- Tap: the indicator shows the Ask Agy category's messages.
+- Search returns: the indicator changes to "Reading N of Matt's stories" and lists their titles, replacing the cycling messages.
+- First words: the indicator gives way to the answer, as now.
+
+**Value:** on all turns, the milestone covers the answer call's wait before its first word once search returns. With MATTGPT-299's direct arm (candidate 4: search on the question, no round 1), search returns about 1 s after the tap, so it also covers most of a first turn's wait. Not contingent on that arm.
+
+**Timings, two sources:**
+- **Baseline (recorded):** MATTGPT-282 run 2, 8fa0270, probe on lever 2: round 1 median 1.94 s; answer call first token median 1.21 s.
+- **Today's ranges (as reported, untracked, during the Oct 13 OpenAI incident):** the dev session's timed taps, `probes/output/MATTGPT-275/latency_20261013/server.jsonl`: round 1 about 2 to 6 s; answer call 1.4 to 7.3 s before its first word. Not committed.
+
+**Design constraints:**
+- No search results, or a clarify turn: skip the milestone. "Reading 0 of Matt's stories" is honest but useless.
+- Read vs cited: if 5 titles show while reading and 2 Sources cards show at the end, make the change visible (for example "Read 5, cited 2"); otherwise titles disappear and the visitor sees the -128 mismatch in a new place. Open question: whether the titles shown become the Sources cards, trimmed to the cited ones per MATTGPT-128.
+- MATTGPT-297: the milestone message is fact, not humor. If the message sets move out of `thinking_indicator.py`, -297's structural check exception moves with them, and the categories place "Tail wagging, almost there..." and "Good boy mode activated..." explicitly.
 
 ---
 
