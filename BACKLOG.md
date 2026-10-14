@@ -150,6 +150,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-298](#mattgpt-298) | Salary and compensation questions get the nonsense banner ("Wrong trail") instead of a polite pointer to Matt | Open | Low | Bug | October 12, 2026 |
 | [MATTGPT-299](#mattgpt-299) | Ask Agy latency on gpt-6.1-sol: whole turn 9.35 s median, first visible text 4.13 s (lever 2, MATTGPT-282 run 2) | Blocked | Medium | Issue | October 12, 2026 |
 | [MATTGPT-300](#mattgpt-300) | Thinking indicator: messages by surface, plus a real-progress milestone in Ask Agy ("Reading N of Matt's stories") | Open | Medium | Issue | October 13, 2026 |
+| [MATTGPT-301](#mattgpt-301) | Em dashes left in the repo after MATTGPT-275: the hook checks added lines only, so existing ones were never caught | Open | Medium | Hygiene | October 14, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -2709,6 +2710,36 @@ Kept off the roadmap's NOW.
 - No search results, or a clarify turn: skip the milestone. "Reading 0 of Matt's stories" is honest but useless.
 - Read vs cited: if 5 titles show while reading and 2 Sources cards show at the end, make the change visible (for example "Read 5, cited 2"); otherwise titles disappear and the visitor sees the -128 mismatch in a new place. Open question: whether the titles shown become the Sources cards, trimmed to the cited ones per MATTGPT-128.
 - MATTGPT-297: the milestone message is fact, not humor. If the message sets move out of `thinking_indicator.py`, -297's structural check exception moves with them, and the categories place "Tail wagging, almost there..." and "Good boy mode activated..." explicitly.
+
+---
+
+### MATTGPT-301
+**Em dashes left in the repo after MATTGPT-275: the hook checks added lines only, so existing ones were never caught**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Hygiene
+- **Related:** MATTGPT-275 (cleans the model prompts and visitor copy), MATTGPT-039 (CI tier 1)
+- **Logged:** October 14, 2026
+
+**Why they persisted:** the pre-commit hook checks added lines only, so existing em dashes were never caught, and every sweep reported clean.
+
+**Count (Oct 14, 2026):**
+- Dev session's read-only scan: 6,106 in 381 files (per-file list in that session's scratchpad `emdash.txt`, not in the repo).
+- Backlog session recount, `git grep -o` over tracked files in the working tree: 6,109 in 384 files. Live code (`ui/`, `services/`, `utils/`, `app.py`, `config/`) 325, of which 47 are in the files 275 handles (`prompts.py`, `backend_service.py`, `story_intelligence.py`, `jd_assessor.py`, `formatting.py`). Neither recount separates comments from strings.
+
+**Handled in MATTGPT-275, not here:** model prompts (`prompts.py`, `backend_service.py`'s Ground Truth block, `story_intelligence.py`, `jd_assessor.py`), the shared no-dash writing rule for Ask Agy and Role Match, and visitor-facing copy: the rate-limit fallback (5 copies, reconciled with the colon version `test_explore_stories.py` expects), the source-chip and "Also relevant:" separators, the "What drives Matt" chip text, the Why Agy dialog, and `formatting.py`'s "Scope:" separator with its `.strip()`. 275's cleanup is applied in the working tree, uncommitted; recount after it commits.
+
+**Remaining:**
+- **Live code comments, docstrings and CSS comments** (`ui/`, `services/`, `utils/`, `app.py`, `config/`): about 200 by the dev session's estimate after 275; no runtime effect.
+  - **String-literal spot check (Oct 14):** a grep for em dashes inside string literals, outside 275's files, found two. `services/pinecone_service.py`'s `title` f-string (client and title joined with an em dash) is DEBUG-only: it sits under `if DEBUG:` in the Pinecone preview snapshot (per the dev audit; confirmed by read). `ui/pages/cross_industry_landing.py`'s `cta-subtext` line is visitor copy and is fixed in MATTGPT-275, not here. The spot check skips multi-line strings, so classify each remaining hit before calling it comment-only.
+- **Tests:** BDD 422, unit 64 (recount matches).
+- **`agent/triage/`** (24): not imported by the app; confirm before cleaning.
+- **`echo_star_stories_interview_questions.jsonl` (165) and `echo_star_stories_nlp_use_cases.jsonl` (162):** referenced by `generate_interview_questions.py` and `generate_use_cases.py` (`git grep -l`). Confirm whether still used; corpus edits go through Cowork.
+- **Docs owned by the docs sessions:** `BACKLOG.md` 415 and `CHANGELOG.md` 280 (backlog session: cleaned in its next maintenance pass), `docs/ADR.md` 44 and `ARCHITECTURE.md` 43 (arch sync).
+- **Leave as is:** `docs/evidence/` and `archive/` (history), third-party JDs (`data/demo_jd.txt`, the Fiserv JD), model files under `models/`.
+
+**Acceptance:** a whole-file check, in CI tier 1 (MATTGPT-039) or the hook, fails the build on any em dash in the paths that reach visitors or the model (prompts, UI copy, config). The hook is Matt's to change.
 
 ---
 
