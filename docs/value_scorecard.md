@@ -253,6 +253,7 @@ experience reliably and sustainably; failures are visible, not silent.
 - Latency: -299 (Blocked on MATTGPT-275 step 1).
 - Model retirement: -302 (gpt-4o family retires January 14, 2027).
 - Silent failures: -292 (silent file-order fallback), -288 (Ask Agy ignores the Pinecone fallback signal).
+- Visible failures: -303 (Ask Agy stream has no timeout or retry of its own).
 - Regression gates and test reliability: -039, -233, -235, -206, -153,
   -274, -084, -180, -277, -198, -035, -060, -082, -143 (Parked), -203,
   -209, -213.

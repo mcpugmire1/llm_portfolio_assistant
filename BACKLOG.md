@@ -153,6 +153,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-300](#mattgpt-300) | Thinking indicator: messages by surface, plus a real-progress milestone in Ask Agy ("Reading N of Matt's stories") | Open | Medium | Issue | October 13, 2026 |
 | [MATTGPT-301](#mattgpt-301) | Em dashes left in the repo after MATTGPT-275: the hook checks added lines only, so existing ones were never caught | Open | Medium | Hygiene | October 14, 2026 |
 | [MATTGPT-302](#mattgpt-302) | OpenAI retires gpt-4o, gpt-4o-mini, gpt-4.1 and gpt-4.1-mini on January 14, 2027: migrate Role Match and the scripts still on them | Open | High | Action | October 14, 2026 |
+| [MATTGPT-303](#mattgpt-303) | Ask Agy's OpenAI stream has no timeout or retry of its own: SDK defaults (600 s read timeout); failures end in "Sorry, I couldn't generate an answer right now." | Open | Medium | Bug | October 15, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -2777,6 +2778,31 @@ Kept off the roadmap's NOW.
 **Acceptance:**
 - A measured before/after run on the AT&T JD (`data/probe_jd_att_principal.txt`) and the demo JD (`data/demo_jd.txt`): extracted `source_text` stays verbatim, requirement counts, and strong/partial/gap counts.
 - A dash check on Role Match output. The no-dash rule was left out of Role Match only because gpt-4o wrote none (Matt, Oct 14, 2026); Sol answers have been seen to contain em dashes (8fa0270).
+
+---
+
+### MATTGPT-303
+**Ask Agy's OpenAI stream has no timeout or retry of its own: SDK defaults (600 s read timeout); failures end in "Sorry, I couldn't generate an answer right now."**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `ui/pages/ask_mattgpt/backend_service.py` (`_openai_client()`, `ANSWER_ERROR_MESSAGE`)
+- **Related:** MATTGPT-299 (latency), MATTGPT-275 (streams the answer)
+- **Logged:** October 15, 2026
+
+**Verified Oct 15, 2026:**
+- `_openai_client()` builds `OpenAI(api_key=..., project=..., organization=...)` with no `timeout` or `max_retries`, at HEAD and in 275's working tree.
+- Installed `openai` 2.5.0 defaults (`openai._constants`): `DEFAULT_TIMEOUT = Timeout(connect=5.0, read=600, write=600, pool=600)`, `DEFAULT_MAX_RETRIES = 2`.
+- **Hypothesis, not measured:** the SDK's retries cover the request, not a stream that has already started, so a mid-stream failure is not retried.
+
+**Seen:**
+- **Oct 14, overnight probe** (`probes/output/MATTGPT-275/rule_arms_20261014_214612/stderr_lane*.txt`, untracked): 2 `agy_answer fatal error: [Errno 54] Connection reset by peer` (`httpx.ReadError`) and 1 `The read operation timed out` (`httpx.ReadTimeout`; after 604 s as reported, the elapsed time not rechecked here). Each ended in `ANSWER_ERROR_MESSAGE`, "Sorry, I couldn't generate an answer right now." (as reported).
+- **Oct 13:** an `APITimeoutError` on the query "interesting": a TLS handshake timeout (`httpx.ConnectTimeout` raised as `APITimeoutError`), diagnosed in the dev session (as reported; no file saved). That is the 5 s connect timeout, not the 600 s read timeout.
+
+**Problem:** a visitor can wait up to 600 s for a read to time out, and a dropped stream ends the turn with the generic error instead of a retry.
+
+**Fix direction (to decide in the ticket):** an explicit read timeout sized to the measured turn (MATTGPT-299's baseline), and a bounded retry for failures before the first visible text. After text has streamed, a retry would repeat or replace what the visitor already saw; decide that case explicitly.
 
 ---
 
