@@ -60,12 +60,10 @@ Rules marked "Enforced" are also blocked by hooks. If a hook blocks a command, s
 - **Each `st.markdown()` call is a DOM element.** On pages using `.conversation-header`, the header's negative margin is tuned to the number of markdown elements before it, so an extra call, even one holding only `<style>`, breaks alignment. Consolidate CSS injections, and put any extra one after the hero content, before `render_footer()`.
 
 ## RAG Pipeline
-`Query → Nonsense Filters → Semantic Router → out_of_scope check → Pinecone → Confidence Gate → LLM`. Intent families are defined in `services/semantic_router.py`.
-- **Entity detection:** `detect_entity()` checks Client, Employer and Division (`ENTITY_DETECTION_FIELDS`), then story titles. A Client, Employer or Division match becomes a hard Pinecone filter: one `$or` across `ENTITY_SEARCH_FIELDS` using the detected value. A Title match adds no Pinecone filter. The synthesis path filters on the detected field only. Detection is deliberately narrower than search; see the comments on both constants in `config/constants.py`. `EXCLUSION_PREFIXES` in `ui/pages/ask_mattgpt/backend_service.py` turn entity filtering off.
-- **Pinecone metadata:** field names are lowercase. Stored values are lowercase for the fields in `PINECONE_LOWERCASE_FIELDS` and as written in the corpus for the rest, so match with `entity_value.lower() if pc_field in PINECONE_LOWERCASE_FIELDS else entity_value`.
-- **Confidence thresholds live in `config/constants.py`.** Never duplicate the values.
 - **"builder" is used verbatim in Professional Narrative responses.** Preserve it exactly when editing the prompts or code that produce them.
-- **Nonsense filters (`nonsense_filters.jsonl`):** test a new pattern against real queries ("Tell me about Matt's X") before adding it. Avoid common verbs ("solve", "build", "create", "manage"), prefer multi-word phrases, and use `\b` word boundaries. Don't duplicate the semantic scoring gate, which already catches gibberish.
+- **Nonsense filters (`nonsense_filters.jsonl`):** test a new pattern against real queries ("Tell me about Matt's X") before adding it. Avoid common verbs ("solve", "build", "create", "manage"), prefer multi-word phrases, and use `\b` word boundaries. Gibberish is caught only by the `gibberish` rule: the router passes any query scoring below `HARD_ACCEPT`, and search has no confidence gate.
+
+Ask Agy's answer path, entity filtering, Pinecone metadata casing and confidence thresholds: see ARCHITECTURE.md.
 
 ## Behavioral Rules
 
@@ -116,7 +114,7 @@ When multiple Claude Code sessions run concurrently, they share one git working 
 ### Choosing the test shape
 - **BDD:** UI behavior, user-facing flows, anything Playwright can observe in the DOM. Write `.feature` scenarios.
 - **Unit tests:** Pure functions, batch scripts, pipeline stages with no DOM surface. Write pytest functions directly. Do not write `.feature` files for batch scripts or functions with no UI interaction.
-- **Live acceptance runs:** For changes to prompts, retrieval, or anything else whose output depends on the LLM. A live acceptance run is a probe script in `probes/`, writing its output to `probes/output/<ticket>/<timestamp>/`. It runs the acceptance queries through the real pipeline (`rag_answer()` or `assess_requirement()`, with all loggers patched out: `log_query`, `log_offdomain`, and the router's two CSV writers, `_log_borderline` and `_log_router_low_confidence`; stderr in its own file), at least 2 runs per query, and it pastes the full answer text for each run. It includes the story controls when the change touches a shared prompt. It supplements unit tests and doesn't replace them: unit tests prove the text reaches the prompt, and the live run shows what the model does with it.
+- **Live acceptance runs:** For changes to prompts, retrieval, or anything else whose output depends on the LLM. A live acceptance run is a probe script in `probes/`, writing its output to `probes/output/<ticket>/<timestamp>/`. It runs the acceptance queries through the real pipeline (`agy_answer()` or `assess_requirement()`, with all loggers patched out: `log_query`, `log_offdomain`, and the router's two CSV writers, `_log_borderline` and `_log_router_low_confidence`; stderr in its own file), at least 2 runs per query, and it pastes the full answer text for each run. It includes the story controls when the change touches a shared prompt. It supplements unit tests and doesn't replace them: unit tests prove the text reaches the prompt, and the live run shows what the model does with it.
 
 ### Red-Green cycle
 
