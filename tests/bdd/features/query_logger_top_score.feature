@@ -1,8 +1,8 @@
 Feature: Query logger records top_score
 
-  Scenario: Top Score is the last column in HEADERS
+  Scenario: Top Score keeps its column position in HEADERS
     Given the query_logger module is imported
-    Then "Top Score" is the last entry in HEADERS
+    Then "Top Score" is entry 33 in HEADERS, right after "Client"
 
   Scenario: top_score is written to the row when supplied
     Given a non-bot user agent is active

@@ -5,7 +5,10 @@ Post-hoc regression guard for behavior shipped at bc72fba ("Add top_score to
 query logger -- HEADERS, log_query param, three call sites"). Not a Red-Green
 cycle: the implementation predates these scenarios. Written to pin the
 HEADERS ordering and the log_query row-assembly so a future refactor cannot
-silently drop the Top Score column or reorder it.
+silently drop the Top Score column or reorder it. Scenario 1 pins its
+position (entry 33, after Client), not "last": columns appended after it
+since keep the Sheet's existing columns in place, which is what the guard
+is for.
 """
 
 import sys
@@ -59,12 +62,20 @@ def given_module_imported(ctx):
     ctx["ql"] = ql
 
 
-@then(parsers.parse('"{header}" is the last entry in HEADERS'))
-def then_last_header(ctx, header):
+@then(
+    parsers.parse(
+        '"{header}" is entry {position:d} in HEADERS, right after "{previous}"'
+    )
+)
+def then_header_position(ctx, header, position, previous):
     from services.query_logger import HEADERS
 
-    assert HEADERS[-1] == header, (
-        f"Expected {header!r} to be the last HEADERS entry; got {HEADERS[-1]!r}."
+    assert header in HEADERS, f"{header!r} is not in HEADERS: {HEADERS}"
+    assert (
+        HEADERS.index(header) == position - 1 and HEADERS[position - 2] == previous
+    ), (
+        f"Expected {header!r} at entry {position}, right after {previous!r}; got entry"
+        f" {HEADERS.index(header) + 1}, after {HEADERS[HEADERS.index(header) - 1]!r}."
         f" Full HEADERS length={len(HEADERS)}: {HEADERS}"
     )
 
