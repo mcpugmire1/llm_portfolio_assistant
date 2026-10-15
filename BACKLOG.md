@@ -165,6 +165,8 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-313](#mattgpt-313) | Production runs Python 3.11, local and CI run 3.13: align them as their own change | Open | Medium | Infra | October 15, 2026 |
 | [MATTGPT-314](#mattgpt-314) | Pin pyarrow<25 in requirements.txt: a Cloud in-place update moved it to 26.0.0 (known segfault) until the reboot corrected it | Open | Low | Infra | October 15, 2026 |
 | [MATTGPT-315](#mattgpt-315) | Source-card labels use different separators: " - " in conversation_helpers.py, ": " in ui_helpers.py | Open | Low | Hygiene | October 15, 2026 |
+| [MATTGPT-316](#mattgpt-316) | Blur submits the landing question: the input's on_change fires on blur as well as Enter | Open | Medium | Bug | October 15, 2026 |
+| [MATTGPT-317](#mattgpt-317) | "Ask Agy About This" is dropped while an answer is in flight: the seed is popped, then the pending-turn guard skips it | Open | Medium | Bug | October 15, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -3067,6 +3069,42 @@ Any sentinel has to be translated in one place before anything uses it. With tha
 - **Logged:** October 15, 2026
 
 **Verified Oct 15, 2026 (HEAD):** `_render_ask_transcript()` labels a source card `f"{client} - {title}"`. `ui_helpers.py` uses `f"{s['client']}: {s['title']}"` and, in `render_sources_chips()`, `sep = ": "`. Cosmetic; pick one.
+
+---
+
+### MATTGPT-316
+**Blur submits the landing question: the input's on_change fires on blur as well as Enter**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `ui/pages/ask_mattgpt/landing_view.py` (`landing_input`, `_hand_off_to_conversation()`)
+- **Related:** MATTGPT-275 (seed_prompt hand-off)
+- **Logged:** October 15, 2026
+
+**Reported (1095d2c known issues, Oct 15, 2026):** clicking the page, or DevTools, after typing in the landing input asks the question. Seen twice and in one trace. Same in the commit before 275.
+
+**Verified Oct 15, 2026 (HEAD):** the landing `st.text_input` (`key="landing_input"`) has `on_change=lambda: _hand_off_to_conversation(st.session_state.get("landing_input", ""))`. Per 1095d2c, Streamlit fires `on_change` on blur as well as Enter (as reported, not re-tested here).
+
+**Acceptance:** typing and then clicking elsewhere leaves the question in the input, unasked; Enter and the Ask button still submit. BDD on the landing page.
+
+---
+
+### MATTGPT-317
+**"Ask Agy About This" is dropped while an answer is in flight: the seed is popped, then the pending-turn guard skips it**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `ui/pages/ask_mattgpt/conversation_view.py` (`render_conversation_view()`), `ui/components/story_detail.py` (`on_ask_this_story()`)
+- **Related:** MATTGPT-275
+- **Logged:** October 15, 2026
+
+**Reported (1095d2c known issues, Oct 15, 2026):** "Ask Agy About This" from a story card while an answer is in flight is lost. Repro: 0 of 3 seeded mid-answer were asked, 3 of 3 when settled. Same pop-then-guard in the commit before 275.
+
+**Verified Oct 15, 2026 (HEAD):** `on_ask_this_story()` sets `seed_prompt` to "Tell me more about: <Title>". `render_conversation_view()` runs `seed = st.session_state.pop("seed_prompt", None)`, then acts only `if pending and not processing_state` (`__processing_chip_injection__`). While a turn is pending or processing, the popped seed is discarded.
+
+**Acceptance:** a seed that arrives while a turn is in flight is asked after that turn finishes, or the button is disabled while a turn is in flight (to decide). BDD covering the mid-answer case.
 
 ---
 

@@ -95,7 +95,8 @@ Project and Place, Parked), -304 (reranker spike).
 
 **Open tickets:** -275, -253 (Blocked on -275), -040 (follow-up eval
 coverage), -282 (answering model beyond gpt-4o), -281 (openers), -280
-(tone), -284 (synthesis mode decided in four places).
+(tone), -284 (synthesis mode decided in four places), -316 (blur submits the landing
+question), -317 (Ask Agy About This dropped mid-answer).
 
 ## 3. Trust and credibility
 
