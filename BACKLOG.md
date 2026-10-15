@@ -155,6 +155,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-302](#mattgpt-302) | OpenAI retires gpt-4o, gpt-4o-mini, gpt-4.1 and gpt-4.1-mini on January 14, 2027: migrate Role Match and the scripts still on them | Open | High | Action | October 14, 2026 |
 | [MATTGPT-303](#mattgpt-303) | Ask Agy's OpenAI stream has no timeout or retry of its own: SDK defaults (600 s read timeout); failures end in "Sorry, I couldn't generate an answer right now." | Open | Medium | Bug | October 15, 2026 |
 | [MATTGPT-304](#mattgpt-304) | Spike: Pinecone-hosted reranker (cohere-rerank-3.5 or bge-reranker-v2-m3) over a wider top-k, after MATTGPT-275 | Blocked | Low | Spike | October 15, 2026 |
+| [MATTGPT-305](#mattgpt-305) | pinecone_semantic_search() logs a Pinecone query exception only under DEBUG: with DEBUG off it returns None with no trace | Open | Low | Bug | October 15, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -2827,6 +2828,27 @@ Kept off the roadmap's NOW.
 - cost per turn
 
 **Out of scope:** an embedding-model change. It would re-baseline every score threshold (`CONFIDENCE_HIGH`, `CONFIDENCE_LOW`, the router's thresholds).
+
+---
+
+### MATTGPT-305
+**pinecone_semantic_search() logs a Pinecone query exception only under DEBUG: with DEBUG off it returns None with no trace**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Bug
+- **File:** `services/pinecone_service.py` (`pinecone_semantic_search()`), `services/rag_service.py` (`semantic_search()`)
+- **Related:** MATTGPT-292 (falls back to the whole corpus in file order), MATTGPT-288 (Ask Agy ignores the Pinecone fallback signal), MATTGPT-303 (no timeout or retry on the answer stream)
+- **Logged:** October 15, 2026
+
+**Verified Oct 15, 2026 (HEAD and 275's working tree):**
+- The `try` around `idx.query()` ends in `except Exception as e:` that prints `DEBUG Pinecone query error: {e}` only `if DEBUG:`, then returns None.
+- The embed step just before it prints `[API_ERROR_DETECTED] source=embed_failure, ...` whether or not DEBUG is on, and sets `__embed_failure__`.
+- `semantic_search()` treats None as `pinecone_unavailable` and sets `reason="fallback:pinecone_unavailable"`, the same reason it sets when the index is not initialized. With DEBUG off, a query exception leaves only that reason: no exception type, message or query.
+
+**Gate run Oct 15, lane 2 (`probes/output/MATTGPT-275/gate_20261015_093237/lane2.log`, untracked; file written 09:47:17):** the run aborted on `fallback:pinecone_unavailable` for the c09 query "Norfolk Southern 2020 Revenue and Shipment Planning modernization...". The line before it is `[API_ERROR_DETECTED] source=embed_failure, exc=APITimeoutError: Request timed out.`: an OpenAI embedding timeout, which is logged. It is not an instance of the swallowed query exception. It shows the contrast: the embed failure could be diagnosed from the log, and a query failure would not have been.
+
+**Fix direction:** log the query exception unconditionally, in the embed path's `[API_ERROR_DETECTED]` form (for example `source=pinecone_query`).
 
 ---
 
