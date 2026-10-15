@@ -161,6 +161,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-308](#mattgpt-308) | My Work's default first page shows all 9 MattGPT Product Development stories in its 10 rows | Open | Medium | Issue | October 15, 2026 |
 | [MATTGPT-309](#mattgpt-309) | Ask Agy opened from Role Match results carries no match context | Open | Medium | Enhancement | October 15, 2026 |
 | [MATTGPT-310](#mattgpt-310) | Direct-reports answer varies run to run between "no count" and "11 to 13 leads" | Open | Medium | Issue | October 15, 2026 |
+| [MATTGPT-311](#mattgpt-311) | No way to mark an ongoing period: the transition story is dated 2023-09 to 2026-08 under Accenture, and nothing in the code accepts End_Date "Present" | Open | Medium | Issue | October 15, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -2960,6 +2961,47 @@ Kept off the roadmap's NOW.
 **Verified Oct 15, 2026:** `leading-people-from-delivery-teams-to-a-150-person-organization` states "11-13 leads directly to me" and, in Performance, "Grew and ran a 150+ person organization through 11-13 direct-report practice and client leads". `data/matt_profile.json` has no direct-report count. "No count" is wrong for the corpus.
 
 **Hypothesis, not measured:** the "no count" run didn't retrieve that story. A live run of the question at least 2 times, recording `search_queries` and sources, would settle it.
+
+---
+
+### MATTGPT-311
+**No way to mark an ongoing period: the transition story is dated 2023-09 to 2026-08 under Accenture, and nothing in the code accepts End_Date "Present"**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Issue
+- **File:** `echo_star_stories_nlp.jsonl` (`transition-story-why-im-exploring-opportunities`), `ui/pages/ask_mattgpt/backend_service.py` (`sync_portfolio_metadata()`, `_CAREER_END_YEAR`), `ui/components/timeline_view.py` (`parse_year()`), `ui/components/story_detail.py`, `ui/pages/ask_mattgpt/story_intelligence.py`
+- **Logged:** October 15, 2026
+
+**Verified Oct 15, 2026 (corpus and HEAD):**
+- The transition story has `Start_Date` 2023-09, `End_Date` 2026-08, `Employer` and `Client` Accenture, Theme Professional Narrative. Its 5PSummary opens "After my tenure at Accenture...": the period it covers is after Accenture, but the record files it under Accenture, with a fixed end date for a period still going on.
+- It holds the corpus's latest `End_Date` (2026-08). No story uses "Present".
+- What each `End_Date` reader would do with "Present", from source, not run:
+  - `sync_portfolio_metadata()`: `int(max(s["End_Date"] for s in stories)[:4])`. "Present" sorts after every "YYYY-MM" string, so this becomes `int("Pres")` and raises `ValueError` when Ask Agy loads.
+  - `parse_year()` (Timeline): returns None, so the story loses its end year.
+  - `story_detail.py`: shows "2023-09 - Present".
+  - `story_intelligence.py`: sends "[DATES]: 2023-09 to Present" to the model.
+
+**Problem:** today, "Present" in any story would crash startup: `sync_portfolio_metadata()` takes `max(End_Date)` as a string and `int("Pres")` fails. In the Timeline, `parse_year()` drops it.
+
+**Ingestion and validation (verified Oct 15, 2026):** `generate_jsonl_from_excel.py` passes `End_Date` through `normalize()` (strip only, no format check). `utils/validation.py`, `scripts/validate_industry_data.py` and `scripts/validate_pinecone_data.py` contain no date check.
+
+**Approach:** one small helper that every `End_Date` reader goes through. It turns "Present" into the current month for date math and into "present" for display.
+
+**Considered and rejected (Oct 15, 2026): a sentinel such as 9999-99.** It keeps the YYYY-MM shape and sorts last, but it needs the same code changes and shows worse:
+- `sync_portfolio_metadata()` wouldn't crash, but would take 9999 as Matt's latest year, so the career span and era ranges would read "to 9999".
+- The model would see "[DATES]: 2023-09 to 9999-99" unless code translates it, and might repeat it or compute a nonsense duration.
+- Month 99 isn't a real month, so real date parsing fails on it. 9999-12 avoids that, with the same display problem.
+
+Any sentinel has to be translated in one place before anything uses it. With that translation written anyway, "Present" is the better value: it reads correctly in the Excel file, on the story detail page and to the model, even where the translation is missed.
+
+**Acceptance:**
+- "Present" is accepted by ingestion (`generate_jsonl_from_excel.py`) and validation.
+- `sync_portfolio_metadata()` and `parse_year()` treat "Present" as the current month.
+- The `[DATES]` line in `story_intelligence.py` renders "to present".
+- A unit test asserts every story's `End_Date` is YYYY-MM or "Present".
+
+**Separate, Matt's:** the transition story's Employer for the period after Accenture (a corpus edit).
 
 ---
 

@@ -143,7 +143,7 @@ extraction), -293 (router out_of_scope copy), -294 (split MATT_DNA by
 responsibility), -296 (closing offer in a prompt example), -297 (no dog humor in
 answers), -300 (thinking indicator shows real progress), -301 (em dashes left in the repo), -306 (set store=False
 after 275, Blocked), -307 (Key Metrics label cut), -310 (direct-reports
-answer varies).
+answer varies), -311 (no ongoing-period End_Date).
 
 ## 4. Role Match
 
