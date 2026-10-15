@@ -675,13 +675,7 @@ Kept in `pinecone_semantic_search()` (`services/pinecone_service.py`); no produc
 
 **Lives in:** `utils/client_utils.py`, `is_generic_client(client: str) -> bool`. Pattern-based; call sites import it and filter with it rather than keep their own lists.
 
-| Value pattern | Reason |
-|-------|--------|
-| `Independent`, `Independent Project` | Personal projects, not a real client |
-| `Career Narrative` | Meta-content, not a client |
-| `Multiple Clients`, `Multiple Financial Services Clients` | Aggregate, not a real client |
-| `Financial Services Client(s)` | Anonymized aggregate |
-| `Personal`, `Sabbatical`, `Various`, `N/A`, `""`, `None` | Empty/placeholder values |
+`is_generic_client()` returns True for an empty or whitespace-only value and for any value ending in "clients" or "project", case-insensitive ("Multiple Clients", "Fortune 500 Clients", "Independent Project"). Every other value, including "Independent" and "Career Narrative", is a named client to it.
 
 **Note:** Single source of truth: if a new exclusion is needed, update `is_generic_client()` once, not multiple files.
 
@@ -784,32 +778,7 @@ MATT_DNA holds no list of companies Matt did not work for: Clients by Employer a
 
 **Why derived:** Client names in the prompt are the JSONL canonical names, so the prompt cannot drift from the corpus.
 
-**Banned Corporate Filler Phrases:**
-- "meaningful outcomes" → use actual outcomes
-- "strategic mindset" → describe what Matt did
-- "foster collaboration" → describe specific collaboration
-- "stakeholder alignment" → name actual stakeholders
-- "bridge the gap" → describe specific connection
-- "execution excellence" → say "he ships"
-- "high-trust engineering cultures" → be specific
-- "modern development practices" → name the actual practices from the story
-- "significant challenges" → describe the actual challenge
-- "adapt to new approaches" → name what they adapted to
-- "rapidly evolving digital landscape" → name the specific market pressure
-- "fostering a culture of" → describe what actually happened
-- "agile methodologies" → name the specific methodology (Lean XP, TDD, etc.)
-- "remain competitive" → describe the specific business pressure
-- "continuous improvement" → describe what specifically improved
-
-**Persona Transformation Rules** (I → Matt):
-```
-| Source (Matt's voice) | Output (Agy's voice) |
-| I/Me/My               | Matt/Him/His         |
-| In my journey         | Throughout Matt's career |
-| I've learned          | Matt learned / Matt demonstrated |
-| I led                 | Matt led             |
-```
-Banned starters: "In my journey", "I've encountered", "In my experience"
+**Voice rules:** the banned phrases, the pronoun transformation (I → Matt) and the evaluate-vs-state examples live in BASE_PROMPT in `prompts.py`; this doc does not copy them.
 
 **Context Isolation:** each story in a search_stories result is wrapped in `<story title="...">`, and BASE_PROMPT's CONTEXT ISOLATION section tells the model to keep facts pinned to their source: no mixing metrics between stories, no attributing one story's outcomes to another.
 
@@ -817,12 +786,7 @@ Banned starters: "In my journey", "I've encountered", "In my experience"
 
 **Texture Rule:** Preserve the story's distinctive details — quote unique phrases, name specific practices, include concrete anecdotes. Generic summaries are a failure mode.
 
-**Personal Project Exception** (Client="Independent" or "Career Narrative"):
-- **HARD RULE:** DO NOT mention job seekers, engineers, teams, or users "struggling"
-- Only acceptable framing is Matt's OWN motivation
-- ✅ "Matt recognized that traditional resumes failed to showcase..."
-- ✅ "Matt wanted to demonstrate his RAG architecture skills..."
-- ❌ NEVER: "Job seekers were struggling..." / "Engineers needed..."
+**Personal Project Exception:** for a story whose Client is "Independent" or "Career Narrative", `build_story_context_for_rag()` puts a warning at the top of its story text: no job seekers, engineers or anyone "struggling"; frame the work as Matt's own goal. STANDARD_DELTA also says "For personal projects: frame as Matt's goal, not fictional users".
 
 **Post-processing** (`_postprocess_agy_text()`, in order):
 1. `normalize_dashes()`: an em dash or spaced en dash becomes ", ", an en dash between digits becomes " to ", an en dash joining two words becomes "-". See ADR 048 in `docs/ADR.md`.
@@ -1307,65 +1271,11 @@ Retrieval is driven primarily by Use Case(s) and 5P Summary; STAR fields provide
 | **scoring.py** | Hybrid scoring (semantic + keyword) | `_keyword_score_for_story()`, `_hybrid_score()` |
 | **ui_helpers.py** | Debug logging, branch-aware rejection banner | `dbg()`, `safe_container()`, `render_no_match_banner()`, `BANNER_COPY` / `RULE_CHIPS` / `PERSONAL_CHIPS` / `OUT_OF_SCOPE_CHIPS` |
 
-**client_utils.py Key Function:**
-```python
-def is_generic_client(client: str) -> bool:
-    """Pattern-based detection of generic/placeholder clients.
-    Returns True for: empty strings, values ending with 'clients' or 'project'.
-    Examples: 'Multiple Clients', 'Fortune 500 Clients', 'Independent Project'."""
-```
-
-**corpus_loader.py Contract:**
-
-Normalization source of truth extracted from `app.py`. Use in eval harnesses and probe scripts -- no Streamlit dependency.
-
-```python
-_LIST_FIELDS = (
-    "Situation", "Task", "Action", "Result",
-    "Process", "Performance", "Competencies", "Use Case(s)",
-)  # 8 PascalCase list fields coerced via _ensure_list()
-
-def normalize_story(story: dict) -> dict:
-    """Coerce list fields and public_tags in-place.
-    - Coerces present _LIST_FIELDS from str or None to list
-    - Parses public_tags from comma-separated str to list[str]
-    - Does not add absent fields"""
-
-def load_stories(path: str) -> list[dict]:
-    """Load and normalize a JSONL corpus file.
-    - Skips empty lines silently
-    - Skips records where id is None, empty string, or 0
-    - Strips whitespace from id; casts to str
-    - Applies normalize_story() to each kept record"""
-```
+**corpus_loader.py contract:** no Streamlit dependency. `normalize_story()` coerces the 8 `_LIST_FIELDS` (Situation, Task, Action, Result, Process, Performance, Competencies, Use Case(s)) from a string or None to a list, and parses `public_tags` from a comma-separated string, without adding absent fields. `load_stories()` skips empty lines and records whose id is None, empty or 0, strips the id and casts it to str, and normalizes each record.
 
 `app.py:load_star_stories()` wraps `normalize_story()` with Streamlit-specific error handling: `st.warning` on file-not-found (returns `[]`), `st.warning` per malformed line (continues). corpus_loader raises instead -- intentional split for the eval/probe context where fail-fast is correct. Nine call sites across eval and probe scripts use `corpus_loader.load_stories()` directly.
 
-**validation.py Key Functions:**
-```python
-def is_nonsense(query: str) -> str | None:
-    """Check if query matches nonsense patterns from nonsense_filters.jsonl.
-    Returns the matched category string (e.g., 'profanity', 'meta', 'gibberish') or None."""
-
-def _tokenize(text: str) -> list[str]:
-    """Tokenize text: lowercase, 3+ chars, filtered through _STOPWORDS set."""
-
-def token_overlap_ratio(query: str, corpus_vocab: set[str]) -> float:
-    """Calculate what % of query tokens appear in corpus vocabulary."""
-```
-
-**filters.py Key Function:**
-```python
-def matches_filters(s: dict, F: dict | None = None) -> bool:
-    """Check if story matches all active filters. F reads from st.session_state['filters'] if None.
-    Supports: industry, capability, era, clients, domains, roles, q (keyword)."""
-```
-
-**Scoring weights** (`config/constants.py`, lines 60-61):
-```python
-W_PC = 1.0  # Semantic (Pinecone) weight
-W_KW = 0.15  # Keyword weight. Activated in commit f5641e7 via pre-registered experiment; results recorded in CHANGELOG (-157/-170).
-```
+**matches_filters()** reads `st.session_state["filters"]` when no filter dict is passed, and supports industry, capability, era, clients, domains, roles and q.
 
 **`_keyword_score_for_story()` haystack (9 fields):**
 Title, Client, Role, Sub-category, Competencies (joined), public_tags (joined), build_5p_summary(400 chars), Process (joined), Performance (joined). Title and Sub-category are double-weighted: hits in those two fields count twice in the numerator. Normalizes by `len(query_tokens) * 2`. Tokenization via `_tokenize()` (applies `_STOPWORDS`).
@@ -1380,49 +1290,11 @@ Lives in `utils/scoring.py`, controlled by `SUBSTITUTION_FAMILIES` in `config/co
 
 ### story_intelligence.py
 
-Theme inference and voice guidance for RAG.
+Theme constants and the story text the search tool sends to the model.
 
-**7 Themes (constants):**
-```python
-THEME_EXECUTION = "Execution & Delivery"      # PRIMARY - He ships
-THEME_STRATEGIC = "Strategic & Advisory"       # He advises
-THEME_ORG_TRANSFORM = "Org & Working-Model Transformation"  # He transforms
-THEME_TALENT = "Talent & Enablement"          # He builds people
-THEME_RISK = "Risk & Responsible Tech"        # He manages risk
-THEME_EMERGING = "Emerging Tech"              # He explores pragmatically
-THEME_PROFESSIONAL = "Professional Narrative" # He knows who he is
-```
-
-**THEME_TO_PATTERN** (prevents voice drift in synthesis):
-```python
-THEME_TO_PATTERN = {
-    THEME_EXECUTION: "He ships.",
-    THEME_STRATEGIC: "He advises.",
-    THEME_ORG_TRANSFORM: "He transforms how teams work.",
-    THEME_TALENT: "He builds people.",
-    THEME_RISK: "He manages risk.",
-    THEME_EMERGING: "He explores pragmatically.",
-    THEME_PROFESSIONAL: "He knows who he is.",
-}
-```
-
-**Key Functions:**
-```python
-def infer_story_theme(story: dict) -> str:
-    """Get theme from story's Theme field (defaults to THEME_EXECUTION)."""
-
-def get_theme_guidance(theme: str) -> str:
-    """No production caller: its call in backend_service.py is commented out.
-    Had conflicting 'Emphasize:' instructions that caused meta-commentary."""
-
-def build_story_context_for_rag(story: dict) -> str:
-    """Build WHY→HOW→WHAT context string for one story: the search_stories
-    tool's story text. Includes "[DATES]: <Start_Date> to <End_Date>" after the
-    Domain line when the story has both (ADR 051)."""
-
-def get_theme_emoji(theme: str) -> str:
-    """Get emoji for theme (🏗️ 🧠 🔄 👥 🛡️ 🚀 🧭)."""
-```
+- **Themes:** seven `THEME_*` constants, with Execution & Delivery as `DEFAULT_THEME`. `THEME_TO_PATTERN` maps each to a one-line pattern ("He ships.") that goes into the story text as `[PATTERN]` and is shown by `conversation_helpers.py`.
+- `build_story_context_for_rag(story)`: the search_stories tool's story text: the pattern line, the story's fields, "[DATES]: <Start_Date> to <End_Date>" after the Domain line when the story has both (ADR 051), and the personal-project warning.
+- Also: `infer_story_theme()` (the story's Theme, else the default), `get_all_themes()`, `get_theme_distribution()`, `get_theme_emoji()`.
 
 ---
 
@@ -1430,34 +1302,9 @@ def get_theme_emoji(theme: str) -> str:
 
 Clean prompt architecture that prevents meta-commentary by keeping Agy in REPORTING mode, not evaluation mode.
 
-**Architecture: BASE_PROMPT + DELTA Pattern**
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│  BASE_PROMPT (shared across all modes)                      │
-│  - Agy's core identity: fact-relayer, not evaluator         │
-│  - Banned phrases with "delete and state the fact" guidance │
-│  - Pronoun transformation rules (I → Matt)                  │
-│  - Fact-pairing and context isolation rules                 │
-├─────────────────────────────────────────────────────────────┤
-│  + SYNTHESIS_DELTA (for multi-story questions)              │
-│    OR                                                       │
-│  + STANDARD_DELTA (for single-story questions)              │
-├─────────────────────────────────────────────────────────────┤
-│  + OFF_TOPIC_GUARD                                          │
-└─────────────────────────────────────────────────────────────┘
-```
+**Architecture:** `build_system_prompt()` returns BASE_PROMPT (Agy's identity as a fact-relayer, banned phrases, pronoun transformation, fact-pairing and context isolation, then MATT_DNA), plus SYNTHESIS_DELTA or STANDARD_DELTA, plus OFF_TOPIC_GUARD. The prompt text lives only in `prompts.py`.
 
 **Key Principle:** Agy RELAYS facts from stories. She does NOT evaluate Matt.
-
-**Meta-Commentary Prevention:**
-```python
-# BAD: "Matt's ability to align stakeholders enabled the transformation."
-# GOOD: "Matt aligned 12 stakeholders across 3 regions. The transformation shipped on time."
-
-# BAD: "This demonstrates his technical leadership."
-# GOOD: "He led a team of 40 engineers. They shipped the platform in 6 months."
-```
 
 **Key Functions:**
 ```python
@@ -1500,100 +1347,13 @@ Rule 0a instructs the LLM to place `[[profile:<category>]]` on its own line at t
 | **debug.py** | Global debug flag | `DEBUG = False` |
 | **settings.py** | Configuration management | `get_conf(key, default)` |
 
-**settings.py Pattern:**
-```python
-def get_conf(key: str, default: str | None = None):
-    """Get config from st.secrets (Streamlit Cloud) or .env fallback."""
-    try:
-        v = st.secrets.get(key)
-        if v is not None:
-            return v
-    except Exception:
-        pass
-    return os.getenv(key, default)
-```
-
-**Required Environment Variables:**
-| Variable | Purpose |
-|----------|---------|
-| `OPENAI_API_KEY` | OpenAI API for embeddings + LLM |
-| `PINECONE_API_KEY` | Pinecone vector database |
-| `PINECONE_INDEX` | Pinecone index name |
+`get_conf()` reads `st.secrets` first, then the environment (`.env` locally). Environment variables: see Environment Configuration.
 
 ---
 
-### CSS Variables (Full List)
+### CSS Variables
 
-Defined in `ui/styles/global_styles.py`. Use these instead of hardcoding colors.
-
-**Light Mode (`:root`):**
-```css
-/* Brand */
---accent-purple: #8B5CF6;
---accent-purple-hover: #7C3AED;
---accent-purple-bg: rgba(139, 92, 246, 0.08);
---accent-purple-light: rgba(139, 92, 246, 0.2);
---accent-purple-text: #8B5CF6;
-
-/* Backgrounds */
---bg-card: #FFFFFF;
---bg-surface: #F9FAFB;
---bg-primary: #FFFFFF;
---bg-hover: #F3F4F6;
---bg-input: #FFFFFF;
-
-/* Text */
---text-heading: #111827;
---text-primary: #1F2937;
---text-secondary: #6B7280;
---text-muted: #9CA3AF;
---text-color: #1F2937;
-
-/* Borders & Shadows */
---border-color: #E5E7EB;
---border-light: #F3F4F6;
---card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
---hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-
-/* Components */
---pill-bg: #F3F4F6;
---pill-text: #4B5563;
---success-color: #10B981;
---banner-info-bg: rgba(139, 92, 246, 0.05);
-
-/* Tables */
---table-header-bg: #F9FAFB;
---table-row-bg: #FFFFFF;
---table-row-hover-bg: #F9FAFB;
-
-/* Chat/Status */
---status-bar-bg: #F9FAFB;
---status-bar-border: #E5E7EB;
---chat-ai-bg: #F9FAFB;
---chat-ai-border: #8B5CF6;
---chat-user-bg: #FBFBFC;
-
-/* Gradients */
---gradient-purple-hero: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-
-/* Legacy (navbar, hero) */
---purple-gradient-start: #667eea;
---dark-navy: #2c3e50;
---dark-navy-hover: #34495e;
-```
-
-**Dark Mode (`body.dark-theme`):**
-```css
---bg-card: #1E1E2E;
---bg-surface: #262633;
---bg-primary: #0E1117;
---bg-hover: #2D2D3D;
---text-heading: #F9FAFB;
---text-primary: #E5E7EB;
---text-secondary: #9CA3AF;
---border-color: #374151;
---accent-purple-text: #A78BFA;  /* Lighter for dark backgrounds */
-```
+Defined in `ui/styles/global_styles.py`: light values in `:root`, dark overrides in `body.dark-theme`. Use them instead of hardcoding a color, shadow or gradient; those two blocks are the full list.
 
 ---
 
@@ -1793,19 +1553,7 @@ Together: a mid-list insert shifts positions 0-34 (prefix fails) and changes the
 
 **Purpose:** Vector search and embedding management.
 
-**Key Functions:**
-```python
-def pinecone_semantic_search(query: str, filters: dict, stories: list, top_k: int = SEARCH_TOP_K, debug_tag: str | None = None) -> list[dict] | None:
-    """
-    1. Embed query with OpenAI
-    2. Query Pinecone index
-    3. Return top_k results with scores
-    4. Apply optional metadata filters (including multi-field entity filter)
-    """
-
-def get_pinecone_index():
-    """Initialize Pinecone client and return index"""
-```
+**Key Functions:** `pinecone_semantic_search(query, filters, stories, top_k=SEARCH_TOP_K, debug_tag=None)` embeds the query, queries the index with any metadata filter, and returns blended hits, or None when Pinecone is unavailable. `validate_pinecone_config()` backs the startup check; `_init_pinecone()` builds the client.
 
 **Search Parameters:**
 - `top_k`: 25 (retrieve top 25 matches, from `SEARCH_TOP_K` in config/constants.py)
@@ -1814,24 +1562,6 @@ def get_pinecone_index():
 - `include_metadata`: False. Queries return ids and scores only; story text and the hit snippet (`5PSummary`) come from the local corpus. Metadata is still stored and used for Pinecone-side filters. See ADR 041 in `docs/ADR.md`.
 
 **Metadata keys and casing** (set at upload by `build_custom_embeddings.py`): each corpus field is stored under its corpus name with its value as written (`Title`, `Client`, `Employer`, `Theme`, ...), plus lowercase keys for filtering (`title`, `client`, `employer`, `division`, `project`, `role`, `industry`, `complexity`, `domain`, `tags`, `summary`). Filters use the lowercase keys. Values are lowercased under `employer`, `division`, `project`, `industry` and `complexity`; `client`, `title`, `role` and `domain` keep the corpus casing. The filters in use are My Work's Domain and Client facets: `domain` and `client`, each `$in`. `PINECONE_LOWERCASE_FIELDS`, the query-side set the entity filter lowercases, differs from the upload casing: it includes `place`, which is not uploaded, and omits `industry`, which is lowercased at upload. The entity filter has no production caller; the mismatch is tracked in BACKLOG.md.
-
-**Metadata Filters:**
-```python
-# Standard filters
-filters = {
-    "industry": "Financial Services",
-    "domain": "Platform Engineering"
-}
-
-# Entity filter: uses $or across 6 fields
-filters = {
-    "entity_field": "client",
-    "entity_value": "Accenture"
-}
-# Translates to: {"$or": [{client: "Accenture"}, {employer: "accenture"}, ...]}
-```
-
-**Multi-Field Entity Filter:** When `entity_field` and `entity_value` are provided, the service builds a Pinecone `$or` clause that searches across `client`, `employer`, `division`, `project`, `place`, and `title` fields simultaneously. It narrows retrieval and rejects nothing. No production caller sets `entity_field`. See [Component Contracts → Multi-Field Entity Filter](#multi-field-entity-filter).
 
 **`_init_pinecone()` two-class failure split:**
 
@@ -1851,15 +1581,7 @@ Extracted from `is_portfolio_query_semantic()` (`services/semantic_router.py`) s
 
 **Purpose:** Semantic search orchestration and confidence buckets. Ask Agy's search tool and My Work both call it.
 
-**Key Functions:**
-```python
-def semantic_search(query: str, filters: dict, *, enforce_overlap: bool = False, min_overlap: float = 0.0, stories: list, top_k: int = SEARCH_TOP_K) -> dict:
-    """
-    1. pinecone_semantic_search() (top_k from constants, default 25)
-    2. Confidence bucket (HIGH=0.25, LOW=0.20); hits below LOW dropped
-    3. UI filters applied; returns results, confidence, top_score
-    """
-```
+**Key Functions:** `semantic_search(query, filters, *, enforce_overlap=False, min_overlap=0.0, stories, top_k=SEARCH_TOP_K)` calls `pinecone_semantic_search()`, buckets confidence (HIGH=0.25, LOW=0.20) and drops hits below LOW, applies the UI filters, and returns results, confidence and top_score.
 
 **Note:** Ask Agy's answer calls live in `backend_service.py:agy_answer()`. See Component Contracts → Layer 4: Response Generation.
 
