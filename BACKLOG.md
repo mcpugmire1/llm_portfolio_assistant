@@ -1049,6 +1049,8 @@ Role Match renders profile evidence as a prose block rather than a card -- do no
 
 **Existing Red commit:** `220d14d` has nine unit tests encoding the old cap invariant. They stay xfailed until this ships, then get rewritten against the new contract.
 
+**Red rewritten in MATTGPT-275 (Oct 14, 2026; working tree, uncommitted):** `_build_sources()` is deleted with `rag_answer()`. Five of the nine 220d14d tests are rewritten as `TestSourcesAreTheCitedStories` in `tests/unit/test_ask_agy_tool_answer.py`, against `agy_answer()`'s cited-stories contract: one cited story shows one card; two cited stories show both in retrieval order; a profile-fact answer shows no story cards; a retrieved but uncited Professional Narrative story is not shown; an off-topic refusal shows no source cards. The other four were obsolete with the fallback path. The class carries one class-level `xfail` (`strict=False`) whose reason says "Remove when -128 ships". Verified by reading the working tree. When 275 commits, point this note at its commit; that class is -128's Red.
+
 **New evidence (September 26, 2026):** With the -250 fact row in place, pure fact answers show unrelated story cards below the fact card. Observed on local 8501:
 
 - "Where is Matt based?" (answer from Location & Availability only): showed Why Hire Matt?, Building the Payment Engine Behind JP Morgan ACCESS, MattGPT: Human-Centered UX Design.
@@ -2740,6 +2742,7 @@ Kept off the roadmap's NOW.
 **Remaining:**
 - **Live code comments, docstrings and CSS comments** (`ui/`, `services/`, `utils/`, `app.py`, `config/`): about 200 by the dev session's estimate after 275; no runtime effect.
   - **String-literal spot check (Oct 14):** a grep for em dashes inside string literals, outside 275's files, found two. `services/pinecone_service.py`'s `title` f-string (client and title joined with an em dash) is DEBUG-only: it sits under `if DEBUG:` in the Pinecone preview snapshot (per the dev audit; confirmed by read). `ui/pages/cross_industry_landing.py`'s `cta-subtext` line is visitor copy and is fixed in MATTGPT-275, not here. The spot check skips multi-line strings, so classify each remaining hit before calling it comment-only.
+- **En dashes in year ranges stay** (such as "2023–2026"; Matt's decision during MATTGPT-275). They are intended, so the whole-file check matches em dashes only.
 - **Router titles (en dashes, Oct 14):** `services/semantic_router.py`'s four Professional Narrative titles ("Career Intent – What I'm Looking For Next", "Leadership Philosophy – How I Lead", "Transition Story – Why I'm Exploring Opportunities", "Work Philosophy – Where I Do My Best Work") must match the corpus titles exactly. Change them together with the corpus at its next ingestion, not before.
 - **Tests:** BDD 422, unit 64 (recount matches).
 - **`agent/triage/`** (24): not imported by the app; confirm before cleaning.
