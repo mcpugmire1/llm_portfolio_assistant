@@ -167,6 +167,10 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-315](#mattgpt-315) | Source-card labels use different separators: " - " in conversation_helpers.py, ": " in ui_helpers.py | Open | Low | Hygiene | October 15, 2026 |
 | [MATTGPT-316](#mattgpt-316) | Blur submits the landing question: the input's on_change fires on blur as well as Enter | Open | Medium | Bug | October 15, 2026 |
 | [MATTGPT-317](#mattgpt-317) | "Ask Agy About This" is dropped while an answer is in flight: the seed is popped, then the pending-turn guard skips it | Open | Medium | Bug | October 15, 2026 |
+| [MATTGPT-318](#mattgpt-318) | extract_facts.py emits no Ask Agy facts: add ask_answer_model, ask_tool_max_rounds and ask_history_max_messages; retire chat_model or emit assessment_model | Open | Medium | Action | October 15, 2026 |
+| [MATTGPT-319](#mattgpt-319) | Golden eval Q59's xfail reason names the confidence gate that 1095d2c removed | Open | Low | Hygiene | October 15, 2026 |
+| [MATTGPT-320](#mattgpt-320) | No golden eval has run on the shipped Ask Agy pipeline (1095d2c): run it once | Open | Medium | Action | October 15, 2026 |
+| [MATTGPT-321](#mattgpt-321) | Stale copy after 1095d2c: "Primary LLM" comment on DEFAULT_CHAT_MODEL, "High confidence match" in the How Agy Searches dialog | Open | Low | Hygiene | October 15, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -2450,6 +2454,14 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 - **Still dead after 275:** `get_all_themes()`, `get_theme_distribution()` and `get_theme_emoji()` in `story_intelligence.py` are still defined at HEAD (Oct 15, 2026); their only callers are `tests/unit/test_story_intelligence.py`, which skips when they are missing. Remove the functions and those tests together.
 - **Stays:** `THEME_PROFESSIONAL`. It is a key in `THEME_TO_PATTERN`, which `conversation_helpers.py` and `build_story_context_for_rag()` use.
 
+**Update (Oct 15, 2026, re-checked at HEAD):** the `_router_rejection()` docstring is fixed in 5d70164. Remaining:
+- the overlap:0.00 comment in `ui/pages/explore_stories.py` (5d70164 changed a line reference in that file, not this comment)
+- the docstring in `tests/unit/test_semantic_router_gating.py`
+- the "rejection path is CONFIDENCE_LOW below" comment in `config/constants.py`
+- MATTGPT-239's Copy discipline and acceptance wording
+- the dead `initialize_vocab()` in `services/rag_service.py`
+- the three dead functions in `story_intelligence.py`
+
 ---
 
 ### MATTGPT-288
@@ -3118,6 +3130,72 @@ Any sentinel has to be translated in one place before anything uses it. With tha
 **Verified Oct 15, 2026 (HEAD):** `on_ask_this_story()` sets `seed_prompt` to "Tell me more about: <Title>". `render_conversation_view()` runs `seed = st.session_state.pop("seed_prompt", None)`, then acts only `if pending and not processing_state` (`__processing_chip_injection__`). While a turn is pending or processing, the popped seed is discarded.
 
 **Acceptance:** a seed that arrives while a turn is in flight is asked after that turn finishes, or the button is disabled while a turn is in flight (to decide). BDD covering the mid-answer case.
+
+---
+
+### MATTGPT-318
+**extract_facts.py emits no Ask Agy facts: add ask_answer_model, ask_tool_max_rounds and ask_history_max_messages; retire chat_model or emit assessment_model**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **File:** `scripts/extract_facts.py`, `config/constants.py` (`ASK_ANSWER_MODEL`, `ASK_TOOL_MAX_ROUNDS`, `ASK_HISTORY_MAX_MESSAGES`), `services/jd_assessor.py` (`ASSESSMENT_MODEL`)
+- **Related:** MATTGPT-302 (`DEFAULT_CHAT_MODEL` and the gpt-4o retirement)
+- **Logged:** October 15, 2026
+
+**Verified Oct 15, 2026 (HEAD):** `extract_facts.py` writes `facts["chat_model"] = DEFAULT_CHAT_MODEL` ("gpt-4o") and `facts["embedding_model"]` to `facts.json`, which the CI sync workflow passes to the design spec. Ask Agy answers on `ASK_ANSWER_MODEL = "gpt-6.1-sol"`, with `ASK_TOOL_MAX_ROUNDS = 3` and `ASK_HISTORY_MAX_MESSAGES = 4` (`config/constants.py`); no fact carries any of them. Role Match assesses on `ASSESSMENT_MODEL = "gpt-4o"` (`services/jd_assessor.py`), also not emitted. Until this lands the design spec cites `ASK_ANSWER_MODEL` in `config/constants.py` directly (Matt, Oct 15, 2026).
+
+**Change:** emit `ask_answer_model`, `ask_tool_max_rounds` and `ask_history_max_messages`. Then either retire `chat_model` (`DEFAULT_CHAT_MODEL` is read only by this script) or emit `assessment_model` in its place; coordinate with MATTGPT-302, which migrates both models.
+
+---
+
+### MATTGPT-319
+**Golden eval Q59's xfail reason names the confidence gate that 1095d2c removed**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Hygiene
+- **File:** `tests/eval_rag_quality.py` (query id 59)
+- **Related:** MATTGPT-320 (golden eval on shipped code), MATTGPT-253 (confidence gate), MATTGPT-250 (profile facts)
+- **Logged:** October 15, 2026
+
+**Verified Oct 15, 2026 (HEAD):** query 59, "Where does Matt live?", `expected_behavior` "profile_fact", must contain "Atlanta". Its `xfail_reason` reads "low_confidence: top_score 0.242 < CONFIDENCE_HIGH 0.25; profile question with no matching story", and the comment above says the confidence gate rejects it before the profile facts. Since 1095d2c search confidence doesn't gate the answer, so the reason no longer describes the code.
+
+**Change:** drop the xfail after an XPASS is observed (MATTGPT-320's run). If Q59 fails instead, rewrite the reason to the failure that run shows.
+
+---
+
+### MATTGPT-320
+**No golden eval has run on the shipped Ask Agy pipeline (1095d2c): run it once**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **File:** `tests/eval_rag_quality.py`
+- **Related:** MATTGPT-275, MATTGPT-319 (Q59), MATTGPT-039 (golden eval in CI tier 2)
+- **Logged:** October 15, 2026
+
+**Verified Oct 15, 2026:** the latest golden eval is `docs/evidence/MATTGPT-275/golden_agy_20261014_150939/`: Oct 14, on 9b61baf plus the then-uncommitted 275 working tree (its `NOTES.md` and `head.txt`). Its `as_run/backend_service.py` differs from HEAD's (`diff` reports 1,989 changed lines); the dash rule, comparison rule, bolding change and stream timeout landed after it. No golden eval has run on 1095d2c's `agy_answer()` path. The design spec's `index.md` says so plainly rather than restating an older number (Matt, Oct 15, 2026).
+
+**Change:** one golden eval run on HEAD, with the result recorded in evidence and on the scorecard (driver 3).
+
+---
+
+### MATTGPT-321
+**Stale copy after 1095d2c: "Primary LLM" comment on DEFAULT_CHAT_MODEL, "High confidence match" in the How Agy Searches dialog**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Hygiene
+- **File:** `config/constants.py` (`DEFAULT_CHAT_MODEL`), `ui/components/how_agy_dialog.py` (step 3, "You Get Results")
+- **Related:** MATTGPT-302, MATTGPT-318
+- **Logged:** October 15, 2026
+
+**Verified Oct 15, 2026 (HEAD):**
+- `DEFAULT_CHAT_MODEL = "gpt-4o"  # Primary LLM for responses`. Ask Agy answers on `ASK_ANSWER_MODEL`; `DEFAULT_CHAT_MODEL` is read only by `scripts/extract_facts.py`.
+- The How Agy Searches dialog's (`@st.dialog("How Agy searches")`) step 3 example card ends with the pill "✓ High confidence match". Since 1095d2c, search confidence doesn't gate or label Ask Agy's answers.
+
+**Change:** correct the comment; replace or drop the pill. `how_agy_dialog.py` is on the Pre-Commit Doc Checklist, so the copy change pairs with any code change it describes.
 
 ---
 

@@ -144,7 +144,8 @@ extraction), -293 (router out_of_scope copy), -294 (split MATT_DNA by
 responsibility), -296 (closing offer in a prompt example), -297 (no dog humor in
 answers), -300 (thinking indicator shows real progress), -301 (em dashes left in the repo), -306 (set store=False
 after 275, Blocked), -307 (Key Metrics label cut), -310 (direct-reports
-answer varies), -311 (no ongoing-period End_Date).
+answer varies), -311 (no ongoing-period End_Date), -319 (Q59 xfail
+reason stale), -320 (golden eval on shipped code).
 
 ## 4. Role Match
 
@@ -292,4 +293,5 @@ Ask Agy feedback are not logged.
 -022, -015, -095, -097, -154, -130, -156, -291 (role-play
 requests, open decision), -298 (salary questions get the nonsense
 banner), -312 (stream shows an unclosed bold marker), -315 (source-card
-separators differ).
+separators differ), -318 (ask_answer_model
+fact), -321 (stale model comment and dialog pill).
