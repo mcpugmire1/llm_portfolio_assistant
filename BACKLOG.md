@@ -170,7 +170,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-318](#mattgpt-318) | extract_facts.py emits no Ask Agy facts: add ask_answer_model, ask_tool_max_rounds and ask_history_max_messages; retire chat_model or emit assessment_model | Open | Medium | Action | October 15, 2026 |
 | [MATTGPT-319](#mattgpt-319) | Golden eval Q59's xfail reason names the confidence gate that 1095d2c removed | Open | Low | Hygiene | October 15, 2026 |
 | [MATTGPT-320](#mattgpt-320) | No golden eval has run on the shipped Ask Agy pipeline (1095d2c): run it once | Open | Medium | Action | October 15, 2026 |
-| [MATTGPT-321](#mattgpt-321) | Stale copy after 1095d2c: "Primary LLM" comment on DEFAULT_CHAT_MODEL, "High confidence match" in the How Agy Searches dialog | Open | Low | Hygiene | October 15, 2026 |
+| [MATTGPT-321](#mattgpt-321) | Stale copy after 1095d2c: "Primary LLM" comment on DEFAULT_CHAT_MODEL; "High confidence match" and "Says what it doesn't know" in the How Agy Searches dialog | Open | Low | Hygiene | October 15, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -2461,6 +2461,7 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 - MATTGPT-239's Copy discipline and acceptance wording
 - the dead `initialize_vocab()` in `services/rag_service.py`
 - the three dead functions in `story_intelligence.py`
+- `_build_retrieval_query()` and `_substitute_matt_subject()` in `utils/scoring.py` (Architecture Sync, Oct 15, 2026; re-checked at HEAD): the first calls the second, and outside `utils/scoring.py` the only caller is `tests/bdd/steps/test_query_substitution_077.py` (MATTGPT-077's Phase 1 strip). Remove them with that feature and its binding.
 
 ---
 
@@ -3182,7 +3183,7 @@ Any sentinel has to be translated in one place before anything uses it. With tha
 ---
 
 ### MATTGPT-321
-**Stale copy after 1095d2c: "Primary LLM" comment on DEFAULT_CHAT_MODEL, "High confidence match" in the How Agy Searches dialog**
+**Stale copy after 1095d2c: "Primary LLM" comment on DEFAULT_CHAT_MODEL; "High confidence match" and "Says what it doesn't know" in the How Agy Searches dialog**
 
 - **Status:** Open
 - **Priority:** Low
@@ -3194,8 +3195,9 @@ Any sentinel has to be translated in one place before anything uses it. With tha
 **Verified Oct 15, 2026 (HEAD):**
 - `DEFAULT_CHAT_MODEL = "gpt-4o"  # Primary LLM for responses`. Ask Agy answers on `ASK_ANSWER_MODEL`; `DEFAULT_CHAT_MODEL` is read only by `scripts/extract_facts.py`.
 - The How Agy Searches dialog's (`@st.dialog("How Agy searches")`) step 3 example card ends with the pill "✓ High confidence match". Since 1095d2c, search confidence doesn't gate or label Ask Agy's answers.
+- The same dialog's "Says what it doesn't know" card reads "If no story covers your question, Agy says so plainly instead of bluffing a stretch answer." The prompt doesn't instruct that. Its only absence rule is citation rule 0b in `prompts.py`: for a category the profile has no key for (patents, publications), respond "Nothing I know about Matt covers that". `prompts.py`, `config/constants.py` and `backend_service.py` contain no instruction for a story question with no match (`git grep -ic` for "not on record", "say so", "bluff" and similar: 0 in each). The card claims more than the prompt instructs.
 
-**Change:** correct the comment; replace or drop the pill. `how_agy_dialog.py` is on the Pre-Commit Doc Checklist, so the copy change pairs with any code change it describes.
+**Change:** correct the comment; replace or drop the pill; reword the card to what the prompt instructs, or leave it until a story-absence instruction exists (MATTGPT-251 is the adjacent-evidence problem). `how_agy_dialog.py` is on the Pre-Commit Doc Checklist, so the copy change pairs with any code change it describes.
 
 ---
 
