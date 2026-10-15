@@ -139,47 +139,13 @@ llm_portfolio_assistant/
 
 ### Startup Sequence (`app.py`)
 
-The application initialization order is critical—later steps depend on earlier outputs:
+Initialization order matters: later steps depend on earlier outputs.
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│  1. load_star_stories(DATA_FILE)                             │
-│     - Reads echo_star_stories_nlp.jsonl                      │
-│     - Skips records where id is None, empty, or 0            │
-│     - Coerces 8 PascalCase list fields via _ensure_list      │
-│     - Parses public_tags from comma-separated str to list    │
-│     - Normalization contract lives in utils/corpus_loader.py │
-└──────────────────────────────────────────────────────────────┘
-                              ↓
-┌──────────────────────────────────────────────────────────────┐
-│  2. initialize_vocab(STORIES)                                │
-│     - Builds _KNOWN_VOCAB; read only when enforce_overlap    │
-│       is set, which no caller does                           │
-│     - Lives in: services/rag_service.py                      │
-└──────────────────────────────────────────────────────────────┘
-                              ↓
-┌──────────────────────────────────────────────────────────────┐
-│  3. sync_portfolio_metadata(STORIES)                         │
-│     - Derives SYNTHESIS_THEMES from story Theme fields       │
-│     - Derives _KNOWN_CLIENTS from story Client fields        │
-│     - Generates MATT_DNA prompt via generate_dynamic_dna()   │
-│     - Lives in: ui/pages/ask_mattgpt/backend_service.py      │
-└──────────────────────────────────────────────────────────────┘
-                              ↓
-┌──────────────────────────────────────────────────────────────┐
-│  4. build_facets(STORIES)                                    │
-│     - Extracts filter options (industries, capabilities,     │
-│       clients, domains, roles, tags)                         │
-│     - Used by Explore Stories filter widgets                  │
-└──────────────────────────────────────────────────────────────┘
-                              ↓
-┌──────────────────────────────────────────────────────────────┐
-│  5. Page Rendering                                           │
-│     - Routes to active_tab page                              │
-│     - Landing pages receive STORIES for hydration            │
-│     - Ask MattGPT uses synced metadata for RAG              │
-└──────────────────────────────────────────────────────────────┘
-```
+1. `load_star_stories(DATA_FILE)` reads `echo_star_stories_nlp.jsonl`: it skips records whose id is None, empty or 0, coerces the 8 PascalCase list fields with `_ensure_list`, and parses `public_tags` into a list. The normalization contract lives in `utils/corpus_loader.py`.
+2. `initialize_vocab(STORIES)` (`services/rag_service.py`) builds `_KNOWN_VOCAB`, read only when `enforce_overlap` is set, which no caller does.
+3. `sync_portfolio_metadata(STORIES)` (`backend_service.py`) derives `SYNTHESIS_THEMES` and `_KNOWN_CLIENTS` from the stories and generates MATT_DNA with `generate_dynamic_dna()`.
+4. `build_facets(STORIES)` extracts the filter options (industries, capabilities, clients, domains, roles, tags, personas) for My Work's filter widgets.
+5. Page rendering routes to the `active_tab` page; landing pages receive STORIES for hydration, and Ask Agy uses the synced metadata.
 
 **Key Invariant:** Steps 1-3 run on every Streamlit rerun but are idempotent. `sync_portfolio_metadata()` regenerates globals each time, ensuring any JSONL change is picked up without restart.
 
