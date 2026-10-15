@@ -1872,6 +1872,13 @@ Scenarios by name:
 **Candidate removals (test before acting):**
 Double-bolding (prompt asks for bold three times alongside the regex) and `OFF_TOPIC_GUARD` are candidate removals tracked in MATTGPT-263; each needs a live acceptance run first.
 
+**Observed (production, Oct 15, 2026; as reported, not on disk):** certification answers bold bare numbers inside quoted names: the "4" in "SAFe 4 Certified", the "8i" in "Oracle 8i DBA", and each year. Same family as 1095d2c's split-bold fix: number bolding should skip numbers inside a quoted name.
+
+**Where the bold comes from (verified Oct 15, 2026, HEAD; prod runs the same `backend_service.py` and `prompts.py` as 1095d2c):**
+- `_postprocess_agy_text()`'s `number_patterns` bold only dollar amounts, percentages, multipliers ("4x") and numbers followed by a unit word (engineers, countries, months...). Run on 'Matt holds "SAFe 4 Certified Agilist" (2017) and "Oracle 8i DBA" (2001).', it returns the text unchanged.
+- `build_answer_instructions()`, in both of Ask Agy's system prompts, says "**Bold ALL client names and numbers.**"
+- **Hypothesis, not measured:** the model bolds these numbers itself, following that line, so the fix is in the prompt instruction (a candidate removal under MATTGPT-263) rather than in the post-processing patterns. The production answer text would settle it.
+
 ---
 
 ### MATTGPT-256
@@ -2045,6 +2052,8 @@ f. Data-contract check against the real corpus (added Oct 11, 2026): field names
 **Tool path (Oct 7, 2026; `docs/evidence/MATTGPT-275/answer_dom_20261007_100712/q2.png`, f7c1de2):** With the confidence gate off the answer path (MATTGPT-275), `OFF_TOPIC_GUARD` is what answers gibberish. "qzwxvnpfrk plmqcvjxk floogerblerg" got the random opener "Tracking this down..." followed by the guard's scripted string verbatim: "I can only discuss Matt's transformation experience. Ask me about application modernization, digital innovation, agile transformation, or leadership."
 
 **Decision needed:** Does the guard stay a scripted reply, or become guidance for Agy's own reply (say the question isn't about Matt's work, in Agy's voice, and offer what Agy can answer)? Candidate 2's measurement question (has the canned reply ever appeared in production) is now answered for the tool path: it appears whenever the model judges a query off-topic.
+
+**Candidate 1, new case (Oct 15, 2026; see MATTGPT-255):** in production, certification answers bold bare numbers inside quoted names ("SAFe 4 Certified", "Oracle 8i DBA", each year). `_postprocess_agy_text()`'s number patterns don't match these; `build_answer_instructions()` says "**Bold ALL client names and numbers.**" Hypothesis, not measured: the model bolds them itself, following that line, so this is a test case for removing or narrowing it.
 
 ---
 
