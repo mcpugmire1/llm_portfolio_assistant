@@ -162,6 +162,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-309](#mattgpt-309) | Ask Agy opened from Role Match results carries no match context | Open | Medium | Enhancement | October 15, 2026 |
 | [MATTGPT-310](#mattgpt-310) | Direct-reports answer varies run to run between "no count" and "11 to 13 leads" | Open | Medium | Issue | October 15, 2026 |
 | [MATTGPT-311](#mattgpt-311) | No way to mark an ongoing period: the transition story is dated 2023-09 to 2026-08 under Accenture, and nothing in the code accepts End_Date "Present" | Open | Medium | Issue | October 15, 2026 |
+| [MATTGPT-312](#mattgpt-312) | Ask Agy stream shows an unclosed bold marker (`**`) until its pair arrives; the finished answer is clean | Blocked | Low | Bug | October 15, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -3002,6 +3003,25 @@ Any sentinel has to be translated in one place before anything uses it. With tha
 - A unit test asserts every story's `End_Date` is YYYY-MM or "Present".
 
 **Separate, Matt's:** the transition story's Employer for the period after Accenture (a corpus edit).
+
+---
+
+### MATTGPT-312
+**Ask Agy stream shows an unclosed bold marker (`**`) until its pair arrives; the finished answer is clean**
+
+- **Status:** Blocked
+- **Priority:** Low
+- **Type:** Bug
+- **Dependencies:** MATTGPT-275. Set to Open when 275 commits (the stream and its dash hold are in 275's working tree).
+- **File:** `ui/pages/ask_mattgpt/backend_service.py` (`_show()` in the stream loop, `_DASH_HOLD_CHARS`), `ui/pages/ask_mattgpt/conversation_view.py` (`_show_delta()`)
+- **Related:** MATTGPT-275, MATTGPT-301 (dashes)
+- **Logged:** October 15, 2026
+
+**Observed (Oct 15, 2026, as reported):** while the answer streams, a bold opening `**` shows as literal asterisks until the closing `**` arrives. The finished answer renders clean.
+
+**Verified Oct 15, 2026 (275's working tree):** `_show()` sends `normalize_dashes(raw.rstrip(_DASH_HOLD_CHARS))` mid-stream, so only trailing spaces, tabs, commas and dashes are held back (`_DASH_HOLD_CHARS = " \t,\u2014\u2013"`). Nothing holds an unpaired `**`. `_show_delta()` re-renders the joined text with `st.markdown()` on every delta.
+
+**Fix direction:** hold back the text from an unpaired `**` until its pair arrives, in the same place as the dash hold, and release it at the end of the stream.
 
 ---
 
