@@ -612,7 +612,7 @@ Remove the Entity Gate rejection. Query rejection comes only from the Pinecone c
 ## ADR 022: Title Entities Use Soft Filtering, Not a Pinecone Hard Filter
 
 **Date:** 2026-01-30 (removed); 2026-10-05 (recorded)
-**Status:** Accepted
+**Status:** Superseded by ADR 047
 **Related tickets:** None
 
 **Context:**
@@ -880,7 +880,7 @@ Replace AgGrid with `st.dataframe` in the Table render path. AgGrid is not used 
 ## ADR 033: Ask Agy Refuses Below CONFIDENCE_HIGH; the Warning Tier Is My Work Only
 
 **Date:** 2026-10-06 (recorded; the Ask Agy refusal of low confidence dates to 2025-12-05)
-**Status:** Accepted
+**Status:** Superseded by ADR 047
 **Related tickets:** MATTGPT-273, MATTGPT-253
 
 **Context:**
@@ -1049,7 +1049,7 @@ Probe scripts and their output accumulated at the repo root, some tracked and so
 ## ADR 040: Ask Agy Is a Conversational System; Retrieval Is Its Evidence Step
 
 **Date:** 2026-10-08
-**Status:** Planned
+**Status:** Superseded by ADR 047
 **Related tickets:** MATTGPT-275, MATTGPT-273, MATTGPT-253, MATTGPT-276
 
 **Context:**
@@ -1216,3 +1216,139 @@ Do not stabilize it.
 
 **Consequences:**
 - A flake in the replacement test gets its own ticket.
+
+---
+
+## ADR 047: Ask Agy Answers Through a Search Tool Loop on gpt-6.1-sol; rag_answer() and Its Gates Are Retired
+
+**Date:** 2026-10-15
+**Status:** Accepted
+**Related tickets:** MATTGPT-275, MATTGPT-282, MATTGPT-273, MATTGPT-169, MATTGPT-128, MATTGPT-292, MATTGPT-306
+
+**Context:**
+ADR 040 set the design: Ask Agy is a conversational system, and retrieval is its evidence step. Ask Agy still answered through `rag_answer()` in `backend_service.py`: the nonsense rules and the router, then `detect_entity()` with a hard Pinecone entity filter, `semantic_search()` on the visitor's literal words, a refusal below `CONFIDENCE_HIGH` (ADR 033), entity pinning and `diversify_results()` (or `get_synthesis_stories()` for synthesis), then `_generate_agy_response()` on gpt-4o with the stories in `<primary_story>` and `<supporting_story>` tags. Follow-ups retrieved on the bare question (ADR 034). MATTGPT-282 run 2 measured a tool-calling prompt ("lever 2") on gpt-6.1-sol: its lever2_sol arm scored 123/130, 122/130 under the quotation rule (`docs/evidence/MATTGPT-282/sol_arms_20261011_211830/`). A rewritten contract prompt scored 57/70 against lever 2's 61/70 on gpt-4o (4cb617f), so the build used lever 2's measured shape.
+
+**Decision:**
+- `send_to_backend()` calls `agy_answer()` only. The nonsense rules and the router's out_of_scope and personal redirects run first; suggestion chips skip both.
+- Then a tool loop on `ASK_ANSWER_MODEL = "gpt-6.1-sol"`, on the Responses API, streamed, reasoning effort medium, 4000 output tokens. The input is `build_tool_system_prompt()` (the mode's system prompt, `TOOL_STORY_NOTE`, then `build_answer_instructions()` with Agy's opener lines as examples), the last two exchanges, and the question as asked. Call 1 must call `search_stories`; later calls may, up to `ASK_TOOL_MAX_ROUNDS` (3); one more call with `tool_choice` "none" must answer. The model writes each search query from the question and the conversation.
+- `search_stories` runs `semantic_search()` with no filters and returns the first 5 stories. Search confidence does not gate the answer. The sources are the stories the searches returned.
+- The answer streams into the conversation and is then replaced by the post-processed text.
+- A model error other than a rate limit returns `ANSWER_ERROR_MESSAGE` ("Sorry, I couldn't generate an answer right now."), no sources, `degraded: True`. It replaces `_degraded_fallback()`, a keyword sort that scored almost every question 0, so the first three corpus stories in file order were cited and one story's 5P summary was shown raw in Matt's first person (seen Oct 13, 2026 after an APITimeoutError).
+- Two nonsense rules are added: `gibberish` (two or more words each typed from one keyboard row) and `local_recommendations` ("best", "good" or "cheap" plus a food or venue word). With the confidence gate gone, "asdf jkl qwerty" and "Best pizza in Atlanta" reached the answering model.
+- Removed: `rag_answer()`, `_generate_agy_response()`, `_degraded_fallback()`, `diversify_results()` and `_diversify_for_background()`, `get_synthesis_stories()`, `detect_entity()`, `ENTITY_ALIASES`, `ENTITY_DETECTION_FIELDS`, `EXCLUDED_DIVISION_VALUES`, entity pinning, the Ask Agy refusal below `CONFIDENCE_HIGH` (`[QUERY_REJECTED] reason=low_pinecone`), `build_user_message()` and its `<primary_story>` and `<supporting_story>` context, and the gpt-4o answer call's temperature and token settings. `semantic_search()` and its confidence buckets stay; My Work uses them.
+
+**Rationale:**
+- Gate rerun (`docs/evidence/MATTGPT-275/gate_20261015_093237/`; 3 arms interleaved, 10 runs, 1,250 rows, 0 errors, loggers patched; 32 blind scorers): new 386/450, opener arm 384/450, baseline 354/450. Invented figures, clients or dates: 0. Four turns below their bar (c03 t2, x1, x2, x4), each accepted as a known issue.
+- Rejected: a score floor for garbage queries. It can't separate them: gibberish scored 0.17, "RBC?" 0.20.
+- Rejected: the old overlap gate. It would block 12 must-answer follow-ups ("PMP?", "Sure.", "Would he relocate?"). Across 133 test queries and 7,573 log rows, the two rules matched only the two garbage test queries and one off-domain log row.
+- Rejected: letting the model decide whether to search on call 1. It skipped the search on follow-ups (ADR 040).
+- Not re-added: the Professional Narrative exclusion (MATTGPT-169). The gate run's grounding scores decide.
+
+**Consequences:**
+- Supersedes ADR 022 (no entity filter on Ask Agy), ADR 033 (Ask Agy no longer refuses on search confidence; My Work's buckets are unchanged) and ADR 040 (built, with the standalone query written by the model inside the tool call). ADR 034 stays Accepted: its history carriage holds, and its consequence that follow-up retrieval runs on the bare question is resolved, since the model writes each search query from the history. ADR 019's constraint has no subject left: `diversify_results()` is gone.
+- No production caller sets the Pinecone entity filter. `ENTITY_SEARCH_FIELDS` and the `$or` builder in `pinecone_semantic_search()` remain.
+- Professional Narrative stories show as sources for any question: in run 2's lever2_sol, 15 of 22 question-turns cited one. Source cards show what was retrieved, not what the answer cited (MATTGPT-128).
+- When Pinecone returns nothing, `semantic_search()` falls back to the corpus in file order, and those stories reach the model as evidence (MATTGPT-292).
+- Responses API calls are stored at OpenAI by default, visitors' questions included (MATTGPT-306).
+- Required closings (c14 to c17) scored 0/10 in every arm, the baseline included; ADR 035 still holds.
+- The golden eval and the structural tests call `agy_answer()` through a fixture in `rag_answer()`'s old call shape; the `entity_detection` eval category is skipped.
+- The commit carries no `Decision:` or `Rejected:` trailer for this decision; it is recorded from the commit message.
+
+---
+
+## ADR 048: Ask Agy's Prompt Carries NO_DASH_RULE; normalize_dashes() Stays as the Backstop
+
+**Date:** 2026-10-15
+**Status:** Accepted
+**Related tickets:** MATTGPT-275, MATTGPT-301
+
+**Context:**
+On gpt-6.1-sol, Ask Agy's answers carried em and en dashes: 42 of 55 answers in the current-prompt arm had one.
+
+**Decision:**
+- `NO_DASH_RULE` (`config/constants.py`): "Don't use em dashes or en dashes; use a comma, a colon, parentheses or a separate sentence, whichever fits." `build_answer_instructions()` carries it after the prose line, so both of Ask Agy's system prompts have it.
+- `normalize_dashes()` (`backend_service.py`) stays on Ask Agy's stream and final text as the backstop: an em dash or spaced en dash becomes ", ", an en dash between digits becomes " to ", an en dash joining two words becomes "-".
+- The prompts' own em dashes are rewritten by hand, as are the fixed texts visitors read: the rate-limit messages, source chip labels ("Client: Title"), the personal chip's question, the "Also relevant:" and "Scope:" lines, and the Why Agy? paragraphs.
+
+**Rationale:**
+- Four-arm run (`docs/evidence/MATTGPT-275/dash_arms_20261014_071542/`; c01, c03, c09, x1, x3; 5 runs each, 55 answers per arm): answers with a dash went from 42 of 55 to 4 of 55 with the line, each of the 4 a bolded number range copied from a story, which `normalize_dashes()` turns into "70 to 80%". Single em dashes per answer 0.73 to 0. No stand-ins (spaced hyphens 0, "--" 0); parentheses, colons and length unchanged.
+- Backstop replay on run 2's 130 saved answers: 162 of 163 dashes replaced, 0 cleanup defects, 260 stream replays matching.
+- Rejected: the rule in Role Match's prompts. On gpt-4o its model-written text had no dash with or without it (`docs/evidence/MATTGPT-275/role_match_dashes_20261014_113329/`): assessment notes and gap explanations 0 of 165 rows before, 0 of 167 after.
+- Rejected: rewriting the prompt's own em dashes as the fix. Without the line it changed nothing (48 of 55).
+
+**Consequences:**
+- The dashes visitors see on Role Match are the JD's own wording and one corpus story title cited as evidence. Neither gets a backstop.
+- Gate rerun (ADR 047): visible dashes in Sol answers 0 of 900.
+- `tests/unit/test_no_dash_rule.py` pins the rule and the dash-free prompts; the run 2 parity fixture holds the prompt to arm D's measured text.
+
+---
+
+## ADR 049: Ask Agy's Prompt Carries COMPARISON_RULE
+
+**Date:** 2026-10-15
+**Status:** Accepted
+**Related tickets:** MATTGPT-275, MATTGPT-251
+
+**Context:**
+On c12 t2 ("Which was bigger?" after Fiserv and JP Morgan ACCESS), answers ranked Fiserv's 45-person team above ACCESS's 40+, and ranked by measures only one side has.
+
+**Decision:**
+`COMPARISON_RULE` (`config/constants.py`), on the line after `NO_DASH_RULE` in `build_answer_instructions()`, so both of Ask Agy's system prompts carry it: "When asked which of two things was bigger or better, compare only on a measure the stories give for both, in the same units. If their figures can't settle it (an open-ended figure against an exact one, or two different measures), say the stories don't establish which is larger."
+
+**Rationale:**
+- Control isolation run (`docs/evidence/MATTGPT-275/control_iso_20261015_065005/`; 200 turns, 10 runs, blind): c12 t2 3/10 without the rule, 10/10 with it; the controls c01 t1 to t3 and c12 t1 10/10 with and without. Gate rerun: c12 t2 10/10 in both Sol arms.
+- Rejected: removing "Draw on all the stories provided." first. It fixed no target, and x1 fell to 1/3 (five-arm run, `docs/evidence/MATTGPT-275/rule_arms_20261014_214612/`, 270 turns; c12 t2 2/3).
+- Rejected: `INDUSTRY_CLAIM_RULE` in this change. It moves to MATTGPT-251, whose candidate rule it is; its arm dropped c01 t3 to 8/10.
+- Rejected: `TERM_SENSE_RULE` in this change. It is held until MATTGPT-251 lifts the `stocks_crypto` hold, since production refuses x3 before the model runs (ADR 043).
+
+**Consequences:**
+- x1 ("Has Matt worked in real estate?") stays below its bar (new 1/10) and is a known issue under MATTGPT-251.
+- `tests/unit/test_comparison_rule.py` pins the rule and its position; the parity fixture's two system prompts carry it.
+
+---
+
+## ADR 050: Ask Agy's Stream Has a 30 s Read Timeout and One Retry Before Any Answer Text
+
+**Date:** 2026-10-15
+**Status:** Accepted
+**Related tickets:** MATTGPT-303, MATTGPT-275, MATTGPT-302
+
+**Context:**
+`_openai_client()` used the SDK's 600 s read timeout. The SDK's own 2 retries wrap only the request send, not a stream that breaks after it starts. The overnight five-arm run had three failures (2 connection resets, 1 read timeout after 604 s), all before any answer text.
+
+**Decision:**
+- `_openai_client()` sets a read timeout of `ASK_ANSWER_READ_TIMEOUT_S = 30` s; connect stays 5 s.
+- `_stream_response()` sends a stream that raises `httpx.TransportError` before any answer text again, once. After text, the visitor has seen part of the answer, so the break raises and the turn ends on `ANSWER_ERROR_MESSAGE`.
+
+**Rationale:**
+- Gap probe (`docs/evidence/MATTGPT-275/stream_gaps_20261015_091852/`, 279 calls on the gate's turn set): the longest silence per call was 3.52 s at p99 and 3.67 s at most, all before the first answer text; 0.62 s at most after it.
+
+**Consequences:**
+- A healthy stall of 30 s would now be cut and sent again. The 122.7 s overnight turn that recovered (x3, 430 output tokens over 3 calls) would be cut if any one silence in it reached 30 s; its silences weren't recorded. If healthy stalls that long appear, revisit the timeout.
+- `backend_service.py` imports `httpx` directly; openai 2.5.0 requires it, so it is not a new dependency.
+- The retry catches `httpx.TransportError`. openai 3.x moved to httpx2, where the retry is inert; the 30 s timeout still applies. The Streamlit Cloud builds had installed 3.28.0 and 3.31.0 because `requirements.txt` listed openai with no version, so 130febd pins `openai==2.5.0`, the version every test, probe and gate ran on. `requirements-ci.txt` stays unpinned: CI's unit tests replace `openai.OpenAI` with a fake. Moving to openai 3.x, with tests, belongs with MATTGPT-302. 130febd carries no trailer; it is recorded here from its message.
+- `TestBrokenStreams` and `TestClientTimeout` in `tests/unit/test_ask_agy_tool_answer.py` pin the retry and the timeout.
+
+---
+
+## ADR 051: The Search Tool's Story Text Carries Start_Date and End_Date
+
+**Date:** 2026-10-15
+**Status:** Accepted
+**Related tickets:** MATTGPT-275, MATTGPT-311
+
+**Context:**
+`build_story_context_for_rag()` passed no dates, so the model answered "how long" and "when" questions with "not on record".
+
+**Decision:**
+`build_story_context_for_rag()` (`story_intelligence.py`) adds "[DATES]: <Start_Date> to <End_Date>" after the Domain line when a story has both, so the `search_stories` tool's story text carries them.
+
+**Rationale:**
+- Acceptance run (`docs/evidence/MATTGPT-275/dates_accept_20261014_210208/`; 54 turns, loggers patched, blind): 49 of 54 after 2 recorded corrections.
+- Gate rerun: c18 t3 10/10 and c10 t3 6/10, against a baseline of 0/10 on both. Every Sol answer to x7 gives dates; every baseline answer says it has none.
+
+**Consequences:**
+- A story without an End_Date gets no dates line, including an ongoing period (MATTGPT-311).
+- c03 t2: 2 of 10 answers place a 2014-2019 incident under a 2019-2023 culture the dates rule out. Accepted; the story's broad dates are part of its anonymization.
+- x7 ("When was he at JP Morgan?"): answers list three of the four periods, because top-5 retrieval misses one story.
+- `TestStoryDates` in `tests/unit/test_story_intelligence.py` pins the line.

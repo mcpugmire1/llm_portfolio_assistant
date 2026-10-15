@@ -76,7 +76,7 @@
 ## Executive Summary
 
 **Project:** MattGPT Portfolio Assistant - AI-powered career story search and chat interface
-**Tech Stack:** Streamlit, OpenAI GPT-4o, Pinecone vector DB, Python 3.11+
+**Tech Stack:** Streamlit, OpenAI (gpt-6.1-sol answers Ask Agy; gpt-4o runs Role Match and tag generation), Pinecone vector DB, Python 3.11+
 **Data Corpus:** 100+ STAR-formatted transformation project stories
 
 ### What This Document Contains
@@ -151,7 +151,7 @@ llm_portfolio_assistant/
 │   │   │   ├── landing_view.py        # Landing page UI
 │   │   │   ├── conversation_view.py   # Chat conversation UI
 │   │   │   ├── conversation_helpers.py # Message rendering
-│   │   │   ├── backend_service.py     # RAG pipeline integration
+│   │   │   ├── backend_service.py     # Ask Agy answer path: agy_answer() tool loop, post-processing, MATT_DNA
 │   │   │   ├── prompts.py             # BASE_PROMPT + DELTA architecture
 │   │   │   ├── styles.py              # CSS definitions
 │   │   │   ├── story_intelligence.py  # Theme/persona inference
@@ -262,7 +262,7 @@ Reusable UI components shared across multiple pages.
 **story_detail.py Key Pattern:**
 ```python
 # "Ask Agy About This" button flow (see Cross-Page Navigation section)
-def handle_ask_about_this(detail: dict):
+def on_ask_this_story(detail: dict):
     st.session_state["seed_prompt"] = f"Tell me more about: {detail.get('Title')}"
     st.session_state["active_story"] = detail.get("id")
     st.session_state["active_story_obj"] = detail
@@ -407,7 +407,7 @@ Pinecone Index (matt-portfolio-v2)
       ↓
 [Production App - services/pinecone_service.py]
       ↓
-Semantic Search Results → RAG → GPT-4o → User
+search_stories tool results → gpt-6.1-sol (Ask Agy) → User
 ```
 
 ---
@@ -574,6 +574,8 @@ PINECONE_NAMESPACE=default
 
 ### Production RAG Pipeline
 
+Ask Agy answers through `agy_answer()` in `backend_service.py`, called by `send_to_backend()`. See ADR 047 in `docs/ADR.md`.
+
 **Query → Response Trace:**
 
 ```
@@ -581,69 +583,41 @@ User Query
     ↓
 ┌─────────────────────────────────────────────────┐
 │ Layer 1: Rules-Based Rejection (Free)           │
-│ - nonsense_filters.jsonl patterns               │
-│ - is_nonsense() regex validation                │
+│ - nonsense_filters.jsonl via is_nonsense()      │
+│ - skipped for suggestion chips                  │
 └─────────────────────────────────────────────────┘
     ↓ (passed)
 ┌─────────────────────────────────────────────────┐
-│ Layer 2: Semantic Router (Cheap)                │
-│ - Embed query with text-embedding-3-small       │
-│ - Compare against intent phrase embeddings (15 families) │
-│ - 15 families including narrative, synthesis, out_of_scope, personal │
-│ - HARD_ACCEPT=0.80, SOFT_ACCEPT=0.40            │
+│ Layer 2: Semantic Router (one embedding)        │
+│ - 15 intent families, HARD_ACCEPT=0.80          │
+│ - out_of_scope and personal: redirect           │
+│ - synthesis: synthesis system prompt            │
+│ - skipped for suggestion chips                  │
 └─────────────────────────────────────────────────┘
-    ↓ (accepted, returns intent_family)
+    ↓ (accepted)
 ┌─────────────────────────────────────────────────┐
-│ Layer 3: Fast Exit Checks                       │
-│ - out_of_scope: intent_family check → redirect  │
-│ - detect_entity(): Client, Employer, Div, Title │
-│ - Title = SOFT filter (no Pinecone metadata)    │
+│ Layer 3: Tool Loop (gpt-6.1-sol, Responses API) │
+│ - input: system prompt, last two exchanges,     │
+│   the question as asked                         │
+│ - call 1 must call search_stories               │
+│ - calls 2-3 may search again                    │
+│ - one more call, no tools, must answer          │
 └─────────────────────────────────────────────────┘
-    ↓
+    ↓ (each search_stories call)
 ┌─────────────────────────────────────────────────┐
-│ Layer 4: Pinecone Vector Search + Keyword Blend │
-│ - Query embedding → vector search               │
-│ - Entity filter ($or across 6 fields) if hard   │
-│ - Title: NO filter (semantic search ranks it)   │
-│ - UI filters (industry, domain, role)           │
-│ - Returns top 25 candidates (SEARCH_TOP_K)      │
-│ - blend = 1.0·pc + 0.15·kw applied to ranking  │
-└─────────────────────────────────────────────────┘
-    ↓
-┌─────────────────────────────────────────────────┐
-│ Layer 5: Confidence Gate                        │
-│ - HIGH (≥0.25): proceed normally                │
-│ - Below 0.25: Ask Agy refuses, except           │
-│   suggestion clicks and trusted behavioral      │
-│ - My Work: LOW (≥0.20) shows a warning          │
+│ Layer 4: Search (semantic_search)               │
+│ - the model's query → Pinecone top 25           │
+│ - sorted by blend = 1.0·pc + 0.15·kw            │
+│ - top 5 returned as <story> blocks              │
+│ - no entity filter, no reshuffle, no gate       │
 └─────────────────────────────────────────────────┘
     ↓
 ┌─────────────────────────────────────────────────┐
-│ Layer 6: Post-Retrieval Processing              │
-│ STANDARD: entity_pin → diversify_results() → 5 │
-│ NARRATIVE: sort by score (skip diversity) → 5   │
-│ SYNTHESIS: theme-filter → named-clients-first → 7 │
-└─────────────────────────────────────────────────┘
-    ↓
-┌─────────────────────────────────────────────────┐
-│ Layer 7: Context Assembly                       │
-│ - XML isolation: <primary_story> tags           │
-│ - MATT_DNA ground truth injection               │
-│ - Mode-specific prompt selection                │
-└─────────────────────────────────────────────────┘
-    ↓
-┌─────────────────────────────────────────────────┐
-│ Layer 8: LLM Generation (OpenAI GPT-4o)         │
-│ - Temperature: 0.4 (standard) / 0.2 (synthesis) │
-│ - Max tokens: 700                               │
-│ - Fact-pairing + texture rules                  │
-└─────────────────────────────────────────────────┘
-    ↓
-┌─────────────────────────────────────────────────┐
-│ Layer 9: Response Formatting                    │
-│ - Extract answer + sources                      │
-│ - Related Projects display                      │
-│ - Meta-commentary cleanup                       │
+│ Layer 5: Stream, Then Swap                      │
+│ - answer text streams with normalize_dashes()   │
+│ - finished text replaced by                     │
+│   _postprocess_agy_text() output                │
+│ - sources: the stories the searches returned    │
 └─────────────────────────────────────────────────┘
     ↓
 User Response
@@ -664,6 +638,8 @@ This section defines the **job, rules, and constraints** for each retrieval comp
 - **Rule:** Runs FIRST before any embedding or LLM cost
 - **Categories:** `celebrity_earnings` (salary/net-worth questions about named public figures), `recruiter_logistics` (compensation range or expectation questions framed as recruiter screens), `personal_compensation` (Matt's own pay). `personal_compensation` uses two patterns: a broad-vocabulary pattern covering salary terminology and a contextual pattern covering indirect phrasings ("how much money does he make"). Two patterns are needed because the indirect form bypasses the broad-vocabulary match. `recruiter_logistics` covers compensation only; location, relocation, start-date, and availability questions are answered from the profile fact surface.
 - **Questions about Matt:** five rules (`creative_writing` and `general_knowledge`, two each, and `gaming`) start with the lookahead `^(?!.*\b(matt|matt's|pugmire|he|his|him)\b)`, so a question that names Matt or uses he, his or him passes them. `stocks_crypto` and `homework` have no lookahead. `roleplay_impersonation` rejects requests to roleplay, pretend or act as a person named by a pronoun or by "my" plus a family word; role phrasings ("a hiring manager", "my interviewer") pass. Both key on wording, not intent. See ADR 043 in `docs/ADR.md`.
+- **Garbage input:** `gibberish` matches two or more words each typed from one keyboard row ("asdf jkl qwerty"); `local_recommendations` matches "best", "good" or "cheap" followed by a food or venue word. Ask Agy has no confidence gate, so without these rules such queries reach the answering model. See ADR 047 in `docs/ADR.md`.
+- **Suggestion chips** (`__ask_from_suggestion__` or `__ask_force_answer__`) skip the nonsense rules and the router.
 
 #### Semantic Router
 - **Job:** Embedding-based intent classification to reject borderline off-topic queries
@@ -677,21 +653,12 @@ This section defines the **job, rules, and constraints** for each retrieval comp
 
 #### Observability Logging
 
-Structured logs added to diagnose "I can't help with that" issues in production.
+**Log lines:**
+- `[API_ERROR_DETECTED] source=embed_failure` (`pinecone_semantic_search()`): the query embedding failed; `__embed_failure__` is set and Ask Agy returns the breather message.
+- `agy_answer fatal error` (`logger.exception` in `agy_answer()`): an answer call failed with anything other than a rate limit.
+- `Ask Agy stream broke before any answer text (...); sending it again` (`logger.warning` in `_stream_response()`).
 
-**Log tags:**
-- `[QUERY_REJECTED]`: Query rejected for low Pinecone confidence (`reason=low_pinecone`)
-- `[API_ERROR_DETECTED]` — Router returned `error_fallback` family (connection/timeout issue)
-
-**Log format:**
-```
-[QUERY_REJECTED] reason=low_pinecone, router_family=background, router_score=0.42, pinecone_score=0.12, query=Tell me about...
-[API_ERROR_DETECTED] router=error_fallback, pinecone_score=0.35, confidence=high, query=Tell me about...
-```
-
-**Lives in:** `ui/pages/ask_mattgpt/backend_service.py`
-
-### Layer 2: Intent Classification (Hybrid)
+### Layer 2: Intent Classification
 
 #### Semantic Router Intent Family (Primary)
 - **Job:** Map query to intent family via embedding similarity (no LLM cost)
@@ -701,59 +668,12 @@ Structured logs added to diagnose "I can't help with that" issues in production.
 
 
 
-#### Entity Detection
-- **Job:** Detect company/division/title mentions in query for scoped retrieval
-- **Lives in:** `ui/pages/ask_mattgpt/backend_service.py:detect_entity()`
-- **Fields checked (in order):** Client, Employer, Division, Title
-- **Hard filtering:** Client, Employer, Division → Apply Pinecone metadata filter
-- **Soft filtering:** Title → Detected but NO Pinecone filter (semantic search ranks naturally)
-- **Why soft filtering for Title:** See ADR 022 in `docs/ADR.md`.
-- **Exclusions:** "Multiple Clients", "Independent", "Career Narrative" (too generic to filter)
-- **Returns:** `(field_name, entity_value)` tuple or `None`
+#### Multi-Field Entity Filter
+Kept in `pinecone_semantic_search()` (`services/pinecone_service.py`); no production caller sets `entity_field`.
 
-#### Multi-Field Entity Search
-- **Job:** Search across ALL entity fields when entity detected, not just the primary field
-- **Lives in:** `services/pinecone_service.py`
-- **Implementation:** Uses Pinecone `$or` operator to search across 6 fields simultaneously
-- **Note:** Entity DETECTION checks 3 hard fields (Client, Employer, Division), with Title as a separate soft path (detected but no Pinecone filter applied). Pinecone SEARCH spans 6 fields for hard-filtered entities.
-- **Fields searched:** `client`, `employer`, `division`, `project`, `place`, `title`
-- **Casing rules:**
-  - **Lowercase fields:** `division`, `employer`, `project`, `place` → `.lower()` applied
-  - **PascalCase fields:** `client` → preserve original casing
-- **Example:** Query "Accenture work" → detected as Client, then searches:
-  ```python
-  {"$or": [
-      {"client": {"$eq": "Accenture"}},
-      {"employer": {"$eq": "accenture"}},
-      {"division": {"$eq": "accenture"}},
-      {"project": {"$eq": "accenture"}},
-      {"place": {"$eq": "accenture"}},
-      {"title": {"$eq": "Accenture"}}
-  ]}
-  ```
-- **Why:** Fixes "entity blind spot" where stories with `Client="Confidential"` but `Employer="Accenture"` weren't found
-- **⚠️ Note:** `get_synthesis_stories()` in `backend_service.py` uses PascalCase `"Theme"` in its Pinecone filters. This works because Pinecone metadata was uploaded with PascalCase `Theme` key, but is inconsistent with the lowercase field name convention used elsewhere. If entity-scoped synthesis returns unexpected zero results, check this field name casing first.
+#### Generic Clients
 
-#### Excluded Entities & Clients
-
-Two related constants prevent overly generic values from triggering entity filters or appearing in UI:
-
-**`EXCLUDED_ENTITIES`** — Values too generic to filter on in Pinecone queries.
-**Lives in:** `backend_service.py`
-
-| Value | Reason |
-|-------|--------|
-| `Multiple Clients` | Would match too broadly |
-| `Multiple Financial Services Clients` | Same |
-| `Independent` | Personal projects, not a real client |
-| `Career Narrative` | Meta-content, not a client |
-| `Sabbatical` | Not a work engagement |
-| `Various`, `N/A`, `""`, `None` | Empty/placeholder values |
-
-**Generic-client exclusion (pattern-based, replaces the former `EXCLUDED_CLIENTS` constants):**
-**Lives in:** `utils/client_utils.py` — `is_generic_client(client: str) -> bool`
-
-Per the CLAUDE.md "No Hardcoded Enums for Data-Derived Values" rule, the prior set of hardcoded `EXCLUDED_CLIENTS` constants (replicated across three files and prone to drift) was replaced by a single pattern-matching helper. Call sites import `is_generic_client` and use it as a filter rather than maintaining parallel exclusion lists.
+**Lives in:** `utils/client_utils.py`, `is_generic_client(client: str) -> bool`. Pattern-based; call sites import it and filter with it rather than keep their own lists.
 
 | Value pattern | Reason |
 |-------|--------|
@@ -763,208 +683,84 @@ Per the CLAUDE.md "No Hardcoded Enums for Data-Derived Values" rule, the prior s
 | `Financial Services Client(s)` | Anonymized aggregate |
 | `Personal`, `Sabbatical`, `Various`, `N/A`, `""`, `None` | Empty/placeholder values |
 
-**Note:** Single source of truth — if a new exclusion is needed, update `is_generic_client()` once, not multiple files.
+**Note:** Single source of truth: if a new exclusion is needed, update `is_generic_client()` once, not multiple files.
 
 ### Layer 3: Retrieval
 
-#### Confidence Gating
-- **Job:** Bucket retrieval by the top Pinecone score; Ask Agy refuses anything below `CONFIDENCE_HIGH`
-- **Lives in:** `services/rag_service.py:semantic_search()` (buckets) and `rag_answer()` in `backend_service.py` (Ask Agy refusal)
-- **Buckets:**
-  - Top score ≥ `CONFIDENCE_HIGH = 0.25` → `confidence="high"`
-  - Top score ≥ `CONFIDENCE_LOW = 0.20` → `confidence="low"`; hits below 0.20 are dropped from the results
-  - Below 0.20 → `confidence="none"`, empty results
-- **Ask Agy:** refuses both `low` and `none`, logged as `[QUERY_REJECTED] reason=low_pinecone`, so any top score below 0.25 is refused. There is no warning tier. Two exceptions pass: suggestion and context-locked queries (`from_suggestion`), and trusted behavioral queries (router score ≥ 0.80 and family `behavioral`).
-- **My Work:** `low` shows "Showing closest matches for ... Relevance may be low." and `none` shows "No strong matches" (`_render_confidence_banner()` in `explore_stories.py`).
-- See ADR 033 in `docs/ADR.md`.
+#### search_stories Tool
+- **Job:** Give the answering model evidence from the corpus, on a query the model writes from the question and the conversation
+- **Lives in:** `_SEARCH_STORIES_TOOL` and `_run_search_tool()` in `backend_service.py`
+- **Shape:** a Responses API function tool with one string parameter, `query` ("A standalone search query."), `strict` false
+- **When it runs:** the first call of every turn has `tool_choice="required"`, so every turn searches; calls 2 to `ASK_TOOL_MAX_ROUNDS` (3) have `"auto"`; the call after that has `"none"` and must answer
+- **Search:** `semantic_search(query, {}, stories=stories, top_k=SEARCH_TOP_K)` in `services/rag_service.py`, with no facet or entity filters. The tool returns the first 5 results, each as `<story title="...">` around `build_story_context_for_rag(story)`; a Professional Narrative story also carries `get_verbatim_requirement()`. With no results it returns "No stories found."
+- **Sources:** every story any search in the turn returned, deduplicated by id, in the order found. Source cards show what was retrieved, not what the answer cited. Professional Narrative stories are returned like any other.
+- **No gate:** search confidence does not decide whether Ask Agy answers. With nothing at or above `CONFIDENCE_LOW`, the tool returns no stories and the model answers from MATT_DNA, the profile and the conversation, or says the record doesn't cover it. The highest top score of the turn goes to the query logger.
 
-#### Standard Mode
-- **Job:** Answer specific questions about one story/client/topic
-- **Triggers:** Intent = client, behavioral, technical, background, general
-- **Retrieval:**
-  1. User query → OpenAI embedding
-  2. Pinecone vector search (top 25, SEARCH_TOP_K) with multi-field entity filter if detected
-  3. Confidence gating
-  4. **Entity pinning:** If entity detected, pin matching story to #1 (title substring match for Division/Project, Pinecone score for Client/Employer)
-  5. `diversify_results()` on remaining stories → named clients first, max 1 per client
-- **Lives in:** `services/rag_service.py` + `backend_service.py:rag_answer()`
-- **Story limit:** 7 stories to LLM context
-
-#### Narrative Mode
-- **Job:** Answer biographical/philosophy questions (leadership journey, early failure, etc.)
-- **Triggers:** Intent family = `narrative` (from semantic router)
-- **Retrieval:**
-  1. Same as Standard (steps 1-3)
-  2. **Skip diversity:** If `pool[0]` is Professional Narrative, preserve it at #1
-  3. Diversify remaining stories
-- **Lives in:** `backend_service.py:rag_answer()` (narrative branch)
-- **Rationale:** Title is now embedded in Pinecone, so semantic search naturally finds narrative stories. The `intent_family == "narrative"` branch protects against diversity demotion.
+#### semantic_search() Confidence Buckets
+- **Lives in:** `services/rag_service.py:semantic_search()`
+- Top score ≥ `CONFIDENCE_HIGH = 0.25` → `confidence="high"`; ≥ `CONFIDENCE_LOW = 0.20` → `"low"`, hits below 0.20 dropped; below 0.20 → `"none"`, empty results
+- When Pinecone returns no hits or fails, it falls back to the local corpus in file order, with confidence `low`
+- **My Work:** `low` shows "Showing closest matches for ... Relevance may be low." and `none` shows "No strong matches" (`_render_confidence_banner()` in `explore_stories.py`)
+- **Ask Agy:** reads only the results and `top_score`; see search_stories Tool
 
 #### Synthesis Mode
-- **Job:** Answer "what are Matt's themes/patterns/philosophy" questions
-- **Triggers:** Intent = `synthesis` (no entity + cross-cutting question)
+- **Triggers:** router family `synthesis`
+- **Effect:** `build_tool_system_prompt(is_synthesis=True)` uses SYNTHESIS_DELTA (breadth across stories, 250-400 words) and no focus angle. Retrieval is the same tool loop.
 
-#### rag_answer Return Contract
-
-All 14 return points in `rag_answer()` (after commits `9395a68`, `3c5d00a`, `040b785`) include retrieval observables. Tests in `tests/unit/` and `tests/integration/` assert against this shape; a silent breaking change here will fail the gate without an obvious error message.
+#### agy_answer Return Contract
 
 ```python
 {
-    "answer_md":       str,           # rendered markdown answer
-    "sources":         list[dict],    # story metadata for citations
-    "modes":           dict,          # {"narrative": str, ...} alternate renders
-    "default_mode":    str,           # which mode to show first
-    # Retrieval observables (always present, may be None):
-    "rejection_reason": str | None,   # e.g. "semantic_router:out_of_scope"
-    "intent_family":    str | None,   # router family ("background", "technical", ...)
-    "entity_match":     tuple | None, # (field, value) e.g. ("Client", "Accenture")
-    "confidence":       str | None,   # "high" | "low" | "none"
-    "pool_size":        int | None,   # stories in pool before LLM truncation
-    # Conditional (LLM-answer return only):
-    "profile_categories": list[str],  # cited profile categories; absent on all other return paths -- read with .get()
+    "answer_md":          str,         # post-processed answer, redirect copy, or an error message
+    "sources":            list[dict],  # {"id", "title", "client"} per story the searches returned
+    "modes":              dict,        # {"narrative": answer_md}; {} on nonsense rejections and errors
+    "default_mode":       "narrative",
+    "intent_family":      str | None,  # router family; None for suggestion chips
+    "confidence":         None,        # always None
+    "entity_match":       None,        # always None
+    "rejection_reason":   str | None,  # "rule:<category>", "semantic_router:out_of_scope", "semantic_router:personal"
+    # Answer and error returns only:
+    "profile_categories": list[str],   # answer return only
+    "degraded":           bool,        # False on an answer, True on ANSWER_ERROR_MESSAGE
 }
 ```
 
-`rejection_reason` mirrors `ask_last_reason` strings exactly. `pool_size` reflects the operative pool: synthesis overrides to `len(synthesis_pool)` at the synthesis branch. `profile_categories` is present only on the LLM-answer return path; all other return points omit it. Consumers (`conversation_view.py`, `landing_view.py`, `conversation_helpers.py`) read it with `.get()` or `[]` as default.
+`rejection_reason` mirrors `ask_last_reason`. Consumers read `profile_categories` with `.get()`.
 
-**Intent Classification (Semantic Router Only):**
-
-All intent classification uses the embedding-based semantic router (`services/semantic_router.py`) which maps queries to 15 intent families without LLM cost. Entity detection runs in parallel to identify company/project/title mentions.
-
-```
-Query → Semantic Router (embedding similarity against intent phrase embeddings across 15 families)
-      → Entity Detection (substring matching against known entities + exact title match)
-      → Intent Family Resolution:
-        - background, behavioral, delivery, team_scaling, leadership
-        - technical, domain_payments, domain_healthcare, stakeholders
-        - innovation, agile_transformation, narrative, synthesis, out_of_scope, personal
-```
-
-The semantic router handles all intent classification via embedding similarity alone: synthesis detection (`intent_family == "synthesis"`), out_of_scope detection, and all other families. See ADR 020 in `docs/ADR.md`.
-
-**Key Rule:** Entity detection OVERRIDES verb patterns.
-- "How did Matt scale at Accenture?" → `client` (not synthesis)
-- "What are Matt's core themes?" → `synthesis` (no entity)
-
-**Retrieval Strategies:**
-
-| Intent | Stories Retrieved | Retrieval Method |
-|--------|-------------------|------------------|
-| synthesis | 7-9 (up to 3 per theme) | Theme-filtered search, named-clients-first sorting |
-| narrative | 7 | Sort by Pinecone score (skip diversity) |
-| client | 7 | Entity pin to #1 → diversify_results() |
-| behavioral | 7 | Entity pin (if detected) → diversify_results() |
-| technical | 7 | Entity pin (if detected) → diversify_results() |
-| background | 7 | Entity pin (if detected) → diversify_results() |
-| general | 7 | Entity pin (if detected) → diversify_results() |
-
-**Synthesis Retrieval (get_synthesis_stories):**
-1. Embed USER's actual query (not fixed theme keywords)
-2. For each theme: Pinecone query with `filter={"Theme": theme}` + user embedding
-3. If entity detected: Add entity filter (e.g., `{"Division": "Cloud Innovation Center"}`)
-4. Up to 3 stories per theme, skip themes with no entity-scoped results
-5. Sort by score, then named-clients-first (JP Morgan/RBC beat "Independent")
-6. Return top 9 stories
-
-**Entity Detection:**
-Checks fields in order: Client, Employer, Division. Project and Place are not detected; see ADR 024 in `docs/ADR.md`.
-- "CIC" matches Division: "Cloud Innovation Center"
-- "JPMorgan" matches Client: "JP Morgan Chase" (via `ENTITY_ALIASES`)
-- Excludes generic values: "Multiple Clients", "Independent"
-
-**Synthesis Prompt Mode:**
-- Different system prompt focused on patterns/themes
-- Asks for breadth across stories, not depth on one
-- Structure: Theme → Evidence from 2-4 clients → Insight
-- Dynamic client list derived from retrieved stories (no hardcoded names)
-- Longer responses (250-400 words)
-
-- **Lives in:** `backend_service.py:get_synthesis_stories()`
-- **Story limit:** 9 stories to LLM context
-- **MUST use:** User's actual query embedding for semantic relevance
-- **MUST NOT:** Ignore user's query for fixed theme keywords (previous bug)
-
-**Cost:**
-- Intent classification: ~$0.0000002 per query (embedding similarity, no LLM call)
-- LLM generation: GPT-4o (~$0.01-0.02 per query, 700 max tokens)
-- Total per query: ~$0.02
+**Intent Classification:** the semantic router (`services/semantic_router.py`) maps a query to one of 15 families by embedding similarity, with no LLM call. On Ask Agy the family decides the out_of_scope and personal redirects and whether the synthesis prompt is used. See ADR 020 in `docs/ADR.md`.
 
 **Self-Maintenance:**
 - Semantic router handles novel phrasings via embedding similarity
 - New story themes automatically picked up via `sync_portfolio_metadata()` at startup
 - MATT_DNA prompt regenerated on each deploy with current client/theme data
 
-#### Ranking Pipeline Order of Operations
+#### Ranking
 
-**1. Pinecone Search (services/pinecone_service.py)**
-```
-query_vector → Pinecone.query(top_k=SEARCH_TOP_K, filter=entity_filters)  # 25
-↓
-Returns: [(story_id, score), ...] sorted by cosine similarity; stories are looked up locally by id
-```
-
-**2. Entity Pinning (backend_service.py)**
-```
-If entity detected AND matching story found:
-  Move matching story to position 0
-  Rest maintain Pinecone order
-```
-
-**3. Diversity Reordering (backend_service.py:diversify_results)**
-```
-Default (client-based) — standard/behavioral modes:
-  - Pin #1 from Pinecone retrieval (highest semantic relevance)
-  - For slots #2+: named clients first, then generic, then duplicates
-  - `max_per_client` is accepted but never read. Prioritizes one story
-    per client; additional same-client stories appended, not dropped.
-  - NO cross-query session state: deterministic per query (ADR 019)
-
-family="background" branch:
-  - Groups by Era instead of Client
-  - Why: client-based diversify treats each Client value as distinct,
-    so four Wellfound engagements filled four slots while collapsing to
-    one era.
-  - Caps: <=1 Professional Narrative (counting pin), <=1 Independent
-    Project. ENGAGE era-duplicates fill remaining slots up to 7 by
-    blend order.
-  - Wired at: standard non-narrative no-entity path + empty-ranked
-    fallback. Entity-pinned and narrative paths retain client-based
-    behavior.
-
-Skip for narrative mode (trust Pinecone semantic ranking).
-```
-
-**4. Final Selection**
-```
-Standard: top 5 after diversity
-Narrative: top 5 by Pinecone score (no reorder)
-Synthesis: up to 9 (3 per theme × 3 themes)
-```
-
-**Scoring Formula:**
-- `blend = 1.0·pc + 0.15·kw` where pc = Pinecone cosine similarity, kw = naive token overlap from `_keyword_score_for_story()` (commit f5641e7; see CHANGELOG -157/-170)
-- Confidence thresholds: HIGH=0.25, LOW=0.20 (from config/constants.py)
+1. `pinecone_semantic_search()`: `Pinecone.query(top_k=SEARCH_TOP_K)` (25), ids and scores only; stories are looked up locally by id. Hits are sorted by `blend = 1.0·pc + 0.15·kw`, where pc is the Pinecone cosine similarity and kw the token overlap from `_keyword_score_for_story()` (weight `W_KW`).
+2. `semantic_search()`: confidence bucket from the top Pinecone score; hits below `CONFIDENCE_LOW` dropped.
+3. `_run_search_tool()`: the first 5.
 
 ### Layer 4: Response Generation
 
 #### Agy Voice Generator
 - **Job:** Transform retrieved stories into WHY→HOW→WHAT narrative with Agy personality
-- **Lives in:** `backend_service.py:_generate_agy_response()`
-- **Model:** GPT-4o
+- **Lives in:** `agy_answer()`, `_stream_response()` and `_postprocess_agy_text()` in `backend_service.py`; the prompt in `prompts.py`
+- **Model:** `ASK_ANSWER_MODEL = "gpt-6.1-sol"` on the Responses API, streamed; `ASK_ANSWER_REASONING_EFFORT = "medium"`; `ASK_ANSWER_MAX_OUTPUT_TOKENS = 4000`, reasoning tokens included. The model takes no temperature or max_tokens. See ADR 047 in `docs/ADR.md`.
+- **Client:** `_openai_client()`: each read waits at most `ASK_ANSWER_READ_TIMEOUT_S = 30` s; connect 5 s. See ADR 050 in `docs/ADR.md`.
 - **Persona:** Agy 🐾 — Matt Pugmire's Plott Hound assistant (named after his late dog Agador Spartacus)
-- **Temperature:** 0.2 (synthesis) / 0.4 (standard) — low to reduce hallucination and preserve texture
-- **Max tokens:** 700
-- **Word target:** 250-400 words
-- **Conversation history:** `send_to_backend()` builds prior messages from `st.session_state["ask_transcript"]` with `_build_history_messages()`: the last `ASK_HISTORY_MAX_MESSAGES = 4` messages (two exchanges), banners skipped, the current question dropped. `rag_answer(history=...)` passes them to `_generate_agy_response()`, which sends them between the system and user messages. Retrieval, the gates, and the router see only the current question. See ADR 034 in `docs/ADR.md`.
+- **Word target:** 200-350 words (standard, `STANDARD_DELTA`), 250-400 words (synthesis, `SYNTHESIS_DELTA`)
+- **Conversation history:** `send_to_backend()` builds prior messages from `st.session_state["ask_transcript"]` with `_build_history_messages()`: the last `ASK_HISTORY_MAX_MESSAGES = 4` messages (two exchanges), banners skipped, the current question dropped. `agy_answer(history=...)` puts them between the system prompt and the question, so the model sees them when it writes its search queries. The nonsense rules and the router see only the current question. See ADR 034 in `docs/ADR.md`.
+- **Streaming:** `_stream_response()` passes each piece of answer text to `on_delta` with `normalize_dashes()` applied. A trailing dash, with the spaces and commas next to it, is held until the next character shows how it resolves, so the stream never takes text back. When the turn finishes, the streamed text is replaced by `_postprocess_agy_text()`'s output (stream, then swap).
+- **Failures:** a stream that raises `httpx.TransportError` before any answer text is sent again once; after text, or on a second break, the turn fails. A rate limit returns "🐾 I need a quick breather: try again in about 15 seconds!"; an embedding failure during a search returns "🐾 I need a quick breather: please try again in a moment!"; any other error returns `ANSWER_ERROR_MESSAGE` ("Sorry, I couldn't generate an answer right now.") with no sources and `degraded: True`. See ADR 050 in `docs/ADR.md`.
 
 **Response Structure:**
 - **Standard mode:** WHY (tension/stakes — what wasn't working) → HOW (what Matt did differently) → WHAT (proof — measurable results)
 - **Synthesis mode:** Name patterns → Prove with client examples → Connect the thread
 
-**Python-Driven Randomization** (for variety), picked by `_choose_opening_and_focus()` from module constants in `backend_service.py`:
-- 8 standard mode openings, `STANDARD_OPENERS` ("🐾 Found it!", "🐾 On it!", etc.)
-- 4 synthesis mode openings, `SYNTHESIS_OPENERS` ("🐾 Looking across Matt's portfolio, I see clear patterns.", etc.), plus the `SYNTHESIS_BREADTH` line
-- 6 focus angles, `FOCUS_ANGLES`: human impact, methodology, scale, leadership, outcomes, innovation
+**Openers and focus angles** (module constants in `backend_service.py`):
+- The system prompt lists every opener line as an example of how Agy opens, synthesis first: the 4 `SYNTHESIS_OPENERS` ("🐾 Looking across Matt's portfolio, I see clear patterns.", etc.), then the 8 `STANDARD_OPENERS` ("🐾 Found it!", "🐾 On it!", etc.). The model writes its own opening line.
+- Standard answers get one of the 6 `FOCUS_ANGLES` (human impact, methodology, scale, leadership, outcomes, innovation) at random, from `_choose_opening_and_focus()`; synthesis answers get none. The opener it picks and `SYNTHESIS_BREADTH` are not sent.
+- `build_answer_instructions()` also carries `NO_DASH_RULE` and `COMPARISON_RULE` (`config/constants.py`) in both modes. See ADRs 048 and 049 in `docs/ADR.md`.
 
 Responses end without a closing offer. See ADR 035 in `docs/ADR.md`.
 
@@ -1015,26 +811,7 @@ MATT_DNA holds no list of companies Matt did not work for: Clients by Employer a
 ```
 Banned starters: "In my journey", "I've encountered", "In my experience"
 
-**Context Isolation via XML Tags** (prevents cross-story hallucination):
-
-Stories are wrapped in XML tags before injection into the LLM prompt:
-```xml
-<primary_story>
-  [Full story context - main focus of response]
-</primary_story>
-
-<supporting_story index="2">
-  [Background context only - do NOT pull details into primary narrative]
-</supporting_story>
-```
-
-**Rules enforced in system prompt:**
-- `<primary_story>` is the MAIN story — response should primarily be about THIS story
-- `<supporting_story>` tags are background context ONLY
-- Do NOT use a client name from a supporting story to label the primary story
-- A metric from a supporting story CANNOT appear in discussion of the primary story
-- If Client="Multiple Clients" → say "across multiple engagements" even if named client in supporting story
-- NEVER invent additional examples to "show breadth"
+**Context Isolation:** each story in a search_stories result is wrapped in `<story title="...">`, and BASE_PROMPT's CONTEXT ISOLATION section tells the model to keep facts pinned to their source: no mixing metrics between stories, no attributing one story's outcomes to another.
 
 **Fact-Pairing Rule:** A metric is only valid if BOTH the number AND the specific outcome it measures appear together in the same story. Do not re-attach a number from one context to a different outcome.
 
@@ -1047,29 +824,16 @@ Stories are wrapped in XML tags before injection into the LLM prompt:
 - ✅ "Matt wanted to demonstrate his RAG architecture skills..."
 - ❌ NEVER: "Job seekers were struggling..." / "Engineers needed..."
 
-**Post-processing:**
-- Auto-bold all known client names (derived from story corpus)
-- Auto-bold numbers/metrics: $50M, 30%, 4x, 150+ engineers, etc.
-- ~~Remove banned phrases that LLM ignores (BANNED_PHRASES_CLEANUP list)~~ ✅ **REMOVED (Jan 26):** BASE_PROMPT now instructs "delete and state the fact"
-
-**Meta-Commentary Safety Net** ✅ **LARGELY RESOLVED (Jan 26):**
-- `META_SENTENCE_PATTERNS` regex catches LLM meta-commentary that violates NEVER rules
-- Patterns: "This story demonstrates...", "This reflects Matt's...", "reveals his pattern of..."
-- ~~**Known issue:** Prompt conflict between "Emphasize X" and "NEVER meta-commentary"~~ ✅ **FIXED:** Removed `get_theme_guidance()`, new BASE_PROMPT + DELTA architecture
-- Failures reduced from 10/31 → 1-2/31 (LLM variance)
-
-**BANDAID Logging:**
-```python
-def _log_bandaid(bandaid_name: str, details: str):
-    """Log when a post-processing safety net catches a violation.
-    Used to track which band-aids fire so unused ones can be deleted."""
-```
-- Logged to DEBUG output when `DEBUG=True`
-- Helps identify which post-processing rules are actually needed vs. cruft
+**Post-processing** (`_postprocess_agy_text()`, in order):
+1. `normalize_dashes()`: an em dash or spaced en dash becomes ", ", an en dash between digits becomes " to ", an en dash joining two words becomes "-". See ADR 048 in `docs/ADR.md`.
+2. `_extract_profile_markers()` strips the `[[profile:<category>]]` markers.
+3. Client names of the turn's sources (`get_known_clients()`) and number patterns ($50M, 30%, 4x, 150+ engineers) are bolded, only outside the spans the model already bolded; a number is matched whole ("135,000+", "99.97%").
+4. Sentences matching `META_COMMENTARY_REGEX_PATTERNS` (`config/constants.py`) are removed.
+5. Whitespace is tidied, and `$` is escaped last so Streamlit doesn't read it as LaTeX.
 
 ### Data Flow Diagram
 
-See [Production RAG Pipeline](#production-rag-pipeline) for the canonical query→response diagram (9-layer trace).
+See [Production RAG Pipeline](#production-rag-pipeline) for the canonical query→response diagram (5-layer trace).
 
 ### Cross-Page Navigation into Ask MattGPT
 
@@ -1089,7 +853,7 @@ Multiple pages can navigate into Ask MattGPT with pre-filled context. This uses 
 **Context Injection Keys (for story-specific queries):**
 
 ```python
-# Set by story_detail.py:handle_ask_about_this()
+# Set by story_detail.py:on_ask_this_story()
 st.session_state["seed_prompt"] = "Tell me more about: {Title}"  # Pre-filled query
 st.session_state["active_story"] = story_id                      # Story ID for context
 st.session_state["active_story_obj"] = story_dict                # Full story object
@@ -1105,8 +869,10 @@ st.rerun()
 # In conversation_view.py
 seed = st.session_state.pop("seed_prompt", None)  # Pop to consume once
 if seed:
-    # Auto-submit the seed prompt
-    process_query(seed)
+    _push_user_turn(seed)  # the question shows at once
+    st.session_state["__processing_chip_injection__"] = {"query": seed, "step": "pending"}
+# _advance_pending_turn() answers it from st.fragment(run_every=_PENDING_TURN_START_SECONDS),
+# after the run that draws the conversation finishes without st.rerun()
 
 # In utils.py:get_context_story()
 if st.session_state.get("__ctx_locked__"):
@@ -1125,6 +891,8 @@ st.session_state["active_tab"] = "My Work"
 if "prefilter_industry" in st.session_state:
     F["industry"] = st.session_state.pop("prefilter_industry")
 ```
+
+**Hand-off into the conversation:** landing's input and chips call `_hand_off_to_conversation()` as an `on_click` callback, which sets `seed_prompt` (and `__ask_force_answer__` for chips) before the script runs, so the run the tap starts already routes to the conversation. A seeded or injected question is answered from a fragment (`_pending_turn_fragment()`): Streamlit prunes the previous run's leftover elements only when a run finishes successfully, so the run that draws the conversation must end without `st.rerun()` for the page the question came from to clear. A typed follow-up is answered in the run after it is pushed. While landing's caption is in the DOM, its stale elements are hidden (CSS Pattern 6).
 
 **Key Rule:** Set prefilters BEFORE the target page renders, then `pop()` to consume them. Never modify widget-bound session state after the widget renders.
 
@@ -1281,7 +1049,7 @@ Stage 3 is parallelized via `asyncio.as_completed` at `_CONCURRENCY = 10` in `_f
 
 #### Retrieval Parameters
 
-`DEFAULT_TOP_K = 5` (in `services/jd_assessor.py`) matches the depth Ask Agy feeds the LLM: Ask Agy retrieves 10 stories, passes them through `diversify_results()` (which returns 7), and feeds 5 to the LLM.
+`DEFAULT_TOP_K = 5` (in `services/jd_assessor.py`) matches the 5 stories each Ask Agy search_stories call returns.
 
 `retrieve_stories` propagates `None` from `pinecone_semantic_search`'s outage signal rather than collapsing it to `[]`. The `None`/`[]` distinction is the only signal `_assess_one_with_index` has to separate a Pinecone outage (Mode 2) from a real empty match (Mode 3). Do not add `if not results: return []` here.
 
@@ -1360,11 +1128,9 @@ Bot filter: `is_bot()` in `query_logger.py` checks User-Agent against `MONITORIN
 
 ### Known Limitations
 
-1. **Synthesis + specific topic:** "Tell me about Matt's rapid prototyping work" classified as synthesis but should find the specific rapid prototyping story. Current workaround: synthesis uses the user query embedding.
-2. **Ground truth fidelity:** LLM paraphrases instead of quoting verbatim despite `[[CORE BRAND DNA]]` markers.
-3. **Deprecated documentation:** `mattgpt_system_prompt.md` documents the original "MattGPT" persona (pre-Agy). The current Agy voice is documented in this file under Component Contracts → Agy Voice Generator.
-4. **LLM stochasticity:** Eval may show occasional failures due to LLM response variability. Re-running typically passes. Semantic similarity scoring would address this; see BACKLOG.md.
-5. **"Where does Matt live" stops at the confidence gate.** Score 0.242 is below CONFIDENCE_HIGH=0.25, so Ask Agy refuses while My Work lists the closest stories.
+1. **Ground truth fidelity:** LLM paraphrases instead of quoting verbatim despite `[[CORE BRAND DNA]]` markers.
+2. **Deprecated documentation:** `mattgpt_system_prompt.md` documents the original "MattGPT" persona (pre-Agy). The current Agy voice is documented in this file under Component Contracts → Agy Voice Generator.
+3. **LLM stochasticity:** Eval may show occasional failures due to LLM response variability. Re-running typically passes. Semantic similarity scoring would address this; see BACKLOG.md.
 
 ---
 
@@ -1378,7 +1144,6 @@ Central reference for all session state keys used across the application.
 | `ask_transcript` | `list[dict]` | Chat history `[{role, text}, ...]` | conversation_view.py | All ask_mattgpt modules |
 | `ask_input_value` | `str` | Current input field value | landing_view.py, conversation_view.py | Input widget |
 | `seed_prompt` | `str` | Pre-filled query from navigation | story_detail.py | conversation_view.py (pop) |
-| `pending_query` | `str` | Query being processed | landing_view.py | Backend processing |
 | `processing_suggestion` | `bool` | Processing indicator flag | landing_view.py | UI disable state |
 | `last_answer` | `str` | Most recent Agy response | conversation_helpers.py | Display |
 | `last_sources` | `list[dict]` | Retrieved stories for response | conversation_helpers.py | Related Projects |
@@ -1393,13 +1158,12 @@ Central reference for all session state keys used across the application.
 |-----|------|---------|
 | `__ctx_locked__` | `bool` | Lock context to specific story |
 | `__ask_from_suggestion__` | `bool` | Query from suggestion (bypass filters) |
-| `__ask_force_answer__` | `bool` | Force answer even on low confidence |
-| `__ask_query_intent__` | `str` | Detected query intent |
-| `__ask_confidence__` | `str` | Confidence level (high/low/none) |
+| `__ask_force_answer__` | `bool` | Suggestion-chip question: skip the nonsense rules and the router |
+| `__ask_query_intent__` | `None` | Set to None by `agy_answer()`: source cards use the 3-card layout |
 | `__asked_once__` | `bool` | User has asked at least one question |
 | `__inject_user_turn__` | `str` | Inject follow-up question |
 | `__landing_processing__` | `bool` | Landing page processing state |
-| `__processing_chip_injection__` | `bool` | Chip click processing |
+| `__processing_chip_injection__` | `dict` | Question in flight: `{"query", "step"}`, step `pending`, `armed` or `processing` |
 
 **Story Selection Keys:**
 | Key | Type | Purpose |
@@ -1652,7 +1416,9 @@ def get_theme_guidance(theme: str) -> str:
     Had conflicting 'Emphasize:' instructions that caused meta-commentary."""
 
 def build_story_context_for_rag(story: dict) -> str:
-    """Build WHY→HOW→WHAT context string for RAG prompt injection."""
+    """Build WHY→HOW→WHAT context string for one story: the search_stories
+    tool's story text. Includes "[DATES]: <Start_Date> to <End_Date>" after the
+    Domain line when the story has both (ADR 051)."""
 
 def get_theme_emoji(theme: str) -> str:
     """Get emoji for theme (🏗️ 🧠 🔄 👥 🛡️ 🚀 🧭)."""
@@ -1700,15 +1466,14 @@ def build_system_prompt(is_synthesis: bool, matt_dna: str, client_list: str = ""
     When profile_facts is non-empty, injects the attested-facts block before
     **GROUNDING RULES:** and citation rules 0a/0b immediately after it."""
 
-def build_user_message(question, story_context, opening, is_synthesis, verbatim_requirement="", focus_angle="", profile_facts: str = "") -> str:
-    """Build user message with stories, ending with build_answer_instructions()
-    and "Start your response with this exact text: {opening}" as its opening line.
-    When profile_facts is non-empty, citation rule 0a is appended at the end of the message.
-    The attested-facts block and rule 0b stay in the system prompt only."""
+def build_tool_system_prompt(is_synthesis, matt_dna, profile_facts, opener_examples, focus_angle="") -> str:
+    """Ask Agy's system prompt: build_system_prompt(), then "**TOOLS:** " and
+    TOOL_STORY_NOTE, then build_answer_instructions() with the opener lines as
+    examples. The user message is the question as asked."""
 
 def build_answer_instructions(opening_line, is_synthesis, verbatim_requirement="", focus_angle="", profile_facts="") -> str:
     """The "## INSTRUCTIONS" block: opener line, focus angle, verbatim requirement,
-    prose, bolding, "State facts", and citation rule 0a."""
+    prose, NO_DASH_RULE, COMPARISON_RULE, bolding, "State facts", and citation rule 0a."""
 
 def get_verbatim_requirement(summary: str) -> str:
     """Extract required verbatim phrases from Professional Narrative stories."""
@@ -1716,7 +1481,7 @@ def get_verbatim_requirement(summary: str) -> str:
 
 **Profile Fact Markers:**
 
-Rule 0a instructs the LLM to place `[[profile:<category>]]` on its own line at the end of the response, once per category stated. `_extract_profile_markers(text)` in `backend_service.py` strips these markers from the raw LLM output before bolding and meta-strip run, and returns `(cleaned_text, cited_categories)` in first-cited order. Unknown markers (`[[profile:patents]]`, malformed forms) are removed without adding a category. A line holding only markers is dropped together with the blank line before it. The marker instruction is part of rule 0a's text, so it reaches the LLM whenever `build_user_message()` appends rule 0a (i.e., when `profile_facts` is non-empty).
+Rule 0a instructs the LLM to place `[[profile:<category>]]` on its own line at the end of the response, once per category stated. `_extract_profile_markers(text)` in `backend_service.py` strips these markers from the raw LLM output before bolding and meta-strip run, and returns `(cleaned_text, cited_categories)` in first-cited order. Unknown markers (`[[profile:patents]]`, malformed forms) are removed without adding a category. A line holding only markers is dropped together with the blank line before it. The marker instruction is part of rule 0a's text, so it reaches the LLM whenever `profile_facts` is non-empty.
 
 **Sources Fact Cards:**
 
@@ -1724,7 +1489,7 @@ Rule 0a instructs the LLM to place `[[profile:<category>]]` on its own line at t
 
 `_fact_card_html(category)` renders one full-width card per cited category. Label: "From Matt's profile · <display name>" (from `PROFILE_FACT_DISPLAY_NAMES`). Entries come from `_fact_card_entries()`, which reads directly from the profile dict (not from the answer text). Education entries show the degree as the primary line, then the institution and the entry's `note` when it has one, both in the text-secondary style. The outer div has class `fact-card` and the grid has class `fact-card-grid`. The grid is two columns inline. At 767px and below, a rule in the Sources `<style>` block in `_render_ask_transcript` stacks it to one column (`grid-template-columns: 1fr !important`) and adds `margin-top: 8px` under SOURCES. Desktop is unchanged. The render call site wraps in try/except; `logger.exception` logs the failure and skips the cards rather than breaking the transcript.
 
-**Why This Architecture:** BASE_PROMPT + DELTA separates universal voice rules from contextual variations. Each module has a single job: `build_system_prompt()` selects the mode-appropriate delta, `build_user_message()` injects story context and response instructions, and `get_verbatim_requirement()` enforces identity-phrase fidelity. The result is a prompt that can't contradict itself -- Agy's role as messenger (not evaluator) is structurally enforced.
+**Why This Architecture:** BASE_PROMPT + DELTA separates universal voice rules from contextual variations. Each module has a single job: `build_system_prompt()` selects the mode-appropriate delta, `build_answer_instructions()` holds the per-answer instructions, `build_tool_system_prompt()` joins them with the tool note, and `get_verbatim_requirement()` enforces identity-phrase fidelity. The result is a prompt that can't contradict itself -- Agy's role as messenger (not evaluator) is structurally enforced.
 
 ---
 
@@ -1840,28 +1605,24 @@ Defined in `ui/styles/global_styles.py`. Use these instead of hardcoding colors.
 | `test_agy_behavior.py` | Agy response behavior tests |
 | `test_structural_assertions.py` | Meta-commentary, voice, and drift checks |
 
-**Last measured:**
-- RAG quality: 70/70 (100%), Aug 8–9, 2026 runs; 64 unique queries across 8 categories; Q43-Q49 parametrized. See Known Limitations re: LLM stochasticity.
-- Structural: 93-97% pass rate (meta-commentary varies with LLM stochasticity)
+Both evals call `agy_answer()` through a fixture with a `(query, filters, stories)` signature; `filters` is ignored. Results are written to `tests/eval_results/` per run.
 
 **eval_rag_quality.py:**
-- Runs 64 unique queries across 8 categories: narrative, client, intent, edge, surgical, entity_detection, marketing, context_story. Q43-Q49 are parametrized, producing 70 total test items.
+- Runs the 65 `GOLDEN_QUERIES` across 8 categories: narrative, client, intent, edge, surgical, entity_detection, marketing, context_story.
 - Checks: voice consistency, ground truth matches, client attribution, client bolding, entity detection, context bypass
 - Outputs JSON results to `tests/eval_results/`
 
 **Test Categories:**
 | Category | Count | Checks |
 |----------|-------|--------|
-| `narrative` | 10 | Voice + ground_truth phrases |
+| `narrative` | 13 | Voice + ground_truth phrases |
 | `client` | 6 | Voice + client attribution + bolding |
-| `intent` | 5 | Voice + intent classification |
+| `intent` | 10 | Voice + intent classification |
 | `edge` | 4 | Voice + client attribution |
-| `surgical` | 6 | Entity-first + specific story retrieval |
-| `entity_detection` | 9 | Regression tests for detect_entity() |
-| `marketing` | 3 | Marketing/recruiter question handling |
+| `surgical` | 11 | Entity-first + specific story retrieval |
+| `entity_detection` | 11 | Skipped and recorded as passed; kept as query text for the structural checks |
+| `marketing` | 7 | Marketing/recruiter question handling |
 | `context_story` | 3 | "Ask Agy About This" button flow |
-
-**Current eval pass rate:** 70/70 (100%) as of Aug 8–9, 2026 runs: 64 unique queries, 70 test items (Q43-Q49 parametrized). LLM stochasticity can cause 98.6% ↔ 100% flapping; see Known Limitations.
 
 **Running Eval:**
 ```bash
@@ -1900,34 +1661,21 @@ META_PATTERNS = [
 
 ### Error Handling Patterns
 
-**Layer 1 (Validation):**
-- `is_nonsense()` → Returns rejection message with category
-- `semantic_router()` → Returns `(False, score)` if below threshold; fails-open on errors
+**Validation:**
+- `is_nonsense()` → returns the matched category; `agy_answer()` returns an empty answer with `rejection_reason="rule:<category>"` and the UI shows the rejection banner
+- `is_portfolio_query_semantic()` → fails open on errors
+- `router_rejection_reason()` → out_of_scope or personal redirect copy
 
-**Layer 2 (Fast Exit + Entity Detection):**
-- `out_of_scope` check → Returns graceful redirect if `intent_family == "out_of_scope"`
-- `detect_entity()` → Returns `None` if no entity found; Title entities use soft filtering
-
-**Layer 3 (Retrieval):**
-- `semantic_search()` (Ask Agy path) -- returns `{"results": [], "confidence": "none", "top_score": 0.0}` on Pinecone error. A caller on this path cannot distinguish an outage from a query that genuinely returned no matches; both surfaces as `confidence: "none"`.
-- `get_synthesis_stories()` → Returns empty list on error
+**Retrieval:**
+- `semantic_search()` → on a Pinecone failure or no hits, falls back to the local corpus in file order (confidence `low`); with every hit below `CONFIDENCE_LOW`, returns empty results (`none`) and the search tool returns "No stories found."
+- An embedding failure sets `__embed_failure__`; `agy_answer()` returns the breather message after that search round.
 - `retrieve_stories()` (Role Match path) -- propagates `None` on Pinecone outage; returns `[]` on real empty match. See Partial Failure Handling in the Role Match section.
 - `_handle_assessment_error` (`ui/pages/role_match.py`, Mode 4) -- logs via `logger.warning` with error class name, writes a `role_match_assessment` Sheet row with `failure_type="retrieval_failed"` and all counts zero, returns retryable or not-retryable banner string. Never leaks `str(e)` into the returned message.
 
-**Layer 4 (Confidence Gate):**
-- `confidence == "none"` → Returns "I couldn't find relevant stories" message
-
-**Layer 5 (Generation):**
-- `_generate_agy_response()` → Raises `RateLimitError` on 429, returns fallback on other errors
-- `rag_answer()` → Catches `RateLimitError`, returns empty sources with:
-  ```
-  "🐾 I need a quick breather — try again in about 15 seconds!"
-  ```
-
-**UI Error Handling:**
-- `send_to_backend()` wraps all errors in try/except
-- Failed responses show generic error message
-- Network errors trigger retry prompt
+**Generation (`agy_answer()`):**
+- Rate limit (429): "🐾 I need a quick breather: try again in about 15 seconds!", no sources
+- Any other error, including a stream that breaks after answer text or breaks twice before it: `ANSWER_ERROR_MESSAGE`, no sources, `degraded: True`, logged with `logger.exception`
+- An exception raised out of `send_to_backend()`: `conversation_view.py` pushes `ANSWER_ERROR_MESSAGE` as the turn's answer
 
 **Logging:**
 - `dbg()` function logs when `DEBUG=True`
@@ -2047,7 +1795,7 @@ Together: a mid-list insert shifts positions 0-34 (prefix fails) and changes the
 
 **Key Functions:**
 ```python
-def semantic_search(query: str, top_k: int = SEARCH_TOP_K, filters: dict = None):
+def pinecone_semantic_search(query: str, filters: dict, stories: list, top_k: int = SEARCH_TOP_K, debug_tag: str | None = None) -> list[dict] | None:
     """
     1. Embed query with OpenAI
     2. Query Pinecone index
@@ -2063,7 +1811,9 @@ def get_pinecone_index():
 - `top_k`: 25 (retrieve top 25 matches, from `SEARCH_TOP_K` in config/constants.py)
 - `min_similarity`: 0.15 (from `PINECONE_MIN_SIM` in config/constants.py)
 - `namespace`: "default"
-- `include_metadata`: False. Queries return ids and scores only; story text and the hit snippet (`5PSummary`) come from the local corpus. Metadata is still stored and used for Pinecone-side filters. The same applies to both query branches of `get_synthesis_stories()`. See ADR 041 in `docs/ADR.md`.
+- `include_metadata`: False. Queries return ids and scores only; story text and the hit snippet (`5PSummary`) come from the local corpus. Metadata is still stored and used for Pinecone-side filters. See ADR 041 in `docs/ADR.md`.
+
+**Metadata keys and casing** (set at upload by `build_custom_embeddings.py`): each corpus field is stored under its corpus name with its value as written (`Title`, `Client`, `Employer`, `Theme`, ...), plus lowercase keys for filtering (`title`, `client`, `employer`, `division`, `project`, `role`, `industry`, `complexity`, `domain`, `tags`, `summary`). Filters use the lowercase keys. Values are lowercased under `employer`, `division`, `project`, `industry` and `complexity`; `client`, `title`, `role` and `domain` keep the corpus casing. The filters in use are My Work's Domain and Client facets: `domain` and `client`, each `$in`.
 
 **Metadata Filters:**
 ```python
@@ -2081,7 +1831,7 @@ filters = {
 # Translates to: {"$or": [{client: "Accenture"}, {employer: "accenture"}, ...]}
 ```
 
-**Multi-Field Entity Filter:** When `entity_field` and `entity_value` are provided, the service builds a Pinecone `$or` clause that searches across `client`, `employer`, `division`, `project`, `place`, and `title` fields simultaneously. It narrows retrieval and rejects nothing. See [Component Contracts → Multi-Field Entity Search](#multi-field-entity-search) for details.
+**Multi-Field Entity Filter:** When `entity_field` and `entity_value` are provided, the service builds a Pinecone `$or` clause that searches across `client`, `employer`, `division`, `project`, `place`, and `title` fields simultaneously. It narrows retrieval and rejects nothing. No production caller sets `entity_field`. See [Component Contracts → Multi-Field Entity Filter](#multi-field-entity-filter).
 
 **`_init_pinecone()` two-class failure split:**
 
@@ -2099,20 +1849,19 @@ Extracted from `is_portfolio_query_semantic()` (`services/semantic_router.py`) s
 
 #### 2. RAG Service ([services/rag_service.py](services/rag_service.py))
 
-**Purpose:** Semantic search orchestration and confidence gating. LLM generation is handled by `backend_service.py`.
+**Purpose:** Semantic search orchestration and confidence buckets. Ask Agy's search tool and My Work both call it.
 
 **Key Functions:**
 ```python
-def semantic_search(q: str, stories: list, top_k: int = SEARCH_TOP_K, filters: dict = None):
+def semantic_search(query: str, filters: dict, *, enforce_overlap: bool = False, min_overlap: float = 0.0, stories: list, top_k: int = SEARCH_TOP_K) -> dict:
     """
-    1. Embed query with text-embedding-3-small
-    2. Pinecone vector search (top_k from constants, default 25)
-    3. Confidence gating (HIGH=0.25, LOW=0.20)
-    4. Return ranked stories with scores and confidence level
+    1. pinecone_semantic_search() (top_k from constants, default 25)
+    2. Confidence bucket (HIGH=0.25, LOW=0.20); hits below LOW dropped
+    3. UI filters applied; returns results, confidence, top_score
     """
 ```
 
-**Note:** LLM generation (GPT-4o, 700 max tokens) and context assembly live in `backend_service.py:_generate_agy_response()`. See Component Contracts → Layer 4: Response Generation for details.
+**Note:** Ask Agy's answer calls live in `backend_service.py:agy_answer()`. See Component Contracts → Layer 4: Response Generation.
 
 ---
 
@@ -2128,8 +1877,8 @@ def semantic_search(q: str, stories: list, top_k: int = SEARCH_TOP_K, filters: d
 #### Query Pipeline
 - **Embedding:** 1 query = 10-20 tokens = $0.0000002
 - **Pinecone:** Free tier (up to 100K queries/month)
-- **GPT-4o:** ~500 tokens per response = $0.01-0.02
-- **Total per query:** ~$0.0002 (negligible)
+- **Search embeddings:** one more per search_stories call
+- **Answer model:** gpt-6.1-sol, reasoning effort medium, up to `ASK_TOOL_MAX_ROUNDS + 1` (4) streamed calls per turn
 
 #### Pinecone Index
 - **Dimensions:** 1536
@@ -2522,6 +2271,7 @@ Use `visibility: hidden` (not `display: none`) to suppress the paint without rem
 **Rules:**
 - Do not hide stale containers broadly and do not target `[data-stale="false"]` — both widen the blast radius to every element on every rerun.
 - Exclude classes that re-render in place on same-page reruns. `.ask-header-conversation` is excluded because hiding it on in-conversation follow-ups would read as a header blink.
+- The one broad rule is scoped to landing's hand-off into the conversation (`global_styles.py`): while `.powered-by-text`, rendered only by `landing_view`, is in the DOM, every stale `stElementContainer` is hidden except the navbar (`st-key-topnav_*`, `.navbar-brand`) and the status bar, and so is `.st-key-intro_section`, a keyed container that never gets `data-stale` itself. Transitions are turned off on what is hidden, because `visibility` is animatable and the footer links' inline `transition: all 0.2s` kept them painted for 200 ms.
 
 **Diagnostic note:** A navigation "blep" of this kind is a stale-content visual artifact, not a timing stall. Performance traces show clean frames and uniform per-navigation reconciliation cost whether or not the artifact is visible. When a user names a specific, repeating symptom ("it's always the avatar"), the diagnosis must account for that symptom, not aggregate numbers.
 
@@ -2662,7 +2412,7 @@ Two automated gates enforce the hermetic unit suite:
 
 **`network` marker:** Tests that hit real external services (OpenAI, Pinecone) are tagged `@pytest.mark.network` and excluded from both gates via `-m "not network"`. Run manually with `pytest tests/integration/ -m network`. Do not add live API calls to tests that lack this marker -- they will silently break the hermetic gate.
 
-**xfail markers:** 5 known-failure tests carry `@pytest.mark.xfail` so they register as expected failures rather than silently degrading the pass count. If a new persistent failure appears, add `xfail` with a ticket reference rather than deleting the test.
+**xfail markers:** 10 known-failure tests carry `@pytest.mark.xfail` so they register as expected failures rather than silently degrading the pass count. If a new persistent failure appears, add `xfail` with a ticket reference rather than deleting the test.
 
 **Commit-time checks:** `.githooks/pre-commit` fails on em dashes in added lines (files under `docs/evidence/` are skipped) and on dynamically hashed Streamlit classes in added lines of `ui/` or `app.py`. `.githooks/commit-msg` fails on an em dash in the message, a `Co-Authored-By` line, or a Green commit that reports a gate as "not run". In a Claude Code session (`CLAUDECODE` set), a role check limits which doc files a commit may contain: `MATTGPT_DOCS_SESSION=arch` (launched by `scripts/arch-sync-session.sh`) commits only `ARCHITECTURE.md` and `docs/ADR.md`; `MATTGPT_DOCS_SESSION=backlog` (`scripts/backlog-session.sh`) commits only `BACKLOG.md`, `CHANGELOG.md` and `docs/value_scorecard.md`; a session with no value commits none of these five; any other value is refused. Commits from a terminal outside Claude Code are not role-checked. A Claude Code session cannot push: `.claude/settings.json` denies push commands and `.claude/hooks/guard-bash.sh` blocks `git push` in any form, so pushes run from Matt's terminal. See ADR 027 in `docs/ADR.md`.
 
@@ -2728,7 +2478,7 @@ Audit of the RAG (Retrieval-Augmented Generation) pipeline covering embedding an
 
 Known architectural concerns are tracked in [BACKLOG.md](BACKLOG.md). Current categories:
 
-- **Coupling and complexity:** `backend_service.py` is over 2,400 lines with imports from 6+ modules; candidates for extraction
+- **Coupling and complexity:** `backend_service.py` is about 1,000 lines with imports from 6+ modules; candidates for extraction
 - **Boundary clarity:** ranking, intent classification, and formatting ownership split across files
 - **Hybrid scoring:** Pinecone scores (0.0–1.0) don't map cleanly to confidence buckets (0.20–0.25)
 - **Error handling:** limited test coverage on error paths; Pinecone timeout and embedding failure lack user notification
@@ -2743,10 +2493,12 @@ Constants with a single source of truth:
 
 | Category | Constants | Location |
 |----------|-----------|----------|
-| **Models** | `DEFAULT_CHAT_MODEL`, `DEFAULT_CLASSIFICATION_MODEL`, `DEFAULT_EMBEDDING_MODEL` | config/constants.py |
+| **Models** | `DEFAULT_CHAT_MODEL`, `DEFAULT_CLASSIFICATION_MODEL`, `DEFAULT_EMBEDDING_MODEL`, `ASK_ANSWER_MODEL` | config/constants.py |
+| **Ask Agy answer call** | `ASK_ANSWER_REASONING_EFFORT`, `ASK_ANSWER_MAX_OUTPUT_TOKENS`, `ASK_ANSWER_READ_TIMEOUT_S`, `ASK_TOOL_MAX_ROUNDS`, `ASK_HISTORY_MAX_MESSAGES` | config/constants.py |
+| **Ask Agy prompt rules** | `NO_DASH_RULE`, `COMPARISON_RULE` | config/constants.py |
 | **Thresholds** | `HARD_ACCEPT`, `SOFT_ACCEPT`, `CONFIDENCE_HIGH`, `CONFIDENCE_LOW`, `PINECONE_MIN_SIM` | config/constants.py |
 | **Voice Quality** | `META_COMMENTARY_PATTERNS`, `META_COMMENTARY_REGEX_PATTERNS` | config/constants.py |
-| **Entity Detection** | `ENTITY_DETECTION_FIELDS`, `ENTITY_SEARCH_FIELDS`, `EXCLUDED_DIVISION_VALUES`, `PINECONE_LOWERCASE_FIELDS` | config/constants.py |
+| **Entity Filter** | `ENTITY_SEARCH_FIELDS`, `PINECONE_LOWERCASE_FIELDS` | config/constants.py |
 | **Profile Facts** | `PROFILE_FACT_CATEGORIES`, `PROFILE_FACT_DISPLAY_NAMES`, `PROFILE_LOCATION_AVAILABILITY_FIELDS` | config/constants.py |
 
 Files that import from constants.py:
@@ -2781,29 +2533,18 @@ These should be reviewed quarterly for relevance.
 **4. UI Display Strings**
 
 ```python
-"🐾 I need a quick breather — try again in about 15 seconds!"
+"🐾 I need a quick breather: try again in about 15 seconds!"
 "Found {n} relevant stories"
 "No strong matches found"
 ```
 
 **Scattered across:** backend_service.py, conversation_helpers.py
 
-**5. Temperature Settings**
+**5. Answer Model Settings**
 
-```python
-temperature=0.4  # standard mode
-temperature=0.2  # synthesis mode
-```
+`ASK_ANSWER_MODEL`, `ASK_ANSWER_REASONING_EFFORT`, `ASK_ANSWER_MAX_OUTPUT_TOKENS` and `ASK_ANSWER_READ_TIMEOUT_S` in `config/constants.py`. The answering model takes no temperature.
 
-**Location:** `backend_service.py`
-
-**6. Token Limits**
-
-```python
-max_tokens=700  # generation (backend_service.py)
-```
-
-**7. Pinecone Index Name**
+**6. Pinecone Index Name**
 
 ✅ **RESOLVED:** Index name is now read from `get_conf("PINECONE_INDEX_NAME")` in `pinecone_service.py`. Current value: `matt-portfolio-v2`.
 
