@@ -1,0 +1,2558 @@
+[
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All claims supported (ACCESS, migration, AmEx VPP, RBC stories); first turn answered.",
+  "claims": [
+   {
+    "text": "ACCESS Technology Delivery Lead, blended onshore/offshore team of 40+ across Accenture and JP Morgan",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built on Bottomline WebSeries; needs beyond out-of-box; managed build-vs-configure boundary",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, tax modules; NACHA validation; MAC security; payment-type entitlements; sanctions screening; risk-based approvals",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Legacy migration with compliance verification, dashboards, zero disruption to live payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011, 135,000+ clients, 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "AmEx VPP: missing SDKs, fragmented docs, no sandbox; Java/.NET/Python SDKs; sandbox with refreshed client data; API trial usage up within 3 months",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation/Action/Result"
+   },
+   {
+    "text": "Environment virtualization, Lean Product and XP, Client Onboarding Test Drive, over 261 story points beyond commitment",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action/Result"
+   },
+   {
+    "text": "RBC cross-border workflows initiation to settlement/reconciliation; FX team partnership; implementation blueprint; revised cutoffs reduced wire delays",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action/Result"
+   },
+   {
+    "text": "70-80% of time embedded at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "UAT, production validation, post-cutover defect triage",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "multi-currency training materials",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All claims supported; first turn answered.",
+  "claims": [
+   {
+    "text": "ACCESS Technology Delivery Lead, blended onshore/offshore team of 40+ across Accenture and JP Morgan",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built on Bottomline WebSeries; needs beyond out-of-box; managed build-vs-configure boundary",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, tax modules; NACHA validation; MAC security; payment-type entitlements; sanctions screening; risk-based approvals",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Legacy migration with compliance verification, dashboards, zero disruption to live payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011, 135,000+ clients, 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "AmEx VPP: missing SDKs, fragmented docs, no sandbox; Java/.NET/Python SDKs; sandbox with refreshed client data; API trial usage up within 3 months",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation/Action/Result"
+   },
+   {
+    "text": "Environment virtualization, Lean Product and XP, Client Onboarding Test Drive, over 261 story points beyond commitment",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action/Result"
+   },
+   {
+    "text": "RBC cross-border workflows initiation to settlement/reconciliation; FX team partnership; implementation blueprint; revised cutoffs reduced wire delays",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action/Result"
+   },
+   {
+    "text": "contextual help explaining wire fields, tax codes, FX parameters",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Interac e-Transfer, recurring payments, batch processing; improved SLA compliance",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style from leadership stories, no payments carry-over; quotes verbatim; all supported.",
+  "claims": [
+   {
+    "text": "leads with empathy, clarity and purpose (paraphrase)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action; career-intent Process"
+   },
+   {
+    "text": "quote 'over-processed, under-trusted, waiting for permission instead of owning outcomes' (verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "CIC rigid hierarchical culture, slow to share ideas",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation"
+   },
+   {
+    "text": "teams avoided risk for fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation"
+   },
+   {
+    "text": "pushed decisions to people closest to the work, intent explicit, transparency, direct feedback",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "weekly brainstorming without judgment, shared goals over individual accolades, recognized contributions",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Action"
+   },
+   {
+    "text": "'permit to fail' (verbatim), non-punitive post-mortems, low-stakes experiments, repeat errors declined",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result/5PSummary"
+   },
+   {
+    "text": "set expectations prototypes/user tests would likely fail; shaped product direction week by week; validated assumptions before costly builds",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "4x delivery acceleration at CIC after lean product and modern engineering",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "paired senior with junior engineers, weekly tech talks, learning in live projects; faster onboarding, proficiency, retention",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action/Result"
+   },
+   {
+    "text": "quote 'to think clearly, not just execute tasks' (verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style with no payments carry-over; all supported.",
+  "claims": [
+   {
+    "text": "leads with empathy, clarity and purpose (paraphrase)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action; career-intent Process"
+   },
+   {
+    "text": "quote 'over-processed, under-trusted, waiting for permission instead of owning outcomes' (verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "CIC rigid hierarchical culture, slow to share ideas",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation"
+   },
+   {
+    "text": "teams avoided risk for fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation"
+   },
+   {
+    "text": "pushed decisions to people closest to the work, intent explicit, transparency, direct feedback",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "weekly brainstorming without judgment, shared goals over individual accolades, recognized contributions",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Action"
+   },
+   {
+    "text": "'permit to fail' (verbatim), non-punitive post-mortems, low-stakes experiments, repeat errors declined",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result/5PSummary"
+   },
+   {
+    "text": "set expectations prototypes/user tests would likely fail; shaped product direction week by week; validated assumptions before costly builds",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "4x delivery acceleration at CIC after lean product and modern engineering",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "balanced teams of PMs, designers, engineers delivering thin-slice production-ready solutions",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Action"
+   },
+   {
+    "text": "150-person Cloud Innovation Center",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Situation"
+   },
+   {
+    "text": "lessons applied in subsequent sprints, no pointing fingers",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Example (Norfolk Southern quality crisis) illustrates the ownership/coaching style just described, not payments; all supported ('a few months' ~ 'a couple of months').",
+  "claims": [
+   {
+    "text": "Norfolk Southern CIC first major engagement, legacy Revenue and Shipment Planning platform",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "client reported rising defects despite near-complete test coverage as pandemic forced remote work; landed before client and Accenture account leadership",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "took ownership, bottom-up audit, engineer built from own interpretation and wrote tests after code; backlog lacked scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "rebuilt backlog with SMART stories; frontend/backend TDD experts from Columbus; boot camps, katas, 'I do, we do, you do' (verbatim)",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "defect rates dropped; client stopped finding defects the dashboard could not see; confidence restored",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Example of the leadership style, not payments; all supported.",
+  "claims": [
+   {
+    "text": "Norfolk Southern CIC first major engagement, legacy Revenue and Shipment Planning platform",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "client reported rising defects despite near-complete test coverage as pandemic forced remote work; landed before client and Accenture account leadership",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "took ownership, bottom-up audit, engineer built from own interpretation and wrote tests after code; backlog lacked scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "rebuilt backlog with SMART stories; frontend/backend TDD experts from Columbus; boot camps, katas, 'I do, we do, you do' (verbatim)",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "defect rates dropped; client stopped finding defects the dashboard could not see; confidence restored",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "early 2020; Samman coaching approach",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "Team of the previous turn's project (Norfolk Southern); figure from another story on same engagement with statement that headcount isn't recorded (ruling 6). Supported.",
+  "claims": [
+   {
+    "text": "Norfolk Southern engagement scaled to three balanced teams, began transitioning one team to Monterrey",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "headcount not specified in the example story",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern (no headcount recorded)"
+   },
+   {
+    "text": "started with a balanced team",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern team per ruling 6, says headcount not specified. Supported.",
+  "claims": [
+   {
+    "text": "Norfolk Southern engagement scaled to three balanced teams, began transitioning one team to Monterrey",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "headcount not specified in the example story",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern (no headcount recorded)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All claims supported; first turn answered.",
+  "claims": [
+   {
+    "text": "ACCESS Technology Delivery Lead, blended onshore/offshore team of 40+ across Accenture and JP Morgan",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built on Bottomline WebSeries; needs beyond out-of-box; managed build-vs-configure boundary",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, tax modules; NACHA validation; MAC security; payment-type entitlements; sanctions screening; risk-based approvals",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Legacy migration with compliance verification, dashboards, zero disruption to live payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011, 135,000+ clients, 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "AmEx VPP: missing SDKs, fragmented docs, no sandbox; Java/.NET/Python SDKs; sandbox with refreshed client data; API trial usage up within 3 months",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation/Action/Result"
+   },
+   {
+    "text": "Environment virtualization, Lean Product and XP, Client Onboarding Test Drive, over 261 story points beyond commitment",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action/Result"
+   },
+   {
+    "text": "RBC cross-border workflows initiation to settlement/reconciliation; FX team partnership; implementation blueprint; revised cutoffs reduced wire delays",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action/Result"
+   },
+   {
+    "text": "Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "owned production support during rollout; preserved configurations, histories, traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All claims supported; first turn answered.",
+  "claims": [
+   {
+    "text": "ACCESS Technology Delivery Lead, blended onshore/offshore team of 40+ across Accenture and JP Morgan",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built on Bottomline WebSeries; needs beyond out-of-box; managed build-vs-configure boundary",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, tax modules; NACHA validation; MAC security; payment-type entitlements; sanctions screening; risk-based approvals",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Legacy migration with compliance verification, dashboards, zero disruption to live payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011, 135,000+ clients, 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "AmEx VPP: missing SDKs, fragmented docs, no sandbox; Java/.NET/Python SDKs; sandbox with refreshed client data; API trial usage up within 3 months",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation/Action/Result"
+   },
+   {
+    "text": "Environment virtualization, Lean Product and XP, Client Onboarding Test Drive, over 261 story points beyond commitment",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action/Result"
+   },
+   {
+    "text": "RBC cross-border workflows initiation to settlement/reconciliation; FX team partnership; implementation blueprint; revised cutoffs reduced wire delays",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action/Result"
+   },
+   {
+    "text": "Execution & Delivery framing (theme name, ruling 4)",
+    "label": "supported",
+    "source": "stated rule 4"
+   },
+   {
+    "text": "customer risk scores in transaction controls; FX engine integration; contextual guidance",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style, no payments carry-over; all supported.",
+  "claims": [
+   {
+    "text": "leads with empathy, clarity and purpose (paraphrase)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action; career-intent Process"
+   },
+   {
+    "text": "quote 'over-processed, under-trusted, waiting for permission instead of owning outcomes' (verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "CIC rigid hierarchical culture, slow to share ideas",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation"
+   },
+   {
+    "text": "teams avoided risk for fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation"
+   },
+   {
+    "text": "pushed decisions to people closest to the work, intent explicit, transparency, direct feedback",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "weekly brainstorming without judgment, shared goals over individual accolades, recognized contributions",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Action"
+   },
+   {
+    "text": "'permit to fail' (verbatim), non-punitive post-mortems, low-stakes experiments, repeat errors declined",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result/5PSummary"
+   },
+   {
+    "text": "set expectations prototypes/user tests would likely fail; shaped product direction week by week; validated assumptions before costly builds",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "4x delivery acceleration at CIC after lean product and modern engineering",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "lessons applied in subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result"
+   },
+   {
+    "text": "JTBD framing, user research, rapid testing",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "balanced teams, thin-slice production-ready solutions",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Action"
+   },
+   {
+    "text": "client teams kept using modern practices after engagements ended",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Leadership style illustrated with Norfolk Southern, no payments carry-over; all supported.",
+  "claims": [
+   {
+    "text": "leads with empathy, clarity and purpose (paraphrase)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action; career-intent Process"
+   },
+   {
+    "text": "quote 'over-processed, under-trusted, waiting for permission instead of owning outcomes' (verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "CIC rigid hierarchical culture, slow to share ideas",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation"
+   },
+   {
+    "text": "teams avoided risk for fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation"
+   },
+   {
+    "text": "pushed decisions to people closest to the work, intent explicit, transparency, direct feedback",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "weekly brainstorming without judgment, shared goals over individual accolades, recognized contributions",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Action"
+   },
+   {
+    "text": "150-person center",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Situation"
+   },
+   {
+    "text": "paired senior with junior, peer-led demos, practice forums, learning in live projects",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   },
+   {
+    "text": "client reported rising defects despite near-complete test coverage as pandemic forced remote work; landed before client and Accenture account leadership",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "took ownership, bottom-up audit, engineer built from own interpretation and wrote tests after code; backlog lacked scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "rebuilt backlog with SMART stories; frontend/backend TDD experts from Columbus; boot camps, katas, 'I do, we do, you do' (verbatim)",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "defect rates dropped; client stopped finding defects the dashboard could not see; confidence restored",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "4x delivery acceleration at CIC after lean product and modern engineering",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Example (decentralized decision-making at CIC) of pushing decisions down as described; all supported.",
+  "claims": [
+   {
+    "text": "CIC designed flat from day one; legacy command-and-control habits reasserted; conversion took enforcement and revalidation multiple times, bumpy path",
+    "label": "supported",
+    "source": "empowering-teams-through-decentralized-decision-making|accenture Situation"
+   },
+   {
+    "text": "cross-functional teams with shared decision authority; leaders as facilitators; anchors removing obstacles",
+    "label": "supported",
+    "source": "empowering-teams-through-decentralized-decision-making|accenture Action"
+   },
+   {
+    "text": "flexible guidelines for decentralized decisions; iterative development, UCD, retrospectives; psychological safety",
+    "label": "supported",
+    "source": "empowering-teams-through-decentralized-decision-making|accenture Action"
+   },
+   {
+    "text": "removed bottlenecks; client-aligned solutions; engagement, satisfaction, retention, cohesion, milestones",
+    "label": "supported",
+    "source": "empowering-teams-through-decentralized-decision-making|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Example of the leadership style (Norfolk Southern), not payments; all claims supported, zero defects from the BDD story on the same engagement.",
+  "claims": [
+   {
+    "text": "Norfolk Southern CIC first major engagement, legacy Revenue and Shipment Planning platform",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "client reported rising defects despite near-complete test coverage as pandemic forced remote work; landed before client and Accenture account leadership",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "took ownership, bottom-up audit, engineer built from own interpretation and wrote tests after code; backlog lacked scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "rebuilt backlog with SMART stories; frontend/backend TDD experts from Columbus; boot camps, katas, 'I do, we do, you do' (verbatim)",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "defect rates dropped; client stopped finding defects the dashboard could not see; confidence restored",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "early 2020",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "pairs rotated daily, new engineers with seasoned practitioners, test cases before solution checked at standup, stories capped at 3 points for 1-week iteration, remote pairs traded drivers",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "failure mode did not recur; release cycles shortened, delivery more predictable",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   },
+   {
+    "text": "Norfolk Southern mission-critical operations tools went live with zero production defects",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "Previous example was the CIC; gives 150+ from a 10-person pilot as fixture expects; all supported.",
+  "claims": [
+   {
+    "text": "Atlanta and Tampa centers grew from 10-person pilot to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Use Case(s)/Action"
+   },
+   {
+    "text": "11-13 practice and client leads reporting directly",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Situation/Performance"
+   },
+   {
+    "text": "10-person cross-functional balanced teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "decentralized decision-making story gives no team headcount",
+    "label": "supported",
+    "source": "empowering-teams-through-decentralized-decision-making|accenture (none recorded)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern (previous example) team per ruling 6 with headcount not specified; supported.",
+  "claims": [
+   {
+    "text": "Norfolk Southern engagement scaled to three balanced teams, began transitioning one team to Monterrey",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "headcount not specified in the example story",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern (no headcount recorded)"
+   },
+   {
+    "text": "started with a balanced team",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "balanced team model of Product, Engineering, Design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern from its stories, all supported; no closing offer.",
+  "claims": [
+   {
+    "text": "CIC's first engagement, Director, Revenue and Shipment Planning, without stopping the railroad",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation/Task/Role"
+   },
+   {
+    "text": "mainframe from 1970s; orders fell out until customers called; COBOL/assembly, shrinking workforce; clerks handled waybill/rating fallout on green-screen",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "three fronts: mainframe thinking, waterfall account leadership, team learning new model, remote under COVID",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "DDD and event storming; mainframe system of record with APIs, microservices, CockroachDB, CDC, reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "client restless; revenue management co-created SRS UI via personas to prototypes in weekly build-measure-learn",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "quality crisis: defects despite coverage, ownership, audit, tests after code, vague stories, SMART stories, TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP covered 95% of targeted use cases; EDI validation proactive; client stopped finding defects dashboard missed",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result; confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Boris Exercise and SNAP-E documentation",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Action"
+   },
+   {
+    "text": "daily rotating pairs, test-first checked at standup, stories small for 1-week iterations, held after experts left",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action/Result"
+   },
+   {
+    "text": "client contributors learned Angular, Node, Spring Boot, cloud-native; support app after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails rule 8: unsupported quoted text 'I'm not paying for 2 people to do the work of 1' is not verbatim (story reads 'two people to do the work of one'). Other claims supported.",
+  "claims": [
+   {
+    "text": "CIC's first engagement, Director, Revenue and Shipment Planning, without stopping the railroad",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation/Task/Role"
+   },
+   {
+    "text": "mainframe from 1970s; orders fell out until customers called; COBOL/assembly, shrinking workforce; clerks handled waybill/rating fallout on green-screen",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "three fronts: mainframe thinking, waterfall account leadership, team learning new model, remote under COVID",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "DDD and event storming; mainframe system of record with APIs, microservices, CockroachDB, CDC, reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "client restless; revenue management co-created SRS UI via personas to prototypes in weekly build-measure-learn",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "quality crisis: defects despite coverage, ownership, audit, tests after code, vague stories, SMART stories, TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP covered 95% of targeted use cases; EDI validation proactive; client stopped finding defects dashboard missed",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result; confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "'I do, we do, you do' (verbatim), thin-stretched experts rotated knowledge",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "quote 'I'm not paying for 2 people to do the work of 1' (story has 'two ... one'; not verbatim)",
+    "label": "unsupported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "All claims supported; no closing offer.",
+  "claims": [
+   {
+    "text": "CIC's first engagement, Director, Revenue and Shipment Planning, without stopping the railroad",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation/Task/Role"
+   },
+   {
+    "text": "mainframe from 1970s; orders fell out until customers called; COBOL/assembly, shrinking workforce; clerks handled waybill/rating fallout on green-screen",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "three fronts: mainframe thinking, waterfall account leadership, team learning new model, remote under COVID",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "DDD and event storming; mainframe system of record with APIs, microservices, CockroachDB, CDC, reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "client restless; revenue management co-created SRS UI via personas to prototypes in weekly build-measure-learn",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "quality crisis: defects despite coverage, ownership, audit, tests after code, vague stories, SMART stories, TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP covered 95% of targeted use cases; EDI validation proactive; client stopped finding defects dashboard missed",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result; confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "API gateways, anti-corruption layers, Strangler pattern, Docker, Kubernetes, CI/CD",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Action"
+   },
+   {
+    "text": "Boris Exercise and SNAP-E documentation",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Action"
+   },
+   {
+    "text": "client contributors learned Angular, Node, Spring Boot, cloud-native; support app after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "clerks and shippers audit malformed waybill data before pricing errors; trading partners notified",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "client owning backlog, co-creating in weekly iterations",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Result; the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Deeper dive on same engagement with new detail (audit specifics, Columbus experts, waybill audit, trading partners); all supported.",
+  "claims": [
+   {
+    "text": "mainframe from 1970s; orders fell out until customers called; COBOL/assembly, shrinking workforce; clerks handled waybill/rating fallout on green-screen",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "three fronts: mainframe thinking, waterfall account leadership, team learning new model, remote under COVID",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "DDD and event storming; mainframe system of record with APIs, microservices, CockroachDB, CDC, reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "client restless; revenue management co-created SRS UI via personas to prototypes in weekly build-measure-learn",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "quality crisis: defects despite coverage, ownership, audit, tests after code, vague stories, SMART stories, TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP covered 95% of targeted use cases; EDI validation proactive; client stopped finding defects dashboard missed",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result; confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Samman coaching, Columbus TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "'I do, we do, you do' (verbatim), thin-stretched experts rotated knowledge",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "clerks and shippers audit malformed waybill data before pricing errors; trading partners notified",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "client contributors learned Angular, Node, Spring Boot, cloud-native; support app after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Deeper dive on same engagement; all supported; quotes verbatim.",
+  "claims": [
+   {
+    "text": "mainframe from 1970s; orders fell out until customers called; COBOL/assembly, shrinking workforce; clerks handled waybill/rating fallout on green-screen",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "three fronts: mainframe thinking, waterfall account leadership, team learning new model, remote under COVID",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "DDD and event storming; mainframe system of record with APIs, microservices, CockroachDB, CDC, reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "client restless; revenue management co-created SRS UI via personas to prototypes in weekly build-measure-learn",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "quality crisis: defects despite coverage, ownership, audit, tests after code, vague stories, SMART stories, TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP covered 95% of targeted use cases; EDI validation proactive; client stopped finding defects dashboard missed",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result; confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Boris Exercise and SNAP-E documentation",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Action"
+   },
+   {
+    "text": "daily rotating pairs, test-first checked at standup, stories small for 1-week iterations, held after experts left",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action/Result"
+   },
+   {
+    "text": "data capture fidelity as north star",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 1,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Deeper dive on same engagement; quote uses 'two ... one' verbatim; all supported.",
+  "claims": [
+   {
+    "text": "mainframe from 1970s; orders fell out until customers called; COBOL/assembly, shrinking workforce; clerks handled waybill/rating fallout on green-screen",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "three fronts: mainframe thinking, waterfall account leadership, team learning new model, remote under COVID",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "DDD and event storming; mainframe system of record with APIs, microservices, CockroachDB, CDC, reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "client restless; revenue management co-created SRS UI via personas to prototypes in weekly build-measure-learn",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "quality crisis: defects despite coverage, ownership, audit, tests after code, vague stories, SMART stories, TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP covered 95% of targeted use cases; EDI validation proactive; client stopped finding defects dashboard missed",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result; confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "hard sync problems: inconsistent environments, unexplained data captures",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "API gateways, anti-corruption layers, Strangler pattern, Docker, Kubernetes, CI/CD",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Action"
+   },
+   {
+    "text": "quote 'I'm not paying for two people to do the work of one' (verbatim)",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "'I do, we do, you do' (verbatim), thin-stretched experts rotated knowledge",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "clerks and shippers audit malformed waybill data before pricing errors; trading partners notified",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "client contributors learned Angular, Node, Spring Boot, cloud-native; support app after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Section 3 (c10 t3): says the modernization's duration is not on record, while the engagement story dates run 2019-11 to 2023-09 (contradicted claim); no clarifying question.",
+  "claims": [
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months; 6 months is the training not the whole",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "weekly build-measure-learn iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "no confirmed end-to-end duration for the modernization",
+    "label": "contradicted",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Start_Date/End_Date (2019-11 to 2023-09)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 1,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Section 3 (c10 t3): says the modernization's duration is not on record, while the engagement story dates run 2019-11 to 2023-09 (contradicted claim); no clarifying question.",
+  "claims": [
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months; 6 months is the training not the whole",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "weekly build-measure-learn iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "full elapsed time isn't specified in Matt's stories",
+    "label": "contradicted",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Start_Date/End_Date (2019-11 to 2023-09)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 1,
+  "turn": 3,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Section 3 (c10 t3): says the modernization's duration is not on record, while the engagement story dates run 2019-11 to 2023-09 (contradicted claim); no clarifying question.",
+  "claims": [
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months; 6 months is the training not the whole",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "no confirmed start-to-MVP duration or total engagement length",
+    "label": "contradicted",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Start_Date/End_Date (2019-11 to 2023-09)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All claims supported; no closing offer.",
+  "claims": [
+   {
+    "text": "CIC's first engagement, Director, Revenue and Shipment Planning, without stopping the railroad",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation/Task/Role"
+   },
+   {
+    "text": "mainframe from 1970s; orders fell out until customers called; COBOL/assembly, shrinking workforce; clerks handled waybill/rating fallout on green-screen",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "three fronts: mainframe thinking, waterfall account leadership, team learning new model, remote under COVID",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "DDD and event storming; mainframe system of record with APIs, microservices, CockroachDB, CDC, reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "client restless; revenue management co-created SRS UI via personas to prototypes in weekly build-measure-learn",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "quality crisis: defects despite coverage, ownership, audit, tests after code, vague stories, SMART stories, TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP covered 95% of targeted use cases; EDI validation proactive; client stopped finding defects dashboard missed",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result; confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "'I do, we do, you do' (verbatim), thin-stretched experts rotated knowledge",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "client contributors learned Angular, Node, Spring Boot, cloud-native; support app after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "clerks and shippers audit malformed waybill data before pricing errors; trading partners notified",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All claims supported; no closing offer.",
+  "claims": [
+   {
+    "text": "CIC's first engagement, Director, Revenue and Shipment Planning, without stopping the railroad",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation/Task/Role"
+   },
+   {
+    "text": "mainframe from 1970s; orders fell out until customers called; COBOL/assembly, shrinking workforce; clerks handled waybill/rating fallout on green-screen",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "three fronts: mainframe thinking, waterfall account leadership, team learning new model, remote under COVID",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "DDD and event storming; mainframe system of record with APIs, microservices, CockroachDB, CDC, reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "client restless; revenue management co-created SRS UI via personas to prototypes in weekly build-measure-learn",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "quality crisis: defects despite coverage, ownership, audit, tests after code, vague stories, SMART stories, TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP covered 95% of targeted use cases; EDI validation proactive; client stopped finding defects dashboard missed",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result; confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "order management, booking, credit, service fulfillment, planning, billing, AR",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "API gateways, anti-corruption layers, Strangler pattern, Docker, Kubernetes, CI/CD",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Action"
+   },
+   {
+    "text": "three balanced teams, one transitioning to Monterrey",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "client owning backlog, co-creating in weekly iterations",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Result; the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "All claims supported; no closing offer.",
+  "claims": [
+   {
+    "text": "CIC's first engagement, Director, Revenue and Shipment Planning, without stopping the railroad",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation/Task/Role"
+   },
+   {
+    "text": "mainframe from 1970s; orders fell out until customers called; COBOL/assembly, shrinking workforce; clerks handled waybill/rating fallout on green-screen",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "three fronts: mainframe thinking, waterfall account leadership, team learning new model, remote under COVID",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "DDD and event storming; mainframe system of record with APIs, microservices, CockroachDB, CDC, reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "client restless; revenue management co-created SRS UI via personas to prototypes in weekly build-measure-learn",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "quality crisis: defects despite coverage, ownership, audit, tests after code, vague stories, SMART stories, TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP covered 95% of targeted use cases; EDI validation proactive; client stopped finding defects dashboard missed",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result; confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Boris Exercise and SNAP-E documentation",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Action"
+   },
+   {
+    "text": "daily rotating pairs, test-first checked at standup, stories small for 1-week iterations, held after experts left",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action/Result"
+   },
+   {
+    "text": "client contributors learned Angular, Node, Spring Boot, cloud-native; support app after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Deeper dive on same engagement; quotes verbatim; all supported.",
+  "claims": [
+   {
+    "text": "mainframe from 1970s; orders fell out until customers called; COBOL/assembly, shrinking workforce; clerks handled waybill/rating fallout on green-screen",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "three fronts: mainframe thinking, waterfall account leadership, team learning new model, remote under COVID",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "DDD and event storming; mainframe system of record with APIs, microservices, CockroachDB, CDC, reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "client restless; revenue management co-created SRS UI via personas to prototypes in weekly build-measure-learn",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "quality crisis: defects despite coverage, ownership, audit, tests after code, vague stories, SMART stories, TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP covered 95% of targeted use cases; EDI validation proactive; client stopped finding defects dashboard missed",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result; confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Boris Exercise and SNAP-E documentation",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Action"
+   },
+   {
+    "text": "API gateways, anti-corruption layers, Strangler pattern, Docker, Kubernetes, CI/CD",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Action"
+   },
+   {
+    "text": "quote 'I'm not paying for two people to do the work of one' (verbatim)",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "'I do, we do, you do' (verbatim), thin-stretched experts rotated knowledge",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Deeper dive on same engagement; all supported ('rather than reproduce green screens' read as framing, not a claim).",
+  "claims": [
+   {
+    "text": "mainframe from 1970s; orders fell out until customers called; COBOL/assembly, shrinking workforce; clerks handled waybill/rating fallout on green-screen",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "three fronts: mainframe thinking, waterfall account leadership, team learning new model, remote under COVID",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "DDD and event storming; mainframe system of record with APIs, microservices, CockroachDB, CDC, reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "client restless; revenue management co-created SRS UI via personas to prototypes in weekly build-measure-learn",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "quality crisis: defects despite coverage, ownership, audit, tests after code, vague stories, SMART stories, TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP covered 95% of targeted use cases; EDI validation proactive; client stopped finding defects dashboard missed",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result; confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "API gateways, anti-corruption layers, Strangler pattern, Docker, Kubernetes, CI/CD",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Action"
+   },
+   {
+    "text": "Boris Exercise and SNAP-E documentation",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Action"
+   },
+   {
+    "text": "clerks and shippers audit malformed waybill data before pricing errors; trading partners notified",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "quote 'I'm not paying for two people to do the work of one' (verbatim)",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "'I do, we do, you do' (verbatim), thin-stretched experts rotated knowledge",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "three balanced teams, one transitioning to Monterrey",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "client owning backlog, co-creating in weekly iterations",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Result; the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 2,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Deeper dive on same engagement; all supported.",
+  "claims": [
+   {
+    "text": "mainframe from 1970s; orders fell out until customers called; COBOL/assembly, shrinking workforce; clerks handled waybill/rating fallout on green-screen",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "three fronts: mainframe thinking, waterfall account leadership, team learning new model, remote under COVID",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "DDD and event storming; mainframe system of record with APIs, microservices, CockroachDB, CDC, reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "client restless; revenue management co-created SRS UI via personas to prototypes in weekly build-measure-learn",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "quality crisis: defects despite coverage, ownership, audit, tests after code, vague stories, SMART stories, TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP covered 95% of targeted use cases; EDI validation proactive; client stopped finding defects dashboard missed",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result; confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Boris Exercise and SNAP-E documentation",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Action"
+   },
+   {
+    "text": "API gateways, anti-corruption layers, Strangler pattern, Docker, Kubernetes, CI/CD",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Action"
+   },
+   {
+    "text": "Samman coaching, Columbus TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "'I do, we do, you do' (verbatim), thin-stretched experts rotated knowledge",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "client contributors learned Angular, Node, Spring Boot, cloud-native; support app after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Section 3 (c10 t3): says the modernization's duration is not on record, while the engagement story dates run 2019-11 to 2023-09 (contradicted claim); no clarifying question.",
+  "claims": [
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months; 6 months is the training not the whole",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "weekly build-measure-learn iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "no confirmed start-to-MVP duration or total engagement length",
+    "label": "contradicted",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Start_Date/End_Date (2019-11 to 2023-09)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 2,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Section 3 (c10 t3): says the modernization's duration is not on record, while the engagement story dates run 2019-11 to 2023-09 (contradicted claim); no clarifying question.",
+  "claims": [
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months; 6 months is the training not the whole",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "weekly build-measure-learn iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "no confirmed duration for the full modernization",
+    "label": "contradicted",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Start_Date/End_Date (2019-11 to 2023-09)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 2,
+  "turn": 3,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Section 3 (c10 t3): says the modernization's duration is not on record, while the engagement story dates run 2019-11 to 2023-09 (contradicted claim); no clarifying question.",
+  "claims": [
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months; 6 months is the training not the whole",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "course covered cloud-native development, DevOps, workload patterns, modern practices",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP covered 95% of targeted use cases",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "no confirmed start-to-finish duration",
+    "label": "contradicted",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Start_Date/End_Date (2019-11 to 2023-09)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All claims supported; no closing offer.",
+  "claims": [
+   {
+    "text": "CIC's first engagement, Director, Revenue and Shipment Planning, without stopping the railroad",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation/Task/Role"
+   },
+   {
+    "text": "mainframe from 1970s; orders fell out until customers called; COBOL/assembly, shrinking workforce; clerks handled waybill/rating fallout on green-screen",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "three fronts: mainframe thinking, waterfall account leadership, team learning new model, remote under COVID",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "DDD and event storming; mainframe system of record with APIs, microservices, CockroachDB, CDC, reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "client restless; revenue management co-created SRS UI via personas to prototypes in weekly build-measure-learn",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "quality crisis: defects despite coverage, ownership, audit, tests after code, vague stories, SMART stories, TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP covered 95% of targeted use cases; EDI validation proactive; client stopped finding defects dashboard missed",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result; confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Boris Exercise and SNAP-E documentation",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Action"
+   },
+   {
+    "text": "API gateways, anti-corruption layers, Strangler pattern, Docker, Kubernetes, CI/CD",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Action"
+   },
+   {
+    "text": "Samman coaching, Columbus TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "client contributors learned Angular, Node, Spring Boot, cloud-native; support app after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All claims supported; quote verbatim; no closing offer.",
+  "claims": [
+   {
+    "text": "CIC's first engagement, Director, Revenue and Shipment Planning, without stopping the railroad",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation/Task/Role"
+   },
+   {
+    "text": "mainframe from 1970s; orders fell out until customers called; COBOL/assembly, shrinking workforce; clerks handled waybill/rating fallout on green-screen",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "three fronts: mainframe thinking, waterfall account leadership, team learning new model, remote under COVID",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "DDD and event storming; mainframe system of record with APIs, microservices, CockroachDB, CDC, reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "client restless; revenue management co-created SRS UI via personas to prototypes in weekly build-measure-learn",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "quality crisis: defects despite coverage, ownership, audit, tests after code, vague stories, SMART stories, TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP covered 95% of targeted use cases; EDI validation proactive; client stopped finding defects dashboard missed",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result; confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Boris Exercise and SNAP-E documentation",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Action"
+   },
+   {
+    "text": "'I do, we do, you do' (verbatim), thin-stretched experts rotated knowledge",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "client contributors learned Angular, Node, Spring Boot, cloud-native; support app after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "three balanced teams, one transitioning to Monterrey",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "client owning backlog, co-creating in weekly iterations",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Result; the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "All claims supported; no closing offer.",
+  "claims": [
+   {
+    "text": "CIC's first engagement, Director, Revenue and Shipment Planning, without stopping the railroad",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation/Task/Role"
+   },
+   {
+    "text": "mainframe from 1970s; orders fell out until customers called; COBOL/assembly, shrinking workforce; clerks handled waybill/rating fallout on green-screen",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "three fronts: mainframe thinking, waterfall account leadership, team learning new model, remote under COVID",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "DDD and event storming; mainframe system of record with APIs, microservices, CockroachDB, CDC, reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "client restless; revenue management co-created SRS UI via personas to prototypes in weekly build-measure-learn",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "quality crisis: defects despite coverage, ownership, audit, tests after code, vague stories, SMART stories, TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP covered 95% of targeted use cases; EDI validation proactive; client stopped finding defects dashboard missed",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result; confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "API gateways, anti-corruption layers, Strangler pattern, Docker, Kubernetes, CI/CD",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Action"
+   },
+   {
+    "text": "three balanced teams, one transitioning to Monterrey",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "client owning backlog, co-creating in weekly iterations",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Result; the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Deeper dive on same engagement; quote verbatim; zero production defects from BDD story on same engagement; all supported.",
+  "claims": [
+   {
+    "text": "mainframe from 1970s; orders fell out until customers called; COBOL/assembly, shrinking workforce; clerks handled waybill/rating fallout on green-screen",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "three fronts: mainframe thinking, waterfall account leadership, team learning new model, remote under COVID",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "DDD and event storming; mainframe system of record with APIs, microservices, CockroachDB, CDC, reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "client restless; revenue management co-created SRS UI via personas to prototypes in weekly build-measure-learn",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "quality crisis: defects despite coverage, ownership, audit, tests after code, vague stories, SMART stories, TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP covered 95% of targeted use cases; EDI validation proactive; client stopped finding defects dashboard missed",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result; confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "hard sync problems: inconsistent environments, unexplained data captures",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "clerks and shippers audit malformed waybill data before pricing errors; trading partners notified",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Samman coaching, Columbus TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "quote 'I'm not paying for two people to do the work of one' (verbatim)",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "mission-critical operations tools went live with zero production defects",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Deeper dive on same engagement; all supported.",
+  "claims": [
+   {
+    "text": "mainframe from 1970s; orders fell out until customers called; COBOL/assembly, shrinking workforce; clerks handled waybill/rating fallout on green-screen",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "three fronts: mainframe thinking, waterfall account leadership, team learning new model, remote under COVID",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "DDD and event storming; mainframe system of record with APIs, microservices, CockroachDB, CDC, reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "client restless; revenue management co-created SRS UI via personas to prototypes in weekly build-measure-learn",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "quality crisis: defects despite coverage, ownership, audit, tests after code, vague stories, SMART stories, TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP covered 95% of targeted use cases; EDI validation proactive; client stopped finding defects dashboard missed",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result; confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "API gateways, anti-corruption layers, Strangler pattern, Docker, Kubernetes, CI/CD",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Action"
+   },
+   {
+    "text": "clerks and shippers audit malformed waybill data before pricing errors; trading partners notified",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "daily rotating pairs, test-first checked at standup, stories small for 1-week iterations, held after experts left",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action/Result"
+   },
+   {
+    "text": "'I do, we do, you do' (verbatim), thin-stretched experts rotated knowledge",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "client contributors learned Angular, Node, Spring Boot, cloud-native; support app after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 3,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Deeper dive on same engagement; all supported.",
+  "claims": [
+   {
+    "text": "mainframe from 1970s; orders fell out until customers called; COBOL/assembly, shrinking workforce; clerks handled waybill/rating fallout on green-screen",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "three fronts: mainframe thinking, waterfall account leadership, team learning new model, remote under COVID",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "DDD and event storming; mainframe system of record with APIs, microservices, CockroachDB, CDC, reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "client restless; revenue management co-created SRS UI via personas to prototypes in weekly build-measure-learn",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "quality crisis: defects despite coverage, ownership, audit, tests after code, vague stories, SMART stories, TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP covered 95% of targeted use cases; EDI validation proactive; client stopped finding defects dashboard missed",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result; confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "order management, booking, credit, service fulfillment, planning, billing, AR",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Boris Exercise and SNAP-E documentation",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Action"
+   },
+   {
+    "text": "API gateways, anti-corruption layers, Strangler pattern, Docker, Kubernetes, CI/CD",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Action"
+   },
+   {
+    "text": "quote 'I'm not paying for two people to do the work of one' (verbatim)",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "'I do, we do, you do' (verbatim), thin-stretched experts rotated knowledge",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "three balanced teams, one transitioning to Monterrey",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Section 3 (c10 t3): says the modernization's duration is not on record, while the engagement story dates run 2019-11 to 2023-09 (contradicted claim); no clarifying question.",
+  "claims": [
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months; 6 months is the training not the whole",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "weekly build-measure-learn iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "no confirmed end-to-end duration",
+    "label": "contradicted",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Start_Date/End_Date (2019-11 to 2023-09)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 3,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Section 3 (c10 t3): says the modernization's duration is not on record, while the engagement story dates run 2019-11 to 2023-09 (contradicted claim); no clarifying question.",
+  "claims": [
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months; 6 months is the training not the whole",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "client contributors learned Angular, Node, Spring Boot, cloud-native; support app after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "elapsed time isn't specified in Matt's stories",
+    "label": "contradicted",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Start_Date/End_Date (2019-11 to 2023-09)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c10",
+  "run": 3,
+  "turn": 3,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Section 3 (c10 t3): says the modernization's duration is not on record, while the engagement story dates run 2019-11 to 2023-09 (contradicted claim); no clarifying question.",
+  "claims": [
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months; 6 months is the training not the whole",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "the stories don't specify its start and end dates",
+    "label": "contradicted",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Start_Date/End_Date (2019-11 to 2023-09)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

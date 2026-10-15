@@ -1,0 +1,3376 @@
+[
+ {
+  "case": "c13",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent; all figures (7 months, 14-month, $8.5M, 2M+, 15 FIs, 45-person, 200-page BRD, 6-month cycle, 3 vendors, 47 criteria, 3 months, 50+ stakeholders, 3 weeks, $500K, 3%/$255K, $45M, 99.97%, $3M) supported by recovering-fiservs-85m-white-label-card-portal|fiserv and driving-agile-transformation-for-fiservs-card-portal|fiserv; no closing.",
+  "claims": [
+   {
+    "text": "Took over as Development Manager roughly 7 months into a 14-month $8.5M white-label card portal initiative",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Task"
+   },
+   {
+    "text": "Platform served 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person globally dispersed team had missed multiple consecutive deadlines; quality poor; client threatening contract cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Requirements in 200-page BRD; 6-month (waterfall) release cycle",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Traveled Mon-Thu to Omaha; daily 7 AM and 11 PM offshore/onshore transition calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Re-prioritized backlog, reset timelines, coordinated 3 external vendors (payment processing, fraud detection, hosting)",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Decomposed requirements into persona-based user stories; restructured JIRA (47 acceptance criteria as Epics); bi-weekly demos",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Overcame PMO/compliance resistance using JIRA audit trails, attached ADA scans, developer comments",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Screen reader audits part of Definition of Done",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "2-week sprints within 3 months; real-time visibility for 50+ stakeholders across 3 time zones",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Recovered Q4 release 3 weeks behind, avoiding $500K penalties",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "3% under budget ($255K savings); 47/47 acceptance criteria; zero critical defects at launch",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$45M transactions first month at 99.97% uptime; $3M contract extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Assumed program manager responsibilities during PM's paternity leave",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action/Task"
+   },
+   {
+    "text": "Negotiated dedicated stakeholder review windows; maintained steering committee reporting",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Gives Fiserv team size 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv with team locations and 3 vendors, all supported; no clarifying question (over-asking control passes); no closing.",
+  "claims": [
+   {
+    "text": "Fiserv team was 45 people, globally dispersed",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Onshore team in Omaha",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation; recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Coordinated 3 external vendors for payment processing, fraud detection, hosting",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent; all figures (7 months, 14-month, $8.5M, 2M+, 15 FIs, 45-person, 200-page BRD, 6-month cycle, 3 vendors, 47 criteria, 3 months, 50+ stakeholders, 3 weeks, $500K, 3%/$255K, $45M, 99.97%, $3M) supported by recovering-fiservs-85m-white-label-card-portal|fiserv and driving-agile-transformation-for-fiservs-card-portal|fiserv; no closing.",
+  "claims": [
+   {
+    "text": "Took over as Development Manager roughly 7 months into a 14-month $8.5M white-label card portal initiative",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Task"
+   },
+   {
+    "text": "Platform served 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person globally dispersed team had missed multiple consecutive deadlines; quality poor; client threatening contract cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Requirements in 200-page BRD; 6-month (waterfall) release cycle",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Traveled Mon-Thu to Omaha; daily 7 AM and 11 PM offshore/onshore transition calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Re-prioritized backlog, reset timelines, coordinated 3 external vendors (payment processing, fraud detection, hosting)",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Decomposed requirements into persona-based user stories; restructured JIRA (47 acceptance criteria as Epics); bi-weekly demos",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Overcame PMO/compliance resistance using JIRA audit trails, attached ADA scans, developer comments",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Screen reader audits part of Definition of Done",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "2-week sprints within 3 months; real-time visibility for 50+ stakeholders across 3 time zones",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Recovered Q4 release 3 weeks behind, avoiding $500K penalties",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "3% under budget ($255K savings); 47/47 acceptance criteria; zero critical defects at launch",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$45M transactions first month at 99.97% uptime; $3M contract extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Managed SOA integration layer wrapping mainframe COBOL into Java EE/Spring portal via MuleSoft, Tibco, WebMethods",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Replaced single To Do/Done board with multi-tiered JIRA Kanban/Scrum",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Team had no visibility into work status",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives Fiserv team size 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv with team locations and 3 vendors, all supported; no clarifying question (over-asking control passes); no closing.",
+  "claims": [
+   {
+    "text": "Fiserv team was 45 people, globally dispersed",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Onshore team in Omaha",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation; recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Coordinated 3 external vendors for payment processing, fraud detection, hosting",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Matt served as Development Manager",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent; all figures (7 months, 14-month, $8.5M, 2M+, 15 FIs, 45-person, 200-page BRD, 6-month cycle, 3 vendors, 47 criteria, 3 months, 50+ stakeholders, 3 weeks, $500K, 3%/$255K, $45M, 99.97%, $3M) supported by recovering-fiservs-85m-white-label-card-portal|fiserv and driving-agile-transformation-for-fiservs-card-portal|fiserv; no closing.",
+  "claims": [
+   {
+    "text": "Took over as Development Manager roughly 7 months into a 14-month $8.5M white-label card portal initiative",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Task"
+   },
+   {
+    "text": "Platform served 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person globally dispersed team had missed multiple consecutive deadlines; quality poor; client threatening contract cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Requirements in 200-page BRD; 6-month (waterfall) release cycle",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Traveled Mon-Thu to Omaha; daily 7 AM and 11 PM offshore/onshore transition calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Re-prioritized backlog, reset timelines, coordinated 3 external vendors (payment processing, fraud detection, hosting)",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Decomposed requirements into persona-based user stories; restructured JIRA (47 acceptance criteria as Epics); bi-weekly demos",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Overcame PMO/compliance resistance using JIRA audit trails, attached ADA scans, developer comments",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Screen reader audits part of Definition of Done",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "2-week sprints within 3 months; real-time visibility for 50+ stakeholders across 3 time zones",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Recovered Q4 release 3 weeks behind, avoiding $500K penalties",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "3% under budget ($255K savings); 47/47 acceptance criteria; zero critical defects at launch",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$45M transactions first month at 99.97% uptime; $3M contract extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "VisionPLUS 350 mainframe COBOL wrapped via MuleSoft, Tibco, WebMethods",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Demos brought branding/UI/ADA reviews forward instead of month 6",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 8,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Gives Fiserv team size 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv with team locations and 3 vendors, all supported; no clarifying question (over-asking control passes); no closing.",
+  "claims": [
+   {
+    "text": "Fiserv team was 45 people, globally dispersed",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Onshore team in Omaha",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation; recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Coordinated 3 external vendors for payment processing, fraud detection, hosting",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent; all figures (7 months, 14-month, $8.5M, 2M+, 15 FIs, 45-person, 200-page BRD, 6-month cycle, 3 vendors, 47 criteria, 3 months, 50+ stakeholders, 3 weeks, $500K, 3%/$255K, $45M, 99.97%, $3M) supported by recovering-fiservs-85m-white-label-card-portal|fiserv and driving-agile-transformation-for-fiservs-card-portal|fiserv; no closing.",
+  "claims": [
+   {
+    "text": "Took over as Development Manager roughly 7 months into a 14-month $8.5M white-label card portal initiative",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Task"
+   },
+   {
+    "text": "Platform served 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person globally dispersed team had missed multiple consecutive deadlines; quality poor; client threatening contract cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Requirements in 200-page BRD; 6-month (waterfall) release cycle",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Traveled Mon-Thu to Omaha; daily 7 AM and 11 PM offshore/onshore transition calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Re-prioritized backlog, reset timelines, coordinated 3 external vendors (payment processing, fraud detection, hosting)",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Decomposed requirements into persona-based user stories; restructured JIRA (47 acceptance criteria as Epics); bi-weekly demos",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Overcame PMO/compliance resistance using JIRA audit trails, attached ADA scans, developer comments",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Screen reader audits part of Definition of Done",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "2-week sprints within 3 months; real-time visibility for 50+ stakeholders across 3 time zones",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Recovered Q4 release 3 weeks behind, avoiding $500K penalties",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "3% under budget ($255K savings); 47/47 acceptance criteria; zero critical defects at launch",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$45M transactions first month at 99.97% uptime; $3M contract extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Integration of legacy mainframe into Java EE/Spring via MuleSoft, Tibco, WebMethods",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Covered PM duties during paternity leave",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Coached offshore teams on empowerment over command-and-control; negotiated review windows",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Gives Fiserv team size 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv with team locations and 3 vendors, all supported; no clarifying question (over-asking control passes); no closing.",
+  "claims": [
+   {
+    "text": "Fiserv team was 45 people, globally dispersed",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Onshore team in Omaha",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation; recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Coordinated 3 external vendors for payment processing, fraud detection, hosting",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Matt served as Development Manager",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent; all figures (7 months, 14-month, $8.5M, 2M+, 15 FIs, 45-person, 200-page BRD, 6-month cycle, 3 vendors, 47 criteria, 3 months, 50+ stakeholders, 3 weeks, $500K, 3%/$255K, $45M, 99.97%, $3M) supported by recovering-fiservs-85m-white-label-card-portal|fiserv and driving-agile-transformation-for-fiservs-card-portal|fiserv; no closing.",
+  "claims": [
+   {
+    "text": "Took over as Development Manager roughly 7 months into a 14-month $8.5M white-label card portal initiative",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Task"
+   },
+   {
+    "text": "Platform served 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person globally dispersed team had missed multiple consecutive deadlines; quality poor; client threatening contract cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Requirements in 200-page BRD; 6-month (waterfall) release cycle",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Traveled Mon-Thu to Omaha; daily 7 AM and 11 PM offshore/onshore transition calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Re-prioritized backlog, reset timelines, coordinated 3 external vendors (payment processing, fraud detection, hosting)",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Decomposed requirements into persona-based user stories; restructured JIRA (47 acceptance criteria as Epics); bi-weekly demos",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Overcame PMO/compliance resistance using JIRA audit trails, attached ADA scans, developer comments",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Screen reader audits part of Definition of Done",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "2-week sprints within 3 months; real-time visibility for 50+ stakeholders across 3 time zones",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Recovered Q4 release 3 weeks behind, avoiding $500K penalties",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "3% under budget ($255K savings); 47/47 acceptance criteria; zero critical defects at launch",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$45M transactions first month at 99.97% uptime; $3M contract extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Platform moving from mainframe toward API-based architecture",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Maintained steering committee reporting; JIRA better than static Word documents",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Negotiated dedicated stakeholder review windows",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives Fiserv team size 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv with team locations and 3 vendors, all supported; no clarifying question (over-asking control passes); no closing.",
+  "claims": [
+   {
+    "text": "Fiserv team was 45 people, globally dispersed",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Onshore team in Omaha",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation; recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Coordinated 3 external vendors for payment processing, fraud detection, hosting",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent; all figures (7 months, 14-month, $8.5M, 2M+, 15 FIs, 45-person, 200-page BRD, 6-month cycle, 3 vendors, 47 criteria, 3 months, 50+ stakeholders, 3 weeks, $500K, 3%/$255K, $45M, 99.97%, $3M) supported by recovering-fiservs-85m-white-label-card-portal|fiserv and driving-agile-transformation-for-fiservs-card-portal|fiserv; no closing.",
+  "claims": [
+   {
+    "text": "Took over as Development Manager roughly 7 months into a 14-month $8.5M white-label card portal initiative",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Task"
+   },
+   {
+    "text": "Platform served 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person globally dispersed team had missed multiple consecutive deadlines; quality poor; client threatening contract cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Requirements in 200-page BRD; 6-month (waterfall) release cycle",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Traveled Mon-Thu to Omaha; daily 7 AM and 11 PM offshore/onshore transition calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Re-prioritized backlog, reset timelines, coordinated 3 external vendors (payment processing, fraud detection, hosting)",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Decomposed requirements into persona-based user stories; restructured JIRA (47 acceptance criteria as Epics); bi-weekly demos",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Overcame PMO/compliance resistance using JIRA audit trails, attached ADA scans, developer comments",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Screen reader audits part of Definition of Done",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "2-week sprints within 3 months; real-time visibility for 50+ stakeholders across 3 time zones",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Recovered Q4 release 3 weeks behind, avoiding $500K penalties",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "3% under budget ($255K savings); 47/47 acceptance criteria; zero critical defects at launch",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$45M transactions first month at 99.97% uptime; $3M contract extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Live critical (Sev-1) defects in payment processing",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "VisionPLUS 350 COBOL integration as First Data transitioned to API architecture",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Action"
+   },
+   {
+    "text": "BRDs organized by system modules; multi-tiered Kanban/Scrum",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 9,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Gives Fiserv team size 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv with team locations and 3 vendors, all supported; no clarifying question (over-asking control passes); no closing.",
+  "claims": [
+   {
+    "text": "Fiserv team was 45 people, globally dispersed",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Onshore team in Omaha",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation; recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Coordinated 3 external vendors for payment processing, fraud detection, hosting",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent; all figures (7 months, 14-month, $8.5M, 2M+, 15 FIs, 45-person, 200-page BRD, 6-month cycle, 3 vendors, 47 criteria, 3 months, 50+ stakeholders, 3 weeks, $500K, 3%/$255K, $45M, 99.97%, $3M) supported by recovering-fiservs-85m-white-label-card-portal|fiserv and driving-agile-transformation-for-fiservs-card-portal|fiserv; no closing.",
+  "claims": [
+   {
+    "text": "Took over as Development Manager roughly 7 months into a 14-month $8.5M white-label card portal initiative",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Task"
+   },
+   {
+    "text": "Platform served 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person globally dispersed team had missed multiple consecutive deadlines; quality poor; client threatening contract cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Requirements in 200-page BRD; 6-month (waterfall) release cycle",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Traveled Mon-Thu to Omaha; daily 7 AM and 11 PM offshore/onshore transition calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Re-prioritized backlog, reset timelines, coordinated 3 external vendors (payment processing, fraud detection, hosting)",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Decomposed requirements into persona-based user stories; restructured JIRA (47 acceptance criteria as Epics); bi-weekly demos",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Overcame PMO/compliance resistance using JIRA audit trails, attached ADA scans, developer comments",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Screen reader audits part of Definition of Done",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "2-week sprints within 3 months; real-time visibility for 50+ stakeholders across 3 time zones",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Recovered Q4 release 3 weeks behind, avoiding $500K penalties",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "3% under budget ($255K savings); 47/47 acceptance criteria; zero critical defects at launch",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$45M transactions first month at 99.97% uptime; $3M contract extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Critical payment-processing defects in production",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "VisionPLUS 350 SOA integration layer via MuleSoft, Tibco, WebMethods",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Wrote the portal's ADA manifesto",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients Action"
+   },
+   {
+    "text": "JAWS/NVDA screen reader audits in Definition of Done",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Fiserv adopted the accessibility standards for later releases",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Gives Fiserv team size 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv with team locations and 3 vendors, all supported; no clarifying question (over-asking control passes); no closing.",
+  "claims": [
+   {
+    "text": "Fiserv team was 45 people, globally dispersed",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Onshore team in Omaha",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation; recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Coordinated 3 external vendors for payment processing, fraud detection, hosting",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent; all figures (7 months, 14-month, $8.5M, 2M+, 15 FIs, 45-person, 200-page BRD, 6-month cycle, 3 vendors, 47 criteria, 3 months, 50+ stakeholders, 3 weeks, $500K, 3%/$255K, $45M, 99.97%, $3M) supported by recovering-fiservs-85m-white-label-card-portal|fiserv and driving-agile-transformation-for-fiservs-card-portal|fiserv; no closing.",
+  "claims": [
+   {
+    "text": "Took over as Development Manager roughly 7 months into a 14-month $8.5M white-label card portal initiative",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Task"
+   },
+   {
+    "text": "Platform served 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person globally dispersed team had missed multiple consecutive deadlines; quality poor; client threatening contract cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Requirements in 200-page BRD; 6-month (waterfall) release cycle",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Traveled Mon-Thu to Omaha; daily 7 AM and 11 PM offshore/onshore transition calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Re-prioritized backlog, reset timelines, coordinated 3 external vendors (payment processing, fraud detection, hosting)",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Decomposed requirements into persona-based user stories; restructured JIRA (47 acceptance criteria as Epics); bi-weekly demos",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Overcame PMO/compliance resistance using JIRA audit trails, attached ADA scans, developer comments",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Screen reader audits part of Definition of Done",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "2-week sprints within 3 months; real-time visibility for 50+ stakeholders across 3 time zones",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Recovered Q4 release 3 weeks behind, avoiding $500K penalties",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "3% under budget ($255K savings); 47/47 acceptance criteria; zero critical defects at launch",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$45M transactions first month at 99.97% uptime; $3M contract extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Platform moving from mainframe to SOA-based API architecture",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Integration layer connecting mainframe COBOL to Java EE/Spring portal",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Delivered before the holiday freeze",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives Fiserv team size 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv with team locations and 3 vendors, all supported; no clarifying question (over-asking control passes); no closing.",
+  "claims": [
+   {
+    "text": "Fiserv team was 45 people, globally dispersed",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Onshore team in Omaha",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation; recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Coordinated 3 external vendors for payment processing, fraud detection, hosting",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent; all figures (7 months, 14-month, $8.5M, 2M+, 15 FIs, 45-person, 200-page BRD, 6-month cycle, 3 vendors, 47 criteria, 3 months, 50+ stakeholders, 3 weeks, $500K, 3%/$255K, $45M, 99.97%, $3M) supported by recovering-fiservs-85m-white-label-card-portal|fiserv and driving-agile-transformation-for-fiservs-card-portal|fiserv; no closing.",
+  "claims": [
+   {
+    "text": "Took over as Development Manager roughly 7 months into a 14-month $8.5M white-label card portal initiative",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Task"
+   },
+   {
+    "text": "Platform served 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person globally dispersed team had missed multiple consecutive deadlines; quality poor; client threatening contract cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Requirements in 200-page BRD; 6-month (waterfall) release cycle",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Traveled Mon-Thu to Omaha; daily 7 AM and 11 PM offshore/onshore transition calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Re-prioritized backlog, reset timelines, coordinated 3 external vendors (payment processing, fraud detection, hosting)",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Decomposed requirements into persona-based user stories; restructured JIRA (47 acceptance criteria as Epics); bi-weekly demos",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Overcame PMO/compliance resistance using JIRA audit trails, attached ADA scans, developer comments",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Screen reader audits part of Definition of Done",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "2-week sprints within 3 months; real-time visibility for 50+ stakeholders across 3 time zones",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Recovered Q4 release 3 weeks behind, avoiding $500K penalties",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "3% under budget ($255K savings); 47/47 acceptance criteria; zero critical defects at launch",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$45M transactions first month at 99.97% uptime; $3M contract extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "VisionPLUS 350 COBOL integration via MuleSoft, Tibco, WebMethods",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Negotiated review windows; coached offshore teams on empowerment",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "PMO and compliance accepted JIRA as system of record",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 10,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Gives Fiserv team size 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv with team locations and 3 vendors, all supported; no clarifying question (over-asking control passes); no closing.",
+  "claims": [
+   {
+    "text": "Fiserv team was 45 people, globally dispersed",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Onshore team in Omaha",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation; recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Coordinated 3 external vendors for payment processing, fraud detection, hosting",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail on required closing (D9, Section 3 c14): ends with a scope question only, no offer to run Role Match or map a job description. Content otherwise meets c14: facts relevant to scope (CIC 0 to 150+, Octane, delivery outcomes), no level label, no vouching, no refusal; all claims supported (CIC, Octane, JPM ACCESS, etc.). contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names)",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from the ground up with full P&L accountability, budget/cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Grew centers from 0 to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Established development environments, CI/CD pipelines, cloud platforms; playbooks; recruiting, training, career progression frameworks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Integrated TDD/CI-CD with enterprise security scanning, deployment pipelines, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps, IaC templates, automated provisioning (Terraform, CloudFormation, serverless), hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards; standardized cloud-native practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/Result"
+   },
+   {
+    "text": "Engineers struggled to onboard to cloud-native technologies because standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Reference apps across Angular/AWS, React Native/AWS, Flutter, each with its own IaC",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Result"
+   },
+   {
+    "text": "Across JP Morgan, Capital One, American Express: reusable cloud-native patterns, automated testing and deployment gates, monitoring/observability; cross-functional teams build, deploy, operate services",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "Developers waited days or weeks for builds, tests, approvals",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Situation"
+   },
+   {
+    "text": "Across 15+ Fortune 500 engagements: 4X velocity, lead time weeks to days, 99.9%+ uptime",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "Managed 40+ blended onshore/offshore team on JP Morgan ACCESS payment engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Owned on-call and Sev-1 incident response, root-cause analysis, leadership communications while issues were live",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Global payments relied on fragmented integrations across 12 countries; gateway unified them",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fail on required closing (D9, Section 3 c14): ends with an offer to map a shared job description to Matt's documented work, but never names or offers Role Match. Content otherwise meets c14: facts relevant to scope (CIC 0 to 150+, Octane, delivery outcomes), no level label, no vouching, no refusal; all claims supported (CIC, Octane, JPM ACCESS, etc.). contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names)",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps, IaC templates, automated provisioning (Terraform, CloudFormation, serverless), hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards; standardized cloud-native practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/Result"
+   },
+   {
+    "text": "Engineers struggled to onboard to cloud-native technologies because standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Reference apps across Angular/AWS, React Native/AWS, Flutter, each with its own IaC",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Result"
+   },
+   {
+    "text": "Amex VPP developer portal: dependency bottlenecks, delayed testing, poor documentation; environment virtualization, stable test environments, Developer Guide; over 261 story points beyond commitment",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Situation/Action/Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from the ground up with full P&L accountability, budget/cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Grew centers from 0 to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Established development environments, CI/CD pipelines, cloud platforms; playbooks; recruiting, training, career progression frameworks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Integrated TDD/CI-CD with enterprise security scanning, deployment pipelines, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; 4X faster velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Contributed to $100M+ in repeatable business (by FY23) through delivery excellence/client advocacy",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Managed 40+ blended onshore/offshore team on JP Morgan ACCESS payment engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Owned on-call and Sev-1 incident response, root-cause analysis, leadership communications while issues were live",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fail on required closing (D9, Section 3 c14): ends with an offer to map a shared job description to Matt's documented work, but never names or offers Role Match. Content otherwise meets c14: facts relevant to scope (CIC 0 to 150+, Octane, delivery outcomes), no level label, no vouching, no refusal; all claims supported (CIC, Octane, JPM ACCESS, etc.). contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names)",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "Clients wanted to move from waterfall/siloed teams to iterative product development while handling legacy, compliance, security",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from the ground up with full P&L accountability, budget/cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Grew centers from 0 to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Established development environments, CI/CD pipelines, cloud platforms; playbooks; recruiting, training, career progression frameworks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Integrated TDD/CI-CD with enterprise security scanning, deployment pipelines, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; 4X faster velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps, IaC templates, automated provisioning (Terraform, CloudFormation, serverless), hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards; standardized cloud-native practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/Result"
+   },
+   {
+    "text": "Engineers struggled to onboard to cloud-native technologies because standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "TICARA with Terraform/Serverless Framework on pre-provisioned AWS/Azure accounts: working environment (VPC, services, sample code) in 30-40 minutes vs 2-3 day provisioning SLA",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Action/Result"
+   },
+   {
+    "text": "Across JP Morgan, Capital One, American Express: reusable cloud-native patterns, automated testing and deployment gates, monitoring/observability; cross-functional teams build, deploy, operate services",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "Developers waited days or weeks for builds, tests, approvals",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Situation"
+   },
+   {
+    "text": "Across 15+ Fortune 500 engagements: 4X velocity, lead time weeks to days, 99.9%+ uptime",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "90%+ automated test coverage",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail on required closing (D9, Section 3 c14): ends with 'share the scope and I can map' (no job description, no Role Match). Content otherwise meets c14: facts relevant to scope (CIC 0 to 150+, Octane, delivery outcomes), no level label, no vouching, no refusal; all claims supported (CIC, Octane, JPM ACCESS, etc.). contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names)",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "Clients wanted to move from waterfall/siloed teams to iterative product development while handling legacy, compliance, security",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from the ground up with full P&L accountability, budget/cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Grew centers from 0 to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Established development environments, CI/CD pipelines, cloud platforms; playbooks; recruiting, training, career progression frameworks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Integrated TDD/CI-CD with enterprise security scanning, deployment pipelines, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps, IaC templates, automated provisioning (Terraform, CloudFormation, serverless), hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards; standardized cloud-native practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/Result"
+   },
+   {
+    "text": "Engineers struggled to onboard to cloud-native technologies because standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Managed 40+ blended onshore/offshore team on JP Morgan ACCESS payment engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Owned on-call and Sev-1 incident response, root-cause analysis, leadership communications while issues were live",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "US/Mumbai/Bangalore team; payment modules, payment-type-specific entitlements, MAC security layer, SSO",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; 4X faster velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivered output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Contributed to $100M+ in repeatable business (by FY23) through delivery excellence/client advocacy",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fail on required closing (D9, Section 3 c14): ends with a scope question only, no offer to run Role Match or map a job description. Content otherwise meets c14: facts relevant to scope (CIC 0 to 150+, Octane, delivery outcomes), no level label, no vouching, no refusal; all claims supported (CIC, Octane, JPM ACCESS, etc.). contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names)",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps, IaC templates, automated provisioning (Terraform, CloudFormation, serverless), hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards; standardized cloud-native practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/Result"
+   },
+   {
+    "text": "Engineers struggled to onboard to cloud-native technologies because standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Reference apps across Angular/AWS, React Native/AWS, Flutter, each with its own IaC",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Result"
+   },
+   {
+    "text": "Across JP Morgan, Capital One, American Express: reusable cloud-native patterns, automated testing and deployment gates, monitoring/observability; cross-functional teams build, deploy, operate services",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "Developers waited days or weeks for builds, tests, approvals",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Situation"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from the ground up with full P&L accountability, budget/cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Grew centers from 0 to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Established development environments, CI/CD pipelines, cloud platforms; playbooks; recruiting, training, career progression frameworks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Integrated TDD/CI-CD with enterprise security scanning, deployment pipelines, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; 4X faster velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Contributed to $100M+ in repeatable business (by FY23) through delivery excellence/client advocacy",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Managed 40+ blended onshore/offshore team on JP Morgan ACCESS payment engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Owned on-call and Sev-1 incident response, root-cause analysis, leadership communications while issues were live",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Capital One teams delivered defect-free production code at 4x internal output",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fail on required closing (D9, Section 3 c14): ends with a scope question only, no offer to run Role Match or map a job description. Content otherwise meets c14: facts relevant to scope (CIC 0 to 150+, Octane, delivery outcomes), no level label, no vouching, no refusal; all claims supported (CIC, Octane, JPM ACCESS, etc.). contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names)",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "Clients wanted to move from waterfall/siloed teams to iterative product development while handling legacy, compliance, security",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Capital One faced Federal Reserve Board-mandated compliance updates, heavy workloads, burnout, quality concerns",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Situation"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from the ground up with full P&L accountability, budget/cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Grew centers from 0 to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Established development environments, CI/CD pipelines, cloud platforms; playbooks; recruiting, training, career progression frameworks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Integrated TDD/CI-CD with enterprise security scanning, deployment pipelines, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; 4X faster velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps, IaC templates, automated provisioning (Terraform, CloudFormation, serverless), hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards; standardized cloud-native practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/Result"
+   },
+   {
+    "text": "Engineers struggled to onboard to cloud-native technologies because standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Capital One: balanced team of 8, Go upskilling, pair programming, CI, automated testing; defect-free code at 4x internal teams' output",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Action/Result"
+   },
+   {
+    "text": "Managed 40+ blended onshore/offshore team on JP Morgan ACCESS payment engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Owned on-call and Sev-1 incident response, root-cause analysis, leadership communications while issues were live",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail on required closing (D9, Section 3 c14): ends with a scope question only, no offer to run Role Match or map a job description. Content otherwise meets c14: facts relevant to scope (CIC 0 to 150+, Octane, delivery outcomes), no level label, no vouching, no refusal; all claims supported (CIC, Octane, JPM ACCESS, etc.). contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names)",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "Clients wanted to move from waterfall/siloed teams to iterative product development while handling legacy, compliance, security",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Capital One faced Federal Reserve Board-mandated compliance updates, heavy workloads, burnout, quality concerns",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Situation"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from the ground up with full P&L accountability, budget/cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Grew centers from 0 to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Established development environments, CI/CD pipelines, cloud platforms; playbooks; recruiting, training, career progression frameworks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Integrated TDD/CI-CD with enterprise security scanning, deployment pipelines, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps, IaC templates, automated provisioning (Terraform, CloudFormation, serverless), hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards; standardized cloud-native practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/Result"
+   },
+   {
+    "text": "Engineers struggled to onboard to cloud-native technologies because standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Capital One: balanced team of 8, Go upskilling, pair programming, CI, automated testing; defect-free code at 4x internal teams' output",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Action/Result"
+   },
+   {
+    "text": "Managed 40+ blended onshore/offshore team on JP Morgan ACCESS payment engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Owned on-call and Sev-1 incident response, root-cause analysis, leadership communications while issues were live",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; 4X faster velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Contributed to $100M+ in repeatable business (by FY23) through delivery excellence/client advocacy",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fail on required closing (D9, Section 3 c14): ends with a scope question only, no offer to run Role Match or map a job description. Content otherwise meets c14: facts relevant to scope (CIC 0 to 150+, Octane, delivery outcomes), no level label, no vouching, no refusal; all claims supported (CIC, Octane, JPM ACCESS, etc.). contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names)",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "Across JP Morgan, Capital One, American Express: reusable cloud-native patterns, automated testing and deployment gates, monitoring/observability; cross-functional teams build, deploy, operate services",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "Developers waited days or weeks for builds, tests, approvals",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Situation"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from the ground up with full P&L accountability, budget/cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Grew centers from 0 to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Established development environments, CI/CD pipelines, cloud platforms; playbooks; recruiting, training, career progression frameworks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Integrated TDD/CI-CD with enterprise security scanning, deployment pipelines, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps, IaC templates, automated provisioning (Terraform, CloudFormation, serverless), hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards; standardized cloud-native practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/Result"
+   },
+   {
+    "text": "Engineers struggled to onboard to cloud-native technologies because standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Tracked lead time, deployment frequency, change failure rate, MTTR",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "Across 15+ Fortune 500 engagements: 4X velocity, lead time weeks to days, 99.9%+ uptime",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "90%+ automated test coverage",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "At Capital One, zero-defect deployments to payment systems through automated testing",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fail on required closing (D9, Section 3 c14): ends with an offer to map a shared job description to Matt's documented work, but never names or offers Role Match. Content otherwise meets c14: facts relevant to scope (CIC 0 to 150+, Octane, delivery outcomes), no level label, no vouching, no refusal; all claims supported (CIC, Octane, JPM ACCESS, etc.). contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names)",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps, IaC templates, automated provisioning (Terraform, CloudFormation, serverless), hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards; standardized cloud-native practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/Result"
+   },
+   {
+    "text": "Engineers struggled to onboard to cloud-native technologies because standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Across JP Morgan, Capital One, American Express: reusable cloud-native patterns, automated testing and deployment gates, monitoring/observability; cross-functional teams build, deploy, operate services",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "Developers waited days or weeks for builds, tests, approvals",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Situation"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from the ground up with full P&L accountability, budget/cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Grew centers from 0 to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Established development environments, CI/CD pipelines, cloud platforms; playbooks; recruiting, training, career progression frameworks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Integrated TDD/CI-CD with enterprise security scanning, deployment pipelines, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; 4X faster velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Managed 40+ blended onshore/offshore team on JP Morgan ACCESS payment engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Owned on-call and Sev-1 incident response, root-cause analysis, leadership communications while issues were live",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "US/Mumbai/Bangalore team; payment modules, payment-type-specific entitlements, MAC security layer, SSO",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail on required closing (D9, Section 3 c14): ends with an offer to map a shared job description to Matt's documented work, but never names or offers Role Match. Content otherwise meets c14: facts relevant to scope (CIC 0 to 150+, Octane, delivery outcomes), no level label, no vouching, no refusal; all claims supported (CIC, Octane, JPM ACCESS, etc.). contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names)",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps, IaC templates, automated provisioning (Terraform, CloudFormation, serverless), hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards; standardized cloud-native practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/Result"
+   },
+   {
+    "text": "Engineers struggled to onboard to cloud-native technologies because standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "TICARA with Terraform/Serverless Framework on pre-provisioned AWS/Azure accounts: working environment (VPC, services, sample code) in 30-40 minutes vs 2-3 day provisioning SLA",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Action/Result"
+   },
+   {
+    "text": "Across JP Morgan, Capital One, American Express: reusable cloud-native patterns, automated testing and deployment gates, monitoring/observability; cross-functional teams build, deploy, operate services",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "Developers waited days or weeks for builds, tests, approvals",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Situation"
+   },
+   {
+    "text": "Tracked lead time, deployment frequency, change failure rate, MTTR",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "Across 15+ Fortune 500 engagements: 4X velocity, lead time weeks to days, 99.9%+ uptime",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "At Capital One, zero-defect deployments to payment systems through automated testing",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from the ground up with full P&L accountability, budget/cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Grew centers from 0 to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Established development environments, CI/CD pipelines, cloud platforms; playbooks; recruiting, training, career progression frameworks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Integrated TDD/CI-CD with enterprise security scanning, deployment pipelines, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; 4X faster velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fail on required closing (D9, Section 3 c14): ends with an offer to map a shared job description to Matt's documented work, but never names or offers Role Match. Content otherwise meets c14: facts relevant to scope (CIC 0 to 150+, Octane, delivery outcomes), no level label, no vouching, no refusal; all claims supported (CIC, Octane, JPM ACCESS, etc.). contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names)",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps, IaC templates, automated provisioning (Terraform, CloudFormation, serverless), hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards; standardized cloud-native practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/Result"
+   },
+   {
+    "text": "Engineers struggled to onboard to cloud-native technologies because standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "New hires lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "Reference apps across Angular/AWS, React Native/AWS, Flutter, each with its own IaC",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from the ground up with full P&L accountability, budget/cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Grew centers from 0 to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Established development environments, CI/CD pipelines, cloud platforms; playbooks; recruiting, training, career progression frameworks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Integrated TDD/CI-CD with enterprise security scanning, deployment pipelines, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; 4X faster velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivered output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Contributed to $100M+ in repeatable business (by FY23) through delivery excellence/client advocacy",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fail on required closing (D9, Section 3 c14): ends with a scope question only, no offer to run Role Match or map a job description. Content otherwise meets c14: facts relevant to scope (CIC 0 to 150+, Octane, delivery outcomes), no level label, no vouching, no refusal; all claims supported (CIC, Octane, JPM ACCESS, etc.). contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names)",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps, IaC templates, automated provisioning (Terraform, CloudFormation, serverless), hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards; standardized cloud-native practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/Result"
+   },
+   {
+    "text": "Engineers struggled to onboard to cloud-native technologies because standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Across JP Morgan, Capital One, American Express: reusable cloud-native patterns, automated testing and deployment gates, monitoring/observability; cross-functional teams build, deploy, operate services",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "Developers waited days or weeks for builds, tests, approvals",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Situation"
+   },
+   {
+    "text": "Norfolk Southern: mainframe apps fragile under load, wholesale replacement too risky; incremental replacement with microservices, API gateways, anti-corruption layers, Docker/Kubernetes, CI/CD, reconciliation reports",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Situation/Action"
+   },
+   {
+    "text": "TICARA with Terraform/Serverless Framework on pre-provisioned AWS/Azure accounts: working environment (VPC, services, sample code) in 30-40 minutes vs 2-3 day provisioning SLA",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Action/Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from the ground up with full P&L accountability, budget/cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Grew centers from 0 to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Established development environments, CI/CD pipelines, cloud platforms; playbooks; recruiting, training, career progression frameworks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Integrated TDD/CI-CD with enterprise security scanning, deployment pipelines, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; 4X faster velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail on required closing (D9, Section 3 c14): ends with a scope question and 'a job description would let me map these', but never names or offers Role Match. Content otherwise meets c14: facts relevant to scope (CIC 0 to 150+, Octane, delivery outcomes), no level label, no vouching, no refusal; all claims supported (CIC, Octane, JPM ACCESS, etc.). contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names)",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps, IaC templates, automated provisioning (Terraform, CloudFormation, serverless), hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards; standardized cloud-native practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/Result"
+   },
+   {
+    "text": "Engineers struggled to onboard to cloud-native technologies because standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Across JP Morgan, Capital One, American Express: reusable cloud-native patterns, automated testing and deployment gates, monitoring/observability; cross-functional teams build, deploy, operate services",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "Developers waited days or weeks for builds, tests, approvals",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Situation"
+   },
+   {
+    "text": "Tracked lead time, deployment frequency, change failure rate, MTTR",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "Norfolk Southern: mainframe apps fragile under load, wholesale replacement too risky; incremental replacement with microservices, API gateways, anti-corruption layers, Docker/Kubernetes, CI/CD, reconciliation reports",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Situation/Action"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from the ground up with full P&L accountability, budget/cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Grew centers from 0 to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Established development environments, CI/CD pipelines, cloud platforms; playbooks; recruiting, training, career progression frameworks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Integrated TDD/CI-CD with enterprise security scanning, deployment pipelines, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; 4X faster velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivered output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Managed 40+ blended onshore/offshore team on JP Morgan ACCESS payment engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Owned on-call and Sev-1 incident response, root-cause analysis, leadership communications while issues were live",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Contributed to $100M+ in repeatable business (by FY23) through delivery excellence/client advocacy",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fail on required closing (D9, Section 3 c14): ends with a scope question only, no offer to run Role Match or map a job description. Content otherwise meets c14: facts relevant to scope (CIC 0 to 150+, Octane, delivery outcomes), no level label, no vouching, no refusal; all claims supported (CIC, Octane, JPM ACCESS, etc.). contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names)",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps, IaC templates, automated provisioning (Terraform, CloudFormation, serverless), hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards; standardized cloud-native practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/Result"
+   },
+   {
+    "text": "Engineers struggled to onboard to cloud-native technologies because standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from the ground up with full P&L accountability, budget/cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Grew centers from 0 to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Established development environments, CI/CD pipelines, cloud platforms; playbooks; recruiting, training, career progression frameworks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Integrated TDD/CI-CD with enterprise security scanning, deployment pipelines, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; 4X faster velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Managed 40+ blended onshore/offshore team on JP Morgan ACCESS payment engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Owned on-call and Sev-1 incident response, root-cause analysis, leadership communications while issues were live",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Capital One teams delivered defect-free production code at 4x internal output",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Result"
+   },
+   {
+    "text": "Defined the engagement model and managed the Bottomline vendor relationship",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fail on required closing (D9, Section 3 c14): ends with an offer to map a shared job description to Matt's documented work, but never names or offers Role Match. Content otherwise meets c14: facts relevant to scope (CIC 0 to 150+, Octane, delivery outcomes), no level label, no vouching, no refusal; all claims supported (CIC, Octane, JPM ACCESS, etc.). contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names)",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "Clients wanted to move from waterfall/siloed teams to iterative product development while handling legacy, compliance, security",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps, IaC templates, automated provisioning (Terraform, CloudFormation, serverless), hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards; standardized cloud-native practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/Result"
+   },
+   {
+    "text": "Engineers struggled to onboard to cloud-native technologies because standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from the ground up with full P&L accountability, budget/cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Grew centers from 0 to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Established development environments, CI/CD pipelines, cloud platforms; playbooks; recruiting, training, career progression frameworks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Integrated TDD/CI-CD with enterprise security scanning, deployment pipelines, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; 4X faster velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Managed 40+ blended onshore/offshore team on JP Morgan ACCESS payment engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Owned on-call and Sev-1 incident response, root-cause analysis, leadership communications while issues were live",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail on required closing (D9, Section 3 c14): ends with a scope question only, no offer to run Role Match or map a job description. Content otherwise meets c14: facts relevant to scope (CIC 0 to 150+, Octane, delivery outcomes), no level label, no vouching, no refusal; all claims supported (CIC, Octane, JPM ACCESS, etc.). contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names)",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps, IaC templates, automated provisioning (Terraform, CloudFormation, serverless), hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards; standardized cloud-native practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/Result"
+   },
+   {
+    "text": "Engineers struggled to onboard to cloud-native technologies because standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "TICARA with Terraform/Serverless Framework on pre-provisioned AWS/Azure accounts: working environment (VPC, services, sample code) in 30-40 minutes vs 2-3 day provisioning SLA",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Action/Result"
+   },
+   {
+    "text": "Across JP Morgan, Capital One, American Express: reusable cloud-native patterns, automated testing and deployment gates, monitoring/observability; cross-functional teams build, deploy, operate services",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "Developers waited days or weeks for builds, tests, approvals",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Situation"
+   },
+   {
+    "text": "Tracked lead time, deployment frequency, change failure rate, MTTR",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from the ground up with full P&L accountability, budget/cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Grew centers from 0 to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Established development environments, CI/CD pipelines, cloud platforms; playbooks; recruiting, training, career progression frameworks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Integrated TDD/CI-CD with enterprise security scanning, deployment pipelines, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; 4X faster velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Managed 40+ blended onshore/offshore team on JP Morgan ACCESS payment engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Owned on-call and Sev-1 incident response, root-cause analysis, leadership communications while issues were live",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Capital One teams delivered defect-free production code at 4x internal output",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fail on required closing (D9, Section 3 c14): ends with a scope question only, no offer to run Role Match or map a job description. Content otherwise meets c14: facts relevant to scope (CIC 0 to 150+, Octane, delivery outcomes), no level label, no vouching, no refusal; all claims supported (CIC, Octane, JPM ACCESS, etc.). contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names)",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "Clients wanted to move from waterfall/siloed teams to iterative product development while handling legacy, compliance, security",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Capital One faced Federal Reserve Board-mandated compliance updates, heavy workloads, burnout, quality concerns",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Situation"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps, IaC templates, automated provisioning (Terraform, CloudFormation, serverless), hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards; standardized cloud-native practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/Result"
+   },
+   {
+    "text": "Engineers struggled to onboard to cloud-native technologies because standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Summit reference app: AWS AppSync real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from the ground up with full P&L accountability, budget/cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Grew centers from 0 to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Established development environments, CI/CD pipelines, cloud platforms; playbooks; recruiting, training, career progression frameworks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Integrated TDD/CI-CD with enterprise security scanning, deployment pipelines, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Capital One: balanced team of 8, Go upskilling, pair programming, CI, automated testing; defect-free code at 4x internal teams' output",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fail on required closing (D9, Section 3 c14): ends with an offer to map a shared job description to Matt's documented work, but never names or offers Role Match. Content otherwise meets c14: facts relevant to scope (CIC 0 to 150+, Octane, delivery outcomes), no level label, no vouching, no refusal; all claims supported (CIC, Octane, JPM ACCESS, etc.). contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names)",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "Clients wanted to move from waterfall/siloed teams to iterative product development while handling legacy, compliance, security",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps, IaC templates, automated provisioning (Terraform, CloudFormation, serverless), hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards; standardized cloud-native practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/Result"
+   },
+   {
+    "text": "Engineers struggled to onboard to cloud-native technologies because standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Summit reference app: AWS AppSync real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from the ground up with full P&L accountability, budget/cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Grew centers from 0 to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Established development environments, CI/CD pipelines, cloud platforms; playbooks; recruiting, training, career progression frameworks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Integrated TDD/CI-CD with enterprise security scanning, deployment pipelines, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; 4X faster velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivered output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Contributed to $100M+ in repeatable business (by FY23) through delivery excellence/client advocacy",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail on required closing (D9, Section 3 c14): ends with a scope question only, no offer to run Role Match or map a job description. Content otherwise meets c14: facts relevant to scope (CIC 0 to 150+, Octane, delivery outcomes), no level label, no vouching, no refusal; all claims supported (CIC, Octane, JPM ACCESS, etc.). contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names)",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "Clients wanted to move from waterfall/siloed teams to iterative product development while handling legacy, compliance, security",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps, IaC templates, automated provisioning (Terraform, CloudFormation, serverless), hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards; standardized cloud-native practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/Result"
+   },
+   {
+    "text": "Engineers struggled to onboard to cloud-native technologies because standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Across JP Morgan, Capital One, American Express: reusable cloud-native patterns, automated testing and deployment gates, monitoring/observability; cross-functional teams build, deploy, operate services",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "Developers waited days or weeks for builds, tests, approvals",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Situation"
+   },
+   {
+    "text": "Tracked lead time, deployment frequency, change failure rate, MTTR",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from the ground up with full P&L accountability, budget/cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Grew centers from 0 to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Established development environments, CI/CD pipelines, cloud platforms; playbooks; recruiting, training, career progression frameworks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Integrated TDD/CI-CD with enterprise security scanning, deployment pipelines, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; 4X faster velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivered output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Across 15+ Fortune 500 engagements: 4X velocity, lead time weeks to days, 99.9%+ uptime",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "Managed 40+ blended onshore/offshore team on JP Morgan ACCESS payment engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Owned on-call and Sev-1 incident response, root-cause analysis, leadership communications while issues were live",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fail on required closing (D9, Section 3 c14): ends with an offer to map a shared job description to Matt's documented work, but never names or offers Role Match. Content otherwise meets c14: facts relevant to scope (CIC 0 to 150+, Octane, delivery outcomes), no level label, no vouching, no refusal; all claims supported (CIC, Octane, JPM ACCESS, etc.). contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names)",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps, IaC templates, automated provisioning (Terraform, CloudFormation, serverless), hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards; standardized cloud-native practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/Result"
+   },
+   {
+    "text": "Engineers struggled to onboard to cloud-native technologies because standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Reference apps across Angular/AWS, React Native/AWS, Flutter, each with its own IaC",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Result"
+   },
+   {
+    "text": "Global payments relied on fragmented integrations across 12 countries; gateway unified them",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from the ground up with full P&L accountability, budget/cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Grew centers from 0 to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Established development environments, CI/CD pipelines, cloud platforms; playbooks; recruiting, training, career progression frameworks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Integrated TDD/CI-CD with enterprise security scanning, deployment pipelines, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; 4X faster velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivered output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Managed 40+ blended onshore/offshore team on JP Morgan ACCESS payment engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Owned on-call and Sev-1 incident response, root-cause analysis, leadership communications while issues were live",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fail on required closing (D9, Section 3 c14): ends with a scope question only, no offer to run Role Match or map a job description. Content otherwise meets c14: facts relevant to scope (CIC 0 to 150+, Octane, delivery outcomes), no level label, no vouching, no refusal; all claims supported (CIC, Octane, JPM ACCESS, etc.). contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names)",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps, IaC templates, automated provisioning (Terraform, CloudFormation, serverless), hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards; standardized cloud-native practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/Result"
+   },
+   {
+    "text": "Engineers struggled to onboard to cloud-native technologies because standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Across JP Morgan, Capital One, American Express: reusable cloud-native patterns, automated testing and deployment gates, monitoring/observability; cross-functional teams build, deploy, operate services",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "Developers waited days or weeks for builds, tests, approvals",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Situation"
+   },
+   {
+    "text": "Tracked lead time, deployment frequency, change failure rate, MTTR",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "Across 15+ Fortune 500 engagements: 4X velocity, lead time weeks to days, 99.9%+ uptime",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "90%+ automated test coverage",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "At Capital One, zero-defect deployments to payment systems through automated testing",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from the ground up with full P&L accountability, budget/cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Grew centers from 0 to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Established development environments, CI/CD pipelines, cloud platforms; playbooks; recruiting, training, career progression frameworks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Integrated TDD/CI-CD with enterprise security scanning, deployment pipelines, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; 4X faster velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Contributed to $100M+ in repeatable business (by FY23) through delivery excellence/client advocacy",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail on required closing (D9, Section 3 c14): ends with a scope question only, no offer to run Role Match or map a job description. Content otherwise meets c14: facts relevant to scope (CIC 0 to 150+, Octane, delivery outcomes), no level label, no vouching, no refusal; all claims supported (CIC, Octane, JPM ACCESS, etc.). contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names)",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "Clients wanted to move from waterfall/siloed teams to iterative product development while handling legacy, compliance, security",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps, IaC templates, automated provisioning (Terraform, CloudFormation, serverless), hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards; standardized cloud-native practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/Result"
+   },
+   {
+    "text": "Engineers struggled to onboard to cloud-native technologies because standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Reference apps across Angular/AWS, React Native/AWS, Flutter, each with its own IaC",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from the ground up with full P&L accountability, budget/cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Grew centers from 0 to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Established development environments, CI/CD pipelines, cloud platforms; playbooks; recruiting, training, career progression frameworks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Integrated TDD/CI-CD with enterprise security scanning, deployment pipelines, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "150+ practitioners with 11-13 direct-report practice and client leads; every final hiring decision; peer feedback, promotion, compensation, remediation calls; near-zero attrition first two years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result/Action/5PSummary"
+   },
+   {
+    "text": "10-person balanced teams delivered output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; 4X faster velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Application modernization \"cookbook\" (quoted word verbatim in story)",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fail on required closing (D9, Section 3 c14): ends with a scope question only, no offer to run Role Match or map a job description. Content otherwise meets c14: facts relevant to scope (CIC 0 to 150+, Octane, delivery outcomes), no level label, no vouching, no refusal; all claims supported (CIC, Octane, JPM ACCESS, etc.). contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names)",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps, IaC templates, automated provisioning (Terraform, CloudFormation, serverless), hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards; standardized cloud-native practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/Result"
+   },
+   {
+    "text": "Engineers struggled to onboard to cloud-native technologies because standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Across JP Morgan, Capital One, American Express: reusable cloud-native patterns, automated testing and deployment gates, monitoring/observability; cross-functional teams build, deploy, operate services",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "Developers waited days or weeks for builds, tests, approvals",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Situation"
+   },
+   {
+    "text": "Norfolk Southern: mainframe apps fragile under load, wholesale replacement too risky; incremental replacement with microservices, API gateways, anti-corruption layers, Docker/Kubernetes, CI/CD, reconciliation reports",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Situation/Action"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from the ground up with full P&L accountability, budget/cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Grew centers from 0 to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Established development environments, CI/CD pipelines, cloud platforms; playbooks; recruiting, training, career progression frameworks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Integrated TDD/CI-CD with enterprise security scanning, deployment pipelines, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Managed 40+ blended onshore/offshore team on JP Morgan ACCESS payment engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Owned on-call and Sev-1 incident response, root-cause analysis, leadership communications while issues were live",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Across 15+ Fortune 500 engagements: 4X velocity, lead time weeks to days, 99.9%+ uptime",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "90%+ automated test coverage",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "At Capital One, zero-defect deployments to payment systems through automated testing",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fail on required closing (D9, Section 3 c14): ends with a scope question only, no offer to run Role Match or map a job description. Content otherwise meets c14: facts relevant to scope (CIC 0 to 150+, Octane, delivery outcomes), no level label, no vouching, no refusal; all claims supported (CIC, Octane, JPM ACCESS, etc.). contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names)",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "New hires lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps, IaC templates, automated provisioning (Terraform, CloudFormation, serverless), hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards; standardized cloud-native practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/Result"
+   },
+   {
+    "text": "Engineers struggled to onboard to cloud-native technologies because standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Reference apps across Angular/AWS, React Native/AWS, Flutter, each with its own IaC",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Result"
+   },
+   {
+    "text": "Across JP Morgan, Capital One, American Express: reusable cloud-native patterns, automated testing and deployment gates, monitoring/observability; cross-functional teams build, deploy, operate services",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "Developers waited days or weeks for builds, tests, approvals",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Situation"
+   },
+   {
+    "text": "Tracked lead time, deployment frequency, change failure rate, MTTR",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from the ground up with full P&L accountability, budget/cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Grew centers from 0 to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Established development environments, CI/CD pipelines, cloud platforms; playbooks; recruiting, training, career progression frameworks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Integrated TDD/CI-CD with enterprise security scanning, deployment pipelines, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; 4X faster velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivered output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Managed 40+ blended onshore/offshore team on JP Morgan ACCESS payment engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Owned on-call and Sev-1 incident response, root-cause analysis, leadership communications while issues were live",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

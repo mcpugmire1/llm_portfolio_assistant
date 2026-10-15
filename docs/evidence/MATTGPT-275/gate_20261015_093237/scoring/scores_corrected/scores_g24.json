@@ -1,0 +1,2122 @@
+[
+ {
+  "case": "c16",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 13 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Led enterprise modernization programs and built product engineering teams",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs from 0 to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Owned full P&L accountability for both centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Established training, career progression frameworks, reusable delivery playbooks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Teams used pair programming, TDD, automated pipelines, balanced Product/Engineering/Design teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ repeat business through delivery excellence and customer relationship building",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Wellfound Technology 2000-2001 and 2002-2003; Cendian Chemical Logistics 2003-2005",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Adjunct at American InterContinental University 2003-2004 alongside full-time work",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "On sabbatical building MattGPT; seeking role where building the org, culture and results are the same job",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 12 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Accenture March 2005 to September 2023, leading modernization programs",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt; about-matt-my-leadership-journey|accenture Action"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs 0 to 150+ across engineering, architecture, product, design with full P&L accountability",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Action"
+   },
+   {
+    "text": "Adapted Lean XP for enterprise complexity",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Pair programming, TDD, automated pipelines, balanced teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ repeat business through delivery excellence and customer relationship building",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Wellfound 2000-2001, 2002-2003; Cendian 2003-2005; AIU adjunct 2003-2004",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Master's in Information Technology, AIU; BA French Language and Literature, Queens University of Charlotte",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Sabbatical building MattGPT using RAG, semantic search, modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Pursuing role where building the org, culture and results are the same job",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 12 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Wellfound 2000-2001, 2002-2003; Cendian 2003-2005; Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Adjunct at AIU 2003-2004 alongside full-time work",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs 0 to 150+ with full P&L accountability",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Action"
+   },
+   {
+    "text": "Recruited and developed practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Balanced teams instead of functional handoffs; pair programming, TDD, hypothesis-driven design, automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/Situation"
+   },
+   {
+    "text": "30+ engagements across 15+ Fortune 500 clients; 4X velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "10-person teams delivered equivalent output to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ repeat business through delivery excellence and customer relationship building",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Sabbatical building MattGPT using RAG, semantic search, modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Seeking role where building the org, culture and results are the same job",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Master's in IT, AIU; BA French, Queens University of Charlotte",
+    "label": "supported",
+    "source": "profile.education"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 12 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "A builder of products, platforms, and teams",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture 5PSummary"
+   },
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Accenture March 2005 to September 2023, modernization programs across banking, healthcare, telecommunications",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt; about-matt-my-leadership-journey|accenture Action"
+   },
+   {
+    "text": "November 2019 to September 2023 built Atlanta and Tampa CICs 0 to 150+",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Start_Date/End_Date/Result"
+   },
+   {
+    "text": "Full P&L accountability; hiring, training, development across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Adapted Lean XP for compliance, legacy systems, security controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation/Action"
+   },
+   {
+    "text": "Pair programming, TDD, automated pipelines, balanced Product/Engineering/Design teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "30+ engagements across 15+ Fortune 500 clients; 4X velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ repeat business through delivery excellence and customer relationship building",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Wellfound, Cendian, AIU adjunct with dates",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Master's in IT, AIU; BA French, Queens",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Sabbatical building MattGPT; in active search for stated role",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 10 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Wellfound, Cendian, Accenture with dates; AIU adjunct 2003-2004",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs 0 to 150+ with full P&L accountability",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Action"
+   },
+   {
+    "text": "Balanced product/engineering/design teams; pair programming, TDD, pipelines adapted for security, compliance, legacy",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Situation"
+   },
+   {
+    "text": "30+ engagements across 15+ Fortune 500 clients; 4X velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ repeat business through delivery excellence and customer relationship building",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Payments and banking modernization for JP Morgan Chase, RBC, Capital One, HSBC",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "JP Morgan payments and Salesforce platforms each rolled out across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Sabbatical building MattGPT using RAG, semantic search, modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Seeking role where building the org, culture and results are the same job",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 12 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "A builder of products, platforms, and teams",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture 5PSummary"
+   },
+   {
+    "text": "Accenture March 2005 through September 2023; built CIC 0 to 150+ across Atlanta and Tampa",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Balanced product/engineering/design teams using TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X velocity with zero-defect deployments",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result"
+   },
+   {
+    "text": "Teams of 10 delivered the impact of typical teams of 20",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Payments and banking modernization for JP Morgan Chase, RBC, Capital One, HSBC; JPMC payments and Salesforce each across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Recovered troubled programs; architected cloud-native systems from prototype to production",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result"
+   },
+   {
+    "text": "$100M+ repeat business through delivery excellence and customer relationship building",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Earlier roles at Wellfound, Cendian, AIU adjunct alongside full-time work",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Sabbatical building MattGPT using RAG, semantic search, Python, Pinecone, OpenAI tooling",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary; transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Pursuing roles where building the org, culture and results are the same job",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 12 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported. Quoted \u201cbuilder\u201d matches the word 'builder' in transition-story 5PSummary (rule 8 pass).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Wellfound, Cendian, Accenture with dates; AIU adjunct 2003-2004",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs 0 to 150+ with full P&L accountability",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Action"
+   },
+   {
+    "text": "Recruited, trained, developed practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Balanced teams using pair programming, TDD, discovery and framing, automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "30+ engagements across 15+ Fortune 500 clients; 4X velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Teams of 10 delivered equivalent output to traditional teams of 20",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Delivery excellence and client relationships contributed to $100M+ repeat business",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Sabbatical building MattGPT using RAG, semantic search, modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Describes himself as a \u201cbuilder\u201d (quoted word appears verbatim)",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Pursuing senior leadership roles in platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result"
+   },
+   {
+    "text": "Master's in IT, AIU",
+    "label": "supported",
+    "source": "profile.education"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 10 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Accenture March 2005 to September 2023 leading platform modernization, cloud-native engineering, product delivery",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt; why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "As Director built Atlanta and Tampa CICs 0 to 150+ with full P&L accountability",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Role/5PSummary/Action"
+   },
+   {
+    "text": "Recruited, trained, developed practitioners; balanced teams with pair programming, TDD, pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "30+ engagements across 15+ Fortune 500 clients; 4X velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ repeat business through delivery excellence and customer relationship building",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Wellfound, Cendian, AIU adjunct with dates",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Master's IT AIU; BA French Queens; graduate coursework Romance Languages (Linguistics) UGA",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Sabbatical building MattGPT; seeking stated role",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Based in Atlanta, GA; open to relocation and travel; available immediately",
+    "label": "supported",
+    "source": "profile.logistics"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 10 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Accenture March 2005 to September 2023; built CIC 0 to 150+ across Atlanta and Tampa",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "4X velocity and zero-defect deployments through TDD and automated pipelines",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result"
+   },
+   {
+    "text": "$100M+ repeat business through delivery excellence and customer relationship building",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Work included enterprise platforms, payments and banking modernization, cloud-native architecture, recovering troubled programs",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Wellfound 2000-2001, 2002-2003; Cendian 2003-2005; AIU adjunct 2003-2004",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Master's IT AIU; graduate coursework Romance Languages UGA; BA French Queens",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Sabbatical building MattGPT using RAG, semantic search, modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "In active search for stated role",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Based in Atlanta, open to relocation and travel, available immediately; US citizen, no sponsorship",
+    "label": "supported",
+    "source": "profile.logistics"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 12 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported. Quoted \u201cbuilder\u201d matches the word 'builder' in transition-story 5PSummary (rule 8 pass).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Accenture March 2005 to September 2023, leading modernization programs and building products, platforms, teams",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt; about-matt-my-leadership-journey|accenture 5PSummary"
+   },
+   {
+    "text": "As Director built Atlanta and Tampa CICs 0 to 150+ across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for both centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Introduced pair programming, TDD, automated pipelines, balanced teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "30+ engagements across 15+ Fortune 500 clients; 4X velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ repeat business through delivery excellence and customer relationship building",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Wellfound, Cendian, AIU adjunct with dates",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Master's IT AIU; BA French Queens",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Sabbatical building MattGPT using RAG, semantic search, modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Describes himself as a \u201cbuilder\u201d (quoted word appears verbatim)",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Pursuing role where building the org, culture and results are the same job",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 12 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "A builder of products, platforms, and teams",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture 5PSummary"
+   },
+   {
+    "text": "Accenture March 2005 to September 2023; modernization across banking, healthcare, telecommunications",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt; about-matt-my-leadership-journey|accenture Action"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs 0 to 150+ with full P&L accountability, hiring, training, development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Pair programming, TDD, automated pipelines, balanced teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Practitioners received training, career progression frameworks, skill development pathways",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "30+ engagements across 15+ Fortune 500 clients; 4X velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Teams of 10 delivered equivalent output to traditional teams of 20",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ repeat business through delivery excellence and customer relationships",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Cendian 2003-2005; Wellfound 2000-2001, 2002-2003; AIU adjunct 2003-2004",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Master's IT AIU; BA French Queens; graduate coursework Romance Languages UGA",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Sabbatical building MattGPT using RAG, semantic search, modern LLM tooling; active search for stated role",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary; matt_dna_ground_truth.txt"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 12 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Wellfound, Cendian, Accenture with dates; AIU adjunct 2003-2004",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Built CIC 0 to 150+ across Atlanta and Tampa",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "TDD and automated pipelines; 4X velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result"
+   },
+   {
+    "text": "$100M+ repeat business through delivery excellence and customer relationship building, not a sales role",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action (product and technology person rather than sales professional)"
+   },
+   {
+    "text": "Payments and banking modernization for JP Morgan Chase, RBC, Capital One, HSBC; JPMC payments and Salesforce each across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Led AWS Launchpad with hands-on labs, structured learning paths, mentor-based training",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture 5PSummary"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Master's IT AIU; BA French Queens",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Sabbatical building MattGPT using RAG, semantic search, modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Pursuing senior leadership roles in platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result"
+   },
+   {
+    "text": "Based in Atlanta, GA; open to relocation and travel; available immediately, no notice period",
+    "label": "supported",
+    "source": "profile.logistics"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 10 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Wellfound, Cendian, Accenture with dates; AIU adjunct 2003-2004",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Built CIC 0 to 150+ across Atlanta and Tampa",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "CIC delivered 4X faster velocity and zero defects",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Performance"
+   },
+   {
+    "text": "CIC teams of 10 consistently delivered the impact of typical teams of 20",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Work included cloud-native systems, platform modernization, TDD and automated pipelines",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result/5PSummary"
+   },
+   {
+    "text": "Led payments and banking modernization across JP Morgan Chase, RBC, Capital One, HSBC; JPMC payments and Salesforce each across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "$100M+ repeat business through delivery excellence and customer relationship building, not a sales-hunter role",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action (rather than sales professional)"
+   },
+   {
+    "text": "Master's IT AIU; BA French Queens",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Sabbatical building MattGPT using RAG, semantic search, modern LLM tooling; active search for stated role",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary; matt_dna_ground_truth.txt"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 12 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported. Quoted \u201cbuilder\u201d matches the word 'builder' in transition-story 5PSummary (rule 8 pass).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Wellfound, Cendian, Accenture with dates; AIU adjunct 2003-2004",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs 0 to 150+ across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Full P&L accountability including hiring, training, budget, and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients by FY23",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result (four-year span; FY23 named in same sentence)"
+   },
+   {
+    "text": "Pair programming, TDD, automated pipelines, balanced teams; 4X velocity; zero-defect",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "10-person teams delivered equivalent output to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ repeat business through delivery excellence and customer relationships",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Sabbatical building MattGPT and pursuing next role",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Describes himself as a \u201cbuilder.\u201d (quoted word appears verbatim)",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Search focuses on role where building the org, culture and results are the same job",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Master's IT AIU; BA French Queens",
+    "label": "supported",
+    "source": "profile.education"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 11 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported. Quoted \u201cbuilder\u201d matches the word 'builder' in transition-story 5PSummary (rule 8 pass).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Describes himself as a \u201cbuilder.\u201d (quoted word appears verbatim)",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Accenture March 2005 to September 2023; built CIC 0 to 150+ across Atlanta and Tampa",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "CIC 4X velocity and zero-defect deployments through TDD and automated pipelines",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result"
+   },
+   {
+    "text": "$100M+ repeat business through delivery excellence and customer relationship building, rather than a sales role",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Work included enterprise platform integration, payments and banking modernization, troubled-program recovery, AWS cloud-native architecture",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary/Result; launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture"
+   },
+   {
+    "text": "JPMC payments and Salesforce platforms each rolled out across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Built partnerships connecting clients with emerging technology: Georgia Tech innovation community, hackathon mentoring, recruiting",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology|accenture Action/5PSummary"
+   },
+   {
+    "text": "Cendian 2003-2005; Wellfound 2000-2001, 2002-2003; AIU adjunct 2003-2004",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Master's IT AIU; BA French Queens; graduate coursework Romance Languages UGA",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Sabbatical building MattGPT using RAG, semantic search, modern LLM tooling; seeking stated role",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary; matt_dna_ground_truth.txt"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 10 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Wellfound, Cendian, Accenture with dates; AIU adjunct 2003-2004",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Built CIC 0 to 150+ across Atlanta and Tampa",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "CIC delivered 4X velocity with zero defects using TDD and automated pipelines",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result"
+   },
+   {
+    "text": "CIC teams of 10 consistently delivered the impact of typical teams of 20",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ repeat business through delivery excellence and customer relationship building, rather than a sales role",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Enterprise modernization, cloud-native architecture, payments and banking programs for JPMC, RBC, Capital One, HSBC",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "JPMC payments and Salesforce platforms each rolled out across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Master's IT AIU; BA French Queens",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Sabbatical building MattGPT; searching for stated role",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 9 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Accenture March 2005 to September 2023 following Wellfound and Cendian; AIU adjunct alongside full-time work",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs 0 to 150+ with full P&L accountability",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Action"
+   },
+   {
+    "text": "Recruited, trained, developed teams across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Balanced teams, pair programming, TDD, automated pipelines adapted for security, compliance, legacy",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "30+ engagements across 15+ Fortune 500 clients; 4X velocity; zero-defect; 10-person teams equal to 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ repeat business through delivery excellence and customer relationship building",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Master's IT AIU; BA French Queens",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Sabbatical building MattGPT; pursuing next role as a builder building the org, culture, results",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt; transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 10 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "As Director built Atlanta and Tampa CICs 0 to 150+ across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Role/5PSummary"
+   },
+   {
+    "text": "Full P&L accountability including hiring, training, budget, cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "30+ engagements across 15+ Fortune 500 clients; $100M+ repeat business through delivery excellence and customer relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Pair programming, TDD, automated pipelines, balanced teams; 4X velocity; zero-defect; 10-person teams equal to 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Earlier led AWS Launchpad at Atlanta Innovation Hub, supporting 200+ professionals in earning AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task/Action (2018-07 to 2019-11)"
+   },
+   {
+    "text": "Wellfound, Cendian with dates; AIU adjunct 2003-2004",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Master's IT AIU; BA French Queens",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Sabbatical building MattGPT; seeking stated role",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 12 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported. Quoted \u201cbuilder\u201d matches the word 'builder' in transition-story 5PSummary (rule 8 pass).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Accenture March 2005 through September 2023; built products, platforms, teams",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt; about-matt-my-leadership-journey|accenture 5PSummary"
+   },
+   {
+    "text": "Modernization programs across banking, healthcare, telecommunications",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action"
+   },
+   {
+    "text": "Built CIC 0 to 150+ across Atlanta and Tampa",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "4x velocity with zero-defect deployments through TDD and automated pipelines",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result"
+   },
+   {
+    "text": "$100M+ repeat business through delivery excellence and customer relationship building, not a sales-hunter role",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Payments and banking modernization for JPMC, RBC, Capital One, HSBC; JPMC payments and Salesforce each across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Recovered troubled programs; architected cloud-native systems from prototype to production",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result"
+   },
+   {
+    "text": "Wellfound, Cendian, AIU adjunct with dates",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Sabbatical building MattGPT using RAG, semantic search, modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Describes himself as a \u201cbuilder\u201d (quoted word appears verbatim)",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Pursuing role where building the org, culture and results are the same job",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 9 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Accenture March 2005 to September 2023 following Cendian 2003-2005 and Wellfound 2000-2001, 2002-2003; AIU adjunct 2003-2004",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs 0 to 150+ with full P&L accountability",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Action"
+   },
+   {
+    "text": "Recruited and developed practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Balanced teams rather than handoffs; pair programming, TDD, automated delivery pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "30+ engagements across 15+ Fortune 500 clients; 4X velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ repeat business through delivery excellence and customer relationship building",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Sabbatical building MattGPT; in active search for stated role",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Master's IT AIU; BA French Queens",
+    "label": "supported",
+    "source": "profile.education"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 10 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Sabbatical building MattGPT; searching for stated role",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Accenture March 2005 to September 2023; led modernization programs; built Atlanta and Tampa CICs 0 to 150+",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt; building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Full P&L accountability; recruited, trained, developed practitioners across disciplines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Balanced teams of PMs, designers, engineers; pair programming, TDD, automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "30+ engagements across 15+ Fortune 500 clients; 4X velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ repeat business through delivery excellence and customer relationship building",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Wellfound, Cendian, AIU adjunct with dates",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Master's IT AIU; BA French Queens; graduate coursework Romance Languages UGA",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Building MattGPT using RAG, semantic search, modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 11 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported. Quoted \u201cbuilder\u201d matches the word 'builder' in transition-story 5PSummary (rule 8 pass).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Wellfound, Cendian, Accenture with dates; AIU adjunct 2003-2004",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Built CIC 0 to 150+ across Atlanta and Tampa",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "TDD and automated pipelines; 4X velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result"
+   },
+   {
+    "text": "$100M+ repeat business through delivery excellence and customer relationship building",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Payments and banking modernization for JPMC, RBC, Capital One, HSBC; JPMC payments and Salesforce each across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Recovered troubled programs; architected cloud-native systems from prototype to production",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result"
+   },
+   {
+    "text": "Sabbatical building MattGPT using RAG, semantic search, modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Describes himself as a \u201cbuilder\u201d (quoted word appears verbatim)",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Pursuing role where building the org, culture and results are the same job",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Master's IT AIU",
+    "label": "supported",
+    "source": "profile.education"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 10 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported. Quoted \u201cbuilder\u201d matches the word 'builder' in transition-story 5PSummary (rule 8 pass).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Accenture March 2005 to September 2023; built CIC 0 to 150+ across Atlanta and Tampa",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "4X velocity and zero-defect deployments through TDD and automated pipelines",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result"
+   },
+   {
+    "text": "$100M+ repeat business through delivery excellence and customer relationship building, not a sales role",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Enterprise modernization, AWS cloud-native architecture, JPMC payments and Salesforce platforms across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture"
+   },
+   {
+    "text": "Wellfound, Cendian, AIU adjunct with dates",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Master's IT AIU; BA French Queens; graduate coursework Romance Languages UGA",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Sabbatical building MattGPT",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Describes himself as a \u201cbuilder.\u201d (quoted word appears verbatim)",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "In active search for stated role",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 11 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Accenture March 2005 to September 2023; modernization across banking, healthcare, telecommunications",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt; about-matt-my-leadership-journey|accenture Action"
+   },
+   {
+    "text": "As Director built Atlanta and Tampa CICs 0 to 150+ with full P&L accountability",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Role/5PSummary/Action"
+   },
+   {
+    "text": "Hired, trained, developed teams across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Balanced teams instead of functional handoffs; pair programming, TDD, hypothesis-driven design, automated CI/CD pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/Action"
+   },
+   {
+    "text": "30+ engagements across 15+ Fortune 500 clients; 4X velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Delivery excellence and customer relationships generated $100M+ repeat business",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Wellfound, Cendian, AIU adjunct with dates",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Master's IT AIU; BA French Queens; graduate coursework Romance Languages UGA",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Sabbatical building MattGPT using RAG, semantic search, modern LLM tooling; pursuing stated role",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary; matt_dna_ground_truth.txt"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 10 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Accenture March 2005 to September 2023; built products, platforms, teams; modernization across banking, healthcare, telecommunications",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt; about-matt-my-leadership-journey|accenture Action/5PSummary"
+   },
+   {
+    "text": "November 2019 to September 2023 built Atlanta and Tampa CICs 0 to 150+ across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Start_Date/End_Date/5PSummary"
+   },
+   {
+    "text": "Full P&L accountability, hiring, training, development for both centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Balanced teams instead of handoffs; pair programming, TDD, automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Adapted Lean XP for compliance, security, legacy systems",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation/Action"
+   },
+   {
+    "text": "30+ engagements across 15+ Fortune 500 clients; 4X velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Delivery excellence and customer relationships generated $100M+ repeat business",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Wellfound, Cendian, AIU adjunct with dates",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Sabbatical building MattGPT using RAG, semantic search, modern LLM tooling; seeking stated role",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary; matt_dna_ground_truth.txt"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 11 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported. Quoted \u201cbuilder\u201d matches the word 'builder' in transition-story 5PSummary (rule 8 pass).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Accenture March 2005 to September 2023; built enterprise platforms, led modernization, built the organization that delivered them",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt; why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "November 2019 to September 2023 built Atlanta and Tampa CICs 0 to 150+ with full P&L accountability",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Start_Date/End_Date/5PSummary/Action"
+   },
+   {
+    "text": "Hired, trained, developed practitioners; pair programming, TDD, CI/CD, balanced teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "30+ engagements across 15+ Fortune 500 clients; 4X velocity; zero-defect; $100M+ repeatable business by FY23",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Growth came through delivery excellence and customer relationship building",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/Action"
+   },
+   {
+    "text": "Wellfound, Cendian, AIU adjunct with dates",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Master's IT AIU; BA French Queens",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Sabbatical building MattGPT using RAG, semantic search, modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Describes himself as a \u201cbuilder\u201d (quoted word appears verbatim)",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Pursuing senior leadership roles in platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 9 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Accenture March 2005 through September 2023; built enterprise platforms, led modernization, established Atlanta and Tampa CICs",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt; why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Built centers 0 to 150+ across engineering, architecture, product, design with full P&L accountability",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "30+ engagements across 15+ Fortune 500 clients; 4X velocity; zero-defect through pair programming, TDD, pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ repeat business through delivery excellence and customer relationship building",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Payments and banking programs for JPMC, RBC, Capital One, HSBC; JPMC payments and Salesforce each across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Wellfound, Cendian, AIU adjunct with dates",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Sabbatical building MattGPT using RAG, semantic search, modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Pursuing senior leadership roles in platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 10 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported. Quoted \u201cbuilder\u201d matches the word 'builder' in transition-story 5PSummary (rule 8 pass).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Describes himself as a \u201cbuilder\u201d who builds products, platforms, and teams (quoted word appears verbatim)",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary; about-matt-my-leadership-journey|accenture 5PSummary"
+   },
+   {
+    "text": "Accenture March 2005 to September 2023; built CIC 0 to 150+ across Atlanta and Tampa",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "4X velocity with zero-defect deployments through TDD and automated pipelines",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result"
+   },
+   {
+    "text": "CIC teams of 10 consistently delivered the impact of typical teams of 20",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Payments and banking modernization for JPMC, RBC, Capital One, HSBC; JPMC payments and Salesforce each across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "$100M+ repeat business through delivery excellence and customer relationship building",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Wellfound, Cendian, AIU adjunct with dates",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Sabbatical building MattGPT using RAG, semantic search, Python, Pinecone, modern LLM tooling",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary; transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Pursuing senior leadership roles in platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 10 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Wellfound, Cendian, Accenture with dates",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs 0 to 150+ across engineering, architecture, product, design; full P&L accountability",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Action"
+   },
+   {
+    "text": "30+ engagements across 15+ Fortune 500 clients; $100M+ repeatable business through delivery excellence and customer relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Adapted Lean XP for compliance, security, legacy systems",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation/Action"
+   },
+   {
+    "text": "Pair programming, TDD, automated pipelines, balanced Product/Engineering/Design teams; 4X velocity; zero-defect; 10-person teams equal to 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Previously, as Cloud Native Architecture Lead, led AWS Launchpad at the Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Role/Task"
+   },
+   {
+    "text": "Program combined hands-on labs, structured learning paths, and mentorship",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture 5PSummary"
+   },
+   {
+    "text": "More than 200 professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Sabbatical building MattGPT; seeking stated role",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Section 3 (c16) and the D9 required closing: the answer gives a text career overview but never points the visitor to About Matt (his profile) or LinkedIn, so it lacks the required close. It invents no file or link (says none is available). All 8 claims supported (story/profile/Ground Truth); 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt Career Arc"
+   },
+   {
+    "text": "Accenture March 2005 to September 2023; enterprise platforms and modernization across banking, healthcare, telecommunications",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt; about-matt-my-leadership-journey|accenture Action"
+   },
+   {
+    "text": "As Director built Accenture's Atlanta and Tampa CICs 0 to 150+ with full P&L accountability",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Role/5PSummary/Action"
+   },
+   {
+    "text": "Balanced product/engineering/design teams; pair programming, TDD, automated pipelines adapted for enterprise",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "30+ engagements across 15+ Fortune 500 clients; 4X velocity; zero-defect; $100M+ repeatable business via delivery excellence and customer relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Wellfound, Cendian, AIU adjunct with dates",
+    "label": "supported",
+    "source": "matt_dna_ground_truth.txt"
+   },
+   {
+    "text": "Master's IT AIU; BA French Queens",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Sabbatical building MattGPT using RAG, semantic search, modern LLM tooling; seeking stated role",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary; matt_dna_ground_truth.txt"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

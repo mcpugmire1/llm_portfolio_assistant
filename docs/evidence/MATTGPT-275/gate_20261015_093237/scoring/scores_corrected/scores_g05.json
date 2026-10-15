@@ -1,0 +1,2326 @@
+[
+ {
+  "case": "c03",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All claims supported (LP, PTF, EF, BS, QC); quotes 'over-processed...', 'permit to fail', 'I do, we do, you do' verbatim. First turn: answered and honest.",
+  "claims": [
+   {
+    "text": "Matt describes his leadership as empathy, clarity, and modern engineering rigor",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quote: teams he inherited were 'over-processed, under-trusted, waiting for permission instead of owning outcomes' (verbatim, case-normalized)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Makes intent explicit, pushes decisions to the people closest to the work, coaches teams to think clearly rather than just execute",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "At the CIC teams had avoided risks for fear of blame; he introduced a 'permit to fail' culture via non-punitive post-mortems and lean, low-stakes experiments",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation/Action/Title"
+   },
+   {
+    "text": "In innovation engagements he set expectations that prototypes and user tests would fail intentionally, to test assumptions before costly builds",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Teams applied lessons to subsequent sprints and prevented recurring failure patterns",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result"
+   },
+   {
+    "text": "Balanced teams of engineers, PMs and UX architects with equal participation and shared accountability; pairing, collaborative coding, retrospectives, open feedback; teams implemented changes autonomously",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Balanced teams achieved zero-defect production code through iterative development and real-time feedback loops",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   },
+   {
+    "text": "At Norfolk Southern, defects rose despite near-complete test coverage; he acknowledged the failure before client and Accenture account leadership rather than defending the metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation/Action"
+   },
+   {
+    "text": "Audited code and tests, rebuilt vague backlog stories, brought in TDD experts using an 'I do, we do, you do' progression (quote verbatim)",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "The client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "CIC teams accelerated delivery 4x after embracing lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All claims supported (LP, MS, SR, PTF, QC); quotes verbatim. Opener not a claim. First turn passes.",
+  "claims": [
+   {
+    "text": "Matt leads with empathy, clarity, and purpose (paraphrase of 'blends empathy, clarity...' and 'Lead with purpose')",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Makes intent explicit, pushes decisions to people closest to the work, coaches teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quote 'over-processed, under-trusted, waiting for permission instead of owning outcomes' verbatim",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "CIC practitioners from command-and-control cultures hesitated to share ideas or take risks for fear of blame",
+    "label": "supported",
+    "source": "making-it-safe-to-take-risks-and-be-wrong|accenture Situation"
+   },
+   {
+    "text": "Established weekly brainstorming sessions where ideas were considered without judgment",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Action"
+   },
+   {
+    "text": "Held open retrospectives and shared his own experiences with mistakes",
+    "label": "supported",
+    "source": "making-it-safe-to-take-risks-and-be-wrong|accenture Action"
+   },
+   {
+    "text": "Emphasized shared goals over individual accolades and recognized contributions advancing the mission",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Action"
+   },
+   {
+    "text": "'Permit to fail' approach with non-punitive post-mortems and lean, low-stakes experiments; lessons applied to subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "Morale improved and turnover declined",
+    "label": "supported",
+    "source": "making-it-safe-to-take-risks-and-be-wrong|accenture Result"
+   },
+   {
+    "text": "At Norfolk Southern defects rose despite near-complete coverage; he took ownership before client and account leadership rather than defending the metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Audit exposed tests written after code and stories without defined scenarios or definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt backlog with testable stories; brought in frontend and backend TDD experts; 'I do, we do, you do' progression with coding katas and practice learning sessions",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "The client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Teams achieved 4x delivery acceleration after embracing lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "All claims supported (LP, SR, PTF, EF, CT); quote verbatim. First turn passes.",
+  "claims": [
+   {
+    "text": "Matt leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quote 'over-processed, under-trusted, waiting for permission instead of owning outcomes' verbatim (story frames it as teams he inherited)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "In CIC's early stages a rigid hierarchical culture made people slow to share ideas",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation"
+   },
+   {
+    "text": "Other teams avoided risks for fear of blame, slowing delivery",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation"
+   },
+   {
+    "text": "Pushed decisions down, made intent explicit, used transparency and direct feedback, coached teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Weekly brainstorming without judgment; recognized contributions advancing shared goals rather than individual accolades",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Action"
+   },
+   {
+    "text": "'Permit to fail' environment with non-punitive post-mortems and lean low-stakes experiments; lessons applied in subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "Set expectations that prototypes and user tests would likely fail intentionally; used user research, JTBD and rapid testing before costly builds",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Situation/Action"
+   },
+   {
+    "text": "Balanced teams of PMs, designers and engineers delivering thin-slice production-ready solutions with user feedback",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Action"
+   },
+   {
+    "text": "Automation, continuous delivery and quality-first engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at the CIC",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Reduced wasted engineering effort by testing assumptions; post-mortem learnings prevented repeat errors",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Result; PTF.5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Gives the Norfolk Southern quality crisis, which the corpus presents as a failure he owned; all claims supported (QC, MIS). Section 3 met.",
+  "claims": [
+   {
+    "text": "At Norfolk Southern, the practices he introduced did not initially hold",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Situation/Task"
+   },
+   {
+    "text": "First CIC engagement modernizing the Revenue and Shipment Planning platform, balanced team, TDD emphasized",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "A couple of months in, client reported rising defects despite near-complete test coverage; credibility hit before client and account leadership accustomed to waterfall",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Pairing, test-first and CI were in place but follow-up discipline was missing",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Task"
+   },
+   {
+    "text": "An engineer solutioned from his own interpretation and wrote tests after code; vague stories lacked scenarios or definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Took ownership, ran a bottom-up audit, showed gaps openly including backlog problems",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Brought in frontend and backend TDD experts, rebuilt stories, boot camps, coding katas, 'I do, we do, you do' (verbatim)",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rotating pairs built test cases before the solution, checked at standup; stories admitted only when discrete and testable",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Provided product management and SMART story training and restructured ceremonies",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see; practices held after experts left; failure mode did not recur",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result; MIS.Result"
+   },
+   {
+    "text": "Lesson: implementing a practice is the easy half; reinforcement, follow-up and verification make it real",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Story choice (AS) is a corpus failure and quotes are verbatim, but the framing that his 'permit to fail' principle was operating on that engagement is unsupported: AS never mentions it and predates the PTF story. unsupported: permit-to-fail framing.",
+  "claims": [
+   {
+    "text": "Framing: an example where Matt's 'permit to fail' principle did not protect a team member, i.e. the principle was in play on that engagement",
+    "label": "unsupported",
+    "source": "AS (no mention of permit to fail; AS dated 2014-01 to 2019-10, PTF 2019-11 onward)"
+   },
+   {
+    "text": "Tech lead on a global platform modernization for a financial services client, responsible for safe environment setup across dev, QA, UAT, production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation/Task"
+   },
+   {
+    "text": "Offshore teams executing test cycles under delivery pressure",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Relied on inherited documentation rather than verifying IAM, environment boundaries, downstream access",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Did not audit who could trigger email processes or confirm names and emails were masked; no compensating controls such as email interception",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered an email job in UAT sending unmasked production data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability and led RCA and remediation; client demanded the tester be removed",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'a systemic failure that resulted in an individual consequence' verbatim",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Made IAM validation, environment verification, PII scrubbing and risk ownership 'day-one leadership responsibilities' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Lesson 'leaders own the environment their teams operate in' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 7,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "One corpus failure story (AS) told honestly; all claims supported; quote verbatim. Passes.",
+  "claims": [
+   {
+    "text": "Describes a delivery failure where he relied on assumptions instead of verifying the environment",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task/5PSummary"
+   },
+   {
+    "text": "Tech lead on a global platform modernization for a financial-services client under delivery pressure",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Offshore teams testing across dev, QA, UAT, production; IAM, boundaries, access inherited with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe setup; focused on delivery pressure and relied on documentation; did not audit job triggers, verify scrubbing, or implement masking and email interception",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task/Action"
+   },
+   {
+    "text": "Tester triggered email job in UAT; unmasked production data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, RCA and remediation; identified insufficient IAM checks, unclear boundaries, unscrubbed data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Client demanded tester removal; quote 'a systemic failure that resulted in an individual consequence' verbatim",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Afterward IAM validation, environment verification, PII scrubbing, risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All claims supported (LP, PTF, EF, BS, QC); quotes verbatim. First turn passes.",
+  "claims": [
+   {
+    "text": "Matt leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quote: teams he inherited were 'over-processed, under-trusted, waiting for permission instead of owning outcomes' verbatim",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Makes intent explicit, pushes decisions down, coaches teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "At CIC established 'permit to fail' for teams that avoided risk out of fear of blame: non-punitive post-mortems, shared lessons, low-stakes experiments with structured hypotheses and controlled iterations",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation/Action"
+   },
+   {
+    "text": "In product incubation set expectations that early prototypes and user tests would fail; user research, JTBD, rapid testing before costly builds",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Balanced teams of engineers, PMs, UX architects with shared accountability; pairing, retrospectives, direct feedback; teams implemented changes autonomously",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "At Norfolk Southern took ownership when defects rose despite near-complete coverage; audited code and tests, exposed backlog gaps, rebuilt stories with scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Brought in TDD experts; boot camps, coding katas, 'I do, we do, you do' (verbatim)",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "4x delivery acceleration across the CIC",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All claims supported (LP, SR, PTF, EF, CT); quotes verbatim. First turn passes.",
+  "claims": [
+   {
+    "text": "Matt describes his leadership as empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quote 'over-processed, under-trusted, waiting for permission instead of owning outcomes' verbatim",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "At CIC a rigid hierarchical culture made people slow to share ideas",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation"
+   },
+   {
+    "text": "Fear of blame kept teams from risks, slower delivery and missed modern-practice adoption",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation"
+   },
+   {
+    "text": "Made intent explicit, pushed decisions down, transparency, direct feedback, open communication",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Weekly brainstorming without judgment; shared goals over individual accolades; recognized contributions",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Action"
+   },
+   {
+    "text": "'Permit to fail' with non-punitive post-mortems and lean low-stakes experiments; lessons applied to subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "Set expectations upfront that prototypes and user tests would likely fail; user research, JTBD, rapid testing; shaped direction week by week",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "Balanced teams of PMs, designers, engineers delivering thin-slice production-ready solutions for rapid feedback",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Action"
+   },
+   {
+    "text": "Leading a 150-person CIC; 4x delivery acceleration",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Situation/5PSummary"
+   },
+   {
+    "text": "Permit-to-fail work prevented recurring failure patterns and shortened timelines through quicker pivots",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "All claims supported (LP, SR, ET, QC, EF); quotes verbatim. First turn passes.",
+  "claims": [
+   {
+    "text": "Matt leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quote 'over-processed, under-trusted, waiting for permission instead of owning outcomes' verbatim",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Focus: intent explicit, psychological safety so people speak honestly, decisions pushed down",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action/5PSummary"
+   },
+   {
+    "text": "Changed a rigid hierarchical culture at CIC via weekly brainstorming without judgment, shared goals over individual recognition",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation/Action"
+   },
+   {
+    "text": "Paired senior engineers with junior team members, peer-led demos and engineering practice forums, learning embedded in live client projects",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   },
+   {
+    "text": "At Norfolk Southern (CIC's initial engagement) defects rose despite near-complete coverage; acknowledged failure rather than defending the dashboard",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation/Action"
+   },
+   {
+    "text": "Audited code and tests, exposed backlog gaps, TDD experts, 'I do, we do, you do' (verbatim), coding katas, practice learning sessions, testable stories",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Set expectations early experiments would fail; results as decision inputs not setbacks",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "150-person CIC; 4x delivery acceleration",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Situation/5PSummary"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Right kind of story (AS) and quotes verbatim, but the framing that his 'permit to fail' principle applied on this engagement is unsupported by AS, which never mentions it and predates PTF. unsupported: permit-to-fail framing.",
+  "claims": [
+   {
+    "text": "Framing: in this engagement Matt's 'permit to fail' principle did not protect a team member (principle presented as operating there)",
+    "label": "unsupported",
+    "source": "AS (no mention of permit to fail; AS dated 2014-01 to 2019-10, PTF 2019-11 onward)"
+   },
+   {
+    "text": "Financial services engagement; tech lead on global platform modernization under delivery pressure; offshore teams testing across environments",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup but relied on inherited documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task/Action"
+   },
+   {
+    "text": "Assumed IAM and boundaries correct; did not audit job or email triggers, verify scrubbing of names and emails, or implement masking and email interception",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Tester triggered UAT email job; unmasked production data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, RCA and remediation; identified insufficient access checks, unclear boundaries, unscrubbed data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Client demanded the tester be removed",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'assumptions I should have verified rather than inherited' verbatim",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Made IAM validation, environment verification, PII scrubbing, risk ownership 'day-one leadership responsibilities' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Story gives no quantified recovery result",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "One corpus failure story (AS) told honestly; quotes verbatim; all supported. Passes.",
+  "claims": [
+   {
+    "text": "Matt did not establish the safe environment he was responsible for",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task"
+   },
+   {
+    "text": "Global platform modernization for a financial services client; tech lead across dev, QA, UAT, production; offshore test cycles under pressure",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM, segregation, downstream access inherited from prior phases with existing documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Relied on documentation; focused on delivery pressure; did not audit triggers, implement masking or email interception, or verify scrubbing",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Tester triggered UAT email job with unmasked data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability and led RCA and remediation; client demanded tester removal",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "The non-punitive stance he advocated did not extend to the client's decision (his own framing: a systemic failure, not an individual one)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'a systemic failure that resulted in an individual consequence' verbatim",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Day-one leadership responsibilities afterward",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Quote 'assumptions are risks in disguise' verbatim; leaders own the environment their teams operate in",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 8,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Norfolk Southern quality crisis, presented in corpus as a failure; all claims supported (QC, MIS); quotes verbatim. Passes.",
+  "claims": [
+   {
+    "text": "Initial Norfolk Southern engagement is where his approach did not work as intended",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation; MIS.Task"
+   },
+   {
+    "text": "Launched CIC engagement with balanced team, pairing, TDD",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation; MIS.Situation"
+   },
+   {
+    "text": "A couple of months into modernizing Revenue and Shipment Planning, rising defects despite near-complete coverage; surfaced before client and account leadership as pandemic forced remote work",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Practices in place but reinforcement and verification missing",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Task"
+   },
+   {
+    "text": "Engineer built from his own interpretation, tests after code; vague stories without scenarios or definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Took ownership, audited code and tests, showed gaps, rebuilt backlog with SMART testable stories; frontend and backend TDD experts; 'I do, we do, you do' (verbatim)",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Test cases before solution, rotating pairs, checked at standup; new engineers paired with seasoned practitioners; story-pointing codified in working agreement",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects; failure mode did not recur after experts left",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result; MIS.Result"
+   },
+   {
+    "text": "Quote 'implementing a practice is the easy half' verbatim",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All claims supported (LP, PTF, BS, QC); quotes verbatim. First turn passes.",
+  "claims": [
+   {
+    "text": "Matt leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quote 'over-processed, under-trusted, waiting for permission instead of owning outcomes' verbatim",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Intent explicit, decisions pushed down, coaches teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "At CIC, teams avoided risk for fear of blame; 'permit to fail' via non-punitive post-mortems and lean low-stakes experiments; mistakes shared openly; lessons applied",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation/Action/Result"
+   },
+   {
+    "text": "Balanced teams of engineers, PMs, UX architects with equal participation and shared accountability",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Norfolk Southern: rising defects despite near-complete coverage; audited codebase and test suite and showed gaps openly",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Engineer wrote tests after the code; vague stories lacked scenarios or definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt backlog with SMART testable stories; frontend and backend TDD experts; 'I do, we do, you do' with boot camps, katas, practice sessions",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects; defect rates dropped as story quality and test-first took hold",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "4x delivery acceleration across the CIC",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All claims supported (LP, SR, MS, PTF, BM); quote verbatim. First turn passes.",
+  "claims": [
+   {
+    "text": "Matt describes his leadership as empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quote 'over-processed, under-trusted, waiting for permission instead of owning outcomes' verbatim",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Rigid hierarchical culture at CIC initially slowed idea sharing",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation"
+   },
+   {
+    "text": "As centers scaled to 150+ practitioners from command-and-control cultures, pockets of fear of blame persisted after openness was established",
+    "label": "supported",
+    "source": "making-it-safe-to-take-risks-and-be-wrong|accenture Situation"
+   },
+   {
+    "text": "Intent explicit, decisions pushed down, transparency, direct feedback; automation, CD, quality-first practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "'Permit to fail': non-punitive post-mortems, open retrospectives, lean low-stakes experiments with structured hypotheses and controlled iterations",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action; MS.Action"
+   },
+   {
+    "text": "Shared his own experiences with mistakes and risk-taking",
+    "label": "supported",
+    "source": "making-it-safe-to-take-risks-and-be-wrong|accenture Action"
+   },
+   {
+    "text": "Post-mortem lessons applied, preventing recurrence of failure patterns",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result"
+   },
+   {
+    "text": "Weekly brainstorming without judgment; shared goals over individual accolades; recognized contributions advancing project goals",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Action"
+   },
+   {
+    "text": "Peer learning cohorts, structured 1:1 mentoring, leadership coaching, program adjusted through feedback",
+    "label": "supported",
+    "source": "building-mentorship-programs-for-long-term-growth-and-retention|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at CIC",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Mentoring improved retention; participants grew into leadership roles",
+    "label": "supported",
+    "source": "building-mentorship-programs-for-long-term-growth-and-retention|accenture Result"
+   },
+   {
+    "text": "Teams experimented more freely, repeat errors declined, timelines shortened",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "All claims supported (LP, PTF, EF, BS, MIS); quote verbatim. First turn passes.",
+  "claims": [
+   {
+    "text": "Matt leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quote 'over-processed, under-trusted, waiting for permission instead of owning outcomes' verbatim",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Intent explicit, decisions pushed down, coaching to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "CIC 'permit to fail': teams avoided risk for fear of blame; non-punitive post-mortems; lean experiments with structured hypotheses; lessons prevented recurrence",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation/Action/Result"
+   },
+   {
+    "text": "In product incubation set expectations early prototypes and user tests would likely fail, used evidence before costly builds",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Balanced teams with equal participation and shared accountability; stand-ups, retrospectives, pairing, open feedback",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Those teams achieved zero-defect production code across client engagements",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result/5PSummary"
+   },
+   {
+    "text": "At Norfolk Southern reinforced practices that had been introduced but had not held: paired newer engineers with seasoned practitioners, daily rotation, test cases as discrete step checked at stand-up",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Situation/Action"
+   },
+   {
+    "text": "When remote, pairs traded drivers frequently",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Pairing and test-first remained default after experts left; crisis failure mode did not recur",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Story (AS) is a corpus failure and quote is verbatim, but presenting the incident as a limit of the 'permit to fail' environment is unsupported: AS never mentions it and predates PTF. unsupported: permit-to-fail framing.",
+  "claims": [
+   {
+    "text": "He took accountability but the team member still bore an individual consequence",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Tech lead on global platform modernization for a financial services client; delivery pressure; offshore test cycles across environments; inherited IAM, segregation, access",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe setup; relied on inherited documentation; did not audit email triggers, verify scrubbing, or implement masking and email interception",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task/Action"
+   },
+   {
+    "text": "Tester triggered UAT email job; unmasked data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, RCA and remediation, worked collectively with team on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Client demanded tester removal; quote 'a systemic failure that resulted in an individual consequence' verbatim",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Framing: this incident is a limit of the 'permit to fail' environment described earlier (principle presented as operating on that engagement)",
+    "label": "unsupported",
+    "source": "AS (no mention of permit to fail; AS dated 2014-01 to 2019-10, PTF 2019-11 onward)"
+   },
+   {
+    "text": "Failure in Matt's own responsibilities before the incident",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task"
+   },
+   {
+    "text": "Afterward treated IAM validation, environment verification, PII scrubbing, risk ownership as day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "One corpus failure story (AS) told honestly; explicitly says it was not a permit-to-fail experiment; quote verbatim; all supported. Passes.",
+  "claims": [
+   {
+    "text": "He took accountability but the outcome for a team member was still punitive (tester removed)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Tech lead on global platform modernization for a financial services client; offshore test cycles under pressure; inherited IAM, boundaries, access",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe setup; relied on documentation; did not audit email triggers, verify scrubbing, or implement masking and email interception",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task/Action"
+   },
+   {
+    "text": "Tester triggered UAT email job; unmasked data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, RCA and remediation; client demanded tester removal",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'a systemic failure that resulted in an individual consequence' verbatim",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Not a low-stakes experiment; a delivery failure involving controls he should have verified",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Afterward day-one leadership responsibilities for IAM validation, environment verification, PII scrubbing, risk ownership",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 9,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Norfolk Southern quality crisis, a corpus failure; all claims supported (QC, MIS); quote verbatim. Passes.",
+  "claims": [
+   {
+    "text": "Initial rollout of balanced teams, pairing, TDD at Norfolk Southern did not prevent a quality crisis",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation; MIS.Situation"
+   },
+   {
+    "text": "A couple of months into Revenue and Shipment Planning modernization, rising defects despite near-complete coverage; credibility hit before client and account leadership as pandemic moved work remote",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Pairing, test-first, CI in place from the start but reinforcement and verification missing",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Task"
+   },
+   {
+    "text": "Engineer built from own interpretation, tests after code; vague stories",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Took ownership instead of defending metrics; bottom-up audit; SMART testable stories; frontend and backend TDD experts from Columbus to redo code and tests",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Test cases a discrete step before solution, checked at stand-up; new engineers with seasoned practitioners; daily rotation; stories capped at 3 points in 1-week iterations",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects; pairing and test-first remained default; failure mode did not recur",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result; MIS.Result"
+   },
+   {
+    "text": "Quote 'implementing a practice is the easy half' verbatim",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All claims supported (LP, PTF, BS, EF); quote verbatim. First turn passes.",
+  "claims": [
+   {
+    "text": "Matt leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quote 'over-processed, under-trusted, waiting for permission instead of owning outcomes' verbatim",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "At Accenture some teams avoided risk for fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation"
+   },
+   {
+    "text": "Hierarchical structures and silos between engineering, design, product created bottlenecks and slower delivery",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Situation"
+   },
+   {
+    "text": "Innovation teams expected polished requirements when they had assumptions to test",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Situation"
+   },
+   {
+    "text": "Pushed decisions down, intent explicit, transparency, direct feedback, coached clear thinking",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "'Permit to fail': non-punitive post-mortems, transparent sharing of errors, low-stakes experiments with structured hypotheses; lessons prevented recurrence",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "Balanced teams with equal participation and shared accountability; pairing, collaborative coding, retrospectives, real-time feedback; changed workflows autonomously",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "For early products, set expectations prototypes would fail and shaped direction week by week before costly builds",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at the CIC",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Silo-breaking work produced zero-defect production code",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   },
+   {
+    "text": "Permit-to-fail work shortened timelines and prevented recurrence; that story gives no numerical measures",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All claims supported (LP, PTF, EF, BS, QC); quotes verbatim. First turn passes.",
+  "claims": [
+   {
+    "text": "Matt leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quote 'over-processed, under-trusted, waiting for permission instead of owning outcomes' verbatim",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Removing barriers: intent explicit, decisions pushed down, coaching teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action/5PSummary"
+   },
+   {
+    "text": "CIC 'permit to fail': teams avoided risk for fear of blame; non-punitive post-mortems; lean experiments with structured hypotheses",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation/Action"
+   },
+   {
+    "text": "In product incubation set expectations prototypes would likely fail intentionally; tested assumptions before costly builds; shaped direction week by week",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Balanced teams of engineers, PMs, UX architects; pairing, collaborative coding, retrospectives, open feedback",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "At Norfolk Southern took ownership when defects rose despite near-complete coverage; showed gaps openly to client and account leadership",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt vague stories into testable requirements; TDD experts; 'I do, we do, you do' (verbatim)",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "4x delivery acceleration across CIC",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Balanced-team work achieved zero-defect production code across client engagements",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "All claims supported (LP, SR, CT, EF, ET); quotes verbatim. First turn passes.",
+  "claims": [
+   {
+    "text": "Matt describes his leadership as empathy, clarity, and modern engineering rigor",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quote 'over-processed, under-trusted, waiting for permission instead of owning outcomes' verbatim",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Rigid hierarchical culture initially slowed idea sharing at CIC",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation"
+   },
+   {
+    "text": "Made purpose and intent explicit, direct feedback and open communication, coached clear thinking",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Weekly brainstorming without judgment; recognized contributions advancing shared goals instead of individual accolades",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Action"
+   },
+   {
+    "text": "Balanced teams of PMs, designers, engineers delivering thin-slice production-ready solutions guided by user feedback",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Action"
+   },
+   {
+    "text": "Set expectations upfront that prototypes, experiments, user tests would fail intentionally; user research and rapid testing; failed experiments as decision inputs (folded under his 'permit to fail' label, same failure-culture theme)",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Paired senior engineers with juniors, weekly tech talks with peer-led demos, learning embedded in live client projects",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   },
+   {
+    "text": "Mentorship improved retention and reduced onboarding time; no numerical measures given",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Result"
+   },
+   {
+    "text": "4x delivery acceleration at the CIC",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Quote 'It didn't happen overnight, but it stuck.' verbatim",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern quality crisis, a corpus failure; all claims supported (QC); quote verbatim. Passes.",
+  "claims": [
+   {
+    "text": "Initial rollout of balanced team and TDD at Norfolk Southern did not prevent a quality crisis",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "In early 2020 CIC modernizing legacy Revenue and Shipment Planning platform",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "A couple of months in, as pandemic forced remote work, rising defects despite near-complete coverage; credibility hit before client and account leadership",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Engineer built from own interpretation, tests after code; vague stories lacked scenarios or definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Took ownership rather than defending metrics; bottom-up audit; SMART testable stories; TDD experts from Columbus redid code and tests",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Boot camps, coding katas, practice sessions, 'I do, we do, you do' (verbatim); PMs received SMART story training",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Defect rates dropped; client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Account records initial process change was not enough; consistent coaching was necessary",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern quality crisis, a corpus failure; all claims supported (QC, MIS); quotes verbatim. Passes.",
+  "claims": [
+   {
+    "text": "Initial Norfolk Southern rollout didn't work as intended",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation; MIS.Task"
+   },
+   {
+    "text": "Early 2020, balanced team and TDD on Revenue and Shipment Planning modernization",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Rising defects despite near-complete coverage a couple of months in; credibility hit before client and account leadership accustomed to waterfall",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Pairing, test-first, CI in place from the start; reinforcement, follow-up, verification missing",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Task"
+   },
+   {
+    "text": "Engineer solutioned from own interpretation, tests after code; vague stories",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Took ownership; bottom-up audit; showed gaps openly; testable stories; frontend and backend TDD experts; 'I do, we do, you do' (verbatim)",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Test cases a discrete step checked at standup; daily pair rotation; new engineers with seasoned practitioners",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects; practices held after experts left; failure mode did not recur",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result; MIS.Result"
+   },
+   {
+    "text": "Quote 'implementing a practice is the easy half' verbatim",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 10,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Norfolk Southern quality crisis, a corpus failure; all claims supported (QC); quotes verbatim. Passes.",
+  "claims": [
+   {
+    "text": "At Norfolk Southern his initial approach did not prevent a quality crisis",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Early 2020 CIC began modernizing Revenue and Shipment Planning; balanced team and TDD",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "A couple of months in, pandemic remote shift, rising defects despite near-complete coverage; credibility hit before client and account leadership accustomed to waterfall",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Engineer solutioned from own interpretation, tests after code; vague stories with no clear way to test",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Took ownership; bottom-up audit; showed gaps including backlog problems; SMART testable stories; TDD experts from Columbus",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Sustained coaching: boot camps, katas, practice sessions, 'I do, we do, you do' (verbatim)",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Defect rates dropped; client stopped finding defects; story gives no numerical reduction",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Quote 'metrics mean nothing without the practice behind them' verbatim; cultural transformation requires consistent coaching",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern 5PSummary/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct years, says none current; quotes verbatim in profile_rendered. All supported.",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   },
+   {
+    "text": "Previously held / also has: AWS Certified Solutions Architect - Associate, issued 2020, expired 2023 (quoted, verbatim in profile_rendered)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Previously held / also has: AWS Certified Cloud Practitioner, issued 2019, expired 2023 (quoted, verbatim in profile_rendered)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Previously held / also has: SAFe 4 Certified Agilist, issued 2017, expired (quoted, verbatim in profile_rendered)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Previously held / also has: Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery, 2002 (quoted, verbatim in profile_rendered)",
+    "label": "supported",
+    "source": "profile.certifications"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct years, says none current; quotes verbatim in profile_rendered. All supported. Opener 'Here's a great example.' is not a claim.",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   },
+   {
+    "text": "Held: AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Held: AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Held: SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Held: Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery, 2002",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "The Oracle entry records exams passed, not a completed OCP certification",
+    "label": "supported",
+    "source": "profile.certifications"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Says no PMP, then lists the profile certifications (rule 1: acknowledges_missing true; useful_direct true); all supported.",
+  "claims": [
+   {
+    "text": "Matt does not hold PMP certification (not among profile certifications)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Certification history: AWS Certified Solutions Architect - Associate, issued 2020, expired 2023 (quoted, verbatim in profile_rendered)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Certification history: AWS Certified Cloud Practitioner, issued 2019, expired 2023 (quoted, verbatim in profile_rendered)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Certification history: SAFe 4 Certified Agilist, issued 2017, expired (quoted, verbatim in profile_rendered)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Certification history: Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery, 2002 (quoted, verbatim in profile_rendered)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Says no PMP, then lists the profile certifications (rule 1: acknowledges_missing true; useful_direct true); all supported.",
+  "claims": [
+   {
+    "text": "Matt does not hold PMP certification (not among profile certifications)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Certification and exam history: AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Certification and exam history: AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Certification and exam history: SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Certification and exam history: Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery, 2002",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none are current, consistent with profile expiries; all supported.",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none are current, consistent with profile expiries; all supported. Opener is not a claim.",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   },
+   {
+    "text": "AWS certifications expired in 2023; SAFe expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "The Oracle entry records exams passed, not a completed OCP certification",
+    "label": "supported",
+    "source": "profile.certifications"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct years, says none current; quotes verbatim in profile_rendered. All supported.",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   },
+   {
+    "text": "Held / completed: AWS Certified Solutions Architect - Associate, issued 2020, expired 2023 (quoted, verbatim in profile_rendered)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Held / completed: AWS Certified Cloud Practitioner, issued 2019, expired 2023 (quoted, verbatim in profile_rendered)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Held / completed: SAFe 4 Certified Agilist, issued 2017, expired (quoted, verbatim in profile_rendered)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Held / completed: Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery, 2002 (quoted, verbatim in profile_rendered)",
+    "label": "supported",
+    "source": "profile.certifications"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct years, says none current; quotes verbatim in profile_rendered. All supported.",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   },
+   {
+    "text": "Held / passed: AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Held / passed: AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Held / passed: SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Held / passed: Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery, 2002",
+    "label": "supported",
+    "source": "profile.certifications"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Says no PMP, then lists the profile certifications (rule 1: acknowledges_missing true; useful_direct true); all supported.",
+  "claims": [
+   {
+    "text": "Matt does not hold PMP certification (not among profile certifications)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Certifications and exam history: AWS Certified Solutions Architect - Associate, issued 2020, expired 2023 (quoted, verbatim in profile_rendered)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Certifications and exam history: AWS Certified Cloud Practitioner, issued 2019, expired 2023 (quoted, verbatim in profile_rendered)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Certifications and exam history: SAFe 4 Certified Agilist, issued 2017, expired (quoted, verbatim in profile_rendered)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Certifications and exam history: Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery, 2002 (quoted, verbatim in profile_rendered)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Says no PMP, then lists the profile certifications (rule 1: acknowledges_missing true; useful_direct true); all supported. Opener is not a claim.",
+  "claims": [
+   {
+    "text": "Matt does not hold PMP certification (not among profile certifications)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Certifications and exams: AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Certifications and exams: AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Certifications and exams: SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Certifications and exams: Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery, 2002",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none are current, consistent with profile expiries; all supported.",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none are current, consistent with profile expiries; all supported. Opener is not a claim.",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct years, says none current; quotes verbatim in profile_rendered. All supported.",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   },
+   {
+    "text": "Held / passed: AWS Certified Solutions Architect - Associate, issued 2020, expired 2023 (quoted, verbatim in profile_rendered)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Held / passed: AWS Certified Cloud Practitioner, issued 2019, expired 2023 (quoted, verbatim in profile_rendered)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Held / passed: SAFe 4 Certified Agilist, issued 2017, expired (quoted, verbatim in profile_rendered)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Held / passed: Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery, 2002 (quoted, verbatim in profile_rendered)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "The Oracle entry records exams passed, not a completed OCP certification",
+    "label": "supported",
+    "source": "profile.certifications"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with correct years, says none current; quotes verbatim in profile_rendered. All supported.",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   },
+   {
+    "text": "Held / has: AWS Certified Solutions Architect - Associate, issued 2020, expired 2023 (quoted, verbatim in profile_rendered)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Held / has: AWS Certified Cloud Practitioner, issued 2019, expired 2023 (quoted, verbatim in profile_rendered)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Held / has: SAFe 4 Certified Agilist, issued 2017, expired (quoted, verbatim in profile_rendered)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Held / has: Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery, 2002 (quoted, verbatim in profile_rendered)",
+    "label": "supported",
+    "source": "profile.certifications"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Says no PMP, then lists the profile certifications (rule 1: acknowledges_missing true; useful_direct true); all supported.",
+  "claims": [
+   {
+    "text": "Matt does not hold PMP certification (not among profile certifications)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Certifications and exams: AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Certifications and exams: AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Certifications and exams: SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Certifications and exams: Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery, 2002",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Says no PMP, then lists the profile certifications (rule 1: acknowledges_missing true; useful_direct true); all supported.",
+  "claims": [
+   {
+    "text": "Matt does not hold PMP certification (not among profile certifications)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Certifications and exams: AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Certifications and exams: AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Certifications and exams: SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Certifications and exams: Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery, 2002",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none are current, consistent with profile expiries; all supported.",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   },
+   {
+    "text": "Both AWS certifications expired in 2023; SAFe expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle entry records exams passed, not a current certification",
+    "label": "supported",
+    "source": "profile.certifications"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none are current, consistent with profile expiries; all supported.",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

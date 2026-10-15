@@ -1,0 +1,32 @@
+scores 200 unique 200
+turn             cur           A           B           C
+c01 t1    10/10 (0,0)  10/10 (0,0)  10/10 (0,0)  10/10 (0,0)
+c01 t2    10/10 (0,0)  10/10 (0,0)  10/10 (0,0)  10/10 (0,0)
+c01 t3    10/10 (0,0)  10/10 (0,0)   8/10 (0,2)  10/10 (0,0)
+c12 t1    10/10 (0,0)  10/10 (0,0)  10/10 (0,0)  10/10 (0,0)
+c12 t2     3/10 (0,7)  10/10 (0,0)   3/10 (0,7)   7/10 (0,3)
+total cur: 43/50
+total A: 50/50
+total B: 41/50
+total C: 47/50
+
+fails:
+c01 t3   B r09: Fail on rule 8: unsupported: quoted “nothing went wrong” matches no story, profile or Ground Truth passage (scare quotes). All factual claims otherwise supported (PE, MIG, GW).
+c01 t3   B r10: Referent correct (JPMC ACCESS) and content supported, but the quoted phrase “nothing went wrong” matches no story, profile or Ground Truth passage: scare quotes fail rule 8 (unsupported). Fail.
+c12 t2   B r01: Unsupported: 'Fiserv had the larger stated team count', the strict reading's exact example; 'open-ended' is not a statement that the stories don't establish which is larger. Fail.
+c12 t2   B r02: Unsupported: 'Fiserv had the larger stated team count' (strict reading). Fail.
+c12 t2   B r03: Unsupported: 'Fiserv had a slightly higher stated team count'; the hedge ('prevents an exact comparison') doesn't say the stories don't establish which is larger, and it contradicts its own 'team sizes were comparable'. Fail.
+c12 t2   B r06: Fail: unsupported "That is a larger stated end-user count" ranks Fiserv above ACCESS by people served (brief rule 10); the follow-on "aren't directly comparable" qualifies but does not withdraw the ranking or say the stories do not establish which is larger. T
+c12 t2   B r07: Fail: unsupported "Fiserv had the larger stated team and cardholder count" and "By stated team size: Fiserv" rank Fiserv above ACCESS on team size and people served (strict reading c12 t2, rule 10).
+c12 t2   B r08: Fail: unsupported "It had more individual end users" ranks Fiserv above ACCESS by people served (brief rule 10); "not directly comparable" does not say the stories do not establish which is larger. Reach and team handled correctly.
+c12 t2   B r09: Fails strict reading: unsupported 'Fiserv had the larger stated team / slightly larger stated delivery team' without saying the stories don't establish it; rule 10 unsupported 'Fiserv had more stated end users'. Other claims supported.
+c12 t2   C r02: Unsupported: 'Fiserv had the larger stated team count'; the hedge does not say the stories don't establish which is larger. Fail.
+c12 t2   C r07: Fail: unsupported "Fiserv had the higher stated end-user count" ranks Fiserv above ACCESS by people served (brief rule 10); "different measures" does not say the stories do not establish which is larger. Team and budget handled correctly.
+c12 t2   C r10: Fails rule 10: unsupported 'Fiserv had more individual end users by the stated counts' (ranks people served; the caveat about non-equivalent measures still asserts the ranking). Team sizes called comparable, otherwise supported.
+c12 t2 cur r01: Unsupported: 'Fiserv had a slightly larger reported team'. The hedge says only that 40+ blocks an exact headcount comparison, not that the stories don't establish which is larger (strict reading). Fail.
+c12 t2 cur r02: Unsupported: the team-size line, set next to 'By geographic reach..., ACCESS was bigger', answers team size as Fiserv with no statement that 40+ vs 45 is unsettled (strict reading). Fail (judgement call, flagged).
+c12 t2 cur r03: Unsupported: 'Fiserv had the slightly larger stated team', an unhedged team-size ranking (strict reading). Fail.
+c12 t2 cur r04: Fail: unsupported "Fiserv had ... a slightly higher stated team count" ranks 45 above 40+; the hedge (40+ not exact) does not say the stories cannot establish which is larger (strict reading c12 t2). Other claims supported.
+c12 t2 cur r05: Fail: unsupported "Fiserv had the higher stated team count" ranks 45 above 40+; "does not establish an exact comparison" is not a statement that the stories cannot establish which is larger (strict reading c12 t2).
+c12 t2 cur r06: Fail: unsupported "Fiserv had the larger stated team count" and "Fiserv for the higher stated team count" rank 45 above 40+ (strict reading c12 t2); hedge does not say the stories cannot establish which is larger.
+c12 t2 cur r08: Fail: unsupported "By individual end-user count, Fiserv reported more" ranks Fiserv above ACCESS by people served (brief rule 10); "not a like-for-like comparison" does not say the stories do not establish which is larger.

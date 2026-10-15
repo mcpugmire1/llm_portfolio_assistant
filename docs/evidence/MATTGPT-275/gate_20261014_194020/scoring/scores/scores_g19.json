@@ -1,0 +1,3343 @@
+[
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: answers the 4-to-150+ question from the CIC stories, correcting the start to the 10-person pilot; all claims supported (CIC growth, hiring engine, flat structure, attrition, velocity); quoted 'I do, we do, you do' is verbatim in scaling-talent-and-practices-for-agile-product-innovation|accenture; no closing.",
+  "claims": [
+   {
+    "text": "CIC grew from 10-person pilot to 150+ practitioners over 4 years",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "organization spanned engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Atlanta and Tampa Cloud Innovation Centers at Accenture",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Task"
+   },
+   {
+    "text": "new hires lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "hiring engine across 4 channels: bench, campus, contract-to-hire, job requisitions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "TDD pairing auditions for engineers; live scoping/client-brief auditions for PMs and designers",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Matt held closing interview and made every final hiring decision",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "4-6 net-new practitioners per week during scaling pushes; interview participation capped at 2 slots per practitioner per week",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "'I do, we do, you do' learning model (quoted, verbatim)",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "round-robin pairing of new joiners with seasoned practitioners after enablement",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "flat structure: 11-13 practice and client leads direct to Matt (3 practice + 8-10 client leads); team anchors without middle layer",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Monday allocation reviews assigning people across engagements and internal tracks",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "evaluation from recent pair partners, PMs, anchors; promotion calibration, compensation allocation, remediation decisions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "near-zero attrition in first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "4X faster velocity, zero-defect deployments, 10-person teams equal to 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "interviewers logged independent votes; failed pairing audition ended candidacy",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "AWS Launchpad: 200+ professionals earned AWS certifications via learning paths, labs, mentorship",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "monthly feedback sessions run by Matt",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "peer-led tech talks, learning within live projects, senior engineers coaching juniors",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: answers the 4-to-150+ question from the CIC stories, correcting the start to the 10-person pilot; all claims supported (CIC growth, hiring engine, flat structure, attrition, velocity); quoted 'I do, we do, you do' is verbatim in scaling-talent-and-practices-for-agile-product-innovation|accenture; no closing.",
+  "claims": [
+   {
+    "text": "CIC grew from 10-person pilot to 150+ practitioners over 4 years",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "organization spanned engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Atlanta and Tampa Cloud Innovation Centers at Accenture",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Task"
+   },
+   {
+    "text": "new hires lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "hiring engine across 4 channels: bench, campus, contract-to-hire, job requisitions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "TDD pairing auditions for engineers; live scoping/client-brief auditions for PMs and designers",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Matt held closing interview and made every final hiring decision",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "4-6 net-new practitioners per week during scaling pushes; interview participation capped at 2 slots per practitioner per week",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "'I do, we do, you do' learning model (quoted, verbatim)",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "round-robin pairing of new joiners with seasoned practitioners after enablement",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "flat structure: 11-13 practice and client leads direct to Matt (3 practice + 8-10 client leads); team anchors without middle layer",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Monday allocation reviews assigning people across engagements and internal tracks",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "evaluation from recent pair partners, PMs, anchors; promotion calibration, compensation allocation, remediation decisions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "near-zero attrition in first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "4X faster velocity, zero-defect deployments, 10-person teams equal to 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Georgia Tech recruiting, job fairs, hackathons",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology|accenture Action; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "embedded pair programming, TDD, CI/CD, UCD, Build-Measure-Learn; skills matrices, tailored plans, weekly tech talks, practice forums",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action; enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: answers the 4-to-150+ question from the CIC stories, correcting the start to the 10-person pilot; all claims supported (CIC growth, hiring engine, flat structure, attrition, velocity); quoted 'I do, we do, you do' is verbatim in scaling-talent-and-practices-for-agile-product-innovation|accenture; no closing.",
+  "claims": [
+   {
+    "text": "CIC grew from 10-person pilot to 150+ practitioners over 4 years",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "organization spanned engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Atlanta and Tampa Cloud Innovation Centers at Accenture",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Task"
+   },
+   {
+    "text": "new hires lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "hiring engine across 4 channels: bench, campus, contract-to-hire, job requisitions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "TDD pairing auditions for engineers; live scoping/client-brief auditions for PMs and designers",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Matt held closing interview and made every final hiring decision",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "4-6 net-new practitioners per week during scaling pushes; interview participation capped at 2 slots per practitioner per week",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "'I do, we do, you do' learning model (quoted, verbatim)",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "round-robin pairing of new joiners with seasoned practitioners after enablement",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "flat structure: 11-13 practice and client leads direct to Matt (3 practice + 8-10 client leads); team anchors without middle layer",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Monday allocation reviews assigning people across engagements and internal tracks",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "evaluation from recent pair partners, PMs, anchors; promotion calibration, compensation allocation, remediation decisions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "near-zero attrition in first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "4X faster velocity, zero-defect deployments, 10-person teams equal to 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "interviewers recorded independent votes",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "training covered lean PM, UCD, pair programming, TDD, CI/CD; junior hires paired with mentors",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "anchors kept Matt and leads informed on technical progress, team dynamics, resource needs",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "monthly feedback capture sessions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "contributed to $100M+ in repeatable business by FY23 through delivery excellence and referrals",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: answers the 4-to-150+ question from the CIC stories, correcting the start to the 10-person pilot; all claims supported (CIC growth, hiring engine, flat structure, attrition, velocity); quoted 'I do, we do, you do' is verbatim in scaling-talent-and-practices-for-agile-product-innovation|accenture; no closing.",
+  "claims": [
+   {
+    "text": "CIC grew from 10-person pilot to 150+ practitioners over 4 years",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "organization spanned engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Atlanta and Tampa Cloud Innovation Centers at Accenture",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Task"
+   },
+   {
+    "text": "new hires lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "hiring engine across 4 channels: bench, campus, contract-to-hire, job requisitions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "TDD pairing auditions for engineers; live scoping/client-brief auditions for PMs and designers",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Matt held closing interview and made every final hiring decision",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "4-6 net-new practitioners per week during scaling pushes; interview participation capped at 2 slots per practitioner per week",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "'I do, we do, you do' learning model (quoted, verbatim)",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "round-robin pairing of new joiners with seasoned practitioners after enablement",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "flat structure: 11-13 practice and client leads direct to Matt (3 practice + 8-10 client leads); team anchors without middle layer",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Monday allocation reviews assigning people across engagements and internal tracks",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "evaluation from recent pair partners, PMs, anchors; promotion calibration, compensation allocation, remediation decisions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "near-zero attrition in first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "4X faster velocity, zero-defect deployments, 10-person teams equal to 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "15-20 auditions per week",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Georgia Tech recruiting, job fairs, hackathons",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology|accenture Action"
+   },
+   {
+    "text": "skills matrices, senior-junior mentoring, weekly peer-led demos",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action; enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   },
+   {
+    "text": "training covered lean PM, UCD, pair programming, TDD, CI/CD",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: answers the 4-to-150+ question from the CIC stories, correcting the start to the 10-person pilot; all claims supported (CIC growth, hiring engine, flat structure, attrition, velocity); quoted 'I do, we do, you do' is verbatim in scaling-talent-and-practices-for-agile-product-innovation|accenture; no closing.",
+  "claims": [
+   {
+    "text": "CIC grew from 10-person pilot to 150+ practitioners over 4 years",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "organization spanned engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Atlanta and Tampa Cloud Innovation Centers at Accenture",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Task"
+   },
+   {
+    "text": "new hires lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "hiring engine across 4 channels: bench, campus, contract-to-hire, job requisitions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "TDD pairing auditions for engineers; live scoping/client-brief auditions for PMs and designers",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Matt held closing interview and made every final hiring decision",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "4-6 net-new practitioners per week during scaling pushes; interview participation capped at 2 slots per practitioner per week",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "'I do, we do, you do' learning model (quoted, verbatim)",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "round-robin pairing of new joiners with seasoned practitioners after enablement",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "flat structure: 11-13 practice and client leads direct to Matt (3 practice + 8-10 client leads); team anchors without middle layer",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Monday allocation reviews assigning people across engagements and internal tracks",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "evaluation from recent pair partners, PMs, anchors; promotion calibration, compensation allocation, remediation decisions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "near-zero attrition in first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "4X faster velocity, zero-defect deployments, 10-person teams equal to 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Georgia Tech recruiting, hackathons, job fairs",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology|accenture Action"
+   },
+   {
+    "text": "training: pair programming, TDD, continuous delivery, user research, Build-Measure-Learn",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "explicit role expectations, career conversations",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "reusable playbooks and technical accelerators",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "multiple hires promoted",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: answers the 4-to-150+ question from the CIC stories, correcting the start to the 10-person pilot; all claims supported (CIC growth, hiring engine, flat structure, attrition, velocity); quoted 'I do, we do, you do' is verbatim in scaling-talent-and-practices-for-agile-product-innovation|accenture; no closing.",
+  "claims": [
+   {
+    "text": "CIC grew from 10-person pilot to 150+ practitioners over 4 years",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "organization spanned engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Atlanta and Tampa Cloud Innovation Centers at Accenture",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Task"
+   },
+   {
+    "text": "new hires lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "hiring engine across 4 channels: bench, campus, contract-to-hire, job requisitions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "TDD pairing auditions for engineers; live scoping/client-brief auditions for PMs and designers",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Matt held closing interview and made every final hiring decision",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "4-6 net-new practitioners per week during scaling pushes; interview participation capped at 2 slots per practitioner per week",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "'I do, we do, you do' learning model (quoted, verbatim)",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "round-robin pairing of new joiners with seasoned practitioners after enablement",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "flat structure: 11-13 practice and client leads direct to Matt (3 practice + 8-10 client leads); team anchors without middle layer",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Monday allocation reviews assigning people across engagements and internal tracks",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "evaluation from recent pair partners, PMs, anchors; promotion calibration, compensation allocation, remediation decisions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "near-zero attrition in first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "4X faster velocity, zero-defect deployments, 10-person teams equal to 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "interviewers recorded independent votes",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "training covered lean PM, UCD, pair programming, TDD, CI/CD",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Monday allocation by client needs, skills, location; anchors informed leaders",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: answers the 4-to-150+ question from the CIC stories, correcting the start to the 10-person pilot; all claims supported (CIC growth, hiring engine, flat structure, attrition, velocity); quoted 'I do, we do, you do' is verbatim in scaling-talent-and-practices-for-agile-product-innovation|accenture; no closing.",
+  "claims": [
+   {
+    "text": "CIC grew from 10-person pilot to 150+ practitioners over 4 years",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "organization spanned engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Atlanta and Tampa Cloud Innovation Centers at Accenture",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Task"
+   },
+   {
+    "text": "new hires lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "hiring engine across 4 channels: bench, campus, contract-to-hire, job requisitions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "TDD pairing auditions for engineers; live scoping/client-brief auditions for PMs and designers",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Matt held closing interview and made every final hiring decision",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "4-6 net-new practitioners per week during scaling pushes; interview participation capped at 2 slots per practitioner per week",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "'I do, we do, you do' learning model (quoted, verbatim)",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "round-robin pairing of new joiners with seasoned practitioners after enablement",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "flat structure: 11-13 practice and client leads direct to Matt (3 practice + 8-10 client leads); team anchors without middle layer",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Monday allocation reviews assigning people across engagements and internal tracks",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "evaluation from recent pair partners, PMs, anchors; promotion calibration, compensation allocation, remediation decisions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "near-zero attrition in first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "4X faster velocity, zero-defect deployments, 10-person teams equal to 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Georgia Tech recruiting, hackathons, job fairs",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology|accenture Action"
+   },
+   {
+    "text": "functional leads reserved Friday afternoons for career-development 1:1s",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "skills matrices, mentoring, weekly peer-led demos",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action; enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   },
+   {
+    "text": "multiple hires promoted; processes held through 4 years of scaling while flat",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: answers the 4-to-150+ question from the CIC stories, correcting the start to the 10-person pilot; all claims supported (CIC growth, hiring engine, flat structure, attrition, velocity); quoted 'I do, we do, you do' is verbatim in scaling-talent-and-practices-for-agile-product-innovation|accenture; no closing.",
+  "claims": [
+   {
+    "text": "CIC grew from 10-person pilot to 150+ practitioners over 4 years",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "organization spanned engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Atlanta and Tampa Cloud Innovation Centers at Accenture",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Task"
+   },
+   {
+    "text": "new hires lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "hiring engine across 4 channels: bench, campus, contract-to-hire, job requisitions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "TDD pairing auditions for engineers; live scoping/client-brief auditions for PMs and designers",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Matt held closing interview and made every final hiring decision",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "4-6 net-new practitioners per week during scaling pushes; interview participation capped at 2 slots per practitioner per week",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "'I do, we do, you do' learning model (quoted, verbatim)",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "round-robin pairing of new joiners with seasoned practitioners after enablement",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "flat structure: 11-13 practice and client leads direct to Matt (3 practice + 8-10 client leads); team anchors without middle layer",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Monday allocation reviews assigning people across engagements and internal tracks",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "evaluation from recent pair partners, PMs, anchors; promotion calibration, compensation allocation, remediation decisions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "near-zero attrition in first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "4X faster velocity, zero-defect deployments, 10-person teams equal to 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "15-20 auditions per week",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "skills matrices, mentors, weekly tech talks",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action; enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: answers the 4-to-150+ question from the CIC stories, correcting the start to the 10-person pilot; all claims supported (CIC growth, hiring engine, flat structure, attrition, velocity); quoted 'I do, we do, you do' is verbatim in scaling-talent-and-practices-for-agile-product-innovation|accenture; no closing.",
+  "claims": [
+   {
+    "text": "CIC grew from 10-person pilot to 150+ practitioners over 4 years",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "organization spanned engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Atlanta and Tampa Cloud Innovation Centers at Accenture",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Task"
+   },
+   {
+    "text": "new hires lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "hiring engine across 4 channels: bench, campus, contract-to-hire, job requisitions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "TDD pairing auditions for engineers; live scoping/client-brief auditions for PMs and designers",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Matt held closing interview and made every final hiring decision",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "4-6 net-new practitioners per week during scaling pushes; interview participation capped at 2 slots per practitioner per week",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "'I do, we do, you do' learning model (quoted, verbatim)",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "round-robin pairing of new joiners with seasoned practitioners after enablement",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "flat structure: 11-13 practice and client leads direct to Matt (3 practice + 8-10 client leads); team anchors without middle layer",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Monday allocation reviews assigning people across engagements and internal tracks",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "evaluation from recent pair partners, PMs, anchors; promotion calibration, compensation allocation, remediation decisions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "near-zero attrition in first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "4X faster velocity, zero-defect deployments, 10-person teams equal to 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "interviewers recorded independent votes",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "recruited for mindset and potential",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture 5PSummary"
+   },
+   {
+    "text": "2-layer structure",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Situation/Result"
+   },
+   {
+    "text": "explicit career-level expectations",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New-topic turn: answers payments from JPM ACCESS, Amex VPP and RBC stories with no carry-over of the turn-1 scaling topic; all figures (40+, 135,000+, 180+, 12 countries, April 2011, 3 months) supported; no closing.",
+  "claims": [
+   {
+    "text": "ACCESS needed capabilities beyond Bottomline WebSeries out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Technology Delivery Lead managing 40+ blended team across Accenture/JPM, Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, tax payment modules; MAC security; payment-type-specific permissions; sanctions screening",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "legacy payments data migration completed without disruption to live payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "centralized gateway: message transformation, protocol translation, routing across 12 countries, replacing point-to-point integrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase 5PSummary/Result"
+   },
+   {
+    "text": "compliance dashboards became ongoing operational tooling",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "Amex VPP adoption lagged: missing SDKs, fragmented docs, no sandbox; replaced legacy mainframe",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "developer portal, Java/.NET/Python SDKs, secure sandbox with refreshed client data, CI/CD-synced docs",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption and trial usage increased within 3 months; onboarding time reduced",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "RBC cross-border workflows initiation through settlement and reconciliation; real-time FX, alerts, recurring payments, Interac e-Transfer, batch",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "delivered implementation blueprint ready for development execution",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   },
+   {
+    "text": "revised payment cutoffs reduced wire-transfer delays, improved SLA compliance",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "New-topic turn: answers payments from JPM ACCESS, Amex VPP and RBC stories with no carry-over of the turn-1 scaling topic; all figures (40+, 135,000+, 180+, 12 countries, April 2011, 3 months, 261 story points) supported; no closing.",
+  "claims": [
+   {
+    "text": "ACCESS needed capabilities beyond Bottomline WebSeries out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Technology Delivery Lead managing 40+ blended team across Accenture/JPM, Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, tax payment modules; MAC security; payment-type-specific permissions; sanctions screening",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "legacy payments data migration completed without disruption to live payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "70-80% embedded at Bottomline Portsmouth; travel to Chicago and NY/NJ",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "defined onshore-offshore engagement model",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "owned Sev-1/production incident response, root-cause analysis, daily leadership calls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Amex VPP adoption lagged: missing SDKs, fragmented docs, no sandbox; replaced legacy mainframe",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "developer portal, Java/.NET/Python SDKs, secure sandbox with refreshed client data, CI/CD-synced docs",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption and trial usage increased within 3 months; onboarding time reduced",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "environment virtualization, Discovery and Framing/North Star workshops, Lean Product and XP, Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "over 261 story points beyond delivery commitment",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action/Result"
+   },
+   {
+    "text": "RBC cross-border workflows initiation through settlement and reconciliation; real-time FX, alerts, recurring payments, Interac e-Transfer, batch",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "delivered implementation blueprint ready for development execution",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   },
+   {
+    "text": "revised payment cutoffs reduced wire-transfer delays, improved SLA compliance",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "New-topic turn: answers payments from JPM ACCESS, Amex VPP and RBC stories with no carry-over of the turn-1 scaling topic; all figures (40+, 135,000+, 180+, 12 countries, April 2011, 3 months, 261 story points) supported; no closing.",
+  "claims": [
+   {
+    "text": "ACCESS needed capabilities beyond Bottomline WebSeries out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Technology Delivery Lead managing 40+ blended team across Accenture/JPM, Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, tax payment modules; MAC security; payment-type-specific permissions; sanctions screening",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "legacy payments data migration completed without disruption to live payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "70-80% embedded at Bottomline Portsmouth; travel to Chicago and NY/NJ",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Amex VPP adoption lagged: missing SDKs, fragmented docs, no sandbox; replaced legacy mainframe",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "developer portal, Java/.NET/Python SDKs, secure sandbox with refreshed client data, CI/CD-synced docs",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption and trial usage increased within 3 months; onboarding time reduced",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "environment virtualization, Discovery and Framing/North Star workshops, Lean Product and XP, Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "over 261 story points beyond delivery commitment",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action/Result"
+   },
+   {
+    "text": "RBC cross-border workflows initiation through settlement and reconciliation; real-time FX, alerts, recurring payments, Interac e-Transfer, batch",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "delivered implementation blueprint ready for development execution",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   },
+   {
+    "text": "revised payment cutoffs reduced wire-transfer delays, improved SLA compliance",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New-topic turn: answers payments from JPM ACCESS, Amex VPP stories with no carry-over of the turn-1 scaling topic; all figures (40+, 135,000+, 180+, 12 countries, April 2011, 3 months, 261 story points) supported; no closing.",
+  "claims": [
+   {
+    "text": "ACCESS needed capabilities beyond Bottomline WebSeries out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Technology Delivery Lead managing 40+ blended team across Accenture/JPM, Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, tax payment modules; MAC security; payment-type-specific permissions; sanctions screening",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "legacy payments data migration completed without disruption to live payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "centralized gateway: message transformation, protocol translation, routing across 12 countries, replacing point-to-point integrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase 5PSummary/Result"
+   },
+   {
+    "text": "70-80% embedded at Bottomline Portsmouth; travel to Chicago and NY/NJ",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "defined onshore-offshore engagement model",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "compliance dashboards became ongoing operational tooling",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "owned Sev-1/production incident response, root-cause analysis, daily leadership calls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Amex VPP adoption lagged: missing SDKs, fragmented docs, no sandbox; replaced legacy mainframe",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "developer portal, Java/.NET/Python SDKs, secure sandbox with refreshed client data, CI/CD-synced docs",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption and trial usage increased within 3 months; onboarding time reduced",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "environment virtualization, Discovery and Framing/North Star workshops, Lean Product and XP, Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "over 261 story points beyond delivery commitment",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "New-topic turn: answers payments from JPM ACCESS, Amex VPP stories with no carry-over of the turn-1 scaling topic; all figures (40+, 135,000+, 180+, 12 countries, April 2011, 3 months, 261 story points) supported; no closing.",
+  "claims": [
+   {
+    "text": "ACCESS needed capabilities beyond Bottomline WebSeries out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Technology Delivery Lead managing 40+ blended team across Accenture/JPM, Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, tax payment modules; MAC security; payment-type-specific permissions; sanctions screening",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "legacy payments data migration completed without disruption to live payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "centralized gateway: message transformation, protocol translation, routing across 12 countries, replacing point-to-point integrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase 5PSummary/Result"
+   },
+   {
+    "text": "70-80% embedded at Bottomline Portsmouth; travel to Chicago and NY/NJ",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "defined onshore-offshore engagement model",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "compliance dashboards became ongoing operational tooling",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "owned Sev-1/production incident response, root-cause analysis, daily leadership calls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Amex VPP adoption lagged: missing SDKs, fragmented docs, no sandbox; replaced legacy mainframe",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "developer portal, Java/.NET/Python SDKs, secure sandbox with refreshed client data, CI/CD-synced docs",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption and trial usage increased within 3 months; onboarding time reduced",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "environment virtualization, Discovery and Framing/North Star workshops, Lean Product and XP, Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "over 261 story points beyond delivery commitment",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "New-topic turn: answers payments from JPM ACCESS, Amex VPP stories with no carry-over of the turn-1 scaling topic; all figures (40+, 135,000+, 180+, 12 countries, April 2011, 3 months, 261 story points) supported; no closing.",
+  "claims": [
+   {
+    "text": "ACCESS needed capabilities beyond Bottomline WebSeries out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Technology Delivery Lead managing 40+ blended team across Accenture/JPM, Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, tax payment modules; MAC security; payment-type-specific permissions; sanctions screening",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "legacy payments data migration completed without disruption to live payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "centralized gateway: message transformation, protocol translation, routing across 12 countries, replacing point-to-point integrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase 5PSummary/Result"
+   },
+   {
+    "text": "70-80% embedded at Bottomline Portsmouth; travel to Chicago and NY/NJ",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "defined onshore-offshore engagement model",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "compliance dashboards became ongoing operational tooling",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "owned Sev-1/production incident response, root-cause analysis, daily leadership calls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Amex VPP adoption lagged: missing SDKs, fragmented docs, no sandbox; replaced legacy mainframe",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "developer portal, Java/.NET/Python SDKs, secure sandbox with refreshed client data, CI/CD-synced docs",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption and trial usage increased within 3 months; onboarding time reduced",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "environment virtualization, Discovery and Framing/North Star workshops, Lean Product and XP, Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "over 261 story points beyond delivery commitment",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New-topic turn: answers payments from JPM ACCESS, Amex VPP stories with no carry-over of the turn-1 scaling topic; all figures (40+, 135,000+, 180+, 12 countries, April 2011, 3 months, 261 story points) supported; no closing. 'Execution & Delivery' is a theme name (rule 4).",
+  "claims": [
+   {
+    "text": "ACCESS needed capabilities beyond Bottomline WebSeries out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Technology Delivery Lead managing 40+ blended team across Accenture/JPM, Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, tax payment modules; MAC security; payment-type-specific permissions; sanctions screening",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "legacy payments data migration completed without disruption to live payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "centralized gateway: message transformation, protocol translation, routing across 12 countries, replacing point-to-point integrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase 5PSummary/Result"
+   },
+   {
+    "text": "70-80% embedded at Bottomline Portsmouth; travel to Chicago and NY/NJ",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "defined onshore-offshore engagement model",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "compliance dashboards became ongoing operational tooling",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "owned Sev-1/production incident response, root-cause analysis, daily leadership calls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Amex VPP adoption lagged: missing SDKs, fragmented docs, no sandbox; replaced legacy mainframe",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "developer portal, Java/.NET/Python SDKs, secure sandbox with refreshed client data, CI/CD-synced docs",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption and trial usage increased within 3 months; onboarding time reduced",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "environment virtualization, Discovery and Framing/North Star workshops, Lean Product and XP, Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "over 261 story points beyond delivery commitment",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "New-topic turn: answers payments from JPM ACCESS, Amex VPP and RBC stories with no carry-over of the turn-1 scaling topic; all figures (40+, 135,000+, 180+, 12 countries, April 2011, 3 months, 261 story points) supported; no closing. Quoted 'day-one' guides verbatim in lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express.",
+  "claims": [
+   {
+    "text": "ACCESS needed capabilities beyond Bottomline WebSeries out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Technology Delivery Lead managing 40+ blended team across Accenture/JPM, Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, tax payment modules; MAC security; payment-type-specific permissions; sanctions screening",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "legacy payments data migration completed without disruption to live payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "compliance dashboards became ongoing operational tooling",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "owned Sev-1/production incident response, root-cause analysis, daily leadership calls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Amex VPP adoption lagged: missing SDKs, fragmented docs, no sandbox; replaced legacy mainframe",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "developer portal, Java/.NET/Python SDKs, secure sandbox with refreshed client data, CI/CD-synced docs",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption and trial usage increased within 3 months; onboarding time reduced",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "environment virtualization, Discovery and Framing/North Star workshops, Lean Product and XP, Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "over 261 story points beyond delivery commitment",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action/Result"
+   },
+   {
+    "text": "RBC cross-border workflows initiation through settlement and reconciliation; real-time FX, alerts, recurring payments, Interac e-Transfer, batch",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "delivered implementation blueprint ready for development execution",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   },
+   {
+    "text": "revised payment cutoffs reduced wire-transfer delays, improved SLA compliance",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   },
+   {
+    "text": "RBC training materials for multi-currency account management",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "New-topic turn: answers payments from JPM ACCESS, Amex VPP stories with no carry-over of the turn-1 scaling topic; all figures (40+, 135,000+, 180+, 12 countries, April 2011, 3 months, 261 story points) supported; no closing. MAC-layer failure traced to missing unit tests supported.",
+  "claims": [
+   {
+    "text": "ACCESS needed capabilities beyond Bottomline WebSeries out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Technology Delivery Lead managing 40+ blended team across Accenture/JPM, Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, tax payment modules; MAC security; payment-type-specific permissions; sanctions screening",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "legacy payments data migration completed without disruption to live payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "centralized gateway: message transformation, protocol translation, routing across 12 countries, replacing point-to-point integrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase 5PSummary/Result"
+   },
+   {
+    "text": "70-80% embedded at Bottomline Portsmouth; travel to Chicago and NY/NJ",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "defined onshore-offshore engagement model",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "compliance dashboards became ongoing operational tooling",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "owned Sev-1/production incident response, root-cause analysis, daily leadership calls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Amex VPP adoption lagged: missing SDKs, fragmented docs, no sandbox; replaced legacy mainframe",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "developer portal, Java/.NET/Python SDKs, secure sandbox with refreshed client data, CI/CD-synced docs",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption and trial usage increased within 3 months; onboarding time reduced",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "environment virtualization, Discovery and Framing/North Star workshops, Lean Product and XP, Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "over 261 story points beyond delivery commitment",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action/Result"
+   },
+   {
+    "text": "traced MAC-layer failure to missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Scored against the engagements the run's turn 2 discussed (JPM ACCESS, Amex VPP, RBC): gives JPM ACCESS 40+ from its stories and says the Amex and RBC stories record no headcount (verified: none in corpus); no CIC answer; all claims supported.",
+  "claims": [
+   {
+    "text": "JPM ACCESS payments team 40+ blended Accenture/JPM across US, Mumbai, Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Task"
+   },
+   {
+    "text": "payment engine and gateway were workstreams of same ACCESS program",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Project; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Project"
+   },
+   {
+    "text": "70-80% embedded at Bottomline Portsmouth; travel to Chicago and NY/NJ",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "owned Sev-1/production incident response, root-cause analysis, daily leadership calls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Amex VPP stories give no team headcount",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express; conducting-discovery-and-framing-to-build-cross-functional-alignment|american-express (searched, none)"
+   },
+   {
+    "text": "RBC cross-border story gives no team headcount",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc (searched, none)"
+   },
+   {
+    "text": "Amex team: distributed cross-functional PMs, CX architects, engineers, business stakeholders; discovery workshops and agreements",
+    "label": "supported",
+    "source": "conducting-discovery-and-framing-to-build-cross-functional-alignment|american-express Situation/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Scored against the engagements the run's turn 2 discussed (JPM ACCESS, Amex VPP, RBC): gives JPM ACCESS 40+ from its stories and says the Amex and RBC stories record no headcount (verified: none in corpus); no CIC answer; all claims supported.",
+  "claims": [
+   {
+    "text": "JPM ACCESS payments team 40+ blended Accenture/JPM across US, Mumbai, Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Task"
+   },
+   {
+    "text": "payment engine and gateway were workstreams of same ACCESS program",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Project; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Project"
+   },
+   {
+    "text": "defined onshore-offshore engagement model",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "managed Bottomline vendor relationship",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Amex VPP stories give no team headcount",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express; conducting-discovery-and-framing-to-build-cross-functional-alignment|american-express (searched, none)"
+   },
+   {
+    "text": "RBC cross-border story gives no team headcount",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc (searched, none)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 8,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "Scored against the engagements the run's turn 2 discussed (JPM ACCESS, Amex VPP, RBC): gives JPM ACCESS 40+ from its stories and says the Amex and RBC stories record no headcount (verified: none in corpus); no CIC answer; all claims supported. Mentions RBC's data-conversion onshore/offshore teams (same RBC Day2Day engagement) with no headcount.",
+  "claims": [
+   {
+    "text": "JPM ACCESS payments team 40+ blended Accenture/JPM across US, Mumbai, Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Task"
+   },
+   {
+    "text": "payment engine and gateway were workstreams of same ACCESS program",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Project; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Project"
+   },
+   {
+    "text": "70-80% embedded at Bottomline Portsmouth; travel to Chicago and NY/NJ",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "defined onshore-offshore engagement model",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "owned Sev-1/production incident response, root-cause analysis, daily leadership calls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "gateway connected payment operations across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Amex VPP stories give no team headcount",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express; conducting-discovery-and-framing-to-build-cross-functional-alignment|american-express (searched, none)"
+   },
+   {
+    "text": "RBC cross-border story gives no team headcount",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc (searched, none)"
+   },
+   {
+    "text": "RBC data conversion: managed onshore and offshore data scrubbing/validation teams, no headcount",
+    "label": "supported",
+    "source": "leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Scored against the engagements the run's turn 2 discussed (JPM ACCESS, Amex VPP): gives JPM ACCESS 40+ from its stories and says the Amex stories record no headcount (verified: none in corpus); no CIC answer; all claims supported.",
+  "claims": [
+   {
+    "text": "JPM ACCESS payments team 40+ blended Accenture/JPM across US, Mumbai, Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Task"
+   },
+   {
+    "text": "payment engine and gateway were workstreams of same ACCESS program",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Project; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Project"
+   },
+   {
+    "text": "defined onshore-offshore engagement model",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Amex VPP stories give no team headcount",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express; conducting-discovery-and-framing-to-build-cross-functional-alignment|american-express (searched, none)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Scored against the engagements the run's turn 2 discussed (JPM ACCESS, Amex VPP): gives JPM ACCESS 40+ from its stories and says the Amex stories record no headcount (verified: none in corpus); no CIC answer; all claims supported. Its CIC 150+ aside is explicitly labelled as not a payments team, so it does not answer about the CIC (ambiguous call).",
+  "claims": [
+   {
+    "text": "JPM ACCESS payments team 40+ blended Accenture/JPM across US, Mumbai, Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Task"
+   },
+   {
+    "text": "payment engine and gateway were workstreams of same ACCESS program",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Project; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Project"
+   },
+   {
+    "text": "Amex VPP stories give no team headcount",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express; conducting-discovery-and-framing-to-build-cross-functional-alignment|american-express (searched, none)"
+   },
+   {
+    "text": "CIC organization grew to 150+ across Atlanta and Tampa",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 9,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "Scored against the engagements the run's turn 2 discussed (JPM ACCESS, Amex VPP): gives JPM ACCESS 40+ from its stories and says the Amex stories record no headcount (verified: none in corpus); no CIC answer; all claims supported.",
+  "claims": [
+   {
+    "text": "JPM ACCESS payments team 40+ blended Accenture/JPM across US, Mumbai, Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Task"
+   },
+   {
+    "text": "payment engine and gateway were workstreams of same ACCESS program",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Project; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Project"
+   },
+   {
+    "text": "defined onshore-offshore engagement model",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Amex VPP stories give no team headcount",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express; conducting-discovery-and-framing-to-build-cross-functional-alignment|american-express (searched, none)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Scored against the engagements the run's turn 2 discussed (JPM ACCESS, Amex VPP): gives JPM ACCESS 40+ from its stories and says the Amex stories record no headcount (verified: none in corpus); no CIC answer; all claims supported.",
+  "claims": [
+   {
+    "text": "JPM ACCESS payments team 40+ blended Accenture/JPM across US, Mumbai, Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Task"
+   },
+   {
+    "text": "payment engine and gateway were workstreams of same ACCESS program",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Project; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Project"
+   },
+   {
+    "text": "defined onshore-offshore engagement model",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Amex VPP stories give no team headcount",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express; conducting-discovery-and-framing-to-build-cross-functional-alignment|american-express (searched, none)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Scored against the engagements the run's turn 2 discussed (JPM ACCESS, Amex VPP, RBC): gives JPM ACCESS 40+ from its stories and says the Amex and RBC stories record no headcount (verified: none in corpus); no CIC answer; all claims supported.",
+  "claims": [
+   {
+    "text": "JPM ACCESS payments team 40+ blended Accenture/JPM across US, Mumbai, Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Task"
+   },
+   {
+    "text": "payment engine and gateway were workstreams of same ACCESS program",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Project; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Project"
+   },
+   {
+    "text": "70-80% embedded at Bottomline Portsmouth; travel to Chicago and NY/NJ",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "defined onshore-offshore engagement model",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "defined integration, defect management, environment strategy",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "gateway launched April 2011, 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Amex VPP stories give no team headcount",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express; conducting-discovery-and-framing-to-build-cross-functional-alignment|american-express (searched, none)"
+   },
+   {
+    "text": "RBC cross-border story gives no team headcount",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc (searched, none)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 10,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "Scored against the engagements the run's turn 2 discussed (JPM ACCESS, Amex VPP): gives JPM ACCESS 40+ from its stories and says the Amex stories record no headcount (verified: none in corpus); no CIC answer; all claims supported.",
+  "claims": [
+   {
+    "text": "JPM ACCESS payments team 40+ blended Accenture/JPM across US, Mumbai, Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Task"
+   },
+   {
+    "text": "payment engine and gateway were workstreams of same ACCESS program",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Project; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Project"
+   },
+   {
+    "text": "defined onshore-offshore engagement model",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "gateway connected payment operations across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Amex VPP stories give no team headcount",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express; conducting-discovery-and-framing-to-build-cross-functional-alignment|american-express (searched, none)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: compares both engagements from their stories; every figure (Fiserv $8.5M, 45, 7 months, 3 vendors, 200-page, 3%, 47/47, $500K; ACCESS 40+, 12 countries, April 2011, 135,000+, 180+) supported; theme names per rule 4; no closing.",
+  "claims": [
+   {
+    "text": "Fiserv $8.5M white-label card portal; missed deadlines, poor quality, contract cancellation threatened",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person globally dispersed team",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "taken over roughly 7 months in; travelled Mon-Thu to Omaha; coordinated 3 external vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Action"
+   },
+   {
+    "text": "200-page BRD decomposed into persona-based stories; 6-month releases to 2-week sprints within 3 months; sprint demos catching branding/ADA issues before month 6",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "3% under budget, 47/47 acceptance criteria, zero critical defects, $500K penalties avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "SVN to Git, mandatory senior code reviews, unit tests, Maven/Artifactory/Hudson/SonarQube; builds days to hours",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "JIRA gave 50+ stakeholders real-time visibility",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "ACCESS required custom engineering beyond Bottomline WebSeries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "40+ blended team; 70-80% embedded at Bottomline Portsmouth",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, tax modules, MAC security, payment-specific entitlements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "entitlement management from days to minutes via role-based profiles, bulk grouping, dashboard",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "gateway across 12 countries replacing separate local logins/point-to-point integrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011; 135,000+ clients, 180+ countries; migration without disruption",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: compares both engagements from their stories; every figure (Fiserv $8.5M, 45, 7 months, 3 vendors, 200-page, 3%, 47/47, $500K; ACCESS 40+, 12 countries, April 2011, 135,000+, 180+) supported; theme names per rule 4; no closing.",
+  "claims": [
+   {
+    "text": "Fiserv $8.5M white-label card portal; missed deadlines, poor quality, contract cancellation threatened",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person globally dispersed team",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "taken over roughly 7 months in; travelled Mon-Thu to Omaha; coordinated 3 external vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Action"
+   },
+   {
+    "text": "200-page BRD decomposed into persona-based stories; 6-month releases to 2-week sprints within 3 months; sprint demos catching branding/ADA issues before month 6",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "3% under budget, 47/47 acceptance criteria, zero critical defects, $500K penalties avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "SVN to Git, mandatory senior code reviews, unit tests, Maven/Artifactory/Hudson/SonarQube; builds days to hours",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "JIRA as system of record with audit trails and attached accessibility scans to overcome PMO/compliance resistance; negotiated review windows",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "47 acceptance criteria tracked as JIRA Epics",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "ACCESS required custom engineering beyond Bottomline WebSeries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "40+ blended team; 70-80% embedded at Bottomline Portsmouth",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, tax modules, MAC security, payment-specific entitlements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "entitlement management from days to minutes via role-based profiles, bulk grouping, dashboard",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "gateway across 12 countries replacing separate local logins/point-to-point integrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011; 135,000+ clients, 180+ countries; migration without disruption",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "led payments data migration with compliance verification, dashboards, production validation",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: compares both engagements from their stories; every figure (Fiserv $8.5M, 45, 7 months, 3 vendors, 200-page, 3%, 47/47, $500K; ACCESS 40+, 12 countries, April 2011, 135,000+, 180+) supported; theme names per rule 4; no closing.",
+  "claims": [
+   {
+    "text": "Fiserv $8.5M white-label card portal; missed deadlines, poor quality, contract cancellation threatened",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person globally dispersed team",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "taken over roughly 7 months in; travelled Mon-Thu to Omaha; coordinated 3 external vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Action"
+   },
+   {
+    "text": "200-page BRD decomposed into persona-based stories; 6-month releases to 2-week sprints within 3 months; sprint demos catching branding/ADA issues before month 6",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "3% under budget, 47/47 acceptance criteria, zero critical defects, $500K penalties avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "SVN to Git, mandatory senior code reviews, unit tests, Maven/Artifactory/Hudson/SonarQube; builds days to hours",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "JIRA as system of record with audit trails and attached accessibility scans to overcome PMO/compliance resistance; negotiated review windows",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "follow-the-sun across India, Philippines, Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "worked with enterprise architects, security SMEs, bank stakeholders on build-vs-configure",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACCESS required custom engineering beyond Bottomline WebSeries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "40+ blended team; 70-80% embedded at Bottomline Portsmouth",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, tax modules, MAC security, payment-specific entitlements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "entitlement management from days to minutes via role-based profiles, bulk grouping, dashboard",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "gateway across 12 countries replacing separate local logins/point-to-point integrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011; 135,000+ clients, 180+ countries; migration without disruption",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: compares both engagements from their stories; every figure (Fiserv $8.5M, 45, 7 months, 3 vendors, 200-page, 3%, 47/47, $500K; ACCESS 40+, 12 countries, April 2011, 135,000+, 180+) supported; theme names per rule 4; no closing.",
+  "claims": [
+   {
+    "text": "Fiserv $8.5M white-label card portal; missed deadlines, poor quality, contract cancellation threatened",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person globally dispersed team",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "taken over roughly 7 months in; travelled Mon-Thu to Omaha; coordinated 3 external vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Action"
+   },
+   {
+    "text": "200-page BRD decomposed into persona-based stories; 6-month releases to 2-week sprints within 3 months; sprint demos catching branding/ADA issues before month 6",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "3% under budget, 47/47 acceptance criteria, zero critical defects, $500K penalties avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "JIRA as system of record with audit trails and attached accessibility scans to overcome PMO/compliance resistance; negotiated review windows",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "7 AM and 11 PM transition calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "ACCESS required custom engineering beyond Bottomline WebSeries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "40+ blended team; 70-80% embedded at Bottomline Portsmouth",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, tax modules, MAC security, payment-specific entitlements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "entitlement management from days to minutes via role-based profiles, bulk grouping, dashboard",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "gateway across 12 countries replacing separate local logins/point-to-point integrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011; 135,000+ clients, 180+ countries; migration without disruption",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: compares both engagements from their stories; every figure (Fiserv $8.5M, 45, 7 months, 3 vendors, 200-page, 3%, 47/47, $500K; ACCESS 40+, 12 countries, April 2011, 135,000+, 180+) supported; theme names per rule 4; no closing. ADA manifesto presented to client IT leadership and steering committee is in thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients.",
+  "claims": [
+   {
+    "text": "Fiserv $8.5M white-label card portal; missed deadlines, poor quality, contract cancellation threatened",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person globally dispersed team",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "taken over roughly 7 months in; travelled Mon-Thu to Omaha; coordinated 3 external vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Action"
+   },
+   {
+    "text": "200-page BRD decomposed into persona-based stories; 6-month releases to 2-week sprints within 3 months; sprint demos catching branding/ADA issues before month 6",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "3% under budget, 47/47 acceptance criteria, zero critical defects, $500K penalties avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "JIRA as system of record with audit trails and attached accessibility scans to overcome PMO/compliance resistance; negotiated review windows",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "presented ADA manifesto to client IT leadership, steering committee, delivery teams",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients Action"
+   },
+   {
+    "text": "ACCESS required custom engineering beyond Bottomline WebSeries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "40+ blended team; 70-80% embedded at Bottomline Portsmouth",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, tax modules, MAC security, payment-specific entitlements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "entitlement management from days to minutes via role-based profiles, bulk grouping, dashboard",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "gateway across 12 countries replacing separate local logins/point-to-point integrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011; 135,000+ clients, 180+ countries; migration without disruption",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: compares both engagements from their stories; every figure (Fiserv $8.5M, 45, 7 months, 3 vendors, 200-page, 3%, 47/47, $500K; ACCESS 40+, 12 countries, April 2011, 135,000+, 180+) supported; theme names per rule 4; no closing.",
+  "claims": [
+   {
+    "text": "Fiserv $8.5M white-label card portal; missed deadlines, poor quality, contract cancellation threatened",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person globally dispersed team",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "taken over roughly 7 months in; travelled Mon-Thu to Omaha; coordinated 3 external vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Action"
+   },
+   {
+    "text": "200-page BRD decomposed into persona-based stories; 6-month releases to 2-week sprints within 3 months; sprint demos catching branding/ADA issues before month 6",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "3% under budget, 47/47 acceptance criteria, zero critical defects, $500K penalties avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "JIRA as system of record with audit trails and attached accessibility scans to overcome PMO/compliance resistance; negotiated review windows",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "ACCESS required custom engineering beyond Bottomline WebSeries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "40+ blended team; 70-80% embedded at Bottomline Portsmouth",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, tax modules, MAC security, payment-specific entitlements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "entitlement management from days to minutes via role-based profiles, bulk grouping, dashboard",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "gateway across 12 countries replacing separate local logins/point-to-point integrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011; 135,000+ clients, 180+ countries; migration without disruption",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: compares both engagements from their stories; every figure (Fiserv $8.5M, 45, 7 months, 3 vendors, 200-page, 3%, 47/47, $500K; ACCESS 40+, 12 countries, April 2011, 135,000+, 180+) supported; theme names per rule 4; no closing.",
+  "claims": [
+   {
+    "text": "Fiserv $8.5M white-label card portal; missed deadlines, poor quality, contract cancellation threatened",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person globally dispersed team",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "taken over roughly 7 months in; travelled Mon-Thu to Omaha; coordinated 3 external vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Action"
+   },
+   {
+    "text": "200-page BRD decomposed into persona-based stories; 6-month releases to 2-week sprints within 3 months; sprint demos catching branding/ADA issues before month 6",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "3% under budget, 47/47 acceptance criteria, zero critical defects, $500K penalties avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "SVN to Git, mandatory senior code reviews, unit tests, Maven/Artifactory/Hudson/SonarQube; builds days to hours",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "JIRA as system of record with audit trails and attached accessibility scans to overcome PMO/compliance resistance; negotiated review windows",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "47 criteria as JIRA Epics",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "integration layer wrapping mainframe into Java EE/Spring portal",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "ACCESS required custom engineering beyond Bottomline WebSeries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "40+ blended team; 70-80% embedded at Bottomline Portsmouth",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, tax modules, MAC security, payment-specific entitlements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "entitlement management from days to minutes via role-based profiles, bulk grouping, dashboard",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "gateway across 12 countries replacing separate local logins/point-to-point integrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011; 135,000+ clients, 180+ countries; migration without disruption",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: compares both engagements from their stories; every figure (Fiserv $8.5M, 45, 7 months, 3 vendors, 200-page, 3%, 47/47, $500K; ACCESS 40+, 12 countries, April 2011, 135,000+, 180+) supported; theme names per rule 4; no closing. $3M contract extension supported.",
+  "claims": [
+   {
+    "text": "Fiserv $8.5M white-label card portal; missed deadlines, poor quality, contract cancellation threatened",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person globally dispersed team",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "taken over roughly 7 months in; travelled Mon-Thu to Omaha; coordinated 3 external vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Action"
+   },
+   {
+    "text": "200-page BRD decomposed into persona-based stories; 6-month releases to 2-week sprints within 3 months; sprint demos catching branding/ADA issues before month 6",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "3% under budget, 47/47 acceptance criteria, zero critical defects, $500K penalties avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "SVN to Git, mandatory senior code reviews, unit tests, Maven/Artifactory/Hudson/SonarQube; builds days to hours",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "SOA integration layer to Java EE/Spring portal",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "$3M contract extension; 14-month program; 2M+ cardholders, 15 FIs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result/Situation"
+   },
+   {
+    "text": "SSO and global reporting",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS required custom engineering beyond Bottomline WebSeries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "40+ blended team; 70-80% embedded at Bottomline Portsmouth",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, tax modules, MAC security, payment-specific entitlements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "entitlement management from days to minutes via role-based profiles, bulk grouping, dashboard",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "gateway across 12 countries replacing separate local logins/point-to-point integrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011; 135,000+ clients, 180+ countries; migration without disruption",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails c12 t2 strict reading: unsupported 'Fiserv had the larger stated team' and 'By stated team size ... Fiserv' ranks 45 above 40+ without saying the stories don't establish which is larger. Other claims supported (135,000+, 180+, 2M+, 15 FIs, $8.5M, $45M first month, APAC/EMEA/Americas compliance).",
+  "claims": [
+   {
+    "text": "ACCESS: 135,000+ institutional clients across 180+ countries; gateway 12 countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase"
+   },
+   {
+    "text": "ACCESS team 40+ blended",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Fiserv: 2M+ cardholders across 15 FIs; 45-person team; 3 vendors; $8.5M, 14-month",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "no ACCESS program budget stated in stories",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase (searched, none)"
+   },
+   {
+    "text": "$45M in transactions in first month",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "jurisdiction-specific compliance across APAC, EMEA, Americas",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action"
+   },
+   {
+    "text": "Fiserv had the larger stated team than ACCESS (45 vs 40+)",
+    "label": "unsupported",
+    "source": "c12 t2 strict reading"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names dimensions (geographic footprint, end-user count, budget) and compares both accurately; lists 45 and 40+ without ranking teams; notes customer counts not equivalent and no ACCESS budget; all claims supported.",
+  "claims": [
+   {
+    "text": "ACCESS: 135,000+ institutional clients across 180+ countries; gateway 12 countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase"
+   },
+   {
+    "text": "ACCESS team 40+ blended",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Fiserv: 2M+ cardholders across 15 FIs; 45-person team; 3 vendors; $8.5M, 14-month",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "no ACCESS program budget stated in stories",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase (searched, none)"
+   },
+   {
+    "text": "$45M in transactions in first month",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names dimensions (geographic reach, end users, budget); says teams similar in size (45 vs 40+), no ranking; all claims supported incl. paternity-leave PM coverage and regional compliance coordination.",
+  "claims": [
+   {
+    "text": "ACCESS: 135,000+ institutional clients across 180+ countries; gateway 12 countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase"
+   },
+   {
+    "text": "ACCESS team 40+ blended",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Fiserv: 2M+ cardholders across 15 FIs; 45-person team; 3 vendors; $8.5M, 14-month",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "no ACCESS program budget stated in stories",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase (searched, none)"
+   },
+   {
+    "text": "took over ~7 months in; covered PM during paternity leave",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Task/Action"
+   },
+   {
+    "text": "coordinated regional compliance officers with dev team",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action"
+   },
+   {
+    "text": "70-80% embedded at Bottomline",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names dimensions; team sizes 'comparable', no ranking; budget comparison declined correctly; all claims supported.",
+  "claims": [
+   {
+    "text": "ACCESS: 135,000+ institutional clients across 180+ countries; gateway 12 countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase"
+   },
+   {
+    "text": "ACCESS team 40+ blended",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Fiserv: 2M+ cardholders across 15 FIs; 45-person team; 3 vendors; $8.5M, 14-month",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "no ACCESS program budget stated in stories",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase (searched, none)"
+   },
+   {
+    "text": "$45M in transactions in first month",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "jurisdictional data visibility and access controls",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names dimensions (geographic reach, platform scope, budget); team sizes comparable; customer counts flagged not like-for-like; all claims supported.",
+  "claims": [
+   {
+    "text": "ACCESS: 135,000+ institutional clients across 180+ countries; gateway 12 countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase"
+   },
+   {
+    "text": "ACCESS team 40+ blended",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Fiserv: 2M+ cardholders across 15 FIs; 45-person team; 3 vendors; $8.5M, 14-month",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "no ACCESS program budget stated in stories",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase (searched, none)"
+   },
+   {
+    "text": "stabilized delivery within 3 months; $45M first month",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "single entry point replacing separate local logins",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails c12 t2 strict reading: unsupported 'Fiserv had the larger stated team count' ranks 45 above 40+; the hedge 'prevents an exact comparison' does not say the stories don't establish which is larger (and contradicts its own 'team sizes were comparable'). Other claims supported.",
+  "claims": [
+   {
+    "text": "ACCESS: 135,000+ institutional clients across 180+ countries; gateway 12 countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase"
+   },
+   {
+    "text": "ACCESS team 40+ blended",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Fiserv: 2M+ cardholders across 15 FIs; 45-person team; 3 vendors; $8.5M, 14-month",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "no ACCESS program budget stated in stories",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase (searched, none)"
+   },
+   {
+    "text": "took over ~7 months in",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "jurisdiction-specific compliance work",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase"
+   },
+   {
+    "text": "Fiserv had the larger stated team count (45 vs 40+)",
+    "label": "unsupported",
+    "source": "c12 t2 strict reading"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names dimensions (platform scope, global reach); states 45 vs 40+ 'do not establish which team was larger'; no ACCESS budget; all claims supported incl. 50+ stakeholders across 3 time zones.",
+  "claims": [
+   {
+    "text": "ACCESS: 135,000+ institutional clients across 180+ countries; gateway 12 countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase"
+   },
+   {
+    "text": "ACCESS team 40+ blended",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Fiserv: 2M+ cardholders across 15 FIs; 45-person team; 3 vendors; $8.5M, 14-month",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "no ACCESS program budget stated in stories",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase (searched, none)"
+   },
+   {
+    "text": "6-month releases to 2-week sprints; 50+ stakeholders across 3 time zones",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Names dimensions; team sizes comparable (no ranking); end-user counts flagged as different measures; no ACCESS budget; all claims supported.",
+  "claims": [
+   {
+    "text": "ACCESS: 135,000+ institutional clients across 180+ countries; gateway 12 countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase"
+   },
+   {
+    "text": "ACCESS team 40+ blended",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Fiserv: 2M+ cardholders across 15 FIs; 45-person team; 3 vendors; $8.5M, 14-month",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "no ACCESS program budget stated in stories",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase (searched, none)"
+   },
+   {
+    "text": "jurisdiction-specific compliance across APAC, EMEA, Americas",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

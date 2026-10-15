@@ -1,0 +1,2466 @@
+[
+ {
+  "case": "c08",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: Answered (the assumptions/IAM incident story) and Honest; all claims supported by what-i-learned-about-assumptions|fortune-500-clients; quoted text verbatim (rule 8 checked). No closing.",
+  "claims": [
+   {
+    "text": "Tech lead on a global platform modernization delivery for a (Fortune 500) financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Delivery pressure; offshore teams ran test cycles across dev, QA, UAT, production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configs inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup but relied on assumptions/inherited documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task/Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes, implement compensating controls (data masking, email interception), or verify PII scrubbing",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered UAT email job sending unmasked production data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led RCA and remediation, worked collectively on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Client demanded the tester be removed; quoted 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Changes are from the incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as consequence; all claims supported, quotes verbatim.",
+  "claims": [
+   {
+    "text": "Made IAM validation, environment verification, PII scrubbing and risk ownership day-one leadership responsibilities (quoted text verbatim where quoted)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Before the incident relied on inherited documentation and assumed controls correct under delivery pressure",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Gaps: who could trigger downstream jobs/email processes; whether names and emails were masked or scrubbed",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Took accountability, led RCA and remediation, implemented corrective controls with the team",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Client demanded the tester's removal; 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Lesson quoted 'leaders own the environment their teams operate in' / 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result/Purpose/Performance"
+   },
+   {
+    "text": "Story does not specify exact controls deployed or measured incident reduction (honest absence statement)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients (no such field)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: Answered (the assumptions/IAM incident story) and Honest; all claims supported by what-i-learned-about-assumptions|fortune-500-clients; quoted text verbatim (rule 8 checked). No closing.",
+  "claims": [
+   {
+    "text": "Tech lead on a global platform modernization delivery for a (Fortune 500) financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Delivery pressure; offshore teams ran test cycles across dev, QA, UAT, production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configs inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup but relied on assumptions/inherited documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task/Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes, implement compensating controls (data masking, email interception), or verify PII scrubbing",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered UAT email job sending unmasked production data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led RCA and remediation, worked collectively on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Client demanded the tester be removed; quoted 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Changes are from the incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as consequence; all claims supported, quotes verbatim.",
+  "claims": [
+   {
+    "text": "Made IAM validation, environment verification, PII scrubbing and risk ownership day-one leadership responsibilities (quoted text verbatim where quoted)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Before the incident relied on inherited documentation and assumed controls correct under delivery pressure",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Gaps: who could trigger downstream jobs/email processes; whether names and emails were masked or scrubbed",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Took accountability, led RCA and remediation, implemented corrective controls with the team",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Client demanded the tester's removal; 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Lesson quoted 'leaders own the environment their teams operate in' / 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result/Purpose/Performance"
+   },
+   {
+    "text": "Story does not specify exact controls deployed or measured incident reduction (honest absence statement)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients (no such field)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: Answered (the assumptions/IAM incident story) and Honest; all claims supported by what-i-learned-about-assumptions|fortune-500-clients; quoted text verbatim (rule 8 checked). No closing.",
+  "claims": [
+   {
+    "text": "Tech lead on a global platform modernization delivery for a (Fortune 500) financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Delivery pressure; offshore teams ran test cycles across dev, QA, UAT, production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configs inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup but relied on assumptions/inherited documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task/Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes, implement compensating controls (data masking, email interception), or verify PII scrubbing",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered UAT email job sending unmasked production data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led RCA and remediation, worked collectively on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Client demanded the tester be removed; quoted 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 8,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Changes are from the incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as consequence; all claims supported, quotes verbatim.",
+  "claims": [
+   {
+    "text": "Made IAM validation, environment verification, PII scrubbing and risk ownership day-one leadership responsibilities (quoted text verbatim where quoted)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Before the incident relied on inherited documentation and assumed controls correct under delivery pressure",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Gaps: who could trigger downstream jobs/email processes; whether names and emails were masked or scrubbed",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Took accountability, led RCA and remediation, implemented corrective controls with the team",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Client demanded the tester's removal; 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Lesson quoted 'leaders own the environment their teams operate in' / 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result/Purpose/Performance"
+   },
+   {
+    "text": "Story does not specify exact controls deployed or measured incident reduction (honest absence statement)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients (no such field)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: Answered (the assumptions/IAM incident story) and Honest; all claims supported by what-i-learned-about-assumptions|fortune-500-clients; quoted text verbatim (rule 8 checked). No closing.",
+  "claims": [
+   {
+    "text": "Tech lead on a global platform modernization delivery for a (Fortune 500) financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Delivery pressure; offshore teams ran test cycles across dev, QA, UAT, production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configs inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup but relied on assumptions/inherited documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task/Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes, implement compensating controls (data masking, email interception), or verify PII scrubbing",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered UAT email job sending unmasked production data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led RCA and remediation, worked collectively on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Client demanded the tester be removed; quoted 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Changes are from the incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as consequence; all claims supported, quotes verbatim.",
+  "claims": [
+   {
+    "text": "Made IAM validation, environment verification, PII scrubbing and risk ownership day-one leadership responsibilities (quoted text verbatim where quoted)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Before the incident relied on inherited documentation and assumed controls correct under delivery pressure",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Gaps: who could trigger downstream jobs/email processes; whether names and emails were masked or scrubbed",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Took accountability, led RCA and remediation, implemented corrective controls with the team",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Client demanded the tester's removal; 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Lesson quoted 'leaders own the environment their teams operate in' / 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result/Purpose/Performance"
+   },
+   {
+    "text": "Story does not specify exact controls deployed or measured incident reduction (honest absence statement)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients (no such field)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: Answered (the assumptions/IAM incident story) and Honest; all claims supported by what-i-learned-about-assumptions|fortune-500-clients; quoted text verbatim (rule 8 checked). No closing.",
+  "claims": [
+   {
+    "text": "Tech lead on a global platform modernization delivery for a (Fortune 500) financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Delivery pressure; offshore teams ran test cycles across dev, QA, UAT, production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configs inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup but relied on assumptions/inherited documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task/Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes, implement compensating controls (data masking, email interception), or verify PII scrubbing",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered UAT email job sending unmasked production data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led RCA and remediation, worked collectively on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Client demanded the tester be removed; quoted 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Changes are from the incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as consequence; all claims supported, quotes verbatim.",
+  "claims": [
+   {
+    "text": "Made IAM validation, environment verification, PII scrubbing and risk ownership day-one leadership responsibilities (quoted text verbatim where quoted)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Before the incident relied on inherited documentation and assumed controls correct under delivery pressure",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Gaps: who could trigger downstream jobs/email processes; whether names and emails were masked or scrubbed",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Took accountability, led RCA and remediation, implemented corrective controls with the team",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Client demanded the tester's removal; 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Lesson quoted 'leaders own the environment their teams operate in' / 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result/Purpose/Performance"
+   },
+   {
+    "text": "Story does not specify exact controls deployed or measured incident reduction (honest absence statement)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients (no such field)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: Answered (the assumptions/IAM incident story) and Honest; all claims supported by what-i-learned-about-assumptions|fortune-500-clients; quoted text verbatim (rule 8 checked). No closing.",
+  "claims": [
+   {
+    "text": "Tech lead on a global platform modernization delivery for a (Fortune 500) financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Delivery pressure; offshore teams ran test cycles across dev, QA, UAT, production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configs inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup but relied on assumptions/inherited documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task/Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes, implement compensating controls (data masking, email interception), or verify PII scrubbing",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered UAT email job sending unmasked production data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led RCA and remediation, worked collectively on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Client demanded the tester be removed; quoted 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 9,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Changes are from the incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as consequence; all claims supported, quotes verbatim.",
+  "claims": [
+   {
+    "text": "Made IAM validation, environment verification, PII scrubbing and risk ownership day-one leadership responsibilities (quoted text verbatim where quoted)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Before the incident relied on inherited documentation and assumed controls correct under delivery pressure",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Gaps: who could trigger downstream jobs/email processes; whether names and emails were masked or scrubbed",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Took accountability, led RCA and remediation, implemented corrective controls with the team",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Client demanded the tester's removal; 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Lesson quoted 'leaders own the environment their teams operate in' / 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result/Purpose/Performance"
+   },
+   {
+    "text": "Story does not specify exact controls deployed or measured incident reduction (honest absence statement)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients (no such field)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: Answered (the assumptions/IAM incident story) and Honest; all claims supported by what-i-learned-about-assumptions|fortune-500-clients; quoted text verbatim (rule 8 checked). No closing.",
+  "claims": [
+   {
+    "text": "Tech lead on a global platform modernization delivery for a (Fortune 500) financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Delivery pressure; offshore teams ran test cycles across dev, QA, UAT, production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configs inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup but relied on assumptions/inherited documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task/Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes, implement compensating controls (data masking, email interception), or verify PII scrubbing",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered UAT email job sending unmasked production data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led RCA and remediation, worked collectively on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Client demanded the tester be removed; quoted 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Changes are from the incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as consequence; all claims supported, quotes verbatim.",
+  "claims": [
+   {
+    "text": "Made IAM validation, environment verification, PII scrubbing and risk ownership day-one leadership responsibilities (quoted text verbatim where quoted)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Before the incident relied on inherited documentation and assumed controls correct under delivery pressure",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Gaps: who could trigger downstream jobs/email processes; whether names and emails were masked or scrubbed",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Took accountability, led RCA and remediation, implemented corrective controls with the team",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Client demanded the tester's removal; 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Lesson quoted 'leaders own the environment their teams operate in' / 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result/Purpose/Performance"
+   },
+   {
+    "text": "Story does not specify exact controls deployed or measured incident reduction (honest absence statement)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients (no such field)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: Answered (the assumptions/IAM incident story) and Honest; all claims supported by what-i-learned-about-assumptions|fortune-500-clients; quoted text verbatim (rule 8 checked). No closing.",
+  "claims": [
+   {
+    "text": "Tech lead on a global platform modernization delivery for a (Fortune 500) financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Delivery pressure; offshore teams ran test cycles across dev, QA, UAT, production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configs inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup but relied on assumptions/inherited documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task/Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes, implement compensating controls (data masking, email interception), or verify PII scrubbing",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered UAT email job sending unmasked production data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led RCA and remediation, worked collectively on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Client demanded the tester be removed; quoted 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Changes are from the incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as consequence; all claims supported, quotes verbatim.",
+  "claims": [
+   {
+    "text": "Made IAM validation, environment verification, PII scrubbing and risk ownership day-one leadership responsibilities (quoted text verbatim where quoted)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Before the incident relied on inherited documentation and assumed controls correct under delivery pressure",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Gaps: who could trigger downstream jobs/email processes; whether names and emails were masked or scrubbed",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Took accountability, led RCA and remediation, implemented corrective controls with the team",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Client demanded the tester's removal; 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Lesson quoted 'leaders own the environment their teams operate in' / 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result/Purpose/Performance"
+   },
+   {
+    "text": "Story does not specify exact controls deployed or measured incident reduction (honest absence statement)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients (no such field)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: Answered (the assumptions/IAM incident story) and Honest; all claims supported by what-i-learned-about-assumptions|fortune-500-clients; quoted text verbatim (rule 8 checked). No closing.",
+  "claims": [
+   {
+    "text": "Tech lead on a global platform modernization delivery for a (Fortune 500) financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Delivery pressure; offshore teams ran test cycles across dev, QA, UAT, production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configs inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup but relied on assumptions/inherited documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task/Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes, implement compensating controls (data masking, email interception), or verify PII scrubbing",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered UAT email job sending unmasked production data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led RCA and remediation, worked collectively on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Client demanded the tester be removed; quoted 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 10,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Changes are from the incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as consequence; all claims supported, quotes verbatim.",
+  "claims": [
+   {
+    "text": "Made IAM validation, environment verification, PII scrubbing and risk ownership day-one leadership responsibilities (quoted text verbatim where quoted)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Before the incident relied on inherited documentation and assumed controls correct under delivery pressure",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Gaps: who could trigger downstream jobs/email processes; whether names and emails were masked or scrubbed",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Took accountability, led RCA and remediation, implemented corrective controls with the team",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Client demanded the tester's removal; 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Lesson quoted 'leaders own the environment their teams operate in' / 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result/Purpose/Performance"
+   },
+   {
+    "text": "Story does not specify exact controls deployed or measured incident reduction (honest absence statement)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients (no such field)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: Answered (payments work: JP Morgan ACCESS, Amex VPP, RBC) and Honest; every figure (40+, 135,000+, 180+, April 2011, 3 months, 261 story points) checked against the stories and supported. No closing.",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead on JP Morgan ACCESS Next Generation built on Bottomline WebSeries; needs beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Task"
+   },
+   {
+    "text": "Blended onshore/offshore team of 40+ across Accenture and JP Morgan",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border and tax payment modules; MAC security; payment-type entitlements; sanctions screening",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Led payments data migration; compliance dashboards; production support during rollout; no disruption to live payments; compliance traceability maintained",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Regional legacy systems with different data models, configurations, entitlements, transaction histories",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Amex VPP adoption lagged: missing SDKs, fragmented documentation, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation/5PSummary"
+   },
+   {
+    "text": "Co-created developer portal; Java, .NET, Python SDKs; secure sandbox with refreshed client data; use-case API docs",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Environment virtualization, Lean Product/XP practices, Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption and trial usage increased within 3 months of relaunch",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "Over 261 additional story points beyond commitment",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Result/Action"
+   },
+   {
+    "text": "RBC: designed cross-border payment workflows from initiation through settlement and reconciliation; real-time FX, alerts, recurring payments, Interac e-Transfer, batch",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "Delivered implementation blueprint; revised cutoff processes reduced wire delays and improved SLA compliance",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: Answered (payments work: JP Morgan ACCESS, Amex VPP, RBC) and Honest; every figure (40+, 135,000+, 180+, April 2011, 3 months, 261 story points) checked against the stories and supported. No closing.",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead on JP Morgan ACCESS Next Generation built on Bottomline WebSeries; needs beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Task"
+   },
+   {
+    "text": "Blended onshore/offshore team of 40+ across Accenture and JP Morgan",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border and tax payment modules; MAC security; payment-type entitlements; sanctions screening",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline's Portsmouth offices; managed build-vs-configure boundary",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Led payments data migration; compliance dashboards; production support during rollout; no disruption to live payments; compliance traceability maintained",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Amex VPP adoption lagged: missing SDKs, fragmented documentation, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation/5PSummary"
+   },
+   {
+    "text": "Co-created developer portal; Java, .NET, Python SDKs; secure sandbox with refreshed client data; use-case API docs",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Environment virtualization, Lean Product/XP practices, Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption and trial usage increased within 3 months of relaunch",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "Over 261 additional story points beyond commitment",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Result/Action"
+   },
+   {
+    "text": "RBC: designed cross-border payment workflows from initiation through settlement and reconciliation; real-time FX, alerts, recurring payments, Interac e-Transfer, batch",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "Delivered implementation blueprint; revised cutoff processes reduced wire delays and improved SLA compliance",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: Answered (payments work: JP Morgan ACCESS, Amex VPP) and Honest; every figure (40+, 135,000+, 180+, April 2011, 3 months, 261 story points, 12 countries) checked against the stories and supported. No closing.",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead on JP Morgan ACCESS Next Generation built on Bottomline WebSeries; needs beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Task"
+   },
+   {
+    "text": "Blended onshore/offshore team of 40+ across Accenture and JP Morgan",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border and tax payment modules; MAC security; payment-type entitlements; sanctions screening",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Centralized payments gateway: message transformation, protocol translation, routing across 12 countries; single entry point replacing separate local logins",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Led payments data migration; compliance dashboards; production support during rollout; no disruption to live payments; compliance traceability maintained",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "NACHA validation; contextual help; on-call and production incident response",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Amex VPP adoption lagged: missing SDKs, fragmented documentation, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation/5PSummary"
+   },
+   {
+    "text": "Co-created developer portal; Java, .NET, Python SDKs; secure sandbox with refreshed client data; use-case API docs",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Environment virtualization, Lean Product/XP practices, Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption and trial usage increased within 3 months of relaunch",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "Over 261 additional story points beyond commitment",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Result/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: Answered (payments work: JP Morgan ACCESS, Amex VPP) and Honest; every figure (40+, 135,000+, 180+, April 2011, 3 months, 261 story points, 12 countries) checked against the stories and supported. No closing.",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead on JP Morgan ACCESS Next Generation built on Bottomline WebSeries; needs beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Task"
+   },
+   {
+    "text": "Blended onshore/offshore team of 40+ across Accenture and JP Morgan",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border and tax payment modules; MAC security; payment-type entitlements; sanctions screening",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Centralized payments gateway: message transformation, protocol translation, routing across 12 countries; single entry point replacing separate local logins",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline's Portsmouth offices; managed build-vs-configure boundary",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Led payments data migration; compliance dashboards; production support during rollout; no disruption to live payments; compliance traceability maintained",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Defined onshore-offshore engagement model; directed RCA, status updates and daily leadership calls during incidents",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Amex VPP adoption lagged: missing SDKs, fragmented documentation, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation/5PSummary"
+   },
+   {
+    "text": "Co-created developer portal; Java, .NET, Python SDKs; secure sandbox with refreshed client data; use-case API docs",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Environment virtualization, Lean Product/XP practices, Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption and trial usage increased within 3 months of relaunch",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "Over 261 additional story points beyond commitment",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Result/Action"
+   },
+   {
+    "text": "North Star and Discovery and Framing workshops",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: Answered (payments work: JP Morgan ACCESS, Amex VPP, RBC) and Honest; every figure (40+, 135,000+, 180+, April 2011, 3 months, 261 story points, 12 countries) checked against the stories and supported. No closing.",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead on JP Morgan ACCESS Next Generation built on Bottomline WebSeries; needs beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Task"
+   },
+   {
+    "text": "Blended onshore/offshore team of 40+ across Accenture and JP Morgan",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border and tax payment modules; MAC security; payment-type entitlements; sanctions screening",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Centralized payments gateway: message transformation, protocol translation, routing across 12 countries; single entry point replacing separate local logins",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline's Portsmouth offices; managed build-vs-configure boundary",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Risk-based approval routing; embedded FX rate visibility",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Amex VPP adoption lagged: missing SDKs, fragmented documentation, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation/5PSummary"
+   },
+   {
+    "text": "Co-created developer portal; Java, .NET, Python SDKs; secure sandbox with refreshed client data; use-case API docs",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Environment virtualization, Lean Product/XP practices, Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption and trial usage increased within 3 months of relaunch",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "Over 261 additional story points beyond commitment",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Result/Action"
+   },
+   {
+    "text": "VPP replaced a legacy mainframe system",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "RBC: designed cross-border payment workflows from initiation through settlement and reconciliation; real-time FX, alerts, recurring payments, Interac e-Transfer, batch",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "Delivered implementation blueprint; revised cutoff processes reduced wire delays and improved SLA compliance",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: Answered (payments work: JP Morgan ACCESS, Amex VPP, RBC) and Honest; every figure (40+, 135,000+, 180+, April 2011, 3 months, 261 story points, 12 countries) checked against the stories and supported. No closing.",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead on JP Morgan ACCESS Next Generation built on Bottomline WebSeries; needs beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Task"
+   },
+   {
+    "text": "Blended onshore/offshore team of 40+ across Accenture and JP Morgan",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border and tax payment modules; MAC security; payment-type entitlements; sanctions screening",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline's Portsmouth offices; managed build-vs-configure boundary",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Led payments data migration; compliance dashboards; production support during rollout; no disruption to live payments; compliance traceability maintained",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Real-time global reporting, SSO across treasury functions, owned production incident response, NACHA validation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Amex VPP adoption lagged: missing SDKs, fragmented documentation, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation/5PSummary"
+   },
+   {
+    "text": "Co-created developer portal; Java, .NET, Python SDKs; secure sandbox with refreshed client data; use-case API docs",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Environment virtualization, Lean Product/XP practices, Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption and trial usage increased within 3 months of relaunch",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "Over 261 additional story points beyond commitment",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Result/Action"
+   },
+   {
+    "text": "RBC: designed cross-border payment workflows from initiation through settlement and reconciliation; real-time FX, alerts, recurring payments, Interac e-Transfer, batch",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "Delivered implementation blueprint; revised cutoff processes reduced wire delays and improved SLA compliance",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Topic switch: leadership style answered from leadership stories with no payments carry-over; all claims supported, 'over-processed...' and 'permit to fail' / 'I do, we do, you do' quotes verbatim.",
+  "claims": [
+   {
+    "text": "Leadership blends empathy, clarity (and purpose / modern engineering rigor)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Teams inherited were 'over-processed, under-trusted, waiting for permission instead of owning outcomes' (verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Made intent explicit, pushed decisions to people closest to the work, transparency, direct feedback, open communication; coached teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at the Cloud Innovation Center once teams embraced lean product and modern engineering",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Early CIC rigid hierarchical culture; weekly brainstorming without judgment; shared goals over individual accolades; recognized contributions",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation/Action"
+   },
+   {
+    "text": "Pairing senior with junior, peer-led demos, engineering practice forums, learning in live client projects",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   },
+   {
+    "text": "Norfolk Southern: client reported rising defects despite near-complete test coverage; took ownership before client and Accenture leadership rather than defending metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation/Action"
+   },
+   {
+    "text": "Bottom-up audit: engineer solutioned from own interpretation and wrote tests after code; stories lacked scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt backlog with SMART testable stories; frontend/backend TDD experts (from Columbus); 'I do, we do, you do' coaching, katas, practice sessions; restructured ceremonies",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Defect rates dropped; client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Topic switch: leadership style answered from leadership stories with no payments carry-over; all claims supported, 'over-processed...' and 'permit to fail' / 'I do, we do, you do' quotes verbatim.",
+  "claims": [
+   {
+    "text": "Leadership blends empathy, clarity (and purpose / modern engineering rigor)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Teams inherited were 'over-processed, under-trusted, waiting for permission instead of owning outcomes' (verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Made intent explicit, pushed decisions to people closest to the work, transparency, direct feedback, open communication; coached teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at the Cloud Innovation Center once teams embraced lean product and modern engineering",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Early CIC rigid hierarchical culture; weekly brainstorming without judgment; shared goals over individual accolades; recognized contributions",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation/Action"
+   },
+   {
+    "text": "'Permit to fail': non-punitive post-mortems, lean low-stakes experiments; lessons applied to subsequent sprints, preventing recurrence; shorter timelines",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "Set expectations that early prototypes/user tests would likely fail; validated assumptions before costly builds; shaped direction week by week",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Balanced teams of product managers, designers, engineers; thin-slice production-ready solutions; rapid user feedback; automation, CD, quality-first",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients / leadership-philosophy-how-i-lead|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Topic switch: leadership style answered from leadership stories with no payments carry-over; all claims supported, 'over-processed...' and 'permit to fail' / 'I do, we do, you do' quotes verbatim.",
+  "claims": [
+   {
+    "text": "Leadership blends empathy, clarity (and purpose / modern engineering rigor)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Teams inherited were 'over-processed, under-trusted, waiting for permission instead of owning outcomes' (verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Made intent explicit, pushed decisions to people closest to the work, transparency, direct feedback, open communication; coached teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at the Cloud Innovation Center once teams embraced lean product and modern engineering",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Early CIC rigid hierarchical culture; weekly brainstorming without judgment; shared goals over individual accolades; recognized contributions",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation/Action"
+   },
+   {
+    "text": "'Permit to fail': non-punitive post-mortems, lean low-stakes experiments; lessons applied to subsequent sprints, preventing recurrence; shorter timelines",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "Norfolk Southern: client reported rising defects despite near-complete test coverage; took ownership before client and Accenture leadership rather than defending metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation/Action"
+   },
+   {
+    "text": "Bottom-up audit: engineer solutioned from own interpretation and wrote tests after code; stories lacked scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt backlog with SMART testable stories; frontend/backend TDD experts (from Columbus); 'I do, we do, you do' coaching, katas, practice sessions; restructured ceremonies",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Defect rates dropped; client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Topic switch: leadership style answered from leadership stories with no payments carry-over; all claims supported, 'over-processed...' and 'permit to fail' / 'I do, we do, you do' quotes verbatim.",
+  "claims": [
+   {
+    "text": "Leadership blends empathy, clarity (and purpose / modern engineering rigor)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Teams inherited were 'over-processed, under-trusted, waiting for permission instead of owning outcomes' (verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Made intent explicit, pushed decisions to people closest to the work, transparency, direct feedback, open communication; coached teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at the Cloud Innovation Center once teams embraced lean product and modern engineering",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Early CIC rigid hierarchical culture; weekly brainstorming without judgment; shared goals over individual accolades; recognized contributions",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation/Action"
+   },
+   {
+    "text": "'Permit to fail': non-punitive post-mortems, lean low-stakes experiments; lessons applied to subsequent sprints, preventing recurrence; shorter timelines",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "Set expectations that early prototypes/user tests would likely fail; validated assumptions before costly builds; shaped direction week by week",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Balanced teams of product managers, designers, engineers; thin-slice production-ready solutions; rapid user feedback; automation, CD, quality-first",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients / leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "150-person Cloud Innovation Center",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Situation"
+   },
+   {
+    "text": "Sustained modern practices after engagements ended; reduced wasted engineering effort",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients / why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Topic switch: leadership style answered from leadership stories with no payments carry-over; all claims supported, 'over-processed...' and 'permit to fail' / 'I do, we do, you do' quotes verbatim.",
+  "claims": [
+   {
+    "text": "Leadership blends empathy, clarity (and purpose / modern engineering rigor)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Teams inherited were 'over-processed, under-trusted, waiting for permission instead of owning outcomes' (verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Made intent explicit, pushed decisions to people closest to the work, transparency, direct feedback, open communication; coached teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at the Cloud Innovation Center once teams embraced lean product and modern engineering",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Early CIC rigid hierarchical culture; weekly brainstorming without judgment; shared goals over individual accolades; recognized contributions",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation/Action"
+   },
+   {
+    "text": "Balanced teams of product managers, designers, engineers; thin-slice production-ready solutions; rapid user feedback; automation, CD, quality-first",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients / leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Set expectations that early prototypes/user tests would likely fail; validated assumptions before costly builds; shaped direction week by week",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Norfolk Southern: client reported rising defects despite near-complete test coverage; took ownership before client and Accenture leadership rather than defending metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation/Action"
+   },
+   {
+    "text": "Bottom-up audit: engineer solutioned from own interpretation and wrote tests after code; stories lacked scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt backlog with SMART testable stories; frontend/backend TDD experts (from Columbus); 'I do, we do, you do' coaching, katas, practice sessions; restructured ceremonies",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Defect rates dropped; client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Topic switch: leadership style answered from leadership stories with no payments carry-over; all claims supported, 'over-processed...' and 'permit to fail' / 'I do, we do, you do' quotes verbatim.",
+  "claims": [
+   {
+    "text": "Leadership blends empathy, clarity (and purpose / modern engineering rigor)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Teams inherited were 'over-processed, under-trusted, waiting for permission instead of owning outcomes' (verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Made intent explicit, pushed decisions to people closest to the work, transparency, direct feedback, open communication; coached teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at the Cloud Innovation Center once teams embraced lean product and modern engineering",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Early CIC rigid hierarchical culture; weekly brainstorming without judgment; shared goals over individual accolades; recognized contributions",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation/Action"
+   },
+   {
+    "text": "'Permit to fail': non-punitive post-mortems, lean low-stakes experiments; lessons applied to subsequent sprints, preventing recurrence; shorter timelines",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "Set expectations that early prototypes/user tests would likely fail; validated assumptions before costly builds; shaped direction week by week",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Balanced teams of product managers, designers, engineers; thin-slice production-ready solutions; rapid user feedback; automation, CD, quality-first",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients / leadership-philosophy-how-i-lead|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Example (Norfolk Southern quality crisis) illustrates the leadership style just described, not payments; all claims supported by the cited stories.",
+  "claims": [
+   {
+    "text": "Norfolk Southern: client reported rising defects despite near-complete test coverage; took ownership before client and Accenture leadership rather than defending metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation/Action"
+   },
+   {
+    "text": "Bottom-up audit: engineer solutioned from own interpretation and wrote tests after code; stories lacked scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt backlog with SMART testable stories; frontend/backend TDD experts (from Columbus); 'I do, we do, you do' coaching, katas, practice sessions; restructured ceremonies",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Defect rates dropped; client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Early 2020, CIC's first major engagement, Revenue and Shipment Planning platform, pandemic shift to remote",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Pairs rotated daily; new engineers with seasoned practitioners; test cases before solution checked at standup; stories small enough for a one-week iteration",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Practices held after the experts went home; crisis failure mode did not recur",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Example (CIC decentralized decision-making / permit to fail) illustrates the leadership style just described, not payments; all claims supported by the cited stories.",
+  "claims": [
+   {
+    "text": "CIC designed flat; legacy command-and-control habits reasserted; decisions drifted upward; enforced and revalidated multiple times",
+    "label": "supported",
+    "source": "empowering-teams-through-decentralized-decision-making|accenture Situation"
+   },
+   {
+    "text": "CIC scaled to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Some team members feared blame and avoided risks",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation"
+   },
+   {
+    "text": "Cross-functional teams with shared decision authority; leaders as facilitators; anchors remove obstacles; clear flexible guidelines",
+    "label": "supported",
+    "source": "empowering-teams-through-decentralized-decision-making|accenture Action"
+   },
+   {
+    "text": "'Permit to fail': non-punitive post-mortems, lean low-stakes experiments; lessons applied to subsequent sprints, preventing recurrence; shorter timelines",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "Removed bottlenecks; higher engagement and satisfaction",
+    "label": "supported",
+    "source": "empowering-teams-through-decentralized-decision-making|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Example (Norfolk Southern quality crisis) illustrates the leadership style just described, not payments; all claims supported by the cited stories.",
+  "claims": [
+   {
+    "text": "Norfolk Southern: client reported rising defects despite near-complete test coverage; took ownership before client and Accenture leadership rather than defending metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation/Action"
+   },
+   {
+    "text": "Bottom-up audit: engineer solutioned from own interpretation and wrote tests after code; stories lacked scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt backlog with SMART testable stories; frontend/backend TDD experts (from Columbus); 'I do, we do, you do' coaching, katas, practice sessions; restructured ceremonies",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Defect rates dropped; client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Early 2020, CIC's first major engagement, Revenue and Shipment Planning platform, pandemic shift to remote",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Pairs rotated daily; new engineers with seasoned practitioners; test cases before solution checked at standup; stories small enough for a one-week iteration",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Practices held after the experts went home; crisis failure mode did not recur",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Example (Norfolk Southern quality crisis) illustrates the leadership style just described, not payments; all claims supported by the cited stories.",
+  "claims": [
+   {
+    "text": "Norfolk Southern: client reported rising defects despite near-complete test coverage; took ownership before client and Accenture leadership rather than defending metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation/Action"
+   },
+   {
+    "text": "Bottom-up audit: engineer solutioned from own interpretation and wrote tests after code; stories lacked scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt backlog with SMART testable stories; frontend/backend TDD experts (from Columbus); 'I do, we do, you do' coaching, katas, practice sessions; restructured ceremonies",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Defect rates dropped; client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Early 2020, CIC's first major engagement, Revenue and Shipment Planning platform, pandemic shift to remote",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Samman coaching approach; boot camps, lunch and learns; product management and SMART story training",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Example (Norfolk Southern quality crisis) illustrates the leadership style just described, not payments; all claims supported by the cited stories.",
+  "claims": [
+   {
+    "text": "Norfolk Southern: client reported rising defects despite near-complete test coverage; took ownership before client and Accenture leadership rather than defending metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation/Action"
+   },
+   {
+    "text": "Bottom-up audit: engineer solutioned from own interpretation and wrote tests after code; stories lacked scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt backlog with SMART testable stories; frontend/backend TDD experts (from Columbus); 'I do, we do, you do' coaching, katas, practice sessions; restructured ceremonies",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Defect rates dropped; client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Early 2020, CIC's first major engagement, Revenue and Shipment Planning platform, pandemic shift to remote",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Pairs rotated daily; new engineers with seasoned practitioners; test cases before solution checked at standup; stories small enough for a one-week iteration",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Practices held after the experts went home; crisis failure mode did not recur",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   },
+   {
+    "text": "Pairs traded drivers frequently during remote work",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Example (Norfolk Southern quality crisis) illustrates the leadership style just described, not payments; all claims supported by the cited stories.",
+  "claims": [
+   {
+    "text": "Norfolk Southern: client reported rising defects despite near-complete test coverage; took ownership before client and Accenture leadership rather than defending metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation/Action"
+   },
+   {
+    "text": "Bottom-up audit: engineer solutioned from own interpretation and wrote tests after code; stories lacked scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt backlog with SMART testable stories; frontend/backend TDD experts (from Columbus); 'I do, we do, you do' coaching, katas, practice sessions; restructured ceremonies",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Defect rates dropped; client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Early 2020, CIC's first major engagement, Revenue and Shipment Planning platform, pandemic shift to remote",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Boot camps, lunch and learns; product management and SMART story training; client and account leadership confidence restored",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "Team size for the Norfolk Southern project used as the example: three balanced teams, one moving to Monterrey (same engagement, another story, rule 6) and says the exact headcount is not recorded. Not payments.",
+  "claims": [
+   {
+    "text": "Norfolk Southern engagement started with a balanced team and scaled to three balanced teams; began transitioning one team to Monterrey",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action / confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Exact headcount not recorded (honest absence statement)",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern (no headcount field)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "Team size of the previous example's project (CIC): 150+ and 10-person balanced teams, both supported; says the account gives no separate project headcount. Not payments.",
+  "claims": [
+   {
+    "text": "Built Atlanta and Tampa CICs to 150+ practitioners across engineering, architecture, product and design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Delivery teams used a 10-person balanced-team model",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Decentralized-decision account does not specify a separate project headcount (honest absence)",
+    "label": "supported",
+    "source": "empowering-teams-through-decentralized-decision-making|accenture (no headcount)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "Team size for the Norfolk Southern project used as the example: three balanced teams, one moving to Monterrey (same engagement, another story, rule 6) and says the exact headcount is not recorded. Not payments.",
+  "claims": [
+   {
+    "text": "Norfolk Southern engagement started with a balanced team and scaled to three balanced teams; began transitioning one team to Monterrey",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action / confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Exact headcount not recorded (honest absence statement)",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern (no headcount field)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "Team size for the Norfolk Southern project used as the example: three balanced teams, one moving to Monterrey (same engagement, another story, rule 6) and says the exact headcount is not recorded. Not payments.",
+  "claims": [
+   {
+    "text": "Norfolk Southern engagement started with a balanced team and scaled to three balanced teams; began transitioning one team to Monterrey",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action / confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Exact headcount not recorded (honest absence statement)",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern (no headcount field)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "Team size for the Norfolk Southern project used as the example: three balanced teams, one moving to Monterrey (same engagement, another story, rule 6) and says the exact headcount is not recorded. Not payments.",
+  "claims": [
+   {
+    "text": "Norfolk Southern engagement started with a balanced team and scaled to three balanced teams; began transitioning one team to Monterrey",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action / confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Exact headcount not recorded (honest absence statement)",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern (no headcount field)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "Team size for the Norfolk Southern project used as the example: three balanced teams, one moving to Monterrey (same engagement, another story, rule 6) and says the exact headcount is not recorded. Not payments.",
+  "claims": [
+   {
+    "text": "Norfolk Southern engagement started with a balanced team and scaled to three balanced teams; began transitioning one team to Monterrey",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action / confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Exact headcount not recorded (honest absence statement)",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern (no headcount field)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

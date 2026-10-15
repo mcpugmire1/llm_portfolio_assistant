@@ -1,0 +1,476 @@
+[
+ {
+  "case": "x7",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Answered/Honest. contradicted: 'No exact start and end dates on record for his JP Morgan engagements' (stories hold month-level ranges, JP Morgan Chase 2009-08 to 2016-06 across ACCESS, TS Dynamics CRM, I&AM and Asset Management engagements; the answer gives only 2011/2014 milestones and omits the 2013-2016 work). supported: 'Worked with JP Morgan Chase as an Accenture consultant, not as a bank employee'; 'ACCESS Next Generation work led to an April 2011 launch'; 'Worked on the I&AM Uplift following the bank's 2014 data breach'.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase as an Accenture consultant, not as a bank employee",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer (Accenture) / Client (JP Morgan Chase)"
+   },
+   {
+    "text": "ACCESS Next Generation work led to an April 2011 launch",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result/Performance ('launched April 2011')"
+   },
+   {
+    "text": "Worked on the I&AM Uplift following the bank's 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Situation ('Following the 2014 data breach'); leading-rbac-remediation-and-application-team-enablement-for-jp-morgans-iam-uplift|jp-morgan-chase Situation"
+   },
+   {
+    "text": "No exact start and end dates on record for his JP Morgan engagements",
+    "label": "contradicted",
+    "source": "JP Morgan Chase stories Start_Date/End_Date: 2009-08 to 2012-06 (ACCESS), 2013-04 to 2014-10 (TS Dynamics CRM), 2014-09 to 2014-12 (I&AM), 2015-06 to 2016-06 (Asset Management)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Answered/Honest. contradicted: 'No exact start and end dates on record for his JP Morgan Chase engagements' (stories hold month-level ranges, JP Morgan Chase 2009-08 to 2016-06 across ACCESS, TS Dynamics CRM, I&AM and Asset Management engagements; the answer gives only 2011/2014 milestones and omits the 2013-2016 work). supported: 'Worked with JP Morgan Chase as an Accenture consultant, not as a bank employee'; 'ACCESS Next Generation payments work led to the platform's launch in April 2011'; 'Worked on the I&AM Uplift following the 2014 data breach'.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase as an Accenture consultant, not as a bank employee",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer (Accenture) / Client (JP Morgan Chase)"
+   },
+   {
+    "text": "ACCESS Next Generation payments work led to the platform's launch in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result/Performance ('launched April 2011')"
+   },
+   {
+    "text": "Worked on the I&AM Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Situation ('Following the 2014 data breach'); leading-rbac-remediation-and-application-team-enablement-for-jp-morgans-iam-uplift|jp-morgan-chase Situation"
+   },
+   {
+    "text": "No exact start and end dates on record for his JP Morgan Chase engagements",
+    "label": "contradicted",
+    "source": "JP Morgan Chase stories Start_Date/End_Date: 2009-08 to 2012-06 (ACCESS), 2013-04 to 2014-10 (TS Dynamics CRM), 2014-09 to 2014-12 (I&AM), 2015-06 to 2016-06 (Asset Management)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Answered/Honest. contradicted: 'No exact start and end dates on record for the JP Morgan Chase engagements' (stories hold month-level ranges, JP Morgan Chase 2009-08 to 2016-06 across ACCESS, TS Dynamics CRM, I&AM and Asset Management engagements; the answer gives only 2011/2014 milestones and omits the 2013-2016 work). supported: 'Worked with JP Morgan Chase as an Accenture consultant'; 'Engagements included ACCESS Next Generation, launched April 2011'; 'Engagements included the I&AM Uplift following the bank's 2014 data breach'.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase as an Accenture consultant",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer (Accenture) / Client (JP Morgan Chase)"
+   },
+   {
+    "text": "Engagements included ACCESS Next Generation, launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result/Performance ('launched April 2011')"
+   },
+   {
+    "text": "Engagements included the I&AM Uplift following the bank's 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Situation ('Following the 2014 data breach'); leading-rbac-remediation-and-application-team-enablement-for-jp-morgans-iam-uplift|jp-morgan-chase Situation"
+   },
+   {
+    "text": "No exact start and end dates on record for the JP Morgan Chase engagements",
+    "label": "contradicted",
+    "source": "JP Morgan Chase stories Start_Date/End_Date: 2009-08 to 2012-06 (ACCESS), 2013-04 to 2014-10 (TS Dynamics CRM), 2014-09 to 2014-12 (I&AM), 2015-06 to 2016-06 (Asset Management)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Answered/Honest. contradicted: 'No exact start and end dates on record for the JP Morgan Chase engagements' (stories hold month-level ranges, JP Morgan Chase 2009-08 to 2016-06 across ACCESS, TS Dynamics CRM, I&AM and Asset Management engagements; the answer gives only 2011/2014 milestones and omits the 2013-2016 work). supported: 'Worked with JP Morgan Chase through Accenture'; 'ACCESS Next Generation launched in April 2011'; 'Worked on the I&AM Uplift following the 2014 data breach'; 'The dates are project milestones, not a continuous tenure at the bank'.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer (Accenture) / Client (JP Morgan Chase)"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result/Performance ('launched April 2011')"
+   },
+   {
+    "text": "Worked on the I&AM Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Situation ('Following the 2014 data breach'); leading-rbac-remediation-and-application-team-enablement-for-jp-morgans-iam-uplift|jp-morgan-chase Situation"
+   },
+   {
+    "text": "No exact start and end dates on record for the JP Morgan Chase engagements",
+    "label": "contradicted",
+    "source": "JP Morgan Chase stories Start_Date/End_Date: 2009-08 to 2012-06 (ACCESS), 2013-04 to 2014-10 (TS Dynamics CRM), 2014-09 to 2014-12 (I&AM), 2015-06 to 2016-06 (Asset Management)"
+   },
+   {
+    "text": "The dates are project milestones, not a continuous tenure at the bank",
+    "label": "supported",
+    "source": "JP Morgan Chase stories Start_Date/End_Date show separate engagements with gaps"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Answered/Honest. contradicted: 'Exact engagement start and end dates are not on record' (stories hold month-level ranges, JP Morgan Chase 2009-08 to 2016-06 across ACCESS, TS Dynamics CRM, I&AM and Asset Management engagements; the answer gives only 2011/2014 milestones and omits the 2013-2016 work). supported: 'Worked with JP Morgan Chase as an Accenture Senior Technology Architecture Manager'; 'ACCESS Next Generation work included the platform's launch in April 2011'; 'Worked on the I&AM Uplift following the 2014 data breach'.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase as an Accenture Senior Technology Architecture Manager",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer/Role"
+   },
+   {
+    "text": "ACCESS Next Generation work included the platform's launch in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result/Performance ('launched April 2011')"
+   },
+   {
+    "text": "Worked on the I&AM Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Situation ('Following the 2014 data breach'); leading-rbac-remediation-and-application-team-enablement-for-jp-morgans-iam-uplift|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Exact engagement start and end dates are not on record",
+    "label": "contradicted",
+    "source": "JP Morgan Chase stories Start_Date/End_Date: 2009-08 to 2012-06 (ACCESS), 2013-04 to 2014-10 (TS Dynamics CRM), 2014-09 to 2014-12 (I&AM), 2015-06 to 2016-06 (Asset Management)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Answered/Honest. contradicted: 'No exact start and end dates on record for each engagement' (stories hold month-level ranges, JP Morgan Chase 2009-08 to 2016-06 across ACCESS, TS Dynamics CRM, I&AM and Asset Management engagements; the answer gives only 2011/2014 milestones and omits the 2013-2016 work). supported: 'Worked with JP Morgan Chase through Accenture'; 'ACCESS Next Generation launched in April 2011'; 'Worked on the I&AM Uplift following the 2014 data breach'; 'These were separate engagements, not a confirmed continuous assignment'.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer (Accenture) / Client (JP Morgan Chase)"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result/Performance ('launched April 2011')"
+   },
+   {
+    "text": "Worked on the I&AM Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Situation ('Following the 2014 data breach'); leading-rbac-remediation-and-application-team-enablement-for-jp-morgans-iam-uplift|jp-morgan-chase Situation"
+   },
+   {
+    "text": "These were separate engagements, not a confirmed continuous assignment",
+    "label": "supported",
+    "source": "JP Morgan Chase stories Start_Date/End_Date show separate engagements with gaps"
+   },
+   {
+    "text": "No exact start and end dates on record for each engagement",
+    "label": "contradicted",
+    "source": "JP Morgan Chase stories Start_Date/End_Date: 2009-08 to 2012-06 (ACCESS), 2013-04 to 2014-10 (TS Dynamics CRM), 2014-09 to 2014-12 (I&AM), 2015-06 to 2016-06 (Asset Management)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Answered/Honest. contradicted: 'No exact engagement start and end dates on record' (stories hold month-level ranges, JP Morgan Chase 2009-08 to 2016-06 across ACCESS, TS Dynamics CRM, I&AM and Asset Management engagements; the answer gives only 2011/2014 milestones and omits the 2013-2016 work). supported: 'Worked with JP Morgan Chase through Accenture'; 'ACCESS Next Generation launched in April 2011'; 'Later worked on the I&AM Uplift following the 2014 data breach'.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer (Accenture) / Client (JP Morgan Chase)"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result/Performance ('launched April 2011')"
+   },
+   {
+    "text": "Later worked on the I&AM Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Start_Date 2014-09 vs ACCESS stories End_Date 2012-06"
+   },
+   {
+    "text": "No exact engagement start and end dates on record",
+    "label": "contradicted",
+    "source": "JP Morgan Chase stories Start_Date/End_Date: 2009-08 to 2012-06 (ACCESS), 2013-04 to 2014-10 (TS Dynamics CRM), 2014-09 to 2014-12 (I&AM), 2015-06 to 2016-06 (Asset Management)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Answered/Honest. contradicted: 'No exact start and end dates on record for his full JP Morgan Chase assignment' (stories hold month-level ranges, JP Morgan Chase 2009-08 to 2016-06 across ACCESS, TS Dynamics CRM, I&AM and Asset Management engagements; the answer gives only 2011/2014 milestones and omits the 2013-2016 work). supported: 'Worked with JP Morgan Chase through Accenture'; 'ACCESS Next Generation payment engine and global payments gateway work supported the April 2011 launch'; 'Worked on the I&AM Uplift following the bank's 2014 data breach'; 'Included a 3-month PMO and migration-planning engagement'.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer (Accenture) / Client (JP Morgan Chase)"
+   },
+   {
+    "text": "ACCESS Next Generation payment engine and global payments gateway work supported the April 2011 launch",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Performance ('Launched April 2011 as part of ACCESS Next Generation')"
+   },
+   {
+    "text": "Worked on the I&AM Uplift following the bank's 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Situation ('Following the 2014 data breach'); leading-rbac-remediation-and-application-team-enablement-for-jp-morgans-iam-uplift|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Included a 3-month PMO and migration-planning engagement",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Result ('within a 3-month engagement window'), Start_Date 2014-09 to End_Date 2014-12"
+   },
+   {
+    "text": "No exact start and end dates on record for his full JP Morgan Chase assignment",
+    "label": "contradicted",
+    "source": "JP Morgan Chase stories Start_Date/End_Date: 2009-08 to 2012-06 (ACCESS), 2013-04 to 2014-10 (TS Dynamics CRM), 2014-09 to 2014-12 (I&AM), 2015-06 to 2016-06 (Asset Management)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Answered/Honest. contradicted: 'No exact start and end dates on record for his full time supporting JP Morgan Chase' (stories hold month-level ranges, JP Morgan Chase 2009-08 to 2016-06 across ACCESS, TS Dynamics CRM, I&AM and Asset Management engagements; the answer gives only 2011/2014 milestones and omits the 2013-2016 work). supported: 'Worked with JP Morgan Chase through Accenture'; 'ACCESS Next Generation launched in April 2011'; 'Worked on the I&AM Uplift following the bank's 2014 data breach'; 'The I&AM planning engagement lasted 3 months'.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer (Accenture) / Client (JP Morgan Chase)"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result/Performance ('launched April 2011')"
+   },
+   {
+    "text": "Worked on the I&AM Uplift following the bank's 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Situation ('Following the 2014 data breach'); leading-rbac-remediation-and-application-team-enablement-for-jp-morgans-iam-uplift|jp-morgan-chase Situation"
+   },
+   {
+    "text": "The I&AM planning engagement lasted 3 months",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Result ('within a 3-month engagement window'), Start_Date 2014-09 to End_Date 2014-12"
+   },
+   {
+    "text": "No exact start and end dates on record for his full time supporting JP Morgan Chase",
+    "label": "contradicted",
+    "source": "JP Morgan Chase stories Start_Date/End_Date: 2009-08 to 2012-06 (ACCESS), 2013-04 to 2014-10 (TS Dynamics CRM), 2014-09 to 2014-12 (I&AM), 2015-06 to 2016-06 (Asset Management)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Answered/Honest. contradicted: 'No exact engagement start and end dates on record' (stories hold month-level ranges, JP Morgan Chase 2009-08 to 2016-06 across ACCESS, TS Dynamics CRM, I&AM and Asset Management engagements; the answer gives only 2011/2014 milestones and omits the 2013-2016 work). supported: 'Worked with JP Morgan Chase as an Accenture consultant'; 'ACCESS Next Generation launched in April 2011'; 'Worked on the I&AM Uplift following the 2014 data breach'; 'Those are project milestones rather than a continuous tenure range'.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase as an Accenture consultant",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer (Accenture) / Client (JP Morgan Chase)"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result/Performance ('launched April 2011')"
+   },
+   {
+    "text": "Worked on the I&AM Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Situation ('Following the 2014 data breach'); leading-rbac-remediation-and-application-team-enablement-for-jp-morgans-iam-uplift|jp-morgan-chase Situation"
+   },
+   {
+    "text": "No exact engagement start and end dates on record",
+    "label": "contradicted",
+    "source": "JP Morgan Chase stories Start_Date/End_Date: 2009-08 to 2012-06 (ACCESS), 2013-04 to 2014-10 (TS Dynamics CRM), 2014-09 to 2014-12 (I&AM), 2015-06 to 2016-06 (Asset Management)"
+   },
+   {
+    "text": "Those are project milestones rather than a continuous tenure range",
+    "label": "supported",
+    "source": "JP Morgan Chase stories Start_Date/End_Date show separate engagements with gaps"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Answered/Honest. contradicted: 'No exact start and end dates on record for his JP Morgan Chase engagements' (stories hold month-level ranges, JP Morgan Chase 2009-08 to 2016-06 across ACCESS, TS Dynamics CRM, I&AM and Asset Management engagements; the answer gives only 2011/2014 milestones and omits the 2013-2016 work). supported: 'Worked with JP Morgan Chase through Accenture'; 'ACCESS Next Generation launched in April 2011'; 'Later worked on the I&AM Uplift following the bank's 2014 data breach'.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer (Accenture) / Client (JP Morgan Chase)"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result/Performance ('launched April 2011')"
+   },
+   {
+    "text": "Later worked on the I&AM Uplift following the bank's 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Start_Date 2014-09 vs ACCESS stories End_Date 2012-06"
+   },
+   {
+    "text": "No exact start and end dates on record for his JP Morgan Chase engagements",
+    "label": "contradicted",
+    "source": "JP Morgan Chase stories Start_Date/End_Date: 2009-08 to 2012-06 (ACCESS), 2013-04 to 2014-10 (TS Dynamics CRM), 2014-09 to 2014-12 (I&AM), 2015-06 to 2016-06 (Asset Management)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Answered/Honest. contradicted: 'No exact start and end dates on record for his JP Morgan Chase engagements' (stories hold month-level ranges, JP Morgan Chase 2009-08 to 2016-06 across ACCESS, TS Dynamics CRM, I&AM and Asset Management engagements; the answer gives only 2011/2014 milestones and omits the 2013-2016 work). supported: 'Worked with JP Morgan Chase as an Accenture consultant on the ACCESS Next Generation platform'; 'ACCESS Next Generation launched in April 2011'; 'Worked on the I&AM Uplift following the 2014 data breach'; 'The milestones shouldn't be treated as a continuous tenure'.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase as an Accenture consultant on the ACCESS Next Generation platform",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer (Accenture) / Client (JP Morgan Chase)"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result/Performance ('launched April 2011')"
+   },
+   {
+    "text": "Worked on the I&AM Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Situation ('Following the 2014 data breach'); leading-rbac-remediation-and-application-team-enablement-for-jp-morgans-iam-uplift|jp-morgan-chase Situation"
+   },
+   {
+    "text": "No exact start and end dates on record for his JP Morgan Chase engagements",
+    "label": "contradicted",
+    "source": "JP Morgan Chase stories Start_Date/End_Date: 2009-08 to 2012-06 (ACCESS), 2013-04 to 2014-10 (TS Dynamics CRM), 2014-09 to 2014-12 (I&AM), 2015-06 to 2016-06 (Asset Management)"
+   },
+   {
+    "text": "The milestones shouldn't be treated as a continuous tenure",
+    "label": "supported",
+    "source": "JP Morgan Chase stories Start_Date/End_Date show separate engagements with gaps"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

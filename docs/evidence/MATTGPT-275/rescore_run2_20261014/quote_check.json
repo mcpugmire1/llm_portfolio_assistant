@@ -1,0 +1,595 @@
+[
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 1,
+  "quotes": [
+   {
+    "quote": "over-processed, under-trusted, waiting for permission instead of owning outcomes.",
+    "verbatim": true
+   },
+   {
+    "quote": "permit to fail",
+    "verbatim": true
+   },
+   {
+    "quote": "I do, we do, you do",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 2,
+  "quotes": [
+   {
+    "quote": "implementing a practice is the easy half",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 1,
+  "quotes": [
+   {
+    "quote": "over-processed, under-trusted, waiting for permission instead of owning outcomes.",
+    "verbatim": true
+   },
+   {
+    "quote": "permit to fail",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 2,
+  "quotes": [
+   {
+    "quote": "I do, we do, you do",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 1,
+  "quotes": [
+   {
+    "quote": "over-processed, under-trusted, waiting for permission instead of owning outcomes.",
+    "verbatim": true
+   },
+   {
+    "quote": "permit to fail",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 2,
+  "quotes": [
+   {
+    "quote": "I do, we do, you do",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 1,
+  "quotes": [
+   {
+    "quote": "over-processed, under-trusted, waiting for permission instead of owning outcomes.",
+    "verbatim": true
+   },
+   {
+    "quote": "permit to fail",
+    "verbatim": true
+   },
+   {
+    "quote": "I do, we do, you do",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 2,
+  "quotes": [
+   {
+    "quote": "implementing a practice is the easy half",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 1,
+  "quotes": [
+   {
+    "quote": "over-processed, under-trusted, waiting for permission instead of owning outcomes.",
+    "verbatim": true
+   },
+   {
+    "quote": "permit to fail",
+    "verbatim": true
+   },
+   {
+    "quote": "I do, we do, you do",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 2,
+  "quotes": [
+   {
+    "quote": "a systemic failure that resulted in an individual consequence.",
+    "verbatim": true
+   },
+   {
+    "quote": "assumptions are risks in disguise,",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 1,
+  "quotes": [
+   {
+    "quote": "AWS Certified Solutions Architect - Associate (issued **2020**, expired **2023**)",
+    "verbatim": true
+   },
+   {
+    "quote": "AWS Certified Cloud Practitioner (issued **2019**, expired **2023**)",
+    "verbatim": true
+   },
+   {
+    "quote": "SAFe **4** Certified Agilist (issued **2017**, expired)",
+    "verbatim": true
+   },
+   {
+    "quote": "Oracle **8i** DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (**2002**).",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 2,
+  "quotes": [
+   {
+    "quote": "AWS Certified Solutions Architect - Associate (issued **2020**, expired **2023**)",
+    "verbatim": true
+   },
+   {
+    "quote": "AWS Certified Cloud Practitioner (issued **2019**, expired **2023**)",
+    "verbatim": true
+   },
+   {
+    "quote": "SAFe **4** Certified Agilist (issued **2017**, expired)",
+    "verbatim": true
+   },
+   {
+    "quote": "Oracle **8i** DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (**2002**).",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 2,
+  "quotes": [
+   {
+    "quote": "over-processed, under-trusted, waiting for permission instead of owning outcomes.",
+    "verbatim": true
+   },
+   {
+    "quote": "permit to fail",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 3,
+  "quotes": [
+   {
+    "quote": "I do, we do, you do",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 2,
+  "quotes": [
+   {
+    "quote": "empathy, clarity, and purpose.",
+    "verbatim": false
+   },
+   {
+    "quote": "over-processed, under-trusted, waiting for permission instead of owning outcomes.",
+    "verbatim": true
+   },
+   {
+    "quote": "to think clearly, not just execute tasks.",
+    "verbatim": true
+   },
+   {
+    "quote": "permit to fail",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 2,
+  "quotes": [
+   {
+    "quote": "over-processed, under-trusted, waiting for permission instead of owning outcomes.",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 3,
+  "quotes": [
+   {
+    "quote": "I do, we do, you do",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 2,
+  "quotes": [
+   {
+    "quote": "over-processed, under-trusted, waiting for permission instead of owning outcomes.",
+    "verbatim": true
+   },
+   {
+    "quote": "permit to fail",
+    "verbatim": true
+   },
+   {
+    "quote": "I do, we do, you do",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 3,
+  "quotes": [
+   {
+    "quote": "I do, we do, you do",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 2,
+  "quotes": [
+   {
+    "quote": "over-processed, under-trusted, waiting for permission instead of owning outcomes.",
+    "verbatim": true
+   },
+   {
+    "quote": "empathy, clarity, and modern engineering rigor.",
+    "verbatim": true
+   },
+   {
+    "quote": "permit to fail",
+    "verbatim": true
+   },
+   {
+    "quote": "It didn’t happen overnight, but it stuck.",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 3,
+  "quotes": [
+   {
+    "quote": "permit to fail",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 4,
+  "quotes": [
+   {
+    "quote": "permit to fail",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 2,
+  "quotes": [
+   {
+    "quote": "permit to fail",
+    "verbatim": true
+   },
+   {
+    "quote": "I do, we do, you do",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 3,
+  "quotes": [
+   {
+    "quote": "I do, we do, you do",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 2,
+  "quotes": [
+   {
+    "quote": "over-processed, under-trusted, waiting for permission instead of owning outcomes.",
+    "verbatim": true
+   },
+   {
+    "quote": "permit to fail",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 3,
+  "quotes": [
+   {
+    "quote": "I do, we do, you do",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 2,
+  "quotes": [
+   {
+    "quote": "over-processed, under-trusted, waiting for permission instead of owning outcomes.",
+    "verbatim": true
+   },
+   {
+    "quote": "permit to fail",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 3,
+  "quotes": [
+   {
+    "quote": "I do, we do, you do",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 2,
+  "quotes": [
+   {
+    "quote": "over-processed, under-trusted, waiting for permission instead of owning outcomes.",
+    "verbatim": true
+   },
+   {
+    "quote": "permit to fail",
+    "verbatim": true
+   },
+   {
+    "quote": "I do, we do, you do",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c09",
+  "run": 9,
+  "turn": 3,
+  "quotes": [
+   {
+    "quote": "I do, we do, you do",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 2,
+  "quotes": [
+   {
+    "quote": "I do, we do, you do",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c09",
+  "run": 10,
+  "turn": 3,
+  "quotes": [
+   {
+    "quote": "I do, we do, you do",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c11",
+  "run": 1,
+  "turn": 1,
+  "quotes": [
+   {
+    "quote": "I do, we do, you do,",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c11",
+  "run": 2,
+  "turn": 1,
+  "quotes": [
+   {
+    "quote": "I do, we do, you do.",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 1,
+  "quotes": [
+   {
+    "quote": "I do, we do, you do",
+    "verbatim": true
+   },
+   {
+    "quote": "anchors",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 1,
+  "quotes": [
+   {
+    "quote": "I do, we do, you do",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 1,
+  "quotes": [
+   {
+    "quote": "I do, we do, you do",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "x3",
+  "run": 1,
+  "turn": 1,
+  "quotes": [
+   {
+    "quote": "trading",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "x3",
+  "run": 2,
+  "turn": 1,
+  "quotes": [
+   {
+    "quote": "trading",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "x4",
+  "run": 1,
+  "turn": 1,
+  "quotes": [
+   {
+    "quote": "transparent cost-to-fix vs. benefit comparison.",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "x4",
+  "run": 3,
+  "turn": 1,
+  "quotes": [
+   {
+    "quote": "transparent cost-to-fix vs. benefit comparison.",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "x4",
+  "run": 4,
+  "turn": 1,
+  "quotes": [
+   {
+    "quote": "cost-to-fix vs. benefit comparison",
+    "verbatim": true
+   }
+  ]
+ },
+ {
+  "case": "x4",
+  "run": 5,
+  "turn": 1,
+  "quotes": [
+   {
+    "quote": "CIC Standard of Value",
+    "verbatim": true
+   }
+  ]
+ }
+]

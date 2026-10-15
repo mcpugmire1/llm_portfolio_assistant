@@ -1,0 +1,152 @@
+lane 0/6: 40 of 240 (case, run) jobs
+health check start: top Fiserv 0.422
+[opener c01 r1 t1] 13.17s  | '🐾 Found it!\n\nMatt’s payments work spans payment-en'
+[opener c01 r1 t2] 6.23s  | '🐾 On it!\n\nFor **JP Morgan Chase’s** ACCESS payment'
+[opener c01 r1 t3] 11.38s  | '🐾 Found it!\n\nOn **JP Morgan Chase’s** ACCESS payme'
+[new c01 r1 t1] 13.99s  | '🐾 Here’s Matt’s payments work, from payment engine'
+[new c01 r1 t2] 6.11s  | '🐾 At **JP Morgan Chase**, Matt managed a blended t'
+[new c01 r1 t3] 14.06s  | '🐾 There was a specific production failure in the *'
+[opener c01 r7 t1] 11.78s  | "🐾 Here's a great example.\n\nAt **JP Morgan Chase**,"
+[opener c01 r7 t2] 5.92s  | '🐾 Tracking this down...\n\nFor **JP Morgan Chase’s**'
+[opener c01 r7 t3] 10.57s  | '🐾 Found it!\n\nOn **JP Morgan Chase’s** ACCESS payme'
+[new c01 r7 t1] 12.65s  | '🐾 His payments work includes global payment proces'
+[new c01 r7 t2] 6.18s  | '🐾 At **JP Morgan Chase**, Matt managed a blended t'
+[new c01 r7 t3] 9.68s  | '🐾 There were production defects in the **JP Morgan'
+[new c02 r3 t1] 4.86s  | '🐾 Matt holds a Master’s degree in Information Tech'
+[new c02 r3 t2] 13.09s  | '🐾 Here’s the education and engineering work behind'
+[opener c02 r3 t1] 5.79s  | "🐾 I know just the story.\n\nMatt holds a Master's de"
+[opener c02 r3 t2] 14.83s  | '🐾 Stepping back to see the themes...\n\nMatt holds a'
+[new c02 r9 t1] 4.81s  | '🐾 Matt has a **Master’s degree in Information Tech'
+[new c02 r9 t2] 14.59s  | '🐾 Here’s the work behind the degree.\n\nMatt has a M'
+[opener c02 r9 t1] 5.54s  | "🐾 This is a strong one.\n\nMatt holds a Master's deg"
+[opener c02 r9 t2] 14.42s  | "🐾 Here's what connects the dots across Matt's work"
+[opener c03 r5 t1] 11.66s  | "🐾 Here's a great example.\n\nMatt leads with empathy"
+[opener c03 r5 t2] 11.27s  | '🐾 Found it!\n\nIn one global financial services plat'
+[new c03 r5 t1] 10.99s  | '🐾 Here’s how Matt describes his leadership: empath'
+[new c03 r5 t2] 13.55s  | '🐾 Yes. In one financial services engagement, Matt '
+[opener c04 r1 t1] 7.53s  | "🐾 Here's a great example.\n\nMatt previously held AW"
+[opener c04 r1 t2] 5.66s  | 'Got it! 🐾 No, Matt does not hold a PMP certificati'
+[opener c04 r1 t3] 5.9s  | "🐾 Looking across Matt's portfolio, I see clear pat"
+[new c04 r1 t1] 19.16s  | '🐾 Here’s Matt’s certification history. None of his'
+[new c04 r1 t2] 6.83s  | '🐾 No, Matt does not hold PMP certification.\n\nHis c'
+[new c04 r1 t3] 4.93s  | '🐾 No. None of Matt’s listed certifications is curr'
+[opener c04 r7 t1] 8.24s  | '🐾 On it!\n\nMatt has held certifications, but **none'
+[opener c04 r7 t2] 5.72s  | '🐾 On it!\n\nNo, Matt does not hold a PMP certificati'
+[opener c04 r7 t3] 6.53s  | "🐾 Here's what connects the dots across Matt's work"
+[new c04 r7 t1] 9.56s  | '🐾 Here’s Matt’s certification history. None is cur'
+[new c04 r7 t2] 7.88s  | '🐾 No, Matt does not hold a PMP certification. His '
+[new c04 r7 t3] 5.22s  | '🐾 No. None of Matt’s listed certifications is curr'
+[new c05 r3 t1] 9.25s  | '🐾 Here’s what Matt is looking for.\n\nAfter his tenu'
+[new c05 r3 t2] 17.9s  | '🐾 Here’s what Matt has owned beyond the consulting'
+[opener c05 r3 t1] 10.95s  | '🐾 On it!\n\nMatt is currently on sabbatical, buildin'
+[opener c05 r3 t2] 16.49s  | '🐾 Stepping back to see the themes...\n\nThe stories '
+[new c05 r9 t1] 9.24s  | '🐾 Here’s what Matt is looking for.\n\nAfter his tenu'
+[new c05 r9 t2] 17.55s  | '🐾 Here’s the work behind that comparison.\n\nThe sto'
+[opener c05 r9 t1] 10.71s  | '🐾 This is a strong one.\n\nMatt is looking for a rol'
+[opener c05 r9 t2] 14.38s  | '🐾 Stepping back to see the themes...\n\nThe stories '
+[new c06 r5 t1] 9.52s  | '🐾 Yes. Matt worked with a **Major U.S. Health Syst'
+[new c06 r5 t2] 10.55s  | '🐾 Here’s what Matt actually did.\n\nAt the **Major U'
+[opener c06 r5 t1] 8.9s  | "🐾 Perfect, here's what I found.\n\nYes. Matt worked "
+[opener c06 r5 t2] 9.65s  | 'Got it! 🐾\n\nAt **Major U.S. Health System**, Matt d'
+[opener c07 r1 t1] 6.41s  | '🐾 I know just the story.\n\nMatt is based in Atlanta'
+[opener c07 r1 t2] 4.91s  | "🐾 Here's a great example.\n\nYes. Matt is open to re"
+[new c07 r1 t1] 5.57s  | '🐾 Matt is based in Atlanta, GA. He is open to relo'
+[new c07 r1 t2] 5.66s  | '🐾 Yes, Matt is open to relocation and travel.'
+[opener c07 r7 t1] 4.99s  | "🐾 Here's a great example.\n\nMatt is based in Atlant"
+[opener c07 r7 t2] 4.72s  | '🐾 On it!\n\nYes. Matt is open to relocation and trav'
+[new c07 r7 t1] 5.04s  | '🐾 Matt is based in Atlanta, GA. He is open to relo'
+[new c07 r7 t2] 4.91s  | '🐾 Yes. Matt is open to relocation and travel.'
+[new c08 r3 t1] 9.33s  | '🐾 Here’s a time Matt took accountability for a fai'
+[new c08 r3 t2] 11.25s  | '🐾 He made verification a day-one responsibility, r'
+[opener c08 r3 t1] 10.08s  | "🐾 Here's a great example.\n\nMatt was the tech lead "
+[opener c08 r3 t2] 12.87s  | 'Got it! 🐾\n\nMatt made “IAM validation, environment '
+[new c08 r9 t1] 9.48s  | '🐾 Here’s a time Matt failed.\n\nMatt was the tech le'
+[new c08 r9 t2] 9.2s  | '🐾 He changed what he treated as a day-one responsi'
+[opener c08 r9 t1] 11.19s  | "🐾 Perfect, here's what I found.\n\nOn a global platf"
+[opener c08 r9 t2] 12.92s  | '🐾 This is a strong one.\n\nMatt made **IAM validatio'
+[opener c09 r5 t1] 12.49s  | '🐾 Tracking this down...\n\nMatt’s payments work incl'
+[opener c09 r5 t2] 11.32s  | '🐾 I know just the story.\n\nMatt leads with empathy,'
+[opener c09 r5 t3] 11.5s  | "🐾 Here's a great example.\n\nAt **Norfolk Southern**"
+[opener c09 r5 t4] 5.27s  | "🐾 Here's a great example.\n\nThe **Norfolk Southern*"
+[new c09 r5 t1] 17.34s  | '🐾 Matt’s payments work includes payment-engine del'
+[new c09 r5 t2] 12.55s  | '🐾 Matt leads with empathy, clarity, and purpose, p'
+[new c09 r5 t3] 11.2s  | '🐾 Here’s an example from **Norfolk Southern**.\n\nIn'
+[new c09 r5 t4] 5.49s  | '🐾 The **Norfolk Southern** engagement scaled to **'
+[opener c10 r1 t1] 13.68s  | "🐾 Here's a great example.\n\nMatt led **Norfolk Sout"
+[opener c10 r1 t2] 14.19s  | '🐾 This is a strong one.\n\nAt **Norfolk Southern**, '
+[opener c10 r1 t3] 6.73s  | "🐾 Perfect, here's what I found.\n\nMatt’s **Norfolk "
+[new c10 r1 t1] 11.84s  | '🐾 Here’s what Matt worked on at **Norfolk Southern'
+[new c10 r1 t2] 14.28s  | '🐾 Here’s a closer look at the modernization and th'
+[new c10 r1 t3] 16.53s  | '🐾 Here’s the timeline.\n\nMatt’s **Norfolk Southern*'
+[opener c10 r7 t1] 12.61s  | '🐾 On it!\n\nMatt led **Norfolk Southern’s** Revenue '
+[opener c10 r7 t2] 13.73s  | "🐾 Here's a great example.\n\nAt **Norfolk Southern**"
+[opener c10 r7 t3] 6.69s  | '🐾 I know just the story.\n\nMatt’s **Norfolk Souther'
+[new c10 r7 t1] 13.66s  | '🐾 Here’s the story of Matt’s work at **Norfolk Sou'
+[new c10 r7 t2] 11.43s  | '🐾 Here’s the deeper dive into the modernization an'
+[new c10 r7 t3] 6.34s  | '🐾 The **Norfolk Southern** engagement ran from **N'
+[opener c11 r3 t1] 12.83s  | "🐾 Here's a great example.\n\nAt **Accenture**, Matt "
+[opener c11 r3 t2] 12.72s  | "🐾 Perfect, here's what I found.\n\nMatt’s payments w"
+[opener c11 r3 t3] 12.2s  | '🐾 On it!\n\nFor the payments work, Matt managed a **'
+[new c11 r3 t1] 15.08s  | '🐾 Here’s how Matt built and ran that organization.'
+[new c11 r3 t2] 12.73s  | '🐾 Matt’s payments work includes payment-engine del'
+[new c11 r3 t3] 7.38s  | '🐾 For the payments work, the documented team size '
+[new c11 r9 t1] 12.52s  | '🐾 Here’s how Matt built the team and the organizat'
+[new c11 r9 t2] 12.59s  | '🐾 Here’s Matt’s payments work, from payment engine'
+[new c11 r9 t3] 15.94s  | '🐾 For his payments work, the confirmed team size w'
+[opener c11 r9 t1] 16.75s  | "🐾 Here's a great example.\n\nMatt grew **Accenture’s"
+[opener c11 r9 t2] 14.16s  | '🐾 Found it!\n\nMatt’s payments work includes **JP Mo'
+[opener c11 r9 t3] 6.77s  | "🐾 Here's a great example.\n\nFor the payments work a"
+[opener c12 r5 t1] 15.75s  | 'Got it! 🐾\n\nExecution & Delivery was central to bot'
+[opener c12 r5 t2] 9.45s  | '🐾 Found it!\n\nThe stories don’t establish which eng'
+[new c12 r5 t1] 16.39s  | '🐾 Here’s how the two engagements compare.\n\nBoth in'
+[new c12 r5 t2] 8.4s  | '🐾 The stories don’t establish which engagement was'
+[opener c13 r1 t1] 11.38s  | '🐾 This is a strong one.\n\nAt **Fiserv**, Matt took '
+[opener c13 r1 t2] 6.79s  | 'Got it! 🐾\n\nThe **Fiserv** team had **45 people**, '
+[new c13 r1 t1] 13.3s  | '🐾 Here’s the story of Matt’s work at **Fiserv**.\n\n'
+[new c13 r1 t2] 6.13s  | '🐾 Matt coordinated a **45-person globally disperse'
+[opener c13 r7 t1] 12.59s  | '🐾 I know just the story.\n\nAt **Fiserv**, Matt took'
+[opener c13 r7 t2] 5.76s  | '🐾 Tracking this down...\n\nMatt coordinated a **45-p'
+[new c13 r7 t1] 12.2s  | '🐾 Found it!\n\nMatt worked on **Fiserv’s** white-lab'
+[new c13 r7 t2] 8.54s  | '🐾 The **Fiserv** team had **45 people**, globally '
+[new c14 r3 t1] 19.73s  | '🐾 Here’s the experience to weigh against your VP o'
+[opener c14 r3 t1] 18.64s  | "🐾 Let me show you what ties Matt's work together.\n"
+[new c14 r9 t1] 19.52s  | '🐾 Here’s Matt’s experience to compare with your VP'
+[opener c14 r9 t1] 19.61s  | "🐾 Looking across Matt's portfolio, I see clear pat"
+[new c15 r5 t1] 7.93s  | 'Nothing I know about Matt covers that.'
+[opener c15 r5 t1] 9.95s  | '🐾 I know just the story.\n\nI don’t have Matt’s emai'
+[opener c16 r1 t1] 12.26s  | '🐾 Tracking this down...\n\nI don’t have a résumé fil'
+[new c16 r1 t1] 15.5s  | '🐾 I can share a condensed text overview. I don’t h'
+[opener c16 r7 t1] 12.82s  | "🐾 Here's a great example.\n\nI don’t have a résumé f"
+[new c16 r7 t1] 36.82s  | '🐾 I can share a résumé-style overview here. I don’'
+[new c17 r3 t2] 12.84s  | '🐾 Here’s how Matt changed the delivery cadence.\n\nA'
+[opener c17 r3 t2] 11.25s  | 'Got it! 🐾\n\nAt **Fiserv**, the **45-person** team w'
+[new c17 r9 t2] 13.52s  | '🐾 Here’s how Matt changed the team’s day-to-day wo'
+[opener c17 r9 t2] 11.61s  | 'Got it! 🐾\n\nAt **Fiserv**, the problem was more tha'
+[new c18 r5 t1] 12.6s  | '🐾 Here’s the story of Matt’s work at **Norfolk Sou'
+[new c18 r5 t2] 12.49s  | '🐾 Here’s Matt’s work at **RBC**.\n\nFrom **June 2012'
+[new c18 r5 t3] 6.98s  | '🐾 Matt’s **RBC** engagement ran from **June 2012 t'
+[opener c18 r5 t1] 15.22s  | '🐾 Found it!\n\nAt **Norfolk Southern**, Matt led the'
+[opener c18 r5 t2] 11.34s  | '🐾 Found it!\n\nAt **RBC**, Matt worked as Senior Tec'
+[opener c18 r5 t3] 6.96s  | '🐾 I know just the story.\n\nMatt’s **RBC** engagemen'
+[opener x1 r1 t1] 15.02s  | '🐾 Found it!\n\nMatt has worked in mortgage lending, '
+[new x1 r1 t1] 10.46s  | '🐾 Yes, through mortgage lending and mortgage techn'
+[opener x1 r7 t1] 10.16s  | '🐾 Tracking this down...\n\nYes, Matt has worked in m'
+[new x1 r7 t1] 10.24s  | '🐾 Yes, through mortgage lending technology, rather'
+[opener x2 r3 t1] 6.6s  | '🐾 Found it!\n\nI don’t have a confirmed example of M'
+[new x2 r3 t1] 5.57s  | '🐾 I don’t have a confirmed example of Matt working'
+[new x2 r9 t1] 5.76s  | '🐾 I don’t have a confirmed example of Matt working'
+[opener x2 r9 t1] 5.96s  | "🐾 Here's a great example.\n\nI don’t have a confirme"
+[opener x3 r5 t1] 9.82s  | "🐾 Here's a great example.\n\nMatt has worked on corp"
+[new x3 r5 t1] 13.16s  | '🐾 Here’s what I found.\n\nMatt has worked on corpora'
+[opener x4 r1 t1] 14.62s  | 'Got it! 🐾\n\nMatt used cost-to-fix versus benefit co'
+[new x4 r1 t1] 18.0s  | '🐾 Here’s what Matt measured.\n\nMatt used cost-to-fi'
+[opener x4 r7 t1] 13.46s  | '🐾 Found it!\n\nMatt used delivery measures and finan'
+[new x4 r7 t1] 15.61s  | '🐾 Here’s what Matt measured.\n\nMatt’s stories docum'
+[opener x5 r3 t1] 7.71s  | "🐾 Here's a great example.\n\nI don’t have evidence t"
+[new x5 r3 t1] 7.3s  | '🐾 I haven’t found a gaming-platform engagement in '
+[new x5 r9 t1] 8.5s  | '🐾 I haven’t found a gaming-platform engagement in '
+[opener x5 r9 t1] 5.73s  | '🐾 Found it!\n\nNothing in Matt’s documented work his'
+[new x7 r5 t1] 7.68s  | '🐾 Here’s the timeline.\n\nMatt worked with **JP Morg'
+[opener x7 r5 t1] 6.5s  | '🐾 I know just the story.\n\nMatt worked with **JP Mo'
+health check end: top Fiserv 0.422
+done | rows 206 | errors []

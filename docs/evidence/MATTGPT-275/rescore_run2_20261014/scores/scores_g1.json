@@ -1,0 +1,1642 @@
+[
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: ACCESS and Amex VPP payments work, all claims supported by JPM ACCESS and Amex stories; no closing.",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead on JP Morgan Chase ACCESS payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "WebSeries could not meet JPM needs out of the box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ Accenture and JPM resources across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Defined onshore-offshore engagement model",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline Portsmouth offices; Chicago and NY/NJ stakeholders",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Task"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "MAC security layer and payment-type-specific entitlements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Centralized gateway for message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Legacy migration coordinated with compliance teams, completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Owned production incident response with RCA and daily leadership calls",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011, 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Amex VPP adoption lagged: missing SDKs, fragmented documentation, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "North Star and Discovery and Framing workshops",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Developer portal, Java/.NET/Python SDKs, use-case-driven documentation, sandbox/virtualized test environments",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Client Onboarding Test Drive gathered feedback",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption and trial usage increased within 3 months; onboarding time reduced",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "Exceeded delivery commitment by over 261 story points",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Correct referent (ACCESS, 40+ blended team); supported by payment-engine story Task.",
+  "claims": [
+   {
+    "text": "ACCESS payments team: blended onshore/offshore 40+ Accenture and JPM, Mumbai/Bangalore/US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Defined onshore-offshore model; primary technical interface with Bottomline",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Same engagement: WebSeries out-of-box gap, MAC failure, legacy data defects, Sev-1 ownership; all supported.",
+  "claims": [
+   {
+    "text": "MAC-layer production failure root-caused to missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Break-glass production access, queried live payment data via SQL",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Post-cutover defects, primarily data issues carried over from legacy platform",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Ran UAT and production validation/shakeout testing, triaged post-cutover defects",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Repeatedly owned Sev-1 incident response across releases, waves, migrations; RCA across NY, Mumbai/Bangalore, Bottomline",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Status updates and daily leadership calls while issues live",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Migration completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Coordinated with Bottomline on where native capabilities ended",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn covering ACCESS, Amex VPP, RBC; all supported ('261 story points' read as the story's 'over 261').",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead on JP Morgan Chase ACCESS payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "WebSeries could not meet JPM needs out of the box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ Accenture and JPM resources across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Defined onshore-offshore engagement model",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline Portsmouth offices; Chicago and NY/NJ stakeholders",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Task"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "MAC security layer and payment-type-specific entitlements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Centralized gateway for message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Legacy migration coordinated with compliance teams, completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Owned production incident response with RCA and daily leadership calls",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011, 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "FX rate visibility, sanctions screening, risk-based approval routing, real-time reporting, SSO",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Amex VPP adoption lagged: missing SDKs, fragmented documentation, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "North Star and Discovery and Framing workshops",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Developer portal, Java/.NET/Python SDKs, use-case-driven documentation, sandbox/virtualized test environments",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Client Onboarding Test Drive gathered feedback",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption and trial usage increased within 3 months; onboarding time reduced",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "Exceeded delivery commitment by over 261 story points",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action/Result"
+   },
+   {
+    "text": "RBC cross-border payment workflows from initiation through settlement and reconciliation",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "Real-time FX, alerts, recurring payments, Interac e-Transfer, batch processing",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "Delivered implementation blueprint ready for development",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   },
+   {
+    "text": "Revised cutoff processes reduced wire-transfer delays, improved SLA compliance",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Correct referent ACCESS 40+; supported.",
+  "claims": [
+   {
+    "text": "ACCESS payments team: blended onshore/offshore 40+ Accenture and JPM, Mumbai/Bangalore/US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Defined onshore-offshore model; primary technical interface with Bottomline",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Portsmouth, NH 70-80% embedded",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Same engagement failures (MAC, legacy defects, Sev-1); supported.",
+  "claims": [
+   {
+    "text": "MAC-layer production failure root-caused to missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Break-glass production access, queried live payment data via SQL",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Post-cutover defects, primarily data issues carried over from legacy platform",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Ran UAT and production validation/shakeout testing, triaged post-cutover defects",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Repeatedly owned Sev-1 incident response across releases, waves, migrations; RCA across NY, Mumbai/Bangalore, Bottomline",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Status updates and daily leadership calls while issues live",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Migration completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Gateway across 12 countries replaced fragmented connectivity; regional launches sequenced by regulatory readiness, not big-bang",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation; navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Result"
+   },
+   {
+    "text": "Entitlement changes took days of manual configuration; poor visibility",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Bulk grouping, role-based profiles, payment-type controls; days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn ACCESS, Amex, RBC; all supported.",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead on JP Morgan Chase ACCESS payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "WebSeries could not meet JPM needs out of the box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ Accenture and JPM resources across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Defined onshore-offshore engagement model",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline Portsmouth offices; Chicago and NY/NJ stakeholders",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Task"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "MAC security layer and payment-type-specific entitlements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Centralized gateway for message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Legacy migration coordinated with compliance teams, completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Owned production incident response with RCA and daily leadership calls",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011, 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Sanctions screening, real-time global reporting",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Amex VPP adoption lagged: missing SDKs, fragmented documentation, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "North Star and Discovery and Framing workshops",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Developer portal, Java/.NET/Python SDKs, use-case-driven documentation, sandbox/virtualized test environments",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Client Onboarding Test Drive gathered feedback",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption and trial usage increased within 3 months; onboarding time reduced",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "Exceeded delivery commitment by over 261 story points",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action/Result"
+   },
+   {
+    "text": "RBC cross-border payment workflows from initiation through settlement and reconciliation",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "Real-time FX, alerts, recurring payments, Interac e-Transfer, batch processing",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "Delivered implementation blueprint ready for development",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   },
+   {
+    "text": "Revised cutoff processes reduced wire-transfer delays, improved SLA compliance",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Correct referent ACCESS 40+; supported.",
+  "claims": [
+   {
+    "text": "ACCESS payments team: blended onshore/offshore 40+ Accenture and JPM, Mumbai/Bangalore/US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Defined onshore-offshore model; primary technical interface with Bottomline",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Same engagement; MAC and migration defects, Sev-1; supported.",
+  "claims": [
+   {
+    "text": "MAC-layer production failure root-caused to missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Break-glass production access, queried live payment data via SQL",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Post-cutover defects, primarily data issues carried over from legacy platform",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Ran UAT and production validation/shakeout testing, triaged post-cutover defects",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Repeatedly owned Sev-1 incident response across releases, waves, migrations; RCA across NY, Mumbai/Bangalore, Bottomline",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Status updates and daily leadership calls while issues live",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Migration completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Fragmented connectivity across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Entitlement changes took days of manual configuration; poor visibility",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Bulk grouping, role-based profiles, payment-type controls; days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn ACCESS plus RBC PMO; all supported.",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead on JP Morgan Chase ACCESS payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "WebSeries could not meet JPM needs out of the box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ Accenture and JPM resources across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Defined onshore-offshore engagement model",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline Portsmouth offices; Chicago and NY/NJ stakeholders",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Task"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "MAC security layer and payment-type-specific entitlements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Centralized gateway for message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Legacy migration coordinated with compliance teams, completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Owned production incident response with RCA and daily leadership calls",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011, 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Managed build-vs-configure boundary with WebSeries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "RBC: established PMO during discovery for Day2Day Corporate Banking while bank evaluated Bottomline and planned to sunset RBC Express; governance meetings, POCs, task tracking",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Situation/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Correct referent ACCESS 40+; clarification that 40+ is his team consistent with 'multi-workstream program'.",
+  "claims": [
+   {
+    "text": "ACCESS payments team: blended onshore/offshore 40+ Accenture and JPM, Mumbai/Bangalore/US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Defined onshore-offshore model; primary technical interface with Bottomline",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "40+ is his delivery team, not the whole ACCESS program",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation (multi-workstream program) / Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Same engagement; MAC and migration defects, Sev-1, entitlements; supported.",
+  "claims": [
+   {
+    "text": "MAC-layer production failure root-caused to missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Break-glass production access, queried live payment data via SQL",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Post-cutover defects, primarily data issues carried over from legacy platform",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Ran UAT and production validation/shakeout testing, triaged post-cutover defects",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Repeatedly owned Sev-1 incident response across releases, waves, migrations; RCA across NY, Mumbai/Bangalore, Bottomline",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Status updates and daily leadership calls while issues live",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Migration completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Entitlement changes took days of manual configuration; poor visibility",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Bulk grouping, role-based profiles, payment-type controls; days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn ACCESS and Amex; all supported.",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead on JP Morgan Chase ACCESS payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "WebSeries could not meet JPM needs out of the box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ Accenture and JPM resources across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Defined onshore-offshore engagement model",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline Portsmouth offices; Chicago and NY/NJ stakeholders",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Task"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "MAC security layer and payment-type-specific entitlements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Centralized gateway for message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Legacy migration coordinated with compliance teams, completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Owned production incident response with RCA and daily leadership calls",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011, 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "NACHA validation, FX rate visibility, wire-approve-not-FX entitlement example, risk-based restrictions, sanctions screening",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Compliance dashboards became standard operational tooling",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "Amex VPP adoption lagged: missing SDKs, fragmented documentation, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "North Star and Discovery and Framing workshops",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Developer portal, Java/.NET/Python SDKs, use-case-driven documentation, sandbox/virtualized test environments",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Client Onboarding Test Drive gathered feedback",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption and trial usage increased within 3 months; onboarding time reduced",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "Exceeded delivery commitment by over 261 story points",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Correct referent ACCESS 40+; supported.",
+  "claims": [
+   {
+    "text": "ACCESS payments team: blended onshore/offshore 40+ Accenture and JPM, Mumbai/Bangalore/US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Defined onshore-offshore model; primary technical interface with Bottomline",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Same engagement; supported.",
+  "claims": [
+   {
+    "text": "MAC-layer production failure root-caused to missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Break-glass production access, queried live payment data via SQL",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Post-cutover defects, primarily data issues carried over from legacy platform",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Ran UAT and production validation/shakeout testing, triaged post-cutover defects",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Repeatedly owned Sev-1 incident response across releases, waves, migrations; RCA across NY, Mumbai/Bangalore, Bottomline",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Status updates and daily leadership calls while issues live",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Migration completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Owned production support during rollout",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Team built custom modules and centralized gateway",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: leadership philosophy, permit-to-fail, balanced teams, NS ownership; all supported.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, purpose; makes intent explicit; pushes decisions to people closest to the work; coaches teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Inherited teams 'over-processed, under-trusted, waiting for permission'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Permit-to-fail: non-punitive post-mortems, low-stakes experiments; lessons applied to subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "Balanced teams of engineers, PMs, UX architects; pair programming, retrospectives; reduced delays; zero-defect production code",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action/Result"
+   },
+   {
+    "text": "4x delivery acceleration once teams embraced lean product and modern engineering",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Rising defects despite near-complete test coverage as pandemic moved team remote; credibility hit with client and Accenture leadership",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership rather than defending metrics; bottom-up audit; rebuilt backlog with SMART stories; TDD experts from Columbus",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Samman coaching: boot camps, katas, 'I do, we do, you do'; restructured agile rituals",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Defect rates dropped; client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern quality crisis, a failure the corpus presents as his ('Took ownership of the failure'); facts supported by crisis and making-it-stick stories.",
+  "claims": [
+   {
+    "text": "Early 2020 first CIC engagement, Norfolk Southern Revenue and Shipment Planning modernization, balanced team, TDD",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Rising defects despite near-complete test coverage as pandemic moved team remote; credibility hit with client and Accenture leadership",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Engineer solutioned from own interpretation and wrote tests after code; vague stories without scenarios/definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Took ownership rather than defending metrics; bottom-up audit; rebuilt backlog with SMART stories; TDD experts from Columbus",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Samman coaching: boot camps, katas, 'I do, we do, you do'; restructured agile rituals",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Defect rates dropped; client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Pairing, test-first and CI in place from start; reinforcement/follow-up/verification missing",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Task/Result"
+   },
+   {
+    "text": "Test cases a discrete step before engineering, checked at standup; daily pair rotation; new engineers with seasoned practitioners",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Stories entered sprints only when discrete and testable, for one-week iterations",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Practices held after experts left; failure mode did not recur; 'implementing a practice is the easy half'",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   },
+   {
+    "text": "Remote pairs traded drivers frequently to reduce fatigue",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn; all supported.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, purpose; makes intent explicit; pushes decisions to people closest to the work; coaches teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Inherited teams 'over-processed, under-trusted, waiting for permission'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Permit-to-fail: non-punitive post-mortems, low-stakes experiments; lessons applied to subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "Balanced teams of engineers, PMs, UX architects; pair programming, retrospectives; reduced delays; zero-defect production code",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action/Result"
+   },
+   {
+    "text": "4x delivery acceleration once teams embraced lean product and modern engineering",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Role silos, fear of blame, knowledge gaps",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Situation; establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation; enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Situation"
+   },
+   {
+    "text": "Early prototypes expected to fail; JTBD, rapid testing; failed experiments as decision inputs",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Paired senior with junior engineers; weekly tech talks; reduced onboarding time",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern quality crisis described honestly; supported; notes no numeric defect reduction.",
+  "claims": [
+   {
+    "text": "Early 2020 first CIC engagement, Norfolk Southern Revenue and Shipment Planning modernization, balanced team, TDD",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Rising defects despite near-complete test coverage as pandemic moved team remote; credibility hit with client and Accenture leadership",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Engineer solutioned from own interpretation and wrote tests after code; vague stories without scenarios/definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Took ownership rather than defending metrics; bottom-up audit; rebuilt backlog with SMART stories; TDD experts from Columbus",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Samman coaching: boot camps, katas, 'I do, we do, you do'; restructured agile rituals",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Defect rates dropped; client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Delivered product management and SMART story training; client confidence restored",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn; all supported.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, purpose; makes intent explicit; pushes decisions to people closest to the work; coaches teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Inherited teams 'over-processed, under-trusted, waiting for permission'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Permit-to-fail: non-punitive post-mortems, low-stakes experiments; lessons applied to subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "Balanced teams of engineers, PMs, UX architects; pair programming, retrospectives; reduced delays; zero-defect production code",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action/Result"
+   },
+   {
+    "text": "4x delivery acceleration once teams embraced lean product and modern engineering",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Command-and-control habits; enforcement and revalidation multiple times; leaders as facilitators",
+    "label": "supported",
+    "source": "empowering-teams-through-decentralized-decision-making|accenture Situation/Action"
+   },
+   {
+    "text": "Early prototypes expected to fail; reduced wasted engineering effort",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern quality crisis; supported.",
+  "claims": [
+   {
+    "text": "Early 2020 first CIC engagement, Norfolk Southern Revenue and Shipment Planning modernization, balanced team, TDD",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Rising defects despite near-complete test coverage as pandemic moved team remote; credibility hit with client and Accenture leadership",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Engineer solutioned from own interpretation and wrote tests after code; vague stories without scenarios/definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Took ownership rather than defending metrics; bottom-up audit; rebuilt backlog with SMART stories; TDD experts from Columbus",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Samman coaching: boot camps, katas, 'I do, we do, you do'; restructured agile rituals",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Defect rates dropped; client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Account leadership accustomed to waterfall",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn; all supported.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, purpose; makes intent explicit; pushes decisions to people closest to the work; coaches teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Inherited teams 'over-processed, under-trusted, waiting for permission'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Permit-to-fail: non-punitive post-mortems, low-stakes experiments; lessons applied to subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "Balanced teams of engineers, PMs, UX architects; pair programming, retrospectives; reduced delays; zero-defect production code",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action/Result"
+   },
+   {
+    "text": "4x delivery acceleration once teams embraced lean product and modern engineering",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Teams voiced feedback and changed workflows autonomously; satisfaction and retention improved",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action/Result"
+   },
+   {
+    "text": "Early prototypes expected to fail, treated as evidence",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "Took ownership rather than defending metrics; bottom-up audit; rebuilt backlog with SMART stories; TDD experts from Columbus",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Samman coaching: boot camps, katas, 'I do, we do, you do'; restructured agile rituals",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Defect rates dropped; client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern quality crisis and follow-up; supported.",
+  "claims": [
+   {
+    "text": "Early 2020 first CIC engagement, Norfolk Southern Revenue and Shipment Planning modernization, balanced team, TDD",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Rising defects despite near-complete test coverage as pandemic moved team remote; credibility hit with client and Accenture leadership",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Engineer solutioned from own interpretation and wrote tests after code; vague stories without scenarios/definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Took ownership rather than defending metrics; bottom-up audit; rebuilt backlog with SMART stories; TDD experts from Columbus",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Samman coaching: boot camps, katas, 'I do, we do, you do'; restructured agile rituals",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Defect rates dropped; client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Pairing, test-first and CI in place from start; reinforcement/follow-up/verification missing",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Task/Result"
+   },
+   {
+    "text": "Test cases a discrete step before engineering, checked at standup; daily pair rotation; new engineers with seasoned practitioners",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Stories entered sprints only when discrete and testable, for one-week iterations",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Practices held after experts left; failure mode did not recur; 'implementing a practice is the easy half'",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   },
+   {
+    "text": "Developers resisted new ways of working; client/account leadership accustomed to waterfall",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn; all supported.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, purpose; makes intent explicit; pushes decisions to people closest to the work; coaches teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Inherited teams 'over-processed, under-trusted, waiting for permission'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Rigid hierarchical culture; weekly brainstorming; shared mission over accolades",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation/Action"
+   },
+   {
+    "text": "Paired senior and junior engineers; peer learning communities; learning in live projects",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   },
+   {
+    "text": "Early prototypes expected to fail; rapid testing; direction week by week",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "Rising defects despite near-complete test coverage as pandemic moved team remote; credibility hit with client and Accenture leadership",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership rather than defending metrics; bottom-up audit; rebuilt backlog with SMART stories; TDD experts from Columbus",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Samman coaching: boot camps, katas, 'I do, we do, you do'; restructured agile rituals",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Defect rates dropped; client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "4x delivery acceleration once teams embraced lean product and modern engineering",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Data-exposure failure story, presented by the corpus as his leadership shortfall; all facts supported.",
+  "claims": [
+   {
+    "text": "Tech lead on global platform modernization for financial services client; offshore test cycles across dev/QA/UAT/prod; inherited IAM controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup but relied on assumptions",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task"
+   },
+   {
+    "text": "Did not audit who could trigger email jobs, verify masking, or add compensating controls such as email interception",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered UAT email job sending unmasked production data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability; RCA and corrective controls with team",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Client demanded tester be removed; 'systemic failure that resulted in an individual consequence'",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities; 'assumptions are risks in disguise'",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Performance"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

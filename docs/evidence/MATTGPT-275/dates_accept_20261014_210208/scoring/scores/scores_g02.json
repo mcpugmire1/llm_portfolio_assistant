@@ -1,0 +1,1510 @@
+[
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Both engagements covered from their stories; all claims supported (Fiserv $8.5M/45-person/3 vendors/results; ACCESS 40+ team, modules, 12-country gateway, April 2011). No quotations, no closing.",
+  "claims": [
+   {
+    "text": "Fiserv was a delivery recovery of an $8.5M white-label card portal serving 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person team had missed consecutive deadlines, poor production quality, stakeholders threatening contract cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation; Action (Sev-1 defects)"
+   },
+   {
+    "text": "ACCESS required custom engineering beyond Bottomline's WebSeries: payment modules, security controls, connectivity for 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Fiserv work combined Execution & Delivery with Org & Working-Model Transformation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Theme; driving-agile-transformation-for-fiservs-card-portal|fiserv Theme (rule 4)"
+   },
+   {
+    "text": "Coordinated 3 external vendors while processing moved from VisionPLUS 350 mainframe toward SOA-based API architecture",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation; Action"
+   },
+   {
+    "text": "Replaced 200-page requirements documents and 6-month release cycles with persona-based user stories, multi-tiered JIRA boards, follow-the-sun handoffs, bi-weekly demos",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation; Action"
+   },
+   {
+    "text": "Team adopted 2-week sprints within 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "PMO and compliance accepted JIRA as system of record with audit trails and attached accessibility scans",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action; Result"
+   },
+   {
+    "text": "Replaced SVN with Git, required senior-developer code reviews, introduced Maven, Artifactory, Hudson, SonarQube, JUnit quality gates",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "At JPMC led a 40+ blended team across Mumbai, Bangalore and the US, 70-80% of time embedded with Bottomline in Portsmouth",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed build-versus-configure boundary; delivered ACH, wire, FX/cross-border, tax payment capabilities, MAC security, payment-type-specific entitlements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway handled message transformation, protocol translation and routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation; Result"
+   },
+   {
+    "text": "Bulk entitlement changes across users, accounts and products via role-based profiles and a centralized dashboard",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Fiserv launched 3% under budget, 47/47 acceptance criteria, zero critical defects, $45M first month at 99.97% uptime, avoided $500K penalties",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 consolidating regional systems into a unified corporate banking portal; entitlement management days to minutes",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Names the dimension (global platform scope) and compares both accurately; team size called comparable, not ranked (strict reading satisfied); budget correctly flagged as not comparable; audience figures flagged as not comparable. All claims supported.",
+  "claims": [
+   {
+    "text": "ACCESS bigger in global platform scope (135,000+ clients across 180+ countries vs Fiserv 2M+ cardholders across 15 FIs)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Team size comparable (40+ vs 45), not ranked",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task; driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Budget cannot be compared: no ACCESS budget figure",
+    "label": "supported",
+    "source": "absence across ACCESS stories; recovering-fiservs-85m-white-label-card-portal|fiserv Situation ($8.5M)"
+   },
+   {
+    "text": "ACCESS served 135,000+ corporations, FIs, governments and municipalities across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Matt led a 40+ blended team delivering payment modules, security, entitlements and a gateway across 12 countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "His work covered legacy-system migration and jurisdiction-specific compliance across APAC, EMEA and the Americas",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task; navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Task"
+   },
+   {
+    "text": "Fiserv: 2M+ cardholders, 15 FIs, 45-person team, 3 external vendors; Matt managed the $8.5M program and its recovery",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation; Action"
+   },
+   {
+    "text": "Audience figures not directly comparable: individual cardholders vs institutional clients",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Both engagements covered from their stories; all claims supported. Theme-name framing for ACCESS accepted under rule 4 (see ambiguous calls).",
+  "claims": [
+   {
+    "text": "Both involved Execution & Delivery and Org & Working-Model Transformation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Theme; driving-agile-transformation-for-fiservs-card-portal|fiserv Theme; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Theme; ACCESS onshore-offshore engagement model in building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Task (rule 4, see ambiguous calls)"
+   },
+   {
+    "text": "Fiserv: took over $8.5M white-label card portal after missed deadlines, poor quality, cancellation threats; 2M+ cardholders across 15 FIs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "ACCESS required custom engineering beyond WebSeries plus consolidation of regional treasury systems for 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Coordinated a 45-person globally dispersed team and 3 external vendors while mainframe processing moved toward API-based integration",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation; Action"
+   },
+   {
+    "text": "Replaced module-based requirements in a 200-page BRD with persona-based user stories, biweekly demos, offshore/onshore handoffs",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Moved from 6-month release cycles to 2-week sprints within 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action; Result"
+   },
+   {
+    "text": "Migrated SVN to Git, mandated senior-developer reviews and unit tests, introduced Maven, Artifactory, Hudson, SonarQube, JUnit",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "JIRA audit trails and attached accessibility scans addressed PMO and compliance resistance",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Managed a 40+ blended team, 70-80% embedded with Bottomline in Portsmouth",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Delivered ACH, wire, FX/cross-border and tax-payment modules, MAC verification, payment-type permissions, SSO and global reporting",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway handled message transformation and routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Role-based profiles and bulk changes reduced entitlement administration from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Led payments data migration without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task; Result"
+   },
+   {
+    "text": "Fiserv 3% under budget, 47/47 acceptance criteria, zero critical defects, avoided $500K penalties by recovering delayed release",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 as unified corporate banking portal with purpose-built payments, centralized permissions, preserved compliance traceability",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail: unsupported ranking 'by reported individual end-user count, Fiserv'. The ACCESS stories give no individual end-user count (135,000+ are institutional clients), so this ranks on a dimension the stories don't establish, and the hedge 'different measures' doesn't say the stories can't settle it. Team (no clear winner), budget (no comparison) and footprint claims supported.",
+  "claims": [
+   {
+    "text": "ACCESS had the broader global footprint",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Team counts similar (45 vs 40+ does not establish a clear winner)",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACCESS served 135,000+ corporations, FIs, governments and municipalities across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Matt managed a 40+ blended team delivering payment modules, a 12-country gateway, and regional consolidation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task"
+   },
+   {
+    "text": "Corporate treasurers gained a single entry point instead of separate local logins",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Fiserv: 2M+ cardholders across 15 FIs, 45-person team, 3 external vendors, $8.5M program",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "By reported individual end-user count, Fiserv is bigger (Fiserv 'served more individual cardholders')",
+    "label": "unsupported",
+    "source": "no ACCESS individual end-user count in building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase; 135,000+ are institutional clients"
+   },
+   {
+    "text": "No supported budget comparison: ACCESS budget not documented",
+    "label": "supported",
+    "source": "absence across ACCESS stories"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Both engagements covered from their stories; all claims supported.",
+  "claims": [
+   {
+    "text": "Both involved Execution & Delivery",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Theme; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Theme"
+   },
+   {
+    "text": "Took over $8.5M white-label card portal roughly 7 months into a troubled engagement",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person team had missed consecutive deadlines, poor quality, cancellation threats",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "ACCESS required custom engineering beyond WebSeries: payment modules, security controls, entitlements, connectivity",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; Task"
+   },
+   {
+    "text": "Regional systems had different data models; entitlement changes took days of manual configuration",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation; overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Coordinated 3 external vendors across payment processing, fraud detection, hosting",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Managed SOA integration layer connecting mainframe COBOL to Java EE/Spring portal",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "200-page requirements organized by system modules replaced with persona-based user stories",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation; Action"
+   },
+   {
+    "text": "Replaced single To Do/Done board with multi-tiered JIRA workflows; sprint demos caught branding and accessibility issues early",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action; Result"
+   },
+   {
+    "text": "PMO and compliance accepted JIRA as system of record with audit trails and accessibility scans",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Moved from 6-month releases to 2-week sprints within 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Managed 40+ blended team, 70-80% embedded at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Determined where platform configuration ended and bespoke engineering began",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Delivered ACH, wire, FX/cross-border modules, payment verification, payment-type permissions, 12-country gateway",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Bulk entitlement changes reduced administration from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Led payments data migration without disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "Fiserv 3% under budget, all 47 acceptance criteria, zero critical defects, avoided $500K penalties",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 as unified portal serving 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail: unsupported 'Fiserv served more people' / 'the larger stated end-user population'. ACCESS's 135,000+ are institutional clients and its stories give no people count, so the ranking isn't established, and 'although the populations were different' doesn't say it. Team (similar), budget (not available) and geographic-scope claims supported.",
+  "claims": [
+   {
+    "text": "By geographic reach and platform scope, ACCESS was bigger",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "By end-user count Fiserv served more people / had the larger stated end-user population",
+    "label": "unsupported",
+    "source": "no ACCESS end-user (people) count in building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase; 135,000+ are institutional clients"
+   },
+   {
+    "text": "ACCESS served 135,000+ corporations, FIs, governments and municipalities across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Payments gateway connected payment operations across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Managed 40+ blended team delivering payment modules, security, reporting, integrations",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task; Action"
+   },
+   {
+    "text": "Fiserv: 2M+ cardholders across 15 FIs, 45-person team, 3 external vendors, $8.5M program",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv processed $45M in first month with 99.97% uptime",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Stated team sizes similar",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "No ACCESS budget figure available",
+    "label": "supported",
+    "source": "absence across ACCESS stories"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail: unsupported claim that he 'presented [the ADA manifesto] to client IT leadership, the steering committee, and delivery teams'. The stories only say he defined the manifesto. Everything else is supported.",
+  "claims": [
+   {
+    "text": "December 2014 to June 2015, Senior Technology Architecture Manager, took over development management",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Start_Date/End_Date, Role, Task"
+   },
+   {
+    "text": "$8.5M white-label card portal serving 2M+ cardholders across 15 FIs; joined roughly 7 months in",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Missed deadlines, production quality problems, cancellation threats; 45-person team lacked visibility; 3 vendors uncoordinated",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation; driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Traveled Mon-Thu to Omaha, ran daily 7 AM and 11 PM offshore/onshore transition calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Re-prioritized backlog, reset timelines, closed quality and process gaps, coordinated vendors (payment processing, fraud detection, hosting)",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Managed SOA integration layer to Java EE/Spring via MuleSoft, Tibco, WebMethods",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Decomposed 200-page requirements into persona-based user stories; replaced 6-month release cycles",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Restructured JIRA around 47 acceptance criteria, bi-weekly sprint demos, negotiated stakeholder review windows",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland moved to 2-week sprints within 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action; Result"
+   },
+   {
+    "text": "Used JIRA audit trails, accessibility scans and developer comments to satisfy PMO and compliance",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Researched and wrote an ADA manifesto",
+    "label": "supported",
+    "source": "delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Action (learned WCAG; defined the ADA manifesto)"
+   },
+   {
+    "text": "Presented the ADA manifesto to client IT leadership, the steering committee and delivery teams",
+    "label": "unsupported",
+    "source": "no Fiserv story records presenting the manifesto to these audiences"
+   },
+   {
+    "text": "Incorporated screen reader audits into the Definition of Done",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Fiserv adopted those accessibility standards for later releases",
+    "label": "supported",
+    "source": "delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Performance; Result (rule 5)"
+   },
+   {
+    "text": "3% under budget ($255K), 47/47 criteria, zero critical defects, recovered release 3 weeks late avoiding $500K, $45M first month at 99.97% uptime, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Gives the Fiserv team size of 45 from the story with no clarifying question. All claims supported.",
+  "claims": [
+   {
+    "text": "45-person globally dispersed team at Fiserv",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation; Action"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland, with the onshore team in Omaha",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action; modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation (Omaha onshore)"
+   },
+   {
+    "text": "Coordinated 3 external vendors for payment processing, fraud detection, hosting infrastructure",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action; Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Fiserv engagement described from its stories; all claims supported.",
+  "claims": [
+   {
+    "text": "December 2014 to June 2015, Senior Technology Architecture Manager and Development Manager",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Start_Date/End_Date, Role, Task"
+   },
+   {
+    "text": "$8.5M white-label card portal, 2M+ cardholders, 15 FIs; joined roughly 7 months in",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person team missed deadlines, production payment processing had critical defects, cancellation threats",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation; Action (Sev-1 defects in live payment processing)"
+   },
+   {
+    "text": "Vendors for payment processing, fraud detection, hosting had uncoordinated dependencies; coordinated the 3 vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation; Action"
+   },
+   {
+    "text": "Reset priorities and timelines, ran daily offshore/onshore transition calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "SOA layer wrapping VisionPLUS 350 mainframe COBOL for Java EE/Spring via MuleSoft, Tibco, WebMethods",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Replaced system-module requirements in 200-page BRD with persona-based user stories",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation; Action"
+   },
+   {
+    "text": "Replaced single To Do/Done JIRA board with multi-tiered Kanban/Scrum; 6-month releases to 2-week sprints within 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action; Result"
+   },
+   {
+    "text": "Used JIRA audit trails, accessibility scans, developer comments as system of record rather than static Word documents",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Wrote the portal's ADA manifesto, screen-reader audits in Definition of Done, sprint demos to catch branding/accessibility issues early",
+    "label": "supported",
+    "source": "delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Action; driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Fiserv adopted those accessibility standards for later releases",
+    "label": "supported",
+    "source": "delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Performance (rule 5)"
+   },
+   {
+    "text": "3% under budget ($255K), 47/47 criteria, zero critical defects, $45M first month at 99.97% uptime, recovered release 3 weeks late avoiding $500K, $3M contract extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Fiserv team size of 45, no clarifying question. All claims supported.",
+  "claims": [
+   {
+    "text": "45-person globally dispersed team at Fiserv",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland, alongside Omaha onshore team",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action; modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Coordinated 3 external vendors for payment processing, fraud detection, hosting",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Ran daily 7 AM CST offshore-to-onshore and 11 PM CST onshore-to-offshore syncs",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Fiserv engagement described from its stories; all claims supported.",
+  "claims": [
+   {
+    "text": "December 2014 to June 2015 as Development Manager",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Start_Date/End_Date, Task"
+   },
+   {
+    "text": "$8.5M portal, 2M+ cardholders, 15 FIs; joined roughly 7 months into the 14-month initiative",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person team missed multiple deadlines, poor quality, cancellation threats; 3 vendors uncoordinated",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Platform moving from mainframe to SOA-based API architecture",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Traveled Mon-Thu to Omaha, ran 7 AM and 11 PM transition calls; reprioritized backlog, reset timelines, coordinated vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Integration layer wrapped mainframe COBOL into Java EE/Spring via MuleSoft, Tibco, WebMethods",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Assumed program manager responsibilities during program lead's paternity leave",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Replaced 6-month waterfall and 200-page module-organized requirements with persona-based stories and 2-week sprints",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation; Action"
+   },
+   {
+    "text": "JIRA tracking 47 acceptance criteria as Epics; biweekly demos caught branding, UI, ADA issues early",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "PMO and compliance accepted JIRA as system of record with audit trails, ADA scans, developer comments",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action; Result"
+   },
+   {
+    "text": "Within 3 months transitioned to new cadence, real-time visibility for 50+ stakeholders across 3 time zones",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "3% under budget ($255K), 47/47 criteria, zero critical defects, release 3 weeks behind recovered avoiding $500K, $45M first month at 99.97% uptime, $3M contract extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Fiserv team size of 45, no clarifying question. All claims supported.",
+  "claims": [
+   {
+    "text": "45-person globally dispersed team on Fiserv's white-label card portal",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland, alongside Omaha onshore team",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action; modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Coordinated 3 external vendors for payment processing, fraud detection, hosting infrastructure",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action; Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern engagement described from its stories; all claims supported. The quotation \"I do, we do, you do\" appears verbatim in the unifying-norfolk-southerns story's Action.",
+  "claims": [
+   {
+    "text": "November 2019 to September 2023, led Revenue and Shipment Planning modernization as Director at Accenture; CIC's first engagement",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Start_Date/End_Date, Role, Project, Situation"
+   },
+   {
+    "text": "Mainframe dated to the 1970s; orders fell out unnoticed until customers called; rules in COBOL and assembly; clerks handled waybill and rating fallout through green-screen consoles",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Wholesale replacement too risky for systems carrying live rail operations",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Situation"
+   },
+   {
+    "text": "Client in mainframe thinking, account leadership waterfall, team learning new model during COVID",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Domain-driven design and event storming; Boris Exercise for APIs and data flows; SNAP-E for dependencies and risks",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action; modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Action"
+   },
+   {
+    "text": "Mainframe kept as system of record while APIs, microservices, CockroachDB rose beside it; CDC sync; reconciliation reports",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action; rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Action"
+   },
+   {
+    "text": "API gateways, anti-corruption layers, Docker, Kubernetes, TDD, automated CI/CD",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Action; the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Brought revenue management into innovation hub to co-create SRS UI, personas through high-fidelity prototypes, weekly build-measure-learn",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Led a 2-day CIC Academy course delivered twice monthly over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "Pair programming faced resistance; let participants experience it firsthand; used \"I do, we do, you do\" to spread domain knowledge (quote verbatim)",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "UI MVP launched covering 95% of targeted use cases, real orders with clean data feeding the mainframe",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "EDI validation caught fallout proactively and notified trading partners",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action; Result"
+   },
+   {
+    "text": "Client contributors learned to own backlog and gained Angular, Node, Spring Boot, cloud-native skills to support the app after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action; Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New topic answered from the RBC stories with no Norfolk Southern carry-over; all claims supported.",
+  "claims": [
+   {
+    "text": "June 2012 to June 2013, Senior Technology Architecture Manager at Accenture on RBC's Day2Day Corporate Banking modernization",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Start_Date/End_Date, Role, Employer, Project"
+   },
+   {
+    "text": "Bank evaluating Bottomline WebSeries as payment hub engine while planning to replace RBC Express",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Systems had performance/scalability limits, lacked mobile cheque deposit, limited cross-device access, no API integration",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation; assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Situation"
+   },
+   {
+    "text": "Leadership needed to know whether the platform could meet requirements before committing investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Architecture assessment and gap/fit analysis using code reviews, interviews, documentation analysis, heat maps across Data, Application, Technology, Business Architecture",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Worked with EA team on target-system models and cost-to-fix vs benefit comparison",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Found WebSeries lacked modularity; prevented further investment; enabled redirecting resources",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action; Result"
+   },
+   {
+    "text": "Established the PMO: project management plan, reporting, risk and dependency management, centralized communications across RBC, Accenture, Bottomline",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Action"
+   },
+   {
+    "text": "Designated contacts, real-time updates, daily summaries, task-tracking matrix eliminated missed updates, reduced redundant effort, clarified assignments",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Action; Result"
+   },
+   {
+    "text": "Took over data conversion from scratch after previous lead left; legacy records, transformation rules, mock cycles, reconciliation for payment amounts and beneficiary details; managed onshore/offshore teams",
+    "label": "supported",
+    "source": "leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Situation; Action"
+   },
+   {
+    "text": "Delivered mobile modernization blueprint covering API integration, cheque deposit, cross-browser/device scalability; mobile implementation roadmap",
+    "label": "supported",
+    "source": "assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Action; Result; 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "RBC's duration from its dates (June 2012 to June 2013), stated approximately ('approximately 12 months', equivalent to 'about a year'); no Norfolk Southern figure, no invented precision. All claims supported.",
+  "claims": [
+   {
+    "text": "RBC engagement ran June 2012 to June 2013, approximately 12 months",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Start_Date/End_Date (and all RBC stories)"
+   },
+   {
+    "text": "Timeframe covers assessment, PMO, data conversion, mobile readiness",
+    "label": "supported",
+    "source": "RBC stories Start_Date/End_Date 2012-06 to 2013-06"
+   },
+   {
+    "text": "Stories don't specify separate workstream durations or a completion date for the full modernization",
+    "label": "supported",
+    "source": "all RBC stories share 2012-06 to 2013-06; no other dates"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern engagement described from its stories; all claims supported.",
+  "claims": [
+   {
+    "text": "November 2019 through September 2023, Director at Accenture, CIC's first engagement",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Start_Date/End_Date, Role, Situation"
+   },
+   {
+    "text": "Core scheduling, billing, order-to-cash on 1970s mainframe; orders fell out unnoticed; COBOL and assembly maintained by shrinking workforce; clerks handled fallout through green-screen consoles",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Led DDD and event storming",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Teams built APIs, microservices, CockroachDB beside mainframe as system of record; CDC sync; reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "API gateways, anti-corruption layers, Docker, Kubernetes, CI/CD supported incremental replacement on live production",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Action; Situation"
+   },
+   {
+    "text": "SNAP-E documentation captured APIs, data flows, dependencies, risks",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Action"
+   },
+   {
+    "text": "Co-created SRS UI in innovation hub via personas, prototypes, weekly build-measure-learn",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "When defects rose despite near-complete coverage, audited code and tests, rebuilt backlog stories, brought in TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation; Action"
+   },
+   {
+    "text": "Led 2-day CIC Academy course twice monthly over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "Pairing rotated legacy knowledge; NS contributors learned Angular, Node, Spring Boot, cloud-native",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "Scaled to 3 balanced teams",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "MVP covered 95% of targeted use cases, real orders with clean data; EDI validation proactive, notified trading partners",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "Real-time revenue tracking replaced batch reporting; maintenance expenses declined",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Result"
+   },
+   {
+    "text": "Client team co-creating in weekly iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail: unsupported claim that he 'published and presented a migration strategy that RBC adopted'. No RBC story has it. No Norfolk Southern carry-over; the other claims are supported.",
+  "claims": [
+   {
+    "text": "June 2012 to June 2013, Senior Technology Architecture Manager at Accenture on Day2Day Corporate Banking",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Start_Date/End_Date, Role, Project"
+   },
+   {
+    "text": "Evaluating Bottomline WebSeries to replace aging RBC Express; performance/scalability limits, no mobile, no API integration",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation; assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Situation"
+   },
+   {
+    "text": "Previous data conversion lead left early",
+    "label": "supported",
+    "source": "leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Situation"
+   },
+   {
+    "text": "Established PMO: staffing, responsibilities, budget, schedule, reporting, risk and dependency management; governance meetings across RBC, Accenture, Bottomline",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Action"
+   },
+   {
+    "text": "Designated contacts, daily summaries, shared update platform, task-tracking matrix clarified assignments and eliminated missed updates",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Action; Result"
+   },
+   {
+    "text": "Took over conversion planning from scratch: legacy records, transformation rules, mock cycles, reconciliation; coordinated partners; managed onshore/offshore teams",
+    "label": "supported",
+    "source": "leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Action"
+   },
+   {
+    "text": "Published and presented a migration strategy that RBC adopted",
+    "label": "unsupported",
+    "source": "no RBC story records a published/presented migration strategy or its adoption (leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Result covers a conversion plan only)"
+   },
+   {
+    "text": "Assessment: code reviews, interviews, gap/fit, leadership workshops, heat maps, target-system models with cost-to-fix vs benefit",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Mobile-readiness blueprint defined API integration, cheque deposit, cross-device requirements",
+    "label": "supported",
+    "source": "assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Action; Result"
+   },
+   {
+    "text": "WebSeries lacked modularity; RBC avoided further investment and redirected resources; heat maps and roadmap remained reference material",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action; Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "RBC's duration from its dates, stated approximately ('about 12 months'); no Norfolk Southern figure or invented precision. All claims supported.",
+  "claims": [
+   {
+    "text": "RBC engagement ran June 2012 to June 2013, about 12 months",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Start_Date/End_Date"
+   },
+   {
+    "text": "Timeframe covers PMO, assessment, mobile blueprint, data conversion",
+    "label": "supported",
+    "source": "RBC stories Start_Date/End_Date"
+   },
+   {
+    "text": "Stories don't specify separate workstream durations or a full-modernization completion date",
+    "label": "supported",
+    "source": "all RBC stories share 2012-06 to 2013-06"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern engagement described from its stories; all claims supported.",
+  "claims": [
+   {
+    "text": "Director at Accenture, led Revenue and Shipment Planning modernization November 2019 through September 2023, CIC's first engagement",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Role, Project, Start_Date/End_Date, Situation"
+   },
+   {
+    "text": "1970s mainframe; orders fell out unnoticed; COBOL and assembly; clerks manually handled waybill and rating fallout",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Resistance from mainframe-thinking client and waterfall-accustomed account leadership",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Kept mainframe as system of record, built APIs, microservices, CockroachDB beside it; CDC; reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Event storming, Boris Exercise, SNAP-E documentation",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Action; Process"
+   },
+   {
+    "text": "Co-created SRS UI in innovation hub via personas, prototypes, weekly build-measure-learn",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Quality crisis: defects rose despite near-complete coverage; audited code and tests instead of defending the dashboard; found tests written after code and vague stories",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation; Action"
+   },
+   {
+    "text": "Brought in TDD experts, rebuilt stories with defined scenarios and definition of done, reinforced test-first via rotating pairs, coding katas, standup checks",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action; making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "2-day CIC Academy course twice a month over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "Pairing spread legacy knowledge and taught Angular, Node, Spring Boot, cloud-native so client could support app after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP covered 95% of targeted use cases, captured real orders, fed clean data to mainframe; EDI validation caught fallout proactively",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "Quality-crisis failure mode did not recur; pairing and test-first held after experts left",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New topic answered from the RBC stories with no Norfolk Southern carry-over; all claims supported.",
+  "claims": [
+   {
+    "text": "June 2012 to June 2013, Senior Technology Architecture Manager on corporate banking modernization",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Start_Date/End_Date, Role"
+   },
+   {
+    "text": "RBC systems had performance/scalability limits and lacked digital offerings; evaluating WebSeries for Day2Day to replace aging RBC Express",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Architecture assessment and gap/fit before further investment: code reviews, interviews, documentation, maturity scoring across Data/Application/Technology/Business Architecture",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Drew on prior WebSeries experience; heat maps, target-system models, cost-to-fix vs benefit",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Task; Action"
+   },
+   {
+    "text": "WebSeries lacked modularity; prevented investment; enabled redirecting resources",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action; Result"
+   },
+   {
+    "text": "Established PMO: plan, roadmap, risk and dependency tracking, reporting, centralized communications across RBC, Accenture, Bottomline",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Action"
+   },
+   {
+    "text": "Designated POCs, daily summaries, task-tracking matrix eliminated missed updates and reduced redundant efforts across 3 organizations",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Action; Result"
+   },
+   {
+    "text": "Took over data conversion from scratch after previous lead left: legacy records, transformation rules, mock cycles, reconciliation; delivered end-to-end conversion plan; coordinated onshore/offshore teams",
+    "label": "supported",
+    "source": "leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Situation; Action; Result"
+   },
+   {
+    "text": "Mobile readiness: assessed cheque deposit, cross-device, external integration gaps; blueprint for API integration, mobile, scalability; real-time account access across devices",
+    "label": "supported",
+    "source": "assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Situation; Task; Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "RBC's duration from its dates, about a year; no Norfolk Southern figure or invented precision. All claims supported.",
+  "claims": [
+   {
+    "text": "RBC engagement ran June 2012 to June 2013, approximately 1 year",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Start_Date/End_Date"
+   },
+   {
+    "text": "Period covers assessment, PMO, data conversion, mobile readiness",
+    "label": "supported",
+    "source": "RBC stories Start_Date/End_Date"
+   },
+   {
+    "text": "Stories don't specify separate workstream durations or a full-modernization completion date",
+    "label": "supported",
+    "source": "all RBC stories share 2012-06 to 2013-06"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail on Answered: it presents three periods as 'these documented engagements' and leaves out the TS Dynamics CRM engagement (JP Morgan Chase, 2013-04 to 2014-10, two stories). That misstates when he was at JP Morgan for about 18 months. The listed dates and role are supported.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer, Client"
+   },
+   {
+    "text": "August 2009 to June 2012: ACCESS Next Generation, payment engine and global payments gateway",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase"
+   },
+   {
+    "text": "September 2014 to December 2014: Corporate I&AM Uplift, including program planning and Jira adoption",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Start_Date/End_Date, Task; driving-agile-adoption-for-jp-morgans-identity-access-management-transformation|jp-morgan-chase Task"
+   },
+   {
+    "text": "June 2015 to June 2016: cloud integration architecture for Asset Management's Salesforce rollout",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Role on these engagements was Senior Technology Architecture Manager",
+    "label": "supported",
+    "source": "JP Morgan Chase stories Role"
+   },
+   {
+    "text": "These three are the documented JP Morgan engagements (list omits TS Dynamics CRM, April 2013 to October 2014)",
+    "label": "contradicted",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Client, Start_Date 2013-04, End_Date 2014-10"
+   },
+   {
+    "text": "Separate engagements, not a continuous tenure",
+    "label": "supported",
+    "source": "JP Morgan Chase stories Start_Date/End_Date"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail on Answered: 'during these periods' gives three periods and leaves out the TS Dynamics CRM engagement (2013-04 to 2014-10), so the answer to 'when' is materially incomplete. The listed dates and role are supported.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer, Client"
+   },
+   {
+    "text": "August 2009 to June 2012: ACCESS Next Generation, payment engine and global payments gateway",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase"
+   },
+   {
+    "text": "September to December 2014: Corporate Identity & Access Management Uplift",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "June 2015 to June 2016: cloud integration architecture for Asset Management's Salesforce rollout",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Role was Senior Technology Architecture Manager",
+    "label": "supported",
+    "source": "JP Morgan Chase stories Role"
+   },
+   {
+    "text": "These are the periods he worked with JP Morgan (omits TS Dynamics CRM, April 2013 to October 2014)",
+    "label": "contradicted",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Client, Start_Date 2013-04, End_Date 2014-10"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail: the claim of 'three documented periods' with the middle one starting September 2014 is contradicted by the TS Dynamics CRM stories (JP Morgan Chase, 2013-04 to 2014-10), which the answer leaves out. The individual engagement dates and role are supported.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer, Client"
+   },
+   {
+    "text": "Three documented periods: Aug 2009 to Jun 2012 (ACCESS / gateway), Sep 2014 to Dec 2014 (I&AM Uplift), Jun 2015 to Jun 2016 (Asset Management Salesforce cloud integration)",
+    "label": "contradicted",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Start_Date 2013-04, End_Date 2014-10 (the second documented period runs from April 2013, not September 2014)"
+   },
+   {
+    "text": "ACCESS Next Generation and global payments gateway August 2009 to June 2012",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase"
+   },
+   {
+    "text": "I&AM Uplift September 2014 to December 2014",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Asset Management Salesforce cloud integration June 2015 to June 2016",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Role was Senior Technology Architecture Manager",
+    "label": "supported",
+    "source": "JP Morgan Chase stories Role"
+   },
+   {
+    "text": "Separate engagements, not one continuous stint",
+    "label": "supported",
+    "source": "JP Morgan Chase stories Start_Date/End_Date"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

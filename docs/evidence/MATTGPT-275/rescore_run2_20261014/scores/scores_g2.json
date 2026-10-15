@@ -1,0 +1,1807 @@
+[
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: supported: all four profile.certifications entries with dates; 'none is current' supported. No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Matt has held certifications",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery, 2002",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (AWS expired 2023, SAFe expired, Oracle entry is 2002 exams)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "No PMP, then the full profile certification list, no PMO pivot. supported: 'does not hold PMP' (absent from profile.certifications), all four entries, 'none is current'. acknowledges_missing true (PMP absent from the record, list follows); useful_direct true.",
+  "claims": [
+   {
+    "text": "He does not hold PMP certification",
+    "label": "supported",
+    "source": "profile.certifications (PMP not in list)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery, 2002",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (AWS expired 2023, SAFe expired, Oracle entry is 2002 exams)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none are current, implies none is. supported: AWS expired 2023, SAFe expired, Oracle 2002 exams not a current certification. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (AWS expired 2023, SAFe expired, Oracle entry is 2002 exams)"
+   },
+   {
+    "text": "Both AWS certifications expired in 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe certification is expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: supported: all four profile.certifications entries with dates; 'none is current' supported. No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Matt has held certifications",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery, 2002",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (AWS expired 2023, SAFe expired, Oracle entry is 2002 exams)"
+   },
+   {
+    "text": "Oracle entry is passed exams, not a claim of full Oracle certification",
+    "label": "supported",
+    "source": "profile.certifications (entry name: 'exams passed')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "No PMP, then the full profile certification list, no PMO pivot. supported: 'does not hold PMP' (absent from profile.certifications), all four entries, 'none is current'. acknowledges_missing true (PMP absent from the record, list follows); useful_direct true.",
+  "claims": [
+   {
+    "text": "He does not hold PMP certification",
+    "label": "supported",
+    "source": "profile.certifications (PMP not in list)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery, 2002",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (AWS expired 2023, SAFe expired, Oracle entry is 2002 exams)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none are current, implies none is. supported: AWS expired 2023, SAFe expired, Oracle 2002 exams not a current certification. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (AWS expired 2023, SAFe expired, Oracle entry is 2002 exams)"
+   },
+   {
+    "text": "Both AWS certifications expired in 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe certification is expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle entry records exams passed in 2002, not a current certification",
+    "label": "supported",
+    "source": "profile.certifications"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: supported: all four profile.certifications entries with dates; 'none is current' supported. No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Matt has held AWS and SAFe certifications",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery, 2002",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (AWS expired 2023, SAFe expired, Oracle entry is 2002 exams)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "No PMP, then the full profile certification list, no PMO pivot. supported: 'does not hold PMP' (absent from profile.certifications), all four entries, 'none is current'. acknowledges_missing true (PMP absent from the record, list follows); useful_direct true.",
+  "claims": [
+   {
+    "text": "He does not hold PMP certification",
+    "label": "supported",
+    "source": "profile.certifications (PMP not in list)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery, 2002",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (AWS expired 2023, SAFe expired, Oracle entry is 2002 exams)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "c04",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none are current, implies none is. supported: AWS expired 2023, SAFe expired, Oracle 2002 exams not a current certification. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (AWS expired 2023, SAFe expired, Oracle entry is 2002 exams)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery, 2002",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle entry is passed exams, not a completed certification",
+    "label": "supported",
+    "source": "profile.certifications (entry name: 'exams passed')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: supported: all four profile.certifications entries with dates; 'none is current' supported. No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Matt has held certifications",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery, 2002",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (AWS expired 2023, SAFe expired, Oracle entry is 2002 exams)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "No PMP, then the full profile certification list, no PMO pivot. supported: 'does not hold PMP' (absent from profile.certifications), all four entries, 'none is current'. acknowledges_missing true (PMP absent from the record, list follows); useful_direct true.",
+  "claims": [
+   {
+    "text": "He does not hold PMP certification",
+    "label": "supported",
+    "source": "profile.certifications (PMP not in list)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery, 2002",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (AWS expired 2023, SAFe expired, Oracle entry is 2002 exams)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "c04",
+  "run": 4,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none are current, implies none is. supported: AWS expired 2023, SAFe expired, Oracle 2002 exams not a current certification. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (AWS expired 2023, SAFe expired, Oracle entry is 2002 exams)"
+   },
+   {
+    "text": "Both AWS certifications expired in 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe certification is expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle entry records exams passed in 2002, not a current certification",
+    "label": "supported",
+    "source": "profile.certifications"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: supported: all four profile.certifications entries with dates; 'none is current' supported. No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Matt has held certifications",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery, 2002",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (AWS expired 2023, SAFe expired, Oracle entry is 2002 exams)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "No PMP, then the full profile certification list, no PMO pivot. supported: 'does not hold PMP' (absent from profile.certifications), all four entries, 'none is current'. acknowledges_missing true (PMP absent from the record, list follows); useful_direct true.",
+  "claims": [
+   {
+    "text": "He does not hold PMP certification",
+    "label": "supported",
+    "source": "profile.certifications (PMP not in list)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery, 2002",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (AWS expired 2023, SAFe expired, Oracle entry is 2002 exams)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "c04",
+  "run": 5,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none are current, implies none is. supported: AWS expired 2023, SAFe expired, Oracle 2002 exams not a current certification. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (AWS expired 2023, SAFe expired, Oracle entry is 2002 exams)"
+   },
+   {
+    "text": "AWS certifications expired in 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe certification is expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle entry records exams passed, not a current certification",
+    "label": "supported",
+    "source": "profile.certifications"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Covers both Fiserv and ACCESS from their stories. supported: Fiserv $8.5M, 45-person, recovery actions and results; ACCESS 40+ team, modules, gateway 12 countries, April 2011. 0 contradicted, 0 unsupported. Note: 'Risk & Responsible Tech' is the label of other stories' Theme, not ACCESS's; read as a description of the security/entitlement/compliance work, which the ACCESS stories hold.",
+  "claims": [
+   {
+    "text": "Fiserv: $8.5M white-label card portal",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv program had missed multiple deadlines, poor quality, stakeholders threatening contract cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv team was 45 people",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv results: 3% under budget, 47/47 acceptance criteria, zero critical defects at launch",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Recovered release avoided $500K in penalties",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "ACCESS: bespoke engineering beyond Bottomline WebSeries platform",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Task"
+   },
+   {
+    "text": "Matt managed a 40+ blended onshore/offshore team on ACCESS",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border modules, MAC security, payment-type-specific RBAC/entitlements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payments gateway across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 as unified global corporate banking portal",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Both engagements are Execution & Delivery; Fiserv also Org & Working-Model Transformation",
+    "label": "supported",
+    "source": "Theme field of recovering-fiservs-85m-white-label-card-portal|fiserv / driving-agile-transformation-for-fiservs-card-portal|fiserv / ACCESS stories"
+   },
+   {
+    "text": "ACCESS included risk and responsible-tech work spanning payment security, entitlements and regional compliance",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Competencies ('Governance & Risk Management'), navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action (theme label itself is Execution & Delivery on ACCESS stories; see reason)"
+   },
+   {
+    "text": "Led custom engineering and legacy consolidation for ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task"
+   },
+   {
+    "text": "200-page requirements documents and 6-month release cycles at Fiserv",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Payment processing, fraud detection and hosting vendors lacked coordinated dependencies",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fragmented regional systems and jurisdiction-specific rules complicated ACCESS consolidation",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation; navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Daily offshore/onshore handoffs, coordinated 3 vendors, persona-based user stories, bi-weekly demos",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action; driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Negotiated review windows, kept steering committee reporting with sprint-level visibility",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "PMO and compliance accepted JIRA as system of record; screen reader audits in Definition of Done",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "ADA manifesto became the portal's accessibility standard",
+    "label": "supported",
+    "source": "delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Spent 70-80% of his time embedded at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Worked with enterprise architects, security specialists, regional compliance officers, developers on the WebSeries configure/build boundary",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Task; navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action"
+   },
+   {
+    "text": "Reporting, SSO",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Migration without disrupting live payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "Regional launches sequenced by regulatory readiness rather than big-bang",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Result"
+   },
+   {
+    "text": "Fiserv moved to 2-week sprints within 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Entitlement administration fell from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Regional compliance configurations enabled launch without regulatory blockers",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Covers both Fiserv and ACCESS from their stories. supported: Fiserv $8.5M, 45-person, recovery actions and results; ACCESS 40+ team, modules, gateway 12 countries, April 2011. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Fiserv: $8.5M white-label card portal",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv program had missed multiple deadlines, poor quality, stakeholders threatening contract cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv team was 45 people",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv results: 3% under budget, 47/47 acceptance criteria, zero critical defects at launch",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Recovered release avoided $500K in penalties",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "ACCESS: bespoke engineering beyond Bottomline WebSeries platform",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Task"
+   },
+   {
+    "text": "Matt managed a 40+ blended onshore/offshore team on ACCESS",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border modules, MAC security, payment-type-specific RBAC/entitlements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payments gateway across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 as unified global corporate banking portal",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Fiserv portal served 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "ACCESS served 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Development Manager at Fiserv; covered program management during the program lead's paternity leave",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Task/Action"
+   },
+   {
+    "text": "Coordinated 3 external vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Managed integration layer wrapping VisionPLUS 350 mainframe COBOL into Java EE/Spring portal",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Replaced 6-month waterfall with 2-week sprints; decomposed 200-page BRD into persona-based stories; sprint demos caught branding and ADA issues early",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "SVN to Git, mandatory senior reviews and unit tests, Maven, Artifactory, Hudson, SonarQube",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Technology Delivery Lead on ACCESS; 70-80% embedded at Bottomline Portsmouth; build-versus-configure boundary",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Tax-payment capability, SSO",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Bulk entitlement changes reduced administration from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Led payments data migration preserving compliance traceability, no disruption to live payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "Owned production incident response",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Portal processed $45M in first month with 99.97% uptime",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "ACCESS consolidated regional systems with purpose-built payments, centralized entitlements, real-time global reporting",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Covers both Fiserv and ACCESS from their stories. supported: Fiserv $8.5M, 45-person, recovery actions and results; ACCESS 40+ team, modules, gateway 12 countries, April 2011. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Fiserv: $8.5M white-label card portal",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv program had missed multiple deadlines, poor quality, stakeholders threatening contract cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv team was 45 people",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv results: 3% under budget, 47/47 acceptance criteria, zero critical defects at launch",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Recovered release avoided $500K in penalties",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "ACCESS: bespoke engineering beyond Bottomline WebSeries platform",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Task"
+   },
+   {
+    "text": "Matt managed a 40+ blended onshore/offshore team on ACCESS",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border modules, MAC security, payment-type-specific RBAC/entitlements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payments gateway across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 as unified global corporate banking portal",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Both involved Execution & Delivery; Fiserv also required changing how the team worked",
+    "label": "supported",
+    "source": "Theme fields; driving-agile-transformation-for-fiservs-card-portal|fiserv"
+   },
+   {
+    "text": "ACCESS under aggressive Wall Street delivery timelines",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Took over as Development Manager roughly 7 months into the Fiserv engagement",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Task"
+   },
+   {
+    "text": "Coordinated 3 external vendors covering payment processing, fraud detection, hosting",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "6-month cycles and 200-page requirements replaced by 2-week sprints, persona-based stories, bi-weekly demos",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Ran 7 AM and 11 PM handoff calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Negotiated stakeholder review windows; JIRA as system of record with audit trails and attached accessibility scans",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Wrote the ADA manifesto that became the accessibility standard",
+    "label": "supported",
+    "source": "delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Technology Delivery Lead for 40+ blended team across US, Mumbai, Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "70-80% embedded at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Worked with enterprise architects, security SMEs, bank stakeholders, developers on payment-type permissions and AML/KYC",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Owned production incident response and daily leadership communications",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Recovered delayed holiday release (Q4, before holiday freeze)",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "$3M contract extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "ACCESS served 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Entitlement engine reduced administration from days to minutes through bulk permission changes and centralized visibility",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Covers both Fiserv and ACCESS from their stories. supported: Fiserv $8.5M, 45-person, recovery actions and results; ACCESS 40+ team, modules, gateway 12 countries, April 2011. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Fiserv: $8.5M white-label card portal",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv program had missed multiple deadlines, poor quality, stakeholders threatening contract cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv team was 45 people",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv results: 3% under budget, 47/47 acceptance criteria, zero critical defects at launch",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Recovered release avoided $500K in penalties",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "ACCESS: bespoke engineering beyond Bottomline WebSeries platform",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Task"
+   },
+   {
+    "text": "Matt managed a 40+ blended onshore/offshore team on ACCESS",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border modules, MAC security, payment-type-specific RBAC/entitlements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payments gateway across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 as unified global corporate banking portal",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Fiserv portal served 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "ACCESS consolidating regional systems for 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase"
+   },
+   {
+    "text": "ACCESS pressure: aggressive timelines, distinct payment requirements, conflicting regional regulations",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Became Development Manager roughly 7 months in; coordinated 45 team members and 3 external vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv 5PSummary"
+   },
+   {
+    "text": "Reset backlog and timelines, ran offshore/onshore transition calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "SOA integration layer connecting VisionPLUS 350 mainframe to Java EE/Spring portal",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "SVN to Git, senior reviews, unit tests, Hudson CI, SonarQube",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "6-month cycles to 2-week sprints within 3 months; persona stories; sprint demos; JIRA accepted as compliance system of record",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "Technology Delivery Lead; 70-80% at Bottomline Portsmouth",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Tax-payment modules, centralized gateway",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase"
+   },
+   {
+    "text": "Bulk permission changes and role-based profiles reduced entitlement management from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Jurisdiction-specific configurations and regional rollout sequencing",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payments data migration without disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "3% under budget, $255K savings",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Q4 release 3 weeks behind",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$45M first month at 99.97% uptime; $3M contract extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Regional launches completed without regulatory blockers",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Covers both Fiserv and ACCESS from their stories. supported: Fiserv $8.5M, 45-person, recovery actions and results; ACCESS 40+ team, modules, gateway 12 countries, April 2011. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Fiserv: $8.5M white-label card portal",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv program had missed multiple deadlines, poor quality, stakeholders threatening contract cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv team was 45 people",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv results: 3% under budget, 47/47 acceptance criteria, zero critical defects at launch",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Recovered release avoided $500K in penalties",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "ACCESS: bespoke engineering beyond Bottomline WebSeries platform",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Task"
+   },
+   {
+    "text": "Matt managed a 40+ blended onshore/offshore team on ACCESS",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border modules, MAC security, payment-type-specific RBAC/entitlements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payments gateway across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 as unified global corporate banking portal",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Both involved Execution & Delivery",
+    "label": "supported",
+    "source": "Theme fields"
+   },
+   {
+    "text": "Inherited the Fiserv portal roughly 7 months into the engagement",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "ACCESS consolidating fragmented regional systems under aggressive timelines",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland lacked visibility; 200-page requirements documents",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation/Action"
+   },
+   {
+    "text": "Persona-based stories, restructured JIRA, bi-weekly demos, 2-week sprints within 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "PMO and compliance resistance overcome with JIRA audit trails, attached accessibility scans, developer comments",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Git, mandatory reviews, automated quality gates",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Coordinated 3 external vendors through the mainframe-to-API transition",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Action"
+   },
+   {
+    "text": "Embedded at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Tax-payment modules, payment verification, payment-specific permissions, contextual help",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Grouping capability and RBAC reduced entitlement management from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Gateway connected payment rails across 12 countries; SSO and global reporting reduced separate logins and fragmented treasury workflows",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payments-workstream migration without disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS served 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Passes: names the dimension (geographic reach, platform breadth) and calls team sizes comparable; both engagements covered accurately. supported: ACCESS 135,000+/180+ countries, 40+ team, 12-country gateway; Fiserv 45, 3 vendors, $8.5M, 14 months, 2M+/15 FIs, $45M first month. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "ACCESS served 135,000+ corporations, FIs, governments, municipalities across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Matt managed a 40+ person blended team on ACCESS",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACCESS gateway covered 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Fiserv portal served 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv: 45-person team",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv: 3 external vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Fiserv: $8.5M, 14-month program",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "No ACCESS budget figure in the stories",
+    "label": "supported",
+    "source": "no budget field or figure in ACCESS stories"
+   },
+   {
+    "text": "ACCESS bigger by geographic reach and breadth of platform work (dimension named)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation (180+ countries) vs recovering-fiservs-85m-white-label-card-portal|fiserv"
+   },
+   {
+    "text": "Team sizes comparable / similarly sized (no ranking)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task; driving-agile-transformation-for-fiservs-card-portal|fiserv"
+   },
+   {
+    "text": "ACCESS included legacy-system migration and regional compliance configuration",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase; navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase"
+   },
+   {
+    "text": "Fiserv portal processed $45M in its first month",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Customer counts measure different populations (organizations vs cardholders)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Passes: names the dimension (geographic reach, platform scope), team sizes comparable, budget not comparable; both engagements covered accurately. supported: ACCESS 135,000+/180+ countries, 40+ team, 12-country gateway; Fiserv 45, 3 vendors, $8.5M, 14 months, 2M+/15 FIs, $45M first month. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "ACCESS served 135,000+ corporations, FIs, governments, municipalities across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Matt managed a 40+ person blended team on ACCESS",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACCESS gateway covered 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Fiserv portal served 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv: 45-person team",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv: 3 external vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Fiserv: $8.5M, 14-month program",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "No ACCESS budget figure in the stories",
+    "label": "supported",
+    "source": "no budget field or figure in ACCESS stories"
+   },
+   {
+    "text": "ACCESS bigger in geographic reach and platform scope (dimension named)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Team sizes comparable (no ranking)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase; driving-agile-transformation-for-fiservs-card-portal|fiserv"
+   },
+   {
+    "text": "ACCESS: bespoke payment modules, security, entitlements, regional-system migration, compliance across APAC, EMEA, Americas",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase; navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase"
+   },
+   {
+    "text": "Fiserv had the larger stated end-user count (2M+ cardholders), caveated as not equivalent to ACCESS's organization count",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails strict reading: unsupported 'Fiserv had the larger stated delivery team' (45 vs 40+ ranked with no statement that the stories don't establish which is larger). Rest supported (135,000+/180+, 40+, 12 countries, $8.5M, 14-month, 2M+/15 FIs).",
+  "claims": [
+   {
+    "text": "ACCESS served 135,000+ corporations, FIs, governments, municipalities across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Matt managed a 40+ person blended team on ACCESS",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACCESS gateway covered 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Fiserv portal served 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv: 45-person team",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv: 3 external vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Fiserv: $8.5M, 14-month program",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "No ACCESS budget figure in the stories",
+    "label": "supported",
+    "source": "no budget field or figure in ACCESS stories"
+   },
+   {
+    "text": "ACCESS bigger in global reach and platform scope",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Fiserv had the larger stated delivery team (45 vs 40+)",
+    "label": "unsupported",
+    "source": "brief strict reading c12 t2: 45 vs 40+ does not establish a larger team; driving-agile-transformation-for-fiservs-card-portal|fiserv / building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase"
+   },
+   {
+    "text": "ACCESS consolidated regional systems into a unified portal",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Customer counts not like-for-like",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase; recovering-fiservs-85m-white-label-card-portal|fiserv"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Passes: names the dimension and says 45 vs 40+ doesn't establish the larger team; both engagements covered accurately. supported: ACCESS 135,000+/180+ countries, 40+ team, 12-country gateway; Fiserv 45, 3 vendors, $8.5M, 14 months, 2M+/15 FIs, $45M first month. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "ACCESS served 135,000+ corporations, FIs, governments, municipalities across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Matt managed a 40+ person blended team on ACCESS",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACCESS gateway covered 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Fiserv portal served 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv: 45-person team",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv: 3 external vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Fiserv: $8.5M, 14-month program",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "No ACCESS budget figure in the stories",
+    "label": "supported",
+    "source": "no budget field or figure in ACCESS stories"
+   },
+   {
+    "text": "ACCESS broader in global reach and payment scope (dimension named)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "45 vs 40+ does not establish which team was larger",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task; driving-agile-transformation-for-fiservs-card-portal|fiserv"
+   },
+   {
+    "text": "ACCESS: ACH, wire, FX/cross-border, tax-payment; regional compliance; legacy consolidation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase; navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase"
+   },
+   {
+    "text": "180+ countries is client reach, not the gateway's country count",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase"
+   },
+   {
+    "text": "Fiserv had the larger stated individual-user population (2M+ cardholders), caveated as not like-for-like",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv remit: recovery, budget, mainframe-to-API integration, accessibility, release and dev practices; PM during paternity leave",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv; delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv; modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv"
+   },
+   {
+    "text": "Fiserv $45M transactions in first month; no comparable ACCESS budget or transaction-volume figure",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Passes: names the dimension (global scope), team sizes comparable; both engagements covered accurately. supported: ACCESS 135,000+/180+ countries, 40+ team, 12-country gateway; Fiserv 45, 3 vendors, $8.5M, 14 months, 2M+/15 FIs, $45M first month. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "ACCESS served 135,000+ corporations, FIs, governments, municipalities across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Matt managed a 40+ person blended team on ACCESS",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACCESS gateway covered 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Fiserv portal served 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv: 45-person team",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Fiserv: 3 external vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Fiserv: $8.5M, 14-month program",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "No ACCESS budget figure in the stories",
+    "label": "supported",
+    "source": "no budget field or figure in ACCESS stories"
+   },
+   {
+    "text": "ACCESS had the broader global scope; covered more treasury functions",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Team sizes comparable (no ranking)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase; driving-agile-transformation-for-fiservs-card-portal|fiserv"
+   },
+   {
+    "text": "ACCESS custom payment modules, security controls, integrations",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Fiserv portal processed $45M in first month",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Fiserv had the larger stated end-user count, caveated as different measures",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

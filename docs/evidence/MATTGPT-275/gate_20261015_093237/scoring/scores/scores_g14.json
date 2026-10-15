@@ -1,0 +1,2527 @@
+[
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "PASS. Turn 1 (payments): correct referent, all payments facts trace to stories. Supported: JPM ACCESS 40+ team, April 2011, 135,000+/180+; RBC workflows; Amex SDKs and 261 story points. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "Built the payment engine for JP Morgan Chase ACCESS",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "Regional treasury systems had different data models, client configurations, entitlement structures",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "ACCESS needed payment capabilities beyond Bottomline WebSeries, under aggressive timelines",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Led a blended team of 40+ across Accenture and JPM in Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, federal tax payment modules, payment verification, payment-type permissions",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Contextual help explaining wire fields, tax codes, FX requirements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Real-time reporting and SSO across treasury functions",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Led payments data migration preserving configurations, histories, compliance traceability without disrupting live payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011, 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "RBC: manual processes, bulk-payment delays, missing real-time FX tools",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Situation"
+   },
+   {
+    "text": "RBC: designed workflows initiation through settlement and reconciliation, partnered with FX team",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "RBC: implementation blueprint, revised cutoff reduced wire delays, training materials",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   },
+   {
+    "text": "Amex: clients lacked SDKs, documentation, sandbox; dependency bottlenecks and delayed testing",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "Amex: Java, .NET, Python SDKs, use-case documentation, virtualized testing environments",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Amex: Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Onboarding time fell, API trial usage up within 3 months, over 261 additional story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "PASS. Turn 1 (payments): correct referent, all payments facts trace to stories. Supported: Technology Delivery Lead, 40+ team, Portsmouth, April 2011, RBC and Amex facts. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead for ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Regional treasury systems had different data models, client configurations, entitlement structures",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "WebSeries needed custom engineering for JPM payment requirements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Task"
+   },
+   {
+    "text": "Managed blended onshore/offshore team of 40+",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Worked extensively from Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, federal tax modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "NACHA validation, MAC security, payment-type permissions, sanctions screening, transaction monitoring integration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Contextual guidance on wire fields, tax codes, FX to reduce errors and support calls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Led payments data migration with compliance traceability and zero disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011, consolidating regional systems, 135,000+ clients, 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "RBC: fragmented cross-border systems, manual processes, bulk delays",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Situation"
+   },
+   {
+    "text": "RBC: workflows incl. real-time FX, alerts, recurring payments, Interac e-Transfer, batch",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "RBC: blueprint, reduced wire delays, training materials",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   },
+   {
+    "text": "Amex VPP adoption lagged: no SDKs, docs, sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "Co-created developer portal, Java/.NET/Python SDKs, virtualized test environments",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Lean Product and XP, Client Onboarding Test Drive, over 261 story points",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Onboarding time fell, API trial usage up within 3 months",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "PASS. Topic switch to leadership style with no payments carry-over; all facts supported. Quotes verified verbatim (rule 8). Supported: leadership philosophy, CIC culture, NS ownership, 4x. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quote 'over-processed, under-trusted, waiting for permission instead of owning outcomes' (verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Makes intent explicit, pushes decisions to those closest to the work, coaches teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "CIC rigid hierarchical culture; weekly brainstorming without judgment; shared goals over accolades",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation/Action"
+   },
+   {
+    "text": "Paired senior with junior engineers; peer-led demos, practice forums; learning in live projects",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   },
+   {
+    "text": "Set expectations early prototypes would likely fail; user research, JTBD, rapid testing; week-by-week direction",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Norfolk Southern: rising defects despite near-complete coverage; took ownership before client and account leadership",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation/Action"
+   },
+   {
+    "text": "Audited code and tests, exposed backlog gaps, brought in TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Quote 'I do, we do, you do' (verbatim); coding katas, testable stories",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "4x delivery acceleration at CIC after lean product and modern engineering",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "PASS. Topic switch to leadership style with no payments carry-over; all facts supported. Quotes verified verbatim. Supported: leadership philosophy, permit-to-fail, balanced teams, 4x. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "Empathy, clarity, purpose with modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quote 'over-processed, under-trusted...' (verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "CIC rigid hierarchy slowed idea sharing",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation"
+   },
+   {
+    "text": "Fear of blame kept teams from experimenting; slower delivery, missed opportunities",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation"
+   },
+   {
+    "text": "Made intent explicit, pushed decisions down, direct feedback and open communication",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Weekly brainstorming without judgment; recognition of shared goals over accolades",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Action"
+   },
+   {
+    "text": "'permit to fail' (verbatim): non-punitive post-mortems, transparent mistakes, low-stakes experiments",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Task/Action"
+   },
+   {
+    "text": "In product incubation, set expectation prototypes would sometimes fail; user research, JTBD, rapid testing",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Situation/Action"
+   },
+   {
+    "text": "Post-mortem lessons into subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result"
+   },
+   {
+    "text": "Balanced teams of PMs, designers, engineers delivering thin-slice production-ready solutions with feedback",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Action"
+   },
+   {
+    "text": "Automation, continuous delivery, quality-first practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at CIC",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Reduced recurring failure patterns, shortened project timelines",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "PASS. Example of the leadership style just described (Norfolk Southern quality crisis), not payments; all facts supported. Same-engagement follow-on story used for reinforcement. Supported throughout. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "NS Revenue and Shipment Planning modernization; client reported rising defects despite near-complete coverage",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Pandemic had just forced remote work",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Engineers learning new practices",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Client and account leadership accustomed to waterfall (source sentence: 'both the NS client and the Accenture account leadership team, who were already accustomed to waterfall delivery')",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership rather than defending metrics; audited codebase and test suite; exposed gaps openly",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Engineer built from own interpretation, wrote tests afterward; backlog lacked scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt backlog with SMART testable stories; TDD experts from Columbus",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "'I do, we do, you do' (verbatim); katas, boot camps, practice learning sessions",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "New engineers paired with seasoned practitioners, daily rotation, test cases before implementation, drivers traded remotely",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Failure did not recur, release cycles shortened, delivery more predictable, knowledge not bottlenecked, pairing countered isolation",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "PASS. Example of the leadership style just described (Norfolk Southern quality crisis), not payments; all facts supported. Supported throughout; quote verbatim. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "2020, CIC's first major engagement, NS legacy Revenue and Shipment Planning platform",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "A couple of months in, pandemic forced remote; client reported rising defects; dashboards near-complete coverage",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Concerns landed before client and Accenture account leadership",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership; bottom-up audit; shared gaps openly",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Engineer worked from own interpretation, tests after code; vague stories lacked scenarios and DoD",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt backlog with SMART stories; Columbus TDD experts redid code and tests",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Boot camps, katas, practice sessions, lunch and learns, SME pairing via 'I do, we do, you do'",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "PM and SMART story training; restructured agile ceremonies",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Defect rates dropped; client stopped finding defects; confidence restored",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "PASS. Team size for the Norfolk Southern example: cites 3 balanced teams from another story on the same engagement and says the stories give no headcount for the quality-crisis team (ruling 6); no invented figure. Opener 'Here's a great example.' is not a claim. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "NS engagement scaled to 3 balanced teams (Product, Engineering, Design)",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action; breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Began transitioning 1 team to Monterrey",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Stories don't specify total headcount or quality-crisis team size",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern (no headcount recorded)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "PASS. Team size for the Norfolk Southern example: cites 3 balanced teams from another story on the same engagement and says the stories give no headcount for the quality-crisis team (ruling 6); no invented figure.  contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "Project began with a balanced team",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Later scaled to 3 balanced teams, 1 team transitioning to Monterrey",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Story doesn't give number of people at the quality issue",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern (no headcount recorded)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "PASS. Turn 1 (payments): correct referent, all payments facts trace to stories. Supported: JPM, RBC, Amex facts. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation needed more than out-of-box platform",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "135,000+ clients across 180+ countries; per-payment-type formatting, validation, compliance",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Led blended team of 40+; worked with Bottomline on build-vs-configure",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, government tax modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Cross-currency payments with embedded rate visibility",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payment-type entitlements (wire approval vs FX initiation); MAC security",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Sanctions screening; risk scores into limits and approval routing",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011 as unified global corporate banking portal",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Led payments migration preserving configs, entitlements, histories, traceability without disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "RBC: fragmented systems/manual processes; workflows initiation to reconciliation; FX team partnership",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Situation/Action"
+   },
+   {
+    "text": "RBC: alerts, recurring payments, Interac e-Transfer, bulk; blueprint ready for development; reduced wire delays",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action/Result"
+   },
+   {
+    "text": "Amex: missing SDKs, fragmented docs, dependency bottlenecks, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "Amex: Java/.NET/Python SDKs, use-case docs, virtualized test environments; Test Drive; CI/CD docs sync",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption and trial usage up within 3 months; onboarding fell; over 261 story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "PASS. Turn 1 (payments): correct referent, all payments facts trace to stories. Supported: gateway 12 countries, 40+, April 2011, Amex facts. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "Regional payment systems differed in message formats, protocols, entitlements, compliance records",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "ACCESS Next Generation built on WebSeries, requirements beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Treasurers needed payments across regions without separate local logins",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Technology Delivery Lead managing 40+ blended team",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, federal tax modules; build-vs-configure boundary",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payment-type permissions, MAC security, sanctions screening, contextual guidance",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Centralized gateway: message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Coordinated data verification; compliance dashboards became standard tooling",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011, 135,000+ clients, 180+ countries; migration without disruption",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "Amex: missing SDKs, fragmented docs, dependency bottlenecks, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "Amex: cross-stack SDKs, use-case docs, secure sandbox, virtualized test environments, Test Drive, CI/CD",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API usage up within 3 months of relaunch; onboarding decreased; over 261 story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "PASS. Topic switch to leadership style with no payments carry-over; all facts supported. Quotes verbatim. Supported throughout. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, purpose; pushes decisions to those closest to the work",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quote 'over-processed, under-trusted...' (verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Early CIC rigid hierarchical culture slowed idea sharing",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation"
+   },
+   {
+    "text": "Fear of blame kept teams from experimenting and slowed delivery (mistakes not shared openly)",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation/Action"
+   },
+   {
+    "text": "Intent explicit, direct feedback, open communication, coached to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Weekly brainstorming, shared goals over accolades, recognized contributions",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Action"
+   },
+   {
+    "text": "'permit to fail' (verbatim): non-punitive post-mortems, low-stakes experiments, lessons in subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "Prototypes expected to fail intentionally; shaped direction week by week before costly builds",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Paired senior with junior engineers, weekly tech talks, peer-led demos, learning in live projects, tailored skill plans",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   },
+   {
+    "text": "New hires onboarded faster, retention improved",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Result"
+   },
+   {
+    "text": "4x delivery acceleration at CIC",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Fewer repeated failure patterns, shorter timelines, freedom to speak honestly and propose experiments, ownership",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result; why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action; leadership-philosophy-how-i-lead|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "PASS. Topic switch to leadership style with no payments carry-over; all facts supported. Quotes verbatim. Supported throughout. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quote 'over-processed, under-trusted...' (verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "CIC rigid hierarchical culture; fear of blame slowed delivery, missed opportunities",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation; establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation"
+   },
+   {
+    "text": "Pushed decisions down, intent explicit, transparency and direct feedback, coaching",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Weekly brainstorming; recognition of shared goals over accolades",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Action"
+   },
+   {
+    "text": "'permit to fail' (verbatim): non-punitive post-mortems, low-stakes experiments, lessons applied",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "Product incubation: prototypes expected to fail; user research and rapid testing before costly builds",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Automation, continuous delivery, quality-first practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Balanced teams of PMs, designers, engineers; thin-slice production-ready solutions",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Action"
+   },
+   {
+    "text": "150-person CIC; 4x delivery acceleration",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Situation/5PSummary"
+   },
+   {
+    "text": "Reduced repeat errors, shortened timelines; stories give no numbers for these",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "PASS. Example of the leadership style just described (Norfolk Southern quality crisis), not payments; all facts supported. Supported throughout; quote verbatim. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "Early 2020, CIC team modernizing NS legacy Revenue and Shipment Planning platform",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "A couple of months in, pandemic remote; rising defects; near-complete coverage",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Scrutiny from client and Accenture account leadership",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership; bottom-up audit; shared gaps openly",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Engineer built from own interpretation, tests after code; stories lacked scenarios and DoD",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "SMART testable stories; Columbus TDD experts side by side",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Code and tests redone; boot camps, katas, practice sessions, 'I do, we do, you do'",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "PMs received product management and SMART story training",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Defect rates dropped; coverage became genuine; client stopped finding defects; confidence restored",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "PASS. Example of the leadership style just described (Norfolk Southern quality crisis), not payments; all facts supported. Supported throughout. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "NS Revenue and Shipment Planning modernization; client raised rising defects",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Near-complete dashboard coverage, client found problems dashboards missed",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation/Result"
+   },
+   {
+    "text": "A couple of months in, pandemic remote",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership; bottom-up audit; gaps shown openly",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Engineer from own interpretation, tests after code; backlog lacked scenarios and DoD",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "SMART stories; Columbus TDD experts; code and tests redone test-first",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action/Result"
+   },
+   {
+    "text": "Samman approach: boot camps, katas, practice sessions, SME pairing, 'I do, we do, you do'",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "PMs received SMART story training",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Defect rates dropped; client stopped finding defects; confidence restored",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "PASS. Team size for the Norfolk Southern example: cites 3 balanced teams from another story on the same engagement and says the stories give no headcount for the quality-crisis team (ruling 6); no invented figure.  contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "NS engagement scaled to three balanced teams; one team transitioning to Monterrey",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Stories don't give exact headcount or quality-issue team size",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern (no headcount recorded)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "PASS. Team size for the Norfolk Southern example: cites 3 balanced teams from another story on the same engagement and says the stories give no headcount for the quality-crisis team (ruling 6); no invented figure. Opener 'Here's a great example.' is not a claim. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "NS engagement grew to 3 balanced teams; 1 team to Monterrey",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Stories don't specify headcount or quality-issue team size",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern (no headcount recorded)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "PASS. Turn 1 (payments): correct referent, all payments facts trace to stories. Supported throughout. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead for payment engine behind ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Capabilities beyond WebSeries for 135,000+ corporations, FIs, governments, municipalities in 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional systems differed in data models, configurations, entitlements, compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed 40+ team across US, Mumbai, Bangalore; 70-80% embedded at Portsmouth",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, federal tax modules; NACHA validation, entitlements, MAC security",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Sanctions screening, risk-based approvals, real-time global reporting, SSO",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Led payments data migration, compliance dashboards",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Owned production incident response",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011; migration without disruption",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "RBC: workflows initiation to reconciliation, real-time FX, alerts, recurring, Interac, bulk",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "RBC: complete implementation blueprint; revised cutoffs reduced wire delays",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   },
+   {
+    "text": "Amex: missing SDKs, docs, dependency bottlenecks, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "Amex: co-created portal, Java/.NET/Python SDKs, secure virtual sandbox, use-case docs, virtualized testing",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API usage up within 3 months of relaunch; onboarding fell; over 261 additional story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "PASS. Turn 1 (payments): correct referent, all payments facts trace to stories. Opener 'Here's a great example.' is not a claim. Supported throughout. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation replaced fragmented regional systems with unified global portal",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "135,000+ corporations, FIs, governments, municipalities in 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "WebSeries foundation; per-payment-type formatting, validation, compliance beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Technology Delivery Lead; 40+ team across Accenture and JPM in US, Mumbai, Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, federal tax modules; NACHA; FX engine integration; MAC; wire-approve-not-FX permissions",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Centralized gateway: transformation, protocol translation, routing across 12 countries; connected to compliance, settlement, reporting",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Led payments data migration preserving configs, entitlements, histories, traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011; migration without disruption",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "Amex VPP replacing legacy mainframe; missing SDKs, docs, dependency bottlenecks, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "Amex: Java/.NET/Python SDKs, use-case docs, sandbox and virtualized testing, Test Drive",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Lean Product and XP; over 261 additional story points",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action/Result"
+   },
+   {
+    "text": "Onboarding fell; API usage up within 3 months of relaunch",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "PASS. Topic switch to leadership style with no payments carry-over; all facts supported. All quotes verified verbatim. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quote 'over-processed, under-trusted...' (verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Intent explicit, decisions pushed down, coaching teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "NS: took ownership of rising defects despite near-complete coverage before client and account leadership",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation/Action"
+   },
+   {
+    "text": "Audit found tests after code and stories without scenarios or DoD",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "SMART stories, TDD experts, 'I do, we do, you do', boot camps, katas, practice sessions, pairing",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects; defect rates dropped",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "'permit to fail' (verbatim) via non-punitive post-mortems, low-stakes experiments, lessons in subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "Weekly brainstorming; shared goals over accolades",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at CIC",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Result/5PSummary"
+   },
+   {
+    "text": "Quote 'It didn't happen overnight, but it stuck.' (verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "PASS. Topic switch to leadership style with no payments carry-over; all facts supported. All quotes verified verbatim. Opener not a claim. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "Quote 'empathy, clarity, and modern engineering rigor' (verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quote 'over-processed, under-trusted...' (verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Intent explicit, decisions pushed down, coaching",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "CIC fear of blame discouraged experimentation; 'permit to fail' culture with post-mortems and low-stakes experiments",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation/Action"
+   },
+   {
+    "text": "Lessons applied to subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result"
+   },
+   {
+    "text": "Product incubation: early prototypes expected to fail intentionally; tested assumptions before costly builds; week by week",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Balanced teams of engineers, PMs, UX architects with equal participation and shared accountability",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Pairing, collaborative coding, retrospectives, open feedback; reduced delays; zero-defect production code",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action/Result"
+   },
+   {
+    "text": "NS: paired newer engineers with seasoned practitioners, daily rotation, test cases before solution checked at standup",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Quote 'showing, doing, and reaffirming' (verbatim)",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Remote: drivers traded frequently, code pushed/pulled before each trade",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Pairing and test-first remained default after experts left; failure did not recur",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "PASS. Example of the leadership style just described (Norfolk Southern quality crisis), not payments; all facts supported. Supported throughout. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "NS Revenue and Shipment Planning modernization; rising defects despite near-complete coverage",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Concerns before client and account leadership as pandemic forced remote",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Needed to address failure without destroying morale",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Task"
+   },
+   {
+    "text": "Took ownership; bottom-up audit; engineer wrote tests after code, own interpretation",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Stories lacked scenarios and DoD",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "SMART stories; Columbus TDD experts; 'I do, we do, you do', pairing, katas, boot camps, practice sessions",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Reinforcement after experts left: pairing new with seasoned, daily rotation, test cases first, drivers traded remotely",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects; defect rates dropped",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Failure did not recur; knowledge not bottlenecked; pairing and test-first remained default",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "PASS. Example of the leadership style just described (Norfolk Southern quality crisis), not payments; all facts supported. Supported throughout. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "NS: client reported rising defects in Revenue and Shipment Planning modernization; near-complete coverage",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Concerns reached client and account leadership as pandemic forced remote",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership; bottom-up audit; gaps shown",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Engineer tests after code, own interpretation; backlog lacked scenarios and DoD",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "SMART stories; Columbus TDD experts redid code and tests; 'I do, we do, you do'",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Restructured agile ceremonies to align stakeholders, developers, PMs",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Paired newer with seasoned engineers, daily rotation, test cases visible step at standup",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Working agreement codified story-pointing so standard was shared, not Matt's alone",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Remote driver trading and code exchange before each trade",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects; practices remained default; failure did not recur",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result; making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "PASS. Team size for the Norfolk Southern example: cites 3 balanced teams from another story on the same engagement and says the stories give no headcount for the quality-crisis team (ruling 6); no invented figure.  contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "NS engagement scaled to 3 balanced teams; 1 team to Monterrey",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Stories don't specify total headcount or quality-issue team size",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern (no headcount recorded)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 6,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "PASS. Team size for the Norfolk Southern example: cites 3 balanced teams from another story on the same engagement and says the stories give no headcount for the quality-crisis team (ruling 6); no invented figure.  contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "NS engagement scaled to three balanced teams; one team to Monterrey",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Stories don't specify headcount or quality-crisis team size",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern (no headcount recorded)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "PASS. Turn 1 (payments): correct referent, all payments facts trace to stories. Supported throughout. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation; regional systems differed in data models, entitlements, message formats, compliance",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation"
+   },
+   {
+    "text": "WebSeries needed custom engineering for 135,000+ corporations, FIs, governments, municipalities in 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Treasurers managed separate regional systems and logins",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Technology Delivery Lead; 40+ blended team across US, Mumbai, Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, government tax modules; NACHA, permissions, MAC, sanctions, risk-based approvals",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Contextual help on payment fields, tax codes, cross-border requirements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway: transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Led payments data migration preserving configs, histories, traceability without disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011, single entry point, real-time reporting, single portal",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Amex: lacked SDKs, fragmented docs, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "Amex: co-created portal, Java/.NET/Python SDKs, sandbox with refreshed client data, virtualized testing, Test Drive",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Onboarding fell; API usage up within 3 months of relaunch; over 261 additional story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "PASS. Turn 1 (payments): correct referent, all payments facts trace to stories. Supported throughout. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "Built payment engine and global gateway behind ACCESS; consolidated legacy systems; Amex VPP barriers",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Title; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Title; lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Title"
+   },
+   {
+    "text": "Regional systems differed in data models, entitlements, payment formats, regulatory requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation"
+   },
+   {
+    "text": "135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Technology Delivery Lead; 40+ team Mumbai, Bangalore, US; defined onshore-offshore model",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "70 to 80% of time at Bottomline Portsmouth",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Coordinated with bank stakeholders; build-vs-configure boundary",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, tax modules; payment verification, permissions, sanctions, risk-based approvals",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "With compliance teams, oversaw migration preserving configs, histories, traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011; migration without disruption",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "Amex: missing SDKs, fragmented docs, no sandbox, testing dependencies",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "North Star and Discovery and Framing workshops",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Co-created portal, SDKs, sandbox with refreshed client data, virtualized testing, Test Drive",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API trial usage up within 3 months; onboarding decreased; over 261 story points of customer-focused value",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "PASS. Topic switch to leadership style with no payments carry-over; all facts supported. Quotes verbatim. Supported throughout. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "Empathy, clarity, shared purpose; decisions pushed to those closest to the work",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Situation/Action"
+   },
+   {
+    "text": "Quote 'over-processed, under-trusted...' (verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Early CIC rigid hierarchy slowed idea sharing; teams avoided risk for fear of blame",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation; establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation"
+   },
+   {
+    "text": "Intent explicit, direct feedback, open communication, coaching to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Weekly brainstorming without judgment; recognition of shared goals over accolades",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Action"
+   },
+   {
+    "text": "'permit to fail' (verbatim): non-punitive post-mortems, transparent errors, structured hypotheses, controlled iterations",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action"
+   },
+   {
+    "text": "Post-mortem lessons in subsequent sprints prevented recurrence",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result"
+   },
+   {
+    "text": "Product incubation: prototypes expected to fail; user research, JTBD, rapid testing before costly builds",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Paired senior with junior engineers, weekly tech talks, peer-led demos, learning in live projects",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   },
+   {
+    "text": "Automation, continuous delivery, quality-first practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration in leadership-philosophy story",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Faster onboarding, improved retention, fewer repeat errors, shorter timelines, no numbers",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Result; establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "PASS. Topic switch to leadership style with no payments carry-over; all facts supported. Quotes verbatim. Supported throughout. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "Empathy, clarity, purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quote 'over-processed, under-trusted...' (verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Led a 150-person Cloud Innovation Center at Accenture",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Situation"
+   },
+   {
+    "text": "Intent explicit, decisions pushed down, coaching to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "'permit to fail' (verbatim): fear of blame; non-punitive post-mortems; transparent errors; lessons to sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation/Action/Result"
+   },
+   {
+    "text": "Low-stakes experiments with structured hypotheses and controlled iterations",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action"
+   },
+   {
+    "text": "Prototypes expected to fail; shaped direction week by week before costly builds",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Balanced teams of engineers, PMs, UX architects; equal participation; shared accountability",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Pairing, collaborative coding, retrospectives, knowledge sharing; teams voiced feedback and changed things autonomously",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at CIC",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Reduced project delays; zero-defect production code via iterative development and feedback loops",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   },
+   {
+    "text": "Shortened timelines; prevented recurrence of failure patterns",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "PASS. Example of the leadership style just described (Norfolk Southern quality crisis), not payments; all facts supported. Supported throughout. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "2020, CIC team modernizing NS legacy Revenue and Shipment Planning platform",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "A couple of months in, pandemic remote; rising defects; near-complete coverage",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Credibility hit before client and account leadership, accustomed to waterfall",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership; bottom-up audit; gaps shared openly",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Engineer own interpretation, tests after code; stories lacked scenarios and DoD",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "SMART stories; Columbus TDD experts; code and tests redone",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "'I do, we do, you do'; boot camps, katas, practice sessions, lunch and learns",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Restructured agile ceremonies; PM and SMART story training",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Defect rates dropped; client stopped finding defects; confidence restored",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "PASS. Example of the leadership style just described (Norfolk Southern quality crisis), not payments; all facts supported. Supported throughout. Opener not a claim. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "NS Revenue and Shipment Planning modernization; rising defects despite near-complete coverage",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Early 2020, pandemic remote shift",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation; Start_Date 2020-01"
+   },
+   {
+    "text": "Client and account leadership accustomed to waterfall (source sentence reads this way)",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership; bottom-up audit; gaps shared",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Engineer own interpretation, tests after code; backlog lacked scenarios and DoD",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Columbus TDD experts; code and tests redone test-first",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action/Result"
+   },
+   {
+    "text": "SMART stories; Samman approach: boot camps, katas, practice sessions, SME pairing, 'I do, we do, you do'",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Restructured agile ceremonies; PM and SMART story training",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Defect rates dropped; client stopped finding defects; confidence restored",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "PASS. Team size for the Norfolk Southern example: cites 3 balanced teams from another story on the same engagement and says the stories give no headcount for the quality-crisis team (ruling 6); no invented figure.  contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "NS engagement scaled to 3 balanced teams; 1 team to Monterrey",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Stories don't give exact headcount or quality-issue team size",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern (no headcount recorded)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 7,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "PASS. Team size for the Norfolk Southern example: cites 3 balanced teams from another story on the same engagement and says the stories give no headcount for the quality-crisis team (ruling 6); no invented figure. Opener 'This is a strong one.' is not a claim. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "NS engagement eventually scaled to 3 balanced teams",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Stories don't specify total headcount or quality-issue team size",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern (no headcount recorded)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "PASS. Turn 1 (payments): correct referent, all payments facts trace to stories. Supported throughout. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "Corporate payment infrastructure at JPM; Amex VPP integration and onboarding barriers",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title; lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Title"
+   },
+   {
+    "text": "Regional systems differed in data models, entitlements, message formats, compliance",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation"
+   },
+   {
+    "text": "ACCESS needed capabilities beyond WebSeries; live processing continued through transition",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task"
+   },
+   {
+    "text": "Technology Delivery Lead; 40+ team Mumbai, Bangalore, US; onshore-offshore model",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "70 to 80% of time at Bottomline Portsmouth",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Coordinated with stakeholders in Chicago and NY/NJ; build-vs-configure boundary",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Ran daily leadership calls during production incidents",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, tax modules; verification, permissions, sanctions, risk-based approvals",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Data verification with compliance teams; compliance dashboards became standard tooling",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011, 135,000+ clients, 180+ countries; migration without disruption",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "Amex: missing SDKs, docs, dependency bottlenecks, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "North Star and Discovery and Framing workshops; SDKs, docs, virtualized testing, Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action; lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API usage up within 3 months of relaunch; onboarding fell; over 261 story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "PASS. Turn 1 (payments): correct referent, all payments facts trace to stories. Supported throughout. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "ACCESS needed more than out-of-box WebSeries; 135,000+ clients, 180+ countries; distinct formats and workflows",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional legacy systems had different data models, entitlements, transaction histories to consolidate without interruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation/Task"
+   },
+   {
+    "text": "Technology Delivery Lead; 40+ team Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, federal tax modules; NACHA, FX engine, MAC, permissions, sanctions, risk-based approvals",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "70 to 80% at Bottomline Portsmouth; owned payment-engine production incident response",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Led payments-workstream migration with compliance traceability, zero disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "RBC: fragmented systems, manual processes delaying cross-border and bulk payments",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Situation"
+   },
+   {
+    "text": "RBC: workflows initiation to reconciliation; FX team on real-time conversion and visibility",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "RBC: blueprint covering alerts, recurring, Interac, batch; revised cutoffs reduced wire delays",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action/Result"
+   },
+   {
+    "text": "Amex: missing SDKs, docs, dependency bottlenecks, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "Amex: developer portal, Java/.NET/Python SDKs, use-case docs, virtualized testing; Lean Product and XP; Test Drive",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API trial usage up within 3 months; onboarding fell; over 261 story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "PASS. Topic switch to leadership style with no payments carry-over; all facts supported. Quote verbatim. Supported throughout. Opener not a claim. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "Empathy, clarity, purpose; intent explicit, decisions pushed down, coaching",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Early CIC rigid hierarchical culture slowed idea sharing",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation"
+   },
+   {
+    "text": "Weekly brainstorming, shared goals over accolades, recognized contributions",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Action"
+   },
+   {
+    "text": "Balanced teams of PMs, designers, engineers; prioritizing essential features; thin-slice production-ready solutions",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Action"
+   },
+   {
+    "text": "Paired senior with junior engineers, weekly tech talks, peer-led demos, practice forums, learning in live projects",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at CIC",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "NS: rising defects despite near-complete coverage; acknowledged failure before client and account leadership",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation/Action"
+   },
+   {
+    "text": "Audit exposed vague stories and tests after code",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "SMART stories, TDD experts, boot camps, katas, 'I do, we do, you do'",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Restructured agile ceremonies; defect rates dropped; client stopped finding defects",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "PASS. Topic switch to leadership style with no payments carry-over; all facts supported. Quotes verbatim. Supported throughout. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "Empathy, clarity, purpose; decisions pushed down; coaching to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quote 'over-processed, under-trusted...' (verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Early CIC rigid hierarchy; fear of blame discouraged experimentation",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation; establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation"
+   },
+   {
+    "text": "Weekly brainstorming, non-punitive post-mortems, low-stakes experiments with structured hypotheses",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Action; establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action"
+   },
+   {
+    "text": "Called it a 'permit to fail' culture (verbatim)",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Task/5PSummary"
+   },
+   {
+    "text": "Recognition of shared goals over accolades",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Action"
+   },
+   {
+    "text": "NS: rising defects despite near-complete coverage; ownership before client and account leadership",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation/Action"
+   },
+   {
+    "text": "Audit: tests after code, stories without scenarios or DoD",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "SMART stories, TDD experts, 'I do, we do, you do', boot camps, katas, practice sessions",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Paired senior with junior, weekly peer-led demos, engineering forums, learning in live projects",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at CIC",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "PASS. Example of the leadership style just described (Norfolk Southern quality crisis), not payments; all facts supported. Supported throughout. Opener not a claim. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "NS Revenue and Shipment Planning modernization; rising defects; near-complete coverage",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Concerns before client and account leadership as pandemic forced remote",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership; bottom-up audit; gaps shown",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Engineer own interpretation, tests after code; backlog lacked scenarios and DoD",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Columbus TDD experts redid code and tests; SMART stories; 'I do, we do, you do', boot camps, katas, pairing",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Test cases a discrete step before solution, checked at standup; daily pair rotation; remote driver trading",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Stories entered sprints only when testable and small for one-week iteration",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Defect rates dropped; client stopped finding defects",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Pairing and test-first remained default after experts left; failure did not recur",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "PASS. Example of the leadership style just described (Norfolk Southern quality crisis), not payments; all facts supported. Supported throughout. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "CIC's first major engagement in 2020; rising defects; near-complete coverage",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Revenue and Shipment Planning modernization; pandemic remote; client and account leadership accustomed to waterfall",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership; bottom-up audit; gaps shown",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Engineer own interpretation, tests after code; stories lacked scenarios and DoD",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "SMART stories; Columbus TDD experts; boot camps, katas, practice sessions, 'I do, we do, you do'",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Daily pair rotation; test cases before solution checked at standup",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Stories entered sprints only when discrete, testable, small for one-week iteration",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Pairing and test-first remained default; failure mode did not recur",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "PASS. Team size for the Norfolk Southern example: cites 3 balanced teams from another story on the same engagement and says the stories give no headcount for the quality-crisis team (ruling 6); no invented figure. Opener not a claim. contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "NS engagement scaled to three balanced teams",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Stories don't specify headcount or quality-crisis team size",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern (no headcount recorded)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 8,
+  "turn": 4,
+  "label": "B",
+  "pass": true,
+  "reason": "PASS. Team size for the Norfolk Southern example: cites 3 balanced teams from another story on the same engagement and says the stories give no headcount for the quality-crisis team (ruling 6); no invented figure.  contradicted: 0; unsupported: 0.",
+  "claims": [
+   {
+    "text": "NS engagement grew to 3 balanced teams; 1 team to Monterrey",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Story doesn't specify headcount or quality-crisis team size",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern (no headcount recorded)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

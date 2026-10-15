@@ -1,0 +1,1511 @@
+[
+ {
+  "case": "c06",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: answers yes with the Major U.S. Health System work; all claims supported by the chronic-disease and responsible-AI stories",
+  "claims": [
+   {
+    "text": "Director at Accenture's Cloud Innovation Center with Major U.S. Health System",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Division/Client"
+   },
+   {
+    "text": "existing condition mgmt app for diabetes, hypertension, heart disease; reactive care, limited real-time insights",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "pilot AI capabilities starting with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "CIO concerns about HIPAA and processing sensitive medical information",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "led delivery of data lake, ML pipeline, LLM-driven chat, mobile components",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system 5PSummary/Action"
+   },
+   {
+    "text": "ingested EMR, glucometer, activity tracker, device data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "personalized daily recommendations, medication reminders, condition-specific guidance",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "trained healthcare teams to interpret AI insights for treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "brought together legal, compliance, IT security, data science, clinical",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "operationalized Responsible AI Framework: anonymization, encryption, differential privacy, access policies, monitoring/auditing",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "working MVP in 16 weeks, extensible foundation not throwaway PoC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "clinical teams adopted insights; full HIPAA compliance; executives approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c06",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: answers yes with the Major U.S. Health System work; all claims supported by the chronic-disease and responsible-AI stories",
+  "claims": [
+   {
+    "text": "Director at Accenture CIC for Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Start_Date/End_Date"
+   },
+   {
+    "text": "existing condition mgmt app; reactive care; pilot starting with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "CIO concerns about HIPAA and patient data privacy",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "led delivery of data lake, ML pipeline, LLM-driven chat, mobile capabilities; EMR, glucometer, tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system 5PSummary/Action"
+   },
+   {
+    "text": "personalized recommendations, medication reminders, condition-specific guidance",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "trained healthcare teams",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "cross-functional group; anonymization, encryption, differential privacy, access policies, monitoring and auditing",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "regularly updated CIO and executive team, adjusting based on feedback",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "working extensible MVP in 16 weeks; full HIPAA compliance; clinical adoption; executive approval of consideration of broader implementation",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c06",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: answers yes with the Major U.S. Health System work; all claims supported by the chronic-disease and responsible-AI stories",
+  "claims": [
+   {
+    "text": "Director at Accenture, Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/dates"
+   },
+   {
+    "text": "existing app for diabetes, hypertension, heart disease; reactive; diabetes first",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "CIO concerns about HIPAA, patient privacy, regulatory fines, reputational damage",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "added data lake, ML pipeline, LLM-driven chat, proactive alerting",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system 5PSummary"
+   },
+   {
+    "text": "ingested EMR, glucometer, activity tracker data; daily recommendations via mobile app incl. medication reminders, lifestyle adjustments, guidance",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "trained healthcare teams",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "cross-functional governance; Responsible AI Framework via anonymization, encryption, differential privacy, HIPAA-compliant pipelines",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "policies for data access, model transparency, accountability; monitoring/auditing; updated CIO and executives",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "MVP in 16 weeks extensible; clinical adoption; full HIPAA compliance; executive approval of consideration of broader AI",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c06",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Role and actions in the healthcare work (chronic disease mgmt + responsible AI governance), not generic; all claims supported",
+  "claims": [
+   {
+    "text": "existing chronic disease app; reactive care; diabetes first; CIO HIPAA concerns",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "designed/implemented data lake, ML pipeline, LLM instance, full-stack components for EMR, glucometer, tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "integrated AI into mobile app: reminders, lifestyle adjustments, guidance, chat interface",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "feedback loop refining ML models",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "cross-functional alignment on responsible AI and HIPAA",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Responsible AI Framework via anonymization, encryption, differential privacy, access policies, model transparency, monitoring/auditing",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "updated CIO and executive team, adjusted on feedback; trained staff on privacy practices",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "trained healthcare teams on AI insights",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "MVP in 16 weeks via iterative product slicing, extensible; clinical adoption; full HIPAA compliance; approval of consideration of broader AI",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c06",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Role and actions in the healthcare work (chronic disease mgmt + responsible AI governance), not generic; all claims supported; quoted 'art-of-the-possible' matches 5PSummary verbatim",
+  "claims": [
+   {
+    "text": "led AI additions to existing chronic disease app starting with diabetes; reactive care; CIO HIPAA/privacy concerns",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation/5PSummary; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "data lake, ML pipeline, LLM instance, full-stack components processing device data in real time",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "generative AI chat interface and daily recommendations; mobile app tracking metrics and progress",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "quoted 'art-of-the-possible' (verbatim in 5PSummary); iterative product slicing, extensible software",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system 5PSummary/Result"
+   },
+   {
+    "text": "trained healthcare teams; feedback loop",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "cross-functional group; Responsible AI Framework previously principles-only; anonymization, encryption, differential privacy, HIPAA-compliant pipelines",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "data-access, model-transparency, accountability policies; monitoring/auditing; updated CIO",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "MVP in 16 weeks; pilot cohort real-time GenAI guidance, a capability never delivered; clinical adoption; full HIPAA compliance",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c06",
+  "run": 8,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Role and actions in the healthcare work (chronic disease mgmt + responsible AI governance), not generic; all claims supported",
+  "claims": [
+   {
+    "text": "existing condition mgmt app; reactive care; limited real-time insights; diabetes first; CIO concerns",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "data lake, ML pipeline, LLM instance, full-stack components for EMR/device data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "mobile app recommendations, reminders, lifestyle adjustments, guidance, chat; feedback loop",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "trained healthcare teams; clinical adoption",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/Result"
+   },
+   {
+    "text": "cross-functional governance; anonymization, encryption, differential privacy, HIPAA pipelines; policies; monitoring; CIO updates",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "MVP in 16 weeks via iterative slicing, extensible; full HIPAA compliance; approval of consideration of broader AI",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c06",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: answers yes with the Major U.S. Health System work; all claims supported by the chronic-disease and responsible-AI stories",
+  "claims": [
+   {
+    "text": "Director with Major U.S. Health System through Accenture CIC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Division/Client"
+   },
+   {
+    "text": "existing app for diabetes, hypertension, heart disease; reactive; diabetes pilot; CIO HIPAA concerns",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "added data lake, ML pipeline, LLM-driven chat, proactive alerting",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system 5PSummary"
+   },
+   {
+    "text": "EMR/device data; daily recommendations via mobile app incl. reminders, lifestyle, guidance; trained healthcare teams",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "cross-functional group; Responsible AI Framework via anonymization, encryption, differential privacy, access policies, monitoring",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "MVP in 16 weeks extensible; 4-month pilot with real-time AI insights; clinical adoption; full HIPAA compliance",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result"
+   },
+   {
+    "text": "executive approval of consideration of broader AI implementation across the health system",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result; delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c06",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: answers yes with the Major U.S. Health System work; all claims supported by the chronic-disease and responsible-AI stories",
+  "claims": [
+   {
+    "text": "Director with Major U.S. Health System through Accenture CIC, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/dates"
+   },
+   {
+    "text": "existing app; reactive; led initiative starting with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation/5PSummary"
+   },
+   {
+    "text": "data lake, ML pipeline, LLM instance, full-stack components; EMR/device data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "daily recommendations via mobile app; trained healthcare teams",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "MVP in 16 weeks via iterative slicing, extensible; clinical adoption shifting reactive to proactive",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "CIO HIPAA/privacy concerns; cross-functional governance; anonymization, encryption, differential privacy, policies, monitoring",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation/Action"
+   },
+   {
+    "text": "full HIPAA compliance; executive approval of consideration of broader AI",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c06",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: brief but correct yes (Healthcare / Life Sciences, Major U.S. Health System, Accenture); supported",
+  "claims": [
+   {
+    "text": "worked in Healthcare / Life Sciences at Accenture with a Major U.S. Health System",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Industry/Employer/Client"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c06",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Role and actions in the healthcare work (chronic disease mgmt + responsible AI governance), not generic; all claims supported; quoted 'art-of-the-possible' matches 5PSummary verbatim",
+  "claims": [
+   {
+    "text": "Director leading AI additions to existing chronic disease app, starting with diabetes; reactive care; CIO HIPAA concerns",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Situation; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "data lake, ML pipeline, LLM instance, full-stack components for EMR/device data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "mobile app chat interface, reminders, lifestyle adjustments, daily recommendations",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "quoted 'art-of-the-possible' verbatim; iterative product slicing; extensible software",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system 5PSummary/Result"
+   },
+   {
+    "text": "trained healthcare teams; feedback loop",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "cross-functional governance; Responsible AI Framework; policies; monitoring; CIO updates",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "MVP in 16 weeks; 4-month pilot; clinical adoption; full HIPAA compliance; approval of consideration of broader AI",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c06",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Role and actions in the healthcare work (chronic disease mgmt + responsible AI governance), not generic; all claims supported; quoted 'art-of-the-possible' matches 5PSummary verbatim",
+  "claims": [
+   {
+    "text": "existing condition mgmt app; reactive; limited real-time insights; led diabetes pilot",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation/5PSummary"
+   },
+   {
+    "text": "quoted 'art-of-the-possible' verbatim",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system 5PSummary"
+   },
+   {
+    "text": "data lake, ML pipeline, LLM instance, full-stack components; mobile chat and recommendations; feedback loop",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "trained healthcare teams",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "CIO concerns; cross-functional group; framework previously principles-only; anonymization, encryption, differential privacy; policies; monitoring; CIO updates",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation/Action"
+   },
+   {
+    "text": "MVP in 16 weeks, iterative slicing, extensible; pilot real-time guidance; clinical adoption; full HIPAA compliance",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c06",
+  "run": 9,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Role and actions in the healthcare work (chronic disease mgmt + responsible AI governance), not generic; all claims supported; clinician interviews/care plan mapping supported by Discovery & Framing story Action (same engagement); quoted 'art-of-the-possible' matches 5PSummary verbatim",
+  "claims": [
+   {
+    "text": "led AI additions to existing chronic disease app starting with diabetes; reactive; CIO HIPAA/privacy concerns",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation/5PSummary; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "discovery included clinician interviews and care plan mapping starting with diabetes, rolling D&F for additional conditions",
+    "label": "supported",
+    "source": "discovery-framing---de-risking-product-development-at-fortune-500-scale|fortune-500-clients Action"
+   },
+   {
+    "text": "quoted 'art-of-the-possible' verbatim; iterative product slicing; extensible not throwaway",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system 5PSummary/Result"
+   },
+   {
+    "text": "data lake, ML pipeline, LLM instance, full-stack components; mobile chat and recommendations; trained healthcare teams",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "cross-functional governance; Responsible AI Framework; anonymization, encryption, differential privacy, access policies, monitoring, auditing",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "MVP in 16 weeks; 4-month pilot GenAI insights; clinical adoption; full HIPAA compliance; approval of consideration of broader AI",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c06",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: answers yes with the Major U.S. Health System work; all claims supported by the chronic-disease and responsible-AI stories; clinician interviews/care plan mapping supported by Discovery & Framing story Action (same engagement); quoted 'art-of-the-possible' matches 5PSummary verbatim",
+  "claims": [
+   {
+    "text": "Director at Accenture with Major U.S. Health System, May through September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/dates"
+   },
+   {
+    "text": "existing app for diabetes, hypertension, heart disease; reactive; diabetes first; personalized insights and proactive intervention",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "data lake, ML pipeline, LLM instance, full-stack components; EMR/device data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "GenAI guidance via mobile app: reminders, lifestyle adjustments, recommendations",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "discovery included clinician interviews and care plan mapping",
+    "label": "supported",
+    "source": "discovery-framing---de-risking-product-development-at-fortune-500-scale|fortune-500-clients Action"
+   },
+   {
+    "text": "quoted 'art-of-the-possible' verbatim; real extensible software; MVP in 16 weeks",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system 5PSummary/Result"
+   },
+   {
+    "text": "CIO HIPAA/privacy concerns; cross-functional group; Responsible AI Framework via anonymization, encryption, differential privacy, access policies, monitoring",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation/Action"
+   },
+   {
+    "text": "4-month pilot; real-time GenAI insights, a capability never delivered; clinical adoption; full HIPAA compliance; approval of consideration of broader AI",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c06",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: answers yes with the Major U.S. Health System work; all claims supported by the chronic-disease and responsible-AI stories",
+  "claims": [
+   {
+    "text": "Director at Accenture CIC with Major U.S. Health System",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Division"
+   },
+   {
+    "text": "existing app; reactive; diabetes first; personalized guidance, early risk identification, proactive intervention",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "iterative product slicing; extensible not throwaway",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "data lake, ML pipeline, LLM instance, full-stack components; mobile reminders and guidance; trained healthcare teams",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "CIO concerns; cross-functional group; framework operationalized, not just principles",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation/Action"
+   },
+   {
+    "text": "MVP in 16 weeks; 4-month pilot; clinical adoption; full HIPAA compliance; executive confidence for broader implementation across health system",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c06",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: answers yes with the Major U.S. Health System work; all claims supported by the chronic-disease and responsible-AI stories",
+  "claims": [
+   {
+    "text": "Director at Accenture with Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/dates"
+   },
+   {
+    "text": "existing app for diabetes, hypertension, heart disease; reactive; diabetes first; added AI to existing app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation/5PSummary"
+   },
+   {
+    "text": "data lake, ML pipeline, LLM instance, full-stack components; mobile recommendations; trained healthcare teams",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "CIO concerns; cross-functional group; anonymization, encryption, differential privacy, access policies, monitoring",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation/Action"
+   },
+   {
+    "text": "MVP in 16 weeks extensible; clinical adoption; full HIPAA compliance; approval of consideration of broader AI",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c06",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Role and actions in the healthcare work (chronic disease mgmt + responsible AI governance), not generic; all claims supported",
+  "claims": [
+   {
+    "text": "led AI additions to existing chronic disease app starting with diabetes; reactive; CIO concerns about sensitive medical information",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation/5PSummary; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "data lake, ML pipeline, LLM instance, full-stack components; mobile chat, reminders, lifestyle, guidance; feedback loop",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "trained healthcare teams",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "cross-functional alignment; updated CIO and executives, adjusted on feedback",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Responsible AI Framework via anonymization, encryption, differential privacy, policies, monitoring",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "MVP in 16 weeks via iterative slicing; 4-month pilot; clinical adoption; full HIPAA compliance; approval of consideration of broader AI",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c06",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Role and actions in the healthcare work (chronic disease mgmt + responsible AI governance), not generic; all claims supported",
+  "claims": [
+   {
+    "text": "as Director led AI additions starting with diabetes; reactive; CIO concerns",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Situation; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "data lake, ML pipeline, LLM instance, full-stack components; GenAI chat and daily recommendations; mobile app metrics and progress",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "trained healthcare teams; feedback loop",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "cross-functional group; anonymization, encryption, differential privacy; policies; monitoring; CIO updates with adjustments",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "extensible MVP in 16 weeks; 4-month pilot; clinical adoption; full HIPAA compliance; approval of consideration of broader AI",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c06",
+  "run": 10,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Role and actions in the healthcare work (chronic disease mgmt + responsible AI governance), not generic; all claims supported; quoted 'art-of-the-possible' matches 5PSummary verbatim",
+  "claims": [
+   {
+    "text": "existing app; reactive; limited real-time insights; led initiative starting with diabetes; CIO concerns",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "data lake, ML pipeline, LLM instance, full-stack components to ingest, process, analyze EMR/device data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "mobile chat, recommendations, reminders, lifestyle, guidance",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "quoted 'art-of-the-possible' verbatim; iterative slicing; trained teams; feedback loop",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system 5PSummary/Action"
+   },
+   {
+    "text": "cross-functional governance; Responsible AI Framework; policies; monitoring; CIO updates",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "MVP in 16 weeks; 4-month pilot; clinical adoption; full HIPAA compliance; approval of consideration of broader AI",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: Atlanta, GA correct; relocation/travel supported by profile; opener is not a claim",
+  "claims": [
+   {
+    "text": "based in Atlanta, GA",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct yes, open to relocation and travel; no hedge, no conditions, no clarifying question; supported by profile",
+  "claims": [
+   {
+    "text": "open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: Atlanta, GA correct; relocation/travel supported by profile; opener is not a claim",
+  "claims": [
+   {
+    "text": "based in Atlanta, GA",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct yes, open to relocation and travel; no hedge, no conditions, no clarifying question; supported by profile",
+  "claims": [
+   {
+    "text": "open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: Atlanta, GA correct; relocation/travel supported by profile; opener is not a claim",
+  "claims": [
+   {
+    "text": "based in Atlanta, GA",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 1,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Direct yes, open to relocation and travel; no hedge, no conditions, no clarifying question; supported by profile",
+  "claims": [
+   {
+    "text": "open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: Atlanta, GA correct; relocation/travel supported by profile; opener is not a claim",
+  "claims": [
+   {
+    "text": "based in Atlanta, GA",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct yes, open to relocation and travel; no hedge, no conditions, no clarifying question; supported by profile",
+  "claims": [
+   {
+    "text": "open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: Atlanta, GA correct; relocation/travel supported by profile; opener is not a claim",
+  "claims": [
+   {
+    "text": "based in Atlanta, GA",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct yes, open to relocation and travel; no hedge, no conditions, no clarifying question; supported by profile",
+  "claims": [
+   {
+    "text": "open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: Atlanta, GA correct; relocation/travel supported by profile; opener is not a claim",
+  "claims": [
+   {
+    "text": "based in Atlanta, GA",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 2,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Direct yes, open to relocation and travel; no hedge, no conditions, no clarifying question; supported by profile",
+  "claims": [
+   {
+    "text": "open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: Atlanta, GA correct; relocation/travel supported by profile; opener is not a claim",
+  "claims": [
+   {
+    "text": "based in Atlanta, GA",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct yes, open to relocation and travel; no hedge, no conditions, no clarifying question; supported by profile",
+  "claims": [
+   {
+    "text": "open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: Atlanta, GA correct; relocation/travel supported by profile; opener is not a claim",
+  "claims": [
+   {
+    "text": "based in Atlanta, GA",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct yes, open to relocation and travel; no hedge, no conditions, no clarifying question; supported by profile",
+  "claims": [
+   {
+    "text": "open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: Atlanta, GA correct; relocation/travel supported by profile; opener is not a claim",
+  "claims": [
+   {
+    "text": "based in Atlanta, GA",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 3,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Direct yes, open to relocation and travel; no hedge, no conditions, no clarifying question; supported by profile",
+  "claims": [
+   {
+    "text": "open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: Atlanta, GA correct; relocation/travel supported by profile; opener is not a claim",
+  "claims": [
+   {
+    "text": "based in Atlanta, GA",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct yes, open to relocation and travel; no hedge, no conditions, no clarifying question; supported by profile",
+  "claims": [
+   {
+    "text": "open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: Atlanta, GA correct; relocation/travel supported by profile; opener is not a claim",
+  "claims": [
+   {
+    "text": "based in Atlanta, GA",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct yes, open to relocation and travel; no hedge, no conditions, no clarifying question; supported by profile",
+  "claims": [
+   {
+    "text": "open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: Atlanta, GA correct; relocation/travel supported by profile; opener is not a claim",
+  "claims": [
+   {
+    "text": "based in Atlanta, GA",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 4,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Direct yes, open to relocation and travel; no hedge, no conditions, no clarifying question; supported by profile",
+  "claims": [
+   {
+    "text": "open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

@@ -1,0 +1,2834 @@
+[
+ {
+  "case": "c05",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass t1: explains why he is looking from the transition and career-intent stories; no closing; all claims supported. Quotes 'builder' and 'in the work, not above it' verbatim.",
+  "claims": [
+   {
+    "text": "Accenture chapter came to a close after long tenure incl. four years leading 150-person CIC",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation"
+   },
+   {
+    "text": "Stepped back to recharge / first pause after years of continuous delivery",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation, 5PSummary"
+   },
+   {
+    "text": "Built MattGPT during sabbatical, a project he'd use rather than tutorial; RAG, semantic search, LLM tooling",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation; transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "MVP shipped with semantic search across 100+ stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Result"
+   },
+   {
+    "text": "Seeking a role where building the product engineering org, establishing culture and delivering results are part of the same job (paraphrase)",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Purpose ('engineering organization building'); career-intent-what-im-looking-for-next|independent-project Task ('elevate engineering culture'), 5PSummary ('real delivery')"
+   },
+   {
+    "text": "Pursuing platform engineering, product leadership, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result; career-intent-what-im-looking-for-next|independent-project Result"
+   },
+   {
+    "text": "real delivery with engineers and product managers, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "NOW/NEXT/LATER roadmap, contained MVP scope",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Action, Result"
+   },
+   {
+    "text": "Clarified work he wants: platform modernization, product leadership, engineering culture",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Action"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary; career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "in the work, not above it, solving hard problems as part of a team",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass t1: explains why he is looking from the transition and career-intent stories; no closing; all claims supported. Quoted 'real delivery with engineers and product managers, not strategy decks' verbatim in career-intent-what-im-looking-for-next|independent-project 5PSummary.",
+  "claims": [
+   {
+    "text": "Accenture chapter came to a close after long tenure incl. four years leading 150-person CIC",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation"
+   },
+   {
+    "text": "Stepped back to recharge / first pause after years of continuous delivery",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation, 5PSummary"
+   },
+   {
+    "text": "Built MattGPT during sabbatical, a project he'd use rather than tutorial; RAG, semantic search, LLM tooling",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation; transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "MVP shipped with semantic search across 100+ stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Result"
+   },
+   {
+    "text": "Clarified work he wants: platform modernization, product leadership, engineering culture",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Action"
+   },
+   {
+    "text": "Working across product, engineering and executive teams",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project Action"
+   },
+   {
+    "text": "Seeking a role where building the product engineering org, establishing culture and delivering results are part of the same job (paraphrase)",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Purpose ('engineering organization building'); career-intent-what-im-looking-for-next|independent-project Task ('elevate engineering culture'), 5PSummary ('real delivery')"
+   },
+   {
+    "text": "real delivery with engineers and product managers, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "NOW/NEXT/LATER roadmap, contained MVP scope",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Action, Result"
+   },
+   {
+    "text": "ADRs, evaluation checks, behavior-first tests; AI-assisted development",
+    "label": "supported",
+    "source": "building-effective-ai-assisted-development-workflows|independent-project Action, Result"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary; career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "Pursuing senior leadership roles in platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result"
+   },
+   {
+    "text": "in the work, not above it, solving hard problems as part of a team",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass t1: explains why he is looking from the transition and career-intent stories; no closing; all claims supported.",
+  "claims": [
+   {
+    "text": "Accenture chapter came to a close after long tenure incl. four years leading 150-person CIC",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation"
+   },
+   {
+    "text": "Stepped back to recharge / first pause after years of continuous delivery",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation, 5PSummary"
+   },
+   {
+    "text": "Built MattGPT during sabbatical, a project he'd use rather than tutorial; RAG, semantic search, LLM tooling",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation; transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "MVP shipped with semantic search across 100+ stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Result"
+   },
+   {
+    "text": "NOW/NEXT/LATER roadmap, contained MVP scope",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Action, Result"
+   },
+   {
+    "text": "Seeking a role where building the product engineering org, establishing culture and delivering results are part of the same job (paraphrase)",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Purpose ('engineering organization building'); career-intent-what-im-looking-for-next|independent-project Task ('elevate engineering culture'), 5PSummary ('real delivery')"
+   },
+   {
+    "text": "Pursuing platform engineering, product leadership, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result; career-intent-what-im-looking-for-next|independent-project Result"
+   },
+   {
+    "text": "real delivery with engineers and product managers, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary; career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "in the work, not above it",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Available immediately, no notice period",
+    "label": "supported",
+    "source": "profile.logistics.availability"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass t2: engages the in-house comparison with ownership/delivery facts (owned, not just advised) without disparaging or ranking; all claims supported; no closing. Closes by naming dimensions to compare with an in-house record.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names, rule 4)",
+    "label": "supported",
+    "source": "rule 4: building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture, the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern, leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Theme"
+   },
+   {
+    "text": "Clients moving from waterfall/feature factories/siloed teams; legacy systems, compliance, org change",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "NS: question whether practices would hold after experts left, pandemic removed co-location",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Situation"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs from ground up over four years with full P&L, budget/cost, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary, Action, Result"
+   },
+   {
+    "text": "Grew from zero (10-person pilot) to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, 5PSummary; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Career progression frameworks, delivery playbooks, technical infrastructure, cookbook",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action, Process"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeatable business (by FY23) through delivery excellence and client advocacy/relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, Task; about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "After quality crisis, rebuilt daily workflow: test cases before implementation, daily pair rotation, testable stories, checked at standup; practices held and failure mode did not recur",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action, Result"
+   },
+   {
+    "text": "6-month enablement program (CIC Academy) at NS",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "NS: thin-stretched domain experts paired and rotated; client contributors paired into new-state build (Angular, Node, Spring Boot) and left able to support the app",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action, Result"
+   },
+   {
+    "text": "NS client learned to write testable stories and own backlog and priorities",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass t2: engages the in-house comparison with ownership/delivery facts (owned, not just advised) without disparaging or ranking; all claims supported; no closing. States the stories don't establish he is better than an unspecified in-house candidate.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names, rule 4)",
+    "label": "supported",
+    "source": "rule 4: building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture, the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern, leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Theme"
+   },
+   {
+    "text": "Clients moving from waterfall/feature factories/siloed teams; legacy systems, compliance, org change",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs from ground up over four years with full P&L, budget/cost, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary, Action, Result"
+   },
+   {
+    "text": "Grew from zero (10-person pilot) to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, 5PSummary; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Ran organization through 11-13 direct-report practice and client leads",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result, Performance"
+   },
+   {
+    "text": "Every final hiring decision, compensation allocation, promotion calibration, end-of-remediation calls",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action, Result"
+   },
+   {
+    "text": "Flat model without managers on daily teams; peer-based evaluation from pair partners, PMs, anchors",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Situation, Action"
+   },
+   {
+    "text": "Weekly allocation reviews, monthly P&L and utilization reviews, quarterly planning checkpoints",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Near-zero attrition in the first two years (multiple hires promoted)",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Hiring, feedback and promotion machinery held through four years of continuous scaling",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result"
+   },
+   {
+    "text": "At JP Morgan teams outpaced peer velocity within first 2 sprints, shipping to production in weeks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "At Norfolk Southern teams reduced meeting overhead and context switching, improving velocity",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 5,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass t2: engages the in-house comparison with ownership/delivery facts (owned, not just advised) without disparaging or ranking; all claims supported; no closing. Opener declines assumptions about the other candidate; framed as owning org, production support, preparing clients to own (borderline on directness, judged as engaging the comparison).",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names, rule 4)",
+    "label": "supported",
+    "source": "rule 4: building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture, the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern, leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Theme"
+   },
+   {
+    "text": "Clients moving from waterfall/feature factories/siloed teams; legacy systems, compliance, org change",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "NS: scarce domain knowledge, client accustomed to mainframe thinking",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation; unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs from ground up over four years with full P&L, budget/cost, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary, Action, Result"
+   },
+   {
+    "text": "Grew from zero (10-person pilot) to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, 5PSummary; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Career progression frameworks, delivery playbooks, technical infrastructure, cookbook",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action, Process"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeatable business (by FY23) through delivery excellence and client advocacy/relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, Task; about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "JPM ACCESS: managed 40+ blended team, delivered payment modules and security controls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task, Action"
+   },
+   {
+    "text": "JPM ACCESS: owned on-call and Sev-1 incident response, RCA and leadership communications while live",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011, 135,000+ clients, 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "NS: thin-stretched domain experts paired and rotated; client contributors paired into new-state build (Angular, Node, Spring Boot) and left able to support the app",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action, Result"
+   },
+   {
+    "text": "NS client learned to write testable stories and own backlog and priorities",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Result"
+   },
+   {
+    "text": "NS MVP launched covering 95% of targeted use cases, real orders with clean data feeding mainframe",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass t1: explains why he is looking from the transition and career-intent stories; no closing; all claims supported. Quote 'real delivery ... not strategy decks' uses an ellipsis over verbatim text of career-intent-what-im-looking-for-next|independent-project 5PSummary; accepted as elision.",
+  "claims": [
+   {
+    "text": "Accenture chapter came to a close after long tenure incl. four years leading 150-person CIC",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation"
+   },
+   {
+    "text": "Stepped back to recharge / first pause after years of continuous delivery",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation, 5PSummary"
+   },
+   {
+    "text": "Built MattGPT during sabbatical, a project he'd use rather than tutorial; RAG, semantic search, LLM tooling",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation; transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "MVP shipped with semantic search across 100+ stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Result"
+   },
+   {
+    "text": "Pursuing senior leadership roles in platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary; career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "Organization needs a 0->1 builder, not a maintainer",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "real delivery with engineers and product managers, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "in the work, not above it, solving hard problems as part of a team",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Seeking a role where building the product engineering org, establishing culture and delivering results are part of the same job (paraphrase)",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Purpose ('engineering organization building'); career-intent-what-im-looking-for-next|independent-project Task ('elevate engineering culture'), 5PSummary ('real delivery')"
+   },
+   {
+    "text": "Available immediately, no notice period",
+    "label": "supported",
+    "source": "profile.logistics.availability"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass t1: explains why he is looking from the transition and career-intent stories; no closing; all claims supported.",
+  "claims": [
+   {
+    "text": "Tenure took him from engineer to Director of the CIC",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary; career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "Stepped back to recharge / first pause after years of continuous delivery",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation, 5PSummary"
+   },
+   {
+    "text": "Built MattGPT during sabbatical, a project he'd use rather than tutorial; RAG, semantic search, LLM tooling",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation; transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "MVP shipped with semantic search across 100+ stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Result"
+   },
+   {
+    "text": "NOW/NEXT/LATER roadmap, contained MVP scope",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Action, Result"
+   },
+   {
+    "text": "Seeking a role where building the product engineering org, establishing culture and delivering results are part of the same job (paraphrase)",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Purpose ('engineering organization building'); career-intent-what-im-looking-for-next|independent-project Task ('elevate engineering culture'), 5PSummary ('real delivery')"
+   },
+   {
+    "text": "Search includes platform engineering, product leadership, enterprise modernization, AI-enabled product innovation",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project Result; transition-story-why-im-exploring-opportunities|accenture Result"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary; career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "real delivery with engineers and product managers, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "in the work, not above it, solving hard problems as part of a team",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Organization needs a 0->1 builder, not a maintainer",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "Available immediately, no notice period",
+    "label": "supported",
+    "source": "profile.logistics.availability"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass t1: explains why he is looking from the transition and career-intent stories; no closing; all claims supported. Quote 'in the work, not above it' verbatim.",
+  "claims": [
+   {
+    "text": "Accenture chapter came to a close after long tenure incl. four years leading 150-person CIC",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation"
+   },
+   {
+    "text": "Stepped back to recharge / first pause after years of continuous delivery",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation, 5PSummary"
+   },
+   {
+    "text": "Built MattGPT during sabbatical, a project he'd use rather than tutorial; RAG, semantic search, LLM tooling",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation; transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "MVP shipped with semantic search across 100+ stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Result"
+   },
+   {
+    "text": "Next role to center on building products, platforms and an engineering organization",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary, Purpose"
+   },
+   {
+    "text": "Stayed hands-on with AI and GenAI",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Action"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary; career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "Pursuing product leadership, platform engineering, technology transformation, cloud modernization, AI-enabled product innovation",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project Result"
+   },
+   {
+    "text": "real delivery with engineers and product managers, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "Seeking a role where building the product engineering org, establishing culture and delivering results are part of the same job (paraphrase)",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Purpose ('engineering organization building'); career-intent-what-im-looking-for-next|independent-project Task ('elevate engineering culture'), 5PSummary ('real delivery')"
+   },
+   {
+    "text": "in the work, not above it, solving hard problems as part of a team",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass t2: engages the in-house comparison with ownership/delivery facts (owned, not just advised) without disparaging or ranking; all claims supported; no closing. Says it can't rank him without the other candidate's experience.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names, rule 4)",
+    "label": "supported",
+    "source": "rule 4: building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture, the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern, leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Theme"
+   },
+   {
+    "text": "Clients moving from waterfall/feature factories/siloed teams; legacy systems, compliance, org change",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "NS: mainframe from 1970s, COBOL rules, orders fell out unnoticed until customers called, mainframe thinking, waterfall account leadership",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs from ground up over four years with full P&L, budget/cost, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary, Action, Result"
+   },
+   {
+    "text": "Grew from zero (10-person pilot) to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, 5PSummary; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Every final hiring decision, compensation allocation, promotion calibration, end-of-remediation calls",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action, Result"
+   },
+   {
+    "text": "Ran organization through 11-13 direct-report practice and client leads",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result, Performance"
+   },
+   {
+    "text": "Hiring, feedback and promotion machinery held through four years of continuous scaling",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result"
+   },
+   {
+    "text": "Near-zero attrition in the first two years (multiple hires promoted)",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "NS: mainframe kept as system of record while APIs, microservices, CockroachDB rose beside it; CDC and reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS: brought revenue management into co-creation, weekly build-measure-learn iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action, Result"
+   },
+   {
+    "text": "NS: thin-stretched domain experts paired and rotated; client contributors paired into new-state build (Angular, Node, Spring Boot) and left able to support the app",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action, Result"
+   },
+   {
+    "text": "NS MVP launched covering 95% of targeted use cases, real orders with clean data feeding mainframe",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeatable business (by FY23) through delivery excellence and client advocacy/relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, Task; about-matt-my-leadership-journey|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass t2: engages the in-house comparison with ownership/delivery facts (owned, not just advised) without disparaging or ranking; all claims supported; no closing. Names comparison dimensions and says no evidence to rank above an unnamed candidate.",
+  "claims": [
+   {
+    "text": "Clients struggling with slow development cycles, fragmented workflows, legacy systems",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Situation"
+   },
+   {
+    "text": "New hires lacked hands-on cloud-native/Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "Flat model without managers on daily teams; peer-based evaluation from pair partners, PMs, anchors",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Situation, Action"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs from ground up over four years with full P&L, budget/cost, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary, Action, Result"
+   },
+   {
+    "text": "Grew from zero (10-person pilot) to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, 5PSummary; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Ran organization through 11-13 direct-report practice and client leads",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result, Performance"
+   },
+   {
+    "text": "Every final hiring decision, compensation allocation, promotion calibration, end-of-remediation calls",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action, Result"
+   },
+   {
+    "text": "Near-zero attrition in the first two years (multiple hires promoted)",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Balanced teams of PMs, designers, engineers with pairing, TDD, CI/CD adapted for enterprise security/compliance",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Career progression frameworks, delivery playbooks, technical infrastructure, cookbook",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action, Process"
+   },
+   {
+    "text": "Clients adopted practices internally after engagements / knowledge transfer to sustain practices",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action, Result"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeatable business (by FY23) through delivery excellence and client advocacy/relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, Task; about-matt-my-leadership-journey|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 6,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass t2: engages the in-house comparison with ownership/delivery facts (owned, not just advised) without disparaging or ranking; all claims supported; no closing. 'I do, we do, you do' quote verbatim (scaling-talent-and-practices-for-agile-product-innovation|accenture).",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names, rule 4)",
+    "label": "supported",
+    "source": "rule 4: building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture, the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern, leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Theme"
+   },
+   {
+    "text": "Clients moving from waterfall/feature factories/siloed teams; legacy systems, compliance, org change",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "NS: mainframe from 1970s, COBOL rules, orders fell out unnoticed until customers called, mainframe thinking, waterfall account leadership",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "JPM: bespoke payment capabilities under aggressive timelines, preserving live operations and compliance traceability",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs from ground up over four years with full P&L, budget/cost, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary, Action, Result"
+   },
+   {
+    "text": "Grew from zero (10-person pilot) to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, 5PSummary; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Career progression frameworks, delivery playbooks, technical infrastructure, cookbook",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action, Process"
+   },
+   {
+    "text": "'I do, we do, you do' learning model, junior hires paired with mentors, guided to independent delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result, Action"
+   },
+   {
+    "text": "Near-zero attrition in the first two years (multiple hires promoted)",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "JPM ACCESS: managed 40+ blended team, delivered payment modules and security controls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task, Action"
+   },
+   {
+    "text": "JPM ACCESS: owned on-call and Sev-1 incident response, RCA and leadership communications while live",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "JPM: payments data migration without disruption to live payment operations; UAT, shakeout, post-cutover defect triage; compliance dashboards became standard",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action, Result"
+   },
+   {
+    "text": "NS: mainframe kept as system of record while APIs, microservices, CockroachDB rose beside it; CDC and reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS: brought revenue management into co-creation, weekly build-measure-learn iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action, Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeatable business (by FY23) through delivery excellence and client advocacy/relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, Task; about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "NS MVP launched covering 95% of targeted use cases, real orders with clean data feeding mainframe",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass t1: explains why he is looking from the transition and career-intent stories; no closing; all claims supported.",
+  "claims": [
+   {
+    "text": "Accenture chapter came to a close after long tenure incl. four years leading 150-person CIC",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation"
+   },
+   {
+    "text": "Stepped back to recharge / first pause after years of continuous delivery",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation, 5PSummary"
+   },
+   {
+    "text": "Built MattGPT during sabbatical, a project he'd use rather than tutorial; RAG, semantic search, LLM tooling",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation; transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "MVP shipped with semantic search across 100+ stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Result"
+   },
+   {
+    "text": "NOW/NEXT/LATER roadmap, contained MVP scope",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Action, Result"
+   },
+   {
+    "text": "Clarified work he wants: platform modernization, product leadership, engineering culture",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Action"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary; career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "Pursuing senior leadership roles in platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result"
+   },
+   {
+    "text": "real delivery with engineers and product managers, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "Seeking a role where building the product engineering org, establishing culture and delivering results are part of the same job (paraphrase)",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Purpose ('engineering organization building'); career-intent-what-im-looking-for-next|independent-project Task ('elevate engineering culture'), 5PSummary ('real delivery')"
+   },
+   {
+    "text": "Chooses environment: clear purpose, psychological safety, room to challenge, intensity balanced with respect",
+    "label": "supported",
+    "source": "work-philosophy-where-i-do-my-best-work|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass t1: explains why he is looking from the transition and career-intent stories; no closing; all claims supported. Brief but answers why (tenure ended, sabbatical, now searching); quote verbatim in profile.",
+  "claims": [
+   {
+    "text": "Currently on sabbatical building MattGPT",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Start/End_Date, Use Case(s); mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Accenture tenure ended September 2023 (March 2005 start where stated)",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project Start_Date/End_Date; building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture End_Date"
+   },
+   {
+    "text": "Seeking a role where building the product engineering org, establishing culture and delivering results are part of the same job (paraphrase)",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Purpose ('engineering organization building'); career-intent-what-im-looking-for-next|independent-project Task ('elevate engineering culture'), 5PSummary ('real delivery')"
+   },
+   {
+    "text": "Self-description 'Builder's mindset, coach's heart'",
+    "label": "supported",
+    "source": "profile.self_description.statements"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass t1: explains why he is looking from the transition and career-intent stories; no closing; all claims supported.",
+  "claims": [
+   {
+    "text": "Currently on sabbatical building MattGPT",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Start/End_Date, Use Case(s); mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "After Accenture tenure ended, stepped back to recharge",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Seeking a role where building the product engineering org, establishing culture and delivering results are part of the same job (paraphrase)",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Purpose ('engineering organization building'); career-intent-what-im-looking-for-next|independent-project Task ('elevate engineering culture'), 5PSummary ('real delivery')"
+   },
+   {
+    "text": "Pursuing senior leadership roles in platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result"
+   },
+   {
+    "text": "real delivery with engineers and product managers, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "A builder looking for his next build",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass t2: engages the in-house comparison with ownership/delivery facts (owned, not just advised) without disparaging or ranking; all claims supported; no closing. Ends naming organizational ownership, live-system delivery and ownership transfer as the comparison points.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names, rule 4)",
+    "label": "supported",
+    "source": "rule 4: building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture, the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern, leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Theme"
+   },
+   {
+    "text": "NS: mainframe from 1970s, COBOL rules, orders fell out unnoticed until customers called, mainframe thinking, waterfall account leadership",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "CIC meant owning how an organization ran, not just what engagements delivered",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Situation"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs from ground up over four years with full P&L, budget/cost, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary, Action, Result"
+   },
+   {
+    "text": "Grew from zero (10-person pilot) to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, 5PSummary; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Every final hiring decision, compensation allocation, promotion calibration, end-of-remediation calls",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action, Result"
+   },
+   {
+    "text": "Ran organization through 11-13 direct-report practice and client leads",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result, Performance"
+   },
+   {
+    "text": "Hiring, feedback and promotion machinery held through four years of continuous scaling",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result"
+   },
+   {
+    "text": "Near-zero attrition in the first two years (multiple hires promoted)",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "NS: mainframe kept as system of record while APIs, microservices, CockroachDB rose beside it; CDC and reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS MVP launched covering 95% of targeted use cases, real orders with clean data feeding mainframe",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "NS: thin-stretched domain experts paired and rotated; client contributors paired into new-state build (Angular, Node, Spring Boot) and left able to support the app",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action, Result"
+   },
+   {
+    "text": "JPM: payments data migration without disruption to live payment operations; UAT, shakeout, post-cutover defect triage; compliance dashboards became standard",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action, Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass t2: engages the in-house comparison with ownership/delivery facts (owned, not just advised) without disparaging or ranking; all claims supported; no closing. Quotes 'cookbook' and 'I do, we do, you do' verbatim; states facts don't establish ranking over unspecified candidate.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names, rule 4)",
+    "label": "supported",
+    "source": "rule 4: building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture, the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern, leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Theme"
+   },
+   {
+    "text": "Clients moving from waterfall/feature factories/siloed teams; legacy systems, compliance, org change",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "New hires lacked hands-on cloud-native/Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs from ground up over four years with full P&L, budget/cost, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary, Action, Result"
+   },
+   {
+    "text": "Grew from zero (10-person pilot) to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, 5PSummary; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Balanced teams of PMs, designers, engineers with pairing, TDD, CI/CD adapted for enterprise security/compliance",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Career progression frameworks, delivery playbooks, technical infrastructure, cookbook",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action, Process"
+   },
+   {
+    "text": "'I do, we do, you do' learning model, junior hires paired with mentors, guided to independent delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result, Action"
+   },
+   {
+    "text": "Near-zero attrition in the first two years (multiple hires promoted)",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "At JP Morgan teams outpaced peer velocity within first 2 sprints, shipping to production in weeks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Clients adopted practices internally after engagements / knowledge transfer to sustain practices",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action, Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 7,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass t2: engages the in-house comparison with ownership/delivery facts (owned, not just advised) without disparaging or ranking; all claims supported; no closing. Engages comparison via 'consulting roles included building and running an organization, not just delivering projects' (borderline on directness). Pairing-cost resistance paraphrased, not quoted.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names, rule 4)",
+    "label": "supported",
+    "source": "rule 4: building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture, the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern, leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Theme"
+   },
+   {
+    "text": "Every final hiring decision, compensation allocation, promotion calibration, end-of-remediation calls",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action, Result"
+   },
+   {
+    "text": "Flat model without managers on daily teams; peer-based evaluation from pair partners, PMs, anchors",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Situation, Action"
+   },
+   {
+    "text": "NS: legacy knowledge with thin-stretched experts, silos, contributors needed skills after roll-off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Situation, Action"
+   },
+   {
+    "text": "NS client resisted pairing over paying for two people (paraphrase, not quoted)",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs from ground up over four years with full P&L, budget/cost, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary, Action, Result"
+   },
+   {
+    "text": "Ran organization through 11-13 direct-report practice and client leads",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result, Performance"
+   },
+   {
+    "text": "Practice leads collected evidence from pair partners, PMs, anchors rather than director's impressions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "NS: 'I do, we do, you do' pairing of domain experts, rotated across team",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "NS: thin-stretched domain experts paired and rotated; client contributors paired into new-state build (Angular, Node, Spring Boot) and left able to support the app",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action, Result"
+   },
+   {
+    "text": "NS client learned to write testable stories and own backlog and priorities",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Result"
+   },
+   {
+    "text": "Grew from zero (10-person pilot) to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, 5PSummary; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Near-zero attrition in the first two years (multiple hires promoted)",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "NS MVP launched covering 95% of targeted use cases, real orders with clean data feeding mainframe",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass t1: explains why he is looking from the transition and career-intent stories; no closing; all claims supported.",
+  "claims": [
+   {
+    "text": "Accenture chapter came to a close after long tenure incl. four years leading 150-person CIC",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation"
+   },
+   {
+    "text": "Stepped back to recharge / first pause after years of continuous delivery",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation, 5PSummary"
+   },
+   {
+    "text": "Built MattGPT during sabbatical, a project he'd use rather than tutorial; RAG, semantic search, LLM tooling",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation; transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "MVP shipped with semantic search across 100+ stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Result"
+   },
+   {
+    "text": "NOW/NEXT/LATER roadmap, contained MVP scope",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Action, Result"
+   },
+   {
+    "text": "Clarified work he wants: platform modernization, product leadership, engineering culture",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Action"
+   },
+   {
+    "text": "Working across product, engineering and executive teams",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project Action"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary; career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "Pursuing senior leadership roles in platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result"
+   },
+   {
+    "text": "real delivery with engineers and product managers, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "Seeking a role where building the product engineering org, establishing culture and delivering results are part of the same job (paraphrase)",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Purpose ('engineering organization building'); career-intent-what-im-looking-for-next|independent-project Task ('elevate engineering culture'), 5PSummary ('real delivery')"
+   },
+   {
+    "text": "in the work, not above it, solving hard problems as part of a team",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass t1: explains why he is looking from the transition and career-intent stories; no closing; all claims supported. Quote is a verbatim substring of the profile statement.",
+  "claims": [
+   {
+    "text": "Accenture tenure ended September 2023 (March 2005 start where stated)",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project Start_Date/End_Date; building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture End_Date"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Start/End_Date, Use Case(s); mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Seeking a role where building the product engineering org, establishing culture and delivering results are part of the same job (paraphrase)",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Purpose ('engineering organization building'); career-intent-what-im-looking-for-next|independent-project Task ('elevate engineering culture'), 5PSummary ('real delivery')"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary; career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "Self-description: 'build what's next, modernize what's not, and grow teams along the way'",
+    "label": "supported",
+    "source": "profile.self_description.statements"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass t1: explains why he is looking from the transition and career-intent stories; no closing; all claims supported.",
+  "claims": [
+   {
+    "text": "Accenture chapter came to a close after long tenure incl. four years leading 150-person CIC",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation"
+   },
+   {
+    "text": "Stepped back to recharge / first pause after years of continuous delivery",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation, 5PSummary"
+   },
+   {
+    "text": "Built MattGPT during sabbatical, a project he'd use rather than tutorial; RAG, semantic search, LLM tooling",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation; transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "MVP shipped with semantic search across 100+ stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Result"
+   },
+   {
+    "text": "Clarified work he wants: platform modernization, product leadership, engineering culture",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Action"
+   },
+   {
+    "text": "Seeking a role where building the product engineering org, establishing culture and delivering results are part of the same job (paraphrase)",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Purpose ('engineering organization building'); career-intent-what-im-looking-for-next|independent-project Task ('elevate engineering culture'), 5PSummary ('real delivery')"
+   },
+   {
+    "text": "Pursuing senior leadership roles in platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result"
+   },
+   {
+    "text": "real delivery with engineers and product managers, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary; career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "Wants to build products, platforms and teams, not maintain",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "in the work, not above it, solving hard problems as part of a team",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Available immediately, no notice period",
+    "label": "supported",
+    "source": "profile.logistics.availability"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass t2: engages the in-house comparison with ownership/delivery facts (owned, not just advised) without disparaging or ranking; all claims supported; no closing. Ends tying consulting tenure to sustained organizational ownership.",
+  "claims": [
+   {
+    "text": "Every final hiring decision, compensation allocation, promotion calibration, end-of-remediation calls",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action, Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs from ground up over four years with full P&L, budget/cost, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary, Action, Result"
+   },
+   {
+    "text": "NS: scarce legacy knowledge with thin-stretched experts; client engineers needed to support app after roll-off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action, Result"
+   },
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names, rule 4)",
+    "label": "supported",
+    "source": "rule 4: building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture, the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern, leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Theme"
+   },
+   {
+    "text": "Hiring, feedback and promotion machinery held through four years of continuous scaling",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result"
+   },
+   {
+    "text": "Grew from zero (10-person pilot) to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, 5PSummary; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Flat model without managers on daily teams; peer-based evaluation from pair partners, PMs, anchors",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Situation, Action"
+   },
+   {
+    "text": "Near-zero attrition in the first two years (multiple hires promoted)",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "NS: thin-stretched domain experts paired and rotated; client contributors paired into new-state build (Angular, Node, Spring Boot) and left able to support the app",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action, Result"
+   },
+   {
+    "text": "After quality crisis, rebuilt daily workflow: test cases before implementation, daily pair rotation, testable stories, checked at standup; practices held and failure mode did not recur",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action, Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ repeatable business through delivery and client referrals",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Clients adopted practices internally after engagements / knowledge transfer to sustain practices",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action, Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass t2: engages the in-house comparison with ownership/delivery facts (owned, not just advised) without disparaging or ranking; all claims supported; no closing. States stories don't establish an unspecified candidate did less.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names, rule 4)",
+    "label": "supported",
+    "source": "rule 4: building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture, the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern, leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Theme"
+   },
+   {
+    "text": "Clients moving from waterfall/feature factories/siloed teams; legacy systems, compliance, org change",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "NS: mainframe from 1970s, COBOL rules, orders fell out unnoticed until customers called, mainframe thinking, waterfall account leadership",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs from ground up over four years with full P&L, budget/cost, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary, Action, Result"
+   },
+   {
+    "text": "Grew from zero (10-person pilot) to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, 5PSummary; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Balanced teams of PMs, designers, engineers with pairing, TDD, CI/CD adapted for enterprise security/compliance",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Career progression frameworks, delivery playbooks, technical infrastructure, cookbook",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action, Process"
+   },
+   {
+    "text": "'I do, we do, you do' learning model, junior hires paired with mentors, guided to independent delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result, Action"
+   },
+   {
+    "text": "Near-zero attrition in the first two years (multiple hires promoted)",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "NS: mainframe kept as system of record while APIs, microservices, CockroachDB rose beside it; CDC and reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS: brought revenue management into co-creation, weekly build-measure-learn iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action, Result"
+   },
+   {
+    "text": "NS: thin-stretched domain experts paired and rotated; client contributors paired into new-state build (Angular, Node, Spring Boot) and left able to support the app",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action, Result"
+   },
+   {
+    "text": "NS client learned to write testable stories and own backlog and priorities",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Result"
+   },
+   {
+    "text": "After quality crisis, rebuilt daily workflow: test cases before implementation, daily pair rotation, testable stories, checked at standup; practices held and failure mode did not recur",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action, Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "NS MVP launched covering 95% of targeted use cases, real orders with clean data feeding mainframe",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 8,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass t2: engages the in-house comparison with ownership/delivery facts (owned, not just advised) without disparaging or ranking; all claims supported; no closing.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names, rule 4)",
+    "label": "supported",
+    "source": "rule 4: building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture, the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern, leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Theme"
+   },
+   {
+    "text": "Clients moving from waterfall/feature factories/siloed teams; legacy systems, compliance, org change",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "NS: thin-stretched domain experts paired and rotated; client contributors paired into new-state build (Angular, Node, Spring Boot) and left able to support the app",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action, Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs from ground up over four years with full P&L, budget/cost, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary, Action, Result"
+   },
+   {
+    "text": "Grew from zero (10-person pilot) to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, 5PSummary; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Every final hiring decision, compensation allocation, promotion calibration, end-of-remediation calls",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action, Result"
+   },
+   {
+    "text": "Ran organization through 11-13 direct-report practice and client leads",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result, Performance"
+   },
+   {
+    "text": "Near-zero attrition in the first two years (multiple hires promoted)",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Balanced teams of PMs, designers, engineers with pairing, TDD, CI/CD adapted for enterprise security/compliance",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "NS MVP launched covering 95% of targeted use cases, real orders with clean data feeding mainframe",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "JPM: payments data migration without disruption to live payment operations; UAT, shakeout, post-cutover defect triage; compliance dashboards became standard",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action, Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeatable business (by FY23) through delivery excellence and client advocacy/relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, Task; about-matt-my-leadership-journey|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass t1: explains why he is looking from the transition and career-intent stories; no closing; all claims supported.",
+  "claims": [
+   {
+    "text": "Accenture chapter came to a close after long tenure incl. four years leading 150-person CIC",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation"
+   },
+   {
+    "text": "Stepped back to recharge / first pause after years of continuous delivery",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation, 5PSummary"
+   },
+   {
+    "text": "Built MattGPT during sabbatical, a project he'd use rather than tutorial; RAG, semantic search, LLM tooling",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation; transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Defined product roadmap, scoped MVP, shipped working application",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Action, Result"
+   },
+   {
+    "text": "Seeking a role where building the product engineering org, establishing culture and delivering results are part of the same job (paraphrase)",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Purpose ('engineering organization building'); career-intent-what-im-looking-for-next|independent-project Task ('elevate engineering culture'), 5PSummary ('real delivery')"
+   },
+   {
+    "text": "Pursuing senior leadership roles in platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result"
+   },
+   {
+    "text": "real delivery with engineers and product managers, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary; career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "Wants to build products, platforms and teams; next build, not maintenance",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass t1: explains why he is looking from the transition and career-intent stories; no closing; all claims supported.",
+  "claims": [
+   {
+    "text": "Tenure took him from engineer to Director of the CIC",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary; career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "Stepped back to recharge / first pause after years of continuous delivery",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation, 5PSummary"
+   },
+   {
+    "text": "Built MattGPT during sabbatical, a project he'd use rather than tutorial; RAG, semantic search, LLM tooling",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation; transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "MVP shipped with semantic search across 100+ stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Result"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Start/End_Date, Use Case(s); mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Seeking a role where building the product engineering org, establishing culture and delivering results are part of the same job (paraphrase)",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Purpose ('engineering organization building'); career-intent-what-im-looking-for-next|independent-project Task ('elevate engineering culture'), 5PSummary ('real delivery')"
+   },
+   {
+    "text": "NOW/NEXT/LATER roadmap, contained MVP scope",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Action, Result"
+   },
+   {
+    "text": "Pursuing senior leadership roles in platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result"
+   },
+   {
+    "text": "real delivery with engineers and product managers, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "Scaling products, modernizing platforms, building engineering culture with product, engineering, executive teams",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project Task, Action"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary; career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "Next build: new capabilities, products, platforms, teams, not maintenance",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass t1: explains why he is looking from the transition and career-intent stories; no closing; all claims supported. Role progression read as supported by Role fields and 'engineer to Director' (listing 'CIC Leader' after Director is loose framing, judged not a new fact).",
+  "claims": [
+   {
+    "text": "Currently on sabbatical building MattGPT",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Start/End_Date, Use Case(s); mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Accenture tenure ended September 2023 (March 2005 start where stated)",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project Start_Date/End_Date; building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture End_Date"
+   },
+   {
+    "text": "Seeking a role where building the product engineering org, establishing culture and delivering results are part of the same job (paraphrase)",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Purpose ('engineering organization building'); career-intent-what-im-looking-for-next|independent-project Task ('elevate engineering culture'), 5PSummary ('real delivery')"
+   },
+   {
+    "text": "Career from Software Engineer to Solution Architect to Director/CIC leader",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary ('From engineer to Director'); Role fields (Wellfound/Cendian Software Engineer, Accenture Solution Architect, Director)"
+   },
+   {
+    "text": "Built CIC from 0 to 150+ practitioners in Atlanta and Tampa",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass t2: engages the in-house comparison with ownership/delivery facts (owned, not just advised) without disparaging or ranking; all claims supported; no closing. Says an in-house record needs its own comparison; Matt operated, not solely advised.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names, rule 4)",
+    "label": "supported",
+    "source": "rule 4: building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture, the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern, leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Theme"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs from ground up over four years with full P&L, budget/cost, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary, Action, Result"
+   },
+   {
+    "text": "Every final hiring decision, compensation allocation, promotion calibration, end-of-remediation calls",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action, Result"
+   },
+   {
+    "text": "Clients moving from waterfall/feature factories/siloed teams; legacy systems, compliance, org change",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "New hires lacked hands-on cloud-native/Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "Flat model without managers on daily teams; peer-based evaluation from pair partners, PMs, anchors",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Situation, Action"
+   },
+   {
+    "text": "Grew from zero (10-person pilot) to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, 5PSummary; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Ran organization through 11-13 direct-report practice and client leads",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result, Performance"
+   },
+   {
+    "text": "Ran monthly peer-feedback capture sessions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Hiring, feedback and promotion machinery held through four years of continuous scaling",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result"
+   },
+   {
+    "text": "Near-zero attrition in the first two years (multiple hires promoted)",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Balanced teams of PMs, designers, engineers with pairing, TDD, CI/CD adapted for enterprise security/compliance",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeatable business (by FY23) through delivery excellence and client advocacy/relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, Task; about-matt-my-leadership-journey|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass t2: engages the in-house comparison with ownership/delivery facts (owned, not just advised) without disparaging or ranking; all claims supported; no closing. States the record doesn't establish he is better than an unspecified candidate.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names, rule 4)",
+    "label": "supported",
+    "source": "rule 4: building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture, the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern, leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Theme"
+   },
+   {
+    "text": "NS: mainframe from 1970s, COBOL rules, orders fell out unnoticed until customers called, mainframe thinking, waterfall account leadership",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Capital One: slow misaligned iterations; features 3-4x faster than other Accenture teams, zero production defects, client sought to retain team",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Situation, Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs from ground up over four years with full P&L, budget/cost, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary, Action, Result"
+   },
+   {
+    "text": "Grew from zero (10-person pilot) to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, 5PSummary; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Career progression frameworks, delivery playbooks, technical infrastructure, cookbook",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action, Process"
+   },
+   {
+    "text": "Operating model for onboarding practitioners and mobilizing teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "JPM ACCESS: managed 40+ blended team, delivered payment modules and security controls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task, Action"
+   },
+   {
+    "text": "JPM ACCESS: owned on-call and Sev-1 incident response, RCA and leadership communications while live",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011, 135,000+ clients, 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "NS: mainframe kept as system of record while APIs, microservices, CockroachDB rose beside it; CDC and reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS MVP launched covering 95% of targeted use cases, real orders with clean data feeding mainframe",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "NS: brought revenue management into co-creation, weekly build-measure-learn iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action, Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 9,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass t2: engages the in-house comparison with ownership/delivery facts (owned, not just advised) without disparaging or ranking; all claims supported; no closing. Framed as 'owned, not just advised on'; 'cookbook' and 'I do, we do, you do' quotes verbatim.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names, rule 4)",
+    "label": "supported",
+    "source": "rule 4: building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture, the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern, leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Theme"
+   },
+   {
+    "text": "Clients moving from waterfall/feature factories/siloed teams; legacy systems, compliance, org change",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "New hires lacked hands-on cloud-native/Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs from ground up over four years with full P&L, budget/cost, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary, Action, Result"
+   },
+   {
+    "text": "Grew from zero (10-person pilot) to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, 5PSummary; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Career progression frameworks, delivery playbooks, technical infrastructure, cookbook",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action, Process"
+   },
+   {
+    "text": "Skills matrix, tailored training, junior hires paired with mentors, 'I do, we do, you do'",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action, Result"
+   },
+   {
+    "text": "Near-zero attrition in the first two years (multiple hires promoted)",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Balanced teams of PMs, designers, engineers with pairing, TDD, CI/CD adapted for enterprise security/compliance",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Clients adopted practices internally after engagements / knowledge transfer to sustain practices",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action, Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeatable business (by FY23) through delivery excellence and client advocacy/relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, Task; about-matt-my-leadership-journey|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass t1: explains why he is looking from the transition and career-intent stories; no closing; all claims supported.",
+  "claims": [
+   {
+    "text": "Accenture chapter came to a close after long tenure incl. four years leading 150-person CIC",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation"
+   },
+   {
+    "text": "Stepped back to recharge / first pause after years of continuous delivery",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation, 5PSummary"
+   },
+   {
+    "text": "Built MattGPT during sabbatical, a project he'd use rather than tutorial; RAG, semantic search, LLM tooling",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation; transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "MVP shipped with semantic search across 100+ stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Result"
+   },
+   {
+    "text": "Clarified work he wants: platform modernization, product leadership, engineering culture",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Action"
+   },
+   {
+    "text": "Seeking a role where building the product engineering org, establishing culture and delivering results are part of the same job (paraphrase)",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Purpose ('engineering organization building'); career-intent-what-im-looking-for-next|independent-project Task ('elevate engineering culture'), 5PSummary ('real delivery')"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary; career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "real delivery with engineers and product managers, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "Organization needs a 0->1 builder, not a maintainer",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "Search includes platform engineering, technology transformation, cloud modernization, AI-enabled product innovation",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project Result"
+   },
+   {
+    "text": "Available immediately, no notice period",
+    "label": "supported",
+    "source": "profile.logistics.availability"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass t1: explains why he is looking from the transition and career-intent stories; no closing; all claims supported. Quote verbatim in profile.",
+  "claims": [
+   {
+    "text": "Currently on sabbatical building MattGPT",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Start/End_Date, Use Case(s); mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Accenture tenure ended September 2023 (March 2005 start where stated)",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project Start_Date/End_Date; building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture End_Date"
+   },
+   {
+    "text": "Seeking a role where building the product engineering org, establishing culture and delivering results are part of the same job (paraphrase)",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Purpose ('engineering organization building'); career-intent-what-im-looking-for-next|independent-project Task ('elevate engineering culture'), 5PSummary ('real delivery')"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary; career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "'I build what's next, modernize what's not, and grow teams along the way.'",
+    "label": "supported",
+    "source": "profile.self_description.statements"
+   },
+   {
+    "text": "Available immediately, no notice period",
+    "label": "supported",
+    "source": "profile.logistics.availability"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass t1: explains why he is looking from the transition and career-intent stories; no closing; all claims supported.",
+  "claims": [
+   {
+    "text": "Accenture chapter came to a close after long tenure incl. four years leading 150-person CIC",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation"
+   },
+   {
+    "text": "Stepped back to recharge / first pause after years of continuous delivery",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation, 5PSummary"
+   },
+   {
+    "text": "Built MattGPT during sabbatical, a project he'd use rather than tutorial; RAG, semantic search, LLM tooling",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation; transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "MVP shipped with semantic search across 100+ stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Result"
+   },
+   {
+    "text": "Clarified work he wants: platform modernization, product leadership, engineering culture",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Action"
+   },
+   {
+    "text": "Seeking a role where building the product engineering org, establishing culture and delivering results are part of the same job (paraphrase)",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Purpose ('engineering organization building'); career-intent-what-im-looking-for-next|independent-project Task ('elevate engineering culture'), 5PSummary ('real delivery')"
+   },
+   {
+    "text": "Pursuing senior leadership roles in platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result"
+   },
+   {
+    "text": "real delivery with engineers and product managers, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "NOW/NEXT/LATER roadmap, contained MVP scope",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Action, Result"
+   },
+   {
+    "text": "Stack Python, Streamlit, Pinecone, OpenAI embeddings, RAG",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Action"
+   },
+   {
+    "text": "ADRs, session handoff protocols, evaluation checks, behavior-first tests in AI-assisted workflow",
+    "label": "supported",
+    "source": "building-effective-ai-assisted-development-workflows|independent-project Action, Result"
+   },
+   {
+    "text": "Builder looking for next build; scale products, modernize platforms, hard problems as part of a team",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; career-intent-what-im-looking-for-next|independent-project Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass t2: engages the in-house comparison with ownership/delivery facts (owned, not just advised) without disparaging or ranking; all claims supported; no closing. Explicitly says no candidate record to support ranking; attrition attributed to talent-scaling story is correct (scaling-talent-and-practices-for-agile-product-innovation|accenture Result).",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names, rule 4)",
+    "label": "supported",
+    "source": "rule 4: building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture, the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern, leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Theme"
+   },
+   {
+    "text": "Clients moving from waterfall/feature factories/siloed teams; legacy systems, compliance, org change",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "New hires lacked hands-on cloud-native/Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs from ground up over four years with full P&L, budget/cost, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary, Action, Result"
+   },
+   {
+    "text": "Grew from zero (10-person pilot) to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, 5PSummary; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "'I do, we do, you do' learning model, junior hires paired with mentors, guided to independent delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result, Action"
+   },
+   {
+    "text": "Near-zero attrition in the first two years (multiple hires promoted)",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Balanced teams of PMs, designers, engineers with pairing, TDD, CI/CD adapted for enterprise security/compliance",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "At JP Morgan teams outpaced peer velocity within first 2 sprints, shipping to production in weeks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "At Norfolk Southern teams reduced meeting overhead and context switching, improving velocity",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeatable business (by FY23) through delivery excellence and client advocacy/relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, Task; about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Clients adopted practices internally after engagements / knowledge transfer to sustain practices",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action, Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass t2: engages the in-house comparison with ownership/delivery facts (owned, not just advised) without disparaging or ranking; all claims supported; no closing. Ends naming responsibilities to compare with an in-house record.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names, rule 4)",
+    "label": "supported",
+    "source": "rule 4: building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture, the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern, leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Theme"
+   },
+   {
+    "text": "Clients moving from waterfall/feature factories/siloed teams; legacy systems, compliance, org change",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "NS: mainframe from 1970s, COBOL rules, orders fell out unnoticed until customers called, mainframe thinking, waterfall account leadership",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "JPM: bespoke payment engineering under aggressive timelines while preserving live payment operations",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs from ground up over four years with full P&L, budget/cost, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary, Action, Result"
+   },
+   {
+    "text": "Grew from zero (10-person pilot) to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, 5PSummary; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Career progression frameworks, delivery playbooks, technical infrastructure, cookbook",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action, Process"
+   },
+   {
+    "text": "Balanced teams of PMs, designers, engineers with pairing, TDD, CI/CD adapted for enterprise security/compliance",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Near-zero attrition in the first two years (multiple hires promoted)",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "NS: thin-stretched domain experts paired and rotated; client contributors paired into new-state build (Angular, Node, Spring Boot) and left able to support the app",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action, Result"
+   },
+   {
+    "text": "NS client learned to write testable stories and own backlog and priorities",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Result"
+   },
+   {
+    "text": "JPM ACCESS: managed 40+ blended team, delivered payment modules and security controls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task, Action"
+   },
+   {
+    "text": "JPM ACCESS: owned on-call and Sev-1 incident response, RCA and leadership communications while live",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "JPM: payments data migration without disruption to live payment operations; UAT, shakeout, post-cutover defect triage; compliance dashboards became standard",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action, Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeatable business (by FY23) through delivery excellence and client advocacy/relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, Task; about-matt-my-leadership-journey|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 10,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass t2: engages the in-house comparison with ownership/delivery facts (owned, not just advised) without disparaging or ranking; all claims supported; no closing. Says no evidence about the other candidate to support ranking.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names, rule 4)",
+    "label": "supported",
+    "source": "rule 4: building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture, the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern, leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Theme"
+   },
+   {
+    "text": "Four years building and running organization incl. budget, hiring, performance decisions, promotions, compensation",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action, Result; building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Clients moving from waterfall/feature factories/siloed teams; legacy systems, compliance, org change",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "NS: scarce domain knowledge, leadership accustomed to waterfall, direct resistance to pair programming",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action; the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "NS client resisted pairing over paying for two people (paraphrase, not quoted)",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs from ground up over four years with full P&L, budget/cost, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary, Action, Result"
+   },
+   {
+    "text": "Ran organization through 11-13 direct-report practice and client leads",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result, Performance"
+   },
+   {
+    "text": "Every final hiring decision, compensation allocation, promotion calibration, end-of-remediation calls",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action, Result"
+   },
+   {
+    "text": "Ran monthly peer-feedback capture",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Hiring, feedback and promotion machinery held through four years of continuous scaling",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result"
+   },
+   {
+    "text": "Near-zero attrition in the first two years (multiple hires promoted)",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Balanced teams of PMs, designers, engineers with pairing, TDD, CI/CD adapted for enterprise security/compliance",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "NS: thin-stretched domain experts paired and rotated; client contributors paired into new-state build (Angular, Node, Spring Boot) and left able to support the app",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action, Result"
+   },
+   {
+    "text": "NS client learned to write testable stories and own backlog and priorities",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Result"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeatable business (by FY23) through delivery excellence and client advocacy/relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result, Task; about-matt-my-leadership-journey|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

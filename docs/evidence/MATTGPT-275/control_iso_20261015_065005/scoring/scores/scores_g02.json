@@ -1,0 +1,2189 @@
+[
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: answers payments work from the JPMC ACCESS, American Express VPP stories; Answered and Honest pass. Every claim supported (no contradicted or unsupported), no quotations, no closing. Supported claims include: JP Morgan Chase regional payment systems had different data models, entitlements, message formats, compliance requirements; ACCESS Next Generation built on Bottomline WebSeries; 135,000+ clients needed capabilities beyond out-of-box; Technology Delivery Lead managing blended 40+ team across Accenture and the bank, Mumbai/Bangalore/US.",
+  "claims": [
+   {
+    "text": "JP Morgan Chase regional payment systems had different data models, entitlements, message formats, compliance requirements",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Situation; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Situation"
+   },
+   {
+    "text": "ACCESS Next Generation built on Bottomline WebSeries; 135,000+ clients needed capabilities beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Situation"
+   },
+   {
+    "text": "Technology Delivery Lead managing blended 40+ team across Accenture and the bank, Mumbai/Bangalore/US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task"
+   },
+   {
+    "text": "Designed and delivered ACH credits/direct debits, wires, FX/cross-border, federal tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Implemented MAC security, payment-type-specific permissions, sanctions screening, contextual help",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Designed centralized gateway for message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Situation/Action"
+   },
+   {
+    "text": "Led payments data migration preserving configurations, entitlements, transaction histories, regulatory traceability without disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011; single entry point instead of separate local logins; real-time visibility into cash positions",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Result; building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "American Express VPP replacing legacy mainframe; missing SDKs, fragmented docs, no sandbox; dependency bottlenecks, delayed testing",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Situation; transforming-developer-experience-for-the-american-express-virtual-payments-platform.Situation"
+   },
+   {
+    "text": "Led work on developer portal, Java/.NET/Python SDKs, use-case docs, secure sandbox with refreshed client data",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Action/5PSummary"
+   },
+   {
+    "text": "Team introduced virtualized testing environments and ran Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform.Action"
+   },
+   {
+    "text": "Onboarding time and integration complexity decreased; API consumption and trial usage up within 3 months",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform.Result"
+   },
+   {
+    "text": "Portal team delivered over 261 additional story points beyond delivery commitment",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform.Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: answers payments work from the JPMC ACCESS, American Express VPP stories; Answered and Honest pass. Every claim supported (no contradicted or unsupported), no quotations, no closing. Supported claims include: Worked on ACCESS Next Generation 2009 to 2012; Treasury services ran across separate regional and legacy systems with different data models, entitlements, formats, compliance; WebSeries foundation; bank needed purpose-built capabilities for 135,000+ clients across 180+ countries.",
+  "claims": [
+   {
+    "text": "Worked on ACCESS Next Generation 2009 to 2012",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Start_Date/End_Date (2009-08 to 2012-06)"
+   },
+   {
+    "text": "Treasury services ran across separate regional and legacy systems with different data models, entitlements, formats, compliance",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Situation; building-jp-morgans-global-payments-gateway-across-12-countries.Situation"
+   },
+   {
+    "text": "WebSeries foundation; bank needed purpose-built capabilities for 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Situation"
+   },
+   {
+    "text": "Technology Delivery Lead, blended 40+ team across Accenture and JPMC, Mumbai/Bangalore/US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, tax modules; NACHA validation; MAC; payment-type permissions; sanctions screening; risk-based approval controls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Designed centralized payments gateway across payment rails in 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Action"
+   },
+   {
+    "text": "Led payments data migration preserving configurations, entitlements, histories, compliance traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action/Result"
+   },
+   {
+    "text": "Owned production support and critical incident response with root-cause analysis across bank, offshore engineers, vendor",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Action; building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "ACCESS launched April 2011; gateway gave treasurers single entry point for wire, ACH, cross-border",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Result"
+   },
+   {
+    "text": "Legacy migration completed with zero disruption to live payment processing",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action/Result"
+   },
+   {
+    "text": "American Express July 2020 to February 2021, VPP adoption",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Start_Date/End_Date"
+   },
+   {
+    "text": "Missing SDKs, fragmented docs, dependency bottlenecks, no sandbox slowed integration",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Situation; transforming-developer-experience-for-the-american-express-virtual-payments-platform.Situation"
+   },
+   {
+    "text": "Helped create Java/.NET/Python SDKs, use-case docs, secure sandbox, virtualized testing environments",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform.Action"
+   },
+   {
+    "text": "Lean Product and XP practices; Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform.Action"
+   },
+   {
+    "text": "API consumption and trial usage up within 3 months; onboarding time decreased; over 261 story points beyond commitment",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform.Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: answers payments work from the JPMC ACCESS, RBC, American Express VPP stories; Answered and Honest pass. Every claim supported (no contradicted or unsupported), no quotations, no closing. Supported claims include: ACCESS Next Generation needed capabilities beyond Bottomline WebSeries; each payment type distinct requirements; 135,000+ clients, 180+ countries; Led blended 40+ team across Accenture and JPMC; worked closely with Bottomline engineers in Portsmouth; ACH, wire, FX/cross-border, government tax modules; permissions, MAC, sanctions screening, risk-based approval routing.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation needed capabilities beyond Bottomline WebSeries; each payment type distinct requirements; 135,000+ clients, 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Situation"
+   },
+   {
+    "text": "Led blended 40+ team across Accenture and JPMC; worked closely with Bottomline engineers in Portsmouth",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, government tax modules; permissions, MAC, sanctions screening, risk-based approval routing",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action/Result"
+   },
+   {
+    "text": "Treasurers could initiate cross-currency payments with embedded rate visibility",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Led payments workstream migration preserving configurations, entitlements, histories, compliance traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011; migration without disruption; compliance dashboards became standard tooling",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Result"
+   },
+   {
+    "text": "RBC: fragmented systems and manual processes delayed cross-border and bulk payments",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express.Situation"
+   },
+   {
+    "text": "Designed workflows initiation through settlement/reconciliation with real-time FX, alerts, recurring payments, Interac e-Transfer, batch",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express.Action"
+   },
+   {
+    "text": "Delivered implementation blueprint; partnered with FX team; revised cutoff processes reduced wire delays",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express.Action/Result"
+   },
+   {
+    "text": "AmEx VPP adoption slowed by missing SDKs, fragmented docs, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Situation"
+   },
+   {
+    "text": "Helped create cross-stack SDKs, use-case docs, secure sandbox with refreshed client data",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Action"
+   },
+   {
+    "text": "Introduced virtualized testing environments and Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform.Action"
+   },
+   {
+    "text": "API usage up within 3 months, onboarding time fell, over 261 story points beyond commitment",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform.Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "First turn: answers payments work from the JPMC ACCESS, RBC, American Express VPP stories; Answered and Honest pass. Every claim supported (no contradicted or unsupported), no quotations, no closing. Supported claims include: ACCESS needed capabilities beyond WebSeries; distinct per-payment-type requirements; 135,000+ clients, 180+ countries; Led blended 40+ team across Accenture and bank resources in US, Mumbai, Bangalore; ACH, wire, FX/cross-border, government tax modules.",
+  "claims": [
+   {
+    "text": "ACCESS needed capabilities beyond WebSeries; distinct per-payment-type requirements; 135,000+ clients, 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Situation"
+   },
+   {
+    "text": "Led blended 40+ team across Accenture and bank resources in US, Mumbai, Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, government tax modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action/Result"
+   },
+   {
+    "text": "NACHA validation, FX engine integration, MAC security, payment-type entitlements (wire approval without FX initiation)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Integrated sanctions screening and risk-based approval controls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Led payments-workstream data migration preserving configurations, entitlements, histories, regulatory traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Task/Action"
+   },
+   {
+    "text": "ACCESS launched April 2011; zero disruption; compliance dashboards standard tooling",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action/Result"
+   },
+   {
+    "text": "RBC: fragmented systems/manual processes delayed cross-border payments; workflows initiation through reconciliation with FX, alerts, recurring, Interac, bulk",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express.Situation/Action"
+   },
+   {
+    "text": "Implementation blueprint ready for development; revised cutoff processes reduced wire delays, improved SLA compliance",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express.Result"
+   },
+   {
+    "text": "AmEx VPP adoption slowed by missing SDKs, fragmented docs, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Situation"
+   },
+   {
+    "text": "Led work on developer portal, Java/.NET/Python SDKs, use-case docs, secure virtualized testing environments",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform.Action"
+   },
+   {
+    "text": "API usage up within 3 months; onboarding time fell",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Result"
+   },
+   {
+    "text": "Lean Product and XP; over 261 additional story points beyond commitment",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform.Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Follow-up gives the JP Morgan ACCESS team size (40+ blended Accenture/JPMC, Mumbai/Bangalore/US), the engagement the prior turn led with; correct referent, all claims supported, no closing. Supported claims include: JPMC ACCESS: blended onshore/offshore team of 40+ across Accenture and JPMC, Mumbai/Bangalore/US; Defined onshore-offshore engagement model; primary technical interface with Bottomline; Spent 70 to 80% of time embedded at Bottomline Portsmouth, NH offices.",
+  "claims": [
+   {
+    "text": "JPMC ACCESS: blended onshore/offshore team of 40+ across Accenture and JPMC, Mumbai/Bangalore/US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task; building-jp-morgans-global-payments-gateway-across-12-countries.Task"
+   },
+   {
+    "text": "Defined onshore-offshore engagement model; primary technical interface with Bottomline",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action; building-jp-morgans-global-payments-gateway-across-12-countries.Task"
+   },
+   {
+    "text": "Spent 70 to 80% of time embedded at Bottomline Portsmouth, NH offices",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Task; building-the-payment-engine-behind-jp-morgan-access.Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Follow-up gives the JP Morgan ACCESS team size (40+ blended Accenture/JPMC, Mumbai/Bangalore/US), the engagement the prior turn led with; correct referent, all claims supported, no closing. Supported claims include: JPMC ACCESS: blended onshore/offshore team of 40+ across Accenture and JPMC, Mumbai/Bangalore/US; Technology Delivery Lead for ACCESS payments work; Stories don't specify a team size for AmEx VPP work.",
+  "claims": [
+   {
+    "text": "JPMC ACCESS: blended onshore/offshore team of 40+ across Accenture and JPMC, Mumbai/Bangalore/US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task; building-jp-morgans-global-payments-gateway-across-12-countries.Task"
+   },
+   {
+    "text": "Technology Delivery Lead for ACCESS payments work",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task"
+   },
+   {
+    "text": "Stories don't specify a team size for AmEx VPP work",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform, transforming-developer-experience-for-the-american-express-virtual-payments-platform, conducting-discovery-and-framing-to-build-cross-functional-alignment (no team figure; conducting-discovery-and-framing-to-build-cross-functional-alignment.Situation says only 'large, cross-functional team')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Follow-up gives the JP Morgan ACCESS team size (40+ blended Accenture/JPMC, Mumbai/Bangalore/US), the engagement the prior turn led with; correct referent, all claims supported, no closing. Supported claims include: JPMC ACCESS: blended onshore/offshore team of 40+ across Accenture and JPMC, Mumbai/Bangalore/US; Primary technical interface with Bottomline, working closely with its engineers at Portsmouth, NH.",
+  "claims": [
+   {
+    "text": "JPMC ACCESS: blended onshore/offshore team of 40+ across Accenture and JPMC, Mumbai/Bangalore/US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task; building-jp-morgans-global-payments-gateway-across-12-countries.Task"
+   },
+   {
+    "text": "Primary technical interface with Bottomline, working closely with its engineers at Portsmouth, NH",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "Follow-up gives the JP Morgan ACCESS team size (40+ blended Accenture/JPMC, Mumbai/Bangalore/US), the engagement the prior turn led with; correct referent, all claims supported, no closing. Supported claims include: JPMC ACCESS: blended onshore/offshore team of 40+ across Accenture and bank resources, Mumbai/Bangalore/US; That team supported the ACCESS payment-engine and global payments gateway work; The 40+ was not the headcount for the entire ACCESS program. Ambiguous call: 'not the headcount for the entire ACCESS program' read as supported by the multi-workstream program description, not as an invented figure.",
+  "claims": [
+   {
+    "text": "JPMC ACCESS: blended onshore/offshore team of 40+ across Accenture and bank resources, Mumbai/Bangalore/US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task; building-jp-morgans-global-payments-gateway-across-12-countries.Task"
+   },
+   {
+    "text": "That team supported the ACCESS payment-engine and global payments gateway work",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task; building-jp-morgans-global-payments-gateway-across-12-countries.Task"
+   },
+   {
+    "text": "The 40+ was not the headcount for the entire ACCESS program",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Situation ('complex, multi-workstream program'); navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout.Action (separate entitlements team)"
+   },
+   {
+    "text": "Primary technical interface with Bottomline",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Follow-up stays on JP Morgan ACCESS: MAC-layer failure (missing unit tests, weak error handling), post-cutover legacy data defects, Sev-1 incident response, out-of-box gaps where named; no different engagement narrated; all claims supported, no closing. Supported claims include: MAC layer failure, the control letting corporate users validate payment integrity before release; Used break-glass production access and SQL on live payment data to triage; Root cause: missing unit tests and weak error handling.",
+  "claims": [
+   {
+    "text": "MAC layer failure, the control letting corporate users validate payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Used break-glass production access and SQL on live payment data to triage",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Root cause: missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Post-cutover production defects primarily data issues carried over from legacy platform",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Regional systems had different schemas, client configurations, entitlement structures, compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Situation/Action"
+   },
+   {
+    "text": "Ran UAT and production validation/shakeout testing and triaged post-cutover defects",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Migration completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Result"
+   },
+   {
+    "text": "Repeatedly owned Sev-1 incident response across releases, waves, migrations; RCA across NY, Mumbai, Bangalore, Bottomline; status updates and daily leadership calls",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Action; building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "WebSeries did not cover bank requirements out of box; modules, security, permissions needed custom engineering",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Situation/Task"
+   },
+   {
+    "text": "Corporate client administrators spent days configuring permissions; replaced with role-based profiles and bulk changes; days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access.Situation/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Result; building-jp-morgans-global-payments-gateway-across-12-countries.Result"
+   },
+   {
+    "text": "Documented problems were production failures, data defects, platform gaps, not a failed launch",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Result; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Follow-up stays on JP Morgan ACCESS: MAC-layer failure (missing unit tests, weak error handling), post-cutover legacy data defects, Sev-1 incident response, out-of-box gaps where named; no different engagement narrated; all claims supported, no closing. Supported claims include: MAC layer failure, the control letting corporate users validate payment integrity before release; Root cause: missing unit tests and weak error handling; Used break-glass production access and SQL on live payment data to triage.",
+  "claims": [
+   {
+    "text": "MAC layer failure, the control letting corporate users validate payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Root cause: missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Used break-glass production access and SQL on live payment data to triage",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Post-cutover production defects primarily data issues carried over from legacy platform",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Regional systems had different schemas, client configurations, entitlement structures, compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Situation/Action"
+   },
+   {
+    "text": "Ran UAT and production validation/shakeout testing and triaged post-cutover defects",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Migration completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Result"
+   },
+   {
+    "text": "Owned Sev-1 incident response and on-call accountability; RCA across bank NY team, Mumbai/Bangalore engineers, vendor; status updates and daily leadership calls",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Action"
+   },
+   {
+    "text": "Centralized gateway launched April 2011 connecting payment rails across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "Follow-up stays on JP Morgan ACCESS: MAC-layer failure (missing unit tests, weak error handling), post-cutover legacy data defects, Sev-1 incident response, out-of-box gaps where named; no different engagement narrated; all claims supported, no closing. Supported claims include: MAC layer failure, the control letting corporate users validate payment integrity before release; Used break-glass production access and SQL on live payment data to triage; Root cause: missing unit tests and weak error handling.",
+  "claims": [
+   {
+    "text": "MAC layer failure, the control letting corporate users validate payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Used break-glass production access and SQL on live payment data to triage",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Root cause: missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Post-cutover production defects primarily data issues carried over from legacy platform",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Regional systems had different schemas, client configurations, entitlement structures, compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Situation/Action"
+   },
+   {
+    "text": "Ran UAT and production validation/shakeout testing and triaged post-cutover defects",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Coordinated data verification with compliance teams",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Migration completed without disruption, preserving configurations, entitlements, histories, compliance traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Result"
+   },
+   {
+    "text": "Repeatedly owned Sev-1 incident response across releases, waves, migrations; RCA across NY, Mumbai, Bangalore, Bottomline; status updates and daily leadership calls",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Action; building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Gateway connected payment channels across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Result"
+   },
+   {
+    "text": "Starting environment: fragmented integrations, days-long entitlement changes, jurisdiction restrictions preventing single global deployment",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Result; overhauling-entitlement-management-for-jp-morgan-access.Situation; navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout.Situation"
+   },
+   {
+    "text": "Bulk permission changes reduced entitlement management from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access.Result"
+   },
+   {
+    "text": "Sequenced regional launches by regulatory readiness; rollout without regulatory blockers",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout.Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 4,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "Follow-up stays on JP Morgan ACCESS: MAC-layer failure (missing unit tests, weak error handling), post-cutover legacy data defects, Sev-1 incident response, out-of-box gaps where named; no different engagement narrated; all claims supported, no closing. Supported claims include: MAC layer failure, the control letting corporate users validate payment integrity before release; Matt traced the failure to missing unit tests and weak error handling; Used break-glass production access and SQL on live payment data to triage.",
+  "claims": [
+   {
+    "text": "MAC layer failure, the control letting corporate users validate payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Matt traced the failure to missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Used break-glass production access and SQL on live payment data to triage",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Post-cutover production defects primarily data issues carried over from legacy platform",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Regional systems had different schemas, client configurations, entitlement structures, compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Situation/Action"
+   },
+   {
+    "text": "Ran UAT and production validation/shakeout testing and triaged post-cutover defects",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Migration completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Result"
+   },
+   {
+    "text": "Repeatedly owned severe-incident response and on-call accountability; RCA across NY, Mumbai, Bangalore, Bottomline; status updates and daily calls",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Action"
+   },
+   {
+    "text": "WebSeries did not provide all needed capabilities out of the box; aggressive Wall Street timelines",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: answers payments work from the JPMC ACCESS, RBC, American Express VPP stories; Answered and Honest pass. Every claim supported (no contradicted or unsupported), no quotations, no closing. Supported claims include: ACCESS needed more than out-of-box WebSeries; 135,000+ clients across 180+ countries needed payment-specific formatting, validation, compliance, approvals; Regional legacy systems had different data models, entitlements, transaction histories to consolidate without interrupting live payments; Technology Delivery Lead, blended 40+ team across Accenture and bank.",
+  "claims": [
+   {
+    "text": "ACCESS needed more than out-of-box WebSeries; 135,000+ clients across 180+ countries needed payment-specific formatting, validation, compliance, approvals",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Situation"
+   },
+   {
+    "text": "Regional legacy systems had different data models, entitlements, transaction histories to consolidate without interrupting live payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Situation"
+   },
+   {
+    "text": "Technology Delivery Lead, blended 40+ team across Accenture and bank",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, federal tax modules; decided where configuration ended and bespoke engineering began",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "NACHA validation, MAC security, payment-type permissions, sanctions screening, risk-based approval routing",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Spent 70 to 80% of time embedded at Bottomline Portsmouth",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task"
+   },
+   {
+    "text": "Led payments data migration, introduced compliance dashboards, owned production incident response",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action; building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "ACCESS launched April 2011; migration without disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Result"
+   },
+   {
+    "text": "RBC: workflows initiation through settlement/reconciliation; FX team on real-time conversion and visibility",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express.Action"
+   },
+   {
+    "text": "RBC scope: alerts, recurring payments, Interac e-Transfer, batch processing, revised cutoff processes, client training; implementation blueprint ready for development",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express.Action/Result"
+   },
+   {
+    "text": "AmEx VPP adoption slowed by missing SDKs, fragmented docs, downstream dependencies, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Situation; transforming-developer-experience-for-the-american-express-virtual-payments-platform.Action"
+   },
+   {
+    "text": "Co-created developer portal with Java/.NET/Python SDKs, use-case docs, secure sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Action"
+   },
+   {
+    "text": "Environment virtualization, Lean Product and XP, Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform.Action"
+   },
+   {
+    "text": "API trial usage up within 3 months; onboarding time fell; over 261 additional story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform.Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: answers payments work from the JPMC ACCESS, RBC, American Express VPP stories; Answered and Honest pass. Every claim supported (no contradicted or unsupported), no quotations, no closing. Supported claims include: Technology Delivery Lead for the payment engine behind ACCESS Next Generation; WebSeries base; 135,000+ clients across 180+ countries needed more than out-of-box; Regional legacy systems with different data models, entitlements, compliance records moved without interrupting live payments.",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead for the payment engine behind ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task"
+   },
+   {
+    "text": "WebSeries base; 135,000+ clients across 180+ countries needed more than out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Situation"
+   },
+   {
+    "text": "Regional legacy systems with different data models, entitlements, compliance records moved without interrupting live payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Situation/Result"
+   },
+   {
+    "text": "Blended 40+ team; 70 to 80% embedded at Bottomline Portsmouth",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, federal tax modules; MAC verification, permissions, sanctions screening, risk-based routing, real-time global reporting",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Led payments data migration preserving compliance traceability, no disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Result"
+   },
+   {
+    "text": "RBC: workflows with real-time FX, alerts, recurring, Interac e-Transfer, batch; blueprint ready for development; revised cutoffs reduced wire delays",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express.Action/Result"
+   },
+   {
+    "text": "AmEx: adoption lagged; co-created portal, Java/.NET/Python SDKs, secure sandbox with refreshed client data",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Situation/Action"
+   },
+   {
+    "text": "Environment virtualization enabled earlier testing; Client Onboarding Test Drive gathered feedback",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform.Action"
+   },
+   {
+    "text": "API usage up within 3 months; over 261 additional story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform.Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: answers payments work from the JPMC ACCESS, American Express VPP stories; Answered and Honest pass. Every claim supported (no contradicted or unsupported), no quotations, no closing. Supported claims include: Payment engines and global gateways at JPMC; VPP adoption at AmEx; Regional systems had different message formats, protocols, data models, regulatory requirements; Technology Delivery Lead, 40+ team across Accenture and JPMC, US/Mumbai/Bangalore.",
+  "claims": [
+   {
+    "text": "Payment engines and global gateways at JPMC; VPP adoption at AmEx",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access; building-jp-morgans-global-payments-gateway-across-12-countries; lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform"
+   },
+   {
+    "text": "Regional systems had different message formats, protocols, data models, regulatory requirements",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Situation; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Situation"
+   },
+   {
+    "text": "Technology Delivery Lead, 40+ team across Accenture and JPMC, US/Mumbai/Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task"
+   },
+   {
+    "text": "ACH, wire, FX, federal tax modules with embedded FX rate visibility, payment-type entitlements, MAC, contextual help",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Integrated sanctions screening and customer risk scores into payment controls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Centralized gateway across 12 countries replacing separate connections",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Action/Result"
+   },
+   {
+    "text": "Led data migration preserving configurations, entitlements, histories, traceability; zero disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 for 135,000+ clients, 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Result"
+   },
+   {
+    "text": "AmEx VPP offered real-time controls and flexible APIs; missing SDKs, fragmented docs, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Situation"
+   },
+   {
+    "text": "Co-created portal with SDKs, sample integrations, use-case docs, sandbox with refreshed data",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Action"
+   },
+   {
+    "text": "Environment virtualization reduced downstream dependencies; Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform.Action"
+   },
+   {
+    "text": "API usage up within 3 months; onboarding decreased; over 261 story points beyond commitment",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform.Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "First turn: answers payments work from the JPMC ACCESS, American Express VPP stories; Answered and Honest pass. Every claim supported (no contradicted or unsupported), no quotations, no closing. Supported claims include: Technology Delivery Lead for ACCESS Next Generation; Regional systems had different data models, entitlements, message formats, compliance requirements; WebSeries out-of-box did not cover requirements of 135,000+ clients, 180+ countries.",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead for ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task"
+   },
+   {
+    "text": "Regional systems had different data models, entitlements, message formats, compliance requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Situation; building-jp-morgans-global-payments-gateway-across-12-countries.Situation"
+   },
+   {
+    "text": "WebSeries out-of-box did not cover requirements of 135,000+ clients, 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Situation"
+   },
+   {
+    "text": "40+ team across Accenture and bank, Mumbai/Bangalore/US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task"
+   },
+   {
+    "text": "Determined where configuration ended and bespoke engineering began",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "ACH credits/direct debits, Fedwire/international wires, FX, federal tax; permissions, MAC, sanctions, risk-based approvals",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Centralized gateway across 12 countries replacing point-to-point integrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Action/Result"
+   },
+   {
+    "text": "Led data migration without disruption; ACCESS launched April 2011",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Result"
+   },
+   {
+    "text": "Owned production incident response and cross-team RCA",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Action"
+   },
+   {
+    "text": "AmEx VPP replacing legacy mainframe; missing SDKs, docs, sandbox, testing dependencies",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Situation; transforming-developer-experience-for-the-american-express-virtual-payments-platform.Situation"
+   },
+   {
+    "text": "Co-created portal, SDKs, sample integrations, docs, sandbox; environment virtualization; Lean/XP; Test Drive",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform.Action"
+   },
+   {
+    "text": "API usage up within 3 months; onboarding fell; over 261 story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform.Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Follow-up gives the JP Morgan ACCESS team size (40+ blended Accenture/JPMC, Mumbai/Bangalore/US), the engagement the prior turn led with; correct referent, all claims supported, no closing. Supported claims include: JPMC ACCESS: blended onshore/offshore team of 40+ across Accenture and the bank, Mumbai/Bangalore/US; Technology Delivery Lead and primary technical interface with Bottomline.",
+  "claims": [
+   {
+    "text": "JPMC ACCESS: blended onshore/offshore team of 40+ across Accenture and the bank, Mumbai/Bangalore/US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task; building-jp-morgans-global-payments-gateway-across-12-countries.Task"
+   },
+   {
+    "text": "Technology Delivery Lead and primary technical interface with Bottomline",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Follow-up gives the JP Morgan ACCESS team size (40+ blended Accenture/JPMC, Mumbai/Bangalore/US), the engagement the prior turn led with; correct referent, all claims supported, no closing. Supported claims include: JPMC ACCESS: blended onshore/offshore team of 40+ across Accenture and JPMC, Mumbai/Bangalore/US; Defined onshore-offshore engagement model; primary technical interface with Bottomline; 70 to 80% embedded at Bottomline Portsmouth, NH.",
+  "claims": [
+   {
+    "text": "JPMC ACCESS: blended onshore/offshore team of 40+ across Accenture and JPMC, Mumbai/Bangalore/US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task; building-jp-morgans-global-payments-gateway-across-12-countries.Task"
+   },
+   {
+    "text": "Defined onshore-offshore engagement model; primary technical interface with Bottomline",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action; building-jp-morgans-global-payments-gateway-across-12-countries.Task"
+   },
+   {
+    "text": "70 to 80% embedded at Bottomline Portsmouth, NH",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Follow-up gives the JP Morgan ACCESS team size (40+ blended Accenture/JPMC, Mumbai/Bangalore/US), the engagement the prior turn led with; correct referent, all claims supported, no closing. Supported claims include: JPMC ACCESS: blended onshore/offshore team of 40+ across Accenture and JPMC, Mumbai/Bangalore/US; Technology Delivery Lead; defined onshore-offshore engagement model; primary technical interface with Bottomline.",
+  "claims": [
+   {
+    "text": "JPMC ACCESS: blended onshore/offshore team of 40+ across Accenture and JPMC, Mumbai/Bangalore/US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task; building-jp-morgans-global-payments-gateway-across-12-countries.Task"
+   },
+   {
+    "text": "Technology Delivery Lead; defined onshore-offshore engagement model; primary technical interface with Bottomline",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "Follow-up gives the JP Morgan ACCESS team size (40+ blended Accenture/JPMC, Mumbai/Bangalore/US), the engagement the prior turn led with; correct referent, all claims supported, no closing. Supported claims include: JPMC ACCESS: blended onshore/offshore team of 40+ across Accenture and bank resources, Mumbai/Bangalore/US; Primary technical interface with Bottomline; Stories don't specify a team size for AmEx VPP.",
+  "claims": [
+   {
+    "text": "JPMC ACCESS: blended onshore/offshore team of 40+ across Accenture and bank resources, Mumbai/Bangalore/US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task; building-jp-morgans-global-payments-gateway-across-12-countries.Task"
+   },
+   {
+    "text": "Primary technical interface with Bottomline",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task"
+   },
+   {
+    "text": "Stories don't specify a team size for AmEx VPP",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform, transforming-developer-experience-for-the-american-express-virtual-payments-platform, conducting-discovery-and-framing-to-build-cross-functional-alignment (no team figure)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Follow-up stays on JP Morgan ACCESS: MAC-layer failure (missing unit tests, weak error handling), post-cutover legacy data defects, Sev-1 incident response, out-of-box gaps where named; no different engagement narrated; all claims supported, no closing. Supported claims include: MAC layer failure, the control letting corporate users validate payment integrity before release; Root-cause analysis traced failure to missing unit tests and weak error handling; Used break-glass production access and SQL on live payment data to triage.",
+  "claims": [
+   {
+    "text": "MAC layer failure, the control letting corporate users validate payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Root-cause analysis traced failure to missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Used break-glass production access and SQL on live payment data to triage",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Owned on-call and severity-1 incident response; RCA across NY, Mumbai, Bangalore, Bottomline; status updates, daily leadership calls",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Action; building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Live global payments platform processing real customer transactions",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Action"
+   },
+   {
+    "text": "Post-cutover production defects primarily data issues carried over from legacy platform",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Regional systems had different schemas, client configurations, entitlement structures, compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Situation/Action"
+   },
+   {
+    "text": "Ran UAT and production validation/shakeout testing and triaged post-cutover defects",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Migration completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Result"
+   },
+   {
+    "text": "Rollout required jurisdiction-specific data-visibility and access-control configs; launches sequenced by regulatory readiness without blockers",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout.Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Follow-up stays on JP Morgan ACCESS: MAC-layer failure (missing unit tests, weak error handling), post-cutover legacy data defects, Sev-1 incident response, out-of-box gaps where named; no different engagement narrated; all claims supported, no closing. Supported claims include: MAC layer failure, the control letting corporate users validate payment integrity before release; Root cause: missing unit tests and weak error handling; Used break-glass production access and SQL on live payment data to triage.",
+  "claims": [
+   {
+    "text": "MAC layer failure, the control letting corporate users validate payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Root cause: missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Used break-glass production access and SQL on live payment data to triage",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Post-cutover production defects primarily data issues carried over from legacy platform",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Regional systems had different schemas, client configurations, entitlement structures, compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Situation/Action"
+   },
+   {
+    "text": "Ran UAT and production validation/shakeout testing and triaged post-cutover defects",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Coordinated data verification with compliance teams",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Migration completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Result"
+   },
+   {
+    "text": "WebSeries did not cover payment-specific formatting, validation, security, approval requirements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Situation"
+   },
+   {
+    "text": "Managed build-versus-configure boundary with Bottomline",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Federal tax payments required debugging formatting/mapping issues and validating NACHA output",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Repeatedly owned Sev-1 incident response across releases, waves, migrations; RCA across NY, Mumbai, Bangalore, Bottomline; status updates and daily leadership calls",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Action; building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Result; building-jp-morgans-global-payments-gateway-across-12-countries.Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "Follow-up stays on JP Morgan ACCESS: MAC-layer failure (missing unit tests, weak error handling), post-cutover legacy data defects, Sev-1 incident response, out-of-box gaps where named; no different engagement narrated; all claims supported, no closing. Supported claims include: MAC layer failure, the control letting corporate users validate payment integrity before release; Used break-glass production access and SQL on live payment data to triage; Root cause: missing unit tests and weak error handling.",
+  "claims": [
+   {
+    "text": "MAC layer failure, the control letting corporate users validate payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Used break-glass production access and SQL on live payment data to triage",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Root cause: missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Post-cutover production defects primarily data issues carried over from legacy platform",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Regional systems had different schemas, client configurations, entitlement structures, compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Situation/Action"
+   },
+   {
+    "text": "Ran UAT and production validation/shakeout testing and triaged post-cutover defects",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Migration recorded zero disruption to live payment processing",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Repeatedly owned Sev-1 incident response across releases, waves, migrations; RCA across NY, Mumbai, Bangalore, Bottomline; status updates and daily leadership calls",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Action; building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "WebSeries lacked needed capabilities out of box; 40+ blended team built extensions under aggressive timelines",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Situation/Task"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Result; building-jp-morgans-global-payments-gateway-across-12-countries.Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 5,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "Follow-up stays on JP Morgan ACCESS: MAC-layer failure (missing unit tests, weak error handling), post-cutover legacy data defects, Sev-1 incident response, out-of-box gaps where named; no different engagement narrated; all claims supported, no closing. Supported claims include: MAC layer failure, the control letting corporate users validate payment integrity before release; Root cause: missing unit tests and weak error handling; Used break-glass production access and SQL on live payment data to triage.",
+  "claims": [
+   {
+    "text": "MAC layer failure, the control letting corporate users validate payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Root cause: missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Used break-glass production access and SQL on live payment data to triage",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Owned on-call and severity-1 incident response for the payment engine; RCA across NY, Mumbai/Bangalore, Bottomline; status updates, daily calls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action; building-jp-morgans-global-payments-gateway-across-12-countries.Action"
+   },
+   {
+    "text": "Post-cutover production defects primarily data issues carried over from legacy platform",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Regional systems had different schemas, client configurations, entitlement structures, compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Situation/Action"
+   },
+   {
+    "text": "Ran UAT and production validation/shakeout testing and triaged post-cutover defects",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Introduced compliance dashboards for monitoring",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Migration without disruption, configurations/entitlements/histories/traceability preserved",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Result; building-jp-morgans-global-payments-gateway-across-12-countries.Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: answers payments work from the JPMC ACCESS, American Express VPP stories; Answered and Honest pass. Every claim supported (no contradicted or unsupported), no quotations, no closing. Supported claims include: Technology Delivery Lead for ACCESS Next Generation; Regional systems had different data models, message formats, protocols, regulatory requirements; 135,000+ clients across 180+ countries needed more than WebSeries out-of-box.",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead for ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task"
+   },
+   {
+    "text": "Regional systems had different data models, message formats, protocols, regulatory requirements",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Situation; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Situation"
+   },
+   {
+    "text": "135,000+ clients across 180+ countries needed more than WebSeries out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Situation"
+   },
+   {
+    "text": "40+ Accenture and bank resources across US, Mumbai, Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task"
+   },
+   {
+    "text": "ACH, wire, FX, federal tax modules with NACHA validation, embedded FX rate visibility, payment-type entitlements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "MAC security for payment integrity verification; sanctions screening; risk-based approval controls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Centralized gateway across 12 countries with integrations into compliance, settlement, reporting",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Action"
+   },
+   {
+    "text": "Led data migration preserving configurations, entitlements, histories, traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Result"
+   },
+   {
+    "text": "ACCESS launched April 2011; migration without disruption; single entry point for treasurers",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Result; building-jp-morgans-global-payments-gateway-across-12-countries.Result"
+   },
+   {
+    "text": "AmEx VPP replacing legacy mainframe; missing SDKs, docs, dependency bottlenecks, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Situation; transforming-developer-experience-for-the-american-express-virtual-payments-platform.Situation"
+   },
+   {
+    "text": "Co-created portal, SDKs, use-case docs, secure virtualized testing environments, Test Drive",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform.Action"
+   },
+   {
+    "text": "API usage up within 3 months; onboarding decreased; over 261 story points beyond commitment",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform.Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: answers payments work from the JPMC ACCESS, American Express VPP stories; Answered and Honest pass. Every claim supported (no contradicted or unsupported), no quotations, no closing. Supported claims include: Regional systems used different message formats, protocols, client configurations, compliance records; ACCESS on WebSeries; requirements beyond out-of-box; each payment type distinct; Technology Delivery Lead; 40+ Accenture and JPMC resources, Mumbai/Bangalore/US.",
+  "claims": [
+   {
+    "text": "Regional systems used different message formats, protocols, client configurations, compliance records",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Situation; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Situation"
+   },
+   {
+    "text": "ACCESS on WebSeries; requirements beyond out-of-box; each payment type distinct",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Situation"
+   },
+   {
+    "text": "Technology Delivery Lead; 40+ Accenture and JPMC resources, Mumbai/Bangalore/US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task"
+   },
+   {
+    "text": "Defined onshore-offshore model; primary technical interface with Bottomline; 70 to 80% at Portsmouth",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task/Action"
+   },
+   {
+    "text": "Coordinated with bank stakeholders in Chicago and NY/NJ",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task"
+   },
+   {
+    "text": "ACH, wire, FX, federal tax modules; payment verification; permissions; sanctions; transaction-monitoring integrations",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Centralized gateway across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Action"
+   },
+   {
+    "text": "Coordinated with compliance teams on traceability; consolidated configurations, entitlements, histories without disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 serving 135,000+ clients in 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Result"
+   },
+   {
+    "text": "Owned production incident response, RCA, status updates, daily leadership calls",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Action"
+   },
+   {
+    "text": "AmEx: adoption slowed by missing SDKs, docs, sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Situation"
+   },
+   {
+    "text": "Discovery and Framing workshops with stakeholders; virtualized testing environments",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform.Action"
+   },
+   {
+    "text": "Led cross-stack SDKs, use-case docs, secure sandbox; Test Drive",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform.Action"
+   },
+   {
+    "text": "API usage up within 3 months; onboarding fell; over 261 additional story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform.Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: answers payments work from the JPMC ACCESS, American Express VPP stories; Answered and Honest pass. Every claim supported (no contradicted or unsupported), no quotations, no closing. Supported claims include: Regional systems had different data models, configurations, entitlements, compliance records; WebSeries out-of-box did not cover 135,000+ clients, 180+ countries; each payment type distinct; Technology Delivery Lead, 40+ team, Mumbai/Bangalore/US; embedded at Portsmouth; Chicago and NY/NJ stakeholders.",
+  "claims": [
+   {
+    "text": "Regional systems had different data models, configurations, entitlements, compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Situation"
+   },
+   {
+    "text": "WebSeries out-of-box did not cover 135,000+ clients, 180+ countries; each payment type distinct",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Situation"
+   },
+   {
+    "text": "Technology Delivery Lead, 40+ team, Mumbai/Bangalore/US; embedded at Portsmouth; Chicago and NY/NJ stakeholders",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task"
+   },
+   {
+    "text": "Defined where configuration ended and custom engineering began",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Team delivered ACH credits/debits, Fedwire/international wires, FX, federal tax; MAC, permissions, sanctions, risk-based approvals",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Centralized gateway across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Action"
+   },
+   {
+    "text": "Migration: compliance data verification, preserved configurations/histories, compliance dashboards became standard tooling",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action/Result"
+   },
+   {
+    "text": "Owned production incident response, RCA, daily leadership calls",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Action"
+   },
+   {
+    "text": "ACCESS launched April 2011; migration without disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Result"
+   },
+   {
+    "text": "AmEx VPP replacing legacy mainframe; missing SDKs, docs, dependency bottlenecks, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Situation; transforming-developer-experience-for-the-american-express-virtual-payments-platform.Situation"
+   },
+   {
+    "text": "Discovery and Framing workshops; co-created portal; SDKs, docs, virtualized testing environments; Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform.Action; lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Action"
+   },
+   {
+    "text": "API usage up within 3 months; onboarding decreased; exceeded commitment by 261 story points (story: 'over 261', rule 7)",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform.Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "First turn: answers payments work from the JPMC ACCESS, RBC, American Express VPP stories; Answered and Honest pass. Every claim supported (no contradicted or unsupported), no quotations, no closing. Supported claims include: Packaged cash-management platform could not meet bank's payment, security, workflow requirements out of box; Regional systems had different data models, entitlements, compliance records; Portal to serve 135,000+ clients across 180+ countries while live operations continued.",
+  "claims": [
+   {
+    "text": "Packaged cash-management platform could not meet bank's payment, security, workflow requirements out of box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Situation"
+   },
+   {
+    "text": "Regional systems had different data models, entitlements, compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Situation"
+   },
+   {
+    "text": "Portal to serve 135,000+ clients across 180+ countries while live operations continued",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Situation; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Situation"
+   },
+   {
+    "text": "Technology Delivery Lead, 40+ team across Accenture and bank, worked directly with Bottomline",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task"
+   },
+   {
+    "text": "Bespoke ACH, wire, FX, government tax modules; NACHA, permissions, MAC, sanctions, risk-based approvals; distinct formatting, cut-off times, compliance",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Gateway routing across clearing networks in 12 countries replacing point-to-point integrations; single entry point",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Action/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011; data migration with zero disruption, traceability preserved",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action/Result"
+   },
+   {
+    "text": "RBC: cross-border workflow design initiation through settlement/reconciliation; FX, alerts, recurring, Interac, bulk",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express.Action"
+   },
+   {
+    "text": "RBC blueprint ready for development; revised cutoffs reduced wire delays",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express.Result"
+   },
+   {
+    "text": "AmEx: missing SDKs, docs, sandbox; led SDKs, docs, sandbox with refreshed data",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Situation/Action"
+   },
+   {
+    "text": "API usage up within 3 months; onboarding fell",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform.Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Follow-up gives the JP Morgan ACCESS team size (40+ blended Accenture/JPMC, Mumbai/Bangalore/US), the engagement the prior turn led with; correct referent, all claims supported, no closing. Supported claims include: JPMC ACCESS: blended onshore/offshore team of 40+ across Accenture and bank resources, Mumbai/Bangalore/US; Primary technical interface with Bottomline; 70 to 80% at Portsmouth, NH; Stories don't specify AmEx VPP team size.",
+  "claims": [
+   {
+    "text": "JPMC ACCESS: blended onshore/offshore team of 40+ across Accenture and bank resources, Mumbai/Bangalore/US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task; building-jp-morgans-global-payments-gateway-across-12-countries.Task"
+   },
+   {
+    "text": "Primary technical interface with Bottomline; 70 to 80% at Portsmouth, NH",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Task"
+   },
+   {
+    "text": "Stories don't specify AmEx VPP team size",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform, transforming-developer-experience-for-the-american-express-virtual-payments-platform, conducting-discovery-and-framing-to-build-cross-functional-alignment (no team figure)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Follow-up gives the JP Morgan ACCESS team size (40+ blended Accenture/JPMC, Mumbai/Bangalore/US), the engagement the prior turn led with; correct referent, all claims supported, no closing. Supported claims include: JPMC ACCESS: blended onshore/offshore team of 40+ across Accenture and JPMC, Mumbai/Bangalore/US; Technology Delivery Lead; defined onshore-offshore model; Primary technical interface; 70 to 80% at Portsmouth, NH.",
+  "claims": [
+   {
+    "text": "JPMC ACCESS: blended onshore/offshore team of 40+ across Accenture and JPMC, Mumbai/Bangalore/US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task; building-jp-morgans-global-payments-gateway-across-12-countries.Task"
+   },
+   {
+    "text": "Technology Delivery Lead; defined onshore-offshore model",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Primary technical interface; 70 to 80% at Portsmouth, NH",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Follow-up gives the JP Morgan ACCESS team size (40+ blended Accenture/JPMC, Mumbai/Bangalore/US), the engagement the prior turn led with; correct referent, all claims supported, no closing. Supported claims include: JPMC ACCESS: blended onshore/offshore team of 40+ across Accenture and JPMC, Mumbai/Bangalore/US; Technology Delivery Lead; primary technical interface; 70 to 80% at Portsmouth, NH.",
+  "claims": [
+   {
+    "text": "JPMC ACCESS: blended onshore/offshore team of 40+ across Accenture and JPMC, Mumbai/Bangalore/US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task; building-jp-morgans-global-payments-gateway-across-12-countries.Task"
+   },
+   {
+    "text": "Technology Delivery Lead; primary technical interface; 70 to 80% at Portsmouth, NH",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "Follow-up gives the JP Morgan ACCESS team size (40+ blended Accenture/JPMC, Mumbai/Bangalore/US), the engagement the prior turn led with; correct referent, all claims supported, no closing. Supported claims include: JPMC ACCESS: blended onshore/offshore team of 40+ across Accenture and the bank, Mumbai/Bangalore/US; Defined onshore-offshore model; primary technical interface; worked from Portsmouth, NH; coordinated with Chicago and NY/NJ stakeholders.",
+  "claims": [
+   {
+    "text": "JPMC ACCESS: blended onshore/offshore team of 40+ across Accenture and the bank, Mumbai/Bangalore/US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task; building-jp-morgans-global-payments-gateway-across-12-countries.Task"
+   },
+   {
+    "text": "Defined onshore-offshore model; primary technical interface; worked from Portsmouth, NH; coordinated with Chicago and NY/NJ stakeholders",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Task; building-the-payment-engine-behind-jp-morgan-access.Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Follow-up stays on JP Morgan ACCESS: MAC-layer failure (missing unit tests, weak error handling), post-cutover legacy data defects, Sev-1 incident response, out-of-box gaps where named; no different engagement narrated; all claims supported, no closing. Supported claims include: MAC layer failure, the control letting corporate users validate payment integrity before release; Matt traced root cause to missing unit tests and weak error handling; Used break-glass production access and SQL on live payment data to triage.",
+  "claims": [
+   {
+    "text": "MAC layer failure, the control letting corporate users validate payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Matt traced root cause to missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Used break-glass production access and SQL on live payment data to triage",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Regional systems had different schemas, client configurations, entitlement structures, compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Situation/Action"
+   },
+   {
+    "text": "Post-cutover production defects primarily data issues carried over from legacy platform",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Ran UAT and production validation/shakeout testing and triaged post-cutover defects",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Coordinated data verification with compliance teams",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Migration completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Result"
+   },
+   {
+    "text": "Fragmented integrations across 12 countries replaced by centralized gateway",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Result"
+   },
+   {
+    "text": "Entitlements: role-based profiles, bulk grouping, centralized dashboard; days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access.Action/Result"
+   },
+   {
+    "text": "Owned Sev-1 incident response; RCA across bank, Mumbai/Bangalore, Bottomline; status updates, daily calls",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Action"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Result; building-jp-morgans-global-payments-gateway-across-12-countries.Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Follow-up stays on JP Morgan ACCESS: MAC-layer failure (missing unit tests, weak error handling), post-cutover legacy data defects, Sev-1 incident response, out-of-box gaps where named; no different engagement narrated; all claims supported, no closing. Supported claims include: MAC layer failure, the control letting corporate users validate payment integrity before release; Used break-glass production access and SQL on live payment data to triage; Root cause: missing unit tests and weak error handling.",
+  "claims": [
+   {
+    "text": "MAC layer failure, the control letting corporate users validate payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Used break-glass production access and SQL on live payment data to triage",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Root cause: missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Regional legacy systems had different data models, configurations, entitlements, histories",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Situation"
+   },
+   {
+    "text": "Post-cutover production defects primarily data issues carried over from legacy platform",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Ran UAT and production validation/shakeout testing and triaged post-cutover defects",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Migration completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Result"
+   },
+   {
+    "text": "Repeatedly owned Sev-1 incident response for the live payments platform; RCA across NY, Mumbai/Bangalore, Bottomline; status updates, daily calls",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Action"
+   },
+   {
+    "text": "Out-of-box platform did not cover requirements; managed configuration vs custom engineering boundary",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Situation/Action"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Result; building-jp-morgans-global-payments-gateway-across-12-countries.Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "Follow-up stays on JP Morgan ACCESS: MAC-layer failure (missing unit tests, weak error handling), post-cutover legacy data defects, Sev-1 incident response, out-of-box gaps where named; no different engagement narrated; all claims supported, no closing. Supported claims include: MAC layer failure, the control letting corporate users validate payment integrity before release; Root cause: missing unit tests and weak error handling; Used break-glass production access and SQL on live payment data to triage.",
+  "claims": [
+   {
+    "text": "MAC layer failure, the control letting corporate users validate payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Root cause: missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Used break-glass production access and SQL on live payment data to triage",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Regional systems had different schemas, client configurations, entitlement structures, compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Situation/Action"
+   },
+   {
+    "text": "Post-cutover production defects primarily data issues carried over from legacy platform",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Ran UAT and production validation/shakeout testing and triaged post-cutover defects",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Coordinated data verification with compliance teams",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Migration completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Result"
+   },
+   {
+    "text": "Repeatedly owned Sev-1 incident response across gateway releases, waves, migrations; RCA; status updates, daily calls",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Action"
+   },
+   {
+    "text": "WebSeries out-of-box insufficient; fragmented regional integrations created operational complexity and compliance risk",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Situation; building-jp-morgans-global-payments-gateway-across-12-countries.Result"
+   },
+   {
+    "text": "Team built custom modules and gateway, launched April 2011 with connectivity across 12 countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Result; building-jp-morgans-global-payments-gateway-across-12-countries.Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 6,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "Follow-up stays on JP Morgan ACCESS: MAC-layer failure (missing unit tests, weak error handling), post-cutover legacy data defects, Sev-1 incident response, out-of-box gaps where named; no different engagement narrated; all claims supported, no closing. Supported claims include: MAC layer failure, the control letting corporate users validate payment integrity before release; Root cause: missing unit tests and weak error handling; Used break-glass production access and SQL on live payment data to triage.",
+  "claims": [
+   {
+    "text": "MAC layer failure, the control letting corporate users validate payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Root cause: missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Used break-glass production access and SQL on live payment data to triage",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Action"
+   },
+   {
+    "text": "Post-cutover production defects primarily data issues carried over from legacy platform",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Regional systems had different schemas, client configurations, entitlement structures, compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Situation/Action"
+   },
+   {
+    "text": "Ran UAT and production validation/shakeout testing and triaged post-cutover defects",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "Worked with compliance teams on data verification and regulatory traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action"
+   },
+   {
+    "text": "12-country connectivity with different formats, protocols, regulatory requirements",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Situation"
+   },
+   {
+    "text": "Legacy permissions took days of manual configuration per user with poor visibility",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access.Situation/Action"
+   },
+   {
+    "text": "Out-of-box platform lacked required modules, security controls, approval workflows",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Situation"
+   },
+   {
+    "text": "Owned production incident response; RCA with bank, Mumbai/Bangalore, Bottomline; status updates, daily calls",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries.Action"
+   },
+   {
+    "text": "Migration zero disruption; entitlement management days to minutes; ACCESS launched April 2011",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform.Action; overhauling-entitlement-management-for-jp-morgan-access.Result; building-the-payment-engine-behind-jp-morgan-access.Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

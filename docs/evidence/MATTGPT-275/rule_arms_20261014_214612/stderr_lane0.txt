@@ -1,0 +1,98 @@
+2026-10-14 21:46:20.677 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-14 21:46:20.678 WARNING streamlit.runtime.state.session_state_proxy: Session state does not function when running a script without `streamlit run`
+2026-10-14 21:46:20.678 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-14 21:46:23.441 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-14 21:46:23.441 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-14 21:46:23.445 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-14 21:46:23.445 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-14 21:46:23.445 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-14 21:46:23.445 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-14 21:46:23.445 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-14 21:46:23.445 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+agy_answer fatal error: [Errno 54] Connection reset by peer
+Traceback (most recent call last):
+  File "/Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/venv/lib/python3.13/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/venv/lib/python3.13/site-packages/httpx/_transports/default.py", line 127, in __iter__
+    for part in self._httpcore_stream:
+                ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/venv/lib/python3.13/site-packages/httpcore/_sync/connection_pool.py", line 407, in __iter__
+    raise exc from None
+  File "/Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/venv/lib/python3.13/site-packages/httpcore/_sync/connection_pool.py", line 403, in __iter__
+    for part in self._stream:
+                ^^^^^^^^^^^^
+  File "/Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/venv/lib/python3.13/site-packages/httpcore/_sync/http11.py", line 342, in __iter__
+    raise exc
+  File "/Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/venv/lib/python3.13/site-packages/httpcore/_sync/http11.py", line 334, in __iter__
+    for chunk in self._connection._receive_response_body(**kwargs):
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/venv/lib/python3.13/site-packages/httpcore/_sync/http11.py", line 203, in _receive_response_body
+    event = self._receive_event(timeout=timeout)
+  File "/Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/venv/lib/python3.13/site-packages/httpcore/_sync/http11.py", line 217, in _receive_event
+    data = self._network_stream.read(
+        self.READ_NUM_BYTES, timeout=timeout
+    )
+  File "/Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/venv/lib/python3.13/site-packages/httpcore/_backends/sync.py", line 126, in read
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/venv/lib/python3.13/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ReadError: [Errno 54] Connection reset by peer
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/ui/pages/ask_mattgpt/backend_service.py", line 842, in agy_answer
+    response = _stream_response(
+        client,
+    ...<6 lines>...
+        tool_choice=tool_choice,
+    )
+  File "/Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/probes/probe_275_gate.py", line 150, in stream_recording
+    resp = _orig_stream(*args, **kwargs)
+  File "/Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/ui/pages/ask_mattgpt/backend_service.py", line 743, in _stream_response
+    for event in client.responses.create(stream=True, **request):
+                 ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/venv/lib/python3.13/site-packages/openai/_streaming.py", line 46, in __iter__
+    for item in self._iterator:
+                ^^^^^^^^^^^^^^
+  File "/Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/venv/lib/python3.13/site-packages/openai/_streaming.py", line 58, in __stream__
+    for sse in iterator:
+               ^^^^^^^^
+  File "/Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/venv/lib/python3.13/site-packages/openai/_streaming.py", line 50, in _iter_events
+    yield from self._decoder.iter_bytes(self.response.iter_bytes())
+  File "/Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/venv/lib/python3.13/site-packages/openai/_streaming.py", line 280, in iter_bytes
+    for chunk in self._iter_chunks(iterator):
+                 ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/venv/lib/python3.13/site-packages/openai/_streaming.py", line 291, in _iter_chunks
+    for chunk in iterator:
+                 ^^^^^^^^
+  File "/Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/venv/lib/python3.13/site-packages/httpx/_models.py", line 897, in iter_bytes
+    for raw_bytes in self.iter_raw():
+                     ~~~~~~~~~~~~~^^
+  File "/Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/venv/lib/python3.13/site-packages/httpx/_models.py", line 951, in iter_raw
+    for raw_stream_bytes in self.stream:
+                            ^^^^^^^^^^^
+  File "/Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/venv/lib/python3.13/site-packages/httpx/_client.py", line 153, in __iter__
+    for chunk in self._stream:
+                 ^^^^^^^^^^^^
+  File "/Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/venv/lib/python3.13/site-packages/httpx/_transports/default.py", line 126, in __iter__
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.3/Frameworks/Python.framework/Versions/3.13/lib/python3.13/contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/venv/lib/python3.13/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ReadError: [Errno 54] Connection reset by peer
+2026-10-14 22:18:12.161 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-14 22:18:12.162 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-14 22:18:12.169 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-14 22:18:12.169 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-14 22:18:12.169 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-14 22:18:12.169 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-14 22:18:12.169 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-14 22:18:12.169 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.

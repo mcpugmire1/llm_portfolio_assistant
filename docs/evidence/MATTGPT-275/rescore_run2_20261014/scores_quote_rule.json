@@ -1,0 +1,74 @@
+[
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Locked brief rule 8 (quotation marks): the quoted phrase 'empathy, clarity, and purpose' is not verbatim in any story or the profile, so it is unsupported and the turn fails. Original re-score reason: Leadership style from leadership-philosophy, permit-to-fail and related CIC stories; no payments carry-over; all claims supported (quoted 'empathy, clarity, and purpose' is a near-quote of LP Action, treated as supported paraphrase).",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity and purpose / modern engineering rigor",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Inherited teams 'over-processed, under-trusted, waiting for permission'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Makes intent explicit, pushes decisions to people closest to the work, transparency and direct feedback",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Coaches teams to think clearly, not just execute tasks",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Permit-to-fail: non-punitive post-mortems, low-stakes experiments, lessons applied in subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "4x delivery acceleration at the Cloud Innovation Center",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Rigid hierarchy; weekly brainstorming; de-emphasized individual accolades",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation/Action"
+   },
+   {
+    "text": "150-person Cloud Innovation Center",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Situation"
+   },
+   {
+    "text": "Experimentation reduced wasted engineering effort",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Result"
+   },
+   {
+    "text": "Thin-slice production-ready solutions in balanced teams",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Action"
+   },
+   {
+    "text": "Matt leads with “empathy, clarity, and purpose.” (quoted)",
+    "label": "unsupported",
+    "source": "locked brief rule 8: no story or profile text matches; closest are 'Lead with empathy, clarity, and outcomes' (Career Intent) and 'blends empathy, clarity, and modern engineering rigor' (Leadership Philosophy)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

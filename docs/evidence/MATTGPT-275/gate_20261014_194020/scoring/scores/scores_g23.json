@@ -1,0 +1,972 @@
+[
+ {
+  "case": "c14",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Facts all supported (CIC 150+/30+/15+/4X, Octane, cloud-native 99.9%+, JPMC 40+ and 12 countries). No level label or vouching. Fails Section 3 required closing: ends with 'Share the job description, and I can put his specific responsibilities and outcomes alongside yours', an in-chat comparison offer, not a Role Match close.",
+  "claims": [
+   {
+    "text": "Accenture engineers struggled to onboard to cloud-native tech because standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Enterprise clients faced slow manual release cycles; developers waited days or weeks for builds, tests, approvals",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Situation"
+   },
+   {
+    "text": "At JPMC fragmented regional payment systems had different message formats, protocols, regulatory requirements",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Built Accenture's Atlanta and Tampa CICs from the ground up with full P&L accountability, hiring, training, developing 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Established career progression frameworks, development environments, CI/CD pipelines, reusable playbooks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Centers delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments through TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Led Project Octane: reference apps, IaC templates, Terraform/CloudFormation provisioning, hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Across JPMC, Capital One, AmEx established architecture patterns, automated testing and deployment gates, monitoring and observability",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "Teams tracked lead time, deployment frequency, change failure rate, MTTR",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "Commit-to-production lead time fell from weeks to days, 99.9%+ uptime",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "Directed on-call and Sev-1 incident response for JPMC's payment engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Managed a 40+ blended team",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Delivered a centralized payments gateway across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Facts all supported. No level label or vouching. Fails Section 3 required closing: ends with scoping questions about the VP role and no Role Match offer (by construction if this arm has no closing step).",
+  "claims": [
+   {
+    "text": "Accenture engineers struggled to onboard to cloud-native tech without standardized resources",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Clients faced manual release cycles, centralized QA bottlenecks, security and regulatory requirements",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Situation"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs from the ground up with full P&L, budget and cost management, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Grew organization from zero to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Established development environments, CI/CD pipelines, cloud platforms, engagement playbooks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; 4X faster velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Led Project Octane: reference apps, IaC templates, Terraform/CloudFormation, workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards; standardized practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/Result"
+   },
+   {
+    "text": "Across JPMC, Capital One, AmEx established patterns, testing and deployment gates, monitoring, observability; teams built, deployed and operated services",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "Lead time weeks to days, 99.9%+ uptime, 90%+ automated test coverage",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "Managed 40+ person blended onshore/offshore team delivering global payments gateway across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Task/5PSummary"
+   },
+   {
+    "text": "Repeatedly owned on-call accountability and Sev-1 incident response, coordinating RCA and leadership communications",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Recorded titles include Director, Cloud Native Architecture Lead, Senior Technology Architecture Manager",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture/driving-modern-software-engineering-with-project-octane|accenture/building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Role"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Facts all supported, including the quoted 'cookbook' and Launchpad 200+. No level label or vouching. Fails Section 3 required closing: ends with a scoping question and no Role Match offer.",
+  "claims": [
+   {
+    "text": "Accenture engineers struggled to onboard because project demands left little time and standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Clients wanted to move away from waterfall, feature factories, siloed teams, with legacy, compliance and governance constraints",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Traditional cloud training failed to keep pace with evolving AWS technologies",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Project Octane: cross-functional team, reference apps, IaC templates, Terraform/CloudFormation/serverless, OWASP and IAM, workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Each reference application had its own IaC",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Result"
+   },
+   {
+    "text": "Standardized cloud-native practices across Accenture's CloudFirst engineering community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs with full P&L, budget and cost management, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established dev environments, CI/CD, cloud platforms, architectural patterns and an application modernization 'cookbook' (quoted word verbatim)",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Integrated TDD and automated delivery with enterprise security scanning and access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Zero to 150+ practitioners, 30+ engagements, 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity, zero-defect deployments, 10-person teams equal to 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Contributed to $100M+ repeatable business by FY23",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Supported 200+ professionals earning AWS certifications through Launchpad",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Most facts supported, but contradicted: 'does not specify ... the management layers beneath him' (the Leading People story records two layers and 11-13 practice and client leads). Also fails Section 3 required closing: no Role Match offer, answer ends with no close.",
+  "claims": [
+   {
+    "text": "Accenture engineers struggled to onboard because standardized resources were missing; project demands",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Across JPMC, Capital One, AmEx manual testing, builds and approvals held releases for weeks or months",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Situation"
+   },
+   {
+    "text": "Project Octane: reference apps, IaC templates, Terraform/CloudFormation, OWASP and IAM, workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Established microservices, containerization, serverless patterns; testing and deployment gates; monitoring and observability; teams build, deploy, operate",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "Tracked lead time, deployment frequency, change failure rate, MTTR",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs with full P&L, budget and cost management, 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Action"
+   },
+   {
+    "text": "Established dev environments, CI/CD pipelines, career progression frameworks, playbooks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "At JPMC managed 40+ blended onshore/offshore team and owned on-call and Sev-1 response for the ACCESS payment engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "4X velocity, 99.9%+ uptime, 90%+ automated test coverage",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "At Capital One automated testing supported zero-defect payment-system deployments",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "The evidence does not specify the management layers beneath him",
+    "label": "contradicted",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Situation/Action (flat model, two layers, 3 practice leads plus 8-10 client delivery leads reporting to him)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Facts all supported. No level label or vouching. Fails Section 3 required closing: ends with scoping questions, no Role Match offer.",
+  "claims": [
+   {
+    "text": "Accenture engineers struggled to onboard without standardized resources",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Clients faced slow manual release cycles with developers waiting days or weeks",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Situation"
+   },
+   {
+    "text": "JPMC payment delivery required compliance controls and continuity of live operations",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase/building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs from the ground up, 0 to 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Full P&L accountability including budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Established dev environments, CI/CD, cloud platforms, career progression frameworks, TDD and pair programming training",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "4X faster velocity, zero-defect deployments, 10-person teams equal to 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Project Octane reference apps, IaC, Terraform/CloudFormation, workshops, OWASP and IAM",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Testing and deployment gates, monitoring and observability, cross-functional teams operating services; tracked DORA-style metrics",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "99.9%+ uptime and lead time reduced from weeks to days",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "Managed 40+ person blended team delivering payment modules and platform capabilities for ACCESS",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Owned on-call and critical-incident response for the payment engine, coordinating RCA and leadership communications",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Facts all supported. No level label or vouching. Fails Section 3 required closing: ends with 'Share the job description, and I can map Matt's documented work to those responsibilities', an in-chat offer, not a Role Match close.",
+  "claims": [
+   {
+    "text": "Clients wanted to move beyond waterfall and siloed teams; Accenture lacked a scalable model for modern product engineering",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation/5PSummary"
+   },
+   {
+    "text": "Accenture engineers struggled to onboard because standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "At JPMC fragmented regional payment systems needed consolidation under security and regulatory requirements",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs with full P&L, budget and cost management, hiring, training, development; 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "Established career progression frameworks, dev environments, CI/CD, cloud platforms; TDD with enterprise security scanning and deployment controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Project Octane reference apps, IaC, Terraform/CloudFormation, OWASP and IAM, workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Reusable architecture patterns, monitoring and observability, teams operating services, tracked DORA-style metrics",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "Managed 40+ person blended team and delivered centralized payments gateway across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Task/5PSummary"
+   },
+   {
+    "text": "Owned on-call and critical incident response, coordinating RCA and leadership communications",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "CIC 4X velocity, zero-defect deployments, 10-person teams equal to 20-person",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "99.9%+ uptime and lead time weeks to days",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Answer is 'Nothing I know about Matt covers that': no claims. Fails Section 3: required close with Contact and LinkedIn links is missing (by construction if this arm has no closing step). Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Answer is 'Nothing I know about Matt covers that': no claims. Fails Section 3: required close with Contact and LinkedIn links is missing (by construction if this arm has no closing step). Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "No claims about Matt beyond statements that it has no contact details. Fails Section 3: required close with Contact and LinkedIn links is missing. Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "No claims about Matt beyond statements that it has no contact details. Fails Section 3: required close with Contact and LinkedIn links is missing. Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "No claims about Matt beyond statements that it has no contact details. Fails Section 3: required close with Contact and LinkedIn links is missing. Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "No claims about Matt beyond statements that it has no contact details. Fails Section 3: required close with Contact and LinkedIn links is missing. Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "No claims about Matt beyond statements that it has no contact details. Fails Section 3: required close with Contact and LinkedIn links is missing. Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "No claims about Matt beyond statements that it has no contact details. Fails Section 3: required close with Contact and LinkedIn links is missing. Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Only claim is his name (profile.name) in a suggestion to search LinkedIn; no LinkedIn link or Contact link given. Fails Section 3: required close with Contact and LinkedIn links is missing. Link rendering not tested.",
+  "claims": [
+   {
+    "text": "His name is Matt Pugmire",
+    "label": "supported",
+    "source": "profile.name"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "No claims about Matt beyond statements that it has no contact details. Fails Section 3: required close with Contact and LinkedIn links is missing. Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Answer is 'Nothing I know about Matt covers that': no claims. Fails Section 3: required close with Contact and LinkedIn links is missing (by construction if this arm has no closing step). Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Answer is 'Nothing I know about Matt covers that': no claims. Fails Section 3: required close with Contact and LinkedIn links is missing (by construction if this arm has no closing step). Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "No claims about Matt beyond statements that it has no contact details. Fails Section 3: required close with Contact and LinkedIn links is missing. Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Answer is 'Nothing I know about Matt covers that': no claims. Fails Section 3: required close with Contact and LinkedIn links is missing (by construction if this arm has no closing step). Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Answer is 'Nothing I know about Matt covers that': no claims. Fails Section 3: required close with Contact and LinkedIn links is missing (by construction if this arm has no closing step). Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Answer is 'Nothing I know about Matt covers that': no claims. Fails Section 3: required close with Contact and LinkedIn links is missing (by construction if this arm has no closing step). Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "No claims about Matt beyond statements that it has no contact details. Fails Section 3: required close with Contact and LinkedIn links is missing. Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "No claims about Matt beyond statements that it has no contact details. Fails Section 3: required close with Contact and LinkedIn links is missing. Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "No claims about Matt beyond statements that it has no contact details. Fails Section 3: required close with Contact and LinkedIn links is missing. Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "No claims about Matt beyond statements that it has no contact details. Fails Section 3: required close with Contact and LinkedIn links is missing. Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Only claim is his name (profile.name) in a suggestion to search LinkedIn; no LinkedIn link or Contact link given. Fails Section 3: required close with Contact and LinkedIn links is missing. Link rendering not tested.",
+  "claims": [
+   {
+    "text": "His name is Matt Pugmire",
+    "label": "supported",
+    "source": "profile.name"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "No claims about Matt beyond statements that it has no contact details. Fails Section 3: required close with Contact and LinkedIn links is missing. Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "No claims about Matt beyond statements that it has no contact details. Fails Section 3: required close with Contact and LinkedIn links is missing. Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "No claims about Matt beyond statements that it has no contact details. Fails Section 3: required close with Contact and LinkedIn links is missing. Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Answer is 'Nothing I know about Matt covers that': no claims. Fails Section 3: required close with Contact and LinkedIn links is missing (by construction if this arm has no closing step). Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "No claims about Matt beyond statements that it has no contact details. Fails Section 3: required close with Contact and LinkedIn links is missing. Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Only claim is his name (profile.name) in a suggestion to search LinkedIn; no LinkedIn link or Contact link given. Fails Section 3: required close with Contact and LinkedIn links is missing. Link rendering not tested.",
+  "claims": [
+   {
+    "text": "His name is Matt Pugmire",
+    "label": "supported",
+    "source": "profile.name"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Answer is 'Nothing I know about Matt covers that': no claims. Fails Section 3: required close with Contact and LinkedIn links is missing (by construction if this arm has no closing step). Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "No claims about Matt beyond statements that it has no contact details. Fails Section 3: required close with Contact and LinkedIn links is missing. Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Answer is 'Nothing I know about Matt covers that': no claims. Fails Section 3: required close with Contact and LinkedIn links is missing (by construction if this arm has no closing step). Link rendering in the conversation view not tested.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

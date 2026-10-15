@@ -1,0 +1,2334 @@
+[
+ {
+  "case": "x3",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails extras rule 3: does not name Cendian's webMethods B2B Trading Networks work. No trading-platform claim; says securities trading is not documented (acknowledges_missing true) and labels ACCESS/RBC as payments/treasury, not trading (useful_direct true). All claims supported: ACCESS 40+, April 2011, 135,000+/180+, FX module, SSO, trade finance groundwork.",
+  "claims": [
+   {
+    "text": "Worked on payments and treasury platforms with FX and trade finance integration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Technology Delivery Lead for ACCESS Next Generation, a unified global corporate banking portal built on Bottomline WebSeries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "Bank needed payment capabilities, security controls and workflows beyond WebSeries out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended onshore/offshore team of 40+ across Accenture and JP Morgan Chase",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built FX/cross-border payment module integrating with the bank's FX engine, embedded rate visibility, international clearing connectivity",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Architected SSO connecting cash, trade and investment operations",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Drove groundwork for trade finance integration, lifecycle from initiation to final payment",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Managed the build-versus-configure boundary with WebSeries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payment-type-specific entitlements, payment verification, sanctions screening",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Jurisdiction-specific access controls",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Situation"
+   },
+   {
+    "text": "ACCESS launched April 2011, 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Corporate banking, payments and treasury work, not securities trading (framing)",
+    "label": "supported",
+    "source": "stated fact"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x3",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails extras rule 3: does not name Cendian's webMethods B2B Trading Networks work. No trading-platform claim; says securities trading is not documented (acknowledges_missing true) and labels ACCESS/RBC as payments/treasury, not trading (useful_direct true). All claims supported: ACCESS facts, RBC cross-border blueprint.",
+  "claims": [
+   {
+    "text": "Worked on corporate banking platforms with FX and trade finance capabilities",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Technology Delivery Lead for the payment engine behind ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Bank needed purpose-built payment modules, security controls, payment-type-specific permissions beyond WebSeries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "Designed and delivered FX/cross-border payment module integrating with the bank's FX engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Architected SSO connecting cash, trade and investment operations",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Drove groundwork for trade finance integration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Corporate treasury and trade finance work, not securities order-entry or execution",
+    "label": "supported",
+    "source": "stated fact"
+   },
+   {
+    "text": "Managed blended team of 40+ across Accenture and JP Morgan Chase",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACCESS launched April 2011, 135,000+ corporations, FIs, governments, municipalities across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "RBC: fragmented systems and manual processes delayed cross-border payments; users lacked real-time FX tools",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Situation"
+   },
+   {
+    "text": "Designed end-to-end payment workflows from initiation through settlement and reconciliation",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "Partnered with RBC FX team on currency conversion integration points, real-time FX tools, alerts, batch processing",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "Deliverable was a complete implementation blueprint ready for development execution",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x3",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails extras rule 3: does not name Cendian's webMethods B2B Trading Networks work. No trading-platform claim; says securities trading is not documented (acknowledges_missing true) and labels ACCESS/RBC as payments/treasury, not trading (useful_direct true). All claims supported: ACCESS facts; RBC blueprint.",
+  "claims": [
+   {
+    "text": "Worked on FX and cross-border payment platforms; documented work in corporate banking, payments, treasury",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; designing-cross-border-payment-workflows-for-rbc-express|rbc"
+   },
+   {
+    "text": "Technology Delivery Lead for the payment engine behind ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Each payment type had distinct formatting, validation, compliance, workflow requirements beyond WebSeries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Designed and delivered bespoke payment modules including FX/cross-border module integrated with FX engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Architected SSO connecting cash, trade and investment operations",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Drove groundwork for trade finance integration, visibility from initiation to final payment",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Trade finance within a corporate banking portal, not securities trading",
+    "label": "supported",
+    "source": "stated fact"
+   },
+   {
+    "text": "ACCESS launched April 2011, 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "RBC: designed cross-border payment workflows initiation through settlement and reconciliation",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "Partnered with FX team on currency-conversion integration points and transaction visibility flows",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "Implementation blueprint for real-time FX integration, automated alerts, bulk processing",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result/Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x3",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails extras rule 3: does not name Cendian's webMethods B2B Trading Networks work. No trading-platform claim; says securities trading is not documented (acknowledges_missing true) and labels ACCESS/RBC as payments/treasury, not trading (useful_direct true). All claims supported: ACCESS treasury-services framing, entitlements, 40+, April 2011.",
+  "claims": [
+   {
+    "text": "Documented work includes FX/cross-border payments and trade finance integration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Technology Delivery Lead for the payment engine behind ACCESS Next Generation, a global corporate banking portal for treasury services and cash management",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Situation"
+   },
+   {
+    "text": "WebSeries foundation did not provide all payment, security and workflow capabilities required",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed the build-vs-configure boundary",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Built FX/cross-border payment module integrating with the FX engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Drove groundwork for trade finance integration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payment-type-specific entitlement controls, e.g. wire approval but not FX initiation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Sanctions screening, payment verification, risk-based approval routing",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Architected SSO connecting cash, trade, investment operations",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Managed blended team of 40+ across Accenture and JP Morgan Chase",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACCESS launched April 2011, 135,000+ corporate and institutional clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Scope is payments/treasury/trade finance, not order management or securities execution",
+    "label": "supported",
+    "source": "stated fact"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x3",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails extras rule 3: does not name Cendian's webMethods B2B Trading Networks work. No trading-platform claim; says securities trading is not documented (acknowledges_missing true) and labels ACCESS/RBC as payments/treasury, not trading (useful_direct true). All claims supported: ACCESS facts.",
+  "claims": [
+   {
+    "text": "Worked on global payments and treasury platforms including FX integration and trade finance",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Technology Delivery Lead for ACCESS Next Generation, unified global corporate banking portal",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "Managed blended onshore/offshore team of 40+",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Designed and delivered payment modules built on Bottomline WebSeries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "FX/cross-border payment module integrated with FX engine, rate visibility, clearing connectivity",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Drove groundwork for trade finance integration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Architected SSO connecting cash, trade, investment operations, reducing friction of separate treasury platforms",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011, 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Payments, FX and trade finance experience, not confirmed securities trading",
+    "label": "supported",
+    "source": "stated fact"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x3",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails extras rule 3: does not name Cendian's webMethods B2B Trading Networks work. No trading-platform claim; says securities trading is not documented (acknowledges_missing true) and labels ACCESS/RBC as payments/treasury, not trading (useful_direct true). All claims supported: ACCESS modules, MAC, 40+, April 2011.",
+  "claims": [
+   {
+    "text": "Worked on FX/cross-border payments and trade finance integration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Technology Delivery Lead for the payment engine behind ACCESS Next Generation, unified global corporate banking portal",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "Bank needed capabilities beyond WebSeries: purpose-built formatting, validation, compliance controls, workflows",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Built FX/cross-border payment module",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Architected SSO and drove trade finance integration groundwork",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACH and wire payment modules, payment-type entitlement controls, MAC security, real-time global reporting",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Managed blended onshore/offshore team of 40+ across Accenture and JP Morgan Chase",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACCESS launched April 2011, 135,000+ corporations, FIs, governments, municipalities across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Payments and treasury-platform work, not securities trading platform",
+    "label": "supported",
+    "source": "stated fact"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x4",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: says no ROI formula/percentage is on record (acknowledges_missing) and gives what Matt measured, labelled as not an ROI calculation (useful_direct, ruling 2). All claims supported; quoted text verbatim: CIC 4X/10 vs 20, $100M+ FY23, Fiserv figures, RBC cost-to-fix quote.",
+  "claims": [
+   {
+    "text": "Stories do not specify an ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "absence: no story records an ROI formula"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Needed evidence that velocity gains and quality improvements offset the investment",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams, 4X faster velocity, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Used results in executive briefings and client workshops",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Full P&L for Atlanta and Tampa centers incl. budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ enterprise clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Centers contributed to $100M+ in repeatable business by FY23",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Fiserv: $8.5M program, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "RBC: transparent 'cost-to-fix vs. benefit comparison' with heat maps and gap/fit analysis",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "WebSeries could not meet the bank's requirements, preventing further investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "No dollar value recorded for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x4",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: says no ROI formula/percentage is on record (acknowledges_missing) and gives what Matt measured, labelled as not an ROI calculation (useful_direct, ruling 2). All claims supported; quoted text verbatim: RBC Day2Day assessment and quote, CIC comparisons, Fiserv figures, P&L practices.",
+  "claims": [
+   {
+    "text": "Stories do not specify an ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "absence: no story records an ROI formula"
+   },
+   {
+    "text": "RBC leadership needed to decide whether WebSeries could support Day2Day Corporate Banking before further investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Conducted code reviews, stakeholder interviews, gap/fit analysis; created architectural heat maps and target-system models with enterprise architecture team",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Quoted 'transparent cost-to-fix vs. benefit comparison'",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action (verbatim)"
+   },
+   {
+    "text": "WebSeries lacked modularity required for long-term digital operating model",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC redirected technical resources",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "No dollar value recorded for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Owned full P&L accountability for Atlanta and Tampa centers, including budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Addressed pair programming cost concerns by comparing velocity and quality",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams, 4X faster velocity, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Fiserv: $8.5M program, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Tracked forecasts, actuals, contingency release, staffing costs, scope changes",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x4",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: says no ROI formula/percentage is on record (acknowledges_missing) and gives what Matt measured, labelled as not an ROI calculation (useful_direct, ruling 2). All claims supported; quoted text verbatim: RBC quote and outcome, CIC cost base/chargeability, Fiserv figures.",
+  "claims": [
+   {
+    "text": "Stories do not specify an ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "absence: no story records an ROI formula"
+   },
+   {
+    "text": "RBC needed to decide on WebSeries for Day2Day before further investment; existing systems had performance and scalability limits",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Conducted code reviews, stakeholder interviews, gap/fit analysis; created architectural heat maps and target-system models with enterprise architecture team",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Quoted 'cost-to-fix vs. benefit comparison' (transparent)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action (verbatim)"
+   },
+   {
+    "text": "Assessment found WebSeries lacked the required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Prevented further investment in that platform path; RBC redirected technical resources to higher-priority initiatives",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "No dollar value recorded for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Owned CIC budget and cost base alongside revenue",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Tracked chargeability, unbillable downtime, contractor spend",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams, 4X faster velocity, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Fiserv: $8.5M program, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x4",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: says no ROI formula/percentage is on record (acknowledges_missing) and gives what Matt measured, labelled as not an ROI calculation (useful_direct, ruling 2). All claims supported; quoted text verbatim: CIC comparisons, JP Morgan 2 sprints, Norfolk Southern pairing, RBC, Fiserv.",
+  "claims": [
+   {
+    "text": "Stories do not specify an ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "absence: no story records an ROI formula"
+   },
+   {
+    "text": "CIC clients wanted to change how they built software but questioned the cost of pair programming",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation/Action"
+   },
+   {
+    "text": "Compared velocity, quality, team size with traditional approaches",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "Owned full P&L for Atlanta and Tampa centers incl. budget and cost management alongside revenue",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams, 4X faster velocity, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "At JP Morgan, teams outpaced peer velocity within first 2 sprints, shipping to production in weeks vs months",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "At Norfolk Southern, teams reduced meeting overhead and eliminated context switching through pairing with daily delivery rhythm",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "RBC: cost-to-fix vs benefit comparison, code review, interviews, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Assessment found WebSeries lacked the required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Prevented further investment in that platform path; RBC redirected technical resources to higher-priority initiatives",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "No dollar savings figure recorded",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Fiserv: $8.5M program, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x4",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: says no ROI formula/percentage is on record (acknowledges_missing) and gives what Matt measured, labelled as not an ROI calculation (useful_direct, ruling 2). All claims supported; quoted text verbatim: RBC quote, CIC 150+, Fiserv figures.",
+  "claims": [
+   {
+    "text": "Stories do not specify an ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "absence: no story records an ROI formula"
+   },
+   {
+    "text": "RBC leadership decision on WebSeries for Day2Day before further investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Conducted code reviews, stakeholder interviews, gap/fit analysis; created architectural heat maps and target-system models with enterprise architecture team",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Quoted 'transparent cost-to-fix vs. benefit comparison'",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action (verbatim)"
+   },
+   {
+    "text": "Assessment found WebSeries lacked the required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Prevented further investment in that platform path; RBC redirected technical resources to higher-priority initiatives",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "No dollar value recorded for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Atlanta and Tampa CIC clients questioned pair programming cost",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams, 4X faster velocity, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Owned centers' full P&L incl. budget and cost management across 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients"
+   },
+   {
+    "text": "Fiserv: $8.5M program, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x4",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: says no ROI formula/percentage is on record (acknowledges_missing) and gives what Matt measured, labelled as not an ROI calculation (useful_direct, ruling 2). All claims supported; quoted text verbatim: CIC 16-18 weeks, premium pricing, 30+/15+, $100M+, RBC quote, Fiserv.",
+  "claims": [
+   {
+    "text": "Stories do not specify an ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "absence: no story records an ROI formula"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Compared velocity, quality, team size, delivery time vs traditional approaches rather than presenting methodology alone",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "Full P&L incl. budget, cost management, chargeability, unbillable downtime, contractor spend across 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams, 4X faster velocity, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Full MVP delivery approx 16 to 18 weeks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Results justified investment and premium pricing",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients, $100M+ repeatable business by FY23",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Quoted 'transparent cost-to-fix vs. benefit comparison'",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action (verbatim)"
+   },
+   {
+    "text": "Assessments, code reviews, heat maps identified WebSeries shortfalls before further investment; resources redirected",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Result"
+   },
+   {
+    "text": "No dollar savings or ROI percentage recorded",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Fiserv: $8.5M program, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x4",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: says no ROI formula/percentage is on record (acknowledges_missing) and gives what Matt measured, labelled as not an ROI calculation (useful_direct, ruling 2). All claims supported; quoted text verbatim: RBC quote, CIC comparisons, $100M+ FY23, P&L engagement economics, Fiserv. 'Keyboards' framing read as paraphrase of the BDD story's two-engineers-one-keyboard objection.",
+  "claims": [
+   {
+    "text": "Stories do not specify an ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "absence: no story records an ROI formula"
+   },
+   {
+    "text": "Quoted 'cost-to-fix vs. benefit comparison' for platform decisions",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action (verbatim)"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Compared velocity and quality with traditional delivery rather than counting engineers at keyboards as value",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation/Action; building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Used client results in executive briefings and workshops",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams, 4X faster velocity, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Owned centers' full P&L incl. budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Centers generated $100M+ repeatable business by FY23",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Performance/Result"
+   },
+   {
+    "text": "RBC: code reviews, interviews, gap/fit, heat maps, target-system models, cost-to-fix vs benefit",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Assessment found WebSeries lacked the required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Preventing further investment in that platform path",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "Tracked actuals, forecast variance, contingency, staffing (resource pyramid) costs, scope changes",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv: $8.5M program, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x4",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: says no ROI formula/percentage is on record (acknowledges_missing) and gives what Matt measured, labelled as not an ROI calculation (useful_direct, ruling 2). All claims supported; quoted text verbatim: CIC P&L and comparisons, JP Morgan 2 sprints, RBC, Fiserv.",
+  "claims": [
+   {
+    "text": "Stories do not specify an ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "absence: no story records an ROI formula"
+   },
+   {
+    "text": "Made CIC investment case through budget/cost management and delivery results",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Demonstrated velocity gains and quality improvements that offset investment",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Full P&L for Atlanta and Tampa centers incl. operating cost base, chargeability, unbillable downtime, contractor spend",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action; building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams, 4X faster velocity, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "At JP Morgan, teams outpaced peer velocity within first 2 sprints, shipping to production in weeks vs months",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Centers contributed to $100M+ in repeatable business by FY23",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "RBC: transparent cost-to-fix vs benefit, code reviews, heat maps, target-state models; WebSeries lacked modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Prevented investment in a platform path that could not deliver",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "Fiserv: $8.5M program, $255K preserved margin, $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x4",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: says no ROI formula/percentage is on record (acknowledges_missing) and gives what Matt measured, labelled as not an ROI calculation (useful_direct, ruling 2). All claims supported; quoted text verbatim: CIC situation, pair programming story, P&L bench-first, RBC quote, Fiserv.",
+  "claims": [
+   {
+    "text": "Stories do not specify an ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "absence: no story records an ROI formula"
+   },
+   {
+    "text": "Quoted 'cost-to-fix vs. benefit comparison'",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action (verbatim)"
+   },
+   {
+    "text": "CIC clients wanted to move away from waterfall, feature factories, siloed teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Engineers in isolation faced bugs, rework, missed deadlines, difficult junior onboarding",
+    "label": "supported",
+    "source": "delivering-better-code-and-stronger-teams-through-pair-programming|accenture Situation"
+   },
+   {
+    "text": "Demonstrated velocity gains and quality improvements that offset the investment",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Full P&L for Atlanta and Tampa incl. budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Tracked chargeability, unbillable downtime, contractor spend",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Required internal bench deployment before approving external contractors",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams, 4X faster velocity, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Structured pairing and partner rotation sped junior onboarding and reduced rework",
+    "label": "supported",
+    "source": "delivering-better-code-and-stronger-teams-through-pair-programming|accenture Action/Result"
+   },
+   {
+    "text": "RBC: worked with enterprise architecture team; code reviews, interviews, heat maps found WebSeries lacked modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Prevented further investment in that platform path; RBC redirected technical resources to higher-priority initiatives",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "No dollar savings recorded",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Fiserv: $8.5M program, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x4",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: says no ROI formula/percentage is on record (acknowledges_missing) and gives what Matt measured, labelled as not an ROI calculation (useful_direct, ruling 2). All claims supported; quoted text verbatim: RBC quote, CIC comparisons, Fiserv.",
+  "claims": [
+   {
+    "text": "Stories do not specify an ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "absence: no story records an ROI formula"
+   },
+   {
+    "text": "RBC evaluating Bottomline WebSeries for Day2Day before further investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Conducted code reviews, stakeholder interviews, gap/fit analysis; created architectural heat maps and target-system models with enterprise architecture team",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Quoted 'transparent cost-to-fix vs. benefit comparison'",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action (verbatim)"
+   },
+   {
+    "text": "Assessment found WebSeries lacked the required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC redirected technical resources",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "No dollar amount or ROI percentage recorded",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams, 4X faster velocity, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Owned centers' budgets and cost base; chargeability, unbillable downtime, contractor spend",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Helped recover $8.5M Fiserv program: 3% under budget/$255K, $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action; recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x4",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: says no ROI formula/percentage is on record (acknowledges_missing) and gives what Matt measured, labelled as not an ROI calculation (useful_direct, ruling 2). All claims supported; quoted text verbatim: CIC, JP Morgan, Norfolk Southern, P&L, RBC quote, Fiserv.",
+  "claims": [
+   {
+    "text": "Stories do not specify an ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "absence: no story records an ROI formula"
+   },
+   {
+    "text": "CIC clients questioned pair programming cost amid waterfall, siloed teams, separate QA phases",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation/Result"
+   },
+   {
+    "text": "Compared velocity and quality vs traditional delivery",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams, 4X faster velocity, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "At JP Morgan, teams outpaced peer velocity within first 2 sprints, shipping to production in weeks vs months",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Owned centers' P&L: budget, practitioner cost, chargeability, unbillable downtime, contractor spend",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action; building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture"
+   },
+   {
+    "text": "Required internal bench deployment before approving external contractors",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "At Norfolk Southern, teams reduced meeting overhead and eliminated context switching through pairing with daily delivery rhythm",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "RBC: quoted 'transparent cost-to-fix vs. benefit comparison' with code reviews, heat maps, gap/fit",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action (verbatim)"
+   },
+   {
+    "text": "Assessment found WebSeries lacked the required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Preventing further investment; no dollar savings recorded",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "Fiserv: $8.5M program, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x4",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: says no ROI formula/percentage is on record (acknowledges_missing) and gives what Matt measured, labelled as not an ROI calculation (useful_direct, ruling 2). All claims supported; quoted text verbatim: 'CIC Standard of Value' verbatim, P&L, RBC, Fiserv.",
+  "claims": [
+   {
+    "text": "Stories do not specify an ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "absence: no story records an ROI formula"
+   },
+   {
+    "text": "CIC clients questioned pair programming costs while teams struggled with slow cycles, siloed functions, handoffs",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation/Result"
+   },
+   {
+    "text": "Addressed concerns with velocity and quality results rather than methodology presentations",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Quoted 'CIC Standard of Value': 4X velocity, zero-defect code, customer journey-led, lean sustainable delivery",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action (verbatim)"
+   },
+   {
+    "text": "Balanced teams of 10 delivered output of traditional teams of 20",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "At Norfolk Southern, teams reduced meeting overhead and eliminated context switching through pairing with daily delivery rhythm",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Owned full P&L incl. budget, cost management, chargeability, unbillable downtime, contractor spend",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients"
+   },
+   {
+    "text": "Bench-first contractor rule kept practitioner cost tied to billable demand",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "RBC: transparent cost-to-fix vs benefit comparison, code reviews, heat maps, target-state models",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Assessment found WebSeries lacked the required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Prevented further investment in that platform path; RBC redirected technical resources to higher-priority initiatives",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "Fiserv: $8.5M program, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x4",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: says no ROI formula/percentage is on record (acknowledges_missing) and gives what Matt measured, labelled as not an ROI calculation (useful_direct, ruling 2). All claims supported; quoted text verbatim: CIC, P&L contractor conversion, $100M+, Fiserv, RBC.",
+  "claims": [
+   {
+    "text": "Stories do not specify an ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "absence: no story records an ROI formula"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Compared velocity, team size, quality vs traditional approaches",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams, 4X faster velocity, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Full P&L incl. budget, practitioner costs, chargeability, unbillable downtime, contractor spend",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action; building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture"
+   },
+   {
+    "text": "Required internal bench deployment before approving external contractors",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Converted contractors to internal hires where roles became permanent",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Centers contributed to $100M+ repeatable business through delivery excellence",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Fiserv: $8.5M program, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "RBC: transparent cost-to-fix vs benefit during architecture assessment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "WebSeries could not meet requirements; RBC redirected resources before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "No dollar value recorded for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x4",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: says no ROI formula/percentage is on record (acknowledges_missing) and gives what Matt measured, labelled as not an ROI calculation (useful_direct, ruling 2). All claims supported; quoted text verbatim: BDD story cost objection and tracked metrics, CIC, P&L, Fiserv, RBC quote.",
+  "claims": [
+   {
+    "text": "Stories do not specify an ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "absence: no story records an ROI formula"
+   },
+   {
+    "text": "Quoted 'transparent cost-to-fix vs. benefit comparison' in architecture assessments",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action (verbatim)"
+   },
+   {
+    "text": "Clients questioned paying for two engineers at one keyboard; delivery teams saw pairing as inefficient and TDD as overhead",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Teams discovered defects late, spent weeks debugging, accumulated technical debt",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Tracked defect rates, velocity, debugging time vs build time, knowledge distribution",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Action"
+   },
+   {
+    "text": "BDD acceptance criteria before production code, TDD Red-Green-Refactor, continuous pairing, tests must pass before merge",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Action"
+   },
+   {
+    "text": "After learning curve, 4X velocity vs client internal teams; recovered rework/debugging time outweighed test-writing time",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Result"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams, 4X faster velocity, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Tracked actuals, forecast variance, contingency, staffing (resource pyramid) costs, scope changes",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Tracked chargeability, unbillable downtime, contractor spend",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv: $8.5M program, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "RBC: code reviews, heat maps, target-system models; WebSeries lacked modularity, preventing investment, resources moved",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x4",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: says no ROI formula/percentage is on record (acknowledges_missing) and gives what Matt measured, labelled as not an ROI calculation (useful_direct, ruling 2). All claims supported; quoted text verbatim: CIC growth figures, RBC, Fiserv.",
+  "claims": [
+   {
+    "text": "Stories do not specify an ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "absence: no story records an ROI formula"
+   },
+   {
+    "text": "CIC clients questioned pair programming cost and fit with legacy, compliance, enterprise governance",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation/Action"
+   },
+   {
+    "text": "Addressed concerns with velocity gains and quality improvements that offset investment",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams, 4X faster velocity, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Owned Atlanta and Tampa full P&L incl. budget, cost management, chargeability, unbillable downtime, contractor spend",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients"
+   },
+   {
+    "text": "Centers grew to 150+ practitioners, 30+ product engagements across 15+ Fortune 500 clients, $100M+ repeatable business",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "RBC: whether WebSeries could meet corporate banking requirements; code reviews, heat maps, target-state models, transparent cost-to-fix vs benefit",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation/Action"
+   },
+   {
+    "text": "Identified missing modularity, prevented further investment; no dollar savings stated",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Result"
+   },
+   {
+    "text": "Fiserv: $8.5M program, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x4",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: says no ROI formula/percentage is on record (acknowledges_missing) and gives what Matt measured, labelled as not an ROI calculation (useful_direct, ruling 2). All claims supported; quoted text verbatim: CIC, P&L, RBC quote and workshops, Fiserv.",
+  "claims": [
+   {
+    "text": "Stories do not specify an ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "absence: no story records an ROI formula"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Addressed concern through executive briefings and client workshops showing velocity and quality gains",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Full P&L for Atlanta and Tampa incl. budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams, 4X faster velocity, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Tracked chargeability, unbillable downtime, contractor spend",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Required internal bench deployment before approving external contractors",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Centers contributed to $100M+ repeatable business through delivery excellence and client advocacy",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "RBC: code reviews, interviews, gap/fit; quoted 'transparent cost-to-fix vs. benefit comparison' with enterprise architecture team",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action (verbatim)"
+   },
+   {
+    "text": "Workshops aligned leadership around business goals and technical findings",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Prevented further investment in that platform path; RBC redirected technical resources to higher-priority initiatives",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "Fiserv: $8.5M program, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x4",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: says no ROI formula/percentage is on record (acknowledges_missing) and gives what Matt measured, labelled as not an ROI calculation (useful_direct, ruling 2). All claims supported; quoted text verbatim: 'CIC Standard of Value', 4-8 week discovery, RBC quote, Fiserv.",
+  "claims": [
+   {
+    "text": "Stories do not specify an ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "absence: no story records an ROI formula"
+   },
+   {
+    "text": "CIC clients questioned pair programming cost; enterprise delivery had to handle legacy, compliance, security",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation/Action"
+   },
+   {
+    "text": "Demonstrated velocity and quality gains that offset investment, rather than methodology presentations",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Quoted 'CIC Standard of Value'",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action (verbatim)"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams, 4X faster velocity, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Started clients with 4 to 8 week discovery engagements that proved value before larger programs",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Owned centers' budget and cost management, chargeability, unbillable downtime, contractor spend",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients"
+   },
+   {
+    "text": "RBC: code reviews, interviews, gap/fit, target-system models; quoted 'cost-to-fix vs. benefit comparison'",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action (verbatim)"
+   },
+   {
+    "text": "Assessment found WebSeries lacked the required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC redirected resources before significant spend; no dollar amount",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "Fiserv: $8.5M program, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x4",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: says no ROI formula/percentage is on record (acknowledges_missing) and gives what Matt measured, labelled as not an ROI calculation (useful_direct, ruling 2). All claims supported; quoted text verbatim: CIC, RBC quote and workshops, P&L, Fiserv.",
+  "claims": [
+   {
+    "text": "Stories do not specify an ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "absence: no story records an ROI formula"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Addressed concerns via executive briefings and client workshops with velocity and quality gains",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams, 4X faster velocity, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Owned full P&L incl. budget, cost management, chargeability, unbillable downtime, contractor spend",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients"
+   },
+   {
+    "text": "RBC: code reviews, interviews, gap/fit; quoted 'cost-to-fix vs. benefit comparison' with enterprise architecture team",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action (verbatim)"
+   },
+   {
+    "text": "Conducted leadership workshops connecting business goals and technical findings",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Missing modularity; prevented further investment; no dollar value stated",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Result"
+   },
+   {
+    "text": "Managed actuals, forecast variance, contingency release, scope changes",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv: $8.5M program, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x4",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: says no ROI formula/percentage is on record (acknowledges_missing) and gives what Matt measured, labelled as not an ROI calculation (useful_direct, ruling 2). All claims supported; quoted text verbatim: CIC, JP Morgan 2 sprints, RBC quote, Fiserv.",
+  "claims": [
+   {
+    "text": "Stories do not specify an ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "absence: no story records an ROI formula"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Demonstrated velocity and quality gains offsetting investment rather than methodology presentations",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Used 4-8 week discovery engagements to prove value before larger programs",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams, 4X faster velocity, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "At JP Morgan, teams outpaced peer velocity within first 2 sprints, shipping to production in weeks vs months",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Owned full P&L: budget, cost management, chargeability, unbillable downtime, contractor spend",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients"
+   },
+   {
+    "text": "RBC: code reviews, interviews, gap/fit; quoted 'cost-to-fix vs. benefit comparison'",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action (verbatim)"
+   },
+   {
+    "text": "Assessment found WebSeries lacked the required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC redirected resources before significant spend; no dollar value",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "Fiserv: $8.5M program, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x4",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: says no ROI formula/percentage is on record (acknowledges_missing) and gives what Matt measured, labelled as not an ROI calculation (useful_direct, ruling 2). All claims supported; quoted text verbatim: CIC, P&L, RBC quote, Fiserv.",
+  "claims": [
+   {
+    "text": "Stories do not specify an ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "absence: no story records an ROI formula"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Full P&L for Atlanta and Tampa incl. budget and cost management alongside revenue",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Compared velocity and quality vs traditional approaches",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams, 4X faster velocity, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Invited clients to observe standups and balanced teams working rather than presentations",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Tracked chargeability, unassigned and unbillable downtime, contractor spend, forecast variance, actuals, contingency release",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Required internal bench deployment before approving external contractors",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Centers contributed to $100M+ repeatable business",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "RBC: quoted 'transparent cost-to-fix vs. benefit comparison'; code review, interviews, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action (verbatim)"
+   },
+   {
+    "text": "Platform lacked required modularity, preventing further investment; no dollar value",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Result"
+   },
+   {
+    "text": "Fiserv: $8.5M program, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x4",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: says no ROI formula/percentage is on record (acknowledges_missing) and gives what Matt measured, labelled as not an ROI calculation (useful_direct, ruling 2). All claims supported; quoted text verbatim: CIC, P&L, RBC, Fiserv. Opening 'assessed ROI through' read as framing, qualified by the no-formula statement.",
+  "claims": [
+   {
+    "text": "Stories do not specify an ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "absence: no story records an ROI formula"
+   },
+   {
+    "text": "CIC clients questioned pair programming cost; enterprise compliance, security, legacy complexity",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Full P&L for Atlanta and Tampa incl. budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Compared delivery velocity and quality vs traditional approaches",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Centers used pairing, TDD, automated pipelines, balanced teams vs siloed functions and separate QA",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams, 4X faster velocity, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Tracked chargeability, unbillable downtime, contractor spend",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "RBC: transparent cost-to-fix vs benefit comparison, code reviews, heat maps, gap/fit",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Missing modularity; bank redirected resources; no dollar value",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Result"
+   },
+   {
+    "text": "Fiserv: $8.5M program, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x4",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: says no ROI formula/percentage is on record (acknowledges_missing) and gives what Matt measured, labelled as not an ROI calculation (useful_direct, ruling 2). All claims supported; quoted text verbatim: RBC quote, CIC, velocity scorecards, Fiserv.",
+  "claims": [
+   {
+    "text": "Stories do not specify an ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "absence: no story records an ROI formula"
+   },
+   {
+    "text": "RBC leadership decision on WebSeries before further investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, structured architecture assessment, heat maps, target-system models",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Quoted 'transparent cost-to-fix vs. benefit comparison'",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action (verbatim)"
+   },
+   {
+    "text": "Assessment found WebSeries lacked the required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Prevented further investment in that platform path; RBC redirected technical resources to higher-priority initiatives",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "No dollar value recorded for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Atlanta and Tampa CIC clients questioned pair programming cost; addressed with velocity and quality gains",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams, 4X faster velocity, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Owned full P&L incl. budget, cost management, chargeability, unbillable downtime, contractor spend",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients"
+   },
+   {
+    "text": "Team scorecards tracked lead time, cycle time, throughput, team stability, backlog health rather than velocity alone",
+    "label": "supported",
+    "source": "replacing-velocity-metrics-with-lead-time-cycle-time-and-throughput|accenture Action"
+   },
+   {
+    "text": "Fiserv: $8.5M program, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x4",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: says no ROI formula/percentage is on record (acknowledges_missing) and gives what Matt measured, labelled as not an ROI calculation (useful_direct, ruling 2). All claims supported; quoted text verbatim: CIC, JP Morgan, Norfolk Southern, RBC quote, P&L, Fiserv, hypothesis-driven design.",
+  "claims": [
+   {
+    "text": "Stories do not specify an ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "absence: no story records an ROI formula"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "CIC investment covered facilities, technical infrastructure, training, operating cost base",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients"
+   },
+   {
+    "text": "Full P&L for Atlanta and Tampa incl. budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams, 4X faster velocity, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "At JP Morgan, teams outpaced peer velocity within first 2 sprints",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "At Norfolk Southern, teams reduced meeting overhead and eliminated context switching through pairing with daily delivery rhythm",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "RBC: quoted 'transparent cost-to-fix vs. benefit comparison'",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action (verbatim)"
+   },
+   {
+    "text": "Assessed WebSeries, heat maps, identified missing modularity before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Result"
+   },
+   {
+    "text": "Prevented further investment in that platform path; RBC redirected technical resources to higher-priority initiatives",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "Tracked actuals, forecast variance, contingency, staffing (resource pyramid) costs, scope changes",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv: $8.5M, 3% under budget, $255K margin, $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Product teams tested hypotheses with mockups and wireframes, reducing unnecessary development cycles and rework",
+    "label": "supported",
+    "source": "testing-assumptions-before-committing-resources-with-hypothesis-driven-design|fortune-500-clients Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x4",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fail: unsupported claim 'The unconventional element was measuring pair programming alongside the whole delivery model...' (no story records this method or characterisation). Otherwise acknowledges no ROI formula and gives labelled adjacent measures; other claims supported (CIC comparisons, 16-18 weeks, JP Morgan 2 sprints, $100M+, RBC quote, Fiserv).",
+  "claims": [
+   {
+    "text": "Stories do not specify an ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "absence: no story records an ROI formula"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Addressed concerns with velocity and quality gains rather than methodology presentations",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams, 4X faster velocity, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Full MVP delivery approx 16 to 18 weeks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "'The unconventional element was measuring pair programming alongside the whole delivery model, including embedded quality, automated pipelines, and Product, Engineering, and Design working together'",
+    "label": "unsupported",
+    "source": "no story says Matt measured pairing alongside the whole delivery model or calls it unconventional"
+   },
+   {
+    "text": "At JP Morgan, teams outpaced peer velocity within first 2 sprints, shipping to production in weeks vs months",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Owned budgets and cost management; chargeability, unbillable downtime, contractor spend",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients"
+   },
+   {
+    "text": "Atlanta and Tampa contributed to $100M+ repeatable business through delivery excellence and client advocacy",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "RBC: quoted 'cost-to-fix vs. benefit comparison' (transparent); code reviews, heat maps, target-system models",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action (verbatim)"
+   },
+   {
+    "text": "WebSeries lacked modularity, preventing further investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Result"
+   },
+   {
+    "text": "Fiserv: $8.5M program, 3% under budget, $255K preserved margin, $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x4",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: says no ROI formula/percentage is on record (acknowledges_missing) and gives what Matt measured, labelled as not an ROI calculation (useful_direct, ruling 2). All claims supported; quoted text verbatim: RBC situation and quote, CIC, Fiserv, P&L practices.",
+  "claims": [
+   {
+    "text": "Stories do not specify an ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "absence: no story records an ROI formula"
+   },
+   {
+    "text": "RBC leadership needed to determine WebSeries fit before further investment; existing systems had performance/scalability limits and lacked digital offerings",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, structured architecture assessment, heat maps, target-system models",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Quoted 'transparent cost-to-fix vs. benefit comparison'",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action (verbatim)"
+   },
+   {
+    "text": "Assessment found WebSeries lacked the required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Prevented further investment in that platform path; RBC redirected technical resources to higher-priority initiatives",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "No dollar value recorded for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Addressed with observed velocity and quality gains rather than methodology presentations alone",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "10-person balanced teams delivered equivalent output to traditional 20-person teams, 4X faster velocity, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Owned centers' budgets, cost management, full P&L",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Helped recover $8.5M Fiserv program: 3% under budget/$255K, $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action; recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Entered actuals, reviewed forecast variance, managed staffing costs, contingency release, scope changes via change requests",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ }
+]

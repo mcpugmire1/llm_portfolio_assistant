@@ -1,0 +1,1563 @@
+[
+ {
+  "case": "x5",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'I don't have a documented example'; supported: Amex payments, Sparkfly commerce/personalization, MattGPT, labelled 'not gaming platforms'. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "No documented example of Matt working on gaming platforms",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   },
+   {
+    "text": "Platform work includes enterprise payments at American Express",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Project/Industry"
+   },
+   {
+    "text": "Commerce and personalization work at Sparkfly",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Use Case(s)"
+   },
+   {
+    "text": "Built his own AI-powered assistant, MattGPT",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task"
+   },
+   {
+    "text": "Those are not gaming platforms",
+    "label": "supported",
+    "source": "Industry fields of the cited stories"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'I don't have a documented example'; supported: payments/banking modernization, cloud-native, Sparkfly portal, MattGPT; labelled 'not gaming platforms'.",
+  "claims": [
+   {
+    "text": "No documented example of gaming-platform work",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   },
+   {
+    "text": "Platform experience includes enterprise payments and banking modernization",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Cloud-native systems",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Title"
+   },
+   {
+    "text": "Sparkfly's commerce and personalization portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Use Case(s)"
+   },
+   {
+    "text": "MattGPT, his AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found a gaming-platform engagement'; supported: payments/banking platforms, cloud-native, MattGPT, framed as not establishing gaming experience.",
+  "claims": [
+   {
+    "text": "No gaming-platform engagement found in his work history",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   },
+   {
+    "text": "Worked on enterprise payments and banking platforms",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Cloud-native systems",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Title"
+   },
+   {
+    "text": "MattGPT, his AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task"
+   },
+   {
+    "text": "These don't establish gaming-platform experience",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found any documented gaming-platform work'; supported: payments/banking, Sparkfly portal, MattGPT; labelled 'not gaming platforms'.",
+  "claims": [
+   {
+    "text": "No documented gaming-platform work",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   },
+   {
+    "text": "Enterprise payments and banking platform work",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Sparkfly's commerce and personalization portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Use Case(s)"
+   },
+   {
+    "text": "MattGPT, AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found a gaming-platform engagement', 'stories available don't establish'; supported: payments, digital banking, Salesforce, cloud-native, MattGPT.",
+  "claims": [
+   {
+    "text": "No gaming-platform engagement in his work history",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   },
+   {
+    "text": "Documented platform work in enterprise payments and digital banking",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Result ('payments, cloud, and digital banking')"
+   },
+   {
+    "text": "Salesforce platforms",
+    "label": "supported",
+    "source": "leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Result"
+   },
+   {
+    "text": "Cloud-native systems",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Title"
+   },
+   {
+    "text": "MattGPT, his AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'I don't have evidence'; supported: payments, banking modernization, cloud-native, MattGPT, 'builder' (transition story); labelled not gaming.",
+  "claims": [
+   {
+    "text": "No evidence Matt has worked on gaming platforms",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   },
+   {
+    "text": "Documented work in enterprise payments, banking modernization, cloud-native systems, MattGPT",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project"
+   },
+   {
+    "text": "Matt is a builder",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary ('I'm a builder')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found a documented example'; supported: JPMC 12-country payments and Salesforce platforms, MattGPT stack; labelled 'not evidence of gaming-platform experience'.",
+  "claims": [
+   {
+    "text": "No documented example of gaming-platform work",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   },
+   {
+    "text": "Documented platform work in enterprise payments, digital banking, cloud-native systems, MattGPT",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Result; accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients; mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project"
+   },
+   {
+    "text": "At JP Morgan Chase, payments and Salesforce platforms rolled out across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase"
+   },
+   {
+    "text": "Built MattGPT with Python, Streamlit, Pinecone and OpenAI tooling",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Action/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'I don't have a documented example'; supported: Amex VPP developer portal redesign, virtualized testing, documentation, Lean Product/XP; labelled 'payments-platform work, not gaming'.",
+  "claims": [
+   {
+    "text": "No documented example of gaming-platform work",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   },
+   {
+    "text": "Platform work in enterprise payments, banking modernization, cloud-native systems and developer portals",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express"
+   },
+   {
+    "text": "At American Express, led the redesign of the Virtual Payments Platform's developer portal",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Role (Director)/Action ('Redesigned the portal's UI')"
+   },
+   {
+    "text": "Included virtualized testing environments",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Included API integration documentation",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action ('updated documentation', Developer Guide)"
+   },
+   {
+    "text": "Used Lean Product and XP practices",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found a story documenting'; supported: payments/banking modernization across JPMC, RBC, Capital One, HSBC and 12-country rollouts (why-hire-matt); labelled 'not gaming platforms'.",
+  "claims": [
+   {
+    "text": "No story documents gaming-platform work",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   },
+   {
+    "text": "Enterprise payments and banking modernization at JP Morgan Chase, RBC, Capital One and HSBC",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "JP Morgan Chase payments and Salesforce platforms each rolled out across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found a gaming-platform engagement'; supported: payments, digital banking, cloud-native, MattGPT, set against 'can't confirm experience with gaming platforms'.",
+  "claims": [
+   {
+    "text": "No gaming-platform engagement in his work history",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   },
+   {
+    "text": "Documented platform work in enterprise payments, digital banking, cloud-native systems",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Result; accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients"
+   },
+   {
+    "text": "MattGPT, an AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'I don't have a documented example'; supported: CIC 0 to 150+ professionals, JPMC 12-country platforms; quote 'builder' matches the story word verbatim (rule 8); labelled 'not gaming projects'.",
+  "claims": [
+   {
+    "text": "No documented example of gaming-platform work",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   },
+   {
+    "text": "Platform experience in enterprise payments, banking modernization, cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Matt describes himself as a 'builder' (quoted word appears verbatim)",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "At Accenture, built the Cloud Innovation Center from 0 to 150+ professionals",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture 5PSummary"
+   },
+   {
+    "text": "JP Morgan Chase payments and Salesforce platforms each rolled out across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found any gaming-platform work in Matt's career stories'; supported: payments, banking modernization, cloud-native, MattGPT; labelled 'not gaming platforms'.",
+  "claims": [
+   {
+    "text": "No gaming-platform work in his career stories",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   },
+   {
+    "text": "Documented platform experience in enterprise payments, banking modernization, cloud-native systems, MattGPT",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found a gaming-platform engagement'; supported: payments, banking modernization, cloud-native, MattGPT; labelled as not game development.",
+  "claims": [
+   {
+    "text": "No gaming-platform engagement in his work history",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   },
+   {
+    "text": "Documented platform work in enterprise payments, banking modernization, cloud-native systems, MattGPT",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project"
+   },
+   {
+    "text": "None of the stories describes game development or a gaming platform",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found a gaming-platform engagement'; supported: payments, digital banking, cloud-native, MattGPT, set against 'can't confirm experience with game development'.",
+  "claims": [
+   {
+    "text": "No gaming-platform engagement in his work history",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   },
+   {
+    "text": "Documented platform work in enterprise payments, digital banking, cloud-native systems, MattGPT",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Result; accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients; mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'I don't have evidence'; supported: Sparkfly employee discount/commerce portal, payments platforms, developer portals; labelled 'none of those is described as a gaming platform'.",
+  "claims": [
+   {
+    "text": "No evidence Matt has worked on gaming platforms",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   },
+   {
+    "text": "Employee discount and commerce portal at Sparkfly",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Project/Use Case(s)"
+   },
+   {
+    "text": "Enterprise payments platforms",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express"
+   },
+   {
+    "text": "Developer portals",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'I don't have a documented example'; supported: payments, digital banking, cloud-native; labelled 'not a confirmed gaming engagement'.",
+  "claims": [
+   {
+    "text": "No documented example of gaming-platform work",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   },
+   {
+    "text": "Platform work in enterprise payments, digital banking, cloud-native systems",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Result; accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'I don't have evidence'; supported: payments, banking modernization, cloud-native, MattGPT; labelled 'not game development or gaming infrastructure'.",
+  "claims": [
+   {
+    "text": "No evidence Matt has worked on gaming platforms",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   },
+   {
+    "text": "Documented platform work in enterprise payments, banking modernization, cloud-native systems, MattGPT",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'I don't have a documented example'; supported: payments, digital banking, cloud-native, MattGPT; labelled 'rather than game development'.",
+  "claims": [
+   {
+    "text": "No documented example of gaming-platform work",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   },
+   {
+    "text": "Documented platform work in enterprise payments, digital banking, cloud-native systems, MattGPT",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Result; accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients; mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'I don't have a documented example'; supported: payments, banking modernization, cloud-native, MattGPT; labelled 'not game development'.",
+  "claims": [
+   {
+    "text": "No documented example of gaming-platform work",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   },
+   {
+    "text": "Documented platform work in enterprise payments, banking modernization, cloud-native systems, MattGPT",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'Nothing in Matt's documented work history establishes experience with gaming platforms'; supported: payments, banking modernization, cloud-native, MattGPT, presented after the not-documented statement.",
+  "claims": [
+   {
+    "text": "Nothing in his documented work history establishes gaming-platform experience",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   },
+   {
+    "text": "Platform work in enterprise payments, banking modernization, cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "MattGPT, his AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found a gaming-platform engagement'; supported: JPMC 12-country payments/Salesforce rollouts, MattGPT; labelled 'not gaming experience'.",
+  "claims": [
+   {
+    "text": "No gaming-platform engagement in his work history",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   },
+   {
+    "text": "Platform work in enterprise payments, digital banking, cloud-native systems, MattGPT",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Result; accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients; mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project"
+   },
+   {
+    "text": "At JP Morgan Chase, payments and Salesforce platforms each rolled out across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'I don't have a story documenting'; supported: payments, banking modernization, cloud-native, MattGPT; labelled 'can't claim gaming-platform experience'.",
+  "claims": [
+   {
+    "text": "No story documents gaming-platform work",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   },
+   {
+    "text": "Documented platform work in enterprise payments, banking modernization, cloud-native systems, MattGPT",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found a gaming-platform engagement'; supported: Sparkfly portal, MattGPT conversational interface, payments/banking; labelled 'aren't gaming platforms'.",
+  "claims": [
+   {
+    "text": "No gaming-platform engagement in his work history",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   },
+   {
+    "text": "Platform work in enterprise payments, banking modernization, cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Sparkfly's commerce and personalization portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Use Case(s)"
+   },
+   {
+    "text": "MattGPT's AI-powered conversational interface",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Action ('conversational interface over a portfolio corpus')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'I don't have a documented example'; supported: payments, banking modernization, cloud-native, MattGPT; labelled 'rather than game development'.",
+  "claims": [
+   {
+    "text": "No documented example of gaming-platform work",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   },
+   {
+    "text": "Platform work in enterprise payments, banking modernization, cloud-native systems, MattGPT",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'documented work does not include gaming platforms' (rule 3: says it is not documented); supported: payments, digital banking, cloud-native, MattGPT; labelled 'should not be presented as gaming-industry experience'.",
+  "claims": [
+   {
+    "text": "Matt's documented work does not include gaming platforms or game development",
+    "label": "supported",
+    "source": "corpus search: no gaming-platform story"
+   },
+   {
+    "text": "Platform experience in enterprise payments, digital banking, cloud-native systems",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Result; accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients"
+   },
+   {
+    "text": "MattGPT, an AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x7",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail (Answered, Honest). contradicted: 'I don't have exact start and end dates' (every JPMC story carries Start_Date/End_Date), so the 'when' question goes unanswered. supported: ACCESS April 2011 launch, I&AM Uplift after 2014 breach.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture on ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer/Project"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Worked on the Identity & Access Management Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Situation"
+   },
+   {
+    "text": "No exact start and end dates for his JP Morgan engagements are available",
+    "label": "contradicted",
+    "source": "Stories hold Start_Date/End_Date for every JPMC engagement: building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase (2009-08 to 2012-06), rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase (2013-04 to 2014-10), mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase (2014-09 to 2014-12), designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase (2015-06 to 2016-06)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fail (Answered). The three listed date ranges and role are supported, but the answer presents them as his JP Morgan periods and omits the 2013-04 to 2014-10 TS Dynamics CRM engagement: contradicted: implied complete period list.",
+  "claims": [
+   {
+    "text": "August 2009 to June 2012: ACCESS Next Generation and the Global Payments Gateway",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "September 2014 to December 2014: Corporate Identity & Access Management Uplift",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "June 2015 to June 2016: Asset Management's global Salesforce rollout",
+    "label": "supported",
+    "source": "leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Role was Senior Technology Architecture Manager",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Role"
+   },
+   {
+    "text": "These are the periods he was at JP Morgan (presented as the answer; omits the TS Dynamics CRM engagement)",
+    "label": "contradicted",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Start_Date/End_Date (2013-04 to 2014-10, Senior Technology Architecture Manager)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fail (Answered). Listed ranges and role supported; contradicted: implied complete period list omits the 2013-04 to 2014-10 TS Dynamics CRM engagement.",
+  "claims": [
+   {
+    "text": "August 2009 to June 2012: ACCESS Next Generation and its global payments gateway",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "September to December 2014: Identity & Access Management Uplift",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "June 2015 to June 2016: cloud integration architecture for Asset Management's Salesforce rollout",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Start_Date/End_Date/Title"
+   },
+   {
+    "text": "Role was Senior Technology Architecture Manager",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Role"
+   },
+   {
+    "text": "These are the periods he was at JP Morgan (omits the TS Dynamics CRM engagement)",
+    "label": "contradicted",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Start_Date/End_Date (2013-04 to 2014-10, Senior Technology Architecture Manager)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail (Answered). Listed ranges, Salesforce integration detail and role supported; contradicted: implied complete period list omits the 2013-04 to 2014-10 TS Dynamics CRM engagement.",
+  "claims": [
+   {
+    "text": "August 2009 to June 2012: ACCESS Next Generation and the global payments gateway",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "September 2014 to December 2014: Identity & Access Management Uplift",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "June 2015 to June 2016: Asset Management cloud integration architecture connecting Salesforce with internal and external systems",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Start_Date/End_Date/Task"
+   },
+   {
+    "text": "Role was Senior Technology Architecture Manager",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Role"
+   },
+   {
+    "text": "These are the periods he was at JP Morgan (omits the TS Dynamics CRM engagement)",
+    "label": "contradicted",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Start_Date/End_Date (2013-04 to 2014-10, Senior Technology Architecture Manager)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fail (Answered). Listed ranges and details supported; contradicted: implied complete period list omits the 2013-04 to 2014-10 TS Dynamics CRM engagement.",
+  "claims": [
+   {
+    "text": "August 2009 to June 2012: ACCESS Next Generation, including the payment engine and global payments gateway",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "September to December 2014: Corporate I&AM Uplift, including program planning and Agile adoption",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Result (PMO, roadmap, migration plan); driving-agile-adoption-for-jp-morgans-identity-access-management-transformation|jp-morgan-chase Title"
+   },
+   {
+    "text": "June 2015 to June 2016: Asset Management cloud integration architecture for Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "These were separate engagements, not one continuous assignment",
+    "label": "supported",
+    "source": "story date ranges"
+   },
+   {
+    "text": "These are the periods he was at JP Morgan (omits the TS Dynamics CRM engagement)",
+    "label": "contradicted",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Start_Date/End_Date (2013-04 to 2014-10, Senior Technology Architecture Manager)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fail (Answered, Honest). contradicted: 'I don't have exact start and end dates' (stories hold them), so the question goes unanswered. supported: April 2011 launch, 2014 breach, 3-month PMO engagement.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase as an Accenture consultant on ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer/Project"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Worked on the I&AM Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Situation"
+   },
+   {
+    "text": "The PMO and migration-planning engagement lasted 3 months",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Result ('within a 3-month engagement window')"
+   },
+   {
+    "text": "No exact start and end dates for his full time on the account",
+    "label": "contradicted",
+    "source": "Stories hold Start_Date/End_Date for every JPMC engagement: building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase (2009-08 to 2012-06), rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase (2013-04 to 2014-10), mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase (2014-09 to 2014-12), designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase (2015-06 to 2016-06)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail (Answered). contradicted: 'He returned for the Identity & Access Management Uplift' (TS Dynamics CRM ran 2013-04 to 2014-10, so he was on the account, and the answer omits that engagement). Other ranges and role supported.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation and its global payments gateway from August 2009 to June 2012",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "He returned for the I&AM Uplift from September 2014 to December 2014 (implies he was away from JP Morgan before it)",
+    "label": "contradicted",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Start_Date/End_Date (2013-04 to 2014-10, Senior Technology Architecture Manager)"
+   },
+   {
+    "text": "I&AM Uplift ran September 2014 to December 2014",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Asset Management Salesforce cloud integration architecture from June 2015 to June 2016",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Role was Senior Technology Architecture Manager",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Role"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fail (Answered, Honest). contradicted: 'I don't have exact start and end dates' (stories hold them). supported: April 2011 launch, I&AM after 2014 breach.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture on ACCESS Next Generation, launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Later worked on the I&AM Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Situation"
+   },
+   {
+    "text": "No exact start and end dates for his JP Morgan engagements",
+    "label": "contradicted",
+    "source": "Stories hold Start_Date/End_Date for every JPMC engagement: building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase (2009-08 to 2012-06), rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase (2013-04 to 2014-10), mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase (2014-09 to 2014-12), designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase (2015-06 to 2016-06)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fail (Answered). Listed ranges, Jira adoption and role supported; contradicted: implied complete period list omits the 2013-04 to 2014-10 TS Dynamics CRM engagement.",
+  "claims": [
+   {
+    "text": "August 2009 to June 2012: ACCESS Next Generation payment engine and global payments gateway",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "September 2014 to December 2014: I&AM Uplift, including program planning and Jira adoption",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase; driving-agile-adoption-for-jp-morgans-identity-access-management-transformation|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "June 2015 to June 2016: cloud integration architecture for Asset Management's Salesforce rollout",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Role was Senior Technology Architecture Manager",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Role"
+   },
+   {
+    "text": "These are the periods he was at JP Morgan (omits the TS Dynamics CRM engagement)",
+    "label": "contradicted",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Start_Date/End_Date (2013-04 to 2014-10, Senior Technology Architecture Manager)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail (Answered). Listed ranges and role supported; contradicted: implied complete period list omits the 2013-04 to 2014-10 TS Dynamics CRM engagement.",
+  "claims": [
+   {
+    "text": "August 2009 to June 2012: ACCESS Next Generation and the global payments gateway",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "September 2014 to December 2014: I&AM Uplift",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "June 2015 to June 2016: Asset Management cloud integration architecture for the Salesforce rollout",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Role was Senior Technology Architecture Manager",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Role"
+   },
+   {
+    "text": "These are the periods he was at JP Morgan (omits the TS Dynamics CRM engagement)",
+    "label": "contradicted",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Start_Date/End_Date (2013-04 to 2014-10, Senior Technology Architecture Manager)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fail (Answered, Honest). contradicted: 'I don't have his exact engagement start and end dates' (stories hold them). supported: April 2011 launch, I&AM after 2014 breach.",
+  "claims": [
+   {
+    "text": "Worked on ACCESS Next Generation, launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Later on the I&AM Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Situation"
+   },
+   {
+    "text": "His exact engagement start and end dates aren't available; only milestones are confirmed",
+    "label": "contradicted",
+    "source": "Stories hold Start_Date/End_Date for every JPMC engagement: building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase (2009-08 to 2012-06), rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase (2013-04 to 2014-10), mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase (2014-09 to 2014-12), designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase (2015-06 to 2016-06)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fail (Answered). Listed ranges and details supported; contradicted: implied complete period list omits the 2013-04 to 2014-10 TS Dynamics CRM engagement.",
+  "claims": [
+   {
+    "text": "Senior Technology Architecture Manager at JP Morgan Chase through Accenture",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Role/Employer"
+   },
+   {
+    "text": "August 2009 to June 2012: ACCESS Next Generation, including the payment engine and global payments gateway",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "September 2014 to December 2014: Corporate I&AM Uplift, including program planning and Jira adoption",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase; driving-agile-adoption-for-jp-morgans-identity-access-management-transformation|jp-morgan-chase"
+   },
+   {
+    "text": "June 2015 to June 2016: Asset Management cloud integration architecture for Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "These were separate engagements, not one continuous assignment",
+    "label": "supported",
+    "source": "story date ranges"
+   },
+   {
+    "text": "These are the periods he was at JP Morgan (omits the TS Dynamics CRM engagement)",
+    "label": "contradicted",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Start_Date/End_Date (2013-04 to 2014-10, Senior Technology Architecture Manager)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail (Answered). contradicted: 'during two periods' (stories also hold TS Dynamics CRM 2013-04 to 2014-10 and Asset Management 2015-06 to 2016-06). ACCESS and I&AM ranges and role supported.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase during two periods",
+    "label": "contradicted",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Start_Date/End_Date (2013-04 to 2014-10, Senior Technology Architecture Manager); designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase (2015-06 to 2016-06)"
+   },
+   {
+    "text": "August 2009 to June 2012 on ACCESS Next Generation, a corporate banking and payments platform",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Result ('unified global corporate banking portal')"
+   },
+   {
+    "text": "September 2014 to December 2014 on the I&AM Uplift program",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Role was Senior Technology Architecture Manager",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Role"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fail (Answered). Listed ranges and role supported; contradicted: implied complete period list omits the 2013-04 to 2014-10 TS Dynamics CRM engagement.",
+  "claims": [
+   {
+    "text": "August 2009 to June 2012: ACCESS Next Generation, including the payment engine and global payments gateway",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "September 2014 to December 2014: I&AM Uplift following the bank's data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Start_Date/End_Date/Situation"
+   },
+   {
+    "text": "June 2015 to June 2016: Asset Management's Salesforce cloud integration architecture",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Role was Senior Technology Architecture Manager",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Role"
+   },
+   {
+    "text": "These are the periods he was at JP Morgan (omits the TS Dynamics CRM engagement)",
+    "label": "contradicted",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Start_Date/End_Date (2013-04 to 2014-10, Senior Technology Architecture Manager)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fail (Answered, Honest). contradicted: 'I don't have exact start and end dates' (stories hold them). supported: April 2011 launch, I&AM after 2014 breach.",
+  "claims": [
+   {
+    "text": "Worked on ACCESS Next Generation, launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Worked on the I&AM Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Situation"
+   },
+   {
+    "text": "No exact start and end dates for his engagements with JP Morgan Chase",
+    "label": "contradicted",
+    "source": "Stories hold Start_Date/End_Date for every JPMC engagement: building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase (2009-08 to 2012-06), rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase (2013-04 to 2014-10), mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase (2014-09 to 2014-12), designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase (2015-06 to 2016-06)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail (Answered, Honest). contradicted: 'exact engagement start and end dates aren't available' (stories hold them). supported: April 2011 launch, I&AM after 2014 breach.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase as an Accenture consultant on ACCESS Next Generation, launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Worked on the I&AM Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Situation"
+   },
+   {
+    "text": "His exact engagement start and end dates aren't available",
+    "label": "contradicted",
+    "source": "Stories hold Start_Date/End_Date for every JPMC engagement: building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase (2009-08 to 2012-06), rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase (2013-04 to 2014-10), mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase (2014-09 to 2014-12), designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase (2015-06 to 2016-06)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fail (Answered). Listed ranges and details supported; contradicted: implied complete period list omits the 2013-04 to 2014-10 TS Dynamics CRM engagement.",
+  "claims": [
+   {
+    "text": "Senior Technology Architecture Manager at JP Morgan Chase through Accenture",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Role/Employer"
+   },
+   {
+    "text": "August 2009 to June 2012: ACCESS Next Generation, including the payment engine and global payments gateway",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "September 2014 to December 2014: I&AM Uplift following the bank's data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Start_Date/End_Date/Situation"
+   },
+   {
+    "text": "June 2015 to June 2016: cloud integration architecture for Asset Management's Salesforce rollout",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "These were separate engagements, not one continuous assignment",
+    "label": "supported",
+    "source": "story date ranges"
+   },
+   {
+    "text": "These are the periods he was at JP Morgan (omits the TS Dynamics CRM engagement)",
+    "label": "contradicted",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Start_Date/End_Date (2013-04 to 2014-10, Senior Technology Architecture Manager)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fail (Answered). Listed ranges and role supported; contradicted: implied complete period list omits the 2013-04 to 2014-10 TS Dynamics CRM engagement.",
+  "claims": [
+   {
+    "text": "August 2009 to June 2012: ACCESS Next Generation payment engine and global payments gateway",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "September 2014 to December 2014: Corporate I&AM Uplift",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Start_Date/End_Date/Project"
+   },
+   {
+    "text": "June 2015 to June 2016: Asset Management cloud integration architecture for Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Role was Senior Technology Architecture Manager",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Role"
+   },
+   {
+    "text": "These are the periods he was at JP Morgan (omits the TS Dynamics CRM engagement)",
+    "label": "contradicted",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Start_Date/End_Date (2013-04 to 2014-10, Senior Technology Architecture Manager)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

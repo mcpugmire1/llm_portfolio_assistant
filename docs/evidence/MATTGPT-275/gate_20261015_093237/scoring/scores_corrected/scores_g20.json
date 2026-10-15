@@ -1,0 +1,2505 @@
+[
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Turn 1: covers both Fiserv and JP Morgan ACCESS from their stories; all claims supported (Fiserv facts from recovering/agile stories; ACCESS facts from payment engine, gateway, entitlement, consolidation stories); no closing, no quotations.",
+  "claims": [
+   {
+    "text": "Both engagements involved Execution & Delivery work and changes to how teams worked",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Theme; driving-agile-transformation-for-fiservs-card-portal|fiserv Theme"
+   },
+   {
+    "text": "Fiserv: inherited an $8.5M card portal in disaster/recovery mode",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Fiserv: missed deadlines, production quality problems, uncoordinated vendors, stakeholders threatening contract cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Action"
+   },
+   {
+    "text": "ACCESS required custom engineering beyond Bottomline WebSeries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Task"
+   },
+   {
+    "text": "ACCESS consolidated fragmented regional payment systems",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Legacy entitlement changes took days",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Each payment type had distinct formatting, validation, compliance and workflow requirements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Coordinated 45 team members and 3 external vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv 5PSummary"
+   },
+   {
+    "text": "Reset priorities and timelines",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Ran offshore/onshore handoffs at 7 AM and 11 PM",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Replaced a single To Do/Done board with multi-tiered JIRA tracking",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Decomposed a 200-page requirements document into persona-based stories",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Introduced biweekly demos",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Used JIRA audit trails, attached accessibility scans and developer comments as system of record to address PMO/compliance resistance",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Negotiated dedicated stakeholder review windows",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Team moved from 6-month releases to 2-week sprints within 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Led a 40+ blended team on ACCESS",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Spent 70 to 80% of his time embedded at Bottomline Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Worked with enterprise architects, security specialists, bank stakeholders and the vendor on configure vs bespoke boundary",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Task; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Scope included ACH, wire and FX payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payment verification (MAC) and payment-type-specific permissions",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Introduced bulk entitlement changes and a centralized dashboard",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Coordinated migration safeguards with compliance teams",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Directed production incident response and leadership updates",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Fiserv finished 3% under budget, 47/47 acceptance criteria, zero critical defects, avoided $500K penalties",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Entitlement management reduced from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Legacy payment data consolidated without disrupting live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS portal served 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Turn 1: covers both Fiserv and JP Morgan ACCESS from their stories; all claims supported (Fiserv facts from recovering/agile stories; ACCESS facts from payment engine, gateway, entitlement, consolidation stories); no closing, no quotations.",
+  "claims": [
+   {
+    "text": "Execution & Delivery central to both, Org & Working-Model Transformation also part of Fiserv",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Theme; driving-agile-transformation-for-fiservs-card-portal|fiserv Theme"
+   },
+   {
+    "text": "Took over a troubled Fiserv card portal and changed how the team delivered",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action; driving-agile-transformation-for-fiservs-card-portal|fiserv Task"
+   },
+   {
+    "text": "Led custom payment engineering and integration for ACCESS Next Generation, consolidating regional systems into a global corporate banking portal",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "Fiserv $8.5M program missed consecutive deadlines, poor quality, cancellation threats",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person team lacked work visibility",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "3 external vendors operated without coordinated dependencies",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Reset priorities and timelines",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Coordinated payment-processing, fraud-detection and hosting deliverables",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Ran offshore/onshore handoffs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Replaced a 200-page requirements document organized by system modules with persona-based user stories",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation/Action"
+   },
+   {
+    "text": "Used JIRA audit trails, attached accessibility scans and developer comments as system of record",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Sprint demos brought stakeholders into branding, UI and accessibility decisions earlier",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Dedicated review windows negotiated",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "ACCESS challenge: capabilities beyond WebSeries under aggressive delivery timelines",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed 40+ blended team across US, Mumbai and Bangalore; defined onshore/offshore engagement model",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Spent 70 to 80% of time embedded with Bottomline in Portsmouth",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Worked with enterprise architects, security specialists and bank stakeholders on configure vs custom",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Work covered ACH, wire, FX/cross-border, payment security, entitlements, gateway connectivity across 12 countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Coordinated incident root-cause analysis and daily leadership calls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Fiserv 2-week sprints within 3 months, 3% under budget, 47 of 47, zero critical defects",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result; recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 serving 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Entitlement engine reduced administration from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Payments migration completed without disruption to live operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Turn 2: says the stories don't establish which was bigger; names team size (45 vs 40+, open-ended, not settled), budget (Fiserv $8.5M, no ACCESS figure) and reach (different units, not settled) for both engagements accurately; no ranking, so rule 10 and the strict reading are satisfied; all claims supported.",
+  "claims": [
+   {
+    "text": "Fiserv had 45 people",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Matt's JP Morgan Chase ACCESS team had 40+",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Fiserv was an $8.5M program; no comparable ACCESS budget stated",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation; absence of budget across JPM ACCESS stories"
+   },
+   {
+    "text": "Fiserv served 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "ACCESS served 135,000+ corporate, FI, government and municipal clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Turn 2: says the stories don't establish which was bigger; names team size (45 vs 40+, open-ended, not settled), budget (Fiserv $8.5M, no ACCESS figure) and reach (different units, not settled) for both engagements accurately; no ranking, so rule 10 and the strict reading are satisfied; all claims supported.",
+  "claims": [
+   {
+    "text": "Fiserv had 45 people",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Matt managed a 40+ blended team on JP Morgan Chase ACCESS",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Fiserv was an $8.5M program; no comparable ACCESS budget stated",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation; absence of budget across JPM ACCESS stories"
+   },
+   {
+    "text": "Fiserv served 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "ACCESS served 135,000+ corporations, FIs, governments and municipalities across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Turn 1: covers both Fiserv and JP Morgan ACCESS from their stories; all claims supported (Fiserv facts from recovering, agile, DevOps stories; ACCESS facts from payment engine, gateway, consolidation, entitlement stories); no closing, no quotations.",
+  "claims": [
+   {
+    "text": "Both involved Execution & Delivery; Fiserv a delivery recovery, ACCESS custom payment engineering and consolidation into a global portal",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Theme; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Inherited $8.5M white-label card portal roughly 7 months into the engagement",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Portal served 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person team missed consecutive deadlines; production had critical (Sev-1) defects; cancellation threats",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Action"
+   },
+   {
+    "text": "3 external vendors had uncoordinated dependencies; mainframe to API transition",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Reset backlog and timelines, coordinated vendors, established offshore/onshore handoffs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Replaced 6-month waterfall releases with 2-week sprints within 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Decomposed 200-page requirements document into persona-based user stories",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Secured compliance acceptance of JIRA as system of record",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Introduced Git, mandatory code reviews, Hudson CI, JUnit and SonarQube quality gates",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "3% under budget, 47 acceptance criteria, zero critical defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Recovered a release 3 weeks behind, avoiding $500K penalties",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Portal processed $45M in first month with 99.97% uptime",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "ACCESS challenge: extending WebSeries beyond out-of-box capabilities",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "ACCESS served 135,000+ corporate, FI, government, municipal clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed 40+ blended team across US, Mumbai, Bangalore; worked extensively from Bottomline Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Delivered ACH, wire, FX/cross-border, tax-payment modules, MAC security, payment-specific entitlements, reporting and SSO",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway connected payment operations across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Led payments data migration from regional systems without disrupting live operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "Bulk permission changes and role-based administration reduced entitlement management from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Turn 1: covers both Fiserv and JP Morgan ACCESS from their stories; all claims supported (Fiserv facts from recovering, agile stories and the thought-leadership story for the presented ADA manifesto; ACCESS facts from payment engine, gateway, entitlement, consolidation stories); no closing, no quotations.",
+  "claims": [
+   {
+    "text": "Fiserv delivery recovery: $8.5M portal serving 2M+ cardholders across 15 FIs; missed deadlines, poor quality, cancellation threats",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "ACCESS required custom engineering beyond WebSeries: payment modules, security controls, entitlements, integration across regional systems under aggressive timelines",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Became Development Manager roughly 7 months into the engagement",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Task/Situation"
+   },
+   {
+    "text": "Coordinated 45 team members and 3 vendors covering payment processing, fraud detection, hosting",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv 5PSummary/Action"
+   },
+   {
+    "text": "Traveled to Omaha Monday through Thursday, ran 7 AM and 11 PM transition calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Reset priorities and resolved cross-vendor dependencies",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Replaced 200-page module-based requirements with persona-based user stories; 6-month cycles to 2-week sprints",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Sprint demos brought branding and accessibility decisions forward; JIRA audit trails addressed PMO/compliance resistance",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Wrote and presented the accessibility manifesto that became the portal standard",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients Action/Performance; delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Technology Delivery Lead for a 40+ blended team across Accenture and the bank",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "70 to 80% embedded with Bottomline in Portsmouth, defining configure vs bespoke boundary",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Worked with enterprise architects, security specialists, compliance teams and bank stakeholders on ACH, wire, FX, payment verification, role-based permissions and migration",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Task; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway connected payment channels across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Entitlement administration dropped from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Fiserv 3% under budget, 47/47, zero critical defects, avoided $500K",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "ACCESS launched April 2011, consolidating regional systems into portal for 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Payments migration completed without disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Turn 1: covers both Fiserv and JP Morgan ACCESS from their stories; all claims supported (Fiserv facts from recovering, agile, DevOps stories; ACCESS facts from payment engine, gateway, entitlement stories); no closing, no quotations.",
+  "claims": [
+   {
+    "text": "Both involved Execution & Delivery",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Theme; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Theme"
+   },
+   {
+    "text": "Took over $8.5M portal roughly seven months into a troubled engagement: missed deadlines, production quality issues, cancellation threats",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Action"
+   },
+   {
+    "text": "ACCESS Next Generation required custom payment engineering beyond WebSeries under aggressive timelines",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "45-person team supported 2M+ cardholders across 15 FIs, 3 external vendors, mainframe-to-API transition",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Reset backlog and timelines, coordinated vendor dependencies",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "6-month release cycles to 2-week sprints within 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Replaced 200-page requirements document with persona-based user stories; sprint demos caught branding and accessibility issues early",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "Replaced SVN with Git, required code reviews and unit tests, introduced Maven, Hudson and SonarQube",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Technology Delivery Lead for 40+ blended team across US, Mumbai, Bangalore; 70 to 80% embedded with Bottomline in Portsmouth",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Delivered ACH, wire, FX/cross-border, tax-payment capabilities, payment-verification security and payment-type-specific entitlements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway handling message transformation, protocol translation and routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "Bulk changes across users, accounts and products; entitlement management days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Fiserv 3% under budget, 47/47, zero critical defects; recovered delayed release avoiding $500K",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 consolidating regional systems into unified portal for 135,000+ clients across 180+ countries; gateway 12 countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Turn 2: says the stories don't establish which was bigger; names team size (45 vs 40+, open-ended, not settled), budget (Fiserv $8.5M, no ACCESS figure) and reach (different units, not settled) for both engagements accurately; no ranking, so rule 10 and the strict reading are satisfied; all claims supported.",
+  "claims": [
+   {
+    "text": "Matt coordinated a 45-person team at Fiserv",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Managed a 40+ blended team on JP Morgan ACCESS",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Fiserv was an $8.5M program; no comparable budget given for ACCESS",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation; absence of budget across JPM ACCESS stories"
+   },
+   {
+    "text": "Fiserv served 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "ACCESS served 135,000+ corporate, FI, government, municipal clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Turn 2: says the stories don't establish which was bigger; names team size (45 vs 40+, open-ended, not settled), budget (Fiserv $8.5M, no ACCESS figure) and reach (different units, not settled) for both engagements accurately; no ranking, so rule 10 and the strict reading are satisfied; all claims supported.",
+  "claims": [
+   {
+    "text": "Matt coordinated 45 team members at Fiserv",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "A 40+ blended team on JP Morgan Chase ACCESS",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Fiserv was an $8.5M program; no comparable ACCESS budget",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation; absence of budget across JPM ACCESS stories"
+   },
+   {
+    "text": "Fiserv platform reach: 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "ACCESS platform reach: 135,000+ institutional clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 6,
+  "turn": 2,
+  "label": "C",
+  "pass": false,
+  "reason": "Turn 2 fail: unsupported 'ACCESS was bigger in geographic reach and platform scope' ranks ACCESS above Fiserv on a measure only one side has (rule 10: geographic reach ranking is unsupported unless the answer says the stories don't establish it). Other figures supported.",
+  "claims": [
+   {
+    "text": "JP Morgan Chase ACCESS was bigger in geographic reach and platform scope",
+    "label": "unsupported",
+    "source": "no story establishes ACCESS as bigger (Fiserv has no geographic reach figure); Section 6 rule 10"
+   },
+   {
+    "text": "Teams Matt managed were similarly sized (40+ vs 45)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task; driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "ACCESS served 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Led 40+ blended team delivering payment modules, security, entitlements, integrations",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Payments gateway supported 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Fiserv portal served 2M+ cardholders across 15 FIs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Coordinated 45-person team and 3 vendors on $8.5M program",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv 5PSummary"
+   },
+   {
+    "text": "Processed $45M in transactions in first month",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "No ACCESS budget in the stories",
+    "label": "supported",
+    "source": "absence across JPM ACCESS stories"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Turn 1: covers both Fiserv and JP Morgan ACCESS from their stories; all claims supported (Fiserv facts from recovering, agile, DevOps stories; ACCESS facts from payment engine, gateway, entitlement, consolidation, multi-jurisdictional compliance stories); no closing, no quotations.",
+  "claims": [
+   {
+    "text": "Execution & Delivery central to both; Fiserv recovery, ACCESS bespoke payments and consolidation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Theme; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Theme"
+   },
+   {
+    "text": "$8.5M initiative missed deadlines; production payment processing had critical (Sev-1) defects; cancellation threats",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Action"
+   },
+   {
+    "text": "45-person team worked from 200-page requirements documents with 6-month release cycles",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "First Data transitioning from VisionPLUS 350 mainframe to SOA-based API architecture",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Reset backlog and timelines, coordinated 3 external vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Managed integration layer connecting legacy COBOL processing to Java EE/Spring portal",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Replaced module-based requirements with persona-based user stories; introduced 2-week sprints and demos",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "JIRA held audit trails, accessibility scans and developer comments instead of static compliance documents",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Replaced SVN with Git, mandatory code reviews, automated builds, unit tests, quality gates",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "3% under budget, 47 acceptance criteria, zero critical defects; recovered release avoided $500K",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "WebSeries could not supply required payment, security and administrative capabilities out of the box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Led 40+ blended team working extensively from Bottomline offices defining configure vs bespoke",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Delivered ACH, wire, FX/cross-border, tax-payment modules, payment-integrity verification, payment-type-specific permissions",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Grouping capability for bulk updates across users, accounts and products; days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Gateway integration across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Led legacy payment-data migration without disrupting live operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "Translated regional regulatory requirements into data-visibility and access controls; launches sequenced by regulatory readiness rather than big bang",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 serving 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Turn 1: covers both Fiserv and JP Morgan ACCESS from their stories; all claims supported (Fiserv facts from recovering, agile, DevOps stories; ACCESS facts from payment engine, gateway, entitlement, consolidation stories); no closing, no quotations.",
+  "claims": [
+   {
+    "text": "Fiserv: took over a delivery recovery; JPMC: led custom payment engineering and legacy consolidation for ACCESS",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task"
+   },
+   {
+    "text": "Both involved live payment systems and globally dispersed teams",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action (live payment processing); driving-agile-transformation-for-fiservs-card-portal|fiserv Action; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Fiserv $8.5M portal missed deadlines, poor quality, cancellation threats",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person team lacked visibility into work",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Source-control conflicts halted builds; deployments frequently required hotfixes or rollbacks",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "WebSeries could not meet payment, security and workflow requirements out of the box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Corporate treasurers used fragmented regional systems",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Client administrators spent days configuring individual permissions",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "Reset backlog and timelines, coordinated 3 vendors, 6-month cycles to 2-week sprints within 3 months",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action; driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Persona-based user stories; sprint demos caught branding and accessibility issues early",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "Git, mandatory code reviews, unit tests and quality gates replaced merge conflicts and uncontrolled releases",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "Engineers gained predictable builds; distributed teams gained explicit handoffs and real-time work visibility",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Result (predictable releases, build bottleneck eliminated); driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result (follow-the-sun handoffs, real-time visibility)"
+   },
+   {
+    "text": "Managed 40+ blended team, worked directly with Bottomline on configure vs bespoke",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Delivered ACH, wire, cross-border modules, security controls, reporting, gateway across 12 countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Bulk permission changes reduced entitlement work from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Treasurers gained single entry point instead of separate regional logins",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Legacy data migrated without disrupting live payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "Fiserv 3% under budget, 47 of 47, zero critical defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 for 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Turn 1: covers both Fiserv and JP Morgan ACCESS from their stories; all claims supported (Fiserv facts from recovering, agile, DevOps stories; ACCESS facts from payment engine, gateway, entitlement, consolidation stories); no closing, no quotations.",
+  "claims": [
+   {
+    "text": "Execution & Delivery runs through both; Fiserv recovery and changing how teams worked, ACCESS custom payment engineering and consolidation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Theme; driving-agile-transformation-for-fiservs-card-portal|fiserv Theme; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Theme"
+   },
+   {
+    "text": "Inherited $8.5M portal roughly 7 months into a troubled engagement; 45-person team missed deadlines, poor quality, cancellation threats",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "ACCESS needed payment modules, security controls and integration beyond WebSeries for 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional payment systems had different data models, entitlement structures and compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Development Manager; coordinated 3 vendors; managed integration between mainframe and Java EE/Spring portal",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Task/Action"
+   },
+   {
+    "text": "Waterfall/6-month cycles replaced with 2-week sprints, persona-based stories and sprint demos",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "SVN to Git, senior-developer code reviews, unit tests, Maven, Artifactory, Hudson, SonarQube",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Delivery stabilized within 3 months",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Technology Delivery Lead, 40+ blended team, 70 to 80% embedded at Bottomline",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Delivered ACH, wire, FX/cross-border, tax-payment, MAC verification, payment-specific permissions, global reporting",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed payments gateway across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Introduced bulk entitlement administration",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Led payments-workstream data migration while maintaining live operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task"
+   },
+   {
+    "text": "Fiserv 3% under budget saving $255K, 47/47, zero critical defects; avoided $500K; $45M first month at 99.97% uptime",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 consolidating regional systems; entitlement days to minutes; migration without disruption",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Turn 2: says the stories don't establish which was bigger; names team size (45 vs 40+, open-ended, not settled), budget (Fiserv $8.5M, no ACCESS figure) and reach (different units, not settled) for both engagements accurately; no ranking, so rule 10 and the strict reading are satisfied; all claims supported.",
+  "claims": [
+   {
+    "text": "By team size Fiserv had 45 people",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "JP Morgan Chase ACCESS had 40+",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "By budget Fiserv was an $8.5M program; no comparable ACCESS budget",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation; absence of budget across JPM ACCESS stories"
+   },
+   {
+    "text": "Fiserv reach: 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "ACCESS reach: 135,000+ corporate, FI, government, municipal clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Turn 2: says the stories don't establish which was bigger; names team size (45 vs 40+, open-ended, not settled), budget (Fiserv $8.5M, no ACCESS figure) and reach (different units, not settled) for both engagements accurately; no ranking, so rule 10 and the strict reading are satisfied; all claims supported.",
+  "claims": [
+   {
+    "text": "Fiserv had an $8.5M budget; no ACCESS budget is stated",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation; absence of budget across JPM ACCESS stories"
+   },
+   {
+    "text": "Matt coordinated 45 people at Fiserv",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "versus 40+ at JP Morgan Chase",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Fiserv audience: 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "ACCESS audience: 135,000+ corporate, FI, government, municipal clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 7,
+  "turn": 2,
+  "label": "C",
+  "pass": false,
+  "reason": "Turn 2 fail: unsupported 'Fiserv had the larger stated team' (strict reading) and unsupported 'ACCESS had the broader global platform scope' (rule 10). Other figures supported.",
+  "claims": [
+   {
+    "text": "JP Morgan ACCESS had the broader global platform scope (ranked bigger)",
+    "label": "unsupported",
+    "source": "no story establishes it; Section 6 rule 10 (geographic reach ranking)"
+   },
+   {
+    "text": "Fiserv had the larger stated team",
+    "label": "unsupported",
+    "source": "Section 5 strict reading c12 t2 (45 vs 40+ does not establish larger)"
+   },
+   {
+    "text": "ACCESS served 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Led 40+ person blended team delivering payment modules, security, entitlements, gateway across 12 countries, consolidation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Fiserv $8.5M, 14-month program serving 2M+ cardholders across 15 FIs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Managed 45 team members and coordinated 3 vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv 5PSummary"
+   },
+   {
+    "text": "Took over delivery recovery roughly halfway through the engagement (7 of 14 months)",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "No ACCESS budget in the stories",
+    "label": "supported",
+    "source": "absence across JPM ACCESS stories"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 2,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Turn 1: covers both Fiserv and JP Morgan ACCESS from their stories; all claims supported (Fiserv facts from recovering, agile, DevOps stories; ACCESS facts from payment engine, gateway, entitlement, consolidation stories); no closing, no quotations.",
+  "claims": [
+   {
+    "text": "Fiserv delivery recovery: $8.5M portal missed consecutive deadlines, poor quality, cancellation threats",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "ACCESS required custom engineering beyond WebSeries plus consolidation of regional payment systems",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Development Manager at Fiserv; Technology Delivery Lead for ACCESS payments work",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Task; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Decomposed 200-page requirements document into persona-based stories; tiered JIRA workflows replaced To Do/Done board; sprint demos",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Retained steering committee reporting; JIRA audit trails, accessibility scans, developer comments satisfied PMO/compliance",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "SVN to Git, senior-developer reviews, unit tests, Maven, Artifactory, Hudson, SonarQube",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "6-month cycles to 2-week sprints within 3 months for the 45-person team",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Managed 40+ blended team, 70 to 80% embedded at Bottomline offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Decided where WebSeries configuration ended and bespoke engineering began",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Delivered ACH, wire, FX/cross-border modules, payment-integrity verification, payment-type-specific permissions",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Role-based profiles, bulk changes and centralized dashboard reduced entitlement administration from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Led payments data migration with verification safeguards and compliance dashboards without disrupting live operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Fiserv 3% under budget, 47/47, zero critical defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "ACCESS launched April 2011, portal for 135,000+ clients across 180+ countries; gateway across 12 countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Turn 1: covers both Fiserv and JP Morgan ACCESS from their stories; all claims supported (Fiserv facts from recovering, agile, DevOps stories; ACCESS facts from payment engine, gateway, entitlement, consolidation stories); no closing, no quotations.",
+  "claims": [
+   {
+    "text": "Delivery recovery at Fiserv, custom payment engineering and consolidation at ACCESS, both Execution & Delivery",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Theme; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Theme"
+   },
+   {
+    "text": "$8.5M portal with missed deadlines, poor quality, cancellation threats",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person team lacked visibility; vendors had uncoordinated dependencies; source-control conflicts halted builds",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation; recovering-fiservs-85m-white-label-card-portal|fiserv Situation; modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "ACCESS: building beyond WebSeries for payment modules, security controls, entitlement workflows for 135,000+ clients across 180+ countries; consolidating regional systems",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Took over development management; persona-based stories, 2-week sprints and demos, offshore/onshore handoffs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Task/Action; driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "SVN to Git, senior-developer code reviews, unit tests, automated builds and quality gates",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Engineers no longer faced SVN merge conflicts; stakeholders reviewed branding/accessibility before end of 6-month cycle",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Result; driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Led 40+ blended team, embedded with Bottomline",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Delivered ACH, wire, FX/cross-border, payment verification, granular permissions, gateway across 12 countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Bulk permission changes and centralized dashboard; days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Treasurers gained single entry point instead of separate regional systems",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Led payments data migration without disrupting live operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "Fiserv 47 acceptance criteria, zero critical defects, 3% under budget, avoided $500K",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 consolidating regional systems into unified global corporate banking portal",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Turn 1: covers both Fiserv and JP Morgan ACCESS from their stories; all claims supported (Fiserv facts from recovering, agile, DevOps stories; ACCESS facts from payment engine, entitlement, consolidation stories; theme names under rule 4); no closing, no quotations.",
+  "claims": [
+   {
+    "text": "Both involved Execution & Delivery and Risk & Responsible Tech; Fiserv also changing how the team worked",
+    "label": "supported",
+    "source": "rule 4 theme names: compliance/risk work in delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv and navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase; driving-agile-transformation-for-fiservs-card-portal|fiserv Theme"
+   },
+   {
+    "text": "$8.5M portal, missed deadlines, poor quality, cancellation threats; 2M+ cardholders across 15 FIs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person team across India, the Philippines, Ireland and the U.S. (Omaha onshore)",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action; modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "3 vendors and mainframe-to-API transition",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "ACCESS: building beyond WebSeries while consolidating regional treasury systems; 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Decomposed 200-page requirements doc, multi-tiered JIRA workflows, follow-the-sun handoffs",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "6-month cycles to 2-week sprints within 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "SVN to Git, senior-developer code reviews, unit tests, Maven, Artifactory, Hudson, SonarQube, JUnit within SOX constraints",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Action/Task"
+   },
+   {
+    "text": "Led 40+ blended team, managed configure vs bespoke boundary",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Delivered ACH, wire, FX/cross-border, tax-payment, MAC verification, payment-type entitlements, global reporting, SSO",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Redesigned entitlement administration with RBAC and bulk changes; days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Led payments-workstream migration preserving compliance traceability and live processing",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "Fiserv 3% under budget, 47/47, zero critical defects, avoided $500K, $3M contract extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 consolidating regional systems; migration without disruption",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Turn 2: says the stories don't establish which was bigger; names team size (45 vs 40+, open-ended, not settled), budget (Fiserv $8.5M, no ACCESS figure) and reach (different units, not settled) for both engagements accurately; no ranking, so rule 10 and the strict reading are satisfied; all claims supported.",
+  "claims": [
+   {
+    "text": "By team size Fiserv had 45 people",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "JP Morgan Chase ACCESS had 40+",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Fiserv was an $8.5M program; no comparable ACCESS budget",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation; absence of budget across JPM ACCESS stories"
+   },
+   {
+    "text": "Fiserv supported 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "ACCESS served 135,000+ corporations, FIs, governments, municipalities across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Turn 2 fail: unsupported 'Fiserv had the larger stated team' (strict reading) and unsupported 'ACCESS was bigger in global reach and scope' (rule 10). Other figures supported.",
+  "claims": [
+   {
+    "text": "JP Morgan ACCESS was bigger in global reach and scope",
+    "label": "unsupported",
+    "source": "no story establishes it; Section 6 rule 10 (geographic reach ranking)"
+   },
+   {
+    "text": "Fiserv had the larger stated team / slightly larger stated team",
+    "label": "unsupported",
+    "source": "Section 5 strict reading c12 t2"
+   },
+   {
+    "text": "ACCESS served 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Led 40+ person blended team on payment modules, security, entitlements, gateway across 12 countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Covered migration from regional systems and jurisdiction-specific compliance across APAC, EMEA, Americas",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task; navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Task"
+   },
+   {
+    "text": "Treasurers got single entry point instead of separate local logins",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Fiserv $8.5M, 14-month portal serving 2M+ cardholders across 15 FIs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Coordinated 45 team members and 3 vendors; took over roughly 7 months in; mainframe to API",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/5PSummary"
+   },
+   {
+    "text": "No comparable ACCESS budget",
+    "label": "supported",
+    "source": "absence across JPM ACCESS stories"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 2,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 8,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Turn 2: says the stories don't establish which was bigger; names team size (45 vs 40+, open-ended, not settled), budget (Fiserv $8.5M, no ACCESS figure) and reach (different units, not settled) for both engagements accurately; no ranking, so rule 10 and the strict reading are satisfied; all claims supported.",
+  "claims": [
+   {
+    "text": "Fiserv had an $8.5M program budget; none given for ACCESS",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation; absence of budget across JPM ACCESS stories"
+   },
+   {
+    "text": "Matt coordinated 45 people at Fiserv",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "A 40+ blended team on ACCESS",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Fiserv supported 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "ACCESS served 135,000+ corporations, FIs, governments, municipalities across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Turn 1: covers both Fiserv and JP Morgan ACCESS from their stories; all claims supported (Fiserv facts from recovering, agile stories; ACCESS facts from payment engine, gateway, entitlement, consolidation stories); no closing, no quotations.",
+  "claims": [
+   {
+    "text": "Both involved Execution & Delivery and banking platform modernization",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Theme/Era; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Era"
+   },
+   {
+    "text": "Fiserv portal in recovery mode: missed deadlines, poor quality, uncoordinated vendors, cancellation threats",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Action"
+   },
+   {
+    "text": "ACCESS required custom payment, security and administration capabilities beyond WebSeries while consolidating regional systems without disrupting live payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "Managed 45-person team and 3 vendors through VisionPLUS 350 to SOA transition",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv 5PSummary"
+   },
+   {
+    "text": "Replaced 200-page module-organized requirements with persona-based stories; 6-month to 2-week sprints; demos for branding/accessibility",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "JIRA audit trails, accessibility scans, developer comments instead of Word documents; PMO and compliance accepted JIRA as system of record",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "Led 40+ blended team embedded with Bottomline; defined configure vs bespoke boundary",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Delivered ACH, wire, FX/cross-border, tax modules, payment verification, payment-type-specific permissions",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Grouping capability for permissions across users, accounts, products from a single screen",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed payments gateway for message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/5PSummary"
+   },
+   {
+    "text": "Led payments data migration preserving regulatory traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Fiserv 3% under $8.5M budget, 47 of 47, zero critical defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 for 135,000+ clients across 180+ countries; entitlement days to minutes; migration without disruption",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Turn 1: covers both Fiserv and JP Morgan ACCESS from their stories; all claims supported (Fiserv facts from recovering, agile stories; ACCESS facts from payment engine, gateway, entitlement, consolidation stories); no closing, no quotations.",
+  "claims": [
+   {
+    "text": "Fiserv recovery: $8.5M portal missed consecutive deadlines, poor quality, cancellation threats",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person global team lacked visibility; 3 vendors uncoordinated",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation; recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "ACCESS global platform build and consolidation of regional systems beyond WebSeries offering",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Development Manager roughly 7 months into the engagement",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Task"
+   },
+   {
+    "text": "Reset priorities and timelines, coordinated payment-processing, fraud-detection, hosting vendors, ran 7 AM and 11 PM calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Persona-based stories instead of 200-page module-organized BRD; biweekly demos",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Negotiated review windows; JIRA as system of record with audit trails and accessibility scans",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "6-month cycles to 2-week sprints within 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Technology Delivery Lead for 40+ blended team across Accenture and JP Morgan; defined onshore/offshore model",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "70 to 80% embedded with Bottomline in Portsmouth, coordinating with stakeholders in Chicago and NY/NJ",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Worked with enterprise architects and security specialists on configure vs custom",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Payment modules, MAC security, payment-specific permissions, gateway across 12 countries, legacy-data migration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task"
+   },
+   {
+    "text": "Bulk permission changes replaced per-user administration; days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Fiserv 3% under budget, 47/47, zero critical defects, avoided $500K, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "ACCESS launched April 2011, portal for 135,000+ clients across 180+ countries; migration without disruption",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Turn 1: covers both Fiserv and JP Morgan ACCESS from their stories; all claims supported (Fiserv facts from recovering, agile stories; ACCESS facts from payment engine, gateway, entitlement stories); no closing, no quotations.",
+  "claims": [
+   {
+    "text": "Execution & Delivery central to both",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Theme; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Theme"
+   },
+   {
+    "text": "Took over troubled $8.5M portal roughly seven months in; slipped deadlines, poor quality, cancellation threats",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "ACCESS Next Generation needed custom payment, security, administration capabilities beyond WebSeries under aggressive timelines",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Coordinated 45 globally dispersed team members and 3 vendors (payment processing, fraud detection, hosting)",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation/Action"
+   },
+   {
+    "text": "Traveled Monday-Thursday to Omaha, ran 7 AM and 11 PM transition calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Persona-based stories, multi-tiered JIRA board, bi-weekly demos",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Negotiated review windows; JIRA audit trails, accessibility scans, developer comments as system of record",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Led 40+ blended team, 70 to 80% embedded with Bottomline in Portsmouth, defined onshore-offshore model",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Worked with enterprise architects, security specialists, bank stakeholders and vendor on configure vs bespoke",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire and FX modules; payment verification; gateway across 12 countries; role-based entitlements with bulk changes",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action; overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Directed production incident response and daily leadership communications",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Fiserv 2-week sprints within 3 months, 3% under budget, 47 acceptance criteria, zero critical defects, avoided $500K",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result; recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 for 135,000+ clients across 180+ countries; entitlement days to minutes",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Turn 2: says the stories don't establish which was bigger; names team size (45 vs 40+, open-ended, not settled), budget (Fiserv $8.5M, no ACCESS figure) and reach (different units, not settled) for both engagements accurately; no ranking, so rule 10 and the strict reading are satisfied; all claims supported.",
+  "claims": [
+   {
+    "text": "Matt managed a 45-person team at Fiserv",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "A 40+ blended team on JP Morgan Chase ACCESS",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Fiserv had an $8.5M program budget; no ACCESS budget given",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation; absence of budget across JPM ACCESS stories"
+   },
+   {
+    "text": "Fiserv served 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "ACCESS served 135,000+ corporations, FIs, governments, municipalities across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Turn 2: says the stories don't establish which was bigger; names team size (45 vs 40+, open-ended, not settled), budget (Fiserv $8.5M, no ACCESS figure) and reach (different units, not settled) for both engagements accurately; no ranking, so rule 10 and the strict reading are satisfied; all claims supported.",
+  "claims": [
+   {
+    "text": "By team size Fiserv had 45 people",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "JP Morgan ACCESS had 40+",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Fiserv was an $8.5M program; no corresponding ACCESS budget figure",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation; absence of budget across JPM ACCESS stories"
+   },
+   {
+    "text": "Fiserv served 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "JP Morgan ACCESS served 135,000+ corporations, FIs, governments, municipalities across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 9,
+  "turn": 2,
+  "label": "C",
+  "pass": false,
+  "reason": "Turn 2 fail: unsupported 'Fiserv had the larger stated team' (strict reading) and unsupported 'ACCESS was bigger in geographic reach and breadth of platform scope' (rule 10). Other figures supported.",
+  "claims": [
+   {
+    "text": "JP Morgan Chase ACCESS was bigger in geographic reach and breadth of platform scope",
+    "label": "unsupported",
+    "source": "no story establishes it; Section 6 rule 10 (geographic reach ranking)"
+   },
+   {
+    "text": "Fiserv had the larger stated team: 45 people",
+    "label": "unsupported",
+    "source": "Section 5 strict reading c12 t2"
+   },
+   {
+    "text": "ACCESS served 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Led 40+ person blended team; gateway connecting rails across 12 countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Fiserv 3 external vendors; $8.5M portal serving 2M+ cardholders across 15 FIs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "No ACCESS budget figure in the stories",
+    "label": "supported",
+    "source": "absence across JPM ACCESS stories"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 2,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Turn 1: covers both Fiserv and JP Morgan ACCESS from their stories; all claims supported (Fiserv facts from recovering, agile, DevOps stories; ACCESS facts from payment engine, gateway, entitlement, consolidation stories); no closing, no quotations.",
+  "claims": [
+   {
+    "text": "Both involved Execution & Delivery and legacy payment systems",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Theme/Situation (VisionPLUS mainframe); consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Fiserv troubled portal: missed deadlines, poor quality, cancellation threats",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Led custom payment engineering for ACCESS because WebSeries could not meet payment, security and administration requirements out of the box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Task; overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "45-person dispersed team had no visibility; requirements in 200-page BRD; SVN merge conflicts halted builds",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation; modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Persona-based stories, sprint demos, follow-the-sun handoffs, dedicated review windows",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "6-month cycles to 2-week sprints within 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "SVN to Git, senior-developer reviews, unit tests, Hudson CI, SonarQube, Maven, Artifactory",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Developers no longer faced SVN conflicts; stakeholders caught branding/accessibility issues early",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Result; driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "$8.5M program 3% under budget, 47/47, zero critical defects; recovered release avoided $500K",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Managed 40+ blended team and worked directly with Bottomline in Portsmouth",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Delivered ACH, wire, FX/cross-border, payment verification, payment-specific permissions; gateway across 12 countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Corporate administrators had spent days configuring permissions individually; RBAC, bulk grouping, dashboard cut it to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Treasurers gained single entry point with contextual payment guidance and unified reporting",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Led payments data migration without disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 for 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Turn 1: covers both Fiserv and JP Morgan ACCESS from their stories; all claims supported (Fiserv facts from recovering, agile, DevOps stories; ACCESS facts from payment engine, gateway, entitlement, consolidation stories); no closing, no quotations.",
+  "claims": [
+   {
+    "text": "Both involved Execution & Delivery and changes to how teams worked",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Theme; driving-agile-transformation-for-fiservs-card-portal|fiserv Theme"
+   },
+   {
+    "text": "Inherited $8.5M portal roughly 7 months in: missed deadlines, poor quality, uncoordinated vendors, cancellation threats",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "ACCESS required capabilities beyond WebSeries while consolidating regional systems under aggressive timelines",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Development Manager; moved 45-person team from 6-month waterfall to 2-week sprints; persona-based stories",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Task; driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Tracked 47 acceptance criteria as JIRA Epics",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Early demos for branding/accessibility; audit trails and accessibility scans addressed PMO/compliance resistance",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Coordinated 3 vendors, ran offshore/onshore handoffs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Replaced SVN conflicts and manual releases with Git, mandatory reviews, Maven, Hudson CI, SonarQube, JUnit",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation/Action/Purpose"
+   },
+   {
+    "text": "Technology Delivery Lead for 40+ blended team, 70 to 80% embedded with Bottomline",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed build-versus-configure boundary",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border modules, payment verification, payment-type-specific permissions",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway message transformation and routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Bulk grouping and role-based profiles; days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Payments data migration with compliance traceability and uninterrupted processing",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "Fiserv stabilized within 3 months; 3% under budget, 47 of 47, zero critical defects, avoided $500K",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 as unified global corporate banking portal for 135,000+ clients across 180+ countries; gateway 12 countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Turn 1: covers both Fiserv and JP Morgan ACCESS from their stories; all claims supported (Fiserv facts from recovering, agile stories; ACCESS facts from payment engine, gateway, entitlement, consolidation stories); no closing, no quotations.",
+  "claims": [
+   {
+    "text": "Fiserv troubled-program recovery; ACCESS global payments build and legacy consolidation; both Execution & Delivery and changes to how distributed teams worked",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Theme; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task (onshore-offshore model); driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Took over $8.5M portal roughly 7 months in; 45-person team missed deadlines, poor quality, cancellation threats",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "ACCESS: capabilities beyond WebSeries while consolidating regional systems; bespoke modules, security, entitlements, connectivity across 12 countries, aggressive timelines",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Reset backlog and timelines, coordinated 3 vendors, offshore/onshore handoffs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Multi-tiered JIRA workflows, 200-page doc decomposed into persona-based stories, demos every 2 weeks",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Retained steering committee reporting while adding sprint-level visibility",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Demonstrated JIRA audit trails and accessibility scans to PMO/compliance; negotiated review windows",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Managed 40+ blended team across US, Mumbai, Bangalore; 70 to 80% embedded with Bottomline in Portsmouth",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Worked with enterprise architects, security specialists, bank stakeholders on configure vs custom",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX modules, payments gateway, payment-type-specific permissions, legacy-data migration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task"
+   },
+   {
+    "text": "Directed production incident response and stakeholder updates",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Fiserv 3% under budget, 47 of 47, zero critical defects; avoided $500K",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "ACCESS launched April 2011; gateway 12 countries; entitlement days to minutes; migration without disruption; 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result; overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Turn 2: says the stories don't establish which was bigger; names team size (45 vs 40+, open-ended, not settled), budget (Fiserv $8.5M, no ACCESS figure) and reach (different units, not settled) for both engagements accurately; no ranking, so rule 10 and the strict reading are satisfied; all claims supported.",
+  "claims": [
+   {
+    "text": "For team size Fiserv had 45 people",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Matt managed a 40+ person blended team on JP Morgan Chase ACCESS",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Fiserv was an $8.5M program; ACCESS stories give no comparable budget",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation; absence of budget across JPM ACCESS stories"
+   },
+   {
+    "text": "Fiserv served 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "ACCESS served 135,000+ corporations, FIs, governments, municipalities across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Turn 2 fail: unsupported 'ACCESS had the broader global platform scope' / 'broader geographic and payment-platform scope' ranks ACCESS above Fiserv on reach that only one side has (rule 10). Team-size and budget handling were correct.",
+  "claims": [
+   {
+    "text": "JP Morgan Chase ACCESS had the broader global platform scope / broader geographic and payment-platform scope (ranked bigger)",
+    "label": "unsupported",
+    "source": "no story establishes it; Section 6 rule 10 (geographic reach ranking)"
+   },
+   {
+    "text": "Team sizes comparable; 45 vs 40+ do not establish a team-size winner",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACCESS served 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Work covered bespoke payment modules, security, entitlements, reporting, integration with treasury functions (SSO)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway connected payment operations across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Fiserv 14-month $8.5M program, 2M+ cardholders across 15 FIs, 3 vendors (payment processing, fraud detection, hosting)",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Portal processed $45M in first month",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "45-person globally dispersed team; 40+ blended Accenture/JPMC team across US, Mumbai, Bangalore",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "No ACCESS budget available",
+    "label": "supported",
+    "source": "absence across JPM ACCESS stories"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c12",
+  "run": 10,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Turn 2: says the stories don't establish which was bigger; names team size (45 vs 40+, open-ended, not settled), budget (Fiserv $8.5M, no ACCESS figure) and reach (different units, not settled) for both engagements accurately; no ranking, so rule 10 and the strict reading are satisfied; all claims supported.",
+  "claims": [
+   {
+    "text": "Matt coordinated a 45-person team at Fiserv",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Managed a 40+ blended team on JP Morgan Chase ACCESS",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "The Fiserv program had an $8.5M budget; ACCESS stories give no comparable budget",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation; absence of budget across JPM ACCESS stories"
+   },
+   {
+    "text": "Fiserv served 2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "ACCESS served 135,000+ corporations, FIs, governments, municipalities across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

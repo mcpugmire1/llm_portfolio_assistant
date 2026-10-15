@@ -1,0 +1,1528 @@
+[
+ {
+  "case": "x3",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Passes extras rule 3: no trading-platform claim and names Cendian webMethods B2B Trading Networks as document exchange, not financial trading (supported: Cendian story Action/Competencies). acknowledges_missing: 'I haven't found evidence that Matt worked on securities trading platforms'. All ACCESS claims supported by payment-engine story: TDL, treasury services and cash management portal, WebSeries gap, FX module, SSO, trade finance groundwork, 40+ team, April 2011, 135,000+ clients, 180+ countries. Quote 'Trading' matches 'webMethods B2B Trading Networks'. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes global payments, FX/cross-border payments and trade finance integration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "At JP Morgan Chase Matt was Technology Delivery Lead for the payment engine behind ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Title"
+   },
+   {
+    "text": "ACCESS Next Generation is a corporate digital banking portal for treasury services and cash management",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "The bank needed capabilities beyond Bottomline Technologies' WebSeries platform",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Each payment type had distinct formatting, validation, compliance and workflow requirements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Built the FX/cross-border payment module integrating with the bank's foreign exchange engine, with embedded rate visibility and connectivity to international clearing systems",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Architected Single Sign-On connecting cash, trade and investment operations",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Drove the groundwork for trade finance integration, visibility of a trade transaction from initiation to final payment",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "That was treasury and trade finance work, not securities trade execution",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; stated fact (ACCESS not a trading platform)"
+   },
+   {
+    "text": "Managed a blended team of 40+ across Accenture and JP Morgan Chase",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Delivered bespoke payment modules, payment-type-specific entitlement controls and payment verification security",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action (MAC layer, entitlements)"
+   },
+   {
+    "text": "ACCESS launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS serves 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Matt worked with webMethods B2B Trading Networks at Cendian Chemical Logistics",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action/Competencies"
+   },
+   {
+    "text": "That system exchanged shipment, order and invoice documents with logistics partners rather than executing financial trades",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation/Action; stated fact (Cendian B2B Trading Networks is EDI document exchange)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x3",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails extras rule 3: does not name Cendian's webMethods B2B Trading Networks work. Otherwise acknowledges_missing ('Trading platforms are not on record in Matt's stories') and all claims supported (payment engine and gateway stories: TDL, 40+ team, ACH/wire/FX/tax modules, FX module, SSO, trade finance, April 2011, 12 countries, single entry point).",
+  "claims": [
+   {
+    "text": "Closest related work is Financial Services / Banking, Global Payments Solutions & Treasury Services at JP Morgan Chase",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Industry/Sub-category"
+   },
+   {
+    "text": "Matt served as Technology Delivery Lead for ACCESS Next Generation, the bank's unified corporate banking portal",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "Managed a blended team of 40+",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Designed and delivered payment modules covering ACH, wires, FX/cross-border and government tax payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Built an FX/cross-border payment module integrating with the bank's foreign exchange engine, enabling cross-currency payments with embedded rate visibility and connectivity to international clearing systems",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Worked on trade finance lifecycle visibility and Single Sign-On connecting cash, trade and investment operations",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "That work was payments and treasury infrastructure, not securities trading",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; stated fact"
+   },
+   {
+    "text": "The payments gateway launched in April 2011",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "It gave corporate treasurers a single entry point across 12 countries instead of separate local logins and regional payment systems",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x3",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails extras rule 3: does not name Cendian's webMethods B2B Trading Networks work. acknowledges_missing true ('His stories do not establish work on equities, derivatives, or order-execution systems'); all claims supported by payment-engine story (2009 to 2012, WebSeries gap, FX/ACH/wire modules, MAC layer, wire-not-FX entitlement example, reporting, SSO, trade finance, 40+ across US/Mumbai/Bangalore, April 2011, 135,000+ across 180+).",
+  "claims": [
+   {
+    "text": "Matt's documented experience is in payments, treasury services and corporate banking platforms",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Sub-category/Situation"
+   },
+   {
+    "text": "At JP Morgan Chase Matt served as Technology Delivery Lead for ACCESS Next Generation from 2009 to 2012",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Start_Date/End_Date"
+   },
+   {
+    "text": "The bank was building a unified corporate banking portal on Bottomline Technologies' WebSeries platform whose requirements went beyond the out-of-box offering",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Different payment types required distinct formatting, validation, compliance controls and approval workflows",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Built the FX/cross-border payment module integrated with the bank's foreign exchange engine, with embedded rate visibility and international clearing connectivity",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed and delivered ACH and wire payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payment verification through a Message Authentication Code security layer",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payment-type-specific access controls such as wire approval without FX initiation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Real-time reporting across bank accounts",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Single Sign-On connecting cash, trade and investment operations, and groundwork for trade finance lifecycle visibility",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Managed a blended team of 40+ across the US, Mumbai and Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACCESS launched in April 2011, consolidating regional systems into a global corporate banking portal serving 135,000+ corporations, financial institutions, governments and municipalities across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x3",
+  "run": 1,
+  "turn": 1,
+  "label": "D",
+  "pass": false,
+  "reason": "No answer ('Sorry, I couldn't generate an answer right now.'): makes no claim, does not say trading is not on record, offers no real work, and does not name Cendian's webMethods B2B Trading Networks work (extras rule 3).",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": false
+ },
+ {
+  "case": "x3",
+  "run": 1,
+  "turn": 1,
+  "label": "E",
+  "pass": false,
+  "reason": "Fails extras rule 3: does not name Cendian's webMethods B2B Trading Networks work. acknowledges_missing true ('his stories do not establish direct experience building securities trading or trade-execution platforms'); all claims supported by payment-engine story. Quote 'trade finance' matches the story's 'trade finance lifecycle visibility'.",
+  "claims": [
+   {
+    "text": "Matt has worked on global payments and treasury platforms",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Sub-category"
+   },
+   {
+    "text": "At JP Morgan Chase Matt was Technology Delivery Lead for ACCESS Next Generation, the bank's unified global corporate banking portal",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "Built an FX/cross-border payment module integrated with the bank's foreign exchange engine, with embedded rate visibility and international clearing connectivity",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "That was payment functionality, not a securities trading platform",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase; stated fact"
+   },
+   {
+    "text": "WebSeries did not provide all the payment modules, security controls and workflows required",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed a blended onshore/offshore team of 40+",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Designed and delivered bespoke ACH, wire, FX/cross-border and tax-payment capabilities",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Built payment-type-specific permissions, payment verification controls and contextual guidance on field requirements, FX parameters and cross-border regulations",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Single Sign-On connecting cash, trade and investment operations into a single portal",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Groundwork for trade finance integration so users could view a trade transaction's lifecycle from initiation to final payment",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched in April 2011, consolidating separate regional systems into a single digital experience serving 135,000+ corporations, financial institutions, governments and municipalities across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Corporate treasurers gained unified visibility into cash positions and transaction details across the bank's and third-party accounts",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x3",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "No answer ('Sorry, I couldn't generate an answer right now.'): makes no claim, does not say trading is not on record, offers no real work, and does not name Cendian's webMethods B2B Trading Networks work (extras rule 3).",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": false
+ },
+ {
+  "case": "x3",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails extras rule 3: does not name Cendian's webMethods B2B Trading Networks work. acknowledges_missing true ('I haven't found a story confirming that experience'); all claims supported by payment-engine story (TDL, WebSeries gap, FX module, wire-vs-FX entitlements, build-vs-configure boundary, SSO, trade finance, 40+, April 2011, 135,000+, 180+).",
+  "claims": [
+   {
+    "text": "Matt's documented work includes corporate banking, FX/cross-border payments and trade finance integration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "At JP Morgan Chase Matt was Technology Delivery Lead for the payment engine behind ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Title"
+   },
+   {
+    "text": "The bank needed payment modules, security controls and workflows beyond WebSeries out of the box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Designed and delivered an FX/cross-border payment module integrating with the bank's foreign exchange engine, with embedded rate visibility and international clearing connectivity",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Built payment-type-specific entitlement controls distinguishing wire approval from FX initiation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Managed the build-versus-configure boundary between WebSeries and bespoke engineering",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Architected Single Sign-On connecting cash, trade and investment operations into a single portal",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Drove groundwork for trade finance integration with lifecycle visibility from initiation to final payment",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Managed a blended team of 40+ across Accenture and JP Morgan Chase",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACCESS launched in April 2011 serving 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x3",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Passes extras rule 3: no trading-platform claim and names Cendian webMethods B2B Trading Networks as logistics document exchange, not financial trading (supported: Cendian story Action, Industry, Situation 300 carriers / 80 countries). acknowledges_missing: 'Securities trading or trade-execution platforms are not on record in Matt's stories'. ACCESS claims supported by payment-engine story. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Closest related work is Financial Services / Banking, Global Payments Solutions & Treasury Services at JP Morgan Chase",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Industry/Sub-category"
+   },
+   {
+    "text": "Matt was Technology Delivery Lead for the payment engine behind ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Title"
+   },
+   {
+    "text": "The bank needed capabilities beyond WebSeries for 135,000+ corporations, financial institutions, governments and municipalities across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Each payment type had distinct formatting, validation, compliance and workflow requirements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed a blended onshore/offshore team of 40+ across Accenture and JP Morgan Chase in Mumbai, Bangalore and the US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Designed and delivered ACH and wire payment modules and built the FX/cross-border module integrated with the bank's FX engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Architected Single Sign-On connecting cash, trade and investment operations and drove trade finance integration groundwork",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched in April 2011 as the bank's unified global corporate banking portal",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "At Cendian Chemical Logistics Matt worked with webMethods B2B Trading Networks",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action/Competencies"
+   },
+   {
+    "text": "That was Transportation & Logistics work",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Industry"
+   },
+   {
+    "text": "Exchanging shipment, order and invoice documents across a network of more than 300 carriers in more than 80 countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Not financial trading",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics; stated fact (Cendian is EDI document exchange)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x3",
+  "run": 2,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Passes extras rule 3: no trading-platform claim and names Cendian webMethods B2B Trading Networks as a logistics document-exchange platform (EDI, XML, flat files) for shipments, orders, invoices (supported: Cendian story Action). acknowledges_missing: 'I haven't found a story documenting Matt building a securities trading or trade-execution platform'. ACCESS claims supported by payment-engine story; data migration claim supported by consolidation story. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes corporate banking, payments, FX/cross-border payments and trade finance integration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "At JP Morgan Chase Matt was Technology Delivery Lead for the payment engine behind ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Title"
+   },
+   {
+    "text": "The bank needed payment modules, security controls and workflows beyond WebSeries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed a blended team of 40+ across Accenture and the bank",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Delivered ACH, wire, FX/cross-border and tax payment capabilities",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Built the FX/cross-border module integrated with the bank's FX engine, with rate visibility and international clearing connectivity",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Architected SSO connecting cash, trade and investment operations and drove trade finance integration groundwork",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Those were corporate treasury and trade finance functions, not securities order execution",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase; stated fact"
+   },
+   {
+    "text": "ACCESS launched in April 2011 serving 135,000+ corporations, financial institutions, governments and municipalities across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Matt led payments data migration without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "At Cendian Chemical Logistics Matt worked with webMethods B2B Trading Networks",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "That was a logistics document-exchange platform handling EDI, XML and flat files for shipments, orders and invoices, not a financial trading platform",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action/Situation; stated fact"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x3",
+  "run": 2,
+  "turn": 1,
+  "label": "E",
+  "pass": false,
+  "reason": "Fails extras rule 3: does not name Cendian's webMethods B2B Trading Networks work. acknowledges_missing true ('I don't have evidence that he worked on a securities trading or trade-execution platform'); all claims supported by payment-engine story (2009 to 2012, treasury services and cash management portal, FX module, trade finance, SSO, reporting, wire-not-FX entitlement, 40+, April 2011, 135,000+, 180+).",
+  "claims": [
+   {
+    "text": "Matt has worked on FX/cross-border payments and trade finance integration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "At JP Morgan Chase Matt served as Technology Delivery Lead for ACCESS Next Generation from 2009 to 2012",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Start_Date/End_Date"
+   },
+   {
+    "text": "ACCESS was a corporate banking portal for treasury services and cash management, not a securities trading platform",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; stated fact"
+   },
+   {
+    "text": "The bank needed payment modules, security controls and workflows beyond WebSeries out-of-box capabilities",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Built the FX/cross-border payment module integrated with the bank's FX engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Drove the groundwork for trade finance integration showing the full lifecycle of a trade transaction within the same portal",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Single Sign-On connecting cash, trade and investment operations, real-time global reporting on cash positions and transaction details, and payment-type-specific entitlement controls (wire approval but not FX initiation)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "These were purpose-built capabilities on top of and alongside the WebSeries engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed a blended onshore/offshore team of 40+",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACCESS launched in April 2011 serving 135,000+ corporations, financial institutions, governments and municipalities across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x3",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails extras rule 3: does not name Cendian's webMethods B2B Trading Networks work. acknowledges_missing true ('Securities trading or trade-execution platforms are not on record'); all claims supported by payment-engine story.",
+  "claims": [
+   {
+    "text": "Closest related work is Financial Services / Banking, Global Payments Solutions & Treasury Services at JP Morgan Chase, including FX/cross-border payments and trade finance integration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Industry/Sub-category/Action"
+   },
+   {
+    "text": "Matt was Technology Delivery Lead for ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "The bank was building its unified corporate banking portal on WebSeries but needed payment modules, security controls and workflows beyond the out-of-box offering",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Each payment type had distinct formatting, validation, compliance and workflow requirements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed a blended onshore/offshore team of 40+ and delivered bespoke ACH, wire, FX/cross-border and tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "The FX module integrated with the bank's FX engine with embedded rate visibility and international clearing connectivity",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Built payment-type-specific entitlement controls, real-time global reporting and SSO connecting cash, trade and investment operations",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Drove trade finance integration groundwork for lifecycle visibility from initiation to final payment",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched in April 2011 serving 135,000+ corporations, financial institutions, governments and municipalities across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x3",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails extras rule 3: does not name Cendian's webMethods B2B Trading Networks work. acknowledges_missing true ('I don't have a documented example of him building equities, derivatives, or order-execution systems'); all claims supported (payment-engine story; 'separate regional systems and disparate treasury functions' from payment-engine Action/Result).",
+  "claims": [
+   {
+    "text": "Matt has worked on FX/cross-border payments and trade finance integration on a corporate banking and treasury platform",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action/Situation"
+   },
+   {
+    "text": "At JP Morgan Chase Matt served as Technology Delivery Lead for ACCESS Next Generation from 2009 to 2012",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Start_Date/End_Date"
+   },
+   {
+    "text": "Managed a blended onshore/offshore team of 40+",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "The bank needed payment modules, security controls and workflows beyond WebSeries out-of-box capabilities",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Corporate treasurers were managing separate regional systems and disparate treasury functions",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action (SSO across separate platforms)/Result (previously separate regional systems)"
+   },
+   {
+    "text": "Built the FX/cross-border module integrated with JP Morgan Chase's FX engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Architected SSO connecting cash, trade and investment operations and drove the groundwork for Trade Finance Integration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACH and wire modules, payment verification, payment-type-specific permissions and contextual help on field requirements, FX parameters and cross-border regulations",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Real-time global reporting with unified visibility into cash positions and transaction details across the bank and third-party accounts",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched in April 2011, consolidating separate regional systems into a unified corporate banking portal serving 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x3",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails extras rule 3: does not name Cendian's webMethods B2B Trading Networks work. acknowledges_missing true ('The available stories do not establish that Matt built an equities, derivatives, or other securities trading platform'); all claims supported by payment-engine story.",
+  "claims": [
+   {
+    "text": "At JP Morgan Chase Matt was Technology Delivery Lead for ACCESS Next Generation, a global corporate banking portal for treasury services and cash management",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Situation"
+   },
+   {
+    "text": "Managed a blended onshore/offshore team of 40+ across Accenture and the bank",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "The bank needed payment modules, security controls and workflows beyond WebSeries out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Built the FX/cross-border module integrated with the bank's FX engine with rate visibility and international clearing connectivity",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Delivered ACH and wire modules, payment-type-specific entitlement controls and real-time global reporting of cash positions and transaction details",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "SSO connecting cash, trade and investment operations and groundwork for Trade Finance Integration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Those are treasury and trade finance functions, not securities order management or trade execution",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase; stated fact"
+   },
+   {
+    "text": "ACCESS launched in April 2011 consolidating separate regional systems into a unified corporate banking portal serving 135,000+ corporations, financial institutions, governments and municipalities across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x3",
+  "run": 3,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Passes extras rule 3: no trading-platform claim (explicitly 'not documented work on an FX trading platform') and names Cendian webMethods B2B Trading Networks as a document-exchange platform connecting shippers and carriers via EDI, XML, flat files (supported: Cendian story Situation/Action). acknowledges_missing: 'I haven't found a story establishing that he worked on a securities trading platform'. ACCESS claims supported by payment-engine story. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes payments and treasury platforms",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Sub-category"
+   },
+   {
+    "text": "At JP Morgan Chase Matt led delivery of the payment engine behind ACCESS Next Generation, a corporate banking portal for treasury services and cash management",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Situation"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border and tax payment modules while managing a blended team of 40+ across Accenture and the bank",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "The FX work integrated with the bank's FX engine, enabling cross-currency payments with rate visibility and international clearing connectivity",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "That was cross-border payment functionality, not an FX trading platform",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase; stated fact"
+   },
+   {
+    "text": "ACCESS included trade finance lifecycle visibility",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Managed the build-versus-configure boundary with WebSeries and delivered bank-specific payment modules, payment-type-level entitlements, Message Authentication Code security and compliance controls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched in April 2011 serving 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "There is a story involving webMethods B2B Trading Networks at Cendian Chemical Logistics",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "That was a document-exchange platform connecting shippers and carriers through EDI, XML and flat files, not a financial trading system",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation/Action; stated fact"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x3",
+  "run": 3,
+  "turn": 1,
+  "label": "E",
+  "pass": true,
+  "reason": "Passes extras rule 3: no trading-platform claim and names Cendian webMethods B2B Trading Networks as exchanging shipment, order and invoice documents with logistics partners (supported: Cendian story Situation/Action). acknowledges_missing: 'the stories do not establish that he built securities trading platforms'. ACCESS claims supported by payment-engine story; migration claim by consolidation story. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Matt has worked on FX payments and trade finance integration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "At JP Morgan Chase Matt was Technology Delivery Lead for ACCESS Next Generation, a global corporate banking portal for treasury services and cash management",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Situation"
+   },
+   {
+    "text": "The bank needed custom payment modules, security controls and workflows beyond WebSeries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed a blended onshore/offshore team of 40+ across Accenture and JP Morgan Chase resources",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built the FX/cross-border module integrated with the bank's FX engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Architected SSO connecting cash, trade and investment operations and drove groundwork for Trade Finance Integration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched in April 2011 serving 135,000+ corporations, financial institutions, governments and municipalities across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Led the payments workstream's migration from legacy regional systems without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "At Cendian Chemical Logistics Matt worked with webMethods B2B Trading Networks, exchanging shipment, order and invoice documents with logistics partners, not financial-market trading",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation/Action; stated fact"
+   },
+   {
+    "text": "Documented experience is corporate banking, FX/cross-border payments and trade finance integration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "acknowledges_missing true ('I haven't found any gaming-platform work in Matt's career stories'), but useful_direct false: offers no real work at all. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false
+ },
+ {
+  "case": "x5",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "acknowledges_missing: 'I haven't found a gaming-platform engagement in Matt's work history'. useful_direct: Sparkfly named and labelled 'not a gaming platform'. Supported: enterprise payments platforms (JPM payment engine), developer portals (Amex VPP), commerce platforms and Sparkfly catalog/checkout/personalization/content channels/SparkAlerts (Sparkfly story Action), employee-discount portal (Sparkfly Project). 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Matt has built enterprise payments platforms",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Matt has built developer portals",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action/5PSummary"
+   },
+   {
+    "text": "Matt has built commerce platforms",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "At Sparkfly he built catalog and checkout, personalization, content channels and administrative messaging",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Sparkfly was an employee-discount and commerce portal, not a gaming platform",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Project/Use Case(s)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "acknowledges_missing: 'Gaming platforms are not on record in Matt's stories'. useful_direct: Sparkfly labelled closest and 'not a gaming platform'. All Sparkfly claims supported by Sparkfly story (Industry, Sub-category, Situation, Task, Action, Result, dates 2000-11 to 2001-12, 4 developers, three-layer personalization, one integrated portal, outlasted dot-com collapse). 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Closest related platform work is Sparkfly, in Technology & Software, Digital Product Development & Delivery",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry/Sub-category"
+   },
+   {
+    "text": "Sparkfly was an employee discount and commerce portal, not a gaming platform",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Project/Use Case(s)"
+   },
+   {
+    "text": "At Sparkfly customers were arriving faster than the platform could carry them",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation"
+   },
+   {
+    "text": "Matt joined through Wellfound Technology as a developer and grew into the lead, running 4 developers while writing production code",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Employer/Task/Action"
+   },
+   {
+    "text": "The build ran from late 2000 through 2001, with the founder in the room and the customer list growing",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation"
+   },
+   {
+    "text": "Built catalog search, product detail, pricing and savings calculations, cross-sell, a multi-item-type cart and checkout",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built Books, Music and Video content channels, a 3-layer personalization model, account management and SparkAlerts with audience scoping and role-based permissions",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Learned MVC and refactored the live product from JSP-only onto servlets and beans",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Designed the Oracle schema and wrote the stored procedures, packages and functions",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Commerce, personalization, content and administrative capabilities shipped as 1 integrated portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "The foundation outlasted the dot-com collapse and Sparkfly evolved into a retail technology platform",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 1,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "acknowledges_missing: 'none documents work on video games or gaming platforms'. useful_direct: names real work (enterprise platforms, cloud modernization, payments and banking, MattGPT) as not gaming. Claims supported at category level. 0 contradicted, 0 unsupported. Ambiguous: category-level real work counted as offering real work.",
+  "claims": [
+   {
+    "text": "Matt's stories cover enterprise platforms and cloud modernization",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Situation/Action"
+   },
+   {
+    "text": "Matt's stories cover payments and banking systems",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Matt's stories cover his MattGPT project",
+    "label": "supported",
+    "source": "mattgpt-rag-architecture-semantic-search-implementation|independent-project 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 1,
+  "turn": 1,
+  "label": "E",
+  "pass": true,
+  "reason": "acknowledges_missing: 'I haven't found any documented gaming-platform work in Matt's career stories'. useful_direct: real work named (enterprise payments, banking modernization, cloud-native, MattGPT) as 'rather than gaming'. Claims supported. 0 contradicted, 0 unsupported. Ambiguous: category-level real work counted.",
+  "claims": [
+   {
+    "text": "Matt's platform experience includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Matt's platform experience includes banking modernization",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Title/5PSummary"
+   },
+   {
+    "text": "Matt's platform experience includes cloud-native systems",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Title/Action"
+   },
+   {
+    "text": "Matt's platform experience includes MattGPT",
+    "label": "supported",
+    "source": "mattgpt-rag-architecture-semantic-search-implementation|independent-project 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "acknowledges_missing: 'I haven't found a gaming-platform engagement in Matt's work history' and 'None of the stories returned identifies video-game development'. useful_direct: real work named as not gaming. Supported: enterprise payments (JPM), banking modernization (RBC), Salesforce platforms (JPM Asset Management), cloud-native systems, MattGPT AI-powered assistant. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Documented platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Documented platform work includes banking modernization",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Title/5PSummary"
+   },
+   {
+    "text": "Documented platform work includes Salesforce platforms",
+    "label": "supported",
+    "source": "leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   },
+   {
+    "text": "Documented platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Title/Action"
+   },
+   {
+    "text": "MattGPT is his AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "acknowledges_missing: 'I don't have a documented example of Matt working on gaming platforms'. useful_direct: real work named, MattGPT labelled 'not a gaming platform'. Supported: enterprise payments, digital banking (ACCESS corporate digital banking portal), cloud-native systems, MattGPT with RAG and semantic search. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Platform work includes digital banking",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Title/Action"
+   },
+   {
+    "text": "He built MattGPT, an AI-powered portfolio assistant using RAG and semantic search",
+    "label": "supported",
+    "source": "mattgpt-rag-architecture-semantic-search-implementation|independent-project 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "acknowledges_missing: 'I haven't found a gaming-platform engagement in Matt's work history'. useful_direct: real work named and 'None of those is described as a gaming platform'. Supported: enterprise payments, banking modernization, Sparkfly commerce and personalization portal, MattGPT. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Documented platform work includes enterprise payments and banking modernization",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Title"
+   },
+   {
+    "text": "Documented platform work includes Sparkfly's commerce and personalization portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action/Result"
+   },
+   {
+    "text": "MattGPT is his AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 2,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "acknowledges_missing: 'Gaming platforms are not on record in Matt's stories'. useful_direct: Sparkfly labelled closest, 'not a gaming platform'. All Sparkfly claims supported by Sparkfly story (Industry, Task, Situation, Action, Result). 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Closest related work is in Technology & Software, digital product development at Sparkfly",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry/Solution / Offering"
+   },
+   {
+    "text": "At Sparkfly Matt joined as a developer and grew into the lead, running 4 developers while writing production code",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task/Action"
+   },
+   {
+    "text": "The founder's customer list grew faster than the platform could support, so the team built while already carrying customers",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation/Task"
+   },
+   {
+    "text": "Built catalog search, product detail, a multi-item-type cart and checkout",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built Books, Music and Video channels on a shared page architecture and a 3-layer personalization model covering interests, independent geographic settings and user-controlled channel visibility",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Learned MVC and refactored the live product from JSP-only onto servlets and beans",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built SparkAlerts with audience scoping, expiration scheduling and role-based permissions",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Designed the Oracle schema and stored procedures underneath the portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Commerce, personalization, content and administrative capabilities shipped as one integrated portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 2,
+  "turn": 1,
+  "label": "E",
+  "pass": true,
+  "reason": "acknowledges_missing: 'I haven't found a story documenting Matt working on gaming platforms'. useful_direct: real work named, 'Those are not gaming platforms'. Supported: enterprise payments, banking modernization, cloud-native systems, MattGPT. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Documented platform work includes enterprise payments and banking modernization",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Title"
+   },
+   {
+    "text": "Documented platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Title/Action"
+   },
+   {
+    "text": "MattGPT is his AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "acknowledges_missing: 'I haven't found a gaming-platform engagement in Matt's work history'. useful_direct: real work named; 'I don't have evidence that he has worked on video-game platforms'. Supported: enterprise payments, banking modernization, cloud-native systems, MattGPT. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Documented platform work includes enterprise payments and banking modernization",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Title"
+   },
+   {
+    "text": "Documented platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Title/Action"
+   },
+   {
+    "text": "MattGPT is his AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "acknowledges_missing: 'I haven't found a gaming-platform engagement in Matt's work history'. useful_direct: real work named, 'not gaming platforms'. Supported: payments at JP Morgan, banking modernization at RBC (Day2Day), HSBC (mortgage transformation of fragmented legacy systems) and Capital One (Financial Services, tagged Digital Transformation / Platform Engineering), cloud-native systems, MattGPT. 0 contradicted, 0 unsupported. Ambiguous: Capital One as 'banking modernization' read as paraphrase.",
+  "claims": [
+   {
+    "text": "Enterprise payments at JP Morgan",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Banking modernization at RBC",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Title/5PSummary"
+   },
+   {
+    "text": "Banking platform work at Capital One",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Industry/Sub-category/public_tags"
+   },
+   {
+    "text": "Banking modernization at HSBC",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc 5PSummary (overhaul of fragmented legacy mortgage systems)"
+   },
+   {
+    "text": "Cloud-native systems",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Title/Action"
+   },
+   {
+    "text": "MattGPT is his AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "No answer ('Sorry, I couldn't generate an answer right now.'): makes no claim, does not say gaming is not on record, offers no real work.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": false
+ },
+ {
+  "case": "x5",
+  "run": 3,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "acknowledges_missing: 'I didn't find a gaming-platform engagement in Matt's stories'. useful_direct: real work named, 'not gaming projects'. Supported: enterprise payments, banking modernization, Salesforce platforms, cloud-native systems, MattGPT. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Documented platform work includes enterprise payments and banking modernization",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Title"
+   },
+   {
+    "text": "Documented platform work includes Salesforce platforms",
+    "label": "supported",
+    "source": "leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   },
+   {
+    "text": "Documented platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Title/Action"
+   },
+   {
+    "text": "MattGPT is an AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 3,
+  "turn": 1,
+  "label": "E",
+  "pass": true,
+  "reason": "acknowledges_missing: 'I haven't found gaming-platform work in Matt's career stories'. useful_direct: Amex VPP labelled 'payments-platform work, not gaming'. Supported: enterprise payments, banking modernization, cloud-native, MattGPT personal AI project; Amex Virtual Payments Platform with developer SDKs, API documentation and secure sandbox for clients evaluating and integrating (Amex adoption story 5PSummary). 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Documented platform work includes enterprise payments and banking modernization",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Title"
+   },
+   {
+    "text": "Documented platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Title/Action"
+   },
+   {
+    "text": "MattGPT is his personal AI project",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary"
+   },
+   {
+    "text": "At American Express he worked on the Virtual Payments Platform",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Client/5PSummary"
+   },
+   {
+    "text": "Created developer SDKs, API documentation and a secure sandbox for clients evaluating and integrating the platform",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ }
+]

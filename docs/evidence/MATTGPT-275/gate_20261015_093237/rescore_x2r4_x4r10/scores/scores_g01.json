@@ -1,0 +1,161 @@
+[
+ {
+  "case": "x2",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail. unsupported: 'webMethods, TIBCO, Java, and XML at Cendian Chemical Logistics' (the Cendian story records TIBCO only as prior experience carrying over, not TIBCO work at Cendian). supported: no documented SAP example (acknowledges_missing), webMethods/Java/XML at Cendian, JPMC Salesforce/data warehouse/compliance/Marketing Cloud integration; adjacent work labelled ('don't establish SAP experience'), useful_direct true. No closing.",
+  "claims": [
+   {
+    "text": "I don't have a documented example of Matt working with SAP.",
+    "label": "supported",
+    "source": "stated fact (no SAP story; corpus search for SAP returns nothing)"
+   },
+   {
+    "text": "His integration work includes webMethods ... at Cendian Chemical Logistics",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "His integration work includes ... TIBCO ... at Cendian Chemical Logistics",
+    "label": "unsupported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action says only 'Learned webMethods 6 Developer, Broker, and B2B Trading Networks on the job by working defects, with the TIBCO experience carrying over conceptually'; no Cendian story records TIBCO work at Cendian (TIBCO work is in Cendant, Level 3, Lockheed, Fiserv stories)"
+   },
+   {
+    "text": "His integration work includes ... Java, and XML at Cendian Chemical Logistics",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action (Java and webMethods integrations; common XML representation)"
+   },
+   {
+    "text": "Salesforce integration with data warehouses, compliance systems, and Marketing Cloud at JP Morgan Chase",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Situation/Action/5PSummary"
+   },
+   {
+    "text": "Those engagements don't establish SAP experience.",
+    "label": "supported",
+    "source": "stated fact"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x4",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail. unsupported: 'These measures identified bottlenecks and where teams could reduce handoffs and rework' (no story records the scorecards producing that outcome; bottlenecks are the scorecard story's problem, handoff and rework reduction is attributed to pair programming/TDD/CI). supported: CIC 4X, 10 vs 20-person, zero-defect, pair-programming cost concern, scorecard metrics, RBC quoted 'cost-to-fix vs. benefit comparison' (verbatim), P&L actuals/variance/contingency, Fiserv $8.5M/3%/$255K/$500K/$3M. acknowledges_missing true (no ROI formula/percentage/payback), useful_direct true ('what Matt measured', Section 6 rule 2). No closing.",
+  "claims": [
+   {
+    "text": "Matt used cost-to-fix versus benefit comparisons, delivery measures, and engagement financials.",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action; building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "The stories do not provide a single ROI formula, a calculated ROI percentage, or a payback period.",
+    "label": "supported",
+    "source": "corpus search: ROI appears only qualitatively (CIC 'proven ROI'); no payback in corpus"
+   },
+   {
+    "text": "At Accenture's Cloud Innovation Centers, clients questioned the cost of pair programming",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation ('Clients questioned why they were paying for two engineers at one keyboard'); building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "traditional delivery involved siloed teams, handoffs, and separate testing phases",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('separate QA phase', 'siloed functions with handoffs')"
+   },
+   {
+    "text": "Matt addressed those concerns with measured delivery results rather than methodology presentations alone.",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action ('addressing concerns about pair programming costs by demonstrating velocity gains'; 'Rather than PowerPoint presentations about methodology'); behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Action"
+   },
+   {
+    "text": "He compared velocity, team size, deployment quality, and delivery timelines against traditional approaches.",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "The centers reported 4X faster velocity",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivering equivalent output to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "zero-defect deployments through test-driven development and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Those were delivery comparisons, not a stated financial ROI percentage.",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Team scorecards tracked lead time, cycle time, throughput, team stability, and backlog health.",
+    "label": "supported",
+    "source": "replacing-velocity-metrics-with-lead-time-cycle-time-and-throughput|accenture Action"
+   },
+   {
+    "text": "These measures identified bottlenecks and where teams could reduce handoffs and rework.",
+    "label": "unsupported",
+    "source": "replacing-velocity-metrics-with-lead-time-cycle-time-and-throughput|accenture records the scorecards only as 'showing teams where to focus improvement efforts'; bottlenecks are its Situation problem, and 'reducing handoffs and rework' is attributed to pair programming, TDD and CI, not to the scorecards"
+   },
+   {
+    "text": "At RBC, Matt worked with the enterprise architecture team on a transparent \"cost-to-fix vs. benefit comparison.\"",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action (quote verbatim)"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, architectural heat maps, and target-system models exposed gaps in WebSeries before significant spending was committed.",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Result"
+   },
+   {
+    "text": "The assessment led the bank away from that platform path; the story does not quantify the avoided investment.",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "Matt tracked actuals, forecast variance, contingency, staffing costs, and scope changes.",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "At Fiserv, the $8.5M program finished 3% under budget, preserving $255K in margin",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action; recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "avoiding $500K in contractual penalties",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "securing a $3M extension",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action; recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ }
+]

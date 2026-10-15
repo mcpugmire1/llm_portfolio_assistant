@@ -1,0 +1,2726 @@
+[
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn, Answered and Honest. supported: all four profile certifications with issue/expiry years and 'none is current' (profile.certifications)",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "PMP absent, then the profile's certification list (locked ruling 1: acknowledges_missing true); supported: all four certifications, none current",
+  "claims": [
+   {
+    "text": "Matt does not hold a PMP certification",
+    "label": "supported",
+    "source": "profile.certifications (PMP not in list)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn, Answered and Honest. supported: all four profile certifications with issue/expiry years and 'none is current' (profile.certifications); quoted certification text is verbatim in profile_rendered.txt",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "PMP absent, then the profile's certification list (locked ruling 1: acknowledges_missing true); supported: all four certifications, none current",
+  "claims": [
+   {
+    "text": "Matt does not hold a PMP certification",
+    "label": "supported",
+    "source": "profile.certifications (PMP not in list)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn, Answered and Honest. supported: all four profile certifications with issue/expiry years and 'none is current' (profile.certifications); quoted certification text is verbatim in profile_rendered.txt",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "PMP absent, then the profile's certification list (locked ruling 1: acknowledges_missing true); supported: all four certifications, none current; quoted certification text verbatim in profile_rendered.txt",
+  "claims": [
+   {
+    "text": "Matt does not hold a PMP certification",
+    "label": "supported",
+    "source": "profile.certifications (PMP not in list)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn, Answered and Honest. supported: all four profile certifications with issue/expiry years and 'none is current' (profile.certifications); 'not a completed OCP certification' read as paraphrase of 'exams passed (OCP track)'",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   },
+   {
+    "text": "Oracle entry records exams passed, not a completed OCP certification",
+    "label": "supported",
+    "source": "profile.certifications ('exams passed (OCP track)')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "PMP absent, then the profile's certification list (locked ruling 1: acknowledges_missing true); supported: all four certifications, none current",
+  "claims": [
+   {
+    "text": "Matt does not hold a PMP certification",
+    "label": "supported",
+    "source": "profile.certifications (PMP not in list)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn, Answered and Honest. supported: all four profile certifications with issue/expiry years and 'none is current' (profile.certifications); quoted certification text verbatim in profile_rendered.txt",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "PMP absent, then the profile's certification list (locked ruling 1: acknowledges_missing true); supported: all four certifications, none current; quoted certification text verbatim in profile_rendered.txt",
+  "claims": [
+   {
+    "text": "Matt does not hold a PMP certification",
+    "label": "supported",
+    "source": "profile.certifications (PMP not in list)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn, Answered and Honest. supported: all four profile certifications with issue/expiry years and 'none is current' (profile.certifications)",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "PMP absent, then the profile's certification list (locked ruling 1: acknowledges_missing true); supported: all four certifications, none current",
+  "claims": [
+   {
+    "text": "Matt does not hold a PMP certification",
+    "label": "supported",
+    "source": "profile.certifications (PMP not in list)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none current; supported: AWS expired 2023, SAFe expired, Oracle exams 2002 (profile.certifications)",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   },
+   {
+    "text": "Both AWS certifications expired in 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe certification is expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle entry records exams passed in 2002, not a current certification",
+    "label": "supported",
+    "source": "profile.certifications"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none current; supported: AWS expired 2023, SAFe expired, Oracle exams 2002 (profile.certifications)",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   },
+   {
+    "text": "Both AWS certifications expired in 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe certification is expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle entry records exams passed in 2002, not a current certification",
+    "label": "supported",
+    "source": "profile.certifications"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 9,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "Says none current (supported, profile.certifications); opener is not a claim",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none current; supported: AWS expired 2023, SAFe expired; Oracle 'not a completed OCP certification' read as paraphrase of 'exams passed (OCP track)'",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   },
+   {
+    "text": "Both AWS certifications expired in 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe certification is expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle entry records exams passed, not a completed OCP certification",
+    "label": "supported",
+    "source": "profile.certifications ('exams passed (OCP track)')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none current; supported: AWS expired 2023, SAFe expired, Oracle exams 2002",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   },
+   {
+    "text": "Both AWS certifications expired in 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe certification is expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle entry records exams passed in 2002, not a current certification",
+    "label": "supported",
+    "source": "profile.certifications"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 10,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "Says none current, lists the three expired certifications (supported, profile.certifications); omits Oracle but implies nothing current; opener is not a claim",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn; all claims supported: Accenture close, four years/150-person CIC, recharge, MattGPT, target roles, available immediately. Role-intent sentence treated as paraphrase of career-intent/why-hire-matt (rule 5).",
+  "claims": [
+   {
+    "text": "Accenture chapter came to a close after a long tenure",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Situation"
+   },
+   {
+    "text": "four years leading a 150-person Cloud Innovation Center",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Situation"
+   },
+   {
+    "text": "stepped back to recharge and focus on what came next",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.5PSummary"
+   },
+   {
+    "text": "stayed hands-on building MattGPT with RAG, semantic search, modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.5PSummary"
+   },
+   {
+    "text": "clarified the work he wants: platform modernization, product leadership, engineering culture",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Action"
+   },
+   {
+    "text": "looking for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.Task/5PSummary ('scale products... elevate engineering culture', 'real delivery'), why-hire-matt.5PSummary (paraphrase, rule 5)"
+   },
+   {
+    "text": "pursuing senior leadership roles in platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Result"
+   },
+   {
+    "text": "real delivery alongside engineers and product managers, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.5PSummary"
+   },
+   {
+    "text": "available immediately, no notice period",
+    "label": "supported",
+    "source": "profile.logistics.availability"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn; supported: sabbatical/MattGPT, role intent, Accenture close, quoted 'builder' verbatim (transition 5PSummary), target roles. Role-intent sentence treated as paraphrase of career-intent/why-hire-matt (rule 5).",
+  "claims": [
+   {
+    "text": "currently on sabbatical building MattGPT, in active search",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Use Case(s)/Result; Sabbatical-division MattGPT stories"
+   },
+   {
+    "text": "looking for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.Task/5PSummary ('scale products... elevate engineering culture', 'real delivery'), why-hire-matt.5PSummary (paraphrase, rule 5)"
+   },
+   {
+    "text": "Accenture chapter came to a close after a long tenure",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Situation"
+   },
+   {
+    "text": "stepped back to recharge and focus on what came next",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.5PSummary"
+   },
+   {
+    "text": "stayed hands-on building MattGPT with RAG, semantic search, modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.5PSummary"
+   },
+   {
+    "text": "describes himself as a 'builder' (quoted)",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "pursuing senior leadership roles in platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Result"
+   },
+   {
+    "text": "real delivery alongside engineers and product managers, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn; supported: sabbatical/MattGPT, role intent, target roles, quoted 'builder' verbatim, in the work not above it, available immediately. Role-intent sentence treated as paraphrase of career-intent/why-hire-matt (rule 5).",
+  "claims": [
+   {
+    "text": "currently on sabbatical building MattGPT, in active search",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Use Case(s)/Result; Sabbatical-division MattGPT stories"
+   },
+   {
+    "text": "looking for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.Task/5PSummary ('scale products... elevate engineering culture', 'real delivery'), why-hire-matt.5PSummary (paraphrase, rule 5)"
+   },
+   {
+    "text": "looking for his next build, not a role maintaining what exists",
+    "label": "supported",
+    "source": "why-hire-matt.5PSummary; career-intent-what-im-looking-for-next.Performance ('0→1 building, not maintenance')"
+   },
+   {
+    "text": "pursuing senior leadership roles in platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Result"
+   },
+   {
+    "text": "real delivery alongside engineers and product managers, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.5PSummary"
+   },
+   {
+    "text": "describes himself as a 'builder' (quoted)",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "wants to be in the work, not above it",
+    "label": "supported",
+    "source": "why-hire-matt.5PSummary"
+   },
+   {
+    "text": "available immediately, no notice period",
+    "label": "supported",
+    "source": "profile.logistics.availability"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn; supported: Accenture close, four years/150-person CIC, first pause, MattGPT not a tutorial, NOW/NEXT/LATER and 100+ stories, quoted 'builder' verbatim. Role-intent sentence treated as paraphrase of career-intent/why-hire-matt (rule 5).",
+  "claims": [
+   {
+    "text": "Accenture chapter came to a close after a long tenure",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Situation"
+   },
+   {
+    "text": "four years leading a 150-person Cloud Innovation Center",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Situation"
+   },
+   {
+    "text": "stepped back to recharge and focus on what came next",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.5PSummary"
+   },
+   {
+    "text": "first pause in his career after years of continuous delivery and leadership",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Situation"
+   },
+   {
+    "text": "built MattGPT as a product he would use rather than a tutorial exercise",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery.Situation"
+   },
+   {
+    "text": "worked with RAG, Python, Pinecone, embeddings",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery.Situation/5PSummary"
+   },
+   {
+    "text": "defined NOW/NEXT/LATER roadmap, shipped MVP with semantic search across 100+ stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery.Result/5PSummary"
+   },
+   {
+    "text": "rebuilt his portfolio",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Action"
+   },
+   {
+    "text": "clarified the work he wants: platform modernization, product leadership, engineering culture",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Action"
+   },
+   {
+    "text": "looking for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.Task/5PSummary ('scale products... elevate engineering culture', 'real delivery'), why-hire-matt.5PSummary (paraphrase, rule 5)"
+   },
+   {
+    "text": "search includes AI-enabled product innovation / product leadership",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.Result"
+   },
+   {
+    "text": "real delivery alongside engineers and product managers, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.5PSummary"
+   },
+   {
+    "text": "describes himself as a 'builder' (quoted)",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "looking for his next build, not a role maintaining what exists",
+    "label": "supported",
+    "source": "why-hire-matt.5PSummary; career-intent-what-im-looking-for-next.Performance ('0→1 building, not maintenance')"
+   },
+   {
+    "text": "wants to be in the work, not above it",
+    "label": "supported",
+    "source": "why-hire-matt.5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn; supported: Accenture close, CIC, MattGPT build details (MVP, 100+ stories, ADRs, BDD), target roles, available immediately. Role-intent sentence treated as paraphrase of career-intent/why-hire-matt (rule 5).",
+  "claims": [
+   {
+    "text": "Accenture chapter came to a close after a long tenure",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Situation"
+   },
+   {
+    "text": "four years leading a 150-person Cloud Innovation Center",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Situation"
+   },
+   {
+    "text": "stepped back to recharge and focus on what came next",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.5PSummary"
+   },
+   {
+    "text": "built MattGPT as a product he would use rather than a tutorial exercise",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery.Situation"
+   },
+   {
+    "text": "defined NOW/NEXT/LATER roadmap, shipped MVP with semantic search across 100+ stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery.Result/5PSummary"
+   },
+   {
+    "text": "worked with RAG, Python, Pinecone, embeddings",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery.Situation/5PSummary"
+   },
+   {
+    "text": "added persistent working agreements, session handoffs, ADRs, behavior-first tests",
+    "label": "supported",
+    "source": "building-effective-ai-assisted-development-workflows.Action"
+   },
+   {
+    "text": "pursuing senior leadership roles in platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Result"
+   },
+   {
+    "text": "real delivery alongside engineers and product managers, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.5PSummary"
+   },
+   {
+    "text": "looking for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.Task/5PSummary ('scale products... elevate engineering culture', 'real delivery'), why-hire-matt.5PSummary (paraphrase, rule 5)"
+   },
+   {
+    "text": "wants to be in the work, not above it",
+    "label": "supported",
+    "source": "why-hire-matt.5PSummary"
+   },
+   {
+    "text": "building, taking on change, solving hard problems as part of a team",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Result"
+   },
+   {
+    "text": "available immediately, no notice period",
+    "label": "supported",
+    "source": "profile.logistics.availability"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn; supported: sabbatical/MattGPT, role intent, next build not maintenance, target roles, available immediately. Role-intent sentence treated as paraphrase of career-intent/why-hire-matt (rule 5).",
+  "claims": [
+   {
+    "text": "currently on sabbatical building MattGPT, in active search",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Use Case(s)/Result; Sabbatical-division MattGPT stories"
+   },
+   {
+    "text": "looking for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.Task/5PSummary ('scale products... elevate engineering culture', 'real delivery'), why-hire-matt.5PSummary (paraphrase, rule 5)"
+   },
+   {
+    "text": "looking for his next build, not a role maintaining what exists",
+    "label": "supported",
+    "source": "why-hire-matt.5PSummary; career-intent-what-im-looking-for-next.Performance ('0→1 building, not maintenance')"
+   },
+   {
+    "text": "pursuing senior leadership roles in platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Result"
+   },
+   {
+    "text": "real delivery alongside engineers and product managers, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.5PSummary"
+   },
+   {
+    "text": "available immediately, no notice period",
+    "label": "supported",
+    "source": "profile.logistics.availability"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn; supported: Accenture close, CIC, first pause, MattGPT details, quoted 'builder' and 'in the work, not above it' both verbatim (transition / why-hire-matt 5PSummary). Role-intent sentence treated as paraphrase of career-intent/why-hire-matt (rule 5).",
+  "claims": [
+   {
+    "text": "Accenture chapter came to a close after a long tenure",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Situation"
+   },
+   {
+    "text": "four years leading a 150-person Cloud Innovation Center",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Situation"
+   },
+   {
+    "text": "first pause in his career after years of continuous delivery and leadership",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Situation"
+   },
+   {
+    "text": "stepped back to recharge and focus on what came next",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.5PSummary"
+   },
+   {
+    "text": "built MattGPT as a product he would use rather than a tutorial exercise",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery.Situation"
+   },
+   {
+    "text": "worked with RAG, Python, Pinecone, embeddings",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery.Situation/5PSummary"
+   },
+   {
+    "text": "defined NOW/NEXT/LATER roadmap, shipped MVP with semantic search across 100+ stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery.Result/5PSummary"
+   },
+   {
+    "text": "rebuilt his portfolio",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Action"
+   },
+   {
+    "text": "looking for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.Task/5PSummary ('scale products... elevate engineering culture', 'real delivery'), why-hire-matt.5PSummary (paraphrase, rule 5)"
+   },
+   {
+    "text": "search includes AI-enabled product innovation / product leadership",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.Result"
+   },
+   {
+    "text": "describes himself as a 'builder' (quoted)",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "real delivery alongside engineers and product managers, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.5PSummary"
+   },
+   {
+    "text": "wants to be in the work, not above it",
+    "label": "supported",
+    "source": "why-hire-matt.5PSummary"
+   },
+   {
+    "text": "building, taking on change, solving hard problems as part of a team",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn; supported: Accenture close, CIC, MattGPT, quoted 'real delivery with engineers and product managers, not strategy decks' and 'builder, not a maintainer' both verbatim in career-intent 5PSummary, available immediately. Role-intent sentence treated as paraphrase of career-intent/why-hire-matt (rule 5).",
+  "claims": [
+   {
+    "text": "Accenture chapter came to a close after a long tenure",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Situation"
+   },
+   {
+    "text": "four years leading a 150-person Cloud Innovation Center",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Situation"
+   },
+   {
+    "text": "stepped back to recharge and focus on what came next",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.5PSummary"
+   },
+   {
+    "text": "first pause in his career after years of continuous delivery and leadership",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Situation"
+   },
+   {
+    "text": "clarified the work he wants: platform modernization, product leadership, engineering culture",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Action"
+   },
+   {
+    "text": "stayed hands-on building MattGPT with RAG, semantic search, modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.5PSummary"
+   },
+   {
+    "text": "built MattGPT as a product he would use rather than a tutorial exercise",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery.Situation"
+   },
+   {
+    "text": "defined NOW/NEXT/LATER roadmap, shipped MVP with semantic search across 100+ stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery.Result/5PSummary"
+   },
+   {
+    "text": "looking for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.Task/5PSummary ('scale products... elevate engineering culture', 'real delivery'), why-hire-matt.5PSummary (paraphrase, rule 5)"
+   },
+   {
+    "text": "quoted 'real delivery with engineers and product managers, not strategy decks.'",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.5PSummary"
+   },
+   {
+    "text": "quoted 'builder, not a maintainer'",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.5PSummary"
+   },
+   {
+    "text": "pursuing senior leadership roles in platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Result"
+   },
+   {
+    "text": "available immediately, no notice period",
+    "label": "supported",
+    "source": "profile.logistics.availability"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn; supported: Accenture close, CIC, MattGPT, role intent, quoted 'builder' verbatim, team. Role-intent sentence treated as paraphrase of career-intent/why-hire-matt (rule 5).",
+  "claims": [
+   {
+    "text": "Accenture chapter came to a close after a long tenure",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Situation"
+   },
+   {
+    "text": "stepped back to recharge and focus on what came next",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.5PSummary"
+   },
+   {
+    "text": "stayed hands-on building MattGPT with RAG, semantic search, modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.5PSummary"
+   },
+   {
+    "text": "clarified the work he wants: platform modernization, product leadership, engineering culture",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Action"
+   },
+   {
+    "text": "looking for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.Task/5PSummary ('scale products... elevate engineering culture', 'real delivery'), why-hire-matt.5PSummary (paraphrase, rule 5)"
+   },
+   {
+    "text": "describes himself as a 'builder' (quoted)",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "real delivery alongside engineers and product managers, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.5PSummary"
+   },
+   {
+    "text": "building, taking on change, solving hard problems as part of a team",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn; supported: Accenture tenure ended September 2023 (career-intent End_Date 2023-09), sabbatical/MattGPT, quoted 'builder' and 'coach's heart' verbatim (profile.self_description), available immediately. Role-intent sentence treated as paraphrase of career-intent/why-hire-matt (rule 5).",
+  "claims": [
+   {
+    "text": "currently on sabbatical building MattGPT, in active search",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Use Case(s)/Result; Sabbatical-division MattGPT stories"
+   },
+   {
+    "text": "Accenture tenure ended September 2023",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.End_Date; building-cloud-innovation-centers End_Date"
+   },
+   {
+    "text": "looking for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.Task/5PSummary ('scale products... elevate engineering culture', 'real delivery'), why-hire-matt.5PSummary (paraphrase, rule 5)"
+   },
+   {
+    "text": "describes himself as a 'builder' with a 'coach's heart'",
+    "label": "supported",
+    "source": "profile.self_description ('Builder's mindset, coach's heart')"
+   },
+   {
+    "text": "available immediately, no notice period",
+    "label": "supported",
+    "source": "profile.logistics.availability"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn; supported: Accenture close, CIC, MattGPT stack and 100+ stories, quoted 'in the work, not above it' verbatim (why-hire-matt), available immediately. Role-intent sentence treated as paraphrase of career-intent/why-hire-matt (rule 5).",
+  "claims": [
+   {
+    "text": "Accenture chapter came to a close after a long tenure",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Situation"
+   },
+   {
+    "text": "four years leading a 150-person Cloud Innovation Center",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Situation"
+   },
+   {
+    "text": "stepped back to recharge and focus on what came next",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.5PSummary"
+   },
+   {
+    "text": "first pause in his career after years of continuous delivery and leadership",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Situation"
+   },
+   {
+    "text": "built MattGPT as a product he would use rather than a tutorial exercise",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery.Situation"
+   },
+   {
+    "text": "defined NOW/NEXT/LATER roadmap, shipped MVP with semantic search across 100+ stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery.Result/5PSummary"
+   },
+   {
+    "text": "worked with RAG, Python, Pinecone, embeddings",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery.Situation/5PSummary"
+   },
+   {
+    "text": "clarified the work he wants: platform modernization, product leadership, engineering culture",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Action"
+   },
+   {
+    "text": "looking for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.Task/5PSummary ('scale products... elevate engineering culture', 'real delivery'), why-hire-matt.5PSummary (paraphrase, rule 5)"
+   },
+   {
+    "text": "pursuing senior leadership roles in platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Result"
+   },
+   {
+    "text": "real delivery alongside engineers and product managers, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.5PSummary"
+   },
+   {
+    "text": "wants to be in the work, not above it",
+    "label": "supported",
+    "source": "why-hire-matt.5PSummary"
+   },
+   {
+    "text": "building, taking on change, solving hard problems as part of a team",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Result"
+   },
+   {
+    "text": "available immediately, no notice period",
+    "label": "supported",
+    "source": "profile.logistics.availability"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn; supported: sabbatical/MattGPT, Accenture March 2005 to September 2023 (career-intent and leading-people Start/End dates), quoted 'builder's mindset, coach's heart' verbatim (profile.self_description). Role-intent sentence treated as paraphrase of career-intent/why-hire-matt (rule 5).",
+  "claims": [
+   {
+    "text": "currently on sabbatical building MattGPT, in active search",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities.Use Case(s)/Result; Sabbatical-division MattGPT stories"
+   },
+   {
+    "text": "looking for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.Task/5PSummary ('scale products... elevate engineering culture', 'real delivery'), why-hire-matt.5PSummary (paraphrase, rule 5)"
+   },
+   {
+    "text": "Accenture tenure March 2005 to September 2023",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next.Start_Date/End_Date"
+   },
+   {
+    "text": "looking for his next build, not a role maintaining what exists",
+    "label": "supported",
+    "source": "why-hire-matt.5PSummary; career-intent-what-im-looking-for-next.Performance ('0→1 building, not maintenance')"
+   },
+   {
+    "text": "quoted 'builder's mindset, coach's heart' in his own words",
+    "label": "supported",
+    "source": "profile.self_description"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Answers the comparison from the record and states it does not rank Matt above an unspecified in-house candidate; all claims supported (CIC story, leading-people story, cutting-time-to-market Situation, scaling-talent Situation).",
+  "claims": [
+   {
+    "text": "work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "clients struggled with slow development cycles, fragmented workflows, legacy systems",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients.Situation"
+   },
+   {
+    "text": "CIC hires often lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation.Situation"
+   },
+   {
+    "text": "flat organization required building hiring, evaluation, promotion, compensation, remediation mechanisms without layers",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Situation/Task"
+   },
+   {
+    "text": "built and ran Atlanta and Tampa CICs from the ground up over 4 years",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Task/Result"
+   },
+   {
+    "text": "grew from zero / a 10-person pilot to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Use Case(s)/Result; leading-people-from-delivery-teams-to-a-150-person-organization.5PSummary"
+   },
+   {
+    "text": "full P&L accountability, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "11 to 13 direct-report practice and client leads in a flat structure",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Result/Performance"
+   },
+   {
+    "text": "final hiring decision on every offer; owned end-of-remediation calls; compensation allocation; promotion calibration",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Action/Result"
+   },
+   {
+    "text": "balanced teams of PMs, designers, engineers; embedded pair programming, TDD, CI/CD, customer journey-led development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "adapted practices for enterprise security, compliance, legacy systems, governance rather than unchanged startup model",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "reusable playbooks and knowledge transfer; clients continued/adopted practices after engagements ended",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action/Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   },
+   {
+    "text": "4X faster velocity, zero-defect deployments; 10-person teams equal to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   },
+   {
+    "text": "delivery excellence and client advocacy/relationships contributed to $100M+ repeatable business (by FY23)",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   },
+   {
+    "text": "near-zero attrition in first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Result; scaling-talent-and-practices-for-agile-product-innovation.Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "States no basis to rank, then documents organization ownership; supported: CIC build/P&L/150+, 'I do, we do, you do' quoted verbatim (scaling-talent Result), NS reinforcement and handover (making-it-stick, unifying), Capital One 3-4x faster, zero production defects, client sought to retain team (capital-one Result), CIC stats.",
+  "claims": [
+   {
+    "text": "work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "clients asked to move from waterfall, feature factories, siloed teams to customer-centric product development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Situation"
+   },
+   {
+    "text": "NS question was whether practices would hold after outside experts left; crisis showed implementing is not reinforcing",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern.Situation/Task"
+   },
+   {
+    "text": "built and ran Atlanta and Tampa CICs from the ground up over 4 years",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Task/Result"
+   },
+   {
+    "text": "full P&L accountability, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "grew from zero / a 10-person pilot to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Use Case(s)/Result; leading-people-from-delivery-teams-to-a-150-person-organization.5PSummary"
+   },
+   {
+    "text": "established recruiting, training, career progression frameworks, technical infrastructure, playbooks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "near-zero attrition in first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Result; scaling-talent-and-practices-for-agile-product-innovation.Result"
+   },
+   {
+    "text": "practitioners progressed guided to independent via 'I do, we do, you do' model",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation.Result"
+   },
+   {
+    "text": "NS: rebuilt daily workflow, test cases before solution, rotating pairs, standup checks, stories finishable in 1-week iteration",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern.Action/5PSummary"
+   },
+   {
+    "text": "practices held after experts went home; crisis failure mode did not recur",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern.Result"
+   },
+   {
+    "text": "NS contributors paired into new-state build learning Angular, Node, Spring Boot, cloud-native; skills to support app after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices.Action/Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   },
+   {
+    "text": "delivery excellence and client advocacy/relationships contributed to $100M+ repeatable business (by FY23)",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   },
+   {
+    "text": "Capital One team delivered features 3-4x faster than other Accenture teams, zero production defects; client sought to retain team beyond planned end",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one.Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 1,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Answers the comparison with ownership evidence and says it does not establish Matt is better; supported: CIC/leading-people facts, NS pairing/skills/reinforcement, JPMC TS Dynamics CRM 20-25 developers and handover to internal team (rescuing story).",
+  "claims": [
+   {
+    "text": "work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "NS question was whether practices would hold after outside experts left; crisis showed implementing is not reinforcing",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern.Situation/Task"
+   },
+   {
+    "text": "JPMC vendor missed all major milestones with high-severity defects; platform moved to internal ownership",
+    "label": "supported",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program.Situation/Task"
+   },
+   {
+    "text": "built and ran Atlanta and Tampa CICs from the ground up over 4 years",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Task/Result"
+   },
+   {
+    "text": "full P&L accountability, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "final hiring decision on every offer; owned end-of-remediation calls; compensation allocation; promotion calibration",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Action/Result"
+   },
+   {
+    "text": "grew from zero / a 10-person pilot to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Use Case(s)/Result; leading-people-from-delivery-teams-to-a-150-person-organization.5PSummary"
+   },
+   {
+    "text": "11 to 13 direct-report practice and client leads in a flat structure",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Result/Performance"
+   },
+   {
+    "text": "ran monthly feedback capture / peer-based feedback system where managers did not sit on teams",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Action"
+   },
+   {
+    "text": "near-zero attrition in first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Result; scaling-talent-and-practices-for-agile-product-innovation.Result"
+   },
+   {
+    "text": "NS: paired thin-stretched domain experts with team members ('I do, we do, you do'), rotated knowledge",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices.Action"
+   },
+   {
+    "text": "NS contributors paired into new-state build learning Angular, Node, Spring Boot, cloud-native; skills to support app after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices.Action/Result"
+   },
+   {
+    "text": "NS client learned to write quality testable stories and own backlog and priorities",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices.Result"
+   },
+   {
+    "text": "practices held after experts went home; crisis failure mode did not recur",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern.Result"
+   },
+   {
+    "text": "directed 20-25 vendor developers, moved from offshore factory to onsite alongside client teams, KT documentation, source-code handoff, paired development, ramp-down",
+    "label": "supported",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program.Action"
+   },
+   {
+    "text": "delivery became predictable; JPM internal team took long-term ownership",
+    "label": "supported",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program.Result"
+   },
+   {
+    "text": "4X faster velocity, zero-defect deployments; 10-person teams equal to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   },
+   {
+    "text": "delivery excellence and client advocacy/relationships contributed to $100M+ repeatable business (by FY23)",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "States no evidence to rank; supported: flat-org machinery, NS scarce domain knowledge and pair-programming resistance ('two people to do the work of one', unifying story), CIC facts, 'I do, we do, you do' quoted verbatim, NS MVP covering 95% of targeted use cases (the-cics-first-engagement Result). Ambiguous: attributing the pairing resistance to 'leadership' read as supported (the objection is about paying).",
+  "claims": [
+   {
+    "text": "work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "flat organization required building hiring, evaluation, promotion, compensation, remediation mechanisms without layers",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Situation/Task"
+   },
+   {
+    "text": "NS modernization constrained by scarce domain knowledge held by thin-stretched experts",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices.Result/5PSummary"
+   },
+   {
+    "text": "NS leadership resisted pair programming: paying for two people to do the work of one",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices.Action/5PSummary"
+   },
+   {
+    "text": "built and ran Atlanta and Tampa CICs from the ground up over 4 years",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Task/Result"
+   },
+   {
+    "text": "full P&L accountability, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "final hiring decision on every offer; owned end-of-remediation calls; compensation allocation; promotion calibration",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Action/Result"
+   },
+   {
+    "text": "ran monthly feedback capture / peer-based feedback system where managers did not sit on teams",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Action"
+   },
+   {
+    "text": "near-zero attrition in first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Result; scaling-talent-and-practices-for-agile-product-innovation.Result"
+   },
+   {
+    "text": "NS: paired thin-stretched domain experts with team members ('I do, we do, you do'), rotated knowledge",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices.Action"
+   },
+   {
+    "text": "NS contributors paired into new-state build learning Angular, Node, Spring Boot, cloud-native; skills to support app after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices.Action/Result"
+   },
+   {
+    "text": "NS client learned to write quality testable stories and own backlog and priorities",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices.Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   },
+   {
+    "text": "4X faster velocity, zero-defect deployments; 10-person teams equal to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   },
+   {
+    "text": "delivery excellence and client advocacy/relationships contributed to $100M+ repeatable business (by FY23)",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   },
+   {
+    "text": "NS revenue-system MVP launched covering 95% of targeted use cases, capturing real orders with clean data feeding the mainframe",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine.Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: 'Engineers were writing tests after code' (the quality-crisis story records one engineer writing tests after the code: 'an engineer had been solutioning... writing tests after the code'). Otherwise supported: quality crisis despite near-complete coverage, ownership in front of client and account leadership, audit, rebuilt backlog, TDD experts, rotating pairs, 6-month academy, CIC facts.",
+  "claims": [
+   {
+    "text": "work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "clients asked to move from waterfall, feature factories, siloed teams to customer-centric product development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Situation"
+   },
+   {
+    "text": "flat organization required building hiring, evaluation, promotion, compensation, remediation mechanisms without layers",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Situation/Task"
+   },
+   {
+    "text": "NS early quality crisis exposed defects despite near-complete test coverage",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change.Situation"
+   },
+   {
+    "text": "Engineers were writing tests after code",
+    "label": "unsupported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change.Action records a single engineer ('an engineer had been... writing tests after the code')"
+   },
+   {
+    "text": "vague backlog stories lacked defined scenarios and a definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change.Action"
+   },
+   {
+    "text": "took ownership in front of client and account leadership rather than defending the dashboard",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change.Action"
+   },
+   {
+    "text": "audited codebase and test suite, rebuilt backlog with testable stories, brought in specialists to redo work alongside team",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change.Action"
+   },
+   {
+    "text": "reinforced test-first through daily rotating pairs, working agreements, standup checks",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern.Action"
+   },
+   {
+    "text": "practices held after experts went home; crisis failure mode did not recur",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern.Result"
+   },
+   {
+    "text": "ran a tailored academy over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices.Action/5PSummary"
+   },
+   {
+    "text": "NS contributors paired into new-state build learning Angular, Node, Spring Boot, cloud-native; skills to support app after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices.Action/Result"
+   },
+   {
+    "text": "NS client learned to write quality testable stories and own backlog and priorities",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices.Result"
+   },
+   {
+    "text": "full P&L accountability, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "final hiring decision on every offer; owned end-of-remediation calls; compensation allocation; promotion calibration",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Action/Result"
+   },
+   {
+    "text": "grew from zero / a 10-person pilot to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Use Case(s)/Result; leading-people-from-delivery-teams-to-a-150-person-organization.5PSummary"
+   },
+   {
+    "text": "near-zero attrition in first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Result; scaling-talent-and-practices-for-agile-product-innovation.Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   },
+   {
+    "text": "delivery excellence and client advocacy/relationships contributed to $100M+ repeatable business (by FY23)",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 2,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Answers with ownership beyond advising; supported: CIC facts, JPMC CRM crisis and 20-25 developers handover, ACCESS 40+ blended team with on-call/Sev-1, root-cause analysis and leadership communications (payment-engine Action), NS pairing and handover.",
+  "claims": [
+   {
+    "text": "work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "clients asked to move from waterfall, feature factories, siloed teams to customer-centric product development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Situation"
+   },
+   {
+    "text": "JPMC vendor missed all major milestones with high-severity defects; platform moved to internal ownership",
+    "label": "supported",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program.Situation/Task"
+   },
+   {
+    "text": "NS modernization constrained by scarce domain knowledge held by thin-stretched experts",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices.Result/5PSummary"
+   },
+   {
+    "text": "built and ran Atlanta and Tampa CICs from the ground up over 4 years",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Task/Result"
+   },
+   {
+    "text": "full P&L accountability, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "established recruiting, training, career progression frameworks, technical infrastructure, playbooks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "grew from zero / a 10-person pilot to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Use Case(s)/Result; leading-people-from-delivery-teams-to-a-150-person-organization.5PSummary"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   },
+   {
+    "text": "4X faster velocity, zero-defect deployments; 10-person teams equal to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   },
+   {
+    "text": "delivery excellence and client advocacy/relationships contributed to $100M+ repeatable business (by FY23)",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   },
+   {
+    "text": "ACCESS payment engine: managed 40+ blended team, owned on-call and Sev-1, coordinated root-cause analysis and leadership communications",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access.Task/Action"
+   },
+   {
+    "text": "directed 20-25 vendor developers, moved from offshore factory to onsite alongside client teams, KT documentation, source-code handoff, paired development, ramp-down",
+    "label": "supported",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program.Action"
+   },
+   {
+    "text": "delivery became predictable; JPM internal team took long-term ownership",
+    "label": "supported",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program.Result"
+   },
+   {
+    "text": "NS: paired thin-stretched domain experts with team members ('I do, we do, you do'), rotated knowledge",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices.Action"
+   },
+   {
+    "text": "NS contributors paired into new-state build learning Angular, Node, Spring Boot, cloud-native; skills to support app after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices.Action/Result"
+   },
+   {
+    "text": "NS client learned to write quality testable stories and own backlog and priorities",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices.Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Frames the record for comparison with an in-house candidate; supported: CIC/leading-people facts, peer-feedback system, NS pairing and skills, JPMC CRM 20-25 developers, 3x daily calls to predictable delivery, requested by name for follow-on (rescuing Result).",
+  "claims": [
+   {
+    "text": "work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "flat organization required building hiring, evaluation, promotion, compensation, remediation mechanisms without layers",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Situation/Task"
+   },
+   {
+    "text": "NS modernization constrained by scarce domain knowledge held by thin-stretched experts",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices.Result/5PSummary"
+   },
+   {
+    "text": "JPMC vendor missed all major milestones with high-severity defects; platform moved to internal ownership",
+    "label": "supported",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program.Situation/Task"
+   },
+   {
+    "text": "built and ran Atlanta and Tampa CICs from the ground up over 4 years",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Task/Result"
+   },
+   {
+    "text": "grew from zero / a 10-person pilot to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Use Case(s)/Result; leading-people-from-delivery-teams-to-a-150-person-organization.5PSummary"
+   },
+   {
+    "text": "full P&L accountability, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "final hiring decision on every offer; owned end-of-remediation calls; compensation allocation; promotion calibration",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Action/Result"
+   },
+   {
+    "text": "ran monthly feedback capture / peer-based feedback system where managers did not sit on teams",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Action"
+   },
+   {
+    "text": "near-zero attrition in first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Result; scaling-talent-and-practices-for-agile-product-innovation.Result"
+   },
+   {
+    "text": "NS: paired thin-stretched domain experts with team members ('I do, we do, you do'), rotated knowledge",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices.Action"
+   },
+   {
+    "text": "NS contributors paired into new-state build learning Angular, Node, Spring Boot, cloud-native; skills to support app after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices.Action/Result"
+   },
+   {
+    "text": "NS client learned to write quality testable stories and own backlog and priorities",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices.Result"
+   },
+   {
+    "text": "directed 20-25 vendor developers, moved from offshore factory to onsite alongside client teams, KT documentation, source-code handoff, paired development, ramp-down",
+    "label": "supported",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program.Action"
+   },
+   {
+    "text": "moved from 3 daily stabilization calls to predictable delivery; client requested Matt by name for follow-on work",
+    "label": "supported",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program.Result"
+   },
+   {
+    "text": "4X faster velocity, zero-defect deployments; 10-person teams equal to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   },
+   {
+    "text": "delivery excellence and client advocacy/relationships contributed to $100M+ repeatable business (by FY23)",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Addresses the comparison directly (no factual basis to rank, in-house candidate may know your product) without disparaging; supported: waterfall/feature factories, new hires lacking cloud-native/Agile, flat-org mechanisms, CIC P&L/150+/hiring/feedback/attrition, delivery practices, stats incl. $100M+ by FY23.",
+  "claims": [
+   {
+    "text": "clients asked to move from waterfall, feature factories, siloed teams to customer-centric product development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Situation"
+   },
+   {
+    "text": "CIC hires often lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation.Situation"
+   },
+   {
+    "text": "flat organization required building hiring, evaluation, promotion, compensation, remediation mechanisms without layers",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Situation/Task"
+   },
+   {
+    "text": "built and ran Atlanta and Tampa CICs from the ground up over 4 years",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Task/Result"
+   },
+   {
+    "text": "full P&L accountability, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "grew from zero / a 10-person pilot to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Use Case(s)/Result; leading-people-from-delivery-teams-to-a-150-person-organization.5PSummary"
+   },
+   {
+    "text": "final hiring decision on every offer; owned end-of-remediation calls; compensation allocation; promotion calibration",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Action/Result"
+   },
+   {
+    "text": "ran monthly feedback capture / peer-based feedback system where managers did not sit on teams",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Action"
+   },
+   {
+    "text": "near-zero attrition in first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Result; scaling-talent-and-practices-for-agile-product-innovation.Result"
+   },
+   {
+    "text": "balanced teams of PMs, designers, engineers; embedded pair programming, TDD, CI/CD, customer journey-led development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "adapted practices for enterprise security, compliance, legacy systems, governance rather than unchanged startup model",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "reusable playbooks and knowledge transfer; clients continued/adopted practices after engagements ended",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action/Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   },
+   {
+    "text": "4X faster velocity, zero-defect deployments; 10-person teams equal to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   },
+   {
+    "text": "delivery excellence and client advocacy/relationships contributed to $100M+ repeatable business (by FY23)",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 3,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Ends by naming what to compare with an in-house candidate; supported: CIC facts, JP Morgan teams outpaced peer velocity within first 2 sprints, NS reduced meeting overhead/context switching (CIC Action), stats.",
+  "claims": [
+   {
+    "text": "work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "clients asked to move from waterfall, feature factories, siloed teams to customer-centric product development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Situation"
+   },
+   {
+    "text": "CIC hires often lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation.Situation"
+   },
+   {
+    "text": "built and ran Atlanta and Tampa CICs from the ground up over 4 years",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Task/Result"
+   },
+   {
+    "text": "full P&L accountability, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "grew from zero / a 10-person pilot to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Use Case(s)/Result; leading-people-from-delivery-teams-to-a-150-person-organization.5PSummary"
+   },
+   {
+    "text": "final hiring decision on every offer; owned end-of-remediation calls; compensation allocation; promotion calibration",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Action/Result"
+   },
+   {
+    "text": "near-zero attrition in first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Result; scaling-talent-and-practices-for-agile-product-innovation.Result"
+   },
+   {
+    "text": "balanced teams of PMs, designers, engineers; embedded pair programming, TDD, CI/CD, customer journey-led development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "adapted practices for enterprise security, compliance, legacy systems, governance rather than unchanged startup model",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "at JP Morgan, teams outpaced peer velocity within first 2 sprints, shipped code in weeks not months",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "at Norfolk Southern, teams reduced meeting overhead and context switching through pairing as velocity improved",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "4X faster velocity, zero-defect deployments; 10-person teams equal to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   },
+   {
+    "text": "delivery excellence and client advocacy/relationships contributed to $100M+ repeatable business (by FY23)",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "States the record does not establish what an in-house candidate has done, then what Matt owned; supported: CIC/leading-people facts (10-person pilot, 11-13 leads, allocation reviews), JP Morgan 2 sprints, 10 vs 20-person teams, 30+ engagements across 15+ clients, clients adopted practices internally.",
+  "claims": [
+   {
+    "text": "work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "clients asked to move from waterfall, feature factories, siloed teams to customer-centric product development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Situation"
+   },
+   {
+    "text": "flat organization required building hiring, evaluation, promotion, compensation, remediation mechanisms without layers",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Situation/Task"
+   },
+   {
+    "text": "built and ran Atlanta and Tampa CICs from the ground up over 4 years",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Task/Result"
+   },
+   {
+    "text": "full P&L accountability, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "grew from zero / a 10-person pilot to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Use Case(s)/Result; leading-people-from-delivery-teams-to-a-150-person-organization.5PSummary"
+   },
+   {
+    "text": "11 to 13 direct-report practice and client leads in a flat structure",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Result/Performance"
+   },
+   {
+    "text": "final hiring decision on every offer; owned end-of-remediation calls; compensation allocation; promotion calibration",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Action/Result"
+   },
+   {
+    "text": "balanced teams of PMs, designers, engineers; embedded pair programming, TDD, CI/CD, customer journey-led development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "adapted practices for enterprise security, compliance, legacy systems, governance rather than unchanged startup model",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "at JP Morgan, teams outpaced peer velocity within first 2 sprints, shipped code in weeks not months",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "4X faster velocity, zero-defect deployments; 10-person teams equal to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   },
+   {
+    "text": "near-zero attrition in first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Result; scaling-talent-and-practices-for-agile-product-innovation.Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   },
+   {
+    "text": "reusable playbooks and knowledge transfer; clients continued/adopted practices after engagements ended",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Addresses the comparison (no factual basis to rank without the other record); supported: CIC facts, 11-13 leads, JP Morgan 2 sprints, $100M+ by FY23, clients adopted practices internally.",
+  "claims": [
+   {
+    "text": "work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "clients asked to move from waterfall, feature factories, siloed teams to customer-centric product development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Situation"
+   },
+   {
+    "text": "CIC hires often lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation.Situation"
+   },
+   {
+    "text": "full P&L accountability, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "built and ran Atlanta and Tampa CICs from the ground up over 4 years",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Task/Result"
+   },
+   {
+    "text": "grew from zero / a 10-person pilot to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Use Case(s)/Result; leading-people-from-delivery-teams-to-a-150-person-organization.5PSummary"
+   },
+   {
+    "text": "11 to 13 direct-report practice and client leads in a flat structure",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Result/Performance"
+   },
+   {
+    "text": "final hiring decision on every offer; owned end-of-remediation calls; compensation allocation; promotion calibration",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Action/Result"
+   },
+   {
+    "text": "near-zero attrition in first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Result; scaling-talent-and-practices-for-agile-product-innovation.Result"
+   },
+   {
+    "text": "balanced teams of PMs, designers, engineers; embedded pair programming, TDD, CI/CD, customer journey-led development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "adapted practices for enterprise security, compliance, legacy systems, governance rather than unchanged startup model",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "at JP Morgan, teams outpaced peer velocity within first 2 sprints, shipped code in weeks not months",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   },
+   {
+    "text": "4X faster velocity, zero-defect deployments; 10-person teams equal to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   },
+   {
+    "text": "delivery excellence and client advocacy/relationships contributed to $100M+ repeatable business (by FY23)",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   },
+   {
+    "text": "reusable playbooks and knowledge transfer; clients continued/adopted practices after engagements ended",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 4,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Frames the record against an in-house candidate (opener); supported: CIC facts, new hires lacking cloud-native experience, career frameworks, 'I do, we do, you do' quoted verbatim (scaling-talent Result), near-zero attrition (scaling-talent Result), JP Morgan 2 sprints, NS meeting overhead, stats.",
+  "claims": [
+   {
+    "text": "work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement",
+    "label": "supported",
+    "source": "Theme values (rule 4)"
+   },
+   {
+    "text": "clients asked to move from waterfall, feature factories, siloed teams to customer-centric product development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Situation"
+   },
+   {
+    "text": "CIC hires often lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation.Situation"
+   },
+   {
+    "text": "built and ran Atlanta and Tampa CICs from the ground up over 4 years",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Task/Result"
+   },
+   {
+    "text": "full P&L accountability, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "grew from zero / a 10-person pilot to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Use Case(s)/Result; leading-people-from-delivery-teams-to-a-150-person-organization.5PSummary"
+   },
+   {
+    "text": "established recruiting, training, career progression frameworks, technical infrastructure, playbooks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "adapted practices for enterprise security, compliance, legacy systems, governance rather than unchanged startup model",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "balanced teams of PMs, designers, engineers; embedded pair programming, TDD, CI/CD, customer journey-led development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "practitioners progressed guided to independent via 'I do, we do, you do' model",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation.Result"
+   },
+   {
+    "text": "near-zero attrition in first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization.Result; scaling-talent-and-practices-for-agile-product-innovation.Result"
+   },
+   {
+    "text": "4X faster velocity, zero-defect deployments; 10-person teams equal to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   },
+   {
+    "text": "at JP Morgan, teams outpaced peer velocity within first 2 sprints, shipped code in weeks not months",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "at Norfolk Southern, teams reduced meeting overhead and context switching through pairing as velocity improved",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   },
+   {
+    "text": "delivery excellence and client advocacy/relationships contributed to $100M+ repeatable business (by FY23)",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Result"
+   },
+   {
+    "text": "reusable playbooks and knowledge transfer; clients continued/adopted practices after engagements ended",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500.Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

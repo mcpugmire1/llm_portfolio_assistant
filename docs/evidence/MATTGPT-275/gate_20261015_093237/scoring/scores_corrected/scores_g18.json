@@ -1,0 +1,2369 @@
+[
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. First turn: answers the scaling question from the CIC stories and corrects the 4-person premise to the documented 10-person pilot. All claims supported; supported: CIC grew from a 10-person pilot to 150+ practitioners across engineering, architecture, product and design in Atlanta and Tampa, Many new joiners lacked hands-on cloud-native or Agile experience, Needed hiring, evaluation, promotion and compensation processes without adding management layers, Hiring engine across 4 channels: bench, campus, contract-to-hire, job requisitions; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "CIC grew from a 10-person pilot to 150+ practitioners across engineering, architecture, product and design in Atlanta and Tampa",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Many new joiners lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "Needed hiring, evaluation, promotion and compensation processes without adding management layers",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Task"
+   },
+   {
+    "text": "Hiring engine across 4 channels: bench, campus, contract-to-hire, job requisitions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Engineers completed TDD pairing auditions; interviewers logged independent votes; Matt held closing interview and made final decision on every offer",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "15-20 auditions and 4-6 net-new practitioners per week; capped at 2 interview slots per practitioner per week",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Tailored enablement then round-robin pairing with experienced practitioners",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "'I do, we do, you do' learning model, guided to independent delivery (verbatim)",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Training covered pair programming, TDD, CI/CD, lean product management, UCD",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Skills matrices, mentoring, peer-led tech talks, career development",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "3 practice leads plus 8-10 client delivery leads reported directly to him; team anchors; Monday allocation reviews",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Performance reviews drew on evidence from recent pair partners, PMs and anchors",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Over 4 years reached 150+, near-zero attrition in first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "30+ product engagements for 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. First turn: answers the scaling question from the CIC stories and corrects the 4-person premise to the documented 10-person pilot. All claims supported; supported: Built Atlanta and Tampa CICs from the ground up, 10-person pilot to 150+ across engineering, architecture, product, design over 4 years, New hires lacked cloud-native or Agile experience, 11 to 13 practice and client leads reported directly to him; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "Built Atlanta and Tampa CICs from the ground up",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Task"
+   },
+   {
+    "text": "10-person pilot to 150+ across engineering, architecture, product, design over 4 years",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "New hires lacked cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "11 to 13 practice and client leads reported directly to him",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Situation/Result"
+   },
+   {
+    "text": "Balanced teams with an experienced engineering anchor keeping leads informed without a management layer",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Monday allocation reviews assigning people across engagements, training and accelerator development by skills, location, demand",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Hiring engine across bench, campus, contract-to-hire, approved job requisitions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Engineers paired on TDD; product and design candidates worked messy client briefs; Matt held closing interview and final decision",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "4-6 net-new per week; interviewer participation capped",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "'I do, we do, you do' then paired with seasoned practitioners (quote verbatim)",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Training covered lean product, UCD, pair programming, TDD, CI/CD",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Mentoring, peer-led tech talks, practice forums",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action; enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   },
+   {
+    "text": "Explicit career expectations; feedback from pair partners, PMs, anchors",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "150+ with near-zero attrition in first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result"
+   },
+   {
+    "text": "10-person teams equal to 20-person teams, 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Delivery excellence and referrals contributed to $100M+ repeatable business",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. New topic: payments answered from the payments stories with no carry-over of the CIC scaling topic. All claims supported; supported: Regional treasury systems had different data models, client configurations, entitlement structures, ACCESS needed payment capabilities beyond Bottomline WebSeries, Treasurers needed to manage treasury functions without moving among separate platforms, Technology Delivery Lead managing blended 40+ team across US, Mumbai, Bangalore; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "Regional treasury systems had different data models, client configurations, entitlement structures",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "ACCESS needed payment capabilities beyond Bottomline WebSeries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Treasurers needed to manage treasury functions without moving among separate platforms",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action (SSO)"
+   },
+   {
+    "text": "Technology Delivery Lead managing blended 40+ team across US, Mumbai, Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, federal tax modules; NACHA validation; payment-type permissions; MAC security",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Contextual help for payment screens to reduce errors and support calls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Led payments data migration preserving configurations, histories, traceability without disrupting live payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 serving 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "RBC: fragmented systems delayed cross-border and bulk payments; designed initiation-to-reconciliation workflows with real-time FX, alerts, recurring, batch",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Situation/Action"
+   },
+   {
+    "text": "RBC deliverable was an implementation blueprint; revised cutoffs reduced wire delays; training materials avoided support dependency",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   },
+   {
+    "text": "AmEx VPP: missing SDKs, fragmented docs, no sandbox; co-created portal, SDKs, docs, sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation/Action"
+   },
+   {
+    "text": "Environment virtualization enabled earlier testing",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Onboarding time fell, API trial usage up within 3 months, over 261 additional story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. New topic: payments answered from the payments stories with no carry-over of the CIC scaling topic. All claims supported; supported: WebSeries lacked payment modules, security controls, workflows for 135,000+ clients across 180+ countries, Regional legacy systems had different data models, entitlements, compliance records, Technology Delivery Lead, blended 40+ team of Accenture and bank resources in US, Mumbai, Bangalore, ACH, wire, FX/cross-border, government tax modules; NACHA validation; payment-type entitlements; MAC; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "WebSeries lacked payment modules, security controls, workflows for 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional legacy systems had different data models, entitlements, compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Technology Delivery Lead, blended 40+ team of Accenture and bank resources in US, Mumbai, Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, government tax modules; NACHA validation; payment-type entitlements; MAC",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Integrated sanctions screening and customer risk scores; real-time global reporting; SSO",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Led payments-workstream data migration preserving configurations, histories, traceability; zero disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 consolidating regional systems",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "RBC workflows initiation to reconciliation with real-time FX, alerts, recurring, batch; complete implementation blueprint; cutoffs reduced wire delays and improved SLA compliance",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action/Result"
+   },
+   {
+    "text": "AmEx: missing SDKs, fragmented docs, no sandbox hindered adoption of mainframe replacement",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "Helped create portal, Java/.NET/Python SDKs, docs, virtualized testing environments",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption and trial usage up within 3 months; onboarding time down; over 261 extra story points via Lean Product and XP",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. Answers team sizes for the engagements its own turn 2 discussed (JP Morgan ACCESS, RBC, American Express); 40+ for ACCESS and states the other stories record no headcount; no Cloud Innovation Center figure given as the answer. All claims supported; supported: 40+ blended team at JP Morgan Chase across US, Mumbai, Bangalore, Defined onshore-offshore model; delivery across payment engine and gateway workstreams, Engine and gateway were one ACCESS team, not separate 40+ teams, Primary technical interface with Bottomline at Portsmouth NH; travel to Chicago and NY/NJ; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "40+ blended team at JP Morgan Chase across US, Mumbai, Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Defined onshore-offshore model; delivery across payment engine and gateway workstreams",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Task"
+   },
+   {
+    "text": "Engine and gateway were one ACCESS team, not separate 40+ teams",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action ('a 40+ person Accenture/JP Morgan team on the ACCESS payment engine and gateway')"
+   },
+   {
+    "text": "Primary technical interface with Bottomline at Portsmouth NH; travel to Chicago and NY/NJ",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Coordinated RCA across US, offshore, vendor teams; status updates and daily leadership calls",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "AmEx VPP and RBC cross-border stories give no headcount",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express/transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express/designing-cross-border-payment-workflows-for-rbc-express|rbc (no team size field or figure)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 3,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. Answers team sizes for the engagements its own turn 2 discussed (JP Morgan ACCESS, RBC, American Express); 40+ for ACCESS and states the other stories record no headcount; no Cloud Innovation Center figure given as the answer. All claims supported; supported: 40+ blended team on JPMC ACCESS across US, Mumbai, Bangalore, Defined onshore-offshore model; primary technical interface with Bottomline, AmEx VPP team was distributed, cross-functional (PMs, CX architects, engineers, business stakeholders), no headcount, RBC story names FX, IT and business teams, no size; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "40+ blended team on JPMC ACCESS across US, Mumbai, Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Defined onshore-offshore model; primary technical interface with Bottomline",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "AmEx VPP team was distributed, cross-functional (PMs, CX architects, engineers, business stakeholders), no headcount",
+    "label": "supported",
+    "source": "conducting-discovery-and-framing-to-build-cross-functional-alignment|american-express Situation"
+   },
+   {
+    "text": "RBC story names FX, IT and business teams, no size",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "150+ refers to the CIC organization, not a payments team",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. First turn: answers the scaling question from the CIC stories and corrects the 4-person premise to the documented 10-person pilot. All claims supported; supported: 10-person pilot to 150+ across engineering, architecture, product, design, Atlanta and Tampa CICs; new joiners lacked cloud-native or Agile experience, Built hiring, evaluation, promotion, compensation without management layers, Hiring engine across bench, campus, contract-to-hire, approved requisitions; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "10-person pilot to 150+ across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Atlanta and Tampa CICs; new joiners lacked cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "Built hiring, evaluation, promotion, compensation without management layers",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Task"
+   },
+   {
+    "text": "Hiring engine across bench, campus, contract-to-hire, approved requisitions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Georgia Tech recruiting, hackathons and job fairs expanded talent pipeline",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology|accenture Action/Result; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "TDD pairing auditions for engineers; PMs and designers on live client briefs; independent votes; Matt's closing interview and final decision",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "4-6 net-new practitioners per week; interview participation capped",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Enablement then round-robin pairing; 'I do, we do, you do' (verbatim)",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Tailored training, senior-to-junior mentoring, weekly peer-led tech talks, live project experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action; enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   },
+   {
+    "text": "Pair programming, TDD, continuous delivery, user research, Build-Measure-Learn as daily practices",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action/Result"
+   },
+   {
+    "text": "11-13 practice and client leads reported directly; anchors; Monday allocation reviews across client work, training, accelerators",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Situation/Action"
+   },
+   {
+    "text": "Reviews from pair partners, PMs, anchors rather than visibility to a boss",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "150+ with near-zero attrition first two years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result"
+   },
+   {
+    "text": "10-person teams equal to 20-person teams, 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. First turn: answers the scaling question from the CIC stories and corrects the 4-person premise to the documented 10-person pilot. All claims supported; supported: 10-person pilot to 150+ across engineering, architecture, product, design, Growing client demand; new hires lacked cloud-native or Agile experience, Run hiring, development, performance, promotions without layers of management, 3 practice leads plus 8-10 client delivery leads reported directly; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "10-person pilot to 150+ across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Growing client demand; new hires lacked cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "Run hiring, development, performance, promotions without layers of management",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Task"
+   },
+   {
+    "text": "3 practice leads plus 8-10 client delivery leads reported directly",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Balanced teams with an engineering 'anchor' (word in story) keeping leads informed on technical progress, team dynamics, resource needs",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Monday reviews assigning practitioners by skills, location, demand",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Hiring via bench, campus, contract-to-hire, approved requisitions; TDD pairing auditions; live client briefs; independent votes; final decision",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "4-6 net-new per week; interviewer workloads capped",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Enablement, mentoring, rotating pair partners, 'I do, we do, you do' (verbatim)",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action/Result; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Weekly peer-led demos, practice forums, retrospectives, career-development conversations",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action; enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   },
+   {
+    "text": "Feedback from actual teammates used in development and promotion",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Over 4 years 150+; near-zero attrition first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result"
+   },
+   {
+    "text": "10-person teams equal to 20-person teams; 4X velocity; zero-defect",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. New topic: payments answered from the payments stories with no carry-over of the CIC scaling topic. All claims supported; supported: ACCESS Next Generation needed capabilities beyond WebSeries; distinct formatting, validation, compliance, workflow requirements per payment type, 135,000+ clients across 180+ countries; regional systems with different data models, configurations, entitlements, Technology Delivery Lead managing 40+ blended team across Mumbai, Bangalore, US, ACH credits and direct debits, wire, FX/cross-border, federal tax payments; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation needed capabilities beyond WebSeries; distinct formatting, validation, compliance, workflow requirements per payment type",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "135,000+ clients across 180+ countries; regional systems with different data models, configurations, entitlements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Technology Delivery Lead managing 40+ blended team across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH credits and direct debits, wire, FX/cross-border, federal tax payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "MAC verification, payment-type permissions, sanctions screening, risk-based approval controls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "70-80% embedded with Bottomline in Portsmouth; managed build-vs-configure boundary",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Led payments data migration, compliance traceability, zero disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "RBC workflows initiation to reconciliation; partnered with FX team; alerts, recurring, Interac e-Transfer, batch, revised cutoffs",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "RBC complete implementation blueprint ready for development; cutoffs reduced wire delays",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   },
+   {
+    "text": "AmEx adoption slowed by missing SDKs, fragmented docs, dependency bottlenecks, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "Led portal work: Java/.NET/Python SDKs, use-case docs, virtualized testing environments; Lean Product and XP; Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption and trial usage up within 3 months; onboarding down; over 261 extra story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. New topic: payments answered from the payments stories with no carry-over of the CIC scaling topic. All claims supported; supported: Treasurers worked across separate regional systems and local logins, Payment types had different formatting, validation, compliance, workflow requirements, Technology Delivery Lead, 40+ blended onshore/offshore team, worked directly with Bottomline on WebSeries, ACH, wire, FX/cross-border, federal tax modules; MAC payment-integrity verification; payment-type permissions; sanctions screening; risk-based approval; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "Treasurers worked across separate regional systems and local logins",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Payment types had different formatting, validation, compliance, workflow requirements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Technology Delivery Lead, 40+ blended onshore/offshore team, worked directly with Bottomline on WebSeries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, federal tax modules; MAC payment-integrity verification; payment-type permissions; sanctions screening; risk-based approval",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Contextual help explaining wire fields, tax codes, FX requirements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway message transformation, protocol translation, routing across 12 countries; single entry point for Wire, ACH, Cross-Border Transfers",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Led payments data migration preserving configurations, entitlements, histories, traceability without disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 serving 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "AmEx: fragmented docs, missing SDKs, dependency bottlenecks, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "Helped create Java/.NET/Python SDKs, use-case docs, simplified Developer Guide, secure virtual sandbox; environment virtualization; Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Onboarding down; API consumption and trial usage up within 3 months; exceeded commitment by over 261 story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. Answers team sizes for the engagements its own turn 2 discussed (JP Morgan ACCESS, RBC, American Express); 40+ for ACCESS and states the other stories record no headcount; no Cloud Innovation Center figure given as the answer. All claims supported; supported: 40+ person blended Accenture/JPMC team across Mumbai, Bangalore, US covering engine and gateway, 40+ is the blended delivery team, not separate teams per workstream, Technology Delivery Lead; defined onshore-offshore model; tracked development progress; managed Bottomline relationship, 70-80% at Bottomline Portsmouth NH; travel to Chicago and NY/NJ; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "40+ person blended Accenture/JPMC team across Mumbai, Bangalore, US covering engine and gateway",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "40+ is the blended delivery team, not separate teams per workstream",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Technology Delivery Lead; defined onshore-offshore model; tracked development progress; managed Bottomline relationship",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "70-80% at Bottomline Portsmouth NH; travel to Chicago and NY/NJ",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Team scope: ACH, wire, FX, federal tax modules, security, reporting, gateway integrations",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Directed incident response with RCA across US, offshore, vendor",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "AmEx distributed cross-functional team (PMs, CX architects, engineers, business stakeholders), no headcount",
+    "label": "supported",
+    "source": "conducting-discovery-and-framing-to-build-cross-functional-alignment|american-express Situation"
+   },
+   {
+    "text": "RBC cross-border story gives no team size; worked with FX, IT, business teams",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 4,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. Answers team sizes for the engagements its own turn 2 discussed (JP Morgan ACCESS and American Express; this label's turn 2 did not discuss RBC); 40+ for ACCESS and states the other stories record no headcount; no Cloud Innovation Center figure given as the answer. All claims supported; supported: 40+ blended onshore/offshore Accenture and JPMC team in Mumbai, Bangalore, US, Same team worked on payment engine and gateway, one program, AmEx VPP story does not specify a headcount; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "40+ blended onshore/offshore Accenture and JPMC team in Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Same team worked on payment engine and gateway, one program",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "AmEx VPP story does not specify a headcount",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express/transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express (no figure)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. First turn: answers the scaling question from the CIC stories and corrects the 4-person premise to the documented 10-person pilot. All claims supported; supported: Scaled Atlanta and Tampa CICs to 150+ across engineering, architecture, product, design; documented start a 10-person pilot, New joiners lacked cloud-native/Agile experience; flat org with no managers on daily teams, Bench, campus, contract-to-hire, requisitions, TDD pairing auditions; live scoping for PMs/designers; independent votes; Matt's closing interview and every final decision; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "Scaled Atlanta and Tampa CICs to 150+ across engineering, architecture, product, design; documented start a 10-person pilot",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "New joiners lacked cloud-native/Agile experience; flat org with no managers on daily teams",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Situation"
+   },
+   {
+    "text": "Bench, campus, contract-to-hire, requisitions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "TDD pairing auditions; live scoping for PMs/designers; independent votes; Matt's closing interview and every final decision",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "4-6 net-new per week; interview participation capped",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "11-13 direct-report practice and client leads; 'anchors' (word in story) inside balanced teams",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Situation/Action"
+   },
+   {
+    "text": "Monday allocation reviews by need, skills, location",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Practice syncs standardized engineering, design, PM expectations",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action (bi-weekly practice syncs standardizing rubrics)"
+   },
+   {
+    "text": "Tailored enablement, rotating pairing, 'I do, we do, you do' (verbatim), senior-to-junior coaching, peer-led tech talks",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action/Result; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Pair programming, TDD, continuous delivery, user research, hypothesis-driven design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "Monthly feedback sessions with evidence from pair partners, PMs, anchors; practice leads ran career conversations",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Facilitated calibration; owned compensation allocation and remediation decisions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "150+ with near-zero attrition first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result"
+   },
+   {
+    "text": "10-person teams equal to 20-person; 4X velocity; zero-defect",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. First turn: answers the scaling question from the CIC stories and corrects the 4-person premise to the documented 10-person pilot. All claims supported; supported: 10-person pilot to 150+ across engineering, architecture, product, design in Atlanta and Tampa, New joiners lacked cloud-native/Agile experience; no supervisors on daily teams, Hiring engine: bench, campus, contract-to-hire, approved requisitions, TDD pairing auditions; live scoping; independent votes; failed audition ended candidacy; final decision; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "10-person pilot to 150+ across engineering, architecture, product, design in Atlanta and Tampa",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "New joiners lacked cloud-native/Agile experience; no supervisors on daily teams",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Situation"
+   },
+   {
+    "text": "Hiring engine: bench, campus, contract-to-hire, approved requisitions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "TDD pairing auditions; live scoping; independent votes; failed audition ended candidacy; final decision",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "4-6 net-new per week; 2 interview slots per week cap",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Enablement covered lean product, UCD, pair programming, TDD, CI/CD; 'I do, we do, you do' (verbatim)",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Skills matrices, peer-led tech talks, career development",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "11-13 practice and client leads; anchors; Monday allocation reviews; pair rotation spread knowledge horizontally",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Situation/Action"
+   },
+   {
+    "text": "Evaluation from pair partners, PMs, anchors; monthly feedback sessions; calibration; compensation; remediation",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "150+ with near-zero attrition first 2 years; machinery held through 4 years of scaling",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. New topic: payments answered from the payments stories with no carry-over of the CIC scaling topic. All claims supported; supported: JPMC treasury teams worked across separate regional systems with different data models, entitlements, message formats, regulatory requirements, WebSeries needed purpose-built capabilities for 135,000+ clients across 180+ countries, Led blended 40+ team across US, Mumbai, Bangalore, ACH, wire, FX/cross-border, federal tax modules; payment-type permissions; MAC; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "JPMC treasury teams worked across separate regional systems with different data models, entitlements, message formats, regulatory requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation"
+   },
+   {
+    "text": "WebSeries needed purpose-built capabilities for 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Led blended 40+ team across US, Mumbai, Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, federal tax modules; payment-type permissions; MAC",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Contextual guidance to cut errors and support calls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway: message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Led payments data migration without disrupting live operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "Owned production incident response and RCA",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011; single entry point instead of separate regional logins",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "AmEx: fragmented docs, missing SDKs, no sandbox, downstream dependencies; clients without mature dev teams struggled",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Situation/Action"
+   },
+   {
+    "text": "Portal improvements, SDKs, docs, virtualized test environments; Client Onboarding Test Drive; Lean Product and XP",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption and trial usage up within 3 months; onboarding down; over 261 extra story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. New topic: payments answered from the payments stories with no carry-over of the CIC scaling topic. All claims supported; supported: ACCESS needed capabilities beyond WebSeries; distinct per-payment-type requirements; treasurers faced fragmented regional systems and separate logins, Technology Delivery Lead, 40+ blended team across US, Mumbai, Bangalore, ACH, wire, FX/cross-border, federal tax modules; payment-type entitlements; MAC; sanctions screening; risk-based approval, Contextual help for wire fields, tax codes, FX parameters; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "ACCESS needed capabilities beyond WebSeries; distinct per-payment-type requirements; treasurers faced fragmented regional systems and separate logins",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Technology Delivery Lead, 40+ blended team across US, Mumbai, Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, federal tax modules; payment-type entitlements; MAC; sanctions screening; risk-based approval",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Contextual help for wire fields, tax codes, FX parameters",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Centralized gateway across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "On-call and Sev-1 incident response coordinating bank, offshore, vendor teams",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011 serving 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "RBC: workflows initiation to reconciliation; FX team partnership; blueprint; cutoffs reduced wire delays; training materials",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action/Result"
+   },
+   {
+    "text": "AmEx: missing SDKs, fragmented docs, no sandbox, clients without mature dev teams; SDKs, docs, sandbox, virtualized test environments; Test Drive",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation/Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Onboarding down; API usage up within 3 months; over 261 story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. Answers team sizes for the engagements its own turn 2 discussed (JP Morgan ACCESS and American Express; this label's turn 2 did not discuss RBC); 40+ for ACCESS and states the other stories record no headcount; no Cloud Innovation Center figure given as the answer. All claims supported; supported: 40+ blended Accenture/bank team across US, Mumbai, Bangalore, Defined onshore-offshore model; primary technical interface with Bottomline, Engine and gateway stories describe the same 40+ team, AmEx VPP stories give no headcount; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "40+ blended Accenture/bank team across US, Mumbai, Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Defined onshore-offshore model; primary technical interface with Bottomline",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Engine and gateway stories describe the same 40+ team",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "AmEx VPP stories give no headcount",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express/transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express (no figure)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 5,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. Answers team sizes for the engagements its own turn 2 discussed (JP Morgan ACCESS, RBC, American Express); 40+ for ACCESS and states the other stories record no headcount; no Cloud Innovation Center figure given as the answer. All claims supported; supported: 40+ blended Accenture/JPMC team across US, Mumbai, Bangalore as Technology Delivery Lead, Team covered engine and gateway incl. ACH, wire, FX, federal tax; one team, Defined onshore-offshore model; managed Bottomline; 70-80% at Portsmouth NH, AmEx distributed cross-functional team, no headcount; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "40+ blended Accenture/JPMC team across US, Mumbai, Bangalore as Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Team covered engine and gateway incl. ACH, wire, FX, federal tax; one team",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Defined onshore-offshore model; managed Bottomline; 70-80% at Portsmouth NH",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "AmEx distributed cross-functional team, no headcount",
+    "label": "supported",
+    "source": "conducting-discovery-and-framing-to-build-cross-functional-alignment|american-express Situation"
+   },
+   {
+    "text": "RBC cross-border story gives no team size",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc (no figure)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. First turn: answers the scaling question from the CIC stories and corrects the 4-person premise to the documented 10-person pilot. All claims supported; supported: 10-person pilot to 150+ across engineering, architecture, product, design in Atlanta and Tampa, Demand required hiring at scale; joiners lacked cloud-native/Agile experience, Hiring engine across 4 channels incl. approved requisitions, Georgia Tech hackathons and job fairs; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "10-person pilot to 150+ across engineering, architecture, product, design in Atlanta and Tampa",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Demand required hiring at scale; joiners lacked cloud-native/Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "Hiring engine across 4 channels incl. approved requisitions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Georgia Tech hackathons and job fairs",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology|accenture Action"
+   },
+   {
+    "text": "TDD pairing auditions; live scoping for PMs/designers; closing interview and final decision",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "4-6 net-new per week; capped at 2 slots per practitioner per week",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Tailored training, senior-junior mentorship, round-robin pairing, 'I do, we do, you do' (verbatim)",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action/Result; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Weekly peer-led demos, engineering forums",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   },
+   {
+    "text": "11-13 leads through 2-layer structure; Monday allocation; anchors",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Situation/Result/Action"
+   },
+   {
+    "text": "Reviews from pair partners, PMs, anchors",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Over 4 years 150+; near-zero attrition first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result"
+   },
+   {
+    "text": "Playbooks supported 30+ engagements across 15+ Fortune 500 clients; 4X velocity; zero-defect",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. First turn: answers the scaling question from the CIC stories and corrects the 4-person premise to the documented 10-person pilot. All claims supported; supported: 10-person pilot to 150+ across engineering, architecture, product, design at Atlanta and Tampa CICs, Joiners lacked cloud-native/Agile experience; managers did not sit on daily teams, Hiring engine via bench, campus, contract-to-hire, requisitions, Georgia Tech hackathons, recruiting, job fairs; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "10-person pilot to 150+ across engineering, architecture, product, design at Atlanta and Tampa CICs",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Joiners lacked cloud-native/Agile experience; managers did not sit on daily teams",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Situation"
+   },
+   {
+    "text": "Hiring engine via bench, campus, contract-to-hire, requisitions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Georgia Tech hackathons, recruiting, job fairs",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology|accenture Action"
+   },
+   {
+    "text": "Pairing auditions; closing interview and every final decision",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "4-6 net-new per week; 2 slots per practitioner per week",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Tailored enablement, round-robin pairing; 'I do, we do, you do' guided to independent delivery (verbatim)",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Senior engineers coached juniors; peer-led tech talks, engineering forums",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action; enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   },
+   {
+    "text": "11-13 leads reported directly; anchors; weekly allocation reviews",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Situation/Action"
+   },
+   {
+    "text": "Feedback from pairing partners rather than visibility to a boss",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "150+, near-zero attrition first 2 years, multiple hires promoted",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result"
+   },
+   {
+    "text": "10-person teams equal to 20-person; 4X; zero-defect",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. First turn: answers the scaling question from the CIC stories and corrects the 4-person premise to the documented 10-person pilot. All claims supported; supported: Scaled Atlanta and Tampa CICs to 150+ across engineering, architecture, product, design; 10-person pilot, Recruits often lacked cloud-native/Agile experience, Hiring engine: bench, campus, contract-to-hire, approved requisitions, Georgia Tech recruiting, hackathons, job fairs; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "Scaled Atlanta and Tampa CICs to 150+ across engineering, architecture, product, design; 10-person pilot",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Recruits often lacked cloud-native/Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "Hiring engine: bench, campus, contract-to-hire, approved requisitions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Georgia Tech recruiting, hackathons, job fairs",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology|accenture Action/Result"
+   },
+   {
+    "text": "TDD pairing auditions; live client briefs; independent votes; final decision on every offer",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "4-6 net-new per week; 2 slots per practitioner per week",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "'I do, we do, you do' (verbatim); paired with seasoned practitioners",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Training: cloud technologies, UCD, lean product, pair programming, TDD, CI/CD",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action; building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Peer-led tech talks, engineering forums",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   },
+   {
+    "text": "11-13 leads via 2-layer structure; anchors; Monday allocation across engagements, training, accelerators",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Situation/Action"
+   },
+   {
+    "text": "Evaluations from pairing partners, PMs, anchors",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Over 4 years 150+; near-zero attrition; multiple hires promoted",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result"
+   },
+   {
+    "text": "Teams of 10 equal to teams of 20; 4X; zero-defect",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. New topic: payments answered from the payments stories with no carry-over of the CIC scaling topic. All claims supported; supported: ACCESS needed more than out-of-box platform for 135,000+ clients across 180+ countries; distinct per-type requirements, Regional legacy systems with different data models, entitlements, histories to move without interrupting payments, Technology Delivery Lead, 40+ blended team US/Mumbai/Bangalore, 70-80% at Bottomline Portsmouth; build-vs-configure boundary; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "ACCESS needed more than out-of-box platform for 135,000+ clients across 180+ countries; distinct per-type requirements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional legacy systems with different data models, entitlements, histories to move without interrupting payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Technology Delivery Lead, 40+ blended team US/Mumbai/Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "70-80% at Bottomline Portsmouth; build-vs-configure boundary",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "ACH, wire, FX, federal tax modules; MAC; payment-type entitlements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Sanctions screening, customer risk scores, transaction-monitoring outputs",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Owned production incident response",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Led migration preserving configurations and traceability; no disruption; compliance dashboards became standard tooling",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "RBC: workflows, real-time FX, alerts, recurring, Interac e-Transfer, bulk; blueprint; cutoffs reduced wire delays",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action/Result"
+   },
+   {
+    "text": "AmEx: missing SDKs, fragmented docs, no sandbox, delayed testing",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "Java/.NET/Python SDKs, docs, sandbox, virtualized environments; Lean Product, XP; Test Drive",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API usage up within 3 months; onboarding down; over 261 extra story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. New topic: payments answered from the payments stories with no carry-over of the CIC scaling topic. All claims supported; supported: Regional treasury systems had different data models, configurations, entitlements, ACCESS needed capabilities beyond Bottomline out-of-box for 135,000+ clients in 180+ countries, Treasurers needed cash visibility and payment workflows without separate systems, Led 40+ blended team delivering ACH, wire, FX, federal tax modules; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "Regional treasury systems had different data models, configurations, entitlements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "ACCESS needed capabilities beyond Bottomline out-of-box for 135,000+ clients in 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Treasurers needed cash visibility and payment workflows without separate systems",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action (SSO, real-time reporting)"
+   },
+   {
+    "text": "Led 40+ blended team delivering ACH, wire, FX, federal tax modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Payment verification, payment-type permissions, sanctions screening, risk-based approval; contextual help",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Led payments data migration without disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 consolidating regional systems",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "RBC: fragmented systems, manual processes, bulk delays, missing real-time FX tools; workflows; FX team; blueprint; cutoffs; training",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Situation/Action/Result"
+   },
+   {
+    "text": "AmEx: missing SDKs, fragmented docs, no sandbox; Java/.NET/Python SDKs, docs, sandbox; environment virtualization",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation/Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Onboarding down; API usage up within 3 months; exceeded commitment by over 261 story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. New topic: payments answered from the payments stories with no carry-over of the CIC scaling topic. All claims supported; supported: ACCESS needed capabilities beyond WebSeries; per-type requirements for 135,000+ clients across 180+ countries, Regional legacy systems with different data models, configurations, entitlements to consolidate, Technology Delivery Lead, 40+ team US/Mumbai/Bangalore, ACH credits and direct debits, wire, FX, federal tax; MAC; payment-type permissions; sanctions screening; transaction-monitoring integration; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "ACCESS needed capabilities beyond WebSeries; per-type requirements for 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional legacy systems with different data models, configurations, entitlements to consolidate",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Technology Delivery Lead, 40+ team US/Mumbai/Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH credits and direct debits, wire, FX, federal tax; MAC; payment-type permissions; sanctions screening; transaction-monitoring integration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Cross-currency payments with embedded rate visibility; real-time global reporting",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Led payments-workstream migration preserving configurations, histories, traceability; zero disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 as unified global corporate banking portal",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "AmEx: missing SDKs, fragmented docs, no sandbox; SDKs, docs, sandbox, virtualized environments",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation/Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API usage up within 3 months; over 261 story points; onboarding time and integration complexity down",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "RBC: workflows, real-time FX, alerts, recurring, Interac e-Transfer, batch; blueprint; cutoffs reduced delays and improved SLA compliance",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. Answers team sizes for the engagements its own turn 2 discussed (JP Morgan ACCESS, RBC, American Express); 40+ for ACCESS and states the other stories record no headcount; no Cloud Innovation Center figure given as the answer. All claims supported; supported: 40+ blended Accenture/JPMC team across US, Mumbai, Bangalore for ACCESS, Defined onshore-offshore model; primary technical interface with Bottomline, 40+ is the blended delivery team, not direct reports or per-workstream teams, AmEx distributed cross-functional team; no headcount; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "40+ blended Accenture/JPMC team across US, Mumbai, Bangalore for ACCESS",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Defined onshore-offshore model; primary technical interface with Bottomline",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "40+ is the blended delivery team, not direct reports or per-workstream teams",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "AmEx distributed cross-functional team; no headcount",
+    "label": "supported",
+    "source": "conducting-discovery-and-framing-to-build-cross-functional-alignment|american-express Situation"
+   },
+   {
+    "text": "RBC cross-border story gives no team size",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc (no figure)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. Answers team sizes for the engagements its own turn 2 discussed (JP Morgan ACCESS, RBC, American Express); 40+ for ACCESS and states the other stories record no headcount; no Cloud Innovation Center figure given as the answer. All claims supported; supported: 40+ blended onshore/offshore team on ACCESS across Mumbai, Bangalore, US, Engine and gateway stories describe the same team, Defined model; primary interface with Bottomline; 70-80% at Portsmouth NH; travel to Chicago and NY/NJ, Delivered ACH, wire, FX, federal tax payments; ACCESS launched April 2011 serving 135,000+ in 180+ countries; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "40+ blended onshore/offshore team on ACCESS across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Engine and gateway stories describe the same team",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Defined model; primary interface with Bottomline; 70-80% at Portsmouth NH; travel to Chicago and NY/NJ",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Delivered ACH, wire, FX, federal tax payments; ACCESS launched April 2011 serving 135,000+ in 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Gateway connected operations across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "RBC and AmEx stories give no headcount; AmEx team of PMs, CX architects, engineers, stakeholders across locations",
+    "label": "supported",
+    "source": "conducting-discovery-and-framing-to-build-cross-functional-alignment|american-express Situation; designing-cross-border-payment-workflows-for-rbc-express|rbc (no figure)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 6,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. Answers team sizes for the engagements its own turn 2 discussed (JP Morgan ACCESS, RBC, American Express); 40+ for ACCESS and states the other stories record no headcount; no Cloud Innovation Center figure given as the answer. All claims supported; supported: 40+ blended Accenture/JPMC team across US, Mumbai, Bangalore for ACCESS, Same team across engine and gateway stories, Defined onshore/offshore model; primary interface with Bottomline, Coordinated incident response across US, offshore, vendor; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "40+ blended Accenture/JPMC team across US, Mumbai, Bangalore for ACCESS",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Same team across engine and gateway stories",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Defined onshore/offshore model; primary interface with Bottomline",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Coordinated incident response across US, offshore, vendor",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "AmEx distributed cross-functional team; no confirmed headcount",
+    "label": "supported",
+    "source": "conducting-discovery-and-framing-to-build-cross-functional-alignment|american-express Situation"
+   },
+   {
+    "text": "RBC worked with FX, IT, business teams; no headcount",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. First turn: answers the scaling question from the CIC stories and corrects the 4-person premise to the documented 10-person pilot. All claims supported; supported: 10-person pilot to 150+ across engineering, architecture, product, design over 4 years, Atlanta and Tampa CICs; new hires lacked hands-on experience, Hiring engine across 4 channels incl. approved requisitions, Georgia Tech recruiting, job fairs, hackathons; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "10-person pilot to 150+ across engineering, architecture, product, design over 4 years",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Atlanta and Tampa CICs; new hires lacked hands-on experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "Hiring engine across 4 channels incl. approved requisitions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Georgia Tech recruiting, job fairs, hackathons",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology|accenture Action"
+   },
+   {
+    "text": "TDD pairing for engineers; live scoping or wireframing for product/design; closing interview and final decision",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "15-20 auditions per week; 4-6 net-new per week; 2 slots per week cap",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Enablement, mentoring, round-robin pairing; 'I do, we do, you do' guided to independent (verbatim)",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action/Result; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Pair programming, TDD, CI/CD, user research, Build-Measure-Learn",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "Weekly peer-led tech talks and practice forums",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   },
+   {
+    "text": "11-13 leads; Monday allocation; anchors",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Situation/Action"
+   },
+   {
+    "text": "Reviews from pair partners, PMs, anchors fed career development, promotion, compensation",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "150+, near-zero attrition first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result"
+   },
+   {
+    "text": "10-person teams equal to 20-person; 4X; zero-defect",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. First turn: answers the scaling question from the CIC stories and corrects the 4-person premise to the documented 10-person pilot. All claims supported; supported: Scaled Atlanta and Tampa CICs to 150+ across engineering, architecture, product, design; 10-person pilot, New hires lacked cloud-native/Agile experience; hiring, evaluation, career development without manager layers, Bench, campus, contract-to-hire, requisitions; TDD pairing auditions; live scoping; independent votes; final decision on every offer, 15-20 auditions and 4-6 practitioners per week; 2 slots per practitioner per week; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "Scaled Atlanta and Tampa CICs to 150+ across engineering, architecture, product, design; 10-person pilot",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "New hires lacked cloud-native/Agile experience; hiring, evaluation, career development without manager layers",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Task"
+   },
+   {
+    "text": "Bench, campus, contract-to-hire, requisitions; TDD pairing auditions; live scoping; independent votes; final decision on every offer",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "15-20 auditions and 4-6 practitioners per week; 2 slots per practitioner per week",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Enablement, round-robin pairing, 'I do, we do, you do' (verbatim)",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Pair programming, TDD, CI/CD, user research, Build-Measure-Learn",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "Senior engineers coached juniors; weekly tech talks, peer-led demos, practice forums",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action; enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   },
+   {
+    "text": "11-13 leads; anchors; Monday allocation",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Situation/Action"
+   },
+   {
+    "text": "Evaluations from pairing partners, PMs, anchors rather than a director's impressions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "150+, near-zero attrition first 2 years, multiple hires promoted",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result"
+   },
+   {
+    "text": "10-person teams equal to 20-person; 4X; zero-defect",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. First turn: answers the scaling question from the CIC stories and corrects the 4-person premise to the documented 10-person pilot. All claims supported; supported: 10-person pilot to 150+ across engineering, architecture, product, design, New hires lacked cloud-native/Agile experience; flat org without managers observing daily work, 4 sourcing channels: bench, campus, contract-to-hire, approved requisitions, TDD pairing auditions; live scoping; independent votes; closing interview and every final decision; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "10-person pilot to 150+ across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "New hires lacked cloud-native/Agile experience; flat org without managers observing daily work",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Situation"
+   },
+   {
+    "text": "4 sourcing channels: bench, campus, contract-to-hire, approved requisitions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "TDD pairing auditions; live scoping; independent votes; closing interview and every final decision",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "15-20 auditions and 4-6 net-new per week; 2 slots per practitioner per week",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Enablement, round-robin pairing, 'I do, we do, you do' (verbatim)",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Pair programming, TDD, CI/CD, user research, Build-Measure-Learn as daily practice",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Weekly tech talks, mentorship, practice forums",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   },
+   {
+    "text": "11-13 direct-report leads; engineering anchors; Monday allocation",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Situation/Action"
+   },
+   {
+    "text": "Peer feedback from pairing partners informed development and promotion",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Over 4 years 150+; near-zero attrition first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result"
+   },
+   {
+    "text": "10-person teams equal to 20-person; 4X; zero-defect",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. New topic: payments answered from the payments stories with no carry-over of the CIC scaling topic. All claims supported; supported: ACCESS needed capabilities beyond WebSeries; per-type requirements; 135,000+ clients across 180+ countries, Technology Delivery Lead, 40+ blended team US/Mumbai/Bangalore; 70-80% at Bottomline Portsmouth, Managed build-vs-configure boundary; bespoke ACH, wire, FX, federal tax modules, NACHA validation, MAC verification, payment-type entitlements, sanctions screening, risk-based approval routing; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "ACCESS needed capabilities beyond WebSeries; per-type requirements; 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Technology Delivery Lead, 40+ blended team US/Mumbai/Bangalore; 70-80% at Bottomline Portsmouth",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed build-vs-configure boundary; bespoke ACH, wire, FX, federal tax modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "NACHA validation, MAC verification, payment-type entitlements, sanctions screening, risk-based approval routing",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Owned production incident response",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Migration: legacy data mapping, compliance verification, production validation, preserving configurations, entitlements, histories",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011; migration without disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "AmEx: missing SDKs, fragmented docs, dependency bottlenecks, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "Java/.NET/Python SDKs, docs, virtualized environments; Discovery and Framing, Lean Product, XP, Test Drive",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API usage up within 3 months; 261 additional story points (hedge-word variant, rule 7)",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "RBC: workflows initiation to reconciliation, real-time FX, alerts, recurring, batch; blueprint ready for development",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. New topic: payments answered from the payments stories with no carry-over of the CIC scaling topic. All claims supported; supported: Regional systems had different message formats, protocols, regulatory requirements, ACCESS on WebSeries; 135,000+ clients across 180+ countries needed more than out-of-box, 40+ blended team; 70-80% at Bottomline Portsmouth NH, ACH, wire, FX, federal tax modules; NACHA; payment-type permissions; MAC; sanctions screening; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "Regional systems had different message formats, protocols, regulatory requirements",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation"
+   },
+   {
+    "text": "ACCESS on WebSeries; 135,000+ clients across 180+ countries needed more than out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "40+ blended team; 70-80% at Bottomline Portsmouth NH",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX, federal tax modules; NACHA; payment-type permissions; MAC; sanctions screening",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Connections to internal compliance and settlement systems",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Owned on-call and Sev-1 incident response",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway transformation, translation, routing across 12 countries replacing point-to-point integrations; Integrated Global Payments Interface launched April 2011, single entry point",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "RBC: workflows initiation to reconciliation, real-time FX, alerts, recurring, bulk; complete blueprint",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action/Result"
+   },
+   {
+    "text": "AmEx: missing SDKs, fragmented docs, no sandbox; SDKs, docs, virtualized environments",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation/Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API usage up within 3 months; over 261 extra story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. New topic: payments answered from the payments stories with no carry-over of the CIC scaling topic. All claims supported; supported: Regional systems had different data models, formats, protocols, compliance requirements, WebSeries foundation; purpose-built modules for 135,000+ clients across 180+ countries, Technology Delivery Lead, 40+ Accenture/bank team; defined onshore-offshore model; 70-80% at Portsmouth; Chicago and NY/NJ, ACH, wire, FX, federal tax; payment verification; permissions; sanctions; risk-based approval; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "Regional systems had different data models, formats, protocols, compliance requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation"
+   },
+   {
+    "text": "WebSeries foundation; purpose-built modules for 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Technology Delivery Lead, 40+ Accenture/bank team; defined onshore-offshore model; 70-80% at Portsmouth; Chicago and NY/NJ",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "ACH, wire, FX, federal tax; payment verification; permissions; sanctions; risk-based approval",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Centralized gateway across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "With compliance teams, led migration preserving configurations, entitlements, histories, traceability; no disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "On-call and critical incident response coordinating engineers, vendor, bank leadership",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "AmEx: missing SDKs, fragmented docs, no sandbox, testing dependencies; Discovery and Framing workshops; SDKs, docs, virtualized environments; Test Drive",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation/Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Situation/Action"
+   },
+   {
+    "text": "API usage up within 3 months; onboarding down; over 261 story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. Answers team sizes for the engagements its own turn 2 discussed (JP Morgan ACCESS, RBC, American Express); 40+ for ACCESS and states the other stories record no headcount; no Cloud Innovation Center figure given as the answer. All claims supported; supported: 40+ blended Accenture/JPMC team across US, Mumbai, Bangalore, Technology Delivery Lead; defined model; engine and gateway workstreams; same team, Primary interface with Bottomline; 70-80% at Portsmouth NH; travel to Chicago and NY/NJ, No vendor headcount specified; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "40+ blended Accenture/JPMC team across US, Mumbai, Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Technology Delivery Lead; defined model; engine and gateway workstreams; same team",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Task; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Primary interface with Bottomline; 70-80% at Portsmouth NH; travel to Chicago and NY/NJ",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "No vendor headcount specified",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase (no figure)"
+   },
+   {
+    "text": "AmEx distributed cross-functional team of PMs, CX architects, engineers, stakeholders; no size",
+    "label": "supported",
+    "source": "conducting-discovery-and-framing-to-build-cross-functional-alignment|american-express Situation"
+   },
+   {
+    "text": "RBC worked with FX, IT, business teams; no headcount",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. Answers team sizes for the engagements its own turn 2 discussed (JP Morgan ACCESS, RBC, American Express); 40+ for ACCESS and states the other stories record no headcount; no Cloud Innovation Center figure given as the answer. RBC team detail drawn from the RBC data conversion story of the same engagement, with no headcount claimed. All claims supported; supported: 40+ blended Accenture/JPMC team across US, Mumbai, Bangalore covering engine and gateway, not separate teams, Defined model; primary Bottomline interface; 70-80% at Portsmouth NH; Chicago and NY/NJ, Production incidents: RCA across bank, offshore, Bottomline; status updates and daily leadership calls, RBC: managed onshore and offshore teams doing data scrubbing and validation; worked with business partners, IT, third-party vendors; no headcount; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "40+ blended Accenture/JPMC team across US, Mumbai, Bangalore covering engine and gateway, not separate teams",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Defined model; primary Bottomline interface; 70-80% at Portsmouth NH; Chicago and NY/NJ",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Production incidents: RCA across bank, offshore, Bottomline; status updates and daily leadership calls",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "RBC: managed onshore and offshore teams doing data scrubbing and validation; worked with business partners, IT, third-party vendors; no headcount",
+    "label": "supported",
+    "source": "leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Action (same RBC engagement, another story; rule 6, says no headcount recorded)"
+   },
+   {
+    "text": "AmEx portal work with business, technical, client teams; no headcount",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c11",
+  "run": 7,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. Answers team sizes for the engagements its own turn 2 discussed (JP Morgan ACCESS and American Express; this label's turn 2 did not discuss RBC); 40+ for ACCESS and states the other stories record no headcount; no Cloud Innovation Center figure given as the answer. All claims supported; supported: 40+ blended Accenture/bank team across US, Mumbai, Bangalore, Defined model; primary Bottomline interface, Figure covers ACCESS payments work, not separate teams per module or gateway, Led AmEx VPP portal work; no headcount in the story; contradicted: none; unsupported: none; no closing offer; no quotation outside rule 8.",
+  "claims": [
+   {
+    "text": "40+ blended Accenture/bank team across US, Mumbai, Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Defined model; primary Bottomline interface",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Figure covers ACCESS payments work, not separate teams per module or gateway",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Led AmEx VPP portal work; no headcount in the story",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express 5PSummary; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

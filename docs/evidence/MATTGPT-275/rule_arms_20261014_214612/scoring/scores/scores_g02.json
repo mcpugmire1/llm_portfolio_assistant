@@ -1,0 +1,1562 @@
+[
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn, scored on Answered and Honest: every claim supported by the JPMC ACCESS, RBC cross-border and Amex VPP stories; no closing; no quotations. Supported: 15 claims; contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Payments work includes JP Morgan Chase corporate payments (ACCESS) and American Express Virtual Payments Platform developer integration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "Regional payment systems had different data models, entitlement structures, message formats and regulatory requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation"
+   },
+   {
+    "text": "ACCESS Next Generation needed custom engineering beyond Bottomline WebSeries to serve 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Technology Delivery Lead managing a blended team of 40+ Accenture and bank resources across US, Mumbai, Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Defined the onshore/offshore engagement model and worked with Bottomline from its Portsmouth offices on the build-vs-configure boundary",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border and tax payment modules, payment verification (MAC), payment-type entitlements, sanctions screening, transaction monitoring integration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Delivered gateway message transformation, protocol translation and routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "Coordinated root-cause analysis across bank, offshore and vendor teams, ran status updates and daily leadership calls during incidents",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Led payments data migration from legacy regional systems preserving compliance traceability, without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "Amex clients lacked SDKs, documentation was fragmented, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "Brought stakeholders together through Discovery and Framing workshops, coordinated stable virtualized testing environments, led developer portal improvements",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Java, .NET and Python SDKs, use case-driven API docs, secure sandbox, Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Onboarding time decreased; API consumption and trial usage increased within 3 months of relaunch",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "Portal team delivered over 261 additional story points beyond its commitment",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn, scored on Answered and Honest: every claim supported by the JPMC ACCESS, RBC cross-border and Amex VPP stories; no closing; no quotations. Supported: 15 claims; contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead for ACCESS Next Generation on Bottomline WebSeries; out-of-box capabilities did not cover payment, security and workflow requirements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Task"
+   },
+   {
+    "text": "Regional legacy systems had different data models, client configurations, entitlement structures and transaction histories to consolidate without interrupting live payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation/Task"
+   },
+   {
+    "text": "Managed a blended onshore/offshore team of 40+ and spent 70-80% of his time at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed the build-vs-configure boundary; delivered bespoke ACH, wire, FX/cross-border and government tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "NACHA file validation, MAC security, payment-type permissions, sanctions screening, risk-based approval routing",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Led payments data migration, introduced compliance dashboards, owned production incident response",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011 serving 135,000+ clients across 180+ countries; migration without disruption",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "RBC: fragmented systems and manual processes delayed cross-border and bulk payments",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Situation"
+   },
+   {
+    "text": "Designed workflows initiation through settlement and reconciliation; partnered with FX team on real-time conversion and transaction visibility",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "Implementation blueprint covering automated alerts, recurring payments, Interac e-Transfer, batch processing",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action/Result"
+   },
+   {
+    "text": "Revised payment cutoff processes reduced wire-transfer delays",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   },
+   {
+    "text": "Amex VPP adoption lagged: no SDKs, usable documentation or sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "Co-created developer portal, Java/.NET/Python SDKs, secure virtualized testing environments",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Discovery and Framing workshops, Lean Product and XP, Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API trial usage increased within 3 months, onboarding time fell, exceeded commitment by over 261 story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn, scored on Answered and Honest: every claim supported by the JPMC ACCESS, RBC cross-border and Amex VPP stories; no closing; no quotations. Supported: 15 claims; contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead for the payment engine behind ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Regional treasury systems to become a single global portal; WebSeries lacked the payment modules, security controls and workflows for 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ across Accenture and bank resources",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Delivered bespoke ACH, wire, FX/cross-border and federal tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "MAC security, payment-type entitlements, sanctions screening, risk-based approval controls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Cross-currency payments with embedded rate visibility; contextual help explaining payment fields and compliance requirements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Led payments data migration preserving client configurations, transaction histories and compliance traceability without disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 as a unified corporate banking portal",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "RBC: fragmented systems and manual processes delayed cross-border and bulk payments",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Situation"
+   },
+   {
+    "text": "Designed end-to-end workflows integrating real-time FX, alerts, recurring payments, batch processing",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "Delivered implementation blueprint ready for development execution",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   },
+   {
+    "text": "Revised cutoff processes reduced wire transfer delays and improved SLA compliance",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   },
+   {
+    "text": "Amex VPP adoption lagged: no SDKs, coherent docs, or sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "Co-created developer portal, Java/.NET/Python SDKs, secure virtual sandbox with refreshed client data, CI/CD syncing docs and APIs",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Onboarding time decreased; API consumption and trial usage increased within 3 months",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "First turn, scored on Answered and Honest: every claim supported by the JPMC ACCESS, RBC cross-border and Amex VPP stories; no closing; no quotations. Supported: 14 claims; contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "ACCESS needed payment capabilities beyond WebSeries; each payment type had distinct formatting, validation, compliance and workflow requirements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional legacy systems had different data models, configurations, entitlements, transaction histories",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Technology Delivery Lead managing blended team of 40+ across Accenture and bank",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed build-vs-configure boundary; delivered ACH, wire, FX/cross-border, government tax modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "MAC security, payment-type entitlements, sanctions screening, risk-based approval controls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Led payments data migration, introduced compliance dashboards, owned production incident response",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011 serving 135,000+ clients across 180+ countries; migration without disruption",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "RBC: fragmented systems, manual processes delayed cross-border and bulk payments",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Situation"
+   },
+   {
+    "text": "Designed workflows initiation through settlement and reconciliation; partnered with FX team",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "Deliverable was an implementation blueprint; revised cutoff processes reduced wire delays and improved SLA compliance",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   },
+   {
+    "text": "Amex VPP adoption lagged: no SDKs, usable docs, sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "Multi-stack SDKs, use-case docs, secure sandbox, CI/CD doc sync",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Environment virtualization for earlier testing, Lean Product and XP, Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption and trial usage increased within 3 months; exceeded delivery commitment by over 261 story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 1,
+  "label": "E",
+  "pass": true,
+  "reason": "First turn, scored on Answered and Honest: every claim supported by the JPMC ACCESS, RBC cross-border and Amex VPP stories; no closing; no quotations. Supported: 15 claims; contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation replaced separate regional treasury systems with a unified corporate banking portal",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "WebSeries foundation; bank needed payment modules, security controls and workflows beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ across Accenture and bank, 70 to 80% embedded at Bottomline's offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, federal tax modules with payment-type-specific formatting, validation, compliance checks, entitlements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "NACHA validation, MAC security, sanctions screening, risk-based approval routing",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Led payments data migration preserving configs, histories, compliance traceability without disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011 serving 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "RBC: fragmented systems, manual processes delayed cross-border and bulk payments",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Situation"
+   },
+   {
+    "text": "Designed workflows initiation through settlement/reconciliation with FX team on real-time conversion and visibility",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "Work included automated alerts, recurring payments, Interac e-Transfer, batch processing, revised cutoff processes",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "Implementation blueprint ready for development execution; revised cutoffs reduced wire-transfer delays",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   },
+   {
+    "text": "Amex VPP had APIs but clients lacked SDKs, clear docs, sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "Helped create cross-stack SDKs, use-case docs, secure virtualized testing environments",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Lean Product and XP practices and a Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API trial usage up within 3 months, onboarding time fell, over 261 additional story points beyond commitment",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Gives the JP Morgan ACCESS team (40+) from the payment-engine story, the engagement led in the prior answer; all claims supported. Amex no-team-size statement verified against all three Amex stories. Supported: 3 claims; contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Managed a blended team of 40+ from Accenture and JP Morgan Chase in US, Mumbai, Bangalore",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Technology Delivery Lead; defined onshore/offshore model; primary technical interface with Bottomline",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Amex stories don't specify a team size",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express, transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express, conducting-discovery-and-framing-to-build-cross-functional-alignment|american-express (no size recorded; only 'large, cross-functional team')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives the JP Morgan ACCESS team (40+) from the payment-engine story, the engagement led in the prior answer; all claims supported. Supported: 3 claims; contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "For ACCESS Next Generation, managed blended onshore/offshore team of 40+ across Accenture and JPMC",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Team in Mumbai, Bangalore, US; defined engagement model; primary technical interface with Bottomline",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Spent 70-80% of his time at Bottomline's Portsmouth, NH offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Gives the JP Morgan ACCESS team (40+) from the payment-engine story, the engagement led in the prior answer; all claims supported. Supported: 2 claims; contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Managed blended onshore/offshore team of 40+ across Accenture and bank, in Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Defined engagement model; primary technical interface with Bottomline; 70 to 80% at Portsmouth, NH",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "Gives the JP Morgan ACCESS team (40+) from the payment-engine story, the engagement led in the prior answer; all claims supported. Supported: 2 claims; contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Managed blended onshore/offshore team of 40+ across Accenture and bank, in Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Technology Delivery Lead; primary technical interface with Bottomline; 70 to 80% at Portsmouth, NH",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 2,
+  "label": "E",
+  "pass": true,
+  "reason": "Gives the JP Morgan ACCESS team (40+) from the payment-engine story, the engagement led in the prior answer; all claims supported. 'Not the entire program' read as supported by the multi-workstream framing (ambiguous call). Supported: 3 claims; contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Managed blended onshore/offshore team of 40+ across Accenture and bank, in Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Technology Delivery Lead and primary technical interface with Bottomline",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "The 40+ figure is the team he managed, not the entire ACCESS program",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task ('I managed a blended ... team of 40+') and Situation ('complex, multi-workstream program'); building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action ('gateway workstream')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Narrates what went wrong on the same ACCESS engagement (MAC failure, post-migration data defects, Sev-1 ownership) from its stories; no other engagement narrated; all claims supported. Supported: 12 claims; contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Production failures at JPMC included a payment-verification defect and data issues after migration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "MAC layer let corporate users validate payment integrity before releasing payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "MAC-layer failure traced to missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Had break-glass production access and queried live payment data through SQL to triage",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "After cutover, production defects were primarily data issues carried over from the legacy platform",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Regional systems had different schemas, client configurations, entitlement structures and compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "Ran UAT, production validation and shakeout testing and triaged defects after cutover",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Migration completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "Repeatedly owned Sev-1 incident response and on-call accountability across releases, rollout waves and migrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Coordinated RCA across the bank's New York team, Mumbai and Bangalore engineers and Bottomline; ran status updates and daily leadership calls",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Pre-existing problem: entitlement changes took days of manual configuration with poor visibility into permissions",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Replaced individual permission changes with role-based profiles, bulk grouping and a centralized dashboard; days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Narrates what went wrong on the same ACCESS engagement (MAC failure, post-migration data defects, Sev-1 ownership) from its stories; no other engagement narrated; all claims supported. Supported: 10 claims; contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "On the ACCESS payment engine, a MAC layer failure traced to missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "The layer provided payment verification so corporate users could validate integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Used break-glass production access and SQL on live payment data to triage",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Legacy migration brought post-cutover defects, primarily data issues carried over from the legacy platform",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Regional systems had different schemas, client configurations, entitlement structures and compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "Ran UAT and production validation/shakeout, triaged defects, introduced compliance dashboards",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Migration completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "Across gateway releases, waves and migrations, repeatedly owned Sev-1 incident response and on-call",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Coordinated RCA across New York, Mumbai, Bangalore and Bottomline; ran status updates and daily leadership calls",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Entitlement changes took days of manual configuration with poor visibility; replaced with role-based profiles, bulk changes and a dashboard; days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "Narrates what went wrong on the same ACCESS engagement (MAC failure, post-migration data defects, Sev-1 ownership) from its stories; no other engagement narrated; all claims supported. Supported: 9 claims; contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "At JPMC a MAC layer failure was traced to missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "MAC layer provided payment verification before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Had break-glass production access and queried live data via SQL to triage the platform's hardest defects",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Owned on-call and severity-1 incident response for the payment engine, coordinating RCA and running status updates and daily leadership calls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Across the gateway work that coordination involved New York, Mumbai, Bangalore and Bottomline",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Post-cutover defects during migration were primarily data issues carried over from the legacy platform",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Regional systems had different schemas, client configurations, entitlement structures and transaction histories, mapped into a unified model",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "Ran UAT and production validation/shakeout and triaged defects after cutover",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Migration account records no disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "Narrates what went wrong on the same ACCESS engagement (MAC failure, post-migration data defects, Sev-1 ownership) from its stories; no other engagement narrated; all claims supported. Supported: 9 claims; contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "On ACCESS a MAC layer failure traced back to missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "MAC layer let corporate users validate payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Used break-glass production access and SQL against live payment data to investigate",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Regional systems had different schemas, formats, client configurations, entitlement structures and compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "After cutover, production defects emerged, primarily legacy data issues; ran UAT, validation, shakeout and triaged during rollout",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Owned on-call and severity-1 incident response across releases, waves and migrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Coordinated RCA across New York, Mumbai, Bangalore and Bottomline; ran stakeholder status updates and daily leadership calls",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payments migration completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c01",
+  "run": 3,
+  "turn": 3,
+  "label": "E",
+  "pass": true,
+  "reason": "Narrates what went wrong on the same ACCESS engagement (MAC failure, post-migration data defects, Sev-1 ownership) from its stories; no other engagement narrated; all claims supported. Pre-rollout problems drawn from ACCESS gateway, entitlement and compliance stories, same engagement. Supported: 12 claims; contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Clearest failure was a MAC security-layer failure traced to missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "MAC layer let corporate users verify payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Had break-glass production access and queried live payment data through SQL",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Post-migration production defects were primarily legacy data issues",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Regional systems had different schemas, client configurations, entitlement structures and compliance records; mapped while keeping live payments running",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "Ran UAT and production validation/shakeout, triaged post-cutover defects, coordinated data verification with compliance teams",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Migration completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "Owned on-call and severity-1 incident response; coordinated RCA across New York, Mumbai, Bangalore and Bottomline; ran status updates and daily leadership calls",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action; building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Pre-existing problems: fragmented connectivity across 12 countries, days-long entitlement changes, jurisdiction restrictions preventing a big-bang global deployment",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation; overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation; navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Worked with security specialists, enterprise architects, regional compliance officers and Bottomline; sequenced launches by regulatory readiness",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Task; navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action"
+   },
+   {
+    "text": "Entitlement management fell from days to minutes; regional launches proceeded without regulatory blockers",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result; navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: lists the profile's four certifications with dates and says none is current; all supported. Quoted certification text matches profile_rendered.txt verbatim (rule 8).",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023 (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023 (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track) ... (2002) (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: lists the profile's four certifications with dates and says none is current; all supported. Oracle 'exams passed, not a completed OCP certification' read as supported by the profile wording.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023 (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023 (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track) ... (2002) (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   },
+   {
+    "text": "The Oracle entry records exams passed, not a completed OCP certification",
+    "label": "supported",
+    "source": "profile.certifications ('Oracle 8i DBA exams passed (OCP track)')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: lists the profile's four certifications with dates and says none is current; all supported. Quoted certification text matches profile_rendered.txt verbatim (rule 8). Oracle 'exams passed, not a completed OCP certification' read as supported by the profile wording.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023 (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023 (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track) ... (2002) (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   },
+   {
+    "text": "The Oracle entry records exams passed, not a completed OCP certification",
+    "label": "supported",
+    "source": "profile.certifications ('Oracle 8i DBA exams passed (OCP track)')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "First turn: lists the profile's four certifications with dates and says none is current; all supported. Quoted certification text matches profile_rendered.txt verbatim (rule 8).",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023 (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023 (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track) ... (2002) (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 1,
+  "label": "E",
+  "pass": true,
+  "reason": "First turn: lists the profile's four certifications with dates and says none is current; all supported. Quoted certification text matches profile_rendered.txt verbatim (rule 8).",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023 (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023 (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track) ... (2002) (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Says no PMP, then lists the profile's certifications (rule 1: acknowledges_missing true; useful_direct true); no pivot to PMO stories; all supported. Quoted certification text matches profile_rendered.txt verbatim (rule 8).",
+  "claims": [
+   {
+    "text": "Matt does not hold a PMP certification",
+    "label": "supported",
+    "source": "profile.certifications (PMP not in list)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023 (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023 (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track) ... (2002) (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Says no PMP, then lists the profile's certifications (rule 1: acknowledges_missing true; useful_direct true); no pivot to PMO stories; all supported.",
+  "claims": [
+   {
+    "text": "Matt does not hold a PMP certification",
+    "label": "supported",
+    "source": "profile.certifications (PMP not in list)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023 (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023 (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track) ... (2002) (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Says no PMP, then lists the profile's certifications (rule 1: acknowledges_missing true; useful_direct true); no pivot to PMO stories; all supported. Quoted certification text matches profile_rendered.txt verbatim (rule 8).",
+  "claims": [
+   {
+    "text": "Matt does not hold a PMP certification",
+    "label": "supported",
+    "source": "profile.certifications (PMP not in list)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023 (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023 (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track) ... (2002) (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 2,
+  "label": "D",
+  "pass": true,
+  "reason": "Says no PMP, then lists the profile's certifications (rule 1: acknowledges_missing true; useful_direct true); no pivot to PMO stories; all supported. Quoted certification text matches profile_rendered.txt verbatim (rule 8).",
+  "claims": [
+   {
+    "text": "Matt does not hold a PMP certification",
+    "label": "supported",
+    "source": "profile.certifications (PMP not in list)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023 (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023 (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track) ... (2002) (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 2,
+  "label": "E",
+  "pass": true,
+  "reason": "Says no PMP, then lists the profile's certifications (rule 1: acknowledges_missing true; useful_direct true); no pivot to PMO stories; all supported. Quoted certification text matches profile_rendered.txt verbatim (rule 8).",
+  "claims": [
+   {
+    "text": "Matt does not hold a PMP certification",
+    "label": "supported",
+    "source": "profile.certifications (PMP not in list)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023 (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023 (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track) ... (2002) (verbatim quote/listing)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none is current, matching the profile (both AWS expired 2023, SAFe expired, Oracle 2002 exams); implies none current; all supported.",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   },
+   {
+    "text": "Both AWS certifications expired in 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe certification is expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle entry records exams passed in 2002, not a current certification",
+    "label": "supported",
+    "source": "profile.certifications"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Says none is current, matching the profile (both AWS expired 2023, SAFe expired, Oracle 2002 exams); implies none current; all supported.",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "Says none is current, matching the profile (both AWS expired 2023, SAFe expired, Oracle 2002 exams); implies none current; all supported.",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   },
+   {
+    "text": "Both AWS certifications expired in 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe certification is expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle entry records exams passed in 2002, not a current certification",
+    "label": "supported",
+    "source": "profile.certifications"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 3,
+  "label": "D",
+  "pass": true,
+  "reason": "Says none is current, matching the profile (both AWS expired 2023, SAFe expired, Oracle 2002 exams); implies none current; all supported.",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 3,
+  "label": "E",
+  "pass": true,
+  "reason": "Says none is current, matching the profile (both AWS expired 2023, SAFe expired, Oracle 2002 exams); implies none current; all supported.",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   },
+   {
+    "text": "Both AWS certifications expired in 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe certification is expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle entry records exams passed in 2002, not a current certification",
+    "label": "supported",
+    "source": "profile.certifications"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

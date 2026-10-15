@@ -1,0 +1,1029 @@
+[
+ {
+  "case": "c14",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Section 3 c14 required closing (D9): ends with a scoping question about the VP mandate and no offer to run Role Match against the job description. All claims supported (CIC build-out, 11-13 leads, final hiring decision, near-zero attrition, Octane, 4X/zero-defect, 30+ engagements/15+ clients/$100M+); no level label or vouching.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement",
+    "label": "supported",
+    "source": "corpus Theme values (rule 4); work described is in the stories"
+   },
+   {
+    "text": "Fortune 500 clients wanted moves from waterfall to iterative, feature factories to customer-centric product development, siloed to balanced teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Situation"
+   },
+   {
+    "text": "Engineers struggled to onboard to cloud-native tech for lack of standardized resources, creating bottlenecks and delayed timelines",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs from the ground up as a Director",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Role, Task"
+   },
+   {
+    "text": "Full P&L accountability, budget and cost management, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Action, 5PSummary"
+   },
+   {
+    "text": "Grew the organization from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Result"
+   },
+   {
+    "text": "11 to 13 practice and client leads reporting directly to him",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result"
+   },
+   {
+    "text": "Made the final hiring decision on every offer",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams...|fortune-500-clients Action"
+   },
+   {
+    "text": "Facilitated promotion calibration",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams...|fortune-500-clients Action"
+   },
+   {
+    "text": "Allocated compensation budgets",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams...|fortune-500-clients Action"
+   },
+   {
+    "text": "Owned end-of-remediation decisions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams...|fortune-500-clients Result"
+   },
+   {
+    "text": "Near-zero attrition in first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams...|fortune-500-clients Performance"
+   },
+   {
+    "text": "Established development environments, CI/CD pipelines, cloud platforms, reusable architectural patterns, reference implementations",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Action"
+   },
+   {
+    "text": "Teams used pair programming, TDD, automated pipelines integrated with enterprise security scanning and access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Action, Result"
+   },
+   {
+    "text": "CIC reported 4X faster velocity, zero-defect deployments, 10-person teams equal to 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Result"
+   },
+   {
+    "text": "Project Octane: led cross-functional team building reusable reference apps and IaC templates",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Automated infrastructure provisioning with Terraform and AWS CloudFormation",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Ran hands-on workshops across modern cloud-native stacks",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Process"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients, $100M+ repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Result; about-matt-my-leadership-journey|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Section 3 c14 required closing (D9): closes with a scoping question and no Role Match offer against the job description. All claims supported (Octane, CIC, JPM 40+ team and Sev-1 ownership, Norfolk Southern strangler migration); no level label or vouching.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement",
+    "label": "supported",
+    "source": "corpus Theme values (rule 4)"
+   },
+   {
+    "text": "Accenture engineers struggled to onboard to cloud-native tech for lack of standardized resources",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Enterprise clients' developers waited days or weeks for builds, tests, approvals; security and regulatory requirements complicated modernization",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Situation"
+   },
+   {
+    "text": "Norfolk Southern mainframe apps had to be modernized on live production without disrupting rail operations",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems...|norfolk-southern Situation"
+   },
+   {
+    "text": "Octane: built and led cross-functional team; reusable reference apps, IaC templates, Terraform and CloudFormation provisioning",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Embedded OWASP and IAM standards, ran hands-on workshops, standardized cloud-native practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action, Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs from the ground up with full P&L, budget and cost management, recruiting, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Action, 5PSummary"
+   },
+   {
+    "text": "Grew from 0 to 150+ across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Result, 5PSummary"
+   },
+   {
+    "text": "Established dev environments, CI/CD pipelines, cloud platforms, reusable architectural patterns, engagement playbooks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients, 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Result"
+   },
+   {
+    "text": "At JP Morgan Chase managed a blended team of 40+ and delivered payment-engine capabilities for ACCESS",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task, Action"
+   },
+   {
+    "text": "Owned on-call and Sev-1 incident response including root-cause analysis and leadership communications",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Norfolk Southern: incremental replacement of mainframe components with microservices, API gateways, Docker, Kubernetes, automated CI/CD",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems...|norfolk-southern Action"
+   },
+   {
+    "text": "Reconciliation reports validated no functionality or data lost",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems...|norfolk-southern Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Section 3 c14 required closing (D9): ends by naming areas to clarify, with no offer to run Role Match against the job description. Claims supported (Octane, TICARA 30-40 min on pre-provisioned accounts, DORA metrics, NS migration, CIC 0 to 150+, 4X/99.9%+, Capital One zero-defect). Also states 'documented roles were Director and Cloud Native Architecture Lead, rather than VP', which edges toward denying a level; not needed to decide the fail.",
+  "claims": [
+   {
+    "text": "Work includes Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement",
+    "label": "supported",
+    "source": "corpus Theme values (rule 4)"
+   },
+   {
+    "text": "Experience building an engineering org, reusable cloud infrastructure and developer tooling, changing how teams build, deploy, operate services",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture; driving-cloud-native-innovation-through-ticara-framework|accenture; accelerating-enterprise-delivery...|fortune-500-clients Action"
+   },
+   {
+    "text": "Documented roles were Director and Cloud Native Architecture Lead",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Role; driving-modern-software-engineering-with-project-octane|accenture Role"
+   },
+   {
+    "text": "Accenture engineers struggled to onboard to cloud-native for lack of standardized resources",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Client developers wrote code quickly but waited days or weeks for builds, tests, approvals",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery...|fortune-500-clients Situation"
+   },
+   {
+    "text": "Norfolk Southern mainframe apps modernized on live production without disrupting rail operations",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems...|norfolk-southern Situation"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps, IaC templates, Terraform/CloudFormation provisioning, hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action, 5PSummary"
+   },
+   {
+    "text": "Designed TICARA, developer toolkit with sample apps, documentation, reusable infrastructure",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Task, Action"
+   },
+   {
+    "text": "Using pre-provisioned cloud accounts, working environment in 30-40 minutes; timing covers build-out, not account provisioning",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Action, Result"
+   },
+   {
+    "text": "Established reusable microservices patterns, automated testing and deployment gates, IaC, monitoring and observability",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery...|fortune-500-clients Action"
+   },
+   {
+    "text": "Created cross-functional teams responsible for building, deploying, operating their services",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery...|fortune-500-clients Action"
+   },
+   {
+    "text": "Tracked lead time, deployment frequency, change failure rate, MTTR",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery...|fortune-500-clients Action"
+   },
+   {
+    "text": "At Norfolk Southern teams incrementally replaced mainframe components using microservices, Kubernetes, API gateways, reconciliation reports",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems...|norfolk-southern Action"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs from zero to 150+ with full P&L, recruiting, training, career frameworks, delivery playbooks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Action, Result"
+   },
+   {
+    "text": "Across CIC engagements teams achieved 4X faster velocity and 99.9%+ uptime",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery...|fortune-500-clients Task, Result"
+   },
+   {
+    "text": "At Capital One automated testing supported zero-defect deployments to payment systems",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery...|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Section 3 c14 required closing (D9): the close offers to 'map Matt's documented work' to a shared job description inside the chat, but makes no offer to run Role Match. Scored strictly against the fixture's Role Match wording (ambiguous call, see report). All claims supported (CIC 0 to 150+, P&L, Octane, mentorship and onboarding, 4X/zero-defect/10 vs 20, 30+/15+/$100M+ via referrals).",
+  "claims": [
+   {
+    "text": "Work spans execution and delivery, organization transformation, talent enablement",
+    "label": "supported",
+    "source": "corpus Theme values (rule 4)"
+   },
+   {
+    "text": "Accenture engineers struggled to onboard to cloud-native for lack of standardized resources, creating bottlenecks and delayed timelines",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Enterprise clients needed to move from waterfall and siloed teams to iterative development within legacy systems, compliance, governance",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Situation"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs from the ground up, 0 to 150+ across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Result, 5PSummary"
+   },
+   {
+    "text": "Owned full P&L for both centers including budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Action"
+   },
+   {
+    "text": "Established dev environments, CI/CD, cloud platforms, recruiting programs, career progression frameworks, skills development pathways",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Action"
+   },
+   {
+    "text": "Led Project Octane, a cloud-native accelerator with reusable reference apps and IaC templates",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Task, Action"
+   },
+   {
+    "text": "Automated provisioning with Terraform, AWS CloudFormation, serverless architectures",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Embedded OWASP and IAM standards; hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action, Process"
+   },
+   {
+    "text": "Reference apps included their own infrastructure code",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Result"
+   },
+   {
+    "text": "Integrated TDD and CI/CD with enterprise security scanning, deployment pipelines, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Action"
+   },
+   {
+    "text": "Introduced balanced teams of product, engineering, design, supported by mentorship and structured onboarding",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Result; building-mentorship-programs-for-long-term-growth-and-retention|accenture; leading-people-from-delivery-teams...|fortune-500-clients Action (month of enablement, round-robin pairing)"
+   },
+   {
+    "text": "4X faster velocity, zero-defect deployments, 10-person teams equal to 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; $100M+ repeatable business through delivery excellence and client referrals",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Section 3 c14 required closing (D9): ends with a scoping question, no Role Match offer. All claims supported (Octane, TICARA 30-40 min with account provisioning separate, CIC 0 to 150+ with P&L, 4X/zero-defect/10 vs 20).",
+  "claims": [
+   {
+    "text": "Themes Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement",
+    "label": "supported",
+    "source": "corpus Theme values (rule 4)"
+   },
+   {
+    "text": "Built an engineering organization, owned its P&L, created reusable cloud-native architecture and developer tooling",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Action; driving-cloud-native-innovation-through-ticara-framework|accenture"
+   },
+   {
+    "text": "Engineers struggled to onboard for lack of standardized resources",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Account setup, billing management, risk assessments delayed prototyping",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Situation"
+   },
+   {
+    "text": "Clients wanted to move from waterfall and siloed teams to iterative development, accommodating legacy, compliance, security, governance",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Situation"
+   },
+   {
+    "text": "Octane: reusable reference apps, IaC templates, automated provisioning, hands-on workshops; Terraform, CloudFormation, serverless; OWASP and IAM",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action, 5PSummary"
+   },
+   {
+    "text": "TICARA: documented developer toolkit covering application services, data stores, messaging",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Action"
+   },
+   {
+    "text": "Pre-provisioned AWS or Azure accounts; working environment with VPC, services, sample code in 30 to 40 minutes; account provisioning separate",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Action, Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa CICs from 0 to 150+ with full P&L",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Result, Action"
+   },
+   {
+    "text": "Established recruiting, training, career progression, dev environments, CI/CD, cloud platforms",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Action"
+   },
+   {
+    "text": "Teams combined product, engineering, design using pair programming, TDD, automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Situation, Result"
+   },
+   {
+    "text": "30+ engagements across 15+ Fortune 500 clients; 4X velocity, zero-defect deployments, 10-person teams equal to 20-person",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c14",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Section 3 c14 required closing (D9): ends with a scoping question, no Role Match offer. All claims supported (Octane, CIC, JPM 40+ team, gateway across 12 countries, Sev-1 ownership, lead time weeks to days, 99.9%+ uptime). 'project demands left little room for learning' read as paraphrase of Octane Situation's 'due to project demands'.",
+  "claims": [
+   {
+    "text": "Work spans execution and delivery, organization transformation, talent development",
+    "label": "supported",
+    "source": "corpus Theme values (rule 4)"
+   },
+   {
+    "text": "Engineers struggled to onboard because project demands left little room for learning and standardized resources were missing",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation (paraphrase, rule 5)"
+   },
+   {
+    "text": "Clients faced manual release cycles, centralized QA bottlenecks, long waits for builds and approvals",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery...|fortune-500-clients Situation"
+   },
+   {
+    "text": "CICs moved clients from siloed delivery to balanced product/engineering/design teams while retaining enterprise security and governance",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Situation, Action"
+   },
+   {
+    "text": "Led Project Octane, modular accelerator with reusable reference apps, IaC templates, hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture 5PSummary"
+   },
+   {
+    "text": "Terraform and CloudFormation provisioning, OWASP and IAM, standardized practices across CloudFirst community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action, Result"
+   },
+   {
+    "text": "Then built Atlanta and Tampa CICs from the ground up with full P&L, budget and cost management, hiring, training, career development; zero to 150+",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Start_Date 2019-11 after Octane End_Date 2019-10; Action, Result"
+   },
+   {
+    "text": "Established dev environments, CI/CD, cloud platforms, reusable architectural patterns, engineering playbooks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Action"
+   },
+   {
+    "text": "TDD integrated with security scanning, deployment gates, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Action; accelerating-enterprise-delivery...|fortune-500-clients Action"
+   },
+   {
+    "text": "At JP Morgan Chase managed a 40+ blended team delivering payment-platform capabilities and a global payments gateway across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Task, Action"
+   },
+   {
+    "text": "Owned on-call and Sev-1 incident response, coordinated RCA, ran leadership updates during live incidents",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "4X faster velocity, 10-person teams equal to 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic...|accenture Result"
+   },
+   {
+    "text": "Across JPM, Capital One, AmEx cloud-native engagements, lead time fell from weeks to days with 99.9%+ uptime",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery...|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): says it has no verified email, phone or LinkedIn URL; no Contact or LinkedIn link present. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): 'Nothing I know about Matt covers that' gives no Contact or LinkedIn link. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): 'Nothing I know about Matt covers that' gives no Contact or LinkedIn link. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): no email, phone or verified LinkedIn link, cannot forward messages; neither Contact nor LinkedIn link present. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): suggests searching LinkedIn for his name but gives no LinkedIn link and no Contact link. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): no verified email, phone or LinkedIn URL; no Contact or LinkedIn link. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): suggests searching LinkedIn but provides no LinkedIn link and no Contact link. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): 'Nothing I know about Matt covers that.' No Contact or LinkedIn link. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): no contact link; offers to draft a message instead of the Contact and LinkedIn close. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): no verified email, phone or contact link; no Contact or LinkedIn link. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): suggests searching LinkedIn for 'Matt Pugmire' (his name, profile.name) but provides no LinkedIn link and no Contact link. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): no verified contact or LinkedIn URL; no Contact or LinkedIn link. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): no email, phone or verified contact link; neither link present. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): 'Nothing I know about Matt covers that.' No Contact or LinkedIn link. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): 'Nothing I know about Matt covers that.' No Contact or LinkedIn link. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): 'Nothing I know about Matt covers that.' No Contact or LinkedIn link. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): no verified email, phone or LinkedIn URL; neither link present. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): 'Nothing I know about Matt covers that.' No Contact or LinkedIn link. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): no email, phone or LinkedIn URL, cannot forward messages; neither link present. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): no verified email, phone or LinkedIn URL; neither link present. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): 'Nothing I know about Matt covers that' gives no Contact or LinkedIn link. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): no verified email, phone or contact link; neither link present. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): 'Nothing I know about Matt covers that.' No Contact or LinkedIn link. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): 'Nothing I know about Matt covers that.' No Contact or LinkedIn link. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): no verified email, phone or LinkedIn URL, so no direct contact link; neither link present. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): no email, phone or LinkedIn URL available; neither link present. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): no email, phone or verified contact link; neither link present. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): no email, phone or verified contact link; neither link present. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): no verified links; tells the visitor to check a website or LinkedIn profile they may have, but provides neither Contact nor LinkedIn link. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c15",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Section 3 c15 and required closing (D9): no verified links; offers to check a profile link the visitor finds, but provides neither Contact nor LinkedIn link. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

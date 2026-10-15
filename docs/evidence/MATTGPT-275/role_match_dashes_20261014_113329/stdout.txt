@@ -1,0 +1,13 @@
+r1 att before rows=34 calls=37
+r1 att after rows=34 calls=37
+r1 demo before rows=21 calls=24
+r1 demo after rows=22 calls=25
+r2 att after rows=33 calls=36
+r2 att before rows=34 calls=37
+r2 demo after rows=22 calls=25
+r2 demo before rows=22 calls=25
+r3 att before rows=33 calls=36
+r3 att after rows=34 calls=37
+r3 demo before rows=21 calls=24
+r3 demo after rows=22 calls=25
+done 12 runs

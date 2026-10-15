@@ -1,0 +1,1712 @@
+[
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: payments work answered (JPMC ACCESS, Amex VPP); all claims supported by ACCESS, Amex and RBC stories; no closing.",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead on JP Morgan ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "WebSeries (Bottomline) did not meet needs out of the box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended onshore/offshore team of 40+ (Accenture and JPM; Mumbai, Bangalore, US)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border and tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011, 135,000+ clients, 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Payments migration completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "70-80% of time embedded at Bottomline Portsmouth; Chicago and NY/NJ stakeholders",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Gateway message transformation, protocol translation and routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Owned production incident response, root-cause analysis, status updates and daily leadership calls",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Sanctions screening and risk-based approval controls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Amex VPP adoption slowed by missing SDKs, fragmented docs, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "Co-created developer portal; Java, .NET, Python SDKs; use case-driven docs",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Virtualized testing environments and Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption/trial usage increased within 3 months; onboarding time reduced",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "Exceeded delivery commitment by over 261 story points",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style from leadership-philosophy, permit-to-fail and related CIC stories; no payments carry-over; all claims supported.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity and purpose / modern engineering rigor",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Inherited teams 'over-processed, under-trusted, waiting for permission'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Makes intent explicit, pushes decisions to people closest to the work, transparency and direct feedback",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Coaches teams to think clearly, not just execute tasks",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Permit-to-fail: non-punitive post-mortems, low-stakes experiments, lessons applied in subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "4x delivery acceleration at the Cloud Innovation Center",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Rigid hierarchical culture made people slow to share ideas; weekly brainstorming; shared goals over accolades",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation/Action"
+   },
+   {
+    "text": "Balanced teams delivering thin-slice production-ready solutions",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Action"
+   },
+   {
+    "text": "Prototypes expected to fail intentionally; JTBD framing; failed experiments as inputs",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/5PSummary"
+   },
+   {
+    "text": "Repeat errors reduced and timelines shortened",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture 5PSummary"
+   },
+   {
+    "text": "Did not happen overnight",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: payments work answered (JPMC ACCESS, Amex VPP); all claims supported by ACCESS, Amex and RBC stories; no closing.",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead on JP Morgan ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "WebSeries (Bottomline) did not meet needs out of the box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended onshore/offshore team of 40+ (Accenture and JPM; Mumbai, Bangalore, US)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border and tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011, 135,000+ clients, 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Payments migration completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "MAC security and payment-type-specific permissions",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Traced a MAC-layer failure to missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway gave corporate treasurers a single entry point across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Migration preserved client configurations, transaction histories, compliance traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "Amex VPP adoption slowed by missing SDKs, fragmented docs, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "Co-created developer portal; Java, .NET, Python SDKs; use case-driven docs",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Virtualized testing environments and Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption/trial usage increased within 3 months; onboarding time reduced",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "Exceeded delivery commitment by over 261 story points",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style from leadership-philosophy, permit-to-fail and related CIC stories; no payments carry-over; all claims supported (quoted 'empathy, clarity, and purpose' is a near-quote of LP Action, treated as supported paraphrase).",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity and purpose / modern engineering rigor",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Inherited teams 'over-processed, under-trusted, waiting for permission'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Makes intent explicit, pushes decisions to people closest to the work, transparency and direct feedback",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Coaches teams to think clearly, not just execute tasks",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Permit-to-fail: non-punitive post-mortems, low-stakes experiments, lessons applied in subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "4x delivery acceleration at the Cloud Innovation Center",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Rigid hierarchy; weekly brainstorming; de-emphasized individual accolades",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation/Action"
+   },
+   {
+    "text": "150-person Cloud Innovation Center",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Situation"
+   },
+   {
+    "text": "Experimentation reduced wasted engineering effort",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Result"
+   },
+   {
+    "text": "Thin-slice production-ready solutions in balanced teams",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: payments work answered (JPMC ACCESS, Amex VPP, RBC); all claims supported by ACCESS, Amex and RBC stories; no closing.",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead on JP Morgan ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "WebSeries (Bottomline) did not meet needs out of the box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended onshore/offshore team of 40+ (Accenture and JPM; Mumbai, Bangalore, US)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border and tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011, 135,000+ clients, 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Payments migration completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "Primary technical interface with Bottomline, 70-80% at Portsmouth",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "MAC security, sanctions screening, real-time global reporting",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Coordinated with compliance teams on legacy data verification",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Led production incident communications",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Amex VPP adoption slowed by missing SDKs, fragmented docs, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "Co-created developer portal; Java, .NET, Python SDKs; use case-driven docs",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Virtualized testing environments and Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption/trial usage increased within 3 months; onboarding time reduced",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "Exceeded delivery commitment by over 261 story points",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "RBC cross-border workflows from initiation through settlement and reconciliation",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "Real-time FX integration, automated alerts, batch processing (and recurring payments / Interac e-Transfer in r04)",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "Implementation blueprint ready for development; revised cutoffs reduced wire delays",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style from leadership-philosophy, permit-to-fail and related CIC stories; no payments carry-over; all claims supported.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity and purpose / modern engineering rigor",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Inherited teams 'over-processed, under-trusted, waiting for permission'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Makes intent explicit, pushes decisions to people closest to the work, transparency and direct feedback",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Coaches teams to think clearly, not just execute tasks",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Permit-to-fail: non-punitive post-mortems, low-stakes experiments, lessons applied in subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "4x delivery acceleration at the Cloud Innovation Center",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "CIC designed flat; command-and-control habits returned; enforcement and revalidation",
+    "label": "supported",
+    "source": "empowering-teams-through-decentralized-decision-making|accenture Situation"
+   },
+   {
+    "text": "Cross-functional teams with shared decision authority; anchors remove obstacles",
+    "label": "supported",
+    "source": "empowering-teams-through-decentralized-decision-making|accenture Action"
+   },
+   {
+    "text": "Senior-junior pairing, peer-led demos, practice forums; faster onboarding, proficiency, retention",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action/Result"
+   },
+   {
+    "text": "Weekly brainstorming; shared goals over accolades",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Action"
+   },
+   {
+    "text": "Early prototypes expected to fail; reduced wasted engineering effort",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Higher engagement and satisfaction from decentralized decisions",
+    "label": "supported",
+    "source": "empowering-teams-through-decentralized-decision-making|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: payments work answered (JPMC ACCESS, Amex VPP, RBC); all claims supported by ACCESS, Amex and RBC stories; no closing.",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead on JP Morgan ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "WebSeries (Bottomline) did not meet needs out of the box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended onshore/offshore team of 40+ (Accenture and JPM; Mumbai, Bangalore, US)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border and tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011, 135,000+ clients, 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Payments migration completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "Managed the build-vs-configure boundary",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Transaction monitoring, risk-based approval controls, sanctions screening integrations",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Introduced compliance dashboards; owned production validation and defect triage",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "70-80% embedded at Bottomline Portsmouth",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Amex VPP adoption slowed by missing SDKs, fragmented docs, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "Co-created developer portal; Java, .NET, Python SDKs; use case-driven docs",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Virtualized testing environments and Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption/trial usage increased within 3 months; onboarding time reduced",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "Exceeded delivery commitment by over 261 story points",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "RBC cross-border workflows from initiation through settlement and reconciliation",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "Real-time FX integration, automated alerts, batch processing (and recurring payments / Interac e-Transfer in r04)",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Action"
+   },
+   {
+    "text": "Implementation blueprint ready for development; revised cutoffs reduced wire delays",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express|rbc Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style from leadership-philosophy, permit-to-fail and related CIC stories; no payments carry-over; all claims supported.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity and purpose / modern engineering rigor",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Inherited teams 'over-processed, under-trusted, waiting for permission'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Makes intent explicit, pushes decisions to people closest to the work, transparency and direct feedback",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Coaches teams to think clearly, not just execute tasks",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Permit-to-fail: non-punitive post-mortems, low-stakes experiments, lessons applied in subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "4x delivery acceleration at the Cloud Innovation Center",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Prototypes expected to fail; results shaped direction week by week",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture 5PSummary"
+   },
+   {
+    "text": "Balanced teams with engineers, PMs, UX architects; pairing, retrospectives",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Improved satisfaction and retention, reduced delays, zero-defect production code",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   },
+   {
+    "text": "Norfolk Southern: rising defects despite near-complete coverage; took ownership; audit; TDD experts; I do/we do/you do",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation/Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: payments work answered (JPMC ACCESS, Amex VPP); all claims supported by ACCESS, Amex and RBC stories; no closing.",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead on JP Morgan ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "WebSeries (Bottomline) did not meet needs out of the box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended onshore/offshore team of 40+ (Accenture and JPM; Mumbai, Bangalore, US)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border and tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "ACCESS launched April 2011, 135,000+ clients, 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Payments migration completed without disruption to live payment operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "Managed build-versus-configure boundary",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "NACHA validation, MAC security, payment-type-specific permissions",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway routing across 12 countries to clearing networks and compliance/settlement/reporting systems",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Single entry point instead of separate regional logins",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Amex VPP adoption slowed by missing SDKs, fragmented docs, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "Co-created developer portal; Java, .NET, Python SDKs; use case-driven docs",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Virtualized testing environments and Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "API consumption/trial usage increased within 3 months; onboarding time reduced",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "Exceeded delivery commitment by over 261 story points",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Leadership style from leadership-philosophy, permit-to-fail and related CIC stories; no payments carry-over; all claims supported.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity and purpose / modern engineering rigor",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Inherited teams 'over-processed, under-trusted, waiting for permission'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Makes intent explicit, pushes decisions to people closest to the work, transparency and direct feedback",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Coaches teams to think clearly, not just execute tasks",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Permit-to-fail: non-punitive post-mortems, low-stakes experiments, lessons applied in subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "4x delivery acceleration at the Cloud Innovation Center",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Rigid hierarchy; weekly brainstorming; shared goals over accolades",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation/Action"
+   },
+   {
+    "text": "150-person CIC grounded in automation, continuous delivery, quality-first",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Situation/Action"
+   },
+   {
+    "text": "Prototypes expected to fail as evidence",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "Thin-slice production-ready solutions",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Action"
+   },
+   {
+    "text": "'It didn't happen overnight, but it stuck.'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern quality crisis as example of ownership/coaching style; all claims supported by quality-crisis story.",
+  "claims": [
+   {
+    "text": "Early 2020, first major CIC engagement, Norfolk Southern Revenue and Shipment Planning platform",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Client reported rising defects despite near-complete test coverage, as pandemic moved work remote",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Concerns landed with client and Accenture account leadership accustomed to waterfall",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership; bottom-up audit; engineer worked from own interpretation and wrote tests after code",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Backlog lacked defined scenarios and definition of done; rebuilt with SMART testable stories",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Frontend and backend TDD experts from Columbus; code and tests redone",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Samman coaching: boot camps, katas, practice sessions, lunch and learns, I do/we do/you do pairing",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Restructured agile ceremonies; product management and SMART story training",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Defect rates dropped; client stopped finding defects the dashboard could not see; confidence restored",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC decentralized decision-making / psychological safety example of style just described; all claims supported by DEC, SAFE, PTF.",
+  "claims": [
+   {
+    "text": "CIC designed flat; legacy command-and-control habits reasserted; enforcement and revalidation, bumpy path",
+    "label": "supported",
+    "source": "empowering-teams-through-decentralized-decision-making|accenture Situation"
+   },
+   {
+    "text": "Cross-functional teams; leaders as facilitators; anchors remove obstacles; flexible guidelines",
+    "label": "supported",
+    "source": "empowering-teams-through-decentralized-decision-making|accenture Action"
+   },
+   {
+    "text": "As centers scaled to 150+, pockets of fear of blame persisted; regular 1:1 engagement, open retros, shared own mistakes",
+    "label": "supported",
+    "source": "making-it-safe-to-take-risks-and-be-wrong|accenture Situation/Action"
+   },
+   {
+    "text": "Non-punitive post-mortems; lessons applied in subsequent sprints; low-stakes experiments",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "Fewer bottlenecks, higher engagement and satisfaction, improved retention",
+    "label": "supported",
+    "source": "empowering-teams-through-decentralized-decision-making|accenture Result"
+   },
+   {
+    "text": "Experimenting more freely, repeat errors declined, timelines shortened",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern quality crisis example; all claims supported by quality-crisis story.",
+  "claims": [
+   {
+    "text": "Early 2020, first major CIC engagement, Norfolk Southern Revenue and Shipment Planning platform",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Client reported rising defects despite near-complete test coverage, as pandemic moved work remote",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Concerns landed with client and Accenture account leadership accustomed to waterfall",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership; bottom-up audit; engineer worked from own interpretation and wrote tests after code",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Backlog lacked defined scenarios and definition of done; rebuilt with SMART testable stories",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Frontend and backend TDD experts from Columbus; code and tests redone",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Samman coaching: boot camps, katas, practice sessions, lunch and learns, I do/we do/you do pairing",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Restructured agile ceremonies; product management and SMART story training",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Defect rates dropped; client stopped finding defects the dashboard could not see; confidence restored",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern quality crisis expanded (already sketched in t2) with making-it-stick follow-up; all claims supported.",
+  "claims": [
+   {
+    "text": "Early 2020, first major CIC engagement, Norfolk Southern Revenue and Shipment Planning platform",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Client reported rising defects despite near-complete test coverage, as pandemic moved work remote",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Concerns landed with client and Accenture account leadership accustomed to waterfall",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership; bottom-up audit; engineer worked from own interpretation and wrote tests after code",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Backlog lacked defined scenarios and definition of done; rebuilt with SMART testable stories",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Frontend and backend TDD experts from Columbus; code and tests redone",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Samman coaching: boot camps, katas, practice sessions, lunch and learns, I do/we do/you do pairing",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Restructured agile ceremonies; product management and SMART story training",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Defect rates dropped; client stopped finding defects the dashboard could not see; confidence restored",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Reinforced test cases before solution, rotating pairs, checks at standup after experts left",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "New engineers paired with seasoned practitioners; stories sized for a 1-week iteration",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action/5PSummary"
+   },
+   {
+    "text": "Practices held after experts left; failure mode did not recur",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC permit-to-fail example of style just described; all claims supported by PTF and SAFE.",
+  "claims": [
+   {
+    "text": "Teams avoided risks for fear of blame; missed opportunities to adopt modern engineering practices",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation"
+   },
+   {
+    "text": "Scaled to 150+ practitioners from command-and-control cultures; some still hesitated",
+    "label": "supported",
+    "source": "making-it-safe-to-take-risks-and-be-wrong|accenture Situation"
+   },
+   {
+    "text": "Non-punitive post-mortems, transparent sharing of errors, low-stakes experiments with structured hypotheses",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action"
+   },
+   {
+    "text": "Regular engagement, open retrospectives, shared own risk-taking and mistakes",
+    "label": "supported",
+    "source": "making-it-safe-to-take-risks-and-be-wrong|accenture Action"
+   },
+   {
+    "text": "Post-mortem learnings applied to subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result"
+   },
+   {
+    "text": "Experimenting more freely, repeat errors declined, quicker pivots, shorter timelines",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result/5PSummary"
+   },
+   {
+    "text": "Morale improved and turnover declined",
+    "label": "supported",
+    "source": "making-it-safe-to-take-risks-and-be-wrong|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 1,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "Team size of the Norfolk Southern example: 3 balanced teams (supported, NS first-engagement story) and says headcount not specified; correct referent, no payments team.",
+  "claims": [
+   {
+    "text": "Norfolk Southern engagement scaled to 3 balanced teams; began transitioning 1 team to Monterrey",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Quality-crisis story gives no headcount (only 'a balanced team')",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 2,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "CIC example: 10-person pilot to 150+, 11-13 leads, 10-person balanced teams; correct referent, all supported.",
+  "claims": [
+   {
+    "text": "CIC grew from 10-person pilot to 150+ practitioners (Atlanta and Tampa)",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Reported up through 11-13 practice and client leads",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Situation"
+   },
+   {
+    "text": "10-person cross-functional balanced teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 3,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern: 3 balanced teams, says exact headcount not in story; correct referent, all supported.",
+  "claims": [
+   {
+    "text": "Norfolk Southern engagement scaled to 3 balanced teams; began transitioning 1 team to Monterrey",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Quality-crisis story gives no headcount (only 'a balanced team')",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 4,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern: 3 balanced teams, says quality-crisis story gives no headcount; correct referent, all supported.",
+  "claims": [
+   {
+    "text": "Norfolk Southern engagement scaled to 3 balanced teams; began transitioning 1 team to Monterrey",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Quality-crisis story gives no headcount (only 'a balanced team')",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c09",
+  "run": 5,
+  "turn": 4,
+  "label": "A",
+  "pass": true,
+  "reason": "Permit-to-fail example: clarifies 150+ is the CIC org, 10-person balanced teams, says story gives no headcount; correct referent, all supported.",
+  "claims": [
+   {
+    "text": "150+ is the broader CIC organization across Atlanta and Tampa",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action / leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients"
+   },
+   {
+    "text": "10-person cross-functional balanced teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Permit-to-fail story gives no team headcount",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture (no size field)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x1",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Supported: all Cendant, HSBC, Accredited facts. Fails acknowledges_missing: says the examples are mortgage-sector 'rather than property development, brokerage, or property management' but never says real estate work is not on record.",
+  "claims": [
+   {
+    "text": "Has worked in mortgage lending within financial services and banking",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage/driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Industry"
+   },
+   {
+    "text": "Experience includes underwriting, mortgage origination and servicing (HSBC assessment), internal systems for a home lender",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Situation; building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders"
+   },
+   {
+    "text": "Engagements are Financial Services / Banking, not property development/brokerage/management",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage,driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc,building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Industry"
+   },
+   {
+    "text": "Cendant Mortgage 2002-2003, replaced mainframe green-screen underwriting app",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Start/End_Date, Situation"
+   },
+   {
+    "text": "Built JSP/MVC front end capturing borrower income, credit score, home value",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Configured TIBCO layer: credit report requests, verification flows, routing to manager approval on risk and loan amount",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Found and corrected errors in Oracle stored procedures calculating risk factors",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Underwriters and loan officers moved to a web application",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Result"
+   },
+   {
+    "text": "HSBC assessment workshops in Buffalo after federal settlement",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Situation/Action"
+   },
+   {
+    "text": "Heat maps, gap analysis, target state architecture with Mortgage Cadence and Black Knight",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Result"
+   },
+   {
+    "text": "Estimates, staffing plan, SOW securing $10M implementation contract",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Result"
+   },
+   {
+    "text": "Stood up program and transitioned it to ongoing delivery team",
+    "label": "supported",
+    "source": "mobilizing-hsbcs-mortgage-transformation-program|hsbc Action/5PSummary"
+   },
+   {
+    "text": "Accredited Home Lenders enterprise HR portal: hiring, onboarding, succession planning, while lender scaled workforce",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Result/Situation"
+   },
+   {
+    "text": "Database schema, domain entities, front end, attribute-level access controls",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": true
+ },
+ {
+  "case": "x1",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Supported: all Cendant, HSBC, Accredited facts, FS/Banking framing. Acknowledges absence ('rather than documented work in property development, brokerage, or property management') and labels mortgage work as distinct from real estate.",
+  "claims": [
+   {
+    "text": "Mortgage lending and mortgage technology within FS/Banking",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage/driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Industry"
+   },
+   {
+    "text": "Engagements are Financial Services / Banking, not property development/brokerage/management",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage,driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc,building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Industry"
+   },
+   {
+    "text": "On site in Mount Laurel, NJ",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Situation/Place"
+   },
+   {
+    "text": "Cendant Mortgage 2002-2003, replaced mainframe green-screen underwriting app",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Start/End_Date, Situation"
+   },
+   {
+    "text": "Built JSP/MVC front end capturing borrower income, credit score, home value",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Configured TIBCO layer: credit report requests, verification flows, routing to manager approval on risk and loan amount",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Found and corrected errors in Oracle stored procedures calculating risk factors",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Underwriters and loan officers moved to a web application",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Result"
+   },
+   {
+    "text": "HSBC assessment workshops in Buffalo after federal settlement",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Situation/Action"
+   },
+   {
+    "text": "Heat maps, gap analysis, target state architecture with Mortgage Cadence and Black Knight",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Result"
+   },
+   {
+    "text": "Estimates, staffing plan, SOW securing $10M implementation contract",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Result"
+   },
+   {
+    "text": "Presented recommendations to senior stakeholders; aligned business and IT leadership",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action"
+   },
+   {
+    "text": "Accredited is a subprime lender rapidly expanding; work supported internal operations",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Situation"
+   },
+   {
+    "text": "Accredited Home Lenders enterprise HR portal: hiring, onboarding, succession planning, while lender scaled workforce",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Result/Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x1",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Contradicted: 'Yes' frames mortgage lending as real estate (strict reading). Other Cendant/HSBC/Accredited facts supported. No not-on-record statement.",
+  "claims": [
+   {
+    "text": "'Yes' to 'Has Matt worked in real estate?', framing mortgage lending as real-estate work ('rather than directly in property development')",
+    "label": "contradicted",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage/driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc/building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Industry = Financial Services / Banking; brief strict reading x1"
+   },
+   {
+    "text": "Software engineer on site in Mount Laurel, NJ",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Role/Place"
+   },
+   {
+    "text": "Cendant Mortgage 2002-2003, replaced mainframe green-screen underwriting app",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Start/End_Date, Situation"
+   },
+   {
+    "text": "Built JSP/MVC front end capturing borrower income, credit score, home value",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Configured TIBCO layer: credit report requests, verification flows, routing to manager approval on risk and loan amount",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Found and corrected errors in Oracle stored procedures calculating risk factors",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Underwriters and loan officers moved to a web application",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Result"
+   },
+   {
+    "text": "HSBC assessment workshops in Buffalo after federal settlement",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Situation/Action"
+   },
+   {
+    "text": "Heat maps, gap analysis, target state architecture with Mortgage Cadence and Black Knight",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Result"
+   },
+   {
+    "text": "Estimates, staffing plan, SOW securing $10M implementation contract",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Result"
+   },
+   {
+    "text": "Fragmented legacy systems and manual processes created compliance risk",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Situation"
+   },
+   {
+    "text": "Accredited Home Lenders enterprise HR portal: hiring, onboarding, succession planning, while lender scaled workforce",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Result/Situation"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": false
+ },
+ {
+  "case": "x1",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Supported: all claims (mortgage work labelled as adjacent, FS/Banking). Fails acknowledges_missing: says those engagements were not real estate brokerage/development/management but never says real estate work is not on record.",
+  "claims": [
+   {
+    "text": "Work connects to real estate via mortgage lending and mortgage technology; engagements in FS/Banking, not brokerage/development/management",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage/driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc/building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Industry"
+   },
+   {
+    "text": "Cendant Mortgage 2002-2003, replaced mainframe green-screen underwriting app",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Start/End_Date, Situation"
+   },
+   {
+    "text": "Built JSP/MVC front end capturing borrower income, credit score, home value",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Configured TIBCO layer: credit report requests, verification flows, routing to manager approval on risk and loan amount",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Found and corrected errors in Oracle stored procedures calculating risk factors",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Underwriters and loan officers moved to a web application",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Result"
+   },
+   {
+    "text": "HSBC assessment workshops in Buffalo after federal settlement",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Situation/Action"
+   },
+   {
+    "text": "Heat maps, gap analysis, target state architecture with Mortgage Cadence and Black Knight",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Result"
+   },
+   {
+    "text": "Estimates, staffing plan, SOW securing $10M implementation contract",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Result"
+   },
+   {
+    "text": "Aligned business and IT leadership",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Result"
+   },
+   {
+    "text": "Worked with HR, technology and in-house design teams on HR portal during rapid growth",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Action/Person"
+   },
+   {
+    "text": "Accredited described as a mortgage lender (client name 'Home Lenders', subprime lender)",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Client/Situation"
+   },
+   {
+    "text": "Accredited Home Lenders enterprise HR portal: hiring, onboarding, succession planning, while lender scaled workforce",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Result/Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": true
+ },
+ {
+  "case": "x1",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Contradicted: 'the financing side of real estate' frames mortgage lending as real estate (strict reading). Acknowledges absence via 'documented engagements'; other facts supported.",
+  "claims": [
+   {
+    "text": "Mortgage lending is 'the financing side of real estate' (frames mortgage work as real estate)",
+    "label": "contradicted",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage/driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc/building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Industry = Financial Services / Banking; brief strict reading x1"
+   },
+   {
+    "text": "Documented engagements are FS/Banking, not property development/brokerage/management",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage/driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc/building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Industry"
+   },
+   {
+    "text": "Cendant Mortgage 2002-2003, replaced mainframe green-screen underwriting app",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Start/End_Date, Situation"
+   },
+   {
+    "text": "Built JSP/MVC front end capturing borrower income, credit score, home value",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Configured TIBCO layer: credit report requests, verification flows, routing to manager approval on risk and loan amount",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Found and corrected errors in Oracle stored procedures calculating risk factors",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Underwriters and loan officers moved to a web application",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Result"
+   },
+   {
+    "text": "Modeled underwriting workflow in TIBCO BPM",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Process"
+   },
+   {
+    "text": "HSBC assessment workshops in Buffalo after federal settlement",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Situation/Action"
+   },
+   {
+    "text": "Heat maps, gap analysis, target state architecture with Mortgage Cadence and Black Knight",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Result"
+   },
+   {
+    "text": "Estimates, staffing plan, SOW securing $10M implementation contract",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Result"
+   },
+   {
+    "text": "Transformation roadmap",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Process"
+   },
+   {
+    "text": "Accredited Home Lenders enterprise HR portal: hiring, onboarding, succession planning, while lender scaled workforce",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Result/Situation"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ }
+]

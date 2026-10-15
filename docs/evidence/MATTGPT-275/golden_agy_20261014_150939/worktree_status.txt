@@ -1,0 +1,52 @@
+ M config/constants.py
+ D diagnose_transformation.py
+ D generate_208_fixtures.py
+ M services/jd_assessor.py
+ M tests/README.md
+ M tests/bdd/features/ask_streamed_answer.feature
+ D tests/bdd/features/cluster_promotion_kw.feature
+ D tests/bdd/features/fatal_fallback_handler.feature
+ M tests/bdd/features/landing_page.feature
+ D tests/bdd/features/pn_exclusion.feature
+ M tests/bdd/features/role_match.feature
+ D tests/bdd/features/synthesis_guard.feature
+ M tests/bdd/steps/test_ask_streamed_answer.py
+ D tests/bdd/steps/test_cluster_promotion_kw.py
+ D tests/bdd/steps/test_fatal_fallback_handler.py
+ M tests/bdd/steps/test_landing_page.py
+ D tests/bdd/steps/test_pn_exclusion.py
+ M tests/bdd/steps/test_role_match.py
+ M tests/bdd/steps/test_role_match_logging.py
+ D tests/bdd/steps/test_synthesis_guard.py
+ D tests/debug_trace_query.py
+ M tests/eval_rag_quality.py
+ M tests/fixtures/ask_agy_lever2_sol_system_prompts.json
+ M tests/test_agy_behavior.py
+ M tests/test_structural_assertions.py
+ D tests/unit/fixtures/mattgpt208_pool_broad.json
+ D tests/unit/fixtures/mattgpt208_pool_early.json
+ M tests/unit/test_ask_agy_history.py
+ M tests/unit/test_ask_agy_post_processing.py
+ M tests/unit/test_ask_agy_prompt_composition.py
+ M tests/unit/test_ask_agy_tool_answer.py
+ M tests/unit/test_ask_agy_tool_system_prompt.py
+ M tests/unit/test_ask_agy_turn_contract.py
+ M tests/unit/test_backend_service.py
+ M tests/unit/test_pinecone_egress.py
+ M ui/components/how_agy_dialog.py
+ M ui/components/how_i_built_dialog.py
+ M ui/components/why_agy_dialog.py
+ M ui/pages/ask_mattgpt/backend_service.py
+ M ui/pages/ask_mattgpt/conversation_view.py
+ M ui/pages/ask_mattgpt/landing_view.py
+ M ui/pages/ask_mattgpt/prompts.py
+ M ui/pages/ask_mattgpt/styles.py
+ M ui/pages/cross_industry_landing.py
+ M ui/styles/global_styles.py
+ M utils/formatting.py
+ M utils/ui_helpers.py
+?? docs/evidence/MATTGPT-275/golden_rag_20261014_140843/
+?? tests/bdd/features/ask_handoff.feature
+?? tests/bdd/steps/test_ask_handoff.py
+?? tests/unit/test_ask_agy_pending_turn.py
+?? tests/unit/test_no_dash_rule.py

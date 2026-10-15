@@ -1,0 +1,142 @@
+[
+ {
+  "case": "c10",
+  "run": 8,
+  "turn": 3,
+  "label": "A",
+  "arm": "opener",
+  "from": "pass",
+  "to": "fail",
+  "rule": "brief_v2 Section 6 rule 13 (c10 t3 crisis duration)"
+ },
+ {
+  "case": "c10",
+  "run": 8,
+  "turn": 3,
+  "label": "B",
+  "arm": "new",
+  "from": "pass",
+  "to": "fail",
+  "rule": "brief_v2 Section 6 rule 13 (c10 t3 crisis duration)"
+ },
+ {
+  "case": "c10",
+  "run": 9,
+  "turn": 3,
+  "label": "A",
+  "arm": "opener",
+  "from": "pass",
+  "to": "fail",
+  "rule": "brief_v2 Section 6 rule 13 (c10 t3 crisis duration)"
+ },
+ {
+  "case": "c10",
+  "run": 10,
+  "turn": 3,
+  "label": "B",
+  "arm": "opener",
+  "from": "pass",
+  "to": "fail",
+  "rule": "brief_v2 Section 6 rule 13 (c10 t3 crisis duration)"
+ },
+ {
+  "case": "x7",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "arm": "opener",
+  "from": "fail",
+  "to": "pass",
+  "rule": "brief_v2 Section 6 rule 12 (x7 omitted period)"
+ },
+ {
+  "case": "x7",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "arm": "new",
+  "from": "fail",
+  "to": "pass",
+  "rule": "brief_v2 Section 6 rule 12 (x7 omitted period)"
+ },
+ {
+  "case": "x7",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "arm": "opener",
+  "from": "fail",
+  "to": "pass",
+  "rule": "brief_v2 Section 6 rule 12 (x7 omitted period)"
+ },
+ {
+  "case": "x7",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "arm": "new",
+  "from": "fail",
+  "to": "pass",
+  "rule": "brief_v2 Section 6 rule 12 (x7 omitted period)"
+ },
+ {
+  "case": "x7",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "arm": "opener",
+  "from": "fail",
+  "to": "pass",
+  "rule": "brief_v2 Section 6 rule 12 (x7 omitted period)"
+ },
+ {
+  "case": "x7",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "arm": "new",
+  "from": "fail",
+  "to": "pass",
+  "rule": "brief_v2 Section 6 rule 12 (x7 omitted period)"
+ },
+ {
+  "case": "x7",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "arm": "opener",
+  "from": "fail",
+  "to": "pass",
+  "rule": "brief_v2 Section 6 rule 12 (x7 omitted period)"
+ },
+ {
+  "case": "x7",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "arm": "new",
+  "from": "fail",
+  "to": "pass",
+  "rule": "brief_v2 Section 6 rule 12 (x7 omitted period)"
+ },
+ {
+  "case": "x7",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "arm": "opener",
+  "from": "fail",
+  "to": "pass",
+  "rule": "brief_v2 Section 6 rule 12 (x7 omitted period)"
+ },
+ {
+  "case": "x7",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "arm": "new",
+  "from": "fail",
+  "to": "pass",
+  "rule": "brief_v2 Section 6 rule 12 (x7 omitted period)"
+ }
+]

@@ -1,0 +1,1922 @@
+[
+ {
+  "case": "x1",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail. contradicted: 'Yes, through mortgage lending technology' frames mortgage work as real estate (x1 strict reading); acknowledges_missing false: never says real estate is not on record, only 'rather than brokerage or property development'. supported: Cendant, HSBC ($10M), Accredited facts.",
+  "claims": [
+   {
+    "text": "Yes, Matt has worked in real estate, through mortgage lending technology",
+    "label": "contradicted",
+    "source": "brief strict reading x1 (mortgage/Cendant work framed as real estate is contradicted); replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Industry; driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Industry"
+   },
+   {
+    "text": "Software Engineer at Cendant Mortgage",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Role"
+   },
+   {
+    "text": "Cendant Mortgage: replaced a mainframe green-screen underwriting application used by underwriters and loan officers",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Situation/Result"
+   },
+   {
+    "text": "Built the JSP and MVC front end capturing borrower income, credit score, and home value",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Underwriting workflow (credit report requests, verification flows, conditional routing to manager approval) modeled as executable process in TIBCO BPM",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Found and corrected errors/flaws in Oracle stored procedures calculating risk factors",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Configured the TIBCO layer where the underwriting logic lived",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "HSBC mortgage operations under regulatory pressure after a federal settlement; fragmented legacy systems and manual processes created compliance risk",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Situation"
+   },
+   {
+    "text": "Conducted on-site interviews/assessment workshops in Buffalo",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action"
+   },
+   {
+    "text": "Produced heat maps, gap analysis, and a target state architecture using Mortgage Cadence for origination and Black Knight for servicing",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action/Result"
+   },
+   {
+    "text": "Reviewed technical artifacts",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action"
+   },
+   {
+    "text": "Estimates, staffing plan, pricing and Statement of Work leading to a $10M implementation contract",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action/Result"
+   },
+   {
+    "text": "Helped mobilize the program",
+    "label": "supported",
+    "source": "mobilizing-hsbcs-mortgage-transformation-program|hsbc Action"
+   },
+   {
+    "text": "Delivered an enterprise HR portal for Accredited Home Lenders supporting hiring, onboarding, and succession planning",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Result"
+   },
+   {
+    "text": "The Accredited application supported HR/workforce operations, not mortgage processing",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Task/Result"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": false
+ },
+ {
+  "case": "x1",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. supported: 'Real estate is not on record' (acknowledges missing), mortgage labelled 'closest related work'; Cendant, HSBC assessment and mobilization, Accredited facts all supported. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Real estate is not on record as an industry or domain in Matt's stories",
+    "label": "supported",
+    "source": "no story Industry is real estate (corpus search 'real estate|property' returned no story hits)"
+   },
+   {
+    "text": "Mortgage engagements are classified as Financial Services / Banking",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Industry; driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Industry; building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Industry"
+   },
+   {
+    "text": "Cendant Mortgage: replaced a mainframe green-screen underwriting application used by underwriters and loan officers",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Situation/Result"
+   },
+   {
+    "text": "Built the JSP and MVC front end capturing borrower income, credit score, and home value",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Underwriting workflow (credit report requests, verification flows, conditional routing to manager approval) modeled as executable process in TIBCO BPM",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Found and corrected errors/flaws in Oracle stored procedures calculating risk factors",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "HSBC mortgage operations under regulatory pressure after a federal settlement; fragmented legacy systems and manual processes created compliance risk",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Situation"
+   },
+   {
+    "text": "Conducted on-site interviews/assessment workshops in Buffalo",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action"
+   },
+   {
+    "text": "Produced heat maps, gap analysis, and a target state architecture using Mortgage Cadence for origination and Black Knight for servicing",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action/Result"
+   },
+   {
+    "text": "Led the HSBC assessment workshops",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Task"
+   },
+   {
+    "text": "Stood up/mobilized the program (governance, timelines, staffing, IT requirements workshops) and handed a fully operational program to the ongoing delivery team",
+    "label": "supported",
+    "source": "mobilizing-hsbcs-mortgage-transformation-program|hsbc Action/Result"
+   },
+   {
+    "text": "Accredited Home Lenders was a subprime lender expanding its workforce rapidly",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Situation"
+   },
+   {
+    "text": "Delivered an enterprise HR portal for Accredited Home Lenders supporting hiring, onboarding, and succession planning",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Result"
+   },
+   {
+    "text": "The Accredited application supported HR/workforce operations, not mortgage processing",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Task/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x1",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. supported: 'The stories do not establish direct work in real estate...' (acknowledges missing), dates 2002 to 2003 and 2016 to 2017 match story dates, Cendant/HSBC/Accredited facts. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Matt has worked in mortgage lending rather than directly in property development, brokerage, or property management",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage/driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Industry"
+   },
+   {
+    "text": "Cendant work was 2002 to 2003",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Start_Date/End_Date (2002-11 to 2003-10)"
+   },
+   {
+    "text": "Cendant Mortgage: replaced a mainframe green-screen underwriting application used by underwriters and loan officers",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Situation/Result"
+   },
+   {
+    "text": "Built the JSP and MVC front end capturing borrower income, credit score, and home value",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Underwriting workflow (credit report requests, verification flows, conditional routing to manager approval) modeled as executable process in TIBCO BPM",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Found and corrected errors/flaws in Oracle stored procedures calculating risk factors",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "HSBC work was 2016 to 2017",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Start_Date/End_Date (2016-12 to 2017-03)"
+   },
+   {
+    "text": "HSBC mortgage operations under regulatory pressure after a federal settlement; fragmented legacy systems and manual processes created compliance risk",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Situation"
+   },
+   {
+    "text": "Conducted on-site interviews/assessment workshops in Buffalo",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action"
+   },
+   {
+    "text": "Produced heat maps, gap analysis, and a target state architecture using Mortgage Cadence for origination and Black Knight for servicing",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action/Result"
+   },
+   {
+    "text": "Stood up/mobilized the program (governance, timelines, staffing, IT requirements workshops) and handed a fully operational program to the ongoing delivery team",
+    "label": "supported",
+    "source": "mobilizing-hsbcs-mortgage-transformation-program|hsbc Action/Result"
+   },
+   {
+    "text": "Delivered an enterprise HR portal for Accredited Home Lenders supporting hiring, onboarding, and succession planning",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Result"
+   },
+   {
+    "text": "The Accredited application supported HR/workforce operations, not mortgage processing",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Task/Result"
+   },
+   {
+    "text": "The stories do not establish direct work in real estate development, brokerage, or property management",
+    "label": "supported",
+    "source": "corpus: no real estate story"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x1",
+  "run": 1,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Pass. supported: mortgage labelled 'adjacent to real estate', 'The stories do not establish direct work in real estate' (acknowledges missing), $10M contract, dates match. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Mortgage lending is adjacent to real estate",
+    "label": "supported",
+    "source": "framing as adjacent, not as real estate"
+   },
+   {
+    "text": "Mortgage engagements are classified as Financial Services / Banking",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Industry; driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Industry; building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Industry"
+   },
+   {
+    "text": "Cendant work was 2002 to 2003",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Start_Date/End_Date (2002-11 to 2003-10)"
+   },
+   {
+    "text": "Cendant Mortgage: replaced a mainframe green-screen underwriting application used by underwriters and loan officers",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Situation/Result"
+   },
+   {
+    "text": "Built the JSP and MVC front end capturing borrower income, credit score, and home value",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Underwriting workflow (credit report requests, verification flows, conditional routing to manager approval) modeled as executable process in TIBCO BPM",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Found and corrected errors/flaws in Oracle stored procedures calculating risk factors",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Underwriters and loan officers moved to a web application with workflow executing in a process engine",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Result"
+   },
+   {
+    "text": "HSBC work was 2016 to 2017",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Start_Date/End_Date (2016-12 to 2017-03)"
+   },
+   {
+    "text": "HSBC mortgage operations under regulatory pressure after a federal settlement; fragmented legacy systems and manual processes created compliance risk",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Situation"
+   },
+   {
+    "text": "Conducted on-site interviews/assessment workshops in Buffalo",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action"
+   },
+   {
+    "text": "Produced heat maps, gap analysis, and a target state architecture using Mortgage Cadence for origination and Black Knight for servicing",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action/Result"
+   },
+   {
+    "text": "Estimates, staffing plan, pricing and Statement of Work leading to a $10M implementation contract",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action/Result"
+   },
+   {
+    "text": "Accredited Home Lenders work was 2002 to 2003",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Start_Date/End_Date"
+   },
+   {
+    "text": "Accredited Home Lenders was a subprime mortgage lender; his work concerned workforce operations",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Title/Situation/Result"
+   },
+   {
+    "text": "Delivered an enterprise HR portal for Accredited Home Lenders supporting hiring, onboarding, and succession planning",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Result"
+   },
+   {
+    "text": "The stories do not establish direct work in real estate development, brokerage, or property management",
+    "label": "supported",
+    "source": "corpus: no real estate story"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x1",
+  "run": 1,
+  "turn": 1,
+  "label": "E",
+  "pass": false,
+  "reason": "Fail. contradicted: 'Yes, on the mortgage-lending side' frames mortgage work as real estate (x1 strict reading); acknowledges_missing false: says only 'rather than property development, brokerage, or property management', never not on record. supported: Cendant, HSBC, Accredited facts.",
+  "claims": [
+   {
+    "text": "Yes, Matt has worked in real estate, on the mortgage-lending side",
+    "label": "contradicted",
+    "source": "brief strict reading x1 (mortgage/Cendant work framed as real estate is contradicted); replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Industry; driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Industry"
+   },
+   {
+    "text": "Cendant work was 2002 to 2003",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Start_Date/End_Date (2002-11 to 2003-10)"
+   },
+   {
+    "text": "Software Engineer at Cendant Mortgage",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Role"
+   },
+   {
+    "text": "Cendant Mortgage: replaced a mainframe green-screen underwriting application used by underwriters and loan officers",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Situation/Result"
+   },
+   {
+    "text": "Built the JSP and MVC front end capturing borrower income, credit score, and home value",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Underwriting workflow (credit report requests, verification flows, conditional routing to manager approval) modeled as executable process in TIBCO BPM",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Found and corrected errors/flaws in Oracle stored procedures calculating risk factors",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Configured the TIBCO process layer",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Underwriters and loan officers moved to a web application with workflow executing in a process engine",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Result"
+   },
+   {
+    "text": "HSBC work was 2016 to 2017",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Start_Date/End_Date (2016-12 to 2017-03)"
+   },
+   {
+    "text": "Led mortgage technology assessment workshops in Buffalo with mortgage operations teams and business/IT leadership",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Task/Action/Result"
+   },
+   {
+    "text": "Produced heat maps, gap analysis, and a target state architecture using Mortgage Cadence for origination and Black Knight for servicing",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action/Result"
+   },
+   {
+    "text": "Brought HSBC, Accenture, and Mortgage Cadence together around a shared execution plan, defined IT requirements through workshops, handed a fully operational program to the delivery team",
+    "label": "supported",
+    "source": "mobilizing-hsbcs-mortgage-transformation-program|hsbc Result"
+   },
+   {
+    "text": "Delivered an enterprise HR portal for Accredited Home Lenders supporting hiring, onboarding, and succession planning",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Result"
+   },
+   {
+    "text": "The Accredited application supported HR/workforce operations, not mortgage processing",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Task/Result"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": false
+ },
+ {
+  "case": "x1",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail. contradicted: 'Yes, in mortgage lending technology' frames mortgage work as real estate (x1 strict reading); acknowledges_missing false: no not-on-record statement. supported: Wellfound/Accenture employers, dates, Cendant/HSBC/Accredited facts.",
+  "claims": [
+   {
+    "text": "Yes, Matt has worked in real estate, in mortgage lending technology",
+    "label": "contradicted",
+    "source": "brief strict reading x1 (mortgage/Cendant work framed as real estate is contradicted); replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Industry; driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Industry"
+   },
+   {
+    "text": "Software Engineer at Cendant Mortgage through Wellfound Technology",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Role/Employer"
+   },
+   {
+    "text": "Cendant work was 2002 to 2003",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Start_Date/End_Date (2002-11 to 2003-10)"
+   },
+   {
+    "text": "Cendant Mortgage: replaced a mainframe green-screen underwriting application used by underwriters and loan officers",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Situation/Result"
+   },
+   {
+    "text": "Built the JSP and MVC front end capturing borrower income, credit score, and home value",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Underwriting workflow (credit report requests, verification flows, conditional routing to manager approval) modeled as executable process in TIBCO BPM",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Found and corrected errors/flaws in Oracle stored procedures calculating risk factors",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Configured the TIBCO layer where the underwriting logic lived",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "HSBC mortgage transformation through Accenture",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Employer"
+   },
+   {
+    "text": "HSBC work was 2016 to 2017",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Start_Date/End_Date (2016-12 to 2017-03)"
+   },
+   {
+    "text": "HSBC mortgage operations under regulatory pressure after a federal settlement; fragmented legacy systems and manual processes created compliance risk",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Situation"
+   },
+   {
+    "text": "Conducted on-site interviews/assessment workshops in Buffalo",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action"
+   },
+   {
+    "text": "Produced heat maps, gap analysis, and a target state architecture using Mortgage Cadence for origination and Black Knight for servicing",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action/Result"
+   },
+   {
+    "text": "Stood up/mobilized the program (governance, timelines, staffing, IT requirements workshops) and handed a fully operational program to the ongoing delivery team",
+    "label": "supported",
+    "source": "mobilizing-hsbcs-mortgage-transformation-program|hsbc Action/Result"
+   },
+   {
+    "text": "Delivered an enterprise HR portal for Accredited Home Lenders supporting hiring, onboarding, and succession planning",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Result"
+   },
+   {
+    "text": "The Accredited application supported HR/workforce operations, not mortgage processing",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Task/Result"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": false
+ },
+ {
+  "case": "x1",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. supported: 'They do not establish direct experience in property development, brokerage, or property management' (acknowledges missing, read as a statement about the record), 'Mount Laurel, New Jersey' (Place field 'Mount Laurel, NJ'), $10M contract, dates. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Engagements at Cendant Mortgage, HSBC, Accredited Home Lenders were in financial services and banking",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage/driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc/building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Industry"
+   },
+   {
+    "text": "Those engagements do not establish direct experience in property development, brokerage, or property management",
+    "label": "supported",
+    "source": "corpus: no real estate story"
+   },
+   {
+    "text": "Cendant work was 2002 to 2003",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Start_Date/End_Date (2002-11 to 2003-10)"
+   },
+   {
+    "text": "Worked on site in Mount Laurel, New Jersey",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Situation ('on site in Mount Laurel') and Place ('Mount Laurel, NJ')"
+   },
+   {
+    "text": "Cendant Mortgage: replaced a mainframe green-screen underwriting application used by underwriters and loan officers",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Situation/Result"
+   },
+   {
+    "text": "Built the JSP and MVC front end capturing borrower income, credit score, and home value",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Underwriting workflow (credit report requests, verification flows, conditional routing to manager approval) modeled as executable process in TIBCO BPM",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Found and corrected errors/flaws in Oracle stored procedures calculating risk factors",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "HSBC work was 2016 to 2017",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Start_Date/End_Date (2016-12 to 2017-03)"
+   },
+   {
+    "text": "HSBC mortgage operations under regulatory pressure after a federal settlement; fragmented legacy systems and manual processes created compliance risk",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Situation"
+   },
+   {
+    "text": "Conducted on-site interviews/assessment workshops in Buffalo",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action"
+   },
+   {
+    "text": "Produced heat maps, gap analysis, and a target state architecture using Mortgage Cadence for origination and Black Knight for servicing",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action/Result"
+   },
+   {
+    "text": "Presented recommendations to senior stakeholders and aligned business and IT leadership",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action/Result"
+   },
+   {
+    "text": "Estimates, staffing plan, pricing and Statement of Work leading to a $10M implementation contract",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action/Result"
+   },
+   {
+    "text": "Delivered an enterprise HR portal for Accredited Home Lenders supporting hiring, onboarding, and succession planning",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Result"
+   },
+   {
+    "text": "The Accredited application supported HR/workforce operations, not mortgage processing",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Task/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x1",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. supported: 'documented engagements are ... rather than property development, brokerage, or property management' (acknowledges missing; ambiguous, see report), team of 5 to 6 in San Diego, $10M contract. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Mortgage lending is related to real estate; documented engagements are in financial services and banking rather than property development, brokerage, or property management",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage/driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc/building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Industry"
+   },
+   {
+    "text": "Replaced it with a Java and JSP web application",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Situation"
+   },
+   {
+    "text": "Underwriting workflow (credit report requests, verification flows, conditional routing to manager approval) modeled as executable process in TIBCO BPM",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Found and corrected errors/flaws in Oracle stored procedures calculating risk factors",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Underwriters and loan officers moved to a web application with workflow executing in a process engine",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Result"
+   },
+   {
+    "text": "HSBC mortgage operations under regulatory pressure after a federal settlement; fragmented legacy systems and manual processes created compliance risk",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Situation"
+   },
+   {
+    "text": "Conducted on-site interviews/assessment workshops in Buffalo",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action"
+   },
+   {
+    "text": "Produced heat maps, gap analysis, and a target state architecture using Mortgage Cadence for origination and Black Knight for servicing",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action/Result"
+   },
+   {
+    "text": "Estimates, staffing plan, pricing and Statement of Work leading to a $10M implementation contract",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action/Result"
+   },
+   {
+    "text": "Stood up/mobilized the program (governance, timelines, staffing, IT requirements workshops) and handed a fully operational program to the ongoing delivery team",
+    "label": "supported",
+    "source": "mobilizing-hsbcs-mortgage-transformation-program|hsbc Action/Result"
+   },
+   {
+    "text": "Delivered an enterprise HR portal for Accredited Home Lenders supporting hiring, onboarding, and succession planning",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Result"
+   },
+   {
+    "text": "Accredited work was a team of approximately 5 to 6 in San Diego, for a rapidly expanding lender",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Situation ('five or six of us went out to San Diego')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x1",
+  "run": 2,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Pass. supported: 'Real estate is not on record' (acknowledges missing), 'closest related work' label, Cendant/HSBC/$10M/Accredited facts. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Real estate is not on record as an industry or domain in Matt's stories",
+    "label": "supported",
+    "source": "no story Industry is real estate (corpus search 'real estate|property' returned no story hits)"
+   },
+   {
+    "text": "Mortgage engagements are classified as Financial Services / Banking",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Industry; driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Industry; building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Industry"
+   },
+   {
+    "text": "Cendant Mortgage: replaced a mainframe green-screen underwriting application used by underwriters and loan officers",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Situation/Result"
+   },
+   {
+    "text": "Built the JSP and MVC front end capturing borrower income, credit score, and home value",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Underwriting workflow (credit report requests, verification flows, conditional routing to manager approval) modeled as executable process in TIBCO BPM",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Found and corrected errors/flaws in Oracle stored procedures calculating risk factors",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Underwriters and loan officers moved to a web application with workflow executing in a process engine",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Result"
+   },
+   {
+    "text": "HSBC mortgage operations under regulatory pressure after a federal settlement; fragmented legacy systems and manual processes created compliance risk",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Situation"
+   },
+   {
+    "text": "Conducted on-site interviews/assessment workshops in Buffalo",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action"
+   },
+   {
+    "text": "Produced heat maps, gap analysis, and a target state architecture using Mortgage Cadence for origination and Black Knight for servicing",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action/Result"
+   },
+   {
+    "text": "Engagement progressed through detailed estimates, staffing, and SOW to a $10M implementation contract",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action/Result"
+   },
+   {
+    "text": "Accredited Home Lenders was a subprime lender expanding its workforce rapidly",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Situation"
+   },
+   {
+    "text": "Delivered an enterprise HR portal for Accredited Home Lenders supporting hiring, onboarding, and succession planning",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Result"
+   },
+   {
+    "text": "The Accredited application supported HR/workforce operations, not mortgage processing",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Task/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x1",
+  "run": 2,
+  "turn": 1,
+  "label": "E",
+  "pass": true,
+  "reason": "Pass. supported: 'adjacent to real estate' label, 'documented engagements are ... rather than property development...' (acknowledges missing; ambiguous, see report), dates and $10M contract. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Mortgage lending is adjacent to real estate; documented engagements are in financial services and banking rather than property development, brokerage, or property management",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage/driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc/building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Industry"
+   },
+   {
+    "text": "Cendant work was 2002 to 2003",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Start_Date/End_Date (2002-11 to 2003-10)"
+   },
+   {
+    "text": "Cendant Mortgage: replaced a mainframe green-screen underwriting application used by underwriters and loan officers",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Situation/Result"
+   },
+   {
+    "text": "Built the JSP and MVC front end capturing borrower income, credit score, and home value",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Underwriting workflow (credit report requests, verification flows, conditional routing to manager approval) modeled as executable process in TIBCO BPM",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Found and corrected errors/flaws in Oracle stored procedures calculating risk factors",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Configured the TIBCO layer",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "HSBC work was 2016 to 2017",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Start_Date/End_Date (2016-12 to 2017-03)"
+   },
+   {
+    "text": "HSBC mortgage operations under regulatory pressure after a federal settlement; fragmented legacy systems and manual processes created compliance risk",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Situation"
+   },
+   {
+    "text": "Conducted on-site interviews/assessment workshops in Buffalo",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action"
+   },
+   {
+    "text": "Produced heat maps, gap analysis, and a target state architecture using Mortgage Cadence for origination and Black Knight for servicing",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action/Result"
+   },
+   {
+    "text": "Estimates, staffing plan, pricing and Statement of Work leading to a $10M implementation contract",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action/Result"
+   },
+   {
+    "text": "Accredited Home Lenders work was 2002 to 2003",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Start_Date/End_Date"
+   },
+   {
+    "text": "Delivered an enterprise HR portal for Accredited Home Lenders supporting hiring, onboarding, and succession planning",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Result"
+   },
+   {
+    "text": "Accredited work supported internal operations while the lender scaled its workforce",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Situation/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x1",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail. contradicted: 'Yes, on the mortgage lending side' frames mortgage work as real estate (x1 strict reading); acknowledges_missing false. supported: Cendant, HSBC, Accredited facts.",
+  "claims": [
+   {
+    "text": "Yes, Matt has worked in real estate, on the mortgage lending side",
+    "label": "contradicted",
+    "source": "brief strict reading x1 (mortgage/Cendant work framed as real estate is contradicted); replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Industry; driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Industry"
+   },
+   {
+    "text": "Replaced it with a Java and JSP web application",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Situation"
+   },
+   {
+    "text": "Built the JSP and MVC front end capturing borrower income, credit score, and home value",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Underwriting workflow (credit report requests, verification flows, conditional routing to manager approval) modeled as executable process in TIBCO BPM",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Found and corrected errors/flaws in Oracle stored procedures calculating risk factors",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "HSBC mortgage operations under regulatory pressure after a federal settlement; fragmented legacy systems and manual processes created compliance risk",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Situation"
+   },
+   {
+    "text": "Conducted on-site interviews/assessment workshops in Buffalo",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action"
+   },
+   {
+    "text": "Produced heat maps, gap analysis, and a target state architecture using Mortgage Cadence for origination and Black Knight for servicing",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action/Result"
+   },
+   {
+    "text": "Reviewed existing systems and integration patterns",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action"
+   },
+   {
+    "text": "Estimates, staffing plan, pricing and Statement of Work leading to a $10M implementation contract",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action/Result"
+   },
+   {
+    "text": "Accredited Home Lenders was a subprime lender expanding its workforce rapidly",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Situation"
+   },
+   {
+    "text": "Delivered an enterprise HR portal for Accredited Home Lenders supporting hiring, onboarding, and succession planning",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Result"
+   },
+   {
+    "text": "The Accredited application supported HR/workforce operations, not mortgage processing",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Task/Result"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": false
+ },
+ {
+  "case": "x1",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fail. contradicted: 'Yes, on the mortgage lending side' frames mortgage work as real estate (x1 strict reading); acknowledges_missing false. supported: dates, $10M contract, mobilization, Accredited facts.",
+  "claims": [
+   {
+    "text": "Yes, Matt has worked in real estate, on the mortgage lending side",
+    "label": "contradicted",
+    "source": "brief strict reading x1 (mortgage/Cendant work framed as real estate is contradicted); replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Industry; driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Industry"
+   },
+   {
+    "text": "Software Engineer at Cendant Mortgage",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Role"
+   },
+   {
+    "text": "Cendant work was 2002 to 2003",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Start_Date/End_Date (2002-11 to 2003-10)"
+   },
+   {
+    "text": "Cendant Mortgage: replaced a mainframe green-screen underwriting application used by underwriters and loan officers",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Situation/Result"
+   },
+   {
+    "text": "Built the JSP and MVC front end capturing borrower income, credit score, and home value",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Underwriting workflow (credit report requests, verification flows, conditional routing to manager approval) modeled as executable process in TIBCO BPM",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Found and corrected errors/flaws in Oracle stored procedures calculating risk factors",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Underwriters and loan officers moved to a web application with workflow executing in a process engine",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Result"
+   },
+   {
+    "text": "HSBC work was 2016 to 2017",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Start_Date/End_Date (2016-12 to 2017-03)"
+   },
+   {
+    "text": "HSBC mortgage operations under regulatory pressure after a federal settlement; fragmented legacy systems and manual processes created compliance risk",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Situation"
+   },
+   {
+    "text": "Conducted on-site interviews/assessment workshops in Buffalo",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action"
+   },
+   {
+    "text": "Produced heat maps, gap analysis, and a target state architecture using Mortgage Cadence for origination and Black Knight for servicing",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action/Result"
+   },
+   {
+    "text": "Estimates, staffing plan, pricing and Statement of Work leading to a $10M implementation contract",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action/Result"
+   },
+   {
+    "text": "Stood up the program, established governance and timelines, locked IT requirements through workshops, handed a fully operational program to the delivery team",
+    "label": "supported",
+    "source": "mobilizing-hsbcs-mortgage-transformation-program|hsbc Action/Result"
+   },
+   {
+    "text": "Delivered an enterprise HR portal for Accredited Home Lenders supporting hiring, onboarding, and succession planning",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Result"
+   },
+   {
+    "text": "The Accredited application supported HR/workforce operations, not mortgage processing",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Task/Result"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": false
+ },
+ {
+  "case": "x1",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fail. contradicted: 'Yes, through mortgage lending technology' frames mortgage work as real estate (x1 strict reading). supported: dates, $10M contract, Accredited facts.",
+  "claims": [
+   {
+    "text": "Yes, Matt has worked in real estate, through mortgage lending technology",
+    "label": "contradicted",
+    "source": "brief strict reading x1 (mortgage/Cendant work framed as real estate is contradicted); replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Industry; driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Industry"
+   },
+   {
+    "text": "Matt's documented work is in financial services and banking",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage/driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Industry"
+   },
+   {
+    "text": "Cendant work was 2002 to 2003",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Start_Date/End_Date (2002-11 to 2003-10)"
+   },
+   {
+    "text": "Cendant Mortgage: replaced a mainframe green-screen underwriting application used by underwriters and loan officers",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Situation/Result"
+   },
+   {
+    "text": "Built the JSP and MVC front end capturing borrower income, credit score, and home value",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Underwriting workflow (credit report requests, verification flows, conditional routing to manager approval) modeled as executable process in TIBCO BPM",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Found and corrected errors/flaws in Oracle stored procedures calculating risk factors",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Underwriters and loan officers moved to a web application with workflow executing in a process engine",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Result"
+   },
+   {
+    "text": "HSBC work was 2016 to 2017",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Start_Date/End_Date (2016-12 to 2017-03)"
+   },
+   {
+    "text": "Conducted on-site interviews/assessment workshops in Buffalo",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action"
+   },
+   {
+    "text": "Produced heat maps, gap analysis, and a target state architecture using Mortgage Cadence for origination and Black Knight for servicing",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action/Result"
+   },
+   {
+    "text": "Estimates, staffing plan, pricing and Statement of Work leading to a $10M implementation contract",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action/Result"
+   },
+   {
+    "text": "Stood up/mobilized the program (governance, timelines, staffing, IT requirements workshops) and handed a fully operational program to the ongoing delivery team",
+    "label": "supported",
+    "source": "mobilizing-hsbcs-mortgage-transformation-program|hsbc Action/Result"
+   },
+   {
+    "text": "Accredited Home Lenders work was 2002 to 2003",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Start_Date/End_Date"
+   },
+   {
+    "text": "Delivered an enterprise HR portal for Accredited Home Lenders supporting hiring, onboarding, and succession planning",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Result"
+   },
+   {
+    "text": "The Accredited application supported HR/workforce operations, not mortgage processing",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Task/Result"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false
+ },
+ {
+  "case": "x1",
+  "run": 3,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Pass. supported: 'They do not establish experience in property development, property management, or real estate brokerage' (acknowledges missing, read as a statement about the record; ambiguous, see report), mortgage labelled as not brokerage/development, dates. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Matt has worked in mortgage lending rather than real estate brokerage or property development",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage/driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Industry"
+   },
+   {
+    "text": "Cendant work was 2002 to 2003",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Start_Date/End_Date (2002-11 to 2003-10)"
+   },
+   {
+    "text": "Cendant Mortgage: replaced a mainframe green-screen underwriting application used by underwriters and loan officers",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Situation/Result"
+   },
+   {
+    "text": "Built the JSP and MVC front end capturing borrower income, credit score, and home value",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Underwriting workflow (credit report requests, verification flows, conditional routing to manager approval) modeled as executable process in TIBCO BPM",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Found and corrected errors/flaws in Oracle stored procedures calculating risk factors",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Underwriters and loan officers moved to a web application with workflow executing in a process engine",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Result"
+   },
+   {
+    "text": "HSBC work was 2016 to 2017",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Start_Date/End_Date (2016-12 to 2017-03)"
+   },
+   {
+    "text": "HSBC mortgage operations under regulatory pressure after a federal settlement; fragmented legacy systems and manual processes created compliance risk",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Situation"
+   },
+   {
+    "text": "Conducted on-site interviews/assessment workshops in Buffalo",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action"
+   },
+   {
+    "text": "Developed a target state architecture using Mortgage Cadence and Black Knight",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action"
+   },
+   {
+    "text": "Established the implementation program's governance, scope, timelines, staffing, and requirements before handing it to the ongoing delivery team",
+    "label": "supported",
+    "source": "mobilizing-hsbcs-mortgage-transformation-program|hsbc Action/Result"
+   },
+   {
+    "text": "Accredited Home Lenders was a subprime lender expanding its workforce rapidly",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Situation"
+   },
+   {
+    "text": "Delivered an enterprise HR portal for Accredited Home Lenders supporting hiring, onboarding, and succession planning",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Result"
+   },
+   {
+    "text": "Those engagements do not establish experience in property development, property management, or real estate brokerage",
+    "label": "supported",
+    "source": "corpus: no real estate story"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x1",
+  "run": 3,
+  "turn": 1,
+  "label": "E",
+  "pass": true,
+  "reason": "Pass. supported: 'Real estate is not on record' (acknowledges missing), 'closest related work' label, Cendant/HSBC/Accredited facts. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Real estate is not on record as an industry or domain in Matt's stories",
+    "label": "supported",
+    "source": "no story Industry is real estate (corpus search 'real estate|property' returned no story hits)"
+   },
+   {
+    "text": "Mortgage engagements are classified as Financial Services / Banking",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Industry; driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Industry; building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Industry"
+   },
+   {
+    "text": "Replaced a mainframe underwriting system with a web application for underwriters and loan officers",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Result"
+   },
+   {
+    "text": "Built the front end capturing borrower income, credit score, and home value; configured underwriting workflows in TIBCO; corrected errors in Oracle stored procedures",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Led a technology assessment of HSBC mortgage origination and servicing following a federal settlement",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Task/Situation"
+   },
+   {
+    "text": "On-site workshops in Buffalo; target state architecture with Mortgage Cadence and Black Knight",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Action"
+   },
+   {
+    "text": "Delivered an enterprise HR portal for Accredited Home Lenders supporting hiring, onboarding, and succession planning",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Result"
+   },
+   {
+    "text": "The Accredited application supported HR/workforce operations, not mortgage processing",
+    "label": "supported",
+    "source": "building-an-hr-portal-for-a-subprime-lender-scaling-faster-than-it-could-hire|accredited-home-lenders Task/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x2",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. supported: webMethods, TIBCO, Java, Oracle, Salesforce, Dynamics CRM. 0 contradicted, 0 unsupported; acknowledges_missing true ('engagements available here don't mention SAP'); useful_direct true (adjacent work labelled as not SAP).",
+  "claims": [
+   {
+    "text": "No confirmed example of Matt working with SAP; engagements available don't mention SAP",
+    "label": "supported",
+    "source": "stated fact: no SAP story (corpus search '\\bSAP\\b' returned no hits)"
+   },
+   {
+    "text": "Worked with webMethods (and Java) at Cendian Chemical Logistics",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Worked with TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action; turning-stratcoms-paper-operational-plans-into-executable-workflow|lockheed-martin Competencies"
+   },
+   {
+    "text": "Worked with Oracle",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Worked with Salesforce at JP Morgan Chase",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action"
+   },
+   {
+    "text": "Integration work includes Microsoft Dynamics CRM",
+    "label": "supported",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase; delivering-global-data-conversion-for-jp-morgans-ts-dynamics-crm-across-four-regions|jp-morgan-chase (data conversion to Dynamics CRM; accepted as integration paraphrase)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x2",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. supported: webMethods, TIBCO, Oracle, Salesforce, Dynamics CRM. 0 contradicted, 0 unsupported; acknowledges_missing true ('none of the stories I found explicitly mentions SAP'); useful_direct true (adjacent work labelled as not SAP).",
+  "claims": [
+   {
+    "text": "Can't confirm SAP experience; none of the stories mentions SAP",
+    "label": "supported",
+    "source": "stated fact: no SAP story (corpus search '\\bSAP\\b' returned no hits)"
+   },
+   {
+    "text": "Worked with webMethods (and Java) at Cendian Chemical Logistics",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Worked with TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action; turning-stratcoms-paper-operational-plans-into-executable-workflow|lockheed-martin Competencies"
+   },
+   {
+    "text": "Worked with Oracle",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Worked with Salesforce at JP Morgan Chase",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action"
+   },
+   {
+    "text": "Worked with Microsoft Dynamics CRM",
+    "label": "supported",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase; delivering-global-data-conversion-for-jp-morgans-ts-dynamics-crm-across-four-regions|jp-morgan-chase Situation/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x2",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. supported: Salesforce at JPMC, Java/webMethods at Cendian, TIBCO at Lockheed Martin. 0 contradicted, 0 unsupported; acknowledges_missing true ('Those engagements do not establish SAP experience'); useful_direct true (adjacent work labelled as not SAP).",
+  "claims": [
+   {
+    "text": "No confirmed example of Matt working with SAP",
+    "label": "supported",
+    "source": "stated fact: no SAP story (corpus search '\\bSAP\\b' returned no hits)"
+   },
+   {
+    "text": "Worked with Salesforce at JP Morgan Chase",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action"
+   },
+   {
+    "text": "Java and webMethods at Cendian Chemical Logistics",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "TIBCO at Lockheed Martin",
+    "label": "supported",
+    "source": "turning-stratcoms-paper-operational-plans-into-executable-workflow|lockheed-martin Competencies"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x2",
+  "run": 1,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Pass. supported: webMethods, TIBCO, Oracle, Salesforce, Dynamics CRM. 0 contradicted, 0 unsupported; acknowledges_missing true ('available engagement details do not identify SAP'); useful_direct true (adjacent work labelled as not SAP).",
+  "claims": [
+   {
+    "text": "No confirmed example; available engagement details do not identify SAP work",
+    "label": "supported",
+    "source": "stated fact: no SAP story (corpus search '\\bSAP\\b' returned no hits)"
+   },
+   {
+    "text": "Worked with webMethods (and Java) at Cendian Chemical Logistics",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Worked with TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action; turning-stratcoms-paper-operational-plans-into-executable-workflow|lockheed-martin Competencies"
+   },
+   {
+    "text": "Worked with Oracle",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Worked with Salesforce at JP Morgan Chase",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action"
+   },
+   {
+    "text": "Worked with Microsoft Dynamics CRM",
+    "label": "supported",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase; delivering-global-data-conversion-for-jp-morgans-ts-dynamics-crm-across-four-regions|jp-morgan-chase Situation/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x2",
+  "run": 1,
+  "turn": 1,
+  "label": "E",
+  "pass": true,
+  "reason": "Pass. supported: Cendian EDI/XML/flat file integrations, GC3 canonical objects, JPMC Salesforce integration architecture. 0 contradicted, 0 unsupported; acknowledges_missing true ('not on record'); useful_direct true (adjacent work labelled as not SAP).",
+  "claims": [
+   {
+    "text": "SAP experience is not on record in Matt's stories",
+    "label": "supported",
+    "source": "stated fact: no SAP story (corpus search '\\bSAP\\b' returned no hits)"
+   },
+   {
+    "text": "At Cendian, engineered Java/webMethods integrations exchanging EDI, XML, and flat files with trading partners",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation/Action"
+   },
+   {
+    "text": "Created canonical business objects normalizing formats into a common XML representation for GC3, the transportation management system",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action/Result"
+   },
+   {
+    "text": "At JP Morgan Chase, designed integration architecture connecting Salesforce with internal data warehouses, compliance systems, reporting tools, and Salesforce Marketing Cloud",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x2",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. supported: Cendian webMethods components, Cendant TIBCO components. 0 contradicted, 0 unsupported; acknowledges_missing true ('they do not name SAP'); useful_direct true (adjacent work labelled as not SAP).",
+  "claims": [
+   {
+    "text": "Can't confirm SAP experience from documented work; engagements do not name SAP",
+    "label": "supported",
+    "source": "stated fact: no SAP story (corpus search '\\bSAP\\b' returned no hits)"
+   },
+   {
+    "text": "webMethods B2B Trading Networks and Integration Server at Cendian Chemical Logistics",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "TIBCO BPM, InConcert, Integration Manager, and the Active Database Adapter at Cendant Mortgage",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Those engagements involve Java, XML, EDI, Oracle, and transportation or underwriting systems",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action; replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x2",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. supported: Cendian integration, GC3, JPMC Salesforce integration. 0 contradicted, 0 unsupported; acknowledges_missing true ('not on record'); useful_direct true (adjacent work labelled as not SAP).",
+  "claims": [
+   {
+    "text": "SAP experience is not on record in Matt's stories",
+    "label": "supported",
+    "source": "stated fact: no SAP story (corpus search '\\bSAP\\b' returned no hits)"
+   },
+   {
+    "text": "At Cendian, engineered Java/webMethods integrations exchanging EDI, XML, and flat files with trading partners",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation/Action"
+   },
+   {
+    "text": "Created a common XML representation for the GC3 transportation management system",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "At JP Morgan Chase, designed integration architecture connecting Salesforce with internal data warehouses, compliance systems, reporting tools, and Salesforce Marketing Cloud",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x2",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. supported: Cendian webMethods/EDI/XML/GC3, JPMC Salesforce integration. 0 contradicted, 0 unsupported; acknowledges_missing true ('neither names SAP'); useful_direct true (adjacent work labelled as not SAP).",
+  "claims": [
+   {
+    "text": "Couldn't confirm SAP experience in Matt's work stories; neither engagement names SAP",
+    "label": "supported",
+    "source": "stated fact: no SAP story (corpus search '\\bSAP\\b' returned no hits)"
+   },
+   {
+    "text": "Java, webMethods Integration Server, and B2B Trading Networks at Cendian, building EDI and XML integrations feeding GC3",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "At JP Morgan Chase, designed integration architecture connecting Salesforce with internal data warehouses, compliance systems, reporting tools, and Salesforce Marketing Cloud",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x2",
+  "run": 2,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Pass. supported: webMethods, TIBCO, Oracle, Salesforce. 0 contradicted, 0 unsupported; acknowledges_missing true ('haven't found a confirmed SAP engagement in Matt's work history'); useful_direct true (adjacent work labelled as not SAP).",
+  "claims": [
+   {
+    "text": "No confirmed SAP engagement in Matt's work history",
+    "label": "supported",
+    "source": "stated fact: no SAP story (corpus search '\\bSAP\\b' returned no hits)"
+   },
+   {
+    "text": "Worked with webMethods (and Java) at Cendian Chemical Logistics",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Worked with TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action; turning-stratcoms-paper-operational-plans-into-executable-workflow|lockheed-martin Competencies"
+   },
+   {
+    "text": "Worked with Oracle",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Worked with Salesforce at JP Morgan Chase",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x2",
+  "run": 2,
+  "turn": 1,
+  "label": "E",
+  "pass": true,
+  "reason": "Pass. supported: webMethods, TIBCO, Salesforce, Dynamics CRM. 0 contradicted, 0 unsupported; acknowledges_missing true ('haven't found a confirmed SAP engagement in Matt's work history'); useful_direct true (adjacent work labelled as not SAP).",
+  "claims": [
+   {
+    "text": "No confirmed SAP engagement in Matt's work history",
+    "label": "supported",
+    "source": "stated fact: no SAP story (corpus search '\\bSAP\\b' returned no hits)"
+   },
+   {
+    "text": "Worked with webMethods (and Java) at Cendian Chemical Logistics",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Worked with TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action; turning-stratcoms-paper-operational-plans-into-executable-workflow|lockheed-martin Competencies"
+   },
+   {
+    "text": "Worked with Salesforce at JP Morgan Chase",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action"
+   },
+   {
+    "text": "Worked with Microsoft Dynamics CRM",
+    "label": "supported",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase; delivering-global-data-conversion-for-jp-morgans-ts-dynamics-crm-across-four-regions|jp-morgan-chase Situation/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x2",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. supported: Cendian Java/webMethods, JPMC Salesforce integration. 0 contradicted, 0 unsupported; acknowledges_missing true ('Those stories do not mention SAP'); useful_direct true (adjacent work labelled as not SAP).",
+  "claims": [
+   {
+    "text": "Can't confirm SAP experience from Matt's stories; stories do not mention SAP",
+    "label": "supported",
+    "source": "stated fact: no SAP story (corpus search '\\bSAP\\b' returned no hits)"
+   },
+   {
+    "text": "Java and webMethods at Cendian Chemical Logistics",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "At JP Morgan Chase, Salesforce integration with internal data warehouses, compliance systems, and reporting tools",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x2",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. supported: Cendian Java/webMethods, Salesforce at JPMC, TIBCO at Lockheed Martin. 0 contradicted, 0 unsupported; acknowledges_missing true ('None of those stories identifies SAP'); useful_direct true (adjacent work labelled as not SAP).",
+  "claims": [
+   {
+    "text": "Can't confirm SAP experience from Matt's work stories",
+    "label": "supported",
+    "source": "stated fact: no SAP story (corpus search '\\bSAP\\b' returned no hits)"
+   },
+   {
+    "text": "Java and webMethods at Cendian Chemical Logistics",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Worked with Salesforce at JP Morgan Chase",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action"
+   },
+   {
+    "text": "TIBCO at Lockheed Martin",
+    "label": "supported",
+    "source": "turning-stratcoms-paper-operational-plans-into-executable-workflow|lockheed-martin Competencies"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x2",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. supported: webMethods, TIBCO, Oracle, Salesforce. 0 contradicted, 0 unsupported; acknowledges_missing true ('I don't have a documented example'); useful_direct true (adjacent work labelled as not SAP).",
+  "claims": [
+   {
+    "text": "No documented example of Matt working with SAP",
+    "label": "supported",
+    "source": "stated fact: no SAP story (corpus search '\\bSAP\\b' returned no hits)"
+   },
+   {
+    "text": "Worked with webMethods (and Java) at Cendian Chemical Logistics",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Worked with TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action; turning-stratcoms-paper-operational-plans-into-executable-workflow|lockheed-martin Competencies"
+   },
+   {
+    "text": "Worked with Oracle",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Worked with Salesforce at JP Morgan Chase",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x2",
+  "run": 3,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Pass. supported: Cendian webMethods/Java/EDI/XML/GC3, JPMC Salesforce integration. 0 contradicted, 0 unsupported; acknowledges_missing true ('Neither engagement explicitly identifies SAP'); useful_direct true (adjacent work labelled as not SAP).",
+  "claims": [
+   {
+    "text": "Can't confirm SAP experience from available work history",
+    "label": "supported",
+    "source": "stated fact: no SAP story (corpus search '\\bSAP\\b' returned no hits)"
+   },
+   {
+    "text": "At Cendian, worked with webMethods, Java, EDI, XML, and the GC3 transportation management system",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation/Action"
+   },
+   {
+    "text": "At JP Morgan Chase, Salesforce integration with internal data warehouses, compliance systems, and reporting tools",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x2",
+  "run": 3,
+  "turn": 1,
+  "label": "E",
+  "pass": true,
+  "reason": "Pass. supported: Cendian Industry, EDI/XML/flat file integration, GC3 canonical objects. 0 contradicted, 0 unsupported; acknowledges_missing true ('not on record'); useful_direct true (adjacent work labelled as not SAP).",
+  "claims": [
+   {
+    "text": "SAP experience is not on record in Matt's stories",
+    "label": "supported",
+    "source": "stated fact: no SAP story (corpus search '\\bSAP\\b' returned no hits)"
+   },
+   {
+    "text": "Cendian Chemical Logistics is in Transportation & Logistics",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Industry"
+   },
+   {
+    "text": "At Cendian, engineered Java/webMethods integrations exchanging EDI, XML, and flat files with trading partners",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation/Action"
+   },
+   {
+    "text": "Built canonical business objects so GC3 received a common shipment representation",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ }
+]

@@ -1,0 +1,3291 @@
+[
+ {
+  "case": "c13",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent, all claims supported by the four Fiserv stories (recovery, agile, DevOps, ADA) and the thought-leadership story; no quotations, no closing offer. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Worked on Fiserv card portal Dec 2014 to June 2015",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Start_Date/End_Date"
+   },
+   {
+    "text": "$8.5M white-label card portal",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "2M+ cardholders across 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Took over as Development Manager ~7 months into 14-month initiative",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / 5PSummary"
+   },
+   {
+    "text": "45-person globally dispersed team",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Team had missed multiple consecutive deadlines",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Production payment processing had high-severity defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action (Sev-1 defects in live payment processing)"
+   },
+   {
+    "text": "Client stakeholders threatening contract cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "3 external vendors without coordinated dependencies",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Platform moving from mainframe to API-based architecture",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Traveled Mon-Thu to Omaha",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Ran daily 7 AM and 11 PM offshore/onshore transition calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Reprioritized backlog, reset timelines, coordinated payment processing, fraud detection, hosting vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Managed SOA integration layer wrapping VisionPLUS 350 COBOL into Java EE/Spring via MuleSoft, Tibco, WebMethods",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Replaced 6-month waterfall releases and 200-page requirements doc organized by system modules",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Introduced persona-based user stories, multi-tiered JIRA boards, biweekly sprint demos",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "PMO and compliance initially resisted agile; satisfied with JIRA audit trails, ADA scans, developer comments",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Screen reader audits built into Definition of Done",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action / Result"
+   },
+   {
+    "text": "2-week sprints within 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Real-time visibility for 50+ stakeholders across 3 time zones",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "3% under budget, $255K saved",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "All 47 acceptance criteria met, zero critical defects at launch",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$45M transactions first month, 99.97% uptime",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Recovered release 3 weeks behind, avoiding $500K penalties",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Result"
+   },
+   {
+    "text": "Secured $3M contract extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Gives the Fiserv team size of 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv / recovering-fiservs-85m-white-label-card-portal|fiserv; no clarifying question (over-asking control passes); team locations and 3 vendors supported; no closing. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Matt coordinated a 45-person globally dispersed team on Fiserv's white-label card portal",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Included developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Worked alongside the Omaha onshore team",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation (Omaha onshore team)"
+   },
+   {
+    "text": "Coordinated 3 external vendors for payment processing, fraud detection, hosting infrastructure",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent, all claims supported by the four Fiserv stories (recovery, agile, DevOps, ADA) and the thought-leadership story; no quotations, no closing offer. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Took over development management ~7 months in",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / 5PSummary"
+   },
+   {
+    "text": "$8.5M white-label card portal",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "2M+ cardholders, 15 financial institutions",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person globally dispersed team",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Missed multiple deadlines",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Production payment processing had critical defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action (Sev-1 defects in live payment processing)"
+   },
+   {
+    "text": "Stakeholders threatening contract cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "3 vendors (payment processing, fraud detection, hosting) uncoordinated dependencies",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Traveled Mon-Thu to Omaha; 7 AM and 11 PM transition calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Reprioritized backlog, reset timelines, closed quality gaps, coordinated vendor deliverables",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Managed integration layer mainframe to Java EE/Spring via MuleSoft, Tibco, WebMethods during API transition",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Requirements in 200-page BRD, 6-month release cycles, little visibility",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Decomposed into persona-based user stories",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Restructured JIRA around 47 acceptance criteria",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Introduced biweekly sprint demos",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Used JIRA audit trails, accessibility scans, developer comments against PMO/compliance resistance",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "2-week sprints within 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "50+ stakeholders across 3 time zones",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "3% under budget, $255K",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "47 of 47 AC, zero critical defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$45M first month, 99.97% uptime",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Recovered release 3 weeks behind, $500K penalties avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Result"
+   },
+   {
+    "text": "$3M contract extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives the Fiserv team size of 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv / recovering-fiservs-85m-white-label-card-portal|fiserv; no clarifying question (over-asking control passes); team locations and 3 vendors supported; no closing. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "The Fiserv team had 45 people, globally dispersed",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland, and an onshore team in Omaha",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Omaha onshore team part of the team",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation (Omaha onshore team)"
+   },
+   {
+    "text": "Matt served as Development Manager",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Task / 5PSummary"
+   },
+   {
+    "text": "Coordinated 3 external vendors handling payment processing, fraud detection, hosting infrastructure",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent, all claims supported by the four Fiserv stories (recovery, agile, DevOps, ADA) and the thought-leadership story; no quotations, no closing offer. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Development Manager ~7 months into troubled 14-month $8.5M initiative",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "2M+ cardholders, 15 FIs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person globally dispersed team",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Missed multiple consecutive deadlines, poor quality",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Stakeholders threatening cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "3 vendors uncoordinated dependencies",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Mainframe to SOA-based API architecture",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Mon-Thu Omaha travel; 7 AM and 11 PM calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Reprioritized backlog, reset timelines, coordinated vendor deliverables",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Integration layer legacy COBOL to Java EE/Spring via MuleSoft, Tibco, WebMethods",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Assumed PM responsibilities during program lead's paternity leave",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Task"
+   },
+   {
+    "text": "Developers India, testers Philippines, designers Ireland moved from 6-month cycles to 2-week sprints within 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Decomposed 200-page requirements doc into persona-based user stories",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Replaced single To Do/Done board with multi-tiered JIRA",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Bi-weekly demos brought branding, UI, ADA reviews forward",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "JIRA audit trails, ADA scans, developer comments satisfied PMO/compliance",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Screen reader audits in Definition of Done",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action / Result"
+   },
+   {
+    "text": "3% under budget, $255K",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "47/47 AC, zero critical defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$45M first month, 99.97% uptime",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "3-weeks-behind release recovered, $500K avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Result"
+   },
+   {
+    "text": "$3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 1,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Gives the Fiserv team size of 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv / recovering-fiservs-85m-white-label-card-portal|fiserv; no clarifying question (over-asking control passes); team locations and 3 vendors supported; no closing. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Matt coordinated a 45-person, globally dispersed team on the Fiserv card portal",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Working with the onshore team in Omaha",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation (Omaha onshore team)"
+   },
+   {
+    "text": "Coordinated 3 external vendors for payment processing, fraud detection, hosting",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent, all claims supported by the four Fiserv stories (recovery, agile, DevOps, ADA) and the thought-leadership story; no quotations, no closing offer. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Dec 2014 to June 2015",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Start_Date/End_Date"
+   },
+   {
+    "text": "$8.5M white-label card portal",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Took over development management ~7 months in",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / 5PSummary"
+   },
+   {
+    "text": "2M+ cardholders, 15 FIs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person global team missed multiple deadlines",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Critical defects in production payment processing",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action (Sev-1 defects in live payment processing)"
+   },
+   {
+    "text": "Stakeholders threatening cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Vendors with uncoordinated dependencies; coordinated 3 external vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Mon-Thu Omaha; 7 AM and 11 PM handoffs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Reprioritized backlog, reset timelines",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "SOA integration layer wrapping VisionPLUS 350 COBOL into Java EE/Spring via MuleSoft, Tibco, WebMethods",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "200-page requirements doc by system modules replaced with persona-based user stories",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Replaced single To Do/Done board with multi-tiered Kanban/Scrum structure tracking 47 AC",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "6-month cycles to 2-week sprints in 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "JIRA audit trails, accessibility scans, developer comments vs static Word docs",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Sprint demos brought branding and accessibility reviews forward",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Wrote ADA manifesto, adopted by Fiserv as ongoing standard",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients Action / Result; delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "JAWS/NVDA screen reader audits in Definition of Done",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action / Result"
+   },
+   {
+    "text": "3% under budget, $255K",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "47 of 47 AC, zero critical defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Release 3 weeks behind recovered, $500K avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Result"
+   },
+   {
+    "text": "$45M first month, 99.97% uptime",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Gives the Fiserv team size of 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv / recovering-fiservs-85m-white-label-card-portal|fiserv; no clarifying question (over-asking control passes); team locations and 3 vendors supported; no closing. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Matt managed a 45-person globally dispersed team on Fiserv's white-label card portal",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "An onshore team in Omaha",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation (Omaha onshore team)"
+   },
+   {
+    "text": "Coordinated 3 external vendors handling payment processing, fraud detection, hosting infrastructure",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent, all claims supported by the four Fiserv stories (recovery, agile, DevOps, ADA) and the thought-leadership story; no quotations, no closing offer. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Development Manager ~7 months into $8.5M portal initiative",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / 5PSummary"
+   },
+   {
+    "text": "2M+ cardholders, 15 FIs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person globally dispersed team, missed deadlines, poor quality",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Threatened cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Vendors uncoordinated dependencies",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "VisionPLUS 350 mainframe to SOA-based API",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Mon-Thu Omaha; 7 AM and 11 PM calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Reprioritized, reset timelines, coordinated 3 vendors, closed quality and process gaps",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "PM responsibilities during paternity leave",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Task"
+   },
+   {
+    "text": "200-page BRD, 6-month cycles, little visibility",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Persona-based user stories; JIRA around 47 AC as Epics",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Biweekly demos",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Negotiated dedicated stakeholder review windows",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Coached offshore teams on empowerment over command-and-control",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "JIRA audit trails, accessibility scans, developer comments met audit requirements",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Delivery stabilized and 2-week sprints within 3 months",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Critical release 3 weeks behind recovered before holiday freeze, $500K avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "3% under budget, $255K",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "All 47 AC, zero critical defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$45M first month, 99.97% uptime",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Fiserv awarded $3M contract extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives the Fiserv team size of 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv / recovering-fiservs-85m-white-label-card-portal|fiserv; no clarifying question (over-asking control passes); team locations and 3 vendors supported; no closing. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Matt coordinated a 45-person, globally dispersed team at Fiserv",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "And an onshore team in Omaha",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation (Omaha onshore team)"
+   },
+   {
+    "text": "Coordinated 3 external vendors handling payment processing, fraud detection, hosting",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent, all claims supported by the four Fiserv stories (recovery, agile, DevOps, ADA) and the thought-leadership story; no quotations, no closing offer. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Dec 2014 through June 2015 as Development Manager",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Start_Date/End_Date"
+   },
+   {
+    "text": "$8.5M portal, 2M+ cardholders, 15 FIs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Joined ~7 months in; missed deadlines, poor quality, threatened cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / 5PSummary"
+   },
+   {
+    "text": "45-person team on 6-month cycles and 200-page requirements docs",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Payment processing moving mainframe to API architecture",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "3 vendors uncoordinated dependencies",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Mon-Thu Omaha; 7 AM and 11 PM calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Reprioritized backlog, reset timelines, coordinated vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "SOA integration layer COBOL to Java EE/Spring via MuleSoft, Tibco, WebMethods",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Persona-based user stories instead of system modules",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Multi-tiered JIRA, 47 AC as Epics",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Biweekly demos to catch branding, UI, ADA issues early",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Screen-reader audits in Definition of Done",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action / Result"
+   },
+   {
+    "text": "JIRA audit trails, ADA scans, developer comments; retained steering committee reporting",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "2-week sprints within 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Release 3 weeks late recovered, $500K avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Result"
+   },
+   {
+    "text": "3% under budget, $255K",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "All 47 AC, zero critical defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$45M first month, 99.97% uptime",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 2,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Gives the Fiserv team size of 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv / recovering-fiservs-85m-white-label-card-portal|fiserv; no clarifying question (over-asking control passes); team locations and 3 vendors supported; no closing. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Matt coordinated a 45-person, globally dispersed team at Fiserv",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Alongside the onshore team in Omaha",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation (Omaha onshore team)"
+   },
+   {
+    "text": "3 external vendors responsible for payment processing, fraud detection, hosting infrastructure",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent, all claims supported by the four Fiserv stories (recovery, agile, DevOps, ADA) and the thought-leadership story; no quotations, no closing offer. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Dec 2014 to June 2015",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Start_Date/End_Date"
+   },
+   {
+    "text": "Development Manager ~7 months into troubled $8.5M initiative",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / 5PSummary"
+   },
+   {
+    "text": "2M+ cardholders, 15 FIs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person team missed multiple consecutive deadlines",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Critical defects in production payment processing",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action (Sev-1 defects in live payment processing)"
+   },
+   {
+    "text": "Threatened cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Vendors uncoordinated dependencies; coordinated 3 vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Mon-Thu Omaha; 7 AM and 11 PM calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Reprioritized backlog, reset timelines",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Integration layer VisionPLUS 350 COBOL to Java EE/Spring via MuleSoft, Tibco, WebMethods, toward API architecture",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "200-page requirements doc, 6-month cycles",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Persona-based stories, JIRA around 47 AC",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Biweekly sprint demos for branding, UI, accessibility",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "JIRA system of record despite PMO/compliance resistance",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "2-week sprints within 3 months; 50+ stakeholders, 3 time zones",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "3% under budget, $255K",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "47 of 47 AC, zero critical defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "3-weeks-behind release recovered, $500K avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Result"
+   },
+   {
+    "text": "$45M first month, 99.97% uptime",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Gives the Fiserv team size of 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv / recovering-fiservs-85m-white-label-card-portal|fiserv; no clarifying question (over-asking control passes); team locations and 3 vendors supported; no closing. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Matt coordinated a 45-person, globally dispersed team on Fiserv's white-label card portal",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "An onshore team in Omaha",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation (Omaha onshore team)"
+   },
+   {
+    "text": "Coordinated 3 external vendors for payment processing, fraud detection, hosting infrastructure",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent, all claims supported by the four Fiserv stories (recovery, agile, DevOps, ADA) and the thought-leadership story; no quotations, no closing offer. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Development Manager ~7 months into $8.5M portal initiative",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / 5PSummary"
+   },
+   {
+    "text": "2M+ cardholders, 15 FIs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person team missed consecutive deadlines",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Critical payment-processing defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action (Sev-1 defects in live payment processing)"
+   },
+   {
+    "text": "Threatened cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "200-page BRD, 6-month waterfall cycle",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "3 vendors uncoordinated",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Mon-Thu Omaha; 7 AM and 11 PM calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Reset priorities, coordinated vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Covered program management during paternity leave",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Task"
+   },
+   {
+    "text": "SOA integration layer VisionPLUS 350 to Java EE/Spring via MuleSoft, Tibco, WebMethods",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Persona-based stories; 47 AC as JIRA Epics",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Developers India, testers Philippines, designers Ireland to 2-week sprints in 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Sprint demos; negotiated review windows",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "JIRA audit trails, accessibility scans, developer comments vs PMO/compliance resistance",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Researched and wrote ADA manifesto, presented to client IT leadership, steering committee, onshore/offshore teams",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv adopted standards for ongoing development",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients Action / Result; delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "3% under budget, 47 AC, zero critical defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "3-weeks-behind release, $500K avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Result"
+   },
+   {
+    "text": "$45M first month, 99.97% uptime",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives the Fiserv team size of 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv / recovering-fiservs-85m-white-label-card-portal|fiserv; no clarifying question (over-asking control passes); team locations and 3 vendors supported; no closing. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Matt coordinated a 45-person globally dispersed team at Fiserv",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Alongside the Omaha onshore team",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation (Omaha onshore team)"
+   },
+   {
+    "text": "3 external vendors responsible for payment processing, fraud detection, hosting infrastructure",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent, all claims supported by the four Fiserv stories (recovery, agile, DevOps, ADA) and the thought-leadership story; no quotations, no closing offer. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Development Manager ~7 months into 14-month $8.5M initiative",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "2M+ cardholders, 15 FIs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person team missed deadlines, poor quality, threatened cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "200-page BRD, 6-month cycle",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "3 vendors uncoordinated",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Mon-Thu Omaha; 7 AM and 11 PM handoffs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Reprioritized, reset timelines, coordinated vendor deliverables",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Integration of legacy mainframe with Java EE/Spring via MuleSoft, Tibco, WebMethods",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "PM responsibilities during paternity leave",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Task"
+   },
+   {
+    "text": "Restructured single To Do/Done board around 47 AC with user stories and workflow columns",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Persona-based tasks",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Biweekly demos surfaced branding/accessibility issues early",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "JIRA audit trails, accessibility scans, developer comments as system of record",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "2-week sprints within 3 months; 50+ stakeholders, 3 time zones",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "3% under budget, $255K",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "47 of 47 AC, zero critical defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "3-weeks-behind release, $500K avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Result"
+   },
+   {
+    "text": "$45M first month, 99.97% uptime",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 3,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Gives the Fiserv team size of 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv / recovering-fiservs-85m-white-label-card-portal|fiserv; no clarifying question (over-asking control passes); team locations and 3 vendors supported; no closing. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Matt coordinated a 45-person globally dispersed team on Fiserv's white-label card portal",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Onshore staff in Omaha",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation (Omaha onshore team)"
+   },
+   {
+    "text": "Coordinated 3 external vendors handling payment processing, fraud detection, hosting infrastructure",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent, all claims supported by the four Fiserv stories (recovery, agile, DevOps, ADA) and the thought-leadership story; no quotations, no closing offer. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Dec 2014 to June 2015",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Start_Date/End_Date"
+   },
+   {
+    "text": "$8.5M portal; Development Manager ~7 months in",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / 5PSummary"
+   },
+   {
+    "text": "2M+ cardholders, 15 FIs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person team missed consecutive deadlines",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Critical payment-processing defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action (Sev-1 defects in live payment processing)"
+   },
+   {
+    "text": "Threatened cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "3 vendors uncoordinated dependencies",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Mainframe to API-based transition",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Mon-Thu Omaha; 7 AM and 11 PM calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Re-prioritized backlog, reset timelines, coordinated vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "SOA integration layer VisionPLUS 350 COBOL to Java EE/Spring via MuleSoft, Tibco, WebMethods",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "200-page system-module requirements and 6-month cycles replaced by persona stories and 2-week sprints",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "JIRA around 47 AC",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Biweekly demos for branding and accessibility",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Screen-reader audits in Definition of Done",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action / Result"
+   },
+   {
+    "text": "PMO/compliance accepted JIRA with audit trails, accessibility scans, developer comments replacing Word docs",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Delivery stabilized within 3 months",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Release 3 weeks behind, $500K avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Result"
+   },
+   {
+    "text": "3% under budget, $255K",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "All 47 AC, zero critical defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$45M first month, 99.97% uptime",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Gives the Fiserv team size of 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv / recovering-fiservs-85m-white-label-card-portal|fiserv; no clarifying question (over-asking control passes); team locations and 3 vendors supported; no closing. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "The Fiserv team had 45 people, globally dispersed",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "With an onshore team in Omaha",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation (Omaha onshore team)"
+   },
+   {
+    "text": "Matt coordinated 3 external vendors for payment processing, fraud detection, hosting infrastructure",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent, all claims supported by the four Fiserv stories (recovery, agile, DevOps, ADA) and the thought-leadership story; no quotations, no closing offer. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Took over development management ~7 months into $8.5M initiative",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / 5PSummary"
+   },
+   {
+    "text": "2M+ cardholders, 15 FIs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person team missed deadlines, poor quality",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Threatened cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "3 vendors uncoordinated",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Mainframe to SOA-based API architecture",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Mon-Thu Omaha; 7 AM and 11 PM calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Reprioritized, reset timelines, closed quality gaps, coordinated vendor deliverables",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Integration layer mainframe COBOL to Java EE/Spring via MuleSoft, Tibco, WebMethods",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Covered program management during paternity leave",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Task"
+   },
+   {
+    "text": "6-month waterfall cycles and 200-page doc replaced by persona stories, multi-tiered JIRA, 2-week sprints",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Sprint demos brought branding, UI, accessibility reviews forward",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "JIRA audit trails, accessibility scans, developer comments as system of record",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Sprint cadence adopted within 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Critical release 3 weeks behind, before holiday freeze, $500K avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "3% under budget, $255K",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "47 of 47 AC, zero critical defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$45M first month, 99.97% uptime",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Fiserv awarded $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives the Fiserv team size of 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv / recovering-fiservs-85m-white-label-card-portal|fiserv; no clarifying question (over-asking control passes); team locations and 3 vendors supported; no closing. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Matt coordinated a 45-person, globally dispersed team at Fiserv",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "An onshore team in Omaha",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation (Omaha onshore team)"
+   },
+   {
+    "text": "Coordinated 3 external vendors handling payment processing, fraud detection, hosting infrastructure",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent, all claims supported by the four Fiserv stories (recovery, agile, DevOps, ADA) and the thought-leadership story; no quotations, no closing offer. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Took over development management of $8.5M portal ~7 months into 14-month initiative",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "2M+ cardholders, 15 FIs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person team missed deadlines, poor quality, threatened cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "200-page BRDs, 6-month cycles",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "3 vendors uncoordinated",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Mon-Thu Omaha; daily 7 AM and 11 PM calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Reprioritized, reset timelines, coordinated vendor deliverables",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Integration layer legacy mainframe to Java EE/Spring via MuleSoft, Tibco, WebMethods",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "PM responsibilities during paternity leave",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Task"
+   },
+   {
+    "text": "Persona-based stories; replaced To Do/Done board with multi-tiered JIRA",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Sprint demos every 2 weeks",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "India/Philippines/Ireland teams to 2-week sprints in 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "50+ stakeholders, 3 time zones visibility",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Audit trails, accessibility scans, developer comments satisfied PMO/compliance",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Screen reader audits in Definition of Done",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action / Result"
+   },
+   {
+    "text": "3% under budget, $255K",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "47 of 47 AC, zero critical defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$45M first month, 99.97% uptime",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Release 3 weeks behind, $500K avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Result"
+   },
+   {
+    "text": "$3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 4,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Gives the Fiserv team size of 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv / recovering-fiservs-85m-white-label-card-portal|fiserv; no clarifying question (over-asking control passes); team locations and 3 vendors supported; no closing. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Matt managed a 45-person, globally dispersed team on Fiserv's white-label card portal",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "With onshore work in Omaha",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation (Omaha onshore team)"
+   },
+   {
+    "text": "3 external vendors responsible for payment processing, fraud detection, hosting infrastructure",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent, all claims supported by the four Fiserv stories (recovery, agile, DevOps, ADA) and the thought-leadership story; no quotations, no closing offer. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Took over development management of $8.5M portal ~7 months into 14-month initiative",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "2M+ cardholders, 15 FIs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person team missed consecutive deadlines",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Critical defects in production payment processing",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action (Sev-1 defects in live payment processing)"
+   },
+   {
+    "text": "Threatened cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "3 vendors without coordinated dependencies",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Mainframe to API-based architecture",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Omaha Mon-Thu; 7 AM and 11 PM calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Reprioritized, reset timelines, coordinated vendor deliverables",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Integration of mainframe COBOL with Java EE/Spring via MuleSoft, Tibco, WebMethods",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Covered program management during paternity leave",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Task"
+   },
+   {
+    "text": "India/Philippines/Ireland teams from 6-month cycles to 2-week sprints in 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Decomposed 200-page doc into persona-based stories",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Fortnightly demos for branding and accessibility",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "JIRA visibility for 50+ stakeholders, 3 time zones; system of record accepted by PMO/compliance",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Replaced SVN with Git/GitHub, senior-developer code reviews, unit tests",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Maven, Artifactory, Hudson CI, SonarQube, JUnit quality gates",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "3% under budget, $255K",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "All 47 AC, zero critical defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Release 3 weeks behind, $500K avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Result"
+   },
+   {
+    "text": "$45M first month, 99.97% uptime",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Gives the Fiserv team size of 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv / recovering-fiservs-85m-white-label-card-portal|fiserv; no clarifying question (over-asking control passes); team locations and 3 vendors supported; no closing. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Matt coordinated a 45-person globally dispersed team on Fiserv's white-label card portal",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Alongside the Omaha onshore team",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation (Omaha onshore team)"
+   },
+   {
+    "text": "3 external vendors responsible for payment processing, fraud detection, hosting infrastructure",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent, all claims supported by the four Fiserv stories (recovery, agile, DevOps, ADA) and the thought-leadership story; no quotations, no closing offer. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Took over development management ~7 months into 14-month $8.5M engagement",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "2M+ cardholders, 15 FIs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person team missed consecutive deadlines, poor quality, threatened cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Vendors uncoordinated dependencies",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Severe defects in live payment processing",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action (Sev-1 defects in live payment processing)"
+   },
+   {
+    "text": "Mon-Thu Omaha; daily 7 AM and 11 PM calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Reprioritized, reset timelines, closed quality and process gaps, coordinated 3 vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Delivery stabilized within 3 months",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Q4 release 3 weeks behind delivered before holiday freeze, $500K penalties avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Covered program management during paternity leave",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Task"
+   },
+   {
+    "text": "VisionPLUS 350 to SOA-based API architecture",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Integration layer wrapping COBOL into Java EE/Spring via MuleSoft, Tibco, WebMethods, API access across brands",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Researched accessibility specs, wrote ADA manifesto, presented to client IT leadership, steering committee, delivery teams",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv adopted standards as ongoing practice",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients Action / Result; delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "3% under budget, $255K",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "47 of 47 AC, zero critical defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$45M first month, 99.97% uptime",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives the Fiserv team size of 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv / recovering-fiservs-85m-white-label-card-portal|fiserv; no clarifying question (over-asking control passes); team locations and 3 vendors supported; no closing. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Matt coordinated a 45-person globally dispersed team at Fiserv",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "And the onshore team in Omaha",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation (Omaha onshore team)"
+   },
+   {
+    "text": "Coordinated 3 external vendors handling payment processing, fraud detection, hosting infrastructure",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent, all claims supported by the four Fiserv stories (recovery, agile, DevOps, ADA) and the thought-leadership story; no quotations, no closing offer. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Dec 2014 through June 2015 as Development Manager",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Start_Date/End_Date"
+   },
+   {
+    "text": "$8.5M portal, 2M+ cardholders, 15 FIs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Joined ~7 months in after missed deadlines and production quality problems",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / 5PSummary"
+   },
+   {
+    "text": "Threatened cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person team and 3 vendors had uncoordinated dependencies (paraphrase of cross-vendor dependencies and onshore-offshore misalignment)",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Payment processing mainframe to API",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Mon-Thu Omaha; 7 AM and 11 PM calls; reprioritized, reset timelines",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Coordinated payment processing, fraud detection, hosting vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Integration layer wrapping COBOL into Java EE/Spring via MuleSoft, Tibco, WebMethods; API access across brands",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Replaced To Do/Done board and 200-page doc with multi-tiered JIRA and persona stories",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "6-month cycles to 2-week sprints in 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Sprint demos brought branding and accessibility reviews forward",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "JIRA audit trails, accessibility scans, developer comments as system of record",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Wrote ADA manifesto adopted as Fiserv's accessibility standard",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients Action / Result; delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Screen reader audits in Definition of Done",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action / Result"
+   },
+   {
+    "text": "3% under budget, $255K",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "All 47 AC, zero critical defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$45M first month, 99.97% uptime",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Recovered release avoided $500K penalties",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Result"
+   },
+   {
+    "text": "Fiserv awarded $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 5,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Gives the Fiserv team size of 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv / recovering-fiservs-85m-white-label-card-portal|fiserv; no clarifying question (over-asking control passes); team locations and 3 vendors supported; no closing. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Matt coordinated a 45-person, globally dispersed team on Fiserv's white-label card portal",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Alongside the Omaha onshore team",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation (Omaha onshore team)"
+   },
+   {
+    "text": "3 external vendors responsible for payment processing, fraud detection, hosting infrastructure",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent, all claims supported by the four Fiserv stories (recovery, agile, DevOps, ADA) and the thought-leadership story; no quotations, no closing offer. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Dec 2014 through June 2015",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Start_Date/End_Date"
+   },
+   {
+    "text": "$8.5M portal; Development Manager ~7 months in",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / 5PSummary"
+   },
+   {
+    "text": "2M+ cardholders, 15 FIs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person team missed deadlines",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Critical defects in live payment processing",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action (Sev-1 defects in live payment processing)"
+   },
+   {
+    "text": "Threatened cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Mon-Thu Omaha; 7 AM and 11 PM calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Reprioritized, reset timelines, coordinated 3 vendors (payment, fraud, hosting)",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Managed integration during First Data's VisionPLUS 350 to API transition, COBOL to Java EE/Spring via MuleSoft, Tibco, WebMethods",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Covered program management during paternity leave",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Task"
+   },
+   {
+    "text": "200-page BRD, 6-month cycles, little visibility",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Persona-based stories, JIRA around 47 AC, sprint demos",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "2-week sprints within 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "50+ stakeholders, 3 time zones; PMO/compliance accepted JIRA as system of record",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "3% under budget, $255K",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "47 of 47 AC, zero critical defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Release 3 weeks behind, $500K avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Result"
+   },
+   {
+    "text": "$45M first month, 99.97% uptime",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Gives the Fiserv team size of 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv / recovering-fiservs-85m-white-label-card-portal|fiserv; no clarifying question (over-asking control passes); team locations and 3 vendors supported; no closing. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Matt coordinated a 45-person, globally dispersed team on Fiserv's white-label card portal",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "With developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "And an onshore team in Omaha",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation (Omaha onshore team)"
+   },
+   {
+    "text": "3 external vendors responsible for payment processing, fraud detection, hosting infrastructure",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent, all claims supported by the four Fiserv stories (recovery, agile, DevOps, ADA) and the thought-leadership story; no quotations, no closing offer. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Development Manager ~7 months into troubled 14-month $8.5M initiative",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "2M+ cardholders, 15 FIs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person team missed consecutive deadlines",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Critical payment processing defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action (Sev-1 defects in live payment processing)"
+   },
+   {
+    "text": "Threatened cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Vendors without coordinated dependencies",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Mon-Thu Omaha, reset timelines, reprioritized, coordinated 3 vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Daily 7 AM and 11 PM calls connecting India/Philippines/Ireland teams",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "PM responsibilities during paternity leave",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Task"
+   },
+   {
+    "text": "200-page doc, 6-month cycles",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Persona stories, JIRA around 47 AC, demos every 2 weeks",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Maintained steering committee reporting with sprint-level visibility",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Negotiated dedicated review windows",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "PMO/compliance resisted; JIRA audit trails, accessibility scans, developer comments vs Word docs",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "2-week sprints within 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Integration of mainframe payment processing into Java EE/Spring via MuleSoft, Tibco, WebMethods",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "3% under budget, $255K",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "All 47 AC, zero critical defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Release 3 weeks late, $500K avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Result"
+   },
+   {
+    "text": "$45M first month, 99.97% uptime",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Fiserv awarded $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives the Fiserv team size of 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv / recovering-fiservs-85m-white-label-card-portal|fiserv; no clarifying question (over-asking control passes); team locations and 3 vendors supported; no closing. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Matt coordinated a 45-person globally dispersed team at Fiserv",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "With developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "And an onshore team in Omaha",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation (Omaha onshore team)"
+   },
+   {
+    "text": "Coordinated 3 external vendors handling payment processing, fraud detection, hosting infrastructure",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent, all claims supported by the four Fiserv stories (recovery, agile, DevOps, ADA) and the thought-leadership story; no quotations, no closing offer. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Dec 2014 to June 2015",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Start_Date/End_Date"
+   },
+   {
+    "text": "Senior Technology Architecture Manager",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Role"
+   },
+   {
+    "text": "Took over development management of troubled $8.5M portal",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Task / 5PSummary"
+   },
+   {
+    "text": "2M+ cardholders, 15 FIs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Arrived ~7 months in after missed deadlines, poor quality, threatened cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person team on 6-month cycles, 200-page docs, no real-time visibility",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Mon-Thu Omaha; 7 AM and 11 PM calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Reprioritized, reset timelines, coordinated 3 vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Integration layer mainframe to Java EE/Spring via MuleSoft, Tibco, WebMethods",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Persona-based stories instead of system modules",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "JIRA around 47 AC, biweekly demos, review windows",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "India/Philippines/Ireland to 2-week sprints in 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "PMO/compliance accepted JIRA with audit trails, ADA scans, developer comments",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "50+ stakeholders across 3 time zones",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "Q4 release 3 weeks behind, $500K avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Result"
+   },
+   {
+    "text": "3% under budget, $255K",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "47 of 47 AC, zero critical defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$45M first month, 99.97% uptime",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 6,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Gives the Fiserv team size of 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv / recovering-fiservs-85m-white-label-card-portal|fiserv; no clarifying question (over-asking control passes); team locations and 3 vendors supported; no closing. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Matt coordinated a 45-person globally dispersed team at Fiserv",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Onshore staff in Omaha",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation (Omaha onshore team)"
+   },
+   {
+    "text": "3 external vendors responsible for payment processing, fraud detection, hosting infrastructure",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent, all claims supported by the four Fiserv stories (recovery, agile, DevOps, ADA) and the thought-leadership story; no quotations, no closing offer. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Dec 2014 to June 2015",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Start_Date/End_Date"
+   },
+   {
+    "text": "Development Manager ~7 months in",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / 5PSummary"
+   },
+   {
+    "text": "$8.5M, 2M+ cardholders, 15 FIs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person team missed multiple consecutive deadlines",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Critical defects in production payment processing",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action (Sev-1 defects in live payment processing)"
+   },
+   {
+    "text": "Threatened cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "3 vendors uncoordinated",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Omaha Mon-Thu; reset priorities; 7 AM and 11 PM calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "First Data VisionPLUS 350 toward API architecture",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Integration layer COBOL to Java EE/Spring via MuleSoft, Tibco, WebMethods",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "6-month waterfall and 200-page system-module doc replaced by persona stories and 2-week sprints",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "JIRA around 47 AC; biweekly demos",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "JAWS/NVDA screen-reader audits in Definition of Done",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action / Result"
+   },
+   {
+    "text": "JIRA audit trails, accessibility scans, developer comments vs Word docs",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Wrote ADA manifesto adopted as accessibility standard",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients Action / Result; delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Delivery stabilized within 3 months",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Release 3 weeks late before holiday freeze, $500K avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "3% under budget, $255K; all 47 AC; zero critical defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$45M first month, 99.97% uptime",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Fiserv awarded $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Gives the Fiserv team size of 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv / recovering-fiservs-85m-white-label-card-portal|fiserv; no clarifying question (over-asking control passes); team locations and 3 vendors supported; no closing. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "The Fiserv team had 45 people, globally dispersed across onshore and offshore locations",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Matt coordinated 3 external vendors handling payment processing, fraud detection, hosting infrastructure",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent, all claims supported by the four Fiserv stories (recovery, agile, DevOps, ADA) and the thought-leadership story; no quotations, no closing offer. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Took over development management of $8.5M portal ~7 months into 14-month initiative",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "2M+ cardholders, 15 FIs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person team missed consecutive deadlines",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Critical payment processing defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action (Sev-1 defects in live payment processing)"
+   },
+   {
+    "text": "Threatened cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "3 vendors uncoordinated",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Mon-Thu Omaha; daily 7 AM and 11 PM calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Coordinated India/Philippines/Ireland teams",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Integration layer mainframe COBOL to Java EE/Spring via MuleSoft, Tibco, WebMethods",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Replaced 200-page doc and To Do/Done board with persona stories, multi-tiered JIRA, demos every 2 weeks",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "PMO/compliance resisted; JIRA audit trails, accessibility scans, developer comments; retained steering reporting",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "6-month cycles to 2-week sprints in 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "SVN to Git/GitHub, senior code reviews, unit tests, Maven, Artifactory, Hudson CI, SonarQube, JUnit",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Build times fell from days to hours",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "3% under budget, $255K",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "47 of 47 AC, zero critical defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$45M first month, 99.97% uptime",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Release 3 weeks behind, $500K avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Result"
+   },
+   {
+    "text": "$3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Gives the Fiserv team size of 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv / recovering-fiservs-85m-white-label-card-portal|fiserv; no clarifying question (over-asking control passes); team locations and 3 vendors supported; no closing. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Matt coordinated a 45-person globally dispersed team at Fiserv",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Alongside the onshore team in Omaha",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation (Omaha onshore team)"
+   },
+   {
+    "text": "Coordinated 3 external vendors handling payment processing, fraud detection, hosting infrastructure",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn on Fiserv: correct referent, all claims supported by the four Fiserv stories (recovery, agile, DevOps, ADA) and the thought-leadership story; no quotations, no closing offer. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Development Manager ~7 months into $8.5M initiative",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / 5PSummary"
+   },
+   {
+    "text": "2M+ cardholders, 15 FIs",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "45-person team missed deadlines, poor quality, threatened cancellation",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "6-month waterfall cycle, 200-page BRD",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Vendors without coordinated dependencies",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   },
+   {
+    "text": "Mon-Thu Omaha; 7 AM and 11 PM calls",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Reprioritized, reset timelines, coordinated 3 vendors",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "SOA integration layer legacy mainframe to Java EE/Spring via MuleSoft, Tibco, WebMethods",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Persona stories, 47 AC as JIRA Epics, biweekly demos",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "JIRA audit trails, accessibility scans, developer comments satisfied PMO/compliance",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Review windows; steering reporting with sprint-level visibility",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Researched specs, wrote ADA manifesto, presented to client IT leadership, steering committee, onshore/offshore teams",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv adopted standards",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients Action / Result; delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "2-week sprints within 3 months",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Result"
+   },
+   {
+    "text": "3% under budget, all 47 AC, zero critical defects",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "$45M first month, 99.97% uptime",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Release 3 weeks behind, $500K avoided",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Action / Result"
+   },
+   {
+    "text": "$3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c13",
+  "run": 7,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Gives the Fiserv team size of 45 from driving-agile-transformation-for-fiservs-card-portal|fiserv / recovering-fiservs-85m-white-label-card-portal|fiserv; no clarifying question (over-asking control passes); team locations and 3 vendors supported; no closing. contradicted: none; unsupported: none.",
+  "claims": [
+   {
+    "text": "Matt managed a 45-person, globally dispersed team at Fiserv",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation / recovering-fiservs-85m-white-label-card-portal|fiserv Situation"
+   },
+   {
+    "text": "Developers in India, testers in the Philippines, designers in Ireland",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action"
+   },
+   {
+    "text": "Alongside the Omaha onshore team",
+    "label": "supported",
+    "source": "modernizing-devops-and-deployment-for-fiservs-white-label-card-portal|fiserv Situation (Omaha onshore team)"
+   },
+   {
+    "text": "Coordinated 3 external vendors handling payment processing, fraud detection, hosting infrastructure",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Situation / Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

@@ -1,0 +1,67 @@
+lane 2/6: 40 of 240 (case, run) jobs
+health check start: top Fiserv 0.422
+[opener c01 r3 t1] 11.31s  | '🐾 I know just the story.\n\nMatt’s payments work inc'
+[opener c01 r3 t2] 7.97s  | '🐾 Tracking this down...\n\nFor **JP Morgan Chase’s**'
+[opener c01 r3 t3] 11.98s  | '🐾 On it!\n\nAt **JP Morgan Chase**, an actual produc'
+[new c01 r3 t1] 12.5s  | '🐾 Here’s where Matt’s payments work went deepest.\n'
+[new c01 r3 t2] 6.45s  | '🐾 For the **JP Morgan Chase** ACCESS payments work'
+[new c01 r3 t3] 9.97s  | '🐾 There were production defects, including a payme'
+[new c01 r9 t1] 12.08s  | '🐾 Matt’s payments work includes building global pa'
+[new c01 r9 t2] 5.83s  | '🐾 At **JP Morgan Chase**, Matt managed a blended o'
+[new c01 r9 t3] 11.36s  | '🐾 On the **JP Morgan Chase** payments program, the'
+[opener c01 r9 t1] 10.76s  | '🐾 Tracking this down...\n\nMatt’s payments work incl'
+[opener c01 r9 t2] 5.23s  | '🐾 On it!\n\nFor the **JP Morgan Chase** payments wor'
+[opener c01 r9 t3] 12.3s  | '🐾 Tracking this down...\n\nAt **JP Morgan Chase**, a'
+[new c02 r5 t1] 5.55s  | "🐾 Matt holds a Master's degree in Information Tech"
+[new c02 r5 t2] 13.28s  | '🐾 Here are the degree facts and the engineering wo'
+[opener c02 r5 t1] 5.87s  | "🐾 On it!\n\nMatt holds a Master's degree, Informatio"
+[opener c02 r5 t2] 13.5s  | '🐾 Stepping back to see the themes...\n\nMatt holds a'
+[opener c03 r1 t1] 11.01s  | '🐾 Tracking this down...\n\nMatt leads with empathy, '
+[opener c03 r1 t2] 9.42s  | '🐾 Tracking this down...\n\nAt **Norfolk Southern**, '
+[new c03 r1 t1] 12.94s  | '🐾 Here’s how Matt leads.\n\nMatt leads with empathy,'
+[new c03 r1 t2] 14.31s  | '🐾 Yes, at **Norfolk Southern**, the initial team m'
+[opener c03 r7 t1] 12.06s  | "🐾 Here's a great example.\n\nMatt leads with empathy"
+[opener c03 r7 t2] 11.74s  | '🐾 On it!\n\nThere’s an example where Matt’s “permit '
+[new c03 r7 t1] 11.35s  | '🐾 Here’s how Matt describes his leadership: empath'
+[new c03 r7 t2] 13.31s  | '🐾 Yes. At **Norfolk Southern**, the practices Matt'
+[opener c04 r3 t1] 9.43s  | '🐾 On it!\n\nMatt has held certifications, but none i'
+[opener c04 r3 t2] 8.44s  | '🐾 On it!\n\nNo, Matt does not hold a PMP certificati'
+[opener c04 r3 t3] 5.79s  | '🐾 Stepping back to see the themes...\n\nNo. None of '
+[new c04 r3 t1] 5.52s  | '🐾 Matt has held certifications, but none is curren'
+[new c04 r3 t2] 19.34s  | '🐾 No, Matt does not hold a PMP certification. His '
+[new c04 r3 t3] 4.68s  | '🐾 No. None of Matt’s certifications is current.'
+[new c04 r9 t1] 20.7s  | '🐾 Here’s Matt’s certification history. None is cur'
+[new c04 r9 t2] 13.61s  | '🐾 No, Matt does not have PMP certification. His ce'
+[new c04 r9 t3] 5.03s  | '🐾 No. None of Matt’s listed certifications is curr'
+[opener c04 r9 t1] 6.92s  | '🐾 I know just the story.\n\nMatt has earned certific'
+[opener c04 r9 t2] 7.85s  | "🐾 Here's a great example.\n\nNo, Matt does not hold "
+[opener c04 r9 t3] 5.73s  | "🐾 Here's what connects the dots across Matt's work"
+[new c05 r5 t1] 12.81s  | '🐾 Here’s what Matt is looking for.\n\nMatt is curren'
+[new c05 r5 t2] 16.81s  | '🐾 Here’s the evidence to weigh against that concer'
+[opener c05 r5 t1] 11.31s  | '🐾 This is a strong one.\n\nMatt is looking for his n'
+[opener c05 r5 t2] 17.79s  | '🐾 Stepping back to see the themes...\n\nThe relevant'
+[opener c06 r1 t1] 10.97s  | '🐾 Tracking this down...\n\nYes. Matt worked as a Dir'
+[opener c06 r1 t2] 9.33s  | "🐾 Here's a great example.\n\nAt the **Major U.S. Hea"
+[new c06 r1 t1] 10.11s  | '🐾 Yes. Matt worked with a **Major U.S. Health Syst'
+[new c06 r1 t2] 10.46s  | '🐾 Here’s what Matt actually did at the **Major U.S'
+[opener c06 r7 t1] 10.96s  | '🐾 On it!\n\nYes. Matt worked as a Director at **Acce'
+[opener c06 r7 t2] 10.69s  | "🐾 Perfect, here's what I found.\n\nAt the **Major U."
+[new c06 r7 t1] 9.24s  | '🐾 Yes. Matt worked as a Director at **Accenture** '
+[new c06 r7 t2] 13.48s  | '🐾 Here’s what Matt actually did at the **Major U.S'
+[new c07 r3 t1] 5.53s  | '🐾 Matt is based in Atlanta, GA. He is open to relo'
+[new c07 r3 t2] 4.45s  | '🐾 Yes, Matt is open to relocation and travel.'
+[opener c07 r3 t1] 5.45s  | "🐾 Here's a great example.\n\nMatt is based in Atlant"
+[opener c07 r3 t2] 4.91s  | 'Got it! 🐾 Yes, Matt is open to relocation and trav'
+[new c07 r9 t1] 5.65s  | '🐾 Matt is based in Atlanta, GA. He is open to relo'
+[new c07 r9 t2] 5.19s  | '🐾 Yes, Matt is open to relocation and travel.'
+[opener c07 r9 t1] 5.09s  | '🐾 Found it!\n\nMatt is based in Atlanta, GA. He is o'
+[opener c07 r9 t2] 4.31s  | '🐾 Found it!\n\nYes, Matt is open to relocation and t'
+[new c08 r5 t1] 9.0s  | '🐾 Here’s a time Matt’s assumptions led to a real f'
+[new c08 r5 t2] 11.13s  | '🐾 He changed what he treated as a day-one responsi'
+[opener c08 r5 t1] 9.75s  | "🐾 Here's a great example.\n\nMatt was the tech lead "
+[opener c08 r5 t2] 9.25s  | "🐾 Here's a great example.\n\nMatt made IAM validatio"
+[opener c09 r1 t1] 12.04s  | '🐾 I know just the story.\n\nMatt’s payments work inc'
+[opener c09 r1 t2] 9.76s  | '🐾 Found it!\n\nMatt describes his leadership approac'
+[opener c09 r1 t3] 9.63s  | "🐾 Here's a great example.\n\nAt **Norfolk Southern**"
+[API_ERROR_DETECTED] source=embed_failure, exc=APITimeoutError: Request timed out., query=Norfolk Southern 2020 Revenue and Shipment Plannin...
+ABORT: search fallback (fallback:pinecone_unavailable) for 'Norfolk Southern 2020 Revenue and Shipment Planning modernization defects test coverage Samman coaching team size number engineers'

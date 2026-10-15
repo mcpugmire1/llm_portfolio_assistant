@@ -1,0 +1,21 @@
+turns 135, calls 279, errors 0, degraded 0, rejected 0
+tool_choice counts: {'required': 135, 'auto': 144, 'none': 0}
+all calls: max_wait_s                        n=279  median   1.04  p95   2.37  p99   3.52  max   3.67
+round 0 (required): max_wait_s               n=135  median   1.05  p95   1.91  p99   3.07  max   3.52
+later search calls (no text): max_wait_s     n=  9  median   1.04  p95   2.30  p99   2.30  max   2.30
+answer calls: max_wait_s                     n=136  median   0.95  p95   2.73  p99   3.54  max   3.67
+answer calls: before first text              n=136  median   0.95  p95   2.73  p99   3.54  max   3.67
+answer calls: after first text               n=136  median   0.18  p95   0.36  p99   0.52  max   0.62
+answer calls: first_text_s                   n=136  median   1.58  p95   4.18  p99   5.23  max   5.76
+headers_s, all calls                         n=279  median   0.52  p95   0.92  p99   1.88  max   3.52
+turn seconds                                 n=135  median  10.97  p95  16.40  p99  17.43  max  23.01
+answer calls with tool_choice: {'required': 1, 'auto': 135, 'none': 0}
+
+longest five:
+  c02 r2 t2 auto     max_wait 3.67s headers 0.67s pre-text 3.67s post-text 0.435 events 391 total 12.888s err None
+  c05 r1 t1 auto     max_wait 3.54s headers 0.72s pre-text 3.54s post-text 0.146 events 113 total 7.353s err None
+  c01 r1 t1 required max_wait 3.52s headers 3.52s pre-text 3.52s post-text None events 23 total 4.842s err None
+  c03 r2 t2 auto     max_wait 3.41s headers 0.51s pre-text 3.41s post-text 0.186 events 311 total 11.686s err None
+  c16 r2 t1 auto     max_wait 3.38s headers 0.52s pre-text 3.38s post-text 0.252 events 391 total 10.388s err None
+
+cost $1.82

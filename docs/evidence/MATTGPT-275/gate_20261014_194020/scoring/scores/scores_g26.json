@@ -1,0 +1,2429 @@
+[
+ {
+  "case": "c18",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All claims supported: CIC first engagement, 1970s mainframe, hybrid stack, SRS UI co-creation, 2-day CIC Academy over 6 months, quoted 'I do, we do, you do' verbatim in UNIFY, 95% MVP, 3 balanced teams; unquantified maintenance/deployment outcomes stated honestly. No closing.",
+  "claims": [
+   {
+    "text": "Director role on Norfolk Southern Revenue and Shipment Planning modernization",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Role"
+   },
+   {
+    "text": "Cloud Innovation Center's first engagement",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Mainframe dated to the 1970s",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Orders fell out unnoticed until customers called; business rules in COBOL and assembly maintained by a shrinking workforce",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Clerks manually handled waybill and rating fallout (green-screen consoles)",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Railroad had to keep running throughout modernization",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Task"
+   },
+   {
+    "text": "Led domain-driven design and event storming sessions",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Built APIs, microservices, CockroachDB alongside mainframe as system of record; CDC sync and reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "API gateways and anti-corruption layers for incremental replacement; Docker, Kubernetes, CI/CD",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Action"
+   },
+   {
+    "text": "SNAP-E documentation captured APIs, dependencies, data flows, risks",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Action"
+   },
+   {
+    "text": "Brought revenue management team into innovation hub to co-create Shipper Revenue System UI, personas to high-fidelity prototypes in weekly build-measure-learn",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Led a 2-day CIC Academy course twice monthly over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "Quoted 'I do, we do, you do' pairing progression",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP launched covering 95% of targeted use cases, real orders with clean data feeding the mainframe",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "EDI validation moved fallout detection to proactive trading-partner notification",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "Scaled to 3 balanced teams",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Client contributors learned Angular, Node, Spring Boot, cloud-native to support app after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "Reduced maintenance expenses and accelerated deployment cycles, not quantified",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Result; rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All claims supported: CIC first engagement, wholesale replacement too risky (REARCH), Boris/SNAP-E, quality crisis audit and SMART stories, TDD experts, 95% MVP, real-time revenue tracking replacing batch. No closing.",
+  "claims": [
+   {
+    "text": "Led Norfolk Southern Revenue and Shipment Planning modernization",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation; the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Project"
+   },
+   {
+    "text": "Cloud Innovation Center's first engagement",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Mainframe dated to the 1970s",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Orders fell out unnoticed until customers called; business rules in COBOL and assembly maintained by a shrinking workforce",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Clerks manually handled waybill and rating fallout (green-screen consoles)",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Wholesale replacement was too risky; modernize without stopping rail operations",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Situation"
+   },
+   {
+    "text": "Mainframe kept as system of record; APIs, microservices, CockroachDB alongside; CDC and reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Event storming, Boris Exercise, SNAP-E documentation",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Action"
+   },
+   {
+    "text": "API gateways, anti-corruption layers, Docker, Kubernetes, CI/CD",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Action"
+   },
+   {
+    "text": "Revenue management co-created Shipper Revenue System workspace in weekly build-measure-learn iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "2-day CIC Academy course twice monthly over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "Client contributors learned Angular, Node, Spring Boot, cloud-native after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "Quality crisis: defects rose despite near-complete test coverage; took ownership, audited, SMART testable stories, TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation; confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "MVP launched covering 95% of targeted use cases",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "Billing clerks and shippers could audit malformed waybill data before pricing errors",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "EDI validation proactive trading-partner notification",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "Real-time revenue tracking replaced batch reporting",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "All claims supported: three fronts of resistance during COVID (CIC1), hybrid platform, quality crisis findings (tests after code, vague stories), katas and rotating pairs, failure mode did not recur (STICK), 2-day Academy, 95% MVP, 3 balanced teams, client backlog ownership (UNIFY). No closing.",
+  "claims": [
+   {
+    "text": "Led Norfolk Southern Revenue and Shipment Planning modernization",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation; the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Project"
+   },
+   {
+    "text": "Cloud Innovation Center's first engagement",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Mainframe dated to the 1970s",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Orders fell out unnoticed until customers called; business rules in COBOL and assembly maintained by a shrinking workforce",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Clerks manually handled waybill and rating fallout (green-screen consoles)",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Resistance from mainframe-thinking client and waterfall account leadership as COVID moved team remote",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Built modern platform alongside mainframe: APIs, microservices, CockroachDB, CDC, reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Event storming, Boris Exercise, SNAP-E",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Action"
+   },
+   {
+    "text": "Co-created Shipper Revenue System interface through personas, prototypes, weekly build-measure-learn",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Quality crisis: found tests written after code and vague backlog stories; brought in TDD experts; rebuilt stories with defined scenarios",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Reinforced test-first via coding katas and rotating pairs; failure mode did not recur",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action; making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   },
+   {
+    "text": "2-day CIC Academy twice monthly over 6 months; contributors learned Angular, Node, Spring Boot",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP 95% of targeted use cases, clean data feeding mainframe",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "EDI validation proactive",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "3 balanced teams",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Client teams took ownership of their backlog and priorities",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New topic answered from RBC stories, no Norfolk Southern carry-over. All claims supported (DERISK, PMO, CONV, MOB); '3 organizations' in PMO Result; unquantified savings stated honestly.",
+  "claims": [
+   {
+    "text": "Senior Technology Architecture Manager on RBC Day2Day Corporate Banking",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Role; de-risking-rbcs-corporate-banking-platform-investment|rbc Project"
+   },
+   {
+    "text": "RBC evaluating Bottomline WebSeries as payment hub engine to replace aging RBC Express portal",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Existing systems had performance and scalability limitations and lacked digital offerings",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Assessment found WebSeries lacked modularity for RBC's long-term digital operating model",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Work spanned program governance, architecture assessment, mobile readiness, data conversion planning",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc; de-risking-rbcs-corporate-banking-platform-investment|rbc; assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc; leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, documentation analysis; four architecture dimensions; heat maps; cost-to-fix vs benefit with EA team",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Bank avoided further investment and redirected technical resources to higher-priority initiatives",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "Established PMO during discovery and requirements; project management plan, roadmap, dependencies, consolidated reporting",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Situation; building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Action"
+   },
+   {
+    "text": "Coordinated 3 organizations: RBC, Accenture, Bottomline Technologies",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Result"
+   },
+   {
+    "text": "Eliminated missed program updates and reduced redundant efforts",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Result"
+   },
+   {
+    "text": "Took over data conversion from scratch after previous lead left early; analysis, transformation rules, mock cycles, reconciliation",
+    "label": "supported",
+    "source": "leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Situation; leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Action"
+   },
+   {
+    "text": "Mobile modernization blueprint: API integration, cheque deposit, cross-device scalability",
+    "label": "supported",
+    "source": "assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Result"
+   },
+   {
+    "text": "Dollar savings and delivery-speed improvements not quantified",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result; building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "New topic, no carry-over. All claims supported: mobile gaps (MOB Situation), prior WebSeries experience, gaps surfaced before significant spend, heat maps as reference, PMO outcomes.",
+  "claims": [
+   {
+    "text": "Senior Technology Architecture Manager on RBC Day2Day Corporate Banking",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Role; de-risking-rbcs-corporate-banking-platform-investment|rbc Project"
+   },
+   {
+    "text": "RBC evaluating Bottomline WebSeries as payment hub engine to replace aging RBC Express portal",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Existing systems had performance and scalability limitations",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Assessment found WebSeries lacked modularity for RBC's long-term digital operating model",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Systems lacked mobile capabilities such as cheque deposit and had no API integration with external financial apps",
+    "label": "supported",
+    "source": "assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Situation"
+   },
+   {
+    "text": "Assessment drew on prior WebSeries implementation experience; code reviews, interviews, maturity scoring, heat maps, EA team models, cost-to-fix vs benefit",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Task; de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC redirected critical technical resources before significant spend was committed",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "Heat maps and roadmap artifacts remained reference material",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "Modernization blueprint covering API integration, mobile cheque deposit, scalability, real-time access across devices",
+    "label": "supported",
+    "source": "assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Result; assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Task"
+   },
+   {
+    "text": "Established PMO across RBC, Accenture, Bottomline; roadmap, risks, dependencies, staffing, budget, reporting",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Action"
+   },
+   {
+    "text": "Shared platform, daily summaries, designated contacts, task matrix; eliminated missed updates, reduced redundant effort",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Action; building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 1,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "New topic, no carry-over. All claims supported across DERISK, PMO, CONV, MOB; no-figures statement honest.",
+  "claims": [
+   {
+    "text": "Senior Technology Architecture Manager on RBC Day2Day Corporate Banking",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Role; de-risking-rbcs-corporate-banking-platform-investment|rbc Project"
+   },
+   {
+    "text": "RBC evaluating Bottomline WebSeries as payment hub engine to replace aging RBC Express portal",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Existing systems had performance and scalability limitations and lacked digital offerings",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Assessment found WebSeries lacked modularity for RBC's long-term digital operating model",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Gap/fit analysis drawing on prior WebSeries experience; maturity scoring; heat maps; target-system models; cost-to-fix vs benefit",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Prevented investment in a platform path that could not deliver; redirected resources",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "Established PMO: plans, staffing, budgets, schedules, risk and dependency, reporting",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Action"
+   },
+   {
+    "text": "Designated contacts, daily summaries, task matrix coordinated RBC, Accenture, Bottomline; eliminated missed updates, reduced redundant effort",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Action; building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Result"
+   },
+   {
+    "text": "Took over data conversion from scratch; legacy analysis, transformation rules, mock cycles, reconciliation",
+    "label": "supported",
+    "source": "leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Action"
+   },
+   {
+    "text": "Mobile blueprint: API integration, cheque deposit, scalability, cross-device access",
+    "label": "supported",
+    "source": "assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Result"
+   },
+   {
+    "text": "No dollar savings or delivery-speed figures recorded",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Section 3 c18 t3: says RBC duration is not on record, but every RBC story dates 2012-06 to 2013-06 (about a year); no clarifying question. contradicted: 'duration isn't specified in his stories'. supported: PMO during discovery and requirements; data conversion takeover.",
+  "claims": [
+   {
+    "text": "RBC engagement duration / start and end dates are not recorded in the stories",
+    "label": "contradicted",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Start_Date, End_Date (2012-06 to 2013-06; all RBC stories)"
+   },
+   {
+    "text": "PMO work took place during discovery and requirements",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Situation"
+   },
+   {
+    "text": "Took over data conversion after previous lead left early",
+    "label": "supported",
+    "source": "leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Situation"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 1,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Section 3 c18 t3: says RBC duration is not on record, but every RBC story dates 2012-06 to 2013-06 (about a year); no clarifying question. contradicted: 'stories don't specify dates'. unsupported: architecture assessment and mobile blueprint placed in the discovery and requirements phase (only PMO story says so).",
+  "claims": [
+   {
+    "text": "RBC engagement duration / start and end dates are not recorded in the stories",
+    "label": "contradicted",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Start_Date, End_Date (2012-06 to 2013-06; all RBC stories)"
+   },
+   {
+    "text": "Architecture assessment and modernization blueprint took place during discovery and requirements phase",
+    "label": "unsupported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation; assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Situation (no phase stated)"
+   },
+   {
+    "text": "PMO setup during discovery and requirements",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Situation"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 1,
+  "turn": 3,
+  "label": "C",
+  "pass": false,
+  "reason": "Section 3 c18 t3: says RBC duration is not on record, but every RBC story dates 2012-06 to 2013-06 (about a year); no clarifying question. contradicted: 'don't give start and end dates', and 'that's the only timing detail recorded' (also contradicted). supported: PMO began during discovery and requirements.",
+  "claims": [
+   {
+    "text": "RBC engagement duration / start and end dates are not recorded in the stories",
+    "label": "contradicted",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Start_Date, End_Date (2012-06 to 2013-06; all RBC stories)"
+   },
+   {
+    "text": "Discovery-and-requirements is the only timing detail recorded",
+    "label": "contradicted",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Start_Date, End_Date"
+   },
+   {
+    "text": "PMO work began during discovery and requirements phase",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Situation"
+   }
+  ],
+  "contradicted": 2,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All claims supported: Director at Accenture, three fronts during pandemic, DDD/event storming, Boris, SNAP-E, hybrid stack, gateways/ACL/Docker/K8s, SRS co-creation, 95% MVP, quality crisis, 2-day Academy, client backlog ownership. No closing.",
+  "claims": [
+   {
+    "text": "Director role on Norfolk Southern Revenue and Shipment Planning modernization",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Role"
+   },
+   {
+    "text": "Cloud Innovation Center's first engagement",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Mainframe dated to the 1970s",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Orders fell out unnoticed until customers called; business rules in COBOL and assembly maintained by a shrinking workforce",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Clerks manually handled waybill and rating fallout (green-screen consoles)",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Wholesale replacement too risky; modernize without stopping the railroad",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Situation; the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Task"
+   },
+   {
+    "text": "Client mainframe thinking, account leadership waterfall, team learning new model during pandemic",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "DDD and event storming; Boris Exercise for APIs/data flows; SNAP-E for dependencies and risks",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action; modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Action"
+   },
+   {
+    "text": "APIs, microservices, CockroachDB alongside mainframe; CDC and reconciliation; no big-bang cutover",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action; rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Action"
+   },
+   {
+    "text": "API gateways, anti-corruption layers, Docker, Kubernetes, CI/CD",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Action"
+   },
+   {
+    "text": "Revenue management co-created SRS interface via personas, user flows, prototypes in weekly iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "MVP 95% of targeted use cases; EDI validation at front door notifying trading partners",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "Audited code/tests, found tests after code and vague stories, brought in TDD experts; client stopped finding defects dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action; confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "2-day CIC Academy twice a month over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "Client contributors learned Angular, Node, Spring Boot; owned backlog and priorities; supported app after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action; unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All claims supported, incl. 'first major engagement' (QUAL Situation), ownership before client and account leadership, frontend/backend TDD experts, daily rotating pairs and failure mode not recurring (STICK), 3 balanced teams, 95% MVP. No closing.",
+  "claims": [
+   {
+    "text": "Director role on Norfolk Southern Revenue and Shipment Planning modernization",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Role"
+   },
+   {
+    "text": "Cloud Innovation Center's first engagement",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Mainframe dated to the 1970s",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Orders fell out unnoticed until customers called; business rules in COBOL and assembly",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Clerks manually handled waybill and rating fallout (green-screen consoles)",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "First major engagement",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Client mainframe thinking, waterfall leadership, COVID remote",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Cross-workstream DDD and event storming",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Mainframe system of record with APIs, microservices, CockroachDB, CDC, reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Boris Exercise and SNAP-E",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Action"
+   },
+   {
+    "text": "Co-created SRS interface in weekly build-measure-learn iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Took ownership before client and account leadership; exposed vague stories and tests after code",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Frontend and backend TDD experts; rebuilt testable stories; daily rotating pairs; failure mode did not recur",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action; making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action; making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   },
+   {
+    "text": "2-day CIC Academy twice monthly over 6 months; prioritization, backlog ownership, pairing resistance",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action; unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Result"
+   },
+   {
+    "text": "Client engineers learned Angular, Node, Spring Boot",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP 95%; real orders with clean data; EDI validation proactive",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "3 balanced teams; contributors gained skills to support the new application",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action; unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "All claims supported: hybrid stack, gateways/ACL, SRS workspace for clerks and shippers to audit malformed waybill data (paraphrase of CIC1 Action, rule 5), quality crisis, katas and pairing, 2-day Academy, 95% MVP, real-time revenue tracking, reduced maintenance expenses (MODREV). No closing.",
+  "claims": [
+   {
+    "text": "Led Norfolk Southern Revenue and Shipment Planning modernization",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation; the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Project"
+   },
+   {
+    "text": "Cloud Innovation Center's first engagement",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Mainframe dated to the 1970s",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Orders fell out unnoticed until customers called; business rules in COBOL and assembly maintained by a shrinking workforce",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Clerks manually handled waybill and rating fallout (green-screen consoles)",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Modernization without stopping rail operations; mainframe thinking, waterfall leadership, pandemic remote",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Task; the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Kept mainframe as system of record; APIs, microservices, CockroachDB; CDC and reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Event storming, Boris Exercise, SNAP-E",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Action"
+   },
+   {
+    "text": "API gateways and anti-corruption layers; Docker, Kubernetes, CI/CD",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Action"
+   },
+   {
+    "text": "Co-created SRS workspace; weekly prototype reviews shaping app for auditing/cleaning malformed waybill data",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Quality crisis: tests after code, vague stories; rebuilt stories; TDD experts, coding katas, pairing; client stopped finding hidden defects",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action; confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "2-day CIC Academy twice monthly over 6 months; pairing spread domain knowledge; Angular, Node, Spring Boot",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP 95%; EDI validation proactive",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "Real-time revenue tracking replaced batch reporting; reduced maintenance expenses",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New topic, no carry-over. All claims supported; quoted 'dress rehearsals' verbatim in CONV Action; migration strategy published, presented and adopted by RBC is in the thought-leadership story (TL Result/Performance).",
+  "claims": [
+   {
+    "text": "Senior Technology Architecture Manager on RBC Day2Day Corporate Banking",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Role; de-risking-rbcs-corporate-banking-platform-investment|rbc Project"
+   },
+   {
+    "text": "RBC evaluating Bottomline WebSeries as payment hub engine to replace aging RBC Express portal",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Existing systems had performance and scalability limitations and lacked digital offerings",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Assessment found WebSeries lacked modularity for RBC's long-term digital operating model",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Leadership needed to know whether it could meet requirements before committing further investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Assessment via code reviews, interviews, documentation, heat maps; prior WebSeries experience; target-system models, cost-to-fix vs benefit",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Prevented investment in a path that could not deliver; redirected resources",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "Established PMO during discovery and requirements; roadmap, risks, dependencies, staffing, budget, reporting",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Situation; building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Action"
+   },
+   {
+    "text": "Shared real-time updates, daily summaries, contacts, task matrix eliminated missed updates and reduced redundant effort across RBC, Accenture, Bottomline",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Action; building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Result"
+   },
+   {
+    "text": "Took over data conversion from scratch; mock conversion 'dress rehearsals'; reconciliation of payment amounts and beneficiary details",
+    "label": "supported",
+    "source": "leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Action"
+   },
+   {
+    "text": "Published and presented client-specific migration strategy to senior leadership; RBC adopted it",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients Result; thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients Performance"
+   },
+   {
+    "text": "Mobile readiness: API integration, cheque deposit, cross-browser/cross-device; blueprint for real-time banking across devices",
+    "label": "supported",
+    "source": "assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Action; assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "New topic, no carry-over. All claims supported: mobile/API gaps, conversion lead left Accenture early, maturity scoring, 3 organizations, onshore/offshore teams, heat maps as reference.",
+  "claims": [
+   {
+    "text": "Senior Technology Architecture Manager on RBC Day2Day Corporate Banking",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Role; de-risking-rbcs-corporate-banking-platform-investment|rbc Project"
+   },
+   {
+    "text": "RBC evaluating Bottomline WebSeries as payment hub engine to replace aging RBC Express portal",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Existing systems had performance and scalability limitations",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Assessment found WebSeries lacked modularity for RBC's long-term digital operating model",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Lacked mobile capabilities and API integration with external financial apps",
+    "label": "supported",
+    "source": "assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Situation"
+   },
+   {
+    "text": "Data conversion lead had left Accenture early; workstream built from scratch",
+    "label": "supported",
+    "source": "leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Situation"
+   },
+   {
+    "text": "Code reviews, interviews, heat maps; maturity across four dimensions; EA team models, cost-to-fix vs benefit",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Established PMO across 3 organizations; roadmap, budget, staffing, schedule, risks, interdependencies",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Action; building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Result"
+   },
+   {
+    "text": "Designated contacts, real-time updates, daily summaries, task matrix; eliminated missed updates",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Action; building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Result"
+   },
+   {
+    "text": "Analyzed decades-old payment records; transformation rules; mock cycles; reconciliation",
+    "label": "supported",
+    "source": "leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Action"
+   },
+   {
+    "text": "Coordinated business partners, IT, vendors; managed onshore/offshore data scrubbing teams",
+    "label": "supported",
+    "source": "leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Action"
+   },
+   {
+    "text": "Mobile blueprint: API integration, cheque deposit, cross-browser/cross-device",
+    "label": "supported",
+    "source": "assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Result; assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Action"
+   },
+   {
+    "text": "Prevented investment, redirected resources; heat maps remained reference material",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 2,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "New topic, no carry-over. All claims supported across DERISK, PMO (3 organizations, consolidated reporting), CONV (onshore/offshore), MOB.",
+  "claims": [
+   {
+    "text": "Senior Technology Architecture Manager on RBC Day2Day Corporate Banking",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Role; de-risking-rbcs-corporate-banking-platform-investment|rbc Project"
+   },
+   {
+    "text": "RBC evaluating Bottomline WebSeries as payment hub engine to replace aging RBC Express portal",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Existing systems had performance and scalability limitations and lacked digital offerings",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Assessment found WebSeries lacked modularity for RBC's long-term digital operating model",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Leadership needed to know before committing further investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Assessment across four dimensions; code reviews, interviews, heat maps; logical and system models with cost-to-fix vs benefit",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Prevented investment; redirected resources",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "PMO during discovery and requirements; roadmap, dependencies, consolidated financial/quality/resource/project reporting",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Situation; building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Action"
+   },
+   {
+    "text": "Coordinated 3 organizations; eliminated missed updates; reduced redundant effort",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Result"
+   },
+   {
+    "text": "Took over data conversion; decades-old records; rules; mock cycles; reconciliation; onshore/offshore teams",
+    "label": "supported",
+    "source": "leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Action"
+   },
+   {
+    "text": "Mobile readiness blueprint: API integration, cheque deposit, cross-device",
+    "label": "supported",
+    "source": "assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Action; assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Result"
+   },
+   {
+    "text": "Heat maps and roadmap artifacts remained reference material",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Section 3 c18 t3: says RBC duration is not on record, but every RBC story dates 2012-06 to 2013-06 (about a year); no clarifying question. contradicted: 'don't specify engagement dates'. unsupported: assessment, conversion planning and mobile blueprint all placed in discovery and requirements.",
+  "claims": [
+   {
+    "text": "RBC engagement duration / start and end dates are not recorded in the stories",
+    "label": "contradicted",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Start_Date, End_Date (2012-06 to 2013-06; all RBC stories)"
+   },
+   {
+    "text": "Architecture assessment, PMO setup, data conversion planning and mobile blueprint all described during discovery and requirements",
+    "label": "unsupported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Situation (PMO only); DERISK, CONV, MOB state no phase"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 2,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Section 3 c18 t3: says RBC duration is not on record, but every RBC story dates 2012-06 to 2013-06 (about a year); no clarifying question. contradicted: 'no start date, end date, or elapsed time is specified'. supported: scope of described work.",
+  "claims": [
+   {
+    "text": "RBC engagement duration / start and end dates are not recorded in the stories",
+    "label": "contradicted",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Start_Date, End_Date (2012-06 to 2013-06; all RBC stories)"
+   },
+   {
+    "text": "Work included discovery and requirements, architecture assessment, PMO setup, conversion planning",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Situation; de-risking-rbcs-corporate-banking-platform-investment|rbc; leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 2,
+  "turn": 3,
+  "label": "C",
+  "pass": false,
+  "reason": "Section 3 c18 t3: says RBC duration is not on record, but every RBC story dates 2012-06 to 2013-06 (about a year); no clarifying question. contradicted: 'stories don't specify start and end dates'. unsupported: all workstreams placed in discovery and requirements phase.",
+  "claims": [
+   {
+    "text": "RBC engagement duration / start and end dates are not recorded in the stories",
+    "label": "contradicted",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Start_Date, End_Date (2012-06 to 2013-06; all RBC stories)"
+   },
+   {
+    "text": "Assessment, PMO, conversion planning and mobile-readiness work took place during the Day2Day discovery and requirements phase",
+    "label": "unsupported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Situation (PMO only)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All claims supported: hybrid stack, DDD/event storming/Boris/SNAP-E, SRS co-creation, quality crisis with stories lacking defined scenarios, katas, daily rotating pairs, standup checks (STICK), 2-day Academy, 95% MVP, failure mode did not recur, real-time revenue tracking and reduced maintenance expenses (MODREV). No closing.",
+  "claims": [
+   {
+    "text": "Director role on Norfolk Southern Revenue and Shipment Planning modernization",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Role"
+   },
+   {
+    "text": "Cloud Innovation Center's first engagement",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Mainframe dated to the 1970s",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Orders fell out unnoticed until customers called; business rules in COBOL and assembly maintained by a shrinking workforce",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Clerks manually handled waybill and rating fallout (green-screen consoles)",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Modernization without stopping the railroad",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Task"
+   },
+   {
+    "text": "Mainframe thinking, waterfall leadership, team learning new practices during COVID",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Kept mainframe as system of record; APIs, microservices, CockroachDB; CDC and reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Event storming, DDD, Boris Exercise, SNAP-E",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action; modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Action"
+   },
+   {
+    "text": "Co-created SRS interface through personas, prototypes, weekly build-measure-learn",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Quality crisis: tests after code, stories without defined scenarios; rebuilt stories; TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Reinforced test-first via coding katas, daily rotating pairs, standup checks",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action; making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "2-day CIC Academy twice monthly over 6 months; contributors learned Angular, Node, Spring Boot to maintain after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP 95%; EDI validation proactive; real orders clean data; failure mode did not recur",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result; making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   },
+   {
+    "text": "Broader modernization enabled real-time revenue tracking and reduced maintenance expenses",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All claims supported; quoted 'I do, we do, you do' verbatim (UNIFY Action); context boundaries for revenue calculations, scheduling, planning (MODREV); practices held after experts left (STICK). No closing.",
+  "claims": [
+   {
+    "text": "Director role on Norfolk Southern Revenue and Shipment Planning modernization",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Role"
+   },
+   {
+    "text": "Cloud Innovation Center's first engagement",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Mainframe dated to the 1970s",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Orders fell out unnoticed until customers called; business rules in COBOL and assembly",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Clerks manually handled waybill and rating fallout (green-screen consoles)",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Mainframe thinking, waterfall leadership, COVID remote",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "DDD and event storming at Accenture innovation hub",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Mapped boundaries for revenue calculations, scheduling, and planning",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Action"
+   },
+   {
+    "text": "Boris Exercise and SNAP-E",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Action"
+   },
+   {
+    "text": "Mainframe system of record; APIs, microservices, CockroachDB; CDC and reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Co-created SRS UI via personas, prototypes, weekly iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Took ownership in front of client and account leadership; audit; testable stories; TDD experts paired with team",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Daily rotating pairs; test cases before implementation",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "2-day CIC Academy twice monthly over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "Quoted 'I do, we do, you do'",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "Contributors learned Angular, Node, Spring Boot; supported app after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP 95%; EDI validation; client stopped finding hidden defects; practices held after experts left",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result; confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result; making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "All claims supported; quoted 'I do, we do, you do' verbatim; SMART stories and frontend/backend TDD experts (QUAL); letting client experience pairing (UNIFY). No closing.",
+  "claims": [
+   {
+    "text": "Director role on Norfolk Southern Revenue and Shipment Planning modernization",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Role"
+   },
+   {
+    "text": "Cloud Innovation Center's first engagement",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Mainframe dated to the 1970s",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Orders fell out unnoticed until customers called; business rules in COBOL and assembly maintained by a shrinking workforce",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Clerks manually handled waybill and rating fallout (green-screen consoles)",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Resistance: mainframe-oriented client, waterfall leadership, team learning during pandemic",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Cross-workstream DDD and event storming",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Boris Exercise and SNAP-E to define APIs and integration requirements",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Action"
+   },
+   {
+    "text": "Mainframe system of record; APIs, microservices, CockroachDB; CDC; reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Co-created SRS workspace via personas, prototypes, weekly iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Took ownership; tests after code; stories without defined scenarios; SMART testable stories; frontend and backend TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "2-day CIC Academy twice monthly over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "Overcame pairing resistance by letting client experience it; 'I do, we do, you do'",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "Contributors learned Angular, Node, Spring Boot; supported app after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP 95%; EDI validation; client co-creating in weekly iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New topic, no carry-over. All claims supported: EA consultation, leadership workshops (DERISK), governance meetings across 3 organizations, escalating missing inputs (PMO), onshore/offshore teams (CONV).",
+  "claims": [
+   {
+    "text": "Senior Technology Architecture Manager on RBC Day2Day Corporate Banking",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Role; de-risking-rbcs-corporate-banking-platform-investment|rbc Project"
+   },
+   {
+    "text": "RBC evaluating Bottomline WebSeries as payment hub engine to replace aging RBC Express portal",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Existing systems had performance and scalability limitations and lacked digital offerings",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Assessment found WebSeries lacked modularity for RBC's long-term digital operating model",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Leadership needed honest assessment before committing further investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Prior WebSeries experience; code reviews, interviews, docs, heat maps; EA consultation; logical and system models; cost-to-fix vs benefit",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Workshops with bank leadership connected business goals with findings",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "PMO: project management plan, roadmap, risk/dependency management, consolidated reporting",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Action"
+   },
+   {
+    "text": "Led governance meetings across 3 organizations; designated contacts; real-time updates; daily summaries; task matrix",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Action; building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Result"
+   },
+   {
+    "text": "Escalated missing inputs to department leads and followed up with contributors",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Action"
+   },
+   {
+    "text": "Took over data conversion after previous lead left early; rules; mock cycles; reconciliation; onshore/offshore teams",
+    "label": "supported",
+    "source": "leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Situation; leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Action"
+   },
+   {
+    "text": "Prevented investment; redirected resources; PMO eliminated missed updates; end-to-end migration plan",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result; building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Result; leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "New topic, no carry-over. All claims supported. 'RBC Express had performance and scalability limitations' read as paraphrase of DERISK Situation (existing systems including the RBC Express portal under review), rule 5.",
+  "claims": [
+   {
+    "text": "Senior Technology Architecture Manager on RBC Day2Day Corporate Banking",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Role; de-risking-rbcs-corporate-banking-platform-investment|rbc Project"
+   },
+   {
+    "text": "RBC evaluating Bottomline WebSeries as payment hub engine to replace aging RBC Express portal",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Existing systems had performance and scalability limitations and lacked digital offerings",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Assessment found WebSeries lacked modularity for RBC's long-term digital operating model",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Work covered program governance, data conversion, architecture assessment, mobile readiness",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc; leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc; de-risking-rbcs-corporate-banking-platform-investment|rbc; assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc"
+   },
+   {
+    "text": "RBC Express had performance/scalability limitations and lacked digital offerings",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation; de-risking-rbcs-corporate-banking-platform-investment|rbc Action (current-state RBC Express)"
+   },
+   {
+    "text": "Assessed four architecture dimensions, code reviews, interviews, heat maps; prior WebSeries experience",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action; de-risking-rbcs-corporate-banking-platform-investment|rbc Task"
+   },
+   {
+    "text": "EA team target-system models and cost-to-fix vs benefit",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Prevented investment; redirected resources",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "Coordination across 3 organizations; PMO plan, budget, schedule, roadmap, interdependencies",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Action; building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Result"
+   },
+   {
+    "text": "Contacts, updates, daily summaries, task matrix; eliminated missed updates; reduced redundant efforts",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Action; building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Result"
+   },
+   {
+    "text": "Took over conversion; decades-old records; rules; mock cycles; reconciliation; onshore/offshore; end-to-end plan",
+    "label": "supported",
+    "source": "leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Action; leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Result"
+   },
+   {
+    "text": "Mobile: API integration, cheque deposit, cross-browser/device, scalability; blueprint for real-time access",
+    "label": "supported",
+    "source": "assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Action; assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 3,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "New topic, no carry-over. All claims supported; RBC adopting the data migration strategy he published and presented is in TL Result/Performance.",
+  "claims": [
+   {
+    "text": "Senior Technology Architecture Manager on RBC Day2Day Corporate Banking",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Role; de-risking-rbcs-corporate-banking-platform-investment|rbc Project"
+   },
+   {
+    "text": "RBC evaluating Bottomline WebSeries as payment hub engine to replace aging RBC Express portal",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Existing systems had performance and scalability limitations and lacked digital offerings",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Assessment found WebSeries lacked modularity for RBC's long-term digital operating model",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Leadership needed to know before committing further investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Code reviews, interviews, docs; four dimensions; heat maps; EA target-system models; cost-to-fix vs benefit",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Leadership workshops connected findings to business goals",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Avoided further investment; redirected resources",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "PMO governance meetings with RBC, Accenture, Bottomline; contacts, daily summaries, task matrix; eliminated missed updates, reduced redundant effort, clarified assignments",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Action; building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Result"
+   },
+   {
+    "text": "Took over data conversion; rules; mock cycles; reconciliation; coordinated vendors and onshore/offshore teams",
+    "label": "supported",
+    "source": "leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Action"
+   },
+   {
+    "text": "RBC adopted the data migration strategy he published and presented to senior leadership",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients Result; thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients Performance"
+   },
+   {
+    "text": "Mobile readiness blueprint: cheque deposit, API integration, cross-device; not a launch claim",
+    "label": "supported",
+    "source": "assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 3,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Section 3 c18 t3: says RBC duration is not on record, but every RBC story dates 2012-06 to 2013-06 (about a year); no clarifying question. contradicted: 'don't specify start and end dates'. supported: PMO during discovery and requirements; conversion takeover early in initiative.",
+  "claims": [
+   {
+    "text": "RBC engagement duration / start and end dates are not recorded in the stories",
+    "label": "contradicted",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Start_Date, End_Date (2012-06 to 2013-06; all RBC stories)"
+   },
+   {
+    "text": "PMO work began during discovery and requirements phase",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Situation"
+   },
+   {
+    "text": "Took over data conversion after previous lead left early in the initiative",
+    "label": "supported",
+    "source": "leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Situation"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 3,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Section 3 c18 t3: says RBC duration is not on record, but every RBC story dates 2012-06 to 2013-06 (about a year); no clarifying question. contradicted: 'I don't have ... start and end dates'. supported: scope of RBC work.",
+  "claims": [
+   {
+    "text": "RBC engagement duration / start and end dates are not recorded in the stories",
+    "label": "contradicted",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Start_Date, End_Date (2012-06 to 2013-06; all RBC stories)"
+   },
+   {
+    "text": "Work covered discovery and requirements, PMO setup, architecture assessment, data conversion planning, mobile readiness",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Situation; de-risking-rbcs-corporate-banking-platform-investment|rbc; leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc; assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 3,
+  "turn": 3,
+  "label": "C",
+  "pass": false,
+  "reason": "Section 3 c18 t3: says RBC duration is not on record, but every RBC story dates 2012-06 to 2013-06 (about a year); no clarifying question. contradicted: 'stories don't specify start and end dates'. supported: scope of RBC work.",
+  "claims": [
+   {
+    "text": "RBC engagement duration / start and end dates are not recorded in the stories",
+    "label": "contradicted",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Start_Date, End_Date (2012-06 to 2013-06; all RBC stories)"
+   },
+   {
+    "text": "Work covered discovery and requirements, WebSeries assessment, PMO setup, data conversion planning",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Situation; de-risking-rbcs-corporate-banking-platform-investment|rbc; leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Rule 8 quotation: unsupported: quoted 'I'm not paying for 2 people to do the work of 1' is not verbatim (UNIFY Action reads 'two people to do the work of one'). All other claims supported (Strangler pattern REARCH, 'I do, we do, you do' verbatim, 95% MVP, 3 balanced teams).",
+  "claims": [
+   {
+    "text": "Director role on Norfolk Southern Revenue and Shipment Planning modernization",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Role"
+   },
+   {
+    "text": "Cloud Innovation Center's first engagement",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Mainframe dated to the 1970s",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Orders fell out unnoticed until customers called; business rules in COBOL and assembly maintained by a shrinking workforce",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Clerks manually handled waybill and rating fallout (green-screen consoles)",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Modernization without stopping rail operations; client, leadership, team adjusting during COVID",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Task; the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Kept mainframe as system of record; APIs, microservices, CockroachDB",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "DDD, event storming, Boris Exercise, SNAP-E",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action; modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Action"
+   },
+   {
+    "text": "CDC and reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Strangler pattern with anti-corruption layers, Docker, Kubernetes, CI/CD",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Action"
+   },
+   {
+    "text": "Revenue management co-created SRS UI: personas, user flows, prototypes in weekly iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "2-day CIC Academy twice monthly over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "Quoted pairing objection 'I'm not paying for 2 people to do the work of 1'",
+    "label": "unsupported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action (verbatim text is 'two people to do the work of one')"
+   },
+   {
+    "text": "Stepped back and let client experience pairing; 'I do, we do, you do'",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP 95%; clean data feeding mainframe; EDI validation notified trading partners",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result; the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "3 balanced teams; contributors learned Angular, Node, Spring Boot after Accenture rolled off",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action; unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All claims supported: hybrid stack, Boris/SNAP-E, SRS workspace for clerks and shippers, quality crisis and katas/rotating pairs, failure mode did not recur after experts left (STICK), 2-day Academy, 95% MVP, client co-creating weekly. No closing.",
+  "claims": [
+   {
+    "text": "Led Norfolk Southern Revenue and Shipment Planning modernization",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation; the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Project"
+   },
+   {
+    "text": "Cloud Innovation Center's first engagement",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Mainframe dated to the 1970s",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Orders fell out unnoticed until customers called; business rules in COBOL and assembly maintained by a shrinking workforce",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Clerks manually handled waybill and rating fallout (green-screen consoles)",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Modernization without stopping the railroad; mainframe thinking, waterfall leadership, COVID remote",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Task; the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "DDD and event storming",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Mainframe system of record; APIs, microservices, CockroachDB; CDC and reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Boris Exercise and SNAP-E",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Action"
+   },
+   {
+    "text": "Co-created SRS workspace, personas to high-fidelity prototypes; billing clerks and shippers audit malformed waybill data",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Quality crisis: tests after code, vague stories; TDD experts; katas, coaching, rotating pairs",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action; making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding hidden defects; failure mode did not recur after experts left",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result; making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   },
+   {
+    "text": "2-day CIC Academy twice monthly over 6 months; Angular, Node, Spring Boot",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "MVP 95%; EDI validation proactive; client co-creating in weekly iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "All claims supported: order-to-cash domain gates (CIC1 Action), Strangler pattern, gateways/ACL (REARCH), Academy designed by Matt, 3 balanced teams and 1 team to Monterrey (CIC1 Action), 95% MVP. No closing.",
+  "claims": [
+   {
+    "text": "Director role on Norfolk Southern Revenue and Shipment Planning modernization",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Role"
+   },
+   {
+    "text": "Cloud Innovation Center's first engagement",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Mainframe dated to the 1970s",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Orders fell out unnoticed until customers called; business rules in COBOL and assembly maintained by a shrinking workforce",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Clerks manually handled waybill and rating fallout (green-screen consoles)",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Core scheduling, billing, order-to-cash ran on mainframe",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Modernization without stopping the railroad; mainframe thinking; waterfall leadership; pandemic",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Task; the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "DDD and event storming; mainframe system of record; APIs, microservices, CockroachDB; CDC; reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Strangler pattern, API gateways, anti-corruption layers",
+    "label": "supported",
+    "source": "rearchitecting-live-railroad-systems-from-mainframe-monolith-to-microservices|norfolk-southern Action"
+   },
+   {
+    "text": "Scope across order management, booking, credit, service fulfillment, planning, billing, AR",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Boris Exercise and SNAP-E",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Action"
+   },
+   {
+    "text": "Co-created SRS interface personas to high-fidelity prototypes weekly",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Confronted rising defects: audit, rebuilt stories, TDD experts",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Designed 2-day CIC Academy twice a month over 6 months; Angular, Node, Spring Boot",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "3 balanced teams; began transitioning 1 team to Monterrey",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "MVP 95%; EDI validation; co-creating weekly; client stopped finding hidden defects",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result; confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "New topic, no carry-over. All claims supported: mobile/API gaps (MOB), leadership workshops (DERISK), PMO during discovery, faster issue resolution (PMO Result), migration strategy adopted (TL).",
+  "claims": [
+   {
+    "text": "Senior Technology Architecture Manager on RBC Day2Day Corporate Banking",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Role; de-risking-rbcs-corporate-banking-platform-investment|rbc Project"
+   },
+   {
+    "text": "RBC evaluating Bottomline WebSeries as payment hub engine to replace aging RBC Express portal",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Existing systems had performance and scalability limitations",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Assessment found WebSeries lacked modularity for RBC's long-term digital operating model",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Systems lacked mobile capabilities and API integration with external financial apps",
+    "label": "supported",
+    "source": "assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Situation"
+   },
+   {
+    "text": "Code reviews, interviews, docs; four dimensions; heat maps; EA models; cost-to-fix vs benefit; leadership workshops",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Justification to redirect investment and technical resources",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "PMO during discovery and requirements; governance meetings with RBC, Accenture, Bottomline; contacts; real-time updates; daily summaries",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Situation; building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Action"
+   },
+   {
+    "text": "Task matrix reduced duplicate work; reporting supported faster issue resolution",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Result"
+   },
+   {
+    "text": "Took over data conversion; rules; mock cycles; reconciliation; coordinated vendors and onshore/offshore teams",
+    "label": "supported",
+    "source": "leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Action"
+   },
+   {
+    "text": "RBC adopted the migration strategy he published and presented to senior leadership",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients Result; thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients Performance"
+   },
+   {
+    "text": "Mobile blueprint: API integration, cheque deposit, cross-browser/device scalability",
+    "label": "supported",
+    "source": "assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Result; assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "New topic, no carry-over. All claims supported across DERISK, PMO, CONV, MOB; deliverables-not-launch framing accurate.",
+  "claims": [
+   {
+    "text": "Senior Technology Architecture Manager on RBC Day2Day Corporate Banking",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Role; de-risking-rbcs-corporate-banking-platform-investment|rbc Project"
+   },
+   {
+    "text": "RBC evaluating Bottomline WebSeries as payment hub engine to replace aging RBC Express portal",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Existing systems had performance and scalability limitations",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Assessment found WebSeries lacked modularity for RBC's long-term digital operating model",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Lacked mobile capabilities such as cheque deposit; no API integration with external apps",
+    "label": "supported",
+    "source": "assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Situation"
+   },
+   {
+    "text": "Gap/fit analysis with prior WebSeries experience; code, interviews, docs, maturity scoring; heat maps; target-system models; cost-to-fix vs benefit",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC redirected critical technical resources to higher-priority initiatives",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "PMO: plan, staffing, budget, schedule, risk/dependency, reporting; contacts, summaries, task matrix",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Action"
+   },
+   {
+    "text": "Eliminated missed updates; reduced redundant effort",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Result"
+   },
+   {
+    "text": "Took over data conversion after lead left early; records, rules, mock cycles, reconciliation",
+    "label": "supported",
+    "source": "leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Situation; leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Action"
+   },
+   {
+    "text": "Mobile blueprint: API, cheque deposit, cross-device",
+    "label": "supported",
+    "source": "assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Result"
+   },
+   {
+    "text": "Heat maps and roadmap remained reference material",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 4,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "New topic, no carry-over. All claims supported incl. 180 days and up to 7 years (R180 Situation) and reporting/export designs with enablement materials (R180 Action/Result).",
+  "claims": [
+   {
+    "text": "Senior Technology Architecture Manager on RBC Day2Day Corporate Banking",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Role; de-risking-rbcs-corporate-banking-platform-investment|rbc Project"
+   },
+   {
+    "text": "RBC evaluating Bottomline WebSeries as payment hub engine to replace aging RBC Express portal",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Existing systems had performance and scalability limitations and lacked digital offerings",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Assessment found WebSeries lacked modularity for RBC's long-term digital operating model",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Maturity scoring across four dimensions; code, docs, interviews; prior WebSeries experience; heat maps; target-system models; cost-to-fix vs benefit",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Bank redirected resources before significant spend was committed",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "PMO during discovery and requirements; contacts, real-time updates, daily summaries, task matrix; eliminated missed updates",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Situation; building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Action; building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Result"
+   },
+   {
+    "text": "Took over conversion; records; rules; mock cycles; reconciliation; end-to-end plan; coordinated vendor, onshore, offshore teams",
+    "label": "supported",
+    "source": "leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Action; leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Result"
+   },
+   {
+    "text": "Mobile: API integration points, cheque deposit, cross-device scalability",
+    "label": "supported",
+    "source": "assessing-mobile-readiness-for-rbcs-corporate-banking-platform|rbc Action"
+   },
+   {
+    "text": "Clients could access only 180 days of transaction and chargeback history; audit needed up to 7 years",
+    "label": "supported",
+    "source": "solving-rbcs-180-day-data-visibility-problem|rbc Situation"
+   },
+   {
+    "text": "Delivered requirements and solution designs for scheduled reporting, exports, extended history, plus enablement materials",
+    "label": "supported",
+    "source": "solving-rbcs-180-day-data-visibility-problem|rbc Action; solving-rbcs-180-day-data-visibility-problem|rbc Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": false,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 4,
+  "turn": 3,
+  "label": "A",
+  "pass": false,
+  "reason": "Section 3 c18 t3: says RBC duration is not on record, but every RBC story dates 2012-06 to 2013-06 (about a year); no clarifying question. contradicted: 'don't specify start and end dates'. supported: PMO during discovery and requirements.",
+  "claims": [
+   {
+    "text": "RBC engagement duration / start and end dates are not recorded in the stories",
+    "label": "contradicted",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Start_Date, End_Date (2012-06 to 2013-06; all RBC stories)"
+   },
+   {
+    "text": "PMO setup during discovery and requirements",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Situation"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 4,
+  "turn": 3,
+  "label": "B",
+  "pass": false,
+  "reason": "Section 3 c18 t3: says RBC duration is not on record, but every RBC story dates 2012-06 to 2013-06 (about a year); no clarifying question. contradicted: 'give no start date, end date, or elapsed time'.",
+  "claims": [
+   {
+    "text": "RBC engagement duration / start and end dates are not recorded in the stories",
+    "label": "contradicted",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Start_Date, End_Date (2012-06 to 2013-06; all RBC stories)"
+   },
+   {
+    "text": "Accounts describe discovery, assessment, and planning work",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Situation; de-risking-rbcs-corporate-banking-platform-investment|rbc; leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c18",
+  "run": 4,
+  "turn": 3,
+  "label": "C",
+  "pass": false,
+  "reason": "Section 3 c18 t3: says RBC duration is not on record, but every RBC story dates 2012-06 to 2013-06 (about a year); no clarifying question. contradicted: 'there are no start and end dates'. supported: PMO during discovery and requirements.",
+  "claims": [
+   {
+    "text": "RBC engagement duration / start and end dates are not recorded in the stories",
+    "label": "contradicted",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Start_Date, End_Date (2012-06 to 2013-06; all RBC stories)"
+   },
+   {
+    "text": "PMO work was during discovery and requirements",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Situation"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

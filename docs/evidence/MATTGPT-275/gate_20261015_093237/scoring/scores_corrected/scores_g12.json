@@ -1,0 +1,2151 @@
+[
+ {
+  "case": "c08",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: correct referent (the IAM/UAT email-exposure failure story), Answered and Honest. All 9 claims supported by what-i-learned-about-assumptions|fortune-500-clients; every quoted passage verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "tech lead on a global platform modernization delivery for a financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "program under delivery pressure; offshore teams executing test cycles across development, QA, UAT, production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation, downstream access configurations inherited from prior phases",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "responsible for safe environment setup but relied on assumptions rather than verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task"
+   },
+   {
+    "text": "trusted inherited documentation; did not audit who could trigger downstream jobs or email processes; did not verify masking of names and email addresses; no compensating controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "offshore tester triggered UAT email job sending unmasked production data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "took accountability, led root cause analysis and remediation; identified insufficient IAM checks, unclear boundaries, unscrubbed data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "client demanded tester removal; quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "quote 'assumptions are risks in disguise' (verbatim); IAM validation, environment verification, PII scrubbing, risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary/Purpose"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: correct referent (the IAM/UAT email-exposure failure story), Answered and Honest. All 9 claims supported by what-i-learned-about-assumptions|fortune-500-clients; every quoted passage verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "tech lead on global platform modernization for a financial services client under delivery pressure",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "offshore teams test cycles across dev, QA, UAT, production; controls inherited from prior phases with existing documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "relied on documentation without confirming accuracy; focused on delivery pressures rather than validating access patterns",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "did not audit who could trigger downstream jobs/email; did not verify masking; no data masking or email interception",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "offshore tester triggered UAT email job with unmasked production data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "took accountability, led RCA and remediation, worked collectively to implement corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "client demanded tester removal; quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing, risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: correct referent (the IAM/UAT email-exposure failure story), Answered and Honest. All 9 claims supported by what-i-learned-about-assumptions|fortune-500-clients; every quoted passage verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "assumed inherited access controls and environment boundaries were correct on a financial services platform modernization",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/5PSummary"
+   },
+   {
+    "text": "tech lead responsible for safe environment setup; relied on existing documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation/Task/Action"
+   },
+   {
+    "text": "delivery pressure; offshore teams running test cycles across dev, QA, UAT, production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "offshore tester triggered UAT email job with unmasked production data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "had not audited who could trigger jobs, not verified scrubbing, no masking/email interception; focused on delivery pressures",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "took accountability, led RCA and remediation; investigation found insufficient IAM checks, unclear boundaries, unscrubbed data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "client demanded tester removal; quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "stated lesson: leaders own the environment their teams operate in",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "made IAM validation, environment verification, PII scrubbing, risk ownership day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Changes come from the same incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as a consequence. All 8 claims supported by what-i-learned-about-assumptions|fortune-500-clients; quotes verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "made verification a day-one responsibility",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary/Performance"
+   },
+   {
+    "text": "before: relied on inherited documentation for IAM, segregation, downstream access; delivery pressure over validating access patterns",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation/Action"
+   },
+   {
+    "text": "quote 'IAM validation, environment verification, PII scrubbing, and risk ownership' (verbatim) became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "the checks addressed access controls, dev/QA/UAT/prod boundaries, masking of names and emails",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "offshore tester triggered UAT email job reaching thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "took accountability, led RCA and remediation, corrective controls; root causes insufficient IAM, unclear boundaries, unscrubbed data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "client demanded tester removal; quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "quote 'assumptions are risks in disguise' (verbatim); leaders own the environment their teams operate in",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Changes come from the same incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as a consequence. All 9 claims supported by what-i-learned-about-assumptions|fortune-500-clients; quotes verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "made verification a day-one responsibility rather than relying on inherited assumptions",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary/Performance"
+   },
+   {
+    "text": "before: accepted existing documentation without confirming IAM, boundaries, downstream access; delivery pressure prioritized",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "afterward IAM validation, environment verification, PII scrubbing, risk ownership part of delivery approach from the start",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "IAM change: validate access patterns including who could trigger downstream jobs/email",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Process"
+   },
+   {
+    "text": "environment verification: check dev/QA/UAT/prod boundaries rather than trusting documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Performance"
+   },
+   {
+    "text": "customer data: verify masking/scrubbing of names and emails; incident exposed absence of masking/email interception",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Performance"
+   },
+   {
+    "text": "took accountability, led RCA and remediation, corrective controls with team",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "account does not specify individual controls deployed or measured reduction in incidents (accurate absence statement)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "lasting change stated explicitly: day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 1,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Changes come from the same incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as a consequence. All 8 claims supported by what-i-learned-about-assumptions|fortune-500-clients; quotes verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "made IAM validation, environment verification, PII scrubbing, risk ownership day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "before: relied on inherited documentation, assumed access controls, boundaries, data masking correct",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/5PSummary"
+   },
+   {
+    "text": "specific checks: who could trigger downstream jobs/email, environment boundaries, masking of names and emails",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "before, had focused on delivery pressures while assuming environment safe",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "took accountability, led RCA and remediation; found insufficient IAM checks, unclear boundaries, unscrubbed data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "client demanded tester removal; quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "quote 'leaders own the environment their teams operate in' (verbatim, Result)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "account does not specify exact corrective controls or measured reduction (accurate absence statement)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: correct referent (the IAM/UAT email-exposure failure story), Answered and Honest. All 8 claims supported by what-i-learned-about-assumptions|fortune-500-clients; every quoted passage verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "tech lead, global platform modernization, financial services client, delivery pressure, offshore testing across dev/QA/UAT/prod",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM, segregation, downstream access inherited from prior phases with existing documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "relied on documentation; did not audit who could trigger jobs/email, confirm scrubbing, or implement masking/email interception",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task/Action"
+   },
+   {
+    "text": "offshore tester triggered UAT email job, unmasked production data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "took accountability, led RCA and remediation; identified insufficient IAM, unclear boundaries, unscrubbed data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "did not treat incident solely as tester's mistake; worked collectively on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "client demanded tester removal, a systemic failure with an individual consequence (unquoted paraphrase)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "quote 'assumptions are risks in disguise' (verbatim); IAM validation etc. became day-one responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary/Purpose"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: correct referent (the IAM/UAT email-exposure failure story), Answered and Honest. All 7 claims supported by what-i-learned-about-assumptions|fortune-500-clients; every quoted passage verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "tech lead on global platform modernization for financial services client under delivery pressure",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "controls inherited from earlier phases; relied on documentation and assumed controls correct",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation/Action"
+   },
+   {
+    "text": "offshore tester triggered UAT email job, unmasked production data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "had not audited job triggers, verified names/emails scrubbed, or implemented masking/email interception",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "took accountability, RCA and remediation; insufficient IAM checks, unclear boundaries, unscrubbed data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "client demanded tester removal; quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "quote 'assumptions are risks in disguise' (verbatim); day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: correct referent (the IAM/UAT email-exposure failure story), Answered and Honest. All 7 claims supported by what-i-learned-about-assumptions|fortune-500-clients; every quoted passage verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "tech lead, financial services platform modernization with dev, QA, UAT, prod; offshore test cycles under pressure",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "relied on inherited documentation rather than confirming accuracy; assumed IAM and boundaries correct",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "did not audit job triggers or verify masking of names/emails; no compensating controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "offshore tester triggered UAT email job, thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "took accountability, RCA, remediation; root causes identified; corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "client demanded tester removal; quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "quote 'assumptions are risks in disguise' (verbatim); day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Changes come from the same incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as a consequence. All 7 claims supported by what-i-learned-about-assumptions|fortune-500-clients; quotes verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "made verification a day-one responsibility rather than treating inherited controls as correct",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary/Performance"
+   },
+   {
+    "text": "before: relied on existing documentation under delivery pressure; did not confirm IAM, audit job triggers, verify masking",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation/Action"
+   },
+   {
+    "text": "quote 'IAM validation, environment verification, PII scrubbing, and risk ownership' (verbatim) became day-one responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "checks addressed insufficient IAM checks, unclear boundaries, unscrubbed data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "took accountability, led RCA and remediation, worked collectively on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "story does not specify exact control configuration, measured reduction, or that email interception was installed (accurate absence statement)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "quote 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Changes come from the same incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as a consequence. All 7 claims supported by what-i-learned-about-assumptions|fortune-500-clients; quotes verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "made verification a day-one responsibility",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary/Performance"
+   },
+   {
+    "text": "before: relied on documentation without confirming accuracy; delivery pressure over validating access patterns; job triggers and masking unverified",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "took accountability, RCA and remediation; root causes insufficient IAM, unclear boundaries, unscrubbed data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "lasting change: IAM validation, environment verification, PII scrubbing, risk ownership day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "quote 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "client demanded tester removal; quote 'a systemic failure that resulted in an individual consequence' (verbatim); reinforced belief leaders own the environment",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "no measured reduction or exact control configuration in account (accurate absence statement)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 2,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Changes come from the same incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as a consequence. All 6 claims supported by what-i-learned-about-assumptions|fortune-500-clients; quotes verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "quote 'IAM validation, environment verification, PII scrubbing, and risk ownership' (verbatim) day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "before: relied on inherited documentation, assumed access controls and boundaries correct",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "changes: validating IAM and downstream access, verifying dev/QA/UAT/prod boundaries, checking masking of names/emails; had not audited job triggers",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Task"
+   },
+   {
+    "text": "took accountability, RCA, remediation; insufficient IAM, unclear boundaries, unscrubbed data; corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "account does not specify final control configuration or measured reduction (accurate absence statement)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "incident reached thousands of real clients; client demanded tester removal; quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: correct referent (the IAM/UAT email-exposure failure story), Answered and Honest. All 7 claims supported by what-i-learned-about-assumptions|fortune-500-clients; every quoted passage verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "tech lead, global platform modernization, financial services client, delivery pressure, offshore testing across environments",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "responsible for safe setup but relied on inherited documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task/Action"
+   },
+   {
+    "text": "assumed IAM configuration correct; did not audit job triggers, verify scrubbing, or implement masking/email interception",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "offshore tester triggered UAT email job, thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "took accountability, RCA and remediation, corrective controls; root causes insufficient IAM, unclear boundaries, unscrubbed data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "client demanded tester removal; quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "quote 'assumptions are risks in disguise' (verbatim); IAM validation etc. day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: correct referent (the IAM/UAT email-exposure failure story), Answered and Honest. All 7 claims supported by what-i-learned-about-assumptions|fortune-500-clients; every quoted passage verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "tech lead on global platform modernization for financial services client; offshore test cycles; inherited controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "relied on documentation without confirming accuracy; focused on delivery pressures over validating access patterns",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "did not audit job triggers, implement masking/email interception, or verify scrubbing",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "offshore tester triggered UAT email job, thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "took accountability, RCA, remediation; root causes were assumptions he should have verified rather than inherited",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "client demanded tester removal: a systemic failure that resulted in an individual consequence (unquoted)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "stated lesson: leaders own the environment their teams operate in; day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: correct referent (the IAM/UAT email-exposure failure story), Answered and Honest. All 7 claims supported by what-i-learned-about-assumptions|fortune-500-clients; every quoted passage verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "tech lead, global platform modernization, financial services client, delivery pressure, inherited controls and documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "relied on documentation, assumed controls correct, focused on delivery pressures",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "did not audit job triggers, implement masking/email interception, confirm scrubbing of names/emails",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "offshore tester triggered UAT email job, thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "took accountability, RCA, remediation; root causes systemic, not simply tester's action",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "client demanded tester removal, a systemic failure with an individual consequence (unquoted)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "quote 'assumptions are risks in disguise' (verbatim); leaders own the environment; day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Changes come from the same incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as a consequence. All 7 claims supported by what-i-learned-about-assumptions|fortune-500-clients; quotes verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "quote 'IAM validation, environment verification, PII scrubbing, and risk ownership' (verbatim) day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "before: relied on inherited documentation and assumed controls correct; afterward verify rather than inherit",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "meant checking IAM and downstream access including job/email triggers, environment boundaries, masking of names/emails",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "took accountability, led RCA and remediation, corrective controls collectively",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "client demanded tester removal; quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "quote 'leaders own the environment their teams operate in' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "story does not report a later incident rate or measured improvement (accurate absence statement)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Changes come from the same incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as a consequence. All 6 claims supported by what-i-learned-about-assumptions|fortune-500-clients; quotes verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "made verification a day-one responsibility rather than relying on inherited documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary/Performance"
+   },
+   {
+    "text": "before: assumed IAM, boundaries, downstream access correct; delivery pressure prioritized",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "changes: validating access patterns, verifying environment boundaries, checking masking of names/emails; job triggers previously unaudited",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Process"
+   },
+   {
+    "text": "took accountability, RCA, remediation, corrective controls collectively",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "quotes 'assumptions are risks in disguise' and 'leaders own the environment their teams operate in' (both verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary/Result"
+   },
+   {
+    "text": "account does not specify exact controls deployed or measured reduction (accurate absence statement)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 3,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Changes come from the same incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as a consequence. All 5 claims supported by what-i-learned-about-assumptions|fortune-500-clients; quotes verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "quote 'IAM validation, environment verification, PII scrubbing, and risk ownership' (verbatim) day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "before: relied on documentation without confirming IAM, boundaries, downstream access",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "IAM validation meant verifying access patterns incl. job/email triggers; environment verification meant confirming dev/QA/UAT/prod boundaries; PII scrubbing meant verifying masking",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Performance"
+   },
+   {
+    "text": "took accountability, RCA, remediation; investigation found insufficient IAM, unclear boundaries, unscrubbed data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "account does not specify individual corrective controls deployed (accurate absence statement)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: correct referent (the IAM/UAT email-exposure failure story), Answered and Honest. All 7 claims supported by what-i-learned-about-assumptions|fortune-500-clients; every quoted passage verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "tech lead, global platform modernization, financial services client, delivery pressure, offshore test cycles",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "inherited controls with existing documentation; assumed controls correct",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation/Action"
+   },
+   {
+    "text": "focused on delivery pressures without confirming access patterns, auditing email job triggers, or verifying scrubbing; no masking/email interception",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "offshore tester triggered UAT email job, thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "took accountability, RCA, remediation; root causes identified; corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "client demanded tester removal; quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "quote 'day-one leadership responsibilities' (verbatim) for IAM validation etc.",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: correct referent (the IAM/UAT email-exposure failure story), Answered and Honest. All 7 claims supported by what-i-learned-about-assumptions|fortune-500-clients; every quoted passage verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "failed to verify testing environments safe on financial services platform modernization; tech lead",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation/Task"
+   },
+   {
+    "text": "relied on inherited documentation, assumed IAM, boundaries, downstream access correct; delivery pressure; offshore testing",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation/Action"
+   },
+   {
+    "text": "offshore tester triggered UAT email job, thousands of real clients; data included names and email addresses",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result/Action"
+   },
+   {
+    "text": "had not audited job triggers, verified scrubbing, or implemented masking/email interception",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "took accountability, RCA, remediation; examined insufficient IAM, unclear boundaries, data in downstream environments",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "client demanded tester removal; quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "day-one leadership responsibilities; quote 'assumptions are risks in disguise' (verbatim); leaders own the environment",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: correct referent (the IAM/UAT email-exposure failure story), Answered and Honest. All 7 claims supported by what-i-learned-about-assumptions|fortune-500-clients; every quoted passage verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "tech lead, global platform modernization, financial services client, offshore test cycles, inherited controls and documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "relied on documentation rather than verifying; assumed boundaries; did not audit job triggers or confirm masking",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "compensating controls such as masking and email interception not in place",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "offshore tester triggered UAT email job, thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "took accountability, RCA, remediation; root causes identified; corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "client demanded tester removal, a systemic failure with an individual consequence (unquoted)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "quote 'assumptions are risks in disguise' (verbatim); leaders own the environment; day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Changes come from the same incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as a consequence. All 7 claims supported by what-i-learned-about-assumptions|fortune-500-clients; quotes verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "made verification a day-one responsibility",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary/Performance"
+   },
+   {
+    "text": "before: relied on existing documentation; under delivery pressure did not confirm access patterns, audit email job triggers, check scrubbing",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "UAT email job sent unmasked production data to thousands of real clients; took accountability, led RCA and remediation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result/Action"
+   },
+   {
+    "text": "quote 'IAM validation, environment verification, PII scrubbing, and risk ownership are now day-one leadership responsibilities' (verbatim, 5PSummary)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "issues: insufficient IAM checks, unclear boundaries, unscrubbed data; worked collectively on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result/Action"
+   },
+   {
+    "text": "client demanded tester removal; quote 'a systemic failure that resulted in an individual consequence' (verbatim); quote 'leaders own the environment...' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "story does not specify individual controls or measured reduction (accurate absence statement)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Changes come from the same incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as a consequence. All 6 claims supported by what-i-learned-about-assumptions|fortune-500-clients; quotes verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "quote 'IAM validation, environment verification, PII scrubbing, and risk ownership' (verbatim) day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "previously relied on inherited documentation and assumed access controls and boundaries correct",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "change covered dev, QA, UAT, prod and downstream access used by offshore testing; verify IAM, boundaries, masking",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation/Action/Performance"
+   },
+   {
+    "text": "in incident, focused on delivery pressure without auditing job/email triggers; risk ownership now day-one",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/5PSummary"
+   },
+   {
+    "text": "took accountability, RCA, remediation; examined root causes; corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "account does not specify every control or recurrence rate (accurate absence statement)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 4,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Changes come from the same incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as a consequence. All 6 claims supported by what-i-learned-about-assumptions|fortune-500-clients; quotes verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "made verification a day-one responsibility; quote 'IAM validation, environment verification, PII scrubbing, and risk ownership' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "before: assumed IAM, boundaries, downstream access correct",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "checks: access controls, separation of dev/test from production, masking of names/emails; missed while focused on delivery pressure",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Situation"
+   },
+   {
+    "text": "took accountability, RCA, remediation; insufficient IAM, unclear boundaries, unscrubbed data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "client demanded offshore tester removal; quote 'a systemic failure that resulted in an individual consequence' (verbatim); quote 'leaders own the environment their teams operate in' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "story does not specify individual controls or measured reduction (accurate absence statement)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: correct referent (the IAM/UAT email-exposure failure story), Answered and Honest. All 7 claims supported by what-i-learned-about-assumptions|fortune-500-clients; every quoted passage verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "tech lead on global modernization for a Fortune 500 financial services client; offshore testing across dev, QA, UAT, prod",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "delivery pressure; inherited controls; relied on documentation without confirming accuracy",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation/Action"
+   },
+   {
+    "text": "focused on delivery pressures; did not audit job triggers, verify scrubbing, or implement masking/email interception",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "offshore tester triggered UAT email job, thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "took accountability, RCA, remediation; root causes insufficient IAM, unclear boundaries, unscrubbed data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "client demanded tester removal, a systemic failure with an individual consequence (unquoted)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "quote 'assumptions are risks in disguise' (verbatim); day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: correct referent (the IAM/UAT email-exposure failure story), Answered and Honest. All 7 claims supported by what-i-learned-about-assumptions|fortune-500-clients; every quoted passage verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "tech lead, global platform modernization, financial services client, delivery pressure, offshore test cycles, inherited controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "relied on assumptions rather than verifying; trusted documentation; did not audit job triggers or verify masking; no compensating controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task/Action"
+   },
+   {
+    "text": "offshore tester triggered UAT email job, thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "took accountability, RCA, remediation; root causes identified; corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "client demanded tester removal; quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "account gives no quantified recovery result (accurate absence statement)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "IAM validation etc. became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: correct referent (the IAM/UAT email-exposure failure story), Answered and Honest. All 7 claims supported by what-i-learned-about-assumptions|fortune-500-clients; every quoted passage verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "tech lead, global platform modernization, financial services client, offshore test cycles, inherited controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "relied on inherited documentation; focused on delivery pressures; did not audit email job triggers or confirm masking",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "masking and email interception not in place",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "offshore tester triggered UAT email job, thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "took accountability, RCA, remediation; corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "client demanded tester removal; quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "quote 'assumptions are risks in disguise' (verbatim); day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Changes come from the same incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as a consequence. All 7 claims supported by what-i-learned-about-assumptions|fortune-500-clients; quotes verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "made verification a day-one responsibility",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary/Performance"
+   },
+   {
+    "text": "before: accepted documentation on IAM, segregation, downstream access without confirming",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "quote 'IAM validation, environment verification, PII scrubbing, and risk ownership' (verbatim) day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "meant verifying access patterns and boundaries, checking masking of names/emails, owning those risks",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Performance/Process"
+   },
+   {
+    "text": "took accountability, RCA, remediation; root causes systemic, not simply tester's action",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "account does not specify exact controls or recurrence rate (accurate absence statement)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "quote 'assumptions are risks in disguise' (verbatim); UAT email job reached thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Changes come from the same incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as a consequence. All 6 claims supported by what-i-learned-about-assumptions|fortune-500-clients; quotes verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "quote 'day-one leadership responsibilities' (verbatim) for IAM validation etc.",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "previously treated inherited documentation as correct while focusing on delivery pressure",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "changes: validate IAM and downstream access, verify boundaries, check masking; missing audit of job triggers and compensating controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "took accountability, RCA, remediation; corrective controls; causes identified",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "client demanded tester removal; quote 'a systemic failure that resulted in an individual consequence' (verbatim); belief leaders own the environment",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "account gives no quantified follow-up result (accurate absence statement)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 5,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Changes come from the same incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as a consequence. All 5 claims supported by what-i-learned-about-assumptions|fortune-500-clients; quotes verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "IAM validation, environment verification, PII scrubbing, risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "before: relied on inherited documentation and assumed IAM, boundaries, data masking correct",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/5PSummary"
+   },
+   {
+    "text": "checks: access controls, separation from production, masking of names/emails; missed job-trigger audit and compensating controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "took accountability, RCA, remediation; corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "client demanded offshore tester removal; quote 'a systemic failure that resulted in an individual consequence' (verbatim); quote 'leaders own the environment their teams operate in' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: correct referent (the IAM/UAT email-exposure failure story), Answered and Honest. All 7 claims supported by what-i-learned-about-assumptions|fortune-500-clients; every quoted passage verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "tech lead, global platform modernization, financial services client, delivery pressure, offshore test cycles, inherited controls and documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "assumed controls correct; focused on delivery pressures; relied on documentation; did not audit job triggers",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "did not verify masking of names/emails or implement email interception",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "offshore tester triggered UAT email job, thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "took accountability, RCA, remediation; root causes insufficient IAM, unclear boundaries, unscrubbed data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "client demanded tester removal; quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "stated lesson leaders own the environment; day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: correct referent (the IAM/UAT email-exposure failure story), Answered and Honest. All 6 claims supported by what-i-learned-about-assumptions|fortune-500-clients; every quoted passage verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "tech lead, global platform modernization, financial services client, delivery pressure, offshore test cycles, inherited controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "assumed controls correct; relied on documentation without confirming; did not audit job triggers or verify masking; no compensating controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "offshore tester triggered UAT email job, thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "took accountability, RCA, remediation; root causes; corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "client demanded tester removal; quote 'a systemic failure that resulted in an individual consequence' (verbatim); leaders own the environment",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "day-one responsibilities; quote 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: correct referent (the IAM/UAT email-exposure failure story), Answered and Honest. All 6 claims supported by what-i-learned-about-assumptions|fortune-500-clients; every quoted passage verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "tech lead responsible for safe environment setup on financial services platform modernization; offshore test cycles; inherited controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation/Task"
+   },
+   {
+    "text": "relied on inherited documentation; focused on delivery pressures; did not audit job triggers or confirm masking; no compensating controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "offshore tester triggered UAT email job, thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "took accountability, RCA, remediation; root causes identified",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "client demanded tester removal; quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "day-one leadership responsibilities; quote 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Changes come from the same incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as a consequence. All 6 claims supported by what-i-learned-about-assumptions|fortune-500-clients; quotes verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "made verification a day-one responsibility",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary/Performance"
+   },
+   {
+    "text": "before: assumed IAM, boundaries, downstream access correct; afterward IAM validation etc. day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/5PSummary"
+   },
+   {
+    "text": "checks: validating access patterns, boundaries, auditing job/email triggers, verifying masking of names/emails",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "took accountability, RCA, remediation; causes systemic, not simply tester's action",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "account does not specify controls installed or measured post-remediation result (accurate absence statement)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "quote 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Changes come from the same incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as a consequence. All 6 claims supported by what-i-learned-about-assumptions|fortune-500-clients; quotes verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "made verification a day-one responsibility",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary/Performance"
+   },
+   {
+    "text": "before: accepted documentation without confirming; delivery pressure over validating access patterns",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "IAM validation re job/email triggers; environment verification re dev/QA/UAT/prod boundaries; PII scrubbing re names/emails",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "took accountability, RCA, remediation; root causes; corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "account does not specify controls installed or incident-rate metric (accurate absence statement)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "client demanded tester removal; quotes 'a systemic failure...', 'leaders own the environment...', 'assumptions are risks in disguise' (all verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 6,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Changes come from the same incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as a consequence. All 6 claims supported by what-i-learned-about-assumptions|fortune-500-clients; quotes verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "quote 'IAM validation, environment verification, PII scrubbing, and risk ownership' (verbatim) day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "followed global platform modernization with offshore testing across dev, QA, UAT, prod; under delivery pressure assumed controls correct",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation/Action"
+   },
+   {
+    "text": "offshore tester triggered UAT email job, thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "changes: validating IAM and downstream access, verifying boundaries, checking masking; previously no job-trigger audit or compensating controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "took accountability, RCA, remediation; root causes; corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "account does not specify every control or recurrence rate (accurate absence statement); quote 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: correct referent (the IAM/UAT email-exposure failure story), Answered and Honest. All 7 claims supported by what-i-learned-about-assumptions|fortune-500-clients; every quoted passage verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "tech lead, global platform modernization, Fortune 500 financial services client, dev/QA/UAT/prod",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "delivery pressure, offshore test cycles, inherited controls with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "relied on documentation without confirming; did not audit job triggers, implement masking/email interception, verify scrubbing",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "offshore tester triggered UAT email job, thousands of real clients; root cause insufficient IAM, unclear boundaries, unscrubbed data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "took accountability, RCA, remediation, corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "client demanded tester removal; quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "quote 'assumptions are risks in disguise' (verbatim); day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: correct referent (the IAM/UAT email-exposure failure story), Answered and Honest. All 7 claims supported by what-i-learned-about-assumptions|fortune-500-clients; every quoted passage verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "failed to verify access controls and boundaries he was responsible for on financial services platform modernization",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task/Action"
+   },
+   {
+    "text": "delivery pressure, offshore test cycles; relied on inherited documentation, assumed IAM correct",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation/Action"
+   },
+   {
+    "text": "offshore tester triggered UAT email job, thousands of real clients; names and emails not scrubbed",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result/Action"
+   },
+   {
+    "text": "focused on delivery pressures; no job-trigger audit, masking verification, or email interception; should have verified rather than inherited",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "took accountability, RCA, remediation; investigation identified root causes",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "client demanded tester removal; quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: correct referent (the IAM/UAT email-exposure failure story), Answered and Honest. All 6 claims supported by what-i-learned-about-assumptions|fortune-500-clients; every quoted passage verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "tech lead, global platform modernization, financial services client, delivery pressure, offshore test cycles, inherited controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "relied on assumptions; focused on delivery pressures; no job-trigger audit or compensating controls; no scrubbing verification",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task/Action"
+   },
+   {
+    "text": "offshore tester triggered UAT email job, thousands of real clients; root cause identified",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "took accountability, RCA, remediation, corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "client demanded tester removal, a systemic failure that resulted in an individual consequence (unquoted)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "quote 'assumptions are risks in disguise' (verbatim); day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Changes come from the same incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as a consequence. All 6 claims supported by what-i-learned-about-assumptions|fortune-500-clients; quotes verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "made verification a day-one responsibility; quote 'IAM validation, environment verification, PII scrubbing, and risk ownership' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "before: relied on documentation for IAM, segregation, downstream access",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation/Action"
+   },
+   {
+    "text": "verify IAM and downstream access incl. job/email triggers; environment verification across dev, QA, UAT, prod",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "PII scrubbing explicit; names/emails remained downstream; masking and email interception were missed compensating controls; deployed controls not specified (accurate)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Performance"
+   },
+   {
+    "text": "took accountability, RCA, remediation, corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "quotes 'leaders own the environment their teams operate in' and 'assumptions are risks in disguise' (both verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Changes come from the same incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as a consequence. All 6 claims supported by what-i-learned-about-assumptions|fortune-500-clients; quotes verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "quote 'day-one leadership responsibilities' (verbatim) for IAM validation etc.",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "previously relied on inherited documentation and focused on delivery pressure",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "change: confirm IAM and downstream access, check boundaries, verify masking; missed job-trigger audit and compensating controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "took accountability, RCA, remediation; not treating tester's action as whole explanation; root causes identified",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "client demanded tester removal; quote 'a systemic failure that resulted in an individual consequence' (verbatim); ownership of environment a leadership responsibility",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "account gives no measured reduction or itemized controls (accurate absence statement)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c08",
+  "run": 7,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Changes come from the same incident's own story (IAM validation, environment verification, PII scrubbing, risk ownership as day-one responsibilities); no other engagement presented as a consequence. All 6 claims supported by what-i-learned-about-assumptions|fortune-500-clients; quotes verbatim per rule 8; no closing. No contradicted or unsupported claims.",
+  "claims": [
+   {
+    "text": "made verification a day-one responsibility",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary/Performance"
+   },
+   {
+    "text": "before: accepted documentation without confirming; delivery pressure over checking job triggers and scrubbing",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "afterward IAM validation etc. day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "addressed insufficient IAM checks, unclear boundaries, unscrubbed data; missed job-trigger audit and compensating controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result/Action"
+   },
+   {
+    "text": "took accountability, RCA, remediation, corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "quote 'assumptions are risks in disguise' (verbatim); account does not specify controls installed or measured reduction (accurate)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

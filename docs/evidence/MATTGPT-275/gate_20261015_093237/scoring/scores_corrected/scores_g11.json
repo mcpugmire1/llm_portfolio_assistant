@@ -1,0 +1,884 @@
+[
+ {
+  "case": "c07",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn scored on Answered and Honest: correct location; supported: 'based in Atlanta, GA' (profile.logistics.location.value), 'open to relocation and travel' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Matt is based in Atlanta, GA.",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "He is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn scored on Answered and Honest: correct location; supported: 'based in Atlanta, GA' (profile.logistics.location.value), 'open to relocation and travel' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported. Opener 'This is a strong one.' is not a claim.",
+  "claims": [
+   {
+    "text": "Matt is based in Atlanta, GA.",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "Open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn scored on Answered and Honest: correct location; supported: 'based in Atlanta, GA' (profile.logistics.location.value), 'open to relocation and travel' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Matt is based in Atlanta, GA.",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "Open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Answers yes, open to relocation and travel, with no hedge, condition or clarifying question; supported: 'Yes, Matt is open to relocation and travel.' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Yes, Matt is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Answers yes, open to relocation and travel, with no hedge, condition or clarifying question; supported: 'Matt is open to relocation and travel.' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported. Opener 'Perfect, here's what I found.' is not a claim.",
+  "claims": [
+   {
+    "text": "Matt is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 5,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Answers yes, open to relocation and travel, with no hedge, condition or clarifying question; supported: 'Yes, Matt is open to relocation and travel.' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Yes, Matt is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn scored on Answered and Honest: correct location; supported: 'based in Atlanta, GA' (profile.logistics.location.value), 'open to relocation and travel' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Matt is based in Atlanta, GA.",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "He is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn scored on Answered and Honest: correct location; supported: 'based in Atlanta, GA' (profile.logistics.location.value), 'open to relocation and travel' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported. Opener 'I know just the story.' is not a claim.",
+  "claims": [
+   {
+    "text": "Matt is based in Atlanta, GA.",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "Open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn scored on Answered and Honest: correct location; supported: 'based in Atlanta, GA' (profile.logistics.location.value), 'open to relocation and travel' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Matt is based in Atlanta, GA.",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "Open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Answers yes, open to relocation and travel, with no hedge, condition or clarifying question; supported: 'Yes, Matt is open to relocation and travel.' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Yes, Matt is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Answers yes, open to relocation and travel, with no hedge, condition or clarifying question; supported: 'Matt is open to relocation and travel.' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported. Opener 'Perfect, here's what I found.' is not a claim.",
+  "claims": [
+   {
+    "text": "Matt is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 6,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Answers yes, open to relocation and travel, with no hedge, condition or clarifying question; supported: 'Yes, Matt is open to relocation and travel.' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Yes, Matt is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn scored on Answered and Honest: correct location; supported: 'based in Atlanta, GA' (profile.logistics.location.value), 'open to relocation and travel' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Matt is based in Atlanta, GA.",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "He is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn scored on Answered and Honest: correct location; supported: 'based in Atlanta, GA' (profile.logistics.location.value), 'open to relocation and travel' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Matt is based in Atlanta, GA.",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "Open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn scored on Answered and Honest: correct location; supported: 'based in Atlanta, GA' (profile.logistics.location.value), 'open to relocation and travel' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported. Opener 'Here's a great example.' is not a claim.",
+  "claims": [
+   {
+    "text": "Matt is based in Atlanta, GA.",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "He is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Answers yes, open to relocation and travel, with no hedge, condition or clarifying question; supported: 'Matt is open to relocation and travel.' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Matt is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Answers yes, open to relocation and travel, with no hedge, condition or clarifying question; supported: 'Yes, Matt is open to relocation and travel.' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Yes, Matt is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 7,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Answers yes, open to relocation and travel, with no hedge, condition or clarifying question; supported: 'Matt is open to relocation and travel.' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported. Opener 'On it!' is not a claim.",
+  "claims": [
+   {
+    "text": "Matt is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn scored on Answered and Honest: correct location; supported: 'based in Atlanta, GA' (profile.logistics.location.value), 'open to relocation and travel' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported. Opener 'On it!' is not a claim.",
+  "claims": [
+   {
+    "text": "Matt is based in Atlanta, GA.",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "Open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn scored on Answered and Honest: correct location; supported: 'based in Atlanta, GA' (profile.logistics.location.value), 'open to relocation and travel' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Matt is based in Atlanta, GA.",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "Open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn scored on Answered and Honest: correct location; supported: 'based in Atlanta, GA' (profile.logistics.location.value), 'open to relocation and travel' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Matt is based in Atlanta, GA.",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "He is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Answers yes, open to relocation and travel, with no hedge, condition or clarifying question; supported: 'Matt is open to relocation and travel.' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported. Opener 'Tracking this down...' is not a claim.",
+  "claims": [
+   {
+    "text": "Matt is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Answers yes, open to relocation and travel, with no hedge, condition or clarifying question; supported: 'Yes, Matt is open to relocation and travel.' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Yes, Matt is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 8,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Answers yes, open to relocation and travel, with no hedge, condition or clarifying question; supported: 'Yes, Matt is open to relocation and travel.' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Yes, Matt is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn scored on Answered and Honest: correct location; supported: 'based in Atlanta, GA' (profile.logistics.location.value), 'open to relocation and travel' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Matt is based in Atlanta, GA.",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "He is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn scored on Answered and Honest: correct location; supported: 'based in Atlanta, GA' (profile.logistics.location.value), 'open to relocation and travel' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Matt is based in Atlanta, GA.",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "He is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn scored on Answered and Honest: correct location; supported: 'based in Atlanta, GA' (profile.logistics.location.value), 'open to relocation and travel' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported. Opener 'Found it!' is not a claim.",
+  "claims": [
+   {
+    "text": "Matt is based in Atlanta, GA.",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "He is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Answers yes, open to relocation and travel, with no hedge, condition or clarifying question; supported: 'Yes, Matt is open to relocation and travel.' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Yes, Matt is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Answers yes, open to relocation and travel, with no hedge, condition or clarifying question; supported: 'Yes, Matt is open to relocation and travel.' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Yes, Matt is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 9,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Answers yes, open to relocation and travel, with no hedge, condition or clarifying question; supported: 'Yes, Matt is open to relocation and travel.' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported. Opener 'Found it!' is not a claim.",
+  "claims": [
+   {
+    "text": "Yes, Matt is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn scored on Answered and Honest: correct location; supported: 'based in Atlanta, GA' (profile.logistics.location.value), 'open to relocation and travel' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Matt is based in Atlanta, GA.",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "He is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn scored on Answered and Honest: correct location; supported: 'based in Atlanta, GA' (profile.logistics.location.value), 'open to relocation and travel' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Matt is based in Atlanta, GA.",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "Open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn scored on Answered and Honest: correct location; supported: 'based in Atlanta, GA' (profile.logistics.location.value), 'open to relocation and travel' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported. Opener 'On it!' is not a claim.",
+  "claims": [
+   {
+    "text": "Matt is based in Atlanta, GA.",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "Open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Answers yes, open to relocation and travel, with no hedge, condition or clarifying question; supported: 'Yes, Matt is open to relocation and travel.' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Yes, Matt is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Answers yes, open to relocation and travel, with no hedge, condition or clarifying question; supported: 'Yes, Matt is open to relocation and travel.' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Yes, Matt is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c07",
+  "run": 10,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Answers yes, open to relocation and travel, with no hedge, condition or clarifying question; supported: 'Matt is open to relocation and travel.' (profile.logistics.location.subline). No closing. 0 contradicted, 0 unsupported. Opener 'This is a strong one.' is not a claim.",
+  "claims": [
+   {
+    "text": "Matt is open to relocation and travel.",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

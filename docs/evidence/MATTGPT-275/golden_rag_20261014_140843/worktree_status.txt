@@ -1,0 +1,31 @@
+ M config/constants.py
+ M services/jd_assessor.py
+ M tests/bdd/features/ask_streamed_answer.feature
+ M tests/bdd/features/landing_page.feature
+ M tests/bdd/features/role_match.feature
+ M tests/bdd/steps/test_ask_streamed_answer.py
+ M tests/bdd/steps/test_landing_page.py
+ M tests/bdd/steps/test_role_match.py
+ M tests/bdd/steps/test_role_match_logging.py
+ M tests/fixtures/ask_agy_lever2_sol_system_prompts.json
+ M tests/unit/test_ask_agy_history.py
+ M tests/unit/test_ask_agy_tool_answer.py
+ M tests/unit/test_ask_agy_tool_system_prompt.py
+ M tests/unit/test_ask_agy_turn_contract.py
+ M tests/unit/test_backend_service.py
+ M ui/components/how_agy_dialog.py
+ M ui/components/how_i_built_dialog.py
+ M ui/components/why_agy_dialog.py
+ M ui/pages/ask_mattgpt/backend_service.py
+ M ui/pages/ask_mattgpt/conversation_view.py
+ M ui/pages/ask_mattgpt/landing_view.py
+ M ui/pages/ask_mattgpt/prompts.py
+ M ui/pages/ask_mattgpt/styles.py
+ M ui/pages/cross_industry_landing.py
+ M ui/styles/global_styles.py
+ M utils/formatting.py
+ M utils/ui_helpers.py
+?? tests/bdd/features/ask_handoff.feature
+?? tests/bdd/steps/test_ask_handoff.py
+?? tests/unit/test_ask_agy_pending_turn.py
+?? tests/unit/test_no_dash_rule.py

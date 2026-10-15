@@ -1,0 +1,581 @@
+[
+ {
+  "case": "x7",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All claims supported: three date ranges match the ACCESS (2009-08 to 2012-06), I&AM (2014-09 to 2014-12) and Asset Management (2015-06 to 2016-06) stories; 'program planning and Jira adoption' paraphrases the I&AM PMO/roadmap and Jira stories; Salesforce rollout integration architecture from the CI story. No completeness claim made; omission of the TS Dynamics period (2013-04 to 2014-10) is not a claim.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Client/Employer"
+   },
+   {
+    "text": "August 2009 to June 2012 on ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Project"
+   },
+   {
+    "text": "ACCESS work included the payment engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "ACCESS work included the global payments gateway",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Title"
+   },
+   {
+    "text": "September 2014 to December 2014 on Identity & Access Management Uplift",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Start_Date/End_Date/Project"
+   },
+   {
+    "text": "I&AM work included program planning",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Task/Action (PMO, program structure, implementation roadmap)"
+   },
+   {
+    "text": "I&AM work included Jira adoption",
+    "label": "supported",
+    "source": "driving-agile-adoption-for-jp-morgans-identity-access-management-transformation|jp-morgan-chase Title/Action"
+   },
+   {
+    "text": "June 2015 to June 2016 on cloud integration architecture for Asset Management's Salesforce rollout",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Start_Date/End_Date/Situation/Title"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'during two periods': the corpus holds four JP Morgan Chase engagement periods (ACCESS 2009-08 to 2012-06, TS Dynamics 2013-04 to 2014-10, I&AM 2014-09 to 2014-12, Asset Management 2015-06 to 2016-06), so stating two is wrong. supported: both listed date ranges, payment modules, gateway, legacy migration, mobilization, migration planning, Jira adoption, role title.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture during two periods",
+    "label": "contradicted",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Start_Date/End_Date; designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Start_Date/End_Date (further JPMC periods exist)"
+   },
+   {
+    "text": "August 2009 to June 2012 on ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Project"
+   },
+   {
+    "text": "ACCESS work covered payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "ACCESS work covered the global payments gateway",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Title"
+   },
+   {
+    "text": "ACCESS work covered legacy payment-system migration",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Title/Situation"
+   },
+   {
+    "text": "September 2014 to December 2014 on Identity & Access Management Uplift",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Start_Date/End_Date/Project"
+   },
+   {
+    "text": "I&AM work covered program mobilization",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "I&AM work covered migration planning",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Action/Competencies"
+   },
+   {
+    "text": "I&AM work covered Jira adoption",
+    "label": "supported",
+    "source": "driving-agile-adoption-for-jp-morgans-identity-access-management-transformation|jp-morgan-chase Title/Action"
+   },
+   {
+    "text": "Role on both engagements was Senior Technology Architecture Manager",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Role; mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Role"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Answered (Section 4): the answer says exact start/end dates are not on record, but every JP Morgan Chase story carries Start_Date/End_Date (ACCESS 2009-08 to 2012-06; TS Dynamics 2013-04 to 2014-10; I&AM 2014-09 to 2014-12; Asset Management 2015-06 to 2016-06). contradicted: 'I don't have exact start and end dates'. supported: ACCESS Next Generation via Accenture, April 2011 launch, I&AM Uplift after the 2014 breach.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture on ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Client/Employer/Project"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Worked on the bank's Identity & Access Management Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Exact start and end dates of his JP Morgan Chase engagements are not on record",
+    "label": "contradicted",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase/mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase/designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase/rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Start_Date/End_Date"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All claims supported: date ranges match ACCESS, I&AM and Asset Management stories; 'program mobilization and Agile adoption' from the I&AM mobilizing and Agile adoption stories; role title in Role fields; 'separate engagement periods, not a continuous assignment' is consistent with the gaps between story date ranges (e.g. RBC 2012-06 to 2013-06, 2015-01 to 2015-05). Omitted TS Dynamics period is not a claim.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Client/Employer"
+   },
+   {
+    "text": "August 2009 to June 2012 on ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Project"
+   },
+   {
+    "text": "ACCESS work included the payment engine and global payments gateway",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Title"
+   },
+   {
+    "text": "September 2014 to December 2014 on Identity & Access Management Uplift",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Start_Date/End_Date/Project"
+   },
+   {
+    "text": "I&AM work included program mobilization",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "I&AM work included Agile adoption",
+    "label": "supported",
+    "source": "driving-agile-adoption-for-jp-morgans-identity-access-management-transformation|jp-morgan-chase Title/Purpose"
+   },
+   {
+    "text": "June 2015 to June 2016 on Asset Management cloud integration architecture for Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Start_Date/End_Date/Title/Use Case(s)"
+   },
+   {
+    "text": "Role on these engagements was Senior Technology Architecture Manager",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase/mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase/designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Role"
+   },
+   {
+    "text": "These were separate engagement periods, not a continuous assignment",
+    "label": "supported",
+    "source": "JPMC story Start_Date/End_Date gaps; building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Start_Date/End_Date"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All claims supported: the three date ranges, payment engine/gateway, I&AM migration planning and Jira adoption, Asset Management Salesforce cloud integration architecture, and Senior Technology Architecture Manager role all match story fields. Omitted TS Dynamics period is not a claim.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Client/Employer"
+   },
+   {
+    "text": "August 2009 to June 2012 on ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Project"
+   },
+   {
+    "text": "ACCESS included the payment engine and the global payments gateway",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Title"
+   },
+   {
+    "text": "September 2014 to December 2014 on I&AM Uplift",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Start_Date/End_Date/Project"
+   },
+   {
+    "text": "I&AM included migration planning",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Action"
+   },
+   {
+    "text": "I&AM included Jira adoption",
+    "label": "supported",
+    "source": "driving-agile-adoption-for-jp-morgans-identity-access-management-transformation|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "June 2015 to June 2016 on Asset Management's Salesforce cloud integration architecture",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Start_Date/End_Date/Situation"
+   },
+   {
+    "text": "Role was Senior Technology Architecture Manager",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase/mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase/designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Role"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fails Answered (Section 4): the answer says exact start/end dates are not on record, but every JP Morgan Chase story carries Start_Date/End_Date (ACCESS 2009-08 to 2012-06; TS Dynamics 2013-04 to 2014-10; I&AM 2014-09 to 2014-12; Asset Management 2015-06 to 2016-06). contradicted: 'I don't have his exact start and end dates for those engagements'. supported: ACCESS Next Generation via Accenture, April 2011 launch, I&AM Uplift after the 2014 breach.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture on ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Client/Employer/Project"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Performance"
+   },
+   {
+    "text": "Worked on the I&AM Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "leading-rbac-remediation-and-application-team-enablement-for-jp-morgans-iam-uplift|jp-morgan-chase Situation/5PSummary"
+   },
+   {
+    "text": "His exact start and end dates for those engagements are not on record",
+    "label": "contradicted",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase/mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Start_Date/End_Date"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Answered (Section 4): the answer says exact start/end dates are not on record, but every JP Morgan Chase story carries Start_Date/End_Date (ACCESS 2009-08 to 2012-06; TS Dynamics 2013-04 to 2014-10; I&AM 2014-09 to 2014-12; Asset Management 2015-06 to 2016-06). contradicted: 'I don't have his exact start and end dates for those engagements'. supported: ACCESS Next Generation via Accenture, April 2011 launch, I&AM Uplift after the 2014 breach.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture on ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Client/Employer/Project"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Performance"
+   },
+   {
+    "text": "Later worked on the I&AM Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "driving-agile-adoption-for-jp-morgans-identity-access-management-transformation|jp-morgan-chase Situation; mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Start_Date"
+   },
+   {
+    "text": "His exact start and end dates are not on record",
+    "label": "contradicted",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase/driving-agile-adoption-for-jp-morgans-identity-access-management-transformation|jp-morgan-chase Start_Date/End_Date"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All claims supported: ACCESS 2009-08 to 2012-06 with payment engine and gateway; I&AM 2014-09 to 2014-12; Asset Management Salesforce cloud integration architecture 2015-06 to 2016-06; Senior Technology Architecture Manager role. Omitted TS Dynamics period is not a claim.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Client/Employer"
+   },
+   {
+    "text": "August 2009 to June 2012: ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Project"
+   },
+   {
+    "text": "Included the payment engine and global payments gateway",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Title"
+   },
+   {
+    "text": "September 2014 to December 2014: I&AM Uplift",
+    "label": "supported",
+    "source": "leading-rbac-remediation-and-application-team-enablement-for-jp-morgans-iam-uplift|jp-morgan-chase Start_Date/End_Date/Project"
+   },
+   {
+    "text": "June 2015 to June 2016: Asset Management Salesforce cloud integration architecture",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Start_Date/End_Date/Title"
+   },
+   {
+    "text": "Served as Senior Technology Architecture Manager on these engagements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase/leading-rbac-remediation-and-application-team-enablement-for-jp-morgans-iam-uplift|jp-morgan-chase/designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Role"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "All claims supported: ACCESS 2009-08 to 2012-06 with payment engine and gateway; I&AM 2014-09 to 2014-12; Asset Management Salesforce integration architecture 2015-06 to 2016-06. Omitted TS Dynamics period is not a claim.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Client/Employer"
+   },
+   {
+    "text": "August 2009 to June 2012 on ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Start_Date/End_Date/Project"
+   },
+   {
+    "text": "Included the payment engine and global payments gateway",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Title"
+   },
+   {
+    "text": "September 2014 to December 2014 on I&AM Uplift",
+    "label": "supported",
+    "source": "driving-agile-adoption-for-jp-morgans-identity-access-management-transformation|jp-morgan-chase Start_Date/End_Date/Project"
+   },
+   {
+    "text": "June 2015 to June 2016 on Asset Management Salesforce integration architecture",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Start_Date/End_Date/Use Case(s)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Answered (Section 4): the answer says exact start/end dates are not on record, but every JP Morgan Chase story carries Start_Date/End_Date (ACCESS 2009-08 to 2012-06; TS Dynamics 2013-04 to 2014-10; I&AM 2014-09 to 2014-12; Asset Management 2015-06 to 2016-06). contradicted: 'I don't have exact start and end dates for his JP Morgan Chase engagements'. supported: ACCESS Next Generation via Accenture, April 2011 launch, I&AM Uplift after the 2014 breach.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase as an Accenture consultant on ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer/Division/Project"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Worked on the I&AM Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Exact start and end dates for his JPMC engagements are not on record",
+    "label": "contradicted",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase/mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase/designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase/rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Start_Date/End_Date"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All claims supported: three date ranges match story fields; 'program planning' paraphrases the I&AM PMO/roadmap work and Jira adoption is in the Agile adoption story; Asset Management Salesforce cloud integration architecture; role title. Omitted TS Dynamics period is not a claim.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Client/Employer"
+   },
+   {
+    "text": "August 2009 to June 2012: ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Project"
+   },
+   {
+    "text": "Included the payment engine and global payments gateway",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Title"
+   },
+   {
+    "text": "September 2014 to December 2014: I&AM Uplift",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Start_Date/End_Date/Project"
+   },
+   {
+    "text": "I&AM included program planning",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "I&AM included Jira adoption",
+    "label": "supported",
+    "source": "driving-agile-adoption-for-jp-morgans-identity-access-management-transformation|jp-morgan-chase Title/Result"
+   },
+   {
+    "text": "June 2015 to June 2016: Asset Management Salesforce cloud integration architecture",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Start_Date/End_Date/Title"
+   },
+   {
+    "text": "Role was Senior Technology Architecture Manager",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase/mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase/designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Role"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "All claims supported: ACCESS 2009-08 to 2012-06 payments platform and gateway; Corporate I&AM Uplift (Project field 'Corporate I&AM Uplift Initiative') 2014-09 to 2014-12; Asset Management cloud integration architecture for Salesforce 2015-06 to 2016-06; 'separate client engagements, not continuous employment at JP Morgan Chase' matches Employer=Accenture and the date gaps. Omitted TS Dynamics period is not a claim.",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Client/Employer"
+   },
+   {
+    "text": "August 2009 to June 2012: ACCESS Next Generation payments platform and global payments gateway",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Project; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Title"
+   },
+   {
+    "text": "September 2014 to December 2014: Corporate Identity & Access Management Uplift",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Start_Date/End_Date/Project"
+   },
+   {
+    "text": "June 2015 to June 2016: Asset Management cloud integration architecture for Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Start_Date/End_Date/Title"
+   },
+   {
+    "text": "These were separate client engagements, not continuous employment at JP Morgan Chase",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer (Accenture); JPMC story date gaps"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

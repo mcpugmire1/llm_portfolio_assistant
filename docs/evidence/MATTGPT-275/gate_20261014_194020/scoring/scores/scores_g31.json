@@ -1,0 +1,1683 @@
+[
+ {
+  "case": "x5",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing true ('I haven't found a gaming-platform engagement in Matt's work history'); useful_direct true (lists real platform work after the no-gaming statement, then 'can't confirm experience with video-game development or gaming platforms'). Supported: 'Platform work includes enterprise payments'; 'Platform work includes banking modernization'; 'Platform work includes cloud-native systems'; 'MattGPT, his AI-powered portfolio assistant'. 0 contradicted, 0 unsupported; no closing offered.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary/Situation ('leading payments and banking modernization')"
+   },
+   {
+    "text": "Platform work includes banking modernization",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('payments and banking modernization across JP Morgan, RBC, Capital One, and HSBC')"
+   },
+   {
+    "text": "Platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('architecting cloud-native systems')"
+   },
+   {
+    "text": "MattGPT, his AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Solution / Offering ('AI-Powered Portfolio & Career Assistant')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing true ('I don't have a documented example'); useful_direct true ('rather than game development'; 'not gaming-specific experience'). Supported: 'Platform work includes enterprise payments'; 'Platform work includes digital banking'; 'Platform work includes cloud-native systems'; 'Platform work includes MattGPT'; 'At JP Morgan Chase his payments and Salesforce platforms were each rolled out across 12 countries'. 0 contradicted, 0 unsupported; no closing offered.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary/Situation ('leading payments and banking modernization')"
+   },
+   {
+    "text": "Platform work includes digital banking",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture ('Platforms modernized across payments, cloud, and digital banking')"
+   },
+   {
+    "text": "Platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('architecting cloud-native systems')"
+   },
+   {
+    "text": "Platform work includes MattGPT",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project"
+   },
+   {
+    "text": "At JP Morgan Chase his payments and Salesforce platforms were each rolled out across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('JP Morgan payments and Salesforce platforms each rolled out across 12 countries')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing true ('haven't found a gaming-platform engagement in Matt's work history'); useful_direct true ('None of those is described as a gaming platform'). Supported: 'Platform work includes enterprise payments'; 'Platform work includes banking modernization'; 'Platform work includes cloud-native systems'; 'MattGPT, his AI-powered portfolio assistant'. 0 contradicted, 0 unsupported; no closing offered.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary/Situation ('leading payments and banking modernization')"
+   },
+   {
+    "text": "Platform work includes banking modernization",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('payments and banking modernization across JP Morgan, RBC, Capital One, and HSBC')"
+   },
+   {
+    "text": "Platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('architecting cloud-native systems')"
+   },
+   {
+    "text": "MattGPT, his AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Solution / Offering ('AI-Powered Portfolio & Career Assistant')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing true ('I don't have a story documenting Matt working on gaming platforms'); useful_direct true ('rather than gaming'). Supported: 'Platform work includes enterprise payments'; 'Platform work includes digital banking'; 'Platform work includes cloud-native systems'; 'Platform work includes MattGPT'. 0 contradicted, 0 unsupported; no closing offered.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary/Situation ('leading payments and banking modernization')"
+   },
+   {
+    "text": "Platform work includes digital banking",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture ('Platforms modernized across payments, cloud, and digital banking')"
+   },
+   {
+    "text": "Platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('architecting cloud-native systems')"
+   },
+   {
+    "text": "Platform work includes MattGPT",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing true ('I don't have a documented example'); useful_direct true ('Those were payments and commerce platforms, not gaming platforms'). Supported: 'Platform work includes enterprise payments'; 'Platform work includes developer portals'; 'Platform work includes digital commerce'; 'At American Express worked on the Virtual Payments Platform'; 'Developed cross-stack SDKs, use case-driven API documentation, and a secure sandbox for client integration'; 'At Sparkfly built catalog and checkout, personalization, and Books, Music, and Video content channels'; 'Led four developers while continuing to write production code at Sparkfly'; 'Those were payments and commerce platforms'. 0 contradicted, 0 unsupported; no closing offered.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary/Situation ('leading payments and banking modernization')"
+   },
+   {
+    "text": "Platform work includes developer portals",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action ('Co-created a modern developer portal')"
+   },
+   {
+    "text": "Platform work includes digital commerce",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action ('Built the commerce path end to end')"
+   },
+   {
+    "text": "At American Express worked on the Virtual Payments Platform",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "Developed cross-stack SDKs, use case-driven API documentation, and a secure sandbox for client integration",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action/5PSummary"
+   },
+   {
+    "text": "At Sparkfly built catalog and checkout, personalization, and Books, Music, and Video content channels",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly 5PSummary"
+   },
+   {
+    "text": "Led four developers while continuing to write production code at Sparkfly",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task/5PSummary"
+   },
+   {
+    "text": "Those were payments and commerce platforms",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Industry; building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing true ('haven't found a gaming-platform engagement in Matt's work history'); useful_direct true (lists documented platform work, then 'can't confirm experience with video-game development or gaming platforms'). Supported: 'Platform work includes enterprise payments'; 'Platform work includes digital banking'; 'Platform work includes cloud-native systems'; 'MattGPT, his AI-powered portfolio assistant'. 0 contradicted, 0 unsupported; no closing offered.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary/Situation ('leading payments and banking modernization')"
+   },
+   {
+    "text": "Platform work includes digital banking",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture ('Platforms modernized across payments, cloud, and digital banking')"
+   },
+   {
+    "text": "Platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('architecting cloud-native systems')"
+   },
+   {
+    "text": "MattGPT, his AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Solution / Offering ('AI-Powered Portfolio & Career Assistant')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing true ('haven't found a gaming-platform engagement'); useful_direct true ('None of those is described as a gaming platform'). Supported: 'Platform work includes enterprise payments'; 'Platform work includes banking modernization'; 'Platform work includes cloud-native systems'; 'MattGPT, his AI-powered portfolio assistant'. 0 contradicted, 0 unsupported; no closing offered.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary/Situation ('leading payments and banking modernization')"
+   },
+   {
+    "text": "Platform work includes banking modernization",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('payments and banking modernization across JP Morgan, RBC, Capital One, and HSBC')"
+   },
+   {
+    "text": "Platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('architecting cloud-native systems')"
+   },
+   {
+    "text": "MattGPT, his AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Solution / Offering ('AI-Powered Portfolio & Career Assistant')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing true ('I don't have a documented example'); useful_direct true ('Those are not gaming projects'). Supported: 'Platform work includes enterprise payments'; 'Platform work includes banking modernization'; 'Platform work includes cloud-native systems'; 'MattGPT, his AI-powered portfolio assistant'. 0 contradicted, 0 unsupported; no closing offered.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary/Situation ('leading payments and banking modernization')"
+   },
+   {
+    "text": "Platform work includes banking modernization",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('payments and banking modernization across JP Morgan, RBC, Capital One, and HSBC')"
+   },
+   {
+    "text": "Platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('architecting cloud-native systems')"
+   },
+   {
+    "text": "MattGPT, his AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Solution / Offering ('AI-Powered Portfolio & Career Assistant')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing true ('I don't have a documented example'); useful_direct true ('Those are not gaming-platform engagements'). Supported: 'Matt is a builder of enterprise platforms'; 'Payments and banking modernization at JP Morgan, RBC, Capital One, and HSBC'; 'Platform work includes cloud-native systems'; 'His AI-powered assistant, MattGPT'. 0 contradicted, 0 unsupported; no closing offered.",
+  "claims": [
+   {
+    "text": "Matt is a builder of enterprise platforms",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('building and integrating enterprise platforms'); transition-story-why-im-exploring-opportunities|accenture ('I'm a builder')"
+   },
+   {
+    "text": "Payments and banking modernization at JP Morgan, RBC, Capital One, and HSBC",
+    "label": "supported",
+    "source": "why-hire-matt|accenture (verbatim list)"
+   },
+   {
+    "text": "Platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('architecting cloud-native systems')"
+   },
+   {
+    "text": "His AI-powered assistant, MattGPT",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Solution / Offering"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing true ('I don't have a documented example'; 'Gaming-platform experience remains unconfirmed'); useful_direct true ('That was payments-platform work, not gaming'). Supported: 'Platform work includes enterprise payments'; 'Platform work includes banking modernization'; 'Platform work includes cloud-native systems'; 'An AI-powered portfolio assistant'; 'At American Express worked on the Virtual Payments Platform'; 'Clients, especially those without mature development teams, struggled to evaluate and integrate it: SDKs missing, documentation fragmented, no sandbox'; 'Co-created a developer portal'; 'Developed SDKs across Java, .NET, and Python'; 'Created use case-driven API documentation'; 'Built a secure sandbox for hands-on exploration and testing'; 'Client onboarding time decreased'; 'API consumption and trial usage increased within 3 months of relaunch'; 'Built MattGPT during his sabbatical, a conversational interface over his career stories'; 'Stack: Streamlit, Python, Pinecone, OpenAI embeddings, GPT-4o'; 'Organized the roadmap around NOW/NEXT/LATER'; 'Shipped an MVP with semantic search across 100+ stories'; 'Used persistent working agreements, session handoffs, ADRs, evaluation checks, and behavior-first tests'; 'These reduced repeated context-setting and prevented AI-generated regressions from reaching production'. 0 contradicted, 0 unsupported; no closing offered.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary/Situation ('leading payments and banking modernization')"
+   },
+   {
+    "text": "Platform work includes banking modernization",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('payments and banking modernization across JP Morgan, RBC, Capital One, and HSBC')"
+   },
+   {
+    "text": "Platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('architecting cloud-native systems')"
+   },
+   {
+    "text": "An AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Solution / Offering"
+   },
+   {
+    "text": "At American Express worked on the Virtual Payments Platform",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "Clients, especially those without mature development teams, struggled to evaluate and integrate it: SDKs missing, documentation fragmented, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Situation/5PSummary"
+   },
+   {
+    "text": "Co-created a developer portal",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Developed SDKs across Java, .NET, and Python",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Created use case-driven API documentation",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Built a secure sandbox for hands-on exploration and testing",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   },
+   {
+    "text": "Client onboarding time decreased",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "API consumption and trial usage increased within 3 months of relaunch",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Result"
+   },
+   {
+    "text": "Built MattGPT during his sabbatical, a conversational interface over his career stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Division (Sabbatical), public_tags ('Conversational Interface')"
+   },
+   {
+    "text": "Stack: Streamlit, Python, Pinecone, OpenAI embeddings, GPT-4o",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Action ('Streamlit frontend, Python backend, Pinecone..., OpenAI text-embedding-3-small..., GPT-4o')"
+   },
+   {
+    "text": "Organized the roadmap around NOW/NEXT/LATER",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project"
+   },
+   {
+    "text": "Shipped an MVP with semantic search across 100+ stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project ('MVP shipped with semantic search across 100+ stories')"
+   },
+   {
+    "text": "Used persistent working agreements, session handoffs, ADRs, evaluation checks, and behavior-first tests",
+    "label": "supported",
+    "source": "building-effective-ai-assisted-development-workflows|independent-project Action"
+   },
+   {
+    "text": "These reduced repeated context-setting and prevented AI-generated regressions from reaching production",
+    "label": "supported",
+    "source": "building-effective-ai-assisted-development-workflows|independent-project Result ('Curbed the re-explain everything tax'; 'Prevented AI-generated regressions from reaching production')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing true ('haven't found any gaming-platform projects in Matt's work history'); useful_direct true ('it is not a gaming platform'; 'can't confirm direct gaming experience'). Supported: 'Built and integrated enterprise platforms'; 'Led payments and banking modernization'; 'Architected cloud-native systems'; 'His personal project MattGPT uses RAG architecture and semantic search'. 0 contradicted, 0 unsupported; no closing offered.",
+  "claims": [
+   {
+    "text": "Built and integrated enterprise platforms",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('building and integrating enterprise platforms')"
+   },
+   {
+    "text": "Led payments and banking modernization",
+    "label": "supported",
+    "source": "why-hire-matt|accenture"
+   },
+   {
+    "text": "Architected cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('architecting cloud-native systems')"
+   },
+   {
+    "text": "His personal project MattGPT uses RAG architecture and semantic search",
+    "label": "supported",
+    "source": "mattgpt-rag-architecture-semantic-search-implementation|independent-project Title"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing true ('I don't have a documented example'; 'Gaming-specific experience isn't covered in the stories'); useful_direct true (lists documented platform work, then says gaming experience is not covered). Supported: 'Platform work includes enterprise payments'; 'Platform work includes banking modernization'; 'Platform work includes cloud-native systems'; 'MattGPT, his AI-powered portfolio assistant'. 0 contradicted, 0 unsupported; no closing offered.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary/Situation ('leading payments and banking modernization')"
+   },
+   {
+    "text": "Platform work includes banking modernization",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('payments and banking modernization across JP Morgan, RBC, Capital One, and HSBC')"
+   },
+   {
+    "text": "Platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('architecting cloud-native systems')"
+   },
+   {
+    "text": "MattGPT, his AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Solution / Offering ('AI-Powered Portfolio & Career Assistant')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing true ('haven't found a gaming-platform project in Matt's career stories'); useful_direct true ('Those aren't gaming platforms'). Supported: 'Platform work includes enterprise payments'; 'Platform work includes banking modernization'; 'Platform work includes cloud-native systems'; 'MattGPT, his AI-powered portfolio assistant'. 0 contradicted, 0 unsupported; no closing offered.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary/Situation ('leading payments and banking modernization')"
+   },
+   {
+    "text": "Platform work includes banking modernization",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('payments and banking modernization across JP Morgan, RBC, Capital One, and HSBC')"
+   },
+   {
+    "text": "Platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('architecting cloud-native systems')"
+   },
+   {
+    "text": "MattGPT, his AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Solution / Offering ('AI-Powered Portfolio & Career Assistant')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing true ('haven't found a gaming-platform engagement in Matt's work history'); useful_direct true ('not gaming platforms'). Supported: 'Platform work includes enterprise payments'; 'Platform work includes banking modernization'; 'Platform work includes cloud-native systems'; 'Platform work includes MattGPT'. 0 contradicted, 0 unsupported; no closing offered.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary/Situation ('leading payments and banking modernization')"
+   },
+   {
+    "text": "Platform work includes banking modernization",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('payments and banking modernization across JP Morgan, RBC, Capital One, and HSBC')"
+   },
+   {
+    "text": "Platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('architecting cloud-native systems')"
+   },
+   {
+    "text": "Platform work includes MattGPT",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing true ('I don't have a documented example'); useful_direct true ('I wouldn't describe that as gaming-industry experience'). Supported: 'Platform work includes enterprise payments'; 'Platform work includes digital banking'; 'Platform work includes cloud-native systems'; 'MattGPT, his AI-powered portfolio assistant'. 0 contradicted, 0 unsupported; no closing offered.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary/Situation ('leading payments and banking modernization')"
+   },
+   {
+    "text": "Platform work includes digital banking",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture ('Platforms modernized across payments, cloud, and digital banking')"
+   },
+   {
+    "text": "Platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('architecting cloud-native systems')"
+   },
+   {
+    "text": "MattGPT, his AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Solution / Offering ('AI-Powered Portfolio & Career Assistant')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing true ('I don't have a documented example'); useful_direct true ('rather than game development or gaming infrastructure'; 'wouldn't label that experience as gaming-platform experience'). Supported: 'Platform work includes enterprise payments'; 'Platform work includes banking modernization'; 'Platform work includes cloud-native systems'; 'Platform work includes developer integration'; 'At American Express developed cross-stack SDKs, use case-driven API documentation, and a secure sandbox for the Virtual Payments Platform'; 'Built MattGPT using RAG architecture and semantic search'; 'Matt describes himself as a 'builder' (quoted; verbatim 'builder' appears)'. 0 contradicted, 0 unsupported; no closing offered.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary/Situation ('leading payments and banking modernization')"
+   },
+   {
+    "text": "Platform work includes banking modernization",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('payments and banking modernization across JP Morgan, RBC, Capital One, and HSBC')"
+   },
+   {
+    "text": "Platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('architecting cloud-native systems')"
+   },
+   {
+    "text": "Platform work includes developer integration",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Task/Action"
+   },
+   {
+    "text": "At American Express developed cross-stack SDKs, use case-driven API documentation, and a secure sandbox for the Virtual Payments Platform",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action/5PSummary"
+   },
+   {
+    "text": "Built MattGPT using RAG architecture and semantic search",
+    "label": "supported",
+    "source": "mattgpt-rag-architecture-semantic-search-implementation|independent-project Title"
+   },
+   {
+    "text": "Matt describes himself as a 'builder' (quoted; verbatim 'builder' appears)",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture ('I'm a builder'); profile.self_description ('Builder's mindset')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing true ('I don't have a documented example of Matt working on gaming platforms or game development'); useful_direct true (lists his platform work directly after the no-gaming statement). Supported: 'Platform work includes enterprise payments'; 'Platform work includes banking modernization'; 'Platform work includes cloud-native systems'; 'MattGPT, his AI-powered portfolio assistant'. 0 contradicted, 0 unsupported; no closing offered.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary/Situation ('leading payments and banking modernization')"
+   },
+   {
+    "text": "Platform work includes banking modernization",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('payments and banking modernization across JP Morgan, RBC, Capital One, and HSBC')"
+   },
+   {
+    "text": "Platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('architecting cloud-native systems')"
+   },
+   {
+    "text": "MattGPT, his AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Solution / Offering ('AI-Powered Portfolio & Career Assistant')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing true ('I don't have evidence'; 'None of those projects is described as a gaming platform'); useful_direct true ('None of those projects is described as a gaming platform'). Supported: 'Platform work includes enterprise payments'; 'Platform work includes banking modernization'; 'Platform work includes cloud-native systems'; 'MattGPT, an AI-powered portfolio assistant'. 0 contradicted, 0 unsupported; no closing offered.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary/Situation ('leading payments and banking modernization')"
+   },
+   {
+    "text": "Platform work includes banking modernization",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('payments and banking modernization across JP Morgan, RBC, Capital One, and HSBC')"
+   },
+   {
+    "text": "Platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('architecting cloud-native systems')"
+   },
+   {
+    "text": "MattGPT, an AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Solution / Offering"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing true ('I don't have a documented example'); useful_direct true ('Those are documented projects, not gaming-platform engagements'). Supported: 'Payments and banking modernization at JP Morgan Chase, RBC, Capital One, and HSBC'; 'Platform work includes cloud-native systems'; 'Built MattGPT using Python, Streamlit, Pinecone, OpenAI embeddings, and RAG architecture'. 0 contradicted, 0 unsupported; no closing offered.",
+  "claims": [
+   {
+    "text": "Payments and banking modernization at JP Morgan Chase, RBC, Capital One, and HSBC",
+    "label": "supported",
+    "source": "why-hire-matt|accenture"
+   },
+   {
+    "text": "Platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('architecting cloud-native systems')"
+   },
+   {
+    "text": "Built MattGPT using Python, Streamlit, Pinecone, OpenAI embeddings, and RAG architecture",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Action; mattgpt-rag-architecture-semantic-search-implementation|independent-project"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing true ('I don't have a documented example of Matt working on gaming platforms or video game development'); useful_direct true (lists his platform work directly after the no-gaming statement). Supported: 'Platform work includes enterprise payments'; 'Platform work includes banking modernization'; 'Platform work includes cloud-native systems'; 'MattGPT, his AI-powered portfolio assistant'. 0 contradicted, 0 unsupported; no closing offered.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary/Situation ('leading payments and banking modernization')"
+   },
+   {
+    "text": "Platform work includes banking modernization",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('payments and banking modernization across JP Morgan, RBC, Capital One, and HSBC')"
+   },
+   {
+    "text": "Platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('architecting cloud-native systems')"
+   },
+   {
+    "text": "MattGPT, his AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Solution / Offering ('AI-Powered Portfolio & Career Assistant')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing true ('I don't have a documented example'); useful_direct true ('not a confirmed gaming engagement'). Supported: 'Platform work includes enterprise payments'; 'Platform work includes digital banking'; 'Platform work includes cloud-native systems'; 'Platform work includes MattGPT'. 0 contradicted, 0 unsupported; no closing offered.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary/Situation ('leading payments and banking modernization')"
+   },
+   {
+    "text": "Platform work includes digital banking",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture ('Platforms modernized across payments, cloud, and digital banking')"
+   },
+   {
+    "text": "Platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('architecting cloud-native systems')"
+   },
+   {
+    "text": "Platform work includes MattGPT",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing true ('I don't have a documented example'); useful_direct true ('but I can't claim gaming-specific experience'). Supported: 'Platform work includes enterprise payments'; 'Platform work includes banking modernization'; 'Platform work includes cloud-native systems'; 'Platform work includes MattGPT'. 0 contradicted, 0 unsupported; no closing offered.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary/Situation ('leading payments and banking modernization')"
+   },
+   {
+    "text": "Platform work includes banking modernization",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('payments and banking modernization across JP Morgan, RBC, Capital One, and HSBC')"
+   },
+   {
+    "text": "Platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('architecting cloud-native systems')"
+   },
+   {
+    "text": "Platform work includes MattGPT",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing true ('I don't have a story documenting Matt working on gaming platforms'); useful_direct true ('Those are not gaming engagements'). Supported: 'Platform work includes enterprise payments'; 'Platform work includes banking modernization'; 'Platform work includes cloud-native systems'; 'MattGPT, his AI-powered portfolio assistant'. 0 contradicted, 0 unsupported; no closing offered.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary/Situation ('leading payments and banking modernization')"
+   },
+   {
+    "text": "Platform work includes banking modernization",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('payments and banking modernization across JP Morgan, RBC, Capital One, and HSBC')"
+   },
+   {
+    "text": "Platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('architecting cloud-native systems')"
+   },
+   {
+    "text": "MattGPT, his AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Solution / Offering ('AI-Powered Portfolio & Career Assistant')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing true ('I don't have evidence'; 'rather than documented gaming projects'); useful_direct true ('rather than documented gaming projects'). Supported: 'Platform work includes enterprise payments'; 'Platform work includes banking modernization'; 'Platform work includes cloud-native systems'; 'Platform work includes developer portals'. 0 contradicted, 0 unsupported; no closing offered.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary/Situation ('leading payments and banking modernization')"
+   },
+   {
+    "text": "Platform work includes banking modernization",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('payments and banking modernization across JP Morgan, RBC, Capital One, and HSBC')"
+   },
+   {
+    "text": "Platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('architecting cloud-native systems')"
+   },
+   {
+    "text": "Platform work includes developer portals",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action ('Co-created a modern developer portal')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x5",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing true ('I don't have evidence'; 'None of the stories I found describes game development'); useful_direct true ('None of the stories I found describes game development or a gaming-platform engagement'). Supported: 'Platform work includes enterprise payments'; 'Platform work includes digital banking'; 'Platform work includes cloud-native systems'; 'MattGPT, his AI-powered portfolio assistant'. 0 contradicted, 0 unsupported; no closing offered.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary/Situation ('leading payments and banking modernization')"
+   },
+   {
+    "text": "Platform work includes digital banking",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture ('Platforms modernized across payments, cloud, and digital banking')"
+   },
+   {
+    "text": "Platform work includes cloud-native systems",
+    "label": "supported",
+    "source": "why-hire-matt|accenture ('architecting cloud-native systems')"
+   },
+   {
+    "text": "MattGPT, his AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Solution / Offering ('AI-Powered Portfolio & Career Assistant')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "x7",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass (first turn, Answered and Honest). Supported: 'Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)'; 'ACCESS Next Generation launched in April 2011'; 'Worked on the Identity & Access Management Uplift following the 2014 data breach'. 0 contradicted, 0 unsupported; no closing. States it lacks exact start/end dates; treated as the assistant's own uncertainty, not a claim about Matt (stories hold 2009-08 to 2016-06; see ambiguity note).",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer/Client"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Worked on the Identity & Access Management Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Project/Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass (first turn, Answered and Honest). Supported: 'Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)'; 'ACCESS Next Generation launched in April 2011'; 'Later worked on the I&AM Uplift following the 2014 data breach'. 0 contradicted, 0 unsupported; no closing. States it lacks exact start/end dates; treated as the assistant's own uncertainty, not a claim about Matt (stories hold 2009-08 to 2016-06; see ambiguity note).",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer/Client"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Later worked on the I&AM Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass (first turn, Answered and Honest). Supported: 'Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)'; 'ACCESS Next Generation launched in April 2011'; 'Worked on the Identity & Access Management Uplift following the 2014 data breach'. 0 contradicted, 0 unsupported; no closing. States it lacks exact start/end dates; treated as the assistant's own uncertainty, not a claim about Matt (stories hold 2009-08 to 2016-06; see ambiguity note).",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer/Client"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Worked on the Identity & Access Management Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Project/Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass (first turn, Answered and Honest). Supported: 'Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)'; 'Multiple JP Morgan Chase engagements'; 'ACCESS Next Generation payments work led up to the April 2011 launch'; 'Worked on the Identity & Access Management Uplift following the 2014 data breach'. 0 contradicted, 0 unsupported; no closing. States it lacks exact start/end dates; treated as the assistant's own uncertainty, not a claim about Matt (stories hold 2009-08 to 2016-06; see ambiguity note).",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer/Client"
+   },
+   {
+    "text": "Multiple JP Morgan Chase engagements",
+    "label": "supported",
+    "source": "JPMC stories: ACCESS Next Generation, TS Dynamics, Corporate I&AM Uplift, Asset Management"
+   },
+   {
+    "text": "ACCESS Next Generation payments work led up to the April 2011 launch",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Worked on the Identity & Access Management Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Project/Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass (first turn, Answered and Honest). Supported: 'Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)'; 'ACCESS Next Generation launched in April 2011'; 'Worked on the Identity & Access Management Uplift following the 2014 data breach'; 'Included a 3-month engagement to establish the PMO, roadmap, and migration plan'. 0 contradicted, 0 unsupported; no closing. States it lacks exact start/end dates; treated as the assistant's own uncertainty, not a claim about Matt (stories hold 2009-08 to 2016-06; see ambiguity note).",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer/Client"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Worked on the Identity & Access Management Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Project/Situation"
+   },
+   {
+    "text": "Included a 3-month engagement to establish the PMO, roadmap, and migration plan",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Interview Questions/Performance ('3-month engagement window'; 'PMO framework and migration roadmap delivered within 3 months')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass (first turn, Answered and Honest). Supported: 'Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)'; 'Accenture consultant, not a bank employee'; 'ACCESS Next Generation payments work led to an April 2011 launch'; 'Worked on the Identity & Access Management Uplift following the 2014 data breach'; 'That I&AM engagement lasted 3 months'. 0 contradicted, 0 unsupported; no closing. States it lacks exact start/end dates; treated as the assistant's own uncertainty, not a claim about Matt (stories hold 2009-08 to 2016-06; see ambiguity note).",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer/Client"
+   },
+   {
+    "text": "Accenture consultant, not a bank employee",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer (Accenture)"
+   },
+   {
+    "text": "ACCESS Next Generation payments work led to an April 2011 launch",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Worked on the Identity & Access Management Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Project/Situation"
+   },
+   {
+    "text": "That I&AM engagement lasted 3 months",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Interview Questions/Performance ('3-month engagement window'; 'PMO framework and migration roadmap delivered within 3 months')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass (first turn, Answered and Honest). Supported: 'Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)'; 'ACCESS Next Generation launched in April 2011'; 'Worked on the Identity & Access Management Uplift following the 2014 data breach'. 0 contradicted, 0 unsupported; no closing. States it lacks exact start/end dates; treated as the assistant's own uncertainty, not a claim about Matt (stories hold 2009-08 to 2016-06; see ambiguity note).",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer/Client"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Worked on the Identity & Access Management Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Project/Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass (first turn, Answered and Honest). Supported: 'Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)'; 'Multiple JP Morgan Chase engagements'; 'Not as a bank employee'; 'ACCESS Next Generation launched in April 2011'; 'Later worked on the Corporate Identity & Access Management Uplift following the 2014 data breach'. 0 contradicted, 0 unsupported; no closing. States it lacks exact start/end dates; treated as the assistant's own uncertainty, not a claim about Matt (stories hold 2009-08 to 2016-06; see ambiguity note).",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer/Client"
+   },
+   {
+    "text": "Multiple JP Morgan Chase engagements",
+    "label": "supported",
+    "source": "JPMC stories: ACCESS Next Generation, TS Dynamics, Corporate I&AM Uplift, Asset Management"
+   },
+   {
+    "text": "Not as a bank employee",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer (Accenture)"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Later worked on the Corporate Identity & Access Management Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Project ('Corporate I&AM Uplift Initiative')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass (first turn, Answered and Honest). Supported: 'Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)'; 'Accenture delivery lead on multiple JPMC engagements within the 2009 to 2017 period'; 'Not a JP Morgan employee'; 'ACCESS Next Generation launched in April 2011'; 'Corporate I&AM work following the 2014 data breach'; 'Also worked on TS Dynamics and Asset Management engagements'. 0 contradicted, 0 unsupported; no closing. Gives the 2009 to 2017 range, which is consistent with the stories. States it lacks exact start/end dates; treated as the assistant's own uncertainty, not a claim about Matt (stories hold 2009-08 to 2016-06; see ambiguity note).",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer/Client"
+   },
+   {
+    "text": "Accenture delivery lead on multiple JPMC engagements within the 2009 to 2017 period",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients 5PSummary ('As a delivery lead across seven engagements at JP Morgan, RBC, Fiserv and HSBC between 2009 and 2017'); JPMC Start/End dates 2009-08 to 2016-06"
+   },
+   {
+    "text": "Not a JP Morgan employee",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer (Accenture)"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Corporate I&AM work following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase"
+   },
+   {
+    "text": "Also worked on TS Dynamics and Asset Management engagements",
+    "label": "supported",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Project; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Project"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass (first turn, Answered and Honest). Supported: 'Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)'; 'ACCESS Next Generation launched in April 2011'; 'Worked on the Identity & Access Management Uplift following the 2014 data breach'. 0 contradicted, 0 unsupported; no closing. States it lacks exact start/end dates; treated as the assistant's own uncertainty, not a claim about Matt (stories hold 2009-08 to 2016-06; see ambiguity note).",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer/Client"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Worked on the Identity & Access Management Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Project/Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass (first turn, Answered and Honest). Supported: 'Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)'; 'Multiple engagements within the 2009 to 2017 period'; 'Not as a bank employee'; 'ACCESS Next Generation payments work launched in April 2011'; 'Corporate I&AM work following the 2014 data breach'; 'Included a 3-month engagement to deliver the PMO framework, roadmap, and migration plan'. 0 contradicted, 0 unsupported; no closing. Gives the 2009 to 2017 range. States it lacks exact start/end dates; treated as the assistant's own uncertainty, not a claim about Matt (stories hold 2009-08 to 2016-06; see ambiguity note).",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer/Client"
+   },
+   {
+    "text": "Multiple engagements within the 2009 to 2017 period",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients ('between 2009 and 2017'); JPMC dates 2009-08 to 2016-06"
+   },
+   {
+    "text": "Not as a bank employee",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer (Accenture)"
+   },
+   {
+    "text": "ACCESS Next Generation payments work launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Corporate I&AM work following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase"
+   },
+   {
+    "text": "Included a 3-month engagement to deliver the PMO framework, roadmap, and migration plan",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Interview Questions/Performance ('3-month engagement window'; 'PMO framework and migration roadmap delivered within 3 months')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass (first turn, Answered and Honest). Supported: 'Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)'; 'ACCESS Next Generation launched in April 2011'; 'Worked on the Identity & Access Management Uplift following the 2014 data breach'; 'Client engagements, not direct employment with the bank'. 0 contradicted, 0 unsupported; no closing. States it lacks exact start/end dates; treated as the assistant's own uncertainty, not a claim about Matt (stories hold 2009-08 to 2016-06; see ambiguity note).",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer/Client"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Worked on the Identity & Access Management Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Project/Situation"
+   },
+   {
+    "text": "Client engagements, not direct employment with the bank",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer (Accenture)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass (first turn, Answered and Honest). Supported: 'Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)'; 'Multiple JP Morgan Chase engagements'; 'ACCESS Next Generation launched in April 2011'; 'Worked on the Identity & Access Management Uplift following the 2014 data breach'. 0 contradicted, 0 unsupported; no closing. States it lacks exact start/end dates; treated as the assistant's own uncertainty, not a claim about Matt (stories hold 2009-08 to 2016-06; see ambiguity note).",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer/Client"
+   },
+   {
+    "text": "Multiple JP Morgan Chase engagements",
+    "label": "supported",
+    "source": "JPMC stories: ACCESS Next Generation, TS Dynamics, Corporate I&AM Uplift, Asset Management"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Worked on the Identity & Access Management Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Project/Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass (first turn, Answered and Honest). Supported: 'Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)'; 'ACCESS Next Generation launched in April 2011'; 'Worked on the Identity & Access Management Uplift following the 2014 data breach'. 0 contradicted, 0 unsupported; no closing. States it lacks exact start/end dates; treated as the assistant's own uncertainty, not a claim about Matt (stories hold 2009-08 to 2016-06; see ambiguity note).",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer/Client"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Worked on the Identity & Access Management Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Project/Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass (first turn, Answered and Honest). Supported: 'Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)'; 'ACCESS Next Generation launched in April 2011'; 'Worked on the Identity & Access Management Uplift following the 2014 data breach'. 0 contradicted, 0 unsupported; no closing. States it lacks exact start/end dates; treated as the assistant's own uncertainty, not a claim about Matt (stories hold 2009-08 to 2016-06; see ambiguity note).",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer/Client"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Worked on the Identity & Access Management Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Project/Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass (first turn, Answered and Honest). Supported: 'Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)'; 'ACCESS Next Generation launched in April 2011'; 'Worked on the Identity & Access Management Uplift following the 2014 data breach'. 0 contradicted, 0 unsupported; no closing. States it lacks exact start/end dates; treated as the assistant's own uncertainty, not a claim about Matt (stories hold 2009-08 to 2016-06; see ambiguity note).",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer/Client"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Worked on the Identity & Access Management Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Project/Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass (first turn, Answered and Honest). Supported: 'Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)'; 'ACCESS Next Generation launched in April 2011'; 'Worked on the Identity & Access Management Uplift following the 2014 data breach'; 'Client engagements, not employment at JP Morgan Chase'. 0 contradicted, 0 unsupported; no closing. States it lacks exact start/end dates; treated as the assistant's own uncertainty, not a claim about Matt (stories hold 2009-08 to 2016-06; see ambiguity note).",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer/Client"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Worked on the Identity & Access Management Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Project/Situation"
+   },
+   {
+    "text": "Client engagements, not employment at JP Morgan Chase",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer (Accenture)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "x7",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass (first turn, Answered and Honest). Supported: 'Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)'; 'ACCESS Next Generation launched in April 2011'; 'Worked on the Identity & Access Management Uplift following the 2014 data breach'. 0 contradicted, 0 unsupported; no closing. States it lacks exact start/end dates; treated as the assistant's own uncertainty, not a claim about Matt (stories hold 2009-08 to 2016-06; see ambiguity note).",
+  "claims": [
+   {
+    "text": "Worked with JP Morgan Chase through Accenture (Accenture employer, JPMC client)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Employer/Client"
+   },
+   {
+    "text": "ACCESS Next Generation launched in April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Worked on the Identity & Access Management Uplift following the 2014 data breach",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Project/Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

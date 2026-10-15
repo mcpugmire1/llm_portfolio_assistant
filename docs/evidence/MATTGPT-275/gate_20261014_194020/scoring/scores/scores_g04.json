@@ -1,0 +1,2755 @@
+[
+ {
+  "case": "c02",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: degree facts from profile.education (Master's IT, AIU, not CS-titled, CS-related, exceeds Bachelor's). Answered and Honest; no closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0]"
+   },
+   {
+    "text": "IT is a recognized CS-related discipline; a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c02",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: degree facts from profile.education (Master's IT, AIU, not CS-titled, CS-related, exceeds Bachelor's). Answered and Honest; no closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0]"
+   },
+   {
+    "text": "IT is a recognized CS-related discipline; a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c02",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: degree facts from profile.education (Master's IT, AIU, not CS-titled, CS-related, exceeds Bachelor's). Answered and Honest; no closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0]"
+   },
+   {
+    "text": "IT is a recognized CS-related discipline; a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c02",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: degree facts from profile.education (Master's IT, AIU, not CS-titled, CS-related, exceeds Bachelor's). Answered and Honest; no closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0]"
+   },
+   {
+    "text": "IT is a recognized CS-related discipline; a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c02",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: degree facts from profile.education (Master's IT, AIU, not CS-titled, CS-related, exceeds Bachelor's). Answered and Honest; no closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0]"
+   },
+   {
+    "text": "IT is a recognized CS-related discipline; a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c02",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: degree facts from profile.education (Master's IT, AIU, not CS-titled, CS-related, exceeds Bachelor's). Answered and Honest; no closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0]"
+   },
+   {
+    "text": "IT is a recognized CS-related discipline; a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c02",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: degree facts from profile.education (Master's IT, AIU, not CS-titled, CS-related, exceeds Bachelor's). Answered and Honest; no closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0]"
+   },
+   {
+    "text": "IT is a recognized CS-related discipline; a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c02",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: degree facts from profile.education (Master's IT, AIU, not CS-titled, CS-related, exceeds Bachelor's). Answered and Honest; no closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0]"
+   },
+   {
+    "text": "IT is a recognized CS-related discipline; a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c02",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: degree facts from profile.education (Master's IT, AIU, not CS-titled, CS-related, exceeds Bachelor's). Answered and Honest; no closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0]"
+   },
+   {
+    "text": "IT is a recognized CS-related discipline; a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c02",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "All claims supported (AT&T NGEDT, Project Octane, AIU teaching stories), but Section 3 not met: the answer never explains the degree from the profile (no Master's in IT / CS-related discipline / exceeds a Bachelor's); it only refers to 'the degree title' and gives track record. Fails Answered on the expected outcome.",
+  "claims": [
+   {
+    "text": "AT&T NGEDT needed integration agreements for MIC, MIC-NT, ELP and technical design in .NET, C#, SQL Server, ESRI APIs",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Situation"
+   },
+   {
+    "text": "Defined Joint Interface Agreements, led interface design, designed enhancements, led developers",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Technical and functional reviews of offshore code; traveled to Hyderabad to transition designs",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Agreements unblocked downstream development across 3 integration points",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Enhancements without architectural rework; Hyderabad team achieved independent delivery velocity",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Accenture engineers struggled to onboard to cloud-native tech, lacking standardized resources",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps and IaC templates, provisioning via Terraform, CloudFormation, serverless",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Reference apps across Angular/AWS, React Native/AWS, Flutter, each with own IaC",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Result"
+   },
+   {
+    "text": "Taught entry-level Enterprise Java course at AIU alongside full-time consulting",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application|american-intercontinental-university Situation"
+   },
+   {
+    "text": "Course ran JDK/Tomcat through servlets, MySQL, JDBC, session tracking, JSP, JavaBeans, MVC",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application|american-intercontinental-university Action"
+   },
+   {
+    "text": "Students with no server-side background finished with working Java web app with persistence and session state",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application|american-intercontinental-university Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c02",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: profile degree facts; AT&T NGEDT claims; TICARA 30 to 40 minutes; Octane reference apps and Summit. Explains degree plus track record as facts; no closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0]"
+   },
+   {
+    "text": "IT is a recognized CS-related discipline; a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "AT&T NGEDT needed integration agreements for MIC, MIC-NT, ELP and technical design in .NET, C#, SQL Server, ESRI APIs",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Situation"
+   },
+   {
+    "text": "Defined Joint Interface Agreements, led interface design, designed enhancements, led developers",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Technical and functional reviews of offshore code; traveled to Hyderabad to transition designs",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Agreements unblocked downstream development across 3 integration points",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Enhancements without architectural rework; Hyderabad team achieved independent delivery velocity",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Designed TICARA with Terraform and Serverless Framework",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Action"
+   },
+   {
+    "text": "Pre-provisioned AWS/Azure accounts stood up VPC, services, sample code in 30 to 40 minutes",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Action"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps and IaC templates, provisioning via Terraform, CloudFormation, serverless",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c02",
+  "run": 8,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: profile degree facts; Cendant underwriting, AT&T NGEDT, Octane claims. Explains degree plus track record; no closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0]"
+   },
+   {
+    "text": "IT is a recognized CS-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "Cendant underwriters used mainframe green-screen app; replacement needed web front end, workflows, Oracle layer",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Situation"
+   },
+   {
+    "text": "Built JSP/MVC front end, configured TIBCO layer, modeled credit requests, verification, routing to manager approval",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Found and corrected flaws in Oracle stored procedures calculating risk factors",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Underwriters moved to web app with workflow in process engine",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Result"
+   },
+   {
+    "text": "AT&T NGEDT needed integration agreements for MIC, MIC-NT, ELP and technical design in .NET, C#, SQL Server, ESRI APIs",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Situation"
+   },
+   {
+    "text": "Defined Joint Interface Agreements, led interface design, designed enhancements, led developers",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Technical and functional reviews of offshore code; traveled to Hyderabad to transition designs",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Agreements unblocked downstream development across 3 integration points",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Enhancements without architectural rework; Hyderabad team achieved independent delivery velocity",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Accenture engineers struggled to onboard to cloud-native tech, lacking standardized resources",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps and IaC templates, provisioning via Terraform, CloudFormation, serverless",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c02",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: profile degree facts; Capital One team of 8, Go upskilling, 4x; DDD workshops and verbatim \"cookbook\"; Octane. Explains degree plus track record; no closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0]"
+   },
+   {
+    "text": "IT is a recognized CS-related discipline; a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "Capital One internal teams overwhelmed by workloads and Federal Reserve Board-mandated compliance updates",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Situation"
+   },
+   {
+    "text": "Built cross-functional team of 8 sized for pair programming",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Action"
+   },
+   {
+    "text": "Organized Go upskilling for 2 teams; Lean XP, CI, automated testing suite",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Action"
+   },
+   {
+    "text": "Delivered defect-free production code at 4x the output of internal teams",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Result"
+   },
+   {
+    "text": "CIC teams faced decomposing monoliths, managing dependencies, bounded contexts without standard approaches",
+    "label": "supported",
+    "source": "transitioning-to-microservices-with-domain-driven-design-ddd|accenture 5PSummary"
+   },
+   {
+    "text": "DDD workshops, rearchitected monoliths into microservices",
+    "label": "supported",
+    "source": "transitioning-to-microservices-with-domain-driven-design-ddd|accenture Action"
+   },
+   {
+    "text": "Created modernization \"cookbook\" for Java, .NET; config management, dependency injection (quote verbatim)",
+    "label": "supported",
+    "source": "transitioning-to-microservices-with-domain-driven-design-ddd|accenture Action"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps and IaC templates, provisioning via Terraform, CloudFormation, serverless",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Reference apps across Angular/AWS, React Native/AWS, Flutter, each with own IaC",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c02",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: profile degree facts; Fortune 500 CI/CD story (JP Morgan 20+ screens in 5 months, Capital One zero-defect); Octane incl. OWASP/IAM. No closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0]"
+   },
+   {
+    "text": "IT is a recognized CS-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "Enterprise clients had slow manual release cycles; JP Morgan compliance, Capital One zero-defect payments, Amex security",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Situation"
+   },
+   {
+    "text": "Designed reusable patterns: microservices, Kafka, Docker/Kubernetes, serverless; CI pipelines; IaC; monitoring",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "JP Morgan mobile banking platform with 20+ screens in 5 months, doubling internal speed",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "Capital One zero-defect deployments to payment systems",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "Accenture engineers struggled to onboard to cloud-native tech, lacking standardized resources",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps and IaC templates, provisioning via Terraform, CloudFormation, serverless",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Reference apps across Angular/AWS, React Native/AWS, Flutter, each with own IaC",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Result"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c02",
+  "run": 9,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: profile degree facts; AT&T NGEDT claims; Octane incl. OWASP/IAM. No closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0]"
+   },
+   {
+    "text": "IT is a recognized CS-related discipline; a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "AT&T NGEDT needed integration agreements for MIC, MIC-NT, ELP and technical design in .NET, C#, SQL Server, ESRI APIs",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Situation"
+   },
+   {
+    "text": "Defined Joint Interface Agreements, led interface design, designed enhancements, led developers",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Technical and functional reviews of offshore code; traveled to Hyderabad to transition designs",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Agreements unblocked downstream development across 3 integration points",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Enhancements without architectural rework; Hyderabad team achieved independent delivery velocity",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Accenture engineers struggled to onboard to cloud-native tech, lacking standardized resources",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps and IaC templates, provisioning via Terraform, CloudFormation, serverless",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c02",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: profile degree facts; AT&T NGEDT; Octane; CIC 0 to 150+ and 4x/zero-defect via TDD (CIC story Result, profile.career_summary). No closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0]"
+   },
+   {
+    "text": "IT is a recognized CS-related discipline; a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "AT&T NGEDT needed integration agreements for MIC, MIC-NT, ELP and technical design in .NET, C#, SQL Server, ESRI APIs",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Situation"
+   },
+   {
+    "text": "Defined Joint Interface Agreements, led interface design, designed enhancements, led developers",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Technical and functional reviews of offshore code; traveled to Hyderabad to transition designs",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Agreements unblocked downstream development across 3 integration points",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Enhancements without architectural rework; Hyderabad team achieved independent delivery velocity",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Accenture engineers struggled to onboard to cloud-native tech, lacking standardized resources",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps and IaC templates, provisioning via Terraform, CloudFormation, serverless",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Reference apps across Angular/AWS, React Native/AWS, Flutter, each with own IaC",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Result"
+   },
+   {
+    "text": "Built the Cloud Innovation Center from 0 to 150+",
+    "label": "supported",
+    "source": "profile.career_summary / building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "CIC teams delivered 4x velocity with zero-defect deployments through TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c02",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: profile degree facts; Fortune 500 CI/CD story (15+ engagements, 4X, 99.9%+ uptime, JP Morgan 20+ screens in 5 months, Capital One zero-defect); Octane. No closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0]"
+   },
+   {
+    "text": "IT is a recognized CS-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "Enterprise clients had slow manual release cycles; JP Morgan compliance, Capital One zero-defect payments, Amex security",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Situation"
+   },
+   {
+    "text": "Designed reusable patterns: microservices, Kafka, Docker/Kubernetes, serverless; CI pipelines; IaC; monitoring",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action"
+   },
+   {
+    "text": "JP Morgan mobile banking platform with 20+ screens in 5 months, doubling internal speed",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "Capital One zero-defect deployments to payment systems",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "Across 15+ Fortune 500 engagements, 4X velocity, 99.9%+ uptime, lead time weeks to days",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "Accenture engineers struggled to onboard to cloud-native tech, lacking standardized resources",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps and IaC templates, provisioning via Terraform, CloudFormation, serverless",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c02",
+  "run": 10,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: profile degree facts; Capital One team composition and 4x; Octane. No closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0]"
+   },
+   {
+    "text": "IT is a recognized CS-related discipline; a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "Capital One internal teams overwhelmed by workloads and Federal Reserve Board-mandated compliance updates",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Situation"
+   },
+   {
+    "text": "Built cross-functional team of 8 sized for pair programming",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Action"
+   },
+   {
+    "text": "Organized Go upskilling for 2 teams; Lean XP, CI, automated testing suite",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Action"
+   },
+   {
+    "text": "Delivered defect-free production code at 4x the output of internal teams",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Result"
+   },
+   {
+    "text": "Team of 8: 1 PM, 1 CX/product designer, 6 developers incl. anchor/lead",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Action"
+   },
+   {
+    "text": "Led Project Octane: reusable reference apps and IaC templates, provisioning via Terraform, CloudFormation, serverless",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Embedded OWASP principles and IAM standards",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: leadership philosophy (verbatim quote), permit to fail, early failure, balanced teams zero-defect, Norfolk Southern quality crisis. 'fail intentionally' read as paraphrase of 'would likely fail, and that this was intentional'. No closing.",
+  "claims": [
+   {
+    "text": "Inherited teams \"over-processed, under-trusted, waiting for permission instead of owning outcomes\" (quote verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Leads with empathy, clarity, purpose; makes intent explicit; pushes decisions to people closest to work; coaches teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Transparency, direct feedback, open communication; automation, continuous delivery, quality-first",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration once teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "\"permit to fail\" culture (quote verbatim) addressing fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation/Task"
+   },
+   {
+    "text": "Non-punitive post-mortems and lean, low-stakes experiments; lessons applied to subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "In product incubation set expectations early prototypes/user tests would likely fail (intentional)",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "User research, JTBD, rapid testing to validate assumptions before costly builds; failed experiments as decision inputs",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Balanced teams of engineers, PMs, UX architects with equal participation, shared accountability; pairing, retros",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Achieved zero-defect production code",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   },
+   {
+    "text": "Took ownership in front of client and Accenture account leadership rather than defending metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Engineer built from own interpretation, tests after code; backlog lacked scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt backlog with SMART testable stories; TDD experts (from Columbus) side by side",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Samman coaching: boot camps, katas, practice sessions, \"I do, we do, you do\" (quote verbatim)",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see; defect rates dropped",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Across CIC leadership, teams accelerated delivery 4x",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: leadership philosophy (verbatim quote, 150-person CIC, 4x), shifting recognition, permit to fail, early failure, thin-slice balanced teams. No closing.",
+  "claims": [
+   {
+    "text": "Inherited teams \"over-processed, under-trusted, waiting for permission instead of owning outcomes\" (quote verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Leads with empathy, clarity, purpose; makes intent explicit; pushes decisions to people closest to work; coaches teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Transparency, direct feedback, open communication; automation, continuous delivery, quality-first",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration once teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Led a 150-person Cloud Innovation Center",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Situation"
+   },
+   {
+    "text": "Early CIC rigid hierarchical culture made team slow to share ideas",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation"
+   },
+   {
+    "text": "Weekly brainstorming without judgment; recognized contributions to shared goals over individual accolades",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Action"
+   },
+   {
+    "text": "\"permit to fail\" culture (quote verbatim) addressing fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation/Task"
+   },
+   {
+    "text": "Non-punitive post-mortems and lean, low-stakes experiments; lessons applied to subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "In product incubation set expectations early prototypes/user tests would likely fail (intentional)",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "User research, JTBD, rapid testing to validate assumptions before costly builds; failed experiments as decision inputs",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Balanced teams prioritized essential features, delivered thin-slice production-ready solutions",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Action"
+   },
+   {
+    "text": "Client teams continued iterative practices after engagements; reduced wasted engineering effort",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients 5PSummary / why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: leadership philosophy, balanced teams zero-defect, permit to fail, early failure, Norfolk Southern quality crisis; quotes verbatim. No closing.",
+  "claims": [
+   {
+    "text": "Inherited teams \"over-processed, under-trusted, waiting for permission instead of owning outcomes\" (quote verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Led a 150-person Cloud Innovation Center",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Situation"
+   },
+   {
+    "text": "Leads with empathy, clarity, purpose; makes intent explicit; pushes decisions to people closest to work; coaches teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Transparency, direct feedback, open communication; automation, continuous delivery, quality-first",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration once teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Balanced teams of engineers, PMs, UX architects with equal participation, shared accountability; pairing, retros",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Achieved zero-defect production code",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   },
+   {
+    "text": "\"permit to fail\" culture (quote verbatim) addressing fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation/Task"
+   },
+   {
+    "text": "Non-punitive post-mortems and lean, low-stakes experiments; lessons applied to subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "In product incubation set expectations early prototypes/user tests would likely fail (intentional)",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "User research, JTBD, rapid testing to validate assumptions before costly builds; failed experiments as decision inputs",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Took ownership in front of client and Accenture account leadership rather than defending metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Engineer built from own interpretation, tests after code; backlog lacked scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt backlog with SMART testable stories; TDD experts (from Columbus) side by side",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Samman coaching: boot camps, katas, practice sessions, \"I do, we do, you do\" (quote verbatim)",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see; defect rates dropped",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: leadership philosophy, shifting recognition, mentorship, Norfolk Southern quality crisis, early failure; quotes verbatim. No closing.",
+  "claims": [
+   {
+    "text": "Inherited teams \"over-processed, under-trusted, waiting for permission instead of owning outcomes\" (quote verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Leads with empathy, clarity, purpose; makes intent explicit; pushes decisions to people closest to work; coaches teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Transparency, direct feedback, open communication; automation, continuous delivery, quality-first",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration once teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Early CIC rigid hierarchical culture made team slow to share ideas",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation"
+   },
+   {
+    "text": "Weekly brainstorming without judgment; recognized contributions to shared goals over individual accolades",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Action"
+   },
+   {
+    "text": "Paired senior with junior engineers; weekly tech talks/peer-led demos/practice forums; learning in live projects",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   },
+   {
+    "text": "Took ownership in front of client and Accenture account leadership rather than defending metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Engineer built from own interpretation, tests after code; backlog lacked scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt backlog with SMART testable stories; TDD experts (from Columbus) side by side",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Samman coaching: boot camps, katas, practice sessions, \"I do, we do, you do\" (quote verbatim)",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see; defect rates dropped",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Treated early failures as evidence, not incompetence",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: leadership philosophy, permit to fail, early failure (build-measure-learn), balanced teams zero-defect, mentorship; quotes verbatim. No closing.",
+  "claims": [
+   {
+    "text": "Inherited teams \"over-processed, under-trusted, waiting for permission instead of owning outcomes\" (quote verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Leads with empathy, clarity, purpose; makes intent explicit; pushes decisions to people closest to work; coaches teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Transparency, direct feedback, open communication; automation, continuous delivery, quality-first",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration once teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "\"permit to fail\" culture (quote verbatim) addressing fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation/Task"
+   },
+   {
+    "text": "Non-punitive post-mortems and lean, low-stakes experiments; lessons applied to subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "In product incubation set expectations early prototypes/user tests would likely fail (intentional)",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "User research, JTBD, rapid testing to validate assumptions before costly builds; failed experiments as decision inputs",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Balanced teams of engineers, PMs, UX architects with equal participation, shared accountability; pairing, retros",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Achieved zero-defect production code",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   },
+   {
+    "text": "Paired senior with junior engineers; weekly tech talks/peer-led demos/practice forums; learning in live projects",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: leadership philosophy, decentralized decision-making (flat org, reverted habits), balanced thin-slice teams, brainstorming, mentorship; 'did not happen overnight' from LP 5PSummary. No closing.",
+  "claims": [
+   {
+    "text": "Inherited teams \"over-processed, under-trusted, waiting for permission instead of owning outcomes\" (quote verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Leads with empathy, clarity, purpose; makes intent explicit; pushes decisions to people closest to work; coaches teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Transparency, direct feedback, open communication; automation, continuous delivery, quality-first",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration once teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "CIC designed flat; practitioners from command-and-control orgs reverted: decisions drifted upward, bottlenecks",
+    "label": "supported",
+    "source": "empowering-teams-through-decentralized-decision-making|accenture Situation"
+   },
+   {
+    "text": "Repeated enforcement and revalidation; team leads removed obstacles rather than controlling outcomes; guidelines",
+    "label": "supported",
+    "source": "empowering-teams-through-decentralized-decision-making|accenture Situation/Action"
+   },
+   {
+    "text": "Balanced teams prioritized essential features, delivered thin-slice production-ready solutions",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Action"
+   },
+   {
+    "text": "Early CIC rigid hierarchical culture made team slow to share ideas",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation"
+   },
+   {
+    "text": "Weekly brainstorming without judgment; recognized contributions to shared goals over individual accolades",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Action"
+   },
+   {
+    "text": "Paired senior with junior engineers; weekly tech talks/peer-led demos/practice forums; learning in live projects",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: leadership philosophy, balanced teams zero-defect, permit to fail, Norfolk Southern quality crisis; quotes verbatim. No closing.",
+  "claims": [
+   {
+    "text": "Inherited teams \"over-processed, under-trusted, waiting for permission instead of owning outcomes\" (quote verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Leads with empathy, clarity, purpose; makes intent explicit; pushes decisions to people closest to work; coaches teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Transparency, direct feedback, open communication; automation, continuous delivery, quality-first",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration once teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Balanced teams of engineers, PMs, UX architects with equal participation, shared accountability; pairing, retros",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Achieved zero-defect production code",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   },
+   {
+    "text": "\"permit to fail\" culture (quote verbatim) addressing fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation/Task"
+   },
+   {
+    "text": "Non-punitive post-mortems and lean, low-stakes experiments; lessons applied to subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "Took ownership in front of client and Accenture account leadership rather than defending metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Engineer built from own interpretation, tests after code; backlog lacked scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt backlog with SMART testable stories; TDD experts (from Columbus) side by side",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Samman coaching: boot camps, katas, practice sessions, \"I do, we do, you do\" (quote verbatim)",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see; defect rates dropped",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: leadership philosophy, decentralized decision-making, permit to fail, early failure, balanced teams zero-defect. No closing.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, purpose; makes intent explicit; pushes decisions to people closest to work; coaches teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Transparency, direct feedback, open communication; automation, continuous delivery, quality-first",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration once teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "CIC designed flat; practitioners from command-and-control orgs reverted: decisions drifted upward, bottlenecks",
+    "label": "supported",
+    "source": "empowering-teams-through-decentralized-decision-making|accenture Situation"
+   },
+   {
+    "text": "Repeated enforcement and revalidation; team leads removed obstacles rather than controlling outcomes; guidelines",
+    "label": "supported",
+    "source": "empowering-teams-through-decentralized-decision-making|accenture Situation/Action"
+   },
+   {
+    "text": "\"permit to fail\" culture (quote verbatim) addressing fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation/Task"
+   },
+   {
+    "text": "Non-punitive post-mortems and lean, low-stakes experiments; lessons applied to subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "In product incubation set expectations early prototypes/user tests would likely fail (intentional)",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "User research, JTBD, rapid testing to validate assumptions before costly builds; failed experiments as decision inputs",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Balanced teams of engineers, PMs, UX architects with equal participation, shared accountability; pairing, retros",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Achieved zero-defect production code",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: leadership philosophy, shifting recognition, mentorship, early failure, Norfolk Southern crisis; quotes verbatim. No closing.",
+  "claims": [
+   {
+    "text": "Inherited teams \"over-processed, under-trusted, waiting for permission instead of owning outcomes\" (quote verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Led a 150-person Cloud Innovation Center",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Situation"
+   },
+   {
+    "text": "Leads with empathy, clarity, purpose; makes intent explicit; pushes decisions to people closest to work; coaches teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Transparency, direct feedback, open communication; automation, continuous delivery, quality-first",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration once teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Early CIC rigid hierarchical culture made team slow to share ideas",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation"
+   },
+   {
+    "text": "Weekly brainstorming without judgment; recognized contributions to shared goals over individual accolades",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Action"
+   },
+   {
+    "text": "Paired senior with junior engineers; weekly tech talks/peer-led demos/practice forums; learning in live projects",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   },
+   {
+    "text": "In product incubation set expectations early prototypes/user tests would likely fail (intentional)",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "Took ownership in front of client and Accenture account leadership rather than defending metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Engineer built from own interpretation, tests after code; backlog lacked scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt backlog with SMART testable stories; TDD experts (from Columbus) side by side",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Samman coaching: boot camps, katas, practice sessions, \"I do, we do, you do\" (quote verbatim)",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see; defect rates dropped",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: leadership philosophy, shifting recognition, permit to fail (repeat errors declined, timelines shortened), early failure, thin-slice teams. No closing.",
+  "claims": [
+   {
+    "text": "Inherited teams \"over-processed, under-trusted, waiting for permission instead of owning outcomes\" (quote verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Led a 150-person Cloud Innovation Center",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Situation"
+   },
+   {
+    "text": "Leads with empathy, clarity, purpose; makes intent explicit; pushes decisions to people closest to work; coaches teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Transparency, direct feedback, open communication; automation, continuous delivery, quality-first",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration once teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Early CIC rigid hierarchical culture made team slow to share ideas",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation"
+   },
+   {
+    "text": "Weekly brainstorming without judgment; recognized contributions to shared goals over individual accolades",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Action"
+   },
+   {
+    "text": "\"permit to fail\" culture (quote verbatim) addressing fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation/Task"
+   },
+   {
+    "text": "Non-punitive post-mortems and lean, low-stakes experiments; lessons applied to subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "In product incubation set expectations early prototypes/user tests would likely fail (intentional)",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "User research, JTBD, rapid testing to validate assumptions before costly builds; failed experiments as decision inputs",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Balanced teams prioritized essential features, delivered thin-slice production-ready solutions",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: leadership philosophy, shifting recognition, mentorship (retention, onboarding), permit to fail, early failure; quotes verbatim. No closing.",
+  "claims": [
+   {
+    "text": "Inherited teams \"over-processed, under-trusted, waiting for permission instead of owning outcomes\" (quote verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Led a 150-person Cloud Innovation Center",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Situation"
+   },
+   {
+    "text": "Leads with empathy, clarity, purpose; makes intent explicit; pushes decisions to people closest to work; coaches teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Transparency, direct feedback, open communication; automation, continuous delivery, quality-first",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration once teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Early CIC rigid hierarchical culture made team slow to share ideas",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation"
+   },
+   {
+    "text": "Weekly brainstorming without judgment; recognized contributions to shared goals over individual accolades",
+    "label": "supported",
+    "source": "shifting-teams-from-individual-recognition-to-collective-ownership|accenture Action"
+   },
+   {
+    "text": "Paired senior with junior engineers; weekly tech talks/peer-led demos/practice forums; learning in live projects",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   },
+   {
+    "text": "Mentorship improved retention and reduced onboarding time",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Result"
+   },
+   {
+    "text": "\"permit to fail\" culture (quote verbatim) addressing fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation/Task"
+   },
+   {
+    "text": "Non-punitive post-mortems and lean, low-stakes experiments; lessons applied to subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "In product incubation set expectations early prototypes/user tests would likely fail (intentional)",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "User research, JTBD, rapid testing to validate assumptions before costly builds; failed experiments as decision inputs",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: leadership philosophy, permit to fail, early failure, balanced teams zero-defect, mentorship. No closing.",
+  "claims": [
+   {
+    "text": "Inherited teams \"over-processed, under-trusted, waiting for permission instead of owning outcomes\" (quote verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Leads with empathy, clarity, purpose; makes intent explicit; pushes decisions to people closest to work; coaches teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Transparency, direct feedback, open communication; automation, continuous delivery, quality-first",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration once teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "\"permit to fail\" culture (quote verbatim) addressing fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation/Task"
+   },
+   {
+    "text": "Non-punitive post-mortems and lean, low-stakes experiments; lessons applied to subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "In product incubation set expectations early prototypes/user tests would likely fail (intentional)",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "User research, JTBD, rapid testing to validate assumptions before costly builds; failed experiments as decision inputs",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Balanced teams of engineers, PMs, UX architects with equal participation, shared accountability; pairing, retros",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Achieved zero-defect production code",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   },
+   {
+    "text": "Paired senior with junior engineers; weekly tech talks/peer-led demos/practice forums; learning in live projects",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   },
+   {
+    "text": "Mentorship improved retention and reduced onboarding time",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: leadership philosophy, decentralized decision-making, balanced teams zero-defect, permit to fail, early failure. No closing.",
+  "claims": [
+   {
+    "text": "Inherited teams \"over-processed, under-trusted, waiting for permission instead of owning outcomes\" (quote verbatim)",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Leads with empathy, clarity, purpose; makes intent explicit; pushes decisions to people closest to work; coaches teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Transparency, direct feedback, open communication; automation, continuous delivery, quality-first",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration once teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "CIC designed flat; practitioners from command-and-control orgs reverted: decisions drifted upward, bottlenecks",
+    "label": "supported",
+    "source": "empowering-teams-through-decentralized-decision-making|accenture Situation"
+   },
+   {
+    "text": "Repeated enforcement and revalidation; team leads removed obstacles rather than controlling outcomes; guidelines",
+    "label": "supported",
+    "source": "empowering-teams-through-decentralized-decision-making|accenture Situation/Action"
+   },
+   {
+    "text": "Balanced teams of engineers, PMs, UX architects with equal participation, shared accountability; pairing, retros",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Achieved zero-defect production code",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   },
+   {
+    "text": "\"permit to fail\" culture (quote verbatim) addressing fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation/Task"
+   },
+   {
+    "text": "Non-punitive post-mortems and lean, low-stakes experiments; lessons applied to subsequent sprints",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action/Result"
+   },
+   {
+    "text": "In product incubation set expectations early prototypes/user tests would likely fail (intentional)",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "User research, JTBD, rapid testing to validate assumptions before costly builds; failed experiments as decision inputs",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern quality crisis, a failure under his leadership the corpus presents as such; supported: NS crisis story plus same-engagement Making It Stick story; quote 'reinforcement, follow-up, and verification' verbatim in Making It Stick Result. No closing.",
+  "claims": [
+   {
+    "text": "Norfolk Southern: rising defects despite near-complete test coverage, early 2020 CIC first engagement, Revenue and Shipment Planning",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership in front of client and Accenture account leadership rather than defending metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Engineer built from own interpretation, tests after code; backlog lacked scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt backlog with SMART testable stories; TDD experts (from Columbus) side by side",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Samman coaching: boot camps, katas, practice sessions, \"I do, we do, you do\" (quote verbatim)",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see; defect rates dropped",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Pairing, test-first, CI in place from start; reinforcement missing",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Task"
+   },
+   {
+    "text": "Test cases before solution inside rotating pairs, checked at standup; new engineers with seasoned practitioners; story discipline",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Practices held after experts left; failure mode did not recur",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   },
+   {
+    "text": "\"reinforcement, follow-up, and verification\" (quote verbatim)",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Data-exposure failure story told honestly; supported: what-i-learned-about-assumptions Situation/Action/Result; quotes verbatim. No closing.",
+  "claims": [
+   {
+    "text": "Tech lead on global platform modernization for financial services client; offshore test cycles under delivery pressure",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Relied on inherited documentation; did not audit downstream triggers, implement masking/interception, verify scrubbing",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered UAT email job with unmasked production data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led RCA and remediation; client demanded tester removal",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "\"a systemic failure that resulted in an individual consequence\" (quote verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Afterward IAM validation, environment verification, PII scrubbing, risk ownership are day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Not a failed \"permit to fail\" experiment (quoted term verbatim in corpus)",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern crisis as shortfall; supported: NS crisis and Making It Stick stories; quote verbatim. No closing.",
+  "claims": [
+   {
+    "text": "Norfolk Southern: rising defects despite near-complete test coverage, early 2020 CIC first engagement, Revenue and Shipment Planning",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership in front of client and Accenture account leadership rather than defending metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Engineer built from own interpretation, tests after code; backlog lacked scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt backlog with SMART testable stories; TDD experts (from Columbus) side by side",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Samman coaching: boot camps, katas, practice sessions, \"I do, we do, you do\" (quote verbatim)",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see; defect rates dropped",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Pairing, test-first, CI in place from start; reinforcement missing",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Task"
+   },
+   {
+    "text": "Test cases before solution inside rotating pairs, checked at standup; new engineers with seasoned practitioners; story discipline",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Practices held after experts left; failure mode did not recur",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Right kind of example (data-exposure failure) and other claims supported, but unsupported: quoted text \"assumptions [he] should have verified rather than inherited\" is not verbatim (source: 'assumptions I should have...'); Section 6 rule 8 fails the turn.",
+  "claims": [
+   {
+    "text": "Tech lead on global platform modernization for financial services client; offshore test cycles under delivery pressure",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Relied on inherited documentation; did not audit downstream triggers, implement masking/interception, verify scrubbing",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered UAT email job with unmasked production data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led RCA and remediation; client demanded tester removal",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "\"a systemic failure that resulted in an individual consequence\" (quote verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Afterward IAM validation, environment verification, PII scrubbing, risk ownership are day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Quote \"assumptions [he] should have verified rather than inherited\": source reads 'assumptions I should have verified rather than inherited'; bracketed alteration is not verbatim",
+    "label": "unsupported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Data-exposure failure story; supported: assumptions story; quotes 'a systemic failure...' and 'day-one leadership responsibilities' verbatim. No closing.",
+  "claims": [
+   {
+    "text": "Tech lead on global platform modernization for financial services client; offshore test cycles under delivery pressure",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Relied on inherited documentation; did not audit downstream triggers, implement masking/interception, verify scrubbing",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered UAT email job with unmasked production data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led RCA and remediation; client demanded tester removal",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "\"a systemic failure that resulted in an individual consequence\" (quote verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Afterward IAM validation, environment verification, PII scrubbing, risk ownership are day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "\"day-one leadership responsibilities\" (quote verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern crisis; supported: NS crisis story incl. Samman coaching, Columbus experts; honest about no numeric reduction. No closing.",
+  "claims": [
+   {
+    "text": "Norfolk Southern: rising defects despite near-complete test coverage, early 2020 CIC first engagement, Revenue and Shipment Planning",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership in front of client and Accenture account leadership rather than defending metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Engineer built from own interpretation, tests after code; backlog lacked scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt backlog with SMART testable stories; TDD experts (from Columbus) side by side",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Samman coaching: boot camps, katas, practice sessions, \"I do, we do, you do\" (quote verbatim)",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see; defect rates dropped",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Restructured agile ceremonies; product management and SMART story training; confidence restored",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action/Result"
+   },
+   {
+    "text": "Story gives no numerical defect reduction",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern crisis; supported: NS crisis and Making It Stick stories. No closing.",
+  "claims": [
+   {
+    "text": "Norfolk Southern: rising defects despite near-complete test coverage, early 2020 CIC first engagement, Revenue and Shipment Planning",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership in front of client and Accenture account leadership rather than defending metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Engineer built from own interpretation, tests after code; backlog lacked scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt backlog with SMART testable stories; TDD experts (from Columbus) side by side",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Samman coaching: boot camps, katas, practice sessions, \"I do, we do, you do\" (quote verbatim)",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see; defect rates dropped",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Pairing, test-first, CI in place from start; reinforcement missing",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Task"
+   },
+   {
+    "text": "Test cases before solution inside rotating pairs, checked at standup; new engineers with seasoned practitioners; story discipline",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Practices held after experts left; failure mode did not recur",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   },
+   {
+    "text": "Lesson: implementing a practice is the easy half; reinforcement, follow-up, verification make it real",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Decentralized decision-making story, whose Situation presents the initial shortfall (habits reasserted, bumpy path); answer frames it honestly as initial failure to take hold, not a failed final outcome, so no success reframed as failure. All claims supported from empowering-teams story. No closing.",
+  "claims": [
+   {
+    "text": "CIC designed flat; practitioners from command-and-control orgs reverted: decisions drifted upward, bottlenecks",
+    "label": "supported",
+    "source": "empowering-teams-through-decentralized-decision-making|accenture Situation"
+   },
+   {
+    "text": "Repeated enforcement and revalidation; team leads removed obstacles rather than controlling outcomes; guidelines",
+    "label": "supported",
+    "source": "empowering-teams-through-decentralized-decision-making|accenture Situation/Action"
+   },
+   {
+    "text": "Cross-functional teams, servant leadership, clear guidelines, continuous retrospectives",
+    "label": "supported",
+    "source": "empowering-teams-through-decentralized-decision-making|accenture Action"
+   },
+   {
+    "text": "Bottlenecks removed; teams consistently met milestones",
+    "label": "supported",
+    "source": "empowering-teams-through-decentralized-decision-making|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Data-exposure failure story; supported: assumptions story; quotes verbatim. No closing.",
+  "claims": [
+   {
+    "text": "Tech lead on global platform modernization for financial services client; offshore test cycles under delivery pressure",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Relied on inherited documentation; did not audit downstream triggers, implement masking/interception, verify scrubbing",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered UAT email job with unmasked production data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led RCA and remediation; client demanded tester removal",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "\"a systemic failure that resulted in an individual consequence\" (quote verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Afterward IAM validation, environment verification, PII scrubbing, risk ownership are day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Data-exposure failure story; supported: assumptions story; quote verbatim; no invented recovery. No closing.",
+  "claims": [
+   {
+    "text": "Tech lead on global platform modernization for financial services client; offshore test cycles under delivery pressure",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Relied on inherited documentation; did not audit downstream triggers, implement masking/interception, verify scrubbing",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered UAT email job with unmasked production data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led RCA and remediation; client demanded tester removal",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "\"a systemic failure that resulted in an individual consequence\" (quote verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Afterward IAM validation, environment verification, PII scrubbing, risk ownership are day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Norfolk Southern crisis; supported: NS crisis story; honest about no numeric reduction. No closing.",
+  "claims": [
+   {
+    "text": "Norfolk Southern: rising defects despite near-complete test coverage, early 2020 CIC first engagement, Revenue and Shipment Planning",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership in front of client and Accenture account leadership rather than defending metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Engineer built from own interpretation, tests after code; backlog lacked scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt backlog with SMART testable stories; TDD experts (from Columbus) side by side",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Samman coaching: boot camps, katas, practice sessions, \"I do, we do, you do\" (quote verbatim)",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see; defect rates dropped",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Lesson: metrics mean nothing without practice; transformation requires coaching",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Norfolk Southern crisis; supported: NS crisis story; quote verbatim in Result. No closing.",
+  "claims": [
+   {
+    "text": "Norfolk Southern: rising defects despite near-complete test coverage, early 2020 CIC first engagement, Revenue and Shipment Planning",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership in front of client and Accenture account leadership rather than defending metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Engineer built from own interpretation, tests after code; backlog lacked scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt backlog with SMART testable stories; TDD experts (from Columbus) side by side",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Samman coaching: boot camps, katas, practice sessions, \"I do, we do, you do\" (quote verbatim)",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see; defect rates dropped",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "\"metrics like test coverage mean nothing without the practice behind them\" (quote verbatim)",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 6,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Norfolk Southern crisis; supported: NS crisis story. No closing.",
+  "claims": [
+   {
+    "text": "Norfolk Southern: rising defects despite near-complete test coverage, early 2020 CIC first engagement, Revenue and Shipment Planning",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership in front of client and Accenture account leadership rather than defending metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Engineer built from own interpretation, tests after code; backlog lacked scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt backlog with SMART testable stories; TDD experts (from Columbus) side by side",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Samman coaching: boot camps, katas, practice sessions, \"I do, we do, you do\" (quote verbatim)",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see; defect rates dropped",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Restructured agile ceremonies; PM and SMART story training; confidence restored",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

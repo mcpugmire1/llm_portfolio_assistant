@@ -1,0 +1,2864 @@
+[
+ {
+  "case": "c16",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. unsupported: 'role where building the product engineering organization, establishing the culture, and delivering results are part of the same job' (in no story or the profile). supported: 18 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer -> Solution Architect -> Director -> Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "Role fields (Wellfound/Cendian: Software Engineer; architecting-atts-scalable-order-management-platform|att: Solution Architect; CIC story: Director); transition-story-why-im-exploring-opportunities|accenture 5PSummary ('from engineer to Director of the Cloud Innovation Center')"
+   },
+   {
+    "text": "Worked at Wellfound Technology 2000-2001 and 2002-2003",
+    "label": "supported",
+    "source": "Wellfound stories Start_Date/End_Date (2000-06..2001-12; 2002-11..2003-10)"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics 2003-2005",
+    "label": "supported",
+    "source": "Cendian stories Start_Date/End_Date (2003-12..2005-02)"
+   },
+   {
+    "text": "At Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Taught as adjunct at American InterContinental University 2003-2004 alongside full-time work",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application Role, dates, Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Full P&L accountability for both centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Hired/recruited, trained and developed practitioners across engineering, architecture, product and design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Teams used pair programming, TDD, balanced teams and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Centers delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivered output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client/customer relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('by FY23'); about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Payments and banking modernization for JP Morgan Chase, RBC, Capital One and HSBC",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "JP Morgan payments and Salesforce platforms each rolled out across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Master's degree, Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT with RAG, semantic search and modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Performance/5PSummary"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "Seeking a role where building the product engineering organization, establishing the culture and delivering results are part of the same job",
+    "label": "unsupported",
+    "source": "none: no story or profile entry states this"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. unsupported: 'role where building the product engineering organization, establishing the culture, and delivering results are part of the same job' (in no story or the profile). supported: 17 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer -> Solution Architect -> Director -> Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "Role fields (Wellfound/Cendian: Software Engineer; architecting-atts-scalable-order-management-platform|att: Solution Architect; CIC story: Director); transition-story-why-im-exploring-opportunities|accenture 5PSummary ('from engineer to Director of the Cloud Innovation Center')"
+   },
+   {
+    "text": "Worked at Wellfound Technology 2000-2001 and 2002-2003",
+    "label": "supported",
+    "source": "Wellfound stories Start_Date/End_Date (2000-06..2001-12; 2002-11..2003-10)"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics 2003-2005",
+    "label": "supported",
+    "source": "Cendian stories Start_Date/End_Date (2003-12..2005-02)"
+   },
+   {
+    "text": "At Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Taught as adjunct at American InterContinental University 2003-2004 alongside full-time work",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application Role, dates, Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Full P&L accountability for both centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Hired/recruited, trained and developed practitioners across engineering, architecture, product and design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Training included pair programming, test-driven development, CI/CD, and balanced teams combining Product, Engineering, and Design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Centers delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client/customer relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('by FY23'); about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Rotating training cohorts, career progression frameworks and skill development pathways",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Master's degree, Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "BA, French Language and Literature, Queens University of Charlotte",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT with RAG, semantic search and modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Performance/5PSummary"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "Seeking a role where building the product engineering organization, establishing the culture and delivering results are part of the same job",
+    "label": "unsupported",
+    "source": "none: no story or profile entry states this"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. supported: 21 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer -> Solution Architect -> Director -> Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "Role fields (Wellfound/Cendian: Software Engineer; architecting-atts-scalable-order-management-platform|att: Solution Architect; CIC story: Director); transition-story-why-im-exploring-opportunities|accenture 5PSummary ('from engineer to Director of the Cloud Innovation Center')"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "Quoted self-description \"I build what's next, modernize what's not, and grow teams along the way.\"",
+    "label": "supported",
+    "source": "profile.self_description (verbatim)"
+   },
+   {
+    "text": "At Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Led modernization programs across banking, healthcare and telecommunications",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Hired/recruited, trained and developed practitioners across engineering, architecture, product and design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for both centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Centers delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Centers achieved 4X faster velocity and zero-defect deployments through TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "Teams used pair programming, TDD, balanced teams and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "10-person balanced teams delivered output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Matt drove $100M+ in repeat business through delivery excellence and customer relationship building",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('by FY23'); about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Worked at Wellfound Technology 2000-2001 and 2002-2003",
+    "label": "supported",
+    "source": "Wellfound stories Start_Date/End_Date (2000-06..2001-12; 2002-11..2003-10)"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics 2003-2005",
+    "label": "supported",
+    "source": "Cendian stories Start_Date/End_Date (2003-12..2005-02)"
+   },
+   {
+    "text": "Taught as adjunct at American InterContinental University 2003-2004 alongside full-time work",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application Role, dates, Situation"
+   },
+   {
+    "text": "Master's degree, Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "BA, French Language and Literature, Queens University of Charlotte",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Graduate coursework, Romance Languages (Linguistics), University of Georgia",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT with RAG, semantic search and modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Performance/5PSummary"
+   },
+   {
+    "text": "Pursuing senior leadership roles in platform engineering, AI-era transformation and enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. unsupported: 'role where building the product engineering organization, establishing the culture, and delivering results are part of the same job' (in no story or the profile). supported: 17 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer -> Solution Architect -> Director -> Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "Role fields (Wellfound/Cendian: Software Engineer; architecting-atts-scalable-order-management-platform|att: Solution Architect; CIC story: Director); transition-story-why-im-exploring-opportunities|accenture 5PSummary ('from engineer to Director of the Cloud Innovation Center')"
+   },
+   {
+    "text": "At Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "Teams used pair programming, TDD, balanced teams and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client/customer relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('by FY23'); about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Payments and banking modernization for JP Morgan Chase, RBC, Capital One and HSBC",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "JP Morgan payments and Salesforce platforms each rolled out across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Recovered troubled programs and architected cloud-native systems (prototype to production)",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result"
+   },
+   {
+    "text": "Worked at Wellfound Technology 2000-2001 and 2002-2003",
+    "label": "supported",
+    "source": "Wellfound stories Start_Date/End_Date (2000-06..2001-12; 2002-11..2003-10)"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics 2003-2005",
+    "label": "supported",
+    "source": "Cendian stories Start_Date/End_Date (2003-12..2005-02)"
+   },
+   {
+    "text": "Taught as adjunct at American InterContinental University 2003-2004 alongside full-time work",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application Role, dates, Situation"
+   },
+   {
+    "text": "Master's degree, Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "BA, French Language and Literature, Queens University of Charlotte",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Graduate coursework, Romance Languages (Linguistics), University of Georgia",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT with RAG, semantic search and modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Performance/5PSummary"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "Seeking a role where building the product engineering organization, establishing the culture and delivering results are part of the same job",
+    "label": "unsupported",
+    "source": "none: no story or profile entry states this"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. supported: 19 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer -> Solution Architect -> Director -> Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "Role fields (Wellfound/Cendian: Software Engineer; architecting-atts-scalable-order-management-platform|att: Solution Architect; CIC story: Director); transition-story-why-im-exploring-opportunities|accenture 5PSummary ('from engineer to Director of the Cloud Innovation Center')"
+   },
+   {
+    "text": "At Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "At Accenture, built and integrated enterprise platforms and led modernization programs",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Full P&L accountability for both centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Hired/recruited, trained and developed practitioners across engineering, architecture, product and design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Brought product, engineering and design together in balanced teams rather than siloed handoffs",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Teams used pair programming, TDD, balanced teams and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Centers delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client/customer relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('by FY23'); about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Worked at Wellfound Technology 2000-2001 and 2002-2003",
+    "label": "supported",
+    "source": "Wellfound stories Start_Date/End_Date (2000-06..2001-12; 2002-11..2003-10)"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics 2003-2005",
+    "label": "supported",
+    "source": "Cendian stories Start_Date/End_Date (2003-12..2005-02)"
+   },
+   {
+    "text": "Taught as adjunct at American InterContinental University 2003-2004 alongside full-time work",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application Role, dates, Situation"
+   },
+   {
+    "text": "Master's degree, Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "BA, French Language and Literature, Queens University of Charlotte",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT with RAG, semantic search and modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Performance/5PSummary"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "Pursuing senior leadership roles in platform engineering, AI-era transformation and enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. Answer gives little or no résumé content, only an offer to provide an overview. supported: 1 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Has a career at Accenture including Cloud Innovation Centers he built and earlier engineering roles",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture; building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture; Wellfound/Cendian Role fields"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. unsupported: 'role where building the product engineering organization, establishing the culture, and delivering results are part of the same job' (in no story or the profile). supported: 16 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer -> Solution Architect -> Director -> Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "Role fields (Wellfound/Cendian: Software Engineer; architecting-atts-scalable-order-management-platform|att: Solution Architect; CIC story: Director); transition-story-why-im-exploring-opportunities|accenture 5PSummary ('from engineer to Director of the Cloud Innovation Center')"
+   },
+   {
+    "text": "At Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Worked at Wellfound Technology 2000-2001 and 2002-2003",
+    "label": "supported",
+    "source": "Wellfound stories Start_Date/End_Date (2000-06..2001-12; 2002-11..2003-10)"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics 2003-2005",
+    "label": "supported",
+    "source": "Cendian stories Start_Date/End_Date (2003-12..2005-02)"
+   },
+   {
+    "text": "Taught as adjunct at American InterContinental University 2003-2004 alongside full-time work",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application Role, dates, Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Full P&L accountability for both centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Hired/recruited, trained and developed practitioners across engineering, architecture, product and design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Brought disciplines together in balanced teams using pair programming, TDD, discovery and framing, and automated delivery pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Centers delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivered output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client/customer relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('by FY23'); about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Modernization work included payments, cloud, and digital banking programs for JP Morgan Chase, RBC, Capital One, and HSBC",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "JP Morgan payments and Salesforce platforms each rolled out across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT with RAG, semantic search and modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Performance/5PSummary"
+   },
+   {
+    "text": "Seeking a role where building the product engineering organization, establishing the culture and delivering results are part of the same job",
+    "label": "unsupported",
+    "source": "none: no story or profile entry states this"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. unsupported: 'role where building the product engineering organization, establishing the culture, and delivering results are part of the same job' (in no story or the profile). supported: 18 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer -> Solution Architect -> Director -> Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "Role fields (Wellfound/Cendian: Software Engineer; architecting-atts-scalable-order-management-platform|att: Solution Architect; CIC story: Director); transition-story-why-im-exploring-opportunities|accenture 5PSummary ('from engineer to Director of the Cloud Innovation Center')"
+   },
+   {
+    "text": "Worked at Wellfound Technology 2000-2001 and 2002-2003",
+    "label": "supported",
+    "source": "Wellfound stories Start_Date/End_Date (2000-06..2001-12; 2002-11..2003-10)"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics 2003-2005",
+    "label": "supported",
+    "source": "Cendian stories Start_Date/End_Date (2003-12..2005-02)"
+   },
+   {
+    "text": "At Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Taught as adjunct at American InterContinental University 2003-2004 alongside full-time work",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application Role, dates, Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "Teams used pair programming, TDD, balanced teams and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Teams of 10 consistently delivered the impact of typical teams of 20",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client/customer relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('by FY23'); about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "$100M+ came through delivery, not a sales role",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action ('product and technology person rather than sales professional')"
+   },
+   {
+    "text": "Payments and banking modernization for JP Morgan Chase, RBC, Capital One and HSBC",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Work included cloud-native architecture and recovering troubled programs",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result"
+   },
+   {
+    "text": "JP Morgan payments and Salesforce platforms each rolled out across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT with RAG, semantic search and modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Performance/5PSummary"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "Seeking a role where building the product engineering organization, establishing the culture and delivering results are part of the same job",
+    "label": "unsupported",
+    "source": "none: no story or profile entry states this"
+   },
+   {
+    "text": "Master's degree, Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "BA, French Language and Literature, Queens University of Charlotte",
+    "label": "supported",
+    "source": "profile.education"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. unsupported: 'role where building the product engineering organization, establishing the culture, and delivering results are part of the same job' (in no story or the profile). supported: 14 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer -> Solution Architect -> Director -> Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "Role fields (Wellfound/Cendian: Software Engineer; architecting-atts-scalable-order-management-platform|att: Solution Architect; CIC story: Director); transition-story-why-im-exploring-opportunities|accenture 5PSummary ('from engineer to Director of the Cloud Innovation Center')"
+   },
+   {
+    "text": "At Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Full P&L accountability for both centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Hired/recruited, trained and developed practitioners across engineering, architecture, product and design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Centers delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client/customer relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('by FY23'); about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Adapted Lean XP for enterprise environments, including pair programming, TDD, automated pipelines, and balanced teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivered output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Worked at Wellfound Technology 2000-2001 and 2002-2003",
+    "label": "supported",
+    "source": "Wellfound stories Start_Date/End_Date (2000-06..2001-12; 2002-11..2003-10)"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics 2003-2005",
+    "label": "supported",
+    "source": "Cendian stories Start_Date/End_Date (2003-12..2005-02)"
+   },
+   {
+    "text": "Taught as adjunct at American InterContinental University 2003-2004 alongside full-time work",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application Role, dates, Situation"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT with RAG, semantic search and modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Performance/5PSummary"
+   },
+   {
+    "text": "Seeking a role where building the product engineering organization, establishing the culture and delivering results are part of the same job",
+    "label": "unsupported",
+    "source": "none: no story or profile entry states this"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. Answer gives little or no résumé content, only an offer to provide an overview. supported: 0 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. unsupported: 'role where building the product engineering organization, establishing the culture, and delivering results are part of the same job' (in no story or the profile). supported: 16 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer -> Solution Architect -> Director -> Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "Role fields (Wellfound/Cendian: Software Engineer; architecting-atts-scalable-order-management-platform|att: Solution Architect; CIC story: Director); transition-story-why-im-exploring-opportunities|accenture 5PSummary ('from engineer to Director of the Cloud Innovation Center')"
+   },
+   {
+    "text": "Worked at Wellfound Technology 2000-2001 and 2002-2003",
+    "label": "supported",
+    "source": "Wellfound stories Start_Date/End_Date (2000-06..2001-12; 2002-11..2003-10)"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics 2003-2005",
+    "label": "supported",
+    "source": "Cendian stories Start_Date/End_Date (2003-12..2005-02)"
+   },
+   {
+    "text": "At Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Full P&L accountability for both centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Hired/recruited, trained and developed practitioners across engineering, architecture, product and design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Teams used pair programming, TDD, balanced teams and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Established recruiting, training, career progression and engagement playbooks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Task/Action/Process"
+   },
+   {
+    "text": "The centers delivered 30+ product engagements across 15+ Fortune 500 clients by FY23",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivered output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client/customer relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('by FY23'); about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Payments and banking modernization for JP Morgan Chase, RBC, Capital One and HSBC",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Led AWS Launchpad (hands-on labs, structured learning paths, mentorship); 200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task/Action/Result"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT with RAG, semantic search and modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Performance/5PSummary"
+   },
+   {
+    "text": "Seeking a role where building the product engineering organization, establishing the culture and delivering results are part of the same job",
+    "label": "unsupported",
+    "source": "none: no story or profile entry states this"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. unsupported: 'role where building the product engineering organization, establishing the culture, and delivering results are part of the same job' (in no story or the profile). supported: 22 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer -> Solution Architect -> Director -> Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "Role fields (Wellfound/Cendian: Software Engineer; architecting-atts-scalable-order-management-platform|att: Solution Architect; CIC story: Director); transition-story-why-im-exploring-opportunities|accenture 5PSummary ('from engineer to Director of the Cloud Innovation Center')"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT with RAG, semantic search and modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Performance/5PSummary"
+   },
+   {
+    "text": "Searching for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job",
+    "label": "unsupported",
+    "source": "none: no story or profile entry states this"
+   },
+   {
+    "text": "At Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Full P&L accountability for both centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "P&L included hiring, training, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action, 5PSummary"
+   },
+   {
+    "text": "Brought product, engineering and design together in balanced teams rather than siloed handoffs",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Teams used pair programming, TDD, balanced teams and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Centers delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivered output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client/customer relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('by FY23'); about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Worked at Wellfound Technology 2000-2001 and 2002-2003",
+    "label": "supported",
+    "source": "Wellfound stories Start_Date/End_Date (2000-06..2001-12; 2002-11..2003-10)"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics 2003-2005",
+    "label": "supported",
+    "source": "Cendian stories Start_Date/End_Date (2003-12..2005-02)"
+   },
+   {
+    "text": "Taught as adjunct at American InterContinental University 2003-2004 alongside full-time work",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application Role, dates, Situation"
+   },
+   {
+    "text": "Master's degree, Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "BA, French Language and Literature, Queens University of Charlotte",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Graduate coursework, Romance Languages (Linguistics), University of Georgia",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Based in Atlanta, GA, open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location"
+   },
+   {
+    "text": "Available immediately",
+    "label": "supported",
+    "source": "profile.logistics.availability"
+   },
+   {
+    "text": "US citizen, no sponsorship needed",
+    "label": "supported",
+    "source": "profile.logistics.authorization"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. unsupported: 'role where building the product engineering organization, establishing the culture, and delivering results are part of the same job' (in no story or the profile). supported: 18 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer -> Solution Architect -> Director -> Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "Role fields (Wellfound/Cendian: Software Engineer; architecting-atts-scalable-order-management-platform|att: Solution Architect; CIC story: Director); transition-story-why-im-exploring-opportunities|accenture 5PSummary ('from engineer to Director of the Cloud Innovation Center')"
+   },
+   {
+    "text": "A builder of products, platforms and teams",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture 5PSummary ('I build products, platforms, and teams')"
+   },
+   {
+    "text": "At Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Work spanned banking, healthcare, telecommunications and transportation",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action, Performance"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Hired/recruited, trained and developed practitioners across engineering, architecture, product and design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for both centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Centers delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client/customer relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('by FY23'); about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "Teams used pair programming, TDD, balanced teams and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "10-person balanced teams delivered output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Worked at Wellfound Technology 2000-2001 and 2002-2003",
+    "label": "supported",
+    "source": "Wellfound stories Start_Date/End_Date (2000-06..2001-12; 2002-11..2003-10)"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics 2003-2005",
+    "label": "supported",
+    "source": "Cendian stories Start_Date/End_Date (2003-12..2005-02)"
+   },
+   {
+    "text": "Taught as adjunct at American InterContinental University 2003-2004 alongside full-time work",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application Role, dates, Situation"
+   },
+   {
+    "text": "Master's degree, Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "BA, French Language and Literature, Queens University of Charlotte",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT with RAG, semantic search and modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Performance/5PSummary"
+   },
+   {
+    "text": "Seeking a role where building the product engineering organization, establishing the culture and delivering results are part of the same job",
+    "label": "unsupported",
+    "source": "none: no story or profile entry states this"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. Answer gives little or no résumé content, only an offer to provide an overview. supported: 3 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer -> Solution Architect -> Director -> Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "Role fields (Wellfound/Cendian: Software Engineer; architecting-atts-scalable-order-management-platform|att: Solution Architect; CIC story: Director); transition-story-why-im-exploring-opportunities|accenture 5PSummary ('from engineer to Director of the Cloud Innovation Center')"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client/customer relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('by FY23'); about-matt-my-leadership-journey|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. unsupported: 'role where building the product engineering organization, establishing the culture, and delivering results are part of the same job' (in no story or the profile). supported: 19 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer -> Solution Architect -> Director -> Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "Role fields (Wellfound/Cendian: Software Engineer; architecting-atts-scalable-order-management-platform|att: Solution Architect; CIC story: Director); transition-story-why-im-exploring-opportunities|accenture 5PSummary ('from engineer to Director of the Cloud Innovation Center')"
+   },
+   {
+    "text": "Worked at Wellfound Technology 2000-2001 and 2002-2003",
+    "label": "supported",
+    "source": "Wellfound stories Start_Date/End_Date (2000-06..2001-12; 2002-11..2003-10)"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics 2003-2005",
+    "label": "supported",
+    "source": "Cendian stories Start_Date/End_Date (2003-12..2005-02)"
+   },
+   {
+    "text": "At Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Taught as adjunct at American InterContinental University 2003-2004 alongside full-time work",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application Role, dates, Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Hired/recruited, trained and developed practitioners across engineering, architecture, product and design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for both centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Established recruiting, training, career progression and engagement playbooks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Task/Action/Process"
+   },
+   {
+    "text": "The centers delivered 30+ product engagements across 15+ Fortune 500 clients by FY23",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Teams used pair programming, TDD, balanced teams and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivered output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client/customer relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('by FY23'); about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Payments and banking modernization for JP Morgan Chase, RBC, Capital One and HSBC",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "JP Morgan payments and Salesforce platforms each rolled out across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Recovered troubled programs and architected cloud-native systems (prototype to production)",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result"
+   },
+   {
+    "text": "Matt is a builder",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT with RAG, semantic search and modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Performance/5PSummary"
+   },
+   {
+    "text": "Seeking a role where building the product engineering organization, establishing the culture and delivering results are part of the same job",
+    "label": "unsupported",
+    "source": "none: no story or profile entry states this"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. Answer gives little or no résumé content, only an offer to provide an overview. supported: 0 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. unsupported: 'role where building the product engineering organization, establishing the culture, and delivering results are part of the same job' (in no story or the profile). supported: 20 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer -> Solution Architect -> Director -> Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "Role fields (Wellfound/Cendian: Software Engineer; architecting-atts-scalable-order-management-platform|att: Solution Architect; CIC story: Director); transition-story-why-im-exploring-opportunities|accenture 5PSummary ('from engineer to Director of the Cloud Innovation Center')"
+   },
+   {
+    "text": "At Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "At Accenture, built and integrated enterprise platforms and led modernization programs",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Hired/recruited, trained and developed practitioners across engineering, architecture, product and design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for both centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Brought product, engineering and design together in balanced teams rather than siloed handoffs",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Rotating training cohorts, career progression frameworks and skill development pathways",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Teams used pair programming, TDD, balanced teams and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Created discovery practices bringing business units, compliance, legal and technology together",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action (Shaping and Framing process)"
+   },
+   {
+    "text": "Centers delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client/customer relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('by FY23'); about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Payments and banking modernization for JP Morgan Chase, RBC, Capital One and HSBC",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Worked at Wellfound Technology 2000-2001 and 2002-2003",
+    "label": "supported",
+    "source": "Wellfound stories Start_Date/End_Date (2000-06..2001-12; 2002-11..2003-10)"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics 2003-2005",
+    "label": "supported",
+    "source": "Cendian stories Start_Date/End_Date (2003-12..2005-02)"
+   },
+   {
+    "text": "Taught as adjunct at American InterContinental University 2003-2004 alongside full-time work",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application Role, dates, Situation"
+   },
+   {
+    "text": "Master's degree, Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "BA, French Language and Literature, Queens University of Charlotte",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT with RAG, semantic search and modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Performance/5PSummary"
+   },
+   {
+    "text": "Seeking a role where building the product engineering organization, establishing the culture and delivering results are part of the same job",
+    "label": "unsupported",
+    "source": "none: no story or profile entry states this"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. unsupported: 'role where building the product engineering organization, establishing the culture, and delivering results are part of the same job' (in no story or the profile). supported: 18 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer -> Solution Architect -> Director -> Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "Role fields (Wellfound/Cendian: Software Engineer; architecting-atts-scalable-order-management-platform|att: Solution Architect; CIC story: Director); transition-story-why-im-exploring-opportunities|accenture 5PSummary ('from engineer to Director of the Cloud Innovation Center')"
+   },
+   {
+    "text": "At Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Led platform modernization and product engineering work across banking, telecommunications, healthcare, and transportation",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action, Performance"
+   },
+   {
+    "text": "Clients included JP Morgan Chase, RBC, Capital One, HSBC and Norfolk Southern",
+    "label": "supported",
+    "source": "Client fields of JP Morgan, RBC, Capital One, HSBC, Norfolk Southern stories"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Full P&L accountability for both centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Hired/recruited, trained and developed practitioners across engineering, architecture, product and design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Centers delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "Teams used pair programming, TDD, balanced teams and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client/customer relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('by FY23'); about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Worked at Wellfound Technology 2000-2001 and 2002-2003",
+    "label": "supported",
+    "source": "Wellfound stories Start_Date/End_Date (2000-06..2001-12; 2002-11..2003-10)"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics 2003-2005",
+    "label": "supported",
+    "source": "Cendian stories Start_Date/End_Date (2003-12..2005-02)"
+   },
+   {
+    "text": "Taught as adjunct at American InterContinental University 2003-2004 alongside full-time work",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application Role, dates, Situation"
+   },
+   {
+    "text": "Master's degree, Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "BA, French Language and Literature, Queens University of Charlotte",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Graduate coursework, Romance Languages (Linguistics), University of Georgia",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT with RAG, semantic search and modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Performance/5PSummary"
+   },
+   {
+    "text": "Seeking a role where building the product engineering organization, establishing the culture and delivering results are part of the same job",
+    "label": "unsupported",
+    "source": "none: no story or profile entry states this"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. unsupported: 'role where building the product engineering organization, establishing the culture, and delivering results are part of the same job' (in no story or the profile). supported: 18 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer -> Solution Architect -> Director -> Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "Role fields (Wellfound/Cendian: Software Engineer; architecting-atts-scalable-order-management-platform|att: Solution Architect; CIC story: Director); transition-story-why-im-exploring-opportunities|accenture 5PSummary ('from engineer to Director of the Cloud Innovation Center')"
+   },
+   {
+    "text": "At Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Built products, platforms, and teams across banking, healthcare, and telecommunications",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture 5PSummary ('I build products, platforms, and teams')"
+   },
+   {
+    "text": "Led modernization programs across banking, healthcare and telecommunications",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "Teams used pair programming, TDD, balanced teams and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client/customer relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('by FY23'); about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Payments and banking modernization for JP Morgan Chase, RBC, Capital One and HSBC",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "JP Morgan payments and Salesforce platforms each rolled out across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Recovered troubled programs and architected cloud-native systems (prototype to production)",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result"
+   },
+   {
+    "text": "Worked at Wellfound Technology 2000-2001 and 2002-2003",
+    "label": "supported",
+    "source": "Wellfound stories Start_Date/End_Date (2000-06..2001-12; 2002-11..2003-10)"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics 2003-2005",
+    "label": "supported",
+    "source": "Cendian stories Start_Date/End_Date (2003-12..2005-02)"
+   },
+   {
+    "text": "Taught as adjunct at American InterContinental University 2003-2004 alongside full-time work",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application Role, dates, Situation"
+   },
+   {
+    "text": "Master's degree, Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "BA, French Language and Literature, Queens University of Charlotte",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT with RAG, semantic search and modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Performance/5PSummary"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "Seeking a role where building the product engineering organization, establishing the culture and delivering results are part of the same job",
+    "label": "unsupported",
+    "source": "none: no story or profile entry states this"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. supported: 18 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer -> Solution Architect -> Director -> Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "Role fields (Wellfound/Cendian: Software Engineer; architecting-atts-scalable-order-management-platform|att: Solution Architect; CIC story: Director); transition-story-why-im-exploring-opportunities|accenture 5PSummary ('from engineer to Director of the Cloud Innovation Center')"
+   },
+   {
+    "text": "Worked at Wellfound Technology 2000-2001 and 2002-2003",
+    "label": "supported",
+    "source": "Wellfound stories Start_Date/End_Date (2000-06..2001-12; 2002-11..2003-10)"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics 2003-2005",
+    "label": "supported",
+    "source": "Cendian stories Start_Date/End_Date (2003-12..2005-02)"
+   },
+   {
+    "text": "At Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Taught as adjunct at American InterContinental University 2003-2004 alongside full-time work",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application Role, dates, Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "Teams used pair programming, TDD, balanced teams and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Brought product, engineering and design together in balanced teams rather than siloed handoffs",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Coached teams in modern engineering practices",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Payments and banking modernization for JP Morgan Chase, RBC, Capital One and HSBC",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "JP Morgan payments and Salesforce platforms each rolled out across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client/customer relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('by FY23'); about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Master's degree, Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "BA, French Language and Literature, Queens University of Charlotte",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT with RAG, semantic search and modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Performance/5PSummary"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "Pursuing senior leadership roles in platform engineering, AI-era transformation and enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. unsupported: 'role where building the product engineering organization, establishing the culture, and delivering results are part of the same job' (in no story or the profile). supported: 18 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer -> Solution Architect -> Director -> Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "Role fields (Wellfound/Cendian: Software Engineer; architecting-atts-scalable-order-management-platform|att: Solution Architect; CIC story: Director); transition-story-why-im-exploring-opportunities|accenture 5PSummary ('from engineer to Director of the Cloud Innovation Center')"
+   },
+   {
+    "text": "Work includes enterprise modernization, platform engineering, cloud-native architecture and building product, engineering and design teams",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "At Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "Teams used pair programming, TDD, balanced teams and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client/customer relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('by FY23'); about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Payments and banking modernization for JP Morgan Chase, RBC, Capital One and HSBC",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "JP Morgan payments and Salesforce platforms each rolled out across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Worked at Wellfound Technology 2000-2001 and 2002-2003",
+    "label": "supported",
+    "source": "Wellfound stories Start_Date/End_Date (2000-06..2001-12; 2002-11..2003-10)"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics 2003-2005",
+    "label": "supported",
+    "source": "Cendian stories Start_Date/End_Date (2003-12..2005-02)"
+   },
+   {
+    "text": "Taught as adjunct at American InterContinental University 2003-2004 alongside full-time work",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application Role, dates, Situation"
+   },
+   {
+    "text": "Master's degree, Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Graduate coursework, Romance Languages (Linguistics), University of Georgia",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "BA, French Language and Literature, Queens University of Charlotte",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT with RAG, semantic search and modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Performance/5PSummary"
+   },
+   {
+    "text": "Seeking a role where building the product engineering organization, establishing the culture and delivering results are part of the same job",
+    "label": "unsupported",
+    "source": "none: no story or profile entry states this"
+   },
+   {
+    "text": "Based in Atlanta, GA, open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location"
+   },
+   {
+    "text": "Available immediately",
+    "label": "supported",
+    "source": "profile.logistics.availability"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. unsupported: 'role where building the product engineering organization, establishing the culture, and delivering results are part of the same job' (in no story or the profile). supported: 16 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer -> Solution Architect -> Director -> Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "Role fields (Wellfound/Cendian: Software Engineer; architecting-atts-scalable-order-management-platform|att: Solution Architect; CIC story: Director); transition-story-why-im-exploring-opportunities|accenture 5PSummary ('from engineer to Director of the Cloud Innovation Center')"
+   },
+   {
+    "text": "A builder of products, platforms and teams",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture 5PSummary ('I build products, platforms, and teams')"
+   },
+   {
+    "text": "At Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Led modernization programs across banking, healthcare and telecommunications",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Hired/recruited, trained and developed practitioners across engineering, architecture, product and design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for both centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Centers delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Contributed to $100M+ in repeatable business by FY23 through delivery excellence and customer relationship building",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('by FY23'); about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "Teams used pair programming, TDD, balanced teams and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "10-person balanced teams delivered output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Worked at Wellfound Technology 2000-2001 and 2002-2003",
+    "label": "supported",
+    "source": "Wellfound stories Start_Date/End_Date (2000-06..2001-12; 2002-11..2003-10)"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics 2003-2005",
+    "label": "supported",
+    "source": "Cendian stories Start_Date/End_Date (2003-12..2005-02)"
+   },
+   {
+    "text": "Taught as adjunct at American InterContinental University 2003-2004 alongside full-time work",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application Role, dates, Situation"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT with RAG, semantic search and modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Performance/5PSummary"
+   },
+   {
+    "text": "Seeking a role where building the product engineering organization, establishing the culture and delivering results are part of the same job",
+    "label": "unsupported",
+    "source": "none: no story or profile entry states this"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. unsupported: 'role where building the product engineering organization, establishing the culture, and delivering results are part of the same job' (in no story or the profile). supported: 16 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer -> Solution Architect -> Director -> Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "Role fields (Wellfound/Cendian: Software Engineer; architecting-atts-scalable-order-management-platform|att: Solution Architect; CIC story: Director); transition-story-why-im-exploring-opportunities|accenture 5PSummary ('from engineer to Director of the Cloud Innovation Center')"
+   },
+   {
+    "text": "At Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Led modernization programs across banking, healthcare, and telecommunications, then built the CIC",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "Teams used pair programming, TDD, balanced teams and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "10-person balanced teams delivered output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client/customer relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('by FY23'); about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "$100M+ came through delivery, not a sales role",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action ('product and technology person rather than sales professional')"
+   },
+   {
+    "text": "Worked at Wellfound Technology 2000-2001 and 2002-2003",
+    "label": "supported",
+    "source": "Wellfound stories Start_Date/End_Date (2000-06..2001-12; 2002-11..2003-10)"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics 2003-2005",
+    "label": "supported",
+    "source": "Cendian stories Start_Date/End_Date (2003-12..2005-02)"
+   },
+   {
+    "text": "Taught as adjunct at American InterContinental University 2003-2004 alongside full-time work",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application Role, dates, Situation"
+   },
+   {
+    "text": "Client work includes American Express, Capital One, HSBC, JP Morgan Chase, RBC, AT&T and Norfolk Southern",
+    "label": "supported",
+    "source": "Client fields of those stories"
+   },
+   {
+    "text": "Master's degree, Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "BA, French Language and Literature, Queens University of Charlotte",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT with RAG, semantic search and modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Performance/5PSummary"
+   },
+   {
+    "text": "Seeking a role where building the product engineering organization, establishing the culture and delivering results are part of the same job",
+    "label": "unsupported",
+    "source": "none: no story or profile entry states this"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. unsupported: 'role where building the product engineering organization, establishing the culture, and delivering results are part of the same job' (in no story or the profile). supported: 18 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer -> Solution Architect -> Director -> Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "Role fields (Wellfound/Cendian: Software Engineer; architecting-atts-scalable-order-management-platform|att: Solution Architect; CIC story: Director); transition-story-why-im-exploring-opportunities|accenture 5PSummary ('from engineer to Director of the Cloud Innovation Center')"
+   },
+   {
+    "text": "Worked at Wellfound Technology 2000-2001 and 2002-2003",
+    "label": "supported",
+    "source": "Wellfound stories Start_Date/End_Date (2000-06..2001-12; 2002-11..2003-10)"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics 2003-2005",
+    "label": "supported",
+    "source": "Cendian stories Start_Date/End_Date (2003-12..2005-02)"
+   },
+   {
+    "text": "At Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Taught as adjunct at American InterContinental University 2003-2004 alongside full-time work",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application Role, dates, Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Hired/recruited, trained and developed practitioners across engineering, architecture, product and design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for both centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Established recruiting, training, career progression and engagement playbooks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Task/Action/Process"
+   },
+   {
+    "text": "Teams used pair programming, TDD, balanced teams and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Centers delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivered output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client/customer relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('by FY23'); about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Master's degree, Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "BA, French Language and Literature, Queens University of Charlotte",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Graduate coursework, Romance Languages (Linguistics), University of Georgia",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT with RAG, semantic search and modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Performance/5PSummary"
+   },
+   {
+    "text": "Seeking a role where building the product engineering organization, establishing the culture and delivering results are part of the same job",
+    "label": "unsupported",
+    "source": "none: no story or profile entry states this"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. unsupported: 'role where building the product engineering organization, establishing the culture, and delivering results are part of the same job' (in no story or the profile). supported: 18 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer -> Solution Architect -> Director -> Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "Role fields (Wellfound/Cendian: Software Engineer; architecting-atts-scalable-order-management-platform|att: Solution Architect; CIC story: Director); transition-story-why-im-exploring-opportunities|accenture 5PSummary ('from engineer to Director of the Cloud Innovation Center')"
+   },
+   {
+    "text": "At Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics 2003-2005",
+    "label": "supported",
+    "source": "Cendian stories Start_Date/End_Date (2003-12..2005-02)"
+   },
+   {
+    "text": "Worked at Wellfound Technology 2000-2001 and 2002-2003",
+    "label": "supported",
+    "source": "Wellfound stories Start_Date/End_Date (2000-06..2001-12; 2002-11..2003-10)"
+   },
+   {
+    "text": "Taught as adjunct at American InterContinental University 2003-2004 alongside full-time work",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application Role, dates, Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Brought product, engineering and design together in balanced teams rather than siloed handoffs",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Teams used pair programming, TDD, balanced teams and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client/customer relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('by FY23'); about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "$100M+ came through delivery, not a sales role",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action ('product and technology person rather than sales professional')"
+   },
+   {
+    "text": "Payments and banking modernization for JP Morgan Chase, RBC, Capital One and HSBC",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "JP Morgan payments and Salesforce platforms each rolled out across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Led AWS Launchpad combining hands-on labs, structured learning paths, and mentor-based training; over 200 professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task/Action/Result"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT with RAG, semantic search and modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Performance/5PSummary"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "Seeking a role where building the product engineering organization, establishing the culture and delivering results are part of the same job",
+    "label": "unsupported",
+    "source": "none: no story or profile entry states this"
+   },
+   {
+    "text": "Master's degree, Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "BA, French Language and Literature, Queens University of Charlotte",
+    "label": "supported",
+    "source": "profile.education"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. unsupported: 'role where building the product engineering organization, establishing the culture, and delivering results are part of the same job' (in no story or the profile). supported: 17 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer -> Solution Architect -> Director -> Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "Role fields (Wellfound/Cendian: Software Engineer; architecting-atts-scalable-order-management-platform|att: Solution Architect; CIC story: Director); transition-story-why-im-exploring-opportunities|accenture 5PSummary ('from engineer to Director of the Cloud Innovation Center')"
+   },
+   {
+    "text": "At Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Led modernization programs across banking, healthcare and telecommunications",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Full P&L accountability for both centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Hired/recruited, trained and developed practitioners across engineering, architecture, product and design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Teams used pair programming, TDD, balanced teams and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Centers delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivered output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client/customer relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('by FY23'); about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Worked at Wellfound Technology 2000-2001 and 2002-2003",
+    "label": "supported",
+    "source": "Wellfound stories Start_Date/End_Date (2000-06..2001-12; 2002-11..2003-10)"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics 2003-2005",
+    "label": "supported",
+    "source": "Cendian stories Start_Date/End_Date (2003-12..2005-02)"
+   },
+   {
+    "text": "Taught as adjunct at American InterContinental University 2003-2004 alongside full-time work",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application Role, dates, Situation"
+   },
+   {
+    "text": "Master's degree, Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "BA, French Language and Literature, Queens University of Charlotte",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT with RAG, semantic search and modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Performance/5PSummary"
+   },
+   {
+    "text": "Seeking a role where building the product engineering organization, establishing the culture and delivering results are part of the same job",
+    "label": "unsupported",
+    "source": "none: no story or profile entry states this"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. Answer gives little or no résumé content, only an offer to provide an overview. supported: 0 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. supported: 19 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer -> Solution Architect -> Director -> Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "Role fields (Wellfound/Cendian: Software Engineer; architecting-atts-scalable-order-management-platform|att: Solution Architect; CIC story: Director); transition-story-why-im-exploring-opportunities|accenture 5PSummary ('from engineer to Director of the Cloud Innovation Center')"
+   },
+   {
+    "text": "Worked at Wellfound Technology 2000-2001 and 2002-2003",
+    "label": "supported",
+    "source": "Wellfound stories Start_Date/End_Date (2000-06..2001-12; 2002-11..2003-10)"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics 2003-2005",
+    "label": "supported",
+    "source": "Cendian stories Start_Date/End_Date (2003-12..2005-02)"
+   },
+   {
+    "text": "At Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Taught as adjunct at American InterContinental University 2003-2004 alongside full-time work",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application Role, dates, Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Hired/recruited, trained and developed practitioners across engineering, architecture, product and design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for both centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Brought product, engineering and design together in balanced teams rather than siloed handoffs",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Teams used pair programming, TDD, balanced teams and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Adapted those practices for enterprise compliance, security and legacy systems",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Task"
+   },
+   {
+    "text": "Centers delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "Contributed to $100M+ in repeatable business by FY23 through delivery excellence and customer relationship building",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('by FY23'); about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Master's degree, Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "BA, French Language and Literature, Queens University of Charlotte",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT with RAG, semantic search and modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Performance/5PSummary"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "Pursuing senior leadership roles in platform engineering, AI-era transformation and enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. unsupported: 'role where building the product engineering organization, establishing the culture, and delivering results are part of the same job' (in no story or the profile). supported: 18 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer -> Solution Architect -> Director -> Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "Role fields (Wellfound/Cendian: Software Engineer; architecting-atts-scalable-order-management-platform|att: Solution Architect; CIC story: Director); transition-story-why-im-exploring-opportunities|accenture 5PSummary ('from engineer to Director of the Cloud Innovation Center')"
+   },
+   {
+    "text": "At Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Worked at Wellfound Technology 2000-2001 and 2002-2003",
+    "label": "supported",
+    "source": "Wellfound stories Start_Date/End_Date (2000-06..2001-12; 2002-11..2003-10)"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics 2003-2005",
+    "label": "supported",
+    "source": "Cendian stories Start_Date/End_Date (2003-12..2005-02)"
+   },
+   {
+    "text": "Taught as adjunct at American InterContinental University 2003-2004 alongside full-time work",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application Role, dates, Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Full P&L accountability for both centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Hired/recruited, trained and developed practitioners across engineering, architecture, product and design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Teams used pair programming, TDD, balanced teams and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Brought product, engineering and design together in balanced teams rather than siloed handoffs",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Centers delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivered output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client/customer relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('by FY23'); about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Master's degree, Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "BA, French Language and Literature, Queens University of Charlotte",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT with RAG, semantic search and modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Performance/5PSummary"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "Pursuing his next role as a builder: building the product engineering organization, establishing the culture, and delivering results as part of the same job",
+    "label": "unsupported",
+    "source": "none: no story or profile entry states this"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c16",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Section 3 fail: required closing (D9) missing; the answer does not point to About Matt (his profile) or LinkedIn. No file or link invented. supported: 18 claims (career dates from story dates, CIC figures from the CIC story, education from profile).",
+  "claims": [
+   {
+    "text": "Career progressed Software Engineer -> Solution Architect -> Director -> Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "Role fields (Wellfound/Cendian: Software Engineer; architecting-atts-scalable-order-management-platform|att: Solution Architect; CIC story: Director); transition-story-why-im-exploring-opportunities|accenture 5PSummary ('from engineer to Director of the Cloud Innovation Center')"
+   },
+   {
+    "text": "Worked at Wellfound Technology 2000-2001 and 2002-2003",
+    "label": "supported",
+    "source": "Wellfound stories Start_Date/End_Date (2000-06..2001-12; 2002-11..2003-10)"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics 2003-2005",
+    "label": "supported",
+    "source": "Cendian stories Start_Date/End_Date (2003-12..2005-02)"
+   },
+   {
+    "text": "At Accenture March 2005 to September 2023",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Taught as adjunct at American InterContinental University 2003-2004 alongside full-time work",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application Role, dates, Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Result"
+   },
+   {
+    "text": "Organization delivered at 4x velocity with zero-defect deployments through TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "Teams used pair programming, TDD, balanced teams and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client/customer relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result ('by FY23'); about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Payments and banking modernization for JP Morgan Chase, RBC, Capital One and HSBC",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Recovered troubled programs and architected cloud-native systems (prototype to production)",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result"
+   },
+   {
+    "text": "JP Morgan payments and Salesforce platforms each rolled out across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Master's degree, Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "BA, French Language and Literature, Queens University of Charlotte",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Graduate coursework, Romance Languages (Linguistics), University of Georgia",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Currently on sabbatical building MattGPT with RAG, semantic search and modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Performance/5PSummary"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "Pursuing senior leadership roles in platform engineering, AI-era transformation and enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

@@ -1,0 +1,18 @@
+[
+ {
+  "case": "c13",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "ruling": "ADA manifesto presented to client IT leadership is in thought-leadership-through-client-povs-and-published-enablement-content (Action); supported"
+ },
+ {
+  "case": "c18",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "ruling": "RBC adopted the data migration strategy is in thought-leadership-through-client-povs-and-published-enablement-content (Result); supported"
+ }
+]
