@@ -8,7 +8,7 @@ from config.debug import DEBUG
 from utils.formatting import _format_deep_dive, _format_key_points, _format_narrative
 
 # ============================================================================
-# Branch-aware rejection chip sets — LOCKED May 19, 2026 (MATTGPT-071)
+# Branch-aware rejection chip sets, LOCKED May 19, 2026 (MATTGPT-071)
 #
 # Each chip is (label, click-injected prompt). Step definitions in
 # tests/bdd/steps/test_ask_mattgpt.py read these constants as the
@@ -21,7 +21,7 @@ from utils.formatting import _format_deep_dive, _format_key_points, _format_narr
 # MattGPT/Strangler Fig self-referential responses).
 #
 # As of Red-B commit, render_no_match_banner does not yet consume these
-# constants — branch-aware rendering lands in the Blue commit.
+# constants; branch-aware rendering lands in the Blue commit.
 #
 # September 2, 2026: MATTGPT-234 reversed the no-chips rule on the
 # low_confidence branch. The three chip constants themselves stay
@@ -51,7 +51,7 @@ RULE_CHIPS = [
 PERSONAL_CHIPS = [
     ("What kind of leader is Matt?", "What kind of leader is Matt?"),
     ("How does Matt handle pressure?", "How does Matt show up when things go wrong?"),
-    ("Why does Matt do this work?", "What drives Matt — why does he do this work?"),
+    ("Why does Matt do this work?", "What drives Matt, and why does he do this work?"),
     (
         "What do former colleagues say?",
         "How would Matt's former teammates describe him?",
@@ -140,7 +140,7 @@ def render_sources_badges_static(
     chips_html = []
     _scores = st.session_state.get("__pc_last_ids__", {}) or {}
     for s in items:
-        label_full = f"{s['client']} — {s['title']}" if s['client'] else s['title']
+        label_full = f"{s['client']}: {s['title']}" if s['client'] else s['title']
         _score_key = str(s.get("id") or "")
         sc = _scores.get(_score_key)
         pct = f"{float(sc)*100:.0f}%" if isinstance(sc, int | float) else None
@@ -249,7 +249,7 @@ def render_sources_chips(
     batch: list[dict] = []
 
     def _chip_label(item: dict, idx: int) -> tuple[str, str]:
-        sep = " \u2009— "
+        sep = ": "
         base = (
             f"{item['client']}{sep}{item['title']}" if item["client"] else item["title"]
         )
@@ -389,10 +389,10 @@ def render_no_match_banner(
         context: "ask" for Ask Agy (shows suggestion chips),
                  "explore" for My Work (simpler message, no chips)
     """
-    # Primary message — differentiate by intent family.
+    # Primary message: differentiate by intent family.
     # Reads from BANNER_COPY (LOCKED May 19, 2026 per MATTGPT-071). The
     # fallback string preserves the legacy catch-all for unknown reasons
-    # (defensive — every known reason value has an explicit branch).
+    # (defensive: every known reason value has an explicit branch).
     if reason == "semantic_router:personal":
         msg = BANNER_COPY["personal"]
     elif reason == "semantic_router:out_of_scope":
@@ -414,15 +414,15 @@ def render_no_match_banner(
     st.markdown(
         """
         <style>
-        /* Rejection banner — design spec per rejection_banner_wireframe.html
+        /* Rejection banner: design spec per rejection_banner_wireframe.html
            (May 21, 2026). Three contracts:
              1. Chips render INSIDE the lavender bubble (containment fix).
              2. Responsive grid: 4 columns ≥1280px, 2 columns 768-1279px,
                 1 column <768px.
              3. Text wraps with uniform chip height via flex centering +
-                min-height — no truncation. */
+                min-height, with no truncation. */
 
-        /* Bubble container — Streamlit container with key=
+        /* Bubble container: Streamlit container with key=
            {key_prefix}_rejection_bubble gets the lavender backdrop. Chips
            and banner text both render as children of this container.
            Uses --banner-info-* CSS variables from global_styles.py which
@@ -457,7 +457,7 @@ def render_no_match_banner(
             margin-top: 8px;
         }
 
-        /* Chip grid — work WITH Streamlit's flex layout rather than
+        /* Chip grid: work WITH Streamlit's flex layout rather than
            overriding to grid (which May 22, 2026 visual test confirmed
            gets beaten by Streamlit's inline display:flex). Use flex-wrap
            on the row + flex-basis on each column to control responsive
@@ -486,10 +486,10 @@ def render_no_match_banner(
             }
         }
 
-        /* Chip button — spec colors, text wrap, uniform height via
+        /* Chip button: spec colors, text wrap, uniform height via
            min-height + flex centering. !important needed to override
            Streamlit's default secondary-button cascade. */
-        /* Chip button — uses CSS variables so light/dark mode is handled
+        /* Chip button: uses CSS variables so light/dark mode is handled
            automatically by global_styles.py. --bg-card flips white →
            dark-purple between modes; --banner-info-border flips purple
            shades to maintain contrast; --banner-info-text flips deep →
@@ -510,7 +510,7 @@ def render_no_match_banner(
             max-width: 320px !important;
             line-height: 1.3 !important;
         }
-        /* Lock inner text-element styling — Streamlit wraps button text
+        /* Lock inner text-element styling: Streamlit wraps button text
            in a <p> or <div> that carries its own theme-derived styles. */
         [class*='_suggest_no_match_'] button p,
         [class*='_suggest_no_match_'] button div {
@@ -530,7 +530,7 @@ def render_no_match_banner(
     # st-key class drives the bubble background; banner text and chip
     # widgets are children of the same container, visually contained.
     with st.container(key=f"{key_prefix}_rejection_bubble"):
-        # Banner HTML — wrapped in <div class="no-match-banner"> as a
+        # Banner HTML: wrapped in <div class="no-match-banner"> as a
         # presence marker for BDD selectors (the lavender background comes
         # from the outer Streamlit container, not this inner div).
         banner_html = (
@@ -541,7 +541,7 @@ def render_no_match_banner(
         if debug_text:
             banner_html += f'<div class="no-match-banner-debug">{debug_text}</div>'
 
-        # Ask Agy context: no hint text — chips speak for themselves.
+        # Ask Agy context: no hint text; chips speak for themselves.
         # My Work context: branch-aware hint text (no chips render
         # there, so the hint is the only follow-up affordance).
         if context != "ask":
@@ -568,7 +568,7 @@ def render_no_match_banner(
             elif reason == "low_confidence":
                 suggestions = OUT_OF_SCOPE_CHIPS
             else:
-                # Unknown reason — legacy generic chip set as defensive fallback
+                # Unknown reason: legacy generic chip set as defensive fallback
                 suggestions = [
                     (
                         "Payments modernization",

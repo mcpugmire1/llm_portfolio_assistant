@@ -18,11 +18,30 @@ from ui.components.ask_mattgpt_header import (
 )
 from ui.components.how_agy_dialog import render_how_agy_dialog
 from ui.components.how_i_built_dialog import render_how_i_built_dialog
-from ui.components.thinking_indicator import render_thinking_indicator
 from ui.components.why_agy_dialog import render_why_agy_dialog
 from ui.image_assets import AGY_AVATAR_B64
-from ui.pages.ask_mattgpt.backend_service import send_to_backend
 from ui.pages.ask_mattgpt.styles import get_landing_css
+
+
+def _hand_off_to_conversation(query: str, force_answer: bool = False) -> None:
+    """Start a fresh conversation with this question (widget callback).
+
+    Runs before the script, so the run the tap or Enter starts already routes
+    to the conversation view (seed_prompt), which answers below the question.
+    Handing off from the landing script instead took extra runs, each ending
+    in st.rerun(), and the landing hero blanked and its elements lingered
+    under the conversation between them. Suggestion chips set
+    __ask_force_answer__ as before; typed questions still meet the nonsense
+    filter.
+    """
+    query = (query or "").strip()
+    if not query:
+        return
+    st.session_state["ask_transcript"] = []
+    st.session_state["seed_prompt"] = query
+    st.session_state["ask_input_value"] = query
+    if force_answer:
+        st.session_state["__ask_force_answer__"] = True
 
 
 def render_landing_page(stories: list[dict]):
@@ -193,13 +212,14 @@ def render_landing_page(stories: list[dict]):
 
             # Hidden receivers: off-screen via CSS, identical click logic for both paths.
             for i, (_icon, _short_label, q) in enumerate(qs):
-                if st.button("", key=f"suggested_{i}", disabled=disabled):
-                    st.session_state["ask_transcript"] = []
-                    st.session_state["processing_suggestion"] = True
-                    st.session_state["pending_query"] = q
-                    st.session_state["ask_input_value"] = q
-                    st.session_state["__ask_force_answer__"] = True
-                    st.rerun()
+                st.button(
+                    "",
+                    key=f"suggested_{i}",
+                    disabled=disabled,
+                    on_click=_hand_off_to_conversation,
+                    args=(q,),
+                    kwargs={"force_answer": True},
+                )
 
             n_chips = len(qs)
             components.html(
@@ -230,28 +250,8 @@ def render_landing_page(stories: list[dict]):
                 height=0,
             )
 
-    # === THINKING INDICATOR ===
-    loading_placeholder = st.empty()
-
-    if st.session_state.get("processing_suggestion"):
-        with loading_placeholder:
-            render_thinking_indicator()
-
     # === INPUT AREA ===
     st.markdown('<div class="landing-input-container">', unsafe_allow_html=True)
-
-    # Check if user pressed Enter in the text input (on_change triggers)
-    if st.session_state.get("landing_input_submitted"):
-        user_input_value = st.session_state.get("landing_input", "")
-        if user_input_value and not st.session_state.get("processing_suggestion"):
-            # Set state and trigger rerun to show loading state
-            st.session_state["ask_transcript"] = []
-            st.session_state["processing_suggestion"] = True
-            st.session_state["pending_query"] = user_input_value
-            st.session_state["ask_input_value"] = user_input_value
-            st.session_state["landing_input_submitted"] = False
-            st.rerun()
-        st.session_state["landing_input_submitted"] = False
 
     # Inject mobile CSS directly here to ensure it loads
     st.markdown(
@@ -312,99 +312,29 @@ def render_landing_page(stories: list[dict]):
                 key="landing_input",
                 label_visibility="collapsed",
                 placeholder="Ask about projects, methods, or outcomes...",
-                on_change=lambda: st.session_state.update(
-                    {"landing_input_submitted": True}
+                on_change=lambda: _hand_off_to_conversation(
+                    st.session_state.get("landing_input", "")
                 ),
             )
 
         with col_button:
             # Disable button if input is empty OR if we're currently processing
             button_disabled = not user_input or disabled
-            if st.button(
+            st.button(
                 "Ask Agy 🐾",
                 key="landing_ask",
                 type="primary",
                 disabled=button_disabled,
-            ):
-                if user_input:
-                    # Set state and trigger rerun to show loading state
-                    # NOTE: Don't set "landing_input" - it's controlled by the widget
-                    st.session_state["ask_transcript"] = []
-                    st.session_state["processing_suggestion"] = True
-                    st.session_state["pending_query"] = user_input
-                    st.session_state["ask_input_value"] = user_input
-                    st.rerun()
+                on_click=lambda: _hand_off_to_conversation(
+                    st.session_state.get("landing_input", "")
+                ),
+            )
 
     st.markdown('</div>', unsafe_allow_html=True)
     st.markdown(
-        '<p class="powered-by-text">Powered by OpenAI GPT-4o with semantic search across 100+ case studies</p>',
+        '<p class="powered-by-text">Powered by OpenAI with semantic search across 100+ case studies</p>',
         unsafe_allow_html=True,
     )
-
-    # === PROCESS PENDING QUERY (if in processing state) ===
-    # Use 2-step process to ensure indicator renders BEFORE blocking backend call
-    if st.session_state.get("processing_suggestion") and st.session_state.get(
-        "pending_query"
-    ):
-        query = st.session_state.get("pending_query")
-
-        # Step 1: Force rerun to show indicator before blocking call
-        if not st.session_state.get("_indicator_shown"):
-            st.session_state["_indicator_shown"] = True
-            st.rerun()
-
-        # Step 2: Indicator shown in previous rerun, now process query
-        result = send_to_backend(query, {}, None, stories)
-        st.session_state.pop("_indicator_shown", None)
-
-        # Add user message to transcript
-        st.session_state["ask_transcript"].append({"Role": "user", "text": query})
-
-        # Check if nonsense was detected
-        if st.session_state.get("ask_last_reason"):
-            # Nonsense detected - add banner entry to transcript
-            reason = st.session_state.get("ask_last_reason", "")
-            query_text = st.session_state.get("ask_last_query", "")
-            overlap = st.session_state.get("ask_last_overlap", None)
-
-            st.session_state["ask_transcript"].append(
-                {
-                    "type": "banner",
-                    "Role": "assistant",
-                    "reason": reason,
-                    "query": query_text,
-                    "overlap": overlap,
-                }
-            )
-
-            # Clear flags after adding to transcript
-            st.session_state.pop("ask_last_reason", None)
-            st.session_state.pop("ask_last_query", None)
-            st.session_state.pop("ask_last_overlap", None)
-        else:
-            # Normal answer - add conversational answer (wireframe style)
-            sources = result.get("sources", [])
-            answer_text = result.get("answer_md") or result.get("answer", "")
-            query_intent = st.session_state.get("__ask_query_intent__")
-
-            st.session_state["ask_transcript"].append(
-                {
-                    "type": "conversational",
-                    "Role": "assistant",
-                    "text": answer_text,
-                    "sources": sources,
-                    "query_intent": query_intent,
-                    "profile_categories": result.get("profile_categories") or [],
-                }
-            )
-
-        # Clear processing state
-        st.session_state["processing_suggestion"] = False
-        st.session_state["pending_query"] = None
-        loading_placeholder.empty()
-
-        # Rerun to show conversation view
-        st.rerun()
 
     # === ADD FOOTER ===
     from ui.components.footer import render_footer

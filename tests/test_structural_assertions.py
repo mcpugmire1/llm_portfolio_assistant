@@ -43,7 +43,7 @@ other failures pre-existing without an isolation run.
 Bucket A conversion history:
 - Aug 30, 2026: TestEntityGateThreshold moved from LLM-text assertions
   (refusal-phrase list, length > 50) to retrieval-observable assertions
-  (rag_answer's rejection_reason field). Now deterministic; no longer on
+  (the pipeline's rejection_reason field). Now deterministic; no longer on
   this list. Three cases (amex alias, AT&T, Norfolk Southern) xfail
   against MATTGPT-219 -- router misroutes real clients to out_of_scope,
   surfaced by the deterministic assertion.
@@ -57,6 +57,7 @@ import sys
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
+from unittest.mock import patch
 
 import pytest
 
@@ -420,21 +421,20 @@ def stories():
 
 @pytest.fixture(scope="module")
 def rag_fn(stories):
-    """Get RAG function with mocked streamlit and synced metadata."""
-    from unittest.mock import MagicMock, patch
+    """The answer pipeline under test: agy_answer() (MATTGPT-275), called in
+    rag_answer()'s old (query, filters, stories) shape so the tests are
+    unchanged. filters is ignored: agy_answer() takes none."""
+    from ui.pages.ask_mattgpt.backend_service import (
+        agy_answer,
+        sync_portfolio_metadata,
+    )
 
-    mock_st = MagicMock()
-    mock_st.session_state = {}
+    sync_portfolio_metadata(stories)
 
-    with patch("streamlit.session_state", mock_st.session_state):
-        with patch("ui.pages.ask_mattgpt.backend_service.st", mock_st):
-            from ui.pages.ask_mattgpt.backend_service import (
-                rag_answer,
-                sync_portfolio_metadata,
-            )
+    def answer(query, filters, stories):
+        return agy_answer(query, stories)
 
-            sync_portfolio_metadata(stories)
-            return rag_answer
+    return answer
 
 
 # =============================================================================
@@ -747,7 +747,7 @@ class TestEntityGateThreshold:
     queries like "Tell me about the CIC" will be incorrectly blocked.
 
     Assertions read the retrieval-observable ``rejection_reason`` field from
-    the rag_answer return dict. That field is None iff the query reached the
+    the pipeline's return dict. That field is None iff the query reached the
     LLM (retrieval side didn't reject it), and mirrors ask_last_reason exactly
     on every rejection path. Previous versions asserted on LLM response text
     (refusal phrase list, length > 50), which flaked on LLM word choice --
@@ -801,8 +801,12 @@ class TestEntityGateThreshold:
             "tags": [],
         }
 
-        rag_result = rag_fn(query, filters, stories)
+        from ui.pages.ask_mattgpt import backend_service as bs
 
+        with patch.object(bs, "_openai_client") as answering_model:
+            rag_result = rag_fn(query, filters, stories)
+
+        assert not answering_model.called, f"answering model was called for {query!r}"
         assert rag_result.get("rejection_reason") is not None, (
             f"Garbage query was NOT blocked (threshold too low?)\n"
             f"Query: {query}\n"
@@ -842,9 +846,13 @@ def run_structural_baseline_report():
     with patch("streamlit.session_state", mock_st.session_state):
         with patch("ui.pages.ask_mattgpt.backend_service.st", mock_st):
             from ui.pages.ask_mattgpt.backend_service import (
-                rag_answer,
+                agy_answer,
                 sync_portfolio_metadata,
             )
+
+            def rag_answer(query, filters, stories):
+                # agy_answer() in rag_answer()'s old call shape (MATTGPT-275).
+                return agy_answer(query, stories)
 
             sync_portfolio_metadata(stories)
 

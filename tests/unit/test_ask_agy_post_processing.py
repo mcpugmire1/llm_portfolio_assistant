@@ -1,7 +1,7 @@
-"""MATTGPT-250 Red: post-processing additions in _generate_agy_response.
+"""MATTGPT-250 Red: post-processing additions in _postprocess_agy_text().
 
 Class E: number_patterns bolds scale units. Three inputs run through
-  _generate_agy_response with the LLM output mocked; assertions inspect
+  _postprocess_agy_text() on a fixed model text; assertions inspect
   the post-processed string.
     E1: pre-bolded "**16 weeks**" -- must survive intact, no split.
     E2: pre-bolded "**150+ practitioners**" -- must survive intact,
@@ -23,8 +23,6 @@ pipeline runs. No pattern-in-list checks.
 """
 
 import logging
-import os
-from unittest.mock import MagicMock, patch
 
 import pytest
 
@@ -38,48 +36,23 @@ _NEIGHBOR = "The rollout finished on schedule."
 
 
 # ---------------------------------------------------------------------------
-# Shared fixture: run _generate_agy_response with a controlled LLM output
+# Shared fixture: run _postprocess_agy_text() with a controlled LLM output
 # ---------------------------------------------------------------------------
 
 
 @pytest.fixture(scope="module")
 def real_story():
-    """First story from the corpus. Satisfies _generate_agy_response's
-    story-context builder; LLM output is mocked, so the story choice
-    does not affect assertions."""
+    """First story from the corpus, passed as the answer's story. The
+    model text is fixed, so the story choice does not affect assertions."""
     return load_stories("echo_star_stories_nlp.jsonl")[0]
 
 
 def _run_agy_with_llm_text(llm_text: str, real_story: dict) -> str:
-    """Run _generate_agy_response with openai.OpenAI patched to return
-    the given text as completion content. Returns the post-processed
-    response string.
-
-    Environment variables satisfy the OpenAI() constructor path before
-    the mock intercepts the actual construction.
-    """
-    fake_completion = MagicMock()
-    fake_completion.choices = [MagicMock()]
-    fake_completion.choices[0].message.content = llm_text
-    fake_openai = MagicMock()
-    fake_openai.chat.completions.create.return_value = fake_completion
-
-    env = {
-        "OPENAI_API_KEY": "test-key",
-        "OPENAI_PROJECT_ID": "test-proj",
-        "OPENAI_ORG_ID": "test-org",
-    }
-
-    with (
-        patch.dict(os.environ, env, clear=False),
-        patch("openai.OpenAI", return_value=fake_openai),
-        patch.object(bs, "DEBUG", False),
-    ):
-        return bs._generate_agy_response(
-            question="What scale of teams has Matt led?",
-            ranked_stories=[real_story],
-            answer_context="fallback context (unused when LLM call succeeds)",
-        )
+    """Run the model's text through _postprocess_agy_text(), the
+    post-processor agy_answer() applies to every answer. Returns the
+    post-processed string."""
+    text, _categories = bs._postprocess_agy_text(llm_text, [real_story])
+    return text
 
 
 # ---------------------------------------------------------------------------
@@ -145,6 +118,42 @@ class TestNumberPatternsBoldScaleUnits:
             f"malformed split '**4**0' found in result -- number pattern "
             f"broke '40' apart. Result: {result!r}"
         )
+
+
+class TestBoldSpansNotSplit:
+    """MATTGPT-275 gate: about 12% of answers on every arm showed bold split
+    inside a number or word (gate_20261014_194020). The model's own bold
+    spans stay as written; an unbolded number is bolded whole."""
+
+    @pytest.mark.parametrize(
+        "text",
+        [
+            "workflows for **135,000+ clients** across",
+            "with **99.97% uptime**, and",
+            "roughly **3 years and 10 months**.",
+        ],
+    )
+    def test_a_model_bold_span_is_left_as_written(self, text, real_story):
+        assert text in _run_agy_with_llm_text(text, real_story)
+
+    def test_a_client_name_inside_a_model_bold_span_is_left_as_written(self):
+        story = next(
+            s
+            for s in load_stories("echo_star_stories_nlp.jsonl")
+            if s.get("Client") == "Fortune 500 Clients"
+        )
+        text = "across **15+ Fortune 500 clients**, contributing"
+        assert text in _run_agy_with_llm_text(text, story)
+
+    @pytest.mark.parametrize(
+        "text, bolded",
+        [
+            ("workflows for 135,000+ clients across", "**135,000+ clients**"),
+            ("with 99.97% uptime, and", "**99.97%**"),
+        ],
+    )
+    def test_an_unbolded_number_is_bolded_whole(self, text, bolded, real_story):
+        assert bolded in _run_agy_with_llm_text(text, real_story)
 
 
 # ---------------------------------------------------------------------------

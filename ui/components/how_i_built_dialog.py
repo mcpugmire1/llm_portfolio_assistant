@@ -12,6 +12,8 @@ via active_dialog = "how_i_built".
 import streamlit as st
 import streamlit.components.v1 as components
 
+from config.constants import ASK_ANSWER_MODEL
+
 
 @st.dialog("How I Built MattGPT", width="large")
 def render_how_i_built_dialog():
@@ -50,14 +52,14 @@ def render_how_i_built_dialog():
 
     # 2. Tech Stack
     st.markdown(
-        """<div class="deep-dive-card">
+        f"""<div class="deep-dive-card">
     <h3 style="margin:0 0 8px;">Tech Stack</h3>
     <div class="tech-grid" style="grid-template-columns:repeat(3,1fr);">
         <div class="tech-item"><div style="font-size:28px;">🐍</div><div style="font-size:11px;font-weight:600;">Python 3.11</div></div>
         <div class="tech-item"><div style="font-size:28px;">⚡</div><div style="font-size:11px;font-weight:600;">Streamlit</div></div>
-        <div class="tech-item"><div style="font-size:28px;">⊙</div><div style="font-size:11px;font-weight:600;">OpenAI GPT-4o</div></div>
+        <div class="tech-item"><div style="font-size:28px;">⊙</div><div style="font-size:11px;font-weight:600;">OpenAI {ASK_ANSWER_MODEL}</div></div>
         <div class="tech-item"><div style="font-size:28px;">📌</div><div style="font-size:11px;font-weight:600;">Pinecone</div></div>
-        <div class="tech-item"><div style="font-size:28px;">🧠</div><div style="font-size:11px;font-weight:600;">text-embedding-3-small</div></div>
+        <div class="tech-item"><div style="font-size:28px;">🧠</div><div style="font-size:11px;font-weight:600;">OpenAI embeddings</div></div>
         <div class="tech-item"><div style="font-size:28px;">🔀</div><div style="font-size:11px;font-weight:600;">GitHub Webhook</div></div>
     </div>
 </div>""",
@@ -71,10 +73,10 @@ def render_how_i_built_dialog():
     <p style="font-size:14px;color:var(--text-secondary);margin:0 0 16px;">How data moves through the system, from raw Excel stories to a deployed RAG pipeline.</p>
     <div class="flow-grid">
         <div class="flow-step"><div class="flow-num">1</div><div class="flow-step-title">Data Ingestion</div><div class="flow-step-desc">Excel → JSONL with STAR format</div></div>
-        <div class="flow-step"><div class="flow-num">2</div><div class="flow-step-title">Embeddings</div><div class="flow-step-desc">OpenAI text-embedding-3-small</div></div>
+        <div class="flow-step"><div class="flow-num">2</div><div class="flow-step-title">Embeddings</div><div class="flow-step-desc">OpenAI embeddings</div></div>
         <div class="flow-step"><div class="flow-num">3</div><div class="flow-step-title">Vector Store</div><div class="flow-step-desc">Pinecone with metadata filters</div></div>
-        <div class="flow-step"><div class="flow-num">4</div><div class="flow-step-title">Intent &amp; Entity</div><div class="flow-step-desc">Query classification + entity pinning</div></div>
-        <div class="flow-step"><div class="flow-num">5</div><div class="flow-step-title">RAG + GPT-4o</div><div class="flow-step-desc">XML-isolated context → generation</div></div>
+        <div class="flow-step"><div class="flow-num">4</div><div class="flow-step-title">Intent</div><div class="flow-step-desc">Query classification</div></div>
+        <div class="flow-step"><div class="flow-num">5</div><div class="flow-step-title">RAG</div><div class="flow-step-desc">XML-isolated context → generation</div></div>
     </div>
 </div>""",
         unsafe_allow_html=True,
@@ -86,11 +88,11 @@ def render_how_i_built_dialog():
     <h3 style="margin:0 0 24px;">Per-query Runtime Pipeline</h3>
     <p style="font-size:14px;color:var(--text-secondary);margin:0 0 14px;">What happens on every query, from the moment a user types to the moment Agy responds.</p>
     <div class="hib-runtime-wrapper">
-        <div class="hib-runtime-step"><div class="hib-runtime-num">1</div><div class="hib-runtime-card"><h4>Filters irrelevant/noisy input</h4><ul><li>Regex-based nonsense rejection, sub-millisecond</li><li>Catches homework asks, gibberish, off-domain queries</li><li>No LLM cost for rejected queries</li></ul></div></div>
-        <div class="hib-runtime-step"><div class="hib-runtime-num">2</div><div class="hib-runtime-card"><h4>Detects interview intent</h4><ul><li>Semantic router classifies into 15 intent families</li><li>Background, behavioral, technical, leadership, synthesis</li><li>Detects out-of-scope and personal queries before retrieval</li></ul></div></div>
-        <div class="hib-runtime-step"><div class="hib-runtime-num">3</div><div class="hib-runtime-card"><h4>Retrieves grounded experience stories</h4><ul><li>Pinecone top-K vector search</li><li>text-embedding-3-small, 1536 dimensions</li><li>Entity-aware pinning for known clients, employers, divisions</li></ul></div></div>
-        <div class="hib-runtime-step"><div class="hib-runtime-num">4</div><div class="hib-runtime-card"><h4>Refuses weak matches / avoids fabrication</h4><ul><li>Confidence gate inspects top match similarity</li><li>Below threshold, returns a "no strong matches" response</li><li>Prevents low-quality fabrication</li></ul></div></div>
-        <div class="hib-runtime-step"><div class="hib-runtime-num">5</div><div class="hib-runtime-card"><h4>Synthesizes a tailored interview response</h4><ul><li>GPT-4o grounded synthesis</li><li>primary_story + supporting_story XML tags prevent cross-story bleed</li><li>STAR format, distinctive phrases preserved verbatim</li></ul></div></div>
+        <div class="hib-runtime-step"><div class="hib-runtime-num">1</div><div class="hib-runtime-card"><h4>Filters irrelevant/noisy input</h4><ul><li>Regex-based nonsense rejection, sub-millisecond</li><li>Catches homework asks and off-domain queries</li><li>No LLM cost for rejected queries</li></ul></div></div>
+        <div class="hib-runtime-step"><div class="hib-runtime-num">2</div><div class="hib-runtime-card"><h4>Detects interview intent</h4><ul><li>Semantic router classifies intent</li><li>Background, behavioral, technical, leadership, synthesis</li><li>Detects out-of-scope and personal queries before retrieval</li></ul></div></div>
+        <div class="hib-runtime-step"><div class="hib-runtime-num">3</div><div class="hib-runtime-card"><h4>Retrieves grounded experience stories</h4><ul><li>Pinecone top-K vector search</li><li>Vector embeddings</li><li>A search query written by the model from the question and the conversation, every turn</li></ul></div></div>
+        <div class="hib-runtime-step"><div class="hib-runtime-num">4</div><div class="hib-runtime-card"><h4>Answers from retrieved stories, Matt's profile and the conversation</h4><ul><li>Every turn retrieves before answering</li><li>Says plainly when no story covers the question</li><li>Reduces fabrication</li></ul></div></div>
+        <div class="hib-runtime-step"><div class="hib-runtime-num">5</div><div class="hib-runtime-card"><h4>Synthesizes a tailored interview response</h4><ul><li>Grounded synthesis</li><li>Each retrieved story passed separately, so the model can tell them apart</li><li>STAR format, distinctive phrases preserved verbatim</li></ul></div></div>
     </div>
 </div>""",
         unsafe_allow_html=True,
@@ -111,7 +113,7 @@ def render_how_i_built_dialog():
     <div class="detail-card">
         <h4>Embeddings Strategy</h4>
         <ul>
-            <li><strong>Model:</strong> OpenAI text-embedding-3-small (1536 dim)</li>
+            <li><strong>Model:</strong> OpenAI embeddings</li>
             <li><strong>Chunking:</strong> Full STAR story per vector</li>
             <li><strong>Metadata:</strong> Category, client, themes indexed</li>
             <li><strong>Refresh:</strong> Excel → JSONL → enrich → embed → Pinecone</li>
@@ -128,9 +130,9 @@ def render_how_i_built_dialog():
         </ul>
     </div>
     <div class="detail-card">
-        <h4>RAG with GPT-4o</h4>
+        <h4>RAG</h4>
         <ul>
-            <li><strong>Context Isolation:</strong> XML tags prevent cross-story bleed</li>
+            <li><strong>Context Isolation:</strong> XML tags, so the model can tell stories apart</li>
             <li><strong>Texture Preservation:</strong> Quotes distinctive phrases verbatim</li>
             <li><strong>Synthesis Mode:</strong> Multi-theme responses for broad queries</li>
             <li><strong>Source Citations:</strong> Links to full STAR stories</li>

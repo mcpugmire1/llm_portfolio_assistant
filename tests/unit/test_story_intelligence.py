@@ -4,7 +4,12 @@ Unit tests for story_intelligence.py
 Tests for story theme inference, context building, and guidance generation.
 """
 
+from unittest.mock import patch
+
 import pytest
+
+from ui.pages.ask_mattgpt import backend_service as bs
+from ui.pages.ask_mattgpt.story_intelligence import build_story_context_for_rag
 
 
 class TestInferStoryTheme:
@@ -94,63 +99,6 @@ class TestBuildStoryContextForRAG:
         context = build_story_context_for_rag({})
 
         assert isinstance(context, str)
-
-
-class TestGetThemeGuidance:
-    """Tests for get_theme_guidance() function."""
-
-    def test_returns_guidance_for_theme(self):
-        """Should return guidance string for a valid theme."""
-        try:
-            from ui.pages.ask_mattgpt.story_intelligence import get_theme_guidance
-        except ImportError:
-            pytest.skip("get_theme_guidance not available")
-
-        guidance = get_theme_guidance("Talent & Enablement")  # One of 7 themes
-
-        # Should return some guidance string
-        assert guidance is not None
-        assert isinstance(guidance, str)
-        assert len(guidance) > 0
-
-    def test_returns_default_for_unknown_theme(self):
-        """Should return default guidance for unknown theme."""
-        try:
-            from ui.pages.ask_mattgpt.story_intelligence import get_theme_guidance
-        except ImportError:
-            pytest.skip("get_theme_guidance not available")
-
-        guidance = get_theme_guidance("Unknown Theme")
-
-        # Should still return something (default to Execution & Delivery)
-        assert guidance is not None
-        assert isinstance(guidance, str)
-
-    def test_guidance_contains_theme_specifics(self):
-        """Guidance should contain theme-specific keywords."""
-        try:
-            from ui.pages.ask_mattgpt.story_intelligence import get_theme_guidance
-        except ImportError:
-            pytest.skip("get_theme_guidance not available")
-
-        # Check that each theme has distinct guidance
-        talent_guidance = get_theme_guidance("Talent & Enablement")
-        assert (
-            "capability" in talent_guidance.lower()
-            or "mentorship" in talent_guidance.lower()
-        )
-
-        execution_guidance = get_theme_guidance("Execution & Delivery")
-        assert (
-            "delivery" in execution_guidance.lower()
-            or "production" in execution_guidance.lower()
-        )
-
-        emerging_guidance = get_theme_guidance("Emerging Tech")
-        assert (
-            "innovation" in emerging_guidance.lower()
-            or "emerging" in emerging_guidance.lower()
-        )
 
 
 class TestGetAllThemes:
@@ -286,3 +234,34 @@ class TestGetThemeEmoji:
 
         # All emojis should be unique
         assert len(set(emojis)) == len(emojis)
+
+
+class TestStoryDates:
+    """MATTGPT-275 gate: the search tool's story text carries the story's
+    Start_Date and End_Date, so duration and "when" questions can be
+    answered from the stories."""
+
+    STORY = {
+        "Title": "ZZZ_SENTINEL Title",
+        "Client": "ZZZ Client",
+        "Start_Date": "2019-11",
+        "End_Date": "2023-09",
+    }
+
+    def test_both_dates_give_a_dates_line(self):
+        assert "[DATES]: 2019-11 to 2023-09" in build_story_context_for_rag(self.STORY)
+
+    def test_a_missing_end_date_gives_no_dates_line(self):  # guard; passes at Red
+        story = {k: v for k, v in self.STORY.items() if k != "End_Date"}
+        assert "[DATES]" not in build_story_context_for_rag(story)
+
+    def test_the_search_tool_output_carries_the_dates(self):
+        with patch.object(
+            bs,
+            "semantic_search",
+            return_value={"results": [self.STORY], "top_score": 0.5},
+        ):
+            output, _found, _score = bs._run_search_tool(
+                '{"query": "zzz"}', [self.STORY]
+            )
+        assert "[DATES]: 2019-11 to 2023-09" in output

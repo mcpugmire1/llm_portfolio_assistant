@@ -187,7 +187,6 @@ pytest -m "not slow"
 ## Next Steps
 
 1. [ ] Run existing unit tests, fix any import issues
-2. [ ] Add tests for `diversify_results()` once implemented
 3. [ ] Add integration tests for Pinecone search
 4. [ ] Set up visual regression baseline screenshots
 5. [ ] Add GitHub Actions CI workflow

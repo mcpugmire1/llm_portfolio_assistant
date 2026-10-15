@@ -386,7 +386,8 @@ GOLDEN_QUERIES = {
             "id": 65,
             "query": "Why hire Matt?",
             "expected_behavior": "synthesis",
-            "min_pool_size": 10,
+            "min_source_stories": 5,
+            "min_source_named_clients": 3,
             "note": (
                 "MATTGPT-218: Title substring match must not collapse the "
                 "synthesis pool. Under the pre-fix bug this query matched "
@@ -398,7 +399,10 @@ GOLDEN_QUERIES = {
                 "well below the natural pool (21), so it fires loudly on "
                 "regression without tripping on normal pool variation. "
                 "min_clients does not work here -- see Red addendum "
-                "(min_clients reads LLM naming choice, not pool composition)."
+                "(min_clients reads LLM naming choice, not pool composition). "
+                "Checked on the answer's sources since MATTGPT-275 "
+                "(agy_answer() has no pool). Until MATTGPT-128 ships, sources "
+                "are every story the searches returned."
             ),
             "category": "intent",
         },
@@ -611,7 +615,7 @@ GOLDEN_QUERIES = {
         },
     ],
     # =========================================================================
-    # Entity Detection (9) - Regression Tests for detect_entity()
+    # Entity detection queries (detect_entity() removed in MATTGPT-275; kept as query text)
     # Tests that common words don't incorrectly scope queries, while proper
     # nouns correctly trigger entity filtering.
     # =========================================================================
@@ -656,7 +660,7 @@ GOLDEN_QUERIES = {
             "note": "Innovation as concept, not entity - should not scope",
             "category": "entity_detection",
         },
-        # CIC alias - intentionally triggers entity detection via ENTITY_ALIASES
+        # CIC alias (the alias map was removed in MATTGPT-275)
         # (Mar 2026: semantic search alone ranked TICARA above the CIC story)
         {
             "id": 35,
@@ -1091,10 +1095,6 @@ def evaluate_query(
 
         response = rag_result.get("answer_md", "")
         result.response = response
-        # MATTGPT-218: surface pool_size for min_pool_size assertions.
-        # rag_answer exposes the operative retrieval pool (Pinecone results for
-        # standard, synthesis_pool for synthesis).
-        result.details["pool_size"] = rag_result.get("pool_size", 0)
 
         if not response and query_spec.get("expected_behavior") != "blocked":
             result.error = "Empty response"
@@ -1140,17 +1140,18 @@ def evaluate_query(
 
             if behavior == "synthesis":
                 # Synthesis can be asserted on named-client diversity in the response
-                # (min_clients) and/or the operative pool size (min_pool_size).
-                # Both are optional; whichever is specified must pass.
+                # (min_clients) and/or the answer's sources (min_source_stories,
+                # min_source_named_clients). Both are optional; whichever is
+                # specified must pass.
                 # Guard: at least one must be specified so new synthesis queries
                 # don't fall through and pass trivially.
                 if (
                     "min_clients" not in query_spec
-                    and "min_pool_size" not in query_spec
+                    and "min_source_stories" not in query_spec
                 ):
                     raise ValueError(
                         f"Synthesis query Q{query_spec.get('id')} must specify "
-                        "at least one of min_clients or min_pool_size"
+                        "at least one of min_clients or min_source_stories"
                     )
                 synth_pass = True
                 if "min_clients" in query_spec:
@@ -1160,13 +1161,25 @@ def evaluate_query(
                     result.checks["synthesis_mode"] = client_pass
                     result.details["client_count"] = client_count
                     synth_pass = synth_pass and client_pass
-                if "min_pool_size" in query_spec:
-                    # MATTGPT-218: pool_size assertion catches pool collapse
-                    # (e.g. Title substring match hard-filtering synthesis themes).
-                    pool_size = result.details.get("pool_size", 0)
-                    pool_pass = pool_size >= query_spec["min_pool_size"]
-                    result.checks["pool_size_check"] = pool_pass
-                    synth_pass = synth_pass and pool_pass
+                if "min_source_stories" in query_spec:
+                    # MATTGPT-218: catches a collapse to one story, checked on
+                    # the answer's sources since MATTGPT-275. Named clients only
+                    # (is_generic_client() excludes "Fortune 500 Clients" etc.).
+                    from utils.client_utils import is_generic_client
+
+                    sources = rag_result.get("sources") or []
+                    named = {
+                        (s.get("client") or "").strip()
+                        for s in sources
+                        if not is_generic_client(s.get("client") or "")
+                    }
+                    result.details["source_stories"] = len(sources)
+                    result.details["source_named_clients"] = len(named)
+                    source_pass = len(sources) >= query_spec[
+                        "min_source_stories"
+                    ] and len(named) >= query_spec.get("min_source_named_clients", 0)
+                    result.checks["source_check"] = source_pass
+                    synth_pass = synth_pass and source_pass
                 result.passed = synth_pass
 
             elif behavior == "redirect":
@@ -1269,34 +1282,10 @@ def evaluate_query(
             result.passed = all_checks_pass
 
         elif category == "entity_detection":
-            # Entity detection tests - check detect_entity() behavior directly
-            from ui.pages.ask_mattgpt.backend_service import detect_entity
-
-            detected = detect_entity(query, stories)
-
-            if query_spec.get("expect_no_entity_scope"):
-                # Should NOT detect an entity
-                no_scope_pass = detected is None
-                result.checks["no_entity_scope"] = no_scope_pass
-                result.details["detected_entity"] = detected
-                result.details["expected"] = "None (no scoping)"
-                result.passed = no_scope_pass
-            elif query_spec.get("expect_entity"):
-                # Should detect specific entity
-                expected_field, expected_value = query_spec["expect_entity"]
-                if detected:
-                    field_match = detected[0] == expected_field
-                    value_match = detected[1] == expected_value
-                    entity_pass = field_match and value_match
-                else:
-                    entity_pass = False
-                result.checks["entity_detected"] = entity_pass
-                result.details["detected_entity"] = detected
-                result.details["expected_entity"] = (expected_field, expected_value)
-                result.passed = entity_pass
-            else:
-                # Fallback - just pass if we got here
-                result.passed = True
+            # detect_entity() removed with rag_answer() (MATTGPT-275); these
+            # golden queries stay as query text for the structural checks.
+            result.error = "skipped: detect_entity() removed (MATTGPT-275)"
+            result.passed = True
 
         elif category == "marketing":
             # Marketing/landing page queries - ground truth + meta-commentary
@@ -1343,7 +1332,7 @@ def evaluate_query(
                 dynamic_query = f"Tell me more about: {story_title}"
                 result.query = dynamic_query  # Update for reporting
 
-                # Call rag_answer through normal flow (Title detection should find it)
+                # Call the pipeline through normal flow
                 rag_result = rag_fn(dynamic_query, {}, stories)
 
                 if rag_result.get("degraded"):
@@ -1404,22 +1393,20 @@ def stories():
 
 @pytest.fixture(scope="module")
 def rag_fn(stories):
-    """Get RAG function with synced metadata.
-
-    Note: We don't mock streamlit because:
-    1. Patches expire when fixture returns, breaking Pinecone calls
-    2. The 'missing ScriptRunContext' warnings are benign
-    3. Direct Pinecone calls work fine without mocking
-    """
+    """The answer pipeline under test: agy_answer() (MATTGPT-275), called in
+    rag_answer()'s old (query, filters, stories) shape so the tests are
+    unchanged. filters is ignored: agy_answer() takes none."""
     from ui.pages.ask_mattgpt.backend_service import (
-        rag_answer,
+        agy_answer,
         sync_portfolio_metadata,
     )
 
-    # Sync SYNTHESIS_THEMES and MATT_DNA from story data
     sync_portfolio_metadata(stories)
 
-    return rag_answer
+    def answer(query, filters, stories):
+        return agy_answer(query, stories)
+
+    return answer
 
 
 # =============================================================================
@@ -1485,11 +1472,13 @@ class TestIntentRouting:
                     f"{result.details.get('client_count', 0)} clients mentioned, "
                     f"need {query_spec['min_clients']}"
                 )
-            if "min_pool_size" in query_spec:
-                assert result.checks.get("pool_size_check", False), (
-                    f"Synthesis pool_size failed - only "
-                    f"{result.details.get('pool_size', 0)} stories in operative "
-                    f"pool, need {query_spec['min_pool_size']}"
+            if "min_source_stories" in query_spec:
+                assert result.checks.get("source_check", False), (
+                    f"Synthesis sources failed - "
+                    f"{result.details.get('source_stories', 0)} stories and "
+                    f"{result.details.get('source_named_clients', 0)} named "
+                    f"clients, need {query_spec['min_source_stories']} and "
+                    f"{query_spec.get('min_source_named_clients', 0)}"
                 )
 
         elif query_spec["expected_behavior"] == "redirect":
@@ -1540,112 +1529,6 @@ class TestSurgicalPrecision:
             assert result.checks.get("client_attribution", False), (
                 f"Client attribution failed for '{query_spec['expected_client']}' - "
                 f"found: {result.details.get('found_client')}"
-            )
-
-
-class TestEntityDetection:
-    """Test entity detection regression - ensure detect_entity() works correctly.
-
-    These tests verify:
-    1. Common words (technology, innovation, transformation) do NOT scope queries
-    2. Proper nouns (CIC, JP Morgan, RBC) DO scope queries correctly
-    3. Excluded division values (Technology) are skipped
-
-    This is a regression test suite - if entity detection changes, these must pass.
-    """
-
-    @pytest.fixture
-    def detect_entity_fn(self, stories):
-        """Get detect_entity function with stories loaded."""
-        from unittest.mock import MagicMock, patch
-
-        mock_st = MagicMock()
-        mock_st.session_state = {}
-
-        with patch("streamlit.session_state", mock_st.session_state):
-            with patch("ui.pages.ask_mattgpt.backend_service.st", mock_st):
-                from ui.pages.ask_mattgpt.backend_service import detect_entity
-
-                return lambda query: detect_entity(query, stories)
-
-    @pytest.mark.parametrize(
-        "query_spec",
-        [
-            q
-            for q in GOLDEN_QUERIES["entity_detection"]
-            if q.get("expect_no_entity_scope")
-        ],
-        ids=lambda q: f"Q{q['id']}_no_scope",
-    )
-    def test_common_words_do_not_scope(self, query_spec, stories, detect_entity_fn):
-        """Verify common words don't incorrectly trigger entity scoping.
-
-        Words like 'technology', 'innovation', 'transformation' appear in
-        Division/Project values but are common enough that they shouldn't
-        scope queries when used conversationally.
-        """
-        query = query_spec["query"]
-        result = detect_entity_fn(query)
-
-        assert result is None, (
-            f"Query should NOT be entity-scoped but got: {result}\n"
-            f"Query: {query}\n"
-            f"Note: {query_spec.get('note', '')}\n"
-            f"Excluded value: {query_spec.get('excluded_value', 'N/A')}"
-        )
-
-    @pytest.mark.parametrize(
-        "query_spec",
-        [q for q in GOLDEN_QUERIES["entity_detection"] if q.get("expect_entity")],
-        ids=lambda q: f"Q{q['id']}_should_scope",
-    )
-    def test_entities_do_scope(self, query_spec, stories, detect_entity_fn):
-        """Verify proper nouns and alias-mapped shortened forms trigger entity scoping.
-
-        Full client/division names (RBC, JP Morgan Chase, Cloud Innovation Center)
-        and alias-mapped shortened forms (CIC → Cloud Innovation Center, JP Morgan →
-        JP Morgan Chase, amex → American Express) should trigger entity filtering
-        to return focused results.
-        """
-        query = query_spec["query"]
-        expected_field, expected_value = query_spec["expect_entity"]
-        result = detect_entity_fn(query)
-
-        assert result is not None, (
-            f"Query should be entity-scoped but got None\n"
-            f"Query: {query}\n"
-            f"Expected: ({expected_field}, {expected_value})\n"
-            f"Note: {query_spec.get('note', '')}"
-        )
-
-        actual_field, actual_value = result
-
-        assert actual_field == expected_field, (
-            f"Wrong entity field detected\n"
-            f"Query: {query}\n"
-            f"Expected field: {expected_field}, got: {actual_field}"
-        )
-
-        # For clients with variants, check if any variant matches
-        if "client_variants" in query_spec:
-            variants = [v.lower() for v in query_spec["client_variants"]]
-            assert (
-                actual_value.lower() in variants
-                or expected_value.lower() in actual_value.lower()
-            ), (
-                f"Wrong entity value detected\n"
-                f"Query: {query}\n"
-                f"Expected: {expected_value} (or variants: {query_spec['client_variants']})\n"
-                f"Got: {actual_value}"
-            )
-        else:
-            assert (
-                expected_value.lower() in actual_value.lower()
-                or actual_value.lower() in expected_value.lower()
-            ), (
-                f"Wrong entity value detected\n"
-                f"Query: {query}\n"
-                f"Expected: {expected_value}, got: {actual_value}"
             )
 
 
@@ -1880,7 +1763,11 @@ def run_full_evaluation() -> dict:
 
     with patch("streamlit.session_state", mock_st.session_state):
         with patch("ui.pages.ask_mattgpt.backend_service.st", mock_st):
-            from ui.pages.ask_mattgpt.backend_service import rag_answer
+            from ui.pages.ask_mattgpt.backend_service import agy_answer
+
+            def rag_answer(query, filters, stories):
+                # agy_answer() in rag_answer()'s old call shape (MATTGPT-275).
+                return agy_answer(query, stories)
 
             # Run all queries
             all_queries = [q for queries in GOLDEN_QUERIES.values() for q in queries]
@@ -1969,10 +1856,11 @@ def run_surgical_diagnostics():
     with patch("streamlit.session_state", mock_st.session_state):
         with patch("ui.pages.ask_mattgpt.backend_service.st", mock_st):
             from services.semantic_router import is_portfolio_query_semantic
-            from ui.pages.ask_mattgpt.backend_service import (
-                detect_entity,
-                rag_answer,
-            )
+            from ui.pages.ask_mattgpt.backend_service import agy_answer
+
+            def rag_answer(query, filters, stories):
+                # agy_answer() in rag_answer()'s old call shape (MATTGPT-275).
+                return agy_answer(query, stories)
 
             surgical_queries = GOLDEN_QUERIES["surgical"]
 
@@ -1998,14 +1886,6 @@ def run_surgical_diagnostics():
                     if len(matched_intent) > 60
                     else f"    Matched Intent: {matched_intent}"
                 )
-
-                # 2. Entity Detection
-                entity_match = detect_entity(query, stories)
-                print("  Entity Detection:")
-                if entity_match:
-                    print(f"    Field: {entity_match[0]} | Value: {entity_match[1]}")
-                else:
-                    print("    No entity detected")
 
                 expected_intent = query_spec.get("expected_intent", "N/A")
 
@@ -2060,7 +1940,6 @@ def run_surgical_diagnostics():
                             "score": semantic_score,
                             "intent_family": intent_family,
                         },
-                        "entity_detected": entity_match,
                         "expected_intent": expected_intent,
                         "confidence": confidence,
                         "sources_count": len(sources),

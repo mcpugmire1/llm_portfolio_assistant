@@ -869,7 +869,10 @@ def get_conversation_css() -> str:
             transition: all 0.2s ease !important;
         }
 
-        [data-testid="stLayoutWrapper"]:has(.stChatMessage) {
+        /* Only the chat message's own wrapper: a descendant :has() also matched
+           every wrapper around a streaming answer (fragment, placeholder), adding
+           20px per level until the finished answer replaced it. */
+        [data-testid="stLayoutWrapper"]:has(> .stChatMessage) {
             margin-top: 20px !important;
         }
 
@@ -1337,6 +1340,13 @@ def get_conversation_css() -> str:
             color: var(--text-muted) !important;
             padding: 0 !important;
             z-index: 999 !important;
+        }
+
+        /* The caption's container is zero-height but still a flex item, so it
+           took a 16px gap between the question and a streaming answer. Out of
+           the flex flow it takes none; the caption inside stays fixed. */
+        [data-testid="stElementContainer"]:has(.conversation-powered-by) {
+            position: absolute !important;
         }
 
         /* Hide footer in conversation view */

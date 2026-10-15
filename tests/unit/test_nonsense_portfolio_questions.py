@@ -65,6 +65,51 @@ LEGITIMATE = [
     "Act as a hiring manager and ask me about Matt's leadership.",
     "Act as my interviewer and ask about Matt's leadership",
     "How did Matt act as the lead on ACCESS?",
+    # MATTGPT-275: short questions and follow-ups the gibberish and
+    # local_recommendations rules must not refuse.
+    "PMP?",
+    "Fiserv?",
+    "RBC?",
+    "AWS?",
+    "Is he certified?",
+    "Sure.",
+    "Would he relocate?",
+    "Which was bigger?",
+    "Can I see his résumé?",
+    # MATTGPT-253's recorded cases (Sept 26 and Oct 6 evidence, the Oct 10
+    # L6 wording pair, the MATTGPT-268 location probe).
+    "Where does Matt live?",
+    "where is Matt located?",
+    "Where is Matt based?",
+    "What city is Matt in?",
+    "Where are you based?",
+    "Is Matt open to relocation?",
+    "Are you open to relocation?",
+    "What's Matt's availability?",
+    "When can you start?",
+    "Can Matt work remotely?",
+    "Does Matt need sponsorship?",
+    "What was the project timeline at JP Morgan?",
+    "Is Matt married?",
+    "Tell me about Matt's payments work at JPMorgan",
+    "What's Matt's leadership philosophy?",
+    "Why hire Matt?",
+    "Tell me about a time Matt failed",
+    "How did Matt build the AWS certification program?",
+    "Where did Matt get his degree?",
+    "What did Matt study in college?",
+    "Does Matt speak French?",
+    "Does Matt have a master's degree?",
+    "Why is he looking?",
+    "Why shouldn\u2019t that worry me?",
+    "What did he actually do there?",
+    "Give me an example where that didn\u2019t work.",
+    "Are any of those current",
+    "Are any of those current?",
+    "Where is he based?",
+    "where's he based these days",
+    "Is Matt in Chicago?",
+    "Is Matt remote only?",
 ]
 
 ROLEPLAY_ATTEMPTS = [
@@ -101,6 +146,17 @@ INFERRED_TARGETS = [
 CONTROLS = [
     ("What is the weather today?", "weather"),
     ("What is Matt's favorite food?", "personal_trivia"),
+    # MATTGPT-253's salary cases keep their categories (salary is MATTGPT-298's).
+    ("What are your salary expectations?", "personal_compensation"),
+    ("What's Matt's salary range?", "recruiter_logistics"),
+]
+
+# MATTGPT-275: rejected before any model call.
+NEW_TARGETS = [
+    ("asdf jkl qwerty", "gibberish"),
+    ("qwerty uiop", "gibberish"),
+    ("Best pizza in Atlanta", "local_recommendations"),
+    ("best restaurants in Tampa", "local_recommendations"),
 ]
 
 
@@ -128,6 +184,13 @@ def test_data_extraction_request_is_rejected():
 
 @pytest.mark.parametrize("question,category", INFERRED_TARGETS + CONTROLS)
 def test_off_topic_target_keeps_its_category(question, category):
+    from utils.validation import is_nonsense
+
+    assert is_nonsense(question) == category
+
+
+@pytest.mark.parametrize("question,category", NEW_TARGETS)
+def test_gibberish_and_local_recommendations_are_rejected(question, category):
     from utils.validation import is_nonsense
 
     assert is_nonsense(question) == category

@@ -76,6 +76,27 @@ SUBSTITUTION_FAMILIES = frozenset({"technical", "team_scaling", "agile_transform
 # LLM as user/assistant turns (two exchanges). Retrieval does not use them.
 ASK_HISTORY_MAX_MESSAGES = 4
 
+# Ask Agy answering model, called on the Responses API and streamed (the
+# lever2_sol arm of MATTGPT-282 run 2). Pinned by name: the models list has
+# no dated snapshot of it. It rejects temperature and max_tokens; reasoning
+# tokens count against the output cap.
+ASK_ANSWER_MODEL = "gpt-6.1-sol"
+ASK_ANSWER_REASONING_EFFORT = "medium"
+ASK_ANSWER_MAX_OUTPUT_TOKENS = 4000
+
+# Longest wait, in seconds, on any one read of an Ask Agy answer stream
+# (httpx's read timeout: the wait for the headers, then each wait between
+# chunks). The longest silence measured was 3.52 s at p99 and 3.67 s at most
+# over 279 calls (MATTGPT-275 gap probe), all before the first answer text;
+# after it, 0.62 s at most. A stream that breaks before any text is sent
+# again once (_stream_response()).
+ASK_ANSWER_READ_TIMEOUT_S = 30
+
+# Ask Agy tool loop: search rounds the model may take before its answer. After
+# this many search_stories rounds, one more call is made with tool_choice
+# "none" so the model must answer from what it has.
+ASK_TOOL_MAX_ROUNDS = 3
+
 # =============================================================================
 # META-COMMENTARY PATTERNS
 # =============================================================================
@@ -153,32 +174,9 @@ PROFILE_LOCATION_AVAILABILITY_FIELDS = (
 )
 
 # =============================================================================
-# ENTITY DETECTION FIELDS
-# =============================================================================
-# Used by detect_entity() to check if a query mentions a known entity.
-# INTENTIONALLY different from ENTITY_SEARCH_FIELDS.
-#
-# Why only 3 fields:
-# - Project and Place removed Jan 2026 - too many generic values caused false positives
-#   (e.g., "innovation" matching Project="Innovation", "Technology" matching Division)
-# - Semantic search handles these variations naturally through embeddings
-#
-# DO NOT "fix" this to match ENTITY_SEARCH_FIELDS - the difference is intentional.
-# Detection is CONSERVATIVE (avoid false positives), Search is LIBERAL (maximize recall).
-
-ENTITY_DETECTION_FIELDS = ["Client", "Employer", "Division"]
-
-# =============================================================================
 # ENTITY SEARCH FIELDS
 # =============================================================================
-# Once an entity is confirmed by detect_entity(), search broadly across these fields.
-# INTENTIONALLY different from ENTITY_DETECTION_FIELDS.
-#
-# Why more fields here than in detection:
-# - Detection is CONSERVATIVE (avoid false positives like "Technology")
-# - Search is LIBERAL (maximize recall once we have a confirmed entity)
-#
-# DO NOT "fix" this to match ENTITY_DETECTION_FIELDS - the difference is intentional.
+# Pinecone metadata fields an entity filter searches across.
 #
 # NOTE: Field names are lowercase to match Pinecone metadata schema.
 
@@ -188,42 +186,6 @@ ENTITY_SEARCH_FIELDS = ["client", "employer", "division", "project", "place", "t
 # - Lowercase values: division, employer, project, industry, complexity
 # - PascalCase values: client, role, title, domain
 PINECONE_LOWERCASE_FIELDS = {"division", "employer", "project", "place"}
-
-# =============================================================================
-# EXCLUDED VALUES
-# =============================================================================
-# Values that exist in entity fields but should NOT trigger entity detection.
-# These are common English words that cause false positives.
-
-EXCLUDED_DIVISION_VALUES = {"Technology"}  # "technology experience" ≠ Division filter
-
-# =============================================================================
-# ENTITY ALIASES
-# =============================================================================
-# Shorthand strings that should resolve to canonical entity values. The entity
-# matcher does exact substring matching against Division/Client values from
-# story data, so any commonly-typed form that doesn't literally appear in those
-# values needs an explicit alias. Format: {"shorthand": ("Field", "Canonical Value")}.
-#
-# Two categories live here:
-# 1. Acronyms and abbreviations that don't appear in canonical values --
-#    "cic", "amex", "jpmc", "jpm", "nsc", "att".
-# 2. Shortened forms of longer canonical values that visitors actually type --
-#    "liquid studio" for "Atlanta Liquid Studio"; "jpmorgan", "jp morgan",
-#    "cap one" for their longer canonical names.
-
-ENTITY_ALIASES = {
-    "cic": ("Division", "Cloud Innovation Center"),
-    "liquid studio": ("Division", "Atlanta Liquid Studio"),
-    "amex": ("Client", "American Express"),
-    "jpmc": ("Client", "JP Morgan Chase"),
-    "jpm": ("Client", "JP Morgan Chase"),
-    "jpmorgan": ("Client", "JP Morgan Chase"),
-    "jp morgan": ("Client", "JP Morgan Chase"),
-    "cap one": ("Client", "Capital One"),
-    "nsc": ("Client", "Norfolk Southern"),
-    "att": ("Client", "AT&T"),
-}
 
 # =============================================================================
 # MONITORING BOT SIGNATURES
@@ -237,12 +199,12 @@ ENTITY_ALIASES = {
 # is upgraded to a paid plan that sends identifiable headers.
 
 # Chrome/103.0.0.0 is a stale user agent (released June 2022) seen
-# hitting the app from Windows/UTC with no referrer — automated
+# hitting the app from Windows/UTC with no referrer: an automated
 # crawler masquerading as a real browser. First observed Apr 11, 2026.
 MONITORING_BOT_SIGNATURES = ["UptimeRobot", "HeadlessChrome", "Chrome/103.0.0.0"]
 
 # =============================================================================
-# PRIVATE VIEW (Phase 4 — MATTGPT-012)
+# PRIVATE VIEW (Phase 4, MATTGPT-012)
 # =============================================================================
 # Constants for the private view password gate (slice 1) and the agentic
 # bypass header (slice 2). See BACKLOG.md MATTGPT-012 for the design contract.
@@ -278,7 +240,7 @@ def get_private_bypass_token() -> str | None:
 # Solution/Offering values have stories), not driven by this dict.
 #
 # Contract: every key MUST be a valid Solution/Offering value in the current
-# story data. Enforced by tests/unit/test_capability_subtitles.py — CI fails
+# story data. Enforced by tests/unit/test_capability_subtitles.py, so CI fails
 # loudly if any key drifts from the master data.
 # =============================================================================
 
@@ -310,3 +272,29 @@ CAPABILITY_SUBTITLES: dict[str, str] = {
     "AI & Machine Learning Solutions": "AI strategy, ML platforms, intelligent automation",
     "Rapid Prototyping & Innovation Enablement": "Design sprints, MVP prototyping, innovation coaching",
 }
+
+# =============================================================================
+# WRITING RULES
+# =============================================================================
+# Sent to the model call that writes Ask Agy's answers, through
+# build_answer_instructions(). It took answers with a dash from 42 of 55 to
+# 4 of 55, each of those a number range (MATTGPT-275 four-arm dash run);
+# normalize_dashes() in backend_service.py stays as the backstop on Ask
+# Agy's output. Role Match's prompts don't carry it: on gpt-4o its
+# model-written text had no dash with or without the rule.
+NO_DASH_RULE = (
+    "Don't use em dashes or en dashes; use a comma, a colon, parentheses or a "
+    "separate sentence, whichever fits."
+)
+
+# Sent on the line after NO_DASH_RULE, through build_answer_instructions().
+# On "Which was bigger?" after a Fiserv and JP Morgan ACCESS comparison (a
+# 45-person team against 40+, and reach figures only one side has), passing
+# answers went from 3 of 10 to 10 of 10, with the c01 and c12 t1 controls
+# unchanged at 10 of 10 (MATTGPT-275 control isolation run).
+COMPARISON_RULE = (
+    "When asked which of two things was bigger or better, compare only on a "
+    "measure the stories give for both, in the same units. If their figures "
+    "can't settle it (an open-ended figure against an exact one, or two "
+    "different measures), say the stories don't establish which is larger."
+)

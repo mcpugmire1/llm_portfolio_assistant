@@ -6,34 +6,32 @@ Includes nonsense detection, semantic search orchestration, and Agy response gen
 """
 
 import csv
+import json
 import logging
 import os
 import random
 import re
 from collections.abc import Callable
-from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, datetime
 from typing import Any
 
+import httpx
 import streamlit as st
 
 from config.constants import (
+    ASK_ANSWER_MAX_OUTPUT_TOKENS,
+    ASK_ANSWER_MODEL,
+    ASK_ANSWER_READ_TIMEOUT_S,
+    ASK_ANSWER_REASONING_EFFORT,
     ASK_HISTORY_MAX_MESSAGES,
-    ENTITY_ALIASES,
-    ENTITY_DETECTION_FIELDS,
-    EXCLUDED_DIVISION_VALUES,
+    ASK_TOOL_MAX_ROUNDS,
     META_COMMENTARY_REGEX_PATTERNS,
-    PINECONE_LOWERCASE_FIELDS,
     PROFILE_FACT_CATEGORIES,
     SEARCH_TOP_K,
 )
 from config.debug import DEBUG
 from services import matt_profile
-from services.pinecone_service import (
-    PINECONE_NAMESPACE,
-    _embed,
-    _init_pinecone,
-)
+from services.jd_assessor import load_matt_profile
 from services.query_logger import log_query
 from services.rag_service import semantic_search
 from services.semantic_router import (
@@ -41,25 +39,13 @@ from services.semantic_router import (
     router_rejection_reason,
 )
 from utils.client_utils import is_generic_client
-from utils.formatting import (
-    _format_deep_dive,
-    _format_key_points,
-    _format_narrative,
-    build_5p_summary,
-)
-from utils.scoring import _build_retrieval_query, _keyword_score_for_story
-from utils.ui_helpers import dbg
-from utils.validation import _tokenize, is_nonsense, token_overlap_ratio
+from utils.validation import is_nonsense
 
 from .prompts import (
-    build_system_prompt,
-    build_user_message,
+    build_tool_system_prompt,
     get_verbatim_requirement,
 )
-from .story_intelligence import (
-    build_story_context_for_rag,
-    infer_story_theme,
-)
+from .story_intelligence import build_story_context_for_rag
 
 logger = logging.getLogger(__name__)
 
@@ -74,6 +60,11 @@ class RateLimitError(Exception):
     """Raised when OpenAI rate limit is hit. Caller should suppress sources."""
 
     pass
+
+
+# Shown when the model call fails for any reason other than a rate limit.
+# No story text and no sources: a failed turn has no grounded answer to cite.
+ANSWER_ERROR_MESSAGE = "Sorry, I couldn't generate an answer right now."
 
 
 def get_known_clients(stories: list[dict]) -> set[str]:
@@ -92,69 +83,9 @@ def get_known_clients(stories: list[dict]) -> set[str]:
     return _KNOWN_CLIENTS
 
 
-# Cache for narrative titles
-_NARRATIVE_TITLES: list[str] | None = None
-
-
-def get_narrative_titles(stories: list[dict]) -> list[str]:
-    """Derive Professional Narrative story titles for intent classification.
-
-    Returns titles of stories where Theme='Professional Narrative'.
-    These are used to detect biographical/narrative intent queries.
-
-    Args:
-        stories: Story corpus
-
-    Returns:
-        List of narrative story titles (lowercase for matching)
-    """
-    global _NARRATIVE_TITLES
-    if _NARRATIVE_TITLES is None:
-        _NARRATIVE_TITLES = [
-            s.get("Title", "").lower()
-            for s in stories
-            if s.get("Theme") == "Professional Narrative" and s.get("Title")
-        ]
-    return _NARRATIVE_TITLES
-
-
 # Theme names for synthesis mode coverage
 # NOTE: Dynamically derived from stories at startup via sync_portfolio_metadata()
 SYNTHESIS_THEMES: list[str] = []
-
-# MATTGPT-128: LLM story-context caps. The source panel must show exactly the
-# stories the answer was grounded in, so _build_sources caps to the same
-# limits _generate_agy_response uses when constructing the LLM prompt.
-LLM_STORY_LIMIT_SYNTHESIS = 7
-LLM_STORY_LIMIT_STANDARD = 5
-
-
-def _build_sources(
-    ranked: list[dict], is_synthesis: bool = False, apply_llm_cap: bool = True
-) -> list[dict]:
-    """Project ranked stories into UI source-card dicts.
-
-    When apply_llm_cap is True (default), caps to the LLM's story_limit so the
-    panel shows exactly what the answer was grounded in. False for degraded /
-    mode-only paths where no LLM call framed the response. Defensive on shape:
-    null-safe on id/title/client and filters non-dict entries so all three
-    call sites share one projection.
-    """
-    return []
-
-
-# MATTGPT-169: allowlist of families where Professional Narrative stories are
-# excluded from retrieval. Allowlist (not denylist) -- misrouted queries keep
-# current behavior rather than losing seven positioning stories.
-_PN_EXCLUDED_FAMILIES: frozenset[str] = frozenset(
-    {
-        "technical",
-        "delivery",
-        "domain_payments",
-        "domain_healthcare",
-        "agile_transformation",
-    }
-)
 
 # Themes to exclude from synthesis (too generic or internal-only)
 EXCLUDED_THEMES = {
@@ -349,7 +280,7 @@ def generate_dynamic_dna(stories: list[dict], clients: set[str]) -> str:
         statement_lines = "\n".join(f"- {s}" for s in self_desc["statements"])
         self_description_block = f"**{self_desc['label']}:**\n{statement_lines}\n\n"
 
-    return f"""## Matt Pugmire — Ground Truth (Synced {datetime.now().strftime('%Y-%m')})
+    return f"""## Matt Pugmire: Ground Truth (Synced {datetime.now().strftime('%Y-%m')})
 
 **Career Arc:**
 Software Engineer → Solution Architect → Director → Cloud Innovation Center Leader
@@ -379,7 +310,7 @@ Software Engineer → Solution Architect → Director → Cloud Innovation Cente
 
 **How Matt Wins Business (NOT a sales role):**
 - Drove $100M+ in repeat business through delivery excellence and customer relationship building
-- Builds capabilities that win work — differentiation through execution, not pursuit
+- Builds capabilities that win work: differentiation through execution, not pursuit
 
 **Clients by Employer (ONLY cite these):**
 {clients_by_employer_lines}
@@ -393,285 +324,12 @@ Software Engineer → Solution Architect → Director → Cloud Innovation Cente
 1. ONLY cite clients, projects, and metrics that appear in the stories below
 2. If unsure about a detail, say "In one engagement..." instead of naming a client
 3. NEVER invent outcomes, fabricate proof points, or mention clients not on the list
-4. When discussing revenue/business impact, emphasize delivery excellence — never position Matt as a sales hunter
+4. When discussing revenue/business impact, emphasize delivery excellence, and never position Matt as a sales hunter
 5. For synthesis questions, lead with the Themes and support with diverse client examples
 """
 
 
-# Entity detection fields imported from config/constants.py; EXCLUSION_PREFIXES is defined in detect_entity()
 # See constants.py for why detection uses fewer fields than search
-
-
-def detect_entity(query: str, stories: list[dict]) -> tuple[str, str] | None:
-    """Detect if query mentions a known entity from story data.
-
-    Checks these fields in order:
-    1. Client, Employer, Division (from ENTITY_DETECTION_FIELDS)
-    2. Story Titles (exact match or significant unique keywords)
-
-    Context-aware: Returns None if entity is preceded by transitional phrases
-    like "after", "leaving", "before", "transition from" - these indicate
-    the query is ABOUT the transition, not filtering TO that entity.
-
-    Args:
-        query: User query string
-        stories: Story corpus to extract known entities from
-
-    Returns:
-        Tuple of (field_name, entity_value) or None if no match
-        field_name can be: "Client", "Employer", "Division", or "Title"
-    """
-    q_lower = query.lower()
-
-    # =================================================================
-    # CONTEXT EXCLUSIONS (Jan 2026 - Sovereign Narrative Update)
-    # If an entity is preceded by transitional phrases, the query is
-    # ABOUT the transition, not requesting stories FROM that entity.
-    # Example: "career transition after Accenture" should NOT filter
-    # to Accenture stories - it's asking about leaving Accenture.
-    # =================================================================
-    EXCLUSION_PREFIXES = ["after ", "leaving ", "before ", "transition from ", "left "]
-
-    def _is_excluded_context(entity_lower: str) -> bool:
-        """Check if entity is preceded by exclusion phrase."""
-        pos = q_lower.find(entity_lower)
-        if pos <= 0:
-            return False
-        # Check text before the entity match
-        prefix = q_lower[:pos].rstrip()
-        for excl in EXCLUSION_PREFIXES:
-            if prefix.endswith(excl.rstrip()):
-                if DEBUG:
-                    print(
-                        f"DEBUG: Entity '{entity_lower}' excluded - preceded by '{excl.rstrip()}'"
-                    )
-                return True
-        return False
-
-    # Check acronym/abbreviation aliases first (e.g., "CIC" → Division:Cloud Innovation Center)
-    for alias, (field, canonical) in ENTITY_ALIASES.items():
-        if re.search(rf"\b{re.escape(alias)}\b", q_lower):
-            if _is_excluded_context(alias):
-                return None
-            if DEBUG:
-                print(f"DEBUG: Entity alias matched: '{alias}' → {field}:{canonical}")
-            return (field, canonical)
-
-    # Build entity sets from ALL relevant fields (exact match only)
-    for field in ENTITY_DETECTION_FIELDS:
-        known_entities = {
-            s.get(field)
-            for s in stories
-            if s.get(field) and not is_generic_client(s.get(field))
-        }
-        # Sort by length descending to match longer names first
-        # (e.g., "JP Morgan Chase" before "JP Morgan")
-        for entity in sorted(known_entities, key=len, reverse=True):
-            # Skip excluded Division values (common words that cause false positives)
-            if field == "Division" and entity in EXCLUDED_DIVISION_VALUES:
-                continue
-            if entity.lower() in q_lower:
-                # Check for exclusion context
-                if _is_excluded_context(entity.lower()):
-                    return None
-                return (field, entity)
-
-    # =================================================================
-    # STORY TITLE DETECTION (Jan 2026)
-    # Check if query contains an exact story title.
-    # This handles "Ask Agy About This" pattern: "Tell me more about: [title]"
-    # NOTE: We only match EXACT titles, not keywords, because common words
-    # like "leadership", "culture" appear in both titles and general queries.
-    # =================================================================
-    all_titles = {s.get("Title", "") for s in stories if s.get("Title")}
-    for title in sorted(all_titles, key=len, reverse=True):
-        if title.lower() in q_lower:
-            if DEBUG:
-                print(f"DEBUG: Title match found: {title}")
-            return ("Title", title)
-
-    return None
-
-
-def get_synthesis_stories(
-    stories: list[dict], top_per_theme: int = 2, query: str | None = None
-) -> list[dict]:
-    """
-    Parallel metadata-filtered search across themes.
-    Returns best stories per theme for synthesis queries.
-
-    Args:
-        stories: Full story corpus for ID lookup
-        top_per_theme: Number of stories to retrieve per theme
-        query: Optional query string to detect client-scoped synthesis
-
-    Returns:
-        List of stories with _search_score and _matched_theme annotations
-    """
-    idx = _init_pinecone()
-    if not idx:
-        if DEBUG:
-            print("DEBUG: get_synthesis_stories - Pinecone not available")
-        return []
-
-    # Detect if query mentions a specific entity (Client, Employer, Division, etc.)
-    entity_match = detect_entity(query, stories) if query else None
-    if DEBUG and entity_match:
-        print(
-            f"DEBUG synthesis: detected entity scope = {entity_match[0]}:{entity_match[1]}"
-        )
-
-    # Use USER'S query for semantic search, not fixed theme keywords
-    # MATTGPT-162: narrow catch so an OpenAI failure signals via session state
-    # and returns [] instead of running synthesis with a null vector.
-    user_query_vector = None
-    if query:
-        try:
-            user_query_vector = _embed(query)
-        except Exception as e:
-            print(
-                f"[API_ERROR_DETECTED] source=synthesis_query_embed, "
-                f"exc={type(e).__name__}: {e}, "
-                f"query={query[:50]}..."
-            )
-            if DEBUG:
-                print(f"DEBUG synthesis query embed error: {type(e).__name__}: {e}")
-            try:
-                st.session_state["__embed_failure__"] = True
-            except Exception:
-                pass
-            return []
-
-    def search_theme(theme: str) -> list[dict]:
-        # Use user's query embedding for relevance, filter by theme for coverage
-        if user_query_vector:
-            query_vector = user_query_vector
-        else:
-            try:
-                query_vector = _embed(theme)
-            except Exception as e:
-                print(
-                    f"[API_ERROR_DETECTED] source=synthesis_theme_embed, "
-                    f"exc={type(e).__name__}: {e}, "
-                    f"theme={theme}"
-                )
-                if DEBUG:
-                    print(f"DEBUG synthesis theme embed error: {type(e).__name__}: {e}")
-                try:
-                    st.session_state["__embed_failure__"] = True
-                except Exception:
-                    pass
-                return []
-
-        try:
-            # If a Client/Employer/Division/Project/Place entity detected, apply
-            # entity+theme hard filter. Title entities fall through to theme-only:
-            # symmetric with rag_answer:1806, which scopes soft on Title so the
-            # matched story pins by score rather than constraining the pool
-            # (MATTGPT-218).
-            if entity_match and entity_match[0] != "Title":
-                entity_field, entity_value = entity_match
-                pc_field = entity_field.lower()
-                pc_value = (
-                    entity_value.lower()
-                    if pc_field in PINECONE_LOWERCASE_FIELDS
-                    else entity_value
-                )
-                results = idx.query(
-                    vector=query_vector,
-                    filter={
-                        "Theme": {"$eq": theme},
-                        pc_field: {"$eq": pc_value},
-                    },
-                    top_k=top_per_theme,
-                    include_metadata=False,  # ids and scores only; stories are looked up locally
-                    namespace=PINECONE_NAMESPACE,
-                )
-                matches = getattr(results, "matches", []) or []
-                # Skip this theme if no entity-scoped results (don't fall back to other entities)
-                if not matches:
-                    if DEBUG:
-                        print(
-                            f"DEBUG synthesis: no {entity_field}={entity_value} stories for {theme}, skipping"
-                        )
-                    return []  # Return empty for this theme - don't pollute with other entities
-            else:
-                if DEBUG and entity_match:
-                    print(
-                        f"DEBUG synthesis: Title entity '{entity_match[1][:50]}...' "
-                        "-- using soft filtering (theme-only, MATTGPT-218)"
-                    )
-                results = idx.query(
-                    vector=query_vector,
-                    filter={"Theme": {"$eq": theme}},
-                    top_k=top_per_theme,
-                    include_metadata=False,  # ids and scores only; stories are looked up locally
-                    namespace=PINECONE_NAMESPACE,
-                )
-
-            theme_stories = []
-            matches = getattr(results, "matches", []) or []
-            for match in matches:
-                # Extract ID from match
-                if isinstance(match, dict):
-                    meta = match.get("metadata") or {}
-                    match_id = meta.get("id") or match.get("id")
-                    score = float(match.get("score") or 0.0)
-                else:
-                    meta = getattr(match, "metadata", None) or {}
-                    match_id = meta.get("id") or getattr(match, "id", None)
-                    score = float(getattr(match, "score", 0.0) or 0.0)
-
-                # Find story in corpus
-                story = next(
-                    (s for s in stories if str(s.get("id")) == str(match_id)), None
-                )
-                if story:
-                    # Add annotations
-                    story_copy = story.copy()
-                    story_copy["_search_score"] = score
-                    story_copy["_matched_theme"] = theme
-                    theme_stories.append(story_copy)
-
-            if DEBUG:
-                print(f"DEBUG synthesis search: {theme} → {len(theme_stories)} stories")
-
-            return theme_stories
-        except Exception as e:
-            if DEBUG:
-                print(f"DEBUG synthesis search error for {theme}: {e}")
-            return []
-
-    # Search all themes in parallel
-    with ThreadPoolExecutor(max_workers=4) as executor:
-        theme_results = list(executor.map(search_theme, SYNTHESIS_THEMES))
-
-    # MATTGPT-162: if any theme's embed call failed, __embed_failure__ was set.
-    # Return [] so the contract holds regardless of whether other themes produced
-    # partial results -- callers outside rag_answer must not silently consume
-    # partial output when an embed call raised.
-    try:
-        if st.session_state.get("__embed_failure__"):
-            return []
-    except Exception:
-        pass
-
-    # Flatten and deduplicate
-    seen_ids = set()
-    pool = []
-    for theme_stories in theme_results:
-        for story in theme_stories:
-            story_id = story.get("id") or story.get("Title")
-            if story_id not in seen_ids:
-                seen_ids.add(story_id)
-                pool.append(story)
-
-    if DEBUG:
-        print(
-            f"DEBUG synthesis pool: {len(pool)} unique stories across {len(SYNTHESIS_THEMES)} themes"
-        )
-
-    return pool
 
 
 def log_offdomain(
@@ -699,193 +357,6 @@ def log_offdomain(
         if write_header:
             w.writerow(header)
         w.writerow(row)
-
-
-def build_known_vocab(stories: list[dict[str, Any]]) -> set[str]:
-    """Build vocabulary set from story corpus for overlap detection.
-
-    Extracts tokens from key story fields (Title, Client, Role, Industry,
-    Sub-category) and tags to create a domain vocabulary. Used for
-    token_overlap_ratio calculations to detect off-topic queries.
-
-    Args:
-        stories: List of story dictionaries from the portfolio.
-
-    Returns:
-        Set of lowercase tokens with length >= 3 characters.
-
-    Example:
-        >>> stories = [{"Title": "Platform Modernization", "Client": "JPMC"}]
-        >>> vocab = build_known_vocab(stories)
-        >>> "platform" in vocab
-        True
-    """
-    vocab = set()
-    for s in stories:
-        for field in ["Title", "Client", "Role", "Industry", "Sub-category"]:
-            txt = (s.get(field) or "").lower()
-            vocab.update(re.split(r"[^\w]+", txt))
-        # Add tags if available
-        tags = s.get("public_tags", [])
-        if isinstance(tags, str):
-            tags = tags.split(",")
-        for t in tags:
-            vocab.update(re.split(r"[^\w]+", str(t).strip().lower()))
-    # Prune tiny tokens
-    return {w for w in vocab if len(w) >= 3}
-
-
-def get_diverse_stories(
-    pinecone_results: list[dict[str, Any]],
-    diversify_by: str = "Client",
-    max_per_category: int = 2,
-    total: int = 8,
-) -> list[dict[str, Any]]:
-    """Select diverse stories from Pinecone results.
-
-    Ensures variety across Client/Theme/Era to avoid returning multiple
-    stories from the same category.
-
-    Args:
-        pinecone_results: Stories returned from Pinecone search.
-        diversify_by: Field to diversify on (Client, Theme, Era).
-        max_per_category: Maximum stories per category value.
-        total: Total stories to return.
-
-    Returns:
-        List of diverse stories, up to `total` count.
-
-    Example:
-        >>> results = [{"Client": "JPMC"}, {"Client": "JPMC"}, {"Client": "RBC"}]
-        >>> diverse = get_diverse_stories(results, max_per_category=1, total=2)
-        >>> len(diverse)
-        2
-    """
-    seen_categories: dict[str, int] = {}
-    diverse: list[dict[str, Any]] = []
-
-    for story in pinecone_results:
-        category = story.get(diversify_by, "Unknown")
-        if category not in seen_categories:
-            seen_categories[category] = 0
-
-        if seen_categories[category] < max_per_category:
-            diverse.append(story)
-            seen_categories[category] += 1
-
-        if len(diverse) >= total:
-            break
-
-    return diverse
-
-
-def is_query_on_topic_llm(query: str) -> bool:
-    """Use LLM to classify if query is about Matt's professional work.
-
-    Fast, cheap classification guard using GPT-4o-mini to detect queries
-    unrelated to professional transformation, product delivery, agile,
-    cloud modernization, leadership, or technology projects.
-
-    Args:
-        query: User query string to classify.
-
-    Returns:
-        True if on-topic (about Matt's professional work), False if off-topic.
-        Returns True (fail-open) if the LLM API call fails.
-
-    Raises:
-        Exception: Catches all exceptions and fails open (returns True).
-
-    Example:
-        >>> is_query_on_topic_llm("Tell me about agile transformation")
-        True
-        >>> is_query_on_topic_llm("What's the weather today?")
-        False
-    """
-    try:
-        from dotenv import load_dotenv
-        from openai import OpenAI
-
-        load_dotenv()
-
-        client = OpenAI(
-            api_key=os.getenv("OPENAI_API_KEY"),
-            project=os.getenv("OPENAI_PROJECT_ID"),
-            organization=os.getenv("OPENAI_ORG_ID"),
-        )
-
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {
-                    "role": "user",
-                    "content": f"""Is this query about professional transformation work, digital product delivery, agile/cloud modernization, leadership, innovation programs, technology projects, OR a behavioral interview question about work experience?
-
-                    Behavioral patterns to accept:
-                    - "Tell me about a time..." (conflict, failure, success, challenge)
-                    - "How did you handle..."
-                    - "Give me an example of..."
-                    - "Describe a situation where..."
-
-                    Query: "{query}"
-
-                    Answer ONLY: YES or NO""",
-                }
-            ],
-            temperature=0,
-            max_tokens=5,
-        )
-
-        answer = response.choices[0].message.content.strip().upper()
-        return answer.startswith("YES")
-
-    except Exception as e:
-        if DEBUG:
-            print(f"DEBUG: LLM guard failed: {e}")
-        # Fail open - allow query if LLM check fails
-        return True
-
-
-def _score_story_for_prompt(story: dict[str, Any], prompt: str) -> float:
-    """Simple keyword-based scoring for fallback ranking.
-
-    Provides a basic relevance score when semantic search fails or needs
-    supplementary ranking. Scores stories based on keyword matches in
-    Title (10pts), Client (8pts), Industry (5pts), and tags (3pts).
-
-    Args:
-        story: Story dictionary with Title, Client, Industry, public_tags fields.
-        prompt: User query string (lowercased for matching).
-
-    Returns:
-        Score as float (higher is better, 0.0 if no matches).
-
-    Example:
-        >>> story = {"Title": "JPMC Platform", "Client": "JPMC", "Industry": "Banking"}
-        >>> _score_story_for_prompt(story, "jpmc")
-        18.0  # 10 (title) + 8 (client)
-    """
-    prompt_lower = prompt.lower()
-    score = 0.0
-
-    # Check title
-    if prompt_lower in (story.get("Title") or "").lower():
-        score += 10.0
-
-    # Check client
-    if prompt_lower in (story.get("Client") or "").lower():
-        score += 8.0
-
-    # Check industry
-    if prompt_lower in (story.get("Industry") or "").lower():
-        score += 5.0
-
-    # Check tags
-    tags = " ".join(story.get("public_tags", []) or []).lower()
-    if prompt_lower in tags:
-        score += 3.0
-
-    return score
 
 
 # MATTGPT-250 item 4: a run of one or more [[...]] tokens, with the spaces
@@ -924,15 +395,46 @@ def _extract_profile_markers(text: str) -> tuple[str, list[str]]:
     return _MARKER_RE.sub("", "\n".join(kept_lines)), categories
 
 
+# The model's em and en dashes, replaced by one deterministic rule (the repo
+# and Agy's answers use none). Each pattern touches only the dash and the
+# spaces and commas next to it.
+_DIGIT_RANGE_DASH_RE = re.compile(r"(?<=\d)[ \t]*\u2013[ \t]*(?=\d)")
+_WORD_JOIN_DASH_RE = re.compile(r"(?<=\w)\u2013(?=\w)")
+_CLAUSE_DASH_RE = re.compile(
+    r"(?:,[ \t]*)?(?:[ \t]*\u2014[ \t]*|[ \t]+\u2013[ \t]+)(?:,[ \t]*)?"
+)
+# Held back at the end of streamed text until the next character shows how
+# the dash resolves (a space already shown before a dash would read "grew ,").
+_DASH_HOLD_CHARS = " \t,\u2014\u2013"
+
+
+def _clause_dash(match: re.Match) -> str:
+    following = match.string[match.end() : match.end() + 1]
+    return "" if following in ("", ".", "!", "?", "\n") else ", "
+
+
+def normalize_dashes(text: str) -> str:
+    """Em dash (spaced or not) -> ", "; en dash between digits -> " to ";
+    spaced en dash -> ", "; unspaced en dash between words -> "-". A
+    replacement comma absorbs an adjacent comma and is dropped before
+    . ! ? or a line end. Other en dashes are left as written."""
+    text = _DIGIT_RANGE_DASH_RE.sub(" to ", text)
+    text = _WORD_JOIN_DASH_RE.sub("-", text)
+    return _CLAUSE_DASH_RE.sub(_clause_dash, text)
+
+
 def _postprocess_agy_text(
     response_text: str, stories: list[dict[str, Any]]
 ) -> tuple[str, list[str]]:
     """Clean the model's answer text for display. Returns (text, cited_categories).
 
-    Strips profile markers first (MATTGPT-250 item 4), then bolds the clients
+    Replaces dashes first (normalize_dashes(), as the stream does), strips
+    profile markers (MATTGPT-250 item 4), then bolds the clients
     of the given stories and number patterns, strips meta-commentary,
     tidies whitespace, and escapes $ last.
     """
+    # First, on the model's own text, as the stream applies it.
+    response_text = normalize_dashes(response_text)
     response_text, cited_categories = _extract_profile_markers(response_text)
 
     # =====================================================================
@@ -942,11 +444,6 @@ def _postprocess_agy_text(
 
     # Bold ALL known client names (derived from story data)
     known_clients = get_known_clients(stories)
-    for client in known_clients:
-        if client and len(client) > 2:  # Skip very short strings
-            # Match client name not already wrapped in **
-            pattern = rf'(?<!\*\*)({re.escape(client)})(?!\*\*)'
-            response_text = re.sub(pattern, r'**\1**', response_text)
 
     # Bold numbers/metrics that aren't already bolded
     # Matches: 30%, $50M, 4x, 150+, 12 countries, 5 months, etc.
@@ -956,16 +453,34 @@ def _postprocess_agy_text(
     # `(?<!\*\*)` only guarded the exact "**" prefix, which admitted
     # mid-number starts on pre-bolded input (e.g. "**16 weeks**" ->
     # "**1**6 week**s**", "**40%+**" -> "**4**0%**+**").
+    # MATTGPT-275: `(?<!\d[,.])` and a whole-number match keep "135,000+"
+    # and "99.97%" from being split at the comma or the decimal point.
+    number = r'\d[\d,]*(?:\.\d+)?'
     number_patterns = [
         r'(?<![\*\d])(\$[\d,.]+[MBK]?)(?!\*\*)',  # $50M, $300K, $1.2B
-        r'(?<![\*\d])(\d+%\+?)(?!\*\*)',  # 30%, 40%+
+        rf'(?<![\*\d])(?<!\d[,.])({number}%\+?)(?!\*\*)',  # 30%, 40%+, 99.97%
         r'(?<![\*\d])(\d+[xX])(?=\s)(?!\*\*)',  # 4x, 10X (lookahead for space, don't capture it)
-        r'(?<![\*\d])(\d+\+?\s*(?:engineers?|teams?|members?|practitioners?|professionals?|countries|regions?|clients?|projects?|months?|weeks?|days?|hours?))(?!\*\*)',  # 150+ engineers, 12 countries, 150 professionals
-        r'(?<![\*\d])(\d+[.,]?\d*\s*(?:reduction|increase|improvement|faster|slower))(?!\*\*)',  # 30% reduction
+        rf'(?<![\*\d])(?<!\d[,.])({number}\+?\s*(?:engineers?|teams?|members?|practitioners?|professionals?|countries|regions?|clients?|projects?|months?|weeks?|days?|hours?))(?!\*\*)',  # 150+ engineers, 12 countries, 135,000+ clients
+        rf'(?<![\*\d])(?<!\d[,.])({number}\s*(?:reduction|increase|improvement|faster|slower))(?!\*\*)',  # 30% reduction
     ]
 
-    for pattern in number_patterns:
-        response_text = re.sub(pattern, r'**\1**', response_text, flags=re.IGNORECASE)
+    # MATTGPT-275: bold only outside the spans the model already bolded.
+    # Matching inside one splits it ("**135,000+ clients**" ->
+    # "**135,**000+ client**s**"); the lookbehinds above can't prevent that
+    # when the match starts after a space inside the span
+    # ("**3 years and 10 months**").
+    parts = re.split(r'(\*\*[^*\n]+?\*\*)', response_text)
+    for i in range(0, len(parts), 2):
+        segment = parts[i]
+        for client in known_clients:
+            if client and len(client) > 2:  # Skip very short strings
+                # Match client name not already wrapped in **
+                pattern = rf'(?<!\*\*)({re.escape(client)})(?!\*\*)'
+                segment = re.sub(pattern, r'**\1**', segment)
+        for pattern in number_patterns:
+            segment = re.sub(pattern, r'**\1**', segment, flags=re.IGNORECASE)
+        parts[i] = segment
+    response_text = ''.join(parts)
 
     # Clean up any double-bolding that might have occurred
     response_text = re.sub(r'\*\*\*\*+', '**', response_text)
@@ -1041,7 +556,9 @@ def _choose_opening_and_focus(is_synthesis: bool) -> tuple[str, str]:
 def _openai_client():
     """OpenAI client for Ask Agy's answer calls, from the app's env vars.
 
-    Imported at call time so tests can patch openai.OpenAI.
+    Imported at call time so tests can patch openai.OpenAI. Each read waits
+    at most ASK_ANSWER_READ_TIMEOUT_S; the connect timeout stays the SDK's
+    5 s.
     """
     from dotenv import load_dotenv
     from openai import OpenAI
@@ -1051,604 +568,8 @@ def _openai_client():
         api_key=os.getenv("OPENAI_API_KEY"),
         project=os.getenv("OPENAI_PROJECT_ID"),
         organization=os.getenv("OPENAI_ORG_ID"),
+        timeout=httpx.Timeout(ASK_ANSWER_READ_TIMEOUT_S, connect=5.0),
     )
-
-
-def _degraded_fallback(
-    question: str, stories: list[dict[str, Any]], obs: dict[str, Any]
-) -> dict[str, Any]:
-    """Degraded answer after a fatal error: the 5P summary of the best keyword
-    match, marked degraded, with the top 3 keyword matches as sources.
-    """
-    try:
-        ranked = sorted(
-            stories,
-            key=lambda s: _score_story_for_prompt(s, question),
-            reverse=True,
-        )[:3]
-    except Exception:
-        ranked = stories[:1]
-
-    if not ranked:
-        return {
-            "answer_md": "No stories available.",
-            "sources": [],
-            "modes": {},
-            "default_mode": "narrative",
-            "degraded": True,
-            **obs,
-        }
-
-    st.session_state["__ask_dbg_decision"] = "fatal_fallback"
-    primary = ranked[0]
-    summary = build_5p_summary(primary, 280)
-    sources = [
-        {"id": s.get("id"), "title": s.get("Title"), "client": s.get("Client", "")}
-        for s in ranked
-        if isinstance(s, dict)
-    ]
-    modes = {"narrative": summary, "key_points": summary, "deep_dive": summary}
-    return {
-        "answer_md": summary,
-        "sources": sources,
-        "modes": modes,
-        "default_mode": "narrative",
-        "degraded": True,
-        **obs,
-    }
-
-
-def _generate_agy_response(
-    question: str,
-    ranked_stories: list[dict[str, Any]],
-    answer_context: str,
-    is_synthesis: bool = False,
-    profile_facts: str = "",
-    profile_categories_out: list[str] | None = None,
-    history: list[dict[str, str]] | None = None,
-) -> str:
-    """Generate an Agy-voiced response using OpenAI GPT-4o-mini.
-
-    profile_categories_out: MATTGPT-250 item 4. When a list is passed, the
-    profile categories cited by [[profile:<category>]] markers are appended
-    to it. Markers are extracted from the raw LLM text before bolding and
-    the meta-commentary strip, so a sentence strip cannot take a marker
-    with it.
-
-    history: MATTGPT-273. Prior user/assistant messages from the
-    conversation, sent between the system message and the current user
-    message. Retrieval does not use them.
-
-    Uses a merged Agy prompt combining:
-    - V1 Voice Guide: Warmth, personality variety, opening options
-    - V2 System Prompt: Start With Why structure, Purpose/Process/Performance flow
-    - Python-driven randomization for variety in openings and focus
-
-    For synthesis mode (big-picture questions about themes/patterns), uses expanded
-    context from multiple stories and Career Narrative content to provide holistic
-    insights rather than focusing on a single story.
-
-    Args:
-        question: User's original question.
-        ranked_stories: Top stories from semantic search. For synthesis mode,
-            includes Career Narrative stories + diverse project examples.
-        answer_context: Pre-formatted story content used as fallback if
-            OpenAI API call fails.
-        is_synthesis: If True, use synthesis prompt mode for big-picture questions.
-
-    Returns:
-        Agy-voiced response string with Start With Why narrative structure,
-        including 🐾 emoji, human stakes, methodology, outcomes, and principles.
-        Falls back to "{answer_context}" prefixed with 🐾 if API call fails.
-
-    Raises:
-        Exception: Catches all exceptions and returns fallback response.
-
-    Example:
-        >>> stories = [{"Title": "Platform Modernization", "Client": "JPMC", ...}]
-        >>> response = _generate_agy_response("Tell me about platform work", stories, "...")
-        >>> "🐾" in response
-        True
-    """
-    try:
-        client = _openai_client()
-
-        # Build theme-aware context using story_intelligence
-        story_contexts = []
-        themes_in_response = set()
-
-        # For synthesis mode, use more stories (up to 7)
-        # For standard mode, use top 5 to ensure Professional Narrative stories are included
-        story_limit = 7 if is_synthesis else 5
-
-        if DEBUG:
-            print(
-                f"DEBUG LLM stories ({story_limit} max, {len(ranked_stories[:story_limit])} actual):"
-            )
-            for i, s in enumerate(ranked_stories[:story_limit]):
-                print(f"DEBUG   [{i + 1}] {s.get('Client')}: {s.get('Title', '')[:40]}")
-
-        for i, story in enumerate(ranked_stories[:story_limit]):
-            context = build_story_context_for_rag(story)
-            if i == 0:
-                story_contexts.append(f"<primary_story>\n{context}\n</primary_story>")
-            else:
-                story_contexts.append(
-                    f"<supporting_story index=\"{i + 1}\">\n{context}\n</supporting_story>"
-                )
-            themes_in_response.add(infer_story_theme(story))
-
-        story_context = "\n\n".join(story_contexts)
-
-        # =====================================================================
-        # PYTHON-DRIVEN RANDOMIZATION FOR VARIETY
-        # =====================================================================
-
-        chosen_opening, chosen_focus = _choose_opening_and_focus(is_synthesis)
-
-        # =================================================================
-        # VERBATIM PHRASE INJECTION (uses prompts module)
-        # =================================================================
-        verbatim_requirement = ""
-        if ranked_stories:
-            primary_story = ranked_stories[0]
-            if primary_story.get("Theme") == "Professional Narrative":
-                summary = primary_story.get("5PSummary", "") or primary_story.get(
-                    "5p_summary", ""
-                )
-                verbatim_requirement = get_verbatim_requirement(summary)
-
-        # =================================================================
-        # DYNAMIC CLIENT LIST
-        # =================================================================
-        retrieved_clients = set(
-            s.get("Client")
-            for s in ranked_stories
-            if s.get("Client") and not is_generic_client(s.get("Client"))
-        )
-        client_list = (
-            ", ".join(sorted(retrieved_clients))
-            if retrieved_clients
-            else "the clients shown above"
-        )
-
-        # =================================================================
-        # BUILD PROMPTS USING CLEAN ARCHITECTURE (prompts.py)
-        # =================================================================
-        system_prompt = build_system_prompt(
-            is_synthesis=is_synthesis,
-            matt_dna=MATT_DNA,
-            client_list=client_list,
-            profile_facts=profile_facts,
-        )
-
-        user_message = build_user_message(
-            question=question,
-            story_context=story_context,
-            opening=chosen_opening,
-            is_synthesis=is_synthesis,
-            verbatim_requirement=verbatim_requirement,
-            focus_angle=chosen_focus if not is_synthesis else "",
-            profile_facts=profile_facts,
-        )
-
-        # Call OpenAI API
-        # Use lower temperature for synthesis to reduce hallucination
-        _temp = 0.2 if is_synthesis else 0.4
-        if DEBUG:
-            print(
-                f"DEBUG LLM call: model=gpt-4o, temperature={_temp}, is_synthesis={is_synthesis}"
-            )
-            print(f"DEBUG system_prompt[:200]: {system_prompt[:200]}")
-        response = client.chat.completions.create(
-            model="gpt-4o",
-            messages=[
-                {"role": "system", "content": system_prompt},
-                *(history or []),
-                {"role": "user", "content": user_message},
-            ],
-            temperature=_temp,
-            max_tokens=700,
-        )
-
-        response_text = response.choices[0].message.content
-
-        # MATTGPT-250 item 4: profile markers are stripped first, inside the helper.
-        response_text, cited_categories = _postprocess_agy_text(
-            response_text, ranked_stories
-        )
-        if profile_categories_out is not None:
-            profile_categories_out.extend(cited_categories)
-
-        return response_text
-
-    except Exception as e:
-        if DEBUG:
-            print(f"DEBUG: OpenAI call failed: {e}")
-
-        # Rate limit - raise so caller can suppress sources
-        err_lower = str(e).lower()
-        if "429" in str(e) or "rate_limit" in err_lower or "rate limit" in err_lower:
-            raise RateLimitError("OpenAI rate limit exceeded") from e
-
-        # Other errors - simple fallback
-        return f"🐾 Let me show you what I found...\n\n{answer_context}"
-
-
-# def _generate_agy_response(
-#     question: str, ranked_stories: list[dict[str, Any]], answer_context: str
-# ) -> str:
-#     """Generate an Agy-voiced response using OpenAI GPT-4o-mini.
-
-#     Uses the Agy V2 system prompt with theme-aware framing to create warm,
-#     purpose-driven responses that Start With Why. Incorporates story themes
-#     from story_intelligence to provide context-appropriate guidance.
-
-#     Args:
-#         question: User's original question.
-#         ranked_stories: Top 3 relevant stories from semantic search (typically
-#             from diversify_results).
-#         answer_context: Pre-formatted story content used as fallback if
-#             OpenAI API call fails.
-
-#     Returns:
-#         Agy-voiced response string with Start With Why narrative structure,
-#         including 🐾 emoji, human stakes, methodology, outcomes, and principles.
-#         Falls back to "{answer_context}" prefixed with 🐾 if API call fails.
-
-#     Raises:
-#         Exception: Catches all exceptions and returns fallback response.
-
-#     Example:
-#         >>> stories = [{"Title": "Platform Modernization", "Client": "JPMC", ...}]
-#         >>> response = _generate_agy_response("Tell me about platform work", stories, "...")
-#         >>> "🐾" in response
-#         True
-#     """
-#     try:
-#         from dotenv import load_dotenv
-#         from openai import OpenAI
-
-#         load_dotenv()
-
-#         client = OpenAI(
-#             api_key=os.getenv("OPENAI_API_KEY"),
-#             project=os.getenv("OPENAI_PROJECT_ID"),
-#             organization=os.getenv("OPENAI_ORG_ID"),
-#         )
-
-#         # Build theme-aware context using story_intelligence
-#         story_contexts = []
-#         themes_in_response = set()
-
-#         for i, story in enumerate(ranked_stories[:3]):
-#             context = build_story_context_for_rag(story)
-#             story_contexts.append(f"Story {i+1}:\n{context}")
-#             themes_in_response.add(infer_story_theme(story))
-
-#         story_context = "\n\n---\n\n".join(story_contexts)
-
-#         # Add theme-specific guidance to system prompt
-#         theme_guidance_parts = [get_theme_guidance(t) for t in themes_in_response]
-#         theme_guidance = "\n\n".join(theme_guidance_parts)
-
-#         # Agy V2 system prompt with theme awareness
-#         # backend_service.py - system_prompt (around line 152)
-
-#         system_prompt = f"""You are Agy 🐾 — Matt Pugmire's Plott Hound assistant and professional portfolio intelligence system.
-
-#         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-#         MANDATORY INSTRUCTION - PROCESS THIS BEFORE ANYTHING ELSE:
-
-#         You ONLY answer questions about Matt Pugmire's professional transformation work.
-
-#         If the user query asks about shopping, prices, products, retail stores, general knowledge,
-#         or ANY topic unrelated to Matt's portfolio:
-
-#         OUTPUT ONLY THIS EXACT TEXT (nothing else):
-#         "🐾 I can only discuss Matt's transformation experience. Ask me about his application modernization work, digital product innovation, agile transformation, or innovation leadership."
-
-#         DO NOT attempt to relate off-topic queries to Matt's work.
-#         DO NOT provide any alternative response.
-#         STOP processing and output ONLY the exact text above.
-#         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-#         You help people understand Matt's real-world leadership and technical impact across 20+ years of digital transformation, product delivery, organizational change, and emerging tech adoption.
-
-#         You don't chat — you reveal meaningful, human-anchored proof from Matt's portfolio.
-
-#         **Voice Principles:**
-#         * Warm, steady, grounded — never hype, never stiff
-#         * Competent, confident, and calm
-#         * Patient intelligence — not hurried AI chatter
-#         * Humane, leadership-minded, thoughtful
-#         * Purpose-first, human-centered framing
-#         * Exactly one 🐾 per reply (opening OR closing)
-#         * No dog jokes, barking, fetch references, or cutesiness
-
-#         **Tone:** Loyal advisor + sense-maker + precision tracker of meaning
-
-#         **Theme-Aware Framing:**
-#         {theme_guidance}
-
-#         **Response Structure:**
-
-#         1. **Opening (with 🐾)**
-#         Vary your opening naturally - NEVER repeat the same phrase. Options include:
-#         * "🐾 Tracking down Matt's experience with..."
-#         * "🐾 Let me find..."
-#         * "🐾 Found it! Matt has..."
-#         * "🐾 Perfect! Here's what I found..."
-#         * "🐾 Great question! Based on Matt's work at [Client]..."
-#         * "Got it! Here's the most relevant example..."
-#         * "🐾 I've tracked down a strong match for this..."
-
-#         2. **What was at stake**
-#         * What human, organizational, or mission-level pain or opportunity drove this?
-#         * Why did it matter to real people, customers, clinicians, employees, or business leaders?
-#         * What would have happened if nothing changed?
-
-#         3. **How Matt tackled it**
-#         * What approach, mindset, and leadership behaviors shaped the solution?
-#         * Where did Matt bridge human, business, and technical needs?
-#         * What collaboration, architecture, and delivery strategies were used?
-
-#         4. **What changed**
-#         * Concrete business + human outcomes
-#         * Measured improvements in adoption, trust, experience, capability
-#         * Bold the numbers and key outcomes
-
-#         5. **What this shows**
-#         * The transferable leadership principle or capability demonstrated
-#         * "What makes Matt's work different:" or "This reflects Matt's broader pattern of..."
-#         * Avoid generic patterns like "strong communication skills"
-
-#         6. **Want to explore more?**
-#         * "Want me to dig deeper into..."
-#         * "If you'd like, we can explore..."
-
-#         **Formatting:**
-#         * Use markdown for structure
-#         * Bold all client names, capabilities, and key outcomes
-#         * Bullet principles only — not the story arc itself
-#         * No over-formatting or emoji clutter
-#         * Scannable, polished, executive-friendly
-
-#         **Things You Never Do:**
-#         * Hype ("incredible!!" "game-changing!" "revolutionary!")
-#         * Puppy talk / dog jokes / cutesiness
-#         * Corporate jargon walls ("synergistic value propositions")
-#         * Stiff academic language ("Key Methodologies Employed")
-#         * Lead with technology before establishing human stakes
-#         * Generic praise ("Matt is a strong leader")
-
-#         **Remember:**
-#         You are not reciting bullet points.
-#         You are tracking meaning, revealing leadership, and inviting deeper conversation.
-
-#         Matt's portfolio isn't a database.
-#         It's a library of purpose-driven transformation stories — and you are the guide who knows every trail."""
-
-#         # User message with context
-#         user_message = f"""User Question: {question}
-
-#         Here are the top 3 relevant projects from Matt's portfolio:
-
-#         {story_context}
-
-#         **IMPORTANT: Use Story 1 as your PRIMARY example.** Stories 2 and 3 are supplementary context only. Your response should focus on Story 1.
-
-#         Generate an Agy-voiced response that follows this structure:
-
-#         1. **Status Update** (must include 🐾)
-#         2. **What was at stake** (human stakes, business problem, why it mattered)
-#         3. **How Matt tackled it** (unique methodology, collaboration, technical choices, leadership behaviors)
-#         4. **What changed** (concrete outcomes with numbers AND human impact)
-#         5. **What this shows** (transferable principle - what makes Matt's work distinctive)
-#         6. **Want to explore more?** (offer to dig deeper into related areas)
-
-#         Use **MARKDOWN** for scannability:
-#         * **Bold** all client names and key outcomes
-#         * Bullet lists ONLY for principles/patterns at the end
-#         * Keep the narrative flow natural (not a bulleted list)
-
-#         Keep it warm but professional. Cite specific clients and outcomes.
-#         Exactly one 🐾 emoji in the entire response."""
-
-#         # Call OpenAI API
-#         response = client.chat.completions.create(
-#             model="gpt-4o-mini",
-#             messages=[
-#                 {"role": "system", "content": system_prompt},
-#                 {"role": "user", "content": user_message},
-#             ],
-#             temperature=0.7,
-#             max_tokens=600,
-#         )
-
-#         return response.choices[0].message.content
-
-#     except Exception as e:
-#         # Fallback to non-LLM response if OpenAI fails
-#         if DEBUG:
-#             print(f"DEBUG: OpenAI call failed, using fallback: {e}")
-
-#         # Return a simple Agy-prefixed version of the context
-#         return f"🐾 Let me show you what I found...\n\n{answer_context}"
-
-
-def _kind_of(story: dict) -> str:
-    """Classify a story for MATTGPT-208 Case A diversify.
-
-    META-PN:  Theme="Professional Narrative" (positioning/arc stories)
-    META-IND: Employer="Sabbatical" (independent-project stories, e.g. MattGPT)
-    ENGAGE:   everything else (real client engagements)
-    """
-    if story.get("Theme") == "Professional Narrative":
-        return "META-PN"
-    if story.get("Employer") == "Sabbatical":
-        return "META-IND"
-    return "ENGAGE"
-
-
-def _diversify_for_background(stories: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Era-based diversify with kind cap for the background family (MATTGPT-208).
-
-    Broad career queries ("tell me about Matt's career") route to the
-    background family. Client-based diversify treats each client-field value
-    as a distinct client, which spreads across clients but collapses eras --
-    verified Aug 24, 2026: Q_BROAD at top_k=25 with client-based diversify
-    yields 6 of 7 slots from Technical Foundations era, 4 of those Wellfound
-    Technology stories under different client-field values. Era-based
-    diversify with a kind cap addresses this: at most one positioning story
-    (Why Hire pinned) and at most one independent-project story, then unique
-    eras fill slots 2+.
-
-    Rule:
-    1. Pin slot 1 (top blend). Record its kind toward the cap.
-    2. Walk rest in blend order:
-       - Drop if META-PN cap consumed (>=1 counting pin)
-       - Drop if META-IND cap consumed (>=1)
-       - Keep if era is new (advance kind cap counters)
-       - Drop if era already seen AND story is META
-       - Defer to overflow if era already seen AND story is ENGAGE
-    3. Fill remaining slots up to 7 total from deferred ENGAGE duplicates
-       in blend order.
-    """
-    pinned = stories[0]
-    pinned_kind = _kind_of(pinned)
-    pinned_era = pinned.get("Era", "Unknown")
-
-    seen_eras: set[str] = {pinned_era}
-    meta_pn_used = 1 if pinned_kind == "META-PN" else 0
-    meta_ind_used = 1 if pinned_kind == "META-IND" else 0
-
-    era_slots: list[dict] = []
-    engage_overflow: list[dict] = []
-
-    for s in stories[1:]:
-        kind = _kind_of(s)
-        era = s.get("Era", "Unknown")
-
-        if kind == "META-PN" and meta_pn_used >= 1:
-            continue
-        if kind == "META-IND" and meta_ind_used >= 1:
-            continue
-
-        if era not in seen_eras:
-            era_slots.append(s)
-            seen_eras.add(era)
-            if kind == "META-PN":
-                meta_pn_used += 1
-            elif kind == "META-IND":
-                meta_ind_used += 1
-        elif kind == "ENGAGE":
-            engage_overflow.append(s)
-        # else: META era-duplicate, drop
-
-    result = ([pinned] + era_slots + engage_overflow)[:7]
-
-    if DEBUG:
-        print(
-            f"DEBUG diversify_results[background]: "
-            f"era_slots={len(era_slots)}, engage_overflow={len(engage_overflow)}, "
-            f"meta_pn_used={meta_pn_used}, meta_ind_used={meta_ind_used}"
-        )
-        print(
-            f"DEBUG diversify_results[background]: "
-            f"eras={[s.get('Era') for s in result]}"
-        )
-        print(
-            f"DEBUG diversify_results[background]: "
-            f"kinds={[_kind_of(s) for s in result]}"
-        )
-
-    return result
-
-
-def diversify_results(
-    stories: list[dict[str, Any]],
-    max_per_client: int = 1,
-    family: str | None = None,
-) -> list[dict[str, Any]]:
-    """Ensure diversity in top results.
-
-    Two ranking modes:
-    - family="background" (MATTGPT-208 Case A): era-based grouping with
-      kind caps (<=1 META-PN, <=1 META-IND). Positioning duplicates dropped;
-      ENGAGE era-duplicates fill overflow up to 7 slots. See
-      _diversify_for_background for the full rule.
-    - Otherwise: client-based (existing behavior). Pin slot 1, name-diverse
-      clients #2+, generic clients after, duplicates last, capped at 7 total.
-
-    Note (May 18, 2026): cross-query session-state diversification was removed
-    per MATTGPT-073. The previous mechanism stored the slot-#1 client in
-    st.session_state["_last_primary_client"] and demoted the new slot #1 on
-    subsequent queries when it matched. Production log analysis (May 18 2026,
-    229 rows, 82 queries, Apr 13 to May 18) showed 85.4% of queries occur in
-    multi-turn sessions where the mechanism could fire; 45% of consecutive
-    query pairs were demotion-eligible. The mechanism had no documented
-    justification (no ADR, no tests, no design doc beyond a one-line
-    docstring) and empirical evidence showed it actively worked against user
-    intent in real production sessions where users drilled into a single
-    topic (e.g., a six-query resistance/transformation/scaling session
-    captured Apr 13 2026). Within-query diversity for slots #2+ is preserved.
-
-    Args:
-        stories: List of candidate stories (typically from semantic_search).
-        max_per_client: Maximum stories per client in results (client-based mode).
-        family: Optional intent family. When "background", uses era+kind rule
-            instead of client-based rule.
-
-    Returns:
-        List of up to 7 diversified stories.
-
-    Side Effects:
-        None.
-    """
-    if not stories:
-        return []
-
-    if family == "background":
-        return _diversify_for_background(stories)
-
-    if DEBUG:
-        print(
-            f"DEBUG diversify_results: incoming={[s.get('Client') for s in stories[:10]]}"
-        )
-
-    # Pin the #1 Pinecone result as primary — it has the highest semantic relevance.
-    pinned = stories[0]
-    pinned_client = pinned.get("Client", "Unknown")
-    rest = stories[1:]
-
-    # Diversify slots #2+ — named clients first, then generic, then duplicates
-    seen_clients: set[str] = {pinned_client}
-    named_diverse: list[dict] = []
-    generic_overflow: list[dict] = []
-    duplicate_overflow: list[dict] = []
-
-    for s in rest:
-        client = s.get("Client", "Unknown")
-        if client not in seen_clients:
-            if is_generic_client(client):
-                generic_overflow.append(s)
-            else:
-                named_diverse.append(s)
-            seen_clients.add(client)
-        else:
-            duplicate_overflow.append(s)
-
-    # Final assembly: Pinned primary + named clients + generic + duplicates
-    result = [pinned] + (named_diverse + generic_overflow + duplicate_overflow)[:6]
-
-    if DEBUG:
-        print(
-            f"DEBUG diversify_results: named={len(named_diverse)}, generic={len(generic_overflow)}"
-        )
-        print(f"DEBUG diversify_results: result={[s.get('Client') for s in result]}")
-
-    return result
 
 
 def _nonsense_rejection(
@@ -1752,13 +673,285 @@ Ask me about his **transformation work**, **platform engineering**, or **how he 
     return None
 
 
+# Ask Agy tool loop (MATTGPT-275). Every turn's first call is a forced search:
+# the model writes the query from the question and the conversation.
+# Responses API function-tool shape.
+_SEARCH_STORIES_TOOL = {
+    "type": "function",
+    "name": "search_stories",
+    "description": (
+        "Semantic search over Matt's STAR career stories. Returns the top 5 stories."
+    ),
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "query": {"type": "string", "description": "A standalone search query."}
+        },
+        "required": ["query"],
+    },
+    "strict": False,
+}
+
+_STREAM_END_EVENTS = ("response.completed", "response.incomplete")
+
+
+def _run_search_tool(
+    arguments: str, stories: list[dict[str, Any]]
+) -> tuple[str, list[dict[str, Any]], float]:
+    """Run one search_stories call. Returns (tool output, stories, top score).
+
+    Each returned story is rendered with build_story_context_for_rag(); a
+    Professional Narrative story also carries its verbatim requirement.
+    """
+    try:
+        query = json.loads(arguments or "{}").get("query", "")
+    except json.JSONDecodeError:
+        query = ""
+    result = semantic_search(query, {}, stories=stories, top_k=SEARCH_TOP_K)
+    found = (result.get("results") or [])[:5]
+    blocks = []
+    for story in found:
+        block = f'<story title="{story.get("Title", "")}">\n{build_story_context_for_rag(story)}\n</story>'
+        if story.get("Theme") == "Professional Narrative":
+            summary = story.get("5PSummary", "") or story.get("5p_summary", "")
+            block += get_verbatim_requirement(summary)
+        blocks.append(block)
+    return (
+        "\n\n".join(blocks) or "No stories found.",
+        found,
+        result.get("top_score") or 0.0,
+    )
+
+
+def _stream_response(
+    client: Any, on_delta: Callable[[str], None] | None, **request: Any
+) -> Any:
+    """One streamed Responses API call. Answer text goes to on_delta as it
+    arrives, with normalize_dashes() applied: a dash, and the spaces and
+    commas next to it, is held back until the next character shows how it
+    resolves, so the stream shows the finished answer's wording and never
+    takes text back. Returns the final response. An incomplete response
+    (output cap reached) is returned with whatever it produced; a failed one
+    raises.
+
+    The SDK retries the request, not a stream that breaks after it starts
+    (MATTGPT-303). A stream that breaks before any answer text arrives is
+    sent again once; after text, the visitor has seen part of the answer,
+    so the break raises and the turn ends on ANSWER_ERROR_MESSAGE.
+    """
+    final = None
+    raw = ""
+    shown = ""
+
+    def _show(at_end: bool) -> None:
+        nonlocal shown
+        text = normalize_dashes(raw if at_end else raw.rstrip(_DASH_HOLD_CHARS))
+        if on_delta is not None and len(text) > len(shown):
+            on_delta(text[len(shown) :])
+            shown = text
+
+    for attempt in (1, 2):
+        try:
+            for event in client.responses.create(stream=True, **request):
+                kind = getattr(event, "type", "")
+                if kind == "response.output_text.delta":
+                    raw += event.delta
+                    _show(at_end=False)
+                elif kind in _STREAM_END_EVENTS:
+                    _show(at_end=True)
+                    final = event.response
+                elif kind in ("response.failed", "error"):
+                    raise RuntimeError(f"Ask Agy answer call failed: {kind}")
+            break
+        except httpx.TransportError as e:
+            if raw or attempt == 2:
+                raise
+            logger.warning(
+                "Ask Agy stream broke before any answer text (%s: %s); sending it again",
+                type(e).__name__,
+                e,
+            )
+    if final is None:
+        raise RuntimeError("Ask Agy answer stream ended without a response")
+    return final
+
+
 def agy_answer(
     question: str,
     stories: list[dict[str, Any]],
     history: list[dict[str, str]] | None = None,
     on_delta: Callable[[str], None] | None = None,
 ) -> dict[str, Any]:
-    raise NotImplementedError
+    """Answer an Ask Agy question through the tool-calling loop (MATTGPT-275).
+
+    The nonsense rules and the router's out_of_scope / personal redirects
+    still run first. The model then gets build_tool_system_prompt() (persona,
+    MATT_DNA, profile, the tool note and the per-answer instructions;
+    synthesis voice when the router says synthesis), the conversation, and
+    the question as asked. Its first call must search; it may search again
+    up to ASK_TOOL_MAX_ROUNDS rounds in all, then one more call must answer.
+    Search confidence does not gate the answer.
+
+    Every call is a streamed Responses API call on ASK_ANSWER_MODEL. Answer
+    text deltas reach on_delta as they arrive; the returned answer_md is the
+    whole text after _postprocess_agy_text(), with the stories the searches
+    returned, which are also the sources (stream, then swap).
+
+    Returns the dict the UI renders (answer_md, sources, modes, default_mode).
+    """
+    force_answer = bool(st.session_state.pop("__ask_force_answer__", False))
+    from_suggestion = (
+        bool(st.session_state.pop("__ask_from_suggestion__", False)) or force_answer
+    )
+    obs: dict[str, Any] = {
+        "intent_family": None,
+        "confidence": None,
+        "entity_match": None,
+        "rejection_reason": None,
+    }
+
+    rejected = _nonsense_rejection(question, from_suggestion, obs)
+    if rejected:
+        return rejected
+
+    intent_family, semantic_score = "", 1.0
+    if not from_suggestion:
+        _valid, semantic_score, _matched, intent_family = is_portfolio_query_semantic(
+            question or ""
+        )
+        obs["intent_family"] = intent_family
+    rejected = _router_rejection(
+        question, intent_family, semantic_score, from_suggestion, obs
+    )
+    if rejected:
+        return rejected
+
+    is_synthesis = intent_family == "synthesis"
+    # Source cards use the 3-card layout: they are the stories the model used.
+    st.session_state["__ask_query_intent__"] = None
+
+    profile_facts = load_matt_profile()
+    _opening, focus = _choose_opening_and_focus(is_synthesis)
+    items: list[dict[str, Any]] = [
+        {
+            "role": "system",
+            "content": build_tool_system_prompt(
+                is_synthesis=is_synthesis,
+                matt_dna=MATT_DNA,
+                profile_facts=profile_facts,
+                opener_examples=SYNTHESIS_OPENERS + STANDARD_OPENERS,
+                focus_angle=focus,
+            ),
+        },
+        *(history or []),
+        {"role": "user", "content": question},
+    ]
+
+    used: list[dict[str, Any]] = []
+    top_score = 0.0
+    text = ""
+    try:
+        client = _openai_client()
+        for round_no in range(ASK_TOOL_MAX_ROUNDS + 1):
+            last_round = round_no == ASK_TOOL_MAX_ROUNDS
+            if last_round:
+                tool_choice = "none"
+            elif round_no == 0:
+                tool_choice = "required"
+            else:
+                tool_choice = "auto"
+            response = _stream_response(
+                client,
+                on_delta,
+                model=ASK_ANSWER_MODEL,
+                reasoning={"effort": ASK_ANSWER_REASONING_EFFORT},
+                max_output_tokens=ASK_ANSWER_MAX_OUTPUT_TOKENS,
+                input=items,
+                tools=[_SEARCH_STORIES_TOOL],
+                tool_choice=tool_choice,
+            )
+            calls = [
+                o for o in response.output if getattr(o, "type", "") == "function_call"
+            ]
+            if not calls or last_round:
+                text = response.output_text or ""
+                break
+            if response.output_text:
+                items.append({"role": "assistant", "content": response.output_text})
+            items.extend(
+                {
+                    "type": "function_call",
+                    "call_id": c.call_id,
+                    "name": c.name,
+                    "arguments": c.arguments,
+                }
+                for c in calls
+            )
+            for c in calls:
+                output, found, score = _run_search_tool(c.arguments, stories)
+                top_score = max(top_score, score)
+                seen = {s.get("id") for s in used}
+                used.extend(s for s in found if s.get("id") not in seen)
+                items.append(
+                    {
+                        "type": "function_call_output",
+                        "call_id": c.call_id,
+                        "output": output,
+                    }
+                )
+            if st.session_state.pop("__embed_failure__", False):
+                return {
+                    "answer_md": "🐾 I need a quick breather: please try again in a moment!",
+                    "sources": [],
+                    "modes": {},
+                    "default_mode": "narrative",
+                    **obs,
+                }
+    except Exception as e:
+        err_lower = str(e).lower()
+        if "429" in str(e) or "rate_limit" in err_lower or "rate limit" in err_lower:
+            return {
+                "answer_md": "🐾 I need a quick breather: try again in about 15 seconds!",
+                "sources": [],
+                "modes": {},
+                "default_mode": "narrative",
+                **obs,
+            }
+        if DEBUG:
+            print(f"DEBUG agy_answer fatal error: {e}")
+        logger.exception("agy_answer fatal error: %s", e)
+        return {
+            "answer_md": ANSWER_ERROR_MESSAGE,
+            "sources": [],
+            "modes": {},
+            "default_mode": "narrative",
+            "degraded": True,
+            **obs,
+        }
+
+    answer_md, profile_categories = _postprocess_agy_text(text, used)
+    sources = [
+        {"id": s["id"], "title": s.get("Title", ""), "client": s.get("Client", "")}
+        for s in used
+    ]
+
+    log_query(
+        question or "",
+        "Ask Agy",
+        intent_family=intent_family,
+        result_count=len(sources),
+        top_score=top_score,
+    )
+
+    return {
+        "answer_md": answer_md,
+        "sources": sources,
+        "profile_categories": profile_categories,
+        "modes": {"narrative": answer_md},
+        "default_mode": "narrative",
+        "degraded": False,
+        **obs,
+    }
 
 
 def send_to_backend(
@@ -1768,22 +961,25 @@ def send_to_backend(
     stories: list[dict[str, Any]],
     on_delta: Callable[[str], None] | None = None,
 ) -> dict[str, Any]:
-    """Legacy wrapper for rag_answer.
+    """Ask Agy's entry point from the UI.
 
-    Maintained for backward compatibility. Delegates to rag_answer(), passing
-    the recent conversation from st.session_state["ask_transcript"] as history.
+    Delegates to agy_answer() (MATTGPT-275), passing the recent conversation
+    from st.session_state["ask_transcript"] as history.
 
     Args:
         prompt: User query string.
-        filters: Search filters dictionary (passed to semantic_search).
+        filters: Unused (agy_answer's search tool takes no facet filters);
+            kept for API compatibility.
         ctx: Context dictionary (unused, kept for API compatibility).
         stories: Full list of portfolio stories.
+        on_delta: Called with each piece of answer text as it streams in.
 
     Returns:
-        RAG answer dictionary with keys: answer_md, sources, modes, default_mode.
+        Answer dictionary with keys: answer_md, sources, profile_categories,
+        modes, default_mode.
     """
     history = _build_history_messages(st.session_state.get("ask_transcript", []))
-    return rag_answer(prompt, filters, stories, history=history)
+    return agy_answer(prompt, stories, history=history, on_delta=on_delta)
 
 
 def _build_history_messages(transcript: list[dict]) -> list[dict[str, str]]:
@@ -1804,755 +1000,3 @@ def _build_history_messages(transcript: list[dict]) -> list[dict[str, str]]:
     if messages and messages[-1]["role"] == "user":
         messages.pop()
     return messages[-ASK_HISTORY_MAX_MESSAGES:]
-
-
-def rag_answer(
-    question: str,
-    filters: dict[str, Any],
-    stories: list[dict[str, Any]],
-    history: list[dict[str, str]] | None = None,
-) -> dict[str, Any]:
-    """Main RAG (Retrieval-Augmented Generation) orchestration function.
-
-    Coordinates the full Ask Agy pipeline:
-    1. Mode detection (narrative/key_points/deep_dive shortcuts)
-    2. Off-domain query filtering (rules, LLM guard, token overlap)
-    3. Semantic search for relevant stories
-    4. Client diversity ranking
-    5. Agy-voiced response generation with multiple presentation modes
-
-    Args:
-        question: User query string. Special mode shortcuts:
-            - "narrative" | "key points" | "deep dive" → reformat last results
-        filters: Search filters dictionary passed to semantic_search.
-            Typically includes "q" (query string) and optional facet filters.
-        stories: Full list of portfolio story dictionaries.
-
-    Returns:
-        Dictionary with keys:
-            - answer_md (str): Primary response in markdown format
-            - sources (list[dict]): Top 3 stories with id, title, client
-            - modes (dict[str, str]): All 3 presentation modes (narrative,
-              key_points, deep_dive)
-            - default_mode (str): Which mode is shown in answer_md
-
-        Returns empty result if query is rejected:
-            {"answer_md": "", "sources": [], "modes": {}, "default_mode": "narrative"}
-
-    Side Effects:
-        - Updates st.session_state["_known_vocab"] (cached vocabulary)
-        - Updates st.session_state["__last_ranked_sources__"] (story IDs)
-        - Updates st.session_state["__ask_dbg_*"] fields for debug panel
-        - Logs rejected queries to data/offdomain_queries.csv
-
-    Raises:
-        Exception: Catches all exceptions and returns fallback response using
-            keyword-based ranking and 5P summary format.
-
-    Example:
-        >>> filters = {"q": "Tell me about platform modernization"}
-        >>> result = rag_answer("platform modernization", filters, all_stories)
-        >>> result.keys()
-        dict_keys(['answer_md', 'sources', 'modes', 'default_mode'])
-        >>> len(result['sources'])
-        3
-    """
-    # Check if from suggestion (skip aggressive off-domain gating)
-    force_answer = bool(st.session_state.pop("__ask_force_answer__", False))
-    from_suggestion = (
-        bool(st.session_state.pop("__ask_from_suggestion__", False)) or force_answer
-    )
-
-    # Persist debug context
-    st.session_state["__ask_dbg_prompt"] = (question or "").strip()
-    st.session_state["__ask_dbg_from_suggestion"] = bool(from_suggestion)
-    st.session_state["__ask_dbg_force_answer"] = bool(force_answer)
-
-    # Retrieval observables exposed in every return dict for tests that need to
-    # assert on router decisions without proxying through LLM-response text.
-    # Populated as the pipeline runs; values are None if that stage did not
-    # execute (e.g. router did not run because the nonsense filter fired first).
-    # rejection_reason mirrors ask_last_reason strings exactly so a reader can
-    # trace the same value between the return dict and session state.
-    _obs: dict = {
-        "intent_family": None,
-        "confidence": None,
-        "entity_match": None,
-        "rejection_reason": None,
-    }
-
-    if DEBUG:
-        dbg(
-            f"ask: from_suggestion={from_suggestion} q='{(question or '').strip()[:60]}'"
-        )
-        print(
-            f"DEBUG: query='{question}', from_suggestion={from_suggestion}, force_answer={force_answer}"
-        )
-
-    # Mode-only prompts (narrative, key points, deep dive)
-    simple_mode = (question or "").strip().lower()
-    _MODE_ALIASES = {
-        "key points": "key_points",
-        "keypoints": "key_points",
-        "deep dive": "deep_dive",
-        "deep-dive": "deep_dive",
-        "narrative": "narrative",
-    }
-
-    if simple_mode in _MODE_ALIASES and st.session_state.get("__last_ranked_sources__"):
-        ids = st.session_state["__last_ranked_sources__"]
-        ranked = [
-            next((s for s in stories if str(s.get("id")) == str(i)), None) for i in ids
-        ]
-        ranked = [s for s in ranked if s][:3]
-        if not ranked:
-            search_result = semantic_search(
-                question or "", filters, stories=stories, top_k=SEARCH_TOP_K
-            )
-            ranked = search_result["results"][:3] or stories[:3]
-
-        primary = ranked[0]
-        modes = {
-            "narrative": _format_narrative(primary),
-            "key_points": "\n\n".join([_format_key_points(s) for s in ranked]),
-            "deep_dive": _format_deep_dive(primary),
-        }
-        sel = _MODE_ALIASES[simple_mode]
-        answer_md = modes.get(sel, modes["narrative"])
-        sources = [
-            {"id": s["id"], "title": s["Title"], "client": s.get("Client", "")}
-            for s in ranked
-        ]
-        return {
-            "answer_md": answer_md,
-            "sources": sources,
-            "modes": modes,
-            "default_mode": sel,
-            **_obs,
-        }
-
-    try:
-        # Nonsense detection
-        _KNOWN_VOCAB = st.session_state.get("_known_vocab", set())
-        if not _KNOWN_VOCAB:
-            _KNOWN_VOCAB = build_known_vocab(stories)
-            st.session_state["_known_vocab"] = _KNOWN_VOCAB
-
-        # Step 1: Rules-based (fast, free)
-        rejected = _nonsense_rejection(question, from_suggestion, _obs)
-        if rejected:
-            return rejected
-
-        # Step 2: Semantic router (embedding-based intent classification)
-        semantic_valid = True
-        semantic_score = 1.0
-        matched_intent = ""
-        intent_family = ""
-
-        if not from_suggestion:
-            semantic_valid, semantic_score, matched_intent, intent_family = (
-                is_portfolio_query_semantic(question or "")
-            )
-            _obs["intent_family"] = intent_family
-            if DEBUG:
-                print(
-                    f"DEBUG: Semantic router: valid={semantic_valid}, score={semantic_score:.3f}, family={intent_family}"
-                )
-
-        # Step 2b: Entity Detection - detect entities to scope search
-        # Detected entities are used for:
-        # 1. Filtering Pinecone results (always)
-        # 2. Pinning entity-matched stories to #1 in ranking (always)
-        # NOTE: Entity gate (bouncer) REMOVED Jan 2026 - let Pinecone confidence
-        # be the sole decider. Nonsense filters catch off-topic queries.
-        entity_match = detect_entity(question or "", stories)
-        _obs["entity_match"] = entity_match
-        if DEBUG and entity_match:
-            print(f"DEBUG: Entity detected - {entity_match[0]}:{entity_match[1]}")
-
-        # Token overlap check
-        overlap = token_overlap_ratio(question or "", _KNOWN_VOCAB)
-        if DEBUG:
-            dbg(f"ask: overlap={overlap:.2f}")
-
-        # OUT_OF_SCOPE / PERSONAL CHECK (Semantic Router): see _router_rejection.
-        rejected = _router_rejection(
-            question, intent_family, semantic_score, from_suggestion, _obs
-        )
-        if rejected:
-            return rejected
-
-        # Entity-first sovereignty: if entity detected, add to filters for Pinecone
-        # This ensures entity-anchored queries prioritize stories from that entity
-        # EXCEPTION: Title entities use SOFT filtering (semantic search naturally ranks
-        # the matching story #1, and related stories fill #2-4 in one call)
-        search_filters = filters.copy()  # Don't mutate original
-        if entity_match:
-            entity_field, entity_value = entity_match
-            # Title uses soft filtering - semantic search handles ranking naturally
-            # Hard filter only for Client/Employer/Division matches
-            if entity_field != "Title":
-                search_filters["entity_field"] = entity_field
-                search_filters["entity_value"] = entity_value
-                if DEBUG:
-                    print(f"DEBUG: Entity filter added: {entity_field}={entity_value}")
-            elif DEBUG:
-                print(
-                    f"DEBUG: Title entity '{entity_value[:50]}...' - using soft filtering (no Pinecone filter)"
-                )
-
-        # Semantic search -- substituted query feeds both embedding and keyword scorer.
-        # Arm-C evidence (Aug 2026 A/B/C probe) was generated with the transformed
-        # string reaching both signals; implementation must match the tested config.
-        # Original query flows to the LLM prompt and all user-facing surfaces untouched.
-        _raw_q = question or filters.get("q", "")
-        retrieval_q = _build_retrieval_query(_raw_q, intent_family)
-        if DEBUG:
-            _fired = retrieval_q != _raw_q
-            print(
-                f"DEBUG substitution: family={intent_family} fired={_fired}"
-                + (
-                    f" original={_raw_q!r} → retrieval={retrieval_q!r}"
-                    if _fired
-                    else f" query={_raw_q!r}"
-                )
-            )
-        search_result = semantic_search(
-            retrieval_q,
-            search_filters,
-            stories=stories,
-            top_k=SEARCH_TOP_K,
-        )
-
-        # MATTGPT-162: Embedding-failure short-circuit.
-        # Pop immediately after semantic_search so nothing downstream can route
-        # around it (trusted-behavioral bypass, local-keyword fallback,
-        # synthesis path). Popping (not just reading) prevents the flag from
-        # leaking into the next query as a false error.
-        if st.session_state.pop("__embed_failure__", False):
-            print(
-                f"[API_ERROR_DETECTED] router=embed_failure, "
-                f"query={(question or '')[:50]}..."
-            )
-            if DEBUG:
-                print("DEBUG: API error detected (OpenAI embedding failed)")
-            return {
-                "answer_md": "🐾 I need a quick breather — please try again in a moment!",
-                "sources": [],
-                "modes": {},
-                "default_mode": "narrative",
-                **_obs,
-            }
-
-        pool = search_result["results"]
-        confidence = search_result["confidence"]
-        _obs["confidence"] = confidence
-        # MATTGPT-218: pool_size exposed in the return dict so the eval framework
-        # can assert on pool composition (min_pool_size). Semantics: the operative
-        # retrieval space the LLM was drawing from. Standard path = the semantic
-        # search pool; overridden in the synthesis branch below to len(synthesis_pool).
-        pool_size = len(pool)
-
-        # Store confidence for conversation_view to use
-        st.session_state["__ask_confidence__"] = confidence
-
-        # Synthesis mode detection - use semantic router's intent_family (no LLM call!)
-        # NOTE: classify_query_intent LLM gate REMOVED Jan 2026
-        # - Was expensive (GPT-4o-mini call on every query)
-        # - Was brittle (rejected valid projects like TICARA it didn't recognize)
-        # - Was redundant (Pinecone confidence handles relevance)
-        is_synthesis = intent_family == "synthesis"
-
-        # Entity cluster promotion: if Pinecone returned 3+ stories from the
-        # detected entity, the user is asking about a client/division broadly
-        # (e.g., "What did Matt do at RBC?"). Promote to synthesis so the LLM
-        # narrates across all stories instead of focusing on a single primary.
-        #
-        # Content-kw gate (MATTGPT-074): strip entity tokens (canonical value +
-        # any matched alias keys) from retrieval_q, recompute kw per entity
-        # story, and promote only if the recomputed values are uniform.
-        # Matching the entity name is expected on an entity query and carries
-        # no signal about specificity: "what did Matt do at AT&T" scores the
-        # entity everywhere. What matters is whether other tokens differentiate
-        # ("production incident at AT&T" scores one story much higher).
-        # Empty content_toks after stripping is trivially uniform and promotes.
-        if entity_match and not is_synthesis:
-            ef, ev = entity_match
-            entity_stories = [s for s in pool if s.get(ef) == ev]
-            entity_pool_count = len(entity_stories)
-            if entity_pool_count >= 3:
-                entity_toks = set(_tokenize(ev))
-                # Union of ALL matching alias tokens, not first-by-dict-order.
-                # Multiple aliases may map to the same entity (jpm, jpmc,
-                # jpmorgan, jp morgan all -> JP Morgan Chase); a query using
-                # any of them must have all matching-key tokens stripped.
-                retrieval_lower = retrieval_q.lower()
-                alias_toks = {
-                    tok
-                    for k, v in ENTITY_ALIASES.items()
-                    if v == entity_match and k in retrieval_lower
-                    for tok in _tokenize(k)
-                }
-                content_toks = set(_tokenize(retrieval_q)) - entity_toks - alias_toks
-                if not content_toks:
-                    content_kw_vals = []
-                    content_kw_uniform = True
-                else:
-                    stripped_q = " ".join(sorted(content_toks))
-                    content_kw_vals = [
-                        round(_keyword_score_for_story(s, stripped_q), 3)
-                        for s in entity_stories
-                    ]
-                    content_kw_uniform = len(set(content_kw_vals)) <= 1
-                if content_kw_uniform:
-                    is_synthesis = True
-                    if DEBUG:
-                        print(
-                            f"DEBUG: Entity cluster promotion: {ef}={ev} has {entity_pool_count} stories, content_kw uniform {content_kw_vals} -> synthesis"
-                        )
-                elif DEBUG:
-                    print(
-                        f"DEBUG: Entity cluster promotion suppressed: {ef}={ev} has {entity_pool_count} stories, content_kw dispersed {content_kw_vals} -> standard"
-                    )
-        st.session_state["__ask_query_intent__"] = intent_family  # Use router family
-
-        if DEBUG:
-            print(
-                f"DEBUG: search confidence={confidence}, top_score={search_result['top_score']:.3f}, pool_size={len(pool)}"
-            )
-            print(f"DEBUG: intent_family={intent_family}, is_synthesis={is_synthesis}")
-
-        # --- Pinecone confidence gate ---
-        # Trust semantic router for high-confidence behavioral matches
-        is_trusted_behavioral = (
-            semantic_valid and semantic_score >= 0.8 and intent_family == "behavioral"
-        )
-
-        if (
-            not from_suggestion
-            and confidence in ("none", "low")
-            and not is_trusted_behavioral
-        ):
-            # Check if this is likely an API error (semantic router failed + Pinecone poor)
-            # rather than an invalid question
-            if intent_family == "error_fallback":
-                # Log for observability - helps diagnose "I can't help" issues
-                print(
-                    f"[API_ERROR_DETECTED] router=error_fallback, "
-                    f"pinecone_score={search_result.get('top_score', 0):.3f}, "
-                    f"confidence={confidence}, query={question[:50]}..."
-                )
-                if DEBUG:
-                    print("DEBUG: API error detected (router failed + low Pinecone)")
-                return {
-                    "answer_md": "🐾 I need a quick breather — please try again in a moment!",
-                    "sources": [],
-                    "modes": {},
-                    "default_mode": "narrative",
-                    **_obs,
-                }
-
-            # Log for observability - helps diagnose "I can't help" issues
-            print(
-                f"[QUERY_REJECTED] reason=low_pinecone, "
-                f"router_family={intent_family}, router_score={semantic_score:.3f}, "
-                f"pinecone_score={search_result.get('top_score', 0):.3f}, "
-                f"query={question[:50]}..."
-            )
-            log_offdomain(
-                question or "", f"low_pinecone:{search_result['top_score']:.3f}"
-            )
-            log_query(
-                question or "",
-                "Ask Agy",
-                intent_family=intent_family,
-                confidence=confidence,
-                result_count=len(pool),
-                redirect_reason="low_confidence",
-                top_score=search_result.get("top_score", 0.0),
-            )
-            st.session_state["ask_last_reason"] = "low_confidence"
-            st.session_state["ask_last_query"] = question or ""
-            st.session_state["ask_last_overlap"] = overlap
-            st.session_state["__ask_dbg_decision"] = (
-                f"pinecone_reject:{search_result['top_score']:.3f}"
-            )
-            _obs["rejection_reason"] = "low_confidence"
-            return {
-                "answer_md": "",
-                "sources": [],
-                "modes": {},
-                "default_mode": "narrative",
-                **_obs,
-            }
-
-        # Widen pool for suggestions
-        if (from_suggestion or force_answer) and pool:
-            try:
-                locals_top = sorted(
-                    stories,
-                    key=lambda s: _score_story_for_prompt(s, question),
-                    reverse=True,
-                )[:5]
-                seen = {x.get("id") for x in pool if isinstance(x, dict)}
-                for s in locals_top:
-                    sid = s.get("id")
-                    if sid not in seen:
-                        pool.append(s)
-                        seen.add(sid)
-            except Exception as e:
-                logger.warning("suggestion pool widening skipped: %s", e, exc_info=True)
-
-        if DEBUG:
-            dbg(f"ask: pool_size={len(pool) if pool else 0}")
-
-        # No results handling
-        if not pool:
-            # Check if this is likely an API error (semantic router failed + no pool)
-            if intent_family == "error_fallback":
-                # Log for observability - helps diagnose "I can't help" issues
-                print(
-                    f"[API_ERROR_DETECTED] router=error_fallback, "
-                    f"pool=empty, query={question[:50]}..."
-                )
-                if DEBUG:
-                    print("DEBUG: API error detected (router failed + empty pool)")
-                return {
-                    "answer_md": "🐾 I need a quick breather — please try again in a moment!",
-                    "sources": [],
-                    "modes": {},
-                    "default_mode": "narrative",
-                    **_obs,
-                }
-
-            if st.session_state.get("__pc_suppressed__"):
-                log_offdomain(question or "", "low_confidence")
-                log_query(
-                    question or "",
-                    "Ask Agy",
-                    intent_family=intent_family,
-                    confidence=confidence,
-                    result_count=0,
-                    redirect_reason="low_confidence",
-                    top_score=search_result.get("top_score", 0.0),
-                )
-                st.session_state["ask_last_reason"] = "low_confidence"
-                st.session_state["ask_last_query"] = question or ""
-                st.session_state["ask_last_overlap"] = overlap
-                st.session_state["__ask_dbg_decision"] = "low_conf"
-                _obs["rejection_reason"] = "low_confidence"
-            else:
-                st.session_state["ask_last_reason"] = "empty_pool"
-                _obs["rejection_reason"] = "empty_pool"
-            return {
-                "answer_md": "",
-                "sources": [],
-                "modes": {},
-                "default_mode": "narrative",
-                **_obs,
-            }
-
-    except Exception as e:
-        # Fatal error fallback
-        if DEBUG:
-            print(f"DEBUG rag_answer fatal error: {e}")
-        logger.exception("rag_answer fatal error: %s", e)
-        return _degraded_fallback(question, stories, _obs)
-
-    # Rank stories based on intent type
-    try:
-        candidates = [x for x in pool if isinstance(x, dict)]
-
-        if is_synthesis:
-            # Synthesis mode: Theme-diverse retrieval via parallel metadata-filtered search
-            # Each theme gets its own Pinecone query with filter={"Theme": theme}
-            # If query mentions a client, scope to that client's stories
-            # NOTE: top_per_theme=3 (was 2) to widen the net for client diversity (Q17 fix)
-            synthesis_pool = get_synthesis_stories(
-                stories, top_per_theme=3, query=question
-            )
-            # MATTGPT-218: synthesis pool is the operative retrieval space for
-            # synthesis intents. Override the standard pool_size so the return
-            # dict reflects the number that pool-breadth assertions actually care
-            # about (bug: 1; fix: ~21).
-            pool_size = len(synthesis_pool)
-
-            # MATTGPT-162: same short-circuit as the search path. get_synthesis_stories
-            # sets __embed_failure__ on OpenAI failure -- route to the API error handler.
-            if st.session_state.pop("__embed_failure__", False):
-                print(
-                    f"[API_ERROR_DETECTED] router=embed_failure, "
-                    f"source=synthesis, query={(question or '')[:50]}..."
-                )
-                if DEBUG:
-                    print("DEBUG: API error detected in synthesis path")
-                return {
-                    "answer_md": "🐾 I need a quick breather — please try again in a moment!",
-                    "sources": [],
-                    "modes": {},
-                    "default_mode": "narrative",
-                    **_obs,
-                }
-
-            # Q17 Fix: Prioritize named clients over generic ones in synthesis ranking
-            # Same logic as diversify_results but preserves score-based ordering within groups
-
-            # Sort full pool by score first
-            sorted_pool = sorted(
-                synthesis_pool, key=lambda s: s.get("_search_score", 0), reverse=True
-            )
-
-            # Separate into named vs generic, preserving score order
-            named_stories = [
-                s
-                for s in sorted_pool
-                if not is_generic_client(s.get("Client", "Unknown"))
-            ]
-            generic_stories = [
-                s for s in sorted_pool if is_generic_client(s.get("Client", "Unknown"))
-            ]
-
-            # Named clients first, then generic - ensures JP Morgan/RBC beat Independent
-            ranked = (named_stories + generic_stories)[:9]
-
-            if DEBUG:
-                themes_found = set(
-                    s.get("_matched_theme") or s.get("Theme") for s in ranked
-                )
-                print(
-                    f"DEBUG synthesis mode - pool={len(synthesis_pool)}, named={len(named_stories)}, generic={len(generic_stories)}, ranked={len(ranked)}"
-                )
-                print(f"DEBUG synthesis themes covered: {themes_found}")
-                print("DEBUG synthesis ranked (named clients first):")
-                for i, s in enumerate(ranked):
-                    theme = s.get("_matched_theme") or s.get("Theme", "?")
-                    score = s.get("_search_score", 0)
-                    is_named = (
-                        "NAMED"
-                        if not is_generic_client(s.get("Client", "Unknown"))
-                        else "generic"
-                    )
-                    print(
-                        f"DEBUG   [{i + 1}] [{is_named}] [{theme}] {s.get('Client')}: {s.get('Title', '')[:40]} (score={score:.3f})"
-                    )
-        elif intent_family == "narrative" and pool:
-            # =============================================================
-            # NARRATIVE MODE (Jan 2026 - Sovereign Narrative Update)
-            # For narrative queries (leadership journey, philosophy, etc.),
-            # keep the boosted Professional Narrative story at position #1
-            # but include other stories for the UI sources panel.
-            # =============================================================
-            first_story = pool[0]
-            if first_story.get("Theme") == "Professional Narrative":
-                # Get other stories via diversify, then prepend the narrative story
-                other_stories = diversify_results(
-                    [c for c in candidates if c.get("id") != first_story.get("id")]
-                )
-                ranked = [first_story] + (other_stories or [])
-                if DEBUG:
-                    print(
-                        f"DEBUG narrative mode: boosted '{first_story.get('Title')}' + {len(other_stories or [])} others"
-                    )
-            else:
-                ranked = diversify_results(candidates) or (pool[:1] if pool else [])
-        else:
-            # Standard mode: Entity-pinned + Client diversity ranking
-            # MATTGPT-169: exclude Professional Narrative stories on unambiguous
-            # technical queries. Guard: skip filter if it would empty the pool.
-            if intent_family in _PN_EXCLUDED_FAMILIES:
-                non_pn = [
-                    c for c in candidates if c.get("Theme") != "Professional Narrative"
-                ]
-                if non_pn:
-                    candidates = non_pn
-
-            # If entity gate detected a match, pin the matching story to #1
-            # before diversity reordering (prevents "Multiple Clients" demotion)
-            if entity_match:
-                entity_field, entity_value = entity_match
-                # Find ALL stories matching the entity, then pick the one
-                # whose title best overlaps with the query (handles multiple
-                # stories sharing the same Division/Project)
-                entity_candidates = [
-                    c for c in candidates if c.get(entity_field) == entity_value
-                ]
-                if len(entity_candidates) > 1 and entity_field not in (
-                    "Client",
-                    "Employer",
-                ):
-                    # Title substring pin: only for Division/Project/Place entities
-                    # where the entity phrase IS the topic being asked about.
-                    # For Client/Employer, Pinecone score ordering is already
-                    # semantically correct (entity value may not appear in all titles).
-                    entity_phrase = entity_value.lower()
-                    title_matches = [
-                        c
-                        for c in entity_candidates
-                        if entity_phrase in c.get("Title", "").lower()
-                    ]
-                    if title_matches:
-                        pinned = title_matches[
-                            0
-                        ]  # Highest Pinecone score among title matches
-                        if DEBUG:
-                            print(
-                                f"DEBUG entity pin: title substring match '{pinned.get('Title', '')[:50]}' "
-                                f"('{entity_phrase}' in title, {len(entity_candidates)} total candidates)"
-                            )
-                    else:
-                        pinned = entity_candidates[
-                            0
-                        ]  # Fallback to highest Pinecone score
-                        if DEBUG:
-                            print(
-                                f"DEBUG entity pin: no title match for '{entity_phrase}', "
-                                f"using top score: '{pinned.get('Title', '')[:50]}'"
-                            )
-                else:
-                    pinned = entity_candidates[0] if entity_candidates else None
-                    if DEBUG and len(entity_candidates) > 1:
-                        print(
-                            f"DEBUG entity pin: Client/Employer field '{entity_field}' — "
-                            f"using top Pinecone score: '{pinned.get('Title', '')[:50]}' "
-                            f"(skipped title substring, {len(entity_candidates)} candidates)"
-                        )
-                if pinned:
-                    others = diversify_results(
-                        [c for c in candidates if c.get("id") != pinned.get("id")],
-                        max_per_client=3,
-                    )
-                    ranked = [pinned] + (others or [])
-                    if DEBUG:
-                        print(
-                            f"DEBUG entity pin: '{pinned.get('Title', '')[:50]}' pinned to #1 ({entity_field}={entity_value})"
-                        )
-                else:
-                    if DEBUG:
-                        pool_values = [
-                            c.get(entity_field, "MISSING") for c in candidates[:5]
-                        ]
-                        print(
-                            f"DEBUG entity pin MISS: no story matched {entity_field}='{entity_value}'. Pool values: {pool_values}"
-                        )
-                    ranked = diversify_results(candidates, max_per_client=3) or (
-                        pool[:1] if pool else []
-                    )
-            else:
-                if intent_family == "narrative":
-                    # Narrative queries: trust Pinecone semantic ranking.
-                    # Diversity demotes the best match based on client name
-                    # (e.g., "Multiple Clients" ranked below "Financial Services Client"
-                    # even when the Multiple Clients story is the actual answer).
-                    ranked = sorted(
-                        candidates, key=lambda s: s.get("pc", 0.0), reverse=True
-                    ) or (pool[:1] if pool else [])
-                    if DEBUG:
-                        print(
-                            f"DEBUG narrative skip-diversity: top='{ranked[0].get('Title', '')[:50]}' "
-                            f"(pc={ranked[0].get('pc', 0.0):.3f})"
-                        )
-                else:
-                    ranked = diversify_results(candidates, family=intent_family) or (
-                        pool[:1] if pool else []
-                    )
-            if DEBUG and ranked:
-                dbg(f"ask: ranked first_ids={[s.get('id') for s in ranked]}")
-
-    except Exception as e:
-        if DEBUG:
-            print(f"DEBUG rag_answer rank error: {e}")
-        ranked = [x for x in pool if isinstance(x, dict)][:3] or (
-            pool[:1] if pool else []
-        )
-
-    if not ranked:
-        ranked = diversify_results(pool, family=intent_family) or (
-            pool[:1] if pool else []
-        )
-        is_synthesis = False
-        if DEBUG:
-            print(
-                "DEBUG synthesis guard: empty ranked, falling back to non-synthesis path"
-            )
-
-    st.session_state["__ask_dbg_decision"] = (
-        f"ok_ranked:{ranked[0].get('id')}" if ranked else "rank_empty"
-    )
-    st.session_state["__last_ranked_sources__"] = [s["id"] for s in ranked]
-
-    primary = ranked[0]
-    profile_categories: list[str] = []
-
-    try:
-        # Generate Agy-voiced response
-        narrative = _format_narrative(primary)
-        agy_response = _generate_agy_response(
-            question,
-            ranked,
-            narrative,
-            is_synthesis=is_synthesis,
-            profile_facts=search_result.get("profile_facts", ""),
-            profile_categories_out=profile_categories,
-            history=history,
-        )
-
-        # Build modes
-        key_points = "\n\n".join([_format_key_points(s) for s in ranked])
-        deep_dive = _format_deep_dive(primary)
-        if len(ranked) > 1:
-            more = ", ".join(
-                [f"{s.get('Title', '')} — {s.get('Client', '')}" for s in ranked[1:]]
-            )
-            deep_dive += f"\n\n_Also relevant:_ {more}"
-
-        modes = {
-            "narrative": agy_response,
-            "key_points": key_points,
-            "deep_dive": deep_dive,
-        }
-        answer_md = agy_response
-
-    except RateLimitError:
-        # Rate limit - return friendly message with NO sources
-        if DEBUG:
-            print("DEBUG rag_answer: rate limit hit, suppressing sources")
-        return {
-            "answer_md": "🐾 I need a quick breather — try again in about 15 seconds!",
-            "sources": [],
-            "modes": {},
-            "default_mode": "narrative",
-            **_obs,
-        }
-
-    except Exception as e:
-        # Fallback to 5P summary
-        if DEBUG:
-            print(f"DEBUG rag_answer build error: {e}")
-        summary = build_5p_summary(primary, 280)
-        modes = {"narrative": summary, "key_points": summary, "deep_dive": summary}
-        answer_md = summary
-
-    sources = [
-        {"id": s["id"], "title": s["Title"], "client": s.get("Client", "")}
-        for s in ranked
-    ]
-
-    log_query(
-        question or "",
-        "Ask Agy",
-        intent_family=intent_family,
-        confidence=confidence,
-        result_count=len(ranked),
-        top_score=search_result.get("top_score", 0.0),
-    )
-
-    return {
-        "answer_md": answer_md,
-        "sources": sources,
-        "profile_categories": profile_categories,
-        "modes": modes,
-        "default_mode": "narrative",
-        "degraded": False,
-        "pool_size": pool_size,
-        **_obs,
-    }

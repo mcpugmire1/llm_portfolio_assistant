@@ -4292,6 +4292,28 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_my_work_trigge
             visibility: hidden !important;
         }
 
+        /* Same pattern for all of landing during the hand-off to the
+           conversation. Hiding only some stale parts left the page half
+           emptied (input, caption and footer still painted under a blank
+           hero and an empty intro card) until the conversation painted.
+           While landing's caption (.powered-by-text, rendered only by
+           landing_view) is in the DOM, every stale element is hidden, and
+           so is the intro card, a keyed container that never gets
+           data-stale itself (only stElementContainer does). The navbar
+           (brand and topnav_ buttons) and the status bar are excluded:
+           they are stale in the same frames, and hiding them read as the
+           page chrome blinking out. */
+        body:has(.powered-by-text) [data-testid="stElementContainer"][data-stale="true"]:not([class*="st-key-topnav_"]):not(:has(.navbar-brand, .status-bar)),
+        body:has(.powered-by-text) .st-key-intro_section:has([data-stale="true"]) {
+            visibility: hidden !important;
+        }
+        /* visibility is animatable: the footer's links carry an inline
+           "transition: all 0.2s", so without this they stayed painted for
+           200 ms after their card was hidden. */
+        body:has(.powered-by-text) [data-testid="stElementContainer"][data-stale="true"]:not([class*="st-key-topnav_"]):not(:has(.navbar-brand, .status-bar)) * {
+            transition: none !important;
+        }
+
         </style>
         """
 

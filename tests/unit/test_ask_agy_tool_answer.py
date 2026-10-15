@@ -38,16 +38,14 @@ import logging
 from types import SimpleNamespace
 from unittest.mock import MagicMock, patch
 
+import httpx
 import pytest
 
+from config import constants
 from ui.pages.ask_mattgpt import backend_service as bs
 
 logging.getLogger("streamlit").setLevel(logging.ERROR)
 
-pytestmark = pytest.mark.xfail(
-    reason="MATTGPT-275 Red; remove these xfails in the 275 Green commit.",
-    strict=False,
-)
 
 # MATT_DNA is "" until sync_portfolio_metadata() runs; patch an invented
 # sentinel so the system-prompt assertion does not depend on test order.
@@ -160,14 +158,19 @@ def _run(
     history=None,
     nonsense=None,
     on_delta=None,
+    session_state=None,
+    search_effect=None,
 ):
     """Run agy_answer with the model, router, search and loggers faked.
+    session_state seeds st.session_state (e.g. a chip's flags).
     Returns (result, fake_model, search_mock, log_query_mock, session)."""
     fake = _FakeOpenAI(script)
-    session = {}
+    session = dict(session_state or {})
     mock_st = MagicMock()
     mock_st.session_state = session
     search_mock = MagicMock(return_value=search or _search_result([_STORY_A]))
+    if search_effect is not None:
+        search_mock.side_effect = lambda *a, **k: search_effect(session)
     log_query_mock = MagicMock()
     with (
         patch("openai.OpenAI", return_value=fake),
@@ -214,7 +217,6 @@ class TestWiring:
         with (
             patch.object(bs, "st", mock_st),
             patch.object(bs, "agy_answer") as mock_agy,
-            patch.object(bs, "rag_answer") as mock_rag,
         ):
             mock_agy.return_value = {"answer_md": "ok", "sources": []}
             bs.send_to_backend("current question", {}, None, _STORIES)
@@ -227,7 +229,6 @@ class TestWiring:
             ],
             on_delta=None,
         )
-        mock_rag.assert_not_called()
 
     def test_send_to_backend_passes_on_delta_through(self):
         def on_delta(text):
@@ -265,10 +266,36 @@ class TestRejectionsKept:
             [_response("unused")], family=family, router_score=0.96
         )
         assert result["rejection_reason"] == f"semantic_router:{family}"
+        assert result["intent_family"] == family
         assert session["ask_last_reason"] == f"semantic_router:{family}"
         assert result["answer_md"].startswith("🐾")
         assert fake.requests == []
         search.assert_not_called()
+
+    def test_a_suggestion_chip_is_answered_past_the_nonsense_rules_and_router(self):
+        """Landing chips set __ask_force_answer__: their fixed questions are
+        answered even when a rule or the router would redirect them."""
+        result, fake, _, _, session = _run(
+            [_response(tool_query="ledger"), _response("Here is the ledger work.")],
+            family="out_of_scope",
+            router_score=0.96,
+            nonsense="joke",
+            session_state={"__ask_force_answer__": True},
+        )
+        assert result["rejection_reason"] is None
+        assert "ask_last_reason" not in session
+        assert result["answer_md"].startswith("Here is the ledger work")
+        assert len(fake.requests) == 2
+        assert (
+            "__ask_force_answer__" not in session
+        ), "the flag must not outlive its turn"
+
+    def test_without_the_chip_flag_the_same_question_is_redirected(self):
+        result, fake, _, _, _ = _run(
+            [_response("unused")], family="out_of_scope", router_score=0.96
+        )
+        assert result["rejection_reason"] == "semantic_router:out_of_scope"
+        assert fake.requests == []
 
 
 # ---------------------------------------------------------------------------
@@ -555,22 +582,33 @@ class TestTheCall:
 # ---------------------------------------------------------------------------
 
 
+_ERROR_MESSAGE = "Sorry, I couldn't generate an answer right now."
+
+
 class _FailingOpenAI:
-    def __init__(self, message):
-        self.message = message
+    """Raises on the first call, or after replaying `script` (one streamed
+    reply per call) when given one."""
+
+    def __init__(self, error, script=()):
+        self.error = RuntimeError(error) if isinstance(error, str) else error
+        self.script = list(script)
         self.responses = SimpleNamespace(create=self._create)
 
     def _create(self, **kwargs):
-        raise RuntimeError(self.message)
+        if self.script:
+            return iter(list(self.script.pop(0)))
+        raise self.error
 
 
-def _run_failing(message):
+def _run_failing(error, script=()):
     mock_st = MagicMock()
     mock_st.session_state = {}
     with (
-        patch("openai.OpenAI", return_value=_FailingOpenAI(message)),
+        patch("openai.OpenAI", return_value=_FailingOpenAI(error, script)),
         patch.object(bs, "st", mock_st),
-        patch.object(bs, "semantic_search", MagicMock()),
+        patch.object(
+            bs, "semantic_search", MagicMock(return_value=_search_result([_STORY_A]))
+        ),
         patch.object(
             bs,
             "is_portfolio_query_semantic",
@@ -590,8 +628,363 @@ class TestModelErrors:
         assert "breather" in result["answer_md"]
         assert result["sources"] == []
 
-    def test_other_errors_return_rag_answers_degraded_fallback(self):
+    def test_other_errors_return_the_error_message_with_no_sources(self):
         result = _run_failing("upstream exploded")
+        assert result["answer_md"] == _ERROR_MESSAGE
+        assert result["sources"] == []
         assert result["degraded"] is True
-        assert result["answer_md"]
-        assert result["sources"]
+
+    def test_a_generic_error_is_logged_with_its_traceback(self, caplog):
+        with caplog.at_level(logging.ERROR, logger=bs.logger.name):
+            _run_failing("upstream exploded")
+        records = [
+            r for r in caplog.records if "agy_answer fatal error" in r.getMessage()
+        ]
+        assert records, "the fatal error was not logged"
+        assert records[0].exc_info is not None, "logged without its traceback"
+
+    def test_the_error_answer_carries_no_story_text(self):
+        result = _run_failing("upstream exploded")
+        shown = [result["answer_md"], *result.get("modes", {}).values()]
+        for story in _STORIES:
+            for field in ("5PSummary", "Title"):
+                assert not any(
+                    story[field] in text for text in shown
+                ), f"story {field} {story[field]!r} reached the visitor"
+
+    def test_a_connection_timeout_returns_the_error_message(self):
+        import httpx
+        import openai
+
+        timeout = openai.APITimeoutError(
+            request=httpx.Request("POST", "https://api.openai.com/v1/responses")
+        )
+        result = _run_failing(timeout)
+        assert result["answer_md"] == _ERROR_MESSAGE
+        assert result["sources"] == []
+
+    def test_an_error_after_a_search_returns_no_sources(self):
+        result = _run_failing(
+            "upstream exploded", script=[_response(tool_query="ledger rebuild")]
+        )
+        assert result["answer_md"] == _ERROR_MESSAGE
+        assert result["sources"] == []
+
+    @pytest.mark.parametrize("event", ["response.failed", "error"])
+    def test_a_stream_that_fails_mid_answer_ends_on_the_error_message(
+        self, event, caplog
+    ):
+        """Text has already streamed when the stream reports a failure: the
+        finished turn is the error message (it replaces the streamed text),
+        with no sources, and the server log names the failure event."""
+        failing = [
+            SimpleNamespace(type="response.output_text.delta", delta="Matt led "),
+            SimpleNamespace(type="response.output_text.delta", delta="a team of"),
+            SimpleNamespace(type=event, response=None),
+        ]
+        deltas = []
+        with caplog.at_level(logging.ERROR, logger=bs.logger.name):
+            result, _, _, _, _ = _run(
+                [_response(tool_query="ledger"), failing], on_delta=deltas.append
+            )
+        assert "".join(deltas) == "Matt led a team of"
+        assert result["answer_md"] == _ERROR_MESSAGE
+        assert result["sources"] == []
+        assert result["degraded"] is True
+        assert (
+            f"answer call failed: {event}" in caplog.text
+        ), f"server log does not name {event!r}"
+
+
+class _BreakingOpenAI:
+    """Replays one streamed reply per call. A reply given as (events, error)
+    yields its events, then raises the error mid-stream, as a dropped or
+    stalled connection does (MATTGPT-303: httpx.ReadError and ReadTimeout
+    raised from the stream body, outside the SDK's own retries)."""
+
+    def __init__(self, script):
+        self.script = list(script)
+        self.requests = []
+        self.responses = SimpleNamespace(create=self._create)
+
+    def _create(self, **kwargs):
+        self.requests.append(json.loads(json.dumps(kwargs, default=str)))
+        reply = self.script.pop(0)
+        events, error = reply if isinstance(reply, tuple) else (reply, None)
+
+        def stream():
+            yield from events
+            if error is not None:
+                raise error
+
+        return stream()
+
+
+def _run_breaking(script, on_delta=None):
+    fake = _BreakingOpenAI(script)
+    mock_st = MagicMock()
+    mock_st.session_state = {}
+    with (
+        patch("openai.OpenAI", return_value=fake),
+        patch.object(bs, "st", mock_st),
+        patch.object(
+            bs, "semantic_search", MagicMock(return_value=_search_result([_STORY_A]))
+        ),
+        patch.object(
+            bs,
+            "is_portfolio_query_semantic",
+            return_value=(True, 0.6, "zzz-intent", "behavioral"),
+        ),
+        patch.object(bs, "is_nonsense", return_value=None),
+        patch.object(bs, "log_query", MagicMock()),
+        patch.object(bs, "log_offdomain", MagicMock()),
+        patch.object(bs, "MATT_DNA", _DNA_SENTINEL),
+    ):
+        result = bs.agy_answer(
+            "Tell me about his ledger work", _STORIES, on_delta=on_delta
+        )
+    return result, fake
+
+
+_BREAKS = {
+    "ReadError": httpx.ReadError("[Errno 54] Connection reset by peer"),
+    "ReadTimeout": httpx.ReadTimeout("The read operation timed out"),
+    "RemoteProtocolError": httpx.RemoteProtocolError("peer closed connection"),
+}
+_STARTED = [SimpleNamespace(type="response.created")]
+_ANSWER = "Matt rebuilt the ledger."
+
+
+class TestBrokenStreams:
+    @pytest.mark.parametrize("error", list(_BREAKS))
+    @pytest.mark.parametrize("call", ["search", "answer"])
+    def test_a_stream_broken_before_any_text_is_sent_again_once(self, call, error):
+        broken = (_STARTED, _BREAKS[error])
+        search, answer = _response(tool_query="ledger"), _response(content=_ANSWER)
+        script = (
+            [broken, search, answer] if call == "search" else [search, broken, answer]
+        )
+        result, fake = _run_breaking(script)
+        assert "rebuilt the ledger" in result["answer_md"]
+        assert len(fake.requests) == 3
+        assert (
+            fake.requests[1 if call == "search" else 2]
+            == fake.requests[0 if call == "search" else 1]
+        )
+
+    @pytest.mark.parametrize("case", ["after text", "on the second try"])
+    def test_a_broken_stream_is_not_sent_again(self, case):
+        """After text has streamed, the visitor has seen part of the answer:
+        the turn ends on the error message. A second break before text ends
+        it too (one retry only)."""
+        error = _BREAKS["ReadError"]
+        if case == "after text":
+            broken = [
+                (
+                    [
+                        SimpleNamespace(
+                            type="response.output_text.delta", delta="Matt led a team"
+                        )
+                    ],
+                    error,
+                )
+            ]
+        else:
+            broken = [(_STARTED, error), (_STARTED, error)]
+        script = [
+            _response(tool_query="ledger"),
+            *broken,
+            _response(content="ZZZ never sent"),
+        ]
+        deltas = []
+        result, fake = _run_breaking(script, on_delta=deltas.append)
+        assert result["answer_md"] == _ERROR_MESSAGE
+        assert result["sources"] == []
+        assert result["degraded"] is True
+        assert len(fake.requests) == 1 + len(broken)
+        assert "".join(deltas) == ("Matt led a team" if case == "after text" else "")
+
+
+class TestClientTimeout:
+    def test_the_client_waits_at_most_the_measured_read_timeout(self):
+        assert getattr(constants, "ASK_ANSWER_READ_TIMEOUT_S", None) == 30
+        with patch("openai.OpenAI") as openai_client:
+            bs._openai_client()
+        assert openai_client.call_args.kwargs["timeout"] == httpx.Timeout(
+            30, connect=5.0
+        )
+
+
+_BREATHER = "\U0001f43e I need a quick breather: please try again in a moment!"
+
+
+def _embedding_fails(session):
+    # pinecone_semantic_search() on an embedding failure (MATTGPT-162).
+    session["__embed_failure__"] = True
+    return _search_result([], top_score=0.0)
+
+
+def _run_with_embedding_failure():
+    return _run(
+        [_response(tool_query="ledger"), _response(content="ZZZ unsourced answer")],
+        search_effect=_embedding_fails,
+    )
+
+
+class TestEmbeddingFailure:
+    """When the search's embedding call fails, the visitor gets the breather
+    with no sources, not an answer written without stories, and the flag is
+    cleared so the next question isn't affected (MATTGPT-162 on the tool path)."""
+
+    def test_the_visitor_gets_the_breather_with_no_sources(self):
+        result, *_ = _run_with_embedding_failure()
+        assert result["answer_md"] == _BREATHER
+        assert result["sources"] == []
+
+    def test_the_model_is_not_asked_to_answer_after_the_failure(self):
+        _, fake, *_ = _run_with_embedding_failure()
+        assert len(fake.requests) == 1
+
+    def test_the_flag_is_cleared(self):
+        *_, session = _run_with_embedding_failure()
+        assert "__embed_failure__" not in session
+
+
+_RETRIEVED_THREE = _search_result([_STORY_A, _STORY_B, _STORY_PN])
+
+
+@pytest.mark.xfail(
+    reason="MATTGPT-128: source cards should show the stories the answer "
+    "cited, not every story the searches returned. How 'cited' is decided "
+    "is open (BACKLOG -128, items 1 to 5); each case here quotes a fact "
+    "found in exactly one story. Rewritten from the 220d14d cap Red when "
+    "rag_answer() was removed (MATTGPT-275). Remove when -128 ships.",
+    strict=False,
+)
+class TestSourcesAreTheCitedStories:
+    def _source_ids(self, answer):
+        result, *_ = _run(
+            [_response(tool_query="ledger"), _response(content=answer)],
+            search=_RETRIEVED_THREE,
+        )
+        return [s["id"] for s in result["sources"]]
+
+    def test_an_answer_citing_one_story_shows_only_that_story(self):
+        ids = self._source_ids("Matt rebuilt the ledger. Settlement ran in 2 hours.")
+        assert ids == ["zzz-story-a"]
+
+    def test_an_answer_citing_two_stories_shows_both_in_retrieval_order(self):
+        ids = self._source_ids("Releases resumed. Settlement ran in 2 hours.")
+        assert ids == ["zzz-story-a", "zzz-story-b"]
+
+    def test_a_profile_fact_answer_shows_no_story_cards(self):
+        ids = self._source_ids(
+            "Matt is based in Atlanta, GA.\n[[profile:location_availability]]"
+        )
+        assert ids == []
+
+    def test_a_retrieved_but_uncited_narrative_story_is_not_shown(self):
+        ids = self._source_ids("Settlement ran in 2 hours.")
+        assert "zzz-story-pn" not in ids
+
+    def test_an_off_topic_refusal_shows_no_source_cards(self):
+        ids = self._source_ids(
+            "\U0001f43e I can only discuss Matt's transformation experience. Ask me "
+            "about application modernization, digital innovation, agile "
+            "transformation, or leadership."
+        )
+        assert ids == []
+
+
+# ---------------------------------------------------------------------------
+# Class D: dashes (MATTGPT-275 step 6). The model's em and en dashes are
+# replaced by one deterministic rule, in the stream and in the final text:
+# em dash (spaced or not) -> ", "; en dash between digits -> " to "; spaced
+# en dash -> ", "; unspaced en dash between words -> "-". A replacement comma
+# never doubles an existing comma and is dropped before . ! ? or a line end.
+# Dashes are written as escapes: the repo's hooks reject a literal em dash.
+# ---------------------------------------------------------------------------
+
+EM = "\u2014"
+EN = "\u2013"
+
+
+class TestDashRule:
+    @pytest.mark.parametrize(
+        ("raw", "expected"),
+        [
+            (
+                f"transaction histories{EM}all while live",
+                "transaction histories, all while live",
+            ),
+            (f"growth {EM} then decline", "growth, then decline"),
+            (f"**Fiserv**{EM}the team", "**Fiserv**, the team"),
+            (f"spent 70{EN}80% of his time", "spent 70 to 80% of his time"),
+            (f"from 2009{EN}2016", "from 2009 to 2016"),
+            (f"from 70 {EN} 80 people", "from 70 to 80 people"),
+            (f"growth {EN} then decline", "growth, then decline"),
+            (f"senior{EN}junior pairings", "senior-junior pairings"),
+            (f"payments, {EM} and treasury", "payments, and treasury"),
+            (f"payments {EM}, and treasury", "payments, and treasury"),
+            (f"he delivered{EM}.", "he delivered."),
+            (f"was it worth it{EM}?", "was it worth it?"),
+            (f"the first line{EM}\nThe next line", "the first line\nThe next line"),
+            (f"the answer ends{EM}", "the answer ends"),
+            (
+                "a well-known re-platform, with no dashes",
+                "a well-known re-platform, with no dashes",
+            ),
+        ],
+    )
+    def test_the_rule(self, raw, expected):
+        assert bs.normalize_dashes(raw) == expected
+
+    def test_applying_it_twice_changes_nothing(self):
+        once = bs.normalize_dashes(f"growth {EM} then 70{EN}80%{EM}.")
+        assert bs.normalize_dashes(once) == once
+
+
+class TestDashesInTheAnswer:
+    _CHUNKS = [
+        "The team grew ",
+        EM,
+        " fast, from 70",
+        EN,
+        "80% of releases",
+        f" on time{EM}",
+        ".",
+    ]
+    _SHOWN = "The team grew, fast, from 70 to 80% of releases on time."
+
+    def _answer(self, chunks):
+        deltas = []
+        result, _, _, _, _ = _run(
+            [_response(tool_query="ledger"), _response("".join(chunks), chunks=chunks)],
+            on_delta=deltas.append,
+        )
+        return result, deltas
+
+    def test_the_stream_shows_no_dash_even_when_one_is_split_across_chunks(self):
+        _, deltas = self._answer(self._CHUNKS)
+        assert not any(EM in d or EN in d for d in deltas), deltas
+        assert "".join(deltas) == self._SHOWN
+
+    def test_a_space_before_a_dash_at_a_chunk_end_is_not_left_before_the_comma(self):
+        """Stream text is append-only, so a space already shown before a dash
+        that arrives in the next chunk would read "grew , fast"."""
+        _, deltas = self._answer(["The team grew ", f"{EM} fast."])
+        assert "".join(deltas) == "The team grew, fast."
+
+    def test_a_dash_at_the_very_end_of_the_stream_is_resolved(self):
+        _, deltas = self._answer(["The answer ends", EM])
+        assert "".join(deltas) == "The answer ends"
+
+    def test_the_finished_answer_has_no_dash(self):
+        result, _ = self._answer(self._CHUNKS)
+        assert EM not in result["answer_md"] and EN not in result["answer_md"]
+
+    def test_the_swap_keeps_the_streamed_wording(self):
+        """The finished answer adds bolding only: with ** removed it reads as
+        the stream did."""
+        result, deltas = self._answer(self._CHUNKS)
+        assert result["answer_md"].replace("**", "") == "".join(deltas)

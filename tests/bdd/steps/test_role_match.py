@@ -13,21 +13,13 @@ the system clipboard, or print-window popups. The scenarios that DO depend
 on those things are bound with @pytest.mark.skip and a reason, so they
 show up in the pytest report as known-skipped instead of silently absent.
 
-Coverage status (April 2026):
+Coverage status (October 2026):
 
-  Bound and executing:
-    - Role Match tab appears in navigation
-    - Clicking Role Match tab navigates to the page
-    - JD text area accepts pasted job description
-    - Mobile shows desktop-only message
-    - Desktop shows full Role Match interface
-    - Action buttons appear only when results are present
+  Bound and executing: every scenario bound in this file without a
+  @pytest.mark.skip decorator. The skipped ones are listed below, each
+  group with its reason.
 
   Bound but skipped:
-    - Empty text area disables the match button
-        (contradicts implementation — the button is intentionally always
-        enabled and empty submissions are handled with a warning. Update
-        the feature file to match reality, then re-enable.)
     - Action buttons appear after results render
     - Share copies plain-text summary to clipboard
     - Export opens a printable document
@@ -42,11 +34,11 @@ Coverage status (April 2026):
     - Partial match shows gap explanation
     - Gap shows explanation with no story chips
     - No fit score or recommendation in recruiter view
-    - Profile-level evidence displays without story chip
+    - Profile-level evidence appears in a block above the story chip row
         (all skipped pending a decision on how to run the assessment
-        pipeline in tests — real backend vs. mocked OpenAI/Pinecone)
+        pipeline in tests: real backend vs. mocked OpenAI/Pinecone)
 
-  Bound and executing (Phase 4 — slice 1, lock icon + password gate):
+  Bound but skipped (Phase 4, slice 1: lock icon + password gate):
     - Lock icon is visible on the Role Match results panel
     - Clicking lock icon opens password popover
     - Correct password unlocks private view
@@ -57,32 +49,36 @@ Coverage status (April 2026):
     - Password input is masked
     - Lock glyph reflects __private_mode__ state
     - Clicking the unlocked icon re-locks the session
-    - Lock icon hidden on mobile
     - Browser refresh re-locks the session
     - New tab does not inherit unlocked state
-        (slice 1 step defs require MATTGPT_PRIVATE_BYPASS_TOKEN in
-        Streamlit secrets — local-prod parity. Add
+        (skipped with _LOCK_SKIP_REASON: the lock icon is hidden from public
+        view until the MATTGPT-012 Phase 4 private overlay ships. When they
+        are re-enabled, the step defs require MATTGPT_PRIVATE_BYPASS_TOKEN in
+        Streamlit secrets, for local-prod parity. Add
         MATTGPT_PRIVATE_BYPASS_TOKEN = "test-bypass-token" to
         .streamlit/secrets.toml to match the BYPASS_TOKEN fixture
         in this file. The command-line env-var prefix workflow
         was decided against in favor of secrets.toml parity.
         See MATTGPT-085 for the cleanup history.)
 
-  Bound but skipped (Phase 4 — Streamlit 1.50 limitation):
+  Bound and executing (Phase 4, slice 1):
+    - Lock icon hidden on mobile
+
+  Bound but skipped (Phase 4, Streamlit 1.50 limitation):
     - Pressing Escape inside the popover closes it without unlocking
         (st.popover does not auto-close on Escape; verified via Playwright.
         The Gherkin scenario is kept in the feature file as design intent.
         Would require a custom JS handler injected via st.markdown.)
 
-  Not yet bound (Phase 4 — slice 2 + 3):
-    - All agentic bypass scenarios (slice 2 — header injection)
-    - All private assessment view scenarios (slice 3 — fit assessment)
-    - MATTGPT_PRIVATE_BYPASS_TOKEN env var unset — silent no-op
-        (slice 2 — needs env-var control over the Streamlit subprocess)
+  Not yet bound (Phase 4, slices 2 and 3):
+    - All agentic bypass scenarios (slice 2: header injection)
+    - All private assessment view scenarios (slice 3: fit assessment)
+    - MATTGPT_PRIVATE_BYPASS_TOKEN env var unset: silent no-op
+        (slice 2: needs env-var control over the Streamlit subprocess)
     - Toggling lock back hides the private assessment on next rerun
-        (slice 3 — needs the assessment view to exist first)
+        (slice 3: needs the assessment view to exist first)
     - Story evidence chips are clickable and expand inline (Phase 3
-      story chip expansion — implementation does not exist)
+      story chip expansion; implementation does not exist)
 """
 
 import pytest
@@ -139,7 +135,6 @@ ROLE_MATCH_HEADER_SELECTOR = ".conversation-header h1"
 ROLE_MATCH_WORKSPACE_SELECTOR = ".st-key-role_match_workspace"
 ROLE_MATCH_INPUT_SELECTOR = ".st-key-role_match_workspace textarea"
 ROLE_MATCH_SUBMIT_SELECTOR = ".st-key-role_match_submit button"
-MOBILE_GATE_TEXT = "Best experienced on desktop"
 ACTION_BUTTON_IDS = (
     "#btn-role-match-helpful",
     "#btn-role-match-share",
@@ -171,17 +166,6 @@ def test_textarea_accepts_paste():
     pass
 
 
-@pytest.mark.skip(
-    reason="Mobile nav navigation requires clicking the hamburger menu first to "
-    "expose the mobile dropdown <a> link. The desktop nav buttons exist in the "
-    "DOM at mobile viewport but extend past the right edge of the viewport, so "
-    "Playwright's click() can't scroll them into view. Needs hamburger interaction."
-)
-@scenario("../features/role_match.feature", "Mobile shows desktop-only message")
-def test_mobile_desktop_only_message():
-    pass
-
-
 @scenario("../features/role_match.feature", "Desktop shows full Role Match interface")
 def test_desktop_shows_full_interface():
     pass
@@ -206,8 +190,10 @@ def test_action_buttons_hidden_without_results():
 # =============================================================================
 
 
-@scenario("../features/role_match.feature", "Empty text area disables the match button")
-def test_empty_text_area_disables_button():
+@scenario(
+    "../features/role_match.feature", "Empty text area leaves the match button enabled"
+)
+def test_empty_text_area_leaves_button_enabled():
     pass
 
 
@@ -561,22 +547,6 @@ def match_button_enabled(browser_page):
     assert button.is_enabled(), '"Match this role" button is unexpectedly disabled'
 
 
-@then("the JD input and match results are not displayed")
-def jd_input_and_results_not_displayed(browser_page):
-    # Mobile gate replaces the workspace with a "Best experienced on desktop" message.
-    workspace = browser_page.locator(ROLE_MATCH_WORKSPACE_SELECTOR)
-    assert (
-        workspace.count() == 0 or not workspace.first.is_visible()
-    ), "Workspace card should not render in mobile mode"
-
-
-@then(f'a message says "{MOBILE_GATE_TEXT}"')
-def mobile_gate_message_visible(browser_page):
-    assert browser_page.get_by_text(
-        MOBILE_GATE_TEXT
-    ).is_visible(), f"Expected mobile gate text '{MOBILE_GATE_TEXT}' to be visible"
-
-
 @then("the two-column layout is displayed (JD input left, results right)")
 def two_column_layout_visible(browser_page):
     workspace = browser_page.locator(ROLE_MATCH_WORKSPACE_SELECTOR)
@@ -793,9 +763,9 @@ def test_new_tab_does_not_inherit():
 
 @scenario(
     "../features/role_match.feature",
-    "Match button is disabled when the JD textarea is empty",
+    "Submitting an empty JD textarea does nothing",
 )
-def test_match_button_disabled_when_empty():
+def test_submitting_empty_textarea_does_nothing():
     pass
 
 
@@ -824,9 +794,9 @@ def test_clear_button_visible_with_text():
 
 @scenario(
     "../features/role_match.feature",
-    "Clicking clear empties the textarea and disables the match button",
+    "Clicking clear empties the textarea",
 )
-def test_clear_empties_textarea_and_disables_button():
+def test_clear_empties_textarea():
     pass
 
 
@@ -842,9 +812,9 @@ def test_no_followup_cta_before_submission():
 
 @scenario(
     "../features/role_match.feature",
-    "Match button stays disabled below 30-word threshold",
+    "Fewer than 30 words is rejected by the gate",
 )
-def test_match_button_disabled_below_30_words():
+def test_fewer_than_30_words_rejected_by_gate():
     pass
 
 
@@ -1336,12 +1306,6 @@ def given_textarea_contains_text(browser_page):
     wait_for_streamlit_rerun(browser_page)
 
 
-@then('the "Match this role 🐾" button is disabled')
-def then_match_button_disabled(browser_page):
-    btn = browser_page.locator(ROLE_MATCH_SUBMIT_SELECTOR).first
-    assert btn.is_disabled(), "Expected 'Match this role 🐾' button to be disabled"
-
-
 @then('the "Match this role 🐾" button is enabled')
 def then_match_button_enabled(browser_page):
     btn = browser_page.locator(ROLE_MATCH_SUBMIT_SELECTOR).first
@@ -1383,17 +1347,11 @@ def then_no_followup_cta_visible(browser_page):
     assert count == 0, f"Expected no follow-up CTA before submission, found {count}"
 
 
-# Step defs for pre-existing "Empty text area disables the match button" scenario
+# Step defs for the "Empty text area leaves the match button enabled" scenario
 @given("the text area is empty")
 def given_text_area_is_empty(browser_page):
     value = browser_page.locator(ROLE_MATCH_INPUT_SELECTOR).first.input_value()
     assert value == "", f"Expected empty textarea on page load, got: {value!r}"
-
-
-@then('the "Match this role" button is disabled')
-def then_match_role_button_disabled_no_emoji(browser_page):
-    btn = browser_page.locator(ROLE_MATCH_SUBMIT_SELECTOR).first
-    assert btn.is_disabled(), "Expected 'Match this role' button to be disabled"
 
 
 # =============================================================================
@@ -1545,6 +1503,14 @@ def when_click_expecting_gate(browser_page):
         f"}}",
         timeout=GATE_TIMEOUT,
     )
+    wait_for_streamlit_rerun(browser_page)
+
+
+@when('I click "Match this role 🐾" with the textarea empty')
+def when_click_match_with_empty_textarea(browser_page):
+    """Empty text is a no-op in _handle_submit_click: no gate banner and
+    no assessment. Clicks, then waits for the rerun to settle."""
+    browser_page.locator(ROLE_MATCH_SUBMIT_SELECTOR).first.click()
     wait_for_streamlit_rerun(browser_page)
 
 

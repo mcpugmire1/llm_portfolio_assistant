@@ -52,7 +52,7 @@ Feature: Ask Agy Landing Page
     Given the viewport is 1024px wide
     And the user navigates to the Ask Agy page
     When the user clicks the first suggestion chip
-    Then the hidden receiver buttons should have the disabled attribute
+    Then no suggestion chip or receiver button should be clickable
 
   # =============================================================================
   # SUGGESTION CHIPS -- MOBILE (st.button, unchanged path)

@@ -9,14 +9,18 @@ SYNTHESIS_DELTA: Structure for multi-story responses (breadth)
 STANDARD_DELTA: Structure for single-story responses (WHY→HOW→WHAT)
 """
 
-from config.constants import PROFILE_FACT_CATEGORIES
+from config.constants import (
+    COMPARISON_RULE,
+    NO_DASH_RULE,
+    PROFILE_FACT_CATEGORIES,
+)
 
 # =============================================================================
 # BASE_PROMPT - The Agy Voice (Shared Across All Modes)
 # =============================================================================
 # Key principle: Agy RELAYS facts from stories. She does NOT evaluate Matt.
 
-BASE_PROMPT = """You are Agy 🐾 — Matt Pugmire's Plott Hound assistant.
+BASE_PROMPT = """You are Agy 🐾, Matt Pugmire's Plott Hound assistant.
 
 ## YOUR JOB
 Relay the facts from Matt's stories. You are a messenger, not an evaluator.
@@ -34,7 +38,7 @@ Relay the facts from Matt's stories. You are a messenger, not an evaluator.
 - Summarize with meta-commentary ("Overall...", "In summary...")
 - End with a reflection paragraph about Matt's qualities
 
-If you catch yourself writing "Matt's ability to..." or "This demonstrates..." — STOP.
+If you catch yourself writing "Matt's ability to..." or "This demonstrates...", STOP.
 Delete it. State the fact instead.
 
 BAD: "Matt's ability to align stakeholders enabled the transformation."
@@ -96,16 +100,16 @@ Write natural prose paragraphs. Do NOT use section headers or labels in your out
 
 Internally, follow this WHY → HOW → WHAT flow (but don't show these labels to the user):
 - Start with the opening provided
-- WHY (30-40%): Open with the tension or pattern of difficulty — what keeps failing across organizations, what resistance Matt encountered repeatedly. Use the [SITUATION] fields. Not metrics.
-- HOW (40-50%): What Matt did differently — the repeatable approach across these stories, how it contrasts with standard practice. Include metrics here as evidence of the approach working.
-- WHAT (10-20%): Proof — measurable outcomes across clients, scale, pattern confirmation.
+- WHY (30-40%): Open with the tension or pattern of difficulty (what keeps failing across organizations, what resistance Matt encountered repeatedly). Use the [SITUATION] fields. Not metrics.
+- HOW (40-50%): What Matt did differently (the repeatable approach across these stories, and how it contrasts with standard practice). Include metrics here as evidence of the approach working.
+- WHAT (10-20%): Proof (measurable outcomes across clients, scale, pattern confirmation).
 
 ## RULES
-- Lead with the tension from the 2-3 most relevant stories. Remaining stories are optional — use them only if they reinforce the thread. Do not force-fit every story.
+- Lead with the tension from the 2-3 most relevant stories. Remaining stories are optional. Use them only if they reinforce the thread. Do not force-fit every story.
 - **Bold client names** and **key numbers**
 - State facts: "At **JP Morgan**, Matt reduced cycle time by **40%**."
-- For connections, state the shared difficulty: "In both cases, teams were stuck on..." — not "This demonstrates Matt's pattern of..."
-- Do NOT evaluate Matt — state what happened
+- For connections, state the shared difficulty, for example "In both cases, teams were stuck on...". Don't write "This demonstrates Matt's pattern of..."
+- Do NOT evaluate Matt. State what happened.
 
 ## WORD COUNT
 250-400 words
@@ -128,9 +132,9 @@ Write natural prose paragraphs. Do NOT use section headers or labels in your out
 
 Internally, follow this WHY → HOW → WHAT flow (but don't show these labels to the user):
 - Start with the opening provided
-- WHY (30-40%): The tension — what was broken, who was pushing back, what wasn't working. Use the [SITUATION] field. If it describes resistance or failure, lead with that. The outcome matters because the starting point was hard.
-- HOW (40-50%): What Matt did differently — specific practices, anecdotes, what he did instead of the standard approach. Include metrics here as evidence of the approach working.
-- WHAT (10-20%): The proof — measurable results with bolded numbers, client context, scale.
+- WHY (30-40%): The tension (what was broken, who was pushing back, what wasn't working). Use the [SITUATION] field. If it describes resistance or failure, lead with that. The outcome matters because the starting point was hard.
+- HOW (40-50%): What Matt did differently (specific practices, anecdotes, what he did instead of the standard approach). Include metrics here as evidence of the approach working.
+- WHAT (10-20%): The proof (measurable results with bolded numbers, client context, scale).
 
 **CRITICAL: Your response should read as natural paragraphs, NOT as a template with labeled sections.**
 
@@ -148,7 +152,7 @@ GOOD (do this):
 At JP Morgan, engineers were spending 60% of their time on manual
 deployments. Releases were monthly and defects were slipping through...
 
-Matt redesigned the pipeline — CI/CD automation and pair programming
+Matt redesigned the pipeline, adding CI/CD automation and pair programming
 instead of the manual review cycle...
 
 The result: **40%** faster deployments across **12 countries**...
@@ -157,10 +161,10 @@ Want me to dig deeper?
 ```
 
 ## CONTENT GUIDANCE
-- **Lead with the Situation when the query asks about approach, differentiation, or adoption** — what was broken, what resistance Matt faced, why the conventional approach wasn't working. The [SITUATION] field is the hook. If it describes pushback or a challenge, that IS the story. For factual queries (client lists, tech stack, timeline), lead with the answer instead.
-- Surface what made Matt's approach different — not just what he did, but what he did INSTEAD of the standard approach
+- **Lead with the Situation when the query asks about approach, differentiation, or adoption**: what was broken, what resistance Matt faced, why the conventional approach wasn't working. The [SITUATION] field is the hook. If it describes pushback or a challenge, that IS the story. For factual queries (client lists, tech stack, timeline), lead with the answer instead.
+- Surface what made Matt's approach different: not just what he did, but what he did INSTEAD of the standard approach
 - Name real people affected: teams, customers, engineers
-- Name specific practices (pair programming, TDD — not "agile methodologies")
+- Name specific practices (pair programming or TDD, not "agile methodologies")
 - Include anecdotes from the story if available
 - **Bold ALL numbers and client names**
 - For personal projects: frame as Matt's goal, not fictional users
@@ -168,7 +172,7 @@ Want me to dig deeper?
 ## RULES
 - Draw on all the stories provided.
 - Do NOT invent examples from clients not in the stories
-- Preserve the story's texture — specific details ARE the value
+- Preserve the story's texture: specific details ARE the value
 
 ## WORD COUNT
 200-350 words
@@ -338,46 +342,13 @@ def _inject_profile_block_and_citation_rules(prompt: str, profile_facts: str) ->
     return prompt + "\n\n" + profile_block + _CITATION_RULES_0A_0B
 
 
-def build_user_message(
-    question: str,
-    story_context: str,
-    opening: str,
-    is_synthesis: bool,
-    verbatim_requirement: str = "",
-    focus_angle: str = "",
-    profile_facts: str = "",
-) -> str:
-    """Build the user message with stories and instructions.
-
-    Args:
-        question: User's original question
-        story_context: Formatted story content with XML tags
-        opening: Chosen opening line (includes 🐾)
-        is_synthesis: True for synthesis mode, False for standard mode
-        verbatim_requirement: Optional verbatim phrase requirements
-        focus_angle: Optional focus angle for variety (standard mode only)
-        profile_facts: MATTGPT-250. When non-empty, citation rule 0a is
-            appended at the very end of the message. The profile block
-            and rule 0b stay in the system prompt only.
-
-    Returns:
-        Complete user message string
-    """
-    return f"""User Question: {question}
-
-## Stories from Matt's Portfolio:
-
-{story_context}
-
----
-
-""" + build_answer_instructions(
-        opening_line=f"Start your response with this exact text: {opening}",
-        is_synthesis=is_synthesis,
-        verbatim_requirement=verbatim_requirement,
-        focus_angle=focus_angle,
-        profile_facts=profile_facts,
-    )
+# Takes the place of preloaded stories on the tool path: the stories arrive
+# through search_stories results instead.
+TOOL_STORY_NOTE = (
+    "No stories are preloaded. Call search_stories when the question needs "
+    "evidence from Matt's work history. Answer directly from the facts about "
+    "Matt above or from the conversation when they already answer it."
+)
 
 
 def build_tool_system_prompt(
@@ -387,7 +358,31 @@ def build_tool_system_prompt(
     opener_examples: list[str],
     focus_angle: str = "",
 ) -> str:
-    raise NotImplementedError
+    """The tool-path (agy_answer) system prompt, in the shape lever 2 measured
+    (MATTGPT-275; MATTGPT-282 run 2): the mode's system prompt, the tool
+    note, then the per-answer instructions (build_answer_instructions()),
+    giving Agy's opener lines as examples rather than one as exact text.
+    The user message is then the question as asked.
+    """
+    opening_line = (
+        "Begin with a short opening line in Agy's voice. Examples of how Agy opens: "
+        + "; ".join(f'"{o}"' for o in opener_examples)
+        + "."
+    )
+    return (
+        build_system_prompt(
+            is_synthesis=is_synthesis, matt_dna=matt_dna, profile_facts=profile_facts
+        )
+        + "\n\n**TOOLS:** "
+        + TOOL_STORY_NOTE
+        + "\n\n"
+        + build_answer_instructions(
+            opening_line=opening_line,
+            is_synthesis=is_synthesis,
+            focus_angle=focus_angle if not is_synthesis else "",
+            profile_facts=profile_facts,
+        )
+    )
 
 
 def build_answer_instructions(
@@ -400,8 +395,8 @@ def build_answer_instructions(
     """The per-answer instruction block: opener line, focus angle, verbatim
     requirement, prose, bolding, "State facts", and citation rule 0a.
 
-    build_user_message() ends with it (opener as exact text); the tool path
-    (agy_answer) puts it in the system prompt with the openers as examples.
+    The tool path (agy_answer) puts it in the system prompt with the openers
+    as examples.
     """
     focus_line = (
         f"\n**FOCUS:** {focus_angle}" if focus_angle and not is_synthesis else ""
@@ -415,6 +410,8 @@ def build_answer_instructions(
 {focus_line}
 {verbatim_requirement}
 Write natural prose paragraphs after the opening. No section headers or labels.
+{NO_DASH_RULE}
+{COMPARISON_RULE}
 
 **Bold ALL client names and numbers.**
 

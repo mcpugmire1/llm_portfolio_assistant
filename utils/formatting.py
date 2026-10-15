@@ -175,13 +175,16 @@ def _format_key_points(s: dict[str, Any]) -> str:
         >>> story = {"title": "Platform Modernization", "client": "JPMC",
         ...          "how": ["Migrated to AWS"], "what": ["Reduced costs 40%"]}
         >>> print(_format_key_points(story))
-        - **Scope:** Platform Modernization — JPMC
+        - **Scope:** Platform Modernization (JPMC)
         - **Approach:** Migrated to AWS
         - **Outcome:** Reduced costs 40%
     """
     metric = strongest_metric_line(s)
     lines = []
-    lines.append(f"- **Scope:** {s.get('title','')} — {s.get('client','')}".strip(" —"))
+    title, client = s.get("title", ""), s.get("client", "")
+    lines.append(
+        f"- **Scope:** {title} ({client})" if client else f"- **Scope:** {title}"
+    )
     top_how = (s.get("how") or [])[:2]
     if top_how:
         lines.append("- **Approach:** " + " / ".join(top_how))

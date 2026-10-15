@@ -38,8 +38,8 @@ other failures pre-existing without an isolation run.
 Bucket A conversion history:
 - Aug 30, 2026: test_out_of_scope_redirect[retail sales work] and
   TestEntityGateThreshold moved from LLM-text assertions to
-  retrieval-observable assertions (rag_answer's rejection_reason and
-  intent_family fields). Those are now deterministic and no longer on
+  retrieval-observable assertions (the pipeline's rejection_reason and
+  intent_family fields; rag_answer() then, agy_answer() since MATTGPT-275). Those are now deterministic and no longer on
   this list.
 """
 
@@ -49,11 +49,20 @@ import re
 
 import pytest
 
-from ui.pages.ask_mattgpt.backend_service import (
-    _generate_agy_response,
-    get_synthesis_stories,
-    rag_answer,
-)
+from ui.pages.ask_mattgpt.backend_service import agy_answer
+
+
+def _agy_answer_with_stories(query, given, all_stories):
+    """agy_answer() with its search_stories tool returning exactly `given`:
+    the old tests handed these stories to _generate_agy_response()."""
+    from unittest.mock import patch
+
+    from ui.pages.ask_mattgpt import backend_service as bs
+
+    found = {"results": given, "top_score": 0.8}
+    with patch.object(bs, "semantic_search", return_value=found):
+        return bs.agy_answer(query, all_stories)["answer_md"]
+
 
 # =============================================================================
 # 1. INTENT ROUTING
@@ -123,7 +132,7 @@ class TestVoiceFidelity:
         ],
     )
     def test_voice_is_third_person(
-        self, query, client_filter, stories_with_first_person
+        self, query, client_filter, stories_with_first_person, stories
     ):
         """
         Test that LLM transforms first-person story content to third-person Agy voice.
@@ -136,10 +145,7 @@ class TestVoiceFidelity:
             if filtered:
                 ranked = filtered[:5]
 
-        is_synthesis = client_filter is None
-        response = _generate_agy_response(
-            query, ranked[:5], "Test context", is_synthesis=is_synthesis
-        )
+        response = _agy_answer_with_stories(query, ranked[:5], stories)
 
         # Check for forbidden first-person Matt voice
         violations = []
@@ -166,7 +172,7 @@ class TestVoiceFidelity:
             f"Response excerpt: {response[:500]}..."
         )
 
-    def test_synthesis_mode_no_first_person(self, stories_with_first_person):
+    def test_synthesis_mode_no_first_person(self, stories_with_first_person, stories):
         """
         Synthesis mode specifically should never leak first-person voice.
         Tests the Career Narrative stories which are heavily first-person.
@@ -180,9 +186,7 @@ class TestVoiceFidelity:
             if s.get("Client") == "Career Narrative"
         ][:5]
 
-        response = _generate_agy_response(
-            query, career_stories, "Test context", is_synthesis=True
-        )
+        response = _agy_answer_with_stories(query, career_stories, stories)
 
         # Strict check - no first-person Matt voice
         violations = []
@@ -210,7 +214,8 @@ class TestOutOfScope:
     bypassed the router (the actual layer that decides "off-topic") and
     tested the wrong layer -- LLM word choice depends on the run.
 
-    Rewritten to call rag_answer end-to-end and assert on the retrieval-side
+    Rewritten to call the pipeline end-to-end (agy_answer() since MATTGPT-275)
+    and assert on the retrieval-side
     rejection reason. Two queries take two different mechanisms:
       - "Tell me about Matt's retail sales work": semantic router routes to
         out_of_scope; intent_family is set, rejection_reason is
@@ -242,16 +247,7 @@ class TestOutOfScope:
         self, query, expected_rejection_reason, expected_intent_family, stories
     ):
         """Off-topic queries must be gated by the router or the nonsense filter."""
-        filters = {
-            "industry": "",
-            "capability": "",
-            "era": "",
-            "clients": [],
-            "domains": [],
-            "roles": [],
-            "tags": [],
-        }
-        result = rag_answer(query, filters, stories)
+        result = agy_answer(query, stories)
 
         assert result.get("rejection_reason") == expected_rejection_reason, (
             f"Off-topic query hit the wrong gate.\n"
@@ -276,22 +272,10 @@ class TestOutOfScope:
 class TestRAGExecution:
     """Verify Parallel Retriever depth and no metric-hallucination."""
 
-    def test_synthesis_pool_size(self, stories):
-        """Synthesis must pull from the full 7-theme, 14-story pool."""
-        pool = get_synthesis_stories(stories, top_per_theme=2)
-        # Should have at least 2 stories per theme (7 themes * 2 = 14 minimum)
-        # But some themes may have fewer stories, so we check for reasonable coverage
-        assert (
-            len(pool) >= 7
-        ), f"Synthesis pool should have at least 7 stories, got {len(pool)}"
-
     def test_metric_fidelity(self, stories):
         """Ensures 'Multiple Clients' metrics are not falsely attributed to a specific client."""
         query = "How did Matt scale learning at Accenture?"
-        ranked = stories[:5]
-        narrative = "Test context"
-
-        response = _generate_agy_response(query, ranked, narrative, is_synthesis=True)
+        response = _agy_answer_with_stories(query, stories[:5], stories)
 
         # If the 10% metric (from Multiple Clients) is used, check for attribution clarity
         if "10%" in response and "Accenture" in response:
@@ -331,9 +315,7 @@ class TestContentFidelity:
             pytest.skip("No JP Morgan Chase stories found")
 
         query = "Tell me about Matt's payments work"
-        response = _generate_agy_response(
-            query, jpmc_stories, "Test context", is_synthesis=False
-        )
+        response = _agy_answer_with_stories(query, jpmc_stories, stories)
 
         # Should mention JP Morgan, JPMorgan, or JPMC - not "Career Narrative"
         has_jpmc = any(x in response for x in ["JP Morgan", "JPMorgan", "JPMC"])
@@ -379,15 +361,3 @@ def stories_with_first_person(stories):
         return any(re.search(p, all_text, re.IGNORECASE) for p in first_person_patterns)
 
     return [s for s in stories if has_first_person(s)]
-
-
-@pytest.fixture
-def sample_synthesis_response(stories):
-    """Fixture for a pre-generated synthesis response."""
-    ranked = stories[:5]
-    return _generate_agy_response(
-        "What are Matt's core leadership themes?",
-        ranked,
-        "Test narrative context",
-        is_synthesis=True,
-    )

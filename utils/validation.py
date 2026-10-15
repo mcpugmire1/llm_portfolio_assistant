@@ -258,7 +258,7 @@ def token_overlap_ratio(query: str, vocab: set[str]) -> float:
     Args:
         query: User query string to analyze.
         vocab: Set of known vocabulary terms from story corpus (lowercase).
-            Typically built via build_known_vocab() in backend_service.
+            Built from the story corpus's title, client, role, industry and tag words.
 
     Returns:
         Float ratio between 0.0 and 1.0 representing the proportion of unique

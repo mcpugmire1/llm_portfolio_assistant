@@ -15,7 +15,9 @@ opener examples line, the focus angle on standard answers only, and citation
 rule 0a when profile facts are present. The parity test holds it to the text
 run 2's lever2_sol arm sent for one standard and one synthesis turn
 (tests/fixtures/ask_agy_lever2_sol_system_prompts.json, with the inputs that
-path received).
+path received), plus the dash edits arm D of the four-arm dash run measured:
+the prompt's own em dashes rewritten by hand and NO_DASH_RULE added, then
+COMPARISON_RULE on the line after it (the fixture's "edited" field).
 """
 
 import json
@@ -27,11 +29,6 @@ from ui.pages.ask_mattgpt.prompts import (
     build_answer_instructions,
     build_system_prompt,
     build_tool_system_prompt,
-)
-
-pytestmark = pytest.mark.xfail(
-    reason="MATTGPT-275; remove in the 275 Green commit",
-    strict=False,
 )
 
 _DNA = "## ZZZ_SENTINEL facts\n- ZZZ career arc\n"

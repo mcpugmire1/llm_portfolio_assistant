@@ -1,13 +1,13 @@
 """
-JD Assessor Service — Job Description Requirement Extraction and Matching
+JD Assessor Service: Job Description Requirement Extraction and Matching
 
 Core logic for the Role Match feature. Extracts structured requirements
 from job descriptions and matches them against Matt's STAR stories in Pinecone.
 
 Architecture: Three-step pipeline (see ADR 016)
-  1. LLM extraction pass — JD text → structured requirements JSON
-  2. Pinecone retrieval pass — per-requirement semantic search
-  3. LLM assessment pass — requirements + candidate stories → match report
+  1. LLM extraction pass: JD text → structured requirements JSON
+  2. Pinecone retrieval pass: per-requirement semantic search
+  3. LLM assessment pass: requirements + candidate stories → match report
 """
 
 import asyncio
@@ -292,7 +292,7 @@ Rules:
 - partial: related evidence but doesn't fully cover the requirement
 - gap: no provided story or grounding context meaningfully addresses the requirement
 - A "strong" match REQUIRES at least one cited piece of evidence (story OR profile). If you cannot cite specific evidence, the match status MUST be "partial" or "gap" -- NEVER "strong" with an empty evidence array. Asserting a strong match without evidence is a violation of this rule.
-- confidence reflects how clearly the provided stories and grounding context demonstrate the requirement — high when evidence is direct and specific, medium when evidence is related but requires inference, low when the match is tenuous
+- confidence reflects how clearly the provided stories and grounding context demonstrate the requirement: high when evidence is direct and specific, medium when evidence is related but requires inference, low when the match is tenuous
 - Include up to 2 evidence items maximum
 - Use evidence_type "story" when citing a retrieved STAR story (include story_title and client)
 - Use evidence_type "profile" when citing a verified fact from the grounding context (story_title and client should be null)
@@ -300,7 +300,7 @@ Rules:
 - Never fabricate -- only use what's in the provided stories or grounding context
 - Recognize cloud-managed equivalents of open-source tools as the same capability: AWS ElastiCache IS Redis (and Memcached), Amazon RDS includes PostgreSQL/MySQL/SQL Server, Aurora is MySQL/PostgreSQL-compatible, Azure Cosmos DB supports MongoDB API, etc. Treat experience with the managed service as evidence for the underlying technology.
 - gap_explanation must start with 'Note:' and stay under 15 words
-- gap_explanation must describe ONLY what's missing — do NOT restate what's present (no "While Matt's profile confirms..." preambles)
+- gap_explanation must describe ONLY what's missing. Do NOT restate what's present (no "While Matt's profile confirms..." preambles)
 - gap_explanation must be specific, not apologetic
 - Output valid JSON only, no preamble"""
 
@@ -361,7 +361,7 @@ def build_assessment_prompt() -> str:
 
 
 # =============================================================================
-# PIPELINE — Three-stage assessment (extract → retrieve → assess)
+# PIPELINE: Three-stage assessment (extract → retrieve → assess)
 # =============================================================================
 # These functions implement the production pipeline consumed by the Role Match
 # UI. They were promoted from tests/jd_pipeline_validation.py so the UI and the
@@ -591,7 +591,7 @@ def retrieve_stories(
     top_k: int = DEFAULT_TOP_K,
     debug_tag: str | None = None,
 ) -> list:
-    """Stage 2 — query Pinecone for candidate stories matching a requirement.
+    """Stage 2: query Pinecone for candidate stories matching a requirement.
 
     Returns a list of trimmed story dicts (title, client, id, score, STAR fields)
     suitable for inclusion in the assessment prompt. Empty list if no hits.
@@ -663,7 +663,7 @@ def _format_candidates_for_prompt(candidate_stories: list) -> str:
 def assess_requirement(
     client: OpenAI, requirement: str, candidate_stories: list
 ) -> dict:
-    """Stage 3 — assess match quality for a single requirement.
+    """Stage 3: assess match quality for a single requirement.
 
     Returns the parsed JSON object produced by JD_ASSESSMENT_PROMPT_TEMPLATE.
     """
@@ -1078,7 +1078,7 @@ async def _fan_out_assessments(
 # =============================================================================
 # RECOMMENDATION LOGIC (Private View)
 # =============================================================================
-# Deterministic computation from match results — not an LLM call.
+# Deterministic computation from match results, not an LLM call.
 # Thresholds may be tuned after testing against real JDs.
 
 RECOMMENDATION_STRONG_RATIO = 0.7  # 70% strong matches for Apply

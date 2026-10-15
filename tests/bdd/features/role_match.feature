@@ -32,10 +32,10 @@ Feature: Role Match page
     When the user pastes a job description into the text area
     Then the "Match this role" button is enabled
 
-  Scenario: Empty text area disables the match button
+  Scenario: Empty text area leaves the match button enabled
     Given the user is on the Role Match page
     And the text area is empty
-    Then the "Match this role" button is disabled
+    Then the "Match this role" button is enabled
 
   # =============================================================================
   # RECRUITER VIEW — MATCH RESULTS
@@ -375,12 +375,6 @@ Feature: Role Match page
   # DESKTOP ONLY
   # =============================================================================
 
-  Scenario: Mobile shows desktop-only message
-    Given the user is on a device with viewport width less than 1024px
-    When the user navigates to Role Match
-    Then the JD input and match results are not displayed
-    And a message says "Best experienced on desktop"
-
   Scenario: Desktop shows full Role Match interface
     Given the user is on a device with viewport width 1024px or greater
     When the user navigates to Role Match
@@ -463,10 +457,12 @@ Feature: Role Match page
 
   # MATTGPT-067 — Input controls and post-result CTA
 
-  Scenario: Match button is disabled when the JD textarea is empty
+  Scenario: Submitting an empty JD textarea does nothing
     Given I navigate to the Role Match page
     When the JD textarea is empty
-    Then the "Match this role 🐾" button is disabled
+    And I click "Match this role 🐾" with the textarea empty
+    Then the page does not show "I couldn't find a job description here."
+    And the button label reads "Match this role 🐾"
 
   Scenario: Match button enables when JD text is entered
     Given I navigate to the Role Match page
@@ -482,12 +478,12 @@ Feature: Role Match page
     And the JD textarea contains text
     Then a "Clear" button is visible
 
-  Scenario: Clicking clear empties the textarea and disables the match button
+  Scenario: Clicking clear empties the textarea
     Given I navigate to the Role Match page
     And the JD textarea contains text
     When I click the "Clear" button
     Then the JD textarea is empty
-    And the "Match this role 🐾" button is disabled
+    And the "Match this role 🐾" button is enabled
 
   Scenario: No follow-up CTA is visible before submission
     Given I navigate to the Role Match page
@@ -495,10 +491,11 @@ Feature: Role Match page
 
   # MATTGPT-067 — 30-word guard
 
-  Scenario: Match button stays disabled below 30-word threshold
+  Scenario: Fewer than 30 words is rejected by the gate
     Given I navigate to the Role Match page
     When I type fewer than 30 words into the JD textarea
-    Then the "Match this role 🐾" button is disabled
+    And I click "Match this role 🐾" expecting the gate to fire
+    Then the page shows "I couldn't find a job description here."
 
   Scenario: Match button enables at 30-word threshold
     Given I navigate to the Role Match page
@@ -525,7 +522,7 @@ Feature: Role Match page
     Given I have submitted a job description and results are displayed
     When I click "✕ Clear"
     Then the JD textarea is empty
-    And the "Match this role 🐾" button is disabled
+    And the "Match this role 🐾" button is enabled
     And the right panel shows "Agy will map each requirement to Matt's real project experience."
     And the "✕ Clear" button is not visible
     And the "Try an example →" link is visible

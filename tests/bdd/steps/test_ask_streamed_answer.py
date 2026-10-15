@@ -23,6 +23,8 @@ Run with: pytest tests/bdd/steps/test_ask_streamed_answer.py -v
 (requires `streamlit run app.py` running on localhost:8501)
 """
 
+import time
+
 import pytest
 from pytest_bdd import given, parsers, scenarios, then, when
 
@@ -34,7 +36,9 @@ scenarios("../features/ask_streamed_answer.feature")
 
 SHORT_WAIT = 200  # ms: quick UI updates
 TURN_TIMEOUT = 90000  # ms: one live turn on gpt-6.1-sol (run 2 p90 12.35 s)
+GAP_TOLERANCE_PX = 1  # mid-stream vs finished question-to-bubble gap
 SETTLE_MS = 1000  # ms the answer text must hold still to count as finished
+IDLE_WINDOW_MS = 4000  # ms after the turn in which the page must send nothing
 
 # "Grows": at least this many distinct non-empty text lengths before the
 # turn finishes, the first under this fraction of the finished length.
@@ -107,6 +111,15 @@ _RECORDER_JS = """
             avatar: src.length + ':' + src.slice(-48),
             len: md ? md.innerText.trim().length : 0,
             thinking: document.querySelector('.thinking-modal') !== null,
+            staleVisible: [...document.querySelectorAll(
+                "[data-testid='stElementContainer'][data-stale='true']")]
+                .filter(e => getComputedStyle(e).visibility !== 'hidden'
+                    && e.getBoundingClientRect().height > 0)
+                .map(e => (e.innerText || '').trim().slice(0, 40)),
+            chatInput: document.querySelectorAll("[data-testid='stChatInput']").length,
+            convCaption: document.querySelectorAll('.conversation-powered-by').length,
+            gap: n >= 2 ? msgs[n - 1].getBoundingClientRect().top
+                - msgs[n - 2].getBoundingClientRect().bottom : null,
         });
     };
     window.__agyStream = {before: before, samples: []};
@@ -173,6 +186,13 @@ def _finish_and_read(page, turn):
             return md ? md.innerText.trim().length : 0;
         }}"""
     )
+    turn["final_gap"] = page.evaluate(
+        f"""() => {{
+            const m = document.querySelectorAll("{CHAT_MESSAGE}");
+            return m[m.length - 1].getBoundingClientRect().top
+                - m[m.length - 2].getBoundingClientRect().bottom;
+        }}"""
+    )
     turn["samples"] = samples
     # Samples of Agy's message for this turn: newer than the messages before
     # the question, under Agy's avatar, with text.
@@ -189,13 +209,29 @@ def stream_turn():
     return {}
 
 
+@pytest.fixture
+def ws_sent():
+    """Times (time.monotonic()) of websocket frames the page sent to the app."""
+    return []
+
+
+def _record_ws_frames(page, sent):
+    """Record every frame the page sends on its websocket. Attached before the
+    page loads, since Streamlit opens its websocket on load."""
+    page.on(
+        "websocket",
+        lambda ws: ws.on("framesent", lambda _payload: sent.append(time.monotonic())),
+    )
+
+
 # =============================================================================
 # GIVEN
 # =============================================================================
 
 
 @given("the user navigates to Ask Agy")
-def navigate_to_ask_agy(browser_page, app_url):
+def navigate_to_ask_agy(browser_page, app_url, ws_sent):
+    _record_ws_frames(browser_page, ws_sent)
     browser_page.goto(app_url)
     browser_page.wait_for_load_state("networkidle")
     _wait_for_navbar_stable(browser_page)
@@ -205,9 +241,10 @@ def navigate_to_ask_agy(browser_page, app_url):
 
 
 @given("the user navigates to the home page")
-def navigate_to_home(browser_page, app_url):
+def navigate_to_home(browser_page, app_url, ws_sent):
     """Home is the default tab; #card-product signals the cards rendered
     (mirrors test_home.py)."""
+    _record_ws_frames(browser_page, ws_sent)
     browser_page.goto(app_url)
     browser_page.wait_for_load_state("networkidle")
     browser_page.wait_for_selector("#card-product", timeout=30000)
@@ -304,6 +341,49 @@ def indicator_gone_while_growing(stream_turn):
     )
 
 
+@then(
+    "while the answer arrives, only the conversation's own input and caption"
+    " are on screen"
+)
+def only_conversation_chrome_while_arriving(stream_turn):
+    """While Agy's answer text is arriving, nothing left over from the
+    previous page (data-stale, visible, with height) is on screen, and the
+    conversation's own chat input and caption are on the page."""
+    final = stream_turn["final_len"]
+    arriving = [s for s in stream_turn["agy_samples"] if s["len"] < final]
+    assert (
+        arriving
+    ), "Expected samples of Agy's answer while it was still arriving; saw none."
+    leftovers = sorted({t for s in arriving for t in s["staleVisible"]})
+    assert not leftovers, (
+        f"Elements left over from the previous page were visible in"
+        f" {sum(1 for s in arriving if s['staleVisible'])} of {len(arriving)}"
+        f" samples while the answer arrived: {leftovers}"
+    )
+    missing = [s for s in arriving if not s["chatInput"] or not s["convCaption"]]
+    assert not missing, (
+        f"The conversation's chat input or caption was missing in {len(missing)}"
+        f" of {len(arriving)} samples while the answer arrived (chat input"
+        f" {missing[0]['chatInput']}, caption {missing[0]['convCaption']})."
+    )
+
+
+@then("Agy's answer stays in place when the finished answer replaces the stream")
+def answer_stays_in_place(stream_turn):
+    """While the answer arrives, the gap from the visitor's question to Agy's
+    bubble equals the finished turn's gap, so the swap moves nothing."""
+    final = stream_turn["final_len"]
+    arriving = [s for s in stream_turn["agy_samples"] if s["len"] < final]
+    assert arriving, "Expected samples of Agy's answer while it was still arriving."
+    gaps = sorted({round(s["gap"], 1) for s in arriving if s["gap"] is not None})
+    off = [g for g in gaps if abs(g - stream_turn["final_gap"]) > GAP_TOLERANCE_PX]
+    assert not off, (
+        f"While the answer arrived, the question-to-bubble gap was {gaps} px; the"
+        f" finished turn's gap is {stream_turn['final_gap']:.1f} px, so the answer"
+        " moves when the finished answer replaces the stream."
+    )
+
+
 @then("the finished turn shows one Agy answer with its related projects")
 def one_finished_answer(browser_page, stream_turn):
     messages = browser_page.locator(CHAT_MESSAGE)
@@ -317,3 +397,18 @@ def one_finished_answer(browser_page, stream_turn):
         newest.locator(".source-links-title").count() == 1
     ), "Expected the finished Agy answer to carry its related projects."
     assert stream_turn["final_len"] > 0, "The finished Agy answer has no text."
+
+
+@then("once the turn has finished, the page sends nothing to the app for 4 seconds")
+def no_background_reruns(browser_page, ws_sent):
+    """No fragment timer outlives the turn: after the swap, the page sends no
+    websocket frame to the app during an idle window."""
+    assert ws_sent, "Recorded no websocket frames at all; the recorder is not attached."
+    start = time.monotonic()
+    browser_page.wait_for_timeout(IDLE_WINDOW_MS)
+    late = [t for t in ws_sent if t >= start]
+    assert not late, (
+        f"The page sent {len(late)} websocket frames to the app in the"
+        f" {IDLE_WINDOW_MS / 1000:.0f} s after the turn finished; a fragment"
+        " timer (run_every) is still rerunning."
+    )

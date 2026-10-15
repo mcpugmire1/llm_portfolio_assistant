@@ -26,7 +26,7 @@ def render_cross_industry_landing(stories: list[dict]):
     Streamlit limitation that cannot be overridden without converting to multipage app.
     """
     # === DYNAMIC COUNTS (derived from JSONL) ===
-    # MATTGPT-104: post-Era counts — exclude Professional Narrative stories
+    # MATTGPT-104: post-Era counts: exclude Professional Narrative stories
     # so hero/stats agree with the landing card grid + Home / Timeline /
     # Explore Stories. Without this, hero showed 57 while card grid showed 48.
     cross_industry_stories = [
@@ -67,7 +67,7 @@ def render_cross_industry_landing(stories: list[dict]):
         render_how_i_built_dialog()
         st.session_state.pop("active_dialog", None)
 
-    # Hidden trigger — position:absolute+height:0 removes from flow (no layout space).
+    # Hidden trigger: position:absolute+height:0 removes from flow (no layout space).
     # Pattern mirrors ask_mattgpt_header.py how_agy_trigger handling exactly.
     if st.button("trigger", key="why_agy_cross_trigger"):
         st.session_state["active_dialog"] = "why_agy"
@@ -102,7 +102,7 @@ def render_cross_industry_landing(stories: list[dict]):
         height=0,
     )
 
-    # Hero — CSS for trigger hiding embedded here (same st.markdown = same
+    # Hero: CSS for trigger hiding embedded here (same st.markdown = same
     # stMarkdownContainer, no extra DOM element before the hero).
     st.markdown(
         f"""
@@ -487,7 +487,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_cross_trigger"
            the same line (mirrors banking_landing.py CSS treatment). */
         display: inline;
     }
-    /* Tiered hierarchy (Core / Specialized Capabilities) — added Phase 2
+    /* Tiered hierarchy (Core / Specialized Capabilities), added Phase 2
        part B data-derivation refactor. Mirrors banking_landing.py CSS. */
     .tier-header {
         font-size: 18px;
@@ -502,7 +502,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_cross_trigger"
     .capability-card.muted .card-title {
         font-size: 14px;
     }
-    /* Subtitle from CAPABILITY_SUBTITLES — italic muted, mirrors
+    /* Subtitle from CAPABILITY_SUBTITLES: italic muted, mirrors
        ERA_SUBTITLES rendering in timeline_view.py */
     .card-subtitle {
         font-size: 13px;
@@ -514,7 +514,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_cross_trigger"
     .capability-card.muted .card-subtitle {
         font-size: 12px;
     }
-    /* Client count meta — only rendered when card count > 1 (signal-driven). */
+    /* Client count meta: only rendered when card count > 1 (signal-driven). */
     .card-clients {
         font-size: 13px;
         color: var(--text-secondary);
@@ -550,7 +550,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_cross_trigger"
     """
     st.markdown(industries_html, unsafe_allow_html=True)
 
-    # Cards are data-derived (post Era exclusion) — mirrors banking_landing.py
+    # Cards are data-derived (post Era exclusion), mirroring banking_landing.py
     # Phase 2 refactor. Contract pinned by tests/unit/test_landing_cards.py.
     cards = build_landing_cards(stories, industry="Cross Industry")
     core_cards = [c for c in cards if c["tier"] == "core"]
@@ -574,7 +574,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_cross_trigger"
     def _render_card_grid(card_list: list[dict], key_prefix: str, *, muted: bool):
         """Render one tier's cards in a 3-column grid.
 
-        Mirrors banking_landing.py _render_card_grid exactly — the only
+        Mirrors banking_landing.py _render_card_grid exactly. The only
         difference is the industry-specific prefix ("cross_industry" vs
         "banking") and the project label ("cross-industry" vs "banking").
         """
@@ -587,7 +587,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_cross_trigger"
                     continue
                 card = card_list[idx]
                 with cols[offset]:
-                    # Meta line — elision rule:
+                    # Meta line, elision rule:
                     # - 1 story: "1 story" (project=client=1 trivially)
                     # - projects == stories: drop the projects lead (redundant)
                     # - projects < stories: show all three, projects leads
@@ -629,7 +629,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_cross_trigger"
                         unsafe_allow_html=True,
                     )
 
-                    # Hidden Streamlit button — key matches the JS bridge selector.
+                    # Hidden Streamlit button: key matches the JS bridge selector.
                     if st.button("", key=f"card_btn_cross_industry_{key_prefix}_{idx}"):
                         st.session_state["prefilter_industry"] = "Cross Industry"
                         st.session_state["prefilter_capability"] = card["title"]
@@ -637,15 +637,15 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_cross_trigger"
                         st.session_state["active_tab"] = "My Work"
                         st.rerun()
 
-    # Core Capabilities tier — cards with >=3 cross-industry stories
+    # Core Capabilities tier: cards with >=3 cross-industry stories
     st.markdown(
         '<div class="tier-header">Core Capabilities</div>',
         unsafe_allow_html=True,
     )
     _render_card_grid(core_cards, key_prefix="core", muted=False)
 
-    # Specialized Capabilities tier — cards with <3 cross-industry stories.
-    # Single-story capabilities are intentionally surfaced — see
+    # Specialized Capabilities tier: cards with <3 cross-industry stories.
+    # Single-story capabilities are intentionally surfaced; see
     # feedback_dont_hide_thin_capabilities.md in memory.
     st.markdown(
         '<div class="tier-header">Specialized Capabilities</div>',
@@ -660,7 +660,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_cross_trigger"
         """
     <div class="cta-section">
         <h2 class="cta-heading">Can't find what you're looking for?</h2>
-        <p class="cta-subtext">Ask Agy 🐾 about Matt's cross-industry transformation experience — get conversational answers tailored to your needs</p>
+        <p class="cta-subtext">Ask Agy 🐾 about Matt's cross-industry transformation experience. Get conversational answers tailored to your needs.</p>
         <div style="margin-top: 24px;">
             <a id="btn-cross-industry-cta" class="card-btn-primary">Ask Agy 🐾</a>
         </div>
@@ -674,7 +674,7 @@ div[data-testid="stElementContainer"]:has([class*="st-key-why_agy_cross_trigger"
         st.session_state["active_tab"] = "Ask Agy"
         st.rerun()
 
-    # JS click-bridge — shared with banking_landing via utils/landing_cards.
+    # JS click-bridge, shared with banking_landing via utils/landing_cards.
     # Single source of truth for the wiring contract; drift caught by
     # tests/unit/test_banking_landing_js.py (cross-industry equivalent
     # exercises the same function with industry_prefix="cross_industry").

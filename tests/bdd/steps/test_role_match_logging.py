@@ -182,6 +182,16 @@ def given_assessment_success(mock_env, log_context):
         strong_count=8,
         partial_count=2,
         gap_count=1,
+        unassessed_count=4,
+        failure_type="ok",
+        required_strong_count=6,
+        required_partial_count=2,
+        required_gap_count=1,
+        required_unassessed_count=2,
+        preferred_strong_count=2,
+        preferred_partial_count=0,
+        preferred_gap_count=0,
+        preferred_unassessed_count=2,
     )
     time.sleep(0.3)  # Wait for daemon thread
     return mock_env
@@ -293,6 +303,16 @@ def when_assessment_completes(mock_env, log_context):
         strong_count=8,
         partial_count=2,
         gap_count=1,
+        unassessed_count=4,
+        failure_type="ok",
+        required_strong_count=6,
+        required_partial_count=2,
+        required_gap_count=1,
+        required_unassessed_count=2,
+        preferred_strong_count=2,
+        preferred_partial_count=0,
+        preferred_gap_count=0,
+        preferred_unassessed_count=2,
     )
     time.sleep(0.3)
     return mock_env

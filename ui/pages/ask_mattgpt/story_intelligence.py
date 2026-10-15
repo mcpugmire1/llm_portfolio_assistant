@@ -51,78 +51,6 @@ def infer_story_theme(story: dict[str, Any]) -> str:
     return story.get("Theme", THEME_EXECUTION)
 
 
-def get_theme_guidance(theme: str) -> str:
-    """Get Agy voice guidance for a specific theme.
-
-    Provides framing instructions that guide Agy's tone, positioning, and
-    emphasis when discussing stories from this theme. Used in system prompts
-    for _generate_agy_response().
-
-    Args:
-        theme: One of the 7 canonical theme strings (THEME_* constants).
-            Examples: "Execution & Delivery", "Strategic & Advisory", etc.
-
-    Returns:
-        Multi-line voice guidance text formatted for inclusion in system prompts.
-        Includes emphasis points, voice patterns, positioning, proof points,
-        and thematic patterns. Falls back to THEME_EXECUTION guidance if
-        theme is unrecognized.
-
-    Example:
-        >>> guidance = get_theme_guidance("Talent & Enablement")
-        >>> "capability building" in guidance.lower()
-        True
-    """
-    guidance = {
-        THEME_EXECUTION: """🏗️ EXECUTION & DELIVERY stories:
-- Emphasize: scale, velocity, production quality, technical complexity
-- Voice: "Matt delivered [system] at scale for [client]..." or "[Client]'s [system] was [problem]. Matt [action]..."
-- Position: Executive who ships production software
-- Proof points: deployment metrics, system performance, reliability outcomes
-- Pattern: Technical execution + operational excellence""",
-        THEME_STRATEGIC: """🧠 STRATEGIC & ADVISORY stories:
-- Emphasize: thought partnership, strategic framing, business alignment
-- Voice: "Matt shaped [strategy] by bridging [business need] with [technical approach]..." or "[Client] was stuck on [problem]. Matt reframed it as [approach]..."
-- Position: Trusted advisor and strategic thought partner
-- Proof points: business outcomes, alignment achieved, decisions influenced
-- Pattern: Strategic thinking + business translation""",
-        THEME_ORG_TRANSFORM: """🔄 ORG & WORKING-MODEL TRANSFORMATION stories:
-- Emphasize: culture change, process improvement, sustainable practices
-- Voice: "Matt transformed how [team/org] worked by introducing [approach]..." or "[Team/org] was [stuck pattern]. Matt shifted them to [new approach]..."
-- Position: Change agent and organizational architect
-- Proof points: adoption rates, velocity improvements, cultural shifts
-- Pattern: Change leadership + sustainable transformation""",
-        THEME_TALENT: """👥 TALENT & ENABLEMENT stories:
-- Emphasize: capability building, mentorship impact, sustainable skills
-- Voice: "Matt built [capability] by coaching [team] on [skill]..." or "[Team] lacked [skill/capability]. Matt built it through [approach]..."
-- Position: Teacher, mentor, capability builder
-- Proof points: team growth, skill development, career progression
-- Pattern: Human development + capability multiplication""",
-        THEME_RISK: """🛡️ RISK & RESPONSIBLE TECH stories:
-- Emphasize: governance frameworks, compliance, ethical considerations
-- Voice: "Matt established [governance approach] to ensure [outcome]..." or "[Organization] had no [governance/compliance framework]. Matt built one by [approach]..."
-- Position: Responsible tech advocate and risk manager
-- Proof points: compliance achieved, risks mitigated, trust established
-- Pattern: Risk management + responsible innovation""",
-        THEME_EMERGING: """🚀 EMERGING TECH stories:
-- Emphasize: innovation, experimentation, cutting-edge exploration
-- Voice: "Matt pioneered [technology] by exploring [approach]..." or "[Existing approach] wasn't keeping pace. Matt introduced [technology] to [outcome]..."
-- Position: Innovation leader and technology scout
-- Proof points: experiments run, insights gained, future capabilities unlocked
-- Pattern: Innovation leadership + pragmatic exploration""",
-        THEME_PROFESSIONAL: """🧭 PROFESSIONAL NARRATIVE stories:
-- Personal and reflective — this is about who Matt is, not just what he did
-- First-person positioning with confidence, not arrogance
-- Philosophy-forward: share how Matt thinks, what drives him, what he values
-- Honest about transitions, growth, and lessons learned
-- Grounded in experience but forward-looking
-- Warm and authentic — this is Matt speaking about himself
-- Avoid corporate-speak; be direct and human""",
-    }
-
-    return guidance.get(theme, guidance[THEME_EXECUTION])
-
-
 def build_story_context_for_rag(story: dict[str, Any]) -> str:
     """Build theme-aware context for a single story to pass to RAG/Agy.
 
@@ -137,13 +65,14 @@ def build_story_context_for_rag(story: dict[str, Any]) -> str:
             - Role (str): Matt's role on the project
             - Industry (str): Industry domain
             - Sub-category (str): Subcategory for theme inference
+            - Start_Date, End_Date (str): YYYY-MM; shown as Dates when both are present
             - STAR fields: Situation, Task, Action, Result
             - 5P fields: Person, Place, Purpose, Performance, Process
             - 5PSummary/5p_summary (str): Optional summary
 
     Returns:
         Multi-line formatted context string with sections:
-        - Header: Title, Theme, Client, Role, Industry, Domain
+        - Header: Title, Theme, Client, Role, Industry, Domain, Dates
         - Summary: 5P summary if available
         - WHY: Purpose/Situation (what drove this work)
         - HOW: Process/Action (how it was accomplished)
@@ -210,6 +139,11 @@ Frame the WHY as: "Matt wanted to..." or "Matt recognized..." based on the story
     domain_val = story.get('Sub-category', '')
     if domain_val:
         lines.append(f"[DOMAIN]: {domain_val}")
+
+    start_val = story.get('Start_Date', '')
+    end_val = story.get('End_Date', '')
+    if start_val and end_val:
+        lines.append(f"[DATES]: {start_val} to {end_val}")
 
     if summary:
         lines.append(f"[SUMMARY]: {summary}")

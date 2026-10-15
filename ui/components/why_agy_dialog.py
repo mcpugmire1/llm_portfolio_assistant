@@ -1,5 +1,5 @@
 """
-Why Agy? — @st.dialog component (MATTGPT-101).
+The Why Agy? dialog, an @st.dialog component (MATTGPT-101).
 
 Origin story for Agy: Plott Hound naming, breed traits mapped to RAG
 behavior, italic closing line honoring Matt's late dog.
@@ -14,7 +14,7 @@ Pattern mirrors how_agy_dialog.py exactly:
   - Caller uses active_dialog key + elif chain (never if/if)
 
 Dark theme: JS detects body.dark-theme on parent page and applies .dark-theme
-to [class*="st-key-why_agy_dialog_content"] — CSS variable overrides cascade
+to [class*="st-key-why_agy_dialog_content"], and CSS variable overrides cascade
 from that wrapper only.
 """
 
@@ -27,9 +27,9 @@ _BODY_HTML = f"""
 
 <div class="why-agy-avatar-row">
     <div class="why-agy-body">
-        <p>I'm named for Matt's Plott Hound. Plott Hounds are bred for tracking — determined, loyal, hard to shake once they're on a trail. That's exactly how I work.
+        <p>I'm named for Matt's Plott Hound. Plott Hounds are bred for tracking: determined, loyal, hard to shake once they're on a trail. That's exactly how I work.
         </p>
-        <p>Ask me about Matt's work and I'll track down the right story. I'm trained on 100+ stories from his career — not a keyword search, not a resume summary. I find what's relevant, or I tell you honestly when I can't.
+        <p>Ask me about Matt's work and I'll track down the right story. I'm trained on 100+ stories from his career. Not a keyword search, not a resume summary. I find what's relevant, or I tell you honestly when I can't.
         </p>
         <em class="why-agy-closing">It felt right to keep his name part of the work we loved doing together.</em>
     </div>
@@ -80,7 +80,7 @@ _CSS = """
     height: auto;
     flex-shrink: 0;
 }
-/* Footer button — full-width secondary style matching how_agy_dialog.py */
+/* Footer button: full-width secondary style matching how_agy_dialog.py */
 [class*="st-key-why_agy_to_hib"] { width: 100% !important; }
 [class*="st-key-why_agy_to_hib"] button {
     width: 100% !important;
@@ -167,7 +167,7 @@ _DARK_THEME_JS = """
 
 @st.dialog("Hi, I'm Agy 🐾")
 def render_why_agy_dialog():
-    """Why Agy? origin story as @st.dialog — native Streamlit, no iframes.
+    """Why Agy? origin story as @st.dialog: native Streamlit, no iframes.
 
     Content wrapped in st.container(key="why_agy_dialog_content") so the
     dark theme JS can target it via [class*="st-key-why_agy_dialog_content"].

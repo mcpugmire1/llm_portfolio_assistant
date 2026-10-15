@@ -452,7 +452,7 @@ def _embed(text: str) -> list[float]:
     Must match the model used in build_custom_embeddings.py.
 
     Raises the underlying OpenAI exception on failure. Callers must catch
-    and signal via st.session_state["__embed_failure__"] so rag_answer can
+    and signal via st.session_state["__embed_failure__"] so agy_answer() can
     route to the API error handler (MATTGPT-162). A prior version swallowed
     and returned zeros, which produced spurious low_pinecone rejections.
     """

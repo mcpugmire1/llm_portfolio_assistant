@@ -24,9 +24,13 @@ from ui.components.how_agy_dialog import render_how_agy_dialog
 from ui.components.how_i_built_dialog import render_how_i_built_dialog
 from ui.components.thinking_indicator import render_thinking_indicator
 from ui.components.why_agy_dialog import render_why_agy_dialog
+from ui.image_assets import AGY_ASK_MATTGPT_B64
 
 # Import from refactored modules
-from ui.pages.ask_mattgpt.backend_service import send_to_backend
+from ui.pages.ask_mattgpt.backend_service import (
+    ANSWER_ERROR_MESSAGE,
+    send_to_backend,
+)
 
 # Import extracted helpers from Phase 5.1
 from ui.pages.ask_mattgpt.conversation_helpers import (
@@ -169,101 +173,24 @@ def render_conversation_view(stories: list[dict]):
     processing_state = st.session_state.get("__processing_chip_injection__")
 
     if pending and not processing_state:
-        # Step 1: Push user turn and set processing
+        # Step 1: push the user turn and mark it pending, then keep drawing in
+        # this run: a rerun here left the previous page painted under a
+        # half-drawn conversation until the next run finished.
         _push_user_turn(pending)
         st.session_state["__processing_chip_injection__"] = {
             "query": pending,
             "step": "pending",
         }
-        st.rerun()
 
-    elif (
-        isinstance(processing_state, dict) and processing_state.get("step") == "pending"
-    ):
-        # Step 2: Show indicator and trigger rerun to render it
-        st.session_state["__processing_chip_injection__"] = {
-            "query": processing_state["query"],
-            "step": "processing",
-        }
-        st.rerun()  # PUT THIS BACK
-
-    elif (
-        isinstance(processing_state, dict)
-        and processing_state.get("step") == "processing"
-    ):
-        # Step 3: Actually process WITH indicator
-        pending_query = processing_state["query"]
-
-        # Show indicator DURING processing
-        indicator_placeholder = st.empty()
-        with indicator_placeholder:
-            render_thinking_indicator()
-
-        try:
-            resp = send_to_backend(pending_query, {}, ctx, stories)
-            indicator_placeholder.empty()  # Clear indicator
-        except Exception as e:
-            indicator_placeholder.empty()
-            if DEBUG:
-                print(f"DEBUG: send_to_backend failed: {e}")
-            _push_assistant_turn(f"Error: {str(e)}")
-            st.session_state["__processing_chip_injection__"] = False
-            st.rerun()
-
-        else:
-            if set_answer:
-                set_answer(resp)
-
-            # Push conversational answer
-            if not st.session_state.get("ask_last_reason"):
-                answer_text = resp.get("answer_md") or resp.get("answer", "")
-                sources = resp.get("sources", []) or []
-                query_intent = st.session_state.get("__ask_query_intent__")
-                _push_conversational_answer(
-                    answer_text,
-                    sources,
-                    query_intent,
-                    resp.get("profile_categories"),
-                )
-                st.session_state["__suppress_live_card_once__"] = True
-            elif st.session_state.get("ask_last_reason"):
-                # Nonsense detected
-                reason = st.session_state.get("ask_last_reason", "")
-                query = st.session_state.get("ask_last_query", "")
-                overlap = st.session_state.get("ask_last_overlap", None)
-
-                st.session_state["ask_transcript"].append(
-                    {
-                        "type": "banner",
-                        "Role": "assistant",
-                        "reason": reason,
-                        "query": query,
-                        "overlap": overlap,
-                    }
-                )
-
-                # Clear flags
-                st.session_state.pop("ask_last_reason", None)
-                st.session_state.pop("ask_last_query", None)
-                st.session_state.pop("ask_last_overlap", None)
-
-            st.session_state["__processing_chip_injection__"] = False
-            st.rerun()
+    # Steps 2 (pending -> processing) and 3 (the answer) run at the end of
+    # this function, after the whole conversation page has rendered: see
+    # _advance_pending_turn().
 
     # ============================================================================
-    # THINKING INDICATOR (check BEFORE rendering transcript)
+    # THINKING INDICATOR
     # ============================================================================
-
-    # Get current processing state
-    processing_state = st.session_state.get("__processing_chip_injection__")
-
-    # Check if we're in the middle of processing
-    is_processing = isinstance(processing_state, dict) and processing_state.get(
-        "step"
-    ) in ["pending", "processing"]
-
-    if is_processing:
-        render_thinking_indicator()
+    # Shown below the transcript by _advance_pending_turn(), in the slot where
+    # the streamed answer then replaces it.
 
     # ============================================================================
     # RENDER TRANSCRIPT
@@ -295,7 +222,7 @@ def render_conversation_view(stories: list[dict]):
 
         # Add "Powered by" text below input
         st.markdown(
-            '<div class="conversation-powered-by">Powered by OpenAI GPT-4o with semantic search across 100+ case studies</div>',
+            '<div class="conversation-powered-by">Powered by OpenAI with semantic search across 100+ case studies</div>',
             unsafe_allow_html=True,
         )
 
@@ -354,64 +281,133 @@ def render_conversation_view(stories: list[dict]):
                 _push_assistant_turn(answer_md)
                 st.rerun()
 
-        # Normal question processing
-        ctx_for_this_turn = ctx
-        if st.session_state.pop("__ctx_locked__", False):
-            locked_ctx = get_context_story(stories)
-            if locked_ctx:
-                ctx_for_this_turn = locked_ctx
+        # Normal question processing: answered on the next run, after the
+        # page (transcript now ending with this question) renders, so the
+        # streamed answer appears below the question (_answer_pending_turn()).
+        st.session_state.pop("__ctx_locked__", None)
+        st.session_state.pop("__ask_from_suggestion__", None)
+        st.session_state["__processing_chip_injection__"] = {
+            "query": user_input_local,
+            "step": "processing",
+        }
+        st.rerun()
 
-        # Show loading indicator
-        loading_container = st.empty()
-        with loading_container:
-            render_thinking_indicator()
-
-        try:
-            st.session_state.pop("__ask_from_suggestion__", None)
-            resp = send_to_backend(user_input_local, {}, ctx_for_this_turn, stories)
-            loading_container.empty()
-        except Exception as e:
-            loading_container.empty()
-            _push_assistant_turn("Sorry, I couldn't generate an answer right now.")
-            st.error(f"Backend error: {e}")
-            st.rerun()
-        else:
-            if set_answer:
-                set_answer(resp)
-
-            # Push conversational answer
-            if not st.session_state.get("ask_last_reason"):
-                answer_text = resp.get("answer_md") or resp.get("answer", "")
-                sources = resp.get("sources", []) or []
-                query_intent = st.session_state.get("__ask_query_intent__")
-                _push_conversational_answer(
-                    answer_text,
-                    sources,
-                    query_intent,
-                    resp.get("profile_categories"),
-                )
-                st.session_state["__suppress_live_card_once__"] = True
-            elif st.session_state.get("ask_last_reason"):
-                # Nonsense detected
-                reason = st.session_state.get("ask_last_reason", "")
-                query = st.session_state.get("ask_last_query", "")
-                overlap = st.session_state.get("ask_last_overlap", None)
-
-                st.session_state["ask_transcript"].append(
-                    {
-                        "type": "banner",
-                        "Role": "assistant",
-                        "reason": reason,
-                        "query": query,
-                        "overlap": overlap,
-                    }
-                )
-
-                # Clear flags
-                st.session_state.pop("ask_last_reason", None)
-                st.session_state.pop("ask_last_query", None)
-                st.session_state.pop("ask_last_overlap", None)
-
-            st.rerun()
+    _advance_pending_turn(ctx, stories)
 
     # Footer is hidden in conversation view (CSS handles this)
+
+
+# Seconds between the pending run finishing and the fragment run that answers.
+_PENDING_TURN_START_SECONDS = 0.05
+
+
+def _advance_pending_turn(ctx: dict | None, stories: list[dict]):
+    """Steps 2 and 3 of a question, after the conversation page has rendered.
+
+    "processing" (typed follow-ups, which rerun from this page): answer now,
+    streamed.
+
+    "pending" and "armed" (seeded or injected questions, which arrive from
+    another page or a chip): the answer starts from a fragment, so the run
+    that draws this page finishes without st.rerun(). Streamlit 1.50 prunes
+    the previous run's leftover elements only when a run finishes
+    successfully (clearStaleNodes on FINISHED_SUCCESSFULLY), and every run in
+    the hand-off used to end in st.rerun(), so the page the question came
+    from (landing input, caption, footer; Home's chips) stayed painted under
+    the streaming answer. A fragment's timed run does not preempt a running
+    script; it starts after this run finishes and the previous page is gone.
+    """
+    state = st.session_state.get("__processing_chip_injection__")
+    if not isinstance(state, dict):
+        return
+    if state.get("step") == "processing":
+        _answer_pending_turn(state["query"], ctx, stories)
+    elif state.get("step") in ("pending", "armed"):
+        st.fragment(run_every=_PENDING_TURN_START_SECONDS)(_pending_turn_fragment)(
+            ctx, stories
+        )
+
+
+def _pending_turn_fragment(ctx: dict | None, stories: list[dict]):
+    """First call (inside the page's run): arm and show the thinking indicator.
+    Next call (the fragment's timed run, after the page's run has finished):
+    answer, streamed, in the indicator's slot."""
+    state = st.session_state.get("__processing_chip_injection__")
+    if not isinstance(state, dict):
+        return
+    if state.get("step") == "pending":
+        st.session_state["__processing_chip_injection__"] = {**state, "step": "armed"}
+        render_thinking_indicator()
+    elif state.get("step") == "armed":
+        st.session_state["__processing_chip_injection__"] = {
+            "query": state["query"],
+            "step": "processing",
+        }
+        _answer_pending_turn(state["query"], ctx, stories)
+
+
+def _answer_pending_turn(query: str, ctx: dict | None, stories: list[dict]):
+    """Answer the pending question, streaming it below the transcript.
+
+    Runs after the conversation page renders (transcript, chat input,
+    caption), so the placeholder sits below the visitor's question and the
+    conversation's own input and caption stay on screen: it shows the
+    thinking indicator, then Agy's answer text as it arrives. When the
+    answer is done, the finished (post-processed) answer goes into the
+    transcript and the page reruns, replacing the streamed text (stream,
+    then swap). Every Ask Agy entry point reaches here: typed follow-ups,
+    chips, seeded prompts and the landing page's handoff.
+    """
+    placeholder = st.empty()
+    with placeholder:
+        render_thinking_indicator()
+
+    streamed: list[str] = []
+
+    def _show_delta(text: str) -> None:
+        streamed.append(text)
+        with placeholder.container():
+            with st.chat_message("assistant", avatar=AGY_ASK_MATTGPT_B64):
+                st.markdown("".join(streamed))
+
+    try:
+        resp = send_to_backend(query, {}, ctx, stories, on_delta=_show_delta)
+    except Exception as e:
+        placeholder.empty()
+        if DEBUG:
+            print(f"DEBUG: send_to_backend failed: {e}")
+        _push_assistant_turn(ANSWER_ERROR_MESSAGE)
+        st.session_state["__processing_chip_injection__"] = False
+        st.rerun()
+
+    if set_answer:
+        set_answer(resp)
+
+    if not st.session_state.get("ask_last_reason"):
+        answer_text = resp.get("answer_md") or resp.get("answer", "")
+        sources = resp.get("sources", []) or []
+        query_intent = st.session_state.get("__ask_query_intent__")
+        _push_conversational_answer(
+            answer_text,
+            sources,
+            query_intent,
+            resp.get("profile_categories"),
+        )
+        st.session_state["__suppress_live_card_once__"] = True
+    else:
+        # Rejected (nonsense rule or router redirect): banner entry
+        st.session_state["ask_transcript"].append(
+            {
+                "type": "banner",
+                "Role": "assistant",
+                "reason": st.session_state.get("ask_last_reason", ""),
+                "query": st.session_state.get("ask_last_query", ""),
+                "overlap": st.session_state.get("ask_last_overlap", None),
+            }
+        )
+        st.session_state.pop("ask_last_reason", None)
+        st.session_state.pop("ask_last_query", None)
+        st.session_state.pop("ask_last_overlap", None)
+
+    st.session_state["__processing_chip_injection__"] = False
+    st.rerun()

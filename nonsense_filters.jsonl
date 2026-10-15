@@ -49,3 +49,5 @@
 {"category":"personal_compensation","pattern":"\\b(salary|salaries|compensation|income|earnings?|wages?|bonus(?:es)?|paycheck)\\b"}
 {"category":"personal_compensation","pattern":"\\bhow much money\\b.{1,25}?\\b(make|makes|made|earn|earns|earned|paid|paying)\\b"}
 {"category":"roleplay_impersonation","pattern":"\\b(roleplay|role-play|role play|pretend|act)\\b[^.?!]{0,40}\\b(as|to be|you are|you're)\\s+(her|him|them|my\\s+(late\\s+)?(grandmother|grandma|granny|grandfather|grandpa|mother|mom|father|dad|aunt|uncle|sister|brother|wife|husband))\\b"}
+{"category":"gibberish","pattern":"^\\s*(?:[asdfghjkl]{3,}|[qwertyuiop]{3,}|[zxcvbnm]{3,})(?:\\s+(?:[asdfghjkl]{2,}|[qwertyuiop]{2,}|[zxcvbnm]{2,}))+\\s*$"}
+{"category":"local_recommendations","pattern":"\\b(best|good|cheap)\\s+(pizza|restaurants?|bars?|coffee|food|tacos|burgers?|sushi|brunch|bbq|hotels?)\\b"}
