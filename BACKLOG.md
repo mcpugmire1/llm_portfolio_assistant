@@ -156,6 +156,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-303](#mattgpt-303) | Ask Agy's OpenAI stream has no timeout or retry of its own: SDK defaults (600 s read timeout); failures end in "Sorry, I couldn't generate an answer right now." | Open | Medium | Bug | October 15, 2026 |
 | [MATTGPT-304](#mattgpt-304) | Spike: Pinecone-hosted reranker (cohere-rerank-3.5 or bge-reranker-v2-m3) over a wider top-k, after MATTGPT-275 | Blocked | Low | Spike | October 15, 2026 |
 | [MATTGPT-305](#mattgpt-305) | pinecone_semantic_search() logs a Pinecone query exception only under DEBUG: with DEBUG off it returns None with no trace | Open | Low | Bug | October 15, 2026 |
+| [MATTGPT-306](#mattgpt-306) | Ask Agy sends no store parameter, so OpenAI keeps each response, visitor questions included, for 30 days: set store=False once MATTGPT-275 is stable | Blocked | Low | Hygiene | October 15, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -2849,6 +2850,32 @@ Kept off the roadmap's NOW.
 **Gate run Oct 15, lane 2 (`probes/output/MATTGPT-275/gate_20261015_093237/lane2.log`, untracked; file written 09:47:17):** the run aborted on `fallback:pinecone_unavailable` for the c09 query "Norfolk Southern 2020 Revenue and Shipment Planning modernization...". The line before it is `[API_ERROR_DETECTED] source=embed_failure, exc=APITimeoutError: Request timed out.`: an OpenAI embedding timeout, which is logged. It is not an instance of the swallowed query exception. It shows the contrast: the embed failure could be diagnosed from the log, and a query failure would not have been.
 
 **Fix direction:** log the query exception unconditionally, in the embed path's `[API_ERROR_DETECTED]` form (for example `source=pinecone_query`).
+
+---
+
+### MATTGPT-306
+**Ask Agy sends no store parameter, so OpenAI keeps each response, visitor questions included, for 30 days: set store=False once MATTGPT-275 is stable**
+
+- **Status:** Blocked
+- **Priority:** Low
+- **Type:** Hygiene
+- **Dependencies:** MATTGPT-275. Set to Open when 275 is stable in production, not at 275's close.
+- **File:** `ui/pages/ask_mattgpt/backend_service.py` (the `client.responses.create(stream=True, **request)` call in 275's working tree)
+- **Related:** MATTGPT-275
+- **Logged:** October 15, 2026
+
+**Verified Oct 15, 2026:**
+- 275's working tree calls `client.responses.create(stream=True, **request)`, and `backend_service.py` contains no `store` or `previous_response_id`. HEAD (production) calls `client.chat.completions.create`, also with no `store`.
+- Installed `openai` 2.5.0 documents `store` on Responses as "Whether to store the generated model response for later retrieval via API." It states no default there.
+- **Not re-verified:** OpenAI's docs say a stored response is kept for 30 days (as reported). Whether production's Chat Completions calls are stored by default was not checked.
+
+**Decision (Matt, Oct 15, 2026):** keep the default through 275's rollout, so answers can be debugged in OpenAI Logs, then set `store=False` once 275 is stable. The query log in Sheets keeps recording questions either way.
+
+**Change:** one request field, `store=False`. The tool loop doesn't use `previous_response_id`, so nothing depends on stored responses.
+
+**Acceptance:**
+- unit Red asserting the request sends `store=False`
+- a short live smoke showing answers still stream
 
 ---
 
