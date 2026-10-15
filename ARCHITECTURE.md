@@ -14,62 +14,14 @@
 
 ## Table of Contents
 
-### 📋 Overview
 - [Executive Summary](#executive-summary)
 - [System Overview](#system-overview)
-  - [Current Architecture](#current-architecture)
-  - [Startup Sequence](#startup-sequence-apppy)
-
-### 📊 Data Pipeline & RAG
 - [Data Pipeline & RAG Architecture](#data-pipeline--rag-architecture)
-  - [Pipeline Overview](#pipeline-overview)
-  - [Stage 0: OneDrive to Local Repo](#stage-0-onedrive-to-local-repo)
-  - [Stage 1: Excel to JSONL](#stage-1-excel-to-jsonl)
-  - [Stage 2: Semantic Tag Generation](#stage-2-semantic-tag-generation)
-  - [Stage 3: Embedding Generation](#stage-3-embedding-generation)
-  - [Production RAG Pipeline](#production-rag-pipeline)
-  - [Component Contracts (Ask Agy)](#component-contracts)
-  - [Role Match / JD Assessment Pipeline](#role-match--jd-assessment-pipeline)
-  - [Key Services](#key-services)
-  - [Cost & Performance](#cost--performance)
-  - [Data Refresh Workflow](#data-refresh-workflow)
-  - [Environment Configuration](#environment-configuration)
-  - [Deployment](#deployment)
-
-### 📋 Data Governance
+- [Component Contracts](#component-contracts)
 - [Data Governance & Master Source](#data-governance--master-source)
-  - [Principle](#principle)
-  - [Hybrid Sovereignty Model](#hybrid-sovereignty-model)
-  - [Sovereignty Patterns](#sovereignty-patterns)
-    - [Dynamic Identity (MATT_DNA)](#1-dynamic-identity-matt_dna)
-    - [Multi-Field Entity Search](#2-multi-field-entity-search)
-    - [UI Hydration](#3-ui-hydration)
-  - [Master Data Source](#master-data-source)
-  - [Ingestion Workflow](#ingestion-workflow)
-  - [What Derives from JSONL](#what-derives-from-jsonl-at-runtime)
-  - [Curated Content](#curated-content-intentionally-static)
-  - [Anti-Patterns](#anti-patterns-dont-do-this)
-  - [Warning: No Manual JSONL Surgery](#️-warning-no-manual-jsonl-surgery)
-
-### 🎨 CSS Architecture
 - [CSS Scoping Patterns](#css-scoping-patterns)
-- [Streamlit-Specific Challenges](#streamlit-specific-challenges)
-
-### 📱 Mobile & Responsive Design
+- [Testing Strategy](#testing-strategy)
 - [Mobile Responsiveness](#mobile-responsiveness)
-  - [Known Mobile Issues](#known-mobile-issues)
-  - [CSS Breakpoint Strategy](#recommended-css-breakpoint-strategy)
-  - [Testing Approach](#testing-approach)
-  - [Implementation Priority](#implementation-priority)
-
-### 🔮 Future Work
-- [Future Enhancements](#future-enhancements)
-
-### 📊 Appendix: RAG Pipeline Audit
-- [RAG Pipeline Audit](#rag-pipeline-audit)
-  - [Embedding Analysis](#embedding-analysis)
-  - [Architecture Issues](#architecture-issues)
-  - [Hardcoded Values Audit](#hardcoded-values-audit)
 
 ---
 
@@ -78,14 +30,6 @@
 **Project:** MattGPT Portfolio Assistant - AI-powered career story search and chat interface
 **Tech Stack:** Streamlit, OpenAI (gpt-6.1-sol answers Ask Agy; gpt-4o runs Role Match and tag generation), Pinecone vector DB, Python 3.11+
 **Data Corpus:** 100+ STAR-formatted transformation project stories
-
-### What This Document Contains
-
-1. **System Overview:** Current file structure, components, services
-2. **Data Pipeline:** Excel → JSONL → Embeddings → Pinecone → RAG
-3. **CSS Architecture:** Scoping patterns, emotion-cache strategies, dark mode
-4. **Mobile Roadmap:** Known issues, breakpoint strategy, implementation phases
-5. **Future Enhancements:** See [BACKLOG.md](BACKLOG.md)
 
 **For design decisions, removed components, and rejected approaches,** see [docs/ADR.md](docs/ADR.md).
 
@@ -646,6 +590,7 @@ This section defines the **job, rules, and constraints** for each retrieval comp
 - **Lives in:** `services/semantic_router.py`
 - **Thresholds:** HARD_ACCEPT=0.80, SOFT_ACCEPT=0.40
 - **Intent Families:** 15 families (background, behavioral, delivery, team_scaling, leadership, technical, domain_payments, domain_healthcare, stakeholders, innovation, agile_transformation, narrative, synthesis, out_of_scope, personal). `data/intent_embeddings.json` holds 134 anchor phrases.
+- **Cache dependency:** if you change `VALID_INTENTS`, delete `data/intent_embeddings.json` so it regenerates. `test_rl4_embedding_cache_keys_match_valid_intents` in `tests/unit/test_semantic_router.py` asserts the cache keys equal `ALL_VALID_INTENTS`, so a stale cache fails the test run.
 - **Cost:** ~$0.0000002 per query (one embedding)
 - **Rule:** Fail-open on errors (accept query if embedding fails)
 - **Do not remove:** Saves LLM cost, prevents garbage-in
@@ -2171,104 +2116,4 @@ The Glide Data Grid generates continuous background XHR. `page.wait_for_load_sta
 ## Mobile Responsiveness
 
 Mobile responsive design is shipped via `ui/styles/mobile_overrides.py` (1,520 lines). Breakpoints: <768px (mobile), 768-1023px (tablet), 1024px+ (desktop). All page components, navigation, chat interface, modals, and grids have mobile-specific overrides.
-
----
-
-## Future Enhancements
-
-See [BACKLOG.md](BACKLOG.md) for current open work.
-
----
-
-## RAG Pipeline Audit
-
-Audit of the RAG (Retrieval-Augmented Generation) pipeline covering embedding analysis, architecture issues, and hardcoded values.
-
-### Embedding Analysis
-
-**Embedding Model:** OpenAI `text-embedding-3-small` (1536 dimensions)
-
-**Vectors Stored in Pinecone:**
-
-| Vector Type | Source | Dimensions | Purpose |
-|-------------|--------|------------|---------|
-| Story embeddings | `build_custom_embeddings.py` | 1536 | Retrieved from Pinecone for story matching |
-| Query embeddings | `pinecone_service.py` | 1536 | Generated at runtime for semantic search |
-| Intent centroids | `semantic_router.py` | 1536 | one pre-computed embedding per example phrase (~126 phrases across 15 families) |
-
-### Architecture Issues
-
-Known architectural concerns are tracked in [BACKLOG.md](BACKLOG.md). Current categories:
-
-- **Coupling and complexity:** `backend_service.py` is about 1,000 lines with imports from 6+ modules; candidates for extraction
-- **Boundary clarity:** ranking, intent classification, and formatting ownership split across files
-- **Hybrid scoring:** Pinecone scores (0.0–1.0) don't map cleanly to confidence buckets (0.20–0.25)
-- **Error handling:** limited test coverage on error paths; Pinecone timeout and embedding failure lack user notification
-
-See [BACKLOG.md](BACKLOG.md) detail blocks for fix approaches and status.
-
-### Hardcoded Values Audit
-
-Centralized in `config/constants.py`.
-
-Constants with a single source of truth:
-
-| Category | Constants | Location |
-|----------|-----------|----------|
-| **Models** | `DEFAULT_CHAT_MODEL`, `DEFAULT_CLASSIFICATION_MODEL`, `DEFAULT_EMBEDDING_MODEL`, `ASK_ANSWER_MODEL` | config/constants.py |
-| **Ask Agy answer call** | `ASK_ANSWER_REASONING_EFFORT`, `ASK_ANSWER_MAX_OUTPUT_TOKENS`, `ASK_ANSWER_READ_TIMEOUT_S`, `ASK_TOOL_MAX_ROUNDS`, `ASK_HISTORY_MAX_MESSAGES` | config/constants.py |
-| **Ask Agy prompt rules** | `NO_DASH_RULE`, `COMPARISON_RULE` | config/constants.py |
-| **Thresholds** | `HARD_ACCEPT`, `SOFT_ACCEPT`, `CONFIDENCE_HIGH`, `CONFIDENCE_LOW`, `PINECONE_MIN_SIM` | config/constants.py |
-| **Voice Quality** | `META_COMMENTARY_PATTERNS`, `META_COMMENTARY_REGEX_PATTERNS` | config/constants.py |
-| **Entity Filter** | `ENTITY_SEARCH_FIELDS`, `PINECONE_LOWERCASE_FIELDS` | config/constants.py |
-| **Profile Facts** | `PROFILE_FACT_CATEGORIES`, `PROFILE_FACT_DISPLAY_NAMES`, `PROFILE_LOCATION_AVAILABILITY_FIELDS` | config/constants.py |
-
-Files that import from constants.py:
-- `ui/pages/ask_mattgpt/backend_service.py`
-- `ui/pages/ask_mattgpt/prompts.py`
-- `ui/pages/ask_mattgpt/conversation_helpers.py`
-- `services/rag_service.py`
-- `services/semantic_router.py`
-- `services/pinecone_service.py`
-- `services/matt_profile.py`
-- `tests/eval_rag_quality.py`
-
----
-
-**Remaining items (lower priority):**
-
-**1. Client Names** — ✅ Resolved. Pattern-based via `utils/client_utils.py` using `is_generic_client()`.
-
-**2. Intent Family Keywords**
-
-Hardcoded in semantic_router.py - 15 intent families with ~20 example phrases each.
-These should be reviewed quarterly for relevance.
-
-**DEPENDENCY WARNING:** If you modify `VALID_INTENTS`, delete `data/intent_embeddings.json` to regenerate cache. `test_rl4_embedding_cache_keys_match_valid_intents` in `tests/unit/test_semantic_router.py` asserts cache keys == `ALL_VALID_INTENTS`; a stale cache fails the test run.
-
-**3. Sacred Vocabulary (Verbatim Phrases)**
-
-**Location:** `prompts.py` → `get_verbatim_requirement()`
-**Mechanism:** Dynamically extracts identity phrases from each story's 5PSummary field at prompt-build time. Not a hardcoded list — phrases come from the data.
-**Purpose:** Force LLM to use exact phrases for Professional Narrative stories.
-
-**4. UI Display Strings**
-
-```python
-"🐾 I need a quick breather: try again in about 15 seconds!"
-"Found {n} relevant stories"
-"No strong matches found"
-```
-
-**Scattered across:** backend_service.py, conversation_helpers.py
-
-**5. Answer Model Settings**
-
-`ASK_ANSWER_MODEL`, `ASK_ANSWER_REASONING_EFFORT`, `ASK_ANSWER_MAX_OUTPUT_TOKENS` and `ASK_ANSWER_READ_TIMEOUT_S` in `config/constants.py`. The answering model takes no temperature.
-
-**6. Pinecone Index Name**
-
-✅ **RESOLVED:** Index name is now read from `get_conf("PINECONE_INDEX_NAME")` in `pinecone_service.py`. Current value: `matt-portfolio-v2`.
-
----
 
