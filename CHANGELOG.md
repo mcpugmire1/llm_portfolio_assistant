@@ -24,6 +24,10 @@ Cited probe output copied byte-identical into docs/evidence/MATTGPT-<n>/ (42ddbe
 
 ### Ask Agy
 
+**October 15, 2026 -- Ask Agy stream gets a 30 s read timeout and one retry before first text (MATTGPT-303)** -- `1095d2c`
+
+Landed in the MATTGPT-275 Green. `_openai_client()` sets a read timeout of `ASK_ANSWER_READ_TIMEOUT_S` (30 s; it was the SDK's 600 s), connect staying at 5 s. `_stream_response()` sends a stream that breaks before any answer text once more; after text, the break raises and the turn ends on `ANSWER_ERROR_MESSAGE`. Sized from a gap probe of 279 calls on the gate's turn set (`docs/evidence/MATTGPT-275/stream_gaps_20261015_091852/`): longest silence per call 3.52 s at p99 and 3.67 s max, all before the first answer text. On openai 3.x the retry's `httpx.TransportError` catch was inert; `openai` is pinned to 2.5.0 in 130febd.
+
 **October 10, 2026 -- Legitimate questions about Matt pass the nonsense filter (MATTGPT-285)** -- Red `e8c8bcd`; Green `017117f`
 
 Five `nonsense_filters.jsonl` rules (both creative_writing, both general_knowledge, and gaming) now skip questions naming Matt (matt, matt's, pugmire, he, his, him) with a leading negative lookahead, so "When did Matt join Accenture?", "Tell me a story about Matt's leadership" and "What has Matt done in the gaming industry?" are answered; off-topic targets keep their category. A new roleplay_impersonation rule rejects act-as-a-third-person attempts ("Act as my late grandmother..."), while "Act as my interviewer" passes. Held: the stocks_crypto and homework rules are unchanged, so "Has Matt worked on trading platforms?" and "How did Matt calculate ROI?" stay refused; unblocked, Agy answered untruthfully. Their tests are xfail(strict=True) naming MATTGPT-251. Sweep: 850 distinct queries, 5 changed. Gates: unit 36 passed, 2 xfailed; pre-push 769 passed, 117 xfailed; nonsense BDD 9/9; live acceptance with a truth check of 22 answers, all claims on record. Known gaps tracked in MATTGPT-275 (date span) and MATTGPT-291 (role-play). Value driver: Semantic understanding.

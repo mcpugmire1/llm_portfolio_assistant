@@ -144,17 +144,16 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-291](#mattgpt-291) | Role-play requests: decide what Agy does when asked to act as an interviewer or hiring manager | Open | Low | Issue | October 10, 2026 |
 | [MATTGPT-292](#mattgpt-292) | semantic_search() silently falls back to the whole corpus in file order when Pinecone returns no hits | Open | Medium | Bug | October 10, 2026 |
 | [MATTGPT-293](#mattgpt-293) | Router out_of_scope copy says "I don't have experience in that industry" and hardcodes an industry list | Open | Low | Bug | October 11, 2026 |
-| [MATTGPT-294](#mattgpt-294) | Split MATT_DNA by responsibility: background may orient, not substitute for evidence | Blocked | Medium | Refactor | October 11, 2026 |
+| [MATTGPT-294](#mattgpt-294) | Split MATT_DNA by responsibility: background may orient, not substitute for evidence | Open | Medium | Refactor | October 11, 2026 |
 | [MATTGPT-295](#mattgpt-295) | Timeline ERA_ORDER hardcodes 5 eras; "Technical Foundations & Enterprise Integration" (9 stories) sorts last | Open | Medium | Bug | October 11, 2026 |
 | [MATTGPT-296](#mattgpt-296) | STANDARD_DELTA's GOOD example ends with "Want me to dig deeper?", contradicting ADR 035 | Open | Low | Bug | October 11, 2026 |
 | [MATTGPT-297](#mattgpt-297) | Dog-stereotype humor ("good boy") is allowed in loading messages only; nothing checks that answers stay free of it | Open | Low | Test | October 11, 2026 |
 | [MATTGPT-298](#mattgpt-298) | Salary and compensation questions get the nonsense banner ("Wrong trail") instead of a polite pointer to Matt | Open | Low | Bug | October 12, 2026 |
-| [MATTGPT-299](#mattgpt-299) | Ask Agy latency on gpt-6.1-sol: whole turn 9.35 s median, first visible text 4.13 s (lever 2, MATTGPT-282 run 2) | Blocked | Medium | Issue | October 12, 2026 |
+| [MATTGPT-299](#mattgpt-299) | Ask Agy latency on gpt-6.1-sol: whole turn 9.35 s median, first visible text 4.13 s (lever 2, MATTGPT-282 run 2) | Open | Medium | Issue | October 12, 2026 |
 | [MATTGPT-300](#mattgpt-300) | Thinking indicator: messages by surface, plus a real-progress milestone in Ask Agy ("Reading N of Matt's stories") | Open | Medium | Issue | October 13, 2026 |
 | [MATTGPT-301](#mattgpt-301) | Em dashes left in the repo after MATTGPT-275: the hook checks added lines only, so existing ones were never caught | Open | Medium | Hygiene | October 14, 2026 |
 | [MATTGPT-302](#mattgpt-302) | OpenAI retires gpt-4o, gpt-4o-mini, gpt-4.1 and gpt-4.1-mini on January 14, 2027: migrate Role Match and the scripts still on them | Open | High | Action | October 14, 2026 |
-| [MATTGPT-303](#mattgpt-303) | Ask Agy's OpenAI stream has no timeout or retry of its own: SDK defaults (600 s read timeout); failures end in "Sorry, I couldn't generate an answer right now." | Open | Medium | Bug | October 15, 2026 |
-| [MATTGPT-304](#mattgpt-304) | Spike: Pinecone-hosted reranker (cohere-rerank-3.5 or bge-reranker-v2-m3) over a wider top-k, after MATTGPT-275 | Blocked | Low | Spike | October 15, 2026 |
+| [MATTGPT-304](#mattgpt-304) | Spike: Pinecone-hosted reranker (cohere-rerank-3.5 or bge-reranker-v2-m3) over a wider top-k, after MATTGPT-275 | Open | Low | Spike | October 15, 2026 |
 | [MATTGPT-305](#mattgpt-305) | pinecone_semantic_search() logs a Pinecone query exception only under DEBUG: with DEBUG off it returns None with no trace | Open | Low | Bug | October 15, 2026 |
 | [MATTGPT-306](#mattgpt-306) | Ask Agy sends no store parameter, so OpenAI keeps each response, visitor questions included, for 30 days: set store=False once MATTGPT-275 is stable | Blocked | Low | Hygiene | October 15, 2026 |
 | [MATTGPT-307](#mattgpt-307) | Key Metrics label cut mid-phrase with no ellipsis ("...4x the"), and "3-4x" shown as "4x" | Open | Low | Bug | October 15, 2026 |
@@ -162,7 +161,10 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-309](#mattgpt-309) | Ask Agy opened from Role Match results carries no match context | Open | Medium | Enhancement | October 15, 2026 |
 | [MATTGPT-310](#mattgpt-310) | Direct-reports answer varies run to run between "no count" and "11 to 13 leads" | Open | Medium | Issue | October 15, 2026 |
 | [MATTGPT-311](#mattgpt-311) | No way to mark an ongoing period: the transition story is dated 2023-09 to 2026-08 under Accenture, and nothing in the code accepts End_Date "Present" | Open | Medium | Issue | October 15, 2026 |
-| [MATTGPT-312](#mattgpt-312) | Ask Agy stream shows an unclosed bold marker (`**`) until its pair arrives; the finished answer is clean | Blocked | Low | Bug | October 15, 2026 |
+| [MATTGPT-312](#mattgpt-312) | Ask Agy stream shows an unclosed bold marker (`**`) until its pair arrives; the finished answer is clean | Open | Low | Bug | October 15, 2026 |
+| [MATTGPT-313](#mattgpt-313) | Production runs Python 3.11, local and CI run 3.13: align them as their own change | Open | Medium | Infra | October 15, 2026 |
+| [MATTGPT-314](#mattgpt-314) | Pin pyarrow<25 in requirements.txt: a Cloud in-place update moved it to 26.0.0 (known segfault) until the reboot corrected it | Open | Low | Infra | October 15, 2026 |
+| [MATTGPT-315](#mattgpt-315) | Source-card labels use different separators: " - " in conversation_helpers.py, ": " in ui_helpers.py | Open | Low | Hygiene | October 15, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -1059,7 +1061,7 @@ Role Match renders profile evidence as a prose block rather than a card -- do no
 
 **Existing Red commit:** `220d14d` has nine unit tests encoding the old cap invariant. They stay xfailed until this ships, then get rewritten against the new contract.
 
-**Red rewritten in MATTGPT-275 (Oct 14, 2026; working tree, uncommitted):** `_build_sources()` is deleted with `rag_answer()`. Five of the nine 220d14d tests are rewritten as `TestSourcesAreTheCitedStories` in `tests/unit/test_ask_agy_tool_answer.py`, against `agy_answer()`'s cited-stories contract: one cited story shows one card; two cited stories show both in retrieval order; a profile-fact answer shows no story cards; a retrieved but uncited Professional Narrative story is not shown; an off-topic refusal shows no source cards. The other four were obsolete with the fallback path. The class carries one class-level `xfail` (`strict=False`) whose reason says "Remove when -128 ships". Verified by reading the working tree. When 275 commits, point this note at its commit; that class is -128's Red.
+**Red rewritten in MATTGPT-275 (Oct 14, 2026; committed in 1095d2c):** `_build_sources()` is deleted with `rag_answer()`. Five of the nine 220d14d tests are rewritten as `TestSourcesAreTheCitedStories` in `tests/unit/test_ask_agy_tool_answer.py`, against `agy_answer()`'s cited-stories contract: one cited story shows one card; two cited stories show both in retrieval order; a profile-fact answer shows no story cards; a retrieved but uncited Professional Narrative story is not shown; an off-topic refusal shows no source cards. The other four were obsolete with the fallback path. The class carries one class-level `xfail` (`strict=False`) whose reason says "Remove when -128 ships". Committed in 1095d2c (Oct 15, 2026; 5 tests in the class at HEAD). That class is -128's Red.
 
 **New evidence (September 26, 2026):** With the -250 fact row in place, pure fact answers show unrelated story cards below the fact card. Observed on local 8501:
 
@@ -2250,6 +2252,8 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 
 **On close:** Re-check MATTGPT-063, -096, -128, -153, -166, -167, -168, -185, -187, -190, -195, -199, -201, -206, -209, -217, -239, -251, -252, -253, -255, -259, -263, -268 (MATTGPT-273's residual: the CS leading no and the PMP follow-up pivot) and -278 against the tool path; close or re-scope each with evidence. The list is the Oct 6, 2026 audit's Waits-on-275 set plus -253 and -255.
 
+**Green deployed (Oct 15, 2026):** 1095d2c (evidence aa0bb94). 275 stays open for the code-rendered closer and the profile contact links: required closings c14 to c17 scored 0/10 in every arm, the baseline included (1095d2c known issues).
+
 ---
 
 ### MATTGPT-277
@@ -2427,8 +2431,8 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 **Scope:** Decide what catches off-topic questions today (per the inventory, the confidence gate), and correct the docs and MATTGPT-239's acceptance to match.
 
 **Dead code in the Ask Agy files (Oct 14, 2026):**
-- **Handled by MATTGPT-275 once it lands:** 275's uncommitted working tree deletes `get_theme_guidance()` (`story_intelligence.py`; its only caller was commented out in `backend_service.py`) and, in `backend_service.py`, `get_narrative_titles()`, `_build_sources()`, `get_diverse_stories()` and `is_query_on_topic_llm()`. Verified by `git grep "def <name>"`: present at HEAD, absent in the working tree. Confirm against 275's Green commit.
-- **Still dead after 275:** `get_all_themes()`, `get_theme_distribution()` and `get_theme_emoji()` in `story_intelligence.py` remain in the working tree with no callers outside their own docstrings. Remove.
+- **Removed by MATTGPT-275 (1095d2c):** 275 deletes `get_theme_guidance()` (`story_intelligence.py`; its only caller was commented out in `backend_service.py`) and, in `backend_service.py`, `get_narrative_titles()`, `_build_sources()`, `get_diverse_stories()` and `is_query_on_topic_llm()`. Confirmed Oct 15, 2026: no definition or reference at HEAD outside the `as_run/` copies under `docs/evidence/MATTGPT-275/`.
+- **Still dead after 275:** `get_all_themes()`, `get_theme_distribution()` and `get_theme_emoji()` in `story_intelligence.py` are still defined at HEAD (Oct 15, 2026); their only callers are `tests/unit/test_story_intelligence.py`, which skips when they are missing. Remove the functions and those tests together.
 - **Stays:** `THEME_PROFESSIONAL`. It is a key in `THEME_TO_PATTERN`, which `conversation_helpers.py` and `build_story_context_for_rag()` use.
 
 ---
@@ -2566,12 +2570,12 @@ No implementation until the decision is recorded here.
 ### MATTGPT-294
 **Split MATT_DNA by responsibility: background may orient, not substitute for evidence**
 
-- **Status:** Blocked
+- **Status:** Open
 - **Priority:** Medium
 - **Type:** Refactor
 - **File:** `ui/pages/ask_mattgpt/backend_service.py` (`generate_dynamic_dna()`), `ui/pages/ask_mattgpt/prompts.py`, `data/matt_profile.json`, `config/constants.py` (`PROFILE_FACT_CATEGORIES`)
 - **Logged:** October 11, 2026
-- **Dependencies:** MATTGPT-275. Set to Open at 275's Green, not its close.
+- **Dependencies:** MATTGPT-275 Green landed in 1095d2c (Oct 15, 2026).
 
 **Principle (Matt, Oct 11, 2026):** background may orient, not substitute for evidence.
 
@@ -2682,10 +2686,10 @@ Kept off the roadmap's NOW.
 ### MATTGPT-299
 **Ask Agy latency on gpt-6.1-sol: whole turn 9.35 s median, first visible text 4.13 s (lever 2, MATTGPT-282 run 2)**
 
-- **Status:** Blocked
+- **Status:** Open
 - **Priority:** Medium
 - **Type:** Issue
-- **Dependencies:** MATTGPT-275. Set to Open when 275's step 1 (streaming at every entry point) lands, not at 275's close.
+- **Dependencies:** MATTGPT-275 step 1 landed in 1095d2c (Oct 15, 2026): answers stream, and the landing input, landing chip, Home chip and story detail hand off to the conversation (BDD ask_handoff, 24/24).
 - **Related:** MATTGPT-282 (answering-model comparison), MATTGPT-046 (superseded by this ticket), MATTGPT-047 (Decided Against, production cost tracking)
 - **Logged:** October 12, 2026
 
@@ -2768,6 +2772,11 @@ Kept off the roadmap's NOW.
 
 **Handled in MATTGPT-275, not here:** model prompts (`prompts.py`, `backend_service.py`'s Ground Truth block, `story_intelligence.py`, `jd_assessor.py`), the shared no-dash writing rule for Ask Agy and Role Match, and visitor-facing copy: the rate-limit fallback (5 copies, reconciled with the colon version `test_explore_stories.py` expects), the source-chip and "Also relevant:" separators, the "What drives Matt" chip text, the Why Agy dialog, and `formatting.py`'s "Scope:" separator with its `.strip()`. 275's cleanup is applied in the working tree, uncommitted; recount after it commits.
 
+**Recount after 275 (Oct 15, 2026, `git grep -o` at HEAD 130febd):** 7,012 in 463 files. The rise from 6,109 is docs/evidence: aa0bb94 committed 275's evidence (3,228 in `docs/evidence/` now). By area:
+- Live code (`ui/`, `services/`, `utils/`, `app.py`, `config/`): 235 (Oct 14: 325). 275's five files: 0. The one string literal left is `services/pinecone_service.py`'s DEBUG-only `title` f-string.
+- Tests: BDD 410, unit 63. `agent/triage/` 24. The two generator JSONL files 165 and 162.
+- `BACKLOG.md` 415, `CHANGELOG.md` 280, `docs/ADR.md` 44, `ARCHITECTURE.md` 43. `archive/` 1,600.
+
 **Remaining:**
 - **Live code comments, docstrings and CSS comments** (`ui/`, `services/`, `utils/`, `app.py`, `config/`): about 200 by the dev session's estimate after 275; no runtime effect.
   - **String-literal spot check (Oct 14):** a grep for em dashes inside string literals, outside 275's files, found two. `services/pinecone_service.py`'s `title` f-string (client and title joined with an em dash) is DEBUG-only: it sits under `if DEBUG:` in the Pinecone preview snapshot (per the dev audit; confirmed by read). `ui/pages/cross_industry_landing.py`'s `cta-subtext` line is visitor copy and is fixed in MATTGPT-275, not here. The spot check skips multi-line strings, so classify each remaining hit before calling it comment-only.
@@ -2807,40 +2816,17 @@ Kept off the roadmap's NOW.
 - A measured before/after run on the AT&T JD (`data/probe_jd_att_principal.txt`) and the demo JD (`data/demo_jd.txt`): extracted `source_text` stays verbatim, requirement counts, and strong/partial/gap counts.
 - A dash check on Role Match output. The no-dash rule was left out of Role Match only because gpt-4o wrote none (Matt, Oct 14, 2026); Sol answers have been seen to contain em dashes (8fa0270).
 
----
-
-### MATTGPT-303
-**Ask Agy's OpenAI stream has no timeout or retry of its own: SDK defaults (600 s read timeout); failures end in "Sorry, I couldn't generate an answer right now."**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Bug
-- **File:** `ui/pages/ask_mattgpt/backend_service.py` (`_openai_client()`, `ANSWER_ERROR_MESSAGE`)
-- **Related:** MATTGPT-299 (latency), MATTGPT-275 (streams the answer)
-- **Logged:** October 15, 2026
-
-**Verified Oct 15, 2026:**
-- `_openai_client()` builds `OpenAI(api_key=..., project=..., organization=...)` with no `timeout` or `max_retries`, at HEAD and in 275's working tree.
-- Installed `openai` 2.5.0 defaults (`openai._constants`): `DEFAULT_TIMEOUT = Timeout(connect=5.0, read=600, write=600, pool=600)`, `DEFAULT_MAX_RETRIES = 2`.
-- **Hypothesis, not measured:** the SDK's retries cover the request, not a stream that has already started, so a mid-stream failure is not retried.
-
-**Seen:**
-- **Oct 14, overnight probe** (`probes/output/MATTGPT-275/rule_arms_20261014_214612/stderr_lane*.txt`, untracked): 2 `agy_answer fatal error: [Errno 54] Connection reset by peer` (`httpx.ReadError`) and 1 `The read operation timed out` (`httpx.ReadTimeout`; after 604 s as reported, the elapsed time not rechecked here). Each ended in `ANSWER_ERROR_MESSAGE`, "Sorry, I couldn't generate an answer right now." (as reported).
-- **Oct 13:** an `APITimeoutError` on the query "interesting": a TLS handshake timeout (`httpx.ConnectTimeout` raised as `APITimeoutError`), diagnosed in the dev session (as reported; no file saved). That is the 5 s connect timeout, not the 600 s read timeout.
-
-**Problem:** a visitor can wait up to 600 s for a read to time out, and a dropped stream ends the turn with the generic error instead of a retry.
-
-**Fix direction (to decide in the ticket):** an explicit read timeout sized to the measured turn (MATTGPT-299's baseline), and a bounded retry for failures before the first visible text. After text has streamed, a retry would repeat or replace what the visitor already saw; decide that case explicitly.
+**openai 3.x (from 130febd, Oct 15, 2026):** `requirements.txt` pins `openai==2.5.0`, the version every test, probe and gate ran on. Unpinned, Cloud builds had installed 3.28.0 (Oct 11) and 3.31.0 (Oct 15 reboot). openai 3.x moved to httpx2, so `_stream_response()`'s before-text retry, which catches `httpx.TransportError`, was inert in prod (as reported in 130febd). Moving to 3.x deliberately, with tests, goes with this ticket. `requirements-ci.txt` stays unpinned.
 
 ---
 
 ### MATTGPT-304
 **Spike: Pinecone-hosted reranker (cohere-rerank-3.5 or bge-reranker-v2-m3) over a wider top-k, after MATTGPT-275**
 
-- **Status:** Blocked
+- **Status:** Open
 - **Priority:** Low
 - **Type:** Spike
-- **Dependencies:** MATTGPT-275. Set to Open when 275 ships.
+- **Dependencies:** MATTGPT-275 deployed in 1095d2c (Oct 15, 2026).
 - **File:** `ui/pages/ask_mattgpt/backend_service.py` (the `search_stories` tool: `semantic_search(..., top_k=SEARCH_TOP_K)`, then `[:5]`, in 275's working tree), `config/constants.py` (`SEARCH_TOP_K = 25`)
 - **Related:** MATTGPT-128 (cards show the cited stories), MATTGPT-251 (adjacent stories treated as evidence), MATTGPT-299 (latency), MATTGPT-283 (embedding model PoC)
 - **Logged:** October 15, 2026
@@ -2875,6 +2861,8 @@ Kept off the roadmap's NOW.
 **Gate run Oct 15, lane 2 (`probes/output/MATTGPT-275/gate_20261015_093237/lane2.log`, untracked; file written 09:47:17):** the run aborted on `fallback:pinecone_unavailable` for the c09 query "Norfolk Southern 2020 Revenue and Shipment Planning modernization...". The line before it is `[API_ERROR_DETECTED] source=embed_failure, exc=APITimeoutError: Request timed out.`: an OpenAI embedding timeout, which is logged. It is not an instance of the swallowed query exception. It shows the contrast: the embed failure could be diagnosed from the log, and a query failure would not have been.
 
 **Fix direction:** log the query exception unconditionally, in the embed path's `[API_ERROR_DETECTED]` form (for example `source=pinecone_query`).
+
+**Correction to 1095d2c (Oct 15, 2026):** 1095d2c's known issues call lane 2's abort "a transient Pinecone query failure". Per the lane 2 log it was an OpenAI embedding timeout (`[API_ERROR_DETECTED] source=embed_failure, exc=APITimeoutError`), as recorded above.
 
 ---
 
@@ -3016,10 +3004,10 @@ Any sentinel has to be translated in one place before anything uses it. With tha
 ### MATTGPT-312
 **Ask Agy stream shows an unclosed bold marker (`**`) until its pair arrives; the finished answer is clean**
 
-- **Status:** Blocked
+- **Status:** Open
 - **Priority:** Low
 - **Type:** Bug
-- **Dependencies:** MATTGPT-275. Set to Open when 275 commits (the stream and its dash hold are in 275's working tree).
+- **Dependencies:** MATTGPT-275 committed in 1095d2c (Oct 15, 2026).
 - **File:** `ui/pages/ask_mattgpt/backend_service.py` (`_show()` in the stream loop, `_DASH_HOLD_CHARS`), `ui/pages/ask_mattgpt/conversation_view.py` (`_show_delta()`)
 - **Related:** MATTGPT-275, MATTGPT-301 (dashes)
 - **Logged:** October 15, 2026
@@ -3029,6 +3017,56 @@ Any sentinel has to be translated in one place before anything uses it. With tha
 **Verified Oct 15, 2026 (275's working tree):** `_show()` sends `normalize_dashes(raw.rstrip(_DASH_HOLD_CHARS))` mid-stream, so only trailing spaces, tabs, commas and dashes are held back (`_DASH_HOLD_CHARS = " \t,\u2014\u2013"`). Nothing holds an unpaired `**`. `_show_delta()` re-renders the joined text with `st.markdown()` on every delta.
 
 **Fix direction:** hold back the text from an unpaired `**` until its pair arrives, in the same place as the dash hold, and release it at the end of the stream.
+
+**Also listed in 1095d2c's known issues (Oct 15, 2026):** seen once, dark mode, "How big was the team?". Fix direction there matches: hold back an unclosed `**` in `_show()`, as it holds back dashes.
+
+---
+
+### MATTGPT-313
+**Production runs Python 3.11, local and CI run 3.13: align them as their own change**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Infra
+- **Related:** MATTGPT-314 (pyarrow pin), MATTGPT-302 (openai 3.x)
+- **Logged:** October 15, 2026
+
+**Reported (Oct 15, 2026, MATTGPT-275 deploy):** Streamlit Cloud runs Python 3.11. The Cloud setting isn't in the repo.
+
+**Verified Oct 15, 2026 (HEAD):** local `python3 --version` is 3.13.3. `.github/workflows/test.yml` sets `python-version: "3.13"` with a comment matching the local interpreter. `.github/workflows/sync-facts.yml` sets "3.11". `pyproject.toml` sets `target-version` py311 for both tools.
+
+**Scope:** one version across Cloud, CI (both workflows) and `pyproject.toml`, changed on its own, not alongside a feature.
+
+---
+
+### MATTGPT-314
+**Pin pyarrow<25 in requirements.txt: a Cloud in-place update moved it to 26.0.0 (known segfault) until the reboot corrected it**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Infra
+- **File:** `requirements.txt`
+- **Related:** MATTGPT-313
+- **Logged:** October 15, 2026
+
+**Reported (Oct 15, 2026, MATTGPT-275 deploy):** Streamlit Cloud's in-place update installed pyarrow 26.0.0, which has a known segfault, until the reboot corrected it.
+
+**Verified Oct 15, 2026 (HEAD):** `requirements.txt` has no pyarrow line; it arrives through other packages. `requirements_temp.txt` has none either.
+
+**Change:** add `pyarrow<25` to `requirements.txt`.
+
+---
+
+### MATTGPT-315
+**Source-card labels use different separators: " - " in conversation_helpers.py, ": " in ui_helpers.py**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Hygiene
+- **File:** `ui/pages/ask_mattgpt/conversation_helpers.py` (`_render_ask_transcript()`), `utils/ui_helpers.py` (`render_sources_badges_static()`, `render_sources_chips()`)
+- **Logged:** October 15, 2026
+
+**Verified Oct 15, 2026 (HEAD):** `_render_ask_transcript()` labels a source card `f"{client} - {title}"`. `ui_helpers.py` uses `f"{s['client']}: {s['title']}"` and, in `render_sources_chips()`, `sep = ": "`. Cosmetic; pick one.
 
 ---
 
@@ -3994,6 +4032,8 @@ The duplication between the superset class and its two components should be reso
 - **Logged:** September 1, 2026
 
 Stale file in repo root. No callers, no CI reference. Remove.
+
+**Re-checked Oct 15, 2026:** `git grep -F requirements_temp` at HEAD, excluding BACKLOG.md and CHANGELOG.md, returns nothing. The file is still tracked.
 
 ---
 

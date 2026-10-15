@@ -61,7 +61,7 @@ bound), -199 (AT&T content-kw gate), -063 (wrong-person queries), -077
 (pronoun and noun-overlap contamination), -195 (incident vocabulary
 routing), -236 (router topical families), -239 (router confidence floor,
 Blocked), -062 (stale router embeddings), -167 (entity detection for
-Project and Place, Parked), -304 (reranker spike, Blocked).
+Project and Place, Parked), -304 (reranker spike).
 
 ## 2. Conversational continuity
 
@@ -254,10 +254,10 @@ experience reliably and sustainably; failures are visible, not silent.
 
 **Open tickets:**
 - Alarms and telemetry: -222, -223.
-- Latency: -299 (Blocked on MATTGPT-275 step 1).
+- Latency: -299.
+- Runtime and dependencies: -313 (Python 3.11 in prod, 3.13 local), -314 (pin pyarrow<25).
 - Model retirement: -302 (gpt-4o family retires January 14, 2027).
 - Silent failures: -292 (silent file-order fallback), -288 (Ask Agy ignores the Pinecone fallback signal), -305 (Pinecone query exception logged only under DEBUG).
-- Visible failures: -303 (Ask Agy stream has no timeout or retry of its own).
 - Regression gates and test reliability: -039, -233, -235, -206, -153,
   -274, -084, -180, -277, -198, -035, -060, -082, -143 (Parked), -203,
   -209, -213.
@@ -290,4 +290,5 @@ Ask Agy feedback are not logged.
 **Open tickets:** -045 (analytics dashboard), -129, -078, -091, -155,
 -022, -015, -095, -097, -154, -130, -156, -291 (role-play
 requests, open decision), -298 (salary questions get the nonsense
-banner), -312 (stream shows an unclosed bold marker, Blocked).
+banner), -312 (stream shows an unclosed bold marker), -315 (source-card
+separators differ).
