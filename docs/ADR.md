@@ -1352,3 +1352,24 @@ On c12 t2 ("Which was bigger?" after Fiserv and JP Morgan ACCESS), answers ranke
 - c03 t2: 2 of 10 answers place a 2014-2019 incident under a 2019-2023 culture the dates rule out. Accepted; the story's broad dates are part of its anonymization.
 - x7 ("When was he at JP Morgan?"): answers list three of the four periods, because top-5 retrieval misses one story.
 - `TestStoryDates` in `tests/unit/test_story_intelligence.py` pins the line.
+
+---
+
+## ADR 052: Role Match Required and Preferred Rows Carry the Verbatim JD Bullet
+
+**Date:** 2026-09-20
+**Status:** Accepted
+**Related tickets:** MATTGPT-244
+
+**Context:**
+The assessor received the extraction model's compressed `requirement`, which dropped qualifiers such as "AWS, Azure, or GCP".
+
+**Decision:**
+`_flatten_extraction()` in `services/jd_assessor.py` uses `source_text` as the row text for required and preferred rows, falling back to `requirement`; implicit rows keep `requirement`. The required and preferred extraction prompts tell the model to copy `source_text` as the entire JD bullet or sentence, verbatim and complete (b28a080).
+
+**Rationale:**
+- A matched-sample probe on the same JD compared the old and new instruction: truncations went from 23/85 to 0/85. The figure was recorded only in ARCHITECTURE.md (45d6321), with no evidence path.
+
+**Consequences:**
+- `source_text` fidelity is checked by exact match against JD lines, not containment; a truncated span still passes a containment check.
+- The `requirement` field stays compressed, and implicit rows are inferred text by design (Role Match Known Defects in ARCHITECTURE.md).

@@ -374,7 +374,6 @@ search_stories tool results → gpt-6.1-sol (Ask Agy) → User
 - Archives any existing `MPugmire - STAR Stories - *.xlsx` in repo root to `archive/star-stories-versions/` before copying; refuses to overwrite an existing archive entry.
 - Nothing writes to git. `archive/star-stories-versions/` is gitignored.
 
-**Introduced:** commit `4c8d900`
 
 ---
 
@@ -946,13 +945,13 @@ JD Input
   → compute_recommendation()     Aggregates verdicts to Strong / Likely / Partial / Gap
 ```
 
-Stage 1 runs through `extract_requirements()` → `_extract_all_sections()`. Wave 1 runs `_call_required` and `_call_preferred` concurrently via `asyncio.gather`; the required call also returns the JD-level metadata (role_title, company, jd_format, key_responsibilities). Wave 2 runs `_call_implicit`, with the wave 1 lists injected into its user message so its dedup rule can check them. If any section call raises, the error leaves `extract_requirements`. Wave 2 never starts when wave 1 fails. The wave 1 siblings are cancelled and then drained with a `return_exceptions=True` gather; the drain is the load-bearing part, because `to_thread` workers can't be cancelled from outside. Each prompt constant (`_REQUIRED_EXTRACTION_PROMPT`, `_PREFERRED_EXTRACTION_PROMPT`, `_IMPLICIT_EXTRACTION_PROMPT`) has a `=== SECTION: <name> ===` marker line that tests use to classify calls. `JD_EXTRACTION_PROMPT` stays only as the pre-split reference for historical probes; production doesn't use it. The return shape didn't change: three requirement lists, key_responsibilities, role_title, company, jd_format. `seniority_signals` was dropped (no consumer). `key_responsibilities` was kept (the planned responsibilities output in ADR 016, not consumed yet).
+Stage 1 runs through `extract_requirements()` → `_extract_all_sections()`. Wave 1 runs `_call_required` and `_call_preferred` concurrently via `asyncio.gather`; the required call also returns the JD-level metadata (role_title, company, jd_format, key_responsibilities). Wave 2 runs `_call_implicit`, with the wave 1 lists injected into its user message so its dedup rule can check them. If any section call raises, the error leaves `extract_requirements`. Wave 2 never starts when wave 1 fails. The wave 1 siblings are cancelled and then drained with a `return_exceptions=True` gather; the drain is the load-bearing part, because `to_thread` workers can't be cancelled from outside. Each prompt constant (`_REQUIRED_EXTRACTION_PROMPT`, `_PREFERRED_EXTRACTION_PROMPT`, `_IMPLICIT_EXTRACTION_PROMPT`) has a `=== SECTION: <name> ===` marker line that tests use to classify calls. `JD_EXTRACTION_PROMPT` is not used in production; probes import it. Return shape: three requirement lists, key_responsibilities (the planned responsibilities output in ADR 016, not consumed yet), role_title, company, jd_format.
 
-Stage 3 is parallelized via `asyncio.as_completed` at `_CONCURRENCY = 10` in `_fan_out_assessments`, wrapping the sync OpenAI and Pinecone clients with `asyncio.to_thread`. Measured on the AT&T JD at DEFAULT_TOP_K=5, three runs each: sequential mean 125.5s, parallel mean 31.0s. The pre-243 sequential implementation is in git history (recoverable via revert if the parallel path ever needs to be undone); not a live fallback.
+Stage 3 is parallelized via `asyncio.as_completed` at `_CONCURRENCY = 10` in `_fan_out_assessments`, wrapping the sync OpenAI and Pinecone clients with `asyncio.to_thread`. The sequential and parallel timings are in the comment above `_CONCURRENCY`.
 
 #### Requirement Text: Flatten and Passthrough
 
-`_flatten_extraction()` is the one place that turns the extraction dict into the submission-ordered requirement list. Both `run_assessment` (used by `scripts/assess_jd.py`) and the Role Match page call it. Required and preferred rows use `source_text` as their `text`, falling back to `requirement` if it's missing. Implicit rows use `requirement`, not `inferred_from`, and get `category="required"`. The required and preferred prompts tell the model to copy `source_text` as the entire JD bullet or sentence, verbatim and complete. On Sept 20 a matched-sample probe on the same JD compared the old and new instruction: truncations went from 23/85 to 0/85. So the assessor now sees full JD bullets on required and preferred, parentheticals included. Check source_text fidelity with exact match against JD lines, not substring containment; a truncated span still passes a containment check.
+`_flatten_extraction()` is the one place that turns the extraction dict into the submission-ordered requirement list. Both `run_assessment` (used by `scripts/assess_jd.py`) and the Role Match page call it. Required and preferred rows use `source_text` as their `text`, falling back to `requirement` if it's missing. Implicit rows use `requirement`, not `inferred_from`, and get `category="required"`. The required and preferred prompts tell the model to copy `source_text` as the entire JD bullet or sentence, verbatim and complete. So the assessor sees full JD bullets on required and preferred, parentheticals included. See ADR 052 in `docs/ADR.md`. Check source_text fidelity with exact match against JD lines, not substring containment; a truncated span still passes a containment check.
 
 `_assess_one_with_index` overwrites `assessment["requirement"]` with the input `req["text"]` on the success path. The input text is what gets displayed, and any paraphrase from the assess LLM is discarded. Mode 1 and 2 unassessed rows already use `req["text"]`. Share text and export read `requirement` off the row, so all surfaces show the same string within a run. Verdict fields (`match_status`, evidence, `gap_explanation`) are still whatever the assess LLM returned.
 
@@ -992,7 +991,7 @@ The Role Match page doesn't call `run_assessment`. Its submit branch calls `extr
 
 **Post-success rerun is required:** the pass that runs the assessment is also the pass that consumed the flag as True and drew the controls disabled. Without a closing `st.rerun()`, the controls stay disabled and the Submit label never changes to "Update Match". Success and failure both end with a rerun. `_role_match_click_start_pending` carries the click timestamp across that rerun, so click-to-render telemetry still covers the whole span.
 
-**Guards must reach the DOM:** twice (Sept 19), a guard was correct in code but didn't show on the page: CSS hid the disabled state, and `include_actions=False` was never passed at the one call site that needed it. Unit tests don't reach the DOM, so any new guard on this page needs a browser check.
+**Guards must reach the DOM:** a guard can be correct in code and still not show on the page, for example when CSS hides the disabled state or a parameter such as `include_actions=False` isn't passed at the one call site that needs it. Unit tests don't reach the DOM, so any new guard on this page needs a browser check.
 
 #### Assessment Grounding (load_matt_profile)
 
@@ -1011,7 +1010,7 @@ Both removals enforce the same principle: grounding must come from retrieved cor
 
 #### Known Defects
 
-1. **Extraction drops qualifying clauses:** On paragraph-format JDs, extraction coarsens requirements and drops qualifiers. Observed examples from the demo JD: "including hands-on development earlier in career," "AWS, Azure, or GCP," "in production environments without business disruption." On bulleted JDs this is rare (1-2 drops vs. 7 on the demo JD). Verdicts are therefore scored against softer requirements than the JD states. Since Sept 20, required and preferred rows reach the assessor as verbatim JD bullets (see Requirement Text: Flatten and Passthrough), so the assessor sees those qualifiers. The `requirement` field itself is still compressed, and implicit rows are inferred text by design.
+1. **Extraction drops qualifying clauses:** On paragraph-format JDs, extraction coarsens requirements and drops qualifiers. Observed examples from the demo JD: "including hands-on development earlier in career," "AWS, Azure, or GCP," "in production environments without business disruption." On bulleted JDs this is rare (1-2 drops vs. 7 on the demo JD). Verdicts are therefore scored against softer requirements than the JD states. Required and preferred rows reach the assessor as verbatim JD bullets (see Requirement Text: Flatten and Passthrough), so the assessor sees those qualifiers. The `requirement` field itself is still compressed, and implicit rows are inferred text by design.
 2. **No extraction validation gate:** Stage 2 and 3 run on whatever Stage 1 returns. There is no schema check or minimum-requirement count guard before retrieval begins.
 
 #### Probe Harness (probe_assessor.py)
@@ -1196,7 +1195,7 @@ Retrieval is driven primarily by Use Case(s) and 5P Summary; STAR fields provide
 - `Theme="Professional Narrative"` → Identity/philosophy stories
 - `Era="Leadership & Professional Narrative"` → Excluded from Timeline view
 
-**Employer field — dual meaning (standing rule, rediscovered three times):**
+**Employer field: dual meaning (standing rule):**
 `Employer` carries two meanings: who employed Matt during the work, and what period the story covers. For engagement stories these coincide. For arc stories they do not -- "Why Hire Matt" summarizes eighteen years at Accenture, "Transition Story" spans 2023-09 to 2026-08, "Career Intent" starts 2005-03, all tagged `Employer=Accenture`. These are not mis-tagged. Any derivation driven by `Employer` must filter `Theme == "Professional Narrative"` to exclude arc stories. An unfiltered derivation returns 2026-08 as the latest Accenture date; filtered returns 2023-09.
 
 **Placeholder Client values (standing rule):**
@@ -1406,9 +1405,9 @@ See ADR 031 in `docs/ADR.md` for why analytics is a Google Sheets logger rather 
 
 **Schema (44 columns -- source of truth: `services/query_logger.py:HEADERS`):**
 
-Why 44: an absent value must never be indistinguishable from a meaningful one. Three of this week's additions exist for that reason: `Env` (local dev traffic looks identical to a real visitor's without it), `Failure Type` (an empty cell already means "pre-column row" in the historical data -- empty can't also mean "ok"), and the 8 per-category counts (`Required Strong`, etc. -- the four combined counts summed required + preferred, hiding the split that assessment fit analysis turns on). Collapsing any of these back to empty would reintroduce the ambiguity they were added to resolve.
+Why 44: an absent value must never be indistinguishable from a meaningful one. Three column groups exist for that reason: `Env` (local dev traffic looks identical to a real visitor's without it), `Failure Type` (an empty cell already means "pre-column row" in the historical data -- empty can't also mean "ok"), and the 8 per-category counts (`Required Strong`, etc. -- the four combined counts summed required + preferred, hiding the split that assessment fit analysis turns on). Collapsing any of these back to empty would reintroduce the ambiguity they were added to resolve.
 
-Schema is append-only. Mid-list insertions change the column position of every historical row in the Sheet (the -086 failure mode). See HEADERS Invariants below.
+Schema is append-only. Mid-list insertions change the column position of every historical row in the Sheet. See HEADERS Invariants below.
 
 Core event columns (all event types):
 | Column | Source | Notes |
@@ -1888,7 +1887,7 @@ runs at the top of `app.py` before any render path executes.
 `global_styles.py` it gains app-wide scope, so collision-prone class names must
 be prefixed. Pattern: `es-` for My Work/Explore Stories (`.es-fixed-height-card`,
 `.es-pagination`, `.es-results-count`, etc.). Apply the prefix to any class that
-previously had implicit page scope via inline injection.
+had page scope only through inline injection.
 
 **Use when:** A page renders custom CSS AND a user action on it can navigate
 to a different page mid-rerun (any chip/button that sets `active_tab` and
