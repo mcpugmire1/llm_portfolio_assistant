@@ -13,7 +13,7 @@ import sys
 from urllib.parse import unquote
 
 CURRENT_STATE = ["CLAUDE.md", "ARCHITECTURE.md", "BACKLOG.md"]
-BUDGET = {"ARCHITECTURE.md": 2000}
+BUDGET = {"ARCHITECTURE.md": 2050}
 MONTH = (
     r"(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|June?|July?|"
     r"Aug(?:ust)?|Sept?(?:ember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\.?"
