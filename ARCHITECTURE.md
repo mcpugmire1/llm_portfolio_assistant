@@ -1398,61 +1398,12 @@ Why 44: an absent value must never be indistinguishable from a meaningful one. T
 
 Schema is append-only. Mid-list insertions change the column position of every historical row in the Sheet. See HEADERS Invariants below.
 
-Core event columns (all event types):
-| Column | Source | Notes |
-|--------|--------|-------|
-| Event Type | log function | "query", "page_load", "feedback", "role_match_assessment", "role_match_gate_rejection", etc. |
-| Timestamp | `datetime.now()` | Server-side UTC |
-| Query | function param | User's search text |
-| Page | function param | "Ask Agy" or "Explore Stories" |
-| Intent Family | semantic router | e.g., "leadership", "personal", "out_of_scope" |
-| Confidence | Pinecone result | "high", "low", "none", or "" if redirected before search |
-| Result Count | `len(results)` | 0 for redirects |
-| Redirect Reason | early-return reason | "rule:{cat}", "semantic_router:personal", "low_confidence", "" for success |
-| User-Agent | `st.context.headers` | Browser identification |
-| Screen Width | `streamlit_js_eval` | Viewport width for CSS breakpoint analysis |
-| Timezone | `st.context.timezone` | User's timezone |
-| Referrer | `st.context.headers` | Captured on first mount via first-mount guard |
-| Sources | function param | Retrieved story titles |
-| Rating | function param | Feedback rating |
-| Turn Index | function param | Conversation turn number |
-| Msg Hash | function param | Message hash for dedup |
-| UTM Source | query string | Campaign tracking |
-| UTM Medium | query string | Campaign tracking |
-| UTM Campaign | query string | Campaign tracking |
-| UTM Content | query string | Campaign tracking |
-| UTM Term | query string | Campaign tracking |
-
-Role Match columns:
-| Column | Notes |
-|--------|-------|
-| Role Title | JD-extracted role |
-| Company | JD-extracted company |
-| JD Format | Format classification |
-| Required Count | Combined required requirement count |
-| Preferred Count | Combined preferred requirement count |
-| Strong Count | Combined story match counts |
-| Partial Count | |
-| Gap Count | |
-| Session ID | Groups page_load + role_match + query events for a visitor |
-| Story Title | Matched story (chip_click events) |
-| Client | Matched story client |
-| Top Score | Top Pinecone score for the assessment |
-
-Appended columns (positions 35-43, appended, not inserted):
-| Column | Notes |
-|--------|-------|
-| Unassessed Count | Requirements not assessed (Mode 1 or Mode 2 failure) |
-| Failure Type | "ok", "retrieval_failed", "gate_rejected" |
-| Env | "local", "dev", "production" -- injected centrally by `_build_row` |
-| Required Strong Count | Per-category count |
-| Required Partial Count | |
-| Required Gap Count | |
-| Required Unassessed Count | |
-| Preferred Strong Count | |
-| Preferred Partial Count | |
-| Preferred Gap Count | |
-| Preferred Unassessed Count | |
+**Columns:** `HEADERS` in `services/query_logger.py` lists all 44 in order; this doc does not copy it. Values that need explaining:
+- `Redirect Reason`: "rule:<category>", "semantic_router:out_of_scope" or "semantic_router:personal"; empty for an answer.
+- `Confidence`: written by My Work's search; Ask Agy leaves it empty and writes `Top Score`.
+- `Failure Type` (Role Match): "ok", "retrieval_failed" or "gate_rejected". `Unassessed Count` counts the Mode 1 and Mode 2 rows.
+- `Env`: "local", "dev" or "production".
+- `Referrer`: captured in `app.py`'s first-mount guard from the `Referer` header; the UTM columns cover platforms that strip it. `Screen Width`: from `streamlit_js_eval`, followed by `st.rerun()` to remove its iframe.
 
 **HEADERS Invariants (`tests/unit/test_query_logger.py::TestHeadersPrefixInvariant`):**
 
@@ -1463,20 +1414,9 @@ Two tests enforce append-only discipline:
 
 Together: a mid-list insert shifts positions 0-34 (prefix fails) and changes the total count (length fails). An append at position 35+ doesn't shift historical positions (prefix passes) but changes the total (length fails until `_CURRENT_SCHEMA_LENGTH` is updated).
 
-**Logging Points:**
-| Location | Count | Points |
-|----------|-------|--------|
-| `backend_service.py` | 6 | Nonsense filter, out_of_scope, personal, low_confidence, empty_pool, success |
-| `explore_stories.py` | 2 | Personal/OOS redirect, search results |
-| `query_logger.py` | 2 | `log_role_match_gate_rejection`, `log_role_match_assessment` (failure path via `_handle_assessment_error`) |
+**Logging points:** `agy_answer()` logs a row for a nonsense-rule rejection, an out_of_scope or personal redirect, or an answer; rate limits and model errors are not logged. My Work logs its router redirects and search results. Role Match logs through its four event functions (Query Logger Events under Role Match).
 
-**Dependencies:** `gspread`, `google-auth` (in requirements.txt)
-
-**Secrets:** Requires `[gcp_service_account]` section in Streamlit secrets (both local `.streamlit/secrets.toml` and Streamlit Cloud settings)
-
-**Browser Context Capture (app.py):**
-- Referrer: Captured in first-mount guard from `st.context.headers.get("Referer", "")`
-- Screen width: Captured via `streamlit_js_eval` with `st.rerun()` to remove iframe from DOM
+**Dependencies and secrets:** `gspread` and `google-auth` (requirements.txt), and a `[gcp_service_account]` section in Streamlit secrets, locally and on Streamlit Cloud.
 
 ---
 
