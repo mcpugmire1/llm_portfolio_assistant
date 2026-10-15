@@ -1,0 +1,824 @@
+[
+ {
+  "answer_md": "🐾 His degree is in Information Technology, not Computer Science.\n\nMatt holds a Master's degree, Information Technology, **American InterContinental University**. Information Technology is a recognized Computer Science-related discipline, and a Master's degree exceeds a Bachelor's.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Teaching Entry-Level Developers to Build Their First Java Web Application (American InterContinental University)",
+   "Mentoring Underserved High School Students into Technology Careers (Accenture)",
+   "Building Tangible Cloud Tech Skills for HBCU Students (Accenture)",
+   "Why Hire Matt? (Accenture)",
+   "Launching a Self-Paced Learning Program for Emerging Technologies (Accenture)"
+  ],
+  "intent_family": "technical",
+  "seconds": 6.06,
+  "opening": "🐾 Here's a great example.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3062,
+     "cached": 0,
+     "output": 31,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 His degree is in Information Technology, not Computer Science.\n\nMatt holds a Master's degree, Information Technology, American InterContinental University. Information Technology is a recognized Computer Science-related discipline, and a Master's degree exceeds a Bachelor's.\n\n[[profile:education]]",
+    "function_calls": 0,
+    "usage": {
+     "input": 5960,
+     "cached": 3059,
+     "output": 55,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt education Master's degree Information Technology American InterContinental University CS degree",
+    "top_score": 0.412000269,
+    "n": 25
+   }
+  ],
+  "arm": "new",
+  "case": "c02",
+  "run": 1,
+  "turn": 1,
+  "question": "Does he have a CS degree?",
+  "nonsense_skipped": false
+ },
+ {
+  "answer_md": "🐾 Here’s the engineering work behind the degree.\n\nThe relevant work includes Execution & Delivery, Cloud-Native Architecture & Platform Engineering, and Talent & Enablement. At **Accenture**, engineers struggled to onboard to modern cloud-native technologies because project demands left little time for learning and standardized resources were missing. At **Capital One**, internal teams faced Federal Reserve Board-mandated compliance updates alongside heavy development workloads, burnout, and tight deadlines. Across enterprise engagements, developers waited days or weeks for builds, tests, and approvals, while manual testing still missed defects.\n\nFor Project Octane at **Accenture**, Matt led the creation of a modular accelerator with reusable reference applications, automated infrastructure provisioning, and hands-on workshops. His team used Terraform, AWS CloudFormation, and serverless architectures. He built the Summit conference reference app on AWS AppSync for real-time GraphQL sync, backed by ElastiCache. Reference applications covered Angular/AWS, React Native/AWS, and Flutter, each with its own infrastructure as code.\n\nAt **Capital One**, Matt built a balanced, cross-functional team of **8**: **1** product manager, **1** CX/product designer, and **6** developers, including the anchor/lead. He organized Go upskilling, implemented pair programming and continuous integration, and developed an automated testing suite. His teams delivered defect-free production code at **4x** the output of internal teams and secured additional engagements.\n\nAcross cloud-native delivery engagements, Matt designed and documented reusable patterns for microservices, event-driven systems with Kafka, Docker and Kubernetes, and serverless approaches. He established automated testing and deployment gates, infrastructure as code, monitoring, and observability. Across **15+** enterprise engagements, delivery reached **4X** velocity, lead time fell from weeks to days, and uptime reached **99.9%+**.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Driving Modern Software Engineering with Project Octane (Accenture)",
+   "Why Hire Matt? (Accenture)",
+   "Scaling Development Capacity with Modern Engineering Practices (Capital One)",
+   "About Matt – My Leadership Journey (Accenture)",
+   "Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD (Fortune 500 Clients)"
+  ],
+  "intent_family": "synthesis",
+  "seconds": 12.84,
+  "opening": "🐾 Stepping back to see the themes...",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 2890,
+     "cached": 0,
+     "output": 34,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Here’s the engineering work behind the degree.\n\nThe relevant work includes Execution & Delivery, Cloud-Native Architecture & Platform Engineering, and Talent & Enablement. At **Accenture**, engineers struggled to onboard to modern cloud-native technologies because project demands left little time for learning and standardized resources were missing. At **Capital One**, internal teams faced Federal Reserve Board-mandated compliance updates alongside heavy development workloads, burnout, and tight deadlines. Across enterprise engagements, developers waited days or weeks for builds, tests, and approvals, while manual testing still missed defects.\n\nFor Project Octane at **Accenture**, Matt led the creation of a modular accelerator with reusable reference applications, automated infrastructure provisioning, and hands-on workshops. His team used Terraform, AWS CloudFormation, and serverless architectures. He built the Summit conference reference app on AWS AppSync for real-time GraphQL sync, backed by ElastiCache. Reference applications covered Angular/AWS, React Native/AWS, and Flutter, each with its own infrastructure as code.\n\nAt **Capital One**, Matt built a balanced, cross-functional team of **8**: **1** product manager, **1** CX/product designer, and **6** developers, including the anchor/lead. He organized Go upskilling, implemented pair programming and continuous integration, and developed an automated testing suite. His teams delivered defect-free production code at **4x** the output of internal teams and secured additional engagements.\n\nAcross cloud-native delivery engagements, Matt designed and documented reusable patterns for microservices, event-driven systems with Kafka, Docker and Kubernetes, and serverless approaches. He established automated testing and deployment gates, infrastructure as code, monitoring, and observability. Across **15+** enterprise engagements, delivery reached **4X** velocity, lead time fell from weeks to days, and uptime reached **99.9%+**.",
+    "function_calls": 0,
+    "usage": {
+     "input": 5970,
+     "cached": 2887,
+     "output": 465,
+     "reasoning": 85
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt hands-on software engineering technical architecture cloud-native production delivery technical foundations computer science degree",
+    "top_score": 0.50173223,
+    "n": 25
+   }
+  ],
+  "arm": "new",
+  "case": "c02",
+  "run": 1,
+  "turn": 2,
+  "question": "Why shouldn’t that worry me?",
+  "nonsense_skipped": false
+ },
+ {
+  "answer_md": "🐾 Matt has a **Master's degree in Information Technology from American InterContinental University**, rather than a degree titled Computer Science. Information Technology is a recognized Computer Science-related discipline.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Teaching Entry-Level Developers to Build Their First Java Web Application (American InterContinental University)",
+   "Why Hire Matt? (Accenture)",
+   "Mentoring Underserved High School Students into Technology Careers (Accenture)",
+   "Building Tangible Cloud Tech Skills for HBCU Students (Accenture)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)"
+  ],
+  "intent_family": "technical",
+  "seconds": 7.18,
+  "opening": "🐾 I know just the story.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3063,
+     "cached": 0,
+     "output": 35,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Matt has a **Master's degree in Information Technology from American InterContinental University**, rather than a degree titled Computer Science. Information Technology is a recognized Computer Science-related discipline.\n\n[[profile:education]]",
+    "function_calls": 0,
+    "usage": {
+     "input": 6505,
+     "cached": 3060,
+     "output": 79,
+     "reasoning": 31
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire education Master's degree Information Technology American InterContinental University CS degree",
+    "top_score": 0.350005597,
+    "n": 25
+   }
+  ],
+  "arm": "new",
+  "case": "c02",
+  "run": 2,
+  "turn": 1,
+  "question": "Does he have a CS degree?",
+  "nonsense_skipped": false
+ },
+ {
+  "answer_md": "🐾 Here are the education and engineering facts behind that distinction.\n\nMatt has a **Master's degree in Information Technology from American InterContinental University**. Information Technology is a recognized Computer Science-related discipline, and a Master's degree exceeds a Bachelor's. His degree is not titled Computer Science.\n\nBeyond the degree, his work includes solution architecture, interface design, code reviews, cloud-native reference applications, and automated infrastructure provisioning. The delivery problems included undefined integration agreements at **AT&T** and engineers struggling to onboard to modern cloud-native technologies at **Accenture**.\n\nAt **AT&T**, Matt led Planning & Analysis and Enhancement Design teams for its Network Engineer implementation. Integration with MIC, MIC-NT, and ELP required defined agreements before downstream development could proceed. He defined Joint Interface Agreements, designed enhancements using .NET, C#, SQL Server, and ESRI APIs, and conducted technical and functional reviews of offshore-delivered code. The agreements unblocked development across all **3 integration points**. Enhancements shipped without architectural rework between phases, and the Hyderabad team achieved independent delivery velocity without ongoing onshore dependency.\n\nAt **Accenture**, Matt led Project Octane when engineering readiness gaps were creating bottlenecks and delayed timelines. He developed reusable reference applications and infrastructure-as-code templates, guided automated provisioning using Terraform and AWS CloudFormation, and hosted hands-on workshops. He built the Summit conference reference app using AWS AppSync for real-time GraphQL sync, backed by ElastiCache.\n\nHe also built the Cloud Innovation Center from **0 to 150+ professionals**. Its teams delivered at **4x velocity**, with **zero-defect deployments** through TDD and automated pipelines. Those are the engineering responsibilities and delivery results available alongside his education.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Architecting Enhancements for AT&T's Network Engineering Platform (AT&T)",
+   "Architecting AT&T's Scalable Order Management Platform (AT&T)",
+   "Why Hire Matt? (Accenture)",
+   "Driving Modern Software Engineering with Project Octane (Accenture)",
+   "About Matt – My Leadership Journey (Accenture)"
+  ],
+  "intent_family": "synthesis",
+  "seconds": 15.04,
+  "opening": "🐾 Let me show you what ties Matt's work together.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 2879,
+     "cached": 2688,
+     "output": 30,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Here are the education and engineering facts behind that distinction.\n\nMatt has a **Master's degree in Information Technology from American InterContinental University**. Information Technology is a recognized Computer Science-related discipline, and a Master's degree exceeds a Bachelor's. His degree is not titled Computer Science.\n\nBeyond the degree, his work includes solution architecture, interface design, code reviews, cloud-native reference applications, and automated infrastructure provisioning. The delivery problems included undefined integration agreements at **AT&T** and engineers struggling to onboard to modern cloud-native technologies at **Accenture**.\n\nAt **AT&T**, Matt led Planning & Analysis and Enhancement Design teams for its Network Engineer implementation. Integration with MIC, MIC-NT, and ELP required defined agreements before downstream development could proceed. He defined Joint Interface Agreements, designed enhancements using .NET, C#, SQL Server, and ESRI APIs, and conducted technical and functional reviews of offshore-delivered code. The agreements unblocked development across all **3 integration points**. Enhancements shipped without architectural rework between phases, and the Hyderabad team achieved independent delivery velocity without ongoing onshore dependency.\n\nAt **Accenture**, Matt led Project Octane when engineering readiness gaps were creating bottlenecks and delayed timelines. He developed reusable reference applications and infrastructure-as-code templates, guided automated provisioning using Terraform and AWS CloudFormation, and hosted hands-on workshops. He built the Summit conference reference app using AWS AppSync for real-time GraphQL sync, backed by ElastiCache.\n\nHe also built the Cloud Innovation Center from **0 to 150+ professionals**. Its teams delivered at **4x velocity**, with **zero-defect deployments** through TDD and automated pipelines. Those are the engineering responsibilities and delivery results available alongside his education.\n\n[[profile:education]]",
+    "function_calls": 0,
+    "usage": {
+     "input": 5898,
+     "cached": 2876,
+     "output": 474,
+     "reasoning": 114
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt software engineer solution architect hands-on technical architecture engineering delivery experience",
+    "top_score": 0.564912498,
+    "n": 25
+   }
+  ],
+  "arm": "new",
+  "case": "c02",
+  "run": 2,
+  "turn": 2,
+  "question": "Why shouldn’t that worry me?",
+  "nonsense_skipped": false
+ },
+ {
+  "answer_md": "🐾 Matt’s degree is in Information Technology, not Computer Science.\n\nHe holds a Master’s degree in Information Technology from **American InterContinental University**. Information Technology is a recognized Computer Science-related discipline.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Teaching Entry-Level Developers to Build Their First Java Web Application (American InterContinental University)",
+   "Mentoring Underserved High School Students into Technology Careers (Accenture)",
+   "Building Tangible Cloud Tech Skills for HBCU Students (Accenture)",
+   "Resolving Cross-Domain Data Issues for AT&T's Order Management (AT&T)",
+   "Architecting Enhancements for AT&T's Network Engineering Platform (AT&T)"
+  ],
+  "intent_family": "technical",
+  "seconds": 5.23,
+  "opening": "🐾 Found it!",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3062,
+     "cached": 2936,
+     "output": 32,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Matt’s degree is in Information Technology, not Computer Science.\n\nHe holds a Master’s degree in Information Technology from American InterContinental University. Information Technology is a recognized Computer Science-related discipline.\n\n[[profile:education]]",
+    "function_calls": 0,
+    "usage": {
+     "input": 6432,
+     "cached": 3059,
+     "output": 93,
+     "reasoning": 42
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt education Master's degree Information Technology American InterContinental University Computer Science degree",
+    "top_score": 0.396803379,
+    "n": 25
+   }
+  ],
+  "arm": "new",
+  "case": "c02",
+  "run": 3,
+  "turn": 1,
+  "question": "Does he have a CS degree?",
+  "nonsense_skipped": false
+ },
+ {
+  "answer_md": "🐾 Here’s the degree detail alongside Matt’s engineering work.\n\nMatt holds a Master’s degree in Information Technology from **American InterContinental University**. Information Technology is a recognized Computer Science-related discipline, and a Master’s degree exceeds a Bachelor’s. His degree is not titled Computer Science.\n\nHis work has included execution and delivery, cloud-native architecture, and engineering organization transformation. At **AT&T**, the Network Engineer implementation needed integration agreements and detailed technical designs across distributed development teams. At **Accenture**, engineers struggled to onboard to modern cloud-native technologies without standardized resources. In banking engagements, developers waited days or weeks for builds, tests, and approvals, while manual testing still missed defects.\n\nAt **AT&T**, Matt defined Joint Interface Agreements and led developers designing enhancements using .NET, C#, SQL Server, and ESRI APIs. He conducted technical and functional reviews of offshore-delivered code and traveled to Hyderabad to transition designs and resolve development issues. The enhancements shipped without architectural rework between phases, and the Hyderabad team achieved independent delivery without ongoing onshore dependency.\n\nAt **Accenture**, Matt led Project Octane, developing reusable reference applications and infrastructure-as-code templates. He guided automated infrastructure provisioning using Terraform and AWS CloudFormation. He also built the Summit conference reference app using AWS AppSync for real-time GraphQL sync, backed by ElastiCache.\n\nAcross enterprise delivery engagements, Matt established automated testing and deployment gates, reusable microservices patterns, infrastructure as code, and production monitoring. At **JP Morgan**, his teams delivered a mobile banking platform with **20+ screens** in **5 months**. At **Capital One**, teams achieved **zero-defect deployments** to payment systems through automated testing.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Driving Modern Software Engineering with Project Octane (Accenture)",
+   "Architecting Enhancements for AT&T's Network Engineering Platform (AT&T)",
+   "Driving Cloud-Native Innovation through TICARA Framework (Accenture)",
+   "Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD (Fortune 500 Clients)",
+   "Why Hire Matt? (Accenture)"
+  ],
+  "intent_family": "synthesis",
+  "seconds": 13.44,
+  "opening": "🐾 Looking across Matt's portfolio, I see clear patterns.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 2884,
+     "cached": 2688,
+     "output": 31,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Here’s the degree detail alongside Matt’s engineering work.\n\nMatt holds a Master’s degree in Information Technology from American InterContinental University. Information Technology is a recognized Computer Science-related discipline, and a Master’s degree exceeds a Bachelor’s. His degree is not titled Computer Science.\n\nHis work has included execution and delivery, cloud-native architecture, and engineering organization transformation. At **AT&T**, the Network Engineer implementation needed integration agreements and detailed technical designs across distributed development teams. At **Accenture**, engineers struggled to onboard to modern cloud-native technologies without standardized resources. In banking engagements, developers waited days or weeks for builds, tests, and approvals, while manual testing still missed defects.\n\nAt **AT&T**, Matt defined Joint Interface Agreements and led developers designing enhancements using .NET, C#, SQL Server, and ESRI APIs. He conducted technical and functional reviews of offshore-delivered code and traveled to Hyderabad to transition designs and resolve development issues. The enhancements shipped without architectural rework between phases, and the Hyderabad team achieved independent delivery without ongoing onshore dependency.\n\nAt **Accenture**, Matt led Project Octane, developing reusable reference applications and infrastructure-as-code templates. He guided automated infrastructure provisioning using Terraform and AWS CloudFormation. He also built the Summit conference reference app using AWS AppSync for real-time GraphQL sync, backed by ElastiCache.\n\nAcross enterprise delivery engagements, Matt established automated testing and deployment gates, reusable microservices patterns, infrastructure as code, and production monitoring. At **JP Morgan**, his teams delivered a mobile banking platform with **20+ screens** in **5 months**. At **Capital One**, teams achieved **zero-defect deployments** to payment systems through automated testing.\n\n[[profile:education]]",
+    "function_calls": 0,
+    "usage": {
+     "input": 6531,
+     "cached": 2881,
+     "output": 449,
+     "reasoning": 98
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt hands-on software engineering solution architecture technical implementation cloud native engineering delivery",
+    "top_score": 0.566261113,
+    "n": 25
+   }
+  ],
+  "arm": "new",
+  "case": "c02",
+  "run": 3,
+  "turn": 2,
+  "question": "Why shouldn’t that worry me?",
+  "nonsense_skipped": false
+ },
+ {
+  "answer_md": "🐾 Here’s what Matt is looking for next.\n\nMatt’s chapter at **Accenture** came to a close after a long tenure, including **four years** leading a **150-person** Cloud Innovation Center. That created his first pause after years of continuous delivery and leadership. He stepped back to recharge and think about the work he wanted to do next.\n\nHe is now looking for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job. His search centers on senior leadership opportunities in platform engineering, product leadership, AI-era transformation, and enterprise modernization. He wants real delivery with engineers and product managers, not strategy decks, and work where he can partner with product, engineering, and executive teams.\n\nDuring the sabbatical, Matt stayed hands-on by building MattGPT rather than completing a tutorial exercise. He defined the product roadmap, scoped the MVP, and shipped semantic search across **100+ career stories**, using Python, Pinecone, OpenAI embeddings, and RAG architecture. He also developed AI-assisted development practices around architectural decisions, session continuity, and behavior-first tests.\n\nMatt describes himself as a “builder.” He is looking for his next build: an organization that needs products scaled, platforms modernized, and an engineering culture established, with him in the work as part of the team.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Transition Story – Why I’m Exploring Opportunities (Accenture)",
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "Why Hire Matt? (Accenture)",
+   "Career Intent – What I’m Looking For Next (Independent Project)",
+   "Building Effective AI-Assisted Development Workflows (Independent Project)"
+  ],
+  "intent_family": "narrative",
+  "seconds": 12.24,
+  "opening": "🐾 On it!",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3061,
+     "cached": 2926,
+     "output": 39,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Here’s what Matt is looking for next.\n\nMatt’s chapter at **Accenture** came to a close after a long tenure, including **four years** leading a **150-person** Cloud Innovation Center. That created his first pause after years of continuous delivery and leadership. He stepped back to recharge and think about the work he wanted to do next.\n\nHe is now looking for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job. His search centers on senior leadership opportunities in platform engineering, product leadership, AI-era transformation, and enterprise modernization. He wants real delivery with engineers and product managers, not strategy decks, and work where he can partner with product, engineering, and executive teams.\n\nDuring the sabbatical, Matt stayed hands-on by building MattGPT rather than completing a tutorial exercise. He defined the product roadmap, scoped the MVP, and shipped semantic search across **100+ career stories**, using Python, Pinecone, OpenAI embeddings, and RAG architecture. He also developed AI-assisted development practices around architectural decisions, session continuity, and behavior-first tests.\n\nMatt describes himself as a “builder.” He is looking for his next build: an organization that needs products scaled, platforms modernized, and an engineering culture established, with him in the work as part of the team.",
+    "function_calls": 0,
+    "usage": {
+     "input": 6148,
+     "cached": 3058,
+     "output": 345,
+     "reasoning": 68
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt current sabbatical building MattGPT active search reason looking next role building product engineering organization culture delivering results",
+    "top_score": 0.614012122,
+    "n": 25
+   }
+  ],
+  "arm": "new",
+  "case": "c05",
+  "run": 1,
+  "turn": 1,
+  "question": "Why is he looking?",
+  "nonsense_skipped": false
+ },
+ {
+  "answer_md": "🐾 Here’s the ownership behind Matt’s consulting background.\n\nThe stories don’t establish that Matt is a better hire than a particular in-house candidate. They do document work beyond project delivery: building and running an organization, owning its budget, hiring its people, managing performance, and sustaining it over **four years**. At **Accenture**, clients were asking for changes in how software was built, while new hires often lacked hands-on cloud-native experience. Matt also had to run a deliberately flat organization without managers sitting alongside practitioners on daily teams.\n\nMatt built the Atlanta and Tampa Cloud Innovation Centers with full P&L accountability, including budget and cost management. He grew the organization from zero to **150+ practitioners** across engineering, product, architecture, and design. He established career progression frameworks, made the final hiring decision on every offer, allocated compensation budgets, facilitated promotion calibration, and owned the decisions to end performance remediation. Those responsibilities continued through **four years** of scaling, rather than ending with a client handoff.\n\nFor day-to-day operations, Matt ran allocation reviews with practice and client leads, monthly P&L and utilization reviews, and quarterly OKR and client planning checkpoints. Because managers did not observe daily work directly, he built a peer-evidence evaluation system using feedback from recent pairing partners, product managers, and team anchors. Practitioners progressed through an “I do, we do, you do” learning model toward independent delivery.\n\nThe organization achieved near-zero attrition in its first **two years**, with multiple hires promoted. The centers delivered **30+ product engagements** across **15+ Fortune 500 clients**, with **4X faster velocity** and zero-defect deployments. Delivery excellence and client advocacy contributed to **\\$100M+ in repeatable business** by **FY23**. Those are the documented responsibilities and outcomes to compare against an in-house candidate’s record.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 (Accenture)",
+   "Scaling Talent and Practices for Agile Product Innovation (Accenture)",
+   "Enhancing Team Proficiency through Servant Leadership and Mentorship (Accenture)",
+   "Driving Modern Software Engineering with Project Octane (Accenture)",
+   "Leading People: From Delivery Teams to a 150-Person Organization (Fortune 500 Clients)"
+  ],
+  "intent_family": "synthesis",
+  "seconds": 14.35,
+  "opening": "🐾 Here's what connects the dots across Matt's work.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3116,
+     "cached": 2688,
+     "output": 40,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Here’s the ownership behind Matt’s consulting background.\n\nThe stories don’t establish that Matt is a better hire than a particular in-house candidate. They do document work beyond project delivery: building and running an organization, owning its budget, hiring its people, managing performance, and sustaining it over **four years**. At **Accenture**, clients were asking for changes in how software was built, while new hires often lacked hands-on cloud-native experience. Matt also had to run a deliberately flat organization without managers sitting alongside practitioners on daily teams.\n\nMatt built the Atlanta and Tampa Cloud Innovation Centers with full P&L accountability, including budget and cost management. He grew the organization from zero to **150+ practitioners** across engineering, product, architecture, and design. He established career progression frameworks, made the final hiring decision on every offer, allocated compensation budgets, facilitated promotion calibration, and owned the decisions to end performance remediation. Those responsibilities continued through **four years** of scaling, rather than ending with a client handoff.\n\nFor day-to-day operations, Matt ran allocation reviews with practice and client leads, monthly P&L and utilization reviews, and quarterly OKR and client planning checkpoints. Because managers did not observe daily work directly, he built a peer-evidence evaluation system using feedback from recent pairing partners, product managers, and team anchors. Practitioners progressed through an “I do, we do, you do” learning model toward independent delivery.\n\nThe organization achieved near-zero attrition in its first **two years**, with multiple hires promoted. The centers delivered **30+ product engagements** across **15+ Fortune 500 clients**, with **4X faster velocity** and zero-defect deployments. Delivery excellence and client advocacy contributed to **$100M+ in repeatable business** by **FY23**. Those are the documented responsibilities and outcomes to compare against an in-house candidate’s record.",
+    "function_calls": 0,
+    "usage": {
+     "input": 9691,
+     "cached": 3113,
+     "output": 437,
+     "reasoning": 50
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt sustained ownership built Cloud Innovation Center 150 practitioners hiring engineering culture delivery repeat business in-house leadership long term outcomes",
+    "top_score": 0.610685587,
+    "n": 25
+   }
+  ],
+  "arm": "new",
+  "case": "c05",
+  "run": 1,
+  "turn": 2,
+  "question": "Why should we hire him over someone who stayed in-house?",
+  "nonsense_skipped": false
+ },
+ {
+  "answer_md": "🐾 Here’s why Matt is looking.\n\nAfter his tenure at **Accenture**, including **four years** leading a **150-person** Cloud Innovation Center, his chapter there came to a close. It was the first pause in his career after years of continuous delivery and leadership. He stepped back to recharge and think about the type of work he wanted to do next.\n\nHe used that time to build MattGPT and deepen his hands-on work in AI and GenAI. Rather than follow a tutorial exercise, he chose a project he would actually use: an AI-powered assistant over his own career stories. He defined the product roadmap, scoped the MVP, and shipped semantic search across **100+ stories**, working with RAG architecture, Python, Pinecone, and modern LLM tooling.\n\nThat experience helped clarify his search. Matt is a builder, and he is looking for a senior leadership role where building the product engineering organization, establishing the culture, and delivering results are part of the same job. He wants real delivery with engineers and product managers, not strategy decks.\n\nHis search centers on platform engineering, product leadership, AI-era transformation, and enterprise modernization. He is looking for his next build: work where he is part of the team, taking on change and hard problems, rather than remaining above the work.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Transition Story – Why I’m Exploring Opportunities (Accenture)",
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "Why Hire Matt? (Accenture)",
+   "Career Intent – What I’m Looking For Next (Independent Project)",
+   "Building Effective AI-Assisted Development Workflows (Independent Project)"
+  ],
+  "intent_family": "narrative",
+  "seconds": 11.18,
+  "opening": "Got it! 🐾",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3061,
+     "cached": 0,
+     "output": 40,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Here’s why Matt is looking.\n\nAfter his tenure at **Accenture**, including **four years** leading a **150-person** Cloud Innovation Center, his chapter there came to a close. It was the first pause in his career after years of continuous delivery and leadership. He stepped back to recharge and think about the type of work he wanted to do next.\n\nHe used that time to build MattGPT and deepen his hands-on work in AI and GenAI. Rather than follow a tutorial exercise, he chose a project he would actually use: an AI-powered assistant over his own career stories. He defined the product roadmap, scoped the MVP, and shipped semantic search across **100+ stories**, working with RAG architecture, Python, Pinecone, and modern LLM tooling.\n\nThat experience helped clarify his search. Matt is a builder, and he is looking for a senior leadership role where building the product engineering organization, establishing the culture, and delivering results are part of the same job. He wants real delivery with engineers and product managers, not strategy decks.\n\nHis search centers on platform engineering, product leadership, AI-era transformation, and enterprise modernization. He is looking for his next build: work where he is part of the team, taking on change and hard problems, rather than remaining above the work.",
+    "function_calls": 0,
+    "usage": {
+     "input": 6149,
+     "cached": 3058,
+     "output": 335,
+     "reasoning": 67
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt current sabbatical building MattGPT active search why looking next role building product engineering organization establishing culture delivering results",
+    "top_score": 0.606955528,
+    "n": 25
+   }
+  ],
+  "arm": "new",
+  "case": "c05",
+  "run": 2,
+  "turn": 1,
+  "question": "Why is he looking?",
+  "nonsense_skipped": false
+ },
+ {
+  "answer_md": "🐾 Here’s what Matt has actually owned.\n\nThe stories don’t establish that Matt is better than someone who stayed in-house. They do cover execution and delivery, organization building, and responsibility after launch, not just recommendations or a handoff.\n\nAt **Accenture**, clients wanted to move from waterfall and feature factories to customer-centric product development, but had legacy systems, compliance requirements, and siloed teams to contend with. Inside the Cloud Innovation Centers, Matt also faced the work of building an organization: hiring people without hands-on cloud-native experience, developing careers, evaluating performance, and managing costs while delivery continued.\n\nMatt built and ran the Atlanta and Tampa centers over **four years**, growing them from **zero to 150+ practitioners** with full P&L accountability. He owned hiring, budget and cost management, compensation allocation, promotion calibration, and performance remediation. He made the final hiring decision on every offer. The organization operated through **11 to 13 direct-report leads**, with near-zero attrition in its first **two years**. Practitioners progressed from guided to independent delivery through an “I do, we do, you do” learning model.\n\nAt **JP Morgan Chase**, his responsibility included live operations. He managed a **40+ person** blended team building the ACCESS payment engine and global payments gateway. He repeatedly owned on-call accountability and critical incident response across successive releases, waves, and migrations, coordinating root-cause analysis and leadership communications while production issues were live. The gateway supported payments across **12 countries**. The legacy-system migration completed without disruption to live payment operations.\n\nAcross the centers, teams delivered **30+ product engagements** for **15+ Fortune 500 clients**, with **4X faster velocity** and **zero-defect deployments** through test-driven development and automated pipelines. Delivery excellence and customer relationships generated **\\$100M+ in repeat business**. Clients adopted the practices internally after engagements ended, including pair programming, discovery and framing, and balanced teams.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 (Accenture)",
+   "Scaling Talent and Practices for Agile Product Innovation (Accenture)",
+   "Enhancing Team Proficiency through Servant Leadership and Mentorship (Accenture)",
+   "Why Hire Matt? (Accenture)",
+   "Leading People: From Delivery Teams to a 150-Person Organization (Fortune 500 Clients)",
+   "Building the Payment Engine Behind JP Morgan ACCESS (JP Morgan Chase)",
+   "Building JP Morgan's Global Payments Gateway Across 12 Countries (JP Morgan Chase)",
+   "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform (JP Morgan Chase)",
+   "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout (JP Morgan Chase)",
+   "Driving Salesforce Adoption Across 12 Countries for JP Morgan (JP Morgan Chase)"
+  ],
+  "intent_family": "synthesis",
+  "seconds": 16.01,
+  "opening": "🐾 Looking across Matt's portfolio, I see clear patterns.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3107,
+     "cached": 2688,
+     "output": 43,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 9531,
+     "cached": 3104,
+     "output": 54,
+     "reasoning": 18
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Here’s what Matt has actually owned.\n\nThe stories don’t establish that Matt is better than someone who stayed in-house. They do cover execution and delivery, organization building, and responsibility after launch, not just recommendations or a handoff.\n\nAt **Accenture**, clients wanted to move from waterfall and feature factories to customer-centric product development, but had legacy systems, compliance requirements, and siloed teams to contend with. Inside the Cloud Innovation Centers, Matt also faced the work of building an organization: hiring people without hands-on cloud-native experience, developing careers, evaluating performance, and managing costs while delivery continued.\n\nMatt built and ran the Atlanta and Tampa centers over **four years**, growing them from **zero to 150+ practitioners** with full P&L accountability. He owned hiring, budget and cost management, compensation allocation, promotion calibration, and performance remediation. He made the final hiring decision on every offer. The organization operated through **11–13 direct-report leads**, with near-zero attrition in its first **two years**. Practitioners progressed from guided to independent delivery through an “I do, we do, you do” learning model.\n\nAt **JP Morgan Chase**, his responsibility included live operations. He managed a **40+ person** blended team building the ACCESS payment engine and global payments gateway. He repeatedly owned on-call accountability and critical incident response across successive releases, waves, and migrations, coordinating root-cause analysis and leadership communications while production issues were live. The gateway supported payments across **12 countries**. The legacy-system migration completed without disruption to live payment operations.\n\nAcross the centers, teams delivered **30+ product engagements** for **15+ Fortune 500 clients**, with **4X faster velocity** and **zero-defect deployments** through test-driven development and automated pipelines. Delivery excellence and customer relationships generated **$100M+ in repeat business**. Clients adopted the practices internally after engagements ended, including pair programming, discovery and framing, and balanced teams.",
+    "function_calls": 0,
+    "usage": {
+     "input": 14263,
+     "cached": 9528,
+     "output": 404,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt long-term ownership built Cloud Innovation Center 150 practitioners hiring engineering culture delivery repeat business consulting versus in-house sustained product engineering outcomes",
+    "top_score": 0.65281415,
+    "n": 25
+   },
+   {
+    "query": "JP Morgan payments platform 12 countries production ownership knowledge transfer internal teams sustained delivery modernization",
+    "top_score": 0.594701707,
+    "n": 25
+   }
+  ],
+  "arm": "new",
+  "case": "c05",
+  "run": 2,
+  "turn": 2,
+  "question": "Why should we hire him over someone who stayed in-house?",
+  "nonsense_skipped": false
+ },
+ {
+  "answer_md": "🐾 Here’s what Matt is looking for.\n\nMatt is currently on sabbatical, building MattGPT, and actively searching for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job.\n\nHis tenure at **Accenture** ended in September **2023**. After years of continuous delivery and leadership, he stepped back to recharge and focus on what came next. During that transition, he stayed hands-on by building MattGPT with RAG, semantic search, and modern LLM tooling.\n\nHe is looking for his next build: a senior leadership role in platform engineering, AI-era transformation, or enterprise modernization. He wants real delivery with engineers and product managers, not strategy decks, and a role where he is in the work, not above it.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "Transition Story – Why I’m Exploring Opportunities (Accenture)",
+   "Why Hire Matt? (Accenture)",
+   "Career Intent – What I’m Looking For Next (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)"
+  ],
+  "intent_family": "narrative",
+  "seconds": 9.43,
+  "opening": "🐾 Here's a great example.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3063,
+     "cached": 0,
+     "output": 41,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Here’s what Matt is looking for.\n\nMatt is currently on sabbatical, building MattGPT, and actively searching for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job.\n\nHis tenure at **Accenture** ended in September **2023**. After years of continuous delivery and leadership, he stepped back to recharge and focus on what came next. During that transition, he stayed hands-on by building MattGPT with RAG, semantic search, and modern LLM tooling.\n\nHe is looking for his next build: a senior leadership role in platform engineering, AI-era transformation, or enterprise modernization. He wants real delivery with engineers and product managers, not strategy decks, and a role where he is in the work, not above it.",
+    "function_calls": 0,
+    "usage": {
+     "input": 6174,
+     "cached": 3060,
+     "output": 235,
+     "reasoning": 68
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire current sabbatical building MattGPT reason looking next role building product engineering organization culture delivering results",
+    "top_score": 0.580776513,
+    "n": 25
+   }
+  ],
+  "arm": "new",
+  "case": "c05",
+  "run": 3,
+  "turn": 1,
+  "question": "Why is he looking?",
+  "nonsense_skipped": false
+ },
+ {
+  "answer_md": "🐾 Here’s the experience Matt brings to that comparison.\n\nExecution & Delivery and Org & Working-Model Transformation are the relevant themes. At **Accenture**, clients wanted to change how they built software, but legacy systems, compliance requirements, and siloed teams complicated that work. At **Norfolk Southern**, scarce domain knowledge sat with thin-stretched experts, and client leaders questioned paying for paired engineers. The question extended beyond shipping an application: who would own the backlog, maintain the system, and keep the practices working after the consultants left?\n\nMatt’s work included running an organization inside **Accenture**, not only advising client organizations. Over **4 years**, he built the Atlanta and Tampa Cloud Innovation Centers from zero to **150+ practitioners**, with full P&L accountability, budget and cost management, recruiting, training, and career development. He established career progression frameworks and paired junior hires with experienced mentors. The talent program achieved near-zero attrition in its first **2 years**, and practitioners progressed toward independent delivery through “I do, we do, you do.”\n\nAt **Norfolk Southern**, he applied that same progression in both directions. Domain experts paired with engineers so legacy knowledge became shared team knowledge. Client contributors paired into the new-state build, learning Angular, Node, Spring Boot, and cloud-native concepts so they could support and manage the application after **Accenture** rolled off. Matt also taught value-driven prioritization and quality, testable stories, putting the client in ownership of its backlog.\n\nThe record includes a quality crisis, too. After the initial practices failed to hold, Matt rebuilt the daily workflow around test cases before implementation, rotating pairs, and explicit story readiness. The practices held after outside experts left, and the crisis failure mode did not recur.\n\nAcross the centers, teams delivered **30+ product engagements** for **15+ Fortune 500 clients**. At **Norfolk Southern**, the revenue-system MVP covered **95% of its targeted use cases**. The stories do not establish that Matt is better than an unspecified in-house candidate; they document organization ownership, shipped systems, and client teams continuing independently.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 (Accenture)",
+   "Scaling Talent and Practices for Agile Product Innovation (Accenture)",
+   "Enhancing Team Proficiency through Servant Leadership and Mentorship (Accenture)",
+   "Building an Innovation Ecosystem to Connect Clients with Emerging Technology (Accenture)",
+   "Driving Modern Software Engineering with Project Octane (Accenture)",
+   "Unifying Norfolk Southern's Teams Around Cloud-Native Practices (Norfolk Southern)",
+   "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine (Norfolk Southern)",
+   "Behavior & Test-Driven Development: Shipping Zero-Defect Code at 4X Velocity (Fortune 500 Clients)",
+   "Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern (Norfolk Southern)",
+   "User-Centered Design - Embedding Customer Journey in Enterprise Product Development (Fortune 500 Clients)"
+  ],
+  "intent_family": "synthesis",
+  "seconds": 17.0,
+  "opening": "🐾 Looking across Matt's portfolio, I see clear patterns.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3006,
+     "cached": 2688,
+     "output": 39,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 7871,
+     "cached": 3003,
+     "output": 47,
+     "reasoning": 12
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Here’s the experience Matt brings to that comparison.\n\nExecution & Delivery and Org & Working-Model Transformation are the relevant themes. At **Accenture**, clients wanted to change how they built software, but legacy systems, compliance requirements, and siloed teams complicated that work. At **Norfolk Southern**, scarce domain knowledge sat with thin-stretched experts, and client leaders questioned paying for paired engineers. The question extended beyond shipping an application: who would own the backlog, maintain the system, and keep the practices working after the consultants left?\n\nMatt’s work included running an organization inside **Accenture**, not only advising client organizations. Over **4 years**, he built the Atlanta and Tampa Cloud Innovation Centers from zero to **150+ practitioners**, with full P&L accountability, budget and cost management, recruiting, training, and career development. He established career progression frameworks and paired junior hires with experienced mentors. The talent program achieved near-zero attrition in its first **2 years**, and practitioners progressed toward independent delivery through “I do, we do, you do.”\n\nAt **Norfolk Southern**, he applied that same progression in both directions. Domain experts paired with engineers so legacy knowledge became shared team knowledge. Client contributors paired into the new-state build, learning Angular, Node, Spring Boot, and cloud-native concepts so they could support and manage the application after **Accenture** rolled off. Matt also taught value-driven prioritization and quality, testable stories, putting the client in ownership of its backlog.\n\nThe record includes a quality crisis, too. After the initial practices failed to hold, Matt rebuilt the daily workflow around test cases before implementation, rotating pairs, and explicit story readiness. The practices held after outside experts left, and the crisis failure mode did not recur.\n\nAcross the centers, teams delivered **30+ product engagements** for **15+ Fortune 500 clients**. At **Norfolk Southern**, the revenue-system MVP covered **95% of its targeted use cases**. The stories do not establish that Matt is better than an unspecified in-house candidate; they document organization ownership, shipped systems, and client teams continuing independently.",
+    "function_calls": 0,
+    "usage": {
+     "input": 13402,
+     "cached": 7868,
+     "output": 432,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt sustained ownership built Cloud Innovation Center 150 practitioners hiring engineering culture delivery long term client transformation in-house consulting",
+    "top_score": 0.615721822,
+    "n": 25
+   },
+   {
+    "query": "Norfolk Southern JP Morgan Chase balanced teams resistance waterfall knowledge transfer sustained delivery CIC",
+    "top_score": 0.551653385,
+    "n": 25
+   }
+  ],
+  "arm": "new",
+  "case": "c05",
+  "run": 3,
+  "turn": 2,
+  "question": "Why should we hire him over someone who stayed in-house?",
+  "nonsense_skipped": false
+ },
+ {
+  "answer_md": "🐾 I can share a résumé-style overview here, but I don’t have a résumé file or download link to provide.\n\nMatt Pugmire’s career progressed from Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader. He worked at **Accenture** from March **2005** to September **2023**, following roles at Wellfound Technology (**2000 to 2001**, **2002 to 2003**) and **Cendian Chemical Logistics** (**2003 to 2005**).\n\nAt **Accenture**, Matt built the Atlanta and Tampa Cloud Innovation Centers from **0** to **150+ practitioners** across engineering, architecture, product, and design. He owned full P&L accountability for both centers, including hiring, training, budget, and cost management. Practitioners worked in balanced teams using pair programming, test-driven development, and automated pipelines, with career progression frameworks and skill development pathways.\n\nThe centers delivered **30+ product engagements** across **15+ Fortune 500 clients**, achieving **4X faster velocity** and zero-defect deployments. Teams of **10** delivered equivalent output to traditional teams of **20**. Delivery excellence and customer relationship building drove **\\$100M+ in repeat business**.\n\nMatt holds a Master’s degree, Information Technology, **American InterContinental University**, and a BA, French Language and Literature, Queens University of Charlotte. He also taught as an adjunct at **American InterContinental University** alongside full-time work.\n\nHe is currently on sabbatical, building MattGPT, and in active search for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "About Matt – My Leadership Journey (Accenture)",
+   "Why Hire Matt? (Accenture)",
+   "Career Intent – What I’m Looking For Next (Independent Project)",
+   "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 (Accenture)",
+   "Transition Story – Why I’m Exploring Opportunities (Accenture)"
+  ],
+  "intent_family": "background",
+  "seconds": 13.94,
+  "opening": "🐾 Perfect, here's what I found.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3062,
+     "cached": 2926,
+     "output": 37,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I can share a résumé-style overview here, but I don’t have a résumé file or download link to provide.\n\nMatt Pugmire’s career progressed from Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader. He worked at Accenture from March **2005** to September **2023**, following roles at Wellfound Technology (**2000–2001**, **2002–2003**) and Cendian Chemical Logistics (**2003–2005**).\n\nAt Accenture, Matt built the Atlanta and Tampa Cloud Innovation Centers from **0** to **150+ practitioners** across engineering, architecture, product, and design. He owned full P&L accountability for both centers, including hiring, training, budget, and cost management. Practitioners worked in balanced teams using pair programming, test-driven development, and automated pipelines, with career progression frameworks and skill development pathways.\n\nThe centers delivered **30+ product engagements** across **15+ Fortune 500 clients**, achieving **4X faster velocity** and zero-defect deployments. Teams of **10** delivered equivalent output to traditional teams of **20**. Delivery excellence and customer relationship building drove **$100M+ in repeat business**.\n\nMatt holds a Master’s degree, Information Technology, American InterContinental University, and a BA, French Language and Literature, Queens University of Charlotte. He also taught as an adjunct at American InterContinental University alongside full-time work.\n\nHe is currently on sabbatical, building MattGPT, and in active search for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job.\n\n[[profile:education]]",
+    "function_calls": 0,
+    "usage": {
+     "input": 7456,
+     "cached": 3059,
+     "output": 456,
+     "reasoning": 113
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire résumé career experience Accenture Cloud Innovation Center leader director solution architect software engineer",
+    "top_score": 0.505659759,
+    "n": 25
+   }
+  ],
+  "arm": "new",
+  "case": "c16",
+  "run": 1,
+  "turn": 1,
+  "question": "Can I see his résumé?",
+  "nonsense_skipped": false
+ },
+ {
+  "answer_md": "🐾 I don’t have a résumé file or download link to share here, but here’s a résumé-style overview.\n\nMatt Pugmire’s career has progressed from Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader. He worked at **Accenture** from **March 2005** to **September 2023**, leading modernization programs and building products, platforms, and teams.\n\nAs Director, Matt built the Atlanta and Tampa Cloud Innovation Centers from **0** to **150+ practitioners** across engineering, architecture, product, and design. He owned full P&L accountability for both centers. Teams used pair programming, test-driven development, automated pipelines, and balanced teams combining Product, Engineering, and Design. The centers delivered **4X faster velocity** and zero-defect deployments, contributing to **\\$100M+ in repeat business** through delivery excellence and customer relationships.\n\nEarlier, Matt worked at Wellfound Technology (**2000-2001**, **2002-2003**) and **Cendian Chemical Logistics** (**2003-2005**). He also taught as an adjunct at **American InterContinental University** (**2003-2004**) alongside full-time work.\n\nMatt holds a Master’s degree, Information Technology, **American InterContinental University**, and a BA, French Language and Literature, Queens University of Charlotte. He also completed graduate coursework, Romance Languages (Linguistics), University of Georgia.\n\nCurrently, Matt is on sabbatical, building MattGPT. He is in active search for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "About Matt – My Leadership Journey (Accenture)",
+   "Why Hire Matt? (Accenture)",
+   "Career Intent – What I’m Looking For Next (Independent Project)",
+   "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 (Accenture)",
+   "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications (Accenture)"
+  ],
+  "intent_family": "background",
+  "seconds": 13.82,
+  "opening": "🐾 Found it!",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3063,
+     "cached": 0,
+     "output": 36,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I don’t have a résumé file or download link to share here, but here’s a résumé-style overview.\n\nMatt Pugmire’s career has progressed from Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader. He worked at **Accenture** from **March 2005** to **September 2023**, leading modernization programs and building products, platforms, and teams.\n\nAs Director, Matt built the Atlanta and Tampa Cloud Innovation Centers from **0** to **150+ practitioners** across engineering, architecture, product, and design. He owned full P&L accountability for both centers. Teams used pair programming, test-driven development, automated pipelines, and balanced teams combining Product, Engineering, and Design. The centers delivered **4X faster velocity** and zero-defect deployments, contributing to **$100M+ in repeat business** through delivery excellence and customer relationships.\n\nEarlier, Matt worked at Wellfound Technology (**2000-2001**, **2002-2003**) and Cendian Chemical Logistics (**2003-2005**). He also taught as an adjunct at American InterContinental University (**2003-2004**) alongside full-time work.\n\nMatt holds a Master’s degree, Information Technology, American InterContinental University, and a BA, French Language and Literature, Queens University of Charlotte. He also completed graduate coursework, Romance Languages (Linguistics), University of Georgia.\n\nCurrently, Matt is on sabbatical, building MattGPT. He is in active search for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job.\n\n[[profile:education]]",
+    "function_calls": 0,
+    "usage": {
+     "input": 7418,
+     "cached": 3060,
+     "output": 449,
+     "reasoning": 110
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire résumé career experience Cloud Innovation Center Accenture director solution architect software engineer",
+    "top_score": 0.507487357,
+    "n": 25
+   }
+  ],
+  "arm": "new",
+  "case": "c16",
+  "run": 2,
+  "turn": 1,
+  "question": "Can I see his résumé?",
+  "nonsense_skipped": false
+ },
+ {
+  "answer_md": "🐾 I can share Matt’s career summary here, but I don’t have a résumé file or download link to provide.\n\nMatt Pugmire’s career has progressed from Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader. He worked at Wellfound Technology in **2000 to 2001** and **2002 to 2003**, **Cendian Chemical Logistics** in **2003 to 2005**, and **Accenture** from March **2005** to September **2023**. He also taught as an adjunct at **American InterContinental University** in **2003 to 2004**, alongside full-time work.\n\nAt **Accenture**, Matt built the Atlanta and Tampa Cloud Innovation Centers from **0** to **150+ practitioners**, with full P&L accountability for both centers. He recruited, trained, and developed teams across engineering, architecture, product, and design. The centers delivered **30+ product engagements** across **15+ Fortune 500 clients**, achieving **4X faster velocity** and zero-defect deployments through test-driven development and automated pipelines. Delivery excellence and customer relationship building drove **\\$100M+ in repeat business**.\n\nHis work included enterprise platform integration, payments and banking modernization, troubled-program recovery, and cloud-native architecture. His **Accenture** clients included **JP Morgan Chase**, **RBC**, **Capital One**, and **HSBC**. He established balanced teams combining Product, Engineering, and Design, with pair programming, discovery and framing, and continuous delivery.\n\nMatt is currently on sabbatical, building MattGPT. He describes himself as a “builder” and is searching for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "About Matt – My Leadership Journey (Accenture)",
+   "Why Hire Matt? (Accenture)",
+   "Career Intent – What I’m Looking For Next (Independent Project)",
+   "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 (Accenture)",
+   "Transition Story – Why I’m Exploring Opportunities (Accenture)"
+  ],
+  "intent_family": "background",
+  "seconds": 12.67,
+  "opening": "Got it! 🐾",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3061,
+     "cached": 2925,
+     "output": 37,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I can share Matt’s career summary here, but I don’t have a résumé file or download link to provide.\n\nMatt Pugmire’s career has progressed from Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader. He worked at Wellfound Technology in **2000–2001** and **2002–2003**, Cendian Chemical Logistics in **2003–2005**, and Accenture from March **2005** to September **2023**. He also taught as an adjunct at American InterContinental University in **2003–2004**, alongside full-time work.\n\nAt Accenture, Matt built the Atlanta and Tampa Cloud Innovation Centers from **0** to **150+ practitioners**, with full P&L accountability for both centers. He recruited, trained, and developed teams across engineering, architecture, product, and design. The centers delivered **30+ product engagements** across **15+ Fortune 500 clients**, achieving **4X faster velocity** and zero-defect deployments through test-driven development and automated pipelines. Delivery excellence and customer relationship building drove **$100M+ in repeat business**.\n\nHis work included enterprise platform integration, payments and banking modernization, troubled-program recovery, and cloud-native architecture. His Accenture clients included **JP Morgan Chase**, **RBC**, **Capital One**, and **HSBC**. He established balanced teams combining Product, Engineering, and Design, with pair programming, discovery and framing, and continuous delivery.\n\nMatt is currently on sabbatical, building MattGPT. He describes himself as a “builder” and is searching for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7455,
+     "cached": 3058,
+     "output": 448,
+     "reasoning": 96
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire résumé career history Cloud Innovation Center leader Accenture director solution architect software engineer",
+    "top_score": 0.515145779,
+    "n": 25
+   }
+  ],
+  "arm": "new",
+  "case": "c16",
+  "run": 3,
+  "turn": 1,
+  "question": "Can I see his résumé?",
+  "nonsense_skipped": false
+ }
+]

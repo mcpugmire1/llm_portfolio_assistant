@@ -1,0 +1,5 @@
+(a) MATT_DNA, capture vs new code, same call: 3219 vs 3219 chars; diff lines: 0
+(b) profile career_arc == values sliced from the capture: True
+(c) matt_dna: HEAD (6ea9a89 worktree) == Green: True (3397 chars)
+(c) standard: HEAD (6ea9a89 worktree) == Green: True (13176 chars)
+(c) synthesis: HEAD (6ea9a89 worktree) == Green: True (12175 chars)
