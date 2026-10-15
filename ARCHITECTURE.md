@@ -1813,7 +1813,7 @@ def get_pinecone_index():
 - `namespace`: "default"
 - `include_metadata`: False. Queries return ids and scores only; story text and the hit snippet (`5PSummary`) come from the local corpus. Metadata is still stored and used for Pinecone-side filters. See ADR 041 in `docs/ADR.md`.
 
-**Metadata keys and casing** (set at upload by `build_custom_embeddings.py`): each corpus field is stored under its corpus name with its value as written (`Title`, `Client`, `Employer`, `Theme`, ...), plus lowercase keys for filtering (`title`, `client`, `employer`, `division`, `project`, `role`, `industry`, `complexity`, `domain`, `tags`, `summary`). Filters use the lowercase keys. Values are lowercased under `employer`, `division`, `project`, `industry` and `complexity`; `client`, `title`, `role` and `domain` keep the corpus casing. The filters in use are My Work's Domain and Client facets: `domain` and `client`, each `$in`.
+**Metadata keys and casing** (set at upload by `build_custom_embeddings.py`): each corpus field is stored under its corpus name with its value as written (`Title`, `Client`, `Employer`, `Theme`, ...), plus lowercase keys for filtering (`title`, `client`, `employer`, `division`, `project`, `role`, `industry`, `complexity`, `domain`, `tags`, `summary`). Filters use the lowercase keys. Values are lowercased under `employer`, `division`, `project`, `industry` and `complexity`; `client`, `title`, `role` and `domain` keep the corpus casing. The filters in use are My Work's Domain and Client facets: `domain` and `client`, each `$in`. `PINECONE_LOWERCASE_FIELDS`, the query-side set the entity filter lowercases, differs from the upload casing: it includes `place`, which is not uploaded, and omits `industry`, which is lowercased at upload. The entity filter has no production caller; the mismatch is tracked in BACKLOG.md.
 
 **Metadata Filters:**
 ```python
@@ -2036,7 +2036,7 @@ The `MATT_DNA` grounding prompt, injected into every LLM call, is rendered at ru
 
 #### 2. Multi-Field Entity Search
 
-See [Component Contracts → Multi-Field Entity Search](#multi-field-entity-search) for the full field table, casing rules, and implementation detail.
+See **Metadata keys and casing** under Key Services → Pinecone Service for the metadata keys and which values are lowercased.
 
 #### 3. UI Hydration
 
