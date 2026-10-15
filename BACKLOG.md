@@ -1522,9 +1522,15 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 - **Over-credit:** a "120 engineers across SRE and data" requirement was credited from the 150-person organization story, a mixed practice. Verified Oct 15: no story pairs 120 with engineers; the 150 figure is in `leading-people-from-delivery-teams-to-a-150-person-organization` and ten other stories.
 - **False gaps** (under-calls, the other direction from this ticket's 22% over-call):
   - LLM tooling: the corpus has 9 MattGPT Product Development stories.
-  - Go: one Capital One Performance line reads "Organized Go upskilling for two of my teams".
+  - Go: one Capital One Performance line reads "Organized Go upskilling for two of my teams". **Revised Oct 15, 2026 (Matt):** that line records organizing upskilling for two teams, not hands-on Go, so a Go gap is a correct call, not a false gap.
   - Product company: a search for "product company", "product-led" and "SaaS company" found nothing, so the contradiction is as reported.
 - Requirement counts that change between runs on the same JD are tracked in MATTGPT-160.
+
+**Observed (production, Oct 15, 2026, demo JD; as reported, not on disk):** a tech-stack row was marked "No evidence of Python or Go experience".
+- **Python is an under-call.** Verified Oct 15: 8 stories name Python, among them three MattGPT Product Development stories that list it in Competencies (`mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project`, `mattgpt-rag-architecture-semantic-search-implementation|independent-project`, `simplifying-mattgpts-rag-pipeline-through-entity-gate-removal|independent-project`).
+- **Go is correct**, for the reason above.
+- The row bundles two languages into one verdict, so one correct gap hid an under-call.
+
 ---
 
 ### MATTGPT-249
@@ -1709,6 +1715,7 @@ Same class as the no-inference clause in MATTGPT-250: retrieved text that sits n
 **Observed (five-persona exploratory test, Oct 15, 2026; screenshots with Matt, not on disk; as reported):**
 - A false-premise question naming Goldman Sachs and trading got the "Wrong trail" banner (`BANNER_COPY["rule"]`, shown for any `rule:` rejection). The banner doesn't correct the premise: it never says Matt has no Goldman Sachs or trading work on record.
 - The Lockheed Martin STRATCOM work was missed until the visitor named it. Related: MATTGPT-210 (STRATCOM invisible on career queries).
+
 ---
 
 ### MATTGPT-252
@@ -3068,6 +3075,7 @@ Any sentinel has to be translated in one place before anything uses it. With tha
 
 
 **Observed (five-persona exploratory test, Oct 15, 2026; screenshots with Matt, not on disk; as reported):** requirement counts changed between runs on the same JD. The report doesn't name the JD or the counts.
+
 ---
 
 
