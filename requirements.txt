@@ -1,6 +1,6 @@
 streamlit==1.50.0
 langchain>=0.1.17
-openai
+openai==2.5.0
 faiss-cpu
 python-dotenv
 openpyxl
