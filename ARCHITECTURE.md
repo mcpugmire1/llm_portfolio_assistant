@@ -57,8 +57,7 @@ llm_portfolio_assistant/
 │   ├── validation.py               # is_nonsense, token_overlap_ratio
 │   ├── scoring.py                  # _keyword_score, _hybrid_score
 │   ├── filters.py                  # matches_filters
-│   ├── ui_helpers.py               # safe_container, render_no_match_banner, dbg
-│   └── search.py                   # Search utilities (placeholder)
+│   └── ui_helpers.py               # safe_container, render_no_match_banner, dbg
 │
 ├── services/                       # Business logic & external APIs
 │   ├── __init__.py
@@ -144,7 +143,7 @@ The application initialization order is critical—later steps depend on earlier
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│  1. load_star_stories(DATA_FILE)  [app.py:206]               │
+│  1. load_star_stories(DATA_FILE)                             │
 │     - Reads echo_star_stories_nlp.jsonl                      │
 │     - Skips records where id is None, empty, or 0            │
 │     - Coerces 8 PascalCase list fields via _ensure_list      │
@@ -154,7 +153,8 @@ The application initialization order is critical—later steps depend on earlier
                               ↓
 ┌──────────────────────────────────────────────────────────────┐
 │  2. initialize_vocab(STORIES)                                │
-│     - Builds corpus vocabulary for search scoring            │
+│     - Builds _KNOWN_VOCAB; read only when enforce_overlap    │
+│       is set, which no caller does                           │
 │     - Lives in: services/rag_service.py                      │
 └──────────────────────────────────────────────────────────────┘
                               ↓
@@ -219,14 +219,7 @@ def on_ask_this_story(detail: dict):
 **timeline_view.py Key Pattern:**
 ```python
 # Era configuration
-ERA_ORDER = [
-    "Independent Product Development",                    # 2024-2025
-    "Enterprise Innovation & Transformation",             # 2019-2023
-    "Cloud-Native Prototyping & Product Shaping",         # 2018-2019
-    "Financial Services Platform Modernization",          # 2008-2018
-    "Integration & Platform Foundations",                 # 2005-2008
-    "Technical Foundations & Enterprise Integration",     # 2000-2005
-]
+ERA_ORDER = [...]  # the eras shown, in order; see timeline_view.py
 EXCLUDED_ERA = "Leadership & Professional Narrative"  # Not shown in timeline
 MAX_STORIES_PER_ERA = 6
 
@@ -879,9 +872,9 @@ User Interaction
 
 **Cache Keys:**
 ```python
-LAST_RESULTS = "__explore_last_results__"     # Cached Pinecone results
-LAST_CONFIDENCE = "__explore_last_confidence__" # "high" | "low" | "none"
-LAST_QUERY = "__explore_last_query__"         # Query that produced cache
+LAST_RESULTS = "__last_search_results__"       # Cached Pinecone results
+LAST_CONFIDENCE = "__last_search_confidence__" # "high" | "low" | "none"
+LAST_QUERY = "__last_search_query__"           # Query that produced cache
 ```
 
 **Filter Application:**
@@ -1085,9 +1078,9 @@ Central reference for all session state keys used across the application.
 | Key | Type | Purpose |
 |-----|------|---------|
 | `filters` | `dict` | Active filter state |
-| `__explore_last_results__` | `list` | Cached Pinecone results |
-| `__explore_last_confidence__` | `str` | Cached confidence level |
-| `__explore_last_query__` | `str` | Query that produced cache |
+| `__last_search_results__` | `list` | Cached Pinecone results |
+| `__last_search_confidence__` | `str` | Cached confidence level |
+| `__last_search_query__` | `str` | Query that produced cache |
 | `page_offset` | `int` | Pagination offset |
 | `_widget_version_clients` | `int` | Row 2 Client selectbox rebuild counter (Reset increments) |
 | `_widget_version_roles` | `int` | Row 2 Role selectbox rebuild counter |
@@ -1224,11 +1217,7 @@ Retrieval is driven primarily by Use Case(s) and 5P Summary; STAR fields provide
 **`_keyword_score_for_story()` haystack (9 fields):**
 Title, Client, Role, Sub-category, Competencies (joined), public_tags (joined), build_5p_summary(400 chars), Process (joined), Performance (joined). Title and Sub-category are double-weighted: hits in those two fields count twice in the numerator. Normalizes by `len(query_tokens) * 2`. Tokenization via `_tokenize()` (applies `_STOPWORDS`).
 
-**Query Substitution (`_substitute_matt_subject`):**
-
-Lives in `utils/scoring.py`, controlled by `SUBSTITUTION_FAMILIES` in `config/constants.py`. Replaces "Matt" with "he" and "Matt's" with "his" in the retrieval query so self-referential name tokens don't bias embeddings toward Independent Project stories. The LLM receives the original query verbatim; only the retrieval string is modified. Enabled families: `technical`, `team_scaling`, `agile_transformation`.
-
-**Constraint:** Adding or removing a family from `SUBSTITUTION_FAMILIES` changes which queries reach the substituted-string path through both the embedding and keyword scorer. Impact must be re-measured before the change is committed: for a query set, compare the top-10 Pinecone hits on the original and substituted strings and report the rank delta and score delta per story. Attach the output to the commit.
+**Query Substitution:** `_build_retrieval_query()` and `_substitute_matt_subject()` in `utils/scoring.py`, with `SUBSTITUTION_FAMILIES` in `config/constants.py`, have no production caller; only `test_query_substitution_077.py` calls them.
 
 ---
 
@@ -2114,5 +2103,5 @@ The Glide Data Grid generates continuous background XHR. `page.wait_for_load_sta
 
 ## Mobile Responsiveness
 
-Mobile responsive design is shipped via `ui/styles/mobile_overrides.py` (1,520 lines). Breakpoints: <768px (mobile), 768-1023px (tablet), 1024px+ (desktop). All page components, navigation, chat interface, modals, and grids have mobile-specific overrides.
+Mobile responsive design is shipped via `ui/styles/mobile_overrides.py`. Breakpoints: <768px (mobile), 768-1023px (tablet), 1024px+ (desktop). All page components, navigation, chat interface, modals, and grids have mobile-specific overrides.
 
