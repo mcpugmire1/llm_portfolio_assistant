@@ -142,7 +142,8 @@ strip deletes paragraphs), -290 (internal-content
 extraction), -293 (router out_of_scope copy), -294 (split MATT_DNA by
 responsibility), -296 (closing offer in a prompt example), -297 (no dog humor in
 answers), -300 (thinking indicator shows real progress), -301 (em dashes left in the repo), -306 (set store=False
-after 275, Blocked).
+after 275, Blocked), -307 (Key Metrics label cut), -310 (direct-reports
+answer varies).
 
 ## 4. Role Match
 
@@ -200,7 +201,8 @@ after 275, Blocked).
   differently worded inputs.
 - General parity: not measured.
 
-**Open tickets:** -268.
+**Open tickets:** -268, -309 (no match context in Ask Agy from Role
+Match).
 
 ## 6. Evidence discovery
 
@@ -232,7 +234,8 @@ after 275, Blocked).
 - The career-narrative field differs by surface (Theme, Era, Category).
 
 **Open tickets:** -146, -228, -204, -196, -150, -122, -131, -197, -145,
--183, -187, -210, -166, -083, -271, -295 (Timeline era order).
+-183, -187, -210, -166, -083, -271, -295 (Timeline era order), -308
+(My Work first page is MattGPT stories).
 
 ## 7. Operational reliability
 

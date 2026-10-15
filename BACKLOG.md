@@ -157,6 +157,10 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-304](#mattgpt-304) | Spike: Pinecone-hosted reranker (cohere-rerank-3.5 or bge-reranker-v2-m3) over a wider top-k, after MATTGPT-275 | Blocked | Low | Spike | October 15, 2026 |
 | [MATTGPT-305](#mattgpt-305) | pinecone_semantic_search() logs a Pinecone query exception only under DEBUG: with DEBUG off it returns None with no trace | Open | Low | Bug | October 15, 2026 |
 | [MATTGPT-306](#mattgpt-306) | Ask Agy sends no store parameter, so OpenAI keeps each response, visitor questions included, for 30 days: set store=False once MATTGPT-275 is stable | Blocked | Low | Hygiene | October 15, 2026 |
+| [MATTGPT-307](#mattgpt-307) | Key Metrics label cut mid-phrase with no ellipsis ("...4x the"), and "3-4x" shown as "4x" | Open | Low | Bug | October 15, 2026 |
+| [MATTGPT-308](#mattgpt-308) | My Work's default first page shows all 9 MattGPT Product Development stories in its 10 rows | Open | Medium | Issue | October 15, 2026 |
+| [MATTGPT-309](#mattgpt-309) | Ask Agy opened from Role Match results carries no match context | Open | Medium | Enhancement | October 15, 2026 |
+| [MATTGPT-310](#mattgpt-310) | Direct-reports answer varies run to run between "no count" and "11 to 13 leads" | Open | Medium | Issue | October 15, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -1511,6 +1515,14 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 - MATTGPT-243 (parallelization; does not touch assessment prompt)
 - MATTGPT-249 (retrieval ranking; -244 must land before -249)
 
+
+**Observed (five-persona exploratory test, Oct 15, 2026; screenshots with Matt, not on disk; as reported, verdicts not re-run here):**
+- **Over-credit:** a "120 engineers across SRE and data" requirement was credited from the 150-person organization story, a mixed practice. Verified Oct 15: no story pairs 120 with engineers; the 150 figure is in `leading-people-from-delivery-teams-to-a-150-person-organization` and ten other stories.
+- **False gaps** (under-calls, the other direction from this ticket's 22% over-call):
+  - LLM tooling: the corpus has 9 MattGPT Product Development stories.
+  - Go: one Capital One Performance line reads "Organized Go upskilling for two of my teams".
+  - Product company: a search for "product company", "product-led" and "SaaS company" found nothing, so the contradiction is as reported.
+- Requirement counts that change between runs on the same JD are tracked in MATTGPT-160.
 ---
 
 ### MATTGPT-249
@@ -1691,6 +1703,10 @@ Same class as the no-inference clause in MATTGPT-250: retrieved text that sits n
 
 **Observed (browser, Oct 7, 2026, pre-275 pipeline; not on disk):** "Tell me about Matt's legacy-to-cloud work" included the Lockheed Martin STRATCOM work (paper operational plans to TIBCO workflows) as legacy-to-cloud. On a rerun, quote marks around the question shifted retrieval and TICARA took its place. Re-check under 275's tool path per 275's On-close list.
 
+
+**Observed (five-persona exploratory test, Oct 15, 2026; screenshots with Matt, not on disk; as reported):**
+- A false-premise question naming Goldman Sachs and trading got the "Wrong trail" banner (`BANNER_COPY["rule"]`, shown for any `rule:` rejection). The banner doesn't correct the premise: it never says Matt has no Goldman Sachs or trading work on record.
+- The Lockheed Martin STRATCOM work was missed until the visitor named it. Related: MATTGPT-210 (STRATCOM invisible on career queries).
 ---
 
 ### MATTGPT-252
@@ -2879,6 +2895,74 @@ Kept off the roadmap's NOW.
 
 ---
 
+### MATTGPT-307
+**Key Metrics label cut mid-phrase with no ellipsis ("...4x the"), and "3-4x" shown as "4x"**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Bug
+- **File:** `utils/formatting.py` (`_extract_metric_display()`), `ui/components/story_detail.py` (Key Metrics)
+- **Related:** MATTGPT-215 (consolidated metric detection to `METRIC_RX`)
+- **Logged:** October 15, 2026
+
+**Observed (five-persona exploratory test, Oct 15, 2026; screenshots with Matt, not on disk; as reported):** a Capital One story's Key Metrics card ends "...4X THE".
+
+**Verified Oct 15, 2026 (`_extract_metric_display()` run on the Capital One Performance lines):**
+- "Delivered production-quality code at 4x the output of internal teams" gives `('4x', 'Delivered production-quality code at 4x the')`. The label is cut at the last word boundary within `label_max=50`, with no ellipsis.
+- "Delivered features 3-4x faster than other Accenture teams..." gives value `'4x'`, dropping the "3-" of the range.
+
+---
+
+### MATTGPT-308
+**My Work's default first page shows all 9 MattGPT Product Development stories in its 10 rows**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Issue
+- **File:** `ui/pages/explore_stories.py` (default view: Professional Narrative excluded, `Start_Date` descending)
+- **Related:** MATTGPT-098 (default view), MATTGPT-146 (Positioning stories in filtered results), MATTGPT-077 (MattGPT over-ranking in Ask Agy)
+- **Logged:** October 15, 2026
+
+**Observed (five-persona exploratory test, Oct 15, 2026; screenshots with Matt, not on disk; as reported):** My Work's first page shows 9 of 10 MattGPT stories.
+
+**Verified Oct 15, 2026 (default-view sort run on the corpus, not in a browser):** after excluding Professional Narrative (114 of 124 stories) and sorting by `Start_Date` descending, rows 1 to 9 are the 9 `Independent Project` / `MattGPT Product Development` stories (2025-04 to 2026-01). Row 10 is a Major U.S. Health System story (2023-05). `TABLE_PAGE_SIZE_DEFAULT = 10`; `CARDS_PAGE_SIZE = 9`, so in Cards the first page is all 9.
+
+---
+
+### MATTGPT-309
+**Ask Agy opened from Role Match results carries no match context**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Enhancement
+- **File:** `ui/pages/role_match.py` (`role_match_followup_cta`)
+- **Logged:** October 15, 2026
+
+**Observed (five-persona exploratory test, Oct 15, 2026; screenshots with Matt, not on disk; as reported):** after Role Match results, "Ask Agy" opens a conversation that knows nothing about the JD or the match.
+
+**Verified Oct 15, 2026:** the "Ask Agy 🐾" button (`key="role_match_followup_cta"`) sets `st.session_state["active_tab"] = "Ask Agy"` and reruns. Nothing from `role_match_result` is passed.
+
+**To decide in the ticket:** what context crosses over (JD, requirements, verdicts, gaps), and through which existing pattern (the prefilter pattern is the cross-page precedent).
+
+---
+
+### MATTGPT-310
+**Direct-reports answer varies run to run between "no count" and "11 to 13 leads"**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Issue
+- **Related:** MATTGPT-304 (reranker spike), MATTGPT-250 (profile facts in Ask Agy)
+- **Logged:** October 15, 2026
+
+**Observed (five-persona exploratory test, Oct 15, 2026; screenshots with Matt, not on disk; as reported):** the same direct-reports question was answered once with no count and once with "11 to 13 leads".
+
+**Verified Oct 15, 2026:** `leading-people-from-delivery-teams-to-a-150-person-organization` states "11-13 leads directly to me" and, in Performance, "Grew and ran a 150+ person organization through 11-13 direct-report practice and client leads". `data/matt_profile.json` has no direct-report count. "No count" is wrong for the corpus.
+
+**Hypothesis, not measured:** the "no count" run didn't retrieve that story. A live run of the question at least 2 times, recording `search_queries` and sources, would settle it.
+
+---
+
 ### MATTGPT-160
 **JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs**
 
@@ -2920,6 +3004,8 @@ Kept off the roadmap's NOW.
 
 **Constraint:** Separate defect from MATTGPT-157 (W_KW keyword weighting). Clause-dropping happens at extraction time, before retrieval scoring. Do not conflate. Do not conflate with -243 (assessor parallelization) -- these are different functions in the same file. **-089 is independent:** the September 18 scope replacement removed logistical_requirements extraction from -089; it no longer touches this prompt. The two tickets share no implementation surface.
 
+
+**Observed (five-persona exploratory test, Oct 15, 2026; screenshots with Matt, not on disk; as reported):** requirement counts changed between runs on the same JD. The report doesn't name the JD or the counts.
 ---
 
 
