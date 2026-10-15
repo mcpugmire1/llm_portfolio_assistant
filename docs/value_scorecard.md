@@ -19,9 +19,9 @@ repo. Evaluator fixture: `tests/fixtures/evaluator_conversations.md` at
 
 | # | Value driver | Outcome written? | Criteria | Status |
 |---|---|---|---|---|
-| 1 | Semantic understanding | Yes (Matt, Oct 10, 2026) | Undefined | Failing on 2 of 20 semantic-check pairs (one held by design) |
-| 2 | Conversational continuity | Yes | Per-turn only; aggregate undefined | Not measured (no valid run on 609f903) |
-| 3 | Trust and credibility | Yes | Partly | Failing (reproduced defects); golden eval count unsettled |
+| 1 | Semantic understanding | Yes (Matt, Oct 10, 2026) | Undefined | Failing on 2 of 20 pairs, Oct 10 on the old pipeline; not re-measured on 1095d2c |
+| 2 | Conversational continuity | Yes | Per-turn only; aggregate undefined | Measured per turn in 1095d2c's acceptance run: new 386/450, 4 turns below bar |
+| 3 | Trust and credibility | Yes | Partly | Failing (reproduced defects); no golden eval on 1095d2c (-320) |
 | 4 | Role Match | Yes | Partly | Not measured on the current pipeline; BDD failing |
 | 5 | Evidence parity | Yes | One case only (CS degree) | Failing on that case; general parity not measured |
 | 6 | Evidence discovery | Yes | Yes (BDD); search relevance undefined | Stale; two known failures |
@@ -36,8 +36,10 @@ synonyms, misspellings, missing punctuation and natural phrasing.
 
 **Criteria:** undefined.
 
-**Status:** failing on 2 of 20 pairs at HEAD (L5, held by design until
-MATTGPT-251; L6, MATTGPT-253). Threshold undefined.
+**Status:** failing on 2 of 20 pairs on Oct 10, on the old pipeline
+(`rag_answer()`, code b2add9a; L5, held by design until
+MATTGPT-251; L6, MATTGPT-253). Not yet re-measured on 1095d2c's
+`agy_answer()` path. Threshold undefined.
 
 **Evidence (Oct 10, 2026; `docs/evidence/semantic_checks/20261010_132625/`,
 d66149f; code b2add9a, 124 stories, 2 runs per wording, health check
@@ -84,9 +86,18 @@ Project and Place, Parked), -304 (reranker spike).
 - Run count: "at least 2 runs per query" (CLAUDE.md, Testing Protocol).
   Repeated-run reliability rate: **undefined**.
 
-**Status:** not measured. No valid evaluator run exists on 609f903.
+**Status:** measured per turn on the shipped tool loop, Oct 15, 2026
+(MATTGPT-275 gate rerun, `docs/evidence/MATTGPT-275/gate_20261015_093237/`, cited as 1095d2c's live acceptance). The
+18 fixture conversations (609f903) plus extras x1 to x5 and x7, 45 live
+turns, 10 runs per arm, scored blind (32 scorers, brief_v2):
+- Total: new 386/450, opener 384/450, baseline 354/450 (`gate_result.json`).
+- Turns below their bar: 4 (c03 t2, x1, x2, x4), each accepted as a known
+  issue in 1095d2c. Required closings (c14 to c17) score 0/10 in every arm;
+  275 stays open for them.
+- Aggregate pass threshold: still **undefined**, so met or failing overall
+  is undefined.
 
-**Evidence (stale, all before dacf2ff):**
+**Earlier evidence (stale, all before dacf2ff):**
 - Tool vs pipeline: 101/110 vs 68/110 (5f9d9bf, scoring corrected in 50bc068).
 - Lever 2: 56/65 follow-ups (f7c1de2).
 - Oct 10 clean PoC: invalid as a controlled comparison.
@@ -126,10 +137,13 @@ question), -317 (Ask Agy About This dropped mid-answer).
   (no threshold).
 
 **Status:**
-- Golden eval: 63/65, Q59 the expected xfail (d0b6376, Oct 7). The gates
-  are written against /64, and the count appears as 70/70, 65/65, /64 and
-  63/65 across sources. Met or failing is **undefined** until the count is
-  settled.
+- Golden eval: no run on 1095d2c's `agy_answer()` path (MATTGPT-320). The
+  last count, 63/65 with Q59 the expected xfail (d0b6376, Oct 7), was on
+  the old pipeline.
+- MATTGPT-275 gate rerun, Oct 15 (`docs/evidence/MATTGPT-275/gate_20261015_093237/`, new arm, 450
+  turns): invented figures, clients or dates 0; visible dashes 0 of 900 Sol
+  answers (new and opener arms); runs with a contradicted claim 16 (x1 8,
+  c10 3, c14 3, x7 2).
 - Failing: the meta-commentary strip garbles answers, 6 of 130 in
   `docs/evidence/MATTGPT-275/candidate_20261009_085832/` (6d41ff8),
   including the production path. Unsupported claims (-251) and evaluative
@@ -201,7 +215,9 @@ reason stale), -320 (golden eval on shipped code).
 - -268: failing (open). Only paired run:
   `docs/evidence/MATTGPT-268/20260925_092116/step1_output.txt`, with
   differently worded inputs.
-- General parity: not measured.
+- General parity: not measured. Beyond the CS-degree case (-268), no run
+  compares Ask Agy and Role Match on the same claims, metrics, cited
+  stories or industries, so a parity gap elsewhere would not show up here.
 
 **Open tickets:** -268, -309 (no match context in Ask Agy from Role
 Match).
