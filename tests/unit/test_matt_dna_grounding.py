@@ -9,6 +9,7 @@ claim that 10-person balanced teams delivered the output of 20-person teams
 """
 
 import logging
+from unittest.mock import patch
 
 import pytest
 
@@ -168,8 +169,46 @@ def test_no_hardcoded_career_eras_block(matt_dna):
     [
         "Wellfound Technology: 2000-2001, 2002-2003",
         "Accenture: March 2005 - September 2023",
-        "Currently: Sabbatical, building MattGPT",
     ],
 )
 def test_career_arc_kept(matt_dna, arc_line):
     assert arc_line in matt_dna
+
+
+# MATTGPT-294: the Career Arc's facts live in data/matt_profile.json
+# (career_arc) and MATT_DNA renders them; its CIC line stays derived from the
+# CIC story. Role Match's grounding does not carry the arc.
+
+
+def _career_arc_block(matt_dna):
+    """The Career Arc block: its label line to the next blank line."""
+    lines = matt_dna.split("\n")
+    start = lines.index("**Career Arc:**")
+    return lines[start : lines.index("", start)]
+
+
+def test_matt_dna_renders_the_career_arc_from_the_profile():
+    from services import matt_profile
+
+    profile = matt_profile.load_profile_dict()
+    profile["career_arc"] = {
+        "progression": "ZZZ_SENTINEL progression",
+        "employers": [{"name": "ZZZ_SENTINEL Employer", "years": "1999-2000"}],
+        "current": "ZZZ_SENTINEL current.",
+    }
+    stories = load_stories("echo_star_stories_nlp.jsonl")
+    with patch.object(matt_profile, "load_profile_dict", return_value=profile):
+        dna = bs.generate_dynamic_dna(stories, bs.get_known_clients(stories))
+    block = _career_arc_block(dna)
+    assert block[1] == "ZZZ_SENTINEL progression"
+    assert "- ZZZ_SENTINEL Employer: 1999-2000" in block
+    assert block[-1] == "- Currently: ZZZ_SENTINEL current."
+    assert not any("Wellfound" in line for line in block)
+
+
+def test_role_match_grounding_has_no_career_arc():  # guard
+    from services.jd_assessor import load_matt_profile
+
+    grounding = load_matt_profile()
+    for text in ("Wellfound Technology", "Sabbatical", "Software Engineer →"):
+        assert text not in grounding

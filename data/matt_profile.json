@@ -46,6 +46,16 @@
       "subline": "No sponsorship needed"
     }
   },
+  "career_arc": {
+    "progression": "Software Engineer → Solution Architect → Director → Cloud Innovation Center Leader",
+    "employers": [
+      {"name": "Wellfound Technology", "years": "2000-2001, 2002-2003"},
+      {"name": "American InterContinental University", "years": "2003-2004", "note": "adjunct, taught alongside full-time work"},
+      {"name": "Cendian Chemical Logistics", "years": "2003-2005"},
+      {"name": "Accenture", "years": "March 2005 - September 2023"}
+    ],
+    "current": "Sabbatical, building MattGPT. In active search for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job."
+  },
   "self_description": {
     "label": "Matt's attested self-description (his own words, not independently verified)",
     "statements": [

@@ -271,25 +271,33 @@ def generate_dynamic_dna(stories: list[dict], clients: set[str]) -> str:
     # quote them as his self-description, not as verified facts. Role Match's
     # grounding (jd_assessor.load_matt_profile) does not carry them.
     try:
-        self_desc = matt_profile.load_profile_dict().get("self_description") or {}
+        profile = matt_profile.load_profile_dict()
     except Exception:
-        self_desc = {}
-        logger.exception("MATT_DNA self-description block skipped: profile read failed")
+        profile = {}
+        logger.exception("MATT_DNA profile blocks skipped: profile read failed")
+    self_desc = profile.get("self_description") or {}
     self_description_block = ""
     if self_desc.get("label") and self_desc.get("statements"):
         statement_lines = "\n".join(f"- {s}" for s in self_desc["statements"])
         self_description_block = f"**{self_desc['label']}:**\n{statement_lines}\n\n"
 
+    # MATTGPT-294: the Career Arc's facts come from the profile; its CIC line
+    # stays derived from the CIC story (p_count). Each line is omitted when
+    # its profile field is empty, so editing "current" is a one-line change.
+    arc = profile.get("career_arc") or {}
+    arc_lines = [arc["progression"]] if arc.get("progression") else []
+    for e in arc.get("employers") or []:
+        note = f" ({e['note']})" if e.get("note") else ""
+        arc_lines.append(f"- {e['name']}: {e['years']}{note}")
+    arc_lines.append(f"- Built CIC from 0 to {p_count}+ practitioners (Atlanta, Tampa)")
+    if arc.get("current"):
+        arc_lines.append(f"- Currently: {arc['current']}")
+    career_arc_lines = "\n".join(arc_lines)
+
     return f"""## Matt Pugmire: Ground Truth (Synced {datetime.now().strftime('%Y-%m')})
 
 **Career Arc:**
-Software Engineer → Solution Architect → Director → Cloud Innovation Center Leader
-- Wellfound Technology: 2000-2001, 2002-2003
-- American InterContinental University: 2003-2004 (adjunct, taught alongside full-time work)
-- Cendian Chemical Logistics: 2003-2005
-- Accenture: March 2005 - September 2023
-- Built CIC from 0 to {p_count}+ practitioners (Atlanta, Tampa)
-- Currently: Sabbatical, building MattGPT. In active search for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job.
+{career_arc_lines}
 
 **The {len(SYNTHESIS_THEMES)} Themes of Matt's Work (use these for synthesis):**
 {themes_text}
