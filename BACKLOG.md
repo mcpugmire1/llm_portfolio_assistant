@@ -7,7 +7,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-10-12)
+## Value Prioritized Roadmap (updated 2026-10-14)
 
 **NOW**
 1. **-275** -- Ask Agy moves to tool-calling retrieval: answers from profile and conversation, calls search_stories when needed. Evaluator script 101/110 vs 68/110, follow-ups 56/65 vs 29/65 (scoring correction, 50bc068), 0 gate refusals vs 25. Supersedes -273 Issue 1, -253's gate scope, and -128's Sources contract. -268 travels with -275.
@@ -16,25 +16,26 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 **NEXT**
 4. **-128** -- After 275 step 1. Cards show the stories the answer cited, not just those retrieved: the Oct 12 JP Morgan payments answer drew 7 of 23 claims from two stories the cards did not show. Sources panel split by kind, extracted reason lines, trailing question removed; design settled August 30. Retrieval check and thin-answer shape still open before Code picks it up.
-5. **-140** -- Move the model names into `config/constants.py` so the answering model is a one-line swap. Prerequisite for -282.
-6. **-282** -- Ask Agy's answering model has only been measured as gpt-4o. Run the evaluator script on a current model (first candidate GPT-6.1 Sol) right after -275 lands, before -280 and -281 tune voice on gpt-4o.
-7. **-250** -- In Progress. Ask Agy cannot answer education, certification, or language questions; profile facts never reached its prompt. Steps 5 and 6 still open and wait on -275.
-8. **-266** -- Role Match labels responsibility-derived rows as "Required Qualifications". Every visitor sees job duties presented as must-have credentials. Fix is in `_flatten_extraction()`, not the prompt. -264 is sequenced after it.
-9. **-255** -- The meta-commentary strip regex corrupts decimal amounts (`$2.5M` becomes an unclosed `**$2.`) and merges paragraphs. Visible correctness bug. Ticket's fix: remove the strip, run structural meta-commentary tests without it, then a live acceptance run on stories with decimal amounts, including story controls. Acceptance counts evaluative sentences before and after (252 coupling).
-10. **-228** -- Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
-11. **-146** -- Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
-12. **-160** -- In Progress. JD extraction split into three concurrent calls (required / preferred / implicit) landed at `5aee8a4`. After-measurement on the AT&T fixture (count spread 1-2 across five runs) not yet recorded. No longer gates -244.
-13. **-244** -- In Progress; prep Greens landed. Role Match assessor calibration: cited evidence doesn't address the specific claim; `confidence` field deletion. Not gated on -160: qualifier preservation was resolved by the `source_text` instruction fix (`5aee8a4`/`b28a080`), not the split. Next: verify the CI/CD-qualifier row after that fix; fixture count and the 22% over-called figure depend on it. Land before -249 (see -249 ordering constraint).
-14. **-168** -- Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data. Re-measure after -275 (tunes behavior 275 replaces).
-15. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
-16. **-129 stories 3-5** -- Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
-17. **-252** -- Ask Agy writes evaluative sentences about Matt despite prompt instructions against it. Visitor-visible; isolating probe spec in the detail block.
-18. **-253** -- Blocked on -275. Confidence gate refuses ordinary evaluator questions, including follow-ups scored on bare text, before the LLM sees profile or history. No threshold change; gate scope superseded by -275.
-19. **-254** -- Five Role Match BDD scenarios describe the old 30-word gate behavior; passing or xfailed against stale assertions, so current behavior is untested. Also an em dash in a CHANGELOG entry.
-20. **-235** -- Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-21. **-223** -- Add router_score and router_family columns to Sheet query row; unblocks -239's floor threshold decision.
-22. **-222** -- Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
-23. Rest of Role Match: -173, -014, -012, -081, -099, -017.
+5. **-302** -- OpenAI retires gpt-4o, gpt-4o-mini, gpt-4.1 and gpt-4.1-mini on January 14, 2027. Migrate Role Match (`ASSESSMENT_MODEL`, assessment and extraction prompts) and the generator scripts; delete the unused `DEFAULT_CLASSIFICATION_MODEL`. Ask Agy moves off gpt-4o with -275. Deadline-driven: schedule well before January.
+6. **-140** -- Move the model names into `config/constants.py` so the answering model is a one-line swap. Prerequisite for -282.
+7. **-282** -- Ask Agy's answering model has only been measured as gpt-4o. Run the evaluator script on a current model (first candidate GPT-6.1 Sol) right after -275 lands, before -280 and -281 tune voice on gpt-4o.
+8. **-250** -- In Progress. Ask Agy cannot answer education, certification, or language questions; profile facts never reached its prompt. Steps 5 and 6 still open and wait on -275.
+9. **-266** -- Role Match labels responsibility-derived rows as "Required Qualifications". Every visitor sees job duties presented as must-have credentials. Fix is in `_flatten_extraction()`, not the prompt. -264 is sequenced after it.
+10. **-255** -- The meta-commentary strip regex corrupts decimal amounts (`$2.5M` becomes an unclosed `**$2.`) and merges paragraphs. Visible correctness bug. Ticket's fix: remove the strip, run structural meta-commentary tests without it, then a live acceptance run on stories with decimal amounts, including story controls. Acceptance counts evaluative sentences before and after (252 coupling).
+11. **-228** -- Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
+12. **-146** -- Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
+13. **-160** -- In Progress. JD extraction split into three concurrent calls (required / preferred / implicit) landed at `5aee8a4`. After-measurement on the AT&T fixture (count spread 1-2 across five runs) not yet recorded. No longer gates -244.
+14. **-244** -- In Progress; prep Greens landed. Role Match assessor calibration: cited evidence doesn't address the specific claim; `confidence` field deletion. Not gated on -160: qualifier preservation was resolved by the `source_text` instruction fix (`5aee8a4`/`b28a080`), not the split. Next: verify the CI/CD-qualifier row after that fix; fixture count and the 22% over-called figure depend on it. Land before -249 (see -249 ordering constraint).
+15. **-168** -- Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data. Re-measure after -275 (tunes behavior 275 replaces).
+16. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
+17. **-129 stories 3-5** -- Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+18. **-252** -- Ask Agy writes evaluative sentences about Matt despite prompt instructions against it. Visitor-visible; isolating probe spec in the detail block.
+19. **-253** -- Blocked on -275. Confidence gate refuses ordinary evaluator questions, including follow-ups scored on bare text, before the LLM sees profile or history. No threshold change; gate scope superseded by -275.
+20. **-254** -- Five Role Match BDD scenarios describe the old 30-word gate behavior; passing or xfailed against stale assertions, so current behavior is untested. Also an em dash in a CHANGELOG entry.
+21. **-235** -- Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
+22. **-223** -- Add router_score and router_family columns to Sheet query row; unblocks -239's floor threshold decision.
+23. **-222** -- Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
+24. Rest of Role Match: -173, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
 -177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- better ranking surfaces more adjacent candidates into verdict definitions that still absorb them as partial, so ranking before calibrating makes over-calling worse before better; full constraint in -249 detail block)
@@ -151,6 +152,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-299](#mattgpt-299) | Ask Agy latency on gpt-6.1-sol: whole turn 9.35 s median, first visible text 4.13 s (lever 2, MATTGPT-282 run 2) | Blocked | Medium | Issue | October 12, 2026 |
 | [MATTGPT-300](#mattgpt-300) | Thinking indicator: messages by surface, plus a real-progress milestone in Ask Agy ("Reading N of Matt's stories") | Open | Medium | Issue | October 13, 2026 |
 | [MATTGPT-301](#mattgpt-301) | Em dashes left in the repo after MATTGPT-275: the hook checks added lines only, so existing ones were never caught | Open | Medium | Hygiene | October 14, 2026 |
+| [MATTGPT-302](#mattgpt-302) | OpenAI retires gpt-4o, gpt-4o-mini, gpt-4.1 and gpt-4.1-mini on January 14, 2027: migrate Role Match and the scripts still on them | Open | High | Action | October 14, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -2393,6 +2395,11 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 
 **Scope:** Decide what catches off-topic questions today (per the inventory, the confidence gate), and correct the docs and MATTGPT-239's acceptance to match.
 
+**Dead code in the Ask Agy files (Oct 14, 2026):**
+- **Handled by MATTGPT-275 once it lands:** 275's uncommitted working tree deletes `get_theme_guidance()` (`story_intelligence.py`; its only caller was commented out in `backend_service.py`) and, in `backend_service.py`, `get_narrative_titles()`, `_build_sources()`, `get_diverse_stories()` and `is_query_on_topic_llm()`. Verified by `git grep "def <name>"`: present at HEAD, absent in the working tree. Confirm against 275's Green commit.
+- **Still dead after 275:** `get_all_themes()`, `get_theme_distribution()` and `get_theme_emoji()` in `story_intelligence.py` remain in the working tree with no callers outside their own docstrings. Remove.
+- **Stays:** `THEME_PROFESSIONAL`. It is a key in `THEME_TO_PATTERN`, which `conversation_helpers.py` and `build_story_context_for_rag()` use.
+
 ---
 
 ### MATTGPT-288
@@ -2733,6 +2740,7 @@ Kept off the roadmap's NOW.
 **Remaining:**
 - **Live code comments, docstrings and CSS comments** (`ui/`, `services/`, `utils/`, `app.py`, `config/`): about 200 by the dev session's estimate after 275; no runtime effect.
   - **String-literal spot check (Oct 14):** a grep for em dashes inside string literals, outside 275's files, found two. `services/pinecone_service.py`'s `title` f-string (client and title joined with an em dash) is DEBUG-only: it sits under `if DEBUG:` in the Pinecone preview snapshot (per the dev audit; confirmed by read). `ui/pages/cross_industry_landing.py`'s `cta-subtext` line is visitor copy and is fixed in MATTGPT-275, not here. The spot check skips multi-line strings, so classify each remaining hit before calling it comment-only.
+- **Router titles (en dashes, Oct 14):** `services/semantic_router.py`'s four Professional Narrative titles ("Career Intent – What I'm Looking For Next", "Leadership Philosophy – How I Lead", "Transition Story – Why I'm Exploring Opportunities", "Work Philosophy – Where I Do My Best Work") must match the corpus titles exactly. Change them together with the corpus at its next ingestion, not before.
 - **Tests:** BDD 422, unit 64 (recount matches).
 - **`agent/triage/`** (24): not imported by the app; confirm before cleaning.
 - **`echo_star_stories_interview_questions.jsonl` (165) and `echo_star_stories_nlp_use_cases.jsonl` (162):** referenced by `generate_interview_questions.py` and `generate_use_cases.py` (`git grep -l`). Confirm whether still used; corpus edits go through Cowork.
@@ -2740,6 +2748,32 @@ Kept off the roadmap's NOW.
 - **Leave as is:** `docs/evidence/` and `archive/` (history), third-party JDs (`data/demo_jd.txt`, the Fiserv JD), model files under `models/`.
 
 **Acceptance:** a whole-file check, in CI tier 1 (MATTGPT-039) or the hook, fails the build on any em dash in the paths that reach visitors or the model (prompts, UI copy, config). The hook is Matt's to change.
+
+---
+
+### MATTGPT-302
+**OpenAI retires gpt-4o, gpt-4o-mini, gpt-4.1 and gpt-4.1-mini on January 14, 2027: migrate Role Match and the scripts still on them**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Action
+- **Deadline:** January 14, 2027 (retirement date per OpenAI's notice, as reported by Matt; not in the repo). Schedule well before January.
+- **File:** `services/jd_assessor.py` (`ASSESSMENT_MODEL`, the assessment and extraction prompts), `config/constants.py`, root generator scripts
+- **Related:** MATTGPT-140 (model names in constants), MATTGPT-282 (answering-model comparison), MATTGPT-275 (moves Ask Agy to gpt-6.1-sol)
+- **Logged:** October 14, 2026
+
+**Verified Oct 14, 2026 (`git grep` over `*.py`, excluding `tests/`, `archive/`, `probes/`, `docs/`):**
+- **Role Match:** `services/jd_assessor.py` sets `ASSESSMENT_MODEL = "gpt-4o"`, used by its four model calls; root `probe_assessor.py` imports it.
+- **Ask Agy at HEAD:** `backend_service.py` calls `"gpt-4o"` for the answer and `"gpt-4o-mini"` in `is_query_on_topic_llm()`. MATTGPT-275's working tree replaces these with `ASK_ANSWER_MODEL = "gpt-6.1-sol"` in `config/constants.py` (uncommitted). If 275 has not shipped by the deadline, production Ask Agy breaks too.
+- **Constants:** `config/constants.py` has `DEFAULT_CHAT_MODEL = "gpt-4o"` and `DEFAULT_CLASSIFICATION_MODEL = "gpt-4o-mini"`. `DEFAULT_CHAT_MODEL` is read by `scripts/extract_facts.py`, which records it as `facts["chat_model"]`; `DEFAULT_CLASSIFICATION_MODEL` has no reader outside `config/constants.py`: delete it rather than migrate.
+- **Generator scripts:** `MODEL = "gpt-4o"` in `generate_competencies.py`, `generate_interview_questions.py`, `generate_public_tags.py` and `generate_use_cases.py`.
+- No gpt-4.1 or gpt-4.1-mini found in those paths.
+
+**Fix:** move Role Match's assessment and extraction to a current model, and every script above off the retiring models. Model names go through `config/constants.py` (MATTGPT-140), so the next retirement is a one-line change.
+
+**Acceptance:**
+- A measured before/after run on the AT&T JD (`data/probe_jd_att_principal.txt`) and the demo JD (`data/demo_jd.txt`): extracted `source_text` stays verbatim, requirement counts, and strong/partial/gap counts.
+- A dash check on Role Match output. The no-dash rule was left out of Role Match only because gpt-4o wrote none (Matt, Oct 14, 2026); Sol answers have been seen to contain em dashes (8fa0270).
 
 ---
 
