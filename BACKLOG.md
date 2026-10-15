@@ -2030,6 +2030,10 @@ f. Data-contract check against the real corpus (added Oct 11, 2026): field names
 
 **Stale docstring (Oct 6, 2026; flagged in the Architecture Sync pass, bce67a7):** `_generate_agy_response()` says "using OpenAI GPT-4o-mini"; the call uses `gpt-4o`. Fix: drop the model name from the docstring; the call's model argument (or `DEFAULT_CHAT_MODEL`) is the single source. The hardcoded `model="gpt-4o"` in that call is MATTGPT-140, the same one-home-for-a-value problem as item 1.
 
+**Update (Oct 15, 2026; Architecture Sync 9ff543b, re-checked at HEAD):** items 3 and 5 still stand. `ENTITY_SEARCH_FIELDS` and `PINECONE_LOWERCASE_FIELDS` include `place`, which `build_custom_embeddings.py`'s metadata never writes. `industry` is written lowercased but isn't in `PINECONE_LOWERCASE_FIELDS`. New: since 1095d2c no caller sets `entity_field`. `git grep` for `entity_field` or `entity_value` outside `pinecone_service.py`, `docs/evidence/` and `archive/` returns nothing, so the whole `$or` entity filter in `pinecone_semantic_search()` is unreachable and neither mismatch affects answers. Decide: fix the field lists, or remove the dead filter (the branch, both constants, and the casing comments in `config/constants.py` and `pinecone_service.py`). Default: remove the dead filter (unreachable since 1095d2c); fix the lists only if a caller is reintroduced.
+
+**Stale docstring item, moot (Oct 15, 2026):** `_generate_agy_response()` was retired in 1095d2c.
+
 ---
 
 ### MATTGPT-263
