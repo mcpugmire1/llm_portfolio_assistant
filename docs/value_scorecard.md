@@ -61,7 +61,7 @@ bound), -199 (AT&T content-kw gate), -063 (wrong-person queries), -077
 (pronoun and noun-overlap contamination), -195 (incident vocabulary
 routing), -236 (router topical families), -239 (router confidence floor,
 Blocked), -062 (stale router embeddings), -167 (entity detection for
-Project and Place, Parked).
+Project and Place, Parked), -304 (reranker spike, Blocked).
 
 ## 2. Conversational continuity
 

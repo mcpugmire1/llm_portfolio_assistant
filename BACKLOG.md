@@ -154,6 +154,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-301](#mattgpt-301) | Em dashes left in the repo after MATTGPT-275: the hook checks added lines only, so existing ones were never caught | Open | Medium | Hygiene | October 14, 2026 |
 | [MATTGPT-302](#mattgpt-302) | OpenAI retires gpt-4o, gpt-4o-mini, gpt-4.1 and gpt-4.1-mini on January 14, 2027: migrate Role Match and the scripts still on them | Open | High | Action | October 14, 2026 |
 | [MATTGPT-303](#mattgpt-303) | Ask Agy's OpenAI stream has no timeout or retry of its own: SDK defaults (600 s read timeout); failures end in "Sorry, I couldn't generate an answer right now." | Open | Medium | Bug | October 15, 2026 |
+| [MATTGPT-304](#mattgpt-304) | Spike: Pinecone-hosted reranker (cohere-rerank-3.5 or bge-reranker-v2-m3) over a wider top-k, after MATTGPT-275 | Blocked | Low | Spike | October 15, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place — specification complete, no confirmed failing case currently | Parked | Medium | Action | August 3, 2026 |
@@ -2803,6 +2804,29 @@ Kept off the roadmap's NOW.
 **Problem:** a visitor can wait up to 600 s for a read to time out, and a dropped stream ends the turn with the generic error instead of a retry.
 
 **Fix direction (to decide in the ticket):** an explicit read timeout sized to the measured turn (MATTGPT-299's baseline), and a bounded retry for failures before the first visible text. After text has streamed, a retry would repeat or replace what the visitor already saw; decide that case explicitly.
+
+---
+
+### MATTGPT-304
+**Spike: Pinecone-hosted reranker (cohere-rerank-3.5 or bge-reranker-v2-m3) over a wider top-k, after MATTGPT-275**
+
+- **Status:** Blocked
+- **Priority:** Low
+- **Type:** Spike
+- **Dependencies:** MATTGPT-275. Set to Open when 275 ships.
+- **File:** `ui/pages/ask_mattgpt/backend_service.py` (the `search_stories` tool: `semantic_search(..., top_k=SEARCH_TOP_K)`, then `[:5]`, in 275's working tree), `config/constants.py` (`SEARCH_TOP_K = 25`)
+- **Related:** MATTGPT-128 (cards show the cited stories), MATTGPT-251 (adjacent stories treated as evidence), MATTGPT-299 (latency), MATTGPT-283 (embedding model PoC)
+- **Logged:** October 15, 2026
+
+**Named case, x7 "When was he at JP Morgan?" (verified Oct 15, 2026, `probes/output/MATTGPT-275/dates_accept_20261014_210208/rows_lane0.json`, untracked):** in all 3 runs, one `search_stories` call fetched 25 matches and the 5 stories passed to the model were Corporate I&AM Uplift, ACCESS Payment Engine, Global Payments Gateway, IAM Agile Adoption and Asset Management Cloud Integration. Neither TS Dynamics CRM story (`delivering-global-data-conversion-for-jp-morgans-ts-dynamics-crm-across-four-regions`, `rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program`, both 2013-04 in `echo_star_stories_nlp.jsonl`) reached the model. None of the 3 answers mentions 2013 or the TS Dynamics CRM work; each cites 2009, 2012, 2014, 2015 and 2016.
+
+**Spike:** rerank a wider Pinecone top-k with a Pinecone-hosted reranker, keep the top 5, and compare with the current ranking on x7 plus the MATTGPT-275 gate's turn set. Measure:
+- retrieval of the expected stories (for x7, both TS Dynamics CRM stories)
+- answer scores on the gate's rubric
+- added latency per turn
+- cost per turn
+
+**Out of scope:** an embedding-model change. It would re-baseline every score threshold (`CONFIDENCE_HIGH`, `CONFIDENCE_LOW`, the router's thresholds).
 
 ---
 
