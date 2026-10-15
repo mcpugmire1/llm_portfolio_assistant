@@ -1015,7 +1015,8 @@ def render_explore_stories(
             # is_nonsense() returns the bare category string (e.g.,
             # "jokes_riddles"). render_no_match_banner expects the
             # "rule:<category>" prefix for the BANNER_COPY["rule"] branch
-            # (mirrors the Ask Agy convention at backend_service.py:1463).
+            # (mirrors the Ask Agy convention in _nonsense_rejection() in
+            # backend_service.py).
             # May 23, 2026 fix.
             st.session_state["__query_rejected__"] = current_query
             st.session_state["__query_rejected_reason__"] = f"rule:{nonsense_check}"

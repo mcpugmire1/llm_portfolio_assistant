@@ -39,14 +39,14 @@ def on_chip_click(question: str) -> None:
     wrongly anchor the response to a single story when the chip questions
     are intentionally broad.
 
-    Sets the three session-state keys that conversation_view.py:165 reads
-    and pops to auto-fire the query:
+    Sets the three session-state keys that render_conversation_view() in
+    conversation_view.py reads and pops to auto-fire the query:
       - seed_prompt: the literal question string (rendered as the user's
         first turn in the chat transcript)
-      - __ask_from_suggestion__: True — tells backend_service.py:1413 to
-        bypass the nonsense filter (otherwise "How does Matt..." style
-        queries can get redirected)
-      - active_tab: "Ask Agy" — routes the rerun to the chat page
+      - __ask_from_suggestion__: True: tells agy_answer() in
+        backend_service.py to skip the nonsense rules and the router
+        (otherwise "How does Matt..." style queries can get redirected)
+      - active_tab: "Ask Agy": routes the rerun to the chat page
 
     Contract pinned by tests/unit/test_category_cards.py::TestOnChipClick.
     """

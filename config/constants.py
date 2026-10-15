@@ -73,7 +73,9 @@ SEARCH_TOP_K = 25  # Stories to fetch from Pinecone (headroom for reranking/filt
 SUBSTITUTION_FAMILIES = frozenset({"technical", "team_scaling", "agile_transformation"})
 
 # Ask Agy conversation history: prior transcript messages sent to the response
-# LLM as user/assistant turns (two exchanges). Retrieval does not use them.
+# LLM as user/assistant turns (two exchanges). The model writes its
+# search_stories queries with them in view; the nonsense rules and the router
+# see only the current question.
 ASK_HISTORY_MAX_MESSAGES = 4
 
 # Ask Agy answering model, called on the Responses API and streamed (the

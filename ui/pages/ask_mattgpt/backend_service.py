@@ -617,9 +617,10 @@ def _router_rejection(
     BEFORE Pinecone to avoid unnecessary search costs.
     MATTGPT-219 (out_of_scope) + MATTGPT-234 (personal): both branches
     gated on HARD_ACCEPT via router_rejection_reason. Below that the
-    router isn't confident; the query falls through to Pinecone and
-    any real off-topic case is caught by the overlap:0.00 gate with
-    correct rejection copy. See helper docstring for full rationale.
+    router isn't confident; the question goes to agy_answer()'s tool
+    loop, which has no search-confidence gate: an off-topic question
+    the router lets through is answered under the prompt's OFF-TOPIC
+    GUARD. See helper docstring for full rationale.
     """
     rejection_family = router_rejection_reason(intent_family, semantic_score)
     if rejection_family == "out_of_scope" and not from_suggestion:
