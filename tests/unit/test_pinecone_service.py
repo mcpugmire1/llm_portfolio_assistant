@@ -76,6 +76,29 @@ class TestPineconeSemanticSearchEmbedFailure:
         assert result is None
         assert "__embed_failure__" not in mock_st.session_state
 
+    @patch("services.pinecone_service.DEBUG", False)
+    @patch("services.pinecone_service._init_pinecone")
+    @patch("services.pinecone_service._embed")
+    @patch("services.pinecone_service.st")
+    def test_pinecone_query_failure_is_logged_with_debug_off(
+        self, mock_st, mock_embed, mock_init, capsys
+    ):
+        """A Pinecone query exception is logged even with DEBUG off (MATTGPT-305)."""
+        from services.pinecone_service import pinecone_semantic_search
+
+        mock_st.session_state = {}
+        mock_embed.return_value = [0.1] * 1536
+        mock_idx = MagicMock()
+        mock_idx.query.side_effect = RuntimeError("pinecone boom")
+        mock_init.return_value = mock_idx
+
+        result = pinecone_semantic_search("a query", {}, [])
+
+        assert result is None
+        out = capsys.readouterr().out
+        assert "[API_ERROR_DETECTED] source=pinecone_query" in out
+        assert "RuntimeError: pinecone boom" in out
+
     @patch("services.pinecone_service._init_pinecone")
     @patch("services.pinecone_service._embed")
     @patch("services.pinecone_service.st")
