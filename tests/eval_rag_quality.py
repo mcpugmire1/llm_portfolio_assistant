@@ -1486,6 +1486,12 @@ class TestIntentRouting:
                 "(nonsense filter block)"
             )
 
+        elif query_spec["expected_behavior"] == "profile_fact":
+            assert result.checks.get("profile_fact", False), (
+                f"Profile fact check failed - response should contain "
+                f"{query_spec.get('must_contain', [])}"
+            )
+
 
 class TestEdgeCases:
     """Test edge cases and robustness."""
