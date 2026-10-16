@@ -1,0 +1,1400 @@
+[
+ {
+  "case": "S01",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All four profile certifications with issued/expired status; nothing presented as current. supported: all four cert entries. No unsupported or contradicted claims.",
+  "claims": [
+   {
+    "text": "None of Matt's certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle exams 2002)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track), three exams listed, 2002",
+    "label": "supported",
+    "source": "profile.certifications"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S01",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Four certifications, statuses correct, none called current; all four quotations match profile_rendered.txt verbatim (rule 8). supported: every claim.",
+  "claims": [
+   {
+    "text": "Matt has held certifications but none is current",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Quoted Solutions Architect Associate entry (issued 2020, expired 2023), verbatim in profile_rendered.txt",
+    "label": "supported",
+    "source": "profile_rendered.txt Certifications"
+   },
+   {
+    "text": "Quoted Cloud Practitioner entry (issued 2019, expired 2023), verbatim",
+    "label": "supported",
+    "source": "profile_rendered.txt Certifications"
+   },
+   {
+    "text": "Quoted SAFe 4 Certified Agilist entry (issued 2017, expired), verbatim",
+    "label": "supported",
+    "source": "profile_rendered.txt Certifications"
+   },
+   {
+    "text": "Quoted Oracle 8i DBA exams passed (OCP track) ... (2002), verbatim",
+    "label": "supported",
+    "source": "profile_rendered.txt Certifications"
+   },
+   {
+    "text": "The Oracle entry records exams passed rather than a completed OCP certification",
+    "label": "supported",
+    "source": "profile.certifications (entry worded as 'exams passed (OCP track)')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S02",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "States no PMP, then lists the four profile certifications; no pivot to PM stories. supported: no-PMP, four certs, none current.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP",
+    "label": "supported",
+    "source": "profile.certifications (PMP absent from the list)"
+   },
+   {
+    "text": "Solutions Architect - Associate issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Cloud Practitioner issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Agilist issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA OCP-track exams passed in 2002",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the listed certifications is current",
+    "label": "supported",
+    "source": "profile.certifications"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S02",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "No PMP, then all four certifications; quotations verbatim under rule 8 (trailing period allowed). supported: all claims.",
+  "claims": [
+   {
+    "text": "No PMP held",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Quoted AWS SA Associate entry with 2020/2023 dates, verbatim",
+    "label": "supported",
+    "source": "profile_rendered.txt Certifications"
+   },
+   {
+    "text": "Quoted AWS Cloud Practitioner entry with 2019/2023 dates, verbatim",
+    "label": "supported",
+    "source": "profile_rendered.txt Certifications"
+   },
+   {
+    "text": "Quoted SAFe 4 entry (issued 2017, expired), verbatim",
+    "label": "supported",
+    "source": "profile_rendered.txt Certifications"
+   },
+   {
+    "text": "Quoted Oracle 8i exams entry ending (2002)., verbatim apart from trailing punctuation",
+    "label": "supported",
+    "source": "profile_rendered.txt Certifications"
+   },
+   {
+    "text": "None is current",
+    "label": "supported",
+    "source": "profile.certifications"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S03",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "English (native) and French (B2, self-assessed); no fluency claim beyond B2. supported: both language entries.",
+  "claims": [
+   {
+    "text": "English is Matt's native language",
+    "label": "supported",
+    "source": "profile.languages"
+   },
+   {
+    "text": "French at B2, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S03",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Matches the languages entry exactly; nothing beyond B2. supported: English native, French B2.",
+  "claims": [
+   {
+    "text": "Speaks English natively",
+    "label": "supported",
+    "source": "profile.languages[0]"
+   },
+   {
+    "text": "Speaks French, level B2 by self-assessment",
+    "label": "supported",
+    "source": "profile.languages[1]"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S04",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answers from the languages entry, B2 self-assessed, no fluency inflation. supported: French B2.",
+  "claims": [
+   {
+    "text": "Yes, Matt speaks French at B2 (self-assessed)",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S04",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Languages entry only, B2 self-assessed; no use of teaching or Montpellier notes as fluency claims. supported: French B2.",
+  "claims": [
+   {
+    "text": "Matt's French is B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S05",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Yes from the profile; does not repeat the CS-equivalence note. supported: degree and institution.",
+  "claims": [
+   {
+    "text": "Matt holds a master's degree",
+    "label": "supported",
+    "source": "profile.education[0]"
+   },
+   {
+    "text": "The master's is in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0]"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S05",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Correct yes with degree and school; equivalence wording not repeated. supported: master's in IT, AIU.",
+  "claims": [
+   {
+    "text": "Yes, a master's degree",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Field Information Technology; institution American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].institution"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S06",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Says nothing on record covers patents using the expected wording; does not cite the Raspberry Pi / Node-RED platform. No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S06",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Expected 'Nothing I know about Matt covers that' wording; no patent claim, no Liquid Studio platform cited. Zero claims.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S07",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct ACCESS payments answer; every figure (40+, 70-80%, 12 countries, April 2011, 135,000+, 180+, days to minutes) and date range matches the JPM ACCESS stories. supported: all claims.",
+  "claims": [
+   {
+    "text": "August 2009 to June 2012",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Technology Delivery Lead for ACCESS Next Generation, unified global corporate banking portal",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "Regional systems had different data models, client configurations, entitlement structures and compliance requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "WebSeries foundation; bank needed capabilities beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Blended team of 40+ Accenture and bank resources in Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "70 to 80% of time embedded at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed boundary between platform configuration and custom engineering",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border and federal tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action/5PSummary (EFTPS tax)"
+   },
+   {
+    "text": "NACHA file validation, MAC payment integrity verification, payment-type-specific permissions",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Centralized gateway: message transformation, protocol translation, routing across clearing networks in 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/5PSummary"
+   },
+   {
+    "text": "Administration engine with bulk operations across users, accounts, products",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Migrated client configurations, entitlements, transaction histories without disruption to live payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "Mapped jurisdiction-specific requirements into data visibility and access controls; launches sequenced by regulatory readiness",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Owned production incident response, root-cause analysis and leadership communications while issues were live",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action (Sev-1)"
+   },
+   {
+    "text": "Launched April 2011; 135,000+ corporations, FIs, governments, municipalities across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Gateway gave treasurers single entry point for wire, ACH, cross-border, replacing local logins and fragmented integrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S07",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Materially correct ACCESS payments narrative; all figures and dates trace to the five ACCESS stories. supported: all claims.",
+  "claims": [
+   {
+    "text": "Served from August 2009 to June 2012 as Technology Delivery Lead on ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase dates/Task"
+   },
+   {
+    "text": "Regional systems differed in data models, entitlement structures, message formats, regulatory requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation; building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Needed payment modules and controls beyond WebSeries out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "40+ blended Accenture/bank team across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Task"
+   },
+   {
+    "text": "70-80% embedded at Bottomline Portsmouth, working out where configuration ended and bespoke engineering began",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, government tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "NACHA validation, FX engine connectivity, MAC security to verify integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway transformation, protocol translation, routing across 12 countries, replacing point-to-point integrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Bulk permission changes from a single screen, absent from legacy systems",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Wire approval without FX initiation as a payment-type control",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Entitlement management from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Led payments data migration without disrupting live operations",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "Launches sequenced by regulatory readiness, not big-bang",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Result"
+   },
+   {
+    "text": "April 2011 launch serving 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Compliance framework enabled rollout across APAC, EMEA, Americas without regulatory blockers",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S08",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct answer from leadership-philosophy and related Accenture stories; both quotations verbatim (rule 8). supported: all claims.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action ('empathy, clarity'; 'Lead with purpose')"
+   },
+   {
+    "text": "Builds psychological safety, pushes decisions to people closest to the work, coaches teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quote 'over-processed, under-trusted, waiting for permission instead of owning outcomes.' verbatim",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "At Accenture fear of blame stalled experimentation; hierarchy and silos slowed delivery",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation; breaking-silos-between-engineering-design-and-product|accenture Situation"
+   },
+   {
+    "text": "Innovation teams expected polished requirements and predictable outcomes but had assumptions",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Situation"
+   },
+   {
+    "text": "Made intent explicit; transparency, direct feedback, open communication",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "'permit to fail' environment via non-punitive post-mortems and low-stakes experiments with structured hypotheses and controlled iterations",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Task/Action"
+   },
+   {
+    "text": "Treated test results, not incompetence or rework, as evidence shaping direction week by week",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Task/Action"
+   },
+   {
+    "text": "User research, JTBD framing, rapid testing before costly builds",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Balanced teams of engineers, PMs, UX architects with equal participation and shared accountability",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Pair programming, collaborative coding, retrospectives, automation, continuous delivery",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action; leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Teams voiced feedback and implemented changes autonomously",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "CIC teams accelerated delivery 4x after embracing lean product and modern engineering",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Reduced handoffs and delays; zero-defect production code via iterative development and real-time feedback loops",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S08",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Materially correct leadership answer; quotations 'over-processed...', 'permit to fail' and 'outcomes, not optics' all verbatim. supported: all claims.",
+  "claims": [
+   {
+    "text": "Matt's leadership blends empathy, clarity and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action; career-intent Action"
+   },
+   {
+    "text": "Describes inherited teams with the verbatim quote 'over-processed, under-trusted, ...'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Accenture teams faced hierarchy, role silos and fear of blame",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Situation; establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation"
+   },
+   {
+    "text": "Innovation-engagement teams expected polished requirements; early work meant testing assumptions",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Situation"
+   },
+   {
+    "text": "Made intent explicit, pushed decisions down, coached teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Balanced teams with equal participation and shared accountability; pairing, retros, automation, CD as daily practice",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action; leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "'permit to fail' with non-punitive post-mortems and lean low-stakes experiments",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action"
+   },
+   {
+    "text": "Failed prototypes treated as evidence, not incompetence; product direction shaped week by week",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Task/Action"
+   },
+   {
+    "text": "Non-negotiables: psychological safety, integrity and respect, clear purpose, 'outcomes, not optics' (contiguous in story)",
+    "label": "supported",
+    "source": "work-philosophy-where-i-do-my-best-work|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at the CIC",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Balanced-team work achieved zero-defect production code with fewer handoffs and real-time feedback",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S09",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, correct why-hire answer from Capital One, Norfolk Southern, CIC and JPM AM stories; all figures (3-4x, 95%, 0 to 150+, 30+, 15+, 4X, $100M+, 12 countries) supported. No closing.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement",
+    "label": "supported",
+    "source": "Theme values (ruling 4)"
+   },
+   {
+    "text": "Capital One had slow, misaligned iterations extending time-to-market",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Situation"
+   },
+   {
+    "text": "NS orders fell out of decades-old mainframe unnoticed until customers called; account leadership expected waterfall",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "JPM regional leaders competed over requirements, risking fragmentation of a global platform",
+    "label": "supported",
+    "source": "leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Capital One balanced team, client-prioritized testable backlog, pairing, TDD, red-green-refactor",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action"
+   },
+   {
+    "text": "Features 3-4x faster than other Accenture teams, zero production defects, client sought to retain team",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "NS modernization without stopping the railroad; mainframe system of record with APIs, microservices, modern data platform beside it",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Task/Action"
+   },
+   {
+    "text": "Brought revenue management into the hub to co-create in weekly build-measure-learn iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "MVP covered 95% of targeted use cases",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "NS contributors paired into the build, gaining skills to support the app after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "Grew Atlanta and Tampa CICs 0 to 150+ with full P&L, recruiting, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary/Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Result; scaling-cic-impact Result"
+   },
+   {
+    "text": "Stabilized JPM Asset Management Salesforce, delivered across 12 countries on schedule, no scope renegotiations",
+    "label": "supported",
+    "source": "leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S09",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Materially correct answer; quoted 'I do, we do, you do' is verbatim; Norfolk Southern crisis facts and CIC figures all trace to stories. supported: all claims.",
+  "claims": [
+   {
+    "text": "Theme framing: Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement",
+    "label": "supported",
+    "source": "Theme values (ruling 4)"
+   },
+   {
+    "text": "Clients wanted to move from waterfall and silos to customer-centric product development within legacy, compliance, governance",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "CIC recruits lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "NS defects rose while dashboards showed near-complete coverage",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Built CICs from the ground up with full P&L, hiring, training, development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Balanced teams, pairing, TDD, automated pipelines integrated with security controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Process/Action"
+   },
+   {
+    "text": "Reusable playbooks and career development frameworks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/Action (career progression frameworks)"
+   },
+   {
+    "text": "Guided-to-independent progression via 'I do, we do, you do' (verbatim)",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Took ownership of the quality failure before client and account leadership rather than defending metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Audit found tests written after code and stories without defined scenarios; rebuilt backlog with SMART testable stories",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "TDD experts alongside the team; boot camps, katas, pairing",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "0 to 150+ practitioners, 30+ engagements, 15+ Fortune 500 clients, 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "At JPM teams outpaced peer velocity within first 2 sprints, production code in weeks not months",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "$100M+ repeat business via delivery excellence and client relationships",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Clients continued the practices after engagements ended",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; discovery-framing 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S10",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Correct failure story with honest framing; quotation verbatim. supported: all claims.",
+  "claims": [
+   {
+    "text": "Tech lead on global platform modernization for a Fortune 500 financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Delivery pressure; offshore teams testing across dev, QA, UAT, prod",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM, environment segregation and downstream access inherited with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup but relied on documentation, focused on delivery pressure",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task/Action"
+   },
+   {
+    "text": "Did not audit email-trigger access, add masking/interception, or verify names and emails were scrubbed",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered UAT email job sending unmasked production data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability; led root cause analysis and remediation with the team",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Client demanded tester's removal; quote 'a systemic failure that resulted in an individual consequence.' verbatim",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing, risk ownership became day-one responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S10",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Same story, accurate; both quotations verbatim under rule 8. supported: all claims.",
+  "claims": [
+   {
+    "text": "Failed to verify controls protecting production customer data on a financial-services platform modernization",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task/5PSummary"
+   },
+   {
+    "text": "Was tech lead responsible for safe setup across dev, QA, UAT, production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation/Task"
+   },
+   {
+    "text": "Inherited IAM and access configurations; relied on documentation without confirming accuracy",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Did not audit job/email triggers, verify scrubbing, or add masking and interception",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "UAT email job by offshore tester reached thousands of real clients with unmasked data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Led RCA and remediation; identified insufficient IAM, unclear boundaries, unscrubbed data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quotes 'a systemic failure that resulted in an individual consequence.' and 'leaders own the environment their teams operate in.' verbatim",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Day-one IAM validation, environment verification, PII scrubbing, risk ownership",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S11",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, correct Launchpad answer; dates, role, services and 200+ figure match. supported: all claims.",
+  "claims": [
+   {
+    "text": "Liquid Studio training couldn't keep pace with AWS; competency gaps slowed adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Atlanta Innovation Hub program to certify engineers and apply cloud-native skills",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "July 2018 to November 2019 as Cloud Native Architecture Lead",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date/Role"
+   },
+   {
+    "text": "Developed with AWS; learning paths, hands-on labs, mentor-based training",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Curriculum: Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Interactive workshops and labs, practical over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Cloud expert mentorship teams; group coaching and knowledge-sharing workshops",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "More than 200 earned AWS certs incl. Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud adoption and cloud-native initiative launches; ongoing mentorship culture",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S11",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Correct Launchpad answer; the added NEW IT SKILLS NOW program is labelled separate and its facts match its own story. supported: all claims.",
+  "claims": [
+   {
+    "text": "Training couldn't keep pace with evolving AWS at Liquid Studio; gaps slowed adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Launchpad built in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Led at Atlanta Innovation Hub, July 2018 to November 2019, to certify engineers for cloud-native transformation",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task/dates"
+   },
+   {
+    "text": "Learning paths covering Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Workshops and hands-on labs in real AWS environments",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Mentorship teams, group coaching, knowledge-sharing workshops",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Separate self-paced NEW IT SKILLS NOW program: SMEs, modular paths, labs, website, tracker, weekly office hours",
+    "label": "supported",
+    "source": "launching-a-self-paced-learning-program-for-emerging-technologies|accenture Action/5PSummary"
+   },
+   {
+    "text": "Office hours supported professionals struggling to get staffed or change roles",
+    "label": "supported",
+    "source": "launching-a-self-paced-learning-program-for-emerging-technologies|accenture Situation/Action"
+   },
+   {
+    "text": "200+ AWS certifications incl. Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result"
+   },
+   {
+    "text": "NEW IT SKILLS NOW trained 300+ and became standard self-paced path across CloudFirst",
+    "label": "supported",
+    "source": "launching-a-self-paced-learning-program-for-emerging-technologies|accenture Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S12",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Atlanta, GA from the profile. supported.",
+  "claims": [
+   {
+    "text": "Lives in Atlanta, GA",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S12",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Atlanta, GA plus relocation subline, both from the profile. supported: both claims.",
+  "claims": [
+   {
+    "text": "Lives in Atlanta, GA",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "Open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S13",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "AIU master's named, plus BA entry correctly attributed. supported: both.",
+  "claims": [
+   {
+    "text": "Master's in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0]"
+   },
+   {
+    "text": "BA in French Language and Literature from Queens University of Charlotte",
+    "label": "supported",
+    "source": "profile.education[2]"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S13",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Correct institutions and degrees from profile. supported: both.",
+  "claims": [
+   {
+    "text": "Earned Master's in IT at American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0]"
+   },
+   {
+    "text": "Earned BA in French Language and Literature at Queens University of Charlotte",
+    "label": "supported",
+    "source": "profile.education[2]"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S14",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All three education entries, correctly attributed. supported: all claims.",
+  "claims": [
+   {
+    "text": "BA French Language and Literature, Queens University of Charlotte",
+    "label": "supported",
+    "source": "profile.education[2]"
+   },
+   {
+    "text": "Year abroad at Universite Paul Valery, Montpellier, via UNC Chapel Hill exchange",
+    "label": "supported",
+    "source": "profile.education[2].note"
+   },
+   {
+    "text": "Graduate coursework in Romance Languages (Linguistics) at University of Georgia",
+    "label": "supported",
+    "source": "profile.education[1]"
+   },
+   {
+    "text": "Teaching assistant who taught French 101, 102, 103",
+    "label": "supported",
+    "source": "profile.education[1].note"
+   },
+   {
+    "text": "Master's in IT from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0]"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S14",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Profile's education entries in full, each with the right institution. supported: all claims.",
+  "claims": [
+   {
+    "text": "BA in French Language and Literature at Queens University of Charlotte",
+    "label": "supported",
+    "source": "profile.education[2].degree"
+   },
+   {
+    "text": "Montpellier year abroad at Paul Valery through UNC Chapel Hill exchange",
+    "label": "supported",
+    "source": "profile.education[2].note"
+   },
+   {
+    "text": "UGA graduate coursework, Romance Languages (Linguistics)",
+    "label": "supported",
+    "source": "profile.education[1].degree"
+   },
+   {
+    "text": "TA at UGA teaching French 101-103",
+    "label": "supported",
+    "source": "profile.education[1].note"
+   },
+   {
+    "text": "Master's degree in Information Technology at AIU",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S15",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Atlanta, GA from profile with relocation subline. supported.",
+  "claims": [
+   {
+    "text": "Based in Atlanta, GA",
+    "label": "supported",
+    "source": "profile.logistics.location.value"
+   },
+   {
+    "text": "Open to relocation and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "S15",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Location from profile; subline accurate. supported: both.",
+  "claims": [
+   {
+    "text": "Matt's base is Atlanta, Georgia",
+    "label": "supported",
+    "source": "profile.logistics.location"
+   },
+   {
+    "text": "Willing to relocate and travel",
+    "label": "supported",
+    "source": "profile.logistics.location.subline"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]

@@ -1,0 +1,23 @@
+Oct 14 (docs/evidence/MATTGPT-275/golden_agy_20261014_150939): {'failed': 9, 'passed': 281, 'skipped': 3}
+Oct 16 (this run, 3d1f63d): {'failed': 4, 'passed': 275, 'skipped': 3}
+passed   -> absent   tests/eval_rag_quality.py::TestEntityDetection::test_common_words_do_not_scope[Q32_no_scope]
+passed   -> absent   tests/eval_rag_quality.py::TestEntityDetection::test_common_words_do_not_scope[Q33_no_scope]
+passed   -> absent   tests/eval_rag_quality.py::TestEntityDetection::test_common_words_do_not_scope[Q34_no_scope]
+passed   -> absent   tests/eval_rag_quality.py::TestEntityDetection::test_common_words_do_not_scope[Q39_no_scope]
+passed   -> absent   tests/eval_rag_quality.py::TestEntityDetection::test_common_words_do_not_scope[Q40_no_scope]
+passed   -> absent   tests/eval_rag_quality.py::TestEntityDetection::test_entities_do_scope[Q35_should_scope]
+passed   -> absent   tests/eval_rag_quality.py::TestEntityDetection::test_entities_do_scope[Q36_should_scope]
+passed   -> absent   tests/eval_rag_quality.py::TestEntityDetection::test_entities_do_scope[Q37_should_scope]
+passed   -> absent   tests/eval_rag_quality.py::TestEntityDetection::test_entities_do_scope[Q38_should_scope]
+passed   -> absent   tests/eval_rag_quality.py::TestEntityDetection::test_entities_do_scope[Q41_should_scope]
+passed   -> absent   tests/eval_rag_quality.py::TestEntityDetection::test_entities_do_scope[Q42_should_scope]
+failed   -> failed   tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q17]
+failed   -> failed   tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q65]
+passed   -> failed   tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q6]
+failed   -> passed   tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q18_voice]
+failed   -> passed   tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q1_voice]
+failed   -> passed   tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q15_structural]
+failed   -> passed   tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q30_structural]
+failed   -> failed   tests/test_structural_assertions.py::TestCorpusLiterals::test_every_literal_is_allowed
+failed   -> passed   tests/test_structural_assertions.py::TestEntityGateThreshold::test_garbage_queries_blocked[block_Best pizza in Atlanta]
+failed   -> passed   tests/test_structural_assertions.py::TestEntityGateThreshold::test_garbage_queries_blocked[block_asdf jkl qwerty]

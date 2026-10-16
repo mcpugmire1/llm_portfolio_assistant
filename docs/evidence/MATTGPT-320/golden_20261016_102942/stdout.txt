@@ -1,0 +1,410 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.3, pytest-9.0.1, pluggy-1.6.0 -- /Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/venv/bin/python
+cachedir: .pytest_cache
+rootdir: /private/tmp/claude-501/-Users-matthewpugmire-Projects-portfolio-llm-portfolio-assistant/7e788638-525f-483d-8a1f-6538f6d53c64/scratchpad/wt_320
+configfile: pytest.ini
+plugins: anyio-4.11.0, langsmith-0.4.37, bdd-8.1.0, cov-7.0.0
+collecting ... collected 282 items
+
+tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q1] PASSED [  0%]
+tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q2] PASSED [  0%]
+tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q3] PASSED [  1%]
+tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q4] PASSED [  1%]
+tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q5] PASSED [  1%]
+tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q6] FAILED [  2%]
+tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q7] PASSED [  2%]
+tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q8] PASSED [  2%]
+tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q9] PASSED [  3%]
+tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q10] PASSED [  3%]
+tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q62] PASSED [  3%]
+tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q63] PASSED [  4%]
+tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q64] PASSED [  4%]
+tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q11] PASSED [  4%]
+tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q12] PASSED [  5%]
+tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q13] PASSED [  5%]
+tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q14] PASSED [  6%]
+tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q15] PASSED [  6%]
+tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q16] PASSED [  6%]
+tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q17] FAILED [  7%]
+tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q18] PASSED [  7%]
+tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q19] PASSED [  7%]
+tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q20] PASSED [  8%]
+tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q21] PASSED [  8%]
+tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q58] PASSED [  8%]
+tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q59] PASSED [  9%]
+tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q60] PASSED [  9%]
+tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q61] PASSED [  9%]
+tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q65] FAILED [ 10%]
+tests/eval_rag_quality.py::TestEdgeCases::test_edge_query[Q22] PASSED    [ 10%]
+tests/eval_rag_quality.py::TestEdgeCases::test_edge_query[Q23] PASSED    [ 10%]
+tests/eval_rag_quality.py::TestEdgeCases::test_edge_query[Q24] PASSED    [ 11%]
+tests/eval_rag_quality.py::TestEdgeCases::test_edge_query[Q25] PASSED    [ 11%]
+tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q26] PASSED [ 12%]
+tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q27] PASSED [ 12%]
+tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q28] PASSED [ 12%]
+tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q29] PASSED [ 13%]
+tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q30] PASSED [ 13%]
+tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q31] PASSED [ 13%]
+tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q53] PASSED [ 14%]
+tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q54] PASSED [ 14%]
+tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q55] PASSED [ 14%]
+tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q56] PASSED [ 15%]
+tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q57] PASSED [ 15%]
+tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q43_landing] PASSED [ 15%]
+tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q44_landing] PASSED [ 16%]
+tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q45_probe] PASSED [ 16%]
+tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q46_landing] PASSED [ 17%]
+tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q47_landing] PASSED [ 17%]
+tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q48_landing] PASSED [ 17%]
+tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q49_landing] PASSED [ 18%]
+tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q43_landing_page_meta] PASSED [ 18%]
+tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q44_landing_page_meta] PASSED [ 18%]
+tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q46_landing_page_meta] PASSED [ 19%]
+tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q47_landing_page_meta] PASSED [ 19%]
+tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q48_landing_page_meta] PASSED [ 19%]
+tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q49_landing_page_meta] PASSED [ 20%]
+tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q50_story_0] PASSED [ 20%]
+tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q51_story_10] PASSED [ 20%]
+tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q52_story_50] PASSED [ 21%]
+tests/test_agy_behavior.py::TestVoiceFidelity::test_voice_is_third_person[Tell me about Matt's work at RBC-RBC] PASSED [ 21%]
+tests/test_agy_behavior.py::TestVoiceFidelity::test_voice_is_third_person[Tell me about Matt's payments work at JP Morgan-JP Morgan Chase] PASSED [ 21%]
+tests/test_agy_behavior.py::TestVoiceFidelity::test_voice_is_third_person[What are the themes in Matt's work?-None] PASSED [ 22%]
+tests/test_agy_behavior.py::TestVoiceFidelity::test_synthesis_mode_no_first_person PASSED [ 22%]
+tests/test_agy_behavior.py::TestOutOfScope::test_out_of_scope_redirect[Tell me about Matt's retail sales work-semantic_router:out_of_scope-out_of_scope] PASSED [ 23%]
+tests/test_agy_behavior.py::TestOutOfScope::test_out_of_scope_redirect[What is Matt's favorite food?-rule:personal_trivia-None] PASSED [ 23%]
+tests/test_agy_behavior.py::TestRAGExecution::test_metric_fidelity PASSED [ 23%]
+tests/test_agy_behavior.py::TestContentFidelity::test_client_attribution_accuracy PASSED [ 24%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q1_meta] PASSED [ 24%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q2_meta] PASSED [ 24%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q3_meta] PASSED [ 25%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q4_meta] PASSED [ 25%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q5_meta] PASSED [ 25%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q6_meta] PASSED [ 26%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q7_meta] PASSED [ 26%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q8_meta] PASSED [ 26%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q9_meta] PASSED [ 27%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q10_meta] PASSED [ 27%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q62_meta] PASSED [ 28%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q63_meta] PASSED [ 28%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q64_meta] PASSED [ 28%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q11_meta] PASSED [ 29%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q12_meta] PASSED [ 29%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q13_meta] PASSED [ 29%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q14_meta] PASSED [ 30%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q15_meta] PASSED [ 30%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q16_meta] PASSED [ 30%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q17_meta] PASSED [ 31%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q18_meta] PASSED [ 31%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q19_meta] PASSED [ 31%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q20_meta] PASSED [ 32%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q21_meta] PASSED [ 32%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q58_meta] PASSED [ 32%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q59_meta] PASSED [ 33%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q60_meta] SKIPPED [ 33%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q61_meta] PASSED [ 34%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q65_meta] PASSED [ 34%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q22_meta] PASSED [ 34%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q23_meta] PASSED [ 35%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q24_meta] PASSED [ 35%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q25_meta] PASSED [ 35%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q26_meta] PASSED [ 36%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q27_meta] PASSED [ 36%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q28_meta] PASSED [ 36%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q29_meta] PASSED [ 37%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q30_meta] PASSED [ 37%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q31_meta] PASSED [ 37%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q53_meta] PASSED [ 38%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q54_meta] PASSED [ 38%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q55_meta] PASSED [ 39%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q56_meta] PASSED [ 39%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q57_meta] PASSED [ 39%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q32_meta] PASSED [ 40%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q33_meta] PASSED [ 40%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q34_meta] PASSED [ 40%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q39_meta] PASSED [ 41%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q40_meta] PASSED [ 41%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q35_meta] PASSED [ 41%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q36_meta] PASSED [ 42%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q37_meta] PASSED [ 42%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q38_meta] PASSED [ 42%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q41_meta] PASSED [ 43%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q42_meta] PASSED [ 43%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q43_meta] PASSED [ 43%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q44_meta] PASSED [ 44%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q45_meta] PASSED [ 44%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q46_meta] PASSED [ 45%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q47_meta] PASSED [ 45%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q48_meta] PASSED [ 45%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q49_meta] PASSED [ 46%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q50_meta] PASSED [ 46%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q51_meta] PASSED [ 46%]
+tests/test_structural_assertions.py::TestNoMetaCommentary::test_no_meta_commentary[Q52_meta] PASSED [ 47%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q1_voice] PASSED [ 47%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q2_voice] PASSED [ 47%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q3_voice] PASSED [ 48%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q4_voice] PASSED [ 48%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q5_voice] PASSED [ 48%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q6_voice] PASSED [ 49%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q7_voice] PASSED [ 49%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q8_voice] PASSED [ 50%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q9_voice] PASSED [ 50%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q10_voice] PASSED [ 50%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q62_voice] PASSED [ 51%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q63_voice] PASSED [ 51%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q64_voice] PASSED [ 51%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q11_voice] PASSED [ 52%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q12_voice] PASSED [ 52%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q13_voice] PASSED [ 52%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q14_voice] PASSED [ 53%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q15_voice] PASSED [ 53%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q16_voice] PASSED [ 53%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q17_voice] PASSED [ 54%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q18_voice] PASSED [ 54%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q19_voice] PASSED [ 54%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q20_voice] PASSED [ 55%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q21_voice] PASSED [ 55%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q58_voice] PASSED [ 56%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q59_voice] PASSED [ 56%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q60_voice] SKIPPED [ 56%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q61_voice] PASSED [ 57%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q65_voice] PASSED [ 57%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q22_voice] PASSED [ 57%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q23_voice] PASSED [ 58%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q24_voice] PASSED [ 58%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q25_voice] PASSED [ 58%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q26_voice] PASSED [ 59%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q27_voice] PASSED [ 59%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q28_voice] PASSED [ 59%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q29_voice] PASSED [ 60%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q30_voice] PASSED [ 60%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q31_voice] PASSED [ 60%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q53_voice] PASSED [ 61%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q54_voice] PASSED [ 61%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q55_voice] PASSED [ 62%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q56_voice] PASSED [ 62%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q57_voice] PASSED [ 62%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q32_voice] PASSED [ 63%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q33_voice] PASSED [ 63%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q34_voice] PASSED [ 63%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q39_voice] PASSED [ 64%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q40_voice] PASSED [ 64%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q35_voice] PASSED [ 64%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q36_voice] PASSED [ 65%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q37_voice] PASSED [ 65%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q38_voice] PASSED [ 65%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q41_voice] PASSED [ 66%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q42_voice] PASSED [ 66%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q43_voice] PASSED [ 67%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q44_voice] PASSED [ 67%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q45_voice] PASSED [ 67%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q46_voice] PASSED [ 68%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q47_voice] PASSED [ 68%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q48_voice] PASSED [ 68%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q49_voice] PASSED [ 69%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q50_voice] PASSED [ 69%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q51_voice] PASSED [ 69%]
+tests/test_structural_assertions.py::TestAgyVoice::test_agy_voice[Q52_voice] PASSED [ 70%]
+tests/test_structural_assertions.py::TestHardcodedDrift::test_no_hardcoded_drift PASSED [ 70%]
+tests/test_structural_assertions.py::TestCorpusLiterals::test_every_literal_is_allowed FAILED [ 70%]
+tests/test_structural_assertions.py::TestCorpusLiterals::test_every_allowed_entry_still_matches PASSED [ 71%]
+tests/test_structural_assertions.py::TestCorpusLiterals::test_every_allowed_entry_has_a_reason PASSED [ 71%]
+tests/test_structural_assertions.py::TestCorpusLiterals::test_every_allowed_figure_is_on_record PASSED [ 71%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q1_structural] PASSED [ 72%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q2_structural] PASSED [ 72%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q3_structural] PASSED [ 73%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q4_structural] PASSED [ 73%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q5_structural] PASSED [ 73%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q6_structural] PASSED [ 74%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q7_structural] PASSED [ 74%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q8_structural] PASSED [ 74%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q9_structural] PASSED [ 75%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q10_structural] PASSED [ 75%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q62_structural] PASSED [ 75%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q63_structural] PASSED [ 76%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q64_structural] PASSED [ 76%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q11_structural] PASSED [ 76%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q12_structural] PASSED [ 77%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q13_structural] PASSED [ 77%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q14_structural] PASSED [ 78%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q15_structural] PASSED [ 78%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q16_structural] PASSED [ 78%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q17_structural] PASSED [ 79%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q18_structural] PASSED [ 79%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q19_structural] PASSED [ 79%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q20_structural] PASSED [ 80%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q21_structural] PASSED [ 80%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q58_structural] PASSED [ 80%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q59_structural] PASSED [ 81%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q60_structural] SKIPPED [ 81%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q61_structural] PASSED [ 81%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q65_structural] PASSED [ 82%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q22_structural] PASSED [ 82%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q23_structural] PASSED [ 82%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q24_structural] PASSED [ 83%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q25_structural] PASSED [ 83%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q26_structural] PASSED [ 84%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q27_structural] PASSED [ 84%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q28_structural] PASSED [ 84%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q29_structural] PASSED [ 85%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q30_structural] PASSED [ 85%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q31_structural] PASSED [ 85%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q53_structural] PASSED [ 86%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q54_structural] PASSED [ 86%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q55_structural] PASSED [ 86%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q56_structural] PASSED [ 87%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q57_structural] PASSED [ 87%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q32_structural] PASSED [ 87%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q33_structural] PASSED [ 88%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q34_structural] PASSED [ 88%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q39_structural] PASSED [ 89%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q40_structural] PASSED [ 89%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q35_structural] PASSED [ 89%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q36_structural] PASSED [ 90%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q37_structural] PASSED [ 90%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q38_structural] PASSED [ 90%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q41_structural] PASSED [ 91%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q42_structural] PASSED [ 91%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q43_structural] PASSED [ 91%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q44_structural] PASSED [ 92%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q45_structural] PASSED [ 92%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q46_structural] PASSED [ 92%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q47_structural] PASSED [ 93%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q48_structural] PASSED [ 93%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q49_structural] PASSED [ 93%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q50_structural] PASSED [ 94%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q51_structural] PASSED [ 94%]
+tests/test_structural_assertions.py::TestAllStructuralChecks::test_structural_checks[Q52_structural] PASSED [ 95%]
+tests/test_structural_assertions.py::TestEntityGateThreshold::test_legitimate_queries_pass[pass_Tell me about the CIC] PASSED [ 95%]
+tests/test_structural_assertions.py::TestEntityGateThreshold::test_legitimate_queries_pass[pass_What problems does Matt solve?] PASSED [ 95%]
+tests/test_structural_assertions.py::TestEntityGateThreshold::test_legitimate_queries_pass[pass_How did Matt handle failure?] PASSED [ 96%]
+tests/test_structural_assertions.py::TestEntityGateThreshold::test_legitimate_queries_pass[pass_Matt's work at JPMC] PASSED [ 96%]
+tests/test_structural_assertions.py::TestEntityGateThreshold::test_legitimate_queries_pass[pass_Tell me about Matt's amex work] PASSED [ 96%]
+tests/test_structural_assertions.py::TestEntityGateThreshold::test_legitimate_queries_pass[pass_leadership] PASSED [ 97%]
+tests/test_structural_assertions.py::TestEntityGateThreshold::test_legitimate_queries_pass[pass_What industries has Matt worke] PASSED [ 97%]
+tests/test_structural_assertions.py::TestEntityGateThreshold::test_legitimate_queries_pass[pass_Tell me about Matt's AT&T work] PASSED [ 97%]
+tests/test_structural_assertions.py::TestEntityGateThreshold::test_legitimate_queries_pass[pass_Tell me about Matt's Norfolk S] PASSED [ 98%]
+tests/test_structural_assertions.py::TestEntityGateThreshold::test_legitimate_queries_pass[pass_Has Matt run on-call rotations] PASSED [ 98%]
+tests/test_structural_assertions.py::TestEntityGateThreshold::test_legitimate_queries_pass[pass_Tell me about Matt's experienc] PASSED [ 98%]
+tests/test_structural_assertions.py::TestEntityGateThreshold::test_garbage_queries_blocked[block_What's the weather today?] PASSED [ 99%]
+tests/test_structural_assertions.py::TestEntityGateThreshold::test_garbage_queries_blocked[block_Best pizza in Atlanta] PASSED [ 99%]
+tests/test_structural_assertions.py::TestEntityGateThreshold::test_garbage_queries_blocked[block_asdf jkl qwerty] PASSED [100%]
+
+=================================== FAILURES ===================================
+______________ TestProfessionalNarrative.test_narrative_query[Q6] ______________
+tests/eval_rag_quality.py:1428: in test_narrative_query
+    assert result.checks.get("ground_truth", False), (
+E   AssertionError: Ground truth check failed - matched 0 of 1 required. Matched: []
+E   assert False
+E    +  where False = <built-in method get of dict object at 0x10b2b2e40>('ground_truth', False)
+E    +    where <built-in method get of dict object at 0x10b2b2e40> = {'ground_truth': False}.get
+E    +      where {'ground_truth': False} = EvalResult(query_id=6, query='Where does Matt do his best work?', category='narrative', passed=False, checks={'ground_truth': False}, response='🐾 Here’s the kind of work Matt is looking for.\n\nMatt is in active search for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job. His stated focus is execution and delivery alongside organizational transformation: building products, platforms, and teams, solving ambiguous problems, and modernizing systems. He describes the role he wants as being “in the work, not above it.”\n\nAt **Accenture**, that work included building the Atlanta and Tampa Cloud Innovation Centers. Clients wanted to move away from waterfall delivery, feature factories, and siloed teams, but needed practices that worked with legacy systems, compliance requirements, and enterprise governance. Many new hires also lacked hands-on experience with cloud-native technologies or these ways of working.\n\nMatt owned full P&L accountability for both centers, recruited and developed practitioners, and brought product managers, designers, and engineers together in balanced teams. He established pairing stations, client co-location spaces, test-driven development, and automated delivery pipelines. Training followed an “I do, we do, you do” model, moving practitioners from guided to independent delivery. When hierarchy discouraged people from sharing ideas, he introduced weekly brainstorming sessions without judgment and recognized contributions to shared goals rather than individual accolades.\n\nThe centers grew from **0 to 150+ practitioners** and delivered **30+ product engagements** across **15+ Fortune 500 clients**. The practice achieved **4X faster velocity** and **zero-defect deployments**, with **10-person** balanced teams delivering equivalent output to traditional **20-person** teams. Delivery excellence and client relationships contributed to **\\$100M+ in repeatable business**.', error=None, details={'ground_truth_matches': 0, 'matched_phrases': []}).checks
+----------------------------- Captured stderr call -----------------------------
+2026-10-16 10:30:48.998 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:30:48.998 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:30:49.460 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:30:49.460 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:30:51.862 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:30:51.862 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:30:51.867 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:30:51.867 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:30:51.867 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:30:51.867 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:30:51.868 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:30:51.868 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:30:51.868 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:30:51.868 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:30:51.868 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:30:51.868 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:30:51.868 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:30:51.868 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:30:51.868 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:30:51.868 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:30:51.868 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:30:51.868 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:30:51.868 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+___________________ TestIntentRouting.test_intent_query[Q17] ___________________
+tests/eval_rag_quality.py:1470: in test_intent_query
+    assert result.checks.get("synthesis_mode", False), (
+E   AssertionError: Synthesis client-diversity failed - only 1 clients mentioned, need 2
+E   assert False
+E    +  where False = <built-in method get of dict object at 0x10b2f1200>('synthesis_mode', False)
+E    +    where <built-in method get of dict object at 0x10b2f1200> = {'synthesis_mode': False}.get
+E    +      where {'synthesis_mode': False} = EvalResult(query_id=17, query="What are Matt's core themes?", category='intent', passed=False, checks={'synthesis_mode': False}, response='🐾 Here are the core themes across Matt’s work.\n\nMatt’s **seven** core themes are **Execution & Delivery, Org & Working-Model Transformation, Emerging Tech, Professional Narrative, Risk & Responsible Tech, Strategic & Advisory, and Talent & Enablement**. Execution & Delivery is the primary theme, with Org & Working-Model Transformation a strong secondary theme.\n\nThe recurring difficulty in his transformation engagements was that clients modernized technology while keeping the same silos, handoffs, and bottlenecks. At **Accenture**, teams also needed to shift from traditional IT delivery to product-centric ways of working, but their starting points varied across product management, agile, DevOps, and modern engineering. Clients wanted iterative development and customer-centric products while still working within legacy systems, compliance requirements, and traditional governance.\n\nMatt addressed execution and working-model transformation together. He built the Atlanta and Tampa Cloud Innovation Centers, introduced balanced teams across product, engineering, and design, and adapted Lean XP for enterprise complexity. His teams used pair programming, test-driven development, automated pipelines, and discovery and framing rather than treating modernization as a technology replacement alone.\n\nTalent & Enablement included competency frameworks, targeted training, and “I do, we do, you do” coaching on actual client work. Emerging Tech and Strategic & Advisory included research and startup partnerships, client workshops, and tailored IT strategies. Risk & Responsible Tech included enterprise security scanning, access controls, compliance, and IP and confidentiality concerns. Professional Narrative covers his career arc from Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader.\n\nThe CIC grew from **zero to 150+ practitioners**, delivered **30+ product engagements**, and achieved **4X faster velocity** and **zero-defect deployments**. Delivery reputation and client relationships contributed to **\\$100M+ in repeatable business**.', error=None, details={'client_count': 1}).checks
+----------------------------- Captured stderr call -----------------------------
+2026-10-16 10:33:51.973 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:33:51.974 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:33:52.287 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:33:52.287 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:33:54.935 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:33:54.935 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:33:54.945 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:33:54.945 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:33:54.946 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:33:54.946 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:33:54.946 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:33:54.946 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:33:54.946 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:33:54.946 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:33:54.946 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:33:54.946 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:33:54.946 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:33:54.946 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:33:54.946 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:33:54.946 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:33:54.946 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:33:54.947 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:33:54.947 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+___________________ TestIntentRouting.test_intent_query[Q65] ___________________
+tests/eval_rag_quality.py:1476: in test_intent_query
+    assert result.checks.get("source_check", False), (
+E   AssertionError: Synthesis sources failed - 5 stories and 2 named clients, need 5 and 3
+E   assert False
+E    +  where False = <built-in method get of dict object at 0x10b101980>('source_check', False)
+E    +    where <built-in method get of dict object at 0x10b101980> = {'source_check': False}.get
+E    +      where {'source_check': False} = EvalResult(query_id=65, query='Why hire Matt?', category='intent', passed=False, checks={'source_check': False}, response='🐾 Here’s what Matt has built, changed, and delivered.\n\nMatt’s work spans execution and delivery, organizational transformation, and talent development. At **Accenture**, clients wanted to move from waterfall delivery and siloed teams to customer-centric product development, but the organization lacked a scalable model for bringing those practices into complex enterprises. New hires also needed hands-on experience with cloud-native technologies and modern engineering practices. Matt was tasked with building the Atlanta and Tampa Cloud Innovation Centers from the ground up.\n\nThe work included correcting failures, not just introducing new processes. At **Norfolk Southern**, defects were rising despite near-complete test coverage. The backlog lacked defined scenarios and a definition of done, and an engineer was writing tests after the code. The dashboard was not capturing the problems the client was finding.\n\nMatt owned full P&L accountability for both centers, recruited and developed practitioners across engineering, architecture, product, and design, and...opment, and automated delivery pipelines for enterprise security, compliance, and legacy systems. Training followed an “I do, we do, you do” progression, with practitioners moving from guided to independent delivery.\n\nAt **Norfolk Southern**, he took ownership in front of the client and account leadership, audited the codebase and tests, and showed the gaps openly. He rebuilt the backlog with testable stories and brought in engineering experts to coach alongside the team. Defect rates dropped, and the client stopped finding defects the dashboard could not see.\n\nThe centers grew from **0 to 150+ practitioners**, delivering **30+ product engagements** across **15+ Fortune 500 clients**. Teams achieved **4X faster velocity** and **zero-defect deployments**, with **10-person** balanced teams delivering equivalent output to traditional **20-person** teams. Delivery excellence and client relationships contributed to **\\$100M+ in repeat business**. Matt is seeking his next build: a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job.', error=None, details={'source_stories': 5, 'source_named_clients': 2}).checks
+----------------------------- Captured stderr call -----------------------------
+2026-10-16 10:34:45.705 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:34:45.705 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:34:46.047 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:34:46.047 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:34:49.066 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:34:49.066 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:34:49.069 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:34:49.069 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:34:49.070 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:34:49.070 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:34:49.070 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:34:49.070 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:34:49.070 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:34:49.070 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:34:49.070 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:34:49.070 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:34:49.070 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:34:49.070 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:34:49.070 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:34:49.070 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:34:49.070 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:34:49.070 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-16 10:34:49.070 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+_______________ TestCorpusLiterals.test_every_literal_is_allowed _______________
+tests/test_structural_assertions.py:555: in test_every_literal_is_allowed
+    assert not unlisted, "Corpus literals not on the allowed list:\n" + "\n".join(
+E   AssertionError: Corpus literals not on the allowed list:
+E     ui/pages/ask_mattgpt/backend_service.py :: generate_dynamic_dna: Project 'Cloud Innovation Center' x1
+E     ui/pages/ask_mattgpt/backend_service.py :: generate_dynamic_dna: figure '$100M+' x1
+E     ui/pages/ask_mattgpt/backend_service.py :: generate_dynamic_dna: figure '4X faster' x1
+E     ui/pages/ask_mattgpt/landing_view.py :: render_landing_page: figure '12+ countries' x1
+E     ui/pages/ask_mattgpt/prompts.py :: <module>: figure '12 countries' x1
+E     ui/pages/ask_mattgpt/prompts.py :: <module>: figure '40 engineers' x1
+E     ui/pages/ask_mattgpt/prompts.py :: <module>: figure '40%** faster' x1
+E     ui/pages/ask_mattgpt/prompts.py :: <module>: figure '60% of' x1
+E     ui/pages/ask_mattgpt/story_intelligence.py :: build_story_context_for_rag: Project 'Career Narrative' x1
+E     utils/ui_helpers.py :: <module>: figure '150+ engineers' x1
+E   assert not ["ui/pages/ask_mattgpt/backend_service.py :: generate_dynamic_dna: Project 'Cloud Innovation Center' x1", "ui/pages/ask_mattgpt/backend_service.py :: generate_dynamic_dna: figure '$100M+' x1", "ui/pages/ask_mattgpt/backend_service.py :: generate_dynamic_dna: figure '4X faster' x1", "ui/pages/ask_mattgpt/landing_view.py :: render_landing_page: figure '12+ countries' x1", "ui/pages/ask_mattgpt/prompts.py :: <module>: figure '12 countries' x1", "ui/pages/ask_mattgpt/prompts.py :: <module>: figure '40 engineers' x1", ...]
+- generated xml file: /Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/probes/output/MATTGPT-320/golden_20261016_102942/junit.xml -
+=========================== short test summary info ============================
+FAILED tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q6]
+FAILED tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q17]
+FAILED tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q65]
+FAILED tests/test_structural_assertions.py::TestCorpusLiterals::test_every_literal_is_allowed
+============ 4 failed, 275 passed, 3 skipped in 3309.75s (0:55:09) =============

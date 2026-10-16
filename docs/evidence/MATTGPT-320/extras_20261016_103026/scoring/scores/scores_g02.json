@@ -1,0 +1,1481 @@
+[
+ {
+  "case": "c02",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn answered from profile education: supported 'Master's in IT, AIU', 'not titled CS', 'CS-related discipline, exceeds a Bachelor's'. No closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0]"
+   },
+   {
+    "text": "His degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Information Technology is a recognized CS-related discipline and a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c02",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "States the degree facts from the profile without inflating or evaluating, then technical track record; all claims supported: AT&T NGEDT JIAs/3 integration points/Hyderabad, JPM Salesforce integration across 12 countries, Octane Summit app on AppSync/ElastiCache.",
+  "claims": [
+   {
+    "text": "Master's, Information Technology, American InterContinental University; CS-related discipline exceeding a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0]"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Work history spans software engineering, solution architecture, technical design, code reviews, cloud-native platform development",
+    "label": "supported",
+    "source": "profile.career_arc.progression; architecting-enhancements-for-atts-network-engineering-platform|att Action; driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "AT&T Network Engineer implementation needed integration agreements and technical designs across .NET, C#, SQL Server, ESRI APIs",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Situation"
+   },
+   {
+    "text": "JPM legacy data warehouses, compliance and reporting systems not designed for real-time exchange with a cloud CRM; APIs needed security and architecture reviews",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Accenture engineers struggled to onboard to cloud-native tech due to project demands and lack of standardized resources",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Defined Joint Interface Agreements, led interface design, reviewed offshore-delivered code",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Traveled to Hyderabad to transition designs and resolve design/development issues",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Agreements unblocked 3 integration points; no architectural rework between phases; Hyderabad team delivered without ongoing onshore dependency",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Designed JPM integration architecture, set latency/scalability benchmarks, built monitoring",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action"
+   },
+   {
+    "text": "Connected Salesforce with internal and external systems across 12 countries, APIs cleared through security review",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Result"
+   },
+   {
+    "text": "Developed reusable reference apps and IaC templates for Project Octane",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Built the Summit reference app on AWS AppSync GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Reference apps covered Angular/AWS, React Native/AWS, Flutter, each with its own IaC",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c02",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn answered from profile education; all three claims supported.",
+  "claims": [
+   {
+    "text": "Master's in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0]"
+   },
+   {
+    "text": "Not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "IT is a recognized CS-related discipline; a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c02",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Explains the degree honestly from the profile (IT Master's, CS-related discipline; notes a strict CS requirement remains unmet, no inflation) plus track record; AT&T NGEDT, Octane and MattGPT AI-workflow claims all supported. Theme names (Execution & Delivery, Emerging Tech) per rule 4.",
+  "claims": [
+   {
+    "text": "Master's in Information Technology, not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0]"
+   },
+   {
+    "text": "IT is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "AT&T Network Engineer work needed integration agreements across MIC, MIC-NT, ELP and design in .NET, C#, SQL Server, ESRI APIs",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Situation"
+   },
+   {
+    "text": "Development involved Accenture, Avanade, third-party consultants and an offshore Hyderabad team",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Situation"
+   },
+   {
+    "text": "Octane: engineers struggled to onboard to cloud-native tech, creating bottlenecks and delayed timelines",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Defined JIAs, led requirements gathering and interface design, reviewed offshore code against design standards",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Traveled to Hyderabad to transition designs and resolve development issues",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Unblocked downstream development across 3 integration points; no architectural rework; Hyderabad team achieved independent delivery velocity",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Led creation of reusable reference apps and IaC templates; team automated provisioning with Terraform, CloudFormation, serverless",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Task/Action"
+   },
+   {
+    "text": "Built Summit reference app on AWS AppSync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Building MattGPT, used ADRs, behavior-first tests and eval-driven checks to address context loss and AI-generated errors",
+    "label": "supported",
+    "source": "building-effective-ai-assisted-development-workflows|independent-project Action/Task"
+   },
+   {
+    "text": "Shipped a working product with 100+ stories, RAG architecture, polished UI",
+    "label": "supported",
+    "source": "building-effective-ai-assisted-development-workflows|independent-project Result"
+   },
+   {
+    "text": "Verification checks prevented AI-generated regressions from reaching production",
+    "label": "supported",
+    "source": "building-effective-ai-assisted-development-workflows|independent-project Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn answered from leadership stories; all claims supported, quote 'permit to fail' verbatim. 'Retrospectives became daily practices' read as paraphrase of breaking-silos Action (regular retrospectives, practices embedded into daily work).",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action (paraphrase, rule 5)"
+   },
+   {
+    "text": "Teams he inherited were over-processed, under-trusted, waiting for permission",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "At the CIC teams faced fear of blame, knowledge silos, hierarchical structures that slowed delivery",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation; delivering-better-code-and-stronger-teams-through-pair-programming|accenture Situation; shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation; breaking-silos-between-engineering-design-and-product|accenture Situation"
+   },
+   {
+    "text": "His focus was removing those barriers rather than adding process",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary/Situation"
+   },
+   {
+    "text": "Made intent explicit, pushed decisions to people closest to the work",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Used transparency, direct feedback, open communication; coached teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "'permit to fail' environment with non-punitive post-mortems and lean low-stakes experiments with structured hypotheses",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Task/Action (quote verbatim)"
+   },
+   {
+    "text": "Lessons applied to subsequent sprints, reducing repeat errors and shortening timelines",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result/5PSummary"
+   },
+   {
+    "text": "Balanced teams of engineers, PMs, UX architects with equal participation and shared accountability",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Pair programming, collaborative coding and retrospectives became daily practices",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action (embedded XP practices; regular retrospectives; iterative workflows into daily practices; paraphrase)"
+   },
+   {
+    "text": "Paired experienced engineers with juniors, rotated partners, adjusted pairing frequency incl. personality/work-style clashes",
+    "label": "supported",
+    "source": "delivering-better-code-and-stronger-teams-through-pair-programming|accenture Action"
+   },
+   {
+    "text": "Tiered coaching, weekly tech talks with peer-led demos, practice forums, learning in live client projects",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action"
+   },
+   {
+    "text": "New hires onboarded faster and retention improved",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Result/5PSummary"
+   },
+   {
+    "text": "Leadership roles included a 150-person CIC",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Situation"
+   },
+   {
+    "text": "Leadership philosophy story reports 4x delivery acceleration once teams embraced lean product and modern engineering",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Balanced-team work achieved zero-defect production code through iterative development and real-time feedback loops",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "One real shortfall story (Norfolk Southern quality crisis) told honestly, placed in its own engagement (rule 11); all claims supported from the crisis and making-it-stick stories.",
+  "claims": [
+   {
+    "text": "At Norfolk Southern the initial rollout of working practices did not prevent a quality crisis",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation; making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Task"
+   },
+   {
+    "text": "Early 2020, CIC team modernizing Revenue and Shipment Planning platform",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Brought in a balanced team and emphasized TDD",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "A couple of months in, as the pandemic forced remote work, client reported rising defects despite near-complete coverage",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Credibility hit in front of client and Accenture account leadership",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Practices in place but reinforcement and follow-up missing",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Task"
+   },
+   {
+    "text": "An engineer built from his own interpretation and wrote tests after the code",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Backlog had vague stories without defined scenarios or definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action/5PSummary"
+   },
+   {
+    "text": "Took ownership, ran bottom-up audit, showed gaps openly",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt backlog with testable stories, brought TDD experts from Columbus to redo code and tests",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Test cases a discrete step before implementation, checked at standup, daily pair rotation, seasoned practitioners with new engineers",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Practices held after experts left; failure mode did not recur",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   },
+   {
+    "text": "No numerical defect reduction recorded",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result (no figure given)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn answered from leadership stories; quotes 'over-processed, under-trusted...' and 'permit to fail' verbatim; all claims supported.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action (paraphrase)"
+   },
+   {
+    "text": "Quote 'over-processed, under-trusted, waiting for permission instead of owning outcomes'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary (verbatim, case only)"
+   },
+   {
+    "text": "CIC teams faced hierarchical structures and role silos that slowed delivery",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Situation; shifting-teams-from-individual-recognition-to-collective-ownership|accenture Situation"
+   },
+   {
+    "text": "Some teams avoided risks for fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation"
+   },
+   {
+    "text": "Teams entered innovation work expecting polished requirements and predictable outcomes but had assumptions to test",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Situation"
+   },
+   {
+    "text": "Made intent explicit, pushed decisions to people closest to the work",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Transparency, direct feedback, open communication; coached teams to think clearly",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Assembled balanced teams of engineers, PMs, UX architects with equal participation and shared accountability",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Pair programming, collaborative coding, retrospectives, knowledge-sharing sessions became part of daily work",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action (paraphrase)"
+   },
+   {
+    "text": "'permit to fail' culture with non-punitive post-mortems, transparent sharing of mistakes, lean experiments",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action (quote verbatim)"
+   },
+   {
+    "text": "Set expectations upfront that prototypes and user tests would likely fail, intentionally",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "User research, JTBD framing, rapid testing to challenge assumptions before costly builds",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Failed experiments became decision inputs; teams shaped direction week by week",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action/Result"
+   },
+   {
+    "text": "CIC teams achieved 4x delivery acceleration after embracing lean product and modern engineering",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Balanced teams achieved zero-defect production code via iterative development and real-time feedback",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   },
+   {
+    "text": "Post-mortem lessons applied to subsequent sprints to prevent repeat failure patterns",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result"
+   },
+   {
+    "text": "Client teams adopted lean practices and iterative delivery processes they could sustain",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c03",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Real shortfall story (Norfolk Southern quality crisis) in its own engagement (rule 11); quote 'I do, we do, you do' verbatim; all claims supported.",
+  "claims": [
+   {
+    "text": "At Norfolk Southern initial rollout of balanced teams and TDD did not prevent a quality crisis",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "CIC's first major engagement, modernizing legacy Revenue and Shipment Planning platform",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "A couple of months in, pandemic forced remote work, client reported rising defects; dashboards showed near-complete coverage",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Discrepancy caught Matt off guard; credibility hit with client and account leadership accustomed to waterfall",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Engineer solutioning from own interpretation, writing tests after code",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Backlog stories lacked defined scenarios and definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Introducing the practices had not established the discipline",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Task"
+   },
+   {
+    "text": "Took ownership, bottom-up audit, showed gaps openly",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt backlog with SMART testable stories; TDD experts from Columbus redid code and tests",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Samman-style coaching: boot camps, katas, practice learning sessions, 'I do, we do, you do'",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action (quote verbatim)"
+   },
+   {
+    "text": "Defect rates dropped; client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Lesson: coverage metrics mean nothing without practice; transformation needs consistent coaching",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: all four certifications from the profile, each status correct, nothing current; quotes verbatim against profile_rendered.txt.",
+  "claims": [
+   {
+    "text": "Has held certifications, none current",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications[0] (quote verbatim in profile_rendered)"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "Oracle entry records exams passed, not a completed OCP certification",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "No PMP then the four profile certifications (rule 1: acknowledges_missing true); useful_direct true; nothing presented as current.",
+  "claims": [
+   {
+    "text": "Does not hold a PMP certification",
+    "label": "supported",
+    "source": "profile.certifications (PMP absent; rule 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications[0] (quote verbatim in profile_rendered)"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "c04",
+  "run": 1,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Says none current: AWS expired 2023, SAFe expired, Oracle exams 2002; matches expected outcome.",
+  "claims": [
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS certifications expired in 2023",
+    "label": "supported",
+    "source": "profile.certifications[0-1]"
+   },
+   {
+    "text": "SAFe certification expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle entry records exams passed in 2002, not a current certification",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: four certifications quoted verbatim from profile_rendered.txt with statuses; nothing current.",
+  "claims": [
+   {
+    "text": "Has held AWS and SAFe certifications, none current",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications[0] (quote verbatim in profile_rendered)"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "Oracle entries are passed exams, not full OCP certification",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "No PMP then the four certifications quoted verbatim (rule 1); acknowledges_missing and useful_direct true.",
+  "claims": [
+   {
+    "text": "Does not hold PMP certification",
+    "label": "supported",
+    "source": "profile.certifications (PMP absent; rule 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications[0] (quote verbatim in profile_rendered)"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle entry records exams passed, not full OCP",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true
+ },
+ {
+  "case": "c04",
+  "run": 2,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "No, none current: AWS expired 2023, SAFe expired, Oracle exams only; matches expected outcome.",
+  "claims": [
+   {
+    "text": "None of his listed certifications is current",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS certifications expired in 2023",
+    "label": "supported",
+    "source": "profile.certifications[0-1]"
+   },
+   {
+    "text": "SAFe certification expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle entry records exams passed, not full OCP",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn from profile.career_arc.current and transition/why-hire stories; 'builder' in quotes appears verbatim in stories; all claims supported.",
+  "claims": [
+   {
+    "text": "Currently on sabbatical building MattGPT",
+    "label": "supported",
+    "source": "profile.career_arc.current"
+   },
+   {
+    "text": "In active search for a role where building the org, culture and results are the same job",
+    "label": "supported",
+    "source": "profile.career_arc.current"
+   },
+   {
+    "text": "Looking for next build: senior leadership in platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "Wants to be in the work with engineers and PMs, solving hard problems as a team, not strategy decks",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Addresses the in-house comparison directly (stories don't rank him above a given candidate; shows ownership of running an org, not just advising) without disparaging; CIC P&L, 150+, 11-13 leads, near-zero attrition, Norfolk Southern Academy, 10 vs 20-person teams, JPM two sprints all supported.",
+  "claims": [
+   {
+    "text": "Ran an organization over four years, not just advising clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result"
+   },
+   {
+    "text": "Accenture needed to move beyond strategy consulting and systems integration to customer-centric product development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Clients faced waterfall, siloed functions, legacy systems, compliance",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Had to build hiring, evaluation, development, promotion, pay without adding management layers",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Task"
+   },
+   {
+    "text": "Built Atlanta and Tampa centers from ground up with full P&L, budget, hiring, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Grew to 150+ practitioners reporting through 11 to 13 practice and client leads",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Situation/Result"
+   },
+   {
+    "text": "Made every final hiring decision, allocated compensation, facilitated promotion calibration, owned end-of-remediation calls",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action/Performance"
+   },
+   {
+    "text": "Machinery ran through four years of scaling with near-zero attrition in first two years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result"
+   },
+   {
+    "text": "Norfolk Southern: fragmented teams, scarce domain knowledge, direct resistance to pair programming",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action/Result"
+   },
+   {
+    "text": "Led a tailored CIC Academy program over six months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action/5PSummary"
+   },
+   {
+    "text": "Paired domain experts with delivery teams; brought client contributors into the new-state build",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action/Process"
+   },
+   {
+    "text": "Client learned testable stories, owning backlog and priorities, and to support the application after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Performance/5PSummary"
+   },
+   {
+    "text": "10-person balanced teams equalled traditional 20-person teams, 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "At JP Morgan teams outpaced peer velocity within first two sprints, shipping code in weeks vs months",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn from transition and career-intent stories and profile; all claims supported.",
+  "claims": [
+   {
+    "text": "Accenture tenure ended September 2023",
+    "label": "supported",
+    "source": "profile.career_arc.employers[3]"
+   },
+   {
+    "text": "Stepped back to recharge and focus on what came next",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "On sabbatical built MattGPT using RAG, semantic search and modern LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Matt is a builder",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Pursuing a role where building the org, culture and delivering results are the same job",
+    "label": "supported",
+    "source": "profile.career_arc.current"
+   },
+   {
+    "text": "Wants real delivery with engineers and PMs, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "Focus on platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c05",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Addresses the in-house comparison directly via lasting ownership (CIC P&L over 4 years; Norfolk Southern discipline holding and client owning the app after roll-off), no disparagement; all claims supported incl. 30+ engagements, 15+ clients, $100M+ by FY23.",
+  "claims": [
+   {
+    "text": "Stories cover sustained responsibility for building an engineering org",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Task/Action"
+   },
+   {
+    "text": "Clients wanted to move from feature factories to customer-centric product development; legacy, compliance, silos",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Built and ran Atlanta and Tampa CICs with full P&L, budget, hiring, training, career development over 4 years",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Norfolk Southern: question whether discipline would hold after temporary experts left",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Situation"
+   },
+   {
+    "text": "Quality crisis exposed that introducing pairing and test-first was not enough",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Task"
+   },
+   {
+    "text": "Client in mainframe thinking, account leadership expected waterfall, pandemic removed co-location",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Situation"
+   },
+   {
+    "text": "Rebuilt daily workflow around test cases first, rotating pairs, checks at standup; new engineers with seasoned practitioners",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Stories entered sprints only when discrete and testable",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Practices held after experts left; failure mode did not recur",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Result"
+   },
+   {
+    "text": "NS contributors paired into new-state build learning Angular, Node, Spring Boot, cloud-native",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action/5PSummary"
+   },
+   {
+    "text": "Domain experts rotated knowledge through the team",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Process/Result"
+   },
+   {
+    "text": "Client learned quality testable stories, owned backlog, gained skills to support app after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Performance"
+   },
+   {
+    "text": "Grew org from zero to 150+, 30+ engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Delivery excellence and client advocacy contributed to $100M+ repeatable business by FY23",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c06",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn from the two Major U.S. Health System stories; all claims supported.",
+  "claims": [
+   {
+    "text": "Worked with a Major U.S. Health System as Director at Accenture, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Employer/dates"
+   },
+   {
+    "text": "Existing condition management app for diabetes, hypertension, heart disease; reactive care, limited real-time insights",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Started with diabetes management",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Data lake, ML pipeline, LLM instance/chat and full-stack components processing EMR, glucometer, activity tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/5PSummary"
+   },
+   {
+    "text": "Patients got medication reminders, lifestyle adjustments, condition-specific guidance via mobile app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams to interpret AI insights into treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "CIO raised HIPAA and patient privacy concerns",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Brought together legal, compliance, IT security, data science, clinical representatives",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Working extensible MVP in 16 weeks, not a throwaway proof of concept",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "Clinical teams adopted AI insights into treatment planning",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "Pilot maintained full HIPAA compliance",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result"
+   },
+   {
+    "text": "Executives approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result"
+   },
+   {
+    "text": "Added personalized guidance and proactive alerting",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system 5PSummary"
+   },
+   {
+    "text": "Operationalized Accenture's Responsible AI Framework with anonymization, encryption, differential privacy, access policies, monitoring and auditing",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c06",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Role and concrete actions in the healthcare work (platform build, mobile integration, feedback loop, clinician training, RAI governance); 'art-of-the-possible' quote verbatim in 5PSummary; all claims supported.",
+  "claims": [
+   {
+    "text": "Existing app supported diabetes, hypertension, heart disease; reactive care; pilot started with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "CIO raised concerns about sensitive medical info, HIPAA, privacy",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Designed and implemented data lake, ML pipeline, LLM instance, full-stack components ingesting EMR/device data in real time",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Integrated AI into mobile app: chat interface, medication reminders, lifestyle recommendations, condition guidance",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Established feedback loop refining ML models",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Iterative product slicing; working extensible software rather than 'art-of-the-possible'",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result/5PSummary (quote verbatim)"
+   },
+   {
+    "text": "Trained healthcare teams on AI insights",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Convened legal, compliance, IT security, data science, clinical",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Operationalized previously principles-only Responsible AI Framework: anonymization, encryption, differential privacy; access, transparency, accountability policies; monitoring and auditing",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Regularly updated the CIO and executive team during the pilot",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Working MVP in 16 weeks",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "Pilot patients received real-time AI guidance via mobile app, a first for the organization",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "Clinical adoption of insights; full HIPAA compliance",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result"
+   },
+   {
+    "text": "Executives approved consideration of broader implementation, not a confirmed rollout",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c06",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn from the two Major U.S. Health System stories; all claims supported.",
+  "claims": [
+   {
+    "text": "Worked with a Major U.S. Health System as Director at Accenture, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Employer/dates"
+   },
+   {
+    "text": "Existing condition management app for diabetes, hypertension, heart disease; reactive care, limited real-time insights",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Started with diabetes management",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Data lake, ML pipeline, LLM instance/chat and full-stack components processing EMR, glucometer, activity tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/5PSummary"
+   },
+   {
+    "text": "Patients got medication reminders, lifestyle adjustments, condition-specific guidance via mobile app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams to interpret AI insights into treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "CIO raised HIPAA and patient privacy concerns",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Brought together legal, compliance, IT security, data science, clinical representatives",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Working extensible MVP in 16 weeks, not a throwaway proof of concept",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "Clinical teams adopted AI insights into treatment planning",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "Pilot maintained full HIPAA compliance",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result"
+   },
+   {
+    "text": "Executives approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result"
+   },
+   {
+    "text": "Patients received personalized daily recommendations",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Operationalized privacy controls, data-access policies, monitoring and auditing",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ },
+ {
+  "case": "c06",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Role and concrete actions in the healthcare work from both stories; all claims supported incl. 16-week MVP and 4-month pilot.",
+  "claims": [
+   {
+    "text": "Existing app supported diabetes, hypertension, heart disease; reactive care, limited insights",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Led initiative to add AI capabilities starting with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation/5PSummary"
+   },
+   {
+    "text": "CIO raised HIPAA and sensitive data concerns",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Designed and implemented data lake, ML pipeline, LLM instance, full-stack components for EMR/device data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Generative AI chat interface and personalized daily recommendations",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Integrated into mobile app so patients could track metrics, receive guidance, monitor progress",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams; established ML feedback loop",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Convened legal, compliance, IT security, data science, clinical",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Integrated anonymization, encryption, differential privacy; policies for access, transparency, accountability; monitoring and auditing",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Operationalized previously principles-only Responsible AI Framework into governance and HIPAA-compliant pipelines",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "MVP in 16 weeks via iterative product slicing, extensible foundation not throwaway PoC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "4-month pilot; real-time recommendations; clinical adoption; full HIPAA compliance",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result; implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result"
+   },
+   {
+    "text": "Executive team approved consideration of broader AI implementation, not a system-wide rollout",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null
+ }
+]
