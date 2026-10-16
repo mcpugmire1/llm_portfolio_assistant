@@ -16,6 +16,8 @@ to describe behavior that would add complexity for zero user-visible
 benefit. The scenario comment + BACKLOG entry document the rationale.
 """
 
+import os
+
 import pytest
 
 
@@ -74,5 +76,9 @@ def browser_page(shared_browser):
 
 @pytest.fixture
 def app_url():
-    """URL of the running Streamlit app."""
-    return "http://localhost:8501"
+    """URL of the running Streamlit app: STREAMLIT_TEST_URL, else localhost:8501.
+
+    Set STREAMLIT_TEST_URL=http://localhost:8502 to point a second session's
+    BDD runs at its own Streamlit server.
+    """
+    return os.environ.get("STREAMLIT_TEST_URL", "http://localhost:8501")
