@@ -8,8 +8,8 @@
 # Backups:  the previous JSONL is copied to archive/jsonl-backups/ before
 #           overwrite. Repo root stays clean.
 #
-# Excel is authoritative for public_tags (blank in Excel means blank).
-# Prior content is kept when Excel has none; id is the Title|Client slug.
+# The JSONL is rebuilt from the Excel master on every run: nothing from the
+# prior JSONL carries over. id is the Title|Client slug.
 # Only run when new or updated stories need to be synced.
 # --------------------------------------------------------
 
@@ -26,7 +26,7 @@ import pandas as pd
 # MATTGPT-216 (Aug 28, 2026): master-xlsx auto-detection moved into
 # excel_to_jsonl() below so importing this module does not raise
 # SystemExit when the master isn't present (breaks CI + unit tests that
-# only import _merge_with_existing). Script UX unchanged -- running
+# import this module). Script UX unchanged -- running
 # `python generate_jsonl_from_excel.py` still fails immediately with the
 # same message when the master is missing.
 
@@ -40,53 +40,17 @@ ARCHIVE_BACKUPS_DIR = Path("archive/jsonl-backups")
 # ---------- helpers ----------
 
 
-def load_existing_jsonl(path: str):
-    """
-    Load existing JSONL into:
-      - records: list of dicts (original order)
-      - by_key: dict keyed by (Title|Client) normalized
-    """
+def load_existing_jsonl(path: str) -> list[dict]:
+    """Load the existing JSONL's records, in file order, for the change report."""
     records: list[dict] = []
-    by_key: dict[str, dict] = {}
     if not os.path.exists(path):
-        return records, by_key
+        return records
     with open(path, encoding="utf-8") as f:
         for line in f:
             if not line.strip():
                 continue
-            rec = json.loads(line)
-            records.append(rec)
-            key = f"{slugify(rec.get('Title', ''))}|{slugify(rec.get('Client', ''))}"
-            by_key[key] = rec
-    return records, by_key
-
-
-def _merge_with_existing(record: dict, existing: dict) -> dict:
-    """Merge a fresh-from-Excel record with any prior JSONL record.
-
-    Excel is authoritative for public_tags: blank in Excel means blank in
-    the JSONL. Content is preserved from prior when Excel does not supply
-    it (LLM/downstream fills content later). Any other prior-only fields
-    survive to accommodate future enrichments not tracked in Excel.
-
-    Prior to Aug 2026 this block also preserved public_tags when Excel was
-    blank, which meant a cleared Excel column was silently overridden by
-    the tag generator's prior output. The master could not express "no
-    tags." Removed as part of MATTGPT-072.
-    """
-    if not existing:
-        return record
-
-    # Preserve content if Excel does not supply it (it usually doesn't)
-    if not record.get("content") and "content" in existing:
-        record["content"] = existing.get("content", "")
-
-    # Preserve any other prior-only fields (future enrichments not in Excel)
-    for k, v in existing.items():
-        if k not in record:
-            record[k] = v
-
-    return record
+            records.append(json.loads(line))
+    return records
 
 
 def backup_file(path: str):
@@ -111,10 +75,6 @@ def slugify(text: str) -> str:
     text = re.sub(r"[^\w\s-]", "", text)
     text = re.sub(r"\s+", "-", text)
     return text
-
-
-def norm_key(title: str, client: str) -> str:
-    return f"{normalize(title).lower()}|{normalize(client).lower()}"
 
 
 def strip_markdown_bold(text: str) -> str:
@@ -178,8 +138,8 @@ def excel_to_jsonl():
         f"\n🚦 DRY_RUN = {DRY_RUN} — {'No file will be written' if DRY_RUN else 'Output will be saved to disk'}"
     )
 
-    # Load existing JSONL (to preserve public_tags/content/ids where appropriate)
-    existing_records, existing_by_key = load_existing_jsonl(OUTPUT_JSONL_FILE)
+    # Load existing JSONL for the change report
+    existing_records = load_existing_jsonl(OUTPUT_JSONL_FILE)
 
     # Backup current JSONL before overwriting
     backup_file(OUTPUT_JSONL_FILE)
@@ -195,7 +155,6 @@ def excel_to_jsonl():
     for _, row in df.iterrows():
         title = normalize(row.get("Title", ""))
         client = normalize(row.get("Client", ""))
-        key = norm_key(title, client)
 
         # Base fields from Excel
         rec_from_excel = {
@@ -243,10 +202,8 @@ def excel_to_jsonl():
             "Process": split_bullets(normalize(row.get("Process", ""))),
             "5PSummary": normalize(row.get("5PSummary", "")),
             # content is often generated later; Excel usually doesn't contain it
-            "content": "",  # placeholder; may be preserved from existing
+            "content": "",  # placeholder
         }
-
-        existing = existing_by_key.get(key, {})
 
         record = {}
 
@@ -255,8 +212,6 @@ def excel_to_jsonl():
 
         # Copy all base fields from Excel first
         record.update(rec_from_excel)
-
-        record = _merge_with_existing(record, existing)
 
         out_records.append(record)
 
@@ -316,7 +271,7 @@ def excel_to_jsonl():
         print("✅ JSONL export complete.")
         print(f"📄 Output file: {OUTPUT_JSONL_FILE}")
         print(
-            "📌 Safe to run content/tag enrichment next. Excel is authoritative for public_tags; content is preserved from prior JSONL when Excel does not supply it."
+            "📌 Safe to run content/tag enrichment next. The JSONL is rebuilt from the Excel master on every run."
         )
 
 
