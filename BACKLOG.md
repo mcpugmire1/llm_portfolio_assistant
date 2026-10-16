@@ -138,7 +138,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-290](#mattgpt-290) | Internal-content extraction: Agy has disclosed internal instructions and notes on request | Open | Medium | Investigation | value | October 10, 2026 |
 | [MATTGPT-291](#mattgpt-291) | Role-play requests: decide what Agy does when asked to act as an interviewer or hiring manager | Open | Low | Issue | value | October 10, 2026 |
 | [MATTGPT-292](#mattgpt-292) | semantic_search() silently falls back to the whole corpus in file order when Pinecone returns no hits | Open | Medium | Bug | value | October 10, 2026 |
-| [MATTGPT-294](#mattgpt-294) | Split MATT_DNA by responsibility: background may orient, not substitute for evidence | Open | Medium | Refactor | value | October 11, 2026 |
+| [MATTGPT-294](#mattgpt-294) | Split MATT_DNA by responsibility: background may orient, not substitute for evidence | In Progress | Medium | Refactor | value | October 11, 2026 |
 | [MATTGPT-295](#mattgpt-295) | Timeline ERA_ORDER hardcodes 5 eras; "Technical Foundations & Enterprise Integration" (9 stories) sorts last | Open | Medium | Bug | value | October 11, 2026 |
 | [MATTGPT-296](#mattgpt-296) | STANDARD_DELTA's GOOD example ends with "Want me to dig deeper?", contradicting ADR 035 | Open | Low | Bug | value | October 11, 2026 |
 | [MATTGPT-297](#mattgpt-297) | Dog-stereotype humor ("good boy") is allowed in loading messages only; nothing checks that answers stay free of it | Open | Low | Test | value | October 11, 2026 |
@@ -2500,7 +2500,7 @@ No implementation until the decision is recorded here.
 ### MATTGPT-294
 **Split MATT_DNA by responsibility: background may orient, not substitute for evidence**
 
-- **Status:** Open
+- **Status:** In Progress
 - **Priority:** Medium
 - **Type:** Refactor
 - **File:** `ui/pages/ask_mattgpt/backend_service.py` (`generate_dynamic_dna()`), `ui/pages/ask_mattgpt/prompts.py`, `data/matt_profile.json`, `config/constants.py` (`PROFILE_FACT_CATEGORIES`)
@@ -2534,6 +2534,12 @@ No implementation until the decision is recorded here.
 **Tests to update:** `tests/unit/test_matt_dna_grounding.py` and the `matt_dna_grounding_drift` and `matt_dna_career_span` BDD features pin MATT_DNA content (ADR 036, Consequences).
 
 **Acceptance:** a removal in the answer pipeline, so a live acceptance run comes before it ships (CLAUDE.md subtract-first rule): `tests/fixtures/evaluator_conversations.md` plus the MATTGPT-251 extras, same rubric and rules as MATTGPT-275's runs, DNA trimmed vs present. Lever 1's earlier trim measured only the search rate, not answer quality.
+
+**Progress (Oct 16, 2026, HEAD 1cfa5ec):**
+- **Item 3 shipped (24d00ca, evidence eff0973):** the Career Arc's facts moved to `data/matt_profile.json` as `career_arc`, and `generate_dynamic_dna()` renders them from the profile; the CIC line stays derived from the CIC story. Decided there: all arc facts live in the profile rather than being derived from Employer and story dates (Rejected: moving the CIC line into the profile). `career_arc` is not in `PROFILE_FACT_CATEGORIES` (certifications, education, languages, location_availability): it renders in MATT_DNA, not as a cited profile fact. Rerun c02, c05, c16 (3 runs each): 11/15, every career-history claim supported, 0 contradicted, 0 unsupported. MATT_DNA and both system prompts byte-identical to before the move.
+- **Left: items 1, 2 and 4 to 7.** `generate_dynamic_dna()` at HEAD still shows the client list, derived from the corpus (`clients_by_employer`, from each story's Employer and Client), under the header "**Clients by Employer (ONLY cite these):**", and carries its own GROUNDING RULES ("1. ONLY cite clients, projects, and metrics that appear in the stories below"; "3. ... mention clients not on the list"): item 1, the list as a source of permission. The list is still shown to the answering model: item 2. Also still there: "**Industry Experience (stories per industry):**" (item 2), "**Leadership Philosophy:**" (item 4), "**Signature Achievements (cite for synthesis):**" (item 5), "**Theme Strengths:**" (item 6) and "**How Matt Wins Business (NOT a sales role):**" (item 7). The "Currently" line of item 4 moved with item 3.
+- The Acceptance live run (DNA trimmed vs present, the evaluator script plus the MATTGPT-251 extras) applies to the remaining items.
+- **Items 1 and 2 change the model's prompt** (Oct 16, 2026): each needs its own live acceptance run against the 1095d2c baseline, MATTGPT-320's run, including the story controls.
 
 ---
 

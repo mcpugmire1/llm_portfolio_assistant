@@ -157,7 +157,7 @@ claims), -168 (slot 1 amplification), -250 (profile facts in Ask Agy, In
 Progress), -257, -263, -278, -096, -217 (pronoun grammar), -286 (meta-commentary
 strip deletes paragraphs), -290 (internal-content
 extraction), -294 (split MATT_DNA by
-responsibility), -296 (closing offer in a prompt example), -297 (no dog humor in
+responsibility, In Progress), -296 (closing offer in a prompt example), -297 (no dog humor in
 answers), -300 (thinking indicator shows real progress), -301 (em dashes left in the repo), -306 (set store=False
 after 275, Blocked), -307 (Key Metrics label cut), -310 (direct-reports
 answer varies), -311 (no ongoing-period End_Date), -319 (Q59 xfail
