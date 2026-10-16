@@ -9,6 +9,51 @@ command -v jq >/dev/null 2>&1 || block "jq is not installed, so commands cannot 
 cmd=$(jq -r '.tool_input.command // ""')
 has() { printf '%s' "$cmd" | grep -Eq -e "$1"; }
 
+# Split a command into parts: pipelines on unquoted ; & && || newline, segments
+# on unquoted | (marked \037). Used by the ingestion and grep -v checks below.
+split_cmd() {
+  awk -v sq="'" '{
+    out=""; q=""; n=length($0)
+    for (i=1; i<=n; i++) {
+      c=substr($0,i,1); nx=substr($0,i+1,1); pv=substr($0,i-1,1)
+      if (q=="") {
+        if (c=="\"" || c==sq) { q=c }
+        else if (c=="|" && nx=="|") { c="\n"; i++ }
+        else if (c=="|") { c="\037" }
+        else if (c==";") { c="\n" }
+        else if (c=="&" && (pv==">" || nx==">")) { }
+        else if (c=="&") { c="\n"; if (nx=="&") i++ }
+      } else if (c==q) { q="" }
+      out=out c
+    }
+    print out
+  }'
+}
+
+# Ingestion is Matt's: no session runs an ingestion script or touches the OneDrive master, even on a copy.
+# Judged per part, so "git status; python <script>" is caught. A part that starts
+# with a read-only, git or test tool is skipped. Any other part is blocked when it
+# launches Python with an ingestion script's name (a .py path, -m module or -c
+# import), or runs the script directly (./script.py). Names inside a longer word,
+# like test_generate_jsonl_from_excel.py, do not count.
+INGEST_RE='(refresh_master|generate_jsonl_from_excel|generate_public_tags|build_custom_embeddings|purge_pinecone_index)'
+INGEST_SKIP_RE='^[[:space:]]*(git|grep|rg|cat|head|tail|less|sed|wc|diff|ls|pytest|ruff|mypy)([[:space:]]|$)'
+INGEST_LAUNCH_RE='(^|[[:space:]/"'"'"'])(python[0-9.]*|uv[[:space:]]+run|poetry[[:space:]]+run)([[:space:]]|$)'
+INGEST_NAME_RE="(^|[^[:alnum:]_])${INGEST_RE}([^[:alnum:]_]|$)"
+INGEST_DIRECT_RE="^[[:space:]]*[^[:space:]]*${INGEST_RE}\\.py([[:space:]]|$)"
+while IFS= read -r part; do
+  printf '%s' "$part" | grep -Eq -e "$INGEST_SKIP_RE" && continue
+  if { printf '%s' "$part" | grep -Eq -e "$INGEST_LAUNCH_RE" && printf '%s' "$part" | grep -Eq -e "$INGEST_NAME_RE"; } \
+     || printf '%s' "$part" | grep -Eq -e "$INGEST_DIRECT_RE"; then
+    block "ingestion scripts are Matt's to run, even on a copy. Ask Matt."
+  fi
+done < <(printf '%s\n' "$cmd" | split_cmd | tr '\037' '\n')
+# The OneDrive folder, matched as a path (~/OneDrive, $HOME/OneDrive,
+# /Users/<name>/OneDrive, CloudStorage/OneDrive*, OneDrive-Personal), not the
+# bare word, so a commit message or grep that only mentions it is allowed.
+if has '((~|\$HOME|\$\{HOME\}|/Users/[^/[:space:]]+)/OneDrive([/[:space:]"'"'"']|$)|CloudStorage/OneDrive|OneDrive-Personal)'; then
+  block "the OneDrive master is Matt's. Do not list, read or copy it. Ask Matt."
+fi
 if has 'git([[:space:]]+-[^[:space:]]+([[:space:]]+[^-[:space:]][^[:space:]]*)?)*[[:space:]]+push([[:space:];&|]|$)'; then
   block "git push. Only Matt pushes. Stop after committing."
 fi
@@ -30,24 +75,6 @@ fi
 # "grep -v ... ; something .env" and patterns like "a|b" are judged correctly.
 GREPV_RE='(^|[[:space:]])[a-z]*grep[[:space:]]+([^[:space:]]+[[:space:]]+)*(-[[:alnum:]]*v[[:alnum:]]*|--invert-match)([[:space:]]|$)'
 SECRET_FILE_RE='(^|[[:space:]=<"'"'"'])[^[:space:]"'"'"']*(\.env(\.[[:alnum:]_-]+)?|\.pem|\.key|(secret|credential|token|service[-_]?account)[^[:space:]"'"'"'/]*\.(toml|json|ya?ml|env|txt|ini|cfg))["'"'"']?([[:space:]]|$)'
-split_cmd() {
-  awk -v sq="'" '{
-    out=""; q=""; n=length($0)
-    for (i=1; i<=n; i++) {
-      c=substr($0,i,1); nx=substr($0,i+1,1); pv=substr($0,i-1,1)
-      if (q=="") {
-        if (c=="\"" || c==sq) { q=c }
-        else if (c=="|" && nx=="|") { c="\n"; i++ }
-        else if (c=="|") { c="\037" }
-        else if (c==";") { c="\n" }
-        else if (c=="&" && (pv==">" || nx==">")) { }
-        else if (c=="&") { c="\n"; if (nx=="&") i++ }
-      } else if (c==q) { q="" }
-      out=out c
-    }
-    print out
-  }'
-}
 while IFS= read -r pipeline; do
   secret_seen=0
   while IFS= read -r seg; do
