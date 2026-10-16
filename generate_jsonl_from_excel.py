@@ -191,7 +191,6 @@ def excel_to_jsonl():
     df = df[df["Title"].notna()].copy()
 
     out_records = []
-    created, updated = 0, 0
 
     for _, row in df.iterrows():
         title = normalize(row.get("Title", ""))
@@ -260,17 +259,13 @@ def excel_to_jsonl():
         record = _merge_with_existing(record, existing)
 
         out_records.append(record)
-        if existing:
-            updated += 1
-        else:
-            created += 1
 
     # === PREVIEW OR WRITE OUTPUT JSONL ===
     out_ids = [rec["id"] for rec in out_records]
     existing_ids = [rec.get("id") for rec in existing_records if "id" in rec]
     new_ids = set(out_ids) - set(existing_ids)
 
-    unchanged = 0
+    created, updated, unchanged = len(new_ids), 0, 0
     print(f"\n--- 🆕 Created ({len(new_ids)}) ---")
     for rec in out_records:
         if rec["id"] in new_ids:
@@ -301,6 +296,7 @@ def excel_to_jsonl():
             print("  • No changes detected.")
             unchanged += 1
         else:
+            updated += 1
             for field, old_val, new_val in diffs:
                 print(f"  • {field} changed:")
                 print(f"    OLD: {json.dumps(old_val, ensure_ascii=False)}")
