@@ -32,6 +32,10 @@ Cited probe output copied byte-identical into docs/evidence/MATTGPT-<n>/ (42ddbe
 
 ### Ask Agy
 
+**October 16, 2026 -- First golden eval on the shipped Ask Agy pipeline (MATTGPT-320)** -- `2e46a59`
+
+Golden eval (`tests/eval_rag_quality.py`, `test_agy_behavior.py`, `test_structural_assertions.py`; `docs/evidence/MATTGPT-320/golden_20261016_102942/`) on a frozen checkout of 3d1f63d, loggers patched: 4 failed, 275 passed, 3 skipped of 282, against 9 failed on Oct 14 (`docs/evidence/MATTGPT-275/golden_agy_20261014_150939/`). Q17, Q65 and TestCorpusLiterals fail as before; Q6 newly fails (MATTGPT-304); the 11 entity-detection tests left with entity detection. Extras (`extras_20261016_103026/`), blind-scored by two scorers: MATTGPT-250's acceptance queries and MATTGPT-253's formerly refused queries, 30/30 single answers and 22/22 conversation turns pass, every formerly refused query answered; Role Match equivalence note 2/2.
+
 **October 15, 2026 -- Four tickets resolved by the MATTGPT-275 Green's deletions (MATTGPT-187, MATTGPT-199, MATTGPT-201, MATTGPT-256)** -- `1095d2c`
 
 The MATTGPT-275 Green deletes `rag_answer()` and the pipeline around it, and with it the code these four tickets were about. Closed Oct 16, 2026 on `git grep -n <pattern> -- '*.py' ':!docs' ':!archive' ':!probes'` at HEAD 77f72c2:

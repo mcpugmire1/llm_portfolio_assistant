@@ -21,7 +21,7 @@ repo. Evaluator fixture: `tests/fixtures/evaluator_conversations.md` at
 |---|---|---|---|---|
 | 1 | Semantic understanding | Yes (Matt, Oct 10, 2026) | Undefined | Failing on 2 of 20 pairs, Oct 10 on the old pipeline; not re-measured on 1095d2c |
 | 2 | Conversational continuity | Yes | Per-turn only; aggregate undefined | Measured per turn in 1095d2c's acceptance run: new 386/450, 4 turns below bar |
-| 3 | Trust and credibility | Yes | Partly | Failing (reproduced defects); no golden eval on 1095d2c (-320) |
+| 3 | Trust and credibility | Yes | Partly | Failing (reproduced defects); golden eval on shipped code 4 failed of 282 (2e46a59) |
 | 4 | Role Match | Yes | Partly | Not measured on the current pipeline; role_match BDD passing (1095d2c) |
 | 5 | Evidence parity | Yes | One case only (CS degree) | Failing on that case; general parity not measured |
 | 6 | Evidence discovery | Yes | Yes (BDD); search relevance undefined | Stale; two known failures |
@@ -63,7 +63,7 @@ runs agreed on every pair. Failures:
 (tokenizer divergence), -171 (phrase matching), -177 (token_overlap_ratio
 bound), -063 (wrong-person queries), -077
 (pronoun and noun-overlap contamination), -195 (incident vocabulary
-routing), -236 (router topical families), -239 (router confidence floor,
+routing), -236 (router out of Ask Agy's answer path), -239 (router confidence floor,
 Blocked), -062 (stale router embeddings), -167 (entity detection for
 Project and Place, Parked), -304 (reranker spike).
 
@@ -139,9 +139,13 @@ question), -317 (Ask Agy About This dropped mid-answer).
   (no threshold).
 
 **Status:**
-- Golden eval: no run on 1095d2c's `agy_answer()` path (MATTGPT-320). The
-  last count, 63/65 with Q59 the expected xfail (d0b6376, Oct 7), was on
-  the old pipeline.
+- Golden eval on the shipped pipeline (Oct 16, 2026; 2e46a59, run on
+  3d1f63d): 4 failed, 275 passed, 3 skipped of 282 tests, against 9
+  failed on Oct 14. Failing: Q17 and Q65 (intent routing) and
+  TestCorpusLiterals, as on Oct 14; Q6 newly (MATTGPT-304).
+- Extras, same commit: MATTGPT-250's acceptance queries and MATTGPT-253's
+  formerly refused queries, blind-scored: 30/30 single answers and 22/22
+  conversation turns pass (52/52); Role Match equivalence note 2/2.
 - MATTGPT-275 gate rerun, Oct 15 (`docs/evidence/MATTGPT-275/gate_20261015_093237/`, new arm, 450
   turns): invented figures, clients or dates 0; visible dashes 0 of 900 Sol
   answers (new and opener arms); runs with a contradicted claim 16 (x1 8,
@@ -161,7 +165,7 @@ responsibility, In Progress), -296 (closing offer in a prompt example), -297 (no
 answers), -300 (thinking indicator shows real progress), -301 (em dashes left in the repo), -306 (set store=False
 after 275, Blocked), -307 (Key Metrics label cut), -310 (direct-reports
 answer varies), -311 (no ongoing-period End_Date), -319 (Q59 xfail
-reason stale), -320 (golden eval on shipped code), -322 (hobby questions
+reason stale), -322 (hobby questions
 get 0b's bare sentence).
 
 ## 4. Role Match
