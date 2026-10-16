@@ -37,7 +37,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 23. Rest of Role Match: -173, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
--177 (bound violation) · -190 (tokenizer divergence) · -187 (max_per_client) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- better ranking surfaces more adjacent candidates into verdict definitions that still absorb them as partial, so ranking before calibrating makes over-calling worse before better; full constraint in -249 detail block)
+-177 (bound violation) · -190 (tokenizer divergence) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (remove router topical family dimension: 3 inert families, 2 set membership rewires, 6 topic-axis families) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- better ranking surfaces more adjacent candidates into verdict definitions that still absorb them as partial, so ranking before calibrating makes over-calling worse before better; full constraint in -249 detail block)
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
@@ -49,7 +49,7 @@ Answer mode: -284 (synthesis mode decided in four places; a promoted query such 
 -077 (re-measure after -181) · -171 (coupled to -190) · -185 (negation) · -239 (router confidence floor, blocked on -223 Sheet data) · -281 (openers by answer type; Matt writes the lists) · -280 (narrative tone depends on which story leads; measure after -281) · -283 (embedding model PoC)
 
 **LATER — tier 4:** hygiene
-Dead code: -176, -183, -199, -201 · -241 (dead prose: out_of_scope_response + personal_response, backend_service.py (out_of_scope_response + personal_response in rag_answer())) · Hidden error: -204 (zero-filter-match only -- st.stop() blanking was MATTGPT-224, shipped `92370b3`)
+Dead code: -176, -183 · -241 (dead prose in `_router_rejection()`: delete it) · Hidden error: -204 (zero-filter-match only -- st.stop() blanking was MATTGPT-224, shipped `92370b3`)
 Untraced flash: -229 (My Work flashes before Ask Agy conversation -- needs DevTools trace) · -289 (MATTGPT-018 regression watch: stale landing elements painted 240-370 ms, one mixed frame in 3 runs)
 BDD flakes: -122, -131, -142, -145, -197, -198
 Wrong-assertion test: -203 · -209 (drift guard searches wrong scope) · -254 (stale `jd_extraction.feature` and `post_era_project_counts.feature` stats-bar assertions)
@@ -110,7 +110,6 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-252](#mattgpt-252) | Ask Agy writes evaluative sentences about Matt despite repeated prompt instructions against it | Open | High | Issue | value | September 26, 2026 |
 | [MATTGPT-254](#mattgpt-254) | Stale BDD scenarios in role_match.feature and jd_extraction.feature; CHANGELOG em dash | Open | Medium | Bug | chore | September 26, 2026 |
 | [MATTGPT-255](#mattgpt-255) | Meta-commentary strip regex corrupts decimal amounts and merges paragraphs | Open | High | Bug | value | October 2, 2026 |
-| [MATTGPT-256](#mattgpt-256) | 154 commented-out lines of the old _generate_agy_response() remain in backend_service.py | Open | Medium | Bug | chore | October 2, 2026 |
 | [MATTGPT-257](#mattgpt-257) | Delete "None is current." from rule 0a -- certification entries already carry expiry dates | Open | Medium | Issue | value | October 2, 2026 |
 | [MATTGPT-258](#mattgpt-258) | Architecture fitness tests: dependency direction and coupling limits have no automated enforcement | Open | Medium | Action | chore | October 2, 2026 |
 | [MATTGPT-259](#mattgpt-259) | Answer pipeline lives in UI layer -- rag_answer() and callers in backend_service.py should move to services/ | Open | High | Refactor | chore | October 2, 2026 |
@@ -140,7 +139,6 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-290](#mattgpt-290) | Internal-content extraction: Agy has disclosed internal instructions and notes on request | Open | Medium | Investigation | value | October 10, 2026 |
 | [MATTGPT-291](#mattgpt-291) | Role-play requests: decide what Agy does when asked to act as an interviewer or hiring manager | Open | Low | Issue | value | October 10, 2026 |
 | [MATTGPT-292](#mattgpt-292) | semantic_search() silently falls back to the whole corpus in file order when Pinecone returns no hits | Open | Medium | Bug | value | October 10, 2026 |
-| [MATTGPT-293](#mattgpt-293) | Router out_of_scope copy says "I don't have experience in that industry" and hardcodes an industry list | Open | Low | Bug | value | October 11, 2026 |
 | [MATTGPT-294](#mattgpt-294) | Split MATT_DNA by responsibility: background may orient, not substitute for evidence | Open | Medium | Refactor | value | October 11, 2026 |
 | [MATTGPT-295](#mattgpt-295) | Timeline ERA_ORDER hardcodes 5 eras; "Technical Foundations & Enterprise Integration" (9 stories) sorts last | Open | Medium | Bug | value | October 11, 2026 |
 | [MATTGPT-296](#mattgpt-296) | STANDARD_DELTA's GOOD example ends with "Want me to dig deeper?", contradicting ADR 035 | Open | Low | Bug | value | October 11, 2026 |
@@ -180,14 +178,11 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-180](#mattgpt-180) | Test fixture blind spot: test_formatting.py, test_filters.py, test_scoring.py build on phantom schema and pass against it | Open | High | Bug | chore | August 11, 2026 |
 | [MATTGPT-183](#mattgpt-183) | has_metric filter dead -- nothing in UI sets it to True; remove rather than fix | Open | Low | Refactor | chore | August 13, 2026 |
 | [MATTGPT-185](#mattgpt-185) | Query negation unsupported -- "outside of MattGPT" returns MattGPT stories | Open | Medium | Enhancement | value | August 13, 2026 |
-| [MATTGPT-187](#mattgpt-187) | diversify_results max_per_client parameter is documented but never implemented | Open | Medium | Bug | chore | August 13, 2026 |
 | [MATTGPT-190](#mattgpt-190) | Tokenizer character-set divergence: _tokenize keeps +#-. while token_overlap_ratio splits on non-\w | Open | Medium | Bug | value | August 16, 2026 |
 | [MATTGPT-195](#mattgpt-195) | Production incident queries scatter across six intent families -- delivery family has no incident vocabulary | Open | Medium | Bug | value | August 16, 2026 |
 | [MATTGPT-196](#mattgpt-196) | Defensive pytest.skip in test_explore_stories.py masks UI regressions as green runs | Open | Medium | Bug | chore | August 16, 2026 |
 | [MATTGPT-197](#mattgpt-197) | BDD suite-order flake: test_tapping_filters_toggle_shows_row_2_on_mobile fails in marathon, passes in isolation | Open | Low | Bug | chore | August 17, 2026 |
 | [MATTGPT-198](#mattgpt-198) | BDD suite-order flake: test_clicking_a_nav_label_still_routes_to_its_surface_no_regression fails in marathon, passes in isolation | Open | Low | Bug | chore | August 17, 2026 |
-| [MATTGPT-199](#mattgpt-199) | Entity-name-untrimmable hole in MATTGPT-074 content-kw gate: AT&T tokenizes to empty set, strip never fires | Open | Low | Bug | chore | August 17, 2026 |
-| [MATTGPT-201](#mattgpt-201) | Entity pin for Client/Employer uses blend order while code comment and debug label state pc-order intent | Open | Low | Refactor | chore | August 17, 2026 |
 | [MATTGPT-202](#mattgpt-202) | id-skip predicate copied verbatim in app.py and corpus_loader.py -- divergence risk, no shared source | Open | Medium | Bug | chore | August 18, 2026 |
 | [MATTGPT-203](#mattgpt-203) | Chip grid disable test asserts the wrong mechanism | Open | Low | Bug (Test) | chore | August 18, 2026 |
 | [MATTGPT-204](#mattgpt-204) | Explore Stories zero-filter-match: Table view renders empty grid chrome; Cards/Timeline empty-state text hidden by CSS | Open | Low | Bug | value | August 18, 2026 |
@@ -1390,6 +1385,8 @@ Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consiste
 
 **Pickup (Oct 16, 2026):** hold while MATTGPT-128 is open. Stale: `dbg()` is still defined in `utils/ui_helpers.py`, but `git grep -nE "\bdbg\("` over `*.py` (excluding `docs/` and `archive/`) finds no caller.
 
+**Stale against 1095d2c; re-scope on pickup.**
+
 ---
 
 ### MATTGPT-153
@@ -1747,6 +1744,8 @@ Same class as the no-inference clause in MATTGPT-250: retrieved text that sits n
 - A false-premise question naming Goldman Sachs and trading got the "Wrong trail" banner (`BANNER_COPY["rule"]`, shown for any `rule:` rejection). The banner doesn't correct the premise: it never says Matt has no Goldman Sachs or trading work on record.
 - The Lockheed Martin STRATCOM work was missed until the visitor named it. Related: MATTGPT-210 (STRATCOM invisible on career queries).
 
+**Second absence claim (Oct 16, 2026):** the router's out_of_scope banner, `BANNER_COPY["out_of_scope"]` in `utils/ui_helpers.py`: "🐾 That's outside Matt's experience." It is what a visitor sees for every out_of_scope rejection (the `out_of_scope_response` prose in `_router_rejection()` is never rendered, MATTGPT-241). Like "Matt has not worked with X", it is a flat claim about Matt's experience; the acceptance above calls for "not on record" wording. Folded in from MATTGPT-293 (closed Oct 16, 2026 as a duplicate): the replacement copy is Matt's wording.
+
 ---
 
 ### MATTGPT-252
@@ -1852,33 +1851,6 @@ Double-bolding (prompt asks for bold three times alongside the regex) and `OFF_T
 
 ---
 
-### MATTGPT-256
-**154 commented-out lines of the old _generate_agy_response() remain in backend_service.py**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Bug
-- **File:** `ui/pages/ask_mattgpt/backend_service.py` (`_generate_agy_response()`), `ui/pages/ask_mattgpt/prompts.py` (`_GROUNDING_RULES_HEADER`)
-- **Logged:** October 2, 2026
-
-**Issue 1 -- contradictory opening.** `_generate_agy_response()` includes `"🐾 Great question -- let me pull together the big picture."` in its synthesis openings list, and `build_user_message()` requires the model to start with that exact text. BASE_PROMPT's VOICE section bans "Great question!". Whenever that opening is chosen, the two instructions contradict each other.
-
-**Fix 1:** Delete that one opening from the list.
-
-**Issue 1 resolved (Oct 6, 2026, f6e750c, MATTGPT-275 Prep C):** The "Great question" synthesis opener is dropped, not reworded; four synthesis openers remain. BASE_PROMPT's VOICE rule ("No sycophantic openers") stays. The only "Great question" left in `backend_service.py` is inside the commented-out block (Issue 2).
-
-**Issue 2 -- dead commented-out code.** Verified Oct 2: 154 commented-out lines of the old `_generate_agy_response()` remain below the live function in `backend_service.py`. No behavior; pure dead weight.
-
-**Fix 2:** Delete the 154 commented-out lines.
-
-**Issue 3 -- stale comment.** The comment above `_GROUNDING_RULES_HEADER` in `prompts.py` cites "state what the block says..." The rule now reads "state what the facts say." The comment is stale.
-
-**Fix 3:** Update the comment to match the current rule text.
-
-**Issue 3 done (b2c85ba):** Verified Oct 6, 2026: the comment above `_GROUNDING_RULES_HEADER` reads ("state what the facts say..." lowercase), matching the rule. Issue 2 is the only open item.
-
----
-
 ### MATTGPT-257
 **Delete "None is current." from rule 0a -- certification entries already carry expiry dates**
 
@@ -1943,6 +1915,8 @@ f. Data-contract check against the real corpus (added Oct 11, 2026): field names
 **Requires:** Pre-flight names all callers; acceptance run covers story controls; ARCHITECTURE.md pre-commit checklist triggers. Depends on coordination with MATTGPT-260 to avoid moving the session-state coupling into the wrong layer.
 
 **Pickup (Oct 16, 2026):** hold until no value ticket has `ui/pages/ask_mattgpt/backend_service.py` open.
+
+**Stale against 1095d2c; re-scope on pickup.**
 
 ---
 
@@ -2268,6 +2242,8 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 
 **Related:** MATTGPT-254 (stale BDD scenarios in role_match.feature and jd_extraction.feature). Kept separate because the pn_exclusion failure may be a regression, not a stale test.
 
+**Stale against 1095d2c; re-scope on pickup.**
+
 ---
 
 ### MATTGPT-278
@@ -2357,6 +2333,8 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 
 **Source:** the read-only Clean Architecture assessment, Oct 9, 2026: `docs/evidence/MATTGPT-275/ca_synthesis_20261009_090024/clean_architecture_assessment.md` (65e0621).
 
+**Stale against 1095d2c; re-scope on pickup.**
+
 ---
 
 ### MATTGPT-286
@@ -2444,6 +2422,8 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 
 **Scope:** What Ask Agy shows when retrieval fails. Any change re-tests the outage behavior from MATTGPT-162 and -230.
 
+**Stale against 1095d2c; re-scope on pickup.**
+
 ---
 
 ### MATTGPT-289
@@ -2530,27 +2510,6 @@ No implementation until the decision is recorded here.
 **Acceptance:** a fallback is logged and visible in the query log, and Agy's answer isn't built from file-order stories as if they were search results.
 
 **Related:** MATTGPT-288 (`rag_answer()` ignores the fallback signal), which this precedes.
-
----
-
-### MATTGPT-293
-**Router out_of_scope copy says "I don't have experience in that industry" and hardcodes an industry list**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Bug
-- **File:** `ui/pages/ask_mattgpt/backend_service.py` (`_router_rejection()`, `out_of_scope_response`)
-- **Logged:** October 11, 2026
-
-**Verified Oct 11, 2026:** the out_of_scope branch of `_router_rejection()` returns fixed copy: "🐾 I don't have experience in that industry. Matt's work is primarily in **Financial Services**, **Healthcare/Life Sciences**, **Telecom**, and **Technology/SaaS**." Seen on "Tell me about Matt's gaming experience", 2 of 2 (MATTGPT-285 run `acceptance_narrowed_20261010_161142`, untracked).
-
-**Problem:**
-- The first sentence is a flat no in Matt's voice. It's false whenever the corpus is incomplete. It should say what's on record instead (e.g. "That isn't in Matt's stories"), matching MATTGPT-251's absence acceptance (fixed copy here, model answers there).
-- The industry list is hand-typed, the MATTGPT-279 class. Derive it from the corpus or drop it.
-
-**Copy wording is Matt's.**
-
-**Correction (Oct 12, 2026):** that copy is the `answer_md` the probe recorded, and in the UI it is likely never shown. The branch also sets `ask_last_reason`, so `conversation_view.py` and `landing_view.py` push a banner entry instead, and the user sees `BANNER_COPY["out_of_scope"]` in `utils/ui_helpers.py`: "🐾 That's outside Matt's experience." (from source; not checked in a browser). That banner is the same flat no. The fix covers the banner copy, and removes or wires the unused `answer_md` (same shape as MATTGPT-298's personal reply).
 
 ---
 
@@ -3176,7 +3135,7 @@ Any sentinel has to be translated in one place before anything uses it. With tha
 - **Related:** MATTGPT-250 (rule 0b), MATTGPT-251
 - **Logged:** October 16, 2026
 
-**Observed (prod, Oct 15, 2026, after MATTGPT-294):** "What does Matt like to do for fun?" reached the model and got rule 0b's "Nothing I know about Matt covers that." with no 🐾 opener. "Is Matt married?" gets the router's personal banner (`personal_response`, which opens "🐾 I'm focused on Matt's professional experience").
+**Observed (prod, Oct 15, 2026, after MATTGPT-294):** "What does Matt like to do for fun?" reached the model and got rule 0b's "Nothing I know about Matt covers that." with no 🐾 opener. "Is Matt married?" gets the router's personal banner, `BANNER_COPY["personal"]` in `utils/ui_helpers.py`: "🐾 I'm focused on Matt's professional experience." (Corrected Oct 16, 2026: this block first named `personal_response`, the prose `_router_rejection()` builds; it is never rendered, MATTGPT-241.)
 
 **Router scores (local, HEAD 77f72c2, Oct 16, 2026; `is_portfolio_query_semantic()` with `_log_borderline` and `_log_router_low_confidence` patched out):**
 - "What does Matt like to do for fun?": 0.593, background ("Who is Matt?")
@@ -3430,6 +3389,8 @@ The phrase is not invisible to keyword scoring. It scores on a single stopword t
 
 **Note on `_format_narrative`:** An earlier claim in this investigation that `_format_narrative` output "poisons every query" was retracted. Verified: `_format_narrative` feeds `answer_context`, used only in the API-failure fallback path in `rag_answer()` in `backend_service.py`, the API-failure fallback path. It does not enter the LLM prompt on normal query paths. No ticket warranted; noted here for provenance since the retraction happened in the same investigation session.
 
+**Stale against 1095d2c; re-scope on pickup.**
+
 ---
 
 ### MATTGPT-177
@@ -3544,30 +3505,6 @@ Specific location: `test_scoring.py:85` constructs a fixture dict using phantom 
 **Cross-references:** MATTGPT-077 (Independent Project / MattGPT vocabulary concentration is why MattGPT dominates these pools in the first place), MATTGPT-172 (CIC consolidation -- reducing Independent Project density is the upstream lever; this ticket handles the explicit-exclusion case).
 
 ---
-
-### MATTGPT-187
-**diversify_results max_per_client parameter is documented but never implemented**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Bug
-- **File:** `rag_answer()` in `backend_service.py` (dedup / client-cap logic)
-- **Logged:** August 13, 2026
-
-**Issue:** The signature takes `max_per_client: int = 1` and the docstring says "Limiting stories per client." The parameter is never referenced in the body. Stories beyond the first per client go into `duplicate_overflow` and are concatenated onto the result rather than dropped.
-
-Two failing tests assert the documented contract:
-- `test_limits_single_client_stories` -- asserts `jpmc_count <= 1`, gets 2. Input `[JPMC, JPMC, Capital One, Takeda, AmEx]` returns `[JPMC, Capital One, Takeda, AmEx, JPMC]`.
-- `test_maintains_overall_order` -- asserts descending score order, gets `[0.95, 0.82, 0.78, 0.75, 0.88]`. The duplicate JPMC at 0.88 is bumped to the end.
-
-**Decision required before fixing:** Is the intent to drop duplicates or to demote them? The tests assert drop. The code demotes. Callers pass `max_per_client=3` at `rag_answer()` in `backend_service.py`, which only means something under the drop interpretation.
-
-Note the second test also asserts score ordering, which the function cannot preserve by design -- it partitions by client bucket and never reads a score. That assertion may be testing the wrong contract regardless of how the first question is resolved.
-
-**Cross-references:** MATTGPT-168 (records this finding in its body -- this is the ticket that owns it), MATTGPT-177 (covers the first of the six untracked failures; this covers two more).
-
----
-
 
 ### MATTGPT-190
 **Tokenizer character-set divergence: _tokenize keeps +#-. while token_overlap_ratio splits on non-\w**
@@ -3720,55 +3657,6 @@ Note the second test also asserts score ordering, which the function cannot pres
 **Evidence:** Full-suite failure at `eb7e5cb` + MATTGPT-074 refinement uncommitted at that run (MATTGPT-074 has since closed at c67c8b7); isolation-run pass with gate refactor restored.
 
 **Acceptance criterion:** Passes consistently in the full suite without isolation, or root cause confirmed and documented.
-
----
-
-### MATTGPT-199
-**Entity-name-untrimmable hole in MATTGPT-074 content-kw gate: AT&T tokenizes to empty set, strip never fires**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Bug
-- **File:** `is_query_on_topic_llm()` in `backend_service.py`, `utils/validation.py` (`_WORD_RX` and `_tokenize()`)
-- **Logged:** August 17, 2026
-
-**Issue:** The content-kw gate strips `entity_toks = set(_tokenize(entity_value))` from `retrieval_q` before recomputing kw. For entities whose canonical name tokenizes to `set()`, nothing gets stripped, so any content token disperses kw and suppresses synthesis -- identical to the broad-query behavior the gate was designed to catch.
-
-**Verified August 17, 2026:** `_WORD_RX = re.compile(r"[A-Za-z0-9+#\-_.]+")` in `utils/validation.py` does not include `&`. `_tokenize("AT&T")` splits into `["at", "t"]`, both dropped by the `len(t) >= 3` filter in `_tokenize()`. `entity_toks = set()`.
-
-**Consequence:** AT&T is the only current corpus entity affected. Any entity whose canonical name is ≤2 chars or contains `&` (or other non-`[A-Za-z0-9+#\-_.]` punctuation) has the same behavior. Hypothetical: "L3", "T&E", etc.
-
-**Test impact (August 17, 2026):** MATTGPT-074 scenario 2 (content tokens beyond entity name still disperse kw) passes at both Red and Green for the wrong reason -- AT&T `entity_toks` are empty either way, so the gate cannot differentiate a broad AT&T query from a specific one. The scenario is a regression guard on content-kw dispersion generally, not a proof of AT&T entity stripping. Documented in scenario comment. MATTGPT-074 has since closed (c67c8b7, August 17).
-
-**Fix options (for later scoping):**
-1. Widen `_WORD_RX` to preserve `&` -- corpus-wide effect on all scoring; requires its own gate and eval run.
-2. Add a per-entity alias (`at&t` → `att`) that gets stripped instead.
-3. Detect that entity value contains chars `_WORD_RX` drops and fall back to a substring strip rather than a token strip.
-
-**Cross-references:** MATTGPT-190 (tokenizer character-set divergence -- `_tokenize` keeps `+#-.` while `token_overlap_ratio` splits on non-`\w`; same tokenizer, adjacent gap).
-
----
-
-### MATTGPT-201
-**Entity pin for Client/Employer uses blend order while code comment and debug label state pc-order intent**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Refactor
-- **File:** `ui/pages/ask_mattgpt/backend_service.py`
-- **Logged:** August 17, 2026
-
-**Issue:** The entity pin for Client/Employer takes `entity_candidates[0]`, assuming the list arrives pc-sorted. The comment at lines 1948-1949 states "For Client/Employer, Pinecone score ordering is already semantically correct..." and the debug label at lines 1978-1979 reads "using top Pinecone score:". But the list actually arrives blend-sorted, so `[0]` is the top-blend story, not the top-pc story.
-
-**Verified August 17, 2026:** AT&T incident trace pinned Southeast CRM (pc=0.481, blend=0.531) over Defining System Interfaces (pc=0.497, blend=0.497). Southeast CRM has kw=0.333 from the Aug 17 corpus edit; that inflated its blend above the pc-preferred story. Comment and behavior disagree.
-
-**Historical note:** The pool likely arrived pc-sorted from an older `pinecone_service` and shifted to blend-sorted without the pin code being audited. Confirm by tracing when `pinecone_service` began sorting by blend.
-
-**Behavior is correct; the label is wrong.** The AT&T incident trace shows Southeast CRM was the right pin. Verified August 17, 2026.
-
-**Fix (option 1):** Update the comment at lines 1948-1949 and the debug label at lines 1978-1979 from "top Pinecone score" to "top blend score." No behavior change. Requires confirming blend-order pinning is the intended semantic for Client/Employer entities generally before committing.
-
-**Cross-references:** MATTGPT-168 (slot-1 amplification -- which story gets pinned determines what takes 80% of the response; this ticket affects the pin selection, not the 80% floor).
 
 ---
 
@@ -4117,6 +4005,8 @@ Fallback if no entity is detected: surviving-family membership (`background`, `n
 **History (Sept 2, 2026 finding, on `rag_answer()`):** `rag_answer()` in `backend_service.py` constructs `out_of_scope_response` and `personal_response`, and both set `ask_last_reason`. The transcript branch in `render_conversation()` in `conversation_view.py` takes the banner path whenever a reason is set, so the prose is never rendered. Warm, well-written copy that no visitor has ever read.
 
 **Acceptance:** `out_of_scope_response` and `personal_response` are gone; `BANNER_COPY` is the only copy path per rejection type. `answer_md` for a router rejection has a defined value, and `TestRejectionsKept` asserts that value.
+
+**Folded in from MATTGPT-293 (closed Oct 16, 2026 as a duplicate):** deleting `out_of_scope_response` also removes its flat "I don't have experience in that industry" and its hand-typed industry list.
 
 ---
 

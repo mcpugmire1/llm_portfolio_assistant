@@ -24,6 +24,18 @@ Cited probe output copied byte-identical into docs/evidence/MATTGPT-<n>/ (42ddbe
 
 ### Ask Agy
 
+**October 15, 2026 -- Four tickets resolved by the MATTGPT-275 Green's deletions (MATTGPT-187, MATTGPT-199, MATTGPT-201, MATTGPT-256)** -- `1095d2c`
+
+The MATTGPT-275 Green deletes `rag_answer()` and the pipeline around it, and with it the code these four tickets were about. Closed Oct 16, 2026 on `git grep -n <pattern> -- '*.py' ':!docs' ':!archive' ':!probes'` at HEAD 77f72c2:
+- MATTGPT-187 (`diversify_results()` ignores `max_per_client`): `def diversify_results` returns nothing, and neither failing test (`test_limits_single_client_stories`, `test_maintains_overall_order`) is left under `tests/`.
+- MATTGPT-199 (AT&T tokenizes to an empty set in the content-kw gate): `is_query_on_topic_llm` returns nothing. The tokenizer divergence itself stays open as MATTGPT-190.
+- MATTGPT-201 (entity pin takes blend order, comment says Pinecone order): `entity_candidates` returns nothing.
+- MATTGPT-256 (the 154 commented-out lines of the old `_generate_agy_response()`, its last open item): `_generate_agy_response` matches only comments and a print in `scripts/assess_story_quality_v2.py` and `tests/test_agy_behavior.py`; "Great question" matches only the VOICE ban in `prompts.py` and `scripts/streamlit_drawer_approximation.py`. Issues 1 and 3 had closed earlier (f6e750c, b2c85ba).
+
+**October 16, 2026 -- Router out_of_scope copy ticket closed as a duplicate (MATTGPT-293)**
+
+MATTGPT-293 covered two copies of one rejection. The prose `_router_rejection()` builds ("🐾 I don't have experience in that industry", with a hand-typed industry list) is never rendered: a rejected turn shows `render_no_match_banner()`. Deleting it is MATTGPT-241. The banner visitors see, `BANNER_COPY["out_of_scope"]` ("🐾 That's outside Matt's experience."), is a flat absence claim, now under MATTGPT-251's "not on record" acceptance. No code change.
+
 **October 15, 2026 -- Ask Agy answers on gpt-6.1-sol after a measured comparison with gpt-4o (MATTGPT-282)** -- `9d046c1`, `8fa0270`, `1095d2c`
 
 Two evidence runs measured the answering model before the switch. `9d046c1` (`docs/evidence/MATTGPT-282/sol_vs_4o_20261011_183401/`): the PoC with only the answering call varied, gpt-4o against gpt-6.1-sol on the Responses API, 280 live turns, scored blind. `8fa0270` (`docs/evidence/MATTGPT-282/sol_arms_20261011_211830/`): four interleaved arms, 520 live turns, scored blind: PoC Sol 124/130, lever 2 Sol 123/130, PoC with the gpt-4o planner 119/130. The MATTGPT-275 Red (`ab09ddf`) and Green (`1095d2c`) ship lever 2 on gpt-6.1-sol, named once as `ASK_ANSWER_MODEL` in `config/constants.py`. Role Match stays on gpt-4o; its migration is MATTGPT-302.

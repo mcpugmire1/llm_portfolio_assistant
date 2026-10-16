@@ -61,7 +61,7 @@ runs agreed on every pair. Failures:
 
 **Open tickets:** -283 (embedding model PoC), -185 (negation), -190
 (tokenizer divergence), -171 (phrase matching), -177 (token_overlap_ratio
-bound), -199 (AT&T content-kw gate), -063 (wrong-person queries), -077
+bound), -063 (wrong-person queries), -077
 (pronoun and noun-overlap contamination), -195 (incident vocabulary
 routing), -236 (router topical families), -239 (router confidence floor,
 Blocked), -062 (stale router embeddings), -167 (entity detection for
@@ -156,7 +156,7 @@ question), -317 (Ask Agy About This dropped mid-answer).
 claims), -168 (slot 1 amplification), -250 (profile facts in Ask Agy, In
 Progress), -257, -263, -278, -096, -217 (pronoun grammar), -286 (meta-commentary
 strip deletes paragraphs), -290 (internal-content
-extraction), -293 (router out_of_scope copy), -294 (split MATT_DNA by
+extraction), -294 (split MATT_DNA by
 responsibility), -296 (closing offer in a prompt example), -297 (no dog humor in
 answers), -300 (thinking indicator shows real progress), -301 (em dashes left in the repo), -306 (set store=False
 after 275, Blocked), -307 (Key Metrics label cut), -310 (direct-reports
@@ -256,7 +256,7 @@ Match).
 - The career-narrative field differs by surface (Theme, Era, Category).
 
 **Open tickets:** -146, -228, -204, -196, -150, -122, -131, -197, -145,
--183, -187, -210, -166, -083, -271, -295 (Timeline era order), -308
+-183, -210, -166, -083, -271, -295 (Timeline era order), -308
 (My Work first page is MattGPT stories).
 
 ## 7. Operational reliability
@@ -284,7 +284,7 @@ experience reliably and sustainably; failures are visible, not silent.
   -274, -084, -180, -277, -198, -035, -060, -082, -143 (Parked), -203,
   -209, -213.
 - Architecture and maintainability: -258 (In Progress), -259, -260, -261, -262, -140,
-  -201, -202, -214, -226, -256.
+  -202, -214, -226.
 - Dead code and hygiene: -176, -232, -241, -152 (Parked), -270, -287 (docs
   describe a removed overlap gate).
 - Visible glitches: -229, -289 (MATTGPT-018 regression watch).
