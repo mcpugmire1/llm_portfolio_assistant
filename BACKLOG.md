@@ -28,14 +28,14 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 14. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
 15. **-129 stories 3-5** -- Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 16. **-252** -- Ask Agy writes evaluative sentences about Matt despite prompt instructions against it. Visitor-visible; isolating probe spec in the detail block.
-17. **-322** -- Blocked on -236. Hobby questions ("What does Matt like to do for fun?") get rule 0b's bare sentence with no opener, where personal questions get the router's banner. -236's router-off gate run includes them; whatever handles them there becomes the fix.
+17. **-322** -- Gates -236. Rule 0b's decline is a bare sentence with no opener: hobby questions get it in every arm of -236's gate, and with the router off personal questions join them (57/60 bare). Fix: a voiced 0b decline with its own live run and story controls.
 18. **-235** -- Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
 19. **-223** -- Add router_score and router_family columns to Sheet query row; unblocks -239's floor threshold decision.
 20. **-222** -- Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
 21. Rest of Role Match: -173, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
--177 (bound violation) · -190 (tokenizer divergence) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (take the router out of Ask Agy's answer path) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- better ranking surfaces more adjacent candidates into verdict definitions that still absorb them as partial, so ranking before calibrating makes over-calling worse before better; full constraint in -249 detail block)
+-177 (bound violation) · -190 (tokenizer divergence) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (take the router out of Ask Agy's answer path; decided arm B, after -322) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- better ranking surfaces more adjacent candidates into verdict definitions that still absorb them as partial, so ranking before calibrating makes over-calling worse before better; full constraint in -249 detail block)
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
@@ -160,7 +160,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-318](#mattgpt-318) | extract_facts.py emits no Ask Agy facts: add ask_answer_model, ask_tool_max_rounds and ask_history_max_messages; retire chat_model or emit assessment_model | Open | Medium | Action | value | October 15, 2026 |
 | [MATTGPT-319](#mattgpt-319) | Golden eval Q59's xfail reason names the confidence gate that 1095d2c removed | Open | Low | Hygiene | chore | October 15, 2026 |
 | [MATTGPT-321](#mattgpt-321) | Stale copy after 1095d2c: "Primary LLM" comment on DEFAULT_CHAT_MODEL; "High confidence match" and "Says what it doesn't know" in the How Agy Searches dialog | Open | Low | Hygiene | value | October 15, 2026 |
-| [MATTGPT-322](#mattgpt-322) | Hobby questions get rule 0b's bare sentence, with no opener, instead of the personal banner | Blocked | Medium | Issue | value | October 16, 2026 |
+| [MATTGPT-322](#mattgpt-322) | Rule 0b's decline is a bare sentence with no opener: hobby questions today, and personal questions once the router is out (MATTGPT-236) | Open | Medium | Issue | value | October 16, 2026 |
 | [MATTGPT-324](#mattgpt-324) | My Work doesn't render the profile facts semantic_search() returns (MATTGPT-250 item 1a) | Open | Medium | Enhancement | value | October 16, 2026 |
 | [MATTGPT-325](#mattgpt-325) | My Work misses stories that mention a one-word query only in their Situation: "Pandemic" returns 1 of the 5 stories that mention it | Open | Medium | Issue | value | October 16, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
@@ -191,7 +191,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-229](#mattgpt-229) | Asking Agy "why hire matt" flashes My Work table view before landing on conversation | Open | Medium | Bug | value | September 1, 2026 |
 | [MATTGPT-233](#mattgpt-233) | Phase 2: extend pre-push gate to BDD suite, `test_agy_behavior.py`, `test_structural_assertions.py` | Open | Medium | Infra | chore | September 1, 2026 |
 | [MATTGPT-235](#mattgpt-235) | Resolve LLM-text assertion classes so pre-push gate can widen to agy-behavior and structural suites | Open | High | Refactor / Test | value | September 1, 2026 |
-| [MATTGPT-236](#mattgpt-236) | Take the semantic router out of Ask Agy's answer path | Open | Medium | Refactor | value | September 1, 2026 |
+| [MATTGPT-236](#mattgpt-236) | Take the semantic router out of Ask Agy's answer path | Blocked | Medium | Refactor | value | September 1, 2026 |
 | [MATTGPT-239](#mattgpt-239) | Router confidence floor: reject queries that score below a threshold across all families before Pinecone query | Blocked | Medium | Enhancement | value | September 2, 2026 |
 | [MATTGPT-241](#mattgpt-241) | Dead prose in backend_service.py: out_of_scope_response and personal_response built but never rendered | Open | Low | Hygiene | chore | September 2, 2026 |
 | [MATTGPT-226](#mattgpt-226) | Dead `.main` selectors across `ui/styles/` after `.main → .stMain` refactor: 31 selectors, ~299 declarations, all matching 0 elements | Open | Medium | Refactor / Tech debt | chore | August 31, 2026 |
@@ -1647,7 +1647,7 @@ Same class as the no-inference clause in MATTGPT-250: retrieved text that sits n
 
 **Rejected (do not re-derive):** Pairwise rules such as "do not treat mortgage as real estate." Each one fixes a single pairing and misses the next.
 
-**Out of scope:** Agriculture under-claim (September 23, 2026). The Liquid Studio story was not in the top 25 for that query -- retrieval miss, not synthesis, and it covers a single PoC mention.
+**Out of scope (September 23, 2026), superseded Oct 16, 2026:** agriculture under-claim, as a retrieval miss. It is now an adjacency case below (MATTGPT-236 gate).
 
 **Observed (Oct 6, 2026; `docs/evidence/MATTGPT-269/not_clients_20261006_164532/`, b2f2d4a):** Agy calls Accenture, Matt's employer, a client: 10/75 answers before removing the NOT-clients list, 6/75 after (by pattern; 9744634).
 
@@ -1659,6 +1659,10 @@ Same class as the no-inference clause in MATTGPT-250: retrieved text that sits n
 - The Lockheed Martin STRATCOM work was missed until the visitor named it. Related: MATTGPT-210 (STRATCOM invisible on career queries).
 
 **Second absence claim (Oct 16, 2026):** the router's out_of_scope banner, `BANNER_COPY["out_of_scope"]` in `utils/ui_helpers.py`: "🐾 That's outside Matt's experience." It is what a visitor sees for every out_of_scope rejection (the `out_of_scope_response` prose in `_router_rejection()` is never rendered, MATTGPT-241). Like "Matt has not worked with X", it is a flat claim about Matt's experience; the acceptance above calls for "not on record" wording. Folded in from MATTGPT-293 (closed Oct 16, 2026 as a duplicate): the replacement copy is Matt's wording.
+
+**Retail (MATTGPT-236 gate, Oct 16, 2026; 1743846, `docs/evidence/MATTGPT-236/gate_20261016_140623/`):** "Has Matt worked in retail?" (r09) scores out_of_scope 0.833 at the router, and the shipped redirect shows "That's outside Matt's experience." It fails 10/10, unsupported: the corpus says the Fiserv portal served "retailers like Home Depot, Citi, and Meijer" and calls Sparkfly "the retail technology platform Sparkfly is today". Without the redirect (arms B and C): 6/10 each, and all 20 answers name the Fiserv or Sparkfly work.
+
+**Adjacency case, agriculture (same gate):** "Has Matt worked in agriculture?" (r07) 0/30 in every arm. All 30 say not on record and none names the Liquid Studio prototype work across "life sciences, transportation, entertainment, agriculture, and consumer goods" (`building-smart-connected-devices-at-accentures-liquid-studio|accenture`, the only story that mentions agriculture). The Liquid Studio story is in the sources of 0 of 30 answers; the tool's one search was "Matt work experience agriculture agricultural farming agribusiness industry". Same family as x1 "Has Matt worked in real estate?" (5/30) and x3 "Has Matt worked on trading platforms?" (8/30). A retrieval miss first (MATTGPT-325's pattern: the story never reaches the model); it stays here for the adjacency part, since once retrieved the answer has to label the work as adjacent.
 
 ---
 
@@ -2993,15 +2997,14 @@ Any sentinel has to be translated in one place before anything uses it. With tha
 ---
 
 ### MATTGPT-322
-**Hobby questions get rule 0b's bare sentence, with no opener, instead of the personal banner**
+**Rule 0b's decline is a bare sentence with no opener: hobby questions today, and personal questions once the router is out (MATTGPT-236)**
 
-- **Status:** Blocked
+- **Status:** Open
 - **Priority:** Medium
 - **Type:** Issue
-- **File:** `services/semantic_router.py` (`VALID_INTENTS["personal"]`)
-- **Related:** MATTGPT-250 (rule 0b), MATTGPT-251
+- **File:** `ui/pages/ask_mattgpt/prompts.py` (`_CITATION_RULES_0A_0B`, rule 0b)
+- **Related:** MATTGPT-250 (rule 0b), MATTGPT-251, MATTGPT-236 (gated by this ticket)
 - **Logged:** October 16, 2026
-- **Dependencies:** MATTGPT-236
 
 **Observed (prod, Oct 15, 2026, after MATTGPT-294):** "What does Matt like to do for fun?" reached the model and got rule 0b's "Nothing I know about Matt covers that." with no 🐾 opener. "Is Matt married?" gets the router's personal banner, `BANNER_COPY["personal"]` in `utils/ui_helpers.py`: "🐾 I'm focused on Matt's professional experience." (Corrected Oct 16, 2026: this block first named `personal_response`, the prose `_router_rejection()` builds; it is never rendered, MATTGPT-241.)
 
@@ -3013,13 +3016,15 @@ Any sentinel has to be translated in one place before anything uses it. With tha
 
 `router_rejection_reason()` fires only for the personal or out_of_scope family at `HARD_ACCEPT` (0.80) or above, so all three hobby questions reach the model. `matt_profile.json` has no hobbies key, so rule 0b covers them, and 0b's "Reply with that sentence only" overrides the tool path's opener line. 0b did its job against MATTGPT-251's failure: no answer built from adjacent stories.
 
-**Fix (decided Oct 16, 2026; superseded, see Blocked below):** add a hobbies anchor to the router's personal family, so these questions get the personal banner. No prompt change.
+**Fix (decided Oct 16, 2026; superseded, see Re-scoped below):** add a hobbies anchor to the router's personal family, so these questions get the personal banner. No prompt change.
 
 **Rejected:** relaxing 0b's "that sentence only" so the reply carries the opener. It is a prompt change needing a live run with story controls, and "only" is what keeps text out after the sentence.
 
 **Test (for the router fix):** the three hobby questions above route to personal at `HARD_ACCEPT` or above. Story controls stay out of the personal family at `HARD_ACCEPT`, including a work-preference wording such as "What does Matt like about leading teams?".
 
-**Blocked on MATTGPT-236 (Oct 16, 2026):** the router fix above is moot if -236 takes the router out of Ask Agy's answer path. -236's router-off vs router-on gate run includes the three hobby questions; whatever handles them with the router off becomes this ticket's fix.
+**Re-scoped (Oct 16, 2026; MATTGPT-236 gate, 1743846, `docs/evidence/MATTGPT-236/gate_20261016_140623/`):** this ticket now gates MATTGPT-236, and its fix is no longer a router anchor. Rule 0b's bare "Nothing I know about Matt covers that" (from the answer text, 10 runs per arm): "What does Matt like to do for fun?" and "What are Matt's hobbies?" 30/30 across the three arms; "What does Matt do outside of work?" 19/30 (A 8, B 7, C 4). With the router off (arm B), "Is Matt married?", "How old is Matt?" and "Does Matt have kids?" are bare 10/10 each (A and C: 0/10, the personal redirect); r01 to r06, B 57/60 against A 28/60.
+
+**Fix:** a voiced 0b decline, measured with story controls in its own live run, before MATTGPT-236's removal.
 
 ---
 
@@ -3070,6 +3075,8 @@ One story at or above `CONFIDENCE_LOW` (0.20), and its 0.242 is below `CONFIDENC
 **Fix direction (not decided):** (a) let a literal keyword hit admit a story below the cutoff; (b) add Situation, Task, Action and Result to the keyword scorer's text; (c) both. Either changes what Ask Agy's search tool gets back as well.
 
 **Constraint on the fix (Oct 16, 2026):** the full question admits 94 of 124 stories at 0.20, so the embedding score alone does not separate topic from noise. Any keyword admission stays narrow (literal term hits only), and is measured against story controls for noise: a live acceptance run in My Work and Ask Agy, with the five pandemic stories and unrelated queries.
+
+**Second case, agriculture (MATTGPT-236 gate, Oct 16, 2026; 1743846, `docs/evidence/MATTGPT-236/gate_20261016_140623/`):** "Has Matt worked in agriculture?" (r07): the Liquid Studio story (`building-smart-connected-devices-at-accentures-liquid-studio|accenture`, the only story that mentions agriculture) is in the sources of 0 of 30 answers; Ask Agy's one search was "Matt work experience agriculture agricultural farming agribusiness industry". A retrieval miss: the story never reaches the model. The adjacency part (the answer has to label the work as adjacent once retrieved) is on MATTGPT-251.
 
 ### MATTGPT-160
 **JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs**
@@ -3820,13 +3827,13 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 ### MATTGPT-236
 **Take the semantic router out of Ask Agy's answer path**
 
-- **Status:** Open
+- **Status:** Blocked
 - **Priority:** Medium
 - **Type:** Refactor
 - **File:** `ui/pages/ask_mattgpt/backend_service.py` (`agy_answer()`, `_router_rejection()`), `services/semantic_router.py`, `config/constants.py`
-- **Related:** MATTGPT-322 (Blocked on this ticket), MATTGPT-239 (router confidence floor), MATTGPT-195 (router incident vocabulary), MATTGPT-241 (router rejection prose)
+- **Related:** MATTGPT-322 (gates this ticket), MATTGPT-239 (router confidence floor), MATTGPT-195 (router incident vocabulary), MATTGPT-241 (router rejection prose)
 - **Logged:** September 1, 2026
-- **Dependencies:** MATTGPT-220 (inventory complete, conclusion untracked until this ticket)
+- **Dependencies:** MATTGPT-322 (its voiced 0b decline lands first, with its own live run). MATTGPT-220 (inventory complete, conclusion untracked until this ticket)
 
 **Scope broadened (Oct 16, 2026):** from removing the topical family dimension to taking the router out of Ask Agy's answer path.
 
@@ -3839,7 +3846,15 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 
 **Acceptance:** a router-off vs router-on gate run (MATTGPT-275's gate shape: the evaluator script, blind-scored), with the story controls and MATTGPT-322's three hobby questions ("What does Matt like to do for fun?", "What does Matt do outside of work?", "What are Matt's hobbies?").
 
-**MATTGPT-322 (Oct 16, 2026):** Blocked on this ticket. Its router-anchor fix is moot if the router goes; whatever handles the hobby questions with the router off becomes -322's fix.
+**Decided (Matt, Oct 16, 2026; 1743846, `docs/evidence/MATTGPT-236/gate_20261016_140623/`):** arm B, the router out of Ask Agy's answer path (no redirects, no synthesis pick), sequenced after MATTGPT-322's fix lands with its own live run.
+
+**Gate (frozen checkout of 725d564; three arms of `agy_answer()`, 10 runs, 1,830 turns, 0 errors; blind-scored under brief_v2 plus RUBRIC.md; `merge_out.txt`):** arm A as shipped, B with the router returning an empty family, C passing only a personal family. Cases: MATTGPT-275's 45 gate turns plus 16 router questions (r01 to r16).
+- All: A 524/610, B 532/610, C 531/610.
+- The 49 questions the router does not change (identical prompts in every arm): A 427/490, B 430/490, C 430/490, the noise floor.
+- The 12 it changes: A 97/120, B 102/120, C 101/120. The synthesis pick changed nothing measurable (A 67, B 66, C 65 of 80).
+- Rule 0b's bare sentence on r01 to r06 (personal and hobby questions): A 28/60, B 57/60, C 24/60. With the router off, the personal questions join the hobby questions: MATTGPT-322.
+
+**MATTGPT-322 gates this ticket (Oct 16, 2026):** its fix is a voiced 0b decline, measured with story controls, before the router comes out.
 
 **Earlier scope (Sept 1, 2026), kept for the router's other callers:**
 
