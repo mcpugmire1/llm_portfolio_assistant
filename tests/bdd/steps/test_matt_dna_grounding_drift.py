@@ -72,13 +72,21 @@ def when_sync(ctx):
     ctx["backend_service"] = backend_service
 
 
-@then("every distinct Employer value from the corpus appears literally in MATT_DNA")
+def _career_arc_block(dna: str) -> str:
+    """MATT_DNA's Career Arc section: from its heading to the next bold heading."""
+    start = dna.index("**Career Arc:**")
+    return dna[start : dna.index("\n\n**", start)]
+
+
+@then("every distinct Employer value from the corpus appears in MATT_DNA's Career Arc")
 def then_every_employer_in_dna(ctx):
     bs = ctx["backend_service"]
+    assert "**Career Arc:**" in bs.MATT_DNA, "MATT_DNA has no Career Arc block."
+    arc = _career_arc_block(bs.MATT_DNA)
     employers = {s["Employer"] for s in ctx["stories"] if s.get("Employer")}
-    missing = [e for e in sorted(employers) if e not in bs.MATT_DNA]
+    missing = [e for e in sorted(employers) if e not in arc]
     assert not missing, (
-        f"Employers present in the corpus but absent from MATT_DNA: {missing}."
+        f"Employers present in the corpus but absent from MATT_DNA's Career Arc: {missing}."
         f" MATT_DNA is anti-hallucination grounding; an Employer that appears in"
         f" the corpus but not in MATT_DNA lets the model misclassify that"
         f" employer's stories against a stale employer list. Aug 20 2026"
@@ -87,8 +95,7 @@ def then_every_employer_in_dna(ctx):
         f" Network Engineering story (Matt's first Accenture engagement,"
         f" Employer=Accenture, Client=AT&T) and misclassified it as pre-Accenture"
         f" *employment* rather than an Accenture engagement serving AT&T as a"
-        f" client. Add the Employer to Career Arc and Career Eras in"
-        f" generate_dynamic_dna."
+        f" client. Add the Employer to career_arc in data/matt_profile.json."
     )
 
 

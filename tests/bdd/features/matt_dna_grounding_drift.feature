@@ -29,10 +29,10 @@ Feature: MATT_DNA grounding drift guards + What-Matt-is-NOT removal (MATTGPT-207
   corpus are all represented in MATT_DNA going forward, so future story
   additions cannot silently orphan grounding again.
 
-  Scenario: every Employer in the corpus appears as a literal string in MATT_DNA
+  Scenario: every Employer in the corpus appears in MATT_DNA's Career Arc
     Given the current production story corpus is loaded
     When sync_portfolio_metadata is called with the production stories
-    Then every distinct Employer value from the corpus appears literally in MATT_DNA
+    Then every distinct Employer value from the corpus appears in MATT_DNA's Career Arc
 
   Scenario: every non-generic Client in the corpus appears in _KNOWN_CLIENTS
     Given the current production story corpus is loaded
