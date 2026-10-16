@@ -1,23 +1,40 @@
-"""Unit test for generate_jsonl_from_excel.py merge behavior (MATTGPT-072).
+"""Unit test: the JSONL is rebuilt from the Excel master (MATTGPT-072, MATTGPT-323).
 
-Excel is authoritative for public_tags: a blank column value means the
-JSONL's public_tags is blank, even if the prior JSONL had tags. Prior to
-Aug 2026 the ingest silently preserved the prior tags when Excel was blank,
-which meant the master could not express "no tags."
+Excel is authoritative: a blank Public Tags cell means blank public_tags in
+the JSONL even if the prior JSONL had tags, and a field that lives only in
+the prior JSONL does not survive the export.
 """
 
+import json
 
-class TestMergeWithExisting:
-    def test_blank_excel_public_tags_produces_blank_jsonl(self):
-        """The preserve-on-blank rule (Aug 2025) meant a cleared Excel
-        column was silently overridden by the prior JSONL's tags. Excel
-        is now authoritative -- blank means blank."""
-        from generate_jsonl_from_excel import _merge_with_existing
+import pandas as pd
 
-        record = {"id": "s1", "Title": "T", "public_tags": ""}
-        existing = {"id": "s1", "Title": "T", "public_tags": "prior-generated-tag"}
-        merged = _merge_with_existing(record, existing)
-        assert merged["public_tags"] == "", (
-            f"Blank Excel public_tags must survive as blank in the JSONL. "
-            f"Got {merged['public_tags']!r}"
-        )
+import generate_jsonl_from_excel as gen
+
+MASTER = "MPugmire - STAR Stories - 01JAN26.xlsx"
+
+
+def test_export_rebuilds_records_from_excel_only(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    (tmp_path / "archive" / "jsonl-backups").mkdir(parents=True)
+    prior = {
+        "id": "t|c",
+        "Title": "T",
+        "Client": "C",
+        "public_tags": "prior-generated-tag",
+        "jsonl_only": "x",
+    }
+    (tmp_path / gen.OUTPUT_JSONL_FILE).write_text(
+        json.dumps(prior) + "\n", encoding="utf-8"
+    )
+    pd.DataFrame([{"Title": "T", "Client": "C", "Public Tags": ""}]).to_excel(
+        tmp_path / MASTER, sheet_name=gen.SHEET_NAME, index=False
+    )
+    monkeypatch.setattr(gen, "DRY_RUN", False)
+
+    gen.excel_to_jsonl()
+
+    lines = (tmp_path / gen.OUTPUT_JSONL_FILE).read_text(encoding="utf-8").splitlines()
+    [record] = [json.loads(line) for line in lines if line.strip()]
+    assert record["public_tags"] == "", "Blank Excel public_tags must stay blank."
+    assert "jsonl_only" not in record, "A JSONL-only field must not survive the export."
