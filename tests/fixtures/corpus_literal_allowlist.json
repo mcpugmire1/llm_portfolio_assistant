@@ -1,13 +1,9 @@
 [
-  {"file": "services/semantic_router.py", "function": "<module>", "kind": "Title", "value": "Leadership Philosophy – How I Lead", "count": 1,
-   "reason": "Router intent exemplar for Professional Narrative questions; goes stale if the title changes, until the exemplars are derived from the corpus"},
   {"file": "services/semantic_router.py", "function": "<module>", "kind": "Title", "value": "What I Learned About Assumptions", "count": 1,
    "reason": "Router intent exemplar for Professional Narrative questions"},
   {"file": "services/semantic_router.py", "function": "<module>", "kind": "Title", "value": "What I Learned About Sustainable Leadership", "count": 1,
    "reason": "Router intent exemplar for Professional Narrative questions"},
   {"file": "services/semantic_router.py", "function": "<module>", "kind": "Title", "value": "Why Early Failure Is a Feature, Not a Bug, in Innovation", "count": 1,
-   "reason": "Router intent exemplar for Professional Narrative questions"},
-  {"file": "services/semantic_router.py", "function": "<module>", "kind": "Title", "value": "Work Philosophy – Where I Do My Best Work", "count": 1,
    "reason": "Router intent exemplar for Professional Narrative questions"},
   {"file": "services/semantic_router.py", "function": "<module>", "kind": "figure", "value": "4x faster", "count": 1,
    "reason": "Router intent exemplar (\"How did Matt achieve 4x faster delivery?\"); on record in the CIC and Capital One stories"},

@@ -71,7 +71,7 @@ GOLDEN_QUERIES = {
         },
         {
             "id": 2,
-            "query": "Career Intent – What I'm Looking For Next",
+            "query": "Career Intent: What I'm Looking For Next",
             # Concept clusters — any wording that captures the idea passes
             "ground_truth": [
                 "build",  # builder identity (build from nothing, build what's next, 0→1)
