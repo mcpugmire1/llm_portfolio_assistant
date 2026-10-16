@@ -1,7 +1,8 @@
 """Shared corpus loader: normalization and id enforcement extracted from app.py.
 
-load_stories() replicates the normalization and id-filtering logic that
-load_star_stories() applies in app.py, without the Streamlit dependency.
+load_stories() applies the same normalization (normalize_story) and id rule
+(story_id_or_none) as load_star_stories() in app.py, which imports both from
+here, without the Streamlit dependency.
 Use this in eval harnesses and probe scripts instead of raw json.loads loops.
 """
 
@@ -53,17 +54,23 @@ def normalize_story(story: dict) -> dict:
 
 
 def story_id_or_none(raw) -> str | None:
-    raise NotImplementedError
+    """The id a loader keeps for a row, or None to skip the row.
+
+    Skips None, "" and 0 (and values equal to 0, like 0.0 and False);
+    otherwise returns str(raw).strip(). Shared by app.py load_star_stories()
+    and load_stories() below, so the two loaders cannot drift.
+    """
+    if raw in (None, "", 0):
+        return None
+    return str(raw).strip()
 
 
 def load_stories(path: str) -> list[dict]:
     """Load, filter, and normalize a JSONL corpus file.
 
-    Replicates app.py id enforcement:
     - Skips empty lines silently
     - Raises json.JSONDecodeError on malformed lines (does not swallow)
-    - Skips records where id is None, empty string, or 0
-    - Strips whitespace from id
+    - Keeps a record only when story_id_or_none() returns an id, and stores it
     - Applies normalize_story to each kept record
     """
     stories = []
@@ -73,10 +80,10 @@ def load_stories(path: str) -> list[dict]:
             if not line:
                 continue
             story = json.loads(line)
-            story_id = story.get("id")
-            if story_id in (None, "", 0):
+            story_id = story_id_or_none(story.get("id"))
+            if story_id is None:
                 continue
-            story["id"] = str(story_id).strip()
+            story["id"] = story_id
             normalize_story(story)
             stories.append(story)
     return stories

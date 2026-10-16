@@ -26,7 +26,7 @@ from ui.components.navbar import render_navbar
 # Local imports - components
 from ui.pages.home import render_home_page
 from ui.styles.global_styles import apply_global_styles
-from utils.corpus_loader import normalize_story
+from utils.corpus_loader import normalize_story, story_id_or_none
 from utils.validation import preload_nonsense_rules
 
 # =========================
@@ -199,13 +199,11 @@ def load_star_stories(path: str):
                 continue
 
             # Enforce a stable ID so Pinecone hits can map back to STORIES
-            story_id = story.get("id")
-            if story_id in (None, "", 0):
+            story_id = story_id_or_none(story.get("id"))
+            if story_id is None:
                 skipped_no_id += 1
                 continue
-
-            # Ensure id is a string
-            story["id"] = str(story_id).strip()
+            story["id"] = story_id
 
             normalize_story(story)
 
