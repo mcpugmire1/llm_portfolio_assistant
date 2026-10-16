@@ -120,14 +120,18 @@ _RULE_0A_NEW_MARKERS = [
     _RULE_0A_MARKER_PLACEMENT,
     _RULE_0A_CERTS_DIRECT_NO,
 ]
-_RULE_0B_MARKER = "Nothing I know about Matt covers that"
+_RULE_0B_MARKER = "nothing on record about what was asked"
 # New at 9d5f575: for absent categories, Agy must not pad the honest gap
-# with story evidence. MATTGPT-322: the opener comes first, so the
-# decline is not a bare sentence.
-_RULE_0B_REPLY_ONLY = "After your opening line, reply with that sentence only"
-_RULE_0B_BARE_CLAUSE = (
-    'respond "Nothing I know about Matt covers that". Reply with that sentence only'
-)
+# with story evidence. MATTGPT-322: the decline is written in Agy's voice
+# (design spec doc 05), opening with the 🐾 and naming what is not on record.
+_RULE_0B_REPLY_ONLY = "No guessing, no padding with story evidence, no excess apology"
+_RULE_0B_VOICE = [
+    "answer in one or two sentences, the first beginning with 🐾",
+    "and name it",
+    "Two examples of the shape, not text to copy",
+]
+# MATTGPT-322: the fixed sentence came back bare, with no opener.
+_RULE_0B_FIXED_SENTENCE = "Nothing I know about Matt covers that"
 
 _GROUNDING_HEADER = "**GROUNDING RULES:**"
 
@@ -259,12 +263,24 @@ class TestCitationRulesInCapturedSystemMessage:
             f"{captured_agy_system_message[:600]!r}"
         )
 
-    def test_rule_0b_no_longer_overrides_the_opener(self, captured_agy_system_message):
-        """MATTGPT-322: 'Reply with that sentence only' directly after the
-        sentence overrode the opener instruction, so the decline came back
-        bare ('Nothing I know about Matt covers that', no opener)."""
-        assert _RULE_0B_BARE_CLAUSE not in captured_agy_system_message, (
-            f"old bare-sentence 0b clause {_RULE_0B_BARE_CLAUSE!r} still in "
+    @pytest.mark.parametrize("fragment", _RULE_0B_VOICE)
+    def test_rule_0b_voice_fragment_present_in_system_message(
+        self, captured_agy_system_message, fragment
+    ):
+        """MATTGPT-322: the decline is one or two sentences, opening with
+        the 🐾, naming what is not on record, with two contrasting examples
+        so neither becomes the template."""
+        assert fragment in captured_agy_system_message, (
+            f"rule 0b voice fragment {fragment!r} not found in captured Agy "
+            f"system message"
+        )
+
+    def test_rule_0b_fixed_sentence_is_gone(self, captured_agy_system_message):
+        """MATTGPT-322: 'Nothing I know about Matt covers that', with 'Reply
+        with that sentence only', overrode the opener instruction, so the
+        decline came back bare, with no opener."""
+        assert _RULE_0B_FIXED_SENTENCE not in captured_agy_system_message, (
+            f"old fixed 0b sentence {_RULE_0B_FIXED_SENTENCE!r} still in "
             f"captured Agy system message"
         )
 
