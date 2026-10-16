@@ -237,7 +237,7 @@ def user_has_opened_detail(browser_page):
             )
             return
 
-    pytest.skip("No clickable story elements found")
+    pytest.fail("No clickable story elements found")
 
 
 @given(parsers.parse('the user has opened story "{story_id}"'))
@@ -551,8 +551,8 @@ def click_close_button(browser_page):
         wait_for_streamlit_rerun(browser_page)
         return
 
-    # Fallback: skip if no close mechanism available
-    pytest.skip("No close button or selected card found")
+    # No close mechanism is a regression, not an environment constraint
+    pytest.fail("No close button or selected card found")
 
 
 @when('the user clicks "Ask Agy About This"')
@@ -583,7 +583,7 @@ def click_ask_agy(browser_page):
         wait_for_content(browser_page, ask_page_selector, timeout=15000)
         return
 
-    pytest.skip("Ask Agy button not found")
+    pytest.fail("Ask Agy button not found")
 
 
 @when("the user clicks the Share button")
@@ -690,7 +690,7 @@ def click_view_in_explore(browser_page, era):
         wait_for_content(browser_page, ".es-results-count", timeout=5000)
         return
 
-    pytest.skip("No Timeline explore links found")
+    pytest.fail("No Timeline explore links found")
 
 
 @when('the user clicks "Next"')
