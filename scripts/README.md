@@ -36,7 +36,6 @@ This directory contains one-off utility scripts for data processing, quality che
 
 - `build_custom_embeddings.py` - **MOVED TO ROOT** (critical data engineering flow)
 - `download_model.py` - Download embedding models
-- `purge_pinecone_index.py` - Clear Pinecone index
 - `rerank_with_metadata.py` - Rerank results with metadata
 - `vector_search.py` - Vector search utilities
 
