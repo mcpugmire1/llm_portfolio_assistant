@@ -16,20 +16,19 @@ Feature: Landing page + Home card project counts align with post-Era convention 
   # Explore Stories still shows 33 for the same filter).
   #
   # DOM-observable note: Banking + Cross-Industry landings render the count
-  # in BOTH the hero subtitle <p> AND the stats bar .stat-number. Home cards
-  # render in .home-cat-meta (category_cards.py:402, 407). Step defs compute
-  # the expected post-Era counts dynamically from the corpus to survive
-  # corpus growth — no hardcoded "32" / "48".
+  # in the hero subtitle <p>. The landing stats bar was removed on purpose,
+  # so MATTGPT-254 dropped its assertions. Home cards render descriptive copy
+  # in .home-cat-meta. Step defs compute the expected post-Era counts
+  # dynamically from the corpus to survive corpus growth, with no hardcoded
+  # "32" or "48".
 
-  Scenario: Banking landing displays post-Era project count in hero and stats bar
+  Scenario: Banking landing displays post-Era project count in hero
     Given the user navigates to the Banking landing page
     Then the Banking hero subtitle should contain the post-Era Banking count
-    And the Banking stats bar should display the post-Era Banking count
 
-  Scenario: Cross-Industry landing displays post-Era project count in hero and stats bar
+  Scenario: Cross-Industry landing displays post-Era project count in hero
     Given the user navigates to the Cross-Industry landing page
     Then the Cross-Industry hero subtitle should contain the post-Era Cross-Industry count
-    And the Cross-Industry stats bar should display the post-Era Cross-Industry count
 
   Scenario: Home category cards display descriptive copy
     Given the user navigates to the home page

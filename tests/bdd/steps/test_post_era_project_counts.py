@@ -15,8 +15,8 @@ and category_cards.py to use post-Era counts.
 
 DOM landmarks (from explore-stories.py / category_cards.py inspection):
   - Banking + Cross-Industry hero subtitle: .conversation-header-text p
-  - Stats bar Projects Delivered count: .stats-bar .stat with the
-    "Projects Delivered" label — first stat in the bar per the existing render.
+    (the landing stats bar was removed on purpose; MATTGPT-254 dropped its
+    assertions)
   - Home Banking card meta: #card-banking .home-cat-meta
   - Home Cross-Industry card meta: #card-cross-industry .home-cat-meta
 """
@@ -103,28 +103,6 @@ def _read_count_from_text(text):
     return int(match.group(0))
 
 
-def _read_stats_projects_delivered(page):
-    """Read the Projects Delivered count from the .stats-bar.
-
-    Pattern from banking_landing.py / cross_industry_landing.py:
-        <div class="stats-bar">
-          <div class="stat">
-            <div class="stat-number">{total_projects}</div>
-            <div class="stat-label">Projects Delivered</div>
-          </div>
-          ...
-        </div>
-    Locate the .stat whose label is "Projects Delivered", then read its
-    .stat-number text.
-    """
-    stat = page.locator(
-        ".stats-bar .stat:has(.stat-label:has-text('Projects Delivered'))"
-    ).first
-    stat.wait_for(state="visible", timeout=LONG_TIMEOUT)
-    number_text = stat.locator(".stat-number").first.inner_text().strip()
-    return _read_count_from_text(number_text)
-
-
 # =============================================================================
 # GIVEN — Navigation
 # =============================================================================
@@ -179,17 +157,6 @@ def assert_banking_hero_post_era(browser_page):
     )
 
 
-@then("the Banking stats bar should display the post-Era Banking count")
-def assert_banking_stats_post_era(browser_page):
-    stories = _load_corpus()
-    expected = _post_era_count(stories, BANKING_INDUSTRY)
-    actual = _read_stats_projects_delivered(browser_page)
-    assert actual == expected, (
-        f"Banking landing stats bar should show {expected} (post-Era), "
-        f"found {actual}. MATTGPT-104: stats source still uses raw count."
-    )
-
-
 @then(
     "the Cross-Industry hero subtitle should contain the post-Era Cross-Industry count"
 )
@@ -204,17 +171,6 @@ def assert_cross_industry_hero_post_era(browser_page):
         f"Cross-Industry landing hero subtitle should show {expected} "
         f"(post-Era), found {actual} in text: {text!r}. MATTGPT-104: hero "
         f"source still uses raw Industry count."
-    )
-
-
-@then("the Cross-Industry stats bar should display the post-Era Cross-Industry count")
-def assert_cross_industry_stats_post_era(browser_page):
-    stories = _load_corpus()
-    expected = _post_era_count(stories, CROSS_INDUSTRY)
-    actual = _read_stats_projects_delivered(browser_page)
-    assert actual == expected, (
-        f"Cross-Industry landing stats bar should show {expected} (post-Era), "
-        f"found {actual}. MATTGPT-104: stats source still uses raw count."
     )
 
 
