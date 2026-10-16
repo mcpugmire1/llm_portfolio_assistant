@@ -1,0 +1,850 @@
+[
+ {
+  "case": "c14",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All claims supported (CIC 0 to 150+, full P&L, Octane Terraform/CloudFormation, pattern library Kafka/Docker/Kubernetes, DORA metrics, 4X/99.9%+/90%+, Capital One zero-defect, 30+ engagements, $100M+, near-zero attrition). No level label or vouching; states gaps in SRE/on-call scope; closes with offer to compare against the job description (Role Match close).",
+  "claims": [
+   {
+    "text": "Built Atlanta and Tampa CICs from zero to 150+ practitioners with full P&L, budget and cost management, hiring, training",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley Action/5PSummary"
+   },
+   {
+    "text": "Established dev environments, CI/CD pipelines, cloud platforms; automated testing, security scanning, deployment gates, access controls",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture Action; balancing-execution-speed Action"
+   },
+   {
+    "text": "Teams responsible for building, deploying, operating their services",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture Action"
+   },
+   {
+    "text": "Tracked lead time, deployment frequency, change failure rate, MTTR",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture Action"
+   },
+   {
+    "text": "Led Project Octane: reference apps, IaC templates, Terraform and CloudFormation provisioning",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Pattern libraries covering microservices, Kafka, Docker, Kubernetes, serverless",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture Action"
+   },
+   {
+    "text": "Senior-to-junior mentoring, weekly technical talks",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action; enhancing-team-proficiency Action"
+   },
+   {
+    "text": "Near-zero attrition in first two years",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "15+ Fortune 500 engagements: 4X velocity, lead time weeks to days, 99.9%+ uptime, 90%+ test coverage",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture Result"
+   },
+   {
+    "text": "Capital One zero-defect deployments to payment systems",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture Result"
+   },
+   {
+    "text": "30+ product engagements, $100M+ repeatable business",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c14",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Claims supported (Octane, CIC 0 to 150+, P&L, 30+ engagements, 15+ Fortune 500, 4X, ACCESS 40+ team, on-call/Sev-1, root-cause analysis), but no Role Match close: it ends on a clarifying question with no offer to run Role Match / compare against the job description (required closing, D9).",
+  "claims": [
+   {
+    "text": "Led Project Octane, reusable reference apps, IaC, Terraform/CloudFormation, OWASP and IAM, workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Reusable architecture patterns, automated testing and deployment gates, observability, cross-functional teams at JPMC, Capital One, Amex",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture Action"
+   },
+   {
+    "text": "Built CICs 0 to 150+, full P&L, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; 4X velocity; zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley Result"
+   },
+   {
+    "text": "Managed 40+ blended onshore/offshore team on ACCESS payment engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "Directed on-call and Sev-1 incident response, root-cause analysis, stakeholder communications during live incidents",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c14",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Claims supported (Director title per Role field and profile, CIC 0 to 150+, P&L, Octane, TICARA 30-40 minute environments, DORA metrics, 4X/99.9%+/90%+), but no Role Match close: ends on a clarifying question with no offer to compare against the job description (required closing, D9).",
+  "claims": [
+   {
+    "text": "Documented title Director, full P&L for Atlanta and Tampa CICs",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley Role/Action; profile.career_summary"
+   },
+   {
+    "text": "Built centers 0 to 150+; recruiting, training, career progression, budget",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley Action"
+   },
+   {
+    "text": "Pair programming, TDD, CI/CD, balanced teams adapted for compliance",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley Action"
+   },
+   {
+    "text": "Project Octane reference apps, IaC templates, automated provisioning, workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "TICARA with Terraform and Serverless Framework against pre-provisioned AWS/Azure accounts; environments in 30-40 minutes",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Action/Result"
+   },
+   {
+    "text": "Lead time, deployment frequency, change failure rate, MTTR; 4X, 99.9%+, 90%+",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture Action/Result"
+   },
+   {
+    "text": "Senior-to-junior coaching, peer-led demos, weekly tech talks",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action; enhancing-team-proficiency Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c14",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: 'His current search includes senior leadership roles in platform engineering' (profile.career_arc.current says a role building the product engineering organization; the platform-engineering framing echoes the visitor's role, not the profile). Other claims supported (CIC 0 to 150+, Octane, I do/we do/you do, near-zero attrition, 4X, 10 vs 20-person teams, $100M+). Has a job-description close.",
+  "claims": [
+   {
+    "text": "Current search includes senior leadership roles in platform engineering",
+    "label": "unsupported",
+    "source": "profile.career_arc.current (says product engineering organization)"
+   },
+   {
+    "text": "Built CICs 0 to 150+, full P&L, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley Action"
+   },
+   {
+    "text": "Octane: cross-functional team, reference apps, IaC templates, Terraform, CloudFormation, serverless",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Dev environments, CI/CD, cloud platforms, architectural patterns, technical accelerators; TDD with security scanning and access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley Action"
+   },
+   {
+    "text": "Senior-junior mentoring, peer-led demos, tailored development plans, 'I do, we do, you do'",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action/Result; enhancing-team-proficiency Process"
+   },
+   {
+    "text": "Near-zero attrition in first 2 years",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "30+ engagements, 4X velocity, zero-defect, 10-person teams = 20-person output, $100M+ via delivery excellence and client advocacy",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley Result/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c14",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Claims supported (Octane incl. AppSync/ElastiCache, CIC 0 to 150+, P&L, I do/we do/you do, near-zero attrition, Launchpad 200+, 4X, 10 vs 20-person teams), but no Role Match close: ends on a clarifying question with no offer to compare against the job description (required closing, D9).",
+  "claims": [
+   {
+    "text": "Octane: reference apps, IaC, Terraform/CloudFormation, OWASP, IAM, workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Real-time GraphQL sync via AWS AppSync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Subsequently built Atlanta and Tampa CICs, full P&L, 150+",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley Action, dates 2019-11 after Octane 2018-07 to 2019-10"
+   },
+   {
+    "text": "Balanced teams; junior engineers paired with senior mentors; weekly peer-led demos; I do/we do/you do",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Near-zero attrition first 2 years",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "AWS Launchpad supported 200+ professionals earning AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "4X faster velocity, zero-defect, 10-person teams equal to 20-person",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c14",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Claims supported (Octane stacks Angular/AWS, React Native/AWS, Flutter; CloudFirst standardization; 11-13 direct reports; compensation, calibration, remediation; Capital One 4x output; 30+ engagements; $100M+), but no Role Match close: ends on a clarifying question with no offer to compare against the job description (required closing, D9).",
+  "claims": [
+   {
+    "text": "Capital One faced heavy workloads and Federal Reserve Board-mandated compliance deadlines",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices Situation"
+   },
+   {
+    "text": "Remit included how practitioners were hired, evaluated, developed, promoted, paid",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization Situation"
+   },
+   {
+    "text": "Octane reference apps across Angular/AWS, React Native/AWS, Flutter, each with IaC; OWASP/IAM",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture 5PSummary/Action"
+   },
+   {
+    "text": "Standardized cloud-native architecture practices across CloudFirst engineering community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Result"
+   },
+   {
+    "text": "0 to 150+, 11-13 direct-report leads, full P&L, hiring decisions, compensation, calibration, remediation",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization Performance/Action"
+   },
+   {
+    "text": "Near-zero attrition in first 2 years",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization Performance"
+   },
+   {
+    "text": "Capital One defect-free code at 4x internal team output",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices"
+   },
+   {
+    "text": "30+ product engagements, 15+ Fortune 500, $100M+",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Answer is only 'Nothing I know about Matt covers that'. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Answer is only 'Nothing I know about Matt covers that'. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Answer is only 'Nothing I know about Matt covers that'. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Says it has no verified contact link and suggests searching LinkedIn for Matt Pugmire without a link. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Answer is only 'Nothing I know about Matt covers that'. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Says it has no verified email, phone or contact/LinkedIn link. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Says it has no verified email, phone or contact/LinkedIn link and cannot forward messages. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Answer is only 'Nothing I know about Matt covers that'. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Answer is only 'Nothing I know about Matt covers that'. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Says it has no verified email, phone or contact/LinkedIn link and cannot forward messages. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Says it has no verified email, phone or contact/LinkedIn link and cannot forward messages. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Answer is only 'Nothing I know about Matt covers that'. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Says it has no verified email, phone or contact/LinkedIn link. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Answer is only 'Nothing I know about Matt covers that'. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Answer is only 'Nothing I know about Matt covers that'. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Answer is only 'Nothing I know about Matt covers that'. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Says it has no verified contact link and suggests searching LinkedIn for Matt Pugmire without a link. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Answer is only 'Nothing I know about Matt covers that'. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Says it has no verified email, phone or contact/LinkedIn link. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Says it has no verified contact link and suggests searching LinkedIn for Matt Pugmire without a link. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Answer is only 'Nothing I know about Matt covers that'. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Answer is only 'Nothing I know about Matt covers that'. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Says it has no contact details and suggests checking the portfolio for a contact or LinkedIn link, without providing either. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Says it has no verified email, phone or contact/LinkedIn link and cannot forward messages. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Answer is only 'Nothing I know about Matt covers that'. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Answer is only 'Nothing I know about Matt covers that'. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Answer is only 'Nothing I know about Matt covers that'. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Says it has no verified email, phone or contact/LinkedIn link and cannot forward messages. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Says it has no verified email, phone or contact/LinkedIn link and cannot forward messages. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c15",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Says it has no verified contact link and suggests searching LinkedIn for Matt Pugmire without a link. Required close missing: no Contact link and no LinkedIn link (D9; Section 3 c15). No claims about Matt.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ }
+]

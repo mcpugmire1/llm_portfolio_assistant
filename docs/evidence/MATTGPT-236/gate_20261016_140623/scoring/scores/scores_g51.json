@@ -1,0 +1,2647 @@
+[
+ {
+  "case": "x4",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "RBC assessed whether Bottomline WebSeries could meet requirements before committing further investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "RBC existing systems had performance and scalability limitations / lacked digital offerings",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Several strategic initiatives competing for resources (story: converging)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation (paraphrase, ruling 5)"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Assessment across Data, Application, Technology and Business Architecture / maturity scoring",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Assessment found WebSeries lacked required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "RBC story gives no dollar value for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Owned CIC P&L, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Managed actuals, forecast variance, contingency release, staffing (pyramid) costs and scope changes via change requests",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Clients questioned paying for two engineers at one keyboard; teams saw pairing as inefficient and TDD as overhead",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Tracked defect rates, velocity, debugging vs build time, knowledge distribution; 4X vs client internal teams after learning curve; rework time saved outweighed test time",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Pairing gave continuous code review, no single-person knowledge, faster onboarding",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Result"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Assessment found WebSeries lacked required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "RBC assessed whether Bottomline WebSeries could meet requirements before committing further investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "RBC existing systems had performance and scalability limitations / lacked digital offerings",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "WebSeries considered for Day2Day corporate banking platform",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Assessment across Data, Application, Technology and Business Architecture / maturity scoring",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Assessment found WebSeries lacked required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "RBC story gives no dollar value for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Owned CIC P&L, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Used hypothesis testing and prototypes before full-scale development",
+    "label": "supported",
+    "source": "testing-assumptions-before-committing-resources-with-hypothesis-driven-design|fortune-500-clients Action/Purpose"
+   },
+   {
+    "text": "Treated velocity as a diagnostic tool rather than performance target",
+    "label": "supported",
+    "source": "shifting-teams-from-velocity-to-value|accenture Action"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "RBC assessed whether Bottomline WebSeries could meet requirements before committing further investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "WebSeries lacked modularity required for long-term digital operating model",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "RBC story gives no dollar value for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Owned CIC P&L, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Tracked chargeability, unbillable downtime, contractor spend for centers (150+ practitioners)",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action/5PSummary"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Investment in facilities, infrastructure and practitioner training needed justification",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Task/Action"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Owned CIC P&L, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Centers contributed to $100M+ repeatable business by FY23",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/Performance"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Assessment found WebSeries lacked required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "RBC story gives no dollar value for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Investment in facilities, infrastructure and practitioner training needed justification",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Task/Action"
+   },
+   {
+    "text": "Used 4-8 week discovery engagements to prove value before larger programs",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Owned CIC P&L, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Tracked chargeability, unbillable downtime, contractor spend for centers (150+ practitioners)",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action/5PSummary"
+   },
+   {
+    "text": "RBC assessed whether Bottomline WebSeries could meet requirements before committing further investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Assessment found WebSeries lacked required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "RBC story gives no dollar value for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "Clients questioned paying for two engineers at one keyboard; teams saw pairing as inefficient and TDD as overhead",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Tracked defect rates, velocity, debugging vs build time, knowledge distribution; 4X vs client internal teams after learning curve; rework time saved outweighed test time",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Scorecards tracked lead time, cycle time, throughput, team stability, backlog health rather than velocity alone",
+    "label": "supported",
+    "source": "replacing-velocity-metrics-with-lead-time-cycle-time-and-throughput|accenture Action"
+   },
+   {
+    "text": "Owned CIC P&L, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Tracked chargeability, unbillable downtime, contractor spend for centers (150+ practitioners)",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action/5PSummary"
+   },
+   {
+    "text": "Managed actuals, forecast variance, contingency release, staffing (pyramid) costs and scope changes via change requests",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "RBC assessed whether Bottomline WebSeries could meet requirements before committing further investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "RBC existing systems had performance and scalability limitations / lacked digital offerings",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Assessment found WebSeries lacked required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "RBC story gives no dollar value for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Owned CIC P&L, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Tracked chargeability, unbillable downtime, contractor spend for centers (150+ practitioners)",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action/5PSummary"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "RBC assessed whether Bottomline WebSeries could meet requirements before committing further investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "RBC existing systems had performance and scalability limitations / lacked digital offerings",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Assessment found WebSeries lacked required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "RBC story gives no dollar value for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Full MVP delivery in approximately 16-18 weeks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Tracked chargeability, unbillable downtime, contractor spend for centers (150+ practitioners)",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action/5PSummary"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Investment in facilities, infrastructure and practitioner training needed justification",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Task/Action"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Used executive briefings and client workshops / case studies to present results",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Process"
+   },
+   {
+    "text": "Scorecards tracked lead time, cycle time, throughput, team stability, backlog health rather than velocity alone",
+    "label": "supported",
+    "source": "replacing-velocity-metrics-with-lead-time-cycle-time-and-throughput|accenture Action"
+   },
+   {
+    "text": "Owned CIC P&L, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Tracked chargeability, unbillable downtime, contractor spend for centers (150+ practitioners)",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action/5PSummary"
+   },
+   {
+    "text": "Required internal bench deployment before approving external contractors",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Managed actuals, forecast variance, contingency release, staffing (pyramid) costs and scope changes via change requests",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Assessment found WebSeries lacked required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "RBC story gives no dollar value for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "RBC assessed whether Bottomline WebSeries could meet requirements before committing further investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Workshops with RBC leadership aligning business goals with technical findings",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Assessment found WebSeries lacked required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "RBC story gives no dollar value for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Used executive briefings and client workshops / case studies to present results",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Process"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Managed actuals, forecast variance, contingency release, staffing (pyramid) costs and scope changes via change requests",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Clients worked with waterfall, siloed functions, separate QA phases",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Owned CIC P&L, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Centers contributed to $100M+ repeatable business by FY23",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/Performance"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Assessment found WebSeries lacked required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Norfolk Southern modernization reduced maintenance expenses, no quantified figure",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Investment in facilities, infrastructure and practitioner training needed justification",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Task/Action"
+   },
+   {
+    "text": "Owned CIC P&L, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Defined \"CIC Standard of Value\": 4X velocity, zero-defect code, customer journey-led, lean sustainable delivery (quote verbatim)",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Centers grew to 150+ practitioners, 30+ product engagements, $100M+ by FY23",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "Fiserv $255K under budget on $8.5M, $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Clients accustomed to waterfall, separate QA, siloed teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Defined \"CIC Standard of Value\": 4X velocity, zero-defect code, customer journey-led, lean sustainable delivery (quote verbatim)",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Used executive briefings and client workshops / case studies to present results",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Process"
+   },
+   {
+    "text": "Owned CIC P&L, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Tracked chargeability, unbillable downtime, contractor spend for centers (150+ practitioners)",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action/5PSummary"
+   },
+   {
+    "text": "Centers contributed to $100M+ repeatable business by FY23",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/Performance"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "RBC assessed whether Bottomline WebSeries could meet requirements before committing further investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "RBC existing systems had performance and scalability limitations / lacked digital offerings",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Assessment found WebSeries lacked required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "RBC story gives no dollar value for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Tracked chargeability, unbillable downtime, contractor spend for centers (150+ practitioners)",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action/5PSummary"
+   },
+   {
+    "text": "Managed actuals, forecast variance, contingency release, staffing (pyramid) costs and scope changes via change requests",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing. Note: ambiguous: \"these measures ... reduce handoffs and rework\" read as paraphrase of RV story",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Teams dealt with siloed work, bugs, rework, difficult onboarding",
+    "label": "supported",
+    "source": "delivering-better-code-and-stronger-teams-through-pair-programming|accenture 5PSummary"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Scorecards tracked lead time, cycle time, throughput, team stability, backlog health rather than velocity alone",
+    "label": "supported",
+    "source": "replacing-velocity-metrics-with-lead-time-cycle-time-and-throughput|accenture Action"
+   },
+   {
+    "text": "Scorecards and practices helped balanced teams see where to improve and reduce handoffs and rework",
+    "label": "supported",
+    "source": "replacing-velocity-metrics-with-lead-time-cycle-time-and-throughput|accenture Action/Result (paraphrase; handoff reduction is attributed to the practices in the story)"
+   },
+   {
+    "text": "Capital One team delivered features 3-4x faster than other Accenture teams on same engagement, zero production defects",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Assessment found WebSeries lacked required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "RBC story gives no dollar value for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Investment in facilities, infrastructure and practitioner training needed justification",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Task/Action"
+   },
+   {
+    "text": "Defined \"CIC Standard of Value\": 4X velocity, zero-defect code, customer journey-led, lean sustainable delivery (quote verbatim)",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Owned CIC P&L, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Tracked chargeability, unbillable downtime, contractor spend for centers (150+ practitioners)",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action/5PSummary"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Assessment across Data, Application, Technology and Business Architecture / maturity scoring",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Assessment found WebSeries lacked required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "RBC story gives no dollar value for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Managed actuals, forecast variance, contingency release, staffing (pyramid) costs and scope changes via change requests",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Investment in facilities, infrastructure and practitioner training needed justification",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Task/Action"
+   },
+   {
+    "text": "Used executive briefings and client workshops / case studies to present results",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Process"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Owned CIC P&L, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Tracked chargeability, unbillable downtime, contractor spend for centers (150+ practitioners)",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action/5PSummary"
+   },
+   {
+    "text": "Required internal bench deployment before approving external contractors",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Scorecards tracked lead time, cycle time, throughput, team stability, backlog health rather than velocity alone",
+    "label": "supported",
+    "source": "replacing-velocity-metrics-with-lead-time-cycle-time-and-throughput|accenture Action"
+   },
+   {
+    "text": "RBC assessed whether Bottomline WebSeries could meet requirements before committing further investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Workshops with RBC leadership aligning business goals with technical findings",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "RBC assessed whether Bottomline WebSeries could meet requirements before committing further investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Workshops with RBC leadership aligning business goals with technical findings",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Assessment found WebSeries lacked required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "RBC story gives no dollar value for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Owned CIC P&L, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Used executive briefings and client workshops / case studies to present results",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Process"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Tracked actuals, forecast variance, estimate at completion, contingency, staffing costs, scope changes through finance reviews",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action (EAC named in the JP Morgan CRM takeover)"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Investment in facilities, infrastructure and practitioner training needed justification",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Task/Action"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Owned CIC P&L, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Centers contributed to $100M+ repeatable business by FY23",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/Performance"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Assessment found WebSeries lacked required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "RBC story gives no dollar value for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "RBC assessed whether Bottomline WebSeries could meet requirements before committing further investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "WebSeries considered for Day2Day corporate banking platform",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "RBC existing systems had performance and scalability limitations / lacked digital offerings",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Several strategic initiatives competing for resources (story: converging)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation (paraphrase, ruling 5)"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Workshops with RBC leadership aligning business goals with technical findings",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Assessment found WebSeries lacked required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "RBC story gives no dollar value for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Owned CIC P&L, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Used executive briefings and client workshops / case studies to present results",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Process"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Managed actuals, forecast variance, contingency release, staffing (pyramid) costs and scope changes via change requests",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "RBC assessed whether Bottomline WebSeries could meet requirements before committing further investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "WebSeries considered for Day2Day corporate banking platform",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Assessment found WebSeries lacked required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "RBC story gives no dollar value for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Owned budget/cost for 2 centers with 150+ practitioners; chargeability, unbillable downtime, contractor spend, capacity",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Managed actuals, forecast variance, contingency release, staffing (pyramid) costs and scope changes via change requests",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Owned CIC P&L, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Tracked chargeability, unbillable downtime, contractor spend for centers (150+ practitioners)",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action/5PSummary"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Scorecards tracked lead time, cycle time, throughput, team stability, backlog health rather than velocity alone",
+    "label": "supported",
+    "source": "replacing-velocity-metrics-with-lead-time-cycle-time-and-throughput|accenture Action"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Assessment found WebSeries lacked required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "RBC story gives no dollar value for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Traditional delivery involved silos, handoffs, rework, separate QA phases",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; replacing-velocity-metrics-with-lead-time-cycle-time-and-throughput|accenture Action"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Owned CIC P&L, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Tracked chargeability, unbillable downtime, contractor spend for centers (150+ practitioners)",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action/5PSummary"
+   },
+   {
+    "text": "Required internal bench deployment before approving external contractors",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Rejected request for 2 onshore contractors; cross-skilled and redeployed 2 internal bench resources",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Assessment found WebSeries lacked required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "RBC assessed whether Bottomline WebSeries could meet requirements before committing further investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "RBC existing systems had performance and scalability limitations / lacked digital offerings",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Several strategic initiatives competing for resources (story: converging)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation (paraphrase, ruling 5)"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Workshops with RBC leadership aligning business goals with technical findings",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Assessment found WebSeries lacked required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "RBC story gives no dollar value for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Used executive briefings and client workshops / case studies to present results",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Process"
+   },
+   {
+    "text": "Owned CIC P&L, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Managed actuals, forecast variance, contingency release, staffing (pyramid) costs and scope changes via change requests",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Concern whether startup practices would work with enterprise compliance, security, legacy systems",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Task (paraphrase)"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Owned CIC P&L, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Tracked chargeability, unbillable downtime, contractor spend for centers (150+ practitioners)",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action/5PSummary"
+   },
+   {
+    "text": "Required internal bench deployment before approving external contractors",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Assessment found WebSeries lacked required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Clients had siloed functions, handoffs, months-long waterfall timelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Defined \"CIC Standard of Value\": 4X velocity, zero-defect code, customer journey-led, lean sustainable delivery (quote verbatim)",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Norfolk Southern teams reduced meeting overhead and eliminated context switching through pairing",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Used executive briefings and client workshops / case studies to present results",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Process"
+   },
+   {
+    "text": "Owned CIC P&L, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Tracked chargeability, unbillable downtime, contractor spend for centers (150+ practitioners)",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action/5PSummary"
+   },
+   {
+    "text": "Required internal bench deployment before approving external contractors",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Assessment found WebSeries lacked required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Velocity sometimes treated as a target rather than an insight; taught diagnostic use; prioritized stories by business impact and user value",
+    "label": "supported",
+    "source": "shifting-teams-from-velocity-to-value|accenture Situation/Action"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Used executive briefings and client workshops / case studies to present results",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Process"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Assessment found WebSeries lacked required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "Managed actuals, forecast variance, contingency release, staffing (pyramid) costs and scope changes via change requests",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   },
+   {
+    "text": "Norfolk Southern modernization reduced maintenance expenses and improved resource utilization, no dollar figure",
+    "label": "supported",
+    "source": "modernizing-railroad-revenue-transitioning-from-legacy-to-cloud|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "RBC assessed whether Bottomline WebSeries could meet requirements before committing further investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "RBC existing systems had performance and scalability limitations / lacked digital offerings",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "WebSeries lacked modularity for long-term digital operating model",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "RBC story gives no dollar value for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Owned CIC budget, cost base and revenue side",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Managed actuals, forecast variance, contingency release, staffing (pyramid) costs and scope changes via change requests",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x4",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "pass: all claims supported (RBC cost-to-fix vs. benefit, CIC 4X/10-vs-20/zero-defect, Fiserv $8.5M/3%/$255K/$500K/$3M); acknowledges_missing: says no ROI formula or percentage is documented; useful_direct: names real measures and labels them as not an ROI calculation; no closing.",
+  "claims": [
+   {
+    "text": "Stories do not document a single ROI formula or calculated ROI percentage",
+    "label": "supported",
+    "source": "corpus-wide absence; no story holds an ROI formula (CIC Process mentions \"Proved ROI\" without a method)"
+   },
+   {
+    "text": "Investment in facilities, infrastructure and practitioner training needed justification",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Task/Action"
+   },
+   {
+    "text": "Clients questioned the cost of pair programming; addressed with velocity gains and quality improvements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Defined \"CIC Standard of Value\": 4X velocity, zero-defect code, customer journey-led, lean sustainable delivery (quote verbatim)",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "4X faster velocity, 10-person balanced teams = traditional 20-person output, zero-defect deployments via TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Owned CIC P&L, budget and cost management",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Tracked chargeability, unbillable downtime, contractor spend for centers (150+ practitioners)",
+    "label": "supported",
+    "source": "owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action/5PSummary"
+   },
+   {
+    "text": "Centers contributed to $100M+ repeatable business by FY23",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/Performance"
+   },
+   {
+    "text": "Worked with RBC enterprise architecture team on target-system models with transparent cost-to-fix vs. benefit comparison (quoted text verbatim)",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Code reviews, stakeholder interviews, gap/fit architecture assessment, heat maps",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Task"
+   },
+   {
+    "text": "Assessment found WebSeries lacked required modularity",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "RBC avoided that investment path and redirected technical resources to higher-priority initiatives, before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "RBC story gives no dollar value for the avoided investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result (no figure)"
+   },
+   {
+    "text": "Fiserv $8.5M program 3% under budget ($255K preserved), $500K penalties avoided, $3M extension",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result; owning-the-pl-from-engagement-margin-to-center-cost-base|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv figures reported separately, not combined into ROI",
+    "label": "supported",
+    "source": "recovering-fiservs-85m-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ }
+]

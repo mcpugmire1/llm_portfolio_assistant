@@ -1,0 +1,1792 @@
+[
+ {
+  "case": "r08",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas), At Cendian 2003 to 2005, Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas)",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "At Cendian 2003 to 2005",
+    "label": "supported",
+    "source": "profile.career_arc.employers"
+   },
+   {
+    "text": "Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Worked with a plastics client's technology team to design, build, test and launch/validate its connection to the trading network",
+    "label": "supported",
+    "source": "onboarding-a-new-plastics-client-onto-cendians-trading-network|cendian-chemical-logistics Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Cendian was a lead logistics provider for the chemical and plastics industry, At Cendian 2003 to 2005, Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Cendian was a lead logistics provider for the chemical and plastics industry",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "At Cendian 2003 to 2005",
+    "label": "supported",
+    "source": "profile.career_arc.employers"
+   },
+   {
+    "text": "Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Used CIDX, the chemical industry's B2B standard, for common data standards",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "EDI, XML, flat files normalized into a common/canonical representation",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Built portal capability for partners who could not integrate directly",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas), Software Engineer at Cendian, At Cendian 2003 to 2005 and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas)",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Software Engineer at Cendian",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Role"
+   },
+   {
+    "text": "At Cendian 2003 to 2005",
+    "label": "supported",
+    "source": "profile.career_arc.employers"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Integrations for orders, shipments, invoices across marine, rail and truck",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Used CIDX, the chemical industry's B2B standard, for common data standards",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "EDI, XML, flat files normalized into a common/canonical representation",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Built portal capability for partners who could not integrate directly",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Brought document / bill-of-lading generation in house, replacing an external service and manual key entry",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas), Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS, Network of 300+ (preferred) carriers into and out of 80+ countries and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas)",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Used CIDX, the chemical industry's B2B standard, for common data standards",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "EDI, XML, flat files normalized into a common/canonical representation",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas), At Cendian 2003 to 2005, Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas)",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "At Cendian 2003 to 2005",
+    "label": "supported",
+    "source": "profile.career_arc.employers"
+   },
+   {
+    "text": "Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Built portal capability for partners who could not integrate directly",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Brought document / bill-of-lading generation in house, replacing an external service and manual key entry",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Worked on transaction tracking so operations could see where messages stopped",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas), At Cendian 2003 to 2005, Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas)",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "At Cendian 2003 to 2005",
+    "label": "supported",
+    "source": "profile.career_arc.employers"
+   },
+   {
+    "text": "Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Built portal capability for partners who could not integrate directly",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Brought document / bill-of-lading generation in house, replacing an external service and manual key entry",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Cendian was a lead logistics provider for the chemical and plastics industry, December 2003 to February 2005, Network of 300+ (preferred) carriers into and out of 80+ countries and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Cendian was a lead logistics provider for the chemical and plastics industry",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "December 2003 to February 2005",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Start_Date/End_Date"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Integrations for orders, shipments, invoices across marine, rail and truck",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas), At Cendian 2003 to 2005, Network of 300+ (preferred) carriers into and out of 80+ countries and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas)",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "At Cendian 2003 to 2005",
+    "label": "supported",
+    "source": "profile.career_arc.employers"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Software Engineer at Cendian",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Role"
+   },
+   {
+    "text": "Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Used CIDX, the chemical industry's B2B standard, for common data standards",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Built portal capability for partners who could not integrate directly",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Worked with a plastics client's technology team to design, build, test and launch/validate its connection to the trading network",
+    "label": "supported",
+    "source": "onboarding-a-new-plastics-client-onto-cendians-trading-network|cendian-chemical-logistics Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas), At Cendian 2003 to 2005, Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas)",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "At Cendian 2003 to 2005",
+    "label": "supported",
+    "source": "profile.career_arc.employers"
+   },
+   {
+    "text": "Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Used CIDX, the chemical industry's B2B standard, for common data standards",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Worked on transaction tracking so operations could see where messages stopped",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Brought document / bill-of-lading generation in house, replacing an external service and manual key entry",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Cendian was a lead logistics provider for the chemical and plastics industry, At Cendian 2003 to 2005, Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Cendian was a lead logistics provider for the chemical and plastics industry",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "At Cendian 2003 to 2005",
+    "label": "supported",
+    "source": "profile.career_arc.employers"
+   },
+   {
+    "text": "Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas), At Cendian 2003 to 2005, Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas)",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "At Cendian 2003 to 2005",
+    "label": "supported",
+    "source": "profile.career_arc.employers"
+   },
+   {
+    "text": "Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Used CIDX, the chemical industry's B2B standard, for common data standards",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Built portal capability for partners who could not integrate directly",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas), Software Engineer at Cendian, Network of 300+ (preferred) carriers into and out of 80+ countries and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas)",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Software Engineer at Cendian",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Role"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "EDI, XML, flat files normalized into a common/canonical representation",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Integrations for orders, shipments, invoices across marine, rail and truck",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Cendian was a lead logistics provider for the chemical and plastics industry, Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS, Network of 300+ (preferred) carriers into and out of 80+ countries and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Cendian was a lead logistics provider for the chemical and plastics industry",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Worked with a plastics client's technology team to design, build, test and launch/validate its connection to the trading network",
+    "label": "supported",
+    "source": "onboarding-a-new-plastics-client-onto-cendians-trading-network|cendian-chemical-logistics Action/Result"
+   },
+   {
+    "text": "Travelled to rural Pennsylvania with a technology implementation manager, week on site, whiteboarding the interface",
+    "label": "supported",
+    "source": "onboarding-a-new-plastics-client-onto-cendians-trading-network|cendian-chemical-logistics Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Cendian was a lead logistics provider for the chemical and plastics industry, At Cendian 2003 to 2005, Integrations for orders, shipments, invoices across marine, rail and truck and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Cendian was a lead logistics provider for the chemical and plastics industry",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "At Cendian 2003 to 2005",
+    "label": "supported",
+    "source": "profile.career_arc.employers"
+   },
+   {
+    "text": "Integrations for orders, shipments, invoices across marine, rail and truck",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Used CIDX, the chemical industry's B2B standard, for common data standards",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Built portal capability for partners who could not integrate directly",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas), December 2003 to February 2005, Software Engineer at Cendian and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas)",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "December 2003 to February 2005",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Start_Date/End_Date"
+   },
+   {
+    "text": "Software Engineer at Cendian",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Role"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "EDI, XML, flat files normalized into a common/canonical representation",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Used CIDX, the chemical industry's B2B standard, for common data standards",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Built portal capability for partners who could not integrate directly",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Travelled to rural Pennsylvania with a technology implementation manager, week on site, whiteboarding the interface",
+    "label": "supported",
+    "source": "onboarding-a-new-plastics-client-onto-cendians-trading-network|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Worked with a plastics client's technology team to design, build, test and launch/validate its connection to the trading network",
+    "label": "supported",
+    "source": "onboarding-a-new-plastics-client-onto-cendians-trading-network|cendian-chemical-logistics Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas), At Cendian 2003 to 2005, Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas)",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "At Cendian 2003 to 2005",
+    "label": "supported",
+    "source": "profile.career_arc.employers"
+   },
+   {
+    "text": "Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "EDI, XML, flat files normalized into a common/canonical representation",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Used CIDX, the chemical industry's B2B standard, for common data standards",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Travelled to rural Pennsylvania with a technology implementation manager, week on site, whiteboarding the interface",
+    "label": "supported",
+    "source": "onboarding-a-new-plastics-client-onto-cendians-trading-network|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Worked with a plastics client's technology team to design, build, test and launch/validate its connection to the trading network",
+    "label": "supported",
+    "source": "onboarding-a-new-plastics-client-onto-cendians-trading-network|cendian-chemical-logistics Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas), At Cendian 2003 to 2005, Software Engineer at Cendian and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas)",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "At Cendian 2003 to 2005",
+    "label": "supported",
+    "source": "profile.career_arc.employers"
+   },
+   {
+    "text": "Software Engineer at Cendian",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Role"
+   },
+   {
+    "text": "Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Used CIDX, the chemical industry's B2B standard, for common data standards",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Worked on transaction tracking so operations could see where messages stopped",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas), At Cendian 2003 to 2005, Network of 300+ (preferred) carriers into and out of 80+ countries and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas)",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "At Cendian 2003 to 2005",
+    "label": "supported",
+    "source": "profile.career_arc.employers"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Integrations for orders, shipments, invoices across marine, rail and truck",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "EDI, XML, flat files normalized into a common/canonical representation",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Used CIDX, the chemical industry's B2B standard, for common data standards",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Built portal capability for partners who could not integrate directly",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Worked on transaction tracking so operations could see where messages stopped",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas), At Cendian 2003 to 2005, Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas)",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "At Cendian 2003 to 2005",
+    "label": "supported",
+    "source": "profile.career_arc.employers"
+   },
+   {
+    "text": "Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "EDI, XML, flat files normalized into a common/canonical representation",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Built portal capability for partners who could not integrate directly",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas), Software Engineer at Cendian, December 2003 to February 2005 and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas)",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Software Engineer at Cendian",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Role"
+   },
+   {
+    "text": "December 2003 to February 2005",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Start_Date/End_Date"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "EDI, XML, flat files normalized into a common/canonical representation",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Used CIDX, the chemical industry's B2B standard, for common data standards",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas), Software Engineer at Cendian, December 2003 to February 2005 and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas)",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Software Engineer at Cendian",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Role"
+   },
+   {
+    "text": "December 2003 to February 2005",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Start_Date/End_Date"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Worked with a plastics client's technology team to design, build, test and launch/validate its connection to the trading network",
+    "label": "supported",
+    "source": "onboarding-a-new-plastics-client-onto-cendians-trading-network|cendian-chemical-logistics Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas), December 2003 to February 2005, Software Engineer at Cendian and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas)",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "December 2003 to February 2005",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Start_Date/End_Date"
+   },
+   {
+    "text": "Software Engineer at Cendian",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Role"
+   },
+   {
+    "text": "Cendian was a lead logistics provider for the chemical and plastics industry",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Work categorized/documented as Transportation & Logistics",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Industry"
+   },
+   {
+    "text": "Chemical companies outsourced their logistics to Cendian; partners had different formats and capabilities",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Integrations for orders, shipments, invoices across marine, rail and truck",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Used CIDX, the chemical industry's B2B standard, for common data standards",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "EDI, XML, flat files normalized into a common/canonical representation",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Built portal capability for partners who could not integrate directly",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Brought document / bill-of-lading generation in house, replacing an external service and manual key entry",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Worked with a plastics client's technology team to design, build, test and launch/validate its connection to the trading network",
+    "label": "supported",
+    "source": "onboarding-a-new-plastics-client-onto-cendians-trading-network|cendian-chemical-logistics Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas), Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS, Network of 300+ (preferred) carriers into and out of 80+ countries and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas)",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "EDI, XML, flat files normalized into a common/canonical representation",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Used CIDX, the chemical industry's B2B standard, for common data standards",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Integrations for orders, shipments, invoices across marine, rail and truck",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Worked with a plastics client's technology team to design, build, test and launch/validate its connection to the trading network",
+    "label": "supported",
+    "source": "onboarding-a-new-plastics-client-onto-cendians-trading-network|cendian-chemical-logistics Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas), Software Engineer at Cendian, December 2003 to February 2005 and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas)",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Software Engineer at Cendian",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Role"
+   },
+   {
+    "text": "December 2003 to February 2005",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Start_Date/End_Date"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Integrations for orders, shipments, invoices across marine, rail and truck",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Used CIDX, the chemical industry's B2B standard, for common data standards",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "EDI, XML, flat files normalized into a common/canonical representation",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Built portal capability for partners who could not integrate directly",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Brought document / bill-of-lading generation in house, replacing an external service and manual key entry",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas), Built and maintained integrations, Network of 300+ (preferred) carriers into and out of 80+ countries and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas)",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Built and maintained integrations",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Task"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "EDI, XML, flat files normalized into a common/canonical representation",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Used CIDX, the chemical industry's B2B standard, for common data standards",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas), Software Engineer at Cendian, Cendian was a lead logistics provider for the chemical and plastics industry and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas)",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Software Engineer at Cendian",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Role"
+   },
+   {
+    "text": "Cendian was a lead logistics provider for the chemical and plastics industry",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "At Cendian 2003 to 2005",
+    "label": "supported",
+    "source": "profile.career_arc.employers"
+   },
+   {
+    "text": "Built and maintained integrations",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Task"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Chemical companies outsourced their logistics to Cendian; partners had different formats and capabilities",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Used CIDX, the chemical industry's B2B standard, for common data standards",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Built portal capability for partners who could not integrate directly",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Portal replaced clerks taking orders by phone and keying them in",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Result"
+   },
+   {
+    "text": "Brought document / bill-of-lading generation in house, replacing an external service and manual key entry",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Worked on transaction tracking so operations could see where messages stopped",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas), At Cendian 2003 to 2005, Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas)",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "At Cendian 2003 to 2005",
+    "label": "supported",
+    "source": "profile.career_arc.employers"
+   },
+   {
+    "text": "Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas), Software Engineer at Cendian, At Cendian 2003 to 2005 and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas)",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Software Engineer at Cendian",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Role"
+   },
+   {
+    "text": "At Cendian 2003 to 2005",
+    "label": "supported",
+    "source": "profile.career_arc.employers"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Integrations for orders, shipments, invoices across marine, rail and truck",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Used CIDX, the chemical industry's B2B standard, for common data standards",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "EDI, XML, flat files normalized into a common/canonical representation",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Built portal capability for partners who could not integrate directly",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Brought document / bill-of-lading generation in house, replacing an external service and manual key entry",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas), Software Engineer at Cendian, At Cendian 2003 to 2005 and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas)",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Software Engineer at Cendian",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Role"
+   },
+   {
+    "text": "At Cendian 2003 to 2005",
+    "label": "supported",
+    "source": "profile.career_arc.employers"
+   },
+   {
+    "text": "Work categorized/documented as Transportation & Logistics",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Industry"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Chemical companies outsourced their logistics to Cendian; partners had different formats and capabilities",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Integrations for orders, shipments, invoices across marine, rail and truck",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Used CIDX, the chemical industry's B2B standard, for common data standards",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "EDI, XML, flat files normalized into a common/canonical representation",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Built portal capability for partners who could not integrate directly",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Portal replaced clerks taking orders by phone and keying them in",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Result"
+   },
+   {
+    "text": "Brought document / bill-of-lading generation in house, replacing an external service and manual key entry",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Worked on transaction tracking so operations could see where messages stopped",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r08",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: says no oil and gas engagement is documented (acknowledges_missing); names Cendian chemical and plastics logistics explicitly as not oil and gas (adjacent, labelled); supported: Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas), At Cendian 2003 to 2005, Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS and the rest checked against Cendian stories/profile; 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "No documented oil and gas engagement (not on record)",
+    "label": "supported",
+    "source": "no story with oil/gas industry; Industry fields checked"
+   },
+   {
+    "text": "Worked at Cendian Chemical Logistics, chemical and plastics industry (adjacent, labelled as not oil and gas)",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   },
+   {
+    "text": "At Cendian 2003 to 2005",
+    "label": "supported",
+    "source": "profile.career_arc.employers"
+   },
+   {
+    "text": "Built Java and webMethods integrations connecting shippers, carriers and shipment planning / TMS",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "EDI, XML, flat files normalized into a common/canonical representation",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Built portal capability for partners who could not integrate directly",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action"
+   },
+   {
+    "text": "Network of 300+ (preferred) carriers into and out of 80+ countries",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ }
+]

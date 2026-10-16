@@ -1,0 +1,74 @@
+scored answers: 1830 (all 1830 present, no duplicates)
+
+pass rate by split and arm:
+  all        A: 523/610  B: 529/610  C: 525/610
+  unchanged  A: 426/490  B: 427/490  C: 424/490
+  changed    A: 97/120  B: 102/120  C: 101/120
+
+bare sentence on r01 to r06 (scorer field | from the answer text):
+  A: 28/60 | 28/60
+  B: 57/60 | 57/60
+  C: 24/60 | 24/60
+
+per turn (A, B, C pass out of 10), * = router-changed:
+   c01 t1: A 10/10  B 10/10  C 10/10
+   c01 t2: A 10/10  B 10/10  C 10/10
+   c01 t3: A 10/10  B 10/10  C 10/10
+   c02 t1: A 10/10  B 10/10  C 10/10
+ * c02 t2: A 10/10  B  9/10  C  9/10   differs
+   c03 t1: A 10/10  B 10/10  C  9/10   differs
+   c03 t2: A  4/10  B 10/10  C  9/10   differs
+   c04 t1: A 10/10  B 10/10  C 10/10
+   c04 t2: A 10/10  B 10/10  C 10/10
+ * c04 t3: A 10/10  B 10/10  C 10/10
+   c05 t1: A 10/10  B 10/10  C  9/10   differs
+ * c05 t2: A 10/10  B 10/10  C 10/10
+   c06 t1: A 10/10  B 10/10  C 10/10
+   c06 t2: A 10/10  B 10/10  C 10/10
+   c07 t1: A 10/10  B 10/10  C 10/10
+   c07 t2: A 10/10  B 10/10  C 10/10
+   c08 t1: A 10/10  B 10/10  C 10/10
+   c08 t2: A 10/10  B  9/10  C  9/10   differs
+   c09 t1: A 10/10  B 10/10  C 10/10
+   c09 t2: A 10/10  B 10/10  C  9/10   differs
+   c09 t3: A 10/10  B 10/10  C 10/10
+   c09 t4: A 10/10  B 10/10  C 10/10
+   c10 t1: A 10/10  B 10/10  C  9/10   differs
+   c10 t2: A 10/10  B 10/10  C 10/10
+   c10 t3: A  7/10  B  5/10  C  6/10   differs
+   c11 t1: A 10/10  B 10/10  C 10/10
+   c11 t2: A 10/10  B 10/10  C 10/10
+   c11 t3: A  8/10  B 10/10  C 10/10   differs
+   c12 t1: A  8/10  B 10/10  C 10/10   differs
+   c12 t2: A 10/10  B 10/10  C 10/10
+   c13 t1: A 10/10  B 10/10  C 10/10
+   c13 t2: A 10/10  B 10/10  C 10/10
+ * c14 t1: A  0/10  B  1/10  C  0/10   differs
+   c15 t1: A  0/10  B  0/10  C  0/10
+   c16 t1: A  0/10  B  0/10  C  0/10
+   c17 t2: A  8/10  B  6/10  C  9/10   differs
+   c18 t1: A 10/10  B 10/10  C 10/10
+   c18 t2: A 10/10  B 10/10  C 10/10
+   c18 t3: A 10/10  B 10/10  C 10/10
+ * r01 t1: A 10/10  B 10/10  C 10/10
+ * r02 t1: A 10/10  B 10/10  C 10/10
+ * r03 t1: A 10/10  B 10/10  C 10/10
+   r04 t1: A 10/10  B 10/10  C 10/10
+   r05 t1: A  9/10  B  7/10  C  4/10   differs
+   r06 t1: A 10/10  B 10/10  C 10/10
+   r07 t1: A  0/10  B  0/10  C  0/10
+   r08 t1: A 10/10  B 10/10  C 10/10
+ * r09 t1: A  0/10  B  6/10  C  6/10   differs
+   r10 t1: A 10/10  B 10/10  C 10/10
+ * r11 t1: A 10/10  B 10/10  C 10/10
+ * r12 t1: A  7/10  B  6/10  C  6/10   differs
+ * r13 t1: A 10/10  B 10/10  C 10/10
+ * r14 t1: A 10/10  B 10/10  C 10/10
+   r15 t1: A 10/10  B 10/10  C 10/10
+   r16 t1: A 10/10  B 10/10  C 10/10
+   x1 t1: A  2/10  B  1/10  C  2/10   differs
+   x2 t1: A 10/10  B 10/10  C 10/10
+   x3 t1: A  2/10  B  3/10  C  3/10   differs
+   x4 t1: A 10/10  B 10/10  C 10/10
+   x5 t1: A 10/10  B 10/10  C 10/10
+   x7 t1: A  8/10  B  6/10  C  6/10   differs

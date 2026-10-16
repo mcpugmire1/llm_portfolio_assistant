@@ -1,0 +1,2032 @@
+[
+ {
+  "case": "r09",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: all Sparkfly claims (building-sparkflys-platform-alongside-its-founder|sparkfly). Adjacent work labelled as not a direct retail engagement (ruling 2). acknowledges_missing true: 'his documented industry experience does not list retail as a standalone sector' and 'rather than a documented engagement directly with a retailer'. Pass.",
+  "claims": [
+   {
+    "text": "Matt has worked on commerce technology through Sparkfly, adjacent to and not a direct retail engagement",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry, Action (labelled adjacent)"
+   },
+   {
+    "text": "Sparkfly work ran late 2000 through 2001 at Wellfound Technology",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation, Start_Date 2000-11, End_Date 2001-12, Employer"
+   },
+   {
+    "text": "Joined as developer, grew into lead, running 4 developers while writing production code",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task, Action, 5PSummary"
+   },
+   {
+    "text": "Built the commerce path end to end: catalog search, genre browse, product detail with pricing and savings, cross-sell, cart, checkout",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built Books, Music, and Video channels (search by attribute, browse taxonomies, curated promotional slots)",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Recognized JSP-only architecture as fragile and slow, learned MVC, refactored live product onto servlets and beans",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Commerce, personalization, content, and administrative capabilities shipped as one integrated portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly later evolved into today's retail technology platform; Matt's work was on the earlier platform",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly engagement classified as Technology & Software",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry"
+   },
+   {
+    "text": "Sparkfly was an employee discount portal at the time",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Project"
+   },
+   {
+    "text": "Built alongside the founder",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Title, Situation"
+   },
+   {
+    "text": "Customers arrived faster than the platform could support them",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation"
+   },
+   {
+    "text": "Built a 3-layer personalization model: interests, per-channel geographic settings, user-controlled channel visibility",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "supported: all Sparkfly claims (building-sparkflys-platform-alongside-its-founder|sparkfly). Adjacent work labelled as not a direct retail engagement (ruling 2). acknowledges_missing false: only says what the Sparkfly example is not ('not a direct engagement with a retail chain'; 'documented work there was on that earlier platform'); never says retail work is not on record (ruling 3). Fails extras rule 2 (absence).",
+  "claims": [
+   {
+    "text": "Matt has worked on commerce technology through Sparkfly, adjacent to and not a direct retail engagement",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry, Action (labelled adjacent)"
+   },
+   {
+    "text": "Sparkfly work ran late 2000 through 2001 at Wellfound Technology",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation, Start_Date 2000-11, End_Date 2001-12, Employer"
+   },
+   {
+    "text": "Joined as developer, grew into lead, running 4 developers while writing production code",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task, Action, 5PSummary"
+   },
+   {
+    "text": "Built the commerce path end to end: catalog search, genre browse, product detail with pricing and savings, cross-sell, cart, checkout",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built Books, Music, and Video channels (search by attribute, browse taxonomies, curated promotional slots)",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Recognized JSP-only architecture as fragile and slow, learned MVC, refactored live product onto servlets and beans",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Commerce, personalization, content, and administrative capabilities shipped as one integrated portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly later evolved into today's retail technology platform; Matt's work was on the earlier platform",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly was an employee discount portal at the time",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Project"
+   },
+   {
+    "text": "Built alongside the founder",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Title, Situation"
+   },
+   {
+    "text": "Customers arrived faster than the platform could support them",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation"
+   },
+   {
+    "text": "Built a 3-layer personalization model: interests, per-channel geographic settings, user-controlled channel visibility",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built account management with stored payment",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built administrative messaging with role-based access",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Designed the Oracle schema and wrote the PL/SQL underneath",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "unsupported: flat 'That's outside Matt's experience' (no not-on-record statement, extras rule 2 fails; adjacent Sparkfly commerce and Fiserv retailer card-portal work exist); acknowledges_missing false, useful_direct false (buttons are generic, no adjacent work named).",
+  "claims": [
+   {
+    "text": "Flat statement that retail is outside Matt's experience",
+    "label": "unsupported",
+    "source": "none: no retail-industry story, but adjacent stories exist (delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Situation: portal for retailers' store cards; building-sparkflys-platform-alongside-its-founder|sparkfly e-commerce portal)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: flat 'That's outside Matt's experience' (no not-on-record statement, extras rule 2 fails; adjacent Sparkfly commerce and Fiserv retailer card-portal work exist); acknowledges_missing false, useful_direct false (buttons are generic, no adjacent work named).",
+  "claims": [
+   {
+    "text": "Flat statement that retail is outside Matt's experience",
+    "label": "unsupported",
+    "source": "none: no retail-industry story, but adjacent stories exist (delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Situation: portal for retailers' store cards; building-sparkflys-platform-alongside-its-founder|sparkfly e-commerce portal)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "supported: all Sparkfly claims (building-sparkflys-platform-alongside-its-founder|sparkfly). Adjacent work labelled as not a direct retail engagement (ruling 2). acknowledges_missing false: 'closest match' and 'rather than directly for a retailer' label adjacency, but nothing says retail work is not on record or not documented (ruling 3). Fails extras rule 2 (absence).",
+  "claims": [
+   {
+    "text": "Matt has worked on retail-related commerce technology through Sparkfly, qualified as not a direct retailer engagement",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action, Result (commerce portal; later retail technology), labelled adjacent"
+   },
+   {
+    "text": "Sparkfly engagement classified as Technology & Software",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry"
+   },
+   {
+    "text": "Sparkfly was an employee discount portal at the time",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Project"
+   },
+   {
+    "text": "Sparkfly work ran late 2000 through 2001 at Wellfound Technology",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation, Start_Date 2000-11, End_Date 2001-12, Employer"
+   },
+   {
+    "text": "Customers arrived faster than the platform could support them",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation"
+   },
+   {
+    "text": "Joined as developer, grew into lead, running 4 developers while writing production code",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task, Action, 5PSummary"
+   },
+   {
+    "text": "Took ownership of the architecture and data layer",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task"
+   },
+   {
+    "text": "Built the commerce path end to end: catalog search, genre browse, product detail with pricing and savings, cross-sell, cart, checkout",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built Books, Music, and Video channels (search by attribute, browse taxonomies, curated promotional slots)",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built account management with stored payment",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built administrative messaging with role-based access",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Recognized JSP-only architecture as fragile and slow, learned MVC, refactored live product onto servlets and beans",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Commerce, personalization, content, and administrative capabilities shipped as one integrated portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Foundation outlasted the dot-com collapse",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Business spun off the original discount operation",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly later evolved into today's retail technology platform; Matt's work was on the earlier platform",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "supported: all Sparkfly claims (building-sparkflys-platform-alongside-its-founder|sparkfly). Adjacent work labelled as not a direct retail engagement (ruling 2). acknowledges_missing false: 'in Technology & Software rather than directly with a retailer' and 'documented work was on that earlier portal' describe only the example; no not-on-record statement for retail (ruling 3). Fails extras rule 2 (absence).",
+  "claims": [
+   {
+    "text": "Sparkfly work ran late 2000 through 2001 at Wellfound Technology",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation, Start_Date 2000-11, End_Date 2001-12, Employer"
+   },
+   {
+    "text": "Joined as developer, grew into lead, running 4 developers while writing production code",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task, Action, 5PSummary"
+   },
+   {
+    "text": "Built the commerce path end to end: catalog search, genre browse, product detail with pricing and savings, cross-sell, cart, checkout",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built Books, Music, and Video channels (search by attribute, browse taxonomies, curated promotional slots)",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Recognized JSP-only architecture as fragile and slow, learned MVC, refactored live product onto servlets and beans",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Commerce, personalization, content, and administrative capabilities shipped as one integrated portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly later evolved into today's retail technology platform; Matt's work was on the earlier platform",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Matt has worked on commerce technology through Sparkfly, adjacent to and not a direct retail engagement",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry, Action (labelled adjacent)"
+   },
+   {
+    "text": "Sparkfly work ran November 2000 through December 2001",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Start_Date 2000-11, End_Date 2001-12"
+   },
+   {
+    "text": "Sparkfly engagement classified as Technology & Software",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry"
+   },
+   {
+    "text": "Sparkfly was an employee discount portal at the time",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Project"
+   },
+   {
+    "text": "Built alongside the founder",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Title, Situation"
+   },
+   {
+    "text": "Customers arrived faster than the platform could support them",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation"
+   },
+   {
+    "text": "Built account management with stored payment",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "No framework handled personalization at the time",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation"
+   },
+   {
+    "text": "Built a 3-layer personalization model: interests, per-channel geographic settings, user-controlled channel visibility",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Foundation outlasted the dot-com collapse",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: all Sparkfly claims (building-sparkflys-platform-alongside-its-founder|sparkfly); Fiserv ADA manifesto claims. Adjacent work labelled as not a direct retail engagement (ruling 2). acknowledges_missing true: 'his industry experience does not list retail as a separate category'; Fiserv ADA manifesto claims all supported by thought-leadership story. Pass.",
+  "claims": [
+   {
+    "text": "Matt has worked on retail-related commerce technology through Sparkfly, qualified as not a direct retailer engagement",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action, Result (commerce portal; later retail technology), labelled adjacent"
+   },
+   {
+    "text": "Sparkfly work ran late 2000 through 2001 at Wellfound Technology",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation, Start_Date 2000-11, End_Date 2001-12, Employer"
+   },
+   {
+    "text": "Sparkfly was an employee discount portal at the time",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Project"
+   },
+   {
+    "text": "Built alongside the founder",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Title, Situation"
+   },
+   {
+    "text": "Customers arrived faster than the platform could support them",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation"
+   },
+   {
+    "text": "Joined as developer, grew into lead, running 4 developers while writing production code",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task, Action, 5PSummary"
+   },
+   {
+    "text": "Built the commerce path end to end: catalog search, genre browse, product detail with pricing and savings, cross-sell, cart, checkout",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built Books, Music, and Video channels (search by attribute, browse taxonomies, curated promotional slots)",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built a 3-layer personalization model: interests, per-channel geographic settings, user-controlled channel visibility",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built account management with stored payment",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built administrative messaging with role-based access",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Recognized JSP-only architecture as fragile and slow, learned MVC, refactored live product onto servlets and beans",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Commerce, personalization, content, and administrative capabilities shipped as one integrated portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly later evolved into today's retail technology platform; Matt's work was on the earlier platform",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "At Fiserv, researched accessibility specs and wrote the ADA manifesto for the white-label card portal serving its largest clients",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients Action; delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Presented it to client IT leadership, the program steering committee, and delivery teams",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients Action"
+   },
+   {
+    "text": "Fiserv adopted the accessibility standards as ongoing practice; teams kept the portal compliant on later releases",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients Result; delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: flat 'That's outside Matt's experience' (no not-on-record statement, extras rule 2 fails; adjacent Sparkfly commerce and Fiserv retailer card-portal work exist); acknowledges_missing false, useful_direct false (buttons are generic, no adjacent work named).",
+  "claims": [
+   {
+    "text": "Flat statement that retail is outside Matt's experience",
+    "label": "unsupported",
+    "source": "none: no retail-industry story, but adjacent stories exist (delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Situation: portal for retailers' store cards; building-sparkflys-platform-alongside-its-founder|sparkfly e-commerce portal)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: all Sparkfly claims (building-sparkflys-platform-alongside-its-founder|sparkfly). Adjacent work labelled as not a direct retail engagement (ruling 2). acknowledges_missing true: 'rather than a documented engagement working directly for a retailer'. Pass.",
+  "claims": [
+   {
+    "text": "Matt has worked on commerce technology through Sparkfly, adjacent to and not a direct retail engagement",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry, Action (labelled adjacent)"
+   },
+   {
+    "text": "Sparkfly work ran late 2000 through 2001 at Wellfound Technology",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation, Start_Date 2000-11, End_Date 2001-12, Employer"
+   },
+   {
+    "text": "Joined as developer, grew into lead, running 4 developers while writing production code",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task, Action, 5PSummary"
+   },
+   {
+    "text": "Built the commerce path end to end: catalog search, genre browse, product detail with pricing and savings, cross-sell, cart, checkout",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built Books, Music, and Video channels (search by attribute, browse taxonomies, curated promotional slots)",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Recognized JSP-only architecture as fragile and slow, learned MVC, refactored live product onto servlets and beans",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Commerce, personalization, content, and administrative capabilities shipped as one integrated portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly later evolved into today's retail technology platform; Matt's work was on the earlier platform",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly engagement classified as Technology & Software",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry"
+   },
+   {
+    "text": "Sparkfly was an employee discount portal at the time",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Project"
+   },
+   {
+    "text": "Built alongside the founder",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Title, Situation"
+   },
+   {
+    "text": "Customers arrived faster than the platform could support them",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation"
+   },
+   {
+    "text": "Founder in the room, customer list growing while the team built a live product",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation, Use Case(s)"
+   },
+   {
+    "text": "Built a 3-layer personalization model: interests, per-channel geographic settings, user-controlled channel visibility",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built account management with stored payment",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built administrative messaging with role-based access",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Foundation outlasted the dot-com collapse",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: all Sparkfly claims (building-sparkflys-platform-alongside-its-founder|sparkfly). Adjacent work labelled as not a direct retail engagement (ruling 2). acknowledges_missing true: 'his documented experience is not a direct engagement for a retailer'. Pass.",
+  "claims": [
+   {
+    "text": "Matt has worked on commerce technology through Sparkfly, adjacent to and not a direct retail engagement",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry, Action (labelled adjacent)"
+   },
+   {
+    "text": "Sparkfly work ran late 2000 through 2001 at Wellfound Technology",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation, Start_Date 2000-11, End_Date 2001-12, Employer"
+   },
+   {
+    "text": "Joined as developer, grew into lead, running 4 developers while writing production code",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task, Action, 5PSummary"
+   },
+   {
+    "text": "Built the commerce path end to end: catalog search, genre browse, product detail with pricing and savings, cross-sell, cart, checkout",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built Books, Music, and Video channels (search by attribute, browse taxonomies, curated promotional slots)",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Recognized JSP-only architecture as fragile and slow, learned MVC, refactored live product onto servlets and beans",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Commerce, personalization, content, and administrative capabilities shipped as one integrated portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly later evolved into today's retail technology platform; Matt's work was on the earlier platform",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly was an employee discount portal at the time",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Project"
+   },
+   {
+    "text": "Founder had won an employee discount program",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation"
+   },
+   {
+    "text": "Customers arrived faster than the platform could support them",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation"
+   },
+   {
+    "text": "Took ownership of the architecture and data layer",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task"
+   },
+   {
+    "text": "Built alongside the founder",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Title, Situation"
+   },
+   {
+    "text": "Built a 3-layer personalization model: interests, per-channel geographic settings, user-controlled channel visibility",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Founder in the room, customer list growing while the team built a live product",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation, Use Case(s)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "supported: all Sparkfly claims (building-sparkflys-platform-alongside-its-founder|sparkfly). Adjacent work labelled as not a direct retail engagement (ruling 2). acknowledges_missing false: 'not a direct retail-industry assignment' and 'documented work was on that earlier ... platform' describe only the example; no not-on-record statement for retail (ruling 3). Fails extras rule 2 (absence).",
+  "claims": [
+   {
+    "text": "Matt has worked on commerce technology through Sparkfly, adjacent to and not a direct retail engagement",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry, Action (labelled adjacent)"
+   },
+   {
+    "text": "Sparkfly work ran late 2000 through 2001 at Wellfound Technology",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation, Start_Date 2000-11, End_Date 2001-12, Employer"
+   },
+   {
+    "text": "Joined as developer, grew into lead, running 4 developers while writing production code",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task, Action, 5PSummary"
+   },
+   {
+    "text": "Built the commerce path end to end: catalog search, genre browse, product detail with pricing and savings, cross-sell, cart, checkout",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built Books, Music, and Video channels (search by attribute, browse taxonomies, curated promotional slots)",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Recognized JSP-only architecture as fragile and slow, learned MVC, refactored live product onto servlets and beans",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Commerce, personalization, content, and administrative capabilities shipped as one integrated portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly later evolved into today's retail technology platform; Matt's work was on the earlier platform",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly engagement classified as Technology & Software",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry"
+   },
+   {
+    "text": "Sparkfly was an employee discount portal at the time",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Project"
+   },
+   {
+    "text": "Built alongside the founder",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Title, Situation"
+   },
+   {
+    "text": "Customers arrived faster than the platform could support them",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation"
+   },
+   {
+    "text": "Designed the Oracle schema and wrote the PL/SQL underneath",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built a 3-layer personalization model: interests, per-channel geographic settings, user-controlled channel visibility",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Business spun off the original discount operation",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "unsupported: flat 'That's outside Matt's experience' (no not-on-record statement, extras rule 2 fails; adjacent Sparkfly commerce and Fiserv retailer card-portal work exist); acknowledges_missing false, useful_direct false (buttons are generic, no adjacent work named).",
+  "claims": [
+   {
+    "text": "Flat statement that retail is outside Matt's experience",
+    "label": "unsupported",
+    "source": "none: no retail-industry story, but adjacent stories exist (delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Situation: portal for retailers' store cards; building-sparkflys-platform-alongside-its-founder|sparkfly e-commerce portal)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: all Sparkfly claims (building-sparkflys-platform-alongside-its-founder|sparkfly). Adjacent work labelled as not a direct retail engagement (ruling 2). acknowledges_missing true: 'his documented industry experience does not include a direct retail-company engagement'. Pass.",
+  "claims": [
+   {
+    "text": "Matt has worked on commerce technology through Sparkfly, adjacent to and not a direct retail engagement",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry, Action (labelled adjacent)"
+   },
+   {
+    "text": "Sparkfly work ran late 2000 through 2001 at Wellfound Technology",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation, Start_Date 2000-11, End_Date 2001-12, Employer"
+   },
+   {
+    "text": "Joined as developer, grew into lead, running 4 developers while writing production code",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task, Action, 5PSummary"
+   },
+   {
+    "text": "Built the commerce path end to end: catalog search, genre browse, product detail with pricing and savings, cross-sell, cart, checkout",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built Books, Music, and Video channels (search by attribute, browse taxonomies, curated promotional slots)",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Recognized JSP-only architecture as fragile and slow, learned MVC, refactored live product onto servlets and beans",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Commerce, personalization, content, and administrative capabilities shipped as one integrated portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly later evolved into today's retail technology platform; Matt's work was on the earlier platform",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly was an employee discount portal at the time",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Project"
+   },
+   {
+    "text": "Customers arrived faster than the platform could support them",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation"
+   },
+   {
+    "text": "Built a 3-layer personalization model: interests, per-channel geographic settings, user-controlled channel visibility",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built account management with stored payment",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built administrative messaging with role-based access",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Designed the Oracle schema and wrote the PL/SQL underneath",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Foundation outlasted the dot-com collapse",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: flat 'That's outside Matt's experience' (no not-on-record statement, extras rule 2 fails; adjacent Sparkfly commerce and Fiserv retailer card-portal work exist); acknowledges_missing false, useful_direct false (buttons are generic, no adjacent work named).",
+  "claims": [
+   {
+    "text": "Flat statement that retail is outside Matt's experience",
+    "label": "unsupported",
+    "source": "none: no retail-industry story, but adjacent stories exist (delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Situation: portal for retailers' store cards; building-sparkflys-platform-alongside-its-founder|sparkfly e-commerce portal)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "supported: all Sparkfly claims (building-sparkflys-platform-alongside-its-founder|sparkfly). Adjacent work labelled as not a direct retail engagement (ruling 2). acknowledges_missing false: 'in Technology & Software rather than directly with a retailer' and 'documented work there was on that earlier ... platform' describe only the example; no not-on-record statement for retail (ruling 3). Fails extras rule 2 (absence).",
+  "claims": [
+   {
+    "text": "Matt has worked on commerce technology through Sparkfly, adjacent to and not a direct retail engagement",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry, Action (labelled adjacent)"
+   },
+   {
+    "text": "Sparkfly work ran late 2000 through 2001 at Wellfound Technology",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation, Start_Date 2000-11, End_Date 2001-12, Employer"
+   },
+   {
+    "text": "Joined as developer, grew into lead, running 4 developers while writing production code",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task, Action, 5PSummary"
+   },
+   {
+    "text": "Built the commerce path end to end: catalog search, genre browse, product detail with pricing and savings, cross-sell, cart, checkout",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built Books, Music, and Video channels (search by attribute, browse taxonomies, curated promotional slots)",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Recognized JSP-only architecture as fragile and slow, learned MVC, refactored live product onto servlets and beans",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Commerce, personalization, content, and administrative capabilities shipped as one integrated portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly later evolved into today's retail technology platform; Matt's work was on the earlier platform",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly engagement classified as Technology & Software",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry"
+   },
+   {
+    "text": "Sparkfly was an employee discount portal at the time",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Project"
+   },
+   {
+    "text": "Built alongside the founder",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Title, Situation"
+   },
+   {
+    "text": "Customers arrived faster than the platform could support them",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation"
+   },
+   {
+    "text": "Took ownership of the architecture and data layer",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task"
+   },
+   {
+    "text": "Built account management with stored payment",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built a 3-layer personalization model: interests, per-channel geographic settings, user-controlled channel visibility",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built administrative messaging with role-based access",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Designed the Oracle schema and wrote the PL/SQL underneath",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: flat 'That's outside Matt's experience' (no not-on-record statement, extras rule 2 fails; adjacent Sparkfly commerce and Fiserv retailer card-portal work exist); acknowledges_missing false, useful_direct false (buttons are generic, no adjacent work named).",
+  "claims": [
+   {
+    "text": "Flat statement that retail is outside Matt's experience",
+    "label": "unsupported",
+    "source": "none: no retail-industry story, but adjacent stories exist (delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Situation: portal for retailers' store cards; building-sparkflys-platform-alongside-its-founder|sparkfly e-commerce portal)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "supported: all Sparkfly claims (building-sparkflys-platform-alongside-its-founder|sparkfly). Adjacent work labelled as not a direct retail engagement (ruling 2). acknowledges_missing false: 'classified as Technology & Software rather than retail' describes only the example; no not-on-record statement for retail (ruling 3). Fails extras rule 2 (absence).",
+  "claims": [
+   {
+    "text": "Matt has worked on commerce technology through Sparkfly, adjacent to and not a direct retail engagement",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry, Action (labelled adjacent)"
+   },
+   {
+    "text": "Sparkfly work ran late 2000 through 2001 at Wellfound Technology",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation, Start_Date 2000-11, End_Date 2001-12, Employer"
+   },
+   {
+    "text": "Joined as developer, grew into lead, running 4 developers while writing production code",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task, Action, 5PSummary"
+   },
+   {
+    "text": "Built the commerce path end to end: catalog search, genre browse, product detail with pricing and savings, cross-sell, cart, checkout",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built Books, Music, and Video channels (search by attribute, browse taxonomies, curated promotional slots)",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Recognized JSP-only architecture as fragile and slow, learned MVC, refactored live product onto servlets and beans",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Commerce, personalization, content, and administrative capabilities shipped as one integrated portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly later evolved into today's retail technology platform; Matt's work was on the earlier platform",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly engagement classified as Technology & Software",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry"
+   },
+   {
+    "text": "Sparkfly was an employee discount portal at the time",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Project"
+   },
+   {
+    "text": "Built a 3-layer personalization model: interests, per-channel geographic settings, user-controlled channel visibility",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: all Sparkfly claims (building-sparkflys-platform-alongside-its-founder|sparkfly). Adjacent work labelled as not a direct retail engagement (ruling 2). acknowledges_missing true: 'rather than a documented engagement directly with a retailer'. Pass.",
+  "claims": [
+   {
+    "text": "Matt has worked on commerce technology through Sparkfly, adjacent to and not a direct retail engagement",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry, Action (labelled adjacent)"
+   },
+   {
+    "text": "Sparkfly work ran late 2000 through 2001 at Wellfound Technology",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation, Start_Date 2000-11, End_Date 2001-12, Employer"
+   },
+   {
+    "text": "Joined as developer, grew into lead, running 4 developers while writing production code",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task, Action, 5PSummary"
+   },
+   {
+    "text": "Built the commerce path end to end: catalog search, genre browse, product detail with pricing and savings, cross-sell, cart, checkout",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built Books, Music, and Video channels (search by attribute, browse taxonomies, curated promotional slots)",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Recognized JSP-only architecture as fragile and slow, learned MVC, refactored live product onto servlets and beans",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Commerce, personalization, content, and administrative capabilities shipped as one integrated portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly later evolved into today's retail technology platform; Matt's work was on the earlier platform",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly engagement classified as Technology & Software",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry"
+   },
+   {
+    "text": "Sparkfly was an employee discount portal at the time",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Project"
+   },
+   {
+    "text": "Customers arrived faster than the platform could support them",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation"
+   },
+   {
+    "text": "Took ownership of the architecture and data layer",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task"
+   },
+   {
+    "text": "Built account management with stored payment",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built a 3-layer personalization model: interests, per-channel geographic settings, user-controlled channel visibility",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: all Sparkfly claims (building-sparkflys-platform-alongside-its-founder|sparkfly). Adjacent work labelled as not a direct retail engagement (ruling 2). acknowledges_missing true: 'his industry experience does not list a direct retail engagement'. Pass.",
+  "claims": [
+   {
+    "text": "Matt has worked on commerce technology through Sparkfly, adjacent to and not a direct retail engagement",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry, Action (labelled adjacent)"
+   },
+   {
+    "text": "Sparkfly work ran late 2000 through 2001 at Wellfound Technology",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation, Start_Date 2000-11, End_Date 2001-12, Employer"
+   },
+   {
+    "text": "Joined as developer, grew into lead, running 4 developers while writing production code",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task, Action, 5PSummary"
+   },
+   {
+    "text": "Built the commerce path end to end: catalog search, genre browse, product detail with pricing and savings, cross-sell, cart, checkout",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built Books, Music, and Video channels (search by attribute, browse taxonomies, curated promotional slots)",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Recognized JSP-only architecture as fragile and slow, learned MVC, refactored live product onto servlets and beans",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Commerce, personalization, content, and administrative capabilities shipped as one integrated portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly later evolved into today's retail technology platform; Matt's work was on the earlier platform",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Founder had won an employee discount program",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation"
+   },
+   {
+    "text": "Customers arrived faster than the platform could support them",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation"
+   },
+   {
+    "text": "Built account management with stored payment",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built a 3-layer personalization model: interests, per-channel geographic settings, user-controlled channel visibility",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Portal supported Sparkfly's first enterprise customers",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Foundation outlasted the dot-com collapse",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly was an employee discount portal at the time",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Project"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "supported: all Sparkfly claims (building-sparkflys-platform-alongside-its-founder|sparkfly). Adjacent work labelled as not a direct retail engagement (ruling 2). acknowledges_missing false: 'classified as Technology & Software rather than retail' and 'work was on that earlier ... platform' describe only the example; no not-on-record statement (ruling 3). Fails extras rule 2 (absence).",
+  "claims": [
+   {
+    "text": "Matt has worked on commerce technology through Sparkfly, adjacent to and not a direct retail engagement",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry, Action (labelled adjacent)"
+   },
+   {
+    "text": "Sparkfly work ran late 2000 through 2001 at Wellfound Technology",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation, Start_Date 2000-11, End_Date 2001-12, Employer"
+   },
+   {
+    "text": "Joined as developer, grew into lead, running 4 developers while writing production code",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task, Action, 5PSummary"
+   },
+   {
+    "text": "Built the commerce path end to end: catalog search, genre browse, product detail with pricing and savings, cross-sell, cart, checkout",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built Books, Music, and Video channels (search by attribute, browse taxonomies, curated promotional slots)",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Recognized JSP-only architecture as fragile and slow, learned MVC, refactored live product onto servlets and beans",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Commerce, personalization, content, and administrative capabilities shipped as one integrated portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly later evolved into today's retail technology platform; Matt's work was on the earlier platform",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly engagement classified as Technology & Software",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry"
+   },
+   {
+    "text": "Sparkfly was an employee discount portal at the time",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Project"
+   },
+   {
+    "text": "Founder had won an employee discount program",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation"
+   },
+   {
+    "text": "Customers arrived faster than the platform could support them",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation"
+   },
+   {
+    "text": "Built a 3-layer personalization model: interests, per-channel geographic settings, user-controlled channel visibility",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "No framework handled personalization at the time",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation"
+   },
+   {
+    "text": "Foundation outlasted the dot-com collapse",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "unsupported: flat 'That's outside Matt's experience' (no not-on-record statement, extras rule 2 fails; adjacent Sparkfly commerce and Fiserv retailer card-portal work exist); acknowledges_missing false, useful_direct false (buttons are generic, no adjacent work named).",
+  "claims": [
+   {
+    "text": "Flat statement that retail is outside Matt's experience",
+    "label": "unsupported",
+    "source": "none: no retail-industry story, but adjacent stories exist (delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Situation: portal for retailers' store cards; building-sparkflys-platform-alongside-its-founder|sparkfly e-commerce portal)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: all Sparkfly claims (building-sparkflys-platform-alongside-its-founder|sparkfly). Adjacent work labelled as not a direct retail engagement (ruling 2). acknowledges_missing true: 'his documented experience is not a direct retail-industry engagement'. Pass.",
+  "claims": [
+   {
+    "text": "Matt has worked on commerce technology through Sparkfly, adjacent to and not a direct retail engagement",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry, Action (labelled adjacent)"
+   },
+   {
+    "text": "Sparkfly work ran late 2000 through 2001 at Wellfound Technology",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation, Start_Date 2000-11, End_Date 2001-12, Employer"
+   },
+   {
+    "text": "Joined as developer, grew into lead, running 4 developers while writing production code",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task, Action, 5PSummary"
+   },
+   {
+    "text": "Built the commerce path end to end: catalog search, genre browse, product detail with pricing and savings, cross-sell, cart, checkout",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Sparkfly was an employee discount portal at the time",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Project"
+   },
+   {
+    "text": "Sparkfly later evolved into today's retail technology platform; Matt's work was on the earlier platform",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "unsupported: flat 'That's outside Matt's experience' (no not-on-record statement, extras rule 2 fails; adjacent Sparkfly commerce and Fiserv retailer card-portal work exist); acknowledges_missing false, useful_direct false (buttons are generic, no adjacent work named).",
+  "claims": [
+   {
+    "text": "Flat statement that retail is outside Matt's experience",
+    "label": "unsupported",
+    "source": "none: no retail-industry story, but adjacent stories exist (delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Situation: portal for retailers' store cards; building-sparkflys-platform-alongside-its-founder|sparkfly e-commerce portal)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: all Sparkfly claims (building-sparkflys-platform-alongside-its-founder|sparkfly). Adjacent work labelled as not a direct retail engagement (ruling 2). acknowledges_missing true: 'rather than a documented engagement directly with a retailer'. Pass.",
+  "claims": [
+   {
+    "text": "Matt has worked on retail-related commerce technology through Sparkfly, qualified as not a direct retailer engagement",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action, Result (commerce portal; later retail technology), labelled adjacent"
+   },
+   {
+    "text": "Sparkfly work ran late 2000 through 2001 at Wellfound Technology",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation, Start_Date 2000-11, End_Date 2001-12, Employer"
+   },
+   {
+    "text": "Sparkfly was an employee discount portal at the time",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Project"
+   },
+   {
+    "text": "Built alongside the founder",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Title, Situation"
+   },
+   {
+    "text": "Customers arrived faster than the platform could support them",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation"
+   },
+   {
+    "text": "Joined as developer, grew into lead, running 4 developers while writing production code",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task, Action, 5PSummary"
+   },
+   {
+    "text": "Built the commerce path end to end: catalog search, genre browse, product detail with pricing and savings, cross-sell, cart, checkout",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built Books, Music, and Video channels (search by attribute, browse taxonomies, curated promotional slots)",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Recognized JSP-only architecture as fragile and slow, learned MVC, refactored live product onto servlets and beans",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built a 3-layer personalization model: interests, per-channel geographic settings, user-controlled channel visibility",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built administrative messaging with role-based access",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built account management with stored payment",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Designed the Oracle schema and wrote the PL/SQL underneath",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Commerce, personalization, content, and administrative capabilities shipped as one integrated portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Foundation outlasted the dot-com collapse",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly later evolved into today's retail technology platform; Matt's work was on the earlier platform",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "unsupported: flat 'That's outside Matt's experience' (no not-on-record statement, extras rule 2 fails; adjacent Sparkfly commerce and Fiserv retailer card-portal work exist); acknowledges_missing false, useful_direct false (buttons are generic, no adjacent work named).",
+  "claims": [
+   {
+    "text": "Flat statement that retail is outside Matt's experience",
+    "label": "unsupported",
+    "source": "none: no retail-industry story, but adjacent stories exist (delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Situation: portal for retailers' store cards; building-sparkflys-platform-alongside-its-founder|sparkfly e-commerce portal)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "supported: all Sparkfly claims (building-sparkflys-platform-alongside-its-founder|sparkfly). Adjacent work labelled as not a direct retail engagement (ruling 2). acknowledges_missing false: 'in Technology & Software rather than directly with a retailer' and 'work was on that earlier platform' describe only the example; no not-on-record statement (ruling 3). Fails extras rule 2 (absence).",
+  "claims": [
+   {
+    "text": "Matt has worked on commerce technology through Sparkfly, adjacent to and not a direct retail engagement",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry, Action (labelled adjacent)"
+   },
+   {
+    "text": "Sparkfly work ran late 2000 through 2001 at Wellfound Technology",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation, Start_Date 2000-11, End_Date 2001-12, Employer"
+   },
+   {
+    "text": "Joined as developer, grew into lead, running 4 developers while writing production code",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task, Action, 5PSummary"
+   },
+   {
+    "text": "Built the commerce path end to end: catalog search, genre browse, product detail with pricing and savings, cross-sell, cart, checkout",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built Books, Music, and Video channels (search by attribute, browse taxonomies, curated promotional slots)",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Recognized JSP-only architecture as fragile and slow, learned MVC, refactored live product onto servlets and beans",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Commerce, personalization, content, and administrative capabilities shipped as one integrated portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly later evolved into today's retail technology platform; Matt's work was on the earlier platform",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly engagement classified as Technology & Software",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry"
+   },
+   {
+    "text": "Sparkfly was an employee discount portal at the time",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Project"
+   },
+   {
+    "text": "Built alongside the founder",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Title, Situation"
+   },
+   {
+    "text": "Customers arrived faster than the platform could support them",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation"
+   },
+   {
+    "text": "Built account management with stored payment",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built a 3-layer personalization model: interests, per-channel geographic settings, user-controlled channel visibility",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built administrative messaging with role-based access",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Designed the Oracle schema and wrote the PL/SQL underneath",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Foundation outlasted the dot-com collapse",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Business spun off the original discount operation",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: all Sparkfly claims (building-sparkflys-platform-alongside-its-founder|sparkfly). Adjacent work labelled as not a direct retail engagement (ruling 2). acknowledges_missing true: 'not a documented engagement working directly for a retailer'. Pass.",
+  "claims": [
+   {
+    "text": "Matt has worked on commerce technology through Sparkfly, adjacent to and not a direct retail engagement",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry, Action (labelled adjacent)"
+   },
+   {
+    "text": "Sparkfly engagement classified as Technology & Software",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry"
+   },
+   {
+    "text": "Sparkfly work ran late 2000 through 2001 at Wellfound Technology",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation, Start_Date 2000-11, End_Date 2001-12, Employer"
+   },
+   {
+    "text": "Joined as developer, grew into lead, running 4 developers while writing production code",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task, Action, 5PSummary"
+   },
+   {
+    "text": "Built the commerce path end to end: catalog search, genre browse, product detail with pricing and savings, cross-sell, cart, checkout",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built Books, Music, and Video channels (search by attribute, browse taxonomies, curated promotional slots)",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Commerce, personalization, content, and administrative capabilities shipped as one integrated portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly later evolved into today's retail technology platform; Matt's work was on the earlier platform",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: all Sparkfly claims (building-sparkflys-platform-alongside-its-founder|sparkfly). Adjacent work labelled as not a direct retail engagement (ruling 2). acknowledges_missing true: 'his documented work is classified as Technology & Software, not a direct retail engagement'. Pass.",
+  "claims": [
+   {
+    "text": "Matt has worked on commerce technology through Sparkfly, adjacent to and not a direct retail engagement",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry, Action (labelled adjacent)"
+   },
+   {
+    "text": "Sparkfly work ran late 2000 through 2001 at Wellfound Technology",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation, Start_Date 2000-11, End_Date 2001-12, Employer"
+   },
+   {
+    "text": "Joined as developer, grew into lead, running 4 developers while writing production code",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task, Action, 5PSummary"
+   },
+   {
+    "text": "Built the commerce path end to end: catalog search, genre browse, product detail with pricing and savings, cross-sell, cart, checkout",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built Books, Music, and Video channels (search by attribute, browse taxonomies, curated promotional slots)",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Recognized JSP-only architecture as fragile and slow, learned MVC, refactored live product onto servlets and beans",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Commerce, personalization, content, and administrative capabilities shipped as one integrated portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly later evolved into today's retail technology platform; Matt's work was on the earlier platform",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly engagement classified as Technology & Software",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Industry"
+   },
+   {
+    "text": "Sparkfly was an employee discount portal at the time",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Project"
+   },
+   {
+    "text": "Customers arrived faster than the platform could support them",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation"
+   },
+   {
+    "text": "Built a 3-layer personalization model: interests, per-channel geographic settings, user-controlled channel visibility",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Business spun off the original discount operation",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: all Sparkfly claims (building-sparkflys-platform-alongside-its-founder|sparkfly); Fiserv ADA manifesto claims. Adjacent work labelled as not a direct retail engagement (ruling 2). acknowledges_missing true: 'his experience is not listed as a direct retail-industry engagement'; Fiserv ADA claims supported. Pass.",
+  "claims": [
+   {
+    "text": "Matt has worked on retail-related commerce technology through Sparkfly, qualified as not a direct retailer engagement",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action, Result (commerce portal; later retail technology), labelled adjacent"
+   },
+   {
+    "text": "Sparkfly work ran late 2000 through 2001 at Wellfound Technology",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation, Start_Date 2000-11, End_Date 2001-12, Employer"
+   },
+   {
+    "text": "Sparkfly was an employee discount portal at the time",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Project"
+   },
+   {
+    "text": "Built alongside the founder",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Title, Situation"
+   },
+   {
+    "text": "Customers arrived faster than the platform could support them",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Situation"
+   },
+   {
+    "text": "Joined as developer, grew into lead, running 4 developers while writing production code",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task, Action, 5PSummary"
+   },
+   {
+    "text": "Built the commerce path end to end: catalog search, genre browse, product detail with pricing and savings, cross-sell, cart, checkout",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built Books, Music, and Video channels (search by attribute, browse taxonomies, curated promotional slots)",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Built a 3-layer personalization model: interests, per-channel geographic settings, user-controlled channel visibility",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Recognized JSP-only architecture as fragile and slow, learned MVC, refactored live product onto servlets and beans",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Commerce, personalization, content, and administrative capabilities shipped as one integrated portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Foundation outlasted the dot-com collapse",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "Sparkfly later evolved into today's retail technology platform; Matt's work was on the earlier platform",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "At Fiserv, researched accessibility specs and wrote the ADA manifesto for the white-label card portal serving its largest clients",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients Action; delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Action"
+   },
+   {
+    "text": "Fiserv adopted the accessibility standards as ongoing practice; teams kept the portal compliant on later releases",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients Result; delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r09",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "unsupported: flat 'That's outside Matt's experience' (no not-on-record statement, extras rule 2 fails; adjacent Sparkfly commerce and Fiserv retailer card-portal work exist); acknowledges_missing false, useful_direct false (buttons are generic, no adjacent work named).",
+  "claims": [
+   {
+    "text": "Flat statement that retail is outside Matt's experience",
+    "label": "unsupported",
+    "source": "none: no retail-industry story, but adjacent stories exist (delivering-multi-client-customization-and-compliance-for-the-white-label-card-portal|fiserv Situation: portal for retailers' store cards; building-sparkflys-platform-alongside-its-founder|sparkfly e-commerce portal)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": false,
+  "useful_direct": false,
+  "bare_sentence": null
+ }
+]

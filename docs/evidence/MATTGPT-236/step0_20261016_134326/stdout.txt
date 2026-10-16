@@ -1,0 +1,61 @@
+gate   c01           t1 0.606 domain_payments                                   Tell me about his payments work.
+gate   c01           t2 0.758 team_scaling                                      How big was the team?
+gate   c01           t3 0.485 behavioral                                        What went wrong?
+gate   c02           t1 0.446 technical                                         Does he have a CS degree?
+gate   c02           t2 0.230 synthesis            SYNTHESIS                    Why shouldn’t that worry me?
+gate   c03           t1 0.813 leadership                                        What’s his leadership style?
+gate   c03           t2 0.463 behavioral                                        Give me an example where that didn’t work.
+gate   c04           t1 0.434 background                                        Is he certified?
+gate   c04           t2 0.449 domain_payments                                   What about PMP?
+gate   c04           t3 0.280 synthesis            SYNTHESIS                    Are any of those current?
+gate   c05           t1 0.490 narrative                                         Why is he looking?
+gate   c05           t2 0.640 synthesis            SYNTHESIS                    Why should we hire him over someone who stayed in-house?
+gate   c06           t1 0.548 domain_healthcare                                 Has he worked in healthcare?
+gate   c06           t2 0.387 background                                        What did he actually do there?
+gate   c07           t1 0.374 narrative                                         Where is he based?
+gate   c07           t2 0.355 narrative                                         Would he relocate?
+gate   c08           t1 0.837 behavioral                                        Tell me about a time he failed.
+gate   c08           t2 0.400 agile_transformation                              What did he change afterward?
+gate   c09           t1 0.606 domain_payments                                   Tell me about his payments work.
+gate   c09           t2 0.813 leadership                                        What’s his leadership style?
+gate   c09           t3 0.606 behavioral                                        Give me an example.
+gate   c09           t4 0.628 team_scaling                                      How big was the team on that project?
+gate   c10           t1 0.428 out_of_scope                                      Tell me about his Norfolk Southern work.
+gate   c10           t2 0.300 domain_payments                                   Sure, the deep dive on that one.
+gate   c10           t3 0.365 delivery                                          How long did that take?
+gate   c11           t1 0.903 team_scaling                                      How did Matt scale engineering teams from 4 to 150+ people?
+gate   c11           t2 0.631 domain_payments                                   Tell me about his payments work
+gate   c11           t3 0.686 team_scaling                                      how big was his teams
+gate   c12           t1 0.527 domain_payments                                   Compare his Fiserv and JP Morgan ACCESS work.
+gate   c12           t2 0.418 team_scaling                                      Which was bigger?
+gate   c13           t1 0.552 domain_payments                                   Tell me about his Fiserv work.
+gate   c13           t2 0.758 team_scaling                                      How big was the team?
+gate   c14           t1 0.612 synthesis            SYNTHESIS                    I’m hiring a VP of Platform Engineering. Would Matt be a fit?
+gate   c15           t1 0.709 background                                        How do I get in touch with Matt?
+gate   c16           t1 0.413 background                                        Can I see his résumé?
+gate   c17           t2 0.229 domain_payments                                   Sure.
+gate   c18           t1 0.428 out_of_scope                                      Tell me about his Norfolk Southern work.
+gate   c18           t2 0.438 domain_payments                                   Tell me about his RBC work.
+gate   c18           t3 0.365 delivery                                          How long did that take?
+gate   x1            t1 0.757 out_of_scope                                      Has Matt worked in real estate?
+gate   x2            t1 0.619 stakeholders                                      Has Matt worked with SAP?
+gate   x3            t1 0.631 background           NONSENSE stocks_crypto       Has Matt worked on trading platforms?
+gate   x4            t1 0.536 personal             NONSENSE homework            How did Matt calculate ROI?
+gate   x5            t1 0.683 out_of_scope                                      Has Matt worked on gaming platforms?
+gate   x7            t1 0.524 domain_payments                                   When was he at JP Morgan?
+router personal      t1 0.958 personal             REDIRECT personal            Is Matt married?
+router personal      t1 0.962 personal             REDIRECT personal            How old is Matt?
+router personal      t1 0.969 personal             REDIRECT personal            Does Matt have kids?
+router hobby         t1 0.593 background                                        What does Matt like to do for fun?
+router hobby         t1 0.722 background                                        What does Matt do outside of work?
+router hobby         t1 0.673 background                                        What are Matt's hobbies?
+router oos-candidate t1 0.702 background                                        Has Matt worked in agriculture?
+router oos-candidate t1 0.728 background                                        Has Matt worked in oil and gas?
+router oos-candidate t1 0.833 out_of_scope         REDIRECT out_of_scope        Has Matt worked in retail?
+router oos-candidate t1 0.705 background                                        Has Matt worked in insurance?
+router synthesis     t1 1.000 synthesis            SYNTHESIS                    Why hire Matt?
+router synthesis     t1 1.000 synthesis            SYNTHESIS                    What are Matt's core themes?
+router synthesis     t1 0.944 synthesis            SYNTHESIS                    What patterns show up across Matt's work?
+router fact          t1 0.648 synthesis            SYNTHESIS                    What languages does Matt speak?
+router fact          t1 0.658 out_of_scope                                      Does Matt have a master's degree?
+router fact          t1 0.541 personal                                          Does Matt speak French?

@@ -1,0 +1,1752 @@
+[
+ {
+  "case": "r12",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: themes and examples all supported by stories/profile; quotations verbatim or none; no closing. supported: Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary; Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments; 10-person teams equal to 20-person teams; Architectural patterns, reference implementations, technical accelerators",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "10-person teams equal to 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "Architectural patterns, reference implementations, technical accelerators",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Action"
+   },
+   {
+    "text": "Integrated security scanning, deployment pipelines, access controls, governance checkpoints",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Action"
+   },
+   {
+    "text": "Engagement playbooks, application modernization 'cookbook'",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Action"
+   },
+   {
+    "text": "Competency frameworks, tailored training, 'I do, we do, you do' coaching",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-*  Action"
+   },
+   {
+    "text": "Frameworks became diagnostic tool across CloudFirst",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-*  Result"
+   },
+   {
+    "text": "30+ engagements, 15+ Fortune 500 clients, $100M+ repeatable business",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "Career from engineer to Director; focus building products, platforms, teams",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project 5PSummary / about-matt-my-leadership-journey|accenture"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered and Honest: themes and examples all supported by stories/profile; quotations verbatim or none; no closing. supported: Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary; Payments and banking modernization across JPMC, RBC, Capital One, HSBC; Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments; Restructured teams around business domains, 6-week Agility Coaching Labs, 15-35% cost reduction",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "Payments and banking modernization across JPMC, RBC, Capital One, HSBC",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project Performance; why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "Restructured teams around business domains, 6-week Agility Coaching Labs, 15-35% cost reduction",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work Action/Result"
+   },
+   {
+    "text": "Competency frameworks, tailored training, 'I do, we do, you do' coaching",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-*  Action"
+   },
+   {
+    "text": "NEW IT SKILLS NOW trained 300+",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement Result"
+   },
+   {
+    "text": "RBC adopted data migration strategy; Fiserv accessibility manifesto became standard",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement Result/Action"
+   },
+   {
+    "text": "Terraform-based cloud-environment tooling (TICARA), reference apps, AWS training",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement Action"
+   },
+   {
+    "text": "Quote \"I build what's next, modernize what's not, and grow teams along the way.\" verbatim",
+    "label": "supported",
+    "source": "profile.self_description"
+   },
+   {
+    "text": "Seeking role where building org, culture and results are the same job",
+    "label": "supported",
+    "source": "profile.career_arc.current"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fail on rule 8 quotation: unsupported: Quote \"He builds what's next, modernizes what's not, and grows teams along the way.\": reworded self-description inside quotation marks (rule 8). Other claims supported.",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "Norfolk Southern: pairing, daily delivery rhythm, reduced meeting overhead",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Action"
+   },
+   {
+    "text": "Competency frameworks, tailored training, 'I do, we do, you do' coaching",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-*  Action"
+   },
+   {
+    "text": "Client Relationship Manager role, partnership not pursuit; $100M+",
+    "label": "supported",
+    "source": "scaling-cic-impact-through-intentional-client-engagement|accenture Action/Result"
+   },
+   {
+    "text": "Georgia Tech and local startup partnerships",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology Action"
+   },
+   {
+    "text": "IP and confidentiality concerns",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology Action"
+   },
+   {
+    "text": "Quote \"He builds what's next, modernizes what's not, and grows teams along the way.\": reworded self-description inside quotation marks (rule 8)",
+    "label": "unsupported",
+    "source": "profile.self_description has \"I build what's next, modernize what's not, and grow teams along the way.\""
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: themes and examples all supported by stories/profile; quotations verbatim or none; no closing. supported: Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary; CIC 0 to 150+, 4x faster delivery, TDD and pipelines zero-defect; JP Morgan payments and Salesforce each across 12 countries; Product-Centric Operating Model Playbook workshops, 6-week labs, 15-35%",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "CIC 0 to 150+, 4x faster delivery, TDD and pipelines zero-defect",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture 5PSummary"
+   },
+   {
+    "text": "JP Morgan payments and Salesforce each across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries; driving-salesforce-adoption-across-12-countries"
+   },
+   {
+    "text": "Product-Centric Operating Model Playbook workshops, 6-week labs, 15-35%",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work Action/Result"
+   },
+   {
+    "text": "Dojo and lab approaches; frameworks diagnostic across CloudFirst in North America",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-*  Action/5PSummary"
+   },
+   {
+    "text": "RBC: WebSeries lacked modularity, prevented investment",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Result"
+   },
+   {
+    "text": "HSBC: target architecture with Mortgage Cadence and Black Knight",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m Task/Action"
+   },
+   {
+    "text": "MattGPT built to sharpen hands-on AI skills",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "\"builder\" self-description",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities 5PSummary (\"I'm a builder\")"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fail on rule 8 quotation: unsupported: Quote \"Matt builds what's next, modernizes what's not, and grows teams along the way.\": reworded self-description inside quotation marks (rule 8). Other claims supported.",
+  "claims": [
+   {
+    "text": "Builds products, platforms and the organizations that deliver them",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "30+ engagements, 15+ Fortune 500",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "Adapted pair programming, hypothesis-driven design, Lean XP for enterprise",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Action"
+   },
+   {
+    "text": "Training not off-the-shelf; live coding, immersive labs",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-*  Action"
+   },
+   {
+    "text": "RBC Bottomline WebSeries assessment; resources redirected",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Result"
+   },
+   {
+    "text": "HSBC federal settlement; automated workflows",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m Situation/Action"
+   },
+   {
+    "text": "Career arc Software Engineer to CIC Leader",
+    "label": "supported",
+    "source": "profile.career_arc.progression"
+   },
+   {
+    "text": "Quote \"Matt builds what's next, modernizes what's not, and grows teams along the way.\": reworded self-description inside quotation marks (rule 8)",
+    "label": "unsupported",
+    "source": "profile.self_description has \"I build what's next, modernize what's not, and grow teams along the way.\""
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fail on rule 8 quotation: unsupported: Quote \"Matt builds what's next, modernizes what's not, and grows teams along the way.\": reworded self-description inside quotation marks (rule 8). Other claims supported.",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "Lean XP adapted; pair programming, TDD, automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Action"
+   },
+   {
+    "text": "Dojo, lab, immersive, self-paced interventions; frameworks diagnostic across CloudFirst",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-*  Action/Result"
+   },
+   {
+    "text": "Liquid Studio prototypes/MVPs; validation months to weeks",
+    "label": "supported",
+    "source": "fast-tracking-client-innovation-with-emerging-technologies / delivering-working-prototypes-in-days-not-months Result"
+   },
+   {
+    "text": "RBC WebSeries modularity gap before significant spend; resources redirected",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Result"
+   },
+   {
+    "text": "Health system: cross-functional governance, monitoring, full HIPAA compliance",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy Action/Result"
+   },
+   {
+    "text": "Quote \"Matt builds what's next, modernizes what's not, and grows teams along the way.\": reworded self-description inside quotation marks (rule 8)",
+    "label": "unsupported",
+    "source": "profile.self_description has \"I build what's next, modernize what's not, and grow teams along the way.\""
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: themes and examples all supported by stories/profile; quotations verbatim or none; no closing. supported: Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary; Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments; Balanced teams; hypothesis-driven design; CI/CD; Lean XP; Dojo and lab coaching; frameworks diagnostic across CloudFirst",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "Balanced teams; hypothesis-driven design; CI/CD; Lean XP",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Action"
+   },
+   {
+    "text": "Dojo and lab coaching; frameworks diagnostic across CloudFirst",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-*  Action/Result"
+   },
+   {
+    "text": "Georgia Tech, local startups, global teams",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology Action"
+   },
+   {
+    "text": "Invited clients to observe standups instead of methodology presentations",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Action"
+   },
+   {
+    "text": "Client Relationship Manager role; $100M+",
+    "label": "supported",
+    "source": "scaling-cic-impact-through-intentional-client-engagement|accenture Action/Result"
+   },
+   {
+    "text": "IP and confidentiality concerns",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology Action"
+   },
+   {
+    "text": "Career arc",
+    "label": "supported",
+    "source": "profile.career_arc.progression"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered and Honest: themes and examples all supported by stories/profile; quotations verbatim or none; no closing. supported: Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary; New hires lacked hands-on cloud-native experience; RBC platform assessment; WebSeries could not deliver; resources redirected; JPMC IAM uplift after data breach: roadmap and migration plan for 341 apps within 3 months",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "New hires lacked hands-on cloud-native experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "RBC platform assessment; WebSeries could not deliver; resources redirected",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Task/Result"
+   },
+   {
+    "text": "JPMC IAM uplift after data breach: roadmap and migration plan for 341 apps within 3 months",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "10 vs 20 person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "Practitioners progressed from guided to independent delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Prototype to production; products, platforms and teams that last beyond the engagement",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Answered and Honest: themes and examples all supported by stories/profile; quotations verbatim or none; no closing. supported: Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary; Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments; 10 vs 20 person teams; Norfolk Southern reduced meeting overhead; JPMC outpaced peer velocity within first 2 sprints",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "10 vs 20 person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "Norfolk Southern reduced meeting overhead; JPMC outpaced peer velocity within first 2 sprints",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Action"
+   },
+   {
+    "text": "Career pathways, capability roadmaps, retention improved",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-*  Result"
+   },
+   {
+    "text": "Workshops, capability showcases, executive briefings",
+    "label": "supported",
+    "source": "scaling-cic-impact-through-intentional-client-engagement|accenture / building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story)"
+   },
+   {
+    "text": "Security scanning, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Action"
+   },
+   {
+    "text": "Unquoted third-person self-description",
+    "label": "supported",
+    "source": "profile.self_description (paraphrase, no quotation marks)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: themes and examples all supported by stories/profile; quotations verbatim or none; no closing. supported: Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary; Building products and platforms, recovering troubled programs; Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments; Lean XP for legacy systems, compliance, governance checkpoints",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "Building products and platforms, recovering troubled programs",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "Lean XP for legacy systems, compliance, governance checkpoints",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Action"
+   },
+   {
+    "text": "Georgia Tech and local startup ventures",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology Action"
+   },
+   {
+    "text": "Career arc",
+    "label": "supported",
+    "source": "profile.career_arc.progression"
+   },
+   {
+    "text": "Quote \"I build what's next, modernize what's not, and grow teams along the way.\" verbatim",
+    "label": "supported",
+    "source": "profile.self_description"
+   },
+   {
+    "text": "Pair programming in regulated environments; IP and confidentiality",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Action; building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology"
+   },
+   {
+    "text": "Tailored IT strategies",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology Action"
+   },
+   {
+    "text": "Shaping and Framing 4-8 week discovery across business units, compliance, legal, technology",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Action"
+   },
+   {
+    "text": "Dojo and lab coaching alongside active delivery",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-*  Situation/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered and Honest: themes and examples all supported by stories/profile; quotations verbatim or none; no closing. supported: Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary; Capital One: thin-slice MVPs, TDD/BDD, 3-4x faster than other Accenture teams, zero production defects; 15-35% cost reduction, balanced teams; Dojo and lab; diagnostic across CloudFirst",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "Capital One: thin-slice MVPs, TDD/BDD, 3-4x faster than other Accenture teams, zero production defects",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one Action/Result"
+   },
+   {
+    "text": "15-35% cost reduction, balanced teams",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work Result"
+   },
+   {
+    "text": "Dojo and lab; diagnostic across CloudFirst",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-* "
+   },
+   {
+    "text": "Reusable patterns; QA shift to exploratory testing, security validation",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture Action/Result"
+   },
+   {
+    "text": "RBC WebSeries lacked modularity for digital operating model",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action"
+   },
+   {
+    "text": "Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "Seeking role building org, culture, results",
+    "label": "supported",
+    "source": "profile.career_arc.current"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Answered and Honest: themes and examples all supported by stories/profile; quotations verbatim or none; no closing. supported: Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary; Clients needed recommendations built for their own systems; CIC 0 to 150+, 4x, zero-defect; 15-35% cost reduction; AWS training, reference apps, Terraform framework",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "Clients needed recommendations built for their own systems",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement Interview Questions/Use Case"
+   },
+   {
+    "text": "CIC 0 to 150+, 4x, zero-defect; 15-35% cost reduction",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture; shifting-client-focus-from-what-they-build-to-how-they-work"
+   },
+   {
+    "text": "AWS training, reference apps, Terraform framework",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement Action"
+   },
+   {
+    "text": "RBC adopted data migration strategy; Fiserv ADA manifesto became standard",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement Action/Result"
+   },
+   {
+    "text": "NEW IT SKILLS NOW 300+; AWS Launchpad 200+",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement Result"
+   },
+   {
+    "text": "Unquoted third-person self-description",
+    "label": "supported",
+    "source": "profile.self_description (no quotation marks)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: themes and examples all supported by stories/profile; quotations verbatim or none; no closing. supported: Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary; Coaching inconsistent and hard to scale without structured way to assess readiness; Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments; 10 vs 20 person teams",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "Coaching inconsistent and hard to scale without structured way to assess readiness",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-*  Situation"
+   },
+   {
+    "text": "Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "10 vs 20 person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "Patterns, reference implementations, accelerators; security scanning, access controls, governance",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Action"
+   },
+   {
+    "text": "Competency frameworks, tailored training, 'I do, we do, you do' coaching",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-*  Action"
+   },
+   {
+    "text": "Quote \"I build what's next, modernize what's not, and grow teams along the way.\" verbatim",
+    "label": "supported",
+    "source": "profile.self_description"
+   },
+   {
+    "text": "Atlanta and Tampa contributed to $100M+",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fail on rule 8 quotation: unsupported: Quote \"Matt builds products, platforms, and teams\": reworded inside quotation marks (rule 8). Other claims supported.",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "CIC 0 to 150+, 4x faster delivery, $100M+ repeat business",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Result/5PSummary"
+   },
+   {
+    "text": "Lean self-regulating balanced teams, 15-35%",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work Result"
+   },
+   {
+    "text": "RBC adopted data migration strategy; Fiserv ADA manifesto adopted as practice",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement Result"
+   },
+   {
+    "text": "NEW IT SKILLS NOW 300+; AWS Launchpad 200+",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement Result"
+   },
+   {
+    "text": "Georgia Tech, startups, global teams",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology Action"
+   },
+   {
+    "text": "Quote \"Matt builds products, platforms, and teams\": reworded inside quotation marks (rule 8)",
+    "label": "unsupported",
+    "source": "about-matt-my-leadership-journey|accenture 5PSummary has \"I build products, platforms, and teams.\""
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Answered and Honest: themes and examples all supported by stories/profile; quotations verbatim or none; no closing. supported: Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary; JPMC: blended team of 40+, payments gateway across 12 countries, single entry point for treasurers; Business-domain restructuring, 15-35%, practices outlasted engagement; Recruited, trained 150+ for Atlanta and Tampa CICs",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "JPMC: blended team of 40+, payments gateway across 12 countries, single entry point for treasurers",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries Task/Result"
+   },
+   {
+    "text": "Business-domain restructuring, 15-35%, practices outlasted engagement",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work Result/5PSummary"
+   },
+   {
+    "text": "Recruited, trained 150+ for Atlanta and Tampa CICs",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture; building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story)"
+   },
+   {
+    "text": "Georgia Tech partnerships, hackathons, recruiting, mentoring",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology Action"
+   },
+   {
+    "text": "Jurisdiction-specific data visibility and access controls; launched APAC/EMEA/Americas without regulatory blockers",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global Process/Result"
+   },
+   {
+    "text": "$100M+ via delivery reputation and trusted relationships",
+    "label": "supported",
+    "source": "scaling-cic-impact-through-intentional-client-engagement|accenture Result"
+   },
+   {
+    "text": "Quote \"building the organization that builds\" verbatim",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: themes and examples all supported by stories/profile; quotations verbatim or none; no closing. supported: Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary; Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments; JPMC outpaced peer velocity within first 2 sprints; NS reduced meeting overhead; 15-35% cost reduction",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "JPMC outpaced peer velocity within first 2 sprints; NS reduced meeting overhead",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Action"
+   },
+   {
+    "text": "15-35% cost reduction",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work Result"
+   },
+   {
+    "text": "Career pathways, retention improved",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-*  Result"
+   },
+   {
+    "text": "Georgia Tech and startups",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology"
+   },
+   {
+    "text": "Security scanning, access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Action"
+   },
+   {
+    "text": "$100M+ via delivery reputation, not sales pursuit",
+    "label": "supported",
+    "source": "scaling-cic-impact-through-intentional-client-engagement|accenture Result"
+   },
+   {
+    "text": "Career arc",
+    "label": "supported",
+    "source": "profile.career_arc.progression"
+   },
+   {
+    "text": "Quote \"I build what's next, modernize what's not, and grow teams along the way.\" verbatim",
+    "label": "supported",
+    "source": "profile.self_description"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered and Honest: themes and examples all supported by stories/profile; quotations verbatim or none; no closing. supported: Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary; Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments; JPMC first 2 sprints; Business domains, 15-35%",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "JPMC first 2 sprints",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Action"
+   },
+   {
+    "text": "Business domains, 15-35%",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work Result"
+   },
+   {
+    "text": "Career pathways, capability roadmaps",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-*  Result"
+   },
+   {
+    "text": "Client Relationship Manager role, partnership not pursuit, $100M+",
+    "label": "supported",
+    "source": "scaling-cic-impact-through-intentional-client-engagement|accenture Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Answered and Honest: themes and examples all supported by stories/profile; quotations verbatim or none; no closing. supported: Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary; RBC leadership needed to decide whether proposed payment platform could meet requirements; Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments; 10 vs 20 person teams",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "RBC leadership needed to decide whether proposed payment platform could meet requirements",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Situation/Task"
+   },
+   {
+    "text": "Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "10 vs 20 person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "Dojo, lab, immersive, self-paced; frameworks strategic diagnostic tool across CloudFirst",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-*  Action/Result"
+   },
+   {
+    "text": "RBC WebSeries lacked modularity; resources redirected",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Result"
+   },
+   {
+    "text": "Unquoted self-description",
+    "label": "supported",
+    "source": "profile.self_description (no quotation marks)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: themes and examples all supported by stories/profile; quotations verbatim or none; no closing. supported: Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary; Liquid Studio clients arrived with business problems or unproven ideas; JPMC first 2 sprints; NS meeting overhead, daily delivery rhythm; Liquid Studio design thinking, co-creation, prototypes across IoT, conversational AI, computer vision",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "Liquid Studio clients arrived with business problems or unproven ideas",
+    "label": "supported",
+    "source": "fast-tracking-client-innovation-with-emerging-technologies / delivering-working-prototypes-in-days-not-months Situation"
+   },
+   {
+    "text": "JPMC first 2 sprints; NS meeting overhead, daily delivery rhythm",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Action"
+   },
+   {
+    "text": "Liquid Studio design thinking, co-creation, prototypes across IoT, conversational AI, computer vision",
+    "label": "supported",
+    "source": "fast-tracking-client-innovation-with-emerging-technologies / delivering-working-prototypes-in-days-not-months; building-smart-connected-devices-at-accentures-liquid-studio"
+   },
+   {
+    "text": "Dojo, lab, immersive, self-paced coaching",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-*  Action"
+   },
+   {
+    "text": "CIC 0 to 150+, 30+ engagements, 4X, zero-defect",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fail on rule 8 quotation: unsupported: Quote \"Matt builds what's next, modernizes what's not, and grows teams along the way.\": reworded self-description inside quotation marks (rule 8). Other claims supported.",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "Quote \"Matt builds what's next, modernizes what's not, and grows teams along the way.\": reworded self-description inside quotation marks (rule 8)",
+    "label": "unsupported",
+    "source": "profile.self_description has \"I build what's next, modernize what's not, and grow teams along the way.\""
+   },
+   {
+    "text": "Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "10 vs 20 person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "MattGPT built to sharpen hands-on AI skills",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "Fiserv ADA manifesto became standard; RBC adopted data migration strategy presented to senior leadership",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement Action/Result"
+   },
+   {
+    "text": "NEW IT SKILLS NOW 300+; AWS Launchpad 200+",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Answered and Honest: themes and examples all supported by stories/profile; quotations verbatim or none; no closing. supported: Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary; Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments; JPMC first 2 sprints; NS meeting overhead; Tailored material, career pathways, retention improved",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "JPMC first 2 sprints; NS meeting overhead",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Action"
+   },
+   {
+    "text": "Tailored material, career pathways, retention improved",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-*  Action/Result"
+   },
+   {
+    "text": "Client Relationship Manager role; $100M+",
+    "label": "supported",
+    "source": "scaling-cic-impact-through-intentional-client-engagement|accenture"
+   },
+   {
+    "text": "IP and confidentiality concerns",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology Action"
+   },
+   {
+    "text": "Career arc; on sabbatical building MattGPT; seeking role",
+    "label": "supported",
+    "source": "profile.career_arc"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail on rule 8 quotation: unsupported: Quote \"Matt builds what's next, modernizes what's not, and grows teams along the way.\": reworded self-description inside quotation marks (rule 8). Other claims supported.",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "10 vs 20 person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "Diagnostic tool across CloudFirst",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-*  Result"
+   },
+   {
+    "text": "Georgia Tech campus, global network",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology 5PSummary"
+   },
+   {
+    "text": "Quote \"Matt builds what's next, modernizes what's not, and grows teams along the way.\": reworded self-description inside quotation marks (rule 8)",
+    "label": "unsupported",
+    "source": "profile.self_description has \"I build what's next, modernize what's not, and grow teams along the way.\""
+   },
+   {
+    "text": "$100M+ repeatable business",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fail on rule 8 quotation: unsupported: Quote \"Matt builds what's next, modernizes what's not, and grows teams along the way.\": reworded self-description inside quotation marks (rule 8). Other claims supported.",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "JPMC CIC teams outpaced peer velocity within first 2 sprints",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Action"
+   },
+   {
+    "text": "NS meeting overhead, context switching",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Action"
+   },
+   {
+    "text": "Cloud platforms, CI/CD, patterns, reference implementations",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Action"
+   },
+   {
+    "text": "Invited clients to observe standups",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Action"
+   },
+   {
+    "text": "Playbooks for pair programming in regulated environments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Action"
+   },
+   {
+    "text": "Career arc",
+    "label": "supported",
+    "source": "profile.career_arc.progression"
+   },
+   {
+    "text": "Quote \"Matt builds what's next, modernizes what's not, and grows teams along the way.\": reworded self-description inside quotation marks (rule 8)",
+    "label": "unsupported",
+    "source": "profile.self_description has \"I build what's next, modernize what's not, and grow teams along the way.\""
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Answered and Honest: themes and examples all supported by stories/profile; quotations verbatim or none; no closing. supported: Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary; CIC 4x, zero-defect; $100M+ repeat business through delivery excellence and relationships; Business domains, 15-35%; CIC 0 to 150+; NEW IT SKILLS NOW 300+",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "CIC 4x, zero-defect; $100M+ repeat business through delivery excellence and relationships",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Result"
+   },
+   {
+    "text": "Business domains, 15-35%",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work Result"
+   },
+   {
+    "text": "CIC 0 to 150+; NEW IT SKILLS NOW 300+",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement Result"
+   },
+   {
+    "text": "RBC legacy commercial banking data migration PoV presented to senior leadership and adopted",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement Action/Result"
+   },
+   {
+    "text": "Microservices and modernization factory walked through with client architects",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement Action"
+   },
+   {
+    "text": "Project Octane reference apps; TICARA Terraform documentation",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement Action"
+   },
+   {
+    "text": "Fiserv ADA manifesto presented to IT leadership, steering committee, teams; adopted",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement Action/Result"
+   },
+   {
+    "text": "Quote \"build products, platforms, and teams\" contiguous in story",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: themes and examples all supported by stories/profile; quotations verbatim or none; no closing. supported: Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary; JPMC jurisdiction-specific data visibility and access controls; Reusable patterns: microservices, event-driven, containers, serverless; JPMC I&AM uplift 341 apps, 30+ requirements, delivered within 3 months",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "JPMC jurisdiction-specific data visibility and access controls",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global Use Case(s)"
+   },
+   {
+    "text": "Reusable patterns: microservices, event-driven, containers, serverless",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture Action"
+   },
+   {
+    "text": "JPMC I&AM uplift 341 apps, 30+ requirements, delivered within 3 months",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Dojo, lab, immersive, self-paced; I do we do you do",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-*  Action"
+   },
+   {
+    "text": "Quote \"build products, platforms, and teams\" contiguous",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture 5PSummary"
+   },
+   {
+    "text": "CIC 0 to 150+, 4X, zero-defect, $100M+",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered and Honest: themes and examples all supported by stories/profile; quotations verbatim or none; no closing. supported: Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary; Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments; 10 vs 20 person teams; RBC WebSeries modularity; prevented investment; resources moved",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "10 vs 20 person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "RBC WebSeries modularity; prevented investment; resources moved",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Result"
+   },
+   {
+    "text": "HSBC federal settlement; automated workflows",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m Situation/Action"
+   },
+   {
+    "text": "Georgia Tech, hackathon judging, mentoring, recruiting",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology Action"
+   },
+   {
+    "text": "Career arc; unquoted self-description",
+    "label": "supported",
+    "source": "profile.career_arc / profile.self_description"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fail on rule 8 quotation: unsupported: Quote \"He builds what's next, modernizes what's not, and grows teams along the way.\": reworded self-description inside quotation marks (rule 8). Other claims supported.",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "10 vs 20 person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "Business domains; balanced teams",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work Action"
+   },
+   {
+    "text": "Product-Centric Operating Model Playbook workshops covering methodology, governance, team organization, funding",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work Action"
+   },
+   {
+    "text": "Pair programming playbooks for regulated environments; security scanning",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Action"
+   },
+   {
+    "text": "Career arc",
+    "label": "supported",
+    "source": "profile.career_arc.progression"
+   },
+   {
+    "text": "Quote \"He builds what's next, modernizes what's not, and grows teams along the way.\": reworded self-description inside quotation marks (rule 8)",
+    "label": "unsupported",
+    "source": "profile.self_description has \"I build what's next, modernize what's not, and grow teams along the way.\""
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail on rule 8 quotation: unsupported: Quote \"Matt builds what's next, modernizes what's not, and grows teams along the way.\": reworded self-description inside quotation marks (rule 8). Other claims supported.",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "Rotating training cohorts",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Action"
+   },
+   {
+    "text": "HSBC workshops, target-state architecture, mobilization plan with Mortgage Cadence",
+    "label": "supported",
+    "source": "mobilizing-hsbcs-mortgage-transformation-program|hsbc; driving-hsbcs-mortgage-transformation-from-assessment-to-10m"
+   },
+   {
+    "text": "JPMC 341 apps, 30+ I&AM requirements",
+    "label": "supported",
+    "source": "mobilizing-jp-morgans-corporate-iam-uplift-across-341-applications|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Georgia Tech, hackathons",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology Action"
+   },
+   {
+    "text": "Career arc",
+    "label": "supported",
+    "source": "profile.career_arc.progression"
+   },
+   {
+    "text": "Quote \"Matt builds what's next, modernizes what's not, and grows teams along the way.\": reworded self-description inside quotation marks (rule 8)",
+    "label": "unsupported",
+    "source": "profile.self_description has \"I build what's next, modernize what's not, and grow teams along the way.\""
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fail on rule 8 quotation: unsupported: Quote \"Matt builds products, platforms, and teams.\": reworded inside quotation marks (rule 8). Other claims supported.",
+  "claims": [
+   {
+    "text": "Seven themes; Execution & Delivery primary, Org & Working-Model Transformation secondary",
+    "label": "supported",
+    "source": "Theme field across corpus (60 E&D, 19 Org)"
+   },
+   {
+    "text": "Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "10 vs 20 person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "Dojo, lab, immersive, self-paced; strategic diagnostic across CloudFirst",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-* "
+   },
+   {
+    "text": "Liquid Studio prototypes/MVPs; months to weeks",
+    "label": "supported",
+    "source": "fast-tracking-client-innovation-with-emerging-technologies / delivering-working-prototypes-in-days-not-months Result"
+   },
+   {
+    "text": "Health system governance; full HIPAA compliance",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy Action/Result"
+   },
+   {
+    "text": "30+ engagements, 15+ clients, $100M+",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "Quote \"Matt builds products, platforms, and teams.\": reworded inside quotation marks (rule 8)",
+    "label": "unsupported",
+    "source": "about-matt-my-leadership-journey|accenture 5PSummary has \"I build products, platforms, and teams.\""
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r12",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fail on rule 8 quotation: unsupported: Quote \"Matt builds what's next, modernizes what's not, and grows teams along the way.\": reworded self-description inside quotation marks (rule 8). Other claims supported.",
+  "claims": [
+   {
+    "text": "Built Atlanta/Tampa CICs from 0 to 150+; 4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result"
+   },
+   {
+    "text": "30+ product engagements; $100M+ repeat business",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley (CIC story) Result; about-matt-my-leadership-journey|accenture"
+   },
+   {
+    "text": "Dojo, lab, immersive, self-paced; live coding",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-*  Action"
+   },
+   {
+    "text": "Liquid Studio: AI, blockchain, IoT, voice, computer vision prototypes; months to weeks",
+    "label": "supported",
+    "source": "fast-tracking-client-innovation-with-emerging-technologies / delivering-working-prototypes-in-days-not-months; building-smart-connected-devices-at-accentures-liquid-studio"
+   },
+   {
+    "text": "Health system CIO concern; governance; full HIPAA compliance",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy"
+   },
+   {
+    "text": "RBC adopted data migration strategy; Fiserv adopted accessibility standards",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement Result"
+   },
+   {
+    "text": "Career arc",
+    "label": "supported",
+    "source": "profile.career_arc.progression"
+   },
+   {
+    "text": "Quote \"Matt builds what's next, modernizes what's not, and grows teams along the way.\": reworded self-description inside quotation marks (rule 8)",
+    "label": "unsupported",
+    "source": "profile.self_description has \"I build what's next, modernize what's not, and grow teams along the way.\""
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 1,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ }
+]

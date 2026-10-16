@@ -1,0 +1,1207 @@
+[
+ {
+  "case": "x2",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All claims supported: named technologies (webMethods, TIBCO, Oracle, Salesforce) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes webMethods",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Competencies/Action; keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Oracle",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Task/Action; integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All claims supported: named technologies (Salesforce, webMethods, TIBCO, legacy payment systems) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   },
+   {
+    "text": "Matt's documented work includes webMethods",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Competencies/Action; keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Competencies"
+   },
+   {
+    "text": "Matt's documented work includes legacy payment systems",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Title/Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "All claims supported: named technologies (cendian_java_wm, lm_tibco, jpmc_sf_internal) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Java and webMethods at Cendian Chemical Logistics",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation/Action"
+   },
+   {
+    "text": "TIBCO at Lockheed Martin",
+    "label": "supported",
+    "source": "keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Competencies/Action"
+   },
+   {
+    "text": "Salesforce integration with internal banking systems at JP Morgan Chase",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All claims supported: named technologies (Java, webMethods, Salesforce, Microsoft Dynamics CRM, cloud integration) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes Java",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes webMethods",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   },
+   {
+    "text": "Matt's documented work includes Microsoft Dynamics CRM",
+    "label": "supported",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Title/Project"
+   },
+   {
+    "text": "Matt's documented work includes cloud integration",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Competencies/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All claims supported: named technologies (webMethods, TIBCO, Salesforce, Oracle, cloud integration) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes webMethods",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Competencies/Action; keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   },
+   {
+    "text": "Matt's documented work includes Oracle",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Task/Action; integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies"
+   },
+   {
+    "text": "Matt's documented work includes cloud integration",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Competencies/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "All claims supported: named technologies (webMethods, TIBCO, Java, Oracle, Salesforce) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes webMethods",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Competencies/Action; keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Java",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes Oracle",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Task/Action; integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All claims supported: named technologies (webMethods, TIBCO, Oracle, Salesforce) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes webMethods",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Competencies/Action; keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Oracle",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Task/Action; integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All claims supported: named technologies (Salesforce, Microsoft Dynamics CRM, TIBCO, webMethods, Oracle) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   },
+   {
+    "text": "Matt's documented work includes Microsoft Dynamics CRM",
+    "label": "supported",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Title/Project"
+   },
+   {
+    "text": "Matt's documented work includes TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Competencies/Action; keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Competencies"
+   },
+   {
+    "text": "Matt's documented work includes webMethods",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes Oracle",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Task/Action; integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "All claims supported: named technologies (webMethods, TIBCO, Oracle, Salesforce) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes webMethods",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Competencies/Action; keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Oracle",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Task/Action; integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All claims supported: named technologies (Java, webMethods, TIBCO, Oracle, Salesforce) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes Java",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes webMethods",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Competencies/Action; keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Oracle",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Task/Action; integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All claims supported: named technologies (webMethods, TIBCO, Java, Salesforce) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes webMethods",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Competencies/Action; keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Java",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "All claims supported: named technologies (webMethods, TIBCO, Oracle, Salesforce, Microsoft Dynamics CRM) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes webMethods",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Competencies/Action; keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Oracle",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Task/Action; integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   },
+   {
+    "text": "Matt's documented work includes Microsoft Dynamics CRM",
+    "label": "supported",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Title/Project"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All claims supported: named technologies (cendian_java_wm, cendant_tibco_oracle, jpmc_sf_arch) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Java and webMethods at Cendian Chemical Logistics",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation/Action"
+   },
+   {
+    "text": "TIBCO and Oracle at Cendant Mortgage",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Task/Action"
+   },
+   {
+    "text": "Salesforce integration architecture at JP Morgan Chase",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All claims supported: named technologies (cendian_b2btn, jpmc_sf_dyn) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Java and webMethods B2B Trading Networks at Cendian Chemical Logistics",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Action/Competencies"
+   },
+   {
+    "text": "Salesforce and Microsoft Dynamics CRM at JP Morgan Chase",
+    "label": "supported",
+    "source": "leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title; rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Title"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "All claims supported: named technologies (Java, TIBCO, webMethods, Oracle, Salesforce, AWS) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes Java",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Competencies/Action; keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Competencies"
+   },
+   {
+    "text": "Matt's documented work includes webMethods",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes Oracle",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Task/Action; integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   },
+   {
+    "text": "Matt's documented work includes AWS",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Competencies/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All claims supported: named technologies (webMethods, TIBCO, Java, Salesforce) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes webMethods",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Competencies/Action; keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Java",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All claims supported: named technologies (webMethods, TIBCO, Oracle, Salesforce, Microsoft Dynamics CRM) are in the stories. No SAP story exists (0 corpus matches); answer absence stated as 'I don't have a confirmed example ... can't claim/confirm SAP' (read as not on record), and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes webMethods",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Competencies/Action; keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Oracle",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Task/Action; integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   },
+   {
+    "text": "Matt's documented work includes Microsoft Dynamics CRM",
+    "label": "supported",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Title/Project"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "All claims supported: named technologies (webMethods, Java, EDI, XML, Salesforce, Microsoft Dynamics CRM) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes webMethods",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes Java",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes EDI",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes XML",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   },
+   {
+    "text": "Matt's documented work includes Microsoft Dynamics CRM",
+    "label": "supported",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Title/Project"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All claims supported: named technologies (Salesforce, webMethods, Java, legacy enterprise systems) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   },
+   {
+    "text": "Matt's documented work includes webMethods",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes Java",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes legacy enterprise systems",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Situation (legacy systems)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All claims supported: named technologies (cendian_java_wm, cendant_tibco_oracle, jpmc_sf_detail) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Java and webMethods at Cendian Chemical Logistics",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation/Action"
+   },
+   {
+    "text": "TIBCO and Oracle at Cendant Mortgage",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Task/Action"
+   },
+   {
+    "text": "Salesforce integration with internal data warehouses, compliance systems, reporting tools, and Marketing Cloud at JP Morgan Chase",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Situation/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "All claims supported: named technologies (webMethods, TIBCO, Oracle, Salesforce, Microsoft Dynamics CRM) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes webMethods",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Competencies/Action; keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Oracle",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Task/Action; integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   },
+   {
+    "text": "Matt's documented work includes Microsoft Dynamics CRM",
+    "label": "supported",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Title/Project"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All claims supported: named technologies (webMethods, TIBCO, Oracle, Salesforce, Microsoft Dynamics CRM) are in the stories. No SAP story exists (0 corpus matches); answer absence stated as 'I don't have a confirmed example ... can't claim/confirm SAP' (read as not on record), and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes webMethods",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Competencies/Action; keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Oracle",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Task/Action; integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   },
+   {
+    "text": "Matt's documented work includes Microsoft Dynamics CRM",
+    "label": "supported",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Title/Project"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All claims supported: named technologies (Salesforce, Microsoft Dynamics CRM, TIBCO, webMethods, Oracle) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   },
+   {
+    "text": "Matt's documented work includes Microsoft Dynamics CRM",
+    "label": "supported",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Title/Project"
+   },
+   {
+    "text": "Matt's documented work includes TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Competencies/Action; keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Competencies"
+   },
+   {
+    "text": "Matt's documented work includes webMethods",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes Oracle",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Task/Action; integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "All claims supported: named technologies (webMethods, TIBCO, Oracle, Salesforce) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes webMethods",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Competencies/Action; keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Oracle",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Task/Action; integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All claims supported: named technologies (webMethods, TIBCO, Java, Salesforce) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes webMethods",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Competencies/Action; keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Java",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All claims supported: named technologies (Java, webMethods, TIBCO, Salesforce, AWS) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes Java",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes webMethods",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Competencies/Action; keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   },
+   {
+    "text": "Matt's documented work includes AWS",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Competencies/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "All claims supported: named technologies (webMethods, TIBCO, Salesforce, Java, Oracle) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes webMethods",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Competencies/Action; keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   },
+   {
+    "text": "Matt's documented work includes Java",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes Oracle",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Task/Action; integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "All claims supported: named technologies (Java, webMethods, TIBCO, Oracle, Salesforce, Microsoft Dynamics CRM) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes Java",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes webMethods",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Competencies/Action; keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Oracle",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Task/Action; integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   },
+   {
+    "text": "Matt's documented work includes Microsoft Dynamics CRM",
+    "label": "supported",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Title/Project"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "All claims supported: named technologies (webMethods, Java, EDI, XML) are in the stories. No SAP story exists (0 corpus matches); answer says the stories/documented work do not mention or establish SAP, and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes webMethods",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes Java",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes EDI",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes XML",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x2",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "All claims supported: named technologies (webMethods, TIBCO, Salesforce, Microsoft Dynamics CRM) are in the stories. No SAP story exists (0 corpus matches); answer absence stated as 'I don't have a confirmed example ... can't claim/confirm SAP' (read as not on record), and labels the listed work as not SAP experience. No flat 'has not worked with SAP'. No closing.",
+  "claims": [
+   {
+    "text": "Matt's documented work includes webMethods",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Competencies/Action"
+   },
+   {
+    "text": "Matt's documented work includes TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Competencies/Action; keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Competencies"
+   },
+   {
+    "text": "Matt's documented work includes Salesforce",
+    "label": "supported",
+    "source": "designing-cloud-integration-architecture-for-jp-morgans-asset-management|jp-morgan-chase Action; leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Title"
+   },
+   {
+    "text": "Matt's documented work includes Microsoft Dynamics CRM",
+    "label": "supported",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Title/Project"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ }
+]

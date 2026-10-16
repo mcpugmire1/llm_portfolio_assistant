@@ -1,0 +1,2 @@
+frozen checkout: 725d5642ad1b3ebdb2ea7ac2e99de4d3ebbcf917
+corpus scored against: echo_star_stories_nlp.jsonl at 725d564 (git show 725d564:echo_star_stories_nlp.jsonl)

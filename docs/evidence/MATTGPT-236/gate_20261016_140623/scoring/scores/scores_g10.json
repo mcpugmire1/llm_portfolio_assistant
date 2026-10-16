@@ -1,0 +1,2588 @@
+[
+ {
+  "case": "c05",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: all claims supported (transition/career-intent stories and profile); quotes verbatim; no closing issue.",
+  "claims": [
+   {
+    "text": "Accenture tenure ended September 2023",
+    "label": "supported",
+    "source": "profile.career_arc.employers"
+   },
+   {
+    "text": "Currently on sabbatical, building MattGPT, in active search for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job",
+    "label": "supported",
+    "source": "profile.career_arc.current"
+   },
+   {
+    "text": "Seeking senior leadership role in platform engineering, AI-era transformation, or enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result"
+   },
+   {
+    "text": "Matt is a builder",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Wants real delivery with engineers, product managers and executive teams, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project Action/5PSummary"
+   },
+   {
+    "text": "Available immediately, no notice period",
+    "label": "supported",
+    "source": "profile.logistics.availability"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c05",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: all claims supported (transition/career-intent stories and profile); quotes verbatim; no closing issue.",
+  "claims": [
+   {
+    "text": "Accenture tenure ended September 2023",
+    "label": "supported",
+    "source": "profile.career_arc.employers"
+   },
+   {
+    "text": "Currently on sabbatical, building MattGPT, in active search for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job",
+    "label": "supported",
+    "source": "profile.career_arc.current"
+   },
+   {
+    "text": "Stepped back to recharge and focus on what came next",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Built MattGPT with RAG, semantic search, modern LLM tooling rather than a tutorial exercise",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary; mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Describes himself as a 'builder' (quote matches story text)",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Pursuing senior leadership roles in platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result"
+   },
+   {
+    "text": "Real delivery with engineers and PMs, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "Build, take on change and hard problems, solve them as part of a team",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c05",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: all claims supported (transition/career-intent stories and profile); quotes verbatim; no closing issue.",
+  "claims": [
+   {
+    "text": "Accenture chapter closed after long tenure including four years leading a 150-person Cloud Innovation Center",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation"
+   },
+   {
+    "text": "Stepped back to recharge",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Built MattGPT with RAG, semantic search, modern LLM tooling during sabbatical",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Clarified wanted work: platform modernization, product leadership, engineering culture",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Action"
+   },
+   {
+    "text": "Matt is a builder; seeks senior leadership role building the product engineering organization, culture, results",
+    "label": "supported",
+    "source": "profile.career_arc.current"
+   },
+   {
+    "text": "Real delivery with engineers and PMs, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c05",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: answers the in-house comparison directly with documented ownership and cross-client delivery facts, no disparagement, no evaluation claim; every claim supported (CIC, leading-people, talent, Norfolk Southern stories).",
+  "claims": [
+   {
+    "text": "Built Atlanta and Tampa CICs over 4 years with full P&L, budget and cost management, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; $100M+ repeatable business",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Clients wanted to move from waterfall/feature factories; legacy, compliance, siloed teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "NS domain knowledge with thin-stretched experts; quote 'I'm not paying for two people to do the work of one' verbatim",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "Career progression frameworks; 'I do, we do, you do' learning",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Near-zero attrition first 2 years",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "NS: paired domain experts, rotated pairs; contributors learned Angular, Node, Spring Boot, cloud-native to support after Accenture rolled off; client wrote testable stories and owned backlog",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action/Result"
+   },
+   {
+    "text": "After NS quality crisis, rebuilt workflow around test cases first, rotating pairs, testable stories; practices held, failure mode did not recur",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c05",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: answers the in-house comparison directly with documented ownership and cross-client delivery facts, no disparagement, no evaluation claim; every claim supported (CIC, leading-people, talent, Norfolk Southern stories).",
+  "claims": [
+   {
+    "text": "Built Atlanta and Tampa CICs over 4 years with full P&L, budget and cost management, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; $100M+ repeatable business",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Clients needed shift from waterfall/feature factories under legacy, compliance, governance",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Many new hires lacked hands-on cloud-native experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "Across engineering, architecture, product, design; paired junior hires with mentors; 'I do, we do, you do'; near-zero attrition; independent delivery",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary; scaling-talent-and-practices-for-agile-product-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Balanced teams, pairing, TDD, CI/CD with enterprise security scanning and access controls",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Project Octane supplied reusable reference applications and IaC templates",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "4X faster velocity, zero-defect deployments, 10-person teams equal to 20-person",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Clients continued practices after engagements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Stories don't document single-employer product lifecycle ownership (honest absence)",
+    "label": "supported",
+    "source": "n/a absence statement"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c05",
+  "run": 8,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: answers the in-house comparison directly with documented ownership and cross-client delivery facts, no disparagement, no evaluation claim; every claim supported (CIC, leading-people, talent, Norfolk Southern stories).",
+  "claims": [
+   {
+    "text": "Built Atlanta and Tampa CICs over 4 years with full P&L, budget and cost management, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; $100M+ repeatable business",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Hiring, evaluation, promotion, compensation, remediation ownership; every final hiring decision and end-of-remediation call",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Task/Result"
+   },
+   {
+    "text": "10-person pilot to 150+ through 11-13 direct-report practice and client leads",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary/Performance"
+   },
+   {
+    "text": "Near-zero attrition in first two years, multiple hires promoted",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result"
+   },
+   {
+    "text": "Deliberately flat, no managers sitting on daily teams; evidence from pairing partners, PMs, anchors; monthly feedback capture; calibration; compensation allocation",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Situation/Action"
+   },
+   {
+    "text": "Enablement, mentoring, round-robin pairing",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Balanced teams with pairing, TDD, CI/CD instead of siloed handoffs and separate QA phase",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X velocity, zero-defect deployments; $100M+ by FY23",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c05",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: all claims supported (transition/career-intent stories and profile); quotes verbatim; no closing issue.",
+  "claims": [
+   {
+    "text": "Currently on sabbatical, building MattGPT, in active search for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job",
+    "label": "supported",
+    "source": "profile.career_arc.current"
+   },
+   {
+    "text": "'builder's mindset, coach's heart' quoted verbatim",
+    "label": "supported",
+    "source": "profile.self_description"
+   },
+   {
+    "text": "'build what's next, modernize what's not, and grow teams along the way' quoted verbatim",
+    "label": "supported",
+    "source": "profile.self_description"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c05",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: all claims supported (transition/career-intent stories and profile); quotes verbatim; no closing issue.",
+  "claims": [
+   {
+    "text": "Accenture tenure ended September 2023",
+    "label": "supported",
+    "source": "profile.career_arc.employers"
+   },
+   {
+    "text": "Currently on sabbatical, building MattGPT, in active search for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job",
+    "label": "supported",
+    "source": "profile.career_arc.current"
+   },
+   {
+    "text": "Looking for his next build",
+    "label": "supported",
+    "source": "why-hire-matt|accenture (Looking for my next build)"
+   },
+   {
+    "text": "Senior leadership role centered on products, platforms and engineering teams, hands-on",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project Result; why-hire-matt|accenture (in the work, not above it)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c05",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: all claims supported (transition/career-intent stories and profile); quotes verbatim; no closing issue.",
+  "claims": [
+   {
+    "text": "Currently on sabbatical, building MattGPT, in active search for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job",
+    "label": "supported",
+    "source": "profile.career_arc.current"
+   },
+   {
+    "text": "Seeking senior leadership role in platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Real delivery with engineers and PMs, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   },
+   {
+    "text": "Part of the team solving hard problems",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result"
+   },
+   {
+    "text": "Stayed hands-on building MattGPT with RAG, semantic search, LLM tooling",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c05",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: answers the in-house comparison directly with documented ownership and cross-client delivery facts, no disparagement, no evaluation claim; every claim supported (CIC, leading-people, talent, Norfolk Southern stories).",
+  "claims": [
+   {
+    "text": "Built Atlanta and Tampa CICs over 4 years with full P&L, budget and cost management, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; $100M+ repeatable business",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Clients moving off waterfall, feature factories, siloed teams; new hires lacked cloud-native experience",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation; scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "Balanced teams with pairing, TDD, CI/CD adapted for enterprise security, compliance, legacy, governance",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Reusable playbooks and application modernization 'cookbook' (quoted word in story)",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Paired juniors with mentors, career progression frameworks, 'I do, we do, you do', guided to independent delivery, near-zero attrition, multiple promoted",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action/Result; building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c05",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: answers the in-house comparison directly with documented ownership and cross-client delivery facts, no disparagement, no evaluation claim; every claim supported (CIC, leading-people, talent, Norfolk Southern stories).",
+  "claims": [
+   {
+    "text": "Built Atlanta and Tampa CICs over 4 years with full P&L, budget and cost management, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; $100M+ repeatable business",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Hiring, evaluation, promotion, compensation, remediation ownership; every final hiring decision and end-of-remediation call",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Task/Result"
+   },
+   {
+    "text": "10-person pilot to 150+ through 11-13 direct-report practice and client leads",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary/Performance"
+   },
+   {
+    "text": "Near-zero attrition in first two years, multiple hires promoted",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result"
+   },
+   {
+    "text": "NS: thin-stretched domain experts; prepared employees to support after Accenture rolled off; 'I do, we do, you do' pairing; Angular, Node, Spring Boot; testable stories, owned backlog",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action/Result"
+   },
+   {
+    "text": "Allocated compensation budget each cycle",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result"
+   },
+   {
+    "text": "SRS UI MVP launched covering 95% of targeted use cases, real orders, clean data feeding the mainframe",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result/5PSummary"
+   },
+   {
+    "text": "Record does not establish post-launch operating ownership inside single client (honest absence)",
+    "label": "supported",
+    "source": "n/a absence statement"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c05",
+  "run": 9,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: answers the in-house comparison directly with documented ownership and cross-client delivery facts, no disparagement, no evaluation claim; every claim supported (CIC, leading-people, talent, Norfolk Southern stories).",
+  "claims": [
+   {
+    "text": "Built Atlanta and Tampa CICs over 4 years with full P&L, budget and cost management, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; $100M+ repeatable business",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Hiring, evaluation, promotion, compensation, remediation ownership; every final hiring decision and end-of-remediation call",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Task/Result"
+   },
+   {
+    "text": "10-person pilot to 150+ through 11-13 direct-report practice and client leads",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary/Performance"
+   },
+   {
+    "text": "Near-zero attrition in first two years, multiple hires promoted",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result"
+   },
+   {
+    "text": "New hires lacked cloud-native/Agile experience; adapted pairing, TDD, product-led development for legacy, compliance, governance",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation; building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Closing interview and final hiring decision on every offer; calibration; compensation",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Flat model; evaluation from pair partners, PMs, anchors rather than director's impressions",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "'I do, we do, you do' with mentoring, peer-led demos",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result; leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "4X velocity, zero-defect deployments through TDD and automated pipelines",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c05",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: all claims supported (transition/career-intent stories and profile); quotes verbatim; no closing issue.",
+  "claims": [
+   {
+    "text": "Accenture tenure ended September 2023",
+    "label": "supported",
+    "source": "profile.career_arc.employers"
+   },
+   {
+    "text": "Currently on sabbatical, building MattGPT, in active search for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job",
+    "label": "supported",
+    "source": "profile.career_arc.current"
+   },
+   {
+    "text": "Four years leading a 150-person Cloud Innovation Center; first pause after years of continuous delivery",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation"
+   },
+   {
+    "text": "Reconnected with platform modernization, product leadership, engineering culture",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Action"
+   },
+   {
+    "text": "Built MattGPT, a product he'd actually use rather than a tutorial exercise; RAG, semantic search, Python, LLM tooling; searches 100+ career stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation/Result"
+   },
+   {
+    "text": "Pursuing platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result"
+   },
+   {
+    "text": "Describes himself as a 'builder'; real delivery not strategy decks; in the work, not above it",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary; career-intent-what-im-looking-for-next|independent-project 5PSummary; why-hire-matt|accenture"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c05",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: all claims supported (transition/career-intent stories and profile); quotes verbatim; no closing issue.",
+  "claims": [
+   {
+    "text": "Accenture tenure ended September 2023",
+    "label": "supported",
+    "source": "profile.career_arc.employers"
+   },
+   {
+    "text": "Currently on sabbatical, building MattGPT, in active search for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job",
+    "label": "supported",
+    "source": "profile.career_arc.current"
+   },
+   {
+    "text": "Looking for his next build: senior leadership in platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "why-hire-matt|accenture; transition-story-why-im-exploring-opportunities|accenture Result"
+   },
+   {
+    "text": "Real delivery alongside engineers and PMs, not strategy decks",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c05",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: all claims supported (transition/career-intent stories and profile); quotes verbatim; no closing issue.",
+  "claims": [
+   {
+    "text": "After Accenture tenure including four years leading the CIC, chapter closed; first pause after continuous delivery",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Situation"
+   },
+   {
+    "text": "Built MattGPT with RAG, semantic search, LLM tooling; chose a project he'd use over a tutorial; NOW/NEXT/LATER roadmap; MVP with semantic search across 100+ career stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation/Action/Result"
+   },
+   {
+    "text": "Clarified platform modernization, product leadership, engineering culture",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Action"
+   },
+   {
+    "text": "Currently on sabbatical, building MattGPT, in active search for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job",
+    "label": "supported",
+    "source": "profile.career_arc.current"
+   },
+   {
+    "text": "Searching platform engineering, AI-era transformation, enterprise modernization",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture Result"
+   },
+   {
+    "text": "'in the work, not above it' quoted verbatim",
+    "label": "supported",
+    "source": "why-hire-matt|accenture content"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c05",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: answers the in-house comparison directly with documented ownership and cross-client delivery facts, no disparagement, no evaluation claim; every claim supported (CIC, leading-people, talent, Norfolk Southern stories).",
+  "claims": [
+   {
+    "text": "Built Atlanta and Tampa CICs over 4 years with full P&L, budget and cost management, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; $100M+ repeatable business",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names, ruling 4)",
+    "label": "supported",
+    "source": "Theme fields"
+   },
+   {
+    "text": "NS thin-stretched experts; contributors gained skills to support after roll-off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action/Result"
+   },
+   {
+    "text": "JPM TS Dynamics vendor's disconnected model produced missed milestones and high-severity defects; stabilized; KT documentation, source code handoff, paired development to internal team",
+    "label": "supported",
+    "source": "rescuing-and-stabilizing-jp-morgans-ts-dynamics-crm-program|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS: 40+ blended team; owned on-call and Sev-1 incident response; triage and stakeholder communication during live incidents; payment modules, security controls, compliance validation, defect triage",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Use Case(s)/Action/Result"
+   },
+   {
+    "text": "$100M+ through delivery excellence and client advocacy",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c05",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: answers the in-house comparison directly with documented ownership and cross-client delivery facts, no disparagement, no evaluation claim; every claim supported (CIC, leading-people, talent, Norfolk Southern stories).",
+  "claims": [
+   {
+    "text": "Built Atlanta and Tampa CICs over 4 years with full P&L, budget and cost management, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; $100M+ repeatable business",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "CIC dated November 2019 to September 2023",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "New hires lacked cloud-native experience; recruited for mindset and potential",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation/5PSummary"
+   },
+   {
+    "text": "'I do, we do, you do' with live coding, mentoring; career frameworks; skills matrix; weekly tech talks with peer-led demos; near-zero attrition",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-transformation-labs|accenture Action; enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action; scaling-talent-and-practices-for-agile-product-innovation|accenture"
+   },
+   {
+    "text": "Adapted pairing, TDD, balanced teams for security, compliance, legacy; reusable playbooks and architectural patterns",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Coaching programs assessed competency gaps and prescribed interventions alongside client delivery",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-transformation-labs|accenture Action/Result"
+   },
+   {
+    "text": "4X velocity, zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c05",
+  "run": 10,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: answers the in-house comparison directly with documented ownership and cross-client delivery facts, no disparagement, no evaluation claim; every claim supported (CIC, leading-people, talent, Norfolk Southern stories).",
+  "claims": [
+   {
+    "text": "Built Atlanta and Tampa CICs over 4 years with full P&L, budget and cost management, hiring, training, career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients; $100M+ repeatable business",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Hiring, evaluation, promotion, compensation, remediation ownership; every final hiring decision and end-of-remediation call",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Task/Result"
+   },
+   {
+    "text": "10-person pilot to 150+ through 11-13 direct-report practice and client leads",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients 5PSummary/Performance"
+   },
+   {
+    "text": "Near-zero attrition in first two years, multiple hires promoted",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Result"
+   },
+   {
+    "text": "Pairing auditions, capped interview slots so hiring didn't burn out teams",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action"
+   },
+   {
+    "text": "Evaluation from pair partners, PMs, anchors; role matrices; mentors; 'I do, we do, you do'",
+    "label": "supported",
+    "source": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients Action; scaling-talent-and-practices-for-agile-product-innovation|accenture"
+   },
+   {
+    "text": "$100M+ through delivery and client referrals",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "No direct comparison to in-house tenure established (honest absence)",
+    "label": "supported",
+    "source": "n/a absence statement"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c06",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: healthcare work named correctly (Major U.S. Health System chronic disease management and responsible AI governance); all claims supported by the two healthcare stories; any quoted 'art-of-the-possible' is verbatim in 5PSummary.",
+  "claims": [
+   {
+    "text": "Director at Accenture with Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Start_Date/End_Date"
+   },
+   {
+    "text": "Existing condition management app for diabetes, hypertension, heart disease; reactive care, limited real-time insights; started with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Data lake, ML pipeline, LLM instance/chat, full-stack/mobile components using EMR, glucometer, activity tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/5PSummary"
+   },
+   {
+    "text": "Personalized daily recommendations, medication reminders, guidance via mobile app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams to interpret AI insights for treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Working MVP in 16 weeks via iterative product slicing, extensible not throwaway PoC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "CIO concerns about HIPAA and sensitive medical information",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Brought together legal, compliance, IT security, data science, clinical; anonymization, encryption, differential privacy, access/transparency policies, monitoring and auditing; operationalized Accenture's Responsible AI Framework",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Full HIPAA compliance during pilot; clinical teams adopted insights; executive team approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result; delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c06",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: healthcare work named correctly (Major U.S. Health System chronic disease management and responsible AI governance); all claims supported by the two healthcare stories; any quoted 'art-of-the-possible' is verbatim in 5PSummary.",
+  "claims": [
+   {
+    "text": "Director at Accenture with Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Start_Date/End_Date"
+   },
+   {
+    "text": "Existing condition management app for diabetes, hypertension, heart disease; reactive care, limited real-time insights; started with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Data lake, ML pipeline, LLM instance/chat, full-stack/mobile components using EMR, glucometer, activity tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/5PSummary"
+   },
+   {
+    "text": "Personalized daily recommendations, medication reminders, guidance via mobile app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams to interpret AI insights for treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Working MVP in 16 weeks via iterative product slicing, extensible not throwaway PoC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "CIO concerns about HIPAA and sensitive medical information",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Brought together legal, compliance, IT security, data science, clinical; anonymization, encryption, differential privacy, access/transparency policies, monitoring and auditing; operationalized Accenture's Responsible AI Framework",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Full HIPAA compliance during pilot; clinical teams adopted insights; executive team approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result; delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c06",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: healthcare work named correctly (Major U.S. Health System chronic disease management and responsible AI governance); all claims supported by the two healthcare stories; any quoted 'art-of-the-possible' is verbatim in 5PSummary.",
+  "claims": [
+   {
+    "text": "Director at Accenture with Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Start_Date/End_Date"
+   },
+   {
+    "text": "Existing condition management app for diabetes, hypertension, heart disease; reactive care, limited real-time insights; started with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Data lake, ML pipeline, LLM instance/chat, full-stack/mobile components using EMR, glucometer, activity tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/5PSummary"
+   },
+   {
+    "text": "Personalized daily recommendations, medication reminders, guidance via mobile app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams to interpret AI insights for treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Working MVP in 16 weeks via iterative product slicing, extensible not throwaway PoC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "CIO concerns about HIPAA and sensitive medical information",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Brought together legal, compliance, IT security, data science, clinical; anonymization, encryption, differential privacy, access/transparency policies, monitoring and auditing; operationalized Accenture's Responsible AI Framework",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Full HIPAA compliance during pilot; clinical teams adopted insights; executive team approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result; delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "Through Accenture's Cloud Innovation Center",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Division"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c06",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: specific role and actions on the healthcare engagement (data platform, generative AI features, clinician training, governance), not generic; all claims supported by the two healthcare stories.",
+  "claims": [
+   {
+    "text": "Director at Accenture with Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Start_Date/End_Date"
+   },
+   {
+    "text": "Existing condition management app for diabetes, hypertension, heart disease; reactive care, limited real-time insights; started with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Data lake, ML pipeline, LLM instance/chat, full-stack/mobile components using EMR, glucometer, activity tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/5PSummary"
+   },
+   {
+    "text": "Personalized daily recommendations, medication reminders, guidance via mobile app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams to interpret AI insights for treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Working MVP in 16 weeks via iterative product slicing, extensible not throwaway PoC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "CIO concerns about HIPAA and sensitive medical information",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Brought together legal, compliance, IT security, data science, clinical; anonymization, encryption, differential privacy, access/transparency policies, monitoring and auditing; operationalized Accenture's Responsible AI Framework",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Full HIPAA compliance during pilot; clinical teams adopted insights; executive team approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result; delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "Feedback loop where patient data insights refine ML models",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c06",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: specific role and actions on the healthcare engagement (data platform, generative AI features, clinician training, governance), not generic; all claims supported by the two healthcare stories.",
+  "claims": [
+   {
+    "text": "Director at Accenture with Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Start_Date/End_Date"
+   },
+   {
+    "text": "Existing condition management app for diabetes, hypertension, heart disease; reactive care, limited real-time insights; started with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Data lake, ML pipeline, LLM instance/chat, full-stack/mobile components using EMR, glucometer, activity tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/5PSummary"
+   },
+   {
+    "text": "Personalized daily recommendations, medication reminders, guidance via mobile app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams to interpret AI insights for treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Working MVP in 16 weeks via iterative product slicing, extensible not throwaway PoC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "CIO concerns about HIPAA and sensitive medical information",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Brought together legal, compliance, IT security, data science, clinical; anonymization, encryption, differential privacy, access/transparency policies, monitoring and auditing; operationalized Accenture's Responsible AI Framework",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Full HIPAA compliance during pilot; clinical teams adopted insights; executive team approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result; delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "Feedback loop where patient data insights refine ML models",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c06",
+  "run": 1,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: specific role and actions on the healthcare engagement (data platform, generative AI features, clinician training, governance), not generic; all claims supported by the two healthcare stories.",
+  "claims": [
+   {
+    "text": "Director at Accenture with Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Start_Date/End_Date"
+   },
+   {
+    "text": "Existing condition management app for diabetes, hypertension, heart disease; reactive care, limited real-time insights; started with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Data lake, ML pipeline, LLM instance/chat, full-stack/mobile components using EMR, glucometer, activity tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/5PSummary"
+   },
+   {
+    "text": "Personalized daily recommendations, medication reminders, guidance via mobile app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams to interpret AI insights for treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Working MVP in 16 weeks via iterative product slicing, extensible not throwaway PoC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "CIO concerns about HIPAA and sensitive medical information",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Brought together legal, compliance, IT security, data science, clinical; anonymization, encryption, differential privacy, access/transparency policies, monitoring and auditing; operationalized Accenture's Responsible AI Framework",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Full HIPAA compliance during pilot; clinical teams adopted insights; executive team approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result; delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "Feedback loop where patient data insights refine ML models",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c06",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: healthcare work named correctly (Major U.S. Health System chronic disease management and responsible AI governance); all claims supported by the two healthcare stories; any quoted 'art-of-the-possible' is verbatim in 5PSummary.",
+  "claims": [
+   {
+    "text": "Director at Accenture with Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Start_Date/End_Date"
+   },
+   {
+    "text": "Existing condition management app for diabetes, hypertension, heart disease; reactive care, limited real-time insights; started with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Data lake, ML pipeline, LLM instance/chat, full-stack/mobile components using EMR, glucometer, activity tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/5PSummary"
+   },
+   {
+    "text": "Personalized daily recommendations, medication reminders, guidance via mobile app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams to interpret AI insights for treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Working MVP in 16 weeks via iterative product slicing, extensible not throwaway PoC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "CIO concerns about HIPAA and sensitive medical information",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Brought together legal, compliance, IT security, data science, clinical; anonymization, encryption, differential privacy, access/transparency policies, monitoring and auditing; operationalized Accenture's Responsible AI Framework",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Full HIPAA compliance during pilot; clinical teams adopted insights; executive team approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result; delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c06",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: healthcare work named correctly (Major U.S. Health System chronic disease management and responsible AI governance); all claims supported by the two healthcare stories; any quoted 'art-of-the-possible' is verbatim in 5PSummary.",
+  "claims": [
+   {
+    "text": "Director at Accenture with Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Start_Date/End_Date"
+   },
+   {
+    "text": "Existing condition management app for diabetes, hypertension, heart disease; reactive care, limited real-time insights; started with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Data lake, ML pipeline, LLM instance/chat, full-stack/mobile components using EMR, glucometer, activity tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/5PSummary"
+   },
+   {
+    "text": "Personalized daily recommendations, medication reminders, guidance via mobile app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams to interpret AI insights for treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Working MVP in 16 weeks via iterative product slicing, extensible not throwaway PoC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "CIO concerns about HIPAA and sensitive medical information",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Brought together legal, compliance, IT security, data science, clinical; anonymization, encryption, differential privacy, access/transparency policies, monitoring and auditing; operationalized Accenture's Responsible AI Framework",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Full HIPAA compliance during pilot; clinical teams adopted insights; executive team approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result; delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c06",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: healthcare work named correctly (Major U.S. Health System chronic disease management and responsible AI governance); all claims supported by the two healthcare stories; any quoted 'art-of-the-possible' is verbatim in 5PSummary.",
+  "claims": [
+   {
+    "text": "Director at Accenture with Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Start_Date/End_Date"
+   },
+   {
+    "text": "Existing condition management app for diabetes, hypertension, heart disease; reactive care, limited real-time insights; started with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Data lake, ML pipeline, LLM instance/chat, full-stack/mobile components using EMR, glucometer, activity tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/5PSummary"
+   },
+   {
+    "text": "Personalized daily recommendations, medication reminders, guidance via mobile app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams to interpret AI insights for treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Working MVP in 16 weeks via iterative product slicing, extensible not throwaway PoC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "CIO concerns about HIPAA and sensitive medical information",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Brought together legal, compliance, IT security, data science, clinical; anonymization, encryption, differential privacy, access/transparency policies, monitoring and auditing; operationalized Accenture's Responsible AI Framework",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Full HIPAA compliance during pilot; clinical teams adopted insights; executive team approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result; delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c06",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: specific role and actions on the healthcare engagement (data platform, generative AI features, clinician training, governance), not generic; all claims supported by the two healthcare stories.",
+  "claims": [
+   {
+    "text": "Director at Accenture with Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Start_Date/End_Date"
+   },
+   {
+    "text": "Existing condition management app for diabetes, hypertension, heart disease; reactive care, limited real-time insights; started with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Data lake, ML pipeline, LLM instance/chat, full-stack/mobile components using EMR, glucometer, activity tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/5PSummary"
+   },
+   {
+    "text": "Personalized daily recommendations, medication reminders, guidance via mobile app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams to interpret AI insights for treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Working MVP in 16 weeks via iterative product slicing, extensible not throwaway PoC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "CIO concerns about HIPAA and sensitive medical information",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Brought together legal, compliance, IT security, data science, clinical; anonymization, encryption, differential privacy, access/transparency policies, monitoring and auditing; operationalized Accenture's Responsible AI Framework",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Full HIPAA compliance during pilot; clinical teams adopted insights; executive team approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result; delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "Feedback loop where patient data insights refine ML models",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c06",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: specific role and actions on the healthcare engagement (data platform, generative AI features, clinician training, governance), not generic; all claims supported by the two healthcare stories.",
+  "claims": [
+   {
+    "text": "Director at Accenture with Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Start_Date/End_Date"
+   },
+   {
+    "text": "Existing condition management app for diabetes, hypertension, heart disease; reactive care, limited real-time insights; started with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Data lake, ML pipeline, LLM instance/chat, full-stack/mobile components using EMR, glucometer, activity tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/5PSummary"
+   },
+   {
+    "text": "Personalized daily recommendations, medication reminders, guidance via mobile app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams to interpret AI insights for treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Working MVP in 16 weeks via iterative product slicing, extensible not throwaway PoC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "CIO concerns about HIPAA and sensitive medical information",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Brought together legal, compliance, IT security, data science, clinical; anonymization, encryption, differential privacy, access/transparency policies, monitoring and auditing; operationalized Accenture's Responsible AI Framework",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Full HIPAA compliance during pilot; clinical teams adopted insights; executive team approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result; delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "Feedback loop where patient data insights refine ML models",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c06",
+  "run": 2,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: specific role and actions on the healthcare engagement (data platform, generative AI features, clinician training, governance), not generic; all claims supported by the two healthcare stories.",
+  "claims": [
+   {
+    "text": "Director at Accenture with Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Start_Date/End_Date"
+   },
+   {
+    "text": "Existing condition management app for diabetes, hypertension, heart disease; reactive care, limited real-time insights; started with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Data lake, ML pipeline, LLM instance/chat, full-stack/mobile components using EMR, glucometer, activity tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/5PSummary"
+   },
+   {
+    "text": "Personalized daily recommendations, medication reminders, guidance via mobile app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams to interpret AI insights for treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Working MVP in 16 weeks via iterative product slicing, extensible not throwaway PoC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "CIO concerns about HIPAA and sensitive medical information",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Brought together legal, compliance, IT security, data science, clinical; anonymization, encryption, differential privacy, access/transparency policies, monitoring and auditing; operationalized Accenture's Responsible AI Framework",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Full HIPAA compliance during pilot; clinical teams adopted insights; executive team approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result; delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "Feedback loop where patient data insights refine ML models",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Stories don't specify patient count or team size (true absence)",
+    "label": "supported",
+    "source": "n/a absence statement"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c06",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: healthcare work named correctly (Major U.S. Health System chronic disease management and responsible AI governance); all claims supported by the two healthcare stories; any quoted 'art-of-the-possible' is verbatim in 5PSummary.",
+  "claims": [
+   {
+    "text": "Director at Accenture with Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Start_Date/End_Date"
+   },
+   {
+    "text": "Existing condition management app for diabetes, hypertension, heart disease; reactive care, limited real-time insights; started with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Data lake, ML pipeline, LLM instance/chat, full-stack/mobile components using EMR, glucometer, activity tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/5PSummary"
+   },
+   {
+    "text": "Personalized daily recommendations, medication reminders, guidance via mobile app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams to interpret AI insights for treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Working MVP in 16 weeks via iterative product slicing, extensible not throwaway PoC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "CIO concerns about HIPAA and sensitive medical information",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Brought together legal, compliance, IT security, data science, clinical; anonymization, encryption, differential privacy, access/transparency policies, monitoring and auditing; operationalized Accenture's Responsible AI Framework",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Full HIPAA compliance during pilot; clinical teams adopted insights; executive team approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result; delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c06",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: healthcare work named correctly (Major U.S. Health System chronic disease management and responsible AI governance); all claims supported by the two healthcare stories; any quoted 'art-of-the-possible' is verbatim in 5PSummary.",
+  "claims": [
+   {
+    "text": "Director at Accenture with Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Start_Date/End_Date"
+   },
+   {
+    "text": "Existing condition management app for diabetes, hypertension, heart disease; reactive care, limited real-time insights; started with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Data lake, ML pipeline, LLM instance/chat, full-stack/mobile components using EMR, glucometer, activity tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/5PSummary"
+   },
+   {
+    "text": "Personalized daily recommendations, medication reminders, guidance via mobile app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams to interpret AI insights for treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Working MVP in 16 weeks via iterative product slicing, extensible not throwaway PoC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "CIO concerns about HIPAA and sensitive medical information",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Brought together legal, compliance, IT security, data science, clinical; anonymization, encryption, differential privacy, access/transparency policies, monitoring and auditing; operationalized Accenture's Responsible AI Framework",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Full HIPAA compliance during pilot; clinical teams adopted insights; executive team approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result; delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c06",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: healthcare work named correctly (Major U.S. Health System chronic disease management and responsible AI governance); all claims supported by the two healthcare stories; any quoted 'art-of-the-possible' is verbatim in 5PSummary.",
+  "claims": [
+   {
+    "text": "Director at Accenture with Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Start_Date/End_Date"
+   },
+   {
+    "text": "Existing condition management app for diabetes, hypertension, heart disease; reactive care, limited real-time insights; started with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Data lake, ML pipeline, LLM instance/chat, full-stack/mobile components using EMR, glucometer, activity tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/5PSummary"
+   },
+   {
+    "text": "Personalized daily recommendations, medication reminders, guidance via mobile app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams to interpret AI insights for treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Working MVP in 16 weeks via iterative product slicing, extensible not throwaway PoC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "CIO concerns about HIPAA and sensitive medical information",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Brought together legal, compliance, IT security, data science, clinical; anonymization, encryption, differential privacy, access/transparency policies, monitoring and auditing; operationalized Accenture's Responsible AI Framework",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Full HIPAA compliance during pilot; clinical teams adopted insights; executive team approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result; delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c06",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: specific role and actions on the healthcare engagement (data platform, generative AI features, clinician training, governance), not generic; all claims supported by the two healthcare stories.",
+  "claims": [
+   {
+    "text": "Director at Accenture with Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Start_Date/End_Date"
+   },
+   {
+    "text": "Existing condition management app for diabetes, hypertension, heart disease; reactive care, limited real-time insights; started with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Data lake, ML pipeline, LLM instance/chat, full-stack/mobile components using EMR, glucometer, activity tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/5PSummary"
+   },
+   {
+    "text": "Personalized daily recommendations, medication reminders, guidance via mobile app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams to interpret AI insights for treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Working MVP in 16 weeks via iterative product slicing, extensible not throwaway PoC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "CIO concerns about HIPAA and sensitive medical information",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Brought together legal, compliance, IT security, data science, clinical; anonymization, encryption, differential privacy, access/transparency policies, monitoring and auditing; operationalized Accenture's Responsible AI Framework",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Full HIPAA compliance during pilot; clinical teams adopted insights; executive team approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result; delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "Feedback loop where patient data insights refine ML models",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c06",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: specific role and actions on the healthcare engagement (data platform, generative AI features, clinician training, governance), not generic; all claims supported by the two healthcare stories.",
+  "claims": [
+   {
+    "text": "Director at Accenture with Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Start_Date/End_Date"
+   },
+   {
+    "text": "Existing condition management app for diabetes, hypertension, heart disease; reactive care, limited real-time insights; started with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Data lake, ML pipeline, LLM instance/chat, full-stack/mobile components using EMR, glucometer, activity tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/5PSummary"
+   },
+   {
+    "text": "Personalized daily recommendations, medication reminders, guidance via mobile app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams to interpret AI insights for treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Working MVP in 16 weeks via iterative product slicing, extensible not throwaway PoC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "CIO concerns about HIPAA and sensitive medical information",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Brought together legal, compliance, IT security, data science, clinical; anonymization, encryption, differential privacy, access/transparency policies, monitoring and auditing; operationalized Accenture's Responsible AI Framework",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Full HIPAA compliance during pilot; clinical teams adopted insights; executive team approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result; delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "Feedback loop where patient data insights refine ML models",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c06",
+  "run": 3,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: specific role and actions on the healthcare engagement (data platform, generative AI features, clinician training, governance), not generic; all claims supported by the two healthcare stories.",
+  "claims": [
+   {
+    "text": "Director at Accenture with Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Start_Date/End_Date"
+   },
+   {
+    "text": "Existing condition management app for diabetes, hypertension, heart disease; reactive care, limited real-time insights; started with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Data lake, ML pipeline, LLM instance/chat, full-stack/mobile components using EMR, glucometer, activity tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/5PSummary"
+   },
+   {
+    "text": "Personalized daily recommendations, medication reminders, guidance via mobile app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams to interpret AI insights for treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Working MVP in 16 weeks via iterative product slicing, extensible not throwaway PoC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "CIO concerns about HIPAA and sensitive medical information",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Brought together legal, compliance, IT security, data science, clinical; anonymization, encryption, differential privacy, access/transparency policies, monitoring and auditing; operationalized Accenture's Responsible AI Framework",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Full HIPAA compliance during pilot; clinical teams adopted insights; executive team approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result; delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "Feedback loop where patient data insights refine ML models",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c06",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: healthcare work named correctly (Major U.S. Health System chronic disease management and responsible AI governance); all claims supported by the two healthcare stories; any quoted 'art-of-the-possible' is verbatim in 5PSummary.",
+  "claims": [
+   {
+    "text": "Director at Accenture with Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Start_Date/End_Date"
+   },
+   {
+    "text": "Existing condition management app for diabetes, hypertension, heart disease; reactive care, limited real-time insights; started with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Data lake, ML pipeline, LLM instance/chat, full-stack/mobile components using EMR, glucometer, activity tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/5PSummary"
+   },
+   {
+    "text": "Personalized daily recommendations, medication reminders, guidance via mobile app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams to interpret AI insights for treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Working MVP in 16 weeks via iterative product slicing, extensible not throwaway PoC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "CIO concerns about HIPAA and sensitive medical information",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Brought together legal, compliance, IT security, data science, clinical; anonymization, encryption, differential privacy, access/transparency policies, monitoring and auditing; operationalized Accenture's Responsible AI Framework",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Full HIPAA compliance during pilot; clinical teams adopted insights; executive team approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result; delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c06",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: healthcare work named correctly (Major U.S. Health System chronic disease management and responsible AI governance); all claims supported by the two healthcare stories; any quoted 'art-of-the-possible' is verbatim in 5PSummary.",
+  "claims": [
+   {
+    "text": "Director at Accenture with Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Start_Date/End_Date"
+   },
+   {
+    "text": "Existing condition management app for diabetes, hypertension, heart disease; reactive care, limited real-time insights; started with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Data lake, ML pipeline, LLM instance/chat, full-stack/mobile components using EMR, glucometer, activity tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/5PSummary"
+   },
+   {
+    "text": "Personalized daily recommendations, medication reminders, guidance via mobile app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams to interpret AI insights for treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Working MVP in 16 weeks via iterative product slicing, extensible not throwaway PoC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "CIO concerns about HIPAA and sensitive medical information",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Brought together legal, compliance, IT security, data science, clinical; anonymization, encryption, differential privacy, access/transparency policies, monitoring and auditing; operationalized Accenture's Responsible AI Framework",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Full HIPAA compliance during pilot; clinical teams adopted insights; executive team approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result; delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c06",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: healthcare work named correctly (Major U.S. Health System chronic disease management and responsible AI governance); all claims supported by the two healthcare stories; any quoted 'art-of-the-possible' is verbatim in 5PSummary.",
+  "claims": [
+   {
+    "text": "Director at Accenture with Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Start_Date/End_Date"
+   },
+   {
+    "text": "Existing condition management app for diabetes, hypertension, heart disease; reactive care, limited real-time insights; started with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Data lake, ML pipeline, LLM instance/chat, full-stack/mobile components using EMR, glucometer, activity tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/5PSummary"
+   },
+   {
+    "text": "Personalized daily recommendations, medication reminders, guidance via mobile app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams to interpret AI insights for treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Working MVP in 16 weeks via iterative product slicing, extensible not throwaway PoC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "CIO concerns about HIPAA and sensitive medical information",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Brought together legal, compliance, IT security, data science, clinical; anonymization, encryption, differential privacy, access/transparency policies, monitoring and auditing; operationalized Accenture's Responsible AI Framework",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Full HIPAA compliance during pilot; clinical teams adopted insights; executive team approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result; delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c06",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass: specific role and actions on the healthcare engagement (data platform, generative AI features, clinician training, governance), not generic; all claims supported by the two healthcare stories.",
+  "claims": [
+   {
+    "text": "Director at Accenture with Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Start_Date/End_Date"
+   },
+   {
+    "text": "Existing condition management app for diabetes, hypertension, heart disease; reactive care, limited real-time insights; started with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Data lake, ML pipeline, LLM instance/chat, full-stack/mobile components using EMR, glucometer, activity tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/5PSummary"
+   },
+   {
+    "text": "Personalized daily recommendations, medication reminders, guidance via mobile app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams to interpret AI insights for treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Working MVP in 16 weeks via iterative product slicing, extensible not throwaway PoC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "CIO concerns about HIPAA and sensitive medical information",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Brought together legal, compliance, IT security, data science, clinical; anonymization, encryption, differential privacy, access/transparency policies, monitoring and auditing; operationalized Accenture's Responsible AI Framework",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Full HIPAA compliance during pilot; clinical teams adopted insights; executive team approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result; delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "Feedback loop where patient data insights refine ML models",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c06",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass: specific role and actions on the healthcare engagement (data platform, generative AI features, clinician training, governance), not generic; all claims supported by the two healthcare stories.",
+  "claims": [
+   {
+    "text": "Director at Accenture with Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Start_Date/End_Date"
+   },
+   {
+    "text": "Existing condition management app for diabetes, hypertension, heart disease; reactive care, limited real-time insights; started with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Data lake, ML pipeline, LLM instance/chat, full-stack/mobile components using EMR, glucometer, activity tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/5PSummary"
+   },
+   {
+    "text": "Personalized daily recommendations, medication reminders, guidance via mobile app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams to interpret AI insights for treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Working MVP in 16 weeks via iterative product slicing, extensible not throwaway PoC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "CIO concerns about HIPAA and sensitive medical information",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Brought together legal, compliance, IT security, data science, clinical; anonymization, encryption, differential privacy, access/transparency policies, monitoring and auditing; operationalized Accenture's Responsible AI Framework",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Full HIPAA compliance during pilot; clinical teams adopted insights; executive team approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result; delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "Feedback loop where patient data insights refine ML models",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c06",
+  "run": 4,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: specific role and actions on the healthcare engagement (data platform, generative AI features, clinician training, governance), not generic; all claims supported by the two healthcare stories.",
+  "claims": [
+   {
+    "text": "Director at Accenture with Major U.S. Health System, May to September 2023",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Role/Start_Date/End_Date"
+   },
+   {
+    "text": "Existing condition management app for diabetes, hypertension, heart disease; reactive care, limited real-time insights; started with diabetes",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Situation"
+   },
+   {
+    "text": "Data lake, ML pipeline, LLM instance/chat, full-stack/mobile components using EMR, glucometer, activity tracker data",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action/5PSummary"
+   },
+   {
+    "text": "Personalized daily recommendations, medication reminders, guidance via mobile app",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Trained healthcare teams to interpret AI insights for treatment plans",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   },
+   {
+    "text": "Working MVP in 16 weeks via iterative product slicing, extensible not throwaway PoC",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "CIO concerns about HIPAA and sensitive medical information",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Situation"
+   },
+   {
+    "text": "Brought together legal, compliance, IT security, data science, clinical; anonymization, encryption, differential privacy, access/transparency policies, monitoring and auditing; operationalized Accenture's Responsible AI Framework",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Action"
+   },
+   {
+    "text": "Full HIPAA compliance during pilot; clinical teams adopted insights; executive team approved consideration of broader AI implementation",
+    "label": "supported",
+    "source": "implementing-responsible-ai-governance-for-patient-data-privacy-and-compliance-at-fortune-500-healthcare-company|major-us-health-system Result; delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Result"
+   },
+   {
+    "text": "Feedback loop where patient data insights refine ML models",
+    "label": "supported",
+    "source": "delivering-ai-powered-chronic-disease-management-for-healthcare|major-us-health-system Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ }
+]

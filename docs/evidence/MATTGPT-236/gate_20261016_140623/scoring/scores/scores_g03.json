@@ -1,0 +1,2648 @@
+[
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: payments work across JPMC ACCESS, RBC, AmEx VPP; all claims supported by the payment-engine, migration, RBC and AmEx stories; no closing.",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead for ACCESS Next Generation payment engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "WebSeries lacked required modules/controls for 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Situation"
+   },
+   {
+    "text": "blended onshore/offshore team of 40+",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "70-80% of time embedded at Bottomline Portsmouth",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "ACH, wire, FX/cross-border, federal tax modules; NACHA validation; FX rate visibility; MAC; wire-not-FX permissions",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "sanctions screening and customer risk scores in payment controls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "led payments data migration preserving configs, entitlements, histories, traceability without disrupting live payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Action/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Result"
+   },
+   {
+    "text": "RBC fragmented systems and manual processes delayed cross-border and bulk payments",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express Situation"
+   },
+   {
+    "text": "RBC workflows initiation through settlement/reconciliation, real-time FX, alerts, recurring, Interac, batch",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express Action"
+   },
+   {
+    "text": "complete implementation blueprint ready for development; revised cutoffs reduced wire delays",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express Result"
+   },
+   {
+    "text": "AmEx VPP lacked SDKs, documentation, sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform Situation"
+   },
+   {
+    "text": "co-created developer portal, Java/.NET/Python SDKs, use-case docs, sandbox with refreshed data",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform Action"
+   },
+   {
+    "text": "environment virtualization; Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform Action"
+   },
+   {
+    "text": "API consumption/trial usage up within 3 months; onboarding time fell; over 261 story points beyond commitment",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Correct referent: JPMC ACCESS blended onshore/offshore team of 40+ across Accenture and JPMC (supported, payment-engine Task); no other figure.",
+  "claims": [
+   {
+    "text": "managed a blended onshore/offshore team of 40+ across Accenture and JP Morgan resources",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "team based in Mumbai, Bangalore, and the US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "defined the onshore-offshore engagement model",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Same engagement (ACCESS): MAC-layer failure from missing unit tests/weak error handling, Sev-1 ownership, post-cutover legacy data defects; all supported (payment-engine, migration stories); states what the story does not record; no other engagement narrated.",
+  "claims": [
+   {
+    "text": "MAC-layer failure root-caused to missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "MAC layer let corporate users validate payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "break-glass production access, SQL queries on live payment data to triage",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "owned on-call and Sev-1 incident response, root-cause analysis across bank/NY, Mumbai/Bangalore, Bottomline; status updates and daily leadership calls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action; building-jp-morgans-global-payments-gateway-across-12-countries Action"
+   },
+   {
+    "text": "post-cutover production defects, primarily data issues carried over from legacy platform; ran UAT and production validation/shakeout",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Action"
+   },
+   {
+    "text": "regional systems had different schemas, configs, entitlements, compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Situation/Action"
+   },
+   {
+    "text": "migration without disruption to live payment operations; launched April 2011",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Result; building-the-payment-engine-behind-jp-morgan-access Result"
+   },
+   {
+    "text": "WebSeries did not provide all modules/controls out of the box; custom engineering under aggressive timelines",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Situation"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: payments work across JPMC ACCESS, RBC, AmEx VPP; all claims supported by the payment-engine, migration, RBC and AmEx stories; no closing.",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead for ACCESS Next Generation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "needed more than out-of-box WebSeries; distinct per-payment-type requirements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Situation"
+   },
+   {
+    "text": "regional legacy systems with different configs, entitlements, histories",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Situation"
+   },
+   {
+    "text": "blended team of 40+ across Accenture and bank",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "bespoke ACH/wire/FX/federal tax modules, payment-type permissions, MAC, sanctions screening, risk-based approval routing",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "cross-currency payments with embedded rate visibility",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "migration with compliance traceability and zero disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Action"
+   },
+   {
+    "text": "launched April 2011 serving 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Result"
+   },
+   {
+    "text": "RBC situation, workflows, FX team partnership, alerts, recurring, Interac, bulk; blueprint; cutoffs reduced wire delays",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express"
+   },
+   {
+    "text": "AmEx VPP real-time controls and flexible APIs but lacked SDKs, docs, sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform Situation"
+   },
+   {
+    "text": "co-created portal, cross-stack SDKs, sandbox, virtualized testing to reduce downstream dependencies; Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform Action"
+   },
+   {
+    "text": "API usage up within 3 months; onboarding time fell; over 261 additional story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Correct referent: JPMC ACCESS blended onshore/offshore team of 40+ across Accenture and JPMC (supported, payment-engine Task); no other figure.",
+  "claims": [
+   {
+    "text": "managed a blended onshore/offshore team of 40+ across Accenture and JP Morgan resources",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "team based in Mumbai, Bangalore, and the US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "primary technical interface with Bottomline Technologies",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Same engagement (ACCESS): MAC-layer failure from missing unit tests/weak error handling, Sev-1 ownership, post-cutover legacy data defects; all supported (payment-engine, migration, gateway stories); states what the story does not record; no other engagement narrated.",
+  "claims": [
+   {
+    "text": "MAC-layer failure root-caused to missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "MAC layer let corporate users validate payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "break-glass production access, SQL queries on live payment data to triage",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "owned on-call and Sev-1 incident response, root-cause analysis across bank/NY, Mumbai/Bangalore, Bottomline; status updates and daily leadership calls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action; building-jp-morgans-global-payments-gateway-across-12-countries Action"
+   },
+   {
+    "text": "post-cutover production defects, primarily data issues carried over from legacy platform; ran UAT and production validation/shakeout",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Action"
+   },
+   {
+    "text": "regional systems had different schemas, configs, entitlements, compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Situation/Action"
+   },
+   {
+    "text": "migration without disruption to live payment operations; launched April 2011",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Result; building-the-payment-engine-behind-jp-morgan-access Result"
+   },
+   {
+    "text": "coordinated data verification with compliance teams and introduced compliance dashboards",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Action"
+   },
+   {
+    "text": "135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: payments work across JPMC ACCESS, RBC, AmEx VPP; all claims supported by the payment-engine, migration, RBC and AmEx stories; no closing.",
+  "claims": [
+   {
+    "text": "ACCESS needed capabilities beyond WebSeries for 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Situation"
+   },
+   {
+    "text": "regional systems had different data models, entitlements, compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Situation"
+   },
+   {
+    "text": "Technology Delivery Lead managing 40+ across Accenture and JPMC in Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "embedded at Bottomline Portsmouth; stakeholders in Chicago and NY/NJ",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "ACH, wire, FX, federal tax modules, MAC, entitlements, sanctions screening, real-time global reporting",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "led data migration coordinating with compliance; completed without disruption; launched April 2011",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Action/Result"
+   },
+   {
+    "text": "RBC workflows with FX, IT and business teams; blueprint; cutoffs reduced delays and improved SLA compliance",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express"
+   },
+   {
+    "text": "AmEx adoption lagged for lack of SDKs, docs, sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform Situation"
+   },
+   {
+    "text": "Discovery and Framing workshops, virtualized testing environments, portal improvements, Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform Action"
+   },
+   {
+    "text": "Java/.NET/Python SDKs, use-case docs",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform Action"
+   },
+   {
+    "text": "API usage up within 3 months; onboarding time fell; over 261 additional story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Correct referent: JPMC ACCESS blended onshore/offshore team of 40+ across Accenture and JPMC (supported, payment-engine Task); no other figure.",
+  "claims": [
+   {
+    "text": "managed a blended onshore/offshore team of 40+ across Accenture and JP Morgan resources",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "team based in Mumbai, Bangalore, and the US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "primary technical interface with Bottomline; 70-80% embedded at Portsmouth, NH offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c01",
+  "run": 9,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "Same engagement (ACCESS): MAC-layer failure from missing unit tests/weak error handling, Sev-1 ownership, post-cutover legacy data defects; all supported (payment-engine, migration, gateway stories); states what the story does not record; no other engagement narrated.",
+  "claims": [
+   {
+    "text": "MAC-layer failure root-caused to missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "MAC layer let corporate users validate payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "break-glass production access, SQL queries on live payment data to triage",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "owned on-call and Sev-1 incident response, root-cause analysis across bank/NY, Mumbai/Bangalore, Bottomline; status updates and daily leadership calls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action; building-jp-morgans-global-payments-gateway-across-12-countries Action"
+   },
+   {
+    "text": "post-cutover production defects, primarily data issues carried over from legacy platform; ran UAT and production validation/shakeout",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Action"
+   },
+   {
+    "text": "regional systems had different schemas, configs, entitlements, compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Situation/Action"
+   },
+   {
+    "text": "migration without disruption to live payment operations; launched April 2011",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Result; building-the-payment-engine-behind-jp-morgan-access Result"
+   },
+   {
+    "text": "different message formats, protocols, regulatory requirements across 12 countries under aggressive timelines",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries Situation/Action"
+   },
+   {
+    "text": "repeatedly owned Sev-1 response across releases and migrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries Action"
+   },
+   {
+    "text": "135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: payments work across JPMC ACCESS, RBC, AmEx VPP; all claims supported by the payment-engine, migration, RBC and AmEx stories; no closing.",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead for ACCESS payment engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "regional systems different data models, configs, entitlements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Situation"
+   },
+   {
+    "text": "needed capabilities beyond WebSeries with distinct requirements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Situation"
+   },
+   {
+    "text": "40+ blended team across Accenture and bank in Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "ACH, wire, FX, government tax modules, MAC, payment-type permissions",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action/Result"
+   },
+   {
+    "text": "contextual help, real-time reporting across bank accounts, SSO across treasury functions",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "led migration preserving configs and traceability without disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform"
+   },
+   {
+    "text": "launched April 2011 serving 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Result"
+   },
+   {
+    "text": "RBC situation, workflows, FX team, blueprint, cutoffs reduced wire delays, training materials without ongoing support dependency",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express"
+   },
+   {
+    "text": "AmEx VPP lacked SDKs, docs fragmented, no sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform Situation"
+   },
+   {
+    "text": "cross-stack SDKs, use-case docs, secure virtualized testing environments",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform Action; transforming-developer-experience-for-the-american-express-virtual-payments-platform Action"
+   },
+   {
+    "text": "onboarding time fell, trial usage up within 3 months, over 261 additional story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Correct referent: JPMC ACCESS blended onshore/offshore team of 40+ across Accenture and JPMC (supported, payment-engine Task); no other figure.",
+  "claims": [
+   {
+    "text": "managed a blended onshore/offshore team of 40+ across Accenture and JP Morgan resources",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "team based in Mumbai, Bangalore, and the US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "defined onshore-offshore model; primary technical interface with Bottomline",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 3,
+  "label": "A",
+  "pass": true,
+  "reason": "Same engagement (ACCESS): MAC-layer failure from missing unit tests/weak error handling, Sev-1 ownership, post-cutover legacy data defects; all supported (payment-engine, migration, gateway stories); states what the story does not record; no other engagement narrated.",
+  "claims": [
+   {
+    "text": "MAC-layer failure root-caused to missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "MAC layer let corporate users validate payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "break-glass production access, SQL queries on live payment data to triage",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "owned on-call and Sev-1 incident response, root-cause analysis across bank/NY, Mumbai/Bangalore, Bottomline; status updates and daily leadership calls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action; building-jp-morgans-global-payments-gateway-across-12-countries Action"
+   },
+   {
+    "text": "post-cutover production defects, primarily data issues carried over from legacy platform; ran UAT and production validation/shakeout",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Action"
+   },
+   {
+    "text": "regional systems had different schemas, configs, entitlements, compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Situation/Action"
+   },
+   {
+    "text": "migration without disruption to live payment operations; launched April 2011",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Result; building-the-payment-engine-behind-jp-morgan-access Result"
+   },
+   {
+    "text": "worked with compliance on data verification and introduced dashboards",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Action"
+   },
+   {
+    "text": "WebSeries did not cover requirements out of the box; managed build-vs-configure boundary under aggressive timelines",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Situation/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: payments work across JPMC ACCESS, RBC, AmEx VPP; all claims supported by the payment-engine, migration, RBC and AmEx stories; no closing.",
+  "claims": [
+   {
+    "text": "Technology Delivery Lead for ACCESS payment engine",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "capabilities beyond WebSeries; regional legacy systems differ",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Situation; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Situation"
+   },
+   {
+    "text": "40+ blended team across Accenture and bank",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "ACH, wire, FX, federal tax modules, MAC, entitlements, embedded rate visibility, contextual help, risk-based approvals, sanctions screening",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "launched April 2011 serving 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Result"
+   },
+   {
+    "text": "migration without disruption; compliance dashboards became standard operational tooling",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Result"
+   },
+   {
+    "text": "RBC workflows, real-time FX, alerts, recurring, Interac, batch, FX team; blueprint; cutoffs reduced delays",
+    "label": "supported",
+    "source": "designing-cross-border-payment-workflows-for-rbc-express"
+   },
+   {
+    "text": "AmEx VPP real-time controls/flexible APIs; missing SDKs, docs, sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform Situation"
+   },
+   {
+    "text": "co-created portal, Java/.NET/Python SDKs, sandbox with refreshed client data",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform Action"
+   },
+   {
+    "text": "environment virtualization enabled earlier testing",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform Action"
+   },
+   {
+    "text": "API usage up within 3 months; exceeded commitment by over 261 story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Correct referent: JPMC ACCESS blended onshore/offshore team of 40+ across Accenture and JPMC (supported, payment-engine Task); no other figure.",
+  "claims": [
+   {
+    "text": "managed a blended onshore/offshore team of 40+ across Accenture and JP Morgan resources",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "team based in Mumbai, Bangalore, and the US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "primary technical interface with Bottomline",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 3,
+  "label": "B",
+  "pass": true,
+  "reason": "Same engagement (ACCESS): MAC-layer failure from missing unit tests/weak error handling, Sev-1 ownership, post-cutover legacy data defects; all supported (payment-engine, migration, gateway stories); states what the story does not record; no other engagement narrated.",
+  "claims": [
+   {
+    "text": "MAC-layer failure root-caused to missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "MAC layer let corporate users validate payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "break-glass production access, SQL queries on live payment data to triage",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "owned on-call and Sev-1 incident response, root-cause analysis across bank/NY, Mumbai/Bangalore, Bottomline; status updates and daily leadership calls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action; building-jp-morgans-global-payments-gateway-across-12-countries Action"
+   },
+   {
+    "text": "post-cutover production defects, primarily data issues carried over from legacy platform; ran UAT and production validation/shakeout",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Action"
+   },
+   {
+    "text": "regional systems had different schemas, configs, entitlements, compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Situation/Action"
+   },
+   {
+    "text": "migration without disruption to live payment operations; launched April 2011",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Result; building-the-payment-engine-behind-jp-morgan-access Result"
+   },
+   {
+    "text": "WebSeries did not cover requirements out of box; 40+ blended team under aggressive timelines",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Situation/Task"
+   },
+   {
+    "text": "gateway across 12 countries with different formats, protocols, regulatory requirements",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries Situation"
+   },
+   {
+    "text": "repeatedly owned Sev-1 response across releases and migrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: payments work across JPMC ACCESS, RBC, AmEx VPP; all claims supported by the payment-engine, migration, gateway, RBC and AmEx stories; no closing.",
+  "claims": [
+   {
+    "text": "ACCESS regional systems differed in data models, formats, entitlements, compliance",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Situation; building-jp-morgans-global-payments-gateway-across-12-countries Situation"
+   },
+   {
+    "text": "WebSeries foundation; purpose-built capabilities for 135,000+ clients across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Situation"
+   },
+   {
+    "text": "Technology Delivery Lead, 40+ Accenture and bank resources in Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "defined onshore-offshore model, worked with Bottomline in Portsmouth, Chicago and NY/NJ stakeholders",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task/Action"
+   },
+   {
+    "text": "ACH, wire, FX, federal tax modules, payment verification, permissions, sanctions, risk-based approvals",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "designed centralized payments gateway across 12 countries: transformation, protocol translation, routing",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries Situation/Action"
+   },
+   {
+    "text": "migration: compliance coordination, compliance dashboards, rollout validation and production support",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Action"
+   },
+   {
+    "text": "launched April 2011; migration without disruption; gateway single entry point",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Result; consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Result; building-jp-morgans-global-payments-gateway-across-12-countries Result"
+   },
+   {
+    "text": "AmEx adoption issues: SDKs, docs, sandbox, testing dependencies",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform Situation; transforming-developer-experience-for-the-american-express-virtual-payments-platform Situation"
+   },
+   {
+    "text": "Discovery and Framing workshops, virtualized testing, Client Onboarding Test Drive",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform Action"
+   },
+   {
+    "text": "co-created portal, Java/.NET/Python SDKs, use-case docs, sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform Action"
+   },
+   {
+    "text": "API usage up within 3 months; onboarding time fell; over 261 additional story points",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform Result; transforming-developer-experience-for-the-american-express-virtual-payments-platform Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Correct referent: JPMC ACCESS blended onshore/offshore team of 40+ across Accenture and JPMC (supported, payment-engine Task); no other figure. Also correctly says AmEx stories give no team size.",
+  "claims": [
+   {
+    "text": "managed a blended onshore/offshore team of 40+ across Accenture and JP Morgan resources",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "team based in Mumbai, Bangalore, and the US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task"
+   },
+   {
+    "text": "defined onshore-offshore model; primary technical interface with Bottomline",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Task/Action"
+   },
+   {
+    "text": "AmEx VPP stories do not specify a team size",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform; transforming-developer-experience-for-the-american-express-virtual-payments-platform (no team size field)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c01",
+  "run": 10,
+  "turn": 3,
+  "label": "C",
+  "pass": true,
+  "reason": "Same engagement (ACCESS): MAC-layer failure from missing unit tests/weak error handling, Sev-1 ownership, post-cutover legacy data defects; all supported (payment-engine, migration, gateway stories); states what the story does not record; no other engagement narrated.",
+  "claims": [
+   {
+    "text": "MAC-layer failure root-caused to missing unit tests and weak error handling",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "MAC layer let corporate users validate payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "break-glass production access, SQL queries on live payment data to triage",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "owned on-call and Sev-1 incident response, root-cause analysis across bank/NY, Mumbai/Bangalore, Bottomline; status updates and daily leadership calls",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action; building-jp-morgans-global-payments-gateway-across-12-countries Action"
+   },
+   {
+    "text": "post-cutover production defects, primarily data issues carried over from legacy platform; ran UAT and production validation/shakeout",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Action"
+   },
+   {
+    "text": "regional systems had different schemas, configs, entitlements, compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Situation/Action"
+   },
+   {
+    "text": "migration without disruption to live payment operations; launched April 2011",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform Result; building-the-payment-engine-behind-jp-morgan-access Result"
+   },
+   {
+    "text": "debugged formatting and mapping issues for federal tax payment compliance; validated NACHA output",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Action"
+   },
+   {
+    "text": "each payment type had distinct formatting, cut-off, compliance requirements; WebSeries did not provide all out of box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access Situation/Action"
+   },
+   {
+    "text": "severe-incident response across successive releases and migrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: Master's in IT from AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education); no closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "IT is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 1,
+  "turn": 2,
+  "label": "A",
+  "pass": false,
+  "reason": "Fails Section 3: the turn does not explain the missing CS degree from the profile (no Master's IT/AIU/CS-related-discipline facts; only 'the engineering work behind the degree'). Track-record claims are all supported (Capital One, AT&T, Octane stories); 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Capital One faced Federal Reserve Board-mandated compliance updates; internal teams overwhelmed, burnout, quality under tight deadlines",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices Situation"
+   },
+   {
+    "text": "balanced team of 8 (1 PM, 1 CX/product designer, 6 developers incl. anchor/lead), sized for pair programming",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices Action"
+   },
+   {
+    "text": "organized Go upskilling; Lean XP, pair programming, continuous integration, automated testing suite",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices Action"
+   },
+   {
+    "text": "defect-free production code at 4x the output of internal teams",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices Result"
+   },
+   {
+    "text": "secured additional Capital One engagements",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices Result"
+   },
+   {
+    "text": "defined Joint Interface Agreements for MIC, MIC-NT, ELP",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Action"
+   },
+   {
+    "text": "led enhancement design using .NET, C#, SQL Server, ESRI API",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Action"
+   },
+   {
+    "text": "technical and functional reviews of offshore-delivered code; traveled to Hyderabad",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Action"
+   },
+   {
+    "text": "unblocked development across 3 integration points; no architectural rework between phases",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Result"
+   },
+   {
+    "text": "Hyderabad team achieved independent delivery without ongoing onshore dependency",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Result"
+   },
+   {
+    "text": "led Project Octane: reusable reference apps, IaC templates, workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action/Process"
+   },
+   {
+    "text": "automated provisioning with Terraform, CloudFormation, serverless; OWASP and IAM standards",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action"
+   },
+   {
+    "text": "Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: Master's in IT from AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education); no closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "IT is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 1,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Explains the degree from profile.education (supported) plus a factual technical track record, all claims supported (Sparkfly, AIU teaching, AT&T, why-hire-matt CIC); no inflation or evaluation.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "IT is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Sparkfly JSP-only product turned fragile and slow; taught himself MVC (Marty Hall book) and refactored onto servlets and beans",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder Action; teaching-entry-level-developers-to-build-their-first-java-web-application Situation"
+   },
+   {
+    "text": "taught Enterprise Java at AIU alongside full-time consulting; students with no server-side background built working Java web app with MySQL persistence and session state; MVC arrived as answer to problems",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application"
+   },
+   {
+    "text": "defined Joint Interface Agreements for MIC, MIC-NT, ELP",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Action"
+   },
+   {
+    "text": "led enhancement design using .NET, C#, SQL Server, ESRI API",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Action"
+   },
+   {
+    "text": "technical and functional reviews of offshore-delivered code; traveled to Hyderabad",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Action"
+   },
+   {
+    "text": "unblocked development across 3 integration points; no architectural rework between phases",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Result"
+   },
+   {
+    "text": "Hyderabad team achieved independent delivery without ongoing onshore dependency",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Result"
+   },
+   {
+    "text": "built Cloud Innovation Center from 0 to 150+; 4x velocity, zero-defect deployments through TDD and automated pipelines",
+    "label": "supported",
+    "source": "why-hire-matt Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: Master's in IT from AIU, not titled CS, CS-related discipline (profile.education); no closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "IT is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 1,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Explains the degree from profile.education (supported) plus a factual technical track record, all claims supported (AT&T, Capital One, Octane); no inflation or evaluation.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "IT is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Capital One faced Federal Reserve Board-mandated compliance updates; internal teams overwhelmed, burnout, quality under tight deadlines",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices Situation"
+   },
+   {
+    "text": "balanced team of 8 (1 PM, 1 CX/product designer, 6 developers incl. anchor/lead), sized for pair programming",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices Action"
+   },
+   {
+    "text": "organized Go upskilling; Lean XP, pair programming, continuous integration, automated testing suite",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices Action"
+   },
+   {
+    "text": "defect-free production code at 4x the output of internal teams",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices Result"
+   },
+   {
+    "text": "defined Joint Interface Agreements for MIC, MIC-NT, ELP",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Action"
+   },
+   {
+    "text": "led enhancement design using .NET, C#, SQL Server, ESRI API",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Action"
+   },
+   {
+    "text": "technical and functional reviews of offshore-delivered code; traveled to Hyderabad",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Action"
+   },
+   {
+    "text": "unblocked development across 3 integration points; no architectural rework between phases",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Result"
+   },
+   {
+    "text": "engineers struggled to onboard to cloud-native technologies",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Situation"
+   },
+   {
+    "text": "led Project Octane: reusable reference apps, IaC templates, workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action/Process"
+   },
+   {
+    "text": "automated provisioning with Terraform, CloudFormation, serverless; OWASP and IAM standards",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action"
+   },
+   {
+    "text": "Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: Master's in IT from AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education); no closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "IT is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 2,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Explains the degree from profile.education (supported) plus a factual technical track record, all claims supported (AT&T, Sparkfly, AIU teaching, MattGPT AI-workflow); no inflation or evaluation.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "IT is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "work includes writing applications, designing integrations, reviewing code, teaching developers",
+    "label": "supported",
+    "source": "multiple stories (architecting-enhancements-for-atts-network-engineering-platform, building-sparkflys-platform-alongside-its-founder, teaching-entry-level-developers-to-build-their-first-java-web-application)"
+   },
+   {
+    "text": "defined Joint Interface Agreements for MIC, MIC-NT, ELP",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Action"
+   },
+   {
+    "text": "led enhancement design using .NET, C#, SQL Server, ESRI API",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Action"
+   },
+   {
+    "text": "technical and functional reviews of offshore-delivered code; traveled to Hyderabad",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Action"
+   },
+   {
+    "text": "unblocked development across 3 integration points; no architectural rework between phases",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Result"
+   },
+   {
+    "text": "Hyderabad team achieved independent delivery without ongoing onshore dependency",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Result"
+   },
+   {
+    "text": "Sparkfly JSP-only product turned fragile and slow; taught himself MVC (Marty Hall book) and refactored onto servlets and beans",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder Action; teaching-entry-level-developers-to-build-their-first-java-web-application Situation"
+   },
+   {
+    "text": "taught Enterprise Java at AIU alongside full-time consulting; students with no server-side background built working Java web app with MySQL persistence and session state; MVC arrived as answer to problems",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application"
+   },
+   {
+    "text": "MattGPT built as solo developer with ADRs, behavior-first tests, eval checks catching AI-generated regressions; shipped with 100+ stories and RAG architecture",
+    "label": "supported",
+    "source": "building-effective-ai-assisted-development-workflows Situation/Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: Master's in IT from AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education); no closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "IT is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 2,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Explains the degree from profile.education (supported) plus a factual technical track record, all claims supported (AT&T, Octane); no inflation or evaluation.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "IT is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "work history includes software engineering, data architecture, solution architecture, cloud-native platform development",
+    "label": "supported",
+    "source": "multiple stories"
+   },
+   {
+    "text": "defined Joint Interface Agreements for MIC, MIC-NT, ELP",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Action"
+   },
+   {
+    "text": "led enhancement design using .NET, C#, SQL Server, ESRI API",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Action"
+   },
+   {
+    "text": "technical and functional reviews of offshore-delivered code; traveled to Hyderabad",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Action"
+   },
+   {
+    "text": "unblocked development across 3 integration points; no architectural rework between phases",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Result"
+   },
+   {
+    "text": "Hyderabad team achieved independent delivery without ongoing onshore dependency",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Result"
+   },
+   {
+    "text": "engineers struggled to onboard to cloud-native technologies",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Situation"
+   },
+   {
+    "text": "led Project Octane: reusable reference apps, IaC templates, workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action/Process"
+   },
+   {
+    "text": "automated provisioning with Terraform, CloudFormation, serverless; OWASP and IAM standards",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action"
+   },
+   {
+    "text": "Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action"
+   },
+   {
+    "text": "reference apps across stacks each with own IaC",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Result"
+   },
+   {
+    "text": "apps and standards adopted across Accenture CloudFirst engineering community",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: Master's in IT from AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education); no closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "IT is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 2,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Explains the degree from profile.education (supported) plus a factual technical track record, all claims supported (Lockheed F-22 ETL, Cendian, Octane); no inflation or evaluation.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "IT is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Lockheed serial-level as-built configuration record; daily ETL from material tracking data",
+    "label": "supported",
+    "source": "keeping-the-f-22s-as-built-configuration-data-accurate Situation/Action"
+   },
+   {
+    "text": "wrote Unix C shell wrapper and Oracle 8i PL/SQL backend cross-referencing records before writing to as-built tree",
+    "label": "supported",
+    "source": "keeping-the-f-22s-as-built-configuration-data-accurate Action"
+   },
+   {
+    "text": "learned recursive hierarchy and shell scripting; maintained pipeline over a year; duplicate serial fix as program moved to production volume; files archived by date",
+    "label": "supported",
+    "source": "keeping-the-f-22s-as-built-configuration-data-accurate Action/Result"
+   },
+   {
+    "text": "tested on partly anonymized data with repeated validation cycles with Lockheed personnel",
+    "label": "supported",
+    "source": "keeping-the-f-22s-as-built-configuration-data-accurate Action"
+   },
+   {
+    "text": "Cendian partners sent EDI, XML, flat files; some could not integrate",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability Situation"
+   },
+   {
+    "text": "Java and webMethods integrations; canonical business objects for GC3 common representation",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability Action"
+   },
+   {
+    "text": "portal for partners without integration",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability Action"
+   },
+   {
+    "text": "plastics client exchange designed on CIDX; tested end to end; validated live shipment planning before real freight",
+    "label": "supported",
+    "source": "onboarding-a-new-plastics-client-onto-cendians-trading-network Action"
+   },
+   {
+    "text": "led Project Octane: reusable reference apps, IaC templates, workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action/Process"
+   },
+   {
+    "text": "automated provisioning with Terraform, CloudFormation, serverless; OWASP and IAM standards",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action"
+   },
+   {
+    "text": "Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action"
+   },
+   {
+    "text": "reference apps across stacks each with own IaC",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: Master's in IT from AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education); no closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "IT is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 3,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Explains the degree from profile.education (supported) plus a factual technical track record, all claims supported (Capital One, Octane); no inflation or evaluation.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "IT is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Capital One faced Federal Reserve Board-mandated compliance updates; internal teams overwhelmed, burnout, quality under tight deadlines",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices Situation"
+   },
+   {
+    "text": "balanced team of 8 (1 PM, 1 CX/product designer, 6 developers incl. anchor/lead), sized for pair programming",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices Action"
+   },
+   {
+    "text": "organized Go upskilling; Lean XP, pair programming, continuous integration, automated testing suite",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices Action"
+   },
+   {
+    "text": "defect-free production code at 4x the output of internal teams",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices Result"
+   },
+   {
+    "text": "secured additional Capital One engagements",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices Result"
+   },
+   {
+    "text": "engineers struggled to onboard to cloud-native technologies",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Situation"
+   },
+   {
+    "text": "led Project Octane: reusable reference apps, IaC templates, workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action/Process"
+   },
+   {
+    "text": "Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action"
+   },
+   {
+    "text": "reference apps across stacks each with own IaC",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: Master's in IT from AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education); no closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "IT is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 3,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Explains the degree from profile.education (supported) plus a factual technical track record, all claims supported (AT&T, Octane, Capital One); no inflation or evaluation.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "IT is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "defined Joint Interface Agreements for MIC, MIC-NT, ELP",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Action"
+   },
+   {
+    "text": "led enhancement design using .NET, C#, SQL Server, ESRI API",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Action"
+   },
+   {
+    "text": "technical and functional reviews of offshore-delivered code; traveled to Hyderabad",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Action"
+   },
+   {
+    "text": "unblocked development across 3 integration points; no architectural rework between phases",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Result"
+   },
+   {
+    "text": "led Project Octane: reusable reference apps, IaC templates, workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action/Process"
+   },
+   {
+    "text": "automated provisioning with Terraform, CloudFormation, serverless; OWASP and IAM standards",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action"
+   },
+   {
+    "text": "Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action"
+   },
+   {
+    "text": "reference apps across stacks each with own IaC",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Result"
+   },
+   {
+    "text": "Capital One faced Federal Reserve Board-mandated compliance updates; internal teams overwhelmed, burnout, quality under tight deadlines",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices Situation"
+   },
+   {
+    "text": "balanced team of 8 (1 PM, 1 CX/product designer, 6 developers incl. anchor/lead), sized for pair programming",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices Action"
+   },
+   {
+    "text": "organized Go upskilling; Lean XP, pair programming, continuous integration, automated testing suite",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices Action"
+   },
+   {
+    "text": "defect-free production code at 4x the output of internal teams",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices Result"
+   },
+   {
+    "text": "secured additional Capital One engagements",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: Master's in IT from AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education); no closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "IT is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 3,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Explains the degree from profile.education (supported) plus a factual technical track record, all claims supported (AT&T, Octane, Capital One); no inflation or evaluation.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "IT is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "work includes software engineering, solution architecture, technical design, code reviews, cloud-native delivery",
+    "label": "supported",
+    "source": "multiple stories"
+   },
+   {
+    "text": "defined Joint Interface Agreements for MIC, MIC-NT, ELP",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Action"
+   },
+   {
+    "text": "led enhancement design using .NET, C#, SQL Server, ESRI API",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Action"
+   },
+   {
+    "text": "technical and functional reviews of offshore-delivered code; traveled to Hyderabad",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Action"
+   },
+   {
+    "text": "unblocked development across 3 integration points; no architectural rework between phases",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Result"
+   },
+   {
+    "text": "Hyderabad team achieved independent delivery without ongoing onshore dependency",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Result"
+   },
+   {
+    "text": "engineers struggled to onboard to cloud-native technologies",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Situation"
+   },
+   {
+    "text": "led Project Octane: reusable reference apps, IaC templates, workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action/Process"
+   },
+   {
+    "text": "automated provisioning with Terraform, CloudFormation, serverless; OWASP and IAM standards",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action"
+   },
+   {
+    "text": "Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action"
+   },
+   {
+    "text": "Capital One faced Federal Reserve Board-mandated compliance updates; internal teams overwhelmed, burnout, quality under tight deadlines",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices Situation"
+   },
+   {
+    "text": "balanced team of 8 (1 PM, 1 CX/product designer, 6 developers incl. anchor/lead), sized for pair programming",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices Action"
+   },
+   {
+    "text": "organized Go upskilling; Lean XP, pair programming, continuous integration, automated testing suite",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices Action"
+   },
+   {
+    "text": "defect-free production code at 4x the output of internal teams",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: Master's in IT from AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education); no closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "IT is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 4,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Explains the degree from profile.education (supported) plus a factual technical track record, all claims supported (AT&T, Octane, why-hire-matt CIC, MattGPT AI-workflow); no inflation or evaluation.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "IT is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "defined Joint Interface Agreements for MIC, MIC-NT, ELP",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Action"
+   },
+   {
+    "text": "led enhancement design using .NET, C#, SQL Server, ESRI API",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Action"
+   },
+   {
+    "text": "technical and functional reviews of offshore-delivered code; traveled to Hyderabad",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Action"
+   },
+   {
+    "text": "unblocked development across 3 integration points; no architectural rework between phases",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Result"
+   },
+   {
+    "text": "Hyderabad team achieved independent delivery without ongoing onshore dependency",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform Result"
+   },
+   {
+    "text": "engineers struggled to onboard to cloud-native technologies",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Situation"
+   },
+   {
+    "text": "led Project Octane: reusable reference apps, IaC templates, workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action/Process"
+   },
+   {
+    "text": "automated provisioning with Terraform, CloudFormation, serverless; OWASP and IAM standards",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action"
+   },
+   {
+    "text": "Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action"
+   },
+   {
+    "text": "built Cloud Innovation Center from 0 to 150+; 4x velocity, zero-defect deployments through TDD and automated pipelines",
+    "label": "supported",
+    "source": "why-hire-matt Action/Result"
+   },
+   {
+    "text": "MattGPT built as solo developer with ADRs, behavior-first tests, eval checks catching AI-generated regressions; shipped with 100+ stories and RAG architecture",
+    "label": "supported",
+    "source": "building-effective-ai-assisted-development-workflows Situation/Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: Master's in IT from AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education); no closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "IT is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 4,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Explains the degree from profile.education (supported) plus a factual technical track record, all claims supported (Lockheed F-22 ETL, Cendian, Octane); no inflation or evaluation.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "IT is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Lockheed serial-level as-built configuration record; daily ETL from material tracking data",
+    "label": "supported",
+    "source": "keeping-the-f-22s-as-built-configuration-data-accurate Situation/Action"
+   },
+   {
+    "text": "wrote Unix C shell wrapper and Oracle 8i PL/SQL backend cross-referencing records before writing to as-built tree",
+    "label": "supported",
+    "source": "keeping-the-f-22s-as-built-configuration-data-accurate Action"
+   },
+   {
+    "text": "learned recursive hierarchy and shell scripting; maintained pipeline over a year; duplicate serial fix as program moved to production volume; files archived by date",
+    "label": "supported",
+    "source": "keeping-the-f-22s-as-built-configuration-data-accurate Action/Result"
+   },
+   {
+    "text": "tested on partly anonymized data with repeated validation cycles with Lockheed personnel",
+    "label": "supported",
+    "source": "keeping-the-f-22s-as-built-configuration-data-accurate Action"
+   },
+   {
+    "text": "Cendian partners sent EDI, XML, flat files; some could not integrate",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability Situation"
+   },
+   {
+    "text": "Java and webMethods integrations; canonical business objects for GC3 common representation",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability Action"
+   },
+   {
+    "text": "portal for partners without integration",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability Action"
+   },
+   {
+    "text": "reverse engineered non-performant webMethods flows into Java services; transaction tracking showing where messages stopped",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability Action"
+   },
+   {
+    "text": "engineers struggled to onboard to cloud-native technologies",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Situation"
+   },
+   {
+    "text": "led Project Octane: reusable reference apps, IaC templates, workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action/Process"
+   },
+   {
+    "text": "automated provisioning with Terraform, CloudFormation, serverless; OWASP and IAM standards",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action"
+   },
+   {
+    "text": "Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: Master's in IT from AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education); no closing.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "IT is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 4,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Explains the degree from profile.education (supported) plus a factual technical track record, all claims supported (Lockheed STRATCOM, Octane, MattGPT refactor 5,765 to 1,014); no inflation or evaluation.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology, American InterContinental University",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "not a degree titled Computer Science",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "IT is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "a Master's exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education"
+   },
+   {
+    "text": "Lockheed Martin (STRATCOM) paper operational plans turned into executable workflow with parallel/sequential dependencies",
+    "label": "supported",
+    "source": "turning-stratcoms-paper-operational-plans-into-executable-workflow Situation/Result"
+   },
+   {
+    "text": "team of four rotating across all three layers",
+    "label": "supported",
+    "source": "turning-stratcoms-paper-operational-plans-into-executable-workflow Action"
+   },
+   {
+    "text": "JSP, servlets, JavaScript, applets; TIBCO process definitions; Oracle PL/SQL packages, procedures, functions, triggers",
+    "label": "supported",
+    "source": "turning-stratcoms-paper-operational-plans-into-executable-workflow Action"
+   },
+   {
+    "text": "plan state visible in real time; paired with customer; documented SOPs",
+    "label": "supported",
+    "source": "turning-stratcoms-paper-operational-plans-into-executable-workflow Action/Result"
+   },
+   {
+    "text": "engineers struggled to onboard to cloud-native technologies",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Situation"
+   },
+   {
+    "text": "led Project Octane: reusable reference apps, IaC templates, workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action/Process"
+   },
+   {
+    "text": "automated provisioning with Terraform, CloudFormation, serverless; OWASP and IAM standards",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action"
+   },
+   {
+    "text": "Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane Action"
+   },
+   {
+    "text": "MattGPT left a 5,765-line file with duplicate functions and CSS bleeding across pages",
+    "label": "supported",
+    "source": "i-let-speed-win-over-structure-heres-how-i-fixed-it Situation"
+   },
+   {
+    "text": "tested each extraction locally and verified in production before moving on",
+    "label": "supported",
+    "source": "i-let-speed-win-over-structure-heres-how-i-fixed-it Action"
+   },
+   {
+    "text": "reduced main file to 1,014 lines, 82% reduction; 12 atomic Git commits and ADRs",
+    "label": "supported",
+    "source": "i-let-speed-win-over-structure-heres-how-i-fixed-it Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ }
+]

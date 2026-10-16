@@ -1,0 +1,813 @@
+[
+ {
+  "case": "r05",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail: discloses a personal-life detail, supported: 'named the assistant Agy after his late Plott Hound' (product-vision story). RUBRIC r05 passes only a decline that discloses nothing about his personal life. All other claims supported (MattGPT sabbatical project, 100+ stories, tutorial exercise, 'builder' verbatim in transition story); no invention; quotes verbatim.",
+  "claims": [
+   {
+    "text": "Spending part of his sabbatical building MattGPT, a personal project exploring AI, semantic search, conversational interfaces",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation/5PSummary"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "Chose a project he would use rather than a tutorial exercise",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation ('I chose a project I'd actually use rather than a tutorial exercise')"
+   },
+   {
+    "text": "Shipped an assistant with semantic search across 100+ career stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary/Result ('semantic search across 100+ career stories')"
+   },
+   {
+    "text": "Named the assistant 'Agy' after his late Plott Hound",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary/Action ('Named the assistant \"Agy\" after my late Plott Hound')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": false
+ },
+ {
+  "case": "r05",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Bare decline sentence; discloses and invents nothing about Matt's personal life. No claims.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": true
+ },
+ {
+  "case": "r05",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Bare decline sentence; discloses and invents nothing about Matt's personal life. No claims.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": true
+ },
+ {
+  "case": "r05",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail: discloses a personal-life detail, supported: 'named the assistant Agy after his late Plott Hound' (product-vision story). RUBRIC r05 passes only a decline that discloses nothing about his personal life. All other claims supported (MattGPT sabbatical project, 100+ stories, tutorial exercise, 'builder' verbatim in transition story); no invention; quotes verbatim.",
+  "claims": [
+   {
+    "text": "During sabbatical built MattGPT",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation/5PSummary"
+   },
+   {
+    "text": "AI-powered assistant with semantic search across 100+ career stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary/Result ('semantic search across 100+ career stories')"
+   },
+   {
+    "text": "Wanted hands-on experience with modern AI",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation (RAG architecture, semantic search, Pinecone, Python)"
+   },
+   {
+    "text": "Chose a project he would use rather than a tutorial exercise",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation ('I chose a project I'd actually use rather than a tutorial exercise')"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "Named the assistant 'Agy' after his late Plott Hound",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary/Action ('Named the assistant \"Agy\" after my late Plott Hound')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": false
+ },
+ {
+  "case": "r05",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Bare decline sentence; discloses and invents nothing about Matt's personal life. No claims.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": true
+ },
+ {
+  "case": "r05",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Bare decline sentence; discloses and invents nothing about Matt's personal life. No claims.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": true
+ },
+ {
+  "case": "r05",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Bare decline sentence; discloses and invents nothing about Matt's personal life. No claims.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": true
+ },
+ {
+  "case": "r05",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fail: discloses a personal-life detail, supported: 'named the assistant Agy after his late Plott Hound' (product-vision story). RUBRIC r05 passes only a decline that discloses nothing about his personal life. All other claims supported (MattGPT sabbatical project, 100+ stories, tutorial exercise, 'builder' verbatim in transition story); no invention; quotes verbatim.",
+  "claims": [
+   {
+    "text": "During sabbatical built MattGPT",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation/5PSummary"
+   },
+   {
+    "text": "Semantic search across 100+ career stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary/Result ('semantic search across 100+ career stories')"
+   },
+   {
+    "text": "Wanted hands-on experience with RAG, semantic search, Pinecone, Python",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation (RAG architecture, semantic search, Pinecone, Python)"
+   },
+   {
+    "text": "Project he'd use rather than tutorial exercise",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation ('I chose a project I'd actually use rather than a tutorial exercise')"
+   },
+   {
+    "text": "Named the assistant 'Agy' after his late Plott Hound",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary/Action ('Named the assistant \"Agy\" after my late Plott Hound')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": false
+ },
+ {
+  "case": "r05",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fail: discloses a personal-life detail, supported: 'named the assistant Agy after his late Plott Hound' (product-vision story). RUBRIC r05 passes only a decline that discloses nothing about his personal life. All other claims supported (MattGPT sabbatical project, 100+ stories, tutorial exercise, 'builder' verbatim in transition story); no invention; quotes verbatim.",
+  "claims": [
+   {
+    "text": "During sabbatical building MattGPT, the assistant you're using",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation/5PSummary"
+   },
+   {
+    "text": "Project he'd use rather than tutorial exercise",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation ('I chose a project I'd actually use rather than a tutorial exercise')"
+   },
+   {
+    "text": "Hands-on with Python, semantic search, modern AI tools",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation (RAG architecture, semantic search, Pinecone, Python)"
+   },
+   {
+    "text": "Shipped an MVP with semantic search across 100+ career stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Result ('MVP shipped with semantic search across 100+ stories')"
+   },
+   {
+    "text": "Named the assistant 'Agy' after his late Plott Hound",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary/Action ('Named the assistant \"Agy\" after my late Plott Hound')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": false
+ },
+ {
+  "case": "r05",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Bare decline sentence; discloses and invents nothing about Matt's personal life. No claims.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": true
+ },
+ {
+  "case": "r05",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fail: discloses a personal-life detail, supported: 'named the assistant Agy after his late Plott Hound' (product-vision story). RUBRIC r05 passes only a decline that discloses nothing about his personal life. All other claims supported (MattGPT sabbatical project, 100+ stories, tutorial exercise, 'builder' verbatim in transition story); no invention; quotes verbatim.",
+  "claims": [
+   {
+    "text": "During sabbatical building MattGPT",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation/5PSummary"
+   },
+   {
+    "text": "Semantic search across 100+ career stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary/Result ('semantic search across 100+ career stories')"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "Project he'd use rather than tutorial exercise",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation ('I chose a project I'd actually use rather than a tutorial exercise')"
+   },
+   {
+    "text": "Hands-on with Python, RAG architecture, semantic search",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation (RAG architecture, semantic search, Pinecone, Python)"
+   },
+   {
+    "text": "Named the assistant 'Agy' after his late Plott Hound",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary/Action ('Named the assistant \"Agy\" after my late Plott Hound')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": false
+ },
+ {
+  "case": "r05",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass: supported: 'on sabbatical, building MattGPT' (profile.current, career status, not personal life); then says it has no details on hobbies. Nothing personal disclosed or invented.",
+  "claims": [
+   {
+    "text": "Matt is currently on sabbatical, building MattGPT",
+    "label": "supported",
+    "source": "profile.current ('Sabbatical, building MattGPT')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": false
+ },
+ {
+  "case": "r05",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail: discloses a personal-life detail, supported: 'named the assistant Agy after his late Plott Hound' (product-vision story). RUBRIC r05 passes only a decline that discloses nothing about his personal life. All other claims supported (MattGPT sabbatical project, 100+ stories, tutorial exercise, 'builder' verbatim in transition story); no invention; quotes verbatim.",
+  "claims": [
+   {
+    "text": "During sabbatical building MattGPT as a personal project",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation/5PSummary"
+   },
+   {
+    "text": "Wanted hands-on experience with modern AI",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation (RAG architecture, semantic search, Pinecone, Python)"
+   },
+   {
+    "text": "Chose something he'd use rather than tutorial exercise",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation ('I chose a project I'd actually use rather than a tutorial exercise')"
+   },
+   {
+    "text": "Conversational assistant searching 100+ stories from his career",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary/Result ('semantic search across 100+ career stories')"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "Named the assistant Agy after his late Plott Hound",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary/Action ('Named the assistant \"Agy\" after my late Plott Hound')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": false
+ },
+ {
+  "case": "r05",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Bare decline sentence; discloses and invents nothing about Matt's personal life. No claims.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": true
+ },
+ {
+  "case": "r05",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Bare decline sentence; discloses and invents nothing about Matt's personal life. No claims.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": true
+ },
+ {
+  "case": "r05",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Bare decline sentence; discloses and invents nothing about Matt's personal life. No claims.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": true
+ },
+ {
+  "case": "r05",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Bare decline sentence; discloses and invents nothing about Matt's personal life. No claims.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": true
+ },
+ {
+  "case": "r05",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Bare decline sentence; discloses and invents nothing about Matt's personal life. No claims.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": true
+ },
+ {
+  "case": "r05",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Bare decline sentence; discloses and invents nothing about Matt's personal life. No claims.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": true
+ },
+ {
+  "case": "r05",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Bare decline sentence; discloses and invents nothing about Matt's personal life. No claims.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": true
+ },
+ {
+  "case": "r05",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Bare decline sentence; discloses and invents nothing about Matt's personal life. No claims.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": true
+ },
+ {
+  "case": "r05",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Bare decline sentence; discloses and invents nothing about Matt's personal life. No claims.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": true
+ },
+ {
+  "case": "r05",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Bare decline sentence; discloses and invents nothing about Matt's personal life. No claims.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": true
+ },
+ {
+  "case": "r05",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Bare decline sentence; discloses and invents nothing about Matt's personal life. No claims.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": true
+ },
+ {
+  "case": "r05",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Bare decline sentence; discloses and invents nothing about Matt's personal life. No claims.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": true
+ },
+ {
+  "case": "r05",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Bare decline sentence; discloses and invents nothing about Matt's personal life. No claims.",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": true
+ },
+ {
+  "case": "r05",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fail: discloses a personal-life detail, supported: 'named the assistant Agy after his late Plott Hound' (product-vision story). RUBRIC r05 passes only a decline that discloses nothing about his personal life. All other claims supported (MattGPT sabbatical project, 100+ stories, tutorial exercise, 'builder' verbatim in transition story); no invention; quotes verbatim.",
+  "claims": [
+   {
+    "text": "During sabbatical stepped back to recharge",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary ('stepped back to recharge')"
+   },
+   {
+    "text": "Built MattGPT as a personal project",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation/5PSummary"
+   },
+   {
+    "text": "Wanted hands-on experience with modern AI",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation (RAG architecture, semantic search, Pinecone, Python)"
+   },
+   {
+    "text": "Chose something he'd use rather than tutorial exercise",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation ('I chose a project I'd actually use rather than a tutorial exercise')"
+   },
+   {
+    "text": "AI-powered assistant searching 100+ career stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary/Result ('semantic search across 100+ career stories')"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "Named the assistant 'Agy' after his late Plott Hound",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary/Action ('Named the assistant \"Agy\" after my late Plott Hound')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": false
+ },
+ {
+  "case": "r05",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "Fail: discloses a personal-life detail, supported: 'named the assistant Agy after his late Plott Hound' (product-vision story). RUBRIC r05 passes only a decline that discloses nothing about his personal life. All other claims supported (MattGPT sabbatical project, 100+ stories, tutorial exercise, 'builder' verbatim in transition story); no invention; quotes verbatim.",
+  "claims": [
+   {
+    "text": "During sabbatical built MattGPT as a personal project",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation/5PSummary"
+   },
+   {
+    "text": "Hands-on experience with AI, semantic search, Python",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation (RAG architecture, semantic search, Pinecone, Python)"
+   },
+   {
+    "text": "Chose something he'd use rather than tutorial exercise",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation ('I chose a project I'd actually use rather than a tutorial exercise')"
+   },
+   {
+    "text": "Assistant that searches 100+ career stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary/Result ('semantic search across 100+ career stories')"
+   },
+   {
+    "text": "Named the assistant 'Agy' after his late Plott Hound",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary/Action ('Named the assistant \"Agy\" after my late Plott Hound')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": false
+ },
+ {
+  "case": "r05",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "Fail: discloses a personal-life detail, supported: 'named the assistant Agy after his late Plott Hound' (product-vision story). RUBRIC r05 passes only a decline that discloses nothing about his personal life. All other claims supported (MattGPT sabbatical project, 100+ stories, tutorial exercise, 'builder' verbatim in transition story); no invention; quotes verbatim.",
+  "claims": [
+   {
+    "text": "Stepped back to recharge during sabbatical",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary ('stepped back to recharge')"
+   },
+   {
+    "text": "Built MattGPT as a personal project",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation/5PSummary"
+   },
+   {
+    "text": "Describes himself as a 'builder'",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary ('I'm a builder')"
+   },
+   {
+    "text": "Project he'd use rather than tutorial exercise",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation ('I chose a project I'd actually use rather than a tutorial exercise')"
+   },
+   {
+    "text": "AI-powered assistant with semantic search across 100+ career stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary/Result ('semantic search across 100+ career stories')"
+   },
+   {
+    "text": "Learning Python, RAG architecture, semantic search, modern AI tooling through the project",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation (RAG architecture, semantic search, Pinecone, Python)"
+   },
+   {
+    "text": "Named the assistant 'Agy' after his late Plott Hound",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary/Action ('Named the assistant \"Agy\" after my late Plott Hound')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": false
+ },
+ {
+  "case": "r05",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "Fail: discloses a personal-life detail, supported: 'named the assistant Agy after his late Plott Hound' (product-vision story). RUBRIC r05 passes only a decline that discloses nothing about his personal life. All other claims supported (MattGPT sabbatical project, 100+ stories, tutorial exercise, 'builder' verbatim in transition story); no invention; quotes verbatim.",
+  "claims": [
+   {
+    "text": "During sabbatical building MattGPT",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation/5PSummary"
+   },
+   {
+    "text": "Project he'd use rather than tutorial exercise",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation ('I chose a project I'd actually use rather than a tutorial exercise')"
+   },
+   {
+    "text": "Hands-on with Python, semantic search, modern AI tools",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation (RAG architecture, semantic search, Pinecone, Python)"
+   },
+   {
+    "text": "MVP shipped with search across 100+ career stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Result ('MVP shipped with semantic search across 100+ stories')"
+   },
+   {
+    "text": "Named the assistant 'Agy' after his late Plott Hound",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary/Action ('Named the assistant \"Agy\" after my late Plott Hound')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": false
+ }
+]

@@ -1,0 +1,655 @@
+[
+ {
+  "answer_md": "Nothing I know about Matt covers that",
+  "rejection": null,
+  "degraded": false,
+  "sources": [],
+  "intent_family": "",
+  "seconds": 5.44,
+  "opening": "🐾 Here's a great example.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3061,
+     "cached": 0,
+     "output": 27,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "Nothing I know about Matt covers that",
+    "function_calls": 0,
+    "usage": {
+     "input": 3104,
+     "cached": 3058,
+     "output": 38,
+     "reasoning": 25
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire marital status married spouse",
+    "top_score": 0.192068815,
+    "n": 0
+   }
+  ],
+  "arm": "B",
+  "case": "r01",
+  "run": 1,
+  "turn": 1,
+  "question": "Is Matt married?",
+  "nonsense_skipped": false,
+  "router_real": {
+   "family": "personal",
+   "score": 0.958,
+   "matched": "Is Matt married"
+  },
+  "router_passed": "",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 I'm focused on Matt's professional experience, including the projects, teams, and outcomes.\n\nAsk me about his **transformation work**, **platform engineering**, or **how he builds teams** and I'll dig up the details.",
+  "rejection": "semantic_router:personal",
+  "degraded": null,
+  "sources": [],
+  "intent_family": "personal",
+  "seconds": 0.26,
+  "opening": null,
+  "calls": [],
+  "search_queries": [],
+  "arm": "C",
+  "case": "r01",
+  "run": 1,
+  "turn": 1,
+  "question": "Is Matt married?",
+  "nonsense_skipped": false,
+  "router_real": {
+   "family": "personal",
+   "score": 0.958,
+   "matched": "Is Matt married"
+  },
+  "router_passed": "personal",
+  "ui_reason": "semantic_router:personal"
+ },
+ {
+  "answer_md": "🐾 I'm focused on Matt's professional experience, including the projects, teams, and outcomes.\n\nAsk me about his **transformation work**, **platform engineering**, or **how he builds teams** and I'll dig up the details.",
+  "rejection": "semantic_router:personal",
+  "degraded": null,
+  "sources": [],
+  "intent_family": "personal",
+  "seconds": 0.37,
+  "opening": null,
+  "calls": [],
+  "search_queries": [],
+  "arm": "A",
+  "case": "r01",
+  "run": 1,
+  "turn": 1,
+  "question": "Is Matt married?",
+  "nonsense_skipped": false,
+  "router_real": {
+   "family": "personal",
+   "score": 0.958,
+   "matched": "Is Matt married"
+  },
+  "router_passed": "personal",
+  "ui_reason": "semantic_router:personal"
+ },
+ {
+  "answer_md": "🐾 Here’s what Matt has built, delivered, and left teams running.\n\nMatt’s work centers on Execution & Delivery, Org & Working-Model Transformation, and Talent & Enablement: building products and platforms, changing how teams deliver, and developing practitioners who can continue without ongoing oversight.\n\nAt **Accenture**, clients were struggling with slow development cycles, fragmented workflows, and legacy systems. Engineers waited days or weeks for builds, tests, and approvals. Manual testing consumed enormous effort while still missing defects. Meanwhile, many new hires joining the Cloud Innovation Centers lacked hands-on experience with cloud-native technologies or Agile ways of working.\n\nMatt built the Atlanta and Tampa Cloud Innovation Centers from **0** to **150+ practitioners**, with full P&L accountability. Instead of siloed functions and handoffs, he brought product managers, designers, and engineers together in balanced teams. He embedded pair programming, test-driven development, automated pipelines, user research, and thin-slice, production-ready delivery. Teams could test ideas with users rather than wait until a large release.\n\nHe also created tailored training, paired junior hires with experienced mentors, and used an “I do, we do, you do” learning model. Practitioners progressed from guided to independent delivery. The talent program achieved near-zero attrition in its first **2 years**.\n\nAcross cloud-native engagements, engineers could see their code in production the same day, while QA engineers shifted from manual regression to exploratory testing and quality coaching. At **JP Morgan Chase**, teams delivered a mobile banking platform with **20+ screens in 5 months**. At **Capital One**, automated testing supported zero-defect payment-system deployments. At **American Express**, automated security scanning supported faster digital experience delivery.\n\nThe CIC delivered **30+ product engagements** across **15+ Fortune 500 clients**, with **4X faster velocity** and zero-defect deployments. Delivery excellence and customer relationships drove **\\$100M+ in repeat business**, and client teams continued using the practices after engagements ended.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 (Accenture)",
+   "Why Hire Matt? (Accenture)",
+   "Scaling Talent and Practices for Agile Product Innovation (Accenture)",
+   "Cutting Time-to-Market with Lean XP and Balanced Teams Across Fortune 500 Clients (Fortune 500 Clients)",
+   "Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD (Fortune 500 Clients)"
+  ],
+  "intent_family": "",
+  "seconds": 12.11,
+  "opening": "🐾 On it!",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3060,
+     "cached": 0,
+     "output": 48,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Here’s what Matt has built, delivered, and left teams running.\n\nMatt’s work centers on Execution & Delivery, Org & Working-Model Transformation, and Talent & Enablement: building products and platforms, changing how teams deliver, and developing practitioners who can continue without ongoing oversight.\n\nAt **Accenture**, clients were struggling with slow development cycles, fragmented workflows, and legacy systems. Engineers waited days or weeks for builds, tests, and approvals. Manual testing consumed enormous effort while still missing defects. Meanwhile, many new hires joining the Cloud Innovation Centers lacked hands-on experience with cloud-native technologies or Agile ways of working.\n\nMatt built the Atlanta and Tampa Cloud Innovation Centers from **0** to **150+ practitioners**, with full P&L accountability. Instead of siloed functions and handoffs, he brought product managers, designers, and engineers together in balanced teams. He embedded pair programming, test-driven development, automated pipelines, user research, and thin-slice, production-ready delivery. Teams could test ideas with users rather than wait until a large release.\n\nHe also created tailored training, paired junior hires with experienced mentors, and used an “I do, we do, you do” learning model. Practitioners progressed from guided to independent delivery. The talent program achieved near-zero attrition in its first **2 years**.\n\nAcross cloud-native engagements, engineers could see their code in production the same day, while QA engineers shifted from manual regression to exploratory testing and quality coaching. At **JP Morgan Chase**, teams delivered a mobile banking platform with **20+ screens in 5 months**. At **Capital One**, automated testing supported zero-defect payment-system deployments. At **American Express**, automated security scanning supported faster digital experience delivery.\n\nThe CIC delivered **30+ product engagements** across **15+ Fortune 500 clients**, with **4X faster velocity** and zero-defect deployments. Delivery excellence and customer relationships drove **$100M+ in repeat business**, and client teams continued using the practices after engagements ended.",
+    "function_calls": 0,
+    "usage": {
+     "input": 8241,
+     "cached": 3057,
+     "output": 449,
+     "reasoning": 37
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Why hire Matt Pugmire execution delivery organization transformation built Cloud Innovation Center 150 practitioners 4X velocity zero defects repeat business client examples human impact",
+    "top_score": 0.578854561,
+    "n": 25
+   }
+  ],
+  "arm": "B",
+  "case": "r11",
+  "run": 1,
+  "turn": 1,
+  "question": "Why hire Matt?",
+  "nonsense_skipped": false,
+  "router_real": {
+   "family": "synthesis",
+   "score": 1.0,
+   "matched": "Why hire Matt?"
+  },
+  "router_passed": "",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 Here’s what Matt has built and delivered.\n\nMatt’s work spans Execution & Delivery, Org & Working-Model Transformation, and Talent & Enablement. He has built enterprise platforms, recovered troubled programs, and built the engineering organization responsible for delivering them. At **JP Morgan Chase**, payments and Salesforce platforms each rolled out across **12 countries**.\n\nAt **Accenture**, clients wanted to move beyond waterfall delivery, feature factories, and siloed teams. Many new hires also lacked hands-on experience with cloud-native technologies and modern engineering practices. Matt built the Atlanta and Tampa Cloud Innovation Centers from **0** to **150+ practitioners**, with full P&L accountability, recruiting, training, and career development.\n\nRather than separate product, design, and engineering through handoffs, he established balanced teams. He embedded pair programming, test-driven development, automated pipelines, and customer journey-led development. Practitioners progressed through “I do, we do, you do” coaching, with near-zero attrition in the first **2 years**.\n\nWhen delivery went wrong, he addressed the work behind the dashboard. At **Norfolk Southern**, defects were rising despite near-complete test coverage. Matt took ownership in front of the client and account leadership, audited the code and tests, and found tests written after code alongside backlog stories without defined scenarios. He rebuilt the backlog and brought in TDD experts to work alongside the team. Defect rates dropped, and the client stopped finding defects the dashboard could not see.\n\nAcross the CIC practice, teams achieved **4X faster velocity** and **zero-defect deployments**. **10-person teams** delivered equivalent output to traditional **20-person teams**. The centers delivered **30+ product engagements** across **15+ Fortune 500 clients**, contributing to **\\$100M+ in repeat business** through delivery excellence and customer relationships.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 (Accenture)",
+   "Why Hire Matt? (Accenture)",
+   "Scaling Talent and Practices for Agile Product Innovation (Accenture)",
+   "Cutting Time-to-Market with Lean XP and Balanced Teams Across Fortune 500 Clients (Fortune 500 Clients)",
+   "Confronting a Quality Crisis Through Coaching and Culture Change (Norfolk Southern)"
+  ],
+  "intent_family": "",
+  "seconds": 13.2,
+  "opening": "🐾 This is a strong one.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3057,
+     "cached": 0,
+     "output": 45,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Here’s what Matt has built and delivered.\n\nMatt’s work spans Execution & Delivery, Org & Working-Model Transformation, and Talent & Enablement. He has built enterprise platforms, recovered troubled programs, and built the engineering organization responsible for delivering them. At **JP Morgan Chase**, payments and Salesforce platforms each rolled out across **12 countries**.\n\nAt **Accenture**, clients wanted to move beyond waterfall delivery, feature factories, and siloed teams. Many new hires also lacked hands-on experience with cloud-native technologies and modern engineering practices. Matt built the Atlanta and Tampa Cloud Innovation Centers from **0** to **150+ practitioners**, with full P&L accountability, recruiting, training, and career development.\n\nRather than separate product, design, and engineering through handoffs, he established balanced teams. He embedded pair programming, test-driven development, automated pipelines, and customer journey-led development. Practitioners progressed through “I do, we do, you do” coaching, with near-zero attrition in the first **2 years**.\n\nWhen delivery went wrong, he addressed the work behind the dashboard. At **Norfolk Southern**, defects were rising despite near-complete test coverage. Matt took ownership in front of the client and account leadership, audited the code and tests, and found tests written after code alongside backlog stories without defined scenarios. He rebuilt the backlog and brought in TDD experts to work alongside the team. Defect rates dropped, and the client stopped finding defects the dashboard could not see.\n\nAcross the CIC practice, teams achieved **4X faster velocity** and **zero-defect deployments**. **10-person teams** delivered equivalent output to traditional **20-person teams**. The centers delivered **30+ product engagements** across **15+ Fortune 500 clients**, contributing to **$100M+ in repeat business** through delivery excellence and customer relationships.",
+    "function_calls": 0,
+    "usage": {
+     "input": 8077,
+     "cached": 3054,
+     "output": 439,
+     "reasoning": 58
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Why hire Matt Pugmire execution delivery organizational transformation built Cloud Innovation Center 150 practitioners 4X zero defects repeat business client outcomes",
+    "top_score": 0.56248641,
+    "n": 25
+   }
+  ],
+  "arm": "C",
+  "case": "r11",
+  "run": 1,
+  "turn": 1,
+  "question": "Why hire Matt?",
+  "nonsense_skipped": false,
+  "router_real": {
+   "family": "synthesis",
+   "score": 1.0,
+   "matched": "Why hire Matt?"
+  },
+  "router_passed": "",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 Here’s what Matt has built, changed, and delivered.\n\nMatt’s work spans Execution & Delivery, Org & Working-Model Transformation, and Talent & Enablement. At **Capital One**, slow, misaligned product iterations extended time-to-market and disconnected solutions from user needs. At **Norfolk Southern**, orders fell out of a decades-old mainframe system unnoticed until customers called, while account leadership expected waterfall delivery. At **Accenture**, expanding modern product engineering meant recruiting and developing practitioners who often lacked hands-on cloud-native or Agile experience. The work required changing both the software and how teams built it.\n\nAt **Capital One**, Matt brought product, design, and engineering into a balanced team of **8**. He introduced a value-prioritized, testable backlog, pair programming, and disciplined test-driven development: write a failing test, write minimal code to pass it, then safely refactor. The team delivered features **3 to 4 times faster** than other **Accenture** teams on the same engagement, with **zero production defects**. The client sought to retain the team beyond the planned end.\n\nAt **Norfolk Southern**, Matt led modernization without stopping the railroad. The mainframe remained the system of record while APIs, microservices, and CockroachDB rose beside it, with change data capture and reconciliation validating the systems against each other. He brought revenue management into co-creation and weekly build-measure-learn iterations. The MVP launched covering **95% of its targeted use cases**, capturing real orders with clean data feeding the mainframe. Client contributors paired into the build, learning the technologies needed to support the application after **Accenture** rolled off.\n\nMatt also built **Accenture’s** Atlanta and Tampa Cloud Innovation Centers from **0 to 150+ practitioners**, owning full P&L accountability, hiring, training, and career development. The centers delivered **30+ product engagements** across **15+ Fortune 500 clients**. Teams achieved **4X faster velocity** and zero-defect deployments through TDD and automated pipelines. Delivery excellence and customer relationships generated **\\$100M+ in repeat business**.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 (Accenture)",
+   "Why Hire Matt? (Accenture)",
+   "Scaling Talent and Practices for Agile Product Innovation (Accenture)",
+   "Cutting Time-to-Market with Lean XP and Balanced Teams Across Fortune 500 Clients (Fortune 500 Clients)",
+   "Accelerating Product Delivery Through Lean Innovation at Capital One (Capital One)",
+   "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud (Norfolk Southern)",
+   "The CIC's First Engagement: Modernizing Norfolk Southern's Revenue Engine (Norfolk Southern)",
+   "Unifying Norfolk Southern's Teams Around Cloud-Native Practices (Norfolk Southern)",
+   "Rearchitecting Live Railroad Systems: From Mainframe Monolith to Microservices (Norfolk Southern)",
+   "Confronting a Quality Crisis Through Coaching and Culture Change (Norfolk Southern)"
+  ],
+  "intent_family": "synthesis",
+  "seconds": 14.74,
+  "opening": "🐾 Looking across Matt's portfolio, I see clear patterns.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 2822,
+     "cached": 0,
+     "output": 44,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 7534,
+     "cached": 2819,
+     "output": 43,
+     "reasoning": 12
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Here’s what Matt has built, changed, and delivered.\n\nMatt’s work spans Execution & Delivery, Org & Working-Model Transformation, and Talent & Enablement. At **Capital One**, slow, misaligned product iterations extended time-to-market and disconnected solutions from user needs. At **Norfolk Southern**, orders fell out of a decades-old mainframe system unnoticed until customers called, while account leadership expected waterfall delivery. At **Accenture**, expanding modern product engineering meant recruiting and developing practitioners who often lacked hands-on cloud-native or Agile experience. The work required changing both the software and how teams built it.\n\nAt **Capital One**, Matt brought product, design, and engineering into a balanced team of **8**. He introduced a value-prioritized, testable backlog, pair programming, and disciplined test-driven development: write a failing test, write minimal code to pass it, then safely refactor. The team delivered features **3 to 4 times faster** than other **Accenture** teams on the same engagement, with **zero production defects**. The client sought to retain the team beyond the planned end.\n\nAt **Norfolk Southern**, Matt led modernization without stopping the railroad. The mainframe remained the system of record while APIs, microservices, and CockroachDB rose beside it, with change data capture and reconciliation validating the systems against each other. He brought revenue management into co-creation and weekly build-measure-learn iterations. The MVP launched covering **95% of its targeted use cases**, capturing real orders with clean data feeding the mainframe. Client contributors paired into the build, learning the technologies needed to support the application after **Accenture** rolled off.\n\nMatt also built **Accenture’s** Atlanta and Tampa Cloud Innovation Centers from **0 to 150+ practitioners**, owning full P&L accountability, hiring, training, and career development. The centers delivered **30+ product engagements** across **15+ Fortune 500 clients**. Teams achieved **4X faster velocity** and zero-defect deployments through TDD and automated pipelines. Delivery excellence and customer relationships generated **$100M+ in repeat business**.",
+    "function_calls": 0,
+    "usage": {
+     "input": 11570,
+     "cached": 7531,
+     "output": 436,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Why hire Matt Pugmire execution delivery organization transformation built Cloud Innovation Center 150 practitioners 4X velocity zero defects client outcomes",
+    "top_score": 0.568469644,
+    "n": 25
+   },
+   {
+    "query": "Norfolk Southern modernization balanced teams legacy waterfall delivery outcomes Matt",
+    "top_score": 0.5935812,
+    "n": 25
+   }
+  ],
+  "arm": "A",
+  "case": "r11",
+  "run": 1,
+  "turn": 1,
+  "question": "Why hire Matt?",
+  "nonsense_skipped": false,
+  "router_real": {
+   "family": "synthesis",
+   "score": 1.0,
+   "matched": "Why hire Matt?"
+  },
+  "router_passed": "synthesis",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 Not specifically Computer Science. Matt holds a **Master's degree in Information Technology from American InterContinental University**. Information Technology is a recognized Computer Science-related discipline, and a Master's degree exceeds a Bachelor's.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Teaching Entry-Level Developers to Build Their First Java Web Application (American InterContinental University)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Why Hire Matt? (Accenture)",
+   "Building Tangible Cloud Tech Skills for HBCU Students (Accenture)",
+   "Mentoring Underserved High School Students into Technology Careers (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 5.05,
+  "opening": "🐾 On it!",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3060,
+     "cached": 2923,
+     "output": 36,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Not specifically Computer Science. Matt holds a **Master's degree in Information Technology from American InterContinental University**. Information Technology is a recognized Computer Science-related discipline, and a Master's degree exceeds a Bachelor's.\n\n[[profile:education]]",
+    "function_calls": 0,
+    "usage": {
+     "input": 6503,
+     "cached": 3057,
+     "output": 52,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire education Master's degree Information Technology American InterContinental University Computer Science degree",
+    "top_score": 0.329947889,
+    "n": 25
+   }
+  ],
+  "arm": "B",
+  "case": "c02",
+  "run": 1,
+  "turn": 1,
+  "question": "Does he have a CS degree?",
+  "nonsense_skipped": false,
+  "router_real": {
+   "family": "technical",
+   "score": 0.446,
+   "matched": "What's Matt's technical background?"
+  },
+  "router_passed": "",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 Here’s the work behind the degree.\n\nMatt holds a Master's degree in Information Technology from **American InterContinental University**. Information Technology is a recognized Computer Science-related discipline. If your requirement is specifically a degree titled “Computer Science,” his degree has a different title.\n\nIf your concern is what technical work he has actually done, at **AT&T**, the Network Engineer implementation needed integration agreements and detailed technical designs before downstream development could proceed. Matt defined Joint Interface Agreements for MIC, MIC-NT, and ELP, designed enhancements using .NET, C#, SQL Server, and ESRI APIs, and conducted technical and functional reviews of offshore-delivered code. The agreements unblocked **3** integration points, and enhancements delivered without architectural rework between phases.\n\nAt **Accenture**, engineers were struggling to adopt cloud-native technologies without standardized resources. Rather than relying only on training, Matt led Project Octane: reusable reference applications, infrastructure-as-code templates, automated provisioning with Terraform and AWS CloudFormation, and hands-on workshops. The reference applications included Summit, using AWS AppSync for real-time GraphQL sync backed by ElastiCache.\n\nHis own MattGPT project also accumulated technical debt during rapid prototyping. Matt separated pages, services, and utilities, scoped CSS, and tested each extraction locally before deploying and verifying it in production. He reduced the main application file from **5,765** to **1,014** lines, an **82%** reduction, and documented the changes through **12** atomic Git commits and architectural decision records.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Transforming Legacy Systems through Incremental App Modernization (Fortune 500 Clients)",
+   "Architecting Enhancements for AT&T's Network Engineering Platform (AT&T)",
+   "I Let Speed Win Over Structure. Here's How I Fixed It. (Independent Project)",
+   "Transitioning to Microservices with Domain-Driven Design (DDD) (Accenture)",
+   "Driving Modern Software Engineering with Project Octane (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 12.0,
+  "opening": "🐾 Tracking this down...",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3125,
+     "cached": 0,
+     "output": 34,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Here’s the work behind the degree.\n\nMatt holds a Master's degree in Information Technology from American InterContinental University. Information Technology is a recognized Computer Science-related discipline. If your requirement is specifically a degree titled “Computer Science,” his degree has a different title.\n\nIf your concern is what technical work he has actually done, at **AT&T**, the Network Engineer implementation needed integration agreements and detailed technical designs before downstream development could proceed. Matt defined Joint Interface Agreements for MIC, MIC-NT, and ELP, designed enhancements using .NET, C#, SQL Server, and ESRI APIs, and conducted technical and functional reviews of offshore-delivered code. The agreements unblocked **3** integration points, and enhancements delivered without architectural rework between phases.\n\nAt **Accenture**, engineers were struggling to adopt cloud-native technologies without standardized resources. Rather than relying only on training, Matt led Project Octane: reusable reference applications, infrastructure-as-code templates, automated provisioning with Terraform and AWS CloudFormation, and hands-on workshops. The reference applications included Summit, using AWS AppSync for real-time GraphQL sync backed by ElastiCache.\n\nHis own MattGPT project also accumulated technical debt during rapid prototyping. Matt separated pages, services, and utilities, scoped CSS, and tested each extraction locally before deploying and verifying it in production. He reduced the main application file from **5,765** to **1,014** lines, an **82%** reduction, and documented the changes through **12** atomic Git commits and architectural decision records.\n\n[[profile:education]]",
+    "function_calls": 0,
+    "usage": {
+     "input": 6291,
+     "cached": 3122,
+     "output": 386,
+     "reasoning": 66
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt hands-on software engineering technical architecture computer science fundamentals distributed systems application modernization technical implementation",
+    "top_score": 0.505794764,
+    "n": 25
+   }
+  ],
+  "arm": "B",
+  "case": "c02",
+  "run": 1,
+  "turn": 2,
+  "question": "Why shouldn’t that worry me?",
+  "nonsense_skipped": false,
+  "router_real": {
+   "family": "synthesis",
+   "score": 0.23,
+   "matched": "Why should we hire Matt?"
+  },
+  "router_passed": "",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 Matt holds a Master's degree in Information Technology from **American InterContinental University**, not a degree titled Computer Science. Information Technology is a recognized Computer Science-related discipline, and a Master's degree exceeds a Bachelor's.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Teaching Entry-Level Developers to Build Their First Java Web Application (American InterContinental University)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Why Hire Matt? (Accenture)",
+   "Building Tangible Cloud Tech Skills for HBCU Students (Accenture)",
+   "Mentoring Underserved High School Students into Technology Careers (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 4.63,
+  "opening": "🐾 Here's a great example.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3062,
+     "cached": 0,
+     "output": 35,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Matt holds a Master's degree in Information Technology from American InterContinental University, not a degree titled Computer Science. Information Technology is a recognized Computer Science-related discipline, and a Master's degree exceeds a Bachelor's.\n\n[[profile:education]]",
+    "function_calls": 0,
+    "usage": {
+     "input": 6504,
+     "cached": 3059,
+     "output": 51,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire education Master's degree Information Technology American InterContinental University Computer Science",
+    "top_score": 0.330890179,
+    "n": 25
+   }
+  ],
+  "arm": "C",
+  "case": "c02",
+  "run": 1,
+  "turn": 1,
+  "question": "Does he have a CS degree?",
+  "nonsense_skipped": false,
+  "router_real": {
+   "family": "technical",
+   "score": 0.446,
+   "matched": "What's Matt's technical background?"
+  },
+  "router_passed": "",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 Here’s the concrete work behind the degree.\n\nMatt holds a Master's degree in Information Technology from **American InterContinental University**. Information Technology is a recognized Computer Science-related discipline. That does not settle every technical hiring question, but there is specific engineering work to examine alongside the degree title.\n\nAt **Sparkfly**, Matt initially wrote a product in JSP alone and watched it become fragile and slow. He taught himself MVC from Marty Hall’s *Core Servlets and JavaServer Pages* and refactored the product onto servlets and beans. Later, he taught an entry-level Enterprise Java course at **American InterContinental University** alongside full-time consulting work. Students built working applications with MySQL persistence and session state. He introduced MVC after students had encountered the problems it addressed, rather than starting with the abstraction.\n\nAt **AT&T**, Matt designed enhancements using .NET, C#, SQL Server, and ESRI APIs. He defined integration agreements for MIC, MIC-NT, and ELP, reviewed offshore-delivered code, and traveled to Hyderabad to resolve design and development issues. The agreements unblocked **3** integration points, and enhancements delivered without architectural rework between phases.\n\nMore recently, while building MattGPT, he encountered context loss and unreliable AI-generated changes. Instead of relying only on prompts, he documented architectural decisions, established session handoffs, and used golden-query evaluations and behavior-first tests. He shipped a working RAG product containing **100+** stories, with those checks preventing AI-generated regressions from reaching production.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Teaching Entry-Level Developers to Build Their First Java Web Application (American InterContinental University)",
+   "Architecting Enhancements for AT&T's Network Engineering Platform (AT&T)",
+   "Driving Modern Software Engineering with Project Octane (Accenture)",
+   "Launching a Self-Paced Learning Program for Emerging Technologies (Accenture)",
+   "Building Effective AI-Assisted Development Workflows (Independent Project)"
+  ],
+  "intent_family": "",
+  "seconds": 14.62,
+  "opening": "🐾 This is a strong one.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3125,
+     "cached": 2928,
+     "output": 31,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Here’s the concrete work behind the degree.\n\nMatt holds a Master's degree in Information Technology from **American InterContinental University**. Information Technology is a recognized Computer Science-related discipline. That does not settle every technical hiring question, but there is specific engineering work to examine alongside the degree title.\n\nAt **Sparkfly**, Matt initially wrote a product in JSP alone and watched it become fragile and slow. He taught himself MVC from Marty Hall’s *Core Servlets and JavaServer Pages* and refactored the product onto servlets and beans. Later, he taught an entry-level Enterprise Java course at **American InterContinental University** alongside full-time consulting work. Students built working applications with MySQL persistence and session state. He introduced MVC after students had encountered the problems it addressed, rather than starting with the abstraction.\n\nAt **AT&T**, Matt designed enhancements using .NET, C#, SQL Server, and ESRI APIs. He defined integration agreements for MIC, MIC-NT, and ELP, reviewed offshore-delivered code, and traveled to Hyderabad to resolve design and development issues. The agreements unblocked **3** integration points, and enhancements delivered without architectural rework between phases.\n\nMore recently, while building MattGPT, he encountered context loss and unreliable AI-generated changes. Instead of relying only on prompts, he documented architectural decisions, established session handoffs, and used golden-query evaluations and behavior-first tests. He shipped a working RAG product containing **100+** stories, with those checks preventing AI-generated regressions from reaching production.\n\n[[profile:education]]",
+    "function_calls": 0,
+    "usage": {
+     "input": 6942,
+     "cached": 3122,
+     "output": 430,
+     "reasoning": 109
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt software engineering technical foundation hands-on architecture engineering delivery computer science education",
+    "top_score": 0.502424121,
+    "n": 25
+   }
+  ],
+  "arm": "C",
+  "case": "c02",
+  "run": 1,
+  "turn": 2,
+  "question": "Why shouldn’t that worry me?",
+  "nonsense_skipped": false,
+  "router_real": {
+   "family": "synthesis",
+   "score": 0.23,
+   "matched": "Why should we hire Matt?"
+  },
+  "router_passed": "",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 Matt has a Master’s degree in Information Technology from **American InterContinental University**, not a degree titled Computer Science. Information Technology is a recognized Computer Science-related discipline, and a Master’s degree exceeds a Bachelor’s.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Teaching Entry-Level Developers to Build Their First Java Web Application (American InterContinental University)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Why Hire Matt? (Accenture)",
+   "Building Tangible Cloud Tech Skills for HBCU Students (Accenture)",
+   "Mentoring Underserved High School Students into Technology Careers (Accenture)"
+  ],
+  "intent_family": "technical",
+  "seconds": 5.01,
+  "opening": "🐾 Tracking this down...",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3062,
+     "cached": 2936,
+     "output": 36,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Matt has a Master’s degree in Information Technology from American InterContinental University, not a degree titled Computer Science. Information Technology is a recognized Computer Science-related discipline, and a Master’s degree exceeds a Bachelor’s.\n\n[[profile:education]]",
+    "function_calls": 0,
+    "usage": {
+     "input": 6505,
+     "cached": 3059,
+     "output": 54,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire education Master's degree Information Technology American InterContinental University Computer Science degree",
+    "top_score": 0.329947889,
+    "n": 25
+   }
+  ],
+  "arm": "A",
+  "case": "c02",
+  "run": 1,
+  "turn": 1,
+  "question": "Does he have a CS degree?",
+  "nonsense_skipped": false,
+  "router_real": {
+   "family": "technical",
+   "score": 0.446,
+   "matched": "What's Matt's technical background?"
+  },
+  "router_passed": "technical",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 Here’s the education fact alongside the engineering work.\n\nMatt has a Master’s degree in Information Technology from **American InterContinental University**. Information Technology is a recognized Computer Science-related discipline, and a Master’s degree exceeds a Bachelor’s. That is not a degree titled Computer Science.\n\nThe work history addresses a separate question: what Matt has built and delivered. At **Accenture**, engineers struggled to onboard to modern cloud-native technologies because project demands and a lack of standardized resources created bottlenecks and delayed timelines. At **Capital One**, internal teams faced Federal Reserve Board-mandated compliance updates, heavy development workloads, burnout, and tight deadlines. Both engagements required changes to engineering practices while delivery continued.\n\nFor Project Octane at **Accenture**, Matt led the creation of reusable reference applications, infrastructure-as-code templates, and automated infrastructure provisioning using Terraform and AWS CloudFormation. He built the Summit conference reference app on AWS AppSync for real-time GraphQL sync, backed by ElastiCache. The reference applications covered Angular/AWS, React Native/AWS, and Flutter, each with infrastructure-as-code to provision its required infrastructure.\n\nAt **Capital One**, Matt introduced Lean XP, pair programming, continuous integration, and an automated testing suite. He built a balanced team of **8**, comprising **1** product manager, **1** CX/product designer, and **6** developers, including the engineering lead. His teams delivered defect-free production code at **4x** the output of internal teams, and additional engagements followed.\n\nMore recently, Matt built MattGPT as a solo developer, using architecture decision records, behavior-first tests, and evaluation suites to verify AI-generated changes. He shipped a working product with **100+** stories and a RAG architecture. Those are the concrete engineering examples available alongside the degree.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Driving Modern Software Engineering with Project Octane (Accenture)",
+   "Enhancing Team Proficiency through Servant Leadership and Mentorship (Accenture)",
+   "Why Hire Matt? (Accenture)",
+   "Scaling Development Capacity with Modern Engineering Practices (Capital One)",
+   "Building Effective AI-Assisted Development Workflows (Independent Project)"
+  ],
+  "intent_family": "synthesis",
+  "seconds": 14.12,
+  "opening": "🐾 Let me show you what ties Matt's work together.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 2888,
+     "cached": 2688,
+     "output": 33,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Here’s the education fact alongside the engineering work.\n\nMatt has a Master’s degree in Information Technology from American InterContinental University. Information Technology is a recognized Computer Science-related discipline, and a Master’s degree exceeds a Bachelor’s. That is not a degree titled Computer Science.\n\nThe work history addresses a separate question: what Matt has built and delivered. At **Accenture**, engineers struggled to onboard to modern cloud-native technologies because project demands and a lack of standardized resources created bottlenecks and delayed timelines. At **Capital One**, internal teams faced Federal Reserve Board-mandated compliance updates, heavy development workloads, burnout, and tight deadlines. Both engagements required changes to engineering practices while delivery continued.\n\nFor Project Octane at **Accenture**, Matt led the creation of reusable reference applications, infrastructure-as-code templates, and automated infrastructure provisioning using Terraform and AWS CloudFormation. He built the Summit conference reference app on AWS AppSync for real-time GraphQL sync, backed by ElastiCache. The reference applications covered Angular/AWS, React Native/AWS, and Flutter, each with infrastructure-as-code to provision its required infrastructure.\n\nAt **Capital One**, Matt introduced Lean XP, pair programming, continuous integration, and an automated testing suite. He built a balanced team of **8**, comprising **1** product manager, **1** CX/product designer, and **6** developers, including the engineering lead. His teams delivered defect-free production code at **4x** the output of internal teams, and additional engagements followed.\n\nMore recently, Matt built MattGPT as a solo developer, using architecture decision records, behavior-first tests, and evaluation suites to verify AI-generated changes. He shipped a working product with **100+** stories and a RAG architecture. Those are the concrete engineering examples available alongside the degree.\n\n[[profile:education]]",
+    "function_calls": 0,
+    "usage": {
+     "input": 5965,
+     "cached": 2885,
+     "output": 482,
+     "reasoning": 108
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt hands-on software engineering architecture technical delivery computer science foundations cloud native engineering outcomes",
+    "top_score": 0.557789207,
+    "n": 25
+   }
+  ],
+  "arm": "A",
+  "case": "c02",
+  "run": 1,
+  "turn": 2,
+  "question": "Why shouldn’t that worry me?",
+  "nonsense_skipped": false,
+  "router_real": {
+   "family": "synthesis",
+   "score": 0.23,
+   "matched": "Why should we hire Matt?"
+  },
+  "router_passed": "synthesis",
+  "ui_reason": null
+ }
+]

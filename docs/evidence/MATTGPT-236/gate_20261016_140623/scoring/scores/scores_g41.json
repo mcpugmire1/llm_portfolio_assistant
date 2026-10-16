@@ -1,0 +1,1157 @@
+[
+ {
+  "case": "r10",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 4 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no confirmed insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "FS experience includes banking, payments, mortgage lending",
+    "label": "supported",
+    "source": "corpus Industry 'Financial Services / Banking' stories (JP Morgan Chase, RBC, Fiserv, Capital One, HSBC, American Express, Cendant Mortgage, Accredited Home Lenders)"
+   },
+   {
+    "text": "replaced mainframe underwriting app with web app and TIBCO workflow incl. credit report requests, verification flows, risk calculations",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "mortgage underwriting labelled 'not insurance underwriting'",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 4 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no documented insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "banking, payments, mortgage work",
+    "label": "supported",
+    "source": "corpus Industry 'Financial Services / Banking' stories (JP Morgan Chase, RBC, Fiserv, Capital One, HSBC, American Express, Cendant Mortgage, Accredited Home Lenders)"
+   },
+   {
+    "text": "asset management work",
+    "label": "supported",
+    "source": "stated fact: JP Morgan Asset Management (Global Funds)"
+   },
+   {
+    "text": "clients JP Morgan Chase, RBC, Capital One, HSBC, Fiserv",
+    "label": "supported",
+    "source": "Client field of Financial Services / Banking stories"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 4 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no confirmed insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "banking and payments work",
+    "label": "supported",
+    "source": "corpus Industry 'Financial Services / Banking' stories (JP Morgan Chase, RBC, Fiserv, Capital One, HSBC, American Express, Cendant Mortgage, Accredited Home Lenders)"
+   },
+   {
+    "text": "JP Morgan Chase, RBC, Capital One, HSBC, Fiserv, American Express",
+    "label": "supported",
+    "source": "Client field of Financial Services / Banking stories"
+   },
+   {
+    "text": "insurance isn't listed among his industry engagements",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 4 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "documented experience does not include insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "banking and mortgage lending",
+    "label": "supported",
+    "source": "corpus Industry 'Financial Services / Banking' stories (JP Morgan Chase, RBC, Fiserv, Capital One, HSBC, American Express, Cendant Mortgage, Accredited Home Lenders)"
+   },
+   {
+    "text": "replaced mainframe underwriting app with web app and TIBCO BPM workflows: credit reports, verification, manager approval based on risk and loan amount",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "mortgage underwriting labelled 'not insurance underwriting'",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 3 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no documented insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "FS experience in banking and payments",
+    "label": "supported",
+    "source": "corpus Industry 'Financial Services / Banking' stories (JP Morgan Chase, RBC, Fiserv, Capital One, HSBC, American Express, Cendant Mortgage, Accredited Home Lenders)"
+   },
+   {
+    "text": "JP Morgan Chase, RBC, Capital One, HSBC, Fiserv",
+    "label": "supported",
+    "source": "Client field of Financial Services / Banking stories"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 5 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no confirmed insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "mortgage underwriting at Cendant Mortgage",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "mortgage origination and servicing at HSBC",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Situation/Task/Action"
+   },
+   {
+    "text": "helped replace mainframe underwriting system with web app and executable workflows for credit reports, verification, risk-based approvals",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "mortgage underwriting labelled 'not insurance underwriting'",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 3 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no documented insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "banking and payments",
+    "label": "supported",
+    "source": "corpus Industry 'Financial Services / Banking' stories (JP Morgan Chase, RBC, Fiserv, Capital One, HSBC, American Express, Cendant Mortgage, Accredited Home Lenders)"
+   },
+   {
+    "text": "JP Morgan Chase, RBC, Capital One, HSBC, American Express, Fiserv",
+    "label": "supported",
+    "source": "Client field of Financial Services / Banking stories"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 3 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no documented insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "banking and payments",
+    "label": "supported",
+    "source": "corpus Industry 'Financial Services / Banking' stories (JP Morgan Chase, RBC, Fiserv, Capital One, HSBC, American Express, Cendant Mortgage, Accredited Home Lenders)"
+   },
+   {
+    "text": "JP Morgan Chase, RBC, Capital One, HSBC, Fiserv",
+    "label": "supported",
+    "source": "Client field of Financial Services / Banking stories"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 4 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no documented insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "banking, payments, mortgage lending",
+    "label": "supported",
+    "source": "corpus Industry 'Financial Services / Banking' stories (JP Morgan Chase, RBC, Fiserv, Capital One, HSBC, American Express, Cendant Mortgage, Accredited Home Lenders)"
+   },
+   {
+    "text": "replaced mainframe underwriting app with web app and TIBCO workflow: credit report requests, verification flows, risk-based approval routing",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "mortgage underwriting labelled 'not insurance underwriting'",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 5 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no confirmed insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "financial services and banking",
+    "label": "supported",
+    "source": "corpus Industry 'Financial Services / Banking' stories (JP Morgan Chase, RBC, Fiserv, Capital One, HSBC, American Express, Cendant Mortgage, Accredited Home Lenders)"
+   },
+   {
+    "text": "replaced mainframe underwriting app with web app and TIBCO workflow for underwriters and loan officers",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "covered borrower income, credit scores, home values, loan risk calculations",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "mortgage underwriting labelled 'not insurance underwriting'",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 4 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "documented experience does not include insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "mortgage underwriting at Cendant Mortgage",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "mortgage origination and servicing transformation at HSBC",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Situation/Task/Action"
+   },
+   {
+    "text": "those engagements were mortgage lending, not insurance",
+    "label": "supported",
+    "source": "corpus Industry 'Financial Services / Banking' stories (JP Morgan Chase, RBC, Fiserv, Capital One, HSBC, American Express, Cendant Mortgage, Accredited Home Lenders)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 5 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no documented insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "JP Morgan Chase, RBC, Fiserv, HSBC",
+    "label": "supported",
+    "source": "Client field of Financial Services / Banking stories"
+   },
+   {
+    "text": "mortgage underwriting labelled 'not insurance underwriting'",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "replaced mainframe green-screen app with web app, moved workflows into TIBCO BPM, corrected risk calculation errors in Oracle stored procedures",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "credit report requests, verification flows, routing to manager approval by risk level and loan amount",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 4 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no documented insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "banking, payments, mortgage lending",
+    "label": "supported",
+    "source": "corpus Industry 'Financial Services / Banking' stories (JP Morgan Chase, RBC, Fiserv, Capital One, HSBC, American Express, Cendant Mortgage, Accredited Home Lenders)"
+   },
+   {
+    "text": "helped replace mainframe underwriting system with web app and TIBCO BPM workflows for credit reports, verification, manager approval by risk and loan amount",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "mortgage underwriting labelled 'not insurance underwriting'",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 3 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no confirmed insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "industry list of seven sectors",
+    "label": "supported",
+    "source": "corpus Industry values: Financial Services / Banking, Technology & Software, Transportation & Logistics, Telecommunications, Aerospace & Defense, Healthcare / Life Sciences, Education"
+   },
+   {
+    "text": "insurance is not listed",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 5 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no documented insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "banking, payments",
+    "label": "supported",
+    "source": "corpus Industry 'Financial Services / Banking' stories (JP Morgan Chase, RBC, Fiserv, Capital One, HSBC, American Express, Cendant Mortgage, Accredited Home Lenders)"
+   },
+   {
+    "text": "treasury services",
+    "label": "supported",
+    "source": "stated fact: JP Morgan ACCESS treasury services"
+   },
+   {
+    "text": "digital banking",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase; about-matt-my-leadership-journey|accenture"
+   },
+   {
+    "text": "JP Morgan Chase, RBC, Capital One, HSBC",
+    "label": "supported",
+    "source": "Client field of Financial Services / Banking stories"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 3 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no confirmed insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "banking and mortgage engagements with JP Morgan Chase, RBC, Fiserv, HSBC, Cendant Mortgage",
+    "label": "supported",
+    "source": "Client field of Financial Services / Banking stories"
+   },
+   {
+    "text": "worked on underwriting application at Cendant, mortgage not insurance",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 4 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no confirmed insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "financial services and banking",
+    "label": "supported",
+    "source": "corpus Industry 'Financial Services / Banking' stories (JP Morgan Chase, RBC, Fiserv, Capital One, HSBC, American Express, Cendant Mortgage, Accredited Home Lenders)"
+   },
+   {
+    "text": "replaced mainframe green-screen app with web app, moved underwriting workflows into TIBCO BPM",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "mortgage lending, not insurance underwriting",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 5 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no confirmed insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "industry list of seven sectors",
+    "label": "supported",
+    "source": "corpus Industry values: Financial Services / Banking, Technology & Software, Transportation & Logistics, Telecommunications, Aerospace & Defense, Healthcare / Life Sciences, Education"
+   },
+   {
+    "text": "underwriting application at Cendant, mortgage lending not insurance",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "replaced green screens with Java/JSP web app, moved workflows into TIBCO BPM, corrected Oracle stored procedure risk factor errors",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "borrower income, credit scores, home values, loan approval routing",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 5 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no documented insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "banking and mortgage engagements",
+    "label": "supported",
+    "source": "corpus Industry 'Financial Services / Banking' stories (JP Morgan Chase, RBC, Fiserv, Capital One, HSBC, American Express, Cendant Mortgage, Accredited Home Lenders)"
+   },
+   {
+    "text": "replaced mainframe underwriting app with web app and TIBCO BPM workflows",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "mortgage underwriting labelled 'not insurance underwriting'",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "led technology assessment and transformation roadmap for HSBC mortgage origination and servicing",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Situation/Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 10 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no documented insurance engagement; stories don't establish insurance carrier/platform work",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "banking, payments, mortgage lending",
+    "label": "supported",
+    "source": "corpus Industry 'Financial Services / Banking' stories (JP Morgan Chase, RBC, Fiserv, Capital One, HSBC, American Express, Cendant Mortgage, Accredited Home Lenders)"
+   },
+   {
+    "text": "Software Engineer through Wellfound Technology, Nov 2002 to Oct 2003",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Role/Employer/Start_Date/End_Date"
+   },
+   {
+    "text": "mortgage underwriting labelled 'not insurance underwriting'",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "underwriters and loan officers used mainframe green-screen app; team replaced with web app",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "built JSP and MVC front end for borrower income, credit score, home value",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "configured and maintained TIBCO layer; credit report requests, verification flows, conditional routing to manager approval by risk and loan amount",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "Oracle underneath through Active Database Adapter",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "found and corrected flaws in Oracle stored procedure risk factor math and logic",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "moved to web app with workflow executing in process engine",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 3 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no documented insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "banking and payments",
+    "label": "supported",
+    "source": "corpus Industry 'Financial Services / Banking' stories (JP Morgan Chase, RBC, Fiserv, Capital One, HSBC, American Express, Cendant Mortgage, Accredited Home Lenders)"
+   },
+   {
+    "text": "JP Morgan Chase, RBC, Capital One, HSBC, Fiserv",
+    "label": "supported",
+    "source": "Client field of Financial Services / Banking stories"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 5 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no confirmed insurance engagement to cite",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "financial services and banking",
+    "label": "supported",
+    "source": "corpus Industry 'Financial Services / Banking' stories (JP Morgan Chase, RBC, Fiserv, Capital One, HSBC, American Express, Cendant Mortgage, Accredited Home Lenders)"
+   },
+   {
+    "text": "replaced mainframe underwriting app with web app and TIBCO workflows for credit reports, verification, manager approval",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "mortgage underwriting labelled 'not insurance underwriting'",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "led technology assessment and transformation roadmap for HSBC mortgage origination and servicing",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Situation/Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 4 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no documented insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "banking, payments, mortgage operations",
+    "label": "supported",
+    "source": "corpus Industry 'Financial Services / Banking' stories (JP Morgan Chase, RBC, Fiserv, Capital One, HSBC, American Express, Cendant Mortgage, Accredited Home Lenders)"
+   },
+   {
+    "text": "JP Morgan Chase, RBC, Capital One, Fiserv, HSBC",
+    "label": "supported",
+    "source": "Client field of Financial Services / Banking stories"
+   },
+   {
+    "text": "led assessment workshops and developed target state architecture for mortgage origination and servicing under regulatory pressure",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Situation/Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 3 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no documented insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "industry list of seven sectors",
+    "label": "supported",
+    "source": "corpus Industry values: Financial Services / Banking, Technology & Software, Transportation & Logistics, Telecommunications, Aerospace & Defense, Healthcare / Life Sciences, Education"
+   },
+   {
+    "text": "insurance isn't listed",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 4 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no documented insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "mortgage underwriting at Cendant Mortgage",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "mortgage transformation at HSBC",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Situation/Task/Action"
+   },
+   {
+    "text": "those involved lending, not insurance",
+    "label": "supported",
+    "source": "corpus Industry 'Financial Services / Banking' stories (JP Morgan Chase, RBC, Fiserv, Capital One, HSBC, American Express, Cendant Mortgage, Accredited Home Lenders)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 3 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no documented insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "banking and payments",
+    "label": "supported",
+    "source": "corpus Industry 'Financial Services / Banking' stories (JP Morgan Chase, RBC, Fiserv, Capital One, HSBC, American Express, Cendant Mortgage, Accredited Home Lenders)"
+   },
+   {
+    "text": "JP Morgan Chase, RBC, Capital One, HSBC, American Express, Fiserv",
+    "label": "supported",
+    "source": "Client field of Financial Services / Banking stories"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 3 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no confirmed insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "banking, payments, mortgage modernization",
+    "label": "supported",
+    "source": "corpus Industry 'Financial Services / Banking' stories (JP Morgan Chase, RBC, Fiserv, Capital One, HSBC, American Express, Cendant Mortgage, Accredited Home Lenders)"
+   },
+   {
+    "text": "JP Morgan Chase, RBC, Capital One, HSBC, Fiserv",
+    "label": "supported",
+    "source": "Client field of Financial Services / Banking stories"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 3 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no documented insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "banking and payments",
+    "label": "supported",
+    "source": "corpus Industry 'Financial Services / Banking' stories (JP Morgan Chase, RBC, Fiserv, Capital One, HSBC, American Express, Cendant Mortgage, Accredited Home Lenders)"
+   },
+   {
+    "text": "JP Morgan Chase, RBC, Fiserv, HSBC",
+    "label": "supported",
+    "source": "Client field of Financial Services / Banking stories"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 5 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no confirmed insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "financial services and banking",
+    "label": "supported",
+    "source": "corpus Industry 'Financial Services / Banking' stories (JP Morgan Chase, RBC, Fiserv, Capital One, HSBC, American Express, Cendant Mortgage, Accredited Home Lenders)"
+   },
+   {
+    "text": "replaced mainframe underwriting screens with web app, moved mortgage underwriting workflows into TIBCO BPM",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "led technology assessment and target state architecture for HSBC mortgage origination and servicing",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Situation/Task/Action"
+   },
+   {
+    "text": "mortgage engagements, not insurance",
+    "label": "supported",
+    "source": "corpus Industry 'Financial Services / Banking' stories (JP Morgan Chase, RBC, Fiserv, Capital One, HSBC, American Express, Cendant Mortgage, Accredited Home Lenders)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "r10",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Says insurance is not documented/confirmed (acknowledges missing); adjacent banking/payments/mortgage work framed as not insurance; all 3 claims supported, 0 contradicted, 0 unsupported; no closing.",
+  "claims": [
+   {
+    "text": "no documented insurance engagement",
+    "label": "supported",
+    "source": "corpus Industry field (no Insurance value; no story mentions insurance)"
+   },
+   {
+    "text": "payments and banking modernization",
+    "label": "supported",
+    "source": "corpus Industry 'Financial Services / Banking' stories (JP Morgan Chase, RBC, Fiserv, Capital One, HSBC, American Express, Cendant Mortgage, Accredited Home Lenders)"
+   },
+   {
+    "text": "JP Morgan Chase, RBC, Capital One, HSBC, Fiserv, American Express",
+    "label": "supported",
+    "source": "Client field of Financial Services / Banking stories"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ }
+]

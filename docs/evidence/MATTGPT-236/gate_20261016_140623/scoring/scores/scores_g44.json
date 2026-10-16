@@ -1,0 +1,2427 @@
+[
+ {
+  "case": "r13",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: Clients questioned paying for two engineers at one keyboard;; Balanced teams, thin-slice production-ready solutions; Restructured teams around business domains; 'I do, we do, yo); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "Clients questioned paying for two engineers at one keyboard; teams saw TDD as overhead",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Balanced teams, thin-slice production-ready solutions",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture / building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Restructured teams around business domains; 'I do, we do, you do' coaching",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work|fortune-500-clients Action"
+   },
+   {
+    "text": "Operating-model engagements reduced costs 15-35%; clients kept balanced teams and lean product practices",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work|fortune-500-clients Result/5PSummary"
+   },
+   {
+    "text": "Gherkin BDD acceptance criteria before production code, TDD Red-Green-Refactor, tests in CI/CD",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Action"
+   },
+   {
+    "text": "Adapted to existing testing tools rather than a framework change",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Action"
+   },
+   {
+    "text": "4X velocity vs client internal teams doing equivalent work after the learning curve",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Result"
+   },
+   {
+    "text": "Norfolk Southern mission-critical operations tools went live with zero production defects",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "Adapted Lean XP for enterprise security, compliance and legacy systems",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Invited prospective clients to observe standups/pairing rather than methodology presentations",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "CICs delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: Manual releases, separate QA phases, siloed handoffs replace; 4X faster velocity and zero-defect deployments; 10-person balanced teams delivering output equivalent to tra); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "Manual releases, separate QA phases, siloed handoffs replaced by pairing, TDD, pipelines, balanced teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivering output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "Incorporated security scanning, access controls, governance into Lean XP",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Invited prospective clients to observe standups/pairing rather than methodology presentations",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "CICs delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "JPMC: WebSeries did not cover payment needs; 40+ blended team delivering payment modules, permissions, verification, sanctions screening, risk approvals",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "RBC adopted data migration strategy; Fiserv adopted accessibility standards",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients Result"
+   },
+   {
+    "text": "NEW IT SKILLS NOW trained 300+; AWS Launchpad produced 200+ AWS certifications",
+    "label": "supported",
+    "source": "thought-leadership-through-client-povs-and-published-enablement-content|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Georgia Tech partnerships, local startups, Accenture global teams, hackathons, recruiting, job fairs",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: NS: orders fell out unnoticed until customers called; client; JPMC regional payment systems with different data models, cl; NS: domain-driven design and event storming); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "NS: orders fell out unnoticed until customers called; client in mainframe thinking, account leadership waterfall, team learning new way of working",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "JPMC regional payment systems with different data models, client configurations, compliance records",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "NS: domain-driven design and event storming",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS: mainframe kept as system of record while APIs, microservices, CockroachDB rose beside it, with CDC and reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS: brought revenue management into the innovation hub to co-create in weekly build-measure-learn iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "JPMC migration: regional systems with different data models/configs/compliance records; data verification with compliance, compliance dashboards; completed without disrupting live payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "'I do, we do, you do' coaching on real work",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-transformation-labs|accenture Action"
+   },
+   {
+    "text": "Assessed competency gaps and prescribed dojo, lab, immersive or self-paced interventions",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-transformation-labs|accenture Use Case(s)/Task"
+   },
+   {
+    "text": "NS MVP launched covering 95% of targeted use cases",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "NS client team co-creating in weekly iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: Clients modernized technology while keeping silos, handoffs,; Built Atlanta and Tampa Cloud Innovation Centers from zero t; CICs delivered 30+ product engagements across 15+ Fortune 50); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "Clients modernized technology while keeping silos, handoffs, bottlenecks",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work|fortune-500-clients Situation"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "CICs delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivering output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Restructured teams around business domains",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work|fortune-500-clients Action"
+   },
+   {
+    "text": "6-week Agility Coaching Labs on clients' actual work with 'I do, we do, you do' coaching",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work|fortune-500-clients Action"
+   },
+   {
+    "text": "Operating-model engagements reduced costs 15-35%; clients kept balanced teams and lean product practices",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work|fortune-500-clients Result/5PSummary"
+   },
+   {
+    "text": "Assessed competency gaps and prescribed dojo, lab, immersive or self-paced interventions",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-transformation-labs|accenture Use Case(s)/Task"
+   },
+   {
+    "text": "Competency frameworks became diagnostic tool across CloudFirst in North America",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-transformation-labs|accenture Result/5PSummary"
+   },
+   {
+    "text": "Financial services work across JPMC, RBC, Capital One, HSBC",
+    "label": "supported",
+    "source": "career-intent-what-im-looking-for-next|independent-project Performance"
+   },
+   {
+    "text": "JPMC payments and Salesforce platforms each across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase / leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Result"
+   },
+   {
+    "text": "Architectural patterns, modernization playbooks, enterprise adaptations",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Created Client Relationship Manager role, partnership not pursuit",
+    "label": "supported",
+    "source": "scaling-cic-impact-through-intentional-client-engagement|accenture 5PSummary"
+   },
+   {
+    "text": "$100M+ in repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: NS: orders fell out unnoticed until customers called; client; NS decades-old mainframe system; American Express: dependency bottlenecks/delayed testing/poo); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "NS: orders fell out unnoticed until customers called; client in mainframe thinking, account leadership waterfall, team learning new way of working",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "NS decades-old mainframe system",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "American Express: dependency bottlenecks/delayed testing/poor docs; D&F workshops, environment virtualization, redesigned portal, onboarding test drive; over 261 additional story points",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Situation/Action/Result"
+   },
+   {
+    "text": "NS DDD and event storming",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS: mainframe kept as system of record while APIs, microservices, CockroachDB rose beside it, with CDC and reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS: brought revenue management into the innovation hub to co-create in weekly build-measure-learn iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "Balanced teams of PMs, designers, engineers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "6-week Agility Coaching Labs on clients' actual work with 'I do, we do, you do' coaching",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work|fortune-500-clients Action"
+   },
+   {
+    "text": "Established success criteria tied to ways of working",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work|fortune-500-clients Action"
+   },
+   {
+    "text": "NS MVP launched covering 95% of targeted use cases",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "Operating-model engagements reduced costs 15-35%; clients kept balanced teams and lean product practices",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work|fortune-500-clients Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: Capital One: slow iterations disconnected from user needs; NS: orders fell out unnoticed until customers called; client; Capital One: balanced team of 8, client-prioritized testable); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "Capital One: slow iterations disconnected from user needs",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Situation"
+   },
+   {
+    "text": "NS: orders fell out unnoticed until customers called; client in mainframe thinking, account leadership waterfall, team learning new way of working",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Capital One: balanced team of 8, client-prioritized testable backlog, pairing, red-green-refactor; features 3-4x faster than other Accenture teams on same engagement with zero production defects",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action/Result"
+   },
+   {
+    "text": "Capital One thin-slice MVPs",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action"
+   },
+   {
+    "text": "NS: mainframe kept as system of record while APIs, microservices, CockroachDB rose beside it, with CDC and reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS: brought revenue management into the innovation hub to co-create in weekly build-measure-learn iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS MVP launched covering 95% of targeted use cases",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "Quote 'I'm not paying for two people to do the work of one' (verbatim)",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "NS: let the client experience pairing; paired domain experts via 'I do, we do, you do' and rotated knowledge",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "Assessed competency gaps and prescribed dojo, lab, immersive or self-paced interventions",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-transformation-labs|accenture Use Case(s)/Task"
+   },
+   {
+    "text": "HSBC: heat maps, gap analysis, target-state architecture from regulatory and operational requirements",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Task/5PSummary"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "$100M+ in repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: Restructured teams around business domains; coached leadersh; Capital One: Federal Reserve Board-mandated compliance, heav; Capital One team of 8); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "Restructured teams around business domains; coached leadership",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work|fortune-500-clients Action/5PSummary"
+   },
+   {
+    "text": "Capital One: Federal Reserve Board-mandated compliance, heavy workloads",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Situation"
+   },
+   {
+    "text": "Capital One team of 8",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action"
+   },
+   {
+    "text": "Organized Go upskilling; pairing, CI, automated testing",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Action"
+   },
+   {
+    "text": "Defect-free code at 4x output of internal teams; secured additional engagements",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Result/Performance"
+   },
+   {
+    "text": "Quote 'I'm not paying for two people to do the work of one' (verbatim)",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "NS: let the client experience pairing; paired domain experts via 'I do, we do, you do' and rotated knowledge",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "NS prioritization through OKRs and value-driven roadmaps, hard conversations",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "NS client owned backlog; skills to support app after engagement",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Result"
+   },
+   {
+    "text": "JPMC 40+ blended team across Mumbai/Bangalore/US, Bottomline vendor interface",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "JP Morgan Chase: led blended team of 40+ delivering payment modules, payment verification (MAC), payment-type entitlements, sanctions screening, risk-based approvals",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: NS: orders fell out unnoticed until customers called; client; American Express: dependency bottlenecks/delayed testing/poo; NS DDD/event storming; revenue management co-creation); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "NS: orders fell out unnoticed until customers called; client in mainframe thinking, account leadership waterfall, team learning new way of working",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "American Express: dependency bottlenecks/delayed testing/poor docs; D&F workshops, environment virtualization, redesigned portal, onboarding test drive; over 261 additional story points",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Situation/Action/Result"
+   },
+   {
+    "text": "NS DDD/event storming; revenue management co-creation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS: mainframe kept as system of record while APIs, microservices, CockroachDB rose beside it, with CDC and reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS MVP launched covering 95% of targeted use cases",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "NS: let the client experience pairing; paired domain experts via 'I do, we do, you do' and rotated knowledge",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "NS client contributors paired into the new-state build and gained skills to support it after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action/Result"
+   },
+   {
+    "text": "Restructured around business domains; 15-35% cost reductions; practices outlasted engagements",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work|fortune-500-clients Result/5PSummary"
+   },
+   {
+    "text": "CIC balanced teams of engineers, PMs, UX architects; zero-defect production code through iterative development and real-time feedback",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: Thin-slice production-ready solutions; balanced teams; pairi; 4X faster velocity and zero-defect deployments; Capital One zero-defect payment deployments via automated te); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "Thin-slice production-ready solutions; balanced teams; pairing, TDD, CI/CD",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Capital One zero-defect payment deployments via automated testing; AmEx automated security scanning in CI/CD",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "NS business rules embedded in decades-old COBOL",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "NS: mainframe kept as system of record while APIs, microservices, CockroachDB rose beside it, with CDC and reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS: brought revenue management into the innovation hub to co-create in weekly build-measure-learn iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS MVP launched covering 95% of targeted use cases",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "Quote 'I'm not paying for two people to do the work of one' (verbatim)",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "NS: let the client experience pairing; paired domain experts via 'I do, we do, you do' and rotated knowledge",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "Assessed competency gaps and prescribed dojo, lab, immersive or self-paced interventions",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-transformation-labs|accenture Use Case(s)/Task"
+   },
+   {
+    "text": "Designers as equals, not visual polish",
+    "label": "supported",
+    "source": "user-centered-design---embedding-customer-journey-in-enterprise-product-development|fortune-500-clients Situation"
+   },
+   {
+    "text": "JPMC user research on wealth-management customers' expectations; pivot saved months of wrong-direction development",
+    "label": "supported",
+    "source": "user-centered-design---embedding-customer-journey-in-enterprise-product-development|fortune-500-clients Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "$100M+ in repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: Capital One: balanced team of 8, client-prioritized testable; NS: orders disappeared until customers called; rules in agin; NS: mainframe kept as system of record while APIs, microserv); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "Capital One: balanced team of 8, client-prioritized testable backlog, pairing, red-green-refactor; features 3-4x faster than other Accenture teams on same engagement with zero production defects",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action/Result"
+   },
+   {
+    "text": "NS: orders disappeared until customers called; rules in aging mainframe",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "NS: mainframe kept as system of record while APIs, microservices, CockroachDB rose beside it, with CDC and reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS: brought revenue management into the innovation hub to co-create in weekly build-measure-learn iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS MVP launched covering 95% of targeted use cases",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "NS: let the client experience pairing; paired domain experts via 'I do, we do, you do' and rotated knowledge",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "CIC training cohorts, playbooks, reference implementations",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Process"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "RBC: code reviews, heat maps, assessment found WebSeries lacked modularity; resources redirected before significant spend",
+    "label": "supported",
+    "source": "de-risking-rbcs-corporate-banking-platform-investment|rbc Action/Result"
+   },
+   {
+    "text": "Georgia Tech research and startup partnerships",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology|accenture Action"
+   },
+   {
+    "text": "Invited prospective clients to observe standups/pairing rather than methodology presentations",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Partnership over pursuit",
+    "label": "supported",
+    "source": "scaling-cic-impact-through-intentional-client-engagement|accenture 5PSummary"
+   },
+   {
+    "text": "$100M+ in repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: NS live railroad revenue engine; three fronts of friction; JPMC regional payment systems with different data models; li; NS: mainframe kept as system of record while APIs, microserv); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "NS live railroad revenue engine; three fronts of friction",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation/Task"
+   },
+   {
+    "text": "JPMC regional payment systems with different data models; live processing could not stop",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "NS: mainframe kept as system of record while APIs, microservices, CockroachDB rose beside it, with CDC and reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS: brought revenue management into the innovation hub to co-create in weekly build-measure-learn iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "JPMC migration: regional systems with different data models/configs/compliance records; data verification with compliance, compliance dashboards; completed without disrupting live payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "NS: let the client experience pairing; paired domain experts via 'I do, we do, you do' and rotated knowledge",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "NS client learned to write testable stories and own backlog",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Result"
+   },
+   {
+    "text": "Balanced teams with TDD and CI/CD replacing handoffs",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "NS MVP launched covering 95% of targeted use cases",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivering output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: NS: orders fell out unnoticed until customers called; client; Capital One slow misaligned iterations; Clients questioned two engineers at one keyboard; TDD as ove); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "NS: orders fell out unnoticed until customers called; client in mainframe thinking, account leadership waterfall, team learning new way of working",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Capital One slow misaligned iterations",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Situation"
+   },
+   {
+    "text": "Clients questioned two engineers at one keyboard; TDD as overhead",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "NS: mainframe kept as system of record while APIs, microservices, CockroachDB rose beside it, with CDC and reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS: brought revenue management into the innovation hub to co-create in weekly build-measure-learn iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS MVP launched covering 95% of targeted use cases",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "Capital One: balanced team of 8, client-prioritized testable backlog, pairing, red-green-refactor; features 3-4x faster than other Accenture teams on same engagement with zero production defects",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action/Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "Competency assessments and targeted coaching during client delivery",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-transformation-labs|accenture Action/5PSummary"
+   },
+   {
+    "text": "Georgia Tech research/startup partnerships",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology|accenture Action"
+   },
+   {
+    "text": "JP Morgan Chase: led blended team of 40+ delivering payment modules, payment verification (MAC), payment-type entitlements, sanctions screening, risk-based approvals",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "ACCESS portal serving 135,000+ organizations across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "$100M+ in repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: Clients recreating legacy dysfunction in new systems; Fiserv: 45-person dispersed team, 6-month releases, 200-page; JPMC I&AM: 341 applications, Jira not fully adopted, fragmen); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "Clients recreating legacy dysfunction in new systems",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work|fortune-500-clients Situation"
+   },
+   {
+    "text": "Fiserv: 45-person dispersed team, 6-month releases, 200-page BRDs, no visibility, missed deadlines, threatened cancellation",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Situation"
+   },
+   {
+    "text": "JPMC I&AM: 341 applications, Jira not fully adopted, fragmented workflows",
+    "label": "supported",
+    "source": "driving-agile-adoption-for-jp-morgans-identity-access-management-transformation|jp-morgan-chase Situation/5PSummary"
+   },
+   {
+    "text": "CIC balanced teams with engineers, PMs, UX architects",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Fiserv: persona-based user stories, follow-the-sun sync, biweekly demos, 2-week sprints within 3 months; Jira system of record satisfying PMO and compliance",
+    "label": "supported",
+    "source": "driving-agile-transformation-for-fiservs-card-portal|fiserv Action/Result"
+   },
+   {
+    "text": "6-week Agility Coaching Labs on clients' actual work with 'I do, we do, you do' coaching",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work|fortune-500-clients Action"
+   },
+   {
+    "text": "Modernization cookbooks, microservices patterns, automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Across 15+ engagements 4X velocity, lead time weeks to days, 99.9%+ uptime; Capital One zero-defect payment deployments",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result/Performance"
+   },
+   {
+    "text": "Operating-model engagements reduced costs 15-35%; clients kept balanced teams and lean product practices",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work|fortune-500-clients Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: Gherkin BDD acceptance criteria before production code, TDD ; JP Morgan and Norfolk Southern contexts for BDD; Code could not merge without passing tests); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "Gherkin BDD acceptance criteria before production code, TDD Red-Green-Refactor, tests in CI/CD",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Action"
+   },
+   {
+    "text": "JP Morgan and Norfolk Southern contexts for BDD",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation/Result"
+   },
+   {
+    "text": "Code could not merge without passing tests",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Action"
+   },
+   {
+    "text": "Adapted to existing testing tools",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Action"
+   },
+   {
+    "text": "Tracked defects, velocity, debugging time",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Action"
+   },
+   {
+    "text": "4X velocity vs client internal teams doing equivalent work after the learning curve",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Result"
+   },
+   {
+    "text": "Norfolk Southern mission-critical operations tools went live with zero production defects",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Result"
+   },
+   {
+    "text": "Product-Centric Operating Model Playbook workshops on governance, funding, team structure",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work|fortune-500-clients Action"
+   },
+   {
+    "text": "6-week Agility Coaching Labs on clients' actual work with 'I do, we do, you do' coaching",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work|fortune-500-clients Action"
+   },
+   {
+    "text": "Operating-model engagements reduced costs 15-35%; clients kept balanced teams and lean product practices",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work|fortune-500-clients Result/5PSummary"
+   },
+   {
+    "text": "Paired experienced with junior developers, rotated partners, retrospectives",
+    "label": "supported",
+    "source": "delivering-better-code-and-stronger-teams-through-pair-programming|accenture Action"
+   },
+   {
+    "text": "Assessed competency gaps and prescribed dojo, lab, immersive or self-paced interventions",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-transformation-labs|accenture Use Case(s)/Task"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "Adapted Lean XP for enterprise security, compliance and legacy systems",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Invited prospective clients to observe standups/pairing rather than methodology presentations",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "CICs delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: Clients questioned two engineers at one keyboard; TDD as ove; Capital One: balanced team of 8, client-prioritized testable; CIC pairing stations, client co-location spaces, balanced te); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "Clients questioned two engineers at one keyboard; TDD as overhead",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Capital One: balanced team of 8, client-prioritized testable backlog, pairing, red-green-refactor; features 3-4x faster than other Accenture teams on same engagement with zero production defects",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action/Result"
+   },
+   {
+    "text": "CIC pairing stations, client co-location spaces, balanced teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Adapted Lean XP for enterprise security, compliance and legacy systems",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "10-person balanced teams delivering output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Paired junior with senior/experienced; guided to independent delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture / enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Result/Action"
+   },
+   {
+    "text": "Assessed competency gaps and prescribed dojo, lab, immersive or self-paced interventions",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-transformation-labs|accenture Use Case(s)/Task"
+   },
+   {
+    "text": "Clients requested BDD/TDD training after engagements",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Result"
+   },
+   {
+    "text": "HSBC workshops, heat maps, gap analysis; governance, staffing, requirements before development",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc / mobilizing-hsbcs-mortgage-transformation-program|hsbc Action/Result"
+   },
+   {
+    "text": "JPMC payments migration with compliance traceability, no disruption; dashboards became standard tooling",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: JPMC payments across 12 countries with different formats, pr; Led 40+ blended team delivering centralized payments gateway; Legacy migration preserved compliance traceability without d); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "JPMC payments across 12 countries with different formats, protocols, regulatory requirements",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Led 40+ blended team delivering centralized payments gateway, single entry point",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "Legacy migration preserved compliance traceability without disrupting live payments",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   },
+   {
+    "text": "Capital One: balanced team of 8, client-prioritized testable backlog, pairing, red-green-refactor; features 3-4x faster than other Accenture teams on same engagement with zero production defects",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action/Result"
+   },
+   {
+    "text": "Capital One client sought to retain team beyond planned end",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "Competency assessments, live coding, mentoring, 'I do, we do, you do'; guided to independent delivery",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-transformation-labs|accenture / scaling-talent-and-practices-for-agile-product-innovation|accenture Action/Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "Near-zero attrition in first 2 years",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Reusable playbooks, patterns, engagement models",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "CICs delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ repeatable business by FY23",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: NS silos across teams and leadership slowed cloud modernizat; Quote 'I'm not paying for two people to do the work of one' ; JPMC Salesforce regional leaders competed, risk of separate ); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "NS silos across teams and leadership slowed cloud modernization",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Situation"
+   },
+   {
+    "text": "Quote 'I'm not paying for two people to do the work of one' (verbatim)",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "JPMC Salesforce regional leaders competed, risk of separate regional projects",
+    "label": "supported",
+    "source": "leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Clients still worked through silos, handoffs, manual releases",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "NS OKRs, testable stories",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action/Result"
+   },
+   {
+    "text": "NS: let the client experience pairing; paired domain experts via 'I do, we do, you do' and rotated knowledge",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "NS client contributors paired into the new-state build and gained skills to support it after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action/Result"
+   },
+   {
+    "text": "Incremental demos replaced waiting months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Result"
+   },
+   {
+    "text": "JPMC Salesforce: competing regional leaders; shared backlog, cross-regional prioritization, dependency tracking across 7 workstreams; on schedule across 12 countries and 3 regions, no scope renegotiations",
+    "label": "supported",
+    "source": "leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "CICs delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: NS: orders disappeared, clerks manually handled waybill fall; NS: mainframe kept as system of record while APIs, microserv; NS: brought revenue management into the innovation hub to co); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "NS: orders disappeared, clerks manually handled waybill fallout, mainframe thinking/waterfall",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "NS: mainframe kept as system of record while APIs, microservices, CockroachDB rose beside it, with CDC and reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS: brought revenue management into the innovation hub to co-create in weekly build-measure-learn iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS MVP launched covering 95% of targeted use cases",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "EDI validation notified trading partners proactively",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action/Result"
+   },
+   {
+    "text": "NS quality crisis: rising defects despite near-complete coverage; audit; tests written after code; rebuilt backlog with testable stories; TDD experts paired with team",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation/Action"
+   },
+   {
+    "text": "NS: pairs rotated daily, test-first checked at standup, pairs traded drivers when remote; practices held after experts went home; failure mode did not recur",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action/Result"
+   },
+   {
+    "text": "AT&T: mentored junior developers via code reviews, unit tests, training materials; became independent contributors; zero critical defects",
+    "label": "supported",
+    "source": "building-atts-service-delivery-platform|att Action/Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "JPMC payment verification, permissions, sanctions screening, risk-based approvals",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Global payments gateway single entry point across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Client workshops, research partnerships, capability showcases",
+    "label": "supported",
+    "source": "scaling-cic-impact-through-intentional-client-engagement|accenture / building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology|accenture Action"
+   },
+   {
+    "text": "$100M+ in repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: Quote 'I'm not paying for two people to do the work of one' ; Capital One slow misaligned iterations; Capital One: balanced team of 8, client-prioritized testable); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "Quote 'I'm not paying for two people to do the work of one' (verbatim)",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "Capital One slow misaligned iterations",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Situation"
+   },
+   {
+    "text": "Capital One: balanced team of 8, client-prioritized testable backlog, pairing, red-green-refactor; features 3-4x faster than other Accenture teams on same engagement with zero production defects",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action/Result"
+   },
+   {
+    "text": "NS sessions with leaders and contributors to find misalignment; value-driven prioritization",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "NS: let the client experience pairing; paired domain experts via 'I do, we do, you do' and rotated knowledge",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "NS client contributors paired into the new-state build and gained skills to support it after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action/Result"
+   },
+   {
+    "text": "After quality crisis: test-first at standup, rotating pairs, team working agreement; practices held after experts left",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action/Result"
+   },
+   {
+    "text": "JP Morgan Chase: led blended team of 40+ delivering payment modules, payment verification (MAC), payment-type entitlements, sanctions screening, risk-based approvals",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "JPMC Sev-1 production incident response",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "CICs delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Partnership over pursuit",
+    "label": "supported",
+    "source": "scaling-cic-impact-through-intentional-client-engagement|accenture 5PSummary"
+   },
+   {
+    "text": "$100M+ in repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: Capital One slow iterations; AmEx dependency bottlenecks, delayed testing, poor documenta; NS silos through leadership); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "Capital One slow iterations",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Situation"
+   },
+   {
+    "text": "AmEx dependency bottlenecks, delayed testing, poor documentation",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Situation"
+   },
+   {
+    "text": "NS silos through leadership",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Situation"
+   },
+   {
+    "text": "Quote 'I'm not paying for two people to do the work of one' (verbatim)",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "Capital One: balanced team of 8, client-prioritized testable backlog, pairing, red-green-refactor; features 3-4x faster than other Accenture teams on same engagement with zero production defects",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action/Result"
+   },
+   {
+    "text": "American Express: dependency bottlenecks/delayed testing/poor docs; D&F workshops, environment virtualization, redesigned portal, onboarding test drive; over 261 additional story points",
+    "label": "supported",
+    "source": "transforming-developer-experience-for-the-american-express-virtual-payments-platform|american-express Situation/Action/Result"
+   },
+   {
+    "text": "NS: let the client experience pairing; paired domain experts via 'I do, we do, you do' and rotated knowledge",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "2-day CIC Academy course twice monthly over 6 months",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "NS client contributors paired into the new-state build and gained skills to support it after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action/Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "Georgia Tech partnerships",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology|accenture Action"
+   },
+   {
+    "text": "CICs delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: Capital One slow misaligned iterations; NS: orders fell out unnoticed until customers called; client; AT&T infrastructure bottlenecks, integration testing across ); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "Capital One slow misaligned iterations",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Situation"
+   },
+   {
+    "text": "NS: orders fell out unnoticed until customers called; client in mainframe thinking, account leadership waterfall, team learning new way of working",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "AT&T infrastructure bottlenecks, integration testing across 10+ teams",
+    "label": "supported",
+    "source": "stabilizing-and-delivering-atts-southeast-crm-replacement|att Situation"
+   },
+   {
+    "text": "Capital One: balanced team of 8, client-prioritized testable backlog, pairing, red-green-refactor; features 3-4x faster than other Accenture teams on same engagement with zero production defects",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action/Result"
+   },
+   {
+    "text": "NS: mainframe kept as system of record while APIs, microservices, CockroachDB rose beside it, with CDC and reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS: brought revenue management into the innovation hub to co-create in weekly build-measure-learn iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS: let the client experience pairing; paired domain experts via 'I do, we do, you do' and rotated knowledge",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "NS quality crisis: rising defects despite near-complete coverage; audit; tests written after code; rebuilt backlog with testable stories; TDD experts paired with team",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation/Action"
+   },
+   {
+    "text": "AT&T stabilization transferred to offshore team",
+    "label": "supported",
+    "source": "stabilizing-and-delivering-atts-southeast-crm-replacement|att Result"
+   },
+   {
+    "text": "NS MVP launched covering 95% of targeted use cases",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "AT&T 4-week infrastructure bottleneck cut to 3 days; tickets ~4,000 to ~200",
+    "label": "supported",
+    "source": "stabilizing-and-delivering-atts-southeast-crm-replacement|att Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: NS: modernize revenue engine without stopping the railroad; ; JP Morgan, Capital One, AmEx compliance/security constraints; New hires lacked hands-on cloud-native experience); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "NS: modernize revenue engine without stopping the railroad; COBOL; orders fell out; waterfall leadership",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation/Task"
+   },
+   {
+    "text": "JP Morgan, Capital One, AmEx compliance/security constraints",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Situation/5PSummary"
+   },
+   {
+    "text": "New hires lacked hands-on cloud-native experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "NS DDD/event storming",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS: mainframe kept as system of record while APIs, microservices, CockroachDB rose beside it, with CDC and reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS: brought revenue management into the innovation hub to co-create in weekly build-measure-learn iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS MVP launched covering 95% of targeted use cases",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "Reusable patterns, automated testing, deployment gates; cross-functional teams build/deploy/operate; QA to exploratory testing, security validation, coaching",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "Capital One zero-defect payment deployments; JP Morgan mobile banking 20+ screens in 5 months",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "NS: let the client experience pairing; paired domain experts via 'I do, we do, you do' and rotated knowledge",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "NS client contributors paired into the new-state build and gained skills to support it after Accenture rolled off",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action/Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "CICs delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivering output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: Cendian: EDI, XML, flat files, paper; 300+ carriers, 80+ cou; Reusable patterns, automated testing, deployment gates acros; CIC balanced teams, pairing, TDD, CI/CD); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "Cendian: EDI, XML, flat files, paper; 300+ carriers, 80+ countries; canonical business objects; portal; in-house document generation removing manual key entry",
+    "label": "supported",
+    "source": "integrating-a-chemical-logistics-network-across-every-partner-capability|cendian-chemical-logistics Situation/Action/Result"
+   },
+   {
+    "text": "Reusable patterns, automated testing, deployment gates across JPM, Capital One, AmEx; 4X velocity, lead time weeks to days across 15+ engagements",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "CIC balanced teams, pairing, TDD, CI/CD",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "CICs delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "10-person balanced teams delivering output equivalent to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "JPMC legal: two years on case management; user research revealed different problem; 10 weeks to production, $1.3M saved, zero defects over a year",
+    "label": "supported",
+    "source": "discovery-framing---de-risking-product-development-at-fortune-500-scale|fortune-500-clients Situation/Result"
+   },
+   {
+    "text": "Clients continued Discovery & Framing independently",
+    "label": "supported",
+    "source": "discovery-framing---de-risking-product-development-at-fortune-500-scale|fortune-500-clients Performance"
+   },
+   {
+    "text": "$100M+ in repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: Defects late, technical debt, technically correct code missi; Gherkin BDD acceptance criteria before production code, TDD ; Clients questioned 2 engineers at 1 keyboard); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "Defects late, technical debt, technically correct code missing business intent",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Gherkin BDD acceptance criteria before production code, TDD Red-Green-Refactor, tests in CI/CD",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Action"
+   },
+   {
+    "text": "Clients questioned 2 engineers at 1 keyboard",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "4X velocity vs client internal teams doing equivalent work after the learning curve",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Result"
+   },
+   {
+    "text": "Norfolk Southern mission-critical operations tools went live with zero production defects",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Result"
+   },
+   {
+    "text": "JPMC mobile banking full Product Owner sign-off through BDD and TDD",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Result"
+   },
+   {
+    "text": "Assessed competency gaps and prescribed dojo, lab, immersive or self-paced interventions",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-transformation-labs|accenture Use Case(s)/Task"
+   },
+   {
+    "text": "Paired experienced with junior developers, retrospectives; junior developers onboarded faster",
+    "label": "supported",
+    "source": "delivering-better-code-and-stronger-teams-through-pair-programming|accenture Action/Result"
+   },
+   {
+    "text": "Competency frameworks diagnostic tool across CloudFirst",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-transformation-labs|accenture Result"
+   },
+   {
+    "text": "6-week Agility Coaching Labs on clients' actual work with 'I do, we do, you do' coaching",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work|fortune-500-clients Action"
+   },
+   {
+    "text": "Operating-model engagements reduced costs 15-35%; clients kept balanced teams and lean product practices",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work|fortune-500-clients Result/5PSummary"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "CICs delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ by FY23",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: NS: orders fell out unnoticed until customers called; client; NS: mainframe kept as system of record while APIs, microserv; NS: brought revenue management into the innovation hub to co); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "NS: orders fell out unnoticed until customers called; client in mainframe thinking, account leadership waterfall, team learning new way of working",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "NS: mainframe kept as system of record while APIs, microservices, CockroachDB rose beside it, with CDC and reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS: brought revenue management into the innovation hub to co-create in weekly build-measure-learn iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS MVP launched covering 95% of targeted use cases",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "EDI validation moved fallout detection from reactive to proactive",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "Quote 'I'm not paying for two people to do the work of one' (verbatim)",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "NS: let the client experience pairing; paired domain experts via 'I do, we do, you do' and rotated knowledge",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "NS contributors learned Angular, Node, Spring Boot, cloud-native concepts",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "Across JPM, Capital One, AmEx: reusable patterns, automated testing, CI/CD with compliance; Capital One zero-defect payment deployments",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action/Result"
+   },
+   {
+    "text": "RBC: migration rules, mock conversion, reconciliation",
+    "label": "supported",
+    "source": "leading-data-conversion-planning-for-rbcs-corporate-banking-migration|rbc Action"
+   },
+   {
+    "text": "RBC risk and dependency management and program-level reporting",
+    "label": "supported",
+    "source": "building-the-pmo-for-rbcs-commercial-banking-modernization|rbc Action/Process"
+   },
+   {
+    "text": "CIC training cohorts, balanced teams, playbooks, career pathways",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture / enabling-new-ways-of-working-through-immersive-coaching-and-transformation-labs|accenture Action/Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "CICs delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: Capital One slow misaligned iterations; NS decades-old mainframe, COBOL maintained by shrinking work; Capital One: balanced team of 8, client-prioritized testable); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "Capital One slow misaligned iterations",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Situation"
+   },
+   {
+    "text": "NS decades-old mainframe, COBOL maintained by shrinking workforce, remote transition",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "Capital One: balanced team of 8, client-prioritized testable backlog, pairing, red-green-refactor; features 3-4x faster than other Accenture teams on same engagement with zero production defects",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action/Result"
+   },
+   {
+    "text": "Capital One lean product management with user-centered design",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action"
+   },
+   {
+    "text": "NS: mainframe kept as system of record while APIs, microservices, CockroachDB rose beside it, with CDC and reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS: brought revenue management into the innovation hub to co-create in weekly build-measure-learn iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS quality crisis: rising defects despite near-complete coverage; audit; tests written after code; rebuilt backlog with testable stories; TDD experts paired with team",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation/Action"
+   },
+   {
+    "text": "6-week Agility Coaching Labs on clients' actual work with 'I do, we do, you do' coaching",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work|fortune-500-clients Action"
+   },
+   {
+    "text": "NS MVP launched covering 95% of targeted use cases",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "NS client team co-creating in weekly iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Result"
+   },
+   {
+    "text": "Operating-model engagements reduced costs 15-35%; clients kept balanced teams and lean product practices",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work|fortune-500-clients Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: Acceptance criteria separate from development; late defects; Gherkin shared artifact across product owners, developers, Q; Capital One: balanced team of 8, client-prioritized testable); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "Acceptance criteria separate from development; late defects",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Gherkin shared artifact across product owners, developers, QA",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Action"
+   },
+   {
+    "text": "Capital One: balanced team of 8, client-prioritized testable backlog, pairing, red-green-refactor; features 3-4x faster than other Accenture teams on same engagement with zero production defects",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action/Result"
+   },
+   {
+    "text": "NS: pairs rotated daily, test-first checked at standup, pairs traded drivers when remote; practices held after experts went home; failure mode did not recur",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action/Result"
+   },
+   {
+    "text": "NS remote: pairs traded drivers frequently",
+    "label": "supported",
+    "source": "making-it-stick-institutionalizing-pairing-and-test-first-discipline-at-norfolk-southern|norfolk-southern Action"
+   },
+   {
+    "text": "Assessed competency gaps and prescribed dojo, lab, immersive or self-paced interventions",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-transformation-labs|accenture Use Case(s)/Task"
+   },
+   {
+    "text": "HSBC: assessments, heat maps, target-state architecture into estimate, staffing, $10M contract",
+    "label": "supported",
+    "source": "driving-hsbcs-mortgage-transformation-from-assessment-to-10m-contract|hsbc Result"
+   },
+   {
+    "text": "Mobilized in Buffalo, governance and requirements; ongoing team inherited fully operational program",
+    "label": "supported",
+    "source": "mobilizing-hsbcs-mortgage-transformation-program|hsbc Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: Capital One slow misaligned iterations; Capital One: balanced team of 8, client-prioritized testable; Clients questioned 2 engineers at 1 keyboard; TDD as overhea); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "Capital One slow misaligned iterations",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Situation"
+   },
+   {
+    "text": "Capital One: balanced team of 8, client-prioritized testable backlog, pairing, red-green-refactor; features 3-4x faster than other Accenture teams on same engagement with zero production defects",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action/Result"
+   },
+   {
+    "text": "Clients questioned 2 engineers at 1 keyboard; TDD as overhead",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Gherkin BDD acceptance criteria before production code, TDD Red-Green-Refactor, tests in CI/CD",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Action"
+   },
+   {
+    "text": "Norfolk Southern mission-critical operations tools went live with zero production defects",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Result"
+   },
+   {
+    "text": "Clients requested BDD/TDD training",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "CICs delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Invited prospective clients to observe standups/pairing rather than methodology presentations",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Georgia Tech research and startup partnerships",
+    "label": "supported",
+    "source": "building-an-innovation-ecosystem-to-connect-clients-with-emerging-technology|accenture Action"
+   },
+   {
+    "text": "JP Morgan Chase: led blended team of 40+ delivering payment modules, payment verification (MAC), payment-type entitlements, sanctions screening, risk-based approvals",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task/Action"
+   },
+   {
+    "text": "ACCESS launched April 2011, 135,000+ clients, 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Payments migration preserved compliance traceability without disruption",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: NS: orders fell out unnoticed until customers called; client; JPMC Salesforce regional leaders competing, risk of fragment; NS: mainframe kept as system of record while APIs, microserv); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "NS: orders fell out unnoticed until customers called; client in mainframe thinking, account leadership waterfall, team learning new way of working",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Situation"
+   },
+   {
+    "text": "JPMC Salesforce regional leaders competing, risk of fragmenting",
+    "label": "supported",
+    "source": "leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Situation"
+   },
+   {
+    "text": "NS: mainframe kept as system of record while APIs, microservices, CockroachDB rose beside it, with CDC and reconciliation",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS: brought revenue management into the innovation hub to co-create in weekly build-measure-learn iterations",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action"
+   },
+   {
+    "text": "NS MVP 95%, capturing real orders with clean data feeding the mainframe",
+    "label": "supported",
+    "source": "the-cics-first-engagement-modernizing-norfolk-southerns-revenue-engine|norfolk-southern Action/Result"
+   },
+   {
+    "text": "JPMC Salesforce: competing regional leaders; shared backlog, cross-regional prioritization, dependency tracking across 7 workstreams; on schedule across 12 countries and 3 regions, no scope renegotiations",
+    "label": "supported",
+    "source": "leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "'I do, we do, you do'; paired experienced practitioners with developers new to TDD",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients / unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Action"
+   },
+   {
+    "text": "4X velocity vs client internal teams doing equivalent work after the learning curve",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Result"
+   },
+   {
+    "text": "Clients requested training",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "CICs delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r13",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Direct, materially correct answer on recurring patterns; all claims supported (key: Clients modernizing while keeping silos; defects late; code ; Gherkin BDD acceptance criteria before production code, TDD ; JPMC mobile banking full Product Owner sign-off); quotes verbatim ('I do, we do, you do', 'I'm not paying for two people to do the work of one' where present); no closing.",
+  "claims": [
+   {
+    "text": "Clients modernizing while keeping silos; defects late; code missing business intent; pairing resistance",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients / shifting-client-focus-from-what-they-build-to-how-they-work|fortune-500-clients Situation"
+   },
+   {
+    "text": "Gherkin BDD acceptance criteria before production code, TDD Red-Green-Refactor, tests in CI/CD",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Action"
+   },
+   {
+    "text": "JPMC mobile banking full Product Owner sign-off",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Result"
+   },
+   {
+    "text": "Norfolk Southern mission-critical operations tools went live with zero production defects",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Result"
+   },
+   {
+    "text": "4X velocity vs client internal teams doing equivalent work after the learning curve",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Result"
+   },
+   {
+    "text": "Product-Centric Operating Model Playbook workshops and 6-week Agility Coaching Labs",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work|fortune-500-clients Action"
+   },
+   {
+    "text": "Operating-model engagements reduced costs 15-35%; clients kept balanced teams and lean product practices",
+    "label": "supported",
+    "source": "shifting-client-focus-from-what-they-build-to-how-they-work|fortune-500-clients Result/5PSummary"
+   },
+   {
+    "text": "Paired experienced with junior, rotated partners, retrospectives for work-style clashes",
+    "label": "supported",
+    "source": "delivering-better-code-and-stronger-teams-through-pair-programming|accenture Action"
+   },
+   {
+    "text": "Competency assessments, custom training, diagnostic tool across CloudFirst",
+    "label": "supported",
+    "source": "enabling-new-ways-of-working-through-immersive-coaching-and-transformation-labs|accenture Result"
+   },
+   {
+    "text": "Built Atlanta and Tampa Cloud Innovation Centers from zero to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "Invited prospective clients to observe standups/pairing rather than methodology presentations",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "CICs delivered 30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ }
+]

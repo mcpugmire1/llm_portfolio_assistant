@@ -1,0 +1,2480 @@
+[
+ {
+  "case": "c02",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: answered from profile; supported: Master's IT, AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: answered from profile; supported: Master's IT, AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: answered from profile; supported: Master's IT, AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 5,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Turn 2 explains the degree from the profile and gives the technical track record as facts, no inflation or self-evaluation, no closing. All claims supported: profile.education; AT&T NGEDT JIAs/3 integration points/no rework/Hyderabad; Octane Terraform/CloudFormation/Summit AppSync; AIU Java teaching. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "Defined Joint Interface Agreements / integration agreements with MIC, MIC-NT and ELP",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Designed enhancements using .NET, C#, SQL Server and ESRI APIs",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action/Situation"
+   },
+   {
+    "text": "Conducted technical and functional reviews of offshore-delivered code",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Agreements unblocked downstream development across 3 integration points",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Enhancements delivered without architectural rework between phases",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Hyderabad team achieved independent delivery velocity without ongoing onshore dependency",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Octane: engineers struggled to onboard to cloud-native technologies for lack of standardized resources",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Led creation of reusable reference applications and IaC templates",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Infrastructure provisioning automated with Terraform and AWS CloudFormation",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Built Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Taught entry-level Enterprise Java at AIU alongside full-time consulting work",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application|american-intercontinental-university Situation"
+   },
+   {
+    "text": "Students with no server-side background finished with a working Java web app with persistence and session state",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application|american-intercontinental-university Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 5,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Turn 2 explains the degree from the profile and gives the technical track record as facts, no inflation or self-evaluation, no closing. All claims supported: profile.education; Cendant JSP/MVC, TIBCO, stored-procedure fixes, two-round screen; STRATCOM team of 4, PL/SQL, TDD/pairing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "Cendant underwriters and loan officers worked in a mainframe green-screen application",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Situation"
+   },
+   {
+    "text": "Selected after the client's technical owner interviewed candidates twice, screening for Java and TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Situation"
+   },
+   {
+    "text": "Built the JSP and MVC front end",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Configured the TIBCO layer; modeled credit report requests, verification flows and conditional routing to manager approval",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Found and corrected flaws in the math and logic of Oracle stored procedures calculating risk factors",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "Underwriting workflow moved into an executable process engine",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Result"
+   },
+   {
+    "text": "STRATCOM: team of 4 rotating across Java web front end, TIBCO middleware and Oracle PL/SQL layers",
+    "label": "supported",
+    "source": "turning-stratcoms-paper-operational-plans-into-executable-workflow|lockheed-martin Action/Task"
+   },
+   {
+    "text": "Wrote PL/SQL packages, stored procedures, functions and triggers",
+    "label": "supported",
+    "source": "turning-stratcoms-paper-operational-plans-into-executable-workflow|lockheed-martin Action"
+   },
+   {
+    "text": "Used TDD and paired with the customer's team; documented build/run procedures",
+    "label": "supported",
+    "source": "turning-stratcoms-paper-operational-plans-into-executable-workflow|lockheed-martin Action"
+   },
+   {
+    "text": "Replaced paper operational procedures with executable workflow; customer could run and extend it",
+    "label": "supported",
+    "source": "turning-stratcoms-paper-operational-plans-into-executable-workflow|lockheed-martin Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 5,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Turn 2 explains the degree from the profile and gives the technical track record as facts, no inflation or self-evaluation, no closing. All claims supported: profile.education (omits 'exceeds a Bachelor's', not a fail); Cendant facts; AT&T 3 integration points, Hyderabad. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "Cendant underwriters and loan officers worked in a mainframe green-screen application",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Situation"
+   },
+   {
+    "text": "Selected after the client's technical owner interviewed candidates twice, screening for Java and TIBCO",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Situation"
+   },
+   {
+    "text": "Built the JSP and MVC front end",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Configured the TIBCO layer; modeled credit report requests, verification flows and conditional routing to manager approval",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Found and corrected flaws in the math and logic of Oracle stored procedures calculating risk factors",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "Risk calculation errors corrected rather than inherited forward",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Result"
+   },
+   {
+    "text": "Defined Joint Interface Agreements / integration agreements with MIC, MIC-NT and ELP",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Designed enhancements using .NET, C#, SQL Server and ESRI APIs",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action/Situation"
+   },
+   {
+    "text": "Conducted technical and functional reviews of offshore-delivered code",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Traveled to Hyderabad to transition designs and resolve design/development issues",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Agreements unblocked downstream development across 3 integration points",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Enhancements delivered without architectural rework between phases",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Hyderabad team achieved independent delivery velocity without ongoing onshore dependency",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: answered from profile; supported: Master's IT, AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: answered from profile; supported: Master's IT, AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: answered from profile; supported: Master's IT, AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 6,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Turn 2 explains the degree from the profile and gives the technical track record as facts, no inflation or self-evaluation, no closing. All claims supported: IT degree, CS-related discipline (omits Master's level and 'exceeds', judged not to ignore the degree); TICARA 2-3 days, 3+ accounts, 30-40 min; AT&T; cloud-native 15+ engagements 4X, 99.9%+ uptime, Capital One zero-defect payment deployments. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Degree is in Information Technology",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "Liquid Studio prototyping was delayed by account setup/provisioning; standard SLA 2 to 3 days",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Situation/Result"
+   },
+   {
+    "text": "Designed TICARA with Terraform and the Serverless Framework",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Action"
+   },
+   {
+    "text": "Pre-provisioned AWS or Azure accounts kept ready at the hub",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Result"
+   },
+   {
+    "text": "Working environment (VPC, services, sample code) stood up in 30 to 40 minutes",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Action"
+   },
+   {
+    "text": "Built a documented developer toolkit covering APIs, data stores, messaging",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Action"
+   },
+   {
+    "text": "Defined Joint Interface Agreements / integration agreements with MIC, MIC-NT and ELP",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Designed enhancements using .NET, C#, SQL Server and ESRI APIs",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action/Situation"
+   },
+   {
+    "text": "Conducted technical and functional reviews of offshore-delivered code",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Traveled to Hyderabad to transition designs and resolve design/development issues",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Agreements unblocked downstream development across 3 integration points",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Enhancements delivered without architectural rework between phases",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Hyderabad team achieved independent delivery velocity without ongoing onshore dependency",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Established microservices patterns, CI with automated testing and deployment gates, IaC",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action/Process"
+   },
+   {
+    "text": "Across 15+ Fortune 500 engagements: 4X velocity; lead time weeks to days",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "At Capital One, zero-defect deployments to payment systems through automated testing",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "99.9%+ uptime",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 6,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Turn 2 explains the degree from the profile and gives the technical track record as facts, no inflation or self-evaluation, no closing. All claims supported: profile.education; Capital One team of 8, Go upskilling, CI, automated tests, 4x defect-free, additional engagements; TICARA Terraform/Serverless, 30-40 min. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "Capital One internal teams overwhelmed by workloads and Fed-mandated compliance updates, burnout",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Situation"
+   },
+   {
+    "text": "Built a balanced team of 8: 1 PM, 1 CX/product designer, 6 developers incl. the anchor/lead, sized for pairing",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Action"
+   },
+   {
+    "text": "Organized Go upskilling ahead of the project",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Action"
+   },
+   {
+    "text": "Implemented Lean XP / pair programming, continuous integration and an automated testing suite",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Action"
+   },
+   {
+    "text": "Defect-free production code at 4x the output of Capital One's internal teams",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Result"
+   },
+   {
+    "text": "Additional engagements followed",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Result"
+   },
+   {
+    "text": "Liquid Studio prototyping was delayed by account setup/provisioning; standard SLA 2 to 3 days",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Situation/Result"
+   },
+   {
+    "text": "Designed TICARA with Terraform and the Serverless Framework",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Action"
+   },
+   {
+    "text": "Pre-provisioned AWS or Azure accounts kept ready at the hub",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Result"
+   },
+   {
+    "text": "Working environment (VPC, services, sample code) stood up in 30 to 40 minutes",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 6,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Turn 2 explains the degree from the profile and gives the technical track record as facts, no inflation or self-evaluation, no closing. All claims supported: profile.education; Cendant; AT&T integration agreements for 3 systems; AIU course content. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "Cendant underwriters and loan officers worked in a mainframe green-screen application",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Situation"
+   },
+   {
+    "text": "Built the JSP and MVC front end",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Configured the TIBCO layer; modeled credit report requests, verification flows and conditional routing to manager approval",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Found and corrected flaws in the math and logic of Oracle stored procedures calculating risk factors",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "Underwriting workflow executing in a process engine",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Result"
+   },
+   {
+    "text": "Defined Joint Interface Agreements / integration agreements with MIC, MIC-NT and ELP",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Designed enhancements using .NET, C#, SQL Server and ESRI APIs",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action/Situation"
+   },
+   {
+    "text": "Conducted technical and functional reviews of offshore-delivered code",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Traveled to Hyderabad to transition designs and resolve design/development issues",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Agreements unblocked downstream development across 3 integration points",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Enhancements delivered without architectural rework between phases",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Taught entry-level Enterprise Java at AIU alongside consulting; students built working app with persistence/session state via servlets, JDBC, MySQL, JSP, JavaBeans, MVC",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application|american-intercontinental-university Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: answered from profile; supported: Master's IT, AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: answered from profile; supported: Master's IT, AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: answered from profile; supported: Master's IT, AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 7,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Turn 2 explains the degree from the profile and gives the technical track record as facts, no inflation or self-evaluation, no closing. All claims supported: profile.education; AT&T NGEDT; AT&T IOM data flow/CASE method; CIC 0 to 150+, 4x, zero-defect (why-hire-matt). 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "Defined Joint Interface Agreements / integration agreements with MIC, MIC-NT and ELP",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Designed enhancements using .NET, C#, SQL Server and ESRI APIs",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action/Situation"
+   },
+   {
+    "text": "Conducted technical and functional reviews of offshore-delivered code",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Traveled to Hyderabad to transition designs and resolve design/development issues",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Agreements unblocked downstream development across 3 integration points",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Enhancements delivered without architectural rework between phases",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Hyderabad team achieved independent delivery velocity without ongoing onshore dependency",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "NGEDT development involved Accenture, Avanade, third-party consultants and Hyderabad offshore team",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Situation"
+   },
+   {
+    "text": "AT&T order management: defined data flow strategy, used Oracle CASE method, reviewed component definitions, worked with domain architects",
+    "label": "supported",
+    "source": "resolving-cross-domain-data-issues-for-atts-order-management|att Action"
+   },
+   {
+    "text": "Removed scalability blockers and caught feasibility issues before rework",
+    "label": "supported",
+    "source": "resolving-cross-domain-data-issues-for-atts-order-management|att Result"
+   },
+   {
+    "text": "Built the Cloud Innovation Center from 0 to 150+ professionals",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Action/Result"
+   },
+   {
+    "text": "CIC teams delivered at 4x velocity with zero-defect deployments through TDD and automated pipelines",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 7,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Turn 2 explains the degree from the profile and gives the technical track record as facts, no inflation or self-evaluation, no closing. All claims supported: profile.education; Cendant; F-22 pipeline; AT&T enhancements; MattGPT ADRs/BDD/evals. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "Cendant underwriters and loan officers worked in a mainframe green-screen application",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Situation"
+   },
+   {
+    "text": "Built the JSP and MVC front end",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Configured the TIBCO layer; modeled credit report requests, verification flows and conditional routing to manager approval",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action"
+   },
+   {
+    "text": "Found and corrected flaws in the math and logic of Oracle stored procedures calculating risk factors",
+    "label": "supported",
+    "source": "replacing-a-mainframe-underwriting-system-at-cendant-mortgage|cendant-mortgage Action/Result"
+   },
+   {
+    "text": "Lockheed: Unix C shell wrapper and Oracle 8i PL/SQL backend for daily aircraft configuration ingestion; recursive next-higher-assembly hierarchy; maintained over a year; duplicate-serial fix",
+    "label": "supported",
+    "source": "keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Action/Result"
+   },
+   {
+    "text": "Designed enhancements using .NET, C#, SQL Server and ESRI APIs",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action/Situation"
+   },
+   {
+    "text": "Enhancements delivered without architectural rework between phases",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Built MattGPT using ADRs, behavior-first tests and eval-driven (golden-query) checks",
+    "label": "supported",
+    "source": "building-effective-ai-assisted-development-workflows|independent-project Action"
+   },
+   {
+    "text": "Checks prevented AI-generated regressions from reaching production",
+    "label": "supported",
+    "source": "building-effective-ai-assisted-development-workflows|independent-project Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 7,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Turn 2 explains the degree from the profile and gives the technical track record as facts, no inflation or self-evaluation, no closing. All claims supported: profile.education (omits 'exceeds', not a fail); F-22 ETL facts; Octane; MattGPT 100+ stories, RAG, regressions prevented. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "F-22 program needed a serial-level as-built configuration record",
+    "label": "supported",
+    "source": "keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Situation"
+   },
+   {
+    "text": "Owned daily ETL between shop-floor material tracking and master configuration system",
+    "label": "supported",
+    "source": "keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Task"
+   },
+   {
+    "text": "Wrote a Unix C shell wrapper and an Oracle 8i PL/SQL backend",
+    "label": "supported",
+    "source": "keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Action"
+   },
+   {
+    "text": "Recursive as-built hierarchy (next-higher assemblies) and Unix scripting were new to him",
+    "label": "supported",
+    "source": "keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Situation/Action"
+   },
+   {
+    "text": "Maintained the pipeline for over a year; shipped fix preventing duplicate serial inserts",
+    "label": "supported",
+    "source": "keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Action/Result"
+   },
+   {
+    "text": "Tested against partly anonymized data, validated in cycles with Lockheed personnel",
+    "label": "supported",
+    "source": "keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Action"
+   },
+   {
+    "text": "Daily ingestion kept configuration data current without manual entry",
+    "label": "supported",
+    "source": "keeping-the-f-22s-as-built-configuration-data-accurate|lockheed-martin Result"
+   },
+   {
+    "text": "Octane: engineers struggled to onboard to cloud-native technologies for lack of standardized resources",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Led creation of reusable reference applications and IaC templates",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Infrastructure provisioning automated with Terraform and AWS CloudFormation",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Built Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Built MattGPT using ADRs, behavior-first tests and eval-driven (golden-query) checks",
+    "label": "supported",
+    "source": "building-effective-ai-assisted-development-workflows|independent-project Action"
+   },
+   {
+    "text": "Shipped a working product (100+ stories, RAG architecture, polished UI) as a solo developer",
+    "label": "supported",
+    "source": "building-effective-ai-assisted-development-workflows|independent-project Result"
+   },
+   {
+    "text": "Checks prevented AI-generated regressions from reaching production",
+    "label": "supported",
+    "source": "building-effective-ai-assisted-development-workflows|independent-project Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: answered from profile; supported: Master's IT, AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: answered from profile; supported: Master's IT, AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: answered from profile; supported: Master's IT, AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 8,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Turn 2 explains the degree from the profile and gives the technical track record as facts, no inflation or self-evaluation, no closing. All claims supported: profile.education; Sparkfly MVC refactor; AIU course; AT&T. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "At Sparkfly wrote a JSP-only product, saw it turn fragile and slow, taught himself MVC from Marty Hall's Core Servlets and JavaServer Pages and refactored onto servlets and beans",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application|american-intercontinental-university Situation; building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "Taught entry-level Enterprise Java at AIU alongside full-time consulting work",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application|american-intercontinental-university Situation"
+   },
+   {
+    "text": "Students with no server-side background finished with a working Java web app with persistence and session state",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application|american-intercontinental-university Result"
+   },
+   {
+    "text": "Course covered JDK/Tomcat setup, HTTP request handling, MySQL/JDBC, session tracking, MVC",
+    "label": "supported",
+    "source": "teaching-entry-level-developers-to-build-their-first-java-web-application|american-intercontinental-university Action"
+   },
+   {
+    "text": "Defined Joint Interface Agreements / integration agreements with MIC, MIC-NT and ELP",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Designed enhancements using .NET, C#, SQL Server and ESRI APIs",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action/Situation"
+   },
+   {
+    "text": "Conducted technical and functional reviews of offshore-delivered code",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Traveled to Hyderabad to transition designs and resolve design/development issues",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Agreements unblocked downstream development across 3 integration points",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Enhancements delivered without architectural rework between phases",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Hyderabad team achieved independent delivery velocity without ongoing onshore dependency",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 8,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Turn 2 explains the degree from the profile and gives the technical track record as facts, no inflation or self-evaluation, no closing. All claims supported: profile.education; AT&T; Octane incl. OWASP/IAM; MattGPT ADRs, golden queries, 100+ stories, RAG, polished UI. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "Defined Joint Interface Agreements / integration agreements with MIC, MIC-NT and ELP",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Designed enhancements using .NET, C#, SQL Server and ESRI APIs",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action/Situation"
+   },
+   {
+    "text": "Conducted technical and functional reviews of offshore-delivered code",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Traveled to Hyderabad to transition designs and resolve design/development issues",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Agreements unblocked downstream development across 3 integration points",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Enhancements delivered without architectural rework between phases",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Octane: engineers struggled to onboard to cloud-native technologies for lack of standardized resources",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Led creation of reusable reference applications and IaC templates",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Infrastructure provisioning automated with Terraform and AWS CloudFormation",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Built Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Octane embedded OWASP and IAM security practices",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Built MattGPT using ADRs, behavior-first tests and eval-driven (golden-query) checks",
+    "label": "supported",
+    "source": "building-effective-ai-assisted-development-workflows|independent-project Action"
+   },
+   {
+    "text": "Shipped a working product (100+ stories, RAG architecture, polished UI) as a solo developer",
+    "label": "supported",
+    "source": "building-effective-ai-assisted-development-workflows|independent-project Result"
+   },
+   {
+    "text": "Checks prevented AI-generated regressions from reaching production",
+    "label": "supported",
+    "source": "building-effective-ai-assisted-development-workflows|independent-project Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 8,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Turn 2 explains the degree from the profile and gives the technical track record as facts, no inflation or self-evaluation, no closing. All claims supported: profile.education; AT&T; Octane; CIC 0 to 150+, 4x, zero-defect. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "Defined Joint Interface Agreements / integration agreements with MIC, MIC-NT and ELP",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Designed enhancements using .NET, C#, SQL Server and ESRI APIs",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action/Situation"
+   },
+   {
+    "text": "Conducted technical and functional reviews of offshore-delivered code",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Traveled to Hyderabad to transition designs and resolve design/development issues",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Agreements unblocked downstream development across 3 integration points",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Enhancements delivered without architectural rework between phases",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Hyderabad team achieved independent delivery velocity without ongoing onshore dependency",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Octane: engineers struggled to onboard to cloud-native technologies for lack of standardized resources",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Led creation of reusable reference applications and IaC templates",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Infrastructure provisioning automated with Terraform and AWS CloudFormation",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Built Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Octane embedded OWASP principles and IAM standards",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Built the Cloud Innovation Center from 0 to 150+ professionals",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Action/Result"
+   },
+   {
+    "text": "CIC teams delivered at 4x velocity with zero-defect deployments through TDD and automated pipelines",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: answered from profile; supported: Master's IT, AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: answered from profile; supported: Master's IT, AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: answered from profile; supported: Master's IT, AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 9,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Turn 2 explains the degree from the profile and gives the technical track record as facts, no inflation or self-evaluation, no closing. All claims supported: profile.education; TICARA; Octane Summit; CIC 0 to 150+, 4x, zero-defect. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "Liquid Studio prototyping was delayed by account setup/provisioning; standard SLA 2 to 3 days",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Situation/Result"
+   },
+   {
+    "text": "Designed TICARA with Terraform and the Serverless Framework",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Action"
+   },
+   {
+    "text": "Pre-provisioned AWS or Azure accounts kept ready at the hub",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Result"
+   },
+   {
+    "text": "Working environment (VPC, services, sample code) stood up in 30 to 40 minutes",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Action"
+   },
+   {
+    "text": "Developer toolkit covering serverless functions, API Gateway, relational/NoSQL stores, messaging",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Action"
+   },
+   {
+    "text": "Led creation of reusable reference applications and IaC templates",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Infrastructure provisioning automated with Terraform and AWS CloudFormation",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Built Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Octane paired reference apps/infrastructure with hands-on workshops",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture 5PSummary"
+   },
+   {
+    "text": "Built the Cloud Innovation Center from 0 to 150+ professionals",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Action/Result"
+   },
+   {
+    "text": "CIC teams delivered at 4x velocity with zero-defect deployments through TDD and automated pipelines",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 9,
+  "turn": 2,
+  "label": "B",
+  "pass": false,
+  "reason": "Fails Section 3: the answer never explains the degree from the profile (no Master's in IT, no CS-related discipline, no 'exceeds a Bachelor's'); it ignores the degree and gives only the track record. All claims supported (Capital One team of 8, Go upskilling, 4x defect-free; STRATCOM team of 4; MattGPT solo, 100+ stories). 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Capital One internal teams overwhelmed by workloads and Fed-mandated compliance updates, burnout",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Situation"
+   },
+   {
+    "text": "Built a balanced team of 8: 1 PM, 1 CX/product designer, 6 developers incl. the anchor/lead, sized for pairing",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Action"
+   },
+   {
+    "text": "Organized Go upskilling ahead of the project",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Action"
+   },
+   {
+    "text": "Implemented Lean XP / pair programming, continuous integration and an automated testing suite",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Action"
+   },
+   {
+    "text": "Defect-free production code at 4x the output of Capital One's internal teams",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Result"
+   },
+   {
+    "text": "Additional engagements followed",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Result"
+   },
+   {
+    "text": "Led the initiative to augment development capacity without compromising quality",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Task"
+   },
+   {
+    "text": "STRATCOM: team of 4 rotating across Java web front end, TIBCO middleware and Oracle PL/SQL layers",
+    "label": "supported",
+    "source": "turning-stratcoms-paper-operational-plans-into-executable-workflow|lockheed-martin Action/Task"
+   },
+   {
+    "text": "Wrote PL/SQL packages, stored procedures, functions and triggers",
+    "label": "supported",
+    "source": "turning-stratcoms-paper-operational-plans-into-executable-workflow|lockheed-martin Action"
+   },
+   {
+    "text": "Used TDD and paired with the customer's team; documented build/run procedures",
+    "label": "supported",
+    "source": "turning-stratcoms-paper-operational-plans-into-executable-workflow|lockheed-martin Action"
+   },
+   {
+    "text": "Replaced paper operational procedures with executable workflow; customer could run and extend it",
+    "label": "supported",
+    "source": "turning-stratcoms-paper-operational-plans-into-executable-workflow|lockheed-martin Result"
+   },
+   {
+    "text": "Built MattGPT using ADRs, behavior-first tests and eval-driven (golden-query) checks",
+    "label": "supported",
+    "source": "building-effective-ai-assisted-development-workflows|independent-project Action"
+   },
+   {
+    "text": "Shipped a working product (100+ stories, RAG architecture, polished UI) as a solo developer",
+    "label": "supported",
+    "source": "building-effective-ai-assisted-development-workflows|independent-project Result"
+   },
+   {
+    "text": "Checks prevented AI-generated regressions from reaching production",
+    "label": "supported",
+    "source": "building-effective-ai-assisted-development-workflows|independent-project Result"
+   },
+   {
+    "text": "ADRs used to preserve architectural intent",
+    "label": "supported",
+    "source": "building-effective-ai-assisted-development-workflows|independent-project Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 9,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Turn 2 explains the degree from the profile and gives the technical track record as facts, no inflation or self-evaluation, no closing. All claims supported: profile.education; AT&T; Octane; Capital One 8-person team, 4x defect-free, additional engagements. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "Defined Joint Interface Agreements / integration agreements with MIC, MIC-NT and ELP",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Designed enhancements using .NET, C#, SQL Server and ESRI APIs",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action/Situation"
+   },
+   {
+    "text": "Conducted technical and functional reviews of offshore-delivered code",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Traveled to Hyderabad to transition designs and resolve design/development issues",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Agreements unblocked downstream development across 3 integration points",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Enhancements delivered without architectural rework between phases",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Octane: engineers struggled to onboard to cloud-native technologies for lack of standardized resources",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Led creation of reusable reference applications and IaC templates",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Infrastructure provisioning automated with Terraform and AWS CloudFormation",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Built Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Summit app included IaC to provision its infrastructure",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Result"
+   },
+   {
+    "text": "Capital One internal teams overwhelmed by workloads and Fed-mandated compliance updates, burnout",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Situation"
+   },
+   {
+    "text": "Built a balanced team of 8: 1 PM, 1 CX/product designer, 6 developers incl. the anchor/lead, sized for pairing",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Action"
+   },
+   {
+    "text": "Organized Go upskilling ahead of the project",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Action"
+   },
+   {
+    "text": "Implemented Lean XP / pair programming, continuous integration and an automated testing suite",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Action"
+   },
+   {
+    "text": "Defect-free production code at 4x the output of Capital One's internal teams",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Result"
+   },
+   {
+    "text": "Additional engagements followed",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "First turn: answered from profile; supported: not specifically CS, Master's IT AIU, CS-related discipline (profile.education). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "First turn: answered from profile; supported: Master's IT, AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "First turn: answered from profile; supported: Master's IT, AIU, not titled CS, CS-related discipline, exceeds Bachelor's (profile.education). No closing. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 10,
+  "turn": 2,
+  "label": "A",
+  "pass": true,
+  "reason": "Turn 2 explains the degree from the profile and gives the technical track record as facts, no inflation or self-evaluation, no closing. All claims supported: profile.education; TICARA 2-3 days, 30-40 min; Octane; cloud-native gates/microservices, Capital One zero-defect payment deployments, 15+ engagements 4X, weeks to days. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "Liquid Studio prototyping was delayed by account setup/provisioning; standard SLA 2 to 3 days",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Situation/Result"
+   },
+   {
+    "text": "Designed TICARA with Terraform and the Serverless Framework",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Action"
+   },
+   {
+    "text": "Pre-provisioned AWS or Azure accounts kept ready at the hub",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Result"
+   },
+   {
+    "text": "Working environment (VPC, services, sample code) stood up in 30 to 40 minutes",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture Action"
+   },
+   {
+    "text": "Client pitches were happening within days",
+    "label": "supported",
+    "source": "driving-cloud-native-innovation-through-ticara-framework|accenture 5PSummary"
+   },
+   {
+    "text": "Octane: engineers struggled to onboard to cloud-native technologies for lack of standardized resources",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Led creation of reusable reference applications and IaC templates",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Infrastructure provisioning automated with Terraform and AWS CloudFormation",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Built Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Reference applications included their own infrastructure code",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Result"
+   },
+   {
+    "text": "Established microservices patterns, CI with automated testing and deployment gates, IaC",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Action/Process"
+   },
+   {
+    "text": "Across 15+ Fortune 500 engagements: 4X velocity; lead time weeks to days",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "At Capital One, zero-defect deployments to payment systems through automated testing",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 10,
+  "turn": 2,
+  "label": "B",
+  "pass": true,
+  "reason": "Turn 2 explains the degree from the profile and gives the technical track record as facts, no inflation or self-evaluation, no closing. All claims supported: profile.education; AT&T; Octane; Capital One. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Degree is not titled Computer Science",
+    "label": "supported",
+    "source": "profile.education[0].degree"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "At AT&T integration agreements were missing",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att 5PSummary"
+   },
+   {
+    "text": "Capital One internal teams overwhelmed by workloads and Fed-mandated compliance updates, burnout",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Situation"
+   },
+   {
+    "text": "Octane: engineers struggled to onboard to cloud-native technologies for lack of standardized resources",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Defined Joint Interface Agreements / integration agreements with MIC, MIC-NT and ELP",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Designed enhancements using .NET, C#, SQL Server and ESRI APIs",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action/Situation"
+   },
+   {
+    "text": "Conducted technical and functional reviews of offshore-delivered code",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Traveled to Hyderabad to transition designs and resolve design/development issues",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Action"
+   },
+   {
+    "text": "Agreements unblocked downstream development across 3 integration points",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Enhancements delivered without architectural rework between phases",
+    "label": "supported",
+    "source": "architecting-enhancements-for-atts-network-engineering-platform|att Result"
+   },
+   {
+    "text": "Led creation of reusable reference applications and IaC templates",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Infrastructure provisioning automated with Terraform and AWS CloudFormation",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Built Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Built a balanced team of 8: 1 PM, 1 CX/product designer, 6 developers incl. the anchor/lead, sized for pairing",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Action"
+   },
+   {
+    "text": "Organized Go upskilling ahead of the project",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Action"
+   },
+   {
+    "text": "Implemented Lean XP / pair programming, continuous integration and an automated testing suite",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Action"
+   },
+   {
+    "text": "Defect-free production code at 4x the output of Capital One's internal teams",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Result"
+   },
+   {
+    "text": "Additional engagements followed",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "c02",
+  "run": 10,
+  "turn": 2,
+  "label": "C",
+  "pass": true,
+  "reason": "Turn 2 explains the degree from the profile and gives the technical track record as facts, no inflation or self-evaluation, no closing. All claims supported: profile.education; profile.career_arc.progression; Capital One; Octane. 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "Master's degree in Information Technology from American InterContinental University",
+    "label": "supported",
+    "source": "profile.education[0].degree/institution"
+   },
+   {
+    "text": "Information Technology is a recognized Computer Science-related discipline",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "A Master's degree exceeds a Bachelor's",
+    "label": "supported",
+    "source": "profile.education[0].note"
+   },
+   {
+    "text": "Career progressed Software Engineer to Solution Architect to Director to Cloud Innovation Center Leader",
+    "label": "supported",
+    "source": "profile.career_arc.progression"
+   },
+   {
+    "text": "Capital One internal teams overwhelmed by workloads and Fed-mandated compliance updates, burnout",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Situation"
+   },
+   {
+    "text": "Built a balanced team of 8: 1 PM, 1 CX/product designer, 6 developers incl. the anchor/lead, sized for pairing",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Action"
+   },
+   {
+    "text": "Organized Go upskilling ahead of the project",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Action"
+   },
+   {
+    "text": "Implemented Lean XP / pair programming, continuous integration and an automated testing suite",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Action"
+   },
+   {
+    "text": "Defect-free production code at 4x the output of Capital One's internal teams",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Result"
+   },
+   {
+    "text": "Additional engagements followed",
+    "label": "supported",
+    "source": "scaling-development-capacity-with-modern-engineering-practices|capital-one Result"
+   },
+   {
+    "text": "Octane: engineers struggled to onboard to cloud-native technologies for lack of standardized resources",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Situation"
+   },
+   {
+    "text": "Led creation of reusable reference applications and IaC templates",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action/5PSummary"
+   },
+   {
+    "text": "Infrastructure provisioning automated with Terraform and AWS CloudFormation",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Built Summit reference app on AWS AppSync for real-time GraphQL sync backed by ElastiCache",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Action"
+   },
+   {
+    "text": "Each reference stack included the IaC to provision its environment",
+    "label": "supported",
+    "source": "driving-modern-software-engineering-with-project-octane|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ }
+]

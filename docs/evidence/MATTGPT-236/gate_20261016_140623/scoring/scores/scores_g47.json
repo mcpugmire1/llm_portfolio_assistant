@@ -1,0 +1,692 @@
+[
+ {
+  "case": "r16",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ },
+ {
+  "case": "r16",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: 'speaks French, B2, self-assessed' (profile.languages); no fluency claim beyond B2, no teaching/Montpellier extras, no closing.",
+  "claims": [
+   {
+    "text": "Matt speaks French at B2 level, self-assessed",
+    "label": "supported",
+    "source": "profile.languages"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": null,
+  "useful_direct": null,
+  "bare_sentence": null
+ }
+]

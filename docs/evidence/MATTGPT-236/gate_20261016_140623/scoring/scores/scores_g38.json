@@ -1,0 +1,857 @@
+[
+ {
+  "case": "r07",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'Matt has no documented agriculture experience.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "Matt has no documented agriculture experience.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'I don’t have any documented agriculture experience for Matt.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "I don’t have any documented agriculture experience for Matt.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "contradicted: 'I don’t have any documented agriculture experience for Matt.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "I don’t have any documented agriculture experience for Matt.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'I don’t have any record of Matt working in agriculture.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "I don’t have any record of Matt working in agriculture.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'I don’t have any documented agriculture experience for Matt.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "I don’t have any documented agriculture experience for Matt.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "contradicted: 'I don’t have evidence that Matt has worked in agriculture.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "I don’t have evidence that Matt has worked in agriculture.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'I don’t have any documented agriculture experience for Matt.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "I don’t have any documented agriculture experience for Matt.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'I don’t have any documented agriculture experience for Matt.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "I don’t have any documented agriculture experience for Matt.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   },
+   {
+    "text": "Agriculture is not among the listed industries",
+    "label": "supported",
+    "source": "corpus Industry field values (no Agriculture value)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "contradicted: 'I don’t have any documented agriculture engagements for Matt.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "I don’t have any documented agriculture engagements for Matt.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'I don’t have any documented agriculture experience for Matt.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "I don’t have any documented agriculture experience for Matt.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'Matt has no documented agriculture experience.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "Matt has no documented agriculture experience.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "contradicted: 'I don’t have any documented agriculture experience for Matt.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "I don’t have any documented agriculture experience for Matt.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'I don’t have any documented agriculture experience for Matt.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "I don’t have any documented agriculture experience for Matt.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'I don’t have any documented agriculture experience for Matt.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "I don’t have any documented agriculture experience for Matt.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "contradicted: 'I don’t have any record of Matt working in agriculture.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "I don’t have any record of Matt working in agriculture.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'I don’t have any documented agriculture experience for Matt.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "I don’t have any documented agriculture experience for Matt.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'Matt has no documented agriculture experience.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "Matt has no documented agriculture experience.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "contradicted: 'I don’t have any documented agriculture experience for Matt.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "I don’t have any documented agriculture experience for Matt.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'I don’t have any documented agriculture experience for Matt.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "I don’t have any documented agriculture experience for Matt.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'I don’t have a documented agriculture engagement for Matt.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "I don’t have a documented agriculture engagement for Matt.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   },
+   {
+    "text": "Agriculture is not among the listed industries",
+    "label": "supported",
+    "source": "corpus Industry field values (no Agriculture value)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "contradicted: 'I don’t have any documented agriculture experience for Matt.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "I don’t have any documented agriculture experience for Matt.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'Not that I know of.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "Not that I know of.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   },
+   {
+    "text": "Agriculture is not among the listed industries",
+    "label": "supported",
+    "source": "corpus Industry field values (no Agriculture value)"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'I don’t have any documented agriculture experience for Matt.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "I don’t have any documented agriculture experience for Matt.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "contradicted: 'I don’t have any documented agriculture experience for Matt.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "I don’t have any documented agriculture experience for Matt.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'I don’t have any documented agriculture experience for Matt.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "I don’t have any documented agriculture experience for Matt.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'I don’t have any documented agriculture experience for Matt.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "I don’t have any documented agriculture experience for Matt.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "contradicted: 'I don’t have any documented agriculture experience for Matt.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "I don’t have any documented agriculture experience for Matt.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": false,
+  "reason": "contradicted: 'I don’t have any documented agriculture experience for Matt.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "I don’t have any documented agriculture experience for Matt.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": false,
+  "reason": "contradicted: 'Matt has no documented agriculture experience.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "Matt has no documented agriculture experience.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ },
+ {
+  "case": "r07",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": false,
+  "reason": "contradicted: 'I don’t have evidence that Matt has worked in agriculture.' (Liquid Studio story Result records prototyping work across agriculture among five industries); supported: industry list from corpus Industry values. Names no adjacent real work, so useful_direct false.",
+  "claims": [
+   {
+    "text": "I don’t have evidence that Matt has worked in agriculture.",
+    "label": "contradicted",
+    "source": "building-smart-connected-devices-at-accentures-liquid-studio|accenture Result ('Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods')"
+   },
+   {
+    "text": "Industry experience includes financial services/banking, technology and software, transportation and logistics, telecommunications, aerospace and defense, healthcare and life sciences, education",
+    "label": "supported",
+    "source": "corpus Industry field values"
+   }
+  ],
+  "contradicted": 1,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": false,
+  "bare_sentence": null
+ }
+]

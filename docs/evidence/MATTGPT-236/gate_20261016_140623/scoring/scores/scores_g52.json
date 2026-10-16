@@ -1,0 +1,1162 @@
+[
+ {
+  "case": "x5",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'I don't have a documented example' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: lists real platform work after the absence statement; labelling is implicit (contrast), not explicit. supported: Platform work includes enterprise payments; banking modernization; cloud-native systems; MattGPT, an AI-powered portfolio assistant. contradicted: none; unsupported: none; no closing offer. Note: ambiguous useful_direct.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "cloud-native systems",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Title"
+   },
+   {
+    "text": "MattGPT, an AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found a gaming-platform engagement in Matt's work history' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: 'but I can't confirm direct gaming-industry experience' contrasts the list. supported: Platform work includes enterprise payments; banking modernization; cloud-native systems; MattGPT. contradicted: none; unsupported: none; no closing offer.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "cloud-native systems",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Title"
+   },
+   {
+    "text": "MattGPT",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found a gaming-platform engagement in Matt's work history' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: 'Those are not gaming platforms'. supported: Platform work includes enterprise payments; banking modernization; cloud-native systems; Sparkfly commerce and personalization portal. contradicted: none; unsupported: none; no closing offer.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "cloud-native systems",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Title"
+   },
+   {
+    "text": "Sparkfly commerce and personalization portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action/Project"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'documented work does not include gaming platforms'; 'stories don't establish' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: adjacent work labelled by the absence framing and 'stories don't establish' gaming. supported: Platform work includes enterprise payments; banking modernization; cloud-native systems; developer portals, including the Virtual Payments Platform at American Express. contradicted: none; unsupported: none; no closing offer.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "cloud-native systems",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Title"
+   },
+   {
+    "text": "developer portals, including the Virtual Payments Platform at American Express",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action (co-created developer portal)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found a documented gaming-platform engagement' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: 'Those are not gaming platforms'. supported: Platform work includes enterprise payments; banking modernization; cloud-native systems; MattGPT, an AI-powered portfolio assistant. contradicted: none; unsupported: none; no closing offer.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "cloud-native systems",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Title"
+   },
+   {
+    "text": "MattGPT, an AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found any documented gaming-platform work' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: 'Those are not gaming engagements'. supported: Platform work includes enterprise payments; banking modernization; cloud-native systems; developer portals. contradicted: none; unsupported: none; no closing offer.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "cloud-native systems",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Title"
+   },
+   {
+    "text": "developer portals",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found any gaming-platform work in Matt's career stories' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: 'rather than gaming'. supported: Platform work includes enterprise payments; banking modernization; cloud-native systems; MattGPT. contradicted: none; unsupported: none; no closing offer.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "cloud-native systems",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Title"
+   },
+   {
+    "text": "MattGPT",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found a gaming-platform engagement in Matt's work history' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: 'not gaming platforms'. supported: enterprise payments platform rolled out across 12 countries at JP Morgan Chase; Salesforce platform rolled out across 12 countries at JP Morgan Chase; Sparkfly portal: led 4 developers while writing production code for commerce, personalization, content channels, administrative messaging; enterprise and retail technology platforms. contradicted: none; unsupported: none; no closing offer.",
+  "claims": [
+   {
+    "text": "enterprise payments platform rolled out across 12 countries at JP Morgan Chase",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Salesforce platform rolled out across 12 countries at JP Morgan Chase",
+    "label": "supported",
+    "source": "driving-salesforce-adoption-across-12-countries-for-jp-morgan|jp-morgan-chase Result"
+   },
+   {
+    "text": "Sparkfly portal: led 4 developers while writing production code for commerce, personalization, content channels, administrative messaging",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Task/Action/5PSummary"
+   },
+   {
+    "text": "enterprise and retail technology platforms",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result (retail technology platform)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found a documented gaming-platform engagement' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: 'Those are not gaming platforms'. supported: Platform work includes enterprise payments; banking modernization; cloud-native systems; Sparkfly commerce and personalization portal; MattGPT. contradicted: none; unsupported: none; no closing offer.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "cloud-native systems",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Title"
+   },
+   {
+    "text": "Sparkfly commerce and personalization portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action/Project"
+   },
+   {
+    "text": "MattGPT",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found a gaming-platform engagement'; 'None of the stories I found describes game development or a gaming platform' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: 'None of the stories ... describes ... a gaming platform'. supported: Platform work includes enterprise payments; banking modernization; cloud-native systems; MattGPT, an AI-powered portfolio assistant. contradicted: none; unsupported: none; no closing offer.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "cloud-native systems",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Title"
+   },
+   {
+    "text": "MattGPT, an AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'I don't have a documented example' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: list follows the absence statement with no explicit not-gaming label; contrast is implicit. supported: Platform work includes enterprise payments; banking modernization; cloud-native systems; MattGPT, an AI-powered portfolio assistant. contradicted: none; unsupported: none; no closing offer. Note: ambiguous useful_direct.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "cloud-native systems",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Title"
+   },
+   {
+    "text": "MattGPT, an AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found any gaming-platform projects in Matt's work history' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: 'but I can't confirm direct gaming-industry experience' contrasts the list. supported: Platform work includes enterprise payments; banking modernization; cloud-native systems; MattGPT. contradicted: none; unsupported: none; no closing offer.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "cloud-native systems",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Title"
+   },
+   {
+    "text": "MattGPT",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found any documented gaming-platform work' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: 'I can't confirm experience with video-game development or gaming platforms' after the list. supported: Platform work includes enterprise payments; banking modernization; cloud-native systems; MattGPT, an AI-powered portfolio assistant. contradicted: none; unsupported: none; no closing offer.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "cloud-native systems",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Title"
+   },
+   {
+    "text": "MattGPT, an AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'I don't have a documented example' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: list follows the absence statement with no explicit not-gaming label; contrast is implicit. supported: Platform work includes enterprise payments; banking modernization; cloud-native systems; MattGPT, an AI-powered portfolio assistant. contradicted: none; unsupported: none; no closing offer. Note: ambiguous useful_direct.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "cloud-native systems",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Title"
+   },
+   {
+    "text": "MattGPT, an AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found any gaming-platform projects' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: 'rather than game development or gaming platforms'. supported: Platform work includes enterprise payments; banking modernization; cloud-native systems; MattGPT. contradicted: none; unsupported: none; no closing offer.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "cloud-native systems",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Title"
+   },
+   {
+    "text": "MattGPT",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found a gaming-platform engagement' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: 'I can't confirm experience with gaming platforms' after the list. supported: Platform work includes enterprise payments; banking modernization; cloud-native systems; MattGPT, an AI-powered portfolio assistant. contradicted: none; unsupported: none; no closing offer.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "cloud-native systems",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Title"
+   },
+   {
+    "text": "MattGPT, an AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'I don't have a documented example' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: 'Gaming-specific experience isn't established in those stories'. supported: Platform work includes enterprise payments; banking modernization; cloud-native systems; MattGPT, an AI-powered portfolio assistant. contradicted: none; unsupported: none; no closing offer.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "cloud-native systems",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Title"
+   },
+   {
+    "text": "MattGPT, an AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found any documented gaming-platform work' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: 'rather than gaming platforms'. supported: Platform work includes enterprise payments; banking modernization; cloud-native systems; MattGPT. contradicted: none; unsupported: none; no closing offer.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "cloud-native systems",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Title"
+   },
+   {
+    "text": "MattGPT",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found any documented gaming-platform work' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: 'I wouldn't describe those as gaming experience'. supported: Platform work includes enterprise payments; banking modernization; cloud-native systems; MattGPT, an AI-powered portfolio assistant. contradicted: none; unsupported: none; no closing offer.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "cloud-native systems",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Title"
+   },
+   {
+    "text": "MattGPT, an AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'I don't have a documented example' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: 'Those are not gaming platforms'. supported: Platform work includes enterprise payments; banking modernization; Sparkfly commerce and personalization portal; MattGPT, an AI-powered portfolio assistant. contradicted: none; unsupported: none; no closing offer.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "Sparkfly commerce and personalization portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action/Project"
+   },
+   {
+    "text": "MattGPT, an AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'I don't have a documented example' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: 'not a gaming platform'. supported: Platform work includes enterprise payments; banking modernization; retail technology; MattGPT, an AI-powered portfolio assistant; At Sparkfly built catalog search, checkout, personalization, content channels, administrative messaging while leading 4 developers and writing production code; a retail and employee-discount portal. contradicted: none; unsupported: none; no closing offer.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "retail technology",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Result"
+   },
+   {
+    "text": "MattGPT, an AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task/5PSummary"
+   },
+   {
+    "text": "At Sparkfly built catalog search, checkout, personalization, content channels, administrative messaging while leading 4 developers and writing production code",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action/5PSummary"
+   },
+   {
+    "text": "a retail and employee-discount portal",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Project/Situation/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'I don't have a documented example' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: list follows the absence statement with no explicit not-gaming label; contrast is implicit. supported: Platform work includes enterprise payments; banking modernization; cloud-native systems; his personal AI project, MattGPT. contradicted: none; unsupported: none; no closing offer. Note: ambiguous useful_direct.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "cloud-native systems",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Title"
+   },
+   {
+    "text": "his personal AI project, MattGPT",
+    "label": "supported",
+    "source": "building-effective-ai-assisted-development-workflows|independent-project Client (Independent Project)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found any documented gaming-platform work in Matt's career stories' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: 'Those projects aren't gaming platforms'. supported: Platform work includes enterprise payments; banking modernization; cloud-native systems; MattGPT, an AI-powered portfolio assistant. contradicted: none; unsupported: none; no closing offer.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "cloud-native systems",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Title"
+   },
+   {
+    "text": "MattGPT, an AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'didn't find any gaming-platform work in Matt's career stories' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: 'Gaming-platform experience isn't established by those stories'. supported: Platform work includes enterprise payments; banking modernization; cloud-native systems; MattGPT, an AI-powered portfolio assistant. contradicted: none; unsupported: none; no closing offer.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "cloud-native systems",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Title"
+   },
+   {
+    "text": "MattGPT, an AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'I don't have a documented example' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: 'not evidence of gaming-platform experience'. supported: Platform work includes enterprise payments; banking modernization; cloud-native systems; MattGPT, an AI-powered portfolio assistant; At American Express worked on the Virtual Payments Platform, including developer SDKs, API documentation and a secure sandbox. contradicted: none; unsupported: none; no closing offer.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "cloud-native systems",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Title"
+   },
+   {
+    "text": "MattGPT, an AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task/5PSummary"
+   },
+   {
+    "text": "At American Express worked on the Virtual Payments Platform, including developer SDKs, API documentation and a secure sandbox",
+    "label": "supported",
+    "source": "lowering-barriers-to-adoption-for-american-expresss-virtual-payments-platform|american-express Action/Interview Questions"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'haven't found a story documenting Matt working on gaming platforms' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: 'I wouldn't describe those as gaming-platform experience'. supported: Platform work includes enterprise payments; banking modernization; cloud-native systems; MattGPT, an AI-powered portfolio assistant. contradicted: none; unsupported: none; no closing offer.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "cloud-native systems",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Title"
+   },
+   {
+    "text": "MattGPT, an AI-powered portfolio assistant",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'I don't have a documented example' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: 'rather than game development or gaming infrastructure'. supported: Platform work includes enterprise payments; banking modernization; cloud-native systems; MattGPT. contradicted: none; unsupported: none; no closing offer.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "cloud-native systems",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Title"
+   },
+   {
+    "text": "MattGPT",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'I don't have a documented example' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: 'I wouldn't describe those as gaming experience'. supported: Platform work includes enterprise payments; banking modernization; cloud-native systems; MattGPT. contradicted: none; unsupported: none; no closing offer.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "cloud-native systems",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Title"
+   },
+   {
+    "text": "MattGPT",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'I don't have a documented example' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: 'not gaming experience'. supported: Platform work includes enterprise payments; banking modernization; cloud-native systems; At JP Morgan Chase payments and Salesforce platforms each rolled out across 12 countries; built MattGPT, an AI-powered assistant with semantic search across 100+ career stories. contradicted: none; unsupported: none; no closing offer.",
+  "claims": [
+   {
+    "text": "Platform work includes enterprise payments",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Title"
+   },
+   {
+    "text": "banking modernization",
+    "label": "supported",
+    "source": "about-matt-my-leadership-journey|accenture Action (modernization programs across banking)"
+   },
+   {
+    "text": "cloud-native systems",
+    "label": "supported",
+    "source": "unifying-norfolk-southerns-teams-around-cloud-native-practices|norfolk-southern Title"
+   },
+   {
+    "text": "At JP Morgan Chase payments and Salesforce platforms each rolled out across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries / driving-salesforce-adoption-across-12-countries-for-jp-morgan Result"
+   },
+   {
+    "text": "built MattGPT, an AI-powered assistant with semantic search across 100+ career stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Task/5PSummary 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ },
+ {
+  "case": "x5",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Pass. acknowledges_missing: 'I don't have a story documenting Matt working on gaming platforms' (no gaming-platform story in corpus (searched gam(e|ing), video game, casino: no platform hits)). useful_direct: 'Those are not gaming platforms'. supported: enterprise payments at JP Morgan Chase; commerce and personalization at Sparkfly; his personal AI application, MattGPT. contradicted: none; unsupported: none; no closing offer.",
+  "claims": [
+   {
+    "text": "enterprise payments at JP Morgan Chase",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase"
+   },
+   {
+    "text": "commerce and personalization at Sparkfly",
+    "label": "supported",
+    "source": "building-sparkflys-platform-alongside-its-founder|sparkfly Action"
+   },
+   {
+    "text": "his personal AI application, MattGPT",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation/Client"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "carry_over": null,
+  "clarifying": false,
+  "acknowledges_missing": true,
+  "useful_direct": true,
+  "bare_sentence": null
+ }
+]
