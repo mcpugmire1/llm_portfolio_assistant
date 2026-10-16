@@ -260,8 +260,8 @@ Match).
 
 **Open tickets:** -146, -228, -204, -196, -150, -122, -131, -197, -145,
 -183, -210, -166, -083, -271, -295 (Timeline era order), -308
-(My Work first page is MattGPT stories), -324 (My Work profile facts, from -250), -325 (one-word query
-misses Situation-only mentions).
+(My Work first page is MattGPT stories), -324 (My Work profile facts, from -250), -325 (query-term mentions
+missed under the embedding cutoff).
 
 ## 7. Operational reliability
 

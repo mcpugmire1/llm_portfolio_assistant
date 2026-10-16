@@ -162,7 +162,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-321](#mattgpt-321) | Stale copy after 1095d2c: "Primary LLM" comment on DEFAULT_CHAT_MODEL; "High confidence match" and "Says what it doesn't know" in the How Agy Searches dialog | Open | Low | Hygiene | value | October 15, 2026 |
 | [MATTGPT-322](#mattgpt-322) | Rule 0b's decline is a bare sentence with no opener: hobby questions today, and personal questions once the router is out (MATTGPT-236) | Open | Medium | Issue | value | October 16, 2026 |
 | [MATTGPT-324](#mattgpt-324) | My Work doesn't render the profile facts semantic_search() returns (MATTGPT-250 item 1a) | Open | Medium | Enhancement | value | October 16, 2026 |
-| [MATTGPT-325](#mattgpt-325) | My Work misses stories that mention a one-word query only in their Situation: "Pandemic" returns 1 of the 5 stories that mention it | Open | Medium | Issue | value | October 16, 2026 |
+| [MATTGPT-325](#mattgpt-325) | Stories that mention a query term are missed when their embedding score is under the cutoff: a keyword hit can't admit them | Open | Medium | Issue | value | October 16, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently | Parked | Medium | Action | value | August 3, 2026 |
@@ -3043,7 +3043,7 @@ Any sentinel has to be translated in one place before anything uses it. With tha
 **Hold carried from -250:** "On hold until the MATTGPT-157 keyword-scoring fix is measured." Observed there (Sept 2026): "Is Matt certified?" lands in My Work's high-confidence state with Launchpad at #11, the cause keyword scoring (MATTGPT-157), not rendering. MATTGPT-157 is closed (CHANGELOG, August 8, 2026, `f5641e7`: W_KW re-enabled), before that observation, so the fix the hold waits on is not named. On pickup: re-measure "Is Matt certified?" in My Work at HEAD and decide whether the hold stands.
 
 ### MATTGPT-325
-**My Work misses stories that mention a one-word query only in their Situation: "Pandemic" returns 1 of the 5 stories that mention it**
+**Stories that mention a query term are missed when their embedding score is under the cutoff: a keyword hit can't admit them**
 
 - **Status:** Open
 - **Priority:** Medium
