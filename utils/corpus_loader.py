@@ -52,6 +52,10 @@ def normalize_story(story: dict) -> dict:
     return story
 
 
+def story_id_or_none(raw) -> str | None:
+    raise NotImplementedError
+
+
 def load_stories(path: str) -> list[dict]:
     """Load, filter, and normalize a JSONL corpus file.
 
