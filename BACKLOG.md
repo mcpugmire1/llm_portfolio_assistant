@@ -162,6 +162,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-321](#mattgpt-321) | Stale copy after 1095d2c: "Primary LLM" comment on DEFAULT_CHAT_MODEL; "High confidence match" and "Says what it doesn't know" in the How Agy Searches dialog | Open | Low | Hygiene | value | October 15, 2026 |
 | [MATTGPT-322](#mattgpt-322) | Hobby questions get rule 0b's bare sentence, with no opener, instead of the personal banner | Blocked | Medium | Issue | value | October 16, 2026 |
 | [MATTGPT-324](#mattgpt-324) | My Work doesn't render the profile facts semantic_search() returns (MATTGPT-250 item 1a) | Open | Medium | Enhancement | value | October 16, 2026 |
+| [MATTGPT-325](#mattgpt-325) | My Work misses stories that mention a one-word query only in their Situation: "Pandemic" returns 1 of the 5 stories that mention it | Open | Medium | Issue | value | October 16, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently | Parked | Medium | Action | value | August 3, 2026 |
@@ -3035,6 +3036,40 @@ Any sentinel has to be translated in one place before anything uses it. With tha
 **Split from MATTGPT-250 (Oct 16, 2026):** -250's item 1 has `semantic_search()` return `profile_facts` on every path so both callers receive it. Ask Agy renders a fact card per cited category; My Work's rendering was deferred per `Profile Facts Surfacing.dc.html` (design project). Verified Oct 16, 2026: `grep -rn "profile_facts" ui/ services/` finds it in `services/rag_service.py`, `ui/pages/ask_mattgpt/backend_service.py` and `ui/pages/ask_mattgpt/prompts.py`, and not in `ui/pages/explore_stories.py`.
 
 **Hold carried from -250:** "On hold until the MATTGPT-157 keyword-scoring fix is measured." Observed there (Sept 2026): "Is Matt certified?" lands in My Work's high-confidence state with Launchpad at #11, the cause keyword scoring (MATTGPT-157), not rendering. MATTGPT-157 is closed (CHANGELOG, August 8, 2026, `f5641e7`: W_KW re-enabled), before that observation, so the fix the hold waits on is not named. On pickup: re-measure "Is Matt certified?" in My Work at HEAD and decide whether the hold stands.
+
+### MATTGPT-325
+**My Work misses stories that mention a one-word query only in their Situation: "Pandemic" returns 1 of the 5 stories that mention it**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Issue
+- **File:** `services/rag_service.py` (`semantic_search()`, the `CONFIDENCE_LOW` cutoff), `utils/scoring.py` (`_keyword_score_for_story()`), `services/pinecone_service.py` (`pinecone_semantic_search()`)
+- **Related:** MATTGPT-249 (Role Match retrieval ranking), MATTGPT-304 (reranker spike), MATTGPT-308 (My Work first page is MattGPT stories), MATTGPT-324 (My Work profile facts)
+- **Logged:** October 16, 2026
+
+**Observed (prod, Oct 16, 2026, as reported):** searching "Pandemic" in My Work returns 1 story (American Express, "Conducting Discovery and Framing to Build Cross-Functional Alignment") under the low-relevance banner. Ask Agy cited the Norfolk Southern pairing story ("Making It Stick: Institutionalizing Pairing and Test-First Discipline at Norfolk Southern", as reported) for the same question; My Work does not return it.
+
+**Measured (Oct 16, 2026, HEAD 4c6f1a7; read-only probe, local index config, untracked):** the query embedded and scored by Pinecone against all 124 stories; keyword score from `_keyword_score_for_story()`. Five stories mention "pandemic" or "covid" in the JSONL (marked *):
+
+| Rank | pc | kw | Story | Mention in |
+|---|---|---|---|---|
+| 1 | 0.242 | 0.500 | * American Express, Conducting Discovery and Framing | Situation, Task, public_tags, 5PSummary |
+| 2 | 0.197 | 0.000 | Major U.S. Health System, AI chronic disease management | none |
+| 12 | 0.139 | 0.500 | * Norfolk Southern, Making It Stick | Situation, Action, 5PSummary |
+| 19 | 0.135 | 0.000 | * Norfolk Southern, Confronting a Quality Crisis | Situation, Task |
+| 40 | 0.115 | 0.000 | * Fortune 500 Clients, Leading People | Action, Result |
+| 88 | 0.086 | 0.000 | * Norfolk Southern, The CIC's First Engagement | Situation, Result |
+
+One story at or above `CONFIDENCE_LOW` (0.20), and its 0.242 is below `CONFIDENCE_HIGH` (0.25): the prod result and banner. Lowercase "pandemic": top pc 0.207, still one story. The full question "How did Matt handle the pandemic?" puts all five at pc 0.23 to 0.30, but 94 of 124 stories clear 0.20, with MattGPT stories at ranks 1 and 3. Not measured: prod's index scores, and the query Ask Agy's search tool sent.
+
+**Verified Oct 16, 2026 (code):**
+- `semantic_search()` sets the confidence tier and keeps results by `pc_score` (raw Pinecone similarity) against `CONFIDENCE_LOW`. The keyword score enters only `score`, the blended value `pinecone_semantic_search()` sorts by, so a keyword hit cannot keep a story below 0.20 (Making It Stick: kw 0.500, pc 0.139).
+- `_keyword_score_for_story()` reads Title, Client, Role, Sub-category, Competencies, public_tags, `build_5p_summary(s, 400)`, Process and Performance; not Situation, Task, Action or Result (Confronting a Quality Crisis: kw 0).
+- `build_embedding_text()` (`build_custom_embeddings.py`) includes up to 2,000 characters of Situation among the other sections, so one word there moves the story's vector little.
+
+**Fix direction (not decided):** (a) let a literal keyword hit admit a story below the cutoff; (b) add Situation, Task, Action and Result to the keyword scorer's text; (c) both. Either changes what Ask Agy's search tool gets back as well.
+
+**Constraint on the fix (Oct 16, 2026):** the full question admits 94 of 124 stories at 0.20, so the embedding score alone does not separate topic from noise. Any keyword admission stays narrow (literal term hits only), and is measured against story controls for noise: a live acceptance run in My Work and Ask Agy, with the five pandemic stories and unrelated queries.
 
 ### MATTGPT-160
 **JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs**
