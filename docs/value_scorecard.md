@@ -285,8 +285,8 @@ experience reliably and sustainably; failures are visible, not silent.
   -209, -213.
 - Architecture and maintainability: -258 (In Progress), -259, -260, -261, -262, -140,
   -202, -214, -226.
-- Dead code and hygiene: -176, -232, -241, -152 (Parked), -270, -287 (docs
-  describe a removed overlap gate).
+- Dead code and hygiene: -176, -241, -152 (Parked), -287 (docs
+  describe a removed overlap gate), -323 (dead JSONL export merge).
 - Visible glitches: -229, -289 (MATTGPT-018 regression watch).
 
 ## 8. Professional demonstration

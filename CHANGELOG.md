@@ -8,6 +8,14 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Process
 
+**October 16, 2026 -- JSONL export summary counts Created and Updated from ids and diffs (MATTGPT-270)** -- `96b92db`, `a87d9b4`
+
+`excel_to_jsonl()` counted Created and Updated per row from the existing-record lookup, which never matches (slug keys against `norm_key()`), so every row counted as created. Created is now the count of new ids, and Updated is counted in the diff loop beside Unchanged, independently of the lookup; MATTGPT-323 (deleting the dead lookup and merge) does not affect them. Export on the real master before and after: output JSONL byte-identical; only the summary line changed. Red: a unit test running `excel_to_jsonl()` twice in a temp folder.
+
+**October 16, 2026 -- Stale requirements_temp.txt removed (MATTGPT-232)** -- `3d1f63d`
+
+The root `requirements_temp.txt` (torch 1.13.1, sentence-transformers 2.2.2) was superseded by `requirements.txt`; nothing read it.
+
 **October 5-6, 2026 -- Root probes moved to probes/; cited evidence preserved (MATTGPT-265)** -- `42ddbe6`, `d3805f3`, `061119d`, `8cbc58b`, `aba9309`
 
 Cited probe output copied byte-identical into docs/evidence/MATTGPT-<n>/ (42ddbe6, plus e4f54e0 and fc25473 for later citations). /probes/ is gitignored, so probe scripts, inputs and output stay untracked (d3805f3). The three 088 extraction caches were committed as fixtures beside their JD files (061119d). 8cbc58b untracked 14 root probe scripts into probes/, each kept in git history; probe_assessor.py, its six probe_extraction_*.json caches, and the generate_* scripts stay at root. aba9309 points probe_assessor's results CSV at probes/output/. Output lands in probes/output/probe_<n>_output/, not per-ticket folders. BACKLOG citations repointed in cf15859 and d7f28f9.

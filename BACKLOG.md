@@ -56,7 +56,7 @@ Wrong-assertion test: -203 · -209 (drift guard searches wrong scope) · -254 (s
 Small refactors: -153, -062, -082, -083, -084, -150, -060, -217 (pronoun grammar in substitution)
 BDD structure: -213 (shared step definitions)
 Correctness audit: -214 (parameters, comments, constants, copied blocks) · -226 (dead `.main` selectors, ~299 declarations matching 0 elements)
-Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/agy-behavior/structural suites) · -232 (requirements_temp.txt removal)
+Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/agy-behavior/structural suites)
 
 ---
 
@@ -121,7 +121,6 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-266](#mattgpt-266) | Role Match labels responsibility-derived rows as Required Qualifications | Open | High | Bug | value | October 3, 2026 |
 | [MATTGPT-267](#mattgpt-267) | Have model return line numbers; Python fills source_text from JD -- saves ~1.7s on long JDs | Open | Medium | Refactor | value | October 3, 2026 |
 | [MATTGPT-268](#mattgpt-268) | "Does Matt have a CS degree?" leads with a no that Role Match doesn't give -- parity fix | Open | High | Bug | value | October 4, 2026 |
-| [MATTGPT-270](#mattgpt-270) | generate_jsonl_from_excel.py summary counters wrong (Created/Updated/Unchanged miscount) | Open | Low | Bug | chore | October 4, 2026 |
 | [MATTGPT-271](#mattgpt-271) | Near-duplicate public_tags from re-tagging pass in master Excel | Open | Low | Corpus | value | October 4, 2026 |
 | [MATTGPT-272](#mattgpt-272) | Corpus gap: zero thought leadership / PoV stories; Role Match returns blanket gap on the requirement | Open | Medium | Issue | value | October 4, 2026 |
 | [MATTGPT-274](#mattgpt-274) | `eval_rag_quality.py --surgical` calls rag_answer() with the query logger and CSV writers active | Open | Low | Bug | chore | October 5, 2026 |
@@ -167,6 +166,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-320](#mattgpt-320) | No golden eval has run on the shipped Ask Agy pipeline (1095d2c): run it once | Open | Medium | Action | value | October 15, 2026 |
 | [MATTGPT-321](#mattgpt-321) | Stale copy after 1095d2c: "Primary LLM" comment on DEFAULT_CHAT_MODEL; "High confidence match" and "Says what it doesn't know" in the How Agy Searches dialog | Open | Low | Hygiene | value | October 15, 2026 |
 | [MATTGPT-322](#mattgpt-322) | Hobby questions get rule 0b's bare sentence, with no opener, instead of the personal banner | Open | Medium | Issue | value | October 16, 2026 |
+| [MATTGPT-323](#mattgpt-323) | generate_jsonl_from_excel.py: _merge_with_existing() and its norm_key() lookup are dead by design; delete them | Open | Low | Refactor | chore | October 16, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently | Parked | Medium | Action | value | August 3, 2026 |
@@ -194,7 +194,6 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-217](#mattgpt-217) | `_substitute_matt_subject` produces subject pronoun in object position ("reported to he at the CIC") | Open | Low | Bug | chore | August 26, 2026 |
 | [MATTGPT-228](#mattgpt-228) | Deep link param never consumed: `?story=<id>` re-applies on refresh, no in-app escape; offset inherited across searches | Open | High | Bug | value | August 31, 2026 |
 | [MATTGPT-229](#mattgpt-229) | Asking Agy "why hire matt" flashes My Work table view before landing on conversation | Open | Medium | Bug | value | September 1, 2026 |
-| [MATTGPT-232](#mattgpt-232) | `requirements_temp.txt` in repo root -- remove | Open | Low | Hygiene | chore | September 1, 2026 |
 | [MATTGPT-233](#mattgpt-233) | Phase 2: extend pre-push gate to BDD suite, `test_agy_behavior.py`, `test_structural_assertions.py` | Open | Medium | Infra | chore | September 1, 2026 |
 | [MATTGPT-235](#mattgpt-235) | Resolve LLM-text assertion classes so pre-push gate can widen to agy-behavior and structural suites | Open | High | Refactor / Test | value | September 1, 2026 |
 | [MATTGPT-236](#mattgpt-236) | Remove router topical family dimension: delete 3 inert families, rewire 2 set memberships, remove 6 topic-axis families | Open | Medium | Refactor | value | September 1, 2026 |
@@ -2104,21 +2103,6 @@ f. Data-contract check against the real corpus (added Oct 11, 2026): field names
 
 ---
 
-### MATTGPT-270
-**generate_jsonl_from_excel.py summary counters wrong (Created/Updated/Unchanged miscount)**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Bug
-- **File:** `generate_jsonl_from_excel.py` (summary counter logic)
-- **Logged:** October 4, 2026
-
-**Issue:** Verified Oct 4, 2026: the script printed "Created: 123, Updated: 0, Unchanged: 120" when 3 stories changed and none were new. The JSONL output itself is correct. The counter logic misclassifies which rows changed.
-
-**Fix:** Identify the comparison logic producing the wrong counts and correct it. The output correctness confirms the diff detection itself works; only the reporting is wrong.
-
----
-
 ### MATTGPT-271
 **Near-duplicate public_tags from re-tagging pass in master Excel**
 
@@ -3153,6 +3137,30 @@ Any sentinel has to be translated in one place before anything uses it. With tha
 
 ---
 
+### MATTGPT-323
+**generate_jsonl_from_excel.py: _merge_with_existing() and its norm_key() lookup are dead by design; delete them**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Refactor
+- **File:** `generate_jsonl_from_excel.py` (`_merge_with_existing()`, `norm_key()`, the `existing_by_key.get(key, {})` lookup), `tests/unit/test_generate_jsonl_from_excel.py` (`test_blank_excel_public_tags_produces_blank_jsonl`, deleted or rewritten with it)
+- **Related:** MATTGPT-270 (found during it; closed)
+- **Logged:** October 16, 2026
+
+**Rule (Matt, Oct 16, 2026):** the JSONL is always rebuilt from the Excel master. A field that lives only in the JSONL is not a valid scenario.
+
+**Verified Oct 16, 2026 (HEAD a87d9b4):**
+- `load_existing_jsonl()` keys each prior record as `f"{slugify(Title)}|{slugify(Client)}"`; the per-row lookup uses `norm_key(title, client)`, which only lowercases (example: `about matt – my leadership journey|accenture` against `about-matt-my-leadership-journey|accenture`). Read-only check on `echo_star_stories.jsonl`, each record's own Title and Client as input: 0 of 124 match.
+- `existing` is therefore always `{}`, and `_merge_with_existing()` returns at its `if not existing:` guard on every row. The merge has never applied, and under the rule above it has nothing to do.
+- Since the MATTGPT-270 Green (a87d9b4), the summary counters come from ids and diffs and do not read the lookup.
+- `existing_by_key` is read only by that lookup. `existing_records`, from the same `load_existing_jsonl()` call, feeds the summary and the per-record diff report.
+
+**Fix:** delete `_merge_with_existing()`, `norm_key()` and the lookup; keep `load_existing_jsonl()` (its `by_key` return can go with the lookup). Delete or rewrite `test_blank_excel_public_tags_produces_blank_jsonl`, which imports `_merge_with_existing`.
+
+**Gate:** the export on the real master is byte-identical before and after, as the MATTGPT-270 Green showed for its change.
+
+---
+
 ### MATTGPT-160
 **JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs**
 
@@ -4052,21 +4060,6 @@ The duplication between the superset class and its two components should be reso
 **Acceptance:** Contract documented; all three surfaces run in the pre-push hook without stochastic failures; any test requiring live API calls is either marked `network` or restructured to be hermetic.
 
 **Pickup (Oct 16, 2026):** needs Matt's direction: `.pre-commit-config.yaml` is his.
-
----
-
-### MATTGPT-232
-**`requirements_temp.txt` in repo root -- remove**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Hygiene
-- **File:** `requirements_temp.txt`
-- **Logged:** September 1, 2026
-
-Stale file in repo root. No callers, no CI reference. Remove.
-
-**Re-checked Oct 15, 2026:** `git grep -F requirements_temp` at HEAD, excluding BACKLOG.md and CHANGELOG.md, returns nothing. The file is still tracked.
 
 ---
 
