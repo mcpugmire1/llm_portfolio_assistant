@@ -427,6 +427,11 @@ def pinecone_semantic_search(
         return hits[:3]
 
     except Exception as e:
+        print(
+            f"[API_ERROR_DETECTED] source=pinecone_query, "
+            f"exc={type(e).__name__}: {e}, "
+            f"query={(query or '')[:50]}..."
+        )
         if DEBUG:
             print(f"{_dtag}DEBUG Pinecone query error: {e}")
         return None
