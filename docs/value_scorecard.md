@@ -22,7 +22,7 @@ repo. Evaluator fixture: `tests/fixtures/evaluator_conversations.md` at
 | 1 | Semantic understanding | Yes (Matt, Oct 10, 2026) | Undefined | Failing on 2 of 20 pairs, Oct 10 on the old pipeline; not re-measured on 1095d2c |
 | 2 | Conversational continuity | Yes | Per-turn only; aggregate undefined | Measured per turn in 1095d2c's acceptance run: new 386/450, 4 turns below bar |
 | 3 | Trust and credibility | Yes | Partly | Failing (reproduced defects); no golden eval on 1095d2c (-320) |
-| 4 | Role Match | Yes | Partly | Not measured on the current pipeline; BDD failing |
+| 4 | Role Match | Yes | Partly | Not measured on the current pipeline; role_match BDD passing (1095d2c) |
 | 5 | Evidence parity | Yes | One case only (CS degree) | Failing on that case; general parity not measured |
 | 6 | Evidence discovery | Yes | Yes (BDD); search relevance undefined | Stale; two known failures |
 | 7 | Operational reliability | Yes (Matt, Oct 10, 2026) | Undefined | Not measured; production logging unverified |
@@ -38,7 +38,8 @@ synonyms, misspellings, missing punctuation and natural phrasing.
 
 **Status:** failing on 2 of 20 pairs on Oct 10, on the old pipeline
 (`rag_answer()`, code b2add9a; L5, held by design until
-MATTGPT-251; L6, MATTGPT-253). Not yet re-measured on 1095d2c's
+MATTGPT-251; L6, the confidence gate, which left the answer path in
+1095d2c, MATTGPT-253 closed). Not yet re-measured on 1095d2c's
 `agy_answer()` path. Threshold undefined.
 
 **Evidence (Oct 10, 2026; `docs/evidence/semantic_checks/20261010_132625/`,
@@ -55,7 +56,8 @@ runs agreed on every pair. Failures:
   markets platforms" via ACCESS) is false too.
 - L6 "where's he based these days": confidence gate, top Pinecone score
   0.185 < CONFIDENCE_LOW 0.2, still 0.185 on the 6ec9aec index:
-  MATTGPT-253 (Blocked on MATTGPT-275).
+  MATTGPT-253, closed: the gate left Ask Agy's answer path in 1095d2c.
+  The wording is on MATTGPT-320's run list.
 
 **Open tickets:** -283 (embedding model PoC), -185 (negation), -190
 (tokenizer divergence), -171 (phrase matching), -177 (token_overlap_ratio
@@ -104,8 +106,8 @@ turns, 10 runs per arm, scored blind (32 scorers, brief_v2):
 - Golden eval multi-turn (Q24) and intent (Q18 to Q20) items pass
   automatically (`tests/eval_rag_quality.py`).
 
-**Open tickets:** -275, -253 (Blocked on -275), -040 (follow-up eval
-coverage), -282 (answering model beyond gpt-4o), -281 (openers), -280
+**Open tickets:** -275, -040 (follow-up eval
+coverage), -281 (openers), -280
 (tone), -284 (synthesis mode decided in four places), -316 (blur submits the landing
 question), -317 (Ask Agy About This dropped mid-answer).
 
@@ -159,7 +161,8 @@ responsibility), -296 (closing offer in a prompt example), -297 (no dog humor in
 answers), -300 (thinking indicator shows real progress), -301 (em dashes left in the repo), -306 (set store=False
 after 275, Blocked), -307 (Key Metrics label cut), -310 (direct-reports
 answer varies), -311 (no ongoing-period End_Date), -319 (Q59 xfail
-reason stale), -320 (golden eval on shipped code).
+reason stale), -320 (golden eval on shipped code), -322 (hobby questions
+get 0b's bare sentence).
 
 ## 4. Role Match
 
@@ -186,7 +189,8 @@ reason stale), -320 (golden eval on shipped code).
   measurement.
 
 **Status:**
-- Failing: BDD 19 passed, 29 skipped, 5 failed (53ef187, Sept 26).
+- BDD role_match: 24 passed, 28 skipped (1095d2c, Oct 15); the five
+  Sept 26 failures (53ef187) are fixed there.
 - Not measured: over-claim rate on the current pipeline (the -244 baseline
   predates its fix); -160's after-measurement not recorded; the 90-second
   goal.
