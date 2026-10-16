@@ -8,6 +8,14 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Process
 
+**October 16, 2026 -- JSONL export no longer merges from the prior JSONL (MATTGPT-323)** -- `7a9d1f1`, `a66ce99`
+
+The JSONL is rebuilt from the Excel master on every run. `_merge_with_existing()`, `norm_key()` and the `existing_by_key` lookup are deleted; `load_existing_jsonl()` returns the records only, which feed the change report and the summary counters (MATTGPT-270). The deletion changes behavior only for a one-word Title and Client, where the lowercased lookup key and the slug key were equal: JSONL-only fields no longer survive the export (the Red's case). Today's corpus has no such key: export on the real master byte-identical before and after.
+
+**October 16, 2026 -- Pinecone query exception logged with DEBUG off (MATTGPT-305)** -- `836fb3d`, `e291e92`
+
+`pinecone_semantic_search()` now prints `[API_ERROR_DETECTED] source=pinecone_query, exc=<type>: <msg>, query=<50 chars>...` on a query exception whether or not DEBUG is on, in the embed-failure line's form. Return value (None) and session flags are unchanged, so `semantic_search()` still reports `fallback:pinecone_unavailable`.
+
 **October 16, 2026 -- JSONL export summary counts Created and Updated from ids and diffs (MATTGPT-270)** -- `96b92db`, `a87d9b4`
 
 `excel_to_jsonl()` counted Created and Updated per row from the existing-record lookup, which never matches (slug keys against `norm_key()`), so every row counted as created. Created is now the count of new ids, and Updated is counted in the diff loop beside Unchanged, independently of the lookup; MATTGPT-323 (deleting the dead lookup and merge) does not affect them. Export on the real master before and after: output JSONL byte-identical; only the summary line changed. Red: a unit test running `excel_to_jsonl()` twice in a temp folder.
@@ -24,6 +32,10 @@ Cited probe output copied byte-identical into docs/evidence/MATTGPT-<n>/ (42ddbe
 
 ### Tests
 
+**October 16, 2026 -- MATT_DNA drift guard checks employers in the Career Arc only (MATTGPT-209)** -- `1b0e68c`
+
+`then_every_employer_in_dna` checked each corpus Employer against the whole MATT_DNA string, so an employer missing from the Career Arc passed when its name appeared elsewhere (Cendian and AIU, listed as clients). It now slices the Career Arc block and checks only that, and its failure message points to `career_arc` in `data/matt_profile.json`. Scenario renamed. 4 / 4 passing. Test-only.
+
 **October 6, 2026 -- Sequential-rejection BDD step waits for the new banner (MATTGPT-142)** -- `49606d0`
 
 `when_user_submits()` waited for any `.no-match-banner`, and banners persist in the transcript, so on a second rejection the first query's banner matched at once and "Sequential rejections swap chip sets per branch" checked chips before the new banner rendered (3 of 8 runs failed). The step now counts banners before submitting and waits for one more. ask_mattgpt.feature 9 passed; the scenario 10 of 10 in isolation. Test-only.
@@ -31,6 +43,10 @@ Cited probe output copied byte-identical into docs/evidence/MATTGPT-<n>/ (42ddbe
 ---
 
 ### Ask Agy
+
+**September 24 to October 16, 2026 -- Ask Agy answers education, certification, language and Location & Availability questions from the profile (MATTGPT-250)** -- `de8448d`, `d98f63c`, `f73cab3`, `1eec604`, `bbeaa01`, `4908877`, `4a5b284`, `31ae450`; acceptance `2e46a59`
+
+`semantic_search()` returns `profile_facts` from `load_matt_profile()`, and Ask Agy injects the block with citation rules 0a (cite the block verbatim, no inference) and 0b ("Nothing I know about Matt covers that." for a category the profile has no key for). The shared loader keeps each education note with its entry and renders languages and Location & Availability. Ask Agy's Sources shows a fact card per cited category above the story grid. The acceptance list passed on the shipped pipeline in MATTGPT-320's extras (2e46a59), with the Role Match equivalence note 2/2. My Work rendering (item 1a) moved to MATTGPT-324.
 
 **October 16, 2026 -- First golden eval on the shipped Ask Agy pipeline (MATTGPT-320)** -- `2e46a59`
 

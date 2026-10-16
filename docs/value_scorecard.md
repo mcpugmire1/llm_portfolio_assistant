@@ -157,8 +157,7 @@ question), -317 (Ask Agy About This dropped mid-answer).
 - 275's surface-parity hedge: not measured.
 
 **Open tickets:** -251, -252, -255, -128 (source cards substantiate
-claims), -168 (slot 1 amplification), -250 (profile facts in Ask Agy, In
-Progress), -257, -263, -278, -096, -217 (pronoun grammar), -286 (meta-commentary
+claims), -168 (slot 1 amplification), -257, -263, -278, -096, -217 (pronoun grammar), -286 (meta-commentary
 strip deletes paragraphs), -290 (internal-content
 extraction), -294 (split MATT_DNA by
 responsibility, In Progress), -296 (closing offer in a prompt example), -297 (no dog humor in
@@ -166,7 +165,7 @@ answers), -300 (thinking indicator shows real progress), -301 (em dashes left in
 after 275, Blocked), -307 (Key Metrics label cut), -310 (direct-reports
 answer varies), -311 (no ongoing-period End_Date), -319 (Q59 xfail
 reason stale), -322 (hobby questions
-get 0b's bare sentence).
+get 0b's bare sentence, Blocked on -236).
 
 ## 4. Role Match
 
@@ -261,7 +260,7 @@ Match).
 
 **Open tickets:** -146, -228, -204, -196, -150, -122, -131, -197, -145,
 -183, -210, -166, -083, -271, -295 (Timeline era order), -308
-(My Work first page is MattGPT stories).
+(My Work first page is MattGPT stories), -324 (My Work profile facts, from -250).
 
 ## 7. Operational reliability
 
@@ -283,14 +282,14 @@ experience reliably and sustainably; failures are visible, not silent.
 - Latency: -299.
 - Runtime and dependencies: -313 (Python 3.11 in prod, 3.13 local), -314 (pin pyarrow<25).
 - Model retirement: -302 (gpt-4o family retires January 14, 2027).
-- Silent failures: -292 (silent file-order fallback), -288 (Ask Agy ignores the Pinecone fallback signal), -305 (Pinecone query exception logged only under DEBUG).
+- Silent failures: -292 (silent file-order fallback), -288 (Ask Agy ignores the Pinecone fallback signal).
 - Regression gates and test reliability: -039, -233, -235, -206, -153,
-  -274, -084, -180, -277, -198, -035, -060, -082, -143 (Parked), -203,
-  -209, -213.
+  -274, -084, -180, -277, -198, -035, -060, -143 (Parked), -203,
+  -213.
 - Architecture and maintainability: -258 (In Progress), -259, -260, -261, -262, -140,
   -202, -214, -226.
 - Dead code and hygiene: -176, -241, -152 (Parked), -287 (docs
-  describe a removed overlap gate), -323 (dead JSONL export merge).
+  describe a removed overlap gate).
 - Visible glitches: -229, -289 (MATTGPT-018 regression watch).
 
 ## 8. Professional demonstration
