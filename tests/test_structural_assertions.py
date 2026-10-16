@@ -368,6 +368,86 @@ def find_corpus_literals(stories: list[dict], root: Path) -> list[tuple]:
     return hits
 
 
+# Architecture fitness (MATTGPT-258). Limits are today's values and may only
+# go down; the refactor ticket that lowers one updates it here.
+FITNESS_LAYERS = ("services", "utils", "config")
+STREAMLIT_ALLOWED = {
+    "services/jd_assessor.py",
+    "services/pinecone_service.py",
+    "services/query_logger.py",
+    "services/rag_service.py",
+    "utils/filters.py",
+    "utils/ui_helpers.py",
+    "config/settings.py",
+}
+OPENAI_CLIENT_SITES_MAX = 4
+
+
+def _app_python_files(root: Path, folders) -> list[Path]:
+    """The .py files under the given top-level folders, plus app.py when asked."""
+    files = []
+    for folder in folders:
+        if folder == "app.py":
+            if (root / "app.py").exists():
+                files.append(root / "app.py")
+            continue
+        files += [
+            p for p in (root / folder).rglob("*.py") if "__pycache__" not in p.parts
+        ]
+    return sorted(files)
+
+
+def _imported_modules(tree) -> list[str]:
+    import ast
+
+    names = []
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            names += [a.name for a in node.names]
+        elif isinstance(node, ast.ImportFrom) and node.module and node.level == 0:
+            names.append(node.module)
+    return names
+
+
+def find_architecture_violations(root: Path) -> dict[str, list[str]]:
+    """AST walk for checks a to d of MATTGPT-258. Comments are not code, so
+    commented-out imports and calls are not counted."""
+    import ast
+
+    found = {
+        "ui_imports": [],
+        "streamlit_files": [],
+        "openai_sites": [],
+        "data_file_defs": [],
+    }
+    for path in _app_python_files(root, ("app.py", "ui", *FITNESS_LAYERS)):
+        rel = path.relative_to(root).as_posix()
+        tree = ast.parse(path.read_text(encoding="utf-8"), filename=rel)
+        modules = _imported_modules(tree)
+        in_layer = rel.split("/")[0] in FITNESS_LAYERS
+        if in_layer and any(m == "ui" or m.startswith("ui.") for m in modules):
+            found["ui_imports"].append(rel)
+        if in_layer and any(
+            m == "streamlit" or m.startswith("streamlit.") for m in modules
+        ):
+            found["streamlit_files"].append(rel)
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Call):
+                fn = node.func
+                name = fn.id if isinstance(fn, ast.Name) else getattr(fn, "attr", None)
+                if name == "OpenAI":
+                    found["openai_sites"].append(f"{rel}:{node.lineno}")
+            elif isinstance(node, ast.Assign | ast.AnnAssign):
+                targets = (
+                    node.targets if isinstance(node, ast.Assign) else [node.target]
+                )
+                if any(
+                    isinstance(t, ast.Name) and t.id == "DATA_FILE" for t in targets
+                ):
+                    found["data_file_defs"].append(f"{rel}:{node.lineno}")
+    return found
+
+
 # =============================================================================
 # COMBINED STRUCTURAL CHECK
 # =============================================================================
@@ -591,6 +671,46 @@ class TestCorpusLiterals:
         assert not off_record, (
             "Allowed figures not in the corpus or profile:\n" + "\n".join(off_record)
         )
+
+
+class TestArchitectureFitness:
+    """Dependency direction and coupling limits (MATTGPT-258, checks a to d).
+    Deterministic AST walks; no model calls."""
+
+    ROOT = Path(__file__).parent.parent
+
+    @pytest.fixture(scope="class")
+    def found(self):
+        return find_architecture_violations(self.ROOT)
+
+    def test_no_ui_imports_below_ui(self, found):
+        assert not found["ui_imports"], (
+            "services/, utils/ and config/ must not import from ui/:\n"
+            + "\n".join(found["ui_imports"])
+        )
+
+    def test_streamlit_imports_stay_within_todays_files(self, found):
+        new = sorted(set(found["streamlit_files"]) - STREAMLIT_ALLOWED)
+        assert not new, (
+            "New streamlit import outside ui/ (allowed set may only shrink):\n"
+            + "\n".join(new)
+        )
+
+    def test_openai_client_sites_at_most_limit(self, found):
+        sites = found["openai_sites"]
+        assert len(sites) <= OPENAI_CLIENT_SITES_MAX, (
+            f"{len(sites)} OpenAI( client creation sites, limit"
+            f" {OPENAI_CLIENT_SITES_MAX} (MATTGPT-261 lowers it):\n" + "\n".join(sites)
+        )
+
+    @pytest.mark.xfail(
+        strict=True,
+        reason="MATTGPT-262: DATA_FILE is defined in app.py, explore_stories.py"
+        " and pinecone_service.py; remove this marker when -262 lands",
+    )
+    def test_data_file_defined_once(self, found):
+        defs = found["data_file_defs"]
+        assert len(defs) == 1, "DATA_FILE must be defined once:\n" + "\n".join(defs)
 
 
 class TestAllStructuralChecks:
