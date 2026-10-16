@@ -122,8 +122,12 @@ _RULE_0A_NEW_MARKERS = [
 ]
 _RULE_0B_MARKER = "Nothing I know about Matt covers that"
 # New at 9d5f575: for absent categories, Agy must not pad the honest gap
-# with story evidence.
-_RULE_0B_REPLY_ONLY = "Reply with that sentence only"
+# with story evidence. MATTGPT-322: the opener comes first, so the
+# decline is not a bare sentence.
+_RULE_0B_REPLY_ONLY = "After your opening line, reply with that sentence only"
+_RULE_0B_BARE_CLAUSE = (
+    'respond "Nothing I know about Matt covers that". Reply with that sentence only'
+)
 
 _GROUNDING_HEADER = "**GROUNDING RULES:**"
 
@@ -253,6 +257,15 @@ class TestCitationRulesInCapturedSystemMessage:
             f"rule 0b reply-only clause {_RULE_0B_REPLY_ONLY!r} not "
             f"found in captured Agy system message. Head: "
             f"{captured_agy_system_message[:600]!r}"
+        )
+
+    def test_rule_0b_no_longer_overrides_the_opener(self, captured_agy_system_message):
+        """MATTGPT-322: 'Reply with that sentence only' directly after the
+        sentence overrode the opener instruction, so the decline came back
+        bare ('Nothing I know about Matt covers that', no opener)."""
+        assert _RULE_0B_BARE_CLAUSE not in captured_agy_system_message, (
+            f"old bare-sentence 0b clause {_RULE_0B_BARE_CLAUSE!r} still in "
+            f"captured Agy system message"
         )
 
 
