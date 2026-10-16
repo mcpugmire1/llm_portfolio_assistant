@@ -359,13 +359,6 @@ GOLDEN_QUERIES = {
             # answered from the profile rather than redirected.
             "expected_behavior": "profile_fact",
             "must_contain": ["Atlanta"],
-            # Known miss, kept visible: Pinecone finds no story for "live",
-            # so the confidence gate rejects it before the profile facts.
-            # Remove after an XPASS is observed (see generate_report).
-            "xfail_reason": (
-                "low_confidence: top_score 0.242 < CONFIDENCE_HIGH 0.25; "
-                "profile question with no matching story"
-            ),
             "category": "intent",
         },
         {
