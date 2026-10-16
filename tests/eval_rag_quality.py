@@ -1854,7 +1854,14 @@ def run_surgical_diagnostics():
     mock_st.session_state = {}
 
     with patch("streamlit.session_state", mock_st.session_state):
-        with patch("ui.pages.ask_mattgpt.backend_service.st", mock_st):
+        with (
+            patch("ui.pages.ask_mattgpt.backend_service.st", mock_st),
+            # MATTGPT-274: a diagnostic run writes no query-log or router CSV rows.
+            patch("ui.pages.ask_mattgpt.backend_service.log_query", MagicMock()),
+            patch("ui.pages.ask_mattgpt.backend_service.log_offdomain", MagicMock()),
+            patch("services.semantic_router._log_borderline", MagicMock()),
+            patch("services.semantic_router._log_router_low_confidence", MagicMock()),
+        ):
             from services.semantic_router import is_portfolio_query_semantic
             from ui.pages.ask_mattgpt.backend_service import agy_answer
 
@@ -1954,17 +1961,6 @@ def run_surgical_diagnostics():
             print("=" * 80)
             passed = sum(1 for d in diagnostics if d["passed"])
             print(f"Passed: {passed}/{len(diagnostics)}")
-
-            # Entity detection failures
-            no_entity = [
-                d
-                for d in diagnostics
-                if d["entity_detected"] is None and d["expected_intent"] == "client"
-            ]
-            if no_entity:
-                print(f"\nMissed Entity Detection ({len(no_entity)}):")
-                for m in no_entity:
-                    print(f"  Q{m['id']}: {m['query'][:50]}...")
 
             return diagnostics
 
