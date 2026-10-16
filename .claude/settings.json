@@ -2,7 +2,9 @@
   "permissions": {
     "deny": [
       "Bash(git push)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Read(~/Library/CloudStorage/OneDrive*/**)",
+      "Read(~/OneDrive/**)"
     ]
   },
   "hooks": {
