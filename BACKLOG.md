@@ -28,14 +28,13 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 14. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
 15. **-129 stories 3-5** -- Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
 16. **-252** -- Ask Agy writes evaluative sentences about Matt despite prompt instructions against it. Visitor-visible; isolating probe spec in the detail block.
-17. **-322** -- Gates -236. Rule 0b's decline is a bare sentence with no opener: hobby questions get it in every arm of -236's gate, and with the router off personal questions join them (57/60 bare). Fix: a voiced 0b decline with its own live run and story controls.
-18. **-235** -- Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-19. **-223** -- Add router_score and router_family columns to Sheet query row; unblocks -239's floor threshold decision.
-20. **-222** -- Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
-21. Rest of Role Match: -173, -014, -012, -081, -099, -017.
+17. **-235** -- Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
+18. **-223** -- Add router_score and router_family columns to Sheet query row; unblocks -239's floor threshold decision.
+19. **-222** -- Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
+20. Rest of Role Match: -173, -014, -012, -081, -099, -017.
 
 **LATER — tier 1:** real defects with known fixes
--177 (bound violation) · -190 (tokenizer divergence) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (take the router out of Ask Agy's answer path; decided arm B, after -322) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- better ranking surfaces more adjacent candidates into verdict definitions that still absorb them as partial, so ranking before calibrating makes over-calling worse before better; full constraint in -249 detail block)
+-177 (bound violation) · -190 (tokenizer divergence) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (take the router out of Ask Agy's answer path; decided arm B; -322 shipped in 58fe71f) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- better ranking surfaces more adjacent candidates into verdict definitions that still absorb them as partial, so ranking before calibrating makes over-calling worse before better; full constraint in -249 detail block)
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
@@ -160,10 +159,11 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-318](#mattgpt-318) | extract_facts.py emits no Ask Agy facts: add ask_answer_model, ask_tool_max_rounds and ask_history_max_messages; retire chat_model or emit assessment_model | Open | Medium | Action | value | October 15, 2026 |
 | [MATTGPT-319](#mattgpt-319) | Golden eval Q59's xfail reason names the confidence gate that 1095d2c removed | Open | Low | Hygiene | chore | October 15, 2026 |
 | [MATTGPT-321](#mattgpt-321) | Stale copy after 1095d2c: "Primary LLM" comment on DEFAULT_CHAT_MODEL; "High confidence match" and "Says what it doesn't know" in the How Agy Searches dialog | Open | Low | Hygiene | value | October 15, 2026 |
-| [MATTGPT-322](#mattgpt-322) | Rule 0b's decline is a bare sentence with no opener: hobby questions today, and personal questions once the router is out (MATTGPT-236) | Open | Medium | Issue | value | October 16, 2026 |
 | [MATTGPT-324](#mattgpt-324) | My Work doesn't render the profile facts semantic_search() returns (MATTGPT-250 item 1a) | Open | Medium | Enhancement | value | October 16, 2026 |
 | [MATTGPT-325](#mattgpt-325) | Stories that mention a query term are missed when their embedding score is under the cutoff: a keyword hit can't admit them | Open | Medium | Issue | value | October 16, 2026 |
 | [MATTGPT-326](#mattgpt-326) | Home BDD: the Banking card click can land before category_cards.py binds its onclick, so the scenario flakes | Open | Low | Bug (Test) | chore | October 16, 2026 |
+| [MATTGPT-327](#mattgpt-327) | Ask Agy rewrites the wording of quotations it attributes to Matt's own words | Open | Medium | Issue | value | October 17, 2026 |
+| [MATTGPT-328](#mattgpt-328) | Rule 0b decline follow-ups: repeat drift, "I can't confirm", possessive wording | Open | Low | Issue | value | October 17, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently | Parked | Medium | Action | value | August 3, 2026 |
@@ -192,7 +192,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-229](#mattgpt-229) | Asking Agy "why hire matt" flashes My Work table view before landing on conversation | Open | Medium | Bug | value | September 1, 2026 |
 | [MATTGPT-233](#mattgpt-233) | Phase 2: extend pre-push gate to BDD suite, `test_agy_behavior.py`, `test_structural_assertions.py` | Open | Medium | Infra | chore | September 1, 2026 |
 | [MATTGPT-235](#mattgpt-235) | Resolve LLM-text assertion classes so pre-push gate can widen to agy-behavior and structural suites | Open | High | Refactor / Test | value | September 1, 2026 |
-| [MATTGPT-236](#mattgpt-236) | Take the semantic router out of Ask Agy's answer path | Blocked | Medium | Refactor | value | September 1, 2026 |
+| [MATTGPT-236](#mattgpt-236) | Take the semantic router out of Ask Agy's answer path | Open | Medium | Refactor | value | September 1, 2026 |
 | [MATTGPT-239](#mattgpt-239) | Router confidence floor: reject queries that score below a threshold across all families before Pinecone query | Blocked | Medium | Enhancement | value | September 2, 2026 |
 | [MATTGPT-241](#mattgpt-241) | Dead prose in backend_service.py: out_of_scope_response and personal_response built but never rendered | Open | Low | Hygiene | chore | September 2, 2026 |
 | [MATTGPT-226](#mattgpt-226) | Dead `.main` selectors across `ui/styles/` after `.main → .stMain` refactor: 31 selectors, ~299 declarations, all matching 0 elements | Open | Medium | Refactor / Tech debt | chore | August 31, 2026 |
@@ -1104,6 +1104,8 @@ None of these stories is cited in the answer. This is the "retrieved, not cited"
 **New evidence (Oct 12, 2026, MATTGPT-275 dev session; local Streamlit on the uncommitted 275 Green (lever 2 on gpt-6.1-sol), Oct 12):** "How did Matt modernize payments across 12+ countries at JP Morgan?" The dev session's truth check traced all 23 claims to a story; 7 of them come from "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout" and "Overhauling Entitlement Management for JP Morgan ACCESS". Neither was shown as a card. The cards were three other JP Morgan stories, reported by short name as Engine, Gateway and Migration: "Building the Payment Engine Behind JP Morgan ACCESS", "Building JP Morgan's Global Payments Gateway Across 12 Countries", and a migration story (the corpus has two: "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform" and "Orchestrating Data Migration Tranche Rollout for JP Morgan"; which one was shown is not recorded). A visitor checking the sources can't find where those 7 facts came from. The truth check and screenshots are in the dev session, not in the repo.
 
 **Superseded in part by MATTGPT-275 (Oct 6, 2026, reworded Oct 12):** The Sources contract: cards show the stories the answer cited, not just those retrieved.
+
+**Observed (Oct 17, 2026; MATTGPT-322 Green 58fe71f, browser check):** the Sources row still lists three stories under a rule 0b decline that says nothing is on record.
 
 ---
 
@@ -3002,38 +3004,6 @@ Any sentinel has to be translated in one place before anything uses it. With tha
 
 ---
 
-### MATTGPT-322
-**Rule 0b's decline is a bare sentence with no opener: hobby questions today, and personal questions once the router is out (MATTGPT-236)**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Issue
-- **File:** `ui/pages/ask_mattgpt/prompts.py` (`_CITATION_RULES_0A_0B`, rule 0b)
-- **Related:** MATTGPT-250 (rule 0b), MATTGPT-251, MATTGPT-236 (gated by this ticket)
-- **Logged:** October 16, 2026
-
-**Observed (prod, Oct 15, 2026, after MATTGPT-294):** "What does Matt like to do for fun?" reached the model and got rule 0b's "Nothing I know about Matt covers that." with no 🐾 opener. "Is Matt married?" gets the router's personal banner, `BANNER_COPY["personal"]` in `utils/ui_helpers.py`: "🐾 I'm focused on Matt's professional experience." (Corrected Oct 16, 2026: this block first named `personal_response`, the prose `_router_rejection()` builds; it is never rendered, MATTGPT-241.)
-
-**Router scores (local, HEAD 77f72c2, Oct 16, 2026; `is_portfolio_query_semantic()` with `_log_borderline` and `_log_router_low_confidence` patched out):**
-- "What does Matt like to do for fun?": 0.593, background ("Who is Matt?")
-- "What does Matt do outside of work?": 0.722, background ("What's Matt's professional experience?")
-- "What are Matt's hobbies?": 0.673, background ("Tell me about Matt's background")
-- "Is Matt married?": 0.958, personal ("Is Matt married"); `router_rejection_reason()` returns personal
-
-`router_rejection_reason()` fires only for the personal or out_of_scope family at `HARD_ACCEPT` (0.80) or above, so all three hobby questions reach the model. `matt_profile.json` has no hobbies key, so rule 0b covers them, and 0b's "Reply with that sentence only" overrides the tool path's opener line. 0b did its job against MATTGPT-251's failure: no answer built from adjacent stories.
-
-**Fix (decided Oct 16, 2026; superseded, see Re-scoped below):** add a hobbies anchor to the router's personal family, so these questions get the personal banner. No prompt change.
-
-**Rejected:** relaxing 0b's "that sentence only" so the reply carries the opener. It is a prompt change needing a live run with story controls, and "only" is what keeps text out after the sentence.
-
-**Test (for the router fix):** the three hobby questions above route to personal at `HARD_ACCEPT` or above. Story controls stay out of the personal family at `HARD_ACCEPT`, including a work-preference wording such as "What does Matt like about leading teams?".
-
-**Re-scoped (Oct 16, 2026; MATTGPT-236 gate, 1743846, `docs/evidence/MATTGPT-236/gate_20261016_140623/`):** this ticket now gates MATTGPT-236, and its fix is no longer a router anchor. Rule 0b's bare "Nothing I know about Matt covers that" (from the answer text, 10 runs per arm): "What does Matt like to do for fun?" and "What are Matt's hobbies?" 30/30 across the three arms; "What does Matt do outside of work?" 19/30 (A 8, B 7, C 4). With the router off (arm B), "Is Matt married?", "How old is Matt?" and "Does Matt have kids?" are bare 10/10 each (A and C: 0/10, the personal redirect); r01 to r06, B 57/60 against A 28/60.
-
-**Fix:** a voiced 0b decline, measured with story controls in its own live run, before MATTGPT-236's removal.
-
----
-
 ### MATTGPT-324
 **My Work doesn't render the profile facts semantic_search() returns (MATTGPT-250 item 1a)**
 
@@ -3101,6 +3071,39 @@ One story at or above `CONFIDENCE_LOW` (0.20), and its 0.242 is below `CONFIDENC
 **Fix (lane 2, uncommitted at filing):** wait until `document.getElementById('card-banking').onclick` is non-null before clicking, as the story-detail button steps do. Test-only.
 
 **Visitors (unmeasured, Oct 17, 2026):** the same gap applies outside the test: a click within about 200 ms of Home rendering may be dead for a visitor too. Not measured in a browser or in production.
+
+### MATTGPT-327
+**Ask Agy rewrites the wording of quotations it attributes to Matt's own words**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Issue
+- **File:** `ui/pages/ask_mattgpt/prompts.py` (the voice rule; not isolated)
+- **Related:** MATTGPT-322 (found in its story-control scoring; closed), MATTGPT-251
+- **Logged:** October 17, 2026
+
+**Note (lane 1, Oct 17, 2026, as written):** "Ask Agy rewrites the wording of quotations it attributes to Matt's own words. In MATTGPT-322's blind story-control scoring, 5 answers failed rule 8 (quotes must be verbatim) by changing the pronoun and verbs inside quotation marks:
+
+'He/Matt builds what's next, modernizes what's not, and grows teams along the way.' The profile's self_description reads 'I build what's next, modernize what's not, and grow teams along the way.' This happened on leadership philosophy (q14), twice in run 1 under the first 0b rewording, once in run 4 and once in run 6.
+'assumptions he should have verified rather than inherited'. The story has 'I'. This was on 'a time Matt failed' (q16), run 1, old 0b.
+The fails span four different rule 0b wordings, and controls never trigger 0b, so the cause isn't 0b. Not yet isolated: whether the voice rule ('State facts', third person about Matt) pulls the model to convert first-person source text inside quotes. Evidence: docs/evidence/MATTGPT-322/ run_20261016_153149, run4_20261017_113023 and run6_20261017_115952, scoring/scores/scores_g14.json and scores_g16.json."
+
+**Contrast (58fe71f browser check):** a story control (innovation experience) quoted "I do, we do, you do" verbatim.
+
+### MATTGPT-328
+**Rule 0b decline follow-ups: repeat drift, "I can't confirm", possessive wording**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Issue
+- **File:** `ui/pages/ask_mattgpt/prompts.py` (rule 0b, `_CITATION_RULES_0A_0B`), `ui/pages/ask_mattgpt/backend_service.py` (`_choose_decline_line()`)
+- **Related:** MATTGPT-322 (closed Oct 17, 2026; 58fe71f), MATTGPT-236 (moves married, age and kids to this decline)
+- **Logged:** October 17, 2026
+
+**Observed in MATTGPT-322's runs, outside its bar (58fe71f; evidence 706505f, `docs/evidence/MATTGPT-322/`):** 58fe71f: a fix for any of these would be a new prompt clause and needs its own justification.
+- **Repeat drift in longer conversations:** the browser check asked "Does Matt have any patents?" three times in one conversation; the line opened the first answer only, and the next two gave "I don't have information about...". Run 7's repeat (patents three times, three-turn conversations) held the line 10/10, 10/10, 8/10. The browser conversation had more earlier turns; the difference is not measured.
+- **"I can't confirm" frequency:** "I can't confirm whether he has any." follows the line on 13 of 20 patents and papers declines in run 6 (run 4: 2); run 7's repeat put "I can't confirm" in 28 of 30 answers. The one decline fail in run 6 (q08 r05, 79/80) answered "I can't confirm whether Matt has published any papers." without the line and without saying nothing is on record.
+- **Possessive wording:** "Matt's patents" / "Matt's published papers", a possessive that presumes they exist, in 2 of 20 patents and papers declines in run 6 (run 4: 9).
 
 ### MATTGPT-160
 **JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs**
@@ -3851,13 +3854,13 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 ### MATTGPT-236
 **Take the semantic router out of Ask Agy's answer path**
 
-- **Status:** Blocked
+- **Status:** Open
 - **Priority:** Medium
 - **Type:** Refactor
 - **File:** `ui/pages/ask_mattgpt/backend_service.py` (`agy_answer()`, `_router_rejection()`), `services/semantic_router.py`, `config/constants.py`
-- **Related:** MATTGPT-322 (gates this ticket), MATTGPT-239 (router confidence floor), MATTGPT-195 (router incident vocabulary), MATTGPT-241 (router rejection prose)
+- **Related:** MATTGPT-322 (closed Oct 17, 2026; 58fe71f), MATTGPT-239 (router confidence floor), MATTGPT-195 (router incident vocabulary), MATTGPT-241 (router rejection prose)
 - **Logged:** September 1, 2026
-- **Dependencies:** MATTGPT-322 (its voiced 0b decline lands first, with its own live run). MATTGPT-220 (inventory complete, conclusion untracked until this ticket)
+- **Dependencies:** MATTGPT-220 (inventory complete, conclusion untracked until this ticket)
 
 **Scope broadened (Oct 16, 2026):** from removing the topical family dimension to taking the router out of Ask Agy's answer path.
 
@@ -3878,7 +3881,7 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 - The 12 it changes: A 97/120, B 102/120, C 101/120. The synthesis pick changed nothing measurable (A 67, B 66, C 65 of 80).
 - Rule 0b's bare sentence on r01 to r06 (personal and hobby questions): A 28/60, B 57/60, C 24/60. With the router off, the personal questions join the hobby questions: MATTGPT-322.
 
-**MATTGPT-322 gates this ticket (Oct 16, 2026):** its fix is a voiced 0b decline, measured with story controls, before the router comes out.
+**Unblocked (Oct 17, 2026):** MATTGPT-322's voiced 0b decline shipped in 58fe71f, with its live runs in 706505f. With the router out, married, age and kids move from the personal banner to that decline. 58fe71f's browser check: "Is Matt married?" still shows the personal banner, pending this ticket.
 
 **Earlier scope (Sept 1, 2026), kept for the router's other callers:**
 

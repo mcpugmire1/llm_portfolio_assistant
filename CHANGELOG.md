@@ -44,6 +44,10 @@ Cited probe output copied byte-identical into docs/evidence/MATTGPT-<n>/ (42ddbe
 
 ### Ask Agy
 
+**October 16 to 17, 2026 -- Rule 0b declines in Agy's voice, opening with a code-picked line (MATTGPT-322)** -- `706505f` (evidence), `58fe71f`
+
+Rule 0b told the model to reply "Nothing I know about Matt covers that" and nothing else, which read as a bare, dismissive line after an opener (old 0b, router off: 0/80 on the voice checklist and decline standard). Rule 0b now states the requirements (first person, one or two sentences, the first beginning with the paw, the topic in the model's own words, no guessing, no padding with story evidence), and `_choose_decline_line()` picks one of `DECLINE_LINES` per answer, which `build_tool_system_prompt()` gives the model as the line to begin a decline with. Live run 6 (router off, 17 questions x 10, blind): declines 79/80, follows its line whole 78/80, facts 40/40, story controls 49/50. Seven runs in 706505f. Unblocks MATTGPT-236. Follow-ups outside the bar: MATTGPT-328; rewritten quotations found in the story controls: MATTGPT-327.
+
 **September 24 to October 16, 2026 -- Ask Agy answers education, certification, language and Location & Availability questions from the profile (MATTGPT-250)** -- `de8448d`, `d98f63c`, `f73cab3`, `1eec604`, `bbeaa01`, `4908877`, `4a5b284`, `31ae450`; acceptance `2e46a59`
 
 `semantic_search()` returns `profile_facts` from `load_matt_profile()`, and Ask Agy injects the block with citation rules 0a (cite the block verbatim, no inference) and 0b ("Nothing I know about Matt covers that." for a category the profile has no key for). The shared loader keeps each education note with its entry and renders languages and Location & Availability. Ask Agy's Sources shows a fact card per cited category above the story grid. The acceptance list passed on the shipped pipeline in MATTGPT-320's extras (2e46a59), with the Role Match equivalence note 2/2. My Work rendering (item 1a) moved to MATTGPT-324.

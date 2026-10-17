@@ -63,7 +63,7 @@ runs agreed on every pair. Failures:
 (tokenizer divergence), -171 (phrase matching), -177 (token_overlap_ratio
 bound), -063 (wrong-person queries), -077
 (pronoun and noun-overlap contamination), -195 (incident vocabulary
-routing), -236 (router out of Ask Agy's answer path; decided arm B, Blocked on -322), -239 (router confidence floor,
+routing), -236 (router out of Ask Agy's answer path; decided arm B), -239 (router confidence floor,
 Blocked), -062 (stale router embeddings), -167 (entity detection for
 Project and Place, Parked), -304 (reranker spike).
 
@@ -164,8 +164,8 @@ responsibility, In Progress), -296 (closing offer in a prompt example), -297 (no
 answers), -300 (thinking indicator shows real progress), -301 (em dashes left in the repo), -306 (set store=False
 after 275, Blocked), -307 (Key Metrics label cut), -310 (direct-reports
 answer varies), -311 (no ongoing-period End_Date), -319 (Q59 xfail
-reason stale), -322 (0b's bare decline;
-gates -236).
+reason stale), -327 (rewritten quotations),
+-328 (rule 0b decline follow-ups).
 
 ## 4. Role Match
 
