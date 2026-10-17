@@ -165,7 +165,7 @@ answers), -300 (thinking indicator shows real progress), -301 (em dashes left in
 after 275, Blocked), -307 (Key Metrics label cut), -310 (direct-reports
 answer varies), -311 (no ongoing-period End_Date), -319 (Q59 xfail
 reason stale), -327 (rewritten quotations),
--328 (rule 0b decline follow-ups).
+-328 (rule 0b decline follow-ups), -329 (crude questions reach the model, High).
 
 ## 4. Role Match
 
