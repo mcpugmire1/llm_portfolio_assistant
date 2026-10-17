@@ -1,0 +1,13 @@
+diff --git a/nonsense_filters.jsonl b/nonsense_filters.jsonl
+index 3746e72..a06ac28 100644
+--- a/nonsense_filters.jsonl
++++ b/nonsense_filters.jsonl
+@@ -36,7 +36,7 @@
+ {"category":"gaming","pattern":"^(?!.*\\b(matt|matt's|pugmire|he|his|him)\\b).*\\b(fortnite|minecraft|call of duty|playstation|xbox|nintendo|gaming|video game cheats)\\b"}
+ {"category":"astrology","pattern":"\\b(mercury retrograde|birth chart|rising sign|moon sign|compatibility|aries|taurus|gemini|cancer|leo|virgo|libra|scorpio|sagittarius|capricorn|aquarius|pisces)\\b.*\\b(horoscope|astrology|zodiac)\\b"}
+ {"category":"religious_spiritual","pattern":"\\b(bible verse|quran|torah|prayer|god says|what does god|spiritual meaning)\\b"}
+-{"category":"adult_content","pattern":"\\b(nsfw|porn|xxx|nude|naked|sex)\\b"}
++{"category":"adult_content","pattern":"\\b(nsfw|porn|xxx|nude|naked|sex|sexy|penis|vagina|genitals?)\\b"}
+ {"category":"drugs_illegal","pattern":"\\b(how to (make|buy|get)|where to buy)\\b.*(drugs|cocaine|heroin|meth|weed)\\b"}
+ {"category":"weapons","pattern":"\\b(how to (make|build)|where to buy)\\b.*(bomb|gun|weapon|explosive)\\b"}
+ {"category":"random_objects","pattern":"\\b(bra|underwear|panties|socks|shoes)\\b.*\\b(celebrity|famous|star)\\b"}
