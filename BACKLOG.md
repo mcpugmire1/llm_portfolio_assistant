@@ -50,7 +50,6 @@ Answer mode: -284 (synthesis mode decided in four places; a promoted query such 
 Dead code: -176, -183 · -241 (dead prose in `_router_rejection()`: delete it) · Hidden error: -204 (zero-filter-match only -- st.stop() blanking was MATTGPT-224, shipped `92370b3`)
 Untraced flash: -229 (My Work flashes before Ask Agy conversation -- needs DevTools trace) · -289 (MATTGPT-018 regression watch: stale landing elements painted 240-370 ms, one mixed frame in 3 runs)
 BDD flakes: -122, -131, -142, -145, -197, -198
-Wrong-assertion test: -203
 Small refactors: -153, -062, -082, -083, -084, -150, -217 (pronoun grammar in substitution)
 BDD structure: -213 (shared step definitions)
 Correctness audit: -214 (parameters, comments, constants, copied blocks) · -226 (dead `.main` selectors, ~299 declarations matching 0 elements)
@@ -160,6 +159,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-328](#mattgpt-328) | Rule 0b decline follow-ups: repeat drift, "I can't confirm", possessive wording | Open | Low | Issue | value | October 17, 2026 |
 | [MATTGPT-330](#mattgpt-330) | Home to My Work card click shows a half-emptied Home for a frame or more: the stale-hide rule covers only the Ask Agy landing | Open | Medium | Bug | value | October 17, 2026 |
 | [MATTGPT-331](#mattgpt-331) | Home cards 3, 5 and 6 apply only their first Sub-category: My Work's single-select Domain box drops the rest | Open | High | Bug | value | October 17, 2026 |
+| [MATTGPT-332](#mattgpt-332) | Delete Ask Agy's synthesis prompt path, unreachable since MATTGPT-236 | Blocked | Low | Refactor | chore | October 17, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently | Parked | Medium | Action | value | August 3, 2026 |
@@ -175,7 +175,6 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-195](#mattgpt-195) | Production incident queries scatter across six intent families -- delivery family has no incident vocabulary | Open | Medium | Bug | value | August 16, 2026 |
 | [MATTGPT-197](#mattgpt-197) | BDD suite-order flake: test_tapping_filters_toggle_shows_row_2_on_mobile fails in marathon, passes in isolation | Open | Low | Bug | chore | August 17, 2026 |
 | [MATTGPT-198](#mattgpt-198) | BDD suite-order flake: test_clicking_a_nav_label_still_routes_to_its_surface_no_regression fails in marathon, passes in isolation | Open | Low | Bug | chore | August 17, 2026 |
-| [MATTGPT-203](#mattgpt-203) | Chip grid disable test asserts the wrong mechanism | Open | Low | Bug (Test) | chore | August 18, 2026 |
 | [MATTGPT-204](#mattgpt-204) | Explore Stories zero-filter-match: Table view renders empty grid chrome; Cards/Timeline empty-state text hidden by CSS | Open | Low | Bug | value | August 18, 2026 |
 | [MATTGPT-206](#mattgpt-206) | Eval suite ~1-in-70 stochastic flap; Q28 confirmed non-deterministic | Open | Medium | Bug (Test) | value | August 19, 2026 |
 | [MATTGPT-210](#mattgpt-210) | Ask Agy landing page suggestion chips are static; stories like STRATCOM invisible on career queries | Open | Low | Enhancement | value | August 24, 2026 |
@@ -2188,6 +2187,8 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 
 **Pickup (Oct 16, 2026):** before MATTGPT-180.
 
+"MATTGPT-287 (dead code), add (Oct 17, 2026, lane 2): ui/pages/ask_mattgpt/landing_view.py still initializes processing_suggestion, reads it into disabled, and passes disabled=disabled to the six chip receivers (suggested_*) and as a term in the Ask button's disabled. Nothing sets it True since 1095d2c (MATTGPT-275) removed the landing answer path, so it is always False. Remove later with its own gates: landing_page BDD on a restarted server plus a browser check of the chip, Enter and Ask-button hand-offs."
+
 ---
 
 ### MATTGPT-288
@@ -2986,6 +2987,28 @@ The fails span four different rule 0b wordings, and controls never trigger 0b, s
 **Fix (needs Matt's UX call):** a multi-select Domain, or one chip named for the card.
 
 **Red (pinned, 45c4a5a, MATTGPT-060):** the Card 3, 5 and 6 scenarios in `home.feature` list every Sub-category their card sets and are `xfail(strict=True)` naming MATTGPT-331; with `--runxfail` each fails only on the missing chips. They XPASS when the fix lands, so the markers come off in the Green.
+
+### MATTGPT-332
+**Delete Ask Agy's synthesis prompt path, unreachable since MATTGPT-236**
+
+- **Status:** Blocked
+- **Priority:** Low
+- **Type:** Refactor
+- **File:** `ui/pages/ask_mattgpt/prompts.py` (`SYNTHESIS_DELTA`, `build_system_prompt()`, `build_tool_system_prompt()`, `build_answer_instructions()`), `ui/pages/ask_mattgpt/backend_service.py` (`SYNTHESIS_BREADTH`, `_choose_opening_and_focus()`), `ui/pages/ask_mattgpt/conversation_helpers.py` (`_sources_layout()`, the Sources label branch), `tests/fixtures/ask_agy_lever2_sol_system_prompts.json`, `tests/unit/test_ask_agy_tool_system_prompt.py`, `tests/unit/test_ask_agy_prompt_composition.py`, `tests/unit/test_ask_agy_tool_answer.py`, `tests/unit/test_comparison_rule.py`, `tests/unit/test_ask_agy_sources_layout.py`
+- **Related:** MATTGPT-236 (removes the router; this ticket follows it), MATTGPT-259 (pipeline out of the UI layer), MATTGPT-128 (Sources panel)
+- **Logged:** October 17, 2026
+- **Dependencies:** MATTGPT-236 (its Green; not landed at filing)
+
+**Note (as written, Oct 17, 2026):** "Delete Ask Agy's synthesis prompt path, unreachable since MATTGPT-236. With the router out of agy_answer(), nothing passes is_synthesis=True on the tool path. Dead in production:
+- SYNTHESIS_DELTA and the synthesis branch of build_system_prompt();
+- SYNTHESIS_BREADTH and the synthesis branch of _choose_opening_and_focus();
+- the is_synthesis parameters on build_tool_system_prompt(), build_answer_instructions() and build_system_prompt().
+
+SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The parity fixture's synthesis turn (tests/fixtures/ask_agy_lever2_sol_system_prompts.json, c04 t3) and about six tests in test_ask_agy_tool_system_prompt.py, test_ask_agy_prompt_composition.py, test_ask_agy_tool_answer.py and test_comparison_rule.py exercise the path, so the deletion carries those test changes. -236's gate measured synthesis off (arm B), not deleted, which is why this is separate. Grep for importers before deleting."
+
+**Verified Oct 17, 2026 (HEAD 20c8e59):**
+- Not yet unreachable: -236's Green has not landed, and `agy_answer()` still sets `is_synthesis = intent_family == "synthesis"` and passes it to `_choose_opening_and_focus()` and the prompt builders. Blocked on -236 for that reason.
+- Already dead at HEAD, not in the note: `agy_answer()` sets `st.session_state["__ask_query_intent__"] = None` on every answer ("Source cards use the 3-card layout"), and `conversation_view.py` stores that on each message as `query_intent`. So `conversation_helpers.py`'s two synthesis branches never fire: `_sources_layout()`'s `SOURCES_MAX_SYNTHESIS` (6-card) cap and the Sources label that swaps the client for a `THEME_TO_PATTERN` phrase. `tests/unit/test_ask_agy_sources_layout.py` exercises the cap. `THEME_TO_PATTERN` itself stays: `story_intelligence.py` uses it.
 
 ### MATTGPT-160
 **JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs**
@@ -3976,27 +3999,6 @@ Two more inert-selector patterns confirmed during the -242 dark-mode scan:
 **Gate reliability consequence:** A single clean 70/70 run does not prove correctness; a single failure does not prove regression. The eval gate requires multiple runs to be meaningful for any ticket that touches retrieval or LLM paths.
 
 **Context:** The eval suite now has three tests with documented stochastic behavior: Q1_voice, Q45_structural (marked in `tests/test_structural_assertions.py` header per f0d8870), and Q28 (this finding). Not a MATTGPT-161 regression -- Q28 failed in pre-Green runs.
-
----
-
-### MATTGPT-203
-**Chip grid disable test asserts the wrong mechanism**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Bug (Test)
-- **Files:** the relevant scenario in `tests/bdd/features/landing_page.feature`, the corresponding step definitions in `tests/bdd/steps/test_landing_page.py`
-- **Logged:** August 18, 2026
-
-**Issue:** The scenario "Chip grid is not interactive during processing" waits for `.thinking-modal`, then asserts each of the six hidden receiver buttons (`st-key-suggested_0` through `_5`) carries the `disabled` attribute. The assertion tests an implementation detail that is not the actual mechanism.
-
-**Verified manually in the app (August 18, 2026):** Clicking a chip during processing disables the entire Ask Agy landing page. Three rapid clicks produced one request -- the double-submit guard works. It does not operate by setting `disabled` on those six receivers.
-
-**Consequence:** The assertion can pass or fail without telling you whether a double-submit is possible. A green result here is not evidence of guard correctness; a red result may reflect a DOM timing artifact rather than a broken guard.
-
-**Fix:** Rewrite the scenario to assert what was manually verified -- a second chip click during processing produces no second request -- or delete it. Either is acceptable. Do not repair the existing `disabled`-attribute assertion; it is the wrong check regardless of whether it passes.
-
-**Distinction from MATTGPT-197 and MATTGPT-198:** Those are timing flakes on scenarios with valid assertions. This scenario has an invalid assertion. The intermittency observed in pre-A1 and post-A1+B full BDD runs is incidental to the wrong-assertion problem; fixing the timing would not fix what the scenario is actually testing.
 
 ---
 

@@ -284,12 +284,12 @@ experience reliably and sustainably; failures are visible, not silent.
 - Model retirement: -302 (gpt-4o family retires January 14, 2027).
 - Silent failures: -292 (silent file-order fallback), -288 (Ask Agy ignores the Pinecone fallback signal).
 - Regression gates and test reliability: -039, -233, -235, -206, -153,
-  -084, -180, -198, -035, -143 (Parked), -203,
+  -084, -180, -198, -035, -143 (Parked),
   -213.
 - Architecture and maintainability: -258 (In Progress), -259, -260, -261, -262, -140,
   -214, -226.
 - Dead code and hygiene: -176, -241, -152 (Parked), -287 (docs
-  describe a removed overlap gate).
+  describe a removed overlap gate), -332 (synthesis prompt path, after -236).
 - Visible glitches: -229, -289 (MATTGPT-018 regression watch), -330 (Home to My Work half-emptied frame).
 
 ## 8. Professional demonstration
