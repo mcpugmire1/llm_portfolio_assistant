@@ -8,6 +8,14 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Process
 
+**October 16, 2026 -- --surgical runs without writing log rows (MATTGPT-274)** -- `725d564`, `14ace5a`
+
+`run_surgical_diagnostics()` now patches `log_query`, `log_offdomain`, `_log_borderline` and `_log_router_low_confidence` for the run, and its "Missed Entity Detection" summary, which read a field 1095d2c removed and raised `KeyError` after every query, is deleted. One live run: exit 0, 11/11 surgical queries passed; Sheet and the three CSVs unchanged before and after.
+
+**October 16, 2026 -- One story id rule for both loaders (MATTGPT-202)** -- `8efdcf9`, `e8dbfce`
+
+`story_id_or_none()` in `utils/corpus_loader.py` holds the id rule that `load_star_stories()` in `app.py` and `load_stories()` each carried a copy of. No behavior change: both loaders' output is identical before and after on both corpus files.
+
 **October 16, 2026 -- JSONL export no longer merges from the prior JSONL (MATTGPT-323)** -- `7a9d1f1`, `a66ce99`
 
 The JSONL is rebuilt from the Excel master on every run. `_merge_with_existing()`, `norm_key()` and the `existing_by_key` lookup are deleted; `load_existing_jsonl()` returns the records only, which feed the change report and the summary counters (MATTGPT-270). The deletion changes behavior only for a one-word Title and Client, where the lowercased lookup key and the slug key were equal: JSONL-only fields no longer survive the export (the Red's case). Today's corpus has no such key: export on the real master byte-identical before and after.
@@ -31,6 +39,10 @@ Cited probe output copied byte-identical into docs/evidence/MATTGPT-<n>/ (42ddbe
 ---
 
 ### Tests
+
+**October 15 to 16, 2026 -- Stale and skipping BDD tests fixed or removed (MATTGPT-017, MATTGPT-196, MATTGPT-254, MATTGPT-277, MATTGPT-319)** -- `5e84710`; `72e792f`; `e898821`, `1aa2c07`; `20b03b1`; `836914d`
+
+MATTGPT-017 (5e84710): the six skipped Role Match logging scenarios run in-process under `streamlit.testing` AppTest with a mock Sheet; 14 passed, 0 skipped. Copy Report now asserts that it logs no row, a known gap: it copies in the browser with no rerun. MATTGPT-196 (72e792f): four `pytest.skip` calls in My Work step definitions become `pytest.fail`, so missing UI fails the run; the clipboard skip stays. 59 passed, 0 skipped. MATTGPT-254 (e898821, 1aa2c07; issues 1 and 2 earlier in 1095d2c and the Oct 16 backlog pass): `post_era_project_counts` drops the removed stats bar's assertions, and the unbound `jd_extraction.feature` is deleted (it never ran). MATTGPT-277: all three failures resolved by other commits: Top Score's guard pins its column position (20b03b1), the Role Match logging scenarios run (5e84710), and the background-family `test_pn_exclusion` went with the code it tested (1095d2c). MATTGPT-319 (836914d): golden eval Q59's xfail, whose reason named the removed confidence gate, is dropped; its answer in MATTGPT-320's run is "Matt lives in Atlanta, GA."
 
 **October 17, 2026 -- Home BDD: card-click and destination-state scenarios (MATTGPT-326, MATTGPT-060)** -- `2b08522`; `85d1e4e`, `45c4a5a`
 

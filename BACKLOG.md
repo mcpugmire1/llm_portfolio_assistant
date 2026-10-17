@@ -32,10 +32,10 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 18. **-235** -- Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
 19. **-223** -- Add router_score and router_family columns to Sheet query row; unblocks -239's floor threshold decision.
 20. **-222** -- Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
-21. Rest of Role Match: -173, -014, -012, -081, -099, -017.
+21. Rest of Role Match: -173, -014, -012, -081, -099.
 
 **LATER — tier 1:** real defects with known fixes
--177 (bound violation) · -190 (tokenizer divergence) · -166 (arc story reframe) · -196 (defensive skips masking regressions) · -063 (wrong-person queries) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (take the router out of Ask Agy's answer path; decided arm B; -322 shipped in 58fe71f) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- better ranking surfaces more adjacent candidates into verdict definitions that still absorb them as partial, so ranking before calibrating makes over-calling worse before better; full constraint in -249 detail block)
+-177 (bound violation) · -190 (tokenizer divergence) · -166 (arc story reframe) · -063 (wrong-person queries) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (take the router out of Ask Agy's answer path; decided arm B; -322 shipped in 58fe71f) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- better ranking surfaces more adjacent candidates into verdict definitions that still absorb them as partial, so ranking before calibrating makes over-calling worse before better; full constraint in -249 detail block)
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
@@ -50,7 +50,7 @@ Answer mode: -284 (synthesis mode decided in four places; a promoted query such 
 Dead code: -176, -183 · -241 (dead prose in `_router_rejection()`: delete it) · Hidden error: -204 (zero-filter-match only -- st.stop() blanking was MATTGPT-224, shipped `92370b3`)
 Untraced flash: -229 (My Work flashes before Ask Agy conversation -- needs DevTools trace) · -289 (MATTGPT-018 regression watch: stale landing elements painted 240-370 ms, one mixed frame in 3 runs)
 BDD flakes: -122, -131, -142, -145, -197, -198
-Wrong-assertion test: -203 · -254 (stale `jd_extraction.feature` and `post_era_project_counts.feature` stats-bar assertions)
+Wrong-assertion test: -203
 Small refactors: -153, -062, -082, -083, -084, -150, -217 (pronoun grammar in substitution)
 BDD structure: -213 (shared step definitions)
 Correctness audit: -214 (parameters, comments, constants, copied blocks) · -226 (dead `.main` selectors, ~299 declarations matching 0 elements)
@@ -65,7 +65,6 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-012](#mattgpt-012) | Role Match -- Phase 4: Private View | In Progress | High | Action | value | Apr 2026 |
 | [MATTGPT-014](#mattgpt-014) | Audit + split skipped Role Match BDD scenarios (BDD for structure, evals for content) | Open | High | Action | value | Apr 28, 2026 |
 | [MATTGPT-015](#mattgpt-015) | JPM Payments IQ Differentiation | Open | High | Action | value | Mar 2026 |
-| [MATTGPT-017](#mattgpt-017) | Wire skipped Role Match logging BDD scenarios (Playwright click + mocked Sheets write) | Open | Medium | Action | chore | Apr 28, 2026 |
 | [MATTGPT-022](#mattgpt-022) | Data Quality Cleanup Journey Story | Open | Medium | Action | value | Mar 2026 |
 | [MATTGPT-035](#mattgpt-035) | Eval Modernization -- Semantic Scoring | Open | Low | Spike | value | Pre-2026 |
 | [MATTGPT-039](#mattgpt-039) | CI quality pipeline: two tiers, with production deploying only from green | Open | High | Action | value | Apr 29, 2026 |
@@ -104,7 +103,6 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-249](#mattgpt-249) | Role Match retrieval: crisis story at rank 18 on incident-leadership requirement; target carries incident vocabulary; ranking problem confirmed | Open | Medium | Bug | value | September 11, 2026 |
 | [MATTGPT-251](#mattgpt-251) | Ask Agy treats adjacent retrieved stories as evidence for the question asked | Open | High | Issue | value | September 23, 2026 |
 | [MATTGPT-252](#mattgpt-252) | Ask Agy writes evaluative sentences about Matt despite repeated prompt instructions against it | Open | High | Issue | value | September 26, 2026 |
-| [MATTGPT-254](#mattgpt-254) | Stale BDD scenarios in role_match.feature and jd_extraction.feature; CHANGELOG em dash | Open | Medium | Bug | chore | September 26, 2026 |
 | [MATTGPT-255](#mattgpt-255) | Meta-commentary strip regex corrupts decimal amounts and merges paragraphs | Open | High | Bug | value | October 2, 2026 |
 | [MATTGPT-257](#mattgpt-257) | Delete "None is current." from rule 0a -- certification entries already carry expiry dates | Open | Medium | Issue | value | October 2, 2026 |
 | [MATTGPT-258](#mattgpt-258) | Architecture fitness tests: dependency direction and coupling limits have no automated enforcement | In Progress | Medium | Action | chore | October 2, 2026 |
@@ -119,9 +117,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-268](#mattgpt-268) | "Does Matt have a CS degree?" leads with a no that Role Match doesn't give -- parity fix | Open | High | Bug | value | October 4, 2026 |
 | [MATTGPT-271](#mattgpt-271) | Near-duplicate public_tags from re-tagging pass in master Excel | Open | Low | Corpus | value | October 4, 2026 |
 | [MATTGPT-272](#mattgpt-272) | Corpus gap: zero thought leadership / PoV stories; Role Match returns blanket gap on the requirement | Open | Medium | Issue | value | October 4, 2026 |
-| [MATTGPT-274](#mattgpt-274) | `eval_rag_quality.py --surgical` calls rag_answer() with the query logger and CSV writers active | Open | Low | Bug | chore | October 5, 2026 |
 | [MATTGPT-275](#mattgpt-275) | Ask Agy moves to tool-calling retrieval: the model answers from profile and conversation, and calls search_stories when needed | Open | High | Action | value | October 6, 2026 |
-| [MATTGPT-277](#mattgpt-277) | Stale BDD tests on main: role_match_logging, query_logger_top_score, pn_exclusion background family | Open | Medium | Bug | chore | October 6, 2026 |
 | [MATTGPT-278](#mattgpt-278) | Tool-path and short-form client names go unbolded | Open | Medium | Issue | value | October 6, 2026 |
 | [MATTGPT-280](#mattgpt-280) | Tool-path narrative tone depends on which story leads | Open | Medium | Issue | value | October 8, 2026 |
 | [MATTGPT-281](#mattgpt-281) | Openers chosen by answer type after the answer is known | Open | Low | Issue | value | October 8, 2026 |
@@ -157,7 +153,6 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-316](#mattgpt-316) | Blur submits the landing question: the input's on_change fires on blur as well as Enter | Open | Medium | Bug | value | October 15, 2026 |
 | [MATTGPT-317](#mattgpt-317) | "Ask Agy About This" is dropped while an answer is in flight: the seed is popped, then the pending-turn guard skips it | Open | Medium | Bug | value | October 15, 2026 |
 | [MATTGPT-318](#mattgpt-318) | extract_facts.py emits no Ask Agy facts: add ask_answer_model, ask_tool_max_rounds and ask_history_max_messages; retire chat_model or emit assessment_model | Open | Medium | Action | value | October 15, 2026 |
-| [MATTGPT-319](#mattgpt-319) | Golden eval Q59's xfail reason names the confidence gate that 1095d2c removed | Open | Low | Hygiene | chore | October 15, 2026 |
 | [MATTGPT-321](#mattgpt-321) | Stale copy after 1095d2c: "Primary LLM" comment on DEFAULT_CHAT_MODEL; "High confidence match" and "Says what it doesn't know" in the How Agy Searches dialog | Open | Low | Hygiene | value | October 15, 2026 |
 | [MATTGPT-324](#mattgpt-324) | My Work doesn't render the profile facts semantic_search() returns (MATTGPT-250 item 1a) | Open | Medium | Enhancement | value | October 16, 2026 |
 | [MATTGPT-325](#mattgpt-325) | Stories that mention a query term are missed when their embedding score is under the cutoff: a keyword hit can't admit them | Open | Medium | Issue | value | October 16, 2026 |
@@ -178,10 +173,8 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-185](#mattgpt-185) | Query negation unsupported -- "outside of MattGPT" returns MattGPT stories | Open | Medium | Enhancement | value | August 13, 2026 |
 | [MATTGPT-190](#mattgpt-190) | Tokenizer character-set divergence: _tokenize keeps +#-. while token_overlap_ratio splits on non-\w | Open | Medium | Bug | value | August 16, 2026 |
 | [MATTGPT-195](#mattgpt-195) | Production incident queries scatter across six intent families -- delivery family has no incident vocabulary | Open | Medium | Bug | value | August 16, 2026 |
-| [MATTGPT-196](#mattgpt-196) | Defensive pytest.skip in test_explore_stories.py masks UI regressions as green runs | Open | Medium | Bug | chore | August 16, 2026 |
 | [MATTGPT-197](#mattgpt-197) | BDD suite-order flake: test_tapping_filters_toggle_shows_row_2_on_mobile fails in marathon, passes in isolation | Open | Low | Bug | chore | August 17, 2026 |
 | [MATTGPT-198](#mattgpt-198) | BDD suite-order flake: test_clicking_a_nav_label_still_routes_to_its_surface_no_regression fails in marathon, passes in isolation | Open | Low | Bug | chore | August 17, 2026 |
-| [MATTGPT-202](#mattgpt-202) | id-skip predicate copied verbatim in app.py and corpus_loader.py -- divergence risk, no shared source | Open | Medium | Bug | chore | August 18, 2026 |
 | [MATTGPT-203](#mattgpt-203) | Chip grid disable test asserts the wrong mechanism | Open | Low | Bug (Test) | chore | August 18, 2026 |
 | [MATTGPT-204](#mattgpt-204) | Explore Stories zero-filter-match: Table view renders empty grid chrome; Cards/Timeline empty-state text hidden by CSS | Open | Low | Bug | value | August 18, 2026 |
 | [MATTGPT-206](#mattgpt-206) | Eval suite ~1-in-70 stochastic flap; Q28 confirmed non-deterministic | Open | Medium | Bug (Test) | value | August 19, 2026 |
@@ -389,26 +382,6 @@ Each detail block uses these fields. Not every field is required for every item.
 
 ---
 
-### MATTGPT-017
-**Wire skipped Role Match logging BDD scenarios (Playwright click + mocked Sheets write)**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Action
-- **File:** `tests/bdd/features/role_match_logging.feature`, `tests/bdd/steps/test_role_match_logging.py`, `tests/unit/test_query_logger.py`
-- **Issue:** 6 BDD scenarios in `test_role_match_logging.py` skipped because they require Streamlit's button click and session state machinery at runtime. Covers chip interactions (2), action button wiring (3), session correlation across interaction types (1).
-- **Decision (May 14, 2026 rationalization):** Original Spike framing is no longer accurate. Since April 28, we've quietly proven the runtime-testing pattern across other work — Banking landing scenarios, Cross-Industry landing scenarios, Home page card click scenarios, chip CX scenarios — all run Playwright against a live Streamlit instance, click hidden buttons via `dispatch_event("click")`, and assert post-rerun state. Streamlit runtime testing isn't an open question anymore.
-- **What these 6 scenarios add beyond the existing pattern:** the assertion target is a **Google Sheets logging write**, not a UI state change. The wrinkle is mocking the Sheets writer so the test doesn't hit the real sheet. Same shape as `tests/unit/test_query_logger.py` (committed May 13, 2026), which mocks `Thread` to assert log-call payloads without writing to Google Sheets.
-- **Concrete next action (Action, not Spike):**
-  1. For each of the 6 skipped scenarios, identify the logging call path (`log_role_match_action`, `log_role_match_chip_click`, `log_role_match_assessment`, etc.).
-  2. Apply the existing Playwright pattern for the click interaction (dispatch_event on hidden Streamlit button keyed for the action).
-  3. Mock `services.query_logger._append_row` (or the underlying `Thread` call — same pattern as `test_query_logger.py::TestLogQueryBotFilter`) to capture the would-be-written payload without hitting the real sheet.
-  4. Assert payload structure matches the BDD scenario's contract (event type, session id, action label, etc.).
-- **Affects:** 6 skipped tests in `test_role_match_logging.py`. Test coverage for analytics correctness (chip click → log payload, action button → log payload, session id correlation across event types).
-- **Logged:** April 28, 2026 / **Reframed:** May 14, 2026
-
----
-
 ### MATTGPT-022
 **Data Quality Cleanup Journey Story**
 
@@ -455,7 +428,7 @@ Each detail block uses these fields. Not every field is required for every item.
 
 **Acceptance:** tier 1 failing keeps the prod branch where it is; tier 2 reports and doesn't block.
 
-**Sequence:** tier 1 first. Tier 2 after MATTGPT-258's data-contract check (check f) exists. BDD in tier 2 also depends on MATTGPT-014 and MATTGPT-017 (skipped Role Match BDD scenarios); until they land, those scenarios are reported as skipped, not run.
+**Sequence:** tier 1 first. Tier 2 after MATTGPT-258's data-contract check (check f) exists. BDD in tier 2 also depends on MATTGPT-014 (skipped Role Match BDD scenarios; MATTGPT-017's six run since 5e84710); until it lands, those scenarios are reported as skipped, not run.
 
 ---
 
@@ -797,6 +770,8 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Stale (Oct 17, 2026):** fbcbb7e bound the two rejection-banner scenarios this block calls unbound ("the story grid should still be visible", MATTGPT-224), and 92370b3 removed the `st.stop()` calls in the rejection branches. Re-scope on pickup.
 - **Logged:** May 23, 2026
 
+- **Also gone (verified Oct 17, 2026, HEAD 836bf4d):** `render_conversation()`, which this block names for Ask Agy's spinner (last mention removed in 5d70164). Re-scope on pickup.
+
 ---
 
 ### MATTGPT-084
@@ -1075,6 +1050,9 @@ None of these stories is cited in the answer. This is the "retrieved, not cited"
 **Superseded in part by MATTGPT-275 (Oct 6, 2026, reworded Oct 12):** The Sources contract: cards show the stories the answer cited, not just those retrieved.
 
 **Observed (Oct 17, 2026; MATTGPT-322 Green 58fe71f, browser check):** the Sources row still lists three stories under a rule 0b decline that says nothing is on record.
+
+
+**Stale in part (verified Oct 17, 2026, HEAD 836bf4d):** `_generate_agy_response()`, whose `random.choice` closings this block describes, is gone from production code (1095d2c), and "dive deeper" appears in none. The trailing-question item needs a re-measure on the tool path before it is worked.
 
 ---
 
@@ -1679,39 +1657,8 @@ Same class as the no-inference clause in MATTGPT-250: retrieved text that sits n
 
 **Out of scope:** MATTGPT-250 and MATTGPT-251. No new regex patterns in the meantime.
 
----
 
-### MATTGPT-254
-**Stale BDD scenarios in role_match.feature and jd_extraction.feature; CHANGELOG em dash**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Bug
-- **File:** `tests/bdd/features/jd_extraction.feature`, `tests/bdd/features/post_era_project_counts.feature`, `tests/bdd/steps/test_post_era_project_counts.py`
-- **Logged:** September 26, 2026
-
-**Issue 1 -- stale scenarios.** Five scenarios in `role_match.feature` describe the old 30-word gate behavior, which was replaced when the gate shipped. They are xfailed or passing against stale assertions; neither outcome proves the current behavior is tested.
-
-Scenarios by name:
-- "Empty text area disables the match button"
-- "Match button is disabled when the JD textarea is empty"
-- "Clicking clear empties the textarea and disables the match button"
-- "Match button stays disabled below 30-word threshold"
-- "Clicking Clear returns to State 1 including right panel and Sample JD link"
-
-**Issue 2 -- CHANGELOG em dash.** The CHANGELOG entry for the 30-word gate (`CHANGELOG.md` line 569 at time of filing) contains "-- honest framing that doesn't imply Agy has result context", which was written with an em dash before the repo rule was added. Fix: replace with a comma or rewrite.
-
-**Issue 3 -- stale `jd_extraction.feature` (folded in, Oct 3, 2026).** `tests/bdd/features/jd_extraction.feature` still asserts `key_responsibilities` and `seniority_signals`. Both were removed from the extraction schema. The feature file passes because the assertions are no longer reached, not because the behavior is correct. Fix: update or remove the stale assertions.
-
-**Fix scope:**
-1. Rewrite or delete the five stale scenarios to assert current behavior (or confirm they are already correct and remove the xfail).
-2. Fix the em dash in the CHANGELOG entry.
-
-**Constraint:** CHANGELOG.md is append-only for new entries; in-place corrections to existing entries are allowed for factual errors and rule violations. The em dash is a rule violation. Fix it in place.
-
-**Added (Oct 6, 2026, b1adf0d):** post_era_project_counts fails 2 of 3 scenarios: stale assertions against the landing stats bar, commented out since b667d67 (Sept 3). Independent of MATTGPT-269 (landing pages import nothing from backend_service). Decision: drop the stats-bar assertions; keep the hero project-count checks (the stats bar was removed intentionally).
-
-**Re-checked Oct 16, 2026 (HEAD 77f72c2):** Issue 1 fixed in 1095d2c: four of the five scenario names are gone from `role_match.feature`, and the remaining one ("Clicking Clear returns to State 1 including right panel and Sample JD link") asserts the match button is enabled after Clear; role_match BDD 24 passed, 28 skipped (1095d2c). Issue 2 fixed in this pass (comma in place of the em dash). Still open: Issue 3, `jd_extraction.feature` still asserts `key_responsibilities` and `seniority_signals`, and no file under `tests/` references it, so it is unbound; and the `post_era_project_counts.feature` stats-bar assertions (Oct 6 addition) are still there.
+**Stale in part (verified Oct 17, 2026, HEAD 836bf4d):** `build_user_message()` is gone (1095d2c), so the count of anti-evaluation rules above (8 places) predates the tool prompt. Recount in `build_tool_system_prompt()`'s prompt on pickup.
 
 ---
 
@@ -2049,23 +1996,6 @@ These only affect behavior if tags feed filters or counts. Fix is in the master 
 
 ---
 
-### MATTGPT-274
-**`eval_rag_quality.py --surgical` calls rag_answer() with the query logger and CSV writers active**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Bug
-- **File:** `tests/eval_rag_quality.py` (`run_surgical_diagnostics()`)
-- **Logged:** October 5, 2026
-
-**Issue:** Verified Oct 5, 2026: `run_surgical_diagnostics()` patches `streamlit.session_state` and `backend_service.st` only, then calls `rag_answer()` directly. The script does not patch `log_query` (`services/query_logger.py`), `log_offdomain` (`backend_service.py`), or the router CSV writers `_log_borderline` and `_log_router_low_confidence` (`services/semantic_router.py`). A `--surgical` run writes rows to the Sheet and to the local CSVs. `94a1cf2` left it unrun live for this reason.
-
-**Fix:** Patch out `log_query`, `log_offdomain`, `_log_borderline` and `_log_router_low_confidence` for the duration of the run, at the names the callers import.
-
-**Acceptance:** `--surgical` runs end to end with no new Sheet rows and no new rows in `data/offdomain_queries.csv`, `data/borderline_queries.csv` or `data/router_low_confidence.csv`.
-
----
-
 ### MATTGPT-275
 **Ask Agy moves to tool-calling retrieval: the model answers from profile and conversation, and calls search_stories when needed**
 
@@ -2101,30 +2031,6 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 **On close:** Re-check MATTGPT-063, -096, -128, -153, -166, -167, -168, -185, -187, -190, -195, -199, -201, -206, -209, -217, -239, -251, -252, -253, -255, -259, -263, -268 (MATTGPT-273's residual: the CS leading no and the PMP follow-up pivot) and -278 against the tool path; close or re-scope each with evidence. The list is the Oct 6, 2026 audit's Waits-on-275 set plus -253 and -255.
 
 **Green deployed (Oct 15, 2026):** 1095d2c (evidence aa0bb94). 275 stays open for the code-rendered closer and the profile contact links: required closings c14 to c17 scored 0/10 in every arm, the baseline included (1095d2c known issues).
-
----
-
-### MATTGPT-277
-**Stale BDD tests on main: role_match_logging, query_logger_top_score, pn_exclusion background family**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Bug
-- **File:** `tests/bdd/steps/test_role_match_logging.py`, `tests/bdd/steps/test_query_logger_top_score.py`, `tests/bdd/steps/test_pn_exclusion.py`
-- **Logged:** October 6, 2026
-
-**Issue:** Seven BDD failures on main, reported in the MATTGPT-276 Green (7850ed2) as failing identically before that change:
-- `test_role_match_logging`: 5 scenarios, written against the logging signature from before 89a3774 (per-category count columns).
-- `test_query_logger_top_score`: 1 scenario, asserts the old `HEADERS` order.
-- `test_pn_exclusion` background family: 1 scenario, bisected to 4309b38 (MATTGPT-208 Part 2 (3b), era+kind diversify for the background family). Stale fixture or regression: undetermined.
-
-**Fix:** Update the first two to the current signature and `HEADERS` order. For pn_exclusion, decide stale fixture vs. regression before changing either the test or the code.
-
-**Also seen (Oct 6, 2026, 7850ed2):** `test_post_result_cta_renders` timed out once in the full Oct 6 run (15s wait for the assessment); passed in isolation. Ticket it if it recurs.
-
-**Related:** MATTGPT-254 (stale BDD scenarios in role_match.feature and jd_extraction.feature). Kept separate because the pn_exclusion failure may be a regression, not a stale test.
-
-**Stale against 1095d2c; re-scope on pickup.**
 
 ---
 
@@ -2940,22 +2846,6 @@ Any sentinel has to be translated in one place before anything uses it. With tha
 
 ---
 
-### MATTGPT-319
-**Golden eval Q59's xfail reason names the confidence gate that 1095d2c removed**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Hygiene
-- **File:** `tests/eval_rag_quality.py` (query id 59)
-- **Related:** MATTGPT-320 (golden eval on shipped code), MATTGPT-253 (confidence gate), MATTGPT-250 (profile facts)
-- **Logged:** October 15, 2026
-
-**Verified Oct 15, 2026 (HEAD):** query 59, "Where does Matt live?", `expected_behavior` "profile_fact", must contain "Atlanta". Its `xfail_reason` reads "low_confidence: top_score 0.242 < CONFIDENCE_HIGH 0.25; profile question with no matching story", and the comment above says the confidence gate rejects it before the profile facts. Since 1095d2c search confidence doesn't gate the answer, so the reason no longer describes the code.
-
-**Change:** drop the xfail after an XPASS is observed (MATTGPT-320's run). If Q59 fails instead, rewrite the reason to the failure that run shows.
-
----
-
 ### MATTGPT-321
 **Stale copy after 1095d2c: "Primary LLM" comment on DEFAULT_CHAT_MODEL; "High confidence match" and "Says what it doesn't know" in the How Agy Searches dialog**
 
@@ -3266,6 +3156,9 @@ After stopword fix: keyword scores already inverted correctly (Fiserv 0.250, cha
 
 **Cross-references:** MATTGPT-174 (gate calibration -- Top Score distribution is what any conditional-pin threshold must be derived from), MATTGPT-077 (noun-overlap contamination), MATTGPT-169 (closed -- PN exclusion shipped at 6a581d5; positioning-story attractor finding documented in CHANGELOG), MATTGPT-178 (closed -- stopword fix inverted keyword scores at 049e203; pc gap is the remaining work in this ticket), MATTGPT-190 (character-set divergence, split from -178).
 
+
+**Stale against 1095d2c (verified Oct 17, 2026, HEAD 836bf4d):** `diversify_results()` and the `<primary_story>` wrapping in `_generate_agy_response()` this block names are gone from production code. Re-measure slot-1 amplification on the tool path, or close if it no longer occurs.
+
 ---
 
 ### MATTGPT-171
@@ -3448,6 +3341,9 @@ Specific location: `test_scoring.py:85` constructs a fixture dict using phantom 
 
 **Cross-references:** MATTGPT-077 (Independent Project / MattGPT vocabulary concentration is why MattGPT dominates these pools in the first place), MATTGPT-172 (CIC consolidation -- reducing Independent Project density is the upstream lever; this ticket handles the explicit-exclusion case).
 
+
+**Stale against 1095d2c (verified Oct 17, 2026, HEAD 836bf4d):** `ENTITY_ALIASES` and `detect_entity()` are gone from production code; the model writes its own search queries now. Re-measure "outside of MattGPT" on the tool path before re-scoping.
+
 ---
 
 ### MATTGPT-190
@@ -3530,38 +3426,6 @@ Specific location: `test_scoring.py:85` constructs a fixture dict using phantom 
 
 ---
 
-### MATTGPT-196
-**Defensive pytest.skip in test_explore_stories.py masks UI regressions as green runs**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Bug
-- **File:** `tests/bdd/steps/test_explore_stories.py`
-- **Logged:** August 16, 2026
-
-**Issue:** Four `pytest.skip()` calls in step definitions convert missing UI elements into skips rather than failures. A card grid that fails to render, a missing button, or absent timeline links would all appear as additional skips in the run total rather than test failures. Real UI regressions become invisible.
-
-**Confirmed locations (August 16, 2026 BDD run):**
-- Line 240: `pytest.skip("No clickable story elements found")` -- in the `@when` step that clicks a card. A missing card grid is a regression, not an environment constraint.
-- Line 555: `pytest.skip("No close button or selected card found")` -- tries to close a detail panel; skips if nothing to close.
-- Line 586: `pytest.skip("Ask Agy button not found")` -- missing Ask Agy button becomes a skip.
-- Line 693: `pytest.skip("No Timeline explore links found")` -- absent timeline links become a skip.
-
-**The correct pattern is already in the file:** Line 589 (`click_share`) uses `pytest.fail("Share button not found after 15s")` -- same situation, right outcome.
-
-**Exception:** Line 1247 (`pytest.skip` for clipboard API) is a genuine headless Chromium constraint (clipboard requires HTTPS or a browser flag). This one stays as skip.
-
-**Fix:** Change the four `pytest.skip(...)` call sites (search: `pytest.skip` in `tests/bdd/steps/`) from `pytest.skip(...)` to `pytest.fail(...)`. No logic change -- only the outcome when the element is absent changes from skip to fail.
-
-**Acceptance criteria:**
-- Running the BDD suite with cards not rendering produces a failure, not an additional skip.
-- Line 1247 clipboard skip unchanged.
-- All currently-passing scenarios still pass.
-
-**Cross-references:** MATTGPT-122 (Cards view BDD timing -- one of the skip sites is the same step; if -122 is fixed, that skip site becomes safe to convert without risk of false red).
-
----
-
 ### MATTGPT-197
 **BDD suite-order flake: test_tapping_filters_toggle_shows_row_2_on_mobile fails in marathon, passes in isolation**
 
@@ -3601,31 +3465,6 @@ Specific location: `test_scoring.py:85` constructs a fixture dict using phantom 
 **Evidence:** Full-suite failure at `eb7e5cb` + MATTGPT-074 refinement uncommitted at that run (MATTGPT-074 has since closed at c67c8b7); isolation-run pass with gate refactor restored.
 
 **Acceptance criterion:** Passes consistently in the full suite without isolation, or root cause confirmed and documented.
-
----
-
-### MATTGPT-202
-**id-skip predicate copied verbatim in app.py and corpus_loader.py -- divergence risk, no shared source**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Bug
-- **File:** `app.py` (`load_star_stories`), `utils/corpus_loader.py` (`load_stories`)
-- **Logged:** August 18, 2026
-
-**Issue:** Both `load_star_stories` in `app.py` and `load_stories` in `corpus_loader.py` implement the same id-enforcement predicate: `story_id in (None, "", 0)`, `str(story_id).strip()`, and a call to `normalize_story`. The predicate is byte-for-byte identical in both files with no shared source. If someone fixes a bug in one path they must remember to update the other -- the same class of silent divergence that MATTGPT-182 fixed in the normalize_story call.
-
-**What this is not:** An incomplete extraction. The `corpus_loader` module was created August 13 specifically for non-Streamlit call sites (tests, probes). The Green commit message explicitly documented the intentional split: `load_star_stories` retains a `json.JSONDecodeError` try/except that surfaces `st.warning` in the Streamlit UI; `corpus_loader.load_stories` raises on malformed lines. That behavioral difference belongs in `app.py` (Streamlit context) and not in the shared library. The error-handling separation is correct.
-
-**The actual risk:** Only the id-skip predicate. It has no shared source and sits in both files as a copy-paste. A future bug fix to the predicate (new skip condition, edge case in `str(story_id).strip()`) hits one file without automatically flagging the other.
-
-**Fix:** Extract the id-enforcement predicate into a single shared helper -- e.g., `is_valid_story_id(story_id)` in `corpus_loader.py` or `utils/`. Both `load_star_stories` and `load_stories` call the helper. Error handling and debug output remain where they are; only the skip-logic ownership changes.
-
-**Naming caution:** A leading underscore on the helper (e.g., `_is_valid_story_id`) signals private to the module, but `app.py` would import it -- a convention violation. Either use a public name (no leading underscore) or document the deliberate violation in a comment. Decide before implementing.
-
-**Pre-flight before implementing:** Read both functions in full and trace current callers of each before proposing a helper location or signature. `corpus_loader.py` docstring says "Replicates app.py id enforcement" -- that comment should be removed or updated when the helper is in place.
-
-**Cross-references:** MATTGPT-182 (same class: normalize_story divergence across call sites; fixed August 15 at 275ff1f).
 
 ---
 
@@ -3760,6 +3599,9 @@ Grep targets for Class 3: `except Exception: pass`, `except: pass`, bare `except
 
 **Pattern context (August 26, 2026):** Suggested alongside MATTGPT-213. Both are instances of the same class as MATTGPT-187 and MATTGPT-211.
 
+
+**Narrowed (verified Oct 17, 2026, HEAD 836bf4d):** the `_PN_EXCLUDED_FAMILIES` finding is resolved: 1095d2c deleted the constant.
+
 ---
 
 
@@ -3879,6 +3721,8 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 
 **Earlier scope (Sept 1, 2026), kept for the router's other callers:**
 
+_Verified Oct 17, 2026 (HEAD 836bf4d): `_PN_EXCLUDED_FAMILIES` was deleted in 1095d2c; `SUBSTITUTION_FAMILIES` (`config/constants.py`) is still read by `utils/scoring.py`._
+
 **Finding (MATTGPT-220 inventory):** 11 topical families produce a label that no branch reads for its topic content. Three (`leadership`, `stakeholders`, `innovation`) reach no branch at all -- they exist only as anchor strings and a log column. Six (`technical`, `delivery`, `team_scaling`, `agile_transformation`, `domain_payments`, `domain_healthcare`) appear only in `SUBSTITUTION_FAMILIES` and `_PN_EXCLUDED_FAMILIES`, where the code cares whether the family is in the set, not which one. Two (`background`, `behavioral`) sit in the topical group but are query-shape families that do branch. Both set memberships proxy for a question the code never asks directly: is this query about the work, or about who Matt is? The story-side half is already answered by `Theme == "Professional Narrative"`.
 
 **Three-commit plan:**
@@ -3959,6 +3803,9 @@ Fallback if no entity is detected: surviving-family membership (`background`, `n
 **Acceptance:** `out_of_scope_response` and `personal_response` are gone; `BANNER_COPY` is the only copy path per rejection type. `answer_md` for a router rejection has a defined value, and `TestRejectionsKept` asserts that value.
 
 **Folded in from MATTGPT-293 (closed Oct 16, 2026 as a duplicate):** deleting `out_of_scope_response` also removes its flat "I don't have experience in that industry" and its hand-typed industry list.
+
+
+**Note (verified Oct 17, 2026, HEAD 836bf4d):** `render_conversation()`, named above as the transcript branch, no longer exists (last mention removed in 5d70164). Name the function that renders the banner on pickup.
 
 ---
 

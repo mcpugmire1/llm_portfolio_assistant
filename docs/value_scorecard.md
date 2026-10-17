@@ -163,8 +163,7 @@ extraction), -294 (split MATT_DNA by
 responsibility, In Progress), -296 (closing offer in a prompt example), -297 (no dog humor in
 answers), -300 (thinking indicator shows real progress), -301 (em dashes left in the repo), -306 (set store=False
 after 275, Blocked), -307 (Key Metrics label cut), -310 (direct-reports
-answer varies), -311 (no ongoing-period End_Date), -319 (Q59 xfail
-reason stale), -327 (rewritten quotations),
+answer varies), -311 (no ongoing-period End_Date), -327 (rewritten quotations),
 -328 (rule 0b decline follow-ups).
 
 ## 4. Role Match
@@ -204,7 +203,7 @@ reason stale), -327 (rewritten quotations),
 - Unbound: `jd_assessment.feature`, `jd_extraction.feature`.
 
 **Open tickets:** -244 (In Progress), -160 (In Progress), -266, -249, -272
-(awaiting validation), -254, -012 (In Progress), -014, -017, -081, -099,
+(awaiting validation), -012 (In Progress), -014, -081, -099,
 -173, -079, -264, -267.
 
 ## 5. Evidence parity (Ask Agy and Role Match)
@@ -258,7 +257,7 @@ Match).
 - Failing: -146, -228 (open bugs).
 - The career-narrative field differs by surface (Theme, Era, Category).
 
-**Open tickets:** -146, -228, -204, -196, -150, -122, -131, -197, -145,
+**Open tickets:** -146, -228, -204, -150, -122, -131, -197, -145,
 -183, -210, -166, -083, -271, -295 (Timeline era order), -308
 (My Work first page is MattGPT stories), -324 (My Work profile facts, from -250), -325 (query-term mentions
 missed under the embedding cutoff), -331 (Home cards 3, 5 and 6 keep only their first Domain, High).
@@ -285,10 +284,10 @@ experience reliably and sustainably; failures are visible, not silent.
 - Model retirement: -302 (gpt-4o family retires January 14, 2027).
 - Silent failures: -292 (silent file-order fallback), -288 (Ask Agy ignores the Pinecone fallback signal).
 - Regression gates and test reliability: -039, -233, -235, -206, -153,
-  -274, -084, -180, -277, -198, -035, -143 (Parked), -203,
+  -084, -180, -198, -035, -143 (Parked), -203,
   -213.
 - Architecture and maintainability: -258 (In Progress), -259, -260, -261, -262, -140,
-  -202, -214, -226.
+  -214, -226.
 - Dead code and hygiene: -176, -241, -152 (Parked), -287 (docs
   describe a removed overlap gate).
 - Visible glitches: -229, -289 (MATTGPT-018 regression watch), -330 (Home to My Work half-emptied frame).
