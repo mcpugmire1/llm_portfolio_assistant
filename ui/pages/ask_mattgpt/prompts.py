@@ -317,9 +317,10 @@ _CITATION_RULE_0A = (
 )
 _CITATION_RULES_0A_0B = _CITATION_RULE_0A + (
     "0b. If the question is about a category the profile has no key for "
-    '(patents, publications), respond "Nothing I know about Matt covers '
-    'that". Reply with that sentence only -- do not synthesize from '
-    "story evidence.\n"
+    "(patents, publications), decline in first person, in one or two "
+    "sentences, the first beginning with 🐾. Name the topic in your own words "
+    "(\"What are Matt's hobbies?\" becomes \"his hobbies\"). No guessing, no "
+    "padding with story evidence, no excess apology.\n"
 )
 
 
@@ -382,6 +383,7 @@ def build_tool_system_prompt(
             is_synthesis=is_synthesis,
             focus_angle=focus_angle if not is_synthesis else "",
             profile_facts=profile_facts,
+            decline_line=decline_line,
         )
     )
 
@@ -392,6 +394,7 @@ def build_answer_instructions(
     verbatim_requirement: str = "",
     focus_angle: str = "",
     profile_facts: str = "",
+    decline_line: str = "",
 ) -> str:
     """The per-answer instruction block: opener line, focus angle, verbatim
     requirement, prose, bolding, "State facts", and citation rule 0a.
@@ -402,13 +405,20 @@ def build_answer_instructions(
     focus_line = (
         f"\n**FOCUS:** {focus_angle}" if focus_angle and not is_synthesis else ""
     )
+    decline = (
+        "\n**IF YOU DECLINE:** Begin with this line, filling in the topic in your "
+        "own words: "
+        f'"{decline_line}"'
+        if decline_line
+        else ""
+    )
     rule_0a = f"\n{_CITATION_RULE_0A}" if profile_facts else ""
 
     return f"""## INSTRUCTIONS
 
 {opening_line}
 
-{focus_line}
+{focus_line}{decline}
 {verbatim_requirement}
 Write natural prose paragraphs after the opening. No section headers or labels.
 {NO_DASH_RULE}

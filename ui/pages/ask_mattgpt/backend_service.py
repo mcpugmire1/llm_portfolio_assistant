@@ -561,8 +561,19 @@ def _choose_opening_and_focus(is_synthesis: bool) -> tuple[str, str]:
     return random.choice(STANDARD_OPENERS), random.choice(FOCUS_ANGLES)
 
 
+# Agy's decline lines, one chosen at random per answer by
+# _choose_decline_line() and given to the model as the shape to use if it
+# declines. Code picks because each call is independent: given the list to
+# vary, the model kept to its own line.
+DECLINE_LINES = [
+    "🐾 I followed that trail and came up empty: Matt's stories don't cover [topic].",
+    "🐾 I searched Matt's whole record, and it doesn't mention [topic].",
+]
+
+
 def _choose_decline_line() -> str:
-    raise NotImplementedError
+    """Pick the decline line for this answer at random."""
+    return random.choice(DECLINE_LINES)
 
 
 def _openai_client():
@@ -854,6 +865,7 @@ def agy_answer(
                 profile_facts=profile_facts,
                 opener_examples=SYNTHESIS_OPENERS + STANDARD_OPENERS,
                 focus_angle=focus,
+                decline_line=_choose_decline_line(),
             ),
         },
         *(history or []),
