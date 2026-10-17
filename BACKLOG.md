@@ -166,6 +166,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-327](#mattgpt-327) | Ask Agy rewrites the wording of quotations it attributes to Matt's own words | Open | Medium | Issue | value | October 17, 2026 |
 | [MATTGPT-328](#mattgpt-328) | Rule 0b decline follow-ups: repeat drift, "I can't confirm", possessive wording | Open | Low | Issue | value | October 17, 2026 |
 | [MATTGPT-329](#mattgpt-329) | Crude and sexual questions about Matt reach the answering model since 1095d2c removed the confidence and overlap gates | Open | High | Regression | value | October 17, 2026 |
+| [MATTGPT-330](#mattgpt-330) | Home to My Work card click shows a half-emptied Home for a frame or more: the stale-hide rule covers only the Ask Agy landing | Open | Medium | Bug | value | October 17, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently | Parked | Medium | Action | value | August 3, 2026 |
@@ -2362,6 +2363,8 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 
 **History:** MATTGPT-018 closed Done in 2f2635b (fix a6b427c). The BDD regression lock, MATTGPT-138, is Decided Against.
 
+**Related (Oct 17, 2026):** MATTGPT-330, the same class on Home to My Work, with a fix direction (extend MATTGPT-275's stale-hide rule to Home's hand-offs).
+
 ---
 
 ### MATTGPT-290
@@ -3126,6 +3129,23 @@ The fails span four different rule 0b wordings, and controls never trigger 0b, s
 **Fix:** a nonsense rule that rejects these before any model call, tested against the must-preserve set (the legitimate questions the rules must not refuse; `LEGITIMATE` in `tests/unit/test_nonsense_portfolio_questions.py`). Follow the nonsense-filter rules in CLAUDE.md: multi-word phrases or `\b` boundaries, tested against real "Tell me about Matt's X" queries.
 
 **Sequence:** before MATTGPT-236. With the router out of the answer path, the nonsense rules are the only check before the model.
+
+### MATTGPT-330
+**Home to My Work card click shows a half-emptied Home for a frame or more: the stale-hide rule covers only the Ask Agy landing**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `ui/styles/global_styles.py` (MATTGPT-275's stale-hide rule), `ui/pages/home.py`
+- **Related:** MATTGPT-289 (same class, Ask Agy landing to My Work; watch), MATTGPT-275 (landing hand-off fix, 1095d2c), MATTGPT-018 (a6b427c)
+- **Logged:** October 17, 2026
+
+**Observed (Matt's browser trace, Oct 17, 2026, localhost:8502; as reported):** clicking a Home card to My Work shows a half-emptied Home for a frame or more: navbar and hero gone; the cards, the Ask Agy box and the footer shifted up; the Ask Agy link faded. The trace shows Streamlit's stale-element opacity fade (see MATTGPT-289's doc conflict on Pattern 6).
+- Screenshots (with Matt, not on disk): the clicked card was Teams & Talent Development. The mid-transition frame starts at "What would you like to explore?", with no navbar or hero above it; the six cards, the Ask Agy Anything box and Let's Connect follow, and the "Ask Agy" link in the Ask Agy box is faded. A Performance trace filmstrip frame at about 2,423 ms shows the same layout. The destination is My Work with the Domain filter "Client Upskilling & Enablement" (1 story).
+
+**Verified Oct 17, 2026 (HEAD 4e85149, `global_styles.py`):** two stale-hide rules exist. a6b427c's (MATTGPT-018) covers stale containers holding `.main-intro-section` or `.ask-header-landing`. 1095d2c's (MATTGPT-275) hides every stale element except the navbar and status bar, plus the intro card, but only under `body:has(.powered-by-text)`; its comment: "`.powered-by-text`, rendered only by landing_view". Neither applies on Home. 275's comment names the same symptom on the Ask Agy landing: "Hiding only some stale parts left the page half emptied ... until the conversation painted."
+
+**Fix direction:** extend 275's rule to Home's hand-offs, measured as 275's was: a headless recorder plus a browser trace.
 
 ### MATTGPT-160
 **JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs**

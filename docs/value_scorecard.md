@@ -291,7 +291,7 @@ experience reliably and sustainably; failures are visible, not silent.
   -202, -214, -226.
 - Dead code and hygiene: -176, -241, -152 (Parked), -287 (docs
   describe a removed overlap gate).
-- Visible glitches: -229, -289 (MATTGPT-018 regression watch).
+- Visible glitches: -229, -289 (MATTGPT-018 regression watch), -330 (Home to My Work half-emptied frame).
 
 ## 8. Professional demonstration
 
