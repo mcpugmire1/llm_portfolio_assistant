@@ -33,7 +33,7 @@ while IFS= read -r entry; do
   printf '%s\n' "$added" | grep -qxF -e "${entry#*:}" && continue
   pat=$(printf '%s' "$entry" | sed 's/[.]/\\./g')
   printf '%s\n' "$decisions" | grep -Eq -e "(^|[^[:alnum:]_./-])${pat}([^[:alnum:]_]|$)" && continue
-  echo "⛔ WAKE UP MATT! PAY ATTENTION TO THIS. This commit deletes production code: $entry. Add a 'Decision: delete $entry, <reason>' trailer only after you've reviewed it." >&2
+  echo "⛔ WAKE UP MATT! PAY ATTENTION TO THIS. This commit deletes production code: $entry. Name it in a 'Decision: delete $entry, <reason>' trailer, matching the approved pre-flight list." >&2
   status=1
 done <<< "$removed"
 
