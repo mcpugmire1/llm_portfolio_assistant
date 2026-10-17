@@ -1,0 +1,2037 @@
+[
+ {
+  "case": "q14",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct answer from the profile self-description and the leadership stories; every claim supported; 0 contradicted, 0 unsupported. Supported: ecp, pfx, bcm, fish, vals, next.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "'Permit to fail' learning environment and balanced teams: Product + Engineering + Design together",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Task; breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Quoted self-description 'Builder's mindset, coach's heart'",
+    "label": "supported",
+    "source": "profile.self_description.statements[1]"
+   },
+   {
+    "text": "Teaches teams to fish, doesn't just fix problems",
+    "label": "supported",
+    "source": "profile.self_description.statements[2]"
+   },
+   {
+    "text": "Core values: Empathy, Authenticity, Curiosity, Integrity, Leadership",
+    "label": "supported",
+    "source": "profile.self_description.statements[3]"
+   },
+   {
+    "text": "Builds what's next, modernizes what's not, grows teams along the way",
+    "label": "supported",
+    "source": "profile.self_description.statements[0]"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q14",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer from leadership-philosophy, work-philosophy, permit-to-fail, early-failure and balanced-teams stories; every claim supported, quotes verbatim; 0 contradicted, 0 unsupported. Supported: ecp, over, remove, bt, btpract, pf, pfact, ef, efres, coach, eng, 4x, btres, pfres.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quoted: teams he inherited were 'over-processed, under-trusted, waiting for permission instead of owning outcomes'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Removes barriers: makes intent explicit, builds psychological safety so people speak honestly, pushes decisions to the people closest to the work",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action, 5PSummary"
+   },
+   {
+    "text": "Balanced teams of engineers, product managers and UX architects (Product, Engineering, Design) with equal participation and shared accountability",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Pair programming, collaborative coding, stand-ups, retrospectives, knowledge-sharing sessions; goals aligned to client and business outcomes; teams voice feedback and change workflows autonomously",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "'Permit to fail' culture at the Accenture Cloud Innovation Center addressing teams' fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation, Task, Division"
+   },
+   {
+    "text": "Non-punitive post-mortems, transparent sharing of mistakes, lessons over finger-pointing, lean low-stakes experiments with structured hypotheses and controlled iterations",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action"
+   },
+   {
+    "text": "In product incubation/innovation work, set expectations that early prototypes and user tests would likely fail, intentionally",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "Teams used results to challenge assumptions and shape product direction week by week before costly builds; failed experiments as decision inputs, not setbacks",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action, Result"
+   },
+   {
+    "text": "Coaches teams to think clearly, not just execute tasks",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Grounds engineering culture in automation, continuous delivery, quality-first practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at the CIC after teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary, Result"
+   },
+   {
+    "text": "Balanced-team work: zero-defect production code, reduced handoffs and project delays, improved satisfaction and retention",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   },
+   {
+    "text": "Lessons applied to subsequent sprints, preventing recurrence of failure patterns; repeat errors declined, timelines shortened",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result, 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q14",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer from leadership-philosophy, work-philosophy, permit-to-fail, early-failure and balanced-teams stories; every claim supported, quotes verbatim; 0 contradicted, 0 unsupported. Supported: ecp, over, remove, coach, pf, pfact, pfres, ef, jtbd, efres, bt, btpract, eng, 4x, btres, nonneg.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quoted: teams he inherited were 'over-processed, under-trusted, waiting for permission instead of owning outcomes'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Removes barriers: makes intent explicit, builds psychological safety so people speak honestly, pushes decisions to the people closest to the work",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action, 5PSummary"
+   },
+   {
+    "text": "Coaches teams to think clearly, not just execute tasks",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "'Permit to fail' culture at the Accenture Cloud Innovation Center addressing teams' fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation, Task, Division"
+   },
+   {
+    "text": "Non-punitive post-mortems, transparent sharing of mistakes, lessons over finger-pointing, lean low-stakes experiments with structured hypotheses and controlled iterations",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action"
+   },
+   {
+    "text": "Lessons applied to subsequent sprints, preventing recurrence of failure patterns; repeat errors declined, timelines shortened",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result, 5PSummary"
+   },
+   {
+    "text": "In product incubation/innovation work, set expectations that early prototypes and user tests would likely fail, intentionally",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "Used user research, JTBD framing and rapid testing",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "Teams used results to challenge assumptions and shape product direction week by week before costly builds; failed experiments as decision inputs, not setbacks",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action, Result"
+   },
+   {
+    "text": "Balanced teams of engineers, product managers and UX architects (Product, Engineering, Design) with equal participation and shared accountability",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Pair programming, collaborative coding, stand-ups, retrospectives, knowledge-sharing sessions; goals aligned to client and business outcomes; teams voice feedback and change workflows autonomously",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Grounds engineering culture in automation, continuous delivery, quality-first practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at the CIC after teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary, Result"
+   },
+   {
+    "text": "Balanced-team work: zero-defect production code, reduced handoffs and project delays, improved satisfaction and retention",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   },
+   {
+    "text": "Non-negotiables: psychological safety, clear purpose, integrity and respect, continuous learning, 'outcomes, not optics'",
+    "label": "supported",
+    "source": "work-philosophy-where-i-do-my-best-work|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q14",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer from leadership-philosophy, work-philosophy, permit-to-fail, early-failure and balanced-teams stories; every claim supported, quotes verbatim; 0 contradicted, 0 unsupported. Supported: ecp, best, over, remove, transp, coach, nonneg, pf, pfact, pfres, ef, efgoal, bt, btpract, 4x, btres.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Aims to create an environment where engineers, designers and product teams do the best work of their careers",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Task"
+   },
+   {
+    "text": "Quoted: teams he inherited were 'over-processed, under-trusted, waiting for permission instead of owning outcomes'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Removes barriers: makes intent explicit, builds psychological safety so people speak honestly, pushes decisions to the people closest to the work",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action, 5PSummary"
+   },
+   {
+    "text": "Uses transparency, direct feedback and open communication",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Coaches teams to think clearly, not just execute tasks",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Non-negotiables: psychological safety, clear purpose, integrity and respect, continuous learning, 'outcomes, not optics'",
+    "label": "supported",
+    "source": "work-philosophy-where-i-do-my-best-work|accenture Action"
+   },
+   {
+    "text": "'Permit to fail' culture at the Accenture Cloud Innovation Center addressing teams' fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation, Task, Division"
+   },
+   {
+    "text": "Non-punitive post-mortems, transparent sharing of mistakes, lessons over finger-pointing, lean low-stakes experiments with structured hypotheses and controlled iterations",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action"
+   },
+   {
+    "text": "Lessons applied to subsequent sprints, preventing recurrence of failure patterns; repeat errors declined, timelines shortened",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result, 5PSummary"
+   },
+   {
+    "text": "In product incubation/innovation work, set expectations that early prototypes and user tests would likely fail, intentionally",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "Goal was to reduce risk quickly and cheaply, not be right on the first try",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Task"
+   },
+   {
+    "text": "Balanced teams of engineers, product managers and UX architects (Product, Engineering, Design) with equal participation and shared accountability",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Pair programming, collaborative coding, stand-ups, retrospectives, knowledge-sharing sessions; goals aligned to client and business outcomes; teams voice feedback and change workflows autonomously",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at the CIC after teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary, Result"
+   },
+   {
+    "text": "Balanced-team work: zero-defect production code, reduced handoffs and project delays, improved satisfaction and retention",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q14",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer from leadership-philosophy, work-philosophy, permit-to-fail, early-failure and balanced-teams stories; every claim supported, quotes verbatim; 0 contradicted, 0 unsupported. Supported: ecp, over, remove, coach, pf, pfact, ef, efres, bt, btpract, nonneg, eng, 4x, btres.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quoted: teams he inherited were 'over-processed, under-trusted, waiting for permission instead of owning outcomes'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Removes barriers: makes intent explicit, builds psychological safety so people speak honestly, pushes decisions to the people closest to the work",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action, 5PSummary"
+   },
+   {
+    "text": "Coaches teams to think clearly, not just execute tasks",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "'Permit to fail' culture at the Accenture Cloud Innovation Center addressing teams' fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation, Task, Division"
+   },
+   {
+    "text": "Non-punitive post-mortems, transparent sharing of mistakes, lessons over finger-pointing, lean low-stakes experiments with structured hypotheses and controlled iterations",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action"
+   },
+   {
+    "text": "In product incubation/innovation work, set expectations that early prototypes and user tests would likely fail, intentionally",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "Teams used results to challenge assumptions and shape product direction week by week before costly builds; failed experiments as decision inputs, not setbacks",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action, Result"
+   },
+   {
+    "text": "Balanced teams of engineers, product managers and UX architects (Product, Engineering, Design) with equal participation and shared accountability",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Pair programming, collaborative coding, stand-ups, retrospectives, knowledge-sharing sessions; goals aligned to client and business outcomes; teams voice feedback and change workflows autonomously",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Non-negotiables: psychological safety, clear purpose, integrity and respect, continuous learning, 'outcomes, not optics'",
+    "label": "supported",
+    "source": "work-philosophy-where-i-do-my-best-work|accenture Action"
+   },
+   {
+    "text": "Grounds engineering culture in automation, continuous delivery, quality-first practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at the CIC after teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary, Result"
+   },
+   {
+    "text": "Balanced-team work: zero-defect production code, reduced handoffs and project delays, improved satisfaction and retention",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q14",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer from leadership-philosophy, work-philosophy, permit-to-fail, early-failure and balanced-teams stories; every claim supported, quotes verbatim; 0 contradicted, 0 unsupported. Supported: ecp, pfx, over, btsilo, ef, remove, transp, coach, bt, btpract, pfact, efres, eng, 4x, btres.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "'Permit to fail' learning environment and balanced teams: Product + Engineering + Design together",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Task; breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Quoted: teams he inherited were 'over-processed, under-trusted, waiting for permission instead of owning outcomes'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Hierarchical structures and role silos caused bottlenecks",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Situation"
+   },
+   {
+    "text": "In product incubation/innovation work, set expectations that early prototypes and user tests would likely fail, intentionally",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "Removes barriers: makes intent explicit, builds psychological safety so people speak honestly, pushes decisions to the people closest to the work",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action, 5PSummary"
+   },
+   {
+    "text": "Uses transparency, direct feedback and open communication",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Coaches teams to think clearly, not just execute tasks",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Balanced teams of engineers, product managers and UX architects (Product, Engineering, Design) with equal participation and shared accountability",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Pair programming, collaborative coding, stand-ups, retrospectives, knowledge-sharing sessions; goals aligned to client and business outcomes; teams voice feedback and change workflows autonomously",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Non-punitive post-mortems, transparent sharing of mistakes, lessons over finger-pointing, lean low-stakes experiments with structured hypotheses and controlled iterations",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action"
+   },
+   {
+    "text": "Teams used results to challenge assumptions and shape product direction week by week before costly builds; failed experiments as decision inputs, not setbacks",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action, Result"
+   },
+   {
+    "text": "Grounds engineering culture in automation, continuous delivery, quality-first practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at the CIC after teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary, Result"
+   },
+   {
+    "text": "Balanced-team work: zero-defect production code, reduced handoffs and project delays, improved satisfaction and retention",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q14",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct answer from the profile self-description and the leadership stories; every claim supported; 0 contradicted, 0 unsupported. Supported: ecp, pfx, bcm, fish, vals.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "'Permit to fail' learning environment and balanced teams: Product + Engineering + Design together",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Task; breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Quoted self-description 'Builder's mindset, coach's heart'",
+    "label": "supported",
+    "source": "profile.self_description.statements[1]"
+   },
+   {
+    "text": "Teaches teams to fish, doesn't just fix problems",
+    "label": "supported",
+    "source": "profile.self_description.statements[2]"
+   },
+   {
+    "text": "Core values: Empathy, Authenticity, Curiosity, Integrity, Leadership",
+    "label": "supported",
+    "source": "profile.self_description.statements[3]"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q14",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer from leadership-philosophy, work-philosophy, permit-to-fail, early-failure and balanced-teams stories; every claim supported, quotes verbatim; 0 contradicted, 0 unsupported. Supported: ecp, over, remove, pf, pfact, pfres, ef, efres, pfx, bt, btpract, eng, coach, 4x, btres.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quoted: teams he inherited were 'over-processed, under-trusted, waiting for permission instead of owning outcomes'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Removes barriers: makes intent explicit, builds psychological safety so people speak honestly, pushes decisions to the people closest to the work",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action, 5PSummary"
+   },
+   {
+    "text": "'Permit to fail' culture at the Accenture Cloud Innovation Center addressing teams' fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation, Task, Division"
+   },
+   {
+    "text": "Non-punitive post-mortems, transparent sharing of mistakes, lessons over finger-pointing, lean low-stakes experiments with structured hypotheses and controlled iterations",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action"
+   },
+   {
+    "text": "Lessons applied to subsequent sprints, preventing recurrence of failure patterns; repeat errors declined, timelines shortened",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result, 5PSummary"
+   },
+   {
+    "text": "In product incubation/innovation work, set expectations that early prototypes and user tests would likely fail, intentionally",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "Teams used results to challenge assumptions and shape product direction week by week before costly builds; failed experiments as decision inputs, not setbacks",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action, Result"
+   },
+   {
+    "text": "'Permit to fail' learning environment and balanced teams: Product + Engineering + Design together",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Task; breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Balanced teams of engineers, product managers and UX architects (Product, Engineering, Design) with equal participation and shared accountability",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Pair programming, collaborative coding, stand-ups, retrospectives, knowledge-sharing sessions; goals aligned to client and business outcomes; teams voice feedback and change workflows autonomously",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Grounds engineering culture in automation, continuous delivery, quality-first practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Coaches teams to think clearly, not just execute tasks",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at the CIC after teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary, Result"
+   },
+   {
+    "text": "Balanced-team work: zero-defect production code, reduced handoffs and project delays, improved satisfaction and retention",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q14",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer from leadership-philosophy, work-philosophy, permit-to-fail, early-failure and balanced-teams stories; every claim supported, quotes verbatim; 0 contradicted, 0 unsupported. Supported: ecp, over, best, remove, transp, coach, nonneg, intensity, pf, pfact, pfres, ef, efres, bt, btpract, 4x, btres.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quoted: teams he inherited were 'over-processed, under-trusted, waiting for permission instead of owning outcomes'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Aims to create an environment where engineers, designers and product teams do the best work of their careers",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Task"
+   },
+   {
+    "text": "Removes barriers: makes intent explicit, builds psychological safety so people speak honestly, pushes decisions to the people closest to the work",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action, 5PSummary"
+   },
+   {
+    "text": "Uses transparency, direct feedback and open communication",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Coaches teams to think clearly, not just execute tasks",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Non-negotiables: psychological safety, clear purpose, integrity and respect, continuous learning, 'outcomes, not optics'",
+    "label": "supported",
+    "source": "work-philosophy-where-i-do-my-best-work|accenture Action"
+   },
+   {
+    "text": "Walks away from / chooses environments where intensity is balanced with respect for people",
+    "label": "supported",
+    "source": "work-philosophy-where-i-do-my-best-work|accenture 5PSummary"
+   },
+   {
+    "text": "'Permit to fail' culture at the Accenture Cloud Innovation Center addressing teams' fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation, Task, Division"
+   },
+   {
+    "text": "Non-punitive post-mortems, transparent sharing of mistakes, lessons over finger-pointing, lean low-stakes experiments with structured hypotheses and controlled iterations",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action"
+   },
+   {
+    "text": "Lessons applied to subsequent sprints, preventing recurrence of failure patterns; repeat errors declined, timelines shortened",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result, 5PSummary"
+   },
+   {
+    "text": "In product incubation/innovation work, set expectations that early prototypes and user tests would likely fail, intentionally",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "Teams used results to challenge assumptions and shape product direction week by week before costly builds; failed experiments as decision inputs, not setbacks",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action, Result"
+   },
+   {
+    "text": "Balanced teams of engineers, product managers and UX architects (Product, Engineering, Design) with equal participation and shared accountability",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Pair programming, collaborative coding, stand-ups, retrospectives, knowledge-sharing sessions; goals aligned to client and business outcomes; teams voice feedback and change workflows autonomously",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at the CIC after teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary, Result"
+   },
+   {
+    "text": "Balanced-team work: zero-defect production code, reduced handoffs and project delays, improved satisfaction and retention",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q14",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer from leadership-philosophy, work-philosophy, permit-to-fail, early-failure and balanced-teams stories; every claim supported, quotes verbatim; 0 contradicted, 0 unsupported. Supported: ecp, over, remove, pf, pfact, pfres, ef, jtbd, efres, pfx, bt, btpract, eng, 4x, btres.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quoted: teams he inherited were 'over-processed, under-trusted, waiting for permission instead of owning outcomes'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Removes barriers: makes intent explicit, builds psychological safety so people speak honestly, pushes decisions to the people closest to the work",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action, 5PSummary"
+   },
+   {
+    "text": "'Permit to fail' culture at the Accenture Cloud Innovation Center addressing teams' fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation, Task, Division"
+   },
+   {
+    "text": "Non-punitive post-mortems, transparent sharing of mistakes, lessons over finger-pointing, lean low-stakes experiments with structured hypotheses and controlled iterations",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action"
+   },
+   {
+    "text": "Lessons applied to subsequent sprints, preventing recurrence of failure patterns; repeat errors declined, timelines shortened",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result, 5PSummary"
+   },
+   {
+    "text": "In product incubation/innovation work, set expectations that early prototypes and user tests would likely fail, intentionally",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "Used user research, JTBD framing and rapid testing",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "Teams used results to challenge assumptions and shape product direction week by week before costly builds; failed experiments as decision inputs, not setbacks",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action, Result"
+   },
+   {
+    "text": "'Permit to fail' learning environment and balanced teams: Product + Engineering + Design together",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Task; breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Balanced teams of engineers, product managers and UX architects (Product, Engineering, Design) with equal participation and shared accountability",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Pair programming, collaborative coding, stand-ups, retrospectives, knowledge-sharing sessions; goals aligned to client and business outcomes; teams voice feedback and change workflows autonomously",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Grounds engineering culture in automation, continuous delivery, quality-first practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at the CIC after teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary, Result"
+   },
+   {
+    "text": "Balanced-team work: zero-defect production code, reduced handoffs and project delays, improved satisfaction and retention",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q14",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer from leadership-philosophy, work-philosophy, permit-to-fail, early-failure and balanced-teams stories; every claim supported, quotes verbatim; 0 contradicted, 0 unsupported. Supported: ecp, over, remove, pf, pfact, pfres, ef, efres, jtbd, bt, btpract, coach, nonneg, 4x, btres.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quoted: teams he inherited were 'over-processed, under-trusted, waiting for permission instead of owning outcomes'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Removes barriers: makes intent explicit, builds psychological safety so people speak honestly, pushes decisions to the people closest to the work",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action, 5PSummary"
+   },
+   {
+    "text": "'Permit to fail' culture at the Accenture Cloud Innovation Center addressing teams' fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation, Task, Division"
+   },
+   {
+    "text": "Non-punitive post-mortems, transparent sharing of mistakes, lessons over finger-pointing, lean low-stakes experiments with structured hypotheses and controlled iterations",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action"
+   },
+   {
+    "text": "Lessons applied to subsequent sprints, preventing recurrence of failure patterns; repeat errors declined, timelines shortened",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result, 5PSummary"
+   },
+   {
+    "text": "In product incubation/innovation work, set expectations that early prototypes and user tests would likely fail, intentionally",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "Teams used results to challenge assumptions and shape product direction week by week before costly builds; failed experiments as decision inputs, not setbacks",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action, Result"
+   },
+   {
+    "text": "Used user research, JTBD framing and rapid testing",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "Balanced teams of engineers, product managers and UX architects (Product, Engineering, Design) with equal participation and shared accountability",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Pair programming, collaborative coding, stand-ups, retrospectives, knowledge-sharing sessions; goals aligned to client and business outcomes; teams voice feedback and change workflows autonomously",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Coaches teams to think clearly, not just execute tasks",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Non-negotiables: psychological safety, clear purpose, integrity and respect, continuous learning, 'outcomes, not optics'",
+    "label": "supported",
+    "source": "work-philosophy-where-i-do-my-best-work|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at the CIC after teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary, Result"
+   },
+   {
+    "text": "Balanced-team work: zero-defect production code, reduced handoffs and project delays, improved satisfaction and retention",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q14",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer from leadership-philosophy, work-philosophy, permit-to-fail, early-failure and balanced-teams stories; every claim supported, quotes verbatim; 0 contradicted, 0 unsupported. Supported: ecp, over, cic150, best, remove, transp, coach, nonneg, pf, pfact, ef, pfres, bt, btpract, eng, 4x, btres.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quoted: teams he inherited were 'over-processed, under-trusted, waiting for permission instead of owning outcomes'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Led a 150-person Cloud Innovation Center",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Situation"
+   },
+   {
+    "text": "Aims to create an environment where engineers, designers and product teams do the best work of their careers",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Task"
+   },
+   {
+    "text": "Removes barriers: makes intent explicit, builds psychological safety so people speak honestly, pushes decisions to the people closest to the work",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action, 5PSummary"
+   },
+   {
+    "text": "Uses transparency, direct feedback and open communication",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Coaches teams to think clearly, not just execute tasks",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Non-negotiables: psychological safety, clear purpose, integrity and respect, continuous learning, 'outcomes, not optics'",
+    "label": "supported",
+    "source": "work-philosophy-where-i-do-my-best-work|accenture Action"
+   },
+   {
+    "text": "'Permit to fail' culture at the Accenture Cloud Innovation Center addressing teams' fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation, Task, Division"
+   },
+   {
+    "text": "Non-punitive post-mortems, transparent sharing of mistakes, lessons over finger-pointing, lean low-stakes experiments with structured hypotheses and controlled iterations",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action"
+   },
+   {
+    "text": "In product incubation/innovation work, set expectations that early prototypes and user tests would likely fail, intentionally",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "Lessons applied to subsequent sprints, preventing recurrence of failure patterns; repeat errors declined, timelines shortened",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result, 5PSummary"
+   },
+   {
+    "text": "Balanced teams of engineers, product managers and UX architects (Product, Engineering, Design) with equal participation and shared accountability",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Pair programming, collaborative coding, stand-ups, retrospectives, knowledge-sharing sessions; goals aligned to client and business outcomes; teams voice feedback and change workflows autonomously",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Grounds engineering culture in automation, continuous delivery, quality-first practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at the CIC after teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary, Result"
+   },
+   {
+    "text": "Balanced-team work: zero-defect production code, reduced handoffs and project delays, improved satisfaction and retention",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q14",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer from leadership-philosophy, work-philosophy, permit-to-fail, early-failure and balanced-teams stories; every claim supported, quotes verbatim; 0 contradicted, 0 unsupported. Supported: ecp, over, trust, remove, coach, bt, btpract, clients, pf, pfact, ef, efres, eng, 4x, btres.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quoted: teams he inherited were 'over-processed, under-trusted, waiting for permission instead of owning outcomes'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Successful teams built on trust, clarity and shared purpose, not just process or tools",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Situation"
+   },
+   {
+    "text": "Removes barriers: makes intent explicit, builds psychological safety so people speak honestly, pushes decisions to the people closest to the work",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action, 5PSummary"
+   },
+   {
+    "text": "Coaches teams to think clearly, not just execute tasks",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Balanced teams of engineers, product managers and UX architects (Product, Engineering, Design) with equal participation and shared accountability",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Pair programming, collaborative coding, stand-ups, retrospectives, knowledge-sharing sessions; goals aligned to client and business outcomes; teams voice feedback and change workflows autonomously",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Embedded clients into balanced CIC teams; user research and reviews after each iteration; TDD and continuous integration",
+    "label": "supported",
+    "source": "partnering-with-clients-to-build-the-right-product-faster|fortune-500-clients 5PSummary, Action"
+   },
+   {
+    "text": "'Permit to fail' culture at the Accenture Cloud Innovation Center addressing teams' fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation, Task, Division"
+   },
+   {
+    "text": "Non-punitive post-mortems, transparent sharing of mistakes, lessons over finger-pointing, lean low-stakes experiments with structured hypotheses and controlled iterations",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action"
+   },
+   {
+    "text": "In product incubation/innovation work, set expectations that early prototypes and user tests would likely fail, intentionally",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "Teams used results to challenge assumptions and shape product direction week by week before costly builds; failed experiments as decision inputs, not setbacks",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action, Result"
+   },
+   {
+    "text": "Grounds engineering culture in automation, continuous delivery, quality-first practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at the CIC after teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary, Result"
+   },
+   {
+    "text": "Balanced-team work: zero-defect production code, reduced handoffs and project delays, improved satisfaction and retention",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q14",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer from leadership-philosophy, work-philosophy, permit-to-fail, early-failure and balanced-teams stories; every claim supported, quotes verbatim; 0 contradicted, 0 unsupported. Supported: ecp, over, best, remove, transp, coach, bt, clients, pf, pfact, ef, efres, eng, ment, cic150, 4x, pfres.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quoted: teams he inherited were 'over-processed, under-trusted, waiting for permission instead of owning outcomes'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Aims to create an environment where engineers, designers and product teams do the best work of their careers",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Task"
+   },
+   {
+    "text": "Removes barriers: makes intent explicit, builds psychological safety so people speak honestly, pushes decisions to the people closest to the work",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action, 5PSummary"
+   },
+   {
+    "text": "Uses transparency, direct feedback and open communication",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Coaches teams to think clearly, not just execute tasks",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Balanced teams of engineers, product managers and UX architects (Product, Engineering, Design) with equal participation and shared accountability",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Embedded clients into balanced CIC teams; user research and reviews after each iteration; TDD and continuous integration",
+    "label": "supported",
+    "source": "partnering-with-clients-to-build-the-right-product-faster|fortune-500-clients 5PSummary, Action"
+   },
+   {
+    "text": "'Permit to fail' culture at the Accenture Cloud Innovation Center addressing teams' fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation, Task, Division"
+   },
+   {
+    "text": "Non-punitive post-mortems, transparent sharing of mistakes, lessons over finger-pointing, lean low-stakes experiments with structured hypotheses and controlled iterations",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action"
+   },
+   {
+    "text": "In product incubation/innovation work, set expectations that early prototypes and user tests would likely fail, intentionally",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "Teams used results to challenge assumptions and shape product direction week by week before costly builds; failed experiments as decision inputs, not setbacks",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action, Result"
+   },
+   {
+    "text": "Grounds engineering culture in automation, continuous delivery, quality-first practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Paired senior engineers with junior members, weekly tech talks with peer-led demos, learning embedded in live client projects; reduced onboarding time",
+    "label": "supported",
+    "source": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture Action, Result"
+   },
+   {
+    "text": "Led a 150-person Cloud Innovation Center",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Situation"
+   },
+   {
+    "text": "4x delivery acceleration at the CIC after teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary, Result"
+   },
+   {
+    "text": "Lessons applied to subsequent sprints, preventing recurrence of failure patterns; repeat errors declined, timelines shortened",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result, 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q14",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer from leadership-philosophy, work-philosophy, permit-to-fail, early-failure and balanced-teams stories; every claim supported, quotes verbatim; 0 contradicted, 0 unsupported. Supported: ecp, over, best, trust, remove, transp, coach, eng, pf, pfact, pfres, efres, bt, btpract, 4x, btres.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quoted: teams he inherited were 'over-processed, under-trusted, waiting for permission instead of owning outcomes'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Aims to create an environment where engineers, designers and product teams do the best work of their careers",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Task"
+   },
+   {
+    "text": "Successful teams built on trust, clarity and shared purpose, not just process or tools",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Situation"
+   },
+   {
+    "text": "Removes barriers: makes intent explicit, builds psychological safety so people speak honestly, pushes decisions to the people closest to the work",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action, 5PSummary"
+   },
+   {
+    "text": "Uses transparency, direct feedback and open communication",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Coaches teams to think clearly, not just execute tasks",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Grounds engineering culture in automation, continuous delivery, quality-first practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "'Permit to fail' culture at the Accenture Cloud Innovation Center addressing teams' fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation, Task, Division"
+   },
+   {
+    "text": "Non-punitive post-mortems, transparent sharing of mistakes, lessons over finger-pointing, lean low-stakes experiments with structured hypotheses and controlled iterations",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action"
+   },
+   {
+    "text": "Lessons applied to subsequent sprints, preventing recurrence of failure patterns; repeat errors declined, timelines shortened",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result, 5PSummary"
+   },
+   {
+    "text": "Teams used results to challenge assumptions and shape product direction week by week before costly builds; failed experiments as decision inputs, not setbacks",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action, Result"
+   },
+   {
+    "text": "Balanced teams of engineers, product managers and UX architects (Product, Engineering, Design) with equal participation and shared accountability",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Pair programming, collaborative coding, stand-ups, retrospectives, knowledge-sharing sessions; goals aligned to client and business outcomes; teams voice feedback and change workflows autonomously",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at the CIC after teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary, Result"
+   },
+   {
+    "text": "Balanced-team work: zero-defect production code, reduced handoffs and project delays, improved satisfaction and retention",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q14",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer from leadership-philosophy, work-philosophy, permit-to-fail, early-failure and balanced-teams stories; every claim supported, quotes verbatim; 0 contradicted, 0 unsupported. Supported: ecp, over, pf, btsilo, remove, transp, coach, nonneg, intensity, pfact, ef, efres, bt, btpract, 4x, btres.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quoted: teams he inherited were 'over-processed, under-trusted, waiting for permission instead of owning outcomes'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "'Permit to fail' culture at the Accenture Cloud Innovation Center addressing teams' fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation, Task, Division"
+   },
+   {
+    "text": "Hierarchical structures and role silos caused bottlenecks",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Situation"
+   },
+   {
+    "text": "Removes barriers: makes intent explicit, builds psychological safety so people speak honestly, pushes decisions to the people closest to the work",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action, 5PSummary"
+   },
+   {
+    "text": "Uses transparency, direct feedback and open communication",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Coaches teams to think clearly, not just execute tasks",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Non-negotiables: psychological safety, clear purpose, integrity and respect, continuous learning, 'outcomes, not optics'",
+    "label": "supported",
+    "source": "work-philosophy-where-i-do-my-best-work|accenture Action"
+   },
+   {
+    "text": "Walks away from / chooses environments where intensity is balanced with respect for people",
+    "label": "supported",
+    "source": "work-philosophy-where-i-do-my-best-work|accenture 5PSummary"
+   },
+   {
+    "text": "Non-punitive post-mortems, transparent sharing of mistakes, lessons over finger-pointing, lean low-stakes experiments with structured hypotheses and controlled iterations",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action"
+   },
+   {
+    "text": "In product incubation/innovation work, set expectations that early prototypes and user tests would likely fail, intentionally",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "Teams used results to challenge assumptions and shape product direction week by week before costly builds; failed experiments as decision inputs, not setbacks",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action, Result"
+   },
+   {
+    "text": "Balanced teams of engineers, product managers and UX architects (Product, Engineering, Design) with equal participation and shared accountability",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Pair programming, collaborative coding, stand-ups, retrospectives, knowledge-sharing sessions; goals aligned to client and business outcomes; teams voice feedback and change workflows autonomously",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at the CIC after teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary, Result"
+   },
+   {
+    "text": "Balanced-team work: zero-defect production code, reduced handoffs and project delays, improved satisfaction and retention",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q14",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer from leadership-philosophy, work-philosophy, permit-to-fail, early-failure and balanced-teams stories; every claim supported, quotes verbatim; 0 contradicted, 0 unsupported. Supported: ecp, over, btsilo, pf, ef, remove, transp, coach, pfact, pfres, efres, bt, btpract, eng, 4x, btres.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quoted: teams he inherited were 'over-processed, under-trusted, waiting for permission instead of owning outcomes'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Hierarchical structures and role silos caused bottlenecks",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Situation"
+   },
+   {
+    "text": "'Permit to fail' culture at the Accenture Cloud Innovation Center addressing teams' fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation, Task, Division"
+   },
+   {
+    "text": "In product incubation/innovation work, set expectations that early prototypes and user tests would likely fail, intentionally",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "Removes barriers: makes intent explicit, builds psychological safety so people speak honestly, pushes decisions to the people closest to the work",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action, 5PSummary"
+   },
+   {
+    "text": "Uses transparency, direct feedback and open communication",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Coaches teams to think clearly, not just execute tasks",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Non-punitive post-mortems, transparent sharing of mistakes, lessons over finger-pointing, lean low-stakes experiments with structured hypotheses and controlled iterations",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action"
+   },
+   {
+    "text": "Lessons applied to subsequent sprints, preventing recurrence of failure patterns; repeat errors declined, timelines shortened",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result, 5PSummary"
+   },
+   {
+    "text": "Teams used results to challenge assumptions and shape product direction week by week before costly builds; failed experiments as decision inputs, not setbacks",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action, Result"
+   },
+   {
+    "text": "Balanced teams of engineers, product managers and UX architects (Product, Engineering, Design) with equal participation and shared accountability",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Pair programming, collaborative coding, stand-ups, retrospectives, knowledge-sharing sessions; goals aligned to client and business outcomes; teams voice feedback and change workflows autonomously",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Grounds engineering culture in automation, continuous delivery, quality-first practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at the CIC after teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary, Result"
+   },
+   {
+    "text": "Balanced-team work: zero-defect production code, reduced handoffs and project delays, improved satisfaction and retention",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q14",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer from leadership-philosophy, work-philosophy, permit-to-fail, early-failure and balanced-teams stories; every claim supported, quotes verbatim; 0 contradicted, 0 unsupported. Supported: ecp, bcm, fish, pfx, over, pf, btsilo, remove, transp, bt, btpract, pfact, ef, efres, eng, 4x, btres.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quoted self-description 'Builder's mindset, coach's heart'",
+    "label": "supported",
+    "source": "profile.self_description.statements[1]"
+   },
+   {
+    "text": "Teaches teams to fish, doesn't just fix problems",
+    "label": "supported",
+    "source": "profile.self_description.statements[2]"
+   },
+   {
+    "text": "'Permit to fail' learning environment and balanced teams: Product + Engineering + Design together",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Task; breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Quoted: teams he inherited were 'over-processed, under-trusted, waiting for permission instead of owning outcomes'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "'Permit to fail' culture at the Accenture Cloud Innovation Center addressing teams' fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation, Task, Division"
+   },
+   {
+    "text": "Hierarchical structures and role silos caused bottlenecks",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Situation"
+   },
+   {
+    "text": "Removes barriers: makes intent explicit, builds psychological safety so people speak honestly, pushes decisions to the people closest to the work",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action, 5PSummary"
+   },
+   {
+    "text": "Uses transparency, direct feedback and open communication",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Balanced teams of engineers, product managers and UX architects (Product, Engineering, Design) with equal participation and shared accountability",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Pair programming, collaborative coding, stand-ups, retrospectives, knowledge-sharing sessions; goals aligned to client and business outcomes; teams voice feedback and change workflows autonomously",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Non-punitive post-mortems, transparent sharing of mistakes, lessons over finger-pointing, lean low-stakes experiments with structured hypotheses and controlled iterations",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action"
+   },
+   {
+    "text": "In product incubation/innovation work, set expectations that early prototypes and user tests would likely fail, intentionally",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "Teams used results to challenge assumptions and shape product direction week by week before costly builds; failed experiments as decision inputs, not setbacks",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action, Result"
+   },
+   {
+    "text": "Grounds engineering culture in automation, continuous delivery, quality-first practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at the CIC after teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary, Result"
+   },
+   {
+    "text": "Balanced-team work: zero-defect production code, reduced handoffs and project delays, improved satisfaction and retention",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q14",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer from leadership-philosophy, work-philosophy, permit-to-fail, early-failure and balanced-teams stories; every claim supported, quotes verbatim; 0 contradicted, 0 unsupported. Supported: ecp, remove, coach, over, pf, pfact, ef, efres, pfx, bt, btpract, eng, 4x, btres.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Removes barriers: makes intent explicit, builds psychological safety so people speak honestly, pushes decisions to the people closest to the work",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action, 5PSummary"
+   },
+   {
+    "text": "Coaches teams to think clearly, not just execute tasks",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quoted: teams he inherited were 'over-processed, under-trusted, waiting for permission instead of owning outcomes'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "'Permit to fail' culture at the Accenture Cloud Innovation Center addressing teams' fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation, Task, Division"
+   },
+   {
+    "text": "Non-punitive post-mortems, transparent sharing of mistakes, lessons over finger-pointing, lean low-stakes experiments with structured hypotheses and controlled iterations",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action"
+   },
+   {
+    "text": "In product incubation/innovation work, set expectations that early prototypes and user tests would likely fail, intentionally",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "Teams used results to challenge assumptions and shape product direction week by week before costly builds; failed experiments as decision inputs, not setbacks",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action, Result"
+   },
+   {
+    "text": "'Permit to fail' learning environment and balanced teams: Product + Engineering + Design together",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Task; breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Balanced teams of engineers, product managers and UX architects (Product, Engineering, Design) with equal participation and shared accountability",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Pair programming, collaborative coding, stand-ups, retrospectives, knowledge-sharing sessions; goals aligned to client and business outcomes; teams voice feedback and change workflows autonomously",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Grounds engineering culture in automation, continuous delivery, quality-first practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "4x delivery acceleration at the CIC after teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary, Result"
+   },
+   {
+    "text": "Balanced-team work: zero-defect production code, reduced handoffs and project delays, improved satisfaction and retention",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q14",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer from leadership-philosophy, work-philosophy, permit-to-fail, early-failure and balanced-teams stories; every claim supported, quotes verbatim; 0 contradicted, 0 unsupported. Supported: ecp, over, remove, pf, pfact, pfres, ef, efgoal, bt, btpract, coach, nonneg, intensity, 4x, btres.",
+  "claims": [
+   {
+    "text": "Leads with empathy, clarity, and purpose",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Quoted: teams he inherited were 'over-processed, under-trusted, waiting for permission instead of owning outcomes'",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary"
+   },
+   {
+    "text": "Removes barriers: makes intent explicit, builds psychological safety so people speak honestly, pushes decisions to the people closest to the work",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action, 5PSummary"
+   },
+   {
+    "text": "'Permit to fail' culture at the Accenture Cloud Innovation Center addressing teams' fear of blame",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Situation, Task, Division"
+   },
+   {
+    "text": "Non-punitive post-mortems, transparent sharing of mistakes, lessons over finger-pointing, lean low-stakes experiments with structured hypotheses and controlled iterations",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Action"
+   },
+   {
+    "text": "Lessons applied to subsequent sprints, preventing recurrence of failure patterns; repeat errors declined, timelines shortened",
+    "label": "supported",
+    "source": "establishing-a-permit-to-fail-culture-for-continuous-improvement|accenture Result, 5PSummary"
+   },
+   {
+    "text": "In product incubation/innovation work, set expectations that early prototypes and user tests would likely fail, intentionally",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Action"
+   },
+   {
+    "text": "Goal was to reduce risk quickly and cheaply, not be right on the first try",
+    "label": "supported",
+    "source": "why-early-failure-is-a-feature-not-a-bug-in-innovation|accenture Task"
+   },
+   {
+    "text": "Balanced teams of engineers, product managers and UX architects (Product, Engineering, Design) with equal participation and shared accountability",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Pair programming, collaborative coding, stand-ups, retrospectives, knowledge-sharing sessions; goals aligned to client and business outcomes; teams voice feedback and change workflows autonomously",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Action"
+   },
+   {
+    "text": "Coaches teams to think clearly, not just execute tasks",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture Action"
+   },
+   {
+    "text": "Non-negotiables: psychological safety, clear purpose, integrity and respect, continuous learning, 'outcomes, not optics'",
+    "label": "supported",
+    "source": "work-philosophy-where-i-do-my-best-work|accenture Action"
+   },
+   {
+    "text": "Walks away from / chooses environments where intensity is balanced with respect for people",
+    "label": "supported",
+    "source": "work-philosophy-where-i-do-my-best-work|accenture 5PSummary"
+   },
+   {
+    "text": "4x delivery acceleration at the CIC after teams embraced lean product and modern engineering practices",
+    "label": "supported",
+    "source": "leadership-philosophy-how-i-lead|accenture 5PSummary, Result"
+   },
+   {
+    "text": "Balanced-team work: zero-defect production code, reduced handoffs and project delays, improved satisfaction and retention",
+    "label": "supported",
+    "source": "breaking-silos-between-engineering-design-and-product|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ }
+]

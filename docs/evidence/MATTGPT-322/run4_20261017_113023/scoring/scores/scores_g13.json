@@ -1,0 +1,3032 @@
+[
+ {
+  "case": "q13",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct ACCESS Next Generation answer; all 22 claims supported by the five ACCESS stories (dates, Technology Delivery Lead, 40+ team, 12-country gateway, April 2011 launch, 135,000+ clients, days to minutes); 0 contradicted, 0 unsupported; no quotations; ends on content.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation, August 2009 to June 2012",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built on Bottomline WebSeries; requirements beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional/legacy systems had different data models, formats, configurations, compliance requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ Accenture and JP Morgan resources across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed where native platform capabilities ended and bespoke engineering was required",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, and tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Message Authentication Code security so users could verify payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed centralized gateway: message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Led payments data migration without disruption to live payment operations, preserving configs, histories, compliance traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "135,000+ clients (corporations, FIs, governments, municipalities) across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "NACHA file validation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "FX engine integration / embedded rate visibility",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway replaced fragmented point-to-point integrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Bulk permission changes across users, accounts, products from a single screen",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payment-type-specific permissions (wire approval without FX initiation)",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Translated jurisdiction-specific requirements into data visibility and access controls; single global architecture",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Sequenced launches by regulatory readiness rather than big-bang",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Rollout across APAC, EMEA, Americas without regulatory blockers",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null
+ },
+ {
+  "case": "q13",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct ACCESS Next Generation answer; all 23 claims supported by the five ACCESS stories (dates, Technology Delivery Lead, 40+ team, 12-country gateway, April 2011 launch, 135,000+ clients, days to minutes); 0 contradicted, 0 unsupported; no quotations; ends on content.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation, August 2009 to June 2012",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built on Bottomline WebSeries; requirements beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional/legacy systems had different data models, formats, configurations, compliance requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ Accenture and JP Morgan resources across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed where native platform capabilities ended and bespoke engineering was required",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, and tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Message Authentication Code security so users could verify payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed centralized gateway: message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Led payments data migration without disruption to live payment operations, preserving configs, histories, compliance traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "135,000+ clients (corporations, FIs, governments, municipalities) across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "NACHA file validation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payment-type-specific permissions (wire approval without FX initiation)",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway connected ACCESS to clearing networks and internal compliance, settlement, reporting systems",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "Gateway replaced fragmented point-to-point integrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Role-based profiles replaced individual permission configuration",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Bulk permission changes across users, accounts, products from a single screen",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Translated jurisdiction-specific requirements into data visibility and access controls; single global architecture",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Sequenced launches by regulatory readiness rather than big-bang",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Owned on-call / Sev-1 production incident response, root-cause analysis, leadership updates",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null
+ },
+ {
+  "case": "q13",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct ACCESS Next Generation answer; all 23 claims supported by the five ACCESS stories (dates, Technology Delivery Lead, 40+ team, 12-country gateway, April 2011 launch, 135,000+ clients, days to minutes); 0 contradicted, 0 unsupported; no quotations; ends on content.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation, August 2009 to June 2012",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built on Bottomline WebSeries; requirements beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional/legacy systems had different data models, formats, configurations, compliance requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ Accenture and JP Morgan resources across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed where native platform capabilities ended and bespoke engineering was required",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, and tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Message Authentication Code security so users could verify payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed centralized gateway: message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Led payments data migration without disruption to live payment operations, preserving configs, histories, compliance traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "135,000+ clients (corporations, FIs, governments, municipalities) across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Bank consolidating regional treasury systems into unified global portal",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "NACHA file validation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "FX engine integration / embedded rate visibility",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Translated jurisdiction-specific requirements into data visibility and access controls; single global architecture",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Sequenced launches by regulatory readiness rather than big-bang",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Bulk permission changes across users, accounts, products from a single screen",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payment-type-specific permissions (wire approval without FX initiation)",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Owned on-call / Sev-1 production incident response, root-cause analysis, leadership updates",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Single entry point for wire, ACH, cross-border transfers, replacing separate local logins",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null
+ },
+ {
+  "case": "q13",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct ACCESS Next Generation answer; all 21 claims supported by the five ACCESS stories (dates, Technology Delivery Lead, 40+ team, 12-country gateway, April 2011 launch, 135,000+ clients, days to minutes); 0 contradicted, 0 unsupported; no quotations; ends on content.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation, August 2009 to June 2012",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built on Bottomline WebSeries; requirements beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional/legacy systems had different data models, formats, configurations, compliance requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ Accenture and JP Morgan resources across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed where native platform capabilities ended and bespoke engineering was required",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, and tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Message Authentication Code security so users could verify payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed centralized gateway: message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Led payments data migration without disruption to live payment operations, preserving configs, histories, compliance traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "135,000+ clients (corporations, FIs, governments, municipalities) across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Payment-type-specific permissions (wire approval without FX initiation)",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway connected ACCESS to clearing networks and internal compliance, settlement, reporting systems",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "Role-based profiles replaced individual permission configuration",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Bulk permission changes across users, accounts, products from a single screen",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Translated jurisdiction-specific requirements into data visibility and access controls; single global architecture",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Sequenced launches by regulatory readiness rather than big-bang",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Owned on-call / Sev-1 production incident response, root-cause analysis, leadership updates",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null
+ },
+ {
+  "case": "q13",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct ACCESS Next Generation answer; all 26 claims supported by the five ACCESS stories (dates, Technology Delivery Lead, 40+ team, 12-country gateway, April 2011 launch, 135,000+ clients, days to minutes); 0 contradicted, 0 unsupported; no quotations; ends on content.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation, August 2009 to June 2012",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built on Bottomline WebSeries; requirements beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional/legacy systems had different data models, formats, configurations, compliance requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ Accenture and JP Morgan resources across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed where native platform capabilities ended and bespoke engineering was required",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, and tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Message Authentication Code security so users could verify payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed centralized gateway: message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Led payments data migration without disruption to live payment operations, preserving configs, histories, compliance traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "135,000+ clients (corporations, FIs, governments, municipalities) across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Portsmouth, New Hampshire",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "ACH credits and direct debits; Fedwire, international wires, book transfers, drawdowns",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "NACHA file validation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "FX engine integration / embedded rate visibility",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payment-type-specific permissions (wire approval without FX initiation)",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Bulk permission changes across users, accounts, products from a single screen",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Role-based profiles replaced individual permission configuration",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Translated jurisdiction-specific requirements into data visibility and access controls; single global architecture",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Sequenced launches by regulatory readiness rather than big-bang",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Owned on-call / Sev-1 production incident response, root-cause analysis, leadership updates",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Single entry point for wire, ACH, cross-border transfers, replacing separate local logins",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Rollout across APAC, EMEA, Americas without regulatory blockers",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null
+ },
+ {
+  "case": "q13",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct ACCESS Next Generation answer; all 23 claims supported by the five ACCESS stories (dates, Technology Delivery Lead, 40+ team, 12-country gateway, April 2011 launch, 135,000+ clients, days to minutes); 0 contradicted, 0 unsupported; no quotations; ends on content.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation, August 2009 to June 2012",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built on Bottomline WebSeries; requirements beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional/legacy systems had different data models, formats, configurations, compliance requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ Accenture and JP Morgan resources across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed where native platform capabilities ended and bespoke engineering was required",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, and tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Message Authentication Code security so users could verify payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed centralized gateway: message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Led payments data migration without disruption to live payment operations, preserving configs, histories, compliance traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "135,000+ clients (corporations, FIs, governments, municipalities) across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACH credits and direct debits; Fedwire, international wires, book transfers, drawdowns",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payment-type-specific permissions (wire approval without FX initiation)",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Sanctions screening and transaction-monitoring integration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Single entry point for wire, ACH, cross-border transfers, replacing separate local logins",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Role-based profiles replaced individual permission configuration",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Bulk permission changes across users, accounts, products from a single screen",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Translated jurisdiction-specific requirements into data visibility and access controls; single global architecture",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Sequenced launches by regulatory readiness rather than big-bang",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Rollout across APAC, EMEA, Americas without regulatory blockers",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null
+ },
+ {
+  "case": "q13",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct ACCESS Next Generation answer; all 24 claims supported by the five ACCESS stories (dates, Technology Delivery Lead, 40+ team, 12-country gateway, April 2011 launch, 135,000+ clients, days to minutes); 0 contradicted, 0 unsupported; no quotations; ends on content.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation, August 2009 to June 2012",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built on Bottomline WebSeries; requirements beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional/legacy systems had different data models, formats, configurations, compliance requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ Accenture and JP Morgan resources across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed where native platform capabilities ended and bespoke engineering was required",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, and tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Message Authentication Code security so users could verify payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed centralized gateway: message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Led payments data migration without disruption to live payment operations, preserving configs, histories, compliance traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "135,000+ clients (corporations, FIs, governments, municipalities) across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACH credits and direct debits; Fedwire, international wires, book transfers, drawdowns",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "NACHA file validation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "FX engine integration / embedded rate visibility",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payment-type-specific permissions (wire approval without FX initiation)",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Contextual help in payment screens (wire fields, tax codes, FX/cross-border)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Owned on-call / Sev-1 production incident response, root-cause analysis, leadership updates",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Bulk permission changes across users, accounts, products from a single screen",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Centralized dashboard for roles and permissions",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Single entry point for wire, ACH, cross-border transfers, replacing separate local logins",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Real-time global reporting and SSO across cash, trade, investment",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null
+ },
+ {
+  "case": "q13",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct ACCESS Next Generation answer; all 23 claims supported by the five ACCESS stories (dates, Technology Delivery Lead, 40+ team, 12-country gateway, April 2011 launch, 135,000+ clients, days to minutes); 0 contradicted, 0 unsupported; no quotations; ends on content.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation, August 2009 to June 2012",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built on Bottomline WebSeries; requirements beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional/legacy systems had different data models, formats, configurations, compliance requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ Accenture and JP Morgan resources across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed where native platform capabilities ended and bespoke engineering was required",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, and tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Message Authentication Code security so users could verify payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed centralized gateway: message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Led payments data migration without disruption to live payment operations, preserving configs, histories, compliance traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "135,000+ clients (corporations, FIs, governments, municipalities) across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "NACHA file validation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "FX engine integration / embedded rate visibility",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway replaced fragmented point-to-point integrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Bulk permission changes across users, accounts, products from a single screen",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payment-type-specific permissions (wire approval without FX initiation)",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Translated jurisdiction-specific requirements into data visibility and access controls; single global architecture",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Sequenced launches by regulatory readiness rather than big-bang",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Owned on-call / Sev-1 production incident response, root-cause analysis, leadership updates",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Single entry point for wire, ACH, cross-border transfers, replacing separate local logins",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null
+ },
+ {
+  "case": "q13",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct ACCESS Next Generation answer; all 25 claims supported by the five ACCESS stories (dates, Technology Delivery Lead, 40+ team, 12-country gateway, April 2011 launch, 135,000+ clients, days to minutes); 0 contradicted, 0 unsupported; no quotations; ends on content.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation, August 2009 to June 2012",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built on Bottomline WebSeries; requirements beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional/legacy systems had different data models, formats, configurations, compliance requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ Accenture and JP Morgan resources across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed where native platform capabilities ended and bespoke engineering was required",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, and tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Message Authentication Code security so users could verify payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed centralized gateway: message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Led payments data migration without disruption to live payment operations, preserving configs, histories, compliance traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "135,000+ clients (corporations, FIs, governments, municipalities) across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Role: Senior Technology Architecture Manager",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Role"
+   },
+   {
+    "text": "Bank consolidating regional treasury systems into unified global portal",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Payment types have distinct formatting, validation, cut-off, compliance requirements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "NACHA file validation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "FX engine integration / embedded rate visibility",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Contextual help in payment screens (wire fields, tax codes, FX/cross-border)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway replaced fragmented point-to-point integrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Bulk permission changes across users, accounts, products from a single screen",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Translated jurisdiction-specific requirements into data visibility and access controls; single global architecture",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Sequenced launches by regulatory readiness rather than big-bang",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Rollout across APAC, EMEA, Americas without regulatory blockers",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null
+ },
+ {
+  "case": "q13",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct ACCESS Next Generation answer; all 24 claims supported by the five ACCESS stories (dates, Technology Delivery Lead, 40+ team, 12-country gateway, April 2011 launch, 135,000+ clients, days to minutes); 0 contradicted, 0 unsupported; no quotations; ends on content.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation, August 2009 to June 2012",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built on Bottomline WebSeries; requirements beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional/legacy systems had different data models, formats, configurations, compliance requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ Accenture and JP Morgan resources across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed where native platform capabilities ended and bespoke engineering was required",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, and tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Message Authentication Code security so users could verify payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed centralized gateway: message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Led payments data migration without disruption to live payment operations, preserving configs, histories, compliance traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "135,000+ clients (corporations, FIs, governments, municipalities) across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "NACHA file validation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payment-type-specific permissions (wire approval without FX initiation)",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway connected ACCESS to clearing networks and internal compliance, settlement, reporting systems",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "Role-based profiles replaced individual permission configuration",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Bulk permission changes across users, accounts, products from a single screen",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Centralized dashboard for roles and permissions",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Translated jurisdiction-specific requirements into data visibility and access controls; single global architecture",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Sequenced launches by regulatory readiness rather than big-bang",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Rollout across APAC, EMEA, Americas without regulatory blockers",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Result"
+   },
+   {
+    "text": "Single entry point for wire, ACH, cross-border transfers, replacing separate local logins",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null
+ },
+ {
+  "case": "q13",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct ACCESS Next Generation answer; all 24 claims supported by the five ACCESS stories (dates, Technology Delivery Lead, 40+ team, 12-country gateway, April 2011 launch, 135,000+ clients, days to minutes); 0 contradicted, 0 unsupported; no quotations; ends on content.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation, August 2009 to June 2012",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built on Bottomline WebSeries; requirements beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional/legacy systems had different data models, formats, configurations, compliance requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ Accenture and JP Morgan resources across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed where native platform capabilities ended and bespoke engineering was required",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, and tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Message Authentication Code security so users could verify payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed centralized gateway: message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Led payments data migration without disruption to live payment operations, preserving configs, histories, compliance traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "135,000+ clients (corporations, FIs, governments, municipalities) across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Bank consolidating regional treasury systems into unified global portal",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "NACHA file validation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "FX engine integration / embedded rate visibility",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway replaced fragmented point-to-point integrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Bulk permission changes across users, accounts, products from a single screen",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payment-type-specific permissions (wire approval without FX initiation)",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Translated jurisdiction-specific requirements into data visibility and access controls; single global architecture",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Sequenced launches by regulatory readiness rather than big-bang",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Single entry point for wire, ACH, cross-border transfers, replacing separate local logins",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Real-time global reporting and SSO across cash, trade, investment",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null
+ },
+ {
+  "case": "q13",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct ACCESS Next Generation answer; all 25 claims supported by the five ACCESS stories (dates, Technology Delivery Lead, 40+ team, 12-country gateway, April 2011 launch, 135,000+ clients, days to minutes); 0 contradicted, 0 unsupported; no quotations; ends on content.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation, August 2009 to June 2012",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built on Bottomline WebSeries; requirements beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional/legacy systems had different data models, formats, configurations, compliance requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ Accenture and JP Morgan resources across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed where native platform capabilities ended and bespoke engineering was required",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, and tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Message Authentication Code security so users could verify payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed centralized gateway: message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Led payments data migration without disruption to live payment operations, preserving configs, histories, compliance traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "135,000+ clients (corporations, FIs, governments, municipalities) across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Aggressive Wall Street delivery timelines",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Defined onshore-offshore engagement model; travel to Chicago and NY/NJ",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Task"
+   },
+   {
+    "text": "NACHA file validation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payment-type-specific permissions (wire approval without FX initiation)",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Brought together enterprise architects, security SMEs, regional compliance, Bottomline, dev team",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Task; navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Task"
+   },
+   {
+    "text": "Role-based profiles replaced individual permission configuration",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Bulk permission changes across users, accounts, products from a single screen",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Production validation and post-cutover defect triage",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Owned on-call / Sev-1 production incident response, root-cause analysis, leadership updates",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Rollout across APAC, EMEA, Americas without regulatory blockers",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Result"
+   },
+   {
+    "text": "Compliance dashboards became standard operational tooling",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null
+ },
+ {
+  "case": "q13",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct ACCESS Next Generation answer; all 27 claims supported by the five ACCESS stories (dates, Technology Delivery Lead, 40+ team, 12-country gateway, April 2011 launch, 135,000+ clients, days to minutes); 0 contradicted, 0 unsupported; no quotations; ends on content.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation, August 2009 to June 2012",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built on Bottomline WebSeries; requirements beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional/legacy systems had different data models, formats, configurations, compliance requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ Accenture and JP Morgan resources across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed where native platform capabilities ended and bespoke engineering was required",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, and tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Message Authentication Code security so users could verify payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed centralized gateway: message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Led payments data migration without disruption to live payment operations, preserving configs, histories, compliance traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "135,000+ clients (corporations, FIs, governments, municipalities) across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Portsmouth, New Hampshire",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "NACHA file validation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "FX engine integration / embedded rate visibility",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway connected ACCESS to clearing networks and internal compliance, settlement, reporting systems",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "Payment-type-specific permissions (wire approval without FX initiation)",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Sanctions screening and transaction-monitoring integration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Bulk permission changes across users, accounts, products from a single screen",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Centralized dashboard for roles and permissions",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Translated jurisdiction-specific requirements into data visibility and access controls; single global architecture",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Sequenced launches by regulatory readiness rather than big-bang",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Owned on-call / Sev-1 production incident response, root-cause analysis, leadership updates",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Single entry point for wire, ACH, cross-border transfers, replacing separate local logins",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Rollout across APAC, EMEA, Americas without regulatory blockers",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null
+ },
+ {
+  "case": "q13",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct ACCESS Next Generation answer; all 28 claims supported by the five ACCESS stories (dates, Technology Delivery Lead, 40+ team, 12-country gateway, April 2011 launch, 135,000+ clients, days to minutes); 0 contradicted, 0 unsupported; no quotations; ends on content.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation, August 2009 to June 2012",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built on Bottomline WebSeries; requirements beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional/legacy systems had different data models, formats, configurations, compliance requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ Accenture and JP Morgan resources across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed where native platform capabilities ended and bespoke engineering was required",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, and tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Message Authentication Code security so users could verify payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed centralized gateway: message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Led payments data migration without disruption to live payment operations, preserving configs, histories, compliance traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "135,000+ clients (corporations, FIs, governments, municipalities) across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Aggressive Wall Street delivery timelines",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Payment types have distinct formatting, validation, cut-off, compliance requirements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "ACH credits and direct debits; Fedwire, international wires, book transfers, drawdowns",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "NACHA file validation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "FX engine integration / embedded rate visibility",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway replaced fragmented point-to-point integrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Payment-type-specific permissions (wire approval without FX initiation)",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Sanctions screening and transaction-monitoring integration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Contextual help in payment screens (wire fields, tax codes, FX/cross-border)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Role-based profiles replaced individual permission configuration",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Bulk permission changes across users, accounts, products from a single screen",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Translated jurisdiction-specific requirements into data visibility and access controls; single global architecture",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Sequenced launches by regulatory readiness rather than big-bang",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Owned on-call / Sev-1 production incident response, root-cause analysis, leadership updates",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null
+ },
+ {
+  "case": "q13",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct ACCESS Next Generation answer; all 23 claims supported by the five ACCESS stories (dates, Technology Delivery Lead, 40+ team, 12-country gateway, April 2011 launch, 135,000+ clients, days to minutes); 0 contradicted, 0 unsupported; no quotations; ends on content.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation, August 2009 to June 2012",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built on Bottomline WebSeries; requirements beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional/legacy systems had different data models, formats, configurations, compliance requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ Accenture and JP Morgan resources across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed where native platform capabilities ended and bespoke engineering was required",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, and tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Message Authentication Code security so users could verify payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed centralized gateway: message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Led payments data migration without disruption to live payment operations, preserving configs, histories, compliance traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "135,000+ clients (corporations, FIs, governments, municipalities) across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Aggressive Wall Street delivery timelines",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "NACHA file validation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "FX engine integration / embedded rate visibility",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payment-type-specific permissions (wire approval without FX initiation)",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Owned on-call / Sev-1 production incident response, root-cause analysis, leadership updates",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Integrated Global Payments Interface launched April 2011",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Single entry point for wire, ACH, cross-border transfers, replacing separate local logins",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Role-based profiles replaced individual permission configuration",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Bulk permission changes across users, accounts, products from a single screen",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null
+ },
+ {
+  "case": "q13",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct ACCESS Next Generation answer; all 24 claims supported by the five ACCESS stories (dates, Technology Delivery Lead, 40+ team, 12-country gateway, April 2011 launch, 135,000+ clients, days to minutes); 0 contradicted, 0 unsupported; no quotations; ends on content.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation, August 2009 to June 2012",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built on Bottomline WebSeries; requirements beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional/legacy systems had different data models, formats, configurations, compliance requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ Accenture and JP Morgan resources across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed where native platform capabilities ended and bespoke engineering was required",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, and tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Message Authentication Code security so users could verify payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed centralized gateway: message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Led payments data migration without disruption to live payment operations, preserving configs, histories, compliance traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "135,000+ clients (corporations, FIs, governments, municipalities) across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACH credits and direct debits; Fedwire, international wires, book transfers, drawdowns",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payment types have distinct formatting, validation, cut-off, compliance requirements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "Gateway connected ACCESS to clearing networks and internal compliance, settlement, reporting systems",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "Single entry point for wire, ACH, cross-border transfers, replacing separate local logins",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Payment-type-specific permissions (wire approval without FX initiation)",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Role-based profiles replaced individual permission configuration",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Bulk permission changes across users, accounts, products from a single screen",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Production validation and post-cutover defect triage",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action"
+   },
+   {
+    "text": "Owned on-call / Sev-1 production incident response, root-cause analysis, leadership updates",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Real-time global reporting and SSO across cash, trade, investment",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null
+ },
+ {
+  "case": "q13",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct ACCESS Next Generation answer; all 25 claims supported by the five ACCESS stories (dates, Technology Delivery Lead, 40+ team, 12-country gateway, April 2011 launch, 135,000+ clients, days to minutes); 0 contradicted, 0 unsupported; no quotations; ends on content.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation, August 2009 to June 2012",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built on Bottomline WebSeries; requirements beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional/legacy systems had different data models, formats, configurations, compliance requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ Accenture and JP Morgan resources across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed where native platform capabilities ended and bespoke engineering was required",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, and tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Message Authentication Code security so users could verify payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed centralized gateway: message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Led payments data migration without disruption to live payment operations, preserving configs, histories, compliance traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "135,000+ clients (corporations, FIs, governments, municipalities) across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Bank consolidating regional treasury systems into unified global portal",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "ACH credits and direct debits; Fedwire, international wires, book transfers, drawdowns",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payment types have distinct formatting, validation, cut-off, compliance requirements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "Gateway replaced fragmented point-to-point integrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Role-based profiles replaced individual permission configuration",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Bulk permission changes across users, accounts, products from a single screen",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payment-type-specific permissions (wire approval without FX initiation)",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Translated jurisdiction-specific requirements into data visibility and access controls; single global architecture",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Sequenced launches by regulatory readiness rather than big-bang",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Owned on-call / Sev-1 production incident response, root-cause analysis, leadership updates",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Single entry point for wire, ACH, cross-border transfers, replacing separate local logins",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null
+ },
+ {
+  "case": "q13",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct ACCESS Next Generation answer; all 23 claims supported by the five ACCESS stories (dates, Technology Delivery Lead, 40+ team, 12-country gateway, April 2011 launch, 135,000+ clients, days to minutes); 0 contradicted, 0 unsupported; no quotations; ends on content.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation, August 2009 to June 2012",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built on Bottomline WebSeries; requirements beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional/legacy systems had different data models, formats, configurations, compliance requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ Accenture and JP Morgan resources across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed where native platform capabilities ended and bespoke engineering was required",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, and tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Message Authentication Code security so users could verify payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed centralized gateway: message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Led payments data migration without disruption to live payment operations, preserving configs, histories, compliance traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "135,000+ clients (corporations, FIs, governments, municipalities) across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "NACHA file validation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "FX engine integration / embedded rate visibility",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payment-type-specific permissions (wire approval without FX initiation)",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Contextual help in payment screens (wire fields, tax codes, FX/cross-border)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Bulk permission changes across users, accounts, products from a single screen",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Translated jurisdiction-specific requirements into data visibility and access controls; single global architecture",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Sequenced launches by regulatory readiness rather than big-bang",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Owned on-call / Sev-1 production incident response, root-cause analysis, leadership updates",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Single entry point for wire, ACH, cross-border transfers, replacing separate local logins",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null
+ },
+ {
+  "case": "q13",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct ACCESS Next Generation answer; all 29 claims supported by the five ACCESS stories (dates, Technology Delivery Lead, 40+ team, 12-country gateway, April 2011 launch, 135,000+ clients, days to minutes); 0 contradicted, 0 unsupported; no quotations; ends on content.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation, August 2009 to June 2012",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built on Bottomline WebSeries; requirements beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional/legacy systems had different data models, formats, configurations, compliance requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ Accenture and JP Morgan resources across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed where native platform capabilities ended and bespoke engineering was required",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, and tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Message Authentication Code security so users could verify payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed centralized gateway: message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Led payments data migration without disruption to live payment operations, preserving configs, histories, compliance traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "135,000+ clients (corporations, FIs, governments, municipalities) across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "ACH credits and direct debits; Fedwire, international wires, book transfers, drawdowns",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "NACHA file validation",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Sanctions screening and transaction-monitoring integration",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payment-type-specific permissions (wire approval without FX initiation)",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Gateway connected ACCESS to clearing networks and internal compliance, settlement, reporting systems",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "Gateway replaced fragmented point-to-point integrations",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Role-based profiles replaced individual permission configuration",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Bulk permission changes across users, accounts, products from a single screen",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Centralized dashboard for roles and permissions",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Contextual help in payment screens (wire fields, tax codes, FX/cross-border)",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Translated jurisdiction-specific requirements into data visibility and access controls; single global architecture",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Sequenced launches by regulatory readiness rather than big-bang",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Owned on-call / Sev-1 production incident response, root-cause analysis, leadership updates",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   },
+   {
+    "text": "Single entry point for wire, ACH, cross-border transfers, replacing separate local logins",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Real-time global reporting and SSO across cash, trade, investment",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null
+ },
+ {
+  "case": "q13",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct ACCESS Next Generation answer; all 24 claims supported by the five ACCESS stories (dates, Technology Delivery Lead, 40+ team, 12-country gateway, April 2011 launch, 135,000+ clients, days to minutes); 0 contradicted, 0 unsupported; no quotations; ends on content.",
+  "claims": [
+   {
+    "text": "ACCESS Next Generation, August 2009 to June 2012",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date"
+   },
+   {
+    "text": "Technology Delivery Lead",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Built on Bottomline WebSeries; requirements beyond out-of-box",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Regional/legacy systems had different data models, formats, configurations, compliance requirements",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Managed blended team of 40+ Accenture and JP Morgan resources across Mumbai, Bangalore, US",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Spent 70-80% of time embedded at Bottomline's Portsmouth offices",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Managed where native platform capabilities ended and bespoke engineering was required",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed and delivered ACH, wire, FX/cross-border, and tax payment modules",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Message Authentication Code security so users could verify payment integrity before release",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Designed centralized gateway: message transformation, protocol translation, routing across 12 countries",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Led payments data migration without disruption to live payment operations, preserving configs, histories, compliance traceability",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Task/Result"
+   },
+   {
+    "text": "ACCESS launched April 2011",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "135,000+ clients (corporations, FIs, governments, municipalities) across 180+ countries",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Result"
+   },
+   {
+    "text": "Portsmouth, New Hampshire",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "Payment types have distinct formatting, validation, cut-off, compliance requirements",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "Gateway connected ACCESS to clearing networks and internal compliance, settlement, reporting systems",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Situation/Action"
+   },
+   {
+    "text": "Role-based profiles replaced individual permission configuration",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Payment-type-specific permissions (wire approval without FX initiation)",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Bulk permission changes across users, accounts, products from a single screen",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Action"
+   },
+   {
+    "text": "Translated jurisdiction-specific requirements into data visibility and access controls; single global architecture",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Sequenced launches by regulatory readiness rather than big-bang",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Single entry point for wire, ACH, cross-border transfers, replacing separate local logins",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Result"
+   },
+   {
+    "text": "Owned on-call / Sev-1 production incident response, root-cause analysis, leadership updates",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null
+ }
+]

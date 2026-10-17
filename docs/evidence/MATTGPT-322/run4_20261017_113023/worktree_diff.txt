@@ -1,0 +1,90 @@
+diff --git a/ui/pages/ask_mattgpt/backend_service.py b/ui/pages/ask_mattgpt/backend_service.py
+index 4a25c69..4b24114 100644
+--- a/ui/pages/ask_mattgpt/backend_service.py
++++ b/ui/pages/ask_mattgpt/backend_service.py
+@@ -561,8 +561,21 @@ def _choose_opening_and_focus(is_synthesis: bool) -> tuple[str, str]:
+     return random.choice(STANDARD_OPENERS), random.choice(FOCUS_ANGLES)
+ 
+ 
++# Agy's decline lines, one chosen at random per answer by
++# _choose_decline_line() and given to the model as the shape to use if it
++# declines. Code picks because each call is independent: given the list to
++# vary, the model kept to its own line.
++DECLINE_LINES = [
++    "🐾 I followed that trail and came up empty: Matt's stories don't cover [topic].",
++    "🐾 That trail goes cold here. There's nothing on record about [topic].",
++    "🐾 I searched Matt's whole record, and it doesn't mention [topic].",
++    "🐾 I've been through Matt's stories, and nothing speaks to [topic].",
++]
++
++
+ def _choose_decline_line() -> str:
+-    raise NotImplementedError
++    """Pick the decline line for this answer at random."""
++    return random.choice(DECLINE_LINES)
+ 
+ 
+ def _openai_client():
+@@ -854,6 +867,7 @@ def agy_answer(
+                 profile_facts=profile_facts,
+                 opener_examples=SYNTHESIS_OPENERS + STANDARD_OPENERS,
+                 focus_angle=focus,
++                decline_line=_choose_decline_line(),
+             ),
+         },
+         *(history or []),
+diff --git a/ui/pages/ask_mattgpt/prompts.py b/ui/pages/ask_mattgpt/prompts.py
+index 9340e6d..9dae45a 100644
+--- a/ui/pages/ask_mattgpt/prompts.py
++++ b/ui/pages/ask_mattgpt/prompts.py
+@@ -317,9 +317,10 @@ _CITATION_RULE_0A = (
+ )
+ _CITATION_RULES_0A_0B = _CITATION_RULE_0A + (
+     "0b. If the question is about a category the profile has no key for "
+-    '(patents, publications), respond "Nothing I know about Matt covers '
+-    'that". Reply with that sentence only -- do not synthesize from '
+-    "story evidence.\n"
++    "(patents, publications), decline in first person, in one or two "
++    "sentences, the first beginning with 🐾. Name the topic in your own words "
++    "(\"What are Matt's hobbies?\" becomes \"his hobbies\"). No guessing, no "
++    "padding with story evidence, no excess apology.\n"
+ )
+ 
+ 
+@@ -382,6 +383,7 @@ def build_tool_system_prompt(
+             is_synthesis=is_synthesis,
+             focus_angle=focus_angle if not is_synthesis else "",
+             profile_facts=profile_facts,
++            decline_line=decline_line,
+         )
+     )
+ 
+@@ -392,6 +394,7 @@ def build_answer_instructions(
+     verbatim_requirement: str = "",
+     focus_angle: str = "",
+     profile_facts: str = "",
++    decline_line: str = "",
+ ) -> str:
+     """The per-answer instruction block: opener line, focus angle, verbatim
+     requirement, prose, bolding, "State facts", and citation rule 0a.
+@@ -402,13 +405,19 @@ def build_answer_instructions(
+     focus_line = (
+         f"\n**FOCUS:** {focus_angle}" if focus_angle and not is_synthesis else ""
+     )
++    decline = (
++        "\n**IF YOU DECLINE:** Use this shape, topic in your own words: "
++        f'"{decline_line}"'
++        if decline_line
++        else ""
++    )
+     rule_0a = f"\n{_CITATION_RULE_0A}" if profile_facts else ""
+ 
+     return f"""## INSTRUCTIONS
+ 
+ {opening_line}
+ 
+-{focus_line}
++{focus_line}{decline}
+ {verbatim_requirement}
+ Write natural prose paragraphs after the opening. No section headers or labels.
+ {NO_DASH_RULE}

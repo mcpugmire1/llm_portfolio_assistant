@@ -1,0 +1,1261 @@
+[
+ {
+  "answer_md": "🐾 I don’t have information about Matt’s marital status.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [],
+  "intent_family": "",
+  "seconds": 5.01,
+  "opening": "🐾 I know just the story.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3168,
+     "cached": 3042,
+     "output": 27,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I don’t have information about Matt’s marital status.",
+    "function_calls": 0,
+    "usage": {
+     "input": 3211,
+     "cached": 3208,
+     "output": 17,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire marital status married spouse",
+    "top_score": 0.192068815,
+    "n": 0
+   }
+  ],
+  "arm": "TB",
+  "case": "q01",
+  "kind": "decline",
+  "run": 7,
+  "turn": 1,
+  "question": "Is Matt married?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 I don’t have Matt’s age or date of birth on record.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)"
+  ],
+  "intent_family": "",
+  "seconds": 3.8,
+  "opening": "🐾 I know just the story.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3173,
+     "cached": 3038,
+     "output": 28,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I don’t have Matt’s age or date of birth on record.",
+    "function_calls": 0,
+    "usage": {
+     "input": 3760,
+     "cached": 3170,
+     "output": 20,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire age date of birth birthday",
+    "top_score": 0.203760445,
+    "n": 1
+   }
+  ],
+  "arm": "TB",
+  "case": "q02",
+  "kind": "decline",
+  "run": 4,
+  "turn": 1,
+  "question": "How old is Matt?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 I don’t have information about whether Matt has children.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)"
+  ],
+  "intent_family": "",
+  "seconds": 3.92,
+  "opening": "🐾 I know just the story.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3171,
+     "cached": 3036,
+     "output": 26,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I don’t have information about whether Matt has children.",
+    "function_calls": 0,
+    "usage": {
+     "input": 4772,
+     "cached": 3168,
+     "output": 17,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire children family kids",
+    "top_score": 0.250541031,
+    "n": 2
+   }
+  ],
+  "arm": "TB",
+  "case": "q03",
+  "kind": "decline",
+  "run": 1,
+  "turn": 1,
+  "question": "Does Matt have kids?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 I don’t have information about whether Matt has children.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Why Hire Matt? (Accenture)",
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Transition Story: Why I’m Exploring Opportunities (Accenture)",
+   "I Let Speed Win Over Structure. Here's How I Fixed It. (Independent Project)"
+  ],
+  "intent_family": "",
+  "seconds": 4.65,
+  "opening": "🐾 Found it!",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3169,
+     "cached": 3034,
+     "output": 23,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I don’t have information about whether Matt has children.",
+    "function_calls": 0,
+    "usage": {
+     "input": 6503,
+     "cached": 3166,
+     "output": 17,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt personal family children kids",
+    "top_score": 0.245245829,
+    "n": 6
+   }
+  ],
+  "arm": "TB",
+  "case": "q03",
+  "kind": "decline",
+  "run": 8,
+  "turn": 1,
+  "question": "Does Matt have kids?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 I don’t have information about Matt’s hobbies or what he likes to do for fun.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Integrating Play into Work to Enhance Team Motivation (Accenture)",
+   "Implementing BDD for System Behavior Specification (Independent Project)",
+   "Owning the P&L: From Engagement Margin to Center Cost Base (Fortune 500 Clients)"
+  ],
+  "intent_family": "",
+  "seconds": 4.26,
+  "opening": "🐾 This is a strong one.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3176,
+     "cached": 3050,
+     "output": 33,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I don’t have information about Matt’s hobbies or what he likes to do for fun.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7097,
+     "cached": 7094,
+     "output": 24,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire hobbies leisure activities what he likes to do for fun",
+    "top_score": 0.263524145,
+    "n": 10
+   }
+  ],
+  "arm": "TB",
+  "case": "q04",
+  "kind": "decline",
+  "run": 5,
+  "turn": 1,
+  "question": "What does Matt like to do for fun?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 That trail goes cold here. I don’t have details about Matt’s hobbies or how he spends his time outside of work.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Transition Story: Why I’m Exploring Opportunities (Accenture)",
+   "Integrating Play into Work to Enhance Team Motivation (Accenture)",
+   "Owning the P&L: From Engagement Margin to Center Cost Base (Fortune 500 Clients)"
+  ],
+  "intent_family": "",
+  "seconds": 4.73,
+  "opening": "🐾 I know just the story.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3172,
+     "cached": 3034,
+     "output": 29,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 That trail goes cold here. I don’t have details about Matt’s hobbies or how he spends his time outside of work.",
+    "function_calls": 0,
+    "usage": {
+     "input": 6975,
+     "cached": 3169,
+     "output": 58,
+     "reasoning": 25
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire activities outside work hobbies personal interests",
+    "top_score": 0.360832572,
+    "n": 25
+   }
+  ],
+  "arm": "TB",
+  "case": "q05",
+  "kind": "decline",
+  "run": 2,
+  "turn": 1,
+  "question": "What does Matt do outside of work?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 I don’t have details about Matt’s hobbies or how he spends his time outside of work.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Transition Story: Why I’m Exploring Opportunities (Accenture)",
+   "Why Hire Matt? (Accenture)",
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "About Matt: My Leadership Journey (Accenture)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)"
+  ],
+  "intent_family": "",
+  "seconds": 3.88,
+  "opening": "Got it! 🐾",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3175,
+     "cached": 3037,
+     "output": 27,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I don’t have details about Matt’s hobbies or how he spends his time outside of work.",
+    "function_calls": 0,
+    "usage": {
+     "input": 6298,
+     "cached": 3172,
+     "output": 49,
+     "reasoning": 22
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt outside of work hobbies personal interests leisure activities",
+    "top_score": 0.303327173,
+    "n": 25
+   }
+  ],
+  "arm": "TB",
+  "case": "q05",
+  "kind": "decline",
+  "run": 9,
+  "turn": 1,
+  "question": "What does Matt do outside of work?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 I don’t have information about Matt’s hobbies. His stories cover his professional work, not his leisure interests.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Integrating Play into Work to Enhance Team Motivation (Accenture)",
+   "Work Philosophy: Where I Do My Best Work (Accenture)",
+   "Transition Story: Why I’m Exploring Opportunities (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 4.71,
+  "opening": "🐾 Tracking this down...",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3173,
+     "cached": 3037,
+     "output": 28,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I don’t have information about Matt’s hobbies. His stories cover his professional work, not his leisure interests.",
+    "function_calls": 0,
+    "usage": {
+     "input": 6184,
+     "cached": 3170,
+     "output": 44,
+     "reasoning": 14
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire hobbies personal interests outside work",
+    "top_score": 0.349412024,
+    "n": 25
+   }
+  ],
+  "arm": "TB",
+  "case": "q06",
+  "kind": "decline",
+  "run": 6,
+  "turn": 1,
+  "question": "What are Matt's hobbies?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 I don’t have any record of patents held by Matt, so I can’t confirm whether he has any.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Building Smart, Connected Devices at Accenture's Liquid Studio (Accenture)",
+   "Building Effective AI-Assisted Development Workflows (Independent Project)",
+   "MattGPT: RAG Architecture & Semantic Search Implementation (Independent Project)"
+  ],
+  "intent_family": "",
+  "seconds": 4.73,
+  "opening": "🐾 Found it!",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3172,
+     "cached": 3036,
+     "output": 28,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I don’t have any record of patents held by Matt, so I can’t confirm whether he has any.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7826,
+     "cached": 3169,
+     "output": 28,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire patents patent inventor intellectual property",
+    "top_score": 0.324563205,
+    "n": 25
+   }
+  ],
+  "arm": "TB",
+  "case": "q07",
+  "kind": "decline",
+  "run": 3,
+  "turn": 1,
+  "question": "Does Matt have any patents?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 I don’t have any information confirming patents held by Matt. I can’t say whether he has any.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Building Smart, Connected Devices at Accenture's Liquid Studio (Accenture)",
+   "Building Effective AI-Assisted Development Workflows (Independent Project)",
+   "MattGPT: RAG Architecture & Semantic Search Implementation (Independent Project)"
+  ],
+  "intent_family": "",
+  "seconds": 4.86,
+  "opening": "🐾 I know just the story.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3172,
+     "cached": 3046,
+     "output": 28,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I don’t have any information confirming patents held by Matt. I can’t say whether he has any.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7826,
+     "cached": 7823,
+     "output": 27,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire patents patent inventor intellectual property",
+    "top_score": 0.324563205,
+    "n": 25
+   }
+  ],
+  "arm": "TB",
+  "case": "q07",
+  "kind": "decline",
+  "run": 10,
+  "turn": 1,
+  "question": "Does Matt have any patents?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 I don’t have any published papers on record for Matt. I can’t confirm whether he has published any.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "MattGPT: RAG Architecture & Semantic Search Implementation (Independent Project)",
+   "I Let Speed Win Over Structure. Here's How I Fixed It. (Independent Project)",
+   "Why Hire Matt? (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 4.56,
+  "opening": "🐾 Here's a great example.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3170,
+     "cached": 3044,
+     "output": 29,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I don’t have any published papers on record for Matt. I can’t confirm whether he has published any.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7153,
+     "cached": 3167,
+     "output": 28,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire published papers academic publications research articles",
+    "top_score": 0.302269399,
+    "n": 18
+   }
+  ],
+  "arm": "TB",
+  "case": "q08",
+  "kind": "decline",
+  "run": 7,
+  "turn": 1,
+  "question": "Has Matt published any papers?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 Matt has earned certifications, but none is current.\n\nHis AWS certifications are “AWS Certified Solutions Architect - Associate (issued **2020**, expired **2023**)” and “AWS Certified Cloud Practitioner (issued **2019**, expired **2023**).” He also earned “SAFe **4** Certified Agilist (issued **2017**, expired).”\n\nHis Oracle record is “Oracle **8i** DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (**2002**).”",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications (Accenture)",
+   "Building AT&T's Service Delivery Platform (AT&T)",
+   "Keeping the F-22's As-Built Configuration Data Accurate (Lockheed Martin)",
+   "Launching a Self-Paced Learning Program for Emerging Technologies (Accenture)",
+   "Balancing Execution Speed with Security and Compliance (Fortune 500 Clients)"
+  ],
+  "intent_family": "",
+  "seconds": 7.36,
+  "opening": "🐾 This is a strong one.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3170,
+     "cached": 3036,
+     "output": 34,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Matt has earned certifications, but none is current.\n\nHis AWS certifications are “AWS Certified Solutions Architect - Associate (issued **2020**, expired **2023**)” and “AWS Certified Cloud Practitioner (issued **2019**, expired **2023**).” He also earned “SAFe **4** Certified Agilist (issued **2017**, expired).”\n\nHis Oracle record is “Oracle **8i** DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (**2002**).”\n\n[[profile:certifications]]",
+    "function_calls": 0,
+    "usage": {
+     "input": 6656,
+     "cached": 3167,
+     "output": 160,
+     "reasoning": 36
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt certifications AWS Certified Solutions Architect Associate Cloud Practitioner SAFe Oracle 8i DBA",
+    "top_score": 0.443883717,
+    "n": 25
+   }
+  ],
+  "arm": "TB",
+  "case": "q09",
+  "kind": "fact",
+  "run": 4,
+  "turn": 1,
+  "question": "Is Matt certified?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 No, Matt does not have a PMP. His certifications and exam history are:\n\n“AWS Certified Solutions Architect - Associate (issued **2020**, expired **2023**)”; “AWS Certified Cloud Practitioner (issued **2019**, expired **2023**)”; “SAFe **4** Certified Agilist (issued **2017**, expired)”; and “Oracle **8i** DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (**2002**).”\n\nNone is current.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications (JP Morgan Chase)",
+   "Building the PMO for RBC's Commercial Banking Modernization (RBC)",
+   "Owning the P&L: From Engagement Margin to Center Cost Base (Fortune 500 Clients)",
+   "Why Hire Matt? (Accenture)",
+   "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 5.58,
+  "opening": "🐾 On it!",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3170,
+     "cached": 3034,
+     "output": 27,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 No, Matt does not have a PMP. His certifications and exam history are:\n\n“AWS Certified Solutions Architect - Associate (issued **2020**, expired **2023**)”; “AWS Certified Cloud Practitioner (issued **2019**, expired **2023**)”; “SAFe **4** Certified Agilist (issued **2017**, expired)”; and “Oracle **8i** DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (**2002**).”\n\nNone is current.\n\n[[profile:certifications]]",
+    "function_calls": 0,
+    "usage": {
+     "input": 6520,
+     "cached": 3167,
+     "output": 144,
+     "reasoning": 22
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire professional certifications PMP certification",
+    "top_score": 0.376820177,
+    "n": 25
+   }
+  ],
+  "arm": "TB",
+  "case": "q10",
+  "kind": "fact",
+  "run": 1,
+  "turn": 1,
+  "question": "Does Matt have a PMP?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 No, Matt does not have a PMP. His certifications and exams are:\n\n- AWS Certified Solutions Architect - Associate (issued **2020**, expired **2023**)\n- AWS Certified Cloud Practitioner (issued **2019**, expired **2023**)\n- SAFe **4** Certified Agilist (issued **2017**, expired)\n- Oracle **8i** DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (**2002**)\n\nNone is current.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Building the PMO for RBC's Commercial Banking Modernization (RBC)",
+   "Owning the P&L: From Engagement Margin to Center Cost Base (Fortune 500 Clients)",
+   "Mobilizing JP Morgan's Corporate I&AM Uplift Across 341 Applications (JP Morgan Chase)",
+   "Rescuing and Stabilizing JP Morgan's TS Dynamics CRM Program (JP Morgan Chase)",
+   "Leading Global Delivery of JP Morgan's Asset Management Salesforce Solution (JP Morgan Chase)"
+  ],
+  "intent_family": "",
+  "seconds": 5.95,
+  "opening": "🐾 I know just the story.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3173,
+     "cached": 3047,
+     "output": 24,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 No, Matt does not have a PMP. His certifications and exams are:\n\n- AWS Certified Solutions Architect - Associate (issued **2020**, expired **2023**)\n- AWS Certified Cloud Practitioner (issued **2019**, expired **2023**)\n- SAFe **4** Certified Agilist (issued **2017**, expired)\n- Oracle **8i** DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (**2002**)\n\nNone is current.\n\n[[profile:certifications]]",
+    "function_calls": 0,
+    "usage": {
+     "input": 7357,
+     "cached": 3170,
+     "output": 146,
+     "reasoning": 28
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt PMP Project Management Professional certification",
+    "top_score": 0.429200917,
+    "n": 25
+   }
+  ],
+  "arm": "TB",
+  "case": "q10",
+  "kind": "fact",
+  "run": 8,
+  "turn": 1,
+  "question": "Does Matt have a PMP?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 Matt speaks English (native) and French (**B2**, self-assessed).",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Building Effective AI-Assisted Development Workflows (Independent Project)",
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Implementing BDD for System Behavior Specification (Independent Project)",
+   "Why Hire Matt? (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 4.27,
+  "opening": "🐾 Here's a great example.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3173,
+     "cached": 3037,
+     "output": 26,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Matt speaks English (native) and French (**B2**, self-assessed).\n\n[[profile:languages]]",
+    "function_calls": 0,
+    "usage": {
+     "input": 6950,
+     "cached": 3170,
+     "output": 27,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire languages English French",
+    "top_score": 0.279815495,
+    "n": 17
+   }
+  ],
+  "arm": "TB",
+  "case": "q11",
+  "kind": "fact",
+  "run": 5,
+  "turn": 1,
+  "question": "What languages does Matt speak?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 Yes. Matt has a Master’s degree in Information Technology from **American InterContinental University**.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Teaching Entry-Level Developers to Build Their First Java Web Application (American InterContinental University)",
+   "Building Tangible Cloud Tech Skills for HBCU Students (Accenture)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Resolving Cross-Domain Data Issues for AT&T's Order Management (AT&T)",
+   "Why Hire Matt? (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 4.38,
+  "opening": "🐾 Perfect, here's what I found.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3173,
+     "cached": 3036,
+     "output": 33,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Yes. Matt has a Master’s degree in Information Technology from American InterContinental University.\n\n[[profile:education]]",
+    "function_calls": 0,
+    "usage": {
+     "input": 6800,
+     "cached": 3170,
+     "output": 29,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire master's degree Information Technology American InterContinental University education",
+    "top_score": 0.328979969,
+    "n": 25
+   }
+  ],
+  "arm": "TB",
+  "case": "q12",
+  "kind": "fact",
+  "run": 2,
+  "turn": 1,
+  "question": "Does Matt have a master's degree?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 Yes. Matt has a master's degree in Information Technology from **American InterContinental University**.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Teaching Entry-Level Developers to Build Their First Java Web Application (American InterContinental University)",
+   "Building Tangible Cloud Tech Skills for HBCU Students (Accenture)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Resolving Cross-Domain Data Issues for AT&T's Order Management (AT&T)",
+   "Why Hire Matt? (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 4.44,
+  "opening": "🐾 Tracking this down...",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3176,
+     "cached": 3039,
+     "output": 33,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Yes. Matt has a master's degree in Information Technology from **American InterContinental University**.\n\n[[profile:education]]",
+    "function_calls": 0,
+    "usage": {
+     "input": 6803,
+     "cached": 3173,
+     "output": 30,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire master's degree Information Technology American InterContinental University education",
+    "top_score": 0.328979969,
+    "n": 25
+   }
+  ],
+  "arm": "TB",
+  "case": "q12",
+  "kind": "fact",
+  "run": 9,
+  "turn": 1,
+  "question": "Does Matt have a master's degree?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 Found it! Matt’s payments work at **JP Morgan Chase** centered on building ACCESS Next Generation, from **August 2009** through **June 2012**.\n\nThe bank was consolidating regional treasury and cash-management systems into a single global portal. Bottomline Technologies’ WebSeries platform provided the foundation, but its out-of-box capabilities did not cover the payment workflows, security controls, and regulatory requirements of **135,000+ clients** across **180+ countries**. Regional systems also had different data models, entitlement structures, and transaction histories that had to move without interrupting live payments.\n\nAs Technology Delivery Lead, Matt managed a blended team of **40+** **Accenture** and bank resources across the US, Mumbai, and Bangalore. He spent **70 to 80%** of his time embedded at Bottomline’s Portsmouth offices, determining where platform configuration ended and bespoke engineering was required.\n\nHe designed and delivered ACH, wire, FX/cross-border, and tax-payment modules, including NACHA file validation, embedded FX rate visibility, and Message Authentication Code security for payment verification before release. He also built the centralized payments gateway, handling message transformation, protocol translation, and routing across **12 countries**, replacing fragmented point-to-point integrations.\n\nFor corporate administrators, Matt introduced bulk permission changes across users, accounts, and products from a single screen. Payment-type-specific controls could authorize someone to approve wires without allowing FX initiation. Entitlement management dropped from days to minutes.\n\nMatt also led payments data migration without disruption to live payment operations. For the global rollout, he translated regional regulatory requirements into data-visibility and access-control configurations, sequencing launches by regulatory readiness rather than using a single big-bang deployment.\n\nACCESS launched in **April 2011**. Corporate treasurers gained a single entry point for payments across regions, with real-time global reporting and access to cash, trade, and investment operations through the same portal.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Building the Payment Engine Behind JP Morgan ACCESS (JP Morgan Chase)",
+   "Building JP Morgan's Global Payments Gateway Across 12 Countries (JP Morgan Chase)",
+   "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform (JP Morgan Chase)",
+   "Overhauling Entitlement Management for JP Morgan ACCESS (JP Morgan Chase)",
+   "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout (JP Morgan Chase)"
+  ],
+  "intent_family": "",
+  "seconds": 13.51,
+  "opening": "🐾 Here's a great example.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3178,
+     "cached": 3038,
+     "output": 28,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Found it! Matt’s payments work at **JP Morgan Chase** centered on building ACCESS Next Generation, from **August 2009** through **June 2012**.\n\nThe bank was consolidating regional treasury and cash-management systems into a single global portal. Bottomline Technologies’ WebSeries platform provided the foundation, but its out-of-box capabilities did not cover the payment workflows, security controls, and regulatory requirements of **135,000+ clients** across **180+ countries**. Regional systems also had different data models, entitlement structures, and transaction histories that had to move without interrupting live payments.\n\nAs Technology Delivery Lead, Matt managed a blended team of **40+** Accenture and bank resources across the US, Mumbai, and Bangalore. He spent **70–80%** of his time embedded at Bottomline’s Portsmouth offices, determining where platform configuration ended and bespoke engineering was required.\n\nHe designed and delivered ACH, wire, FX/cross-border, and tax-payment modules, including NACHA file validation, embedded FX rate visibility, and Message Authentication Code security for payment verification before release. He also built the centralized payments gateway, handling message transformation, protocol translation, and routing across **12 countries**, replacing fragmented point-to-point integrations.\n\nFor corporate administrators, Matt introduced bulk permission changes across users, accounts, and products from a single screen. Payment-type-specific controls could authorize someone to approve wires without allowing FX initiation. Entitlement management dropped from days to minutes.\n\nMatt also led payments data migration without disruption to live payment operations. For the global rollout, he translated regional regulatory requirements into data-visibility and access-control configurations, sequencing launches by regulatory readiness rather than using a single big-bang deployment.\n\nACCESS launched in **April 2011**. Corporate treasurers gained a single entry point for payments across regions, with real-time global reporting and access to cash, trade, and investment operations through the same portal.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7914,
+     "cached": 3175,
+     "output": 391,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt JP Morgan Chase payments work payments platform modernization innovation",
+    "top_score": 0.638988793,
+    "n": 25
+   }
+  ],
+  "arm": "TB",
+  "case": "q13",
+  "kind": "control",
+  "run": 6,
+  "turn": 1,
+  "question": "Tell me about Matt's payments work at JPMorgan",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 Matt leads with empathy, clarity, and purpose.\n\nHe describes teams he inherited as “over-processed, under-trusted, waiting for permission instead of owning outcomes.” His focus is on removing those barriers: making intent explicit, creating psychological safety so people speak honestly, and pushing decisions to the people closest to the work. He coaches teams to think clearly, not just execute tasks.\n\nAt the **Accenture** Cloud Innovation Center, that included a “permit to fail” learning environment. Teams had avoided risks because they feared blame. Matt organized non-punitive post-mortems, emphasized lessons rather than pointing fingers, and supported lean, low-stakes experiments. In innovation engagements, he set expectations upfront that prototypes and user tests would likely fail. Teams used those results to challenge assumptions and shape product direction week by week, before committing to costly builds.\n\nHe also brought engineers, product managers, and UX architects into balanced teams with equal participation and shared accountability. Rather than relying on handoffs between separate functions, he embedded pair programming, collaborative coding, stand-ups, retrospectives, and knowledge-sharing sessions. Teams connected their goals to client and business outcomes and could voice feedback and change their workflows autonomously.\n\nHis working principles include integrity and respect, continuous learning, and “outcomes, not optics.” Engineering practices remain part of that philosophy: automation, continuous delivery, and quality-first practices. At the Cloud Innovation Center, teams achieved **4x delivery acceleration** after embracing lean product and modern engineering practices. The balanced-team work also achieved **zero-defect production code** through iterative development and real-time feedback loops.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Leadership Philosophy: How I Lead (Accenture)",
+   "Establishing a ‘Permit to Fail’ Culture for Continuous Improvement (Accenture)",
+   "Why Early Failure Is a Feature, Not a Bug, in Innovation (Accenture)",
+   "Work Philosophy: Where I Do My Best Work (Accenture)",
+   "Breaking Silos Between Engineering, Design, and Product (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 24.47,
+  "opening": "Got it! 🐾",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3173,
+     "cached": 3037,
+     "output": 38,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Matt leads with empathy, clarity, and purpose.\n\nHe describes teams he inherited as “over-processed, under-trusted, waiting for permission instead of owning outcomes.” His focus is on removing those barriers: making intent explicit, creating psychological safety so people speak honestly, and pushing decisions to the people closest to the work. He coaches teams to think clearly, not just execute tasks.\n\nAt the **Accenture** Cloud Innovation Center, that included a “permit to fail” learning environment. Teams had avoided risks because they feared blame. Matt organized non-punitive post-mortems, emphasized lessons rather than pointing fingers, and supported lean, low-stakes experiments. In innovation engagements, he set expectations upfront that prototypes and user tests would likely fail. Teams used those results to challenge assumptions and shape product direction week by week, before committing to costly builds.\n\nHe also brought engineers, product managers, and UX architects into balanced teams with equal participation and shared accountability. Rather than relying on handoffs between separate functions, he embedded pair programming, collaborative coding, stand-ups, retrospectives, and knowledge-sharing sessions. Teams connected their goals to client and business outcomes and could voice feedback and change their workflows autonomously.\n\nHis working principles include integrity and respect, continuous learning, and “outcomes, not optics.” Engineering practices remain part of that philosophy: automation, continuous delivery, and quality-first practices. At the Cloud Innovation Center, teams achieved **4x delivery acceleration** after embracing lean product and modern engineering practices. The balanced-team work also achieved **zero-defect production code** through iterative development and real-time feedback loops.",
+    "function_calls": 0,
+    "usage": {
+     "input": 5378,
+     "cached": 3170,
+     "output": 379,
+     "reasoning": 48
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt leadership philosophy empathy clarity purpose permit to fail learning environment balanced teams Product Engineering Design teaching teams to fish",
+    "top_score": 0.616301358,
+    "n": 25
+   }
+  ],
+  "arm": "TB",
+  "case": "q14",
+  "kind": "control",
+  "run": 3,
+  "turn": 1,
+  "question": "What's Matt's leadership philosophy?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 Here’s how Matt describes his leadership philosophy.\n\nMatt leads with empathy, clarity, and purpose. He builds psychological safety, pushes decisions to the people closest to the work, and coaches teams to think clearly, not just execute tasks. Across his roles at **Accenture**, he inherited engineering teams that were over-processed, under-trusted, and waiting for permission instead of owning outcomes. His focus was on removing those barriers rather than adding more process.\n\nHis “permit to fail” learning environment makes that concrete. When teams avoided risks because they feared blame, Matt organized non-punitive post-mortems and emphasized lessons learned rather than pointing fingers. He supported lean, low-stakes experiments with structured hypotheses and controlled iterations. In product incubation, he set expectations upfront that prototypes and user tests would likely fail. Teams used those results to shape product direction week by week, before committing to costly builds.\n\nMatt also builds balanced teams: Product + Engineering + Design together. At the Cloud Innovation Center, he assembled engineers, product managers, and UX architects with equal participation and shared accountability. Instead of hierarchical handoffs, teams used pair programming, collaborative coding, retrospectives, and direct feedback. They could voice concerns and change their workflows autonomously.\n\nHe grounds that environment in automation, continuous delivery, and quality-first practices. At the Cloud Innovation Center, teams achieved **4x delivery acceleration** after embracing lean product and modern engineering practices. His work breaking down role silos also produced **zero-defect production code** through iterative development and real-time feedback loops.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Leadership Philosophy: How I Lead (Accenture)",
+   "Establishing a ‘Permit to Fail’ Culture for Continuous Improvement (Accenture)",
+   "Why Early Failure Is a Feature, Not a Bug, in Innovation (Accenture)",
+   "Breaking Silos Between Engineering, Design, and Product (Accenture)",
+   "Work Philosophy: Where I Do My Best Work (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 12.71,
+  "opening": "🐾 Tracking this down...",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3175,
+     "cached": 3049,
+     "output": 32,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Here’s how Matt describes his leadership philosophy.\n\nMatt leads with empathy, clarity, and purpose. He builds psychological safety, pushes decisions to the people closest to the work, and coaches teams to think clearly, not just execute tasks. Across his roles at **Accenture**, he inherited engineering teams that were over-processed, under-trusted, and waiting for permission instead of owning outcomes. His focus was on removing those barriers rather than adding more process.\n\nHis “permit to fail” learning environment makes that concrete. When teams avoided risks because they feared blame, Matt organized non-punitive post-mortems and emphasized lessons learned rather than pointing fingers. He supported lean, low-stakes experiments with structured hypotheses and controlled iterations. In product incubation, he set expectations upfront that prototypes and user tests would likely fail. Teams used those results to shape product direction week by week, before committing to costly builds.\n\nMatt also builds balanced teams: Product + Engineering + Design together. At the Cloud Innovation Center, he assembled engineers, product managers, and UX architects with equal participation and shared accountability. Instead of hierarchical handoffs, teams used pair programming, collaborative coding, retrospectives, and direct feedback. They could voice concerns and change their workflows autonomously.\n\nHe grounds that environment in automation, continuous delivery, and quality-first practices. At the Cloud Innovation Center, teams achieved **4x delivery acceleration** after embracing lean product and modern engineering practices. His work breaking down role silos also produced **zero-defect production code** through iterative development and real-time feedback loops.",
+    "function_calls": 0,
+    "usage": {
+     "input": 5374,
+     "cached": 5371,
+     "output": 397,
+     "reasoning": 78
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt leadership philosophy empathy clarity purpose permit to fail balanced teams Product Engineering Design",
+    "top_score": 0.635112822,
+    "n": 25
+   }
+  ],
+  "arm": "TB",
+  "case": "q14",
+  "kind": "control",
+  "run": 10,
+  "turn": 1,
+  "question": "What's Matt's leadership philosophy?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 Here’s what Matt has built and delivered.\n\nMatt’s work spans execution and delivery, organizational transformation, and talent development: enterprise platforms shipped across **12 countries**, troubled programs recovered, and an engineering organization built from **0 to 150+ practitioners**.\n\nAt **Accenture**, clients needed more than another software delivery program. They were working through slow development cycles, fragmented workflows, legacy systems, and handoffs between product, design, and engineering. Many new hires also lacked hands-on experience with cloud-native technologies or modern engineering practices.\n\nMatt built the Atlanta and Tampa Cloud Innovation Centers with full P&L accountability. Instead of keeping product managers, designers, and engineers in separate functions, he established balanced teams. Instead of a separate QA phase, teams used test-driven development and automated pipelines. Instead of delivering a large requirements list before getting feedback, they shipped thin-slice, production-ready solutions and used customer feedback to decide what came next.\n\nHe built training around “I do, we do, you do,” pairing junior practitioners with experienced mentors and using coding katas, workshops, and hands-on delivery. The talent program achieved near-zero attrition in its first **2 years**.\n\nWhen delivery fell short, he addressed the work directly. At **Norfolk Southern**, rising defects contradicted near-complete test coverage. Matt took ownership, audited the code and tests, exposed vague backlog stories, and brought in TDD experts to work alongside the team. The client stopped finding defects the dashboard could not see. At **JP Morgan Chase**, CIC teams outpaced peer velocity within the first **2 sprints**.\n\nThe centers delivered **30+ product engagements** across **15+ clients**, with **4X faster velocity** and **zero-defect deployments**. Matt drove **\\$100M+ in repeat business** through delivery excellence and customer relationships. Clients kept coming back, and teams continued using the practices after engagements ended.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 (Accenture)",
+   "Why Hire Matt? (Accenture)",
+   "Scaling Talent and Practices for Agile Product Innovation (Accenture)",
+   "Cutting Time-to-Market with Lean XP and Balanced Teams Across Fortune 500 Clients (Fortune 500 Clients)",
+   "Confronting a Quality Crisis Through Coaching and Culture Change (Norfolk Southern)"
+  ],
+  "intent_family": "",
+  "seconds": 16.13,
+  "opening": "🐾 Tracking this down...",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3173,
+     "cached": 3039,
+     "output": 46,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Here’s what Matt has built and delivered.\n\nMatt’s work spans execution and delivery, organizational transformation, and talent development: enterprise platforms shipped across **12 countries**, troubled programs recovered, and an engineering organization built from **0 to 150+ practitioners**.\n\nAt **Accenture**, clients needed more than another software delivery program. They were working through slow development cycles, fragmented workflows, legacy systems, and handoffs between product, design, and engineering. Many new hires also lacked hands-on experience with cloud-native technologies or modern engineering practices.\n\nMatt built the Atlanta and Tampa Cloud Innovation Centers with full P&L accountability. Instead of keeping product managers, designers, and engineers in separate functions, he established balanced teams. Instead of a separate QA phase, teams used test-driven development and automated pipelines. Instead of delivering a large requirements list before getting feedback, they shipped thin-slice, production-ready solutions and used customer feedback to decide what came next.\n\nHe built training around “I do, we do, you do,” pairing junior practitioners with experienced mentors and using coding katas, workshops, and hands-on delivery. The talent program achieved near-zero attrition in its first **2 years**.\n\nWhen delivery fell short, he addressed the work directly. At **Norfolk Southern**, rising defects contradicted near-complete test coverage. Matt took ownership, audited the code and tests, exposed vague backlog stories, and brought in TDD experts to work alongside the team. The client stopped finding defects the dashboard could not see. At **JP Morgan Chase**, CIC teams outpaced peer velocity within the first **2 sprints**.\n\nThe centers delivered **30+ product engagements** across **15+ clients**, with **4X faster velocity** and **zero-defect deployments**. Matt drove **$100M+ in repeat business** through delivery excellence and customer relationships. Clients kept coming back, and teams continued using the practices after engagements ended.",
+    "function_calls": 0,
+    "usage": {
+     "input": 8194,
+     "cached": 3170,
+     "output": 485,
+     "reasoning": 91
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Why hire Matt Pugmire execution delivery organization transformation built Cloud Innovation Center 150 practitioners 4X zero defects repeat business client examples methodology",
+    "top_score": 0.568760037,
+    "n": 25
+   }
+  ],
+  "arm": "TB",
+  "case": "q15",
+  "kind": "control",
+  "run": 7,
+  "turn": 1,
+  "question": "Why hire Matt?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 Here’s a time Matt’s assumptions led to a real incident.\n\nMatt was the tech lead on a global platform modernization for a financial services client. The program was under delivery pressure, with offshore teams running test cycles across development, QA, UAT, and production. IAM controls, environment segregation, and downstream access configurations had been inherited from earlier phases.\n\nMatt was responsible for ensuring a safe environment setup. He relied on the inherited documentation instead of verifying the IAM configuration and downstream access controls. He did not audit who could trigger email processes, confirm that production customer data had been scrubbed from test environments, or implement compensating controls such as data masking and email interception.\n\nAn offshore tester accidentally triggered an email job in UAT. It sent communications containing unmasked production customer data to **thousands of real clients**.\n\nMatt took accountability and led the team through root cause analysis and remediation. They identified insufficient IAM checks, unclear environment boundaries, and production data that had not been scrubbed from downstream environments. He worked with the team to understand what happened and implement corrective controls.\n\nThe client nevertheless demanded that the tester be removed from the project. Matt described that as “a systemic failure that resulted in an individual consequence.”\n\nHis stated lesson was that “assumptions are risks in disguise.” After the incident, he made IAM validation, environment verification, PII scrubbing, and risk ownership day-one responsibilities in his delivery approach.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "What I Learned About Assumptions (Fortune 500 Clients)",
+   "Establishing a ‘Permit to Fail’ Culture for Continuous Improvement (Accenture)",
+   "Why Early Failure Is a Feature, Not a Bug, in Innovation (Accenture)",
+   "My Chatbot Kept Flattering Me Instead of Answering the Question. Here's How I Fixed It (Independent Project)",
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)"
+  ],
+  "intent_family": "",
+  "seconds": 8.56,
+  "opening": "Got it! 🐾",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3171,
+     "cached": 3034,
+     "output": 35,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Here’s a time Matt’s assumptions led to a real incident.\n\nMatt was the tech lead on a global platform modernization for a financial services client. The program was under delivery pressure, with offshore teams running test cycles across development, QA, UAT, and production. IAM controls, environment segregation, and downstream access configurations had been inherited from earlier phases.\n\nMatt was responsible for ensuring a safe environment setup. He relied on the inherited documentation instead of verifying the IAM configuration and downstream access controls. He did not audit who could trigger email processes, confirm that production customer data had been scrubbed from test environments, or implement compensating controls such as data masking and email interception.\n\nAn offshore tester accidentally triggered an email job in UAT. It sent communications containing unmasked production customer data to **thousands of real clients**.\n\nMatt took accountability and led the team through root cause analysis and remediation. They identified insufficient IAM checks, unclear environment boundaries, and production data that had not been scrubbed from downstream environments. He worked with the team to understand what happened and implement corrective controls.\n\nThe client nevertheless demanded that the tester be removed from the project. Matt described that as “a systemic failure that resulted in an individual consequence.”\n\nHis stated lesson was that “assumptions are risks in disguise.” After the incident, he made IAM validation, environment verification, PII scrubbing, and risk ownership day-one responsibilities in his delivery approach.",
+    "function_calls": 0,
+    "usage": {
+     "input": 6060,
+     "cached": 3168,
+     "output": 290,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "A time Matt failed, made a mistake or setback, took responsibility and learned from failure",
+    "top_score": 0.484052509,
+    "n": 25
+   }
+  ],
+  "arm": "TB",
+  "case": "q16",
+  "kind": "control",
+  "run": 4,
+  "turn": 1,
+  "question": "Tell me about a time Matt failed",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 Found it!\n\nAt **Accenture’s** Liquid Studio, traditional training programs couldn’t keep pace with rapidly evolving AWS technologies. Engineers had gaps in cloud competency, and cloud adoption was slowing. The AWS Launchpad program addressed that problem with structured learning paths, hands-on labs, and mentor-based training, rather than theory alone.\n\nFrom **July 2018** to **November 2019**, Matt led AWS Launchpad in the Atlanta Innovation Hub as Cloud Native Architecture Lead. The program was developed in collaboration with AWS, with the goal of certifying engineers and preparing teams to lead cloud-native transformation initiatives.\n\nMatt designed learning paths and certification programs around AWS core services and cloud-native application development. The curriculum included Lambda, API Gateway, DynamoDB, Kubernetes, and ECS/Fargate. He delivered interactive workshops and labs that immersed engineers in real-world AWS environments, reinforcing practical application over theory.\n\nHe also established cloud expert mentorship teams so engineers could learn from experienced practitioners. Group coaching sessions and knowledge-sharing workshops complemented the individual learning paths, giving participants opportunities to work through questions together and share what they learned. Certification preparation was paired with practical cloud work and ongoing mentorship, rather than treated as an isolated exam-preparation exercise.\n\nThrough AWS Launchpad, **over 200 professionals earned AWS certifications**, including AWS Solutions Architect and DevOps Engineer certifications. The program accelerated cloud adoption across **Accenture** and supported the launch of cloud-native initiatives.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications (Accenture)",
+   "Building Tangible Cloud Tech Skills for HBCU Students (Accenture)",
+   "Launching a Self-Paced Learning Program for Emerging Technologies (Accenture)",
+   "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 (Accenture)",
+   "Scaling Talent and Practices for Agile Product Innovation (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 10.14,
+  "opening": "🐾 I know just the story.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3177,
+     "cached": 3038,
+     "output": 34,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Found it!\n\nAt **Accenture’s** Liquid Studio, traditional training programs couldn’t keep pace with rapidly evolving AWS technologies. Engineers had gaps in cloud competency, and cloud adoption was slowing. The AWS Launchpad program addressed that problem with structured learning paths, hands-on labs, and mentor-based training, rather than theory alone.\n\nFrom **July 2018** to **November 2019**, Matt led AWS Launchpad in the Atlanta Innovation Hub as Cloud Native Architecture Lead. The program was developed in collaboration with AWS, with the goal of certifying engineers and preparing teams to lead cloud-native transformation initiatives.\n\nMatt designed learning paths and certification programs around AWS core services and cloud-native application development. The curriculum included Lambda, API Gateway, DynamoDB, Kubernetes, and ECS/Fargate. He delivered interactive workshops and labs that immersed engineers in real-world AWS environments, reinforcing practical application over theory.\n\nHe also established cloud expert mentorship teams so engineers could learn from experienced practitioners. Group coaching sessions and knowledge-sharing workshops complemented the individual learning paths, giving participants opportunities to work through questions together and share what they learned. Certification preparation was paired with practical cloud work and ongoing mentorship, rather than treated as an isolated exam-preparation exercise.\n\nThrough AWS Launchpad, **over 200 professionals earned AWS certifications**, including AWS Solutions Architect and DevOps Engineer certifications. The program accelerated cloud adoption across **Accenture** and supported the launch of cloud-native initiatives.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7907,
+     "cached": 3174,
+     "output": 292,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "How did Matt build the AWS certification program? AWS certification training program cloud innovation center",
+    "top_score": 0.58812356,
+    "n": 25
+   }
+  ],
+  "arm": "TB",
+  "case": "q17",
+  "kind": "control",
+  "run": 1,
+  "turn": 1,
+  "question": "How did Matt build the AWS certification program?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 Here’s how Matt built AWS Launchpad.\n\nAt **Accenture’s** Liquid Studio, traditional training programs weren’t keeping pace with rapidly evolving AWS technologies. Engineers had gaps in cloud competency, and cloud adoption was slowing. The Atlanta Innovation Hub needed a structured program that would prepare engineers for certifications and for cloud-native application development, rather than relying on theory alone.\n\nAs Cloud Native Architecture Lead, Matt led AWS Launchpad in collaboration with AWS. He designed structured learning paths and certification programs covering core services, including Lambda, API Gateway, DynamoDB, Kubernetes, and ECS/Fargate. The program paired that curriculum with interactive workshops and hands-on labs, immersing engineers in real-world AWS environments so they could apply what they were learning.\n\nMatt also established cloud expert mentorship teams. Engineers had access to mentors who reinforced AWS best practices and shared knowledge across teams. He organized group coaching sessions and knowledge-sharing workshops alongside the structured learning paths. The program combined practical exercises, expert support, and peer learning rather than treating certification preparation as an individual study exercise.\n\nThe program supported **more than 200 professionals** in earning AWS certifications, including AWS Solutions Architect and DevOps Engineer. Beyond the certification count, the engagement reported accelerated cloud adoption and launch of cloud-native initiatives at **Accenture**. The mentorship teams and knowledge-sharing workshops also supported ongoing learning beyond the certification preparation itself.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications (Accenture)",
+   "Building Tangible Cloud Tech Skills for HBCU Students (Accenture)",
+   "Launching a Self-Paced Learning Program for Emerging Technologies (Accenture)",
+   "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500 (Accenture)",
+   "Driving Modern Software Engineering with Project Octane (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 12.6,
+  "opening": "Got it! 🐾",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3173,
+     "cached": 3034,
+     "output": 35,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Here’s how Matt built AWS Launchpad.\n\nAt **Accenture’s** Liquid Studio, traditional training programs weren’t keeping pace with rapidly evolving AWS technologies. Engineers had gaps in cloud competency, and cloud adoption was slowing. The Atlanta Innovation Hub needed a structured program that would prepare engineers for certifications and for cloud-native application development, rather than relying on theory alone.\n\nAs Cloud Native Architecture Lead, Matt led AWS Launchpad in collaboration with AWS. He designed structured learning paths and certification programs covering core services, including Lambda, API Gateway, DynamoDB, Kubernetes, and ECS/Fargate. The program paired that curriculum with interactive workshops and hands-on labs, immersing engineers in real-world AWS environments so they could apply what they were learning.\n\nMatt also established cloud expert mentorship teams. Engineers had access to mentors who reinforced AWS best practices and shared knowledge across teams. He organized group coaching sessions and knowledge-sharing workshops alongside the structured learning paths. The program combined practical exercises, expert support, and peer learning rather than treating certification preparation as an individual study exercise.\n\nThe program supported **more than 200 professionals** in earning AWS certifications, including AWS Solutions Architect and DevOps Engineer. Beyond the certification count, the engagement reported accelerated cloud adoption and launch of cloud-native initiatives at **Accenture**. The mentorship teams and knowledge-sharing workshops also supported ongoing learning beyond the certification preparation itself.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7740,
+     "cached": 3170,
+     "output": 325,
+     "reasoning": 44
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "How did Matt build the AWS certification program? AWS certification training program study groups cloud practitioners",
+    "top_score": 0.548977852,
+    "n": 25
+   }
+  ],
+  "arm": "TB",
+  "case": "q17",
+  "kind": "control",
+  "run": 8,
+  "turn": 1,
+  "question": "How did Matt build the AWS certification program?",
+  "ui_reason": null
+ }
+]

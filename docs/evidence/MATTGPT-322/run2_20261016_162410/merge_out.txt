@@ -1,0 +1,44 @@
+scored answers: 680, no duplicates; groups with no scores: none
+
+  declines pass                  VA: 80/80  VB: 80/80  NB: 80/80  OB: 80/80
+  0a facts pass                  VA: 40/40  VB: 40/40  NB: 40/40  OB: 40/40
+  story controls pass            VA: 50/50  VB: 50/50  NB: 50/50  OB: 49/50
+
+declines, Brand Voice Checklist (true):
+  voice_first_person             VA: 80/80  VB: 80/80  NB: 80/80  OB: 80/80
+  voice_paw_ok                   VA: 80/80  VB: 80/80  NB: 80/80  OB: 80/80
+  voice_smart_helpful            VA: 80/80  VB: 80/80  NB: 10/80  OB: 33/80
+  voice_professional             VA: 80/80  VB: 80/80  NB: 80/80  OB: 80/80
+  voice_no_dog_puns              VA: 80/80  VB: 80/80  NB: 80/80  OB: 80/80
+  voice_warm_credible            VA: 80/80  VB: 80/80  NB: 29/80  OB: 3/80
+  voice_ends_on_content          VA: 80/80  VB: 80/80  NB: 80/80  OB: 80/80
+  voice_substance_first          VA: 80/80  VB: 80/80  NB: 80/80  OB: 80/80
+  voice_trust                    VA: 80/80  VB: 80/80  NB: 80/80  OB: 80/80
+
+declines, the decline standard:
+  names_missing                  VA: 50/80  VB: 80/80  NB: 4/80  OB: 3/80
+  one_or_two_sentences           VA: 80/80  VB: 80/80  NB: 79/80  OB: 77/80
+  too_dismissive                 VA: 0/80  VB: 0/80  NB: 34/80  OB: 57/80
+  too_apologetic                 VA: 0/80  VB: 0/80  NB: 0/80  OB: 0/80
+  padded                         VA: 0/80  VB: 0/80  NB: 1/80  OB: 3/80
+  speculation                    VA: 0/80  VB: 0/80  NB: 0/80  OB: 0/80
+  meets_every_item               VA: 50/80  VB: 80/80  NB: 2/80  OB: 0/80
+
+all answers, Brand Voice Checklist items not met:
+   VA: 0  VB: 0  NB: 121  OB: 124
+
+model-written declines (banners excluded), from the answer text:
+  VA: 50 declines, 13 distinct first lines, 0 reuse an example verbatim
+  VB: 80 declines, 15 distinct first lines, 0 reuse an example verbatim
+  NB: 80 declines, 10 distinct first lines, 0 reuse an example verbatim
+  OB: 80 declines, 5 distinct first lines, 0 reuse an example verbatim
+
+the bar, per decline question (runs meeting every item, of 10):
+  q01 VA  0/10  VB 10/10  NB  0/10  OB  0/10
+  q02 VA  0/10  VB 10/10  NB  1/10  OB  0/10
+  q03 VA  0/10  VB 10/10  NB  0/10  OB  0/10
+  q04 VA 10/10  VB 10/10  NB  1/10  OB  0/10
+  q05 VA 10/10  VB 10/10  NB  0/10  OB  0/10
+  q06 VA 10/10  VB 10/10  NB  0/10  OB  0/10
+  q07 VA 10/10  VB 10/10  NB  0/10  OB  0/10
+  q08 VA 10/10  VB 10/10  NB  0/10  OB  0/10

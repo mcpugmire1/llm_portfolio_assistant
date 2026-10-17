@@ -1,0 +1,2802 @@
+[
+ {
+  "case": "q15",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer from the stories (story control). All 21 claims supported (CIC, Capital One, Norfolk Southern, why-hire-matt, profile); 0 contradicted, 0 unsupported; only quoted text is 'I do, we do, you do', verbatim in scaling-talent-and-practices-for-agile-product-innovation. No closing offer.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names describing real work)",
+    "label": "supported",
+    "source": "Theme values, ruling 4"
+   },
+   {
+    "text": "Clients wanted to move from waterfall, feature factories and siloed teams to iterative, customer-centric development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Clients struggled with slow development cycles, fragmented workflows, legacy systems",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for the centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Hiring, training and career development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Adapted Lean XP / startup practices for enterprise compliance, security, legacy systems and governance",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation/Action"
+   },
+   {
+    "text": "Balanced teams combining product, design and engineering, with pair programming, TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "Quality built in through TDD rather than a separate QA phase",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Capital One faced slow, misaligned iterations extending time-to-market",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Situation"
+   },
+   {
+    "text": "Client-prioritized, testable backlog and red-green-refactor practice",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action"
+   },
+   {
+    "text": "Team of 8 delivered features 3-4x faster than other Accenture teams on the same engagement",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action/Result"
+   },
+   {
+    "text": "Zero production defects",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "Client sought to retain the team beyond the planned end",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "New hires lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "'I do, we do, you do' learning model, guided to independent delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Near-zero attrition in the first 2 years",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Paired junior hires with mentors and tailored training/onboarding",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Action"
+   },
+   {
+    "text": "Client teams continued using the practices after engagements ended",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q15",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer from the stories (story control). All 27 claims supported (CIC, Capital One, Norfolk Southern, why-hire-matt, profile); 0 contradicted, 0 unsupported; only quoted text is 'I do, we do, you do', verbatim in scaling-talent-and-practices-for-agile-product-innovation. No closing offer.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names describing real work)",
+    "label": "supported",
+    "source": "Theme values, ruling 4"
+   },
+   {
+    "text": "Clients wanted to move from waterfall, feature factories and siloed teams to iterative, customer-centric development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Clients struggled with slow development cycles, fragmented workflows, legacy systems",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for the centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Recruited and developed 150+ practitioners across engineering, architecture, product, design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Balanced teams combining product, design and engineering, with pair programming, TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "Customer research and thin-slice, production-ready delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action; cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Action"
+   },
+   {
+    "text": "New hires lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "Paired junior hires with mentors and tailored training/onboarding",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "Established skills matrices and career pathways",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action; building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "'I do, we do, you do' learning model, guided to independent delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Near-zero attrition in the first 2 years",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Capital One faced slow, misaligned iterations extending time-to-market",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Situation"
+   },
+   {
+    "text": "Client-prioritized, testable backlog and red-green-refactor practice",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action"
+   },
+   {
+    "text": "Team of 8 delivered features 3-4x faster than other Accenture teams on the same engagement",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action/Result"
+   },
+   {
+    "text": "Zero production defects",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "Client sought to retain the team beyond the planned end",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "Norfolk Southern: rising defects despite near-complete test coverage",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership in front of client and account leadership rather than defending the metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Audited code and tests; tests written after code; vague backlog stories without defined scenarios",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt the backlog with testable stories; brought in TDD experts for hands-on coaching",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Action"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "Growth through repeat engagements and client referrals",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q15",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer from the stories (story control). All 22 claims supported (CIC, Capital One, Norfolk Southern, why-hire-matt, profile); 0 contradicted, 0 unsupported; only quoted text is 'I do, we do, you do', verbatim in scaling-talent-and-practices-for-agile-product-innovation. No closing offer.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names describing real work)",
+    "label": "supported",
+    "source": "Theme values, ruling 4"
+   },
+   {
+    "text": "Clients wanted to move from waterfall, feature factories and siloed teams to iterative, customer-centric development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Clients struggled with slow development cycles, fragmented workflows, legacy systems",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Situation"
+   },
+   {
+    "text": "Engineers waited days or weeks for builds, tests and approvals",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Situation"
+   },
+   {
+    "text": "New hires lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for the centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Balanced teams combining product, design and engineering, with pair programming, TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "Customer journey-led development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Invited prospective clients to observe standups, pairing and teams solving problems rather than methodology slides",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Paired junior hires with mentors and tailored training/onboarding",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "'I do, we do, you do' learning model, guided to independent delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Near-zero attrition in the first 2 years",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Multiple hires promoted",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Engineers could see code in production same day; QA moved from manual regression to exploratory testing and quality coaching",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "10-person teams delivering equivalent output to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "At JP Morgan, delivered a mobile banking platform with 20+ screens in 5 months, doubling the speed of internal teams",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "At Capital One, automated testing supported zero-defect deployments to payment systems",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "At American Express, automated security scanning supported faster digital experience delivery with enterprise security",
+    "label": "supported",
+    "source": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q15",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer from the stories (story control). All 19 claims supported (CIC, Capital One, Norfolk Southern, why-hire-matt, profile); 0 contradicted, 0 unsupported; only quoted text is 'I do, we do, you do', verbatim in scaling-talent-and-practices-for-agile-product-innovation. No closing offer.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names describing real work)",
+    "label": "supported",
+    "source": "Theme values, ruling 4"
+   },
+   {
+    "text": "Clients wanted more than systems integration: iterative development and customer-centric products",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "New hires lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for the centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Balanced teams combining product, design and engineering, with pair programming, TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "User research and thin-slice, production-ready delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action; cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Action"
+   },
+   {
+    "text": "'I do, we do, you do' learning model, guided to independent delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Near-zero attrition in the first 2 years",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Adapted Lean XP / startup practices for enterprise compliance, security, legacy systems and governance",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation/Action"
+   },
+   {
+    "text": "Norfolk Southern: rising defects despite near-complete test coverage",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership in front of client and account leadership rather than defending the metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Audited code and tests; tests written after code; vague backlog stories without defined scenarios",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt the backlog with testable stories; brought in TDD experts for hands-on coaching",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "At JP Morgan, teams outpaced peer velocity within the first 2 sprints, shipping production code in weeks rather than months",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q15",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer from the stories (story control). All 21 claims supported (CIC, Capital One, Norfolk Southern, why-hire-matt, profile); 0 contradicted, 0 unsupported; only quoted text is 'I do, we do, you do', verbatim in scaling-talent-and-practices-for-agile-product-innovation. No closing offer. No paw opener.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names describing real work)",
+    "label": "supported",
+    "source": "Theme values, ruling 4"
+   },
+   {
+    "text": "Clients wanted to move from waterfall, feature factories and siloed teams to iterative, customer-centric development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Clients struggled with slow development cycles, fragmented workflows, legacy systems",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Situation"
+   },
+   {
+    "text": "New hires lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for the centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Balanced teams combining product, design and engineering, with pair programming, TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "Created repeatable engagement playbooks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Paired junior hires with mentors and tailored training/onboarding",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "'I do, we do, you do' learning model, guided to independent delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Near-zero attrition in the first 2 years",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Norfolk Southern: rising defects despite near-complete test coverage",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership in front of client and account leadership rather than defending the metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Audited code and tests; tests written after code; vague backlog stories without defined scenarios",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt the backlog with testable stories; brought in TDD experts for hands-on coaching",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "10-person teams delivering equivalent output to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "At JP Morgan, teams outpaced peer velocity within the first 2 sprints, shipping production code in weeks rather than months",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q15",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer from the stories (story control). All 22 claims supported (CIC, Capital One, Norfolk Southern, why-hire-matt, profile); 0 contradicted, 0 unsupported; only quoted text is 'I do, we do, you do', verbatim in scaling-talent-and-practices-for-agile-product-innovation. No closing offer.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names describing real work)",
+    "label": "supported",
+    "source": "Theme values, ruling 4"
+   },
+   {
+    "text": "Client teams continued using the practices after engagements ended",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Career progression software engineer to solution architect to director / Cloud Innovation Center leader",
+    "label": "supported",
+    "source": "profile.career_arc.progression"
+   },
+   {
+    "text": "Clients wanted to move from waterfall, feature factories and siloed teams to iterative, customer-centric development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Clients struggled with slow development cycles, fragmented workflows, legacy systems",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for the centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Balanced teams combining product, design and engineering, with pair programming, TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "Adapted Lean XP / startup practices for enterprise compliance, security, legacy systems and governance",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation/Action"
+   },
+   {
+    "text": "Created reusable playbooks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Invited prospective clients to observe standups, pairing and teams solving problems rather than methodology slides",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Capital One faced slow, misaligned iterations extending time-to-market",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Situation"
+   },
+   {
+    "text": "Client-prioritized, testable backlog and red-green-refactor practice",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action"
+   },
+   {
+    "text": "Team of 8 delivered features 3-4x faster than other Accenture teams on the same engagement",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action/Result"
+   },
+   {
+    "text": "Zero production defects",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "Client sought to retain the team beyond the planned end",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "Thin-slice MVPs at Capital One",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action"
+   },
+   {
+    "text": "Paired junior hires with mentors and tailored training/onboarding",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "'I do, we do, you do' learning model, guided to independent delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Near-zero attrition in the first 2 years",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q15",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer from the stories (story control). All 23 claims supported (CIC, Capital One, Norfolk Southern, why-hire-matt, profile); 0 contradicted, 0 unsupported; only quoted text is 'I do, we do, you do', verbatim in scaling-talent-and-practices-for-agile-product-innovation. No closing offer.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names describing real work)",
+    "label": "supported",
+    "source": "Theme values, ruling 4"
+   },
+   {
+    "text": "Clients wanted to move from waterfall, feature factories and siloed teams to iterative, customer-centric development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Clients struggled with slow development cycles, fragmented workflows, legacy systems",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Situation"
+   },
+   {
+    "text": "New hires lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "Clients questioned paying for two engineers at one keyboard; delivery teams saw TDD as overhead",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for the centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Balanced teams combining product, design and engineering, with pair programming, TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "Invited prospective clients to observe standups, pairing and teams solving problems rather than methodology slides",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Paired junior hires with mentors and tailored training/onboarding",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "'I do, we do, you do' learning model, guided to independent delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Near-zero attrition in the first 2 years",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Features began with Given/When/Then acceptance criteria; red-green-refactor; pairing with rotation; code could not merge without passing tests",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Action"
+   },
+   {
+    "text": "At Norfolk Southern, mission-critical operations tools went live with zero production defects",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Result"
+   },
+   {
+    "text": "Capital One faced slow, misaligned iterations extending time-to-market",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Situation"
+   },
+   {
+    "text": "Client-prioritized, testable backlog and red-green-refactor practice",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action"
+   },
+   {
+    "text": "Team of 8 delivered features 3-4x faster than other Accenture teams on the same engagement",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action/Result"
+   },
+   {
+    "text": "Zero production defects",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "Client sought to retain the team beyond the planned end",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "Thin-slice MVPs at Capital One",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Action"
+   },
+   {
+    "text": "Clients requested training for their own teams; practices continued beyond engagements",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q15",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer from the stories (story control). All 23 claims supported (CIC, Capital One, Norfolk Southern, why-hire-matt, profile); 0 contradicted, 0 unsupported; only quoted text is 'I do, we do, you do', verbatim in scaling-talent-and-practices-for-agile-product-innovation. No closing offer.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names describing real work)",
+    "label": "supported",
+    "source": "Theme values, ruling 4"
+   },
+   {
+    "text": "Built enterprise platforms, recovered troubled programs, architected cloud-native systems from prototype to production",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result/5PSummary"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for the centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Clients wanted to move from waterfall, feature factories and siloed teams to iterative, customer-centric development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Clients struggled with slow development cycles, fragmented workflows, legacy systems",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Situation"
+   },
+   {
+    "text": "New hires lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "Balanced teams combining product, design and engineering, with pair programming, TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "Customer journey-led development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Norfolk Southern: rising defects despite near-complete test coverage",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership in front of client and account leadership rather than defending the metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Audited code and tests; tests written after code; vague backlog stories without defined scenarios",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt the backlog with testable stories; brought in TDD experts for hands-on coaching",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Frontend and backend TDD experts alongside engineers; coding katas and 'I do, we do, you do' progression",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "'I do, we do, you do' learning model, guided to independent delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Near-zero attrition in the first 2 years",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Multiple hires promoted",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "10-person teams delivering equivalent output to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "JP Morgan payments and Salesforce platforms each rolled out across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q15",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer from the stories (story control). All 21 claims supported (CIC, Capital One, Norfolk Southern, why-hire-matt, profile); 0 contradicted, 0 unsupported; only quoted text is 'I do, we do, you do', verbatim in scaling-talent-and-practices-for-agile-product-innovation. No closing offer.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names describing real work)",
+    "label": "supported",
+    "source": "Theme values, ruling 4"
+   },
+   {
+    "text": "From engineer to Director, including payments and banking modernization at JP Morgan Chase, RBC, Capital One and HSBC",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Clients wanted to move from waterfall, feature factories and siloed teams to iterative, customer-centric development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Clients struggled with slow development cycles, fragmented workflows, legacy systems",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for the centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Hiring, training and development across engineering, architecture, product and design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Balanced teams combining product, design and engineering, with pair programming, TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "Customer journey-led development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "'I do, we do, you do' learning model, guided to independent delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Near-zero attrition in the first 2 years",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Paired junior hires with mentors and tailored training/onboarding",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "Capital One faced slow, misaligned iterations extending time-to-market",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Situation"
+   },
+   {
+    "text": "Client-prioritized, testable backlog and red-green-refactor practice",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action"
+   },
+   {
+    "text": "Team of 8 delivered features 3-4x faster than other Accenture teams on the same engagement",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action/Result"
+   },
+   {
+    "text": "Zero production defects",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "Client sought to retain the team beyond the planned end",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "10-person teams delivering equivalent output to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q15",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer from the stories (story control). All 21 claims supported (CIC, Capital One, Norfolk Southern, why-hire-matt, profile); 0 contradicted, 0 unsupported; only quoted text is 'I do, we do, you do', verbatim in scaling-talent-and-practices-for-agile-product-innovation. No closing offer.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names describing real work)",
+    "label": "supported",
+    "source": "Theme values, ruling 4"
+   },
+   {
+    "text": "Clients wanted to move from waterfall, feature factories and siloed teams to iterative, customer-centric development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Clients struggled with slow development cycles, fragmented workflows, legacy systems",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Situation"
+   },
+   {
+    "text": "New hires lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for the centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Balanced teams combining product, design and engineering, with pair programming, TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "Thin-slice, production-ready solutions and user feedback",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Action"
+   },
+   {
+    "text": "Paired junior hires with mentors and tailored training/onboarding",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "'I do, we do, you do' learning model, guided to independent delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Near-zero attrition in the first 2 years",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Norfolk Southern: rising defects despite near-complete test coverage",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership in front of client and account leadership rather than defending the metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Audited code and tests; tests written after code; vague backlog stories without defined scenarios",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt the backlog with testable stories; brought in TDD experts for hands-on coaching",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Action"
+   },
+   {
+    "text": "JP Morgan payments and Salesforce platforms each rolled out across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Client teams continued using the practices after engagements ended",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q15",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer from the stories (story control). All 22 claims supported (CIC, Capital One, Norfolk Southern, why-hire-matt, profile); 0 contradicted, 0 unsupported; only quoted text is 'I do, we do, you do', verbatim in scaling-talent-and-practices-for-agile-product-innovation. No closing offer.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names describing real work)",
+    "label": "supported",
+    "source": "Theme values, ruling 4"
+   },
+   {
+    "text": "From engineer to Director, banking modernization at JP Morgan Chase, RBC, Capital One and HSBC",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Built enterprise platforms, recovered troubled programs, architected cloud-native systems from prototype to production",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result/5PSummary"
+   },
+   {
+    "text": "Clients wanted to move from waterfall, feature factories and siloed teams to iterative, customer-centric development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Clients struggled with slow development cycles, fragmented workflows, legacy systems",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for the centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Balanced teams combining product, design and engineering, with pair programming, TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "Adapted Lean XP / startup practices for enterprise compliance, security, legacy systems and governance",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation/Action"
+   },
+   {
+    "text": "Invited prospective clients to observe standups, pairing and teams solving problems rather than methodology slides",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Paired junior hires with mentors and tailored training/onboarding",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "'I do, we do, you do' learning model, guided to independent delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Near-zero attrition in the first 2 years",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Capital One faced slow, misaligned iterations extending time-to-market",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Situation"
+   },
+   {
+    "text": "Client-prioritized, testable backlog and red-green-refactor practice",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action"
+   },
+   {
+    "text": "Team of 8 delivered features 3-4x faster than other Accenture teams on the same engagement",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action/Result"
+   },
+   {
+    "text": "Zero production defects",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "Client sought to retain the team beyond the planned end",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Action"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "Client teams continued using the practices after engagements ended",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q15",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer from the stories (story control). All 23 claims supported (CIC, Capital One, Norfolk Southern, why-hire-matt, profile); 0 contradicted, 0 unsupported; only quoted text is 'I do, we do, you do', verbatim in scaling-talent-and-practices-for-agile-product-innovation. No closing offer.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names describing real work)",
+    "label": "supported",
+    "source": "Theme values, ruling 4"
+   },
+   {
+    "text": "Builds products, platforms and teams that last beyond the engagement",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Career progression software engineer to solution architect to director / Cloud Innovation Center leader",
+    "label": "supported",
+    "source": "profile.career_arc.progression"
+   },
+   {
+    "text": "Clients wanted to move from waterfall, feature factories and siloed teams to iterative, customer-centric development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Clients struggled with slow development cycles, fragmented workflows, legacy systems",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for the centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Balanced teams combining product, design and engineering, with pair programming, TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "Adapted Lean XP / startup practices for enterprise compliance, security, legacy systems and governance",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation/Action"
+   },
+   {
+    "text": "'I do, we do, you do' learning model, guided to independent delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Near-zero attrition in the first 2 years",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Action"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "JP Morgan Salesforce rollout at risk of fragmenting into regional projects; brought in to stabilize",
+    "label": "supported",
+    "source": "leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Situation"
+   },
+   {
+    "text": "Negotiated priorities across APAC, EMEA, Americas; shared backlog; dependencies across 7 workstreams",
+    "label": "supported",
+    "source": "leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Action"
+   },
+   {
+    "text": "Launched on schedule across 12 countries for 1,200 users with no mid-flight scope renegotiations",
+    "label": "supported",
+    "source": "leading-global-delivery-of-jp-morgans-asset-management-salesforce-solution|jp-morgan-chase Result/5PSummary; driving-salesforce-adoption-across-12-countries-for-jp-morgan|jp-morgan-chase Result"
+   },
+   {
+    "text": "Norfolk Southern: rising defects despite near-complete test coverage",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership in front of client and account leadership rather than defending the metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Audited code and tests; tests written after code; vague backlog stories without defined scenarios",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt the backlog with testable stories; brought in TDD experts for hands-on coaching",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Defect rates dropped",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q15",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer from the stories (story control). All 21 claims supported (CIC, Capital One, Norfolk Southern, why-hire-matt, profile); 0 contradicted, 0 unsupported; only quoted text is 'I do, we do, you do', verbatim in scaling-talent-and-practices-for-agile-product-innovation. No closing offer.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names describing real work)",
+    "label": "supported",
+    "source": "Theme values, ruling 4"
+   },
+   {
+    "text": "Builds products, platforms and teams that last beyond the engagement",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Career from software engineer to Director",
+    "label": "supported",
+    "source": "profile.career_arc.progression; why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Clients wanted to move from waterfall, feature factories and siloed teams to iterative, customer-centric development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Clients struggled with slow development cycles, fragmented workflows, legacy systems",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for the centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Balanced teams combining product, design and engineering, with pair programming, TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "New hires lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "Paired junior hires with mentors and tailored training/onboarding",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "'I do, we do, you do' learning model, guided to independent delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Near-zero attrition in the first 2 years",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Norfolk Southern: rising defects despite near-complete test coverage",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership in front of client and account leadership rather than defending the metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Audited code and tests; tests written after code; vague backlog stories without defined scenarios",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt the backlog with testable stories; brought in TDD experts for hands-on coaching",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "At JP Morgan, teams outpaced peer velocity within the first 2 sprints, shipping production code in weeks rather than months",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q15",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer from the stories (story control). All 19 claims supported (CIC, Capital One, Norfolk Southern, why-hire-matt, profile); 0 contradicted, 0 unsupported; only quoted text is 'I do, we do, you do', verbatim in scaling-talent-and-practices-for-agile-product-innovation. No closing offer.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names describing real work)",
+    "label": "supported",
+    "source": "Theme values, ruling 4"
+   },
+   {
+    "text": "Career progression software engineer to solution architect to director / Cloud Innovation Center leader",
+    "label": "supported",
+    "source": "profile.career_arc.progression"
+   },
+   {
+    "text": "Enterprise payment platforms shipped across 12 countries, troubled programs recovered, cloud-native systems prototype to production",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result"
+   },
+   {
+    "text": "Clients wanted to move from waterfall, feature factories and siloed teams to iterative, customer-centric development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Clients struggled with slow development cycles, fragmented workflows, legacy systems",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for the centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Balanced teams combining product, design and engineering, with pair programming, TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "Customer journey-led development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Capital One faced slow, misaligned iterations extending time-to-market",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Situation"
+   },
+   {
+    "text": "Client-prioritized, testable backlog and red-green-refactor practice",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action"
+   },
+   {
+    "text": "Team of 8 delivered features 3-4x faster than other Accenture teams on the same engagement",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action/Result"
+   },
+   {
+    "text": "Zero production defects",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "Client sought to retain the team beyond the planned end",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Action"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "'I do, we do, you do' learning model, guided to independent delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Near-zero attrition in the first 2 years",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q15",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer from the stories (story control). All 23 claims supported (CIC, Capital One, Norfolk Southern, why-hire-matt, profile); 0 contradicted, 0 unsupported; only quoted text is 'I do, we do, you do', verbatim in scaling-talent-and-practices-for-agile-product-innovation. No closing offer.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names describing real work)",
+    "label": "supported",
+    "source": "Theme values, ruling 4"
+   },
+   {
+    "text": "Clients wanted to move from waterfall, feature factories and siloed teams to iterative, customer-centric development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Clients struggled with slow development cycles, fragmented workflows, legacy systems",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for the centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Hiring, training and development across engineering, architecture, product and design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture 5PSummary"
+   },
+   {
+    "text": "Balanced teams combining product, design and engineering, with pair programming, TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "Invited prospective clients to observe standups, pairing and teams solving problems rather than methodology slides",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "10-person teams delivering equivalent output to traditional 20-person teams",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Norfolk Southern: rising defects despite near-complete test coverage",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Situation"
+   },
+   {
+    "text": "Took ownership in front of client and account leadership rather than defending the metrics",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Audited code and tests; tests written after code; vague backlog stories without defined scenarios",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Rebuilt the backlog with testable stories; brought in TDD experts for hands-on coaching",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "Client stopped finding defects the dashboard could not see",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Result"
+   },
+   {
+    "text": "Backlog stories lacked defined scenarios or a definition of done",
+    "label": "supported",
+    "source": "confronting-a-quality-crisis-through-coaching-and-culture-change|norfolk-southern Action"
+   },
+   {
+    "text": "New hires lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "Paired junior hires with mentors and tailored training/onboarding",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "'I do, we do, you do' learning model, guided to independent delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Near-zero attrition in the first 2 years",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Action"
+   },
+   {
+    "text": "Clients continued pair programming, TDD and balanced teams after engagements",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q15",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer from the stories (story control). All 20 claims supported (CIC, Capital One, Norfolk Southern, why-hire-matt, profile); 0 contradicted, 0 unsupported; only quoted text is 'I do, we do, you do', verbatim in scaling-talent-and-practices-for-agile-product-innovation. No closing offer.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names describing real work)",
+    "label": "supported",
+    "source": "Theme values, ruling 4"
+   },
+   {
+    "text": "Teams faced siloed functions, late defect discovery, months-long waterfall timelines",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation; building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Clients questioned two engineers at one keyboard; delivery teams saw TDD as overhead",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for the centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Balanced teams combining product, design and engineering, with pair programming, TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "'I do, we do, you do' learning model, guided to independent delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Near-zero attrition in the first 2 years",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Gherkin acceptance criteria, red-green-refactor, pairing, tests embedded in CI/CD so code could not merge without passing",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Action"
+   },
+   {
+    "text": "Adapted practices to existing testing tools rather than a framework change on top of a practice change",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Action"
+   },
+   {
+    "text": "Capital One faced slow, misaligned iterations extending time-to-market",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Situation"
+   },
+   {
+    "text": "Client-prioritized, testable backlog and red-green-refactor practice",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action"
+   },
+   {
+    "text": "Team of 8 delivered features 3-4x faster than other Accenture teams on the same engagement",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action/Result"
+   },
+   {
+    "text": "Zero production defects",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "Client sought to retain the team beyond the planned end",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "Thin-slice MVPs",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action"
+   },
+   {
+    "text": "At Norfolk Southern, mission-critical operations tools went live with zero production defects",
+    "label": "supported",
+    "source": "behavior-test-driven-development-shipping-zero-defect-code-at-4x-velocity|fortune-500-clients Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Action"
+   },
+   {
+    "text": "Looking for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job",
+    "label": "supported",
+    "source": "profile.career_arc.current"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q15",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer from the stories (story control). All 22 claims supported (CIC, Capital One, Norfolk Southern, why-hire-matt, profile); 0 contradicted, 0 unsupported; only quoted text is 'I do, we do, you do', verbatim in scaling-talent-and-practices-for-agile-product-innovation. No closing offer.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names describing real work)",
+    "label": "supported",
+    "source": "Theme values, ruling 4"
+   },
+   {
+    "text": "From software engineer to Director, building enterprise platforms and cloud-native systems before the organization",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary; profile.career_arc"
+   },
+   {
+    "text": "Looking for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job",
+    "label": "supported",
+    "source": "profile.career_arc.current"
+   },
+   {
+    "text": "Clients wanted to move from waterfall, feature factories and siloed teams to iterative, customer-centric development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Clients struggled with slow development cycles, fragmented workflows, legacy systems",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for the centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Balanced teams combining product, design and engineering, with pair programming, TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "Adapted Lean XP / startup practices for enterprise compliance, security, legacy systems and governance",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation/Action"
+   },
+   {
+    "text": "Hypothesis-driven design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Invited prospective clients to observe standups, pairing and teams solving problems rather than methodology slides",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "Capital One faced slow, misaligned iterations extending time-to-market",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Situation"
+   },
+   {
+    "text": "Client-prioritized, testable backlog and red-green-refactor practice",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action"
+   },
+   {
+    "text": "Team of 8 delivered features 3-4x faster than other Accenture teams on the same engagement",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action/Result"
+   },
+   {
+    "text": "Zero production defects",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "Client sought to retain the team beyond the planned end",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "Paired junior hires with mentors and tailored training/onboarding",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "Career-development frameworks",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "'I do, we do, you do' learning model, guided to independent delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Near-zero attrition in the first 2 years",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q15",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer from the stories (story control). All 21 claims supported (CIC, Capital One, Norfolk Southern, why-hire-matt, profile); 0 contradicted, 0 unsupported; only quoted text is 'I do, we do, you do', verbatim in scaling-talent-and-practices-for-agile-product-innovation. No closing offer.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names describing real work)",
+    "label": "supported",
+    "source": "Theme values, ruling 4"
+   },
+   {
+    "text": "Clients wanted to move from waterfall, feature factories and siloed teams to iterative, customer-centric development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Clients struggled with slow development cycles, fragmented workflows, legacy systems",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Situation"
+   },
+   {
+    "text": "Accenture piloted the CIC model in Columbus and needed to scale it with enterprise constraints",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for the centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Balanced teams combining product, design and engineering, with pair programming, TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "Adapted for security scanning, access controls and governance checkpoints",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "New hires lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "Paired junior hires with mentors and tailored training/onboarding",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "'I do, we do, you do' learning model, guided to independent delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Near-zero attrition in the first 2 years",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Capital One faced slow, misaligned iterations extending time-to-market",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Situation"
+   },
+   {
+    "text": "Client-prioritized, testable backlog and red-green-refactor practice",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action"
+   },
+   {
+    "text": "Team of 8 delivered features 3-4x faster than other Accenture teams on the same engagement",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action/Result"
+   },
+   {
+    "text": "Zero production defects",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "Client sought to retain the team beyond the planned end",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Action"
+   },
+   {
+    "text": "$100M+ in repeatable business by FY23; growth through referrals",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "Invited prospective clients to observe standups, pairing and teams solving problems rather than methodology slides",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q15",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Direct, materially correct answer from the stories (story control). All 21 claims supported (CIC, Capital One, Norfolk Southern, why-hire-matt, profile); 0 contradicted, 0 unsupported; only quoted text is 'I do, we do, you do', verbatim in scaling-talent-and-practices-for-agile-product-innovation. No closing offer.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names describing real work)",
+    "label": "supported",
+    "source": "Theme values, ruling 4"
+   },
+   {
+    "text": "Enterprise platforms shipped across 12 countries",
+    "label": "supported",
+    "source": "why-hire-matt|accenture Result"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for the centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Action"
+   },
+   {
+    "text": "Clients wanted to move from waterfall, feature factories and siloed teams to iterative, customer-centric development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Clients struggled with slow development cycles, fragmented workflows, legacy systems",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Situation"
+   },
+   {
+    "text": "New hires lacked hands-on cloud-native or Agile experience",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Situation"
+   },
+   {
+    "text": "Balanced teams combining product, design and engineering, with pair programming, TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "Customer journey-led development; no separate QA phase",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/Result"
+   },
+   {
+    "text": "'I do, we do, you do' learning model, guided to independent delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Near-zero attrition in the first 2 years",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Capital One faced slow, misaligned iterations extending time-to-market",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Situation"
+   },
+   {
+    "text": "Client-prioritized, testable backlog and red-green-refactor practice",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action"
+   },
+   {
+    "text": "Team of 8 delivered features 3-4x faster than other Accenture teams on the same engagement",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action/Result"
+   },
+   {
+    "text": "Zero production defects",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "Client sought to retain the team beyond the planned end",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "At JP Morgan, teams outpaced peer velocity within the first 2 sprints, shipping production code in weeks rather than months",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "Client teams continued using the practices after engagements ended",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q15",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Direct, materially correct answer from the stories (story control). All 20 claims supported (CIC, Capital One, Norfolk Southern, why-hire-matt, profile); 0 contradicted, 0 unsupported; only quoted text is 'I do, we do, you do', verbatim in scaling-talent-and-practices-for-agile-product-innovation. No closing offer.",
+  "claims": [
+   {
+    "text": "Work spans Execution & Delivery, Org & Working-Model Transformation, Talent & Enablement (theme names describing real work)",
+    "label": "supported",
+    "source": "Theme values, ruling 4"
+   },
+   {
+    "text": "Products, platforms and teams that last beyond the engagement",
+    "label": "supported",
+    "source": "why-hire-matt|accenture 5PSummary"
+   },
+   {
+    "text": "Clients wanted to move from waterfall, feature factories and siloed teams to iterative, customer-centric development",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "Clients struggled with slow development cycles, fragmented workflows, legacy systems",
+    "label": "supported",
+    "source": "cutting-time-to-market-with-lean-xp-and-balanced-teams-across-fortune-500-clients|fortune-500-clients Situation"
+   },
+   {
+    "text": "Adapted Lean XP / startup practices for enterprise compliance, security, legacy systems and governance",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation/Action"
+   },
+   {
+    "text": "Built the Atlanta and Tampa Cloud Innovation Centers from 0 to 150+ practitioners",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result/5PSummary"
+   },
+   {
+    "text": "Full P&L accountability for the centers",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action/5PSummary"
+   },
+   {
+    "text": "Balanced teams combining product, design and engineering, with pair programming, TDD and automated pipelines",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Action; scaling-talent-and-practices-for-agile-product-innovation|accenture Action"
+   },
+   {
+    "text": "Hypothesis-driven design",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Situation"
+   },
+   {
+    "text": "30+ product engagements across 15+ Fortune 500 clients",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   },
+   {
+    "text": "$100M+ in repeat/repeatable business through delivery excellence and client relationships",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Action"
+   },
+   {
+    "text": "4X faster velocity and zero-defect deployments",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result; why-hire-matt|accenture Result"
+   },
+   {
+    "text": "Capital One faced slow, misaligned iterations extending time-to-market",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Situation"
+   },
+   {
+    "text": "Client-prioritized, testable backlog and red-green-refactor practice",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action"
+   },
+   {
+    "text": "Team of 8 delivered features 3-4x faster than other Accenture teams on the same engagement",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Action/Result"
+   },
+   {
+    "text": "Zero production defects",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "Client sought to retain the team beyond the planned end",
+    "label": "supported",
+    "source": "accelerating-product-delivery-through-lean-innovation-at-capital-one|capital-one Result"
+   },
+   {
+    "text": "'I do, we do, you do' learning model, guided to independent delivery",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Near-zero attrition in the first 2 years",
+    "label": "supported",
+    "source": "scaling-talent-and-practices-for-agile-product-innovation|accenture Result"
+   },
+   {
+    "text": "Client teams continued using the practices after engagements ended",
+    "label": "supported",
+    "source": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ }
+]

@@ -1,0 +1,1842 @@
+[
+ {
+  "case": "q10",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 1,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 2,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 3,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 4,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 5,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 6,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 7,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 8,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 9,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q10",
+  "run": 10,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "supported: no PMP, then all four profile certifications with issued/expired status, none presented as current; any quoted text matches profile_rendered.txt verbatim; no pivot to PM stories; no closing.",
+  "claims": [
+   {
+    "text": "Matt does not have a PMP (not among his certifications)",
+    "label": "supported",
+    "source": "profile.certifications (the list is the record, ruling 1)"
+   },
+   {
+    "text": "AWS Certified Solutions Architect - Associate (issued 2020, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner (issued 2019, expired 2023)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist (issued 2017, expired)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications"
+   },
+   {
+    "text": "None of the certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired or dated 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ }
+]

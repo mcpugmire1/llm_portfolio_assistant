@@ -1,0 +1,100 @@
+lane 5/7: 24 of 170 jobs
+health check start: top Fiserv 0.439
+[NB q01 r6] 4.53s  | '🐾 Here’s what I can share.\n\nNothing I know about M'
+[OB q01 r6] 5.35s  | 'Nothing I know about Matt covers that'
+[NA q01 r6] 0.35s semantic_router:personal | "🐾 I'm focused on Matt's professional experience, i"
+[OA q01 r6] 0.31s semantic_router:personal | "🐾 I'm focused on Matt's professional experience, i"
+[OB q02 r3] 4.78s  | 'Nothing I know about Matt covers that.'
+[NA q02 r3] 0.36s semantic_router:personal | "🐾 I'm focused on Matt's professional experience, i"
+[OA q02 r3] 0.32s semantic_router:personal | "🐾 I'm focused on Matt's professional experience, i"
+[NB q02 r3] 4.95s  | '🐾 I don’t know Matt’s age.\n\nNothing I know about M'
+[NB q02 r10] 4.95s  | '🐾 Here’s what I can share.\n\nNothing I know about M'
+[OB q02 r10] 4.47s  | 'Nothing I know about Matt covers that.'
+[NA q02 r10] 0.27s semantic_router:personal | "🐾 I'm focused on Matt's professional experience, i"
+[OA q02 r10] 0.26s semantic_router:personal | "🐾 I'm focused on Matt's professional experience, i"
+[OB q03 r7] 5.36s  | 'Nothing I know about Matt covers that.'
+[NA q03 r7] 0.34s semantic_router:personal | "🐾 I'm focused on Matt's professional experience, i"
+[OA q03 r7] 0.33s semantic_router:personal | "🐾 I'm focused on Matt's professional experience, i"
+[NB q03 r7] 4.56s  | '🐾 I don’t have that detail.\n\nNothing I know about '
+[NA q04 r4] 5.7s  | '🐾 Here’s what I can say.\n\nNothing I know about Mat'
+[OA q04 r4] 6.05s  | 'Nothing I know about Matt covers that'
+[NB q04 r4] 5.82s  | '🐾 Here’s what I can tell you.\n\nNothing I know abou'
+[OB q04 r4] 4.41s  | 'Nothing I know about Matt covers that.'
+[OA q05 r1] 6.85s  | 'Nothing I know about Matt covers that'
+[NB q05 r1] 8.4s  | '🐾 Here’s the personal side I can share.\n\nDuring hi'
+[OB q05 r1] 5.89s  | 'Nothing I know about Matt covers that'
+[NA q05 r1] 8.43s  | '🐾 Here’s the personal side I can share.\n\nDuring hi'
+[NA q05 r8] 5.26s  | '🐾 Here’s what I can share.\n\nNothing I know about M'
+[OA q05 r8] 8.57s  | '🐾 Here’s a little of Matt’s life beyond his formal'
+[NB q05 r8] 4.69s  | '🐾 Here’s what I can share.\n\nNothing I know about M'
+[OB q05 r8] 6.16s  | 'Nothing I know about Matt covers that.'
+[OA q06 r5] 4.34s  | 'Nothing I know about Matt covers that'
+[NB q06 r5] 5.58s  | '🐾 Here’s what I can share.\n\nNothing I know about M'
+[OB q06 r5] 5.0s  | 'Nothing I know about Matt covers that.'
+[NA q06 r5] 4.89s  | "🐾 Here's what I can say.\n\nNothing I know about Mat"
+[NB q07 r2] 4.19s  | '🐾 Here’s what I know.\n\nNothing I know about Matt c'
+[OB q07 r2] 4.72s  | 'Nothing I know about Matt covers that.'
+[NA q07 r2] 5.11s  | '🐾 Here’s what I know.\n\nNothing I know about Matt c'
+[OA q07 r2] 4.49s  | 'Nothing I know about Matt covers that.'
+[OA q07 r9] 4.42s  | 'Nothing I know about Matt covers that.'
+[NB q07 r9] 4.68s  | '🐾 Here’s what I can say.\n\nNothing I know about Mat'
+[OB q07 r9] 5.11s  | 'Nothing I know about Matt covers that.'
+[NA q07 r9] 4.27s  | '🐾 Here’s what I can say.\n\nNothing I know about Mat'
+[NB q08 r6] 4.7s  | '🐾 Here’s what I know.\n\nNothing I know about Matt c'
+[OB q08 r6] 4.6s  | 'Nothing I know about Matt covers that.'
+[NA q08 r6] 4.05s  | '🐾 Here’s what I can say.\n\nNothing I know about Mat'
+[OA q08 r6] 3.83s  | 'Nothing I know about Matt covers that'
+[OB q09 r3] 6.97s  | '🐾 Matt has earned certifications, but none is curr'
+[NA q09 r3] 6.52s  | '🐾 Here’s Matt’s certification history.\n\nMatt previ'
+[OA q09 r3] 7.03s  | '🐾 Matt has held certifications, but none is curren'
+[NB q09 r3] 6.56s  | '🐾 Here’s Matt’s certification history.\n\nMatt has h'
+[NB q09 r10] 6.79s  | '🐾 Here’s Matt’s certification history.\n\nMatt has h'
+[OB q09 r10] 6.07s  | '🐾 Matt has held certifications, but none is curren'
+[NA q09 r10] 5.62s  | '🐾 Here are Matt’s certifications and exam history.'
+[OA q09 r10] 6.86s  | '🐾 Here are Matt’s certifications and exam history.'
+[OB q10 r7] 5.56s  | '🐾 No, Matt does not have a PMP. His certifications'
+[NA q10 r7] 6.54s  | '🐾 Here are Matt’s certifications.\n\nNo, Matt does n'
+[OA q10 r7] 6.58s  | '🐾 No, Matt does not have a PMP. His certifications'
+[NB q10 r7] 7.32s  | '🐾 Here are Matt’s certifications.\n\nNo, Matt does n'
+[NA q11 r4] 5.85s  | '🐾 Here’s what Matt speaks.\n\nMatt speaks English (n'
+[OA q11 r4] 4.43s  | '🐾 Matt speaks English (native) and French (**B2**,'
+[NB q11 r4] 4.86s  | '🐾 Here’s what Matt speaks.\n\nMatt speaks English (n'
+[OB q11 r4] 4.75s  | '🐾 Here you go!\n\nMatt speaks English (native) and F'
+[OA q12 r1] 4.2s  | "🐾 Yes. Matt has a Master's degree, Information Tec"
+[NB q12 r1] 5.41s  | "🐾 Yes!\n\nMatt has a Master's degree, Information Te"
+[OB q12 r1] 4.51s  | "🐾 Yes. Matt has a Master's degree in Information T"
+[NA q12 r1] 5.39s  | "🐾 Yes. Matt has a Master's degree, Information Tec"
+[NA q12 r8] 4.28s  | "🐾 Yes. Matt has a master's degree in Information T"
+[OA q12 r8] 4.51s  | "🐾 Yes. Matt has a master's degree in Information T"
+[NB q12 r8] 5.77s  | "🐾 Yes. Matt holds a Master's degree, Information T"
+[OB q12 r8] 4.23s  | "🐾 Yes. Matt has a Master's degree, Information Tec"
+[OA q13 r5] 13.08s  | '🐾 Here’s the story behind Matt’s payments work at '
+[NB q13 r5] 11.51s  | '🐾 Here’s the story behind Matt’s payments work at '
+[OB q13 r5] 11.63s  | '🐾 Here’s the story behind Matt’s payments work at '
+[NA q13 r5] 13.03s  | '🐾 Here’s the story behind Matt’s payments work.\n\nA'
+[NB q14 r2] 10.31s  | '🐾 Here’s how Matt describes his leadership philoso'
+[OB q14 r2] 11.97s  | '🐾 Here’s how Matt describes his leadership philoso'
+[NA q14 r2] 11.59s  | '🐾 Here’s how Matt describes his leadership philoso'
+[OA q14 r2] 11.24s  | '🐾 Here’s how Matt describes his leadership philoso'
+[OA q14 r9] 11.89s  | '🐾 Here’s how Matt describes his leadership philoso'
+[NB q14 r9] 10.44s  | '🐾 Here’s how Matt describes his leadership philoso'
+[OB q14 r9] 11.8s  | '🐾 Here’s how Matt describes his leadership philoso'
+[NA q14 r9] 8.36s  | '🐾 Here’s how Matt describes his leadership philoso'
+[NB q15 r6] 14.07s  | '🐾 Here’s what Matt has built and delivered.\n\nMatt’'
+[OB q15 r6] 13.46s  | '🐾 Here’s what Matt has built and delivered.\n\nMatt’'
+[NA q15 r6] 14.48s  | '🐾 Here’s what Matt has built, changed, and deliver'
+[OA q15 r6] 15.06s  | '🐾 Here’s what Matt has built, delivered, and chang'
+[OB q16 r3] 9.04s  | '🐾 Here’s a time Matt failed, and what happened aft'
+[NA q16 r3] 8.47s  | '🐾 Here’s the failure Matt describes when asked thi'
+[OA q16 r3] 8.43s  | '🐾 Here’s a time Matt failed, with consequences for'
+[NB q16 r3] 9.53s  | '🐾 Here’s a time Matt failed, and what happened aft'
+[NB q16 r10] 10.72s  | '🐾 Here’s a time Matt took accountability for a fai'
+[OB q16 r10] 9.55s  | '🐾 Here’s a time Matt failed, and what happened aft'
+[NA q16 r10] 9.0s  | '🐾 Here’s a time Matt failed.\n\nMatt was the tech le'
+[OA q16 r10] 10.55s  | '🐾 Here’s a time Matt failed.\n\nMatt was the tech le'
+[OB q17 r7] 9.77s  | '🐾 Here’s how Matt built AWS Launchpad.\n\nAt **Accen'
+[NA q17 r7] 16.58s  | '🐾 Here’s how Matt built AWS Launchpad.\n\nAt **Accen'
+[OA q17 r7] 9.7s  | '🐾 Found it!\n\nMatt led the AWS Launchpad program at'
+[NB q17 r7] 11.15s  | '🐾 Found it!\n\nAt **Accenture’s** Liquid Studio, tra'
+health check end: top Fiserv 0.439
+done | rows 96 | errors []

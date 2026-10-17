@@ -1,0 +1,262 @@
+[
+ {
+  "answer_md": "🐾 That trail goes cold here. I have nothing on record about his hobbies.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Integrating Play into Work to Enhance Team Motivation (Accenture)",
+   "Work Philosophy: Where I Do My Best Work (Accenture)",
+   "Transition Story: Why I’m Exploring Opportunities (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 9.2,
+  "opening": "🐾 Tracking this down...",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3125,
+     "cached": 0,
+     "output": 28,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 That trail goes cold here. I have nothing on record about his hobbies.",
+    "function_calls": 0,
+    "usage": {
+     "input": 6136,
+     "cached": 3122,
+     "output": 151,
+     "reasoning": 128
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire hobbies personal interests outside work",
+    "top_score": 0.349412024,
+    "n": 25
+   }
+  ],
+  "arm": "DB",
+  "case": "q06",
+  "kind": "decline",
+  "run": 1,
+  "turn": 1,
+  "question": "What are Matt's hobbies?",
+  "ui_reason": null,
+  "decline_line": "🐾 That trail goes cold here. There's nothing on record about [topic]."
+ },
+ {
+  "answer_md": "🐾 I followed that trail and came up empty: I don’t have information about Matt’s patents.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Building Smart, Connected Devices at Accenture's Liquid Studio (Accenture)",
+   "Building Effective AI-Assisted Development Workflows (Independent Project)",
+   "Why Hire Matt? (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 7.13,
+  "opening": "🐾 This is a strong one.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3126,
+     "cached": 0,
+     "output": 26,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I followed that trail and came up empty: I don’t have information about Matt’s patents.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7039,
+     "cached": 3123,
+     "output": 25,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire patents patent inventor",
+    "top_score": 0.312678516,
+    "n": 25
+   }
+  ],
+  "arm": "DB",
+  "case": "q07",
+  "kind": "decline",
+  "run": 1,
+  "turn": 1,
+  "question": "Does Matt have any patents?",
+  "ui_reason": null,
+  "decline_line": "🐾 I followed that trail and came up empty: Matt's stories don't cover [topic]."
+ },
+ {
+  "answer_md": "🐾 I followed that trail and came up empty: Matt's stories don't cover his marital status.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [],
+  "intent_family": "",
+  "seconds": 7.1,
+  "opening": "🐾 On it!",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3124,
+     "cached": 2990,
+     "output": 22,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I followed that trail and came up empty: Matt's stories don't cover his marital status.",
+    "function_calls": 0,
+    "usage": {
+     "input": 3162,
+     "cached": 3121,
+     "output": 51,
+     "reasoning": 25
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt marital status married",
+    "top_score": 0.12435171,
+    "n": 0
+   }
+  ],
+  "arm": "DB",
+  "case": "q01",
+  "kind": "decline",
+  "run": 1,
+  "turn": 1,
+  "question": "Is Matt married?",
+  "ui_reason": null,
+  "decline_line": "🐾 I followed that trail and came up empty: Matt's stories don't cover [topic]."
+ },
+ {
+  "answer_md": "🐾 That trail goes cold here. There's nothing on record about Matt's age.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)"
+  ],
+  "intent_family": "",
+  "seconds": 4.7,
+  "opening": "🐾 Found it!",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3123,
+     "cached": 0,
+     "output": 28,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 That trail goes cold here. There's nothing on record about Matt's age.",
+    "function_calls": 0,
+    "usage": {
+     "input": 3710,
+     "cached": 3120,
+     "output": 21,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire age date of birth birthday",
+    "top_score": 0.203760445,
+    "n": 1
+   }
+  ],
+  "arm": "DB",
+  "case": "q02",
+  "kind": "decline",
+  "run": 1,
+  "turn": 1,
+  "question": "How old is Matt?",
+  "ui_reason": null,
+  "decline_line": "🐾 That trail goes cold here. There's nothing on record about [topic]."
+ },
+ {
+  "answer_md": "🐾 Here’s how Matt describes his leadership philosophy.\n\nMatt leads with empathy, clarity, and purpose. He describes teams he inherited as “over-processed, under-trusted, waiting for permission instead of owning outcomes.” His focus was to remove those barriers and create an environment where engineers, designers, and product teams could speak honestly, make decisions, and take ownership.\n\nHe makes intent explicit, pushes decisions to the people closest to the work, and uses transparency, direct feedback, and open communication. He coaches teams to think clearly, not just execute tasks. His non-negotiables include integrity and respect, psychological safety, and a focus on outcomes, not optics.\n\nAt **Accenture’s** Cloud Innovation Center, that included a “permit to fail” learning environment. Teams had avoided risks because they feared blame. Matt organized non-punitive post-mortems, emphasized lessons rather than pointing fingers, and supported lean, low-stakes experiments. Teams applied those lessons to subsequent sprints to prevent recurring failures. In product incubation, he set expectations that early prototypes and user tests would likely fail, then helped teams use that evidence to shape product direction week by week.\n\nHe also assembled balanced teams with engineers, product managers, and UX architects, with equal participation and shared accountability. Pair programming, collaborative coding, retrospectives, and knowledge-sharing sessions replaced siloed handoffs.\n\nAt the Cloud Innovation Center, teams accelerated delivery **4x** after embracing lean product and modern engineering practices. The balanced-team work also achieved **zero-defect production code** through iterative development and real-time feedback loops.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Leadership Philosophy: How I Lead (Accenture)",
+   "Establishing a ‘Permit to Fail’ Culture for Continuous Improvement (Accenture)",
+   "Why Early Failure Is a Feature, Not a Bug, in Innovation (Accenture)",
+   "Work Philosophy: Where I Do My Best Work (Accenture)",
+   "Breaking Silos Between Engineering, Design, and Product (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 10.78,
+  "opening": "🐾 Found it!",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3123,
+     "cached": 0,
+     "output": 34,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Here’s how Matt describes his leadership philosophy.\n\nMatt leads with empathy, clarity, and purpose. He describes teams he inherited as “over-processed, under-trusted, waiting for permission instead of owning outcomes.” His focus was to remove those barriers and create an environment where engineers, designers, and product teams could speak honestly, make decisions, and take ownership.\n\nHe makes intent explicit, pushes decisions to the people closest to the work, and uses transparency, direct feedback, and open communication. He coaches teams to think clearly, not just execute tasks. His non-negotiables include integrity and respect, psychological safety, and a focus on outcomes, not optics.\n\nAt **Accenture’s** Cloud Innovation Center, that included a “permit to fail” learning environment. Teams had avoided risks because they feared blame. Matt organized non-punitive post-mortems, emphasized lessons rather than pointing fingers, and supported lean, low-stakes experiments. Teams applied those lessons to subsequent sprints to prevent recurring failures. In product incubation, he set expectations that early prototypes and user tests would likely fail, then helped teams use that evidence to shape product direction week by week.\n\nHe also assembled balanced teams with engineers, product managers, and UX architects, with equal participation and shared accountability. Pair programming, collaborative coding, retrospectives, and knowledge-sharing sessions replaced siloed handoffs.\n\nAt the Cloud Innovation Center, teams accelerated delivery **4x** after embracing lean product and modern engineering practices. The balanced-team work also achieved **zero-defect production code** through iterative development and real-time feedback loops.",
+    "function_calls": 0,
+    "usage": {
+     "input": 5324,
+     "cached": 3120,
+     "output": 361,
+     "reasoning": 35
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt leadership philosophy empathy clarity purpose permit to fail learning environment balanced teams Product Engineering Design",
+    "top_score": 0.626104414,
+    "n": 25
+   }
+  ],
+  "arm": "DB",
+  "case": "q14",
+  "kind": "control",
+  "run": 1,
+  "turn": 1,
+  "question": "What's Matt's leadership philosophy?",
+  "ui_reason": null,
+  "decline_line": "🐾 That trail goes cold here. There's nothing on record about [topic]."
+ }
+]

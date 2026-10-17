@@ -1,0 +1,674 @@
+[
+ {
+  "answer_md": "🐾 I followed that trail and came up empty: Matt's stories don't cover patents held by him. I can’t confirm whether he has any patents.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Building Smart, Connected Devices at Accenture's Liquid Studio (Accenture)",
+   "Building Effective AI-Assisted Development Workflows (Independent Project)",
+   "Why Hire Matt? (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 6.08,
+  "opening": "Got it! 🐾",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3132,
+     "cached": 3006,
+     "output": 26,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I followed that trail and came up empty: Matt's stories don't cover patents held by him. I can’t confirm whether he has any patents.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7045,
+     "cached": 7042,
+     "output": 49,
+     "reasoning": 12
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire patents patent inventor",
+    "top_score": 0.312678516,
+    "n": 25
+   }
+  ],
+  "arm": "R",
+  "conv": "R",
+  "case": "Rt1",
+  "kind": "decline",
+  "run": 5,
+  "turn": 1,
+  "question": "Does Matt have any patents?",
+  "ui_reason": null,
+  "history_messages": 0,
+  "decline_line": "🐾 I followed that trail and came up empty: Matt's stories don't cover [topic]."
+ },
+ {
+  "answer_md": "🐾 I searched Matt's whole record, and it doesn't mention patents held by him. I can’t confirm whether he has any patents.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Building Smart, Connected Devices at Accenture's Liquid Studio (Accenture)",
+   "Building Effective AI-Assisted Development Workflows (Independent Project)",
+   "Why Hire Matt? (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 6.23,
+  "opening": "🐾 Here's a great example.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3171,
+     "cached": 2988,
+     "output": 26,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I searched Matt's whole record, and it doesn't mention patents held by him. I can’t confirm whether he has any patents.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7084,
+     "cached": 3168,
+     "output": 86,
+     "reasoning": 52
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire patents patent inventor",
+    "top_score": 0.312678516,
+    "n": 25
+   }
+  ],
+  "arm": "R",
+  "conv": "R",
+  "case": "Rt2",
+  "kind": "decline",
+  "run": 5,
+  "turn": 2,
+  "question": "Does Matt have any patents?",
+  "ui_reason": null,
+  "history_messages": 2,
+  "decline_line": "🐾 I searched Matt's whole record, and it doesn't mention [topic]."
+ },
+ {
+  "answer_md": "🐾 I can’t confirm whether Matt holds any patents.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Building Smart, Connected Devices at Accenture's Liquid Studio (Accenture)",
+   "Building Effective AI-Assisted Development Workflows (Independent Project)",
+   "MattGPT: RAG Architecture & Semantic Search Implementation (Independent Project)"
+  ],
+  "intent_family": "",
+  "seconds": 4.97,
+  "opening": "Got it! 🐾",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3222,
+     "cached": 0,
+     "output": 28,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I can’t confirm whether Matt holds any patents.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7876,
+     "cached": 3219,
+     "output": 30,
+     "reasoning": 12
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire patents patent inventor intellectual property",
+    "top_score": 0.324563205,
+    "n": 25
+   }
+  ],
+  "arm": "R",
+  "conv": "R",
+  "case": "Rt3",
+  "kind": "decline",
+  "run": 5,
+  "turn": 3,
+  "question": "Does Matt have any patents?",
+  "ui_reason": null,
+  "history_messages": 4,
+  "decline_line": "🐾 I followed that trail and came up empty: Matt's stories don't cover [topic]."
+ },
+ {
+  "answer_md": "🐾 I followed that trail and came up empty: Matt's stories don't cover his patents. I can’t confirm whether he holds any.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Building Smart, Connected Devices at Accenture's Liquid Studio (Accenture)",
+   "Building Effective AI-Assisted Development Workflows (Independent Project)",
+   "Why Hire Matt? (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 5.4,
+  "opening": "🐾 Here's a great example.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3130,
+     "cached": 0,
+     "output": 26,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I followed that trail and came up empty: Matt's stories don't cover his patents. I can’t confirm whether he holds any.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7043,
+     "cached": 3127,
+     "output": 75,
+     "reasoning": 41
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire patents patent inventor",
+    "top_score": 0.312678516,
+    "n": 25
+   }
+  ],
+  "arm": "R",
+  "conv": "R",
+  "case": "Rt1",
+  "kind": "decline",
+  "run": 10,
+  "turn": 1,
+  "question": "Does Matt have any patents?",
+  "ui_reason": null,
+  "history_messages": 0,
+  "decline_line": "🐾 I followed that trail and came up empty: Matt's stories don't cover [topic]."
+ },
+ {
+  "answer_md": "🐾 I searched Matt's whole record, and it doesn't mention any patents held by Matt. I can’t confirm whether he has any.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Building Smart, Connected Devices at Accenture's Liquid Studio (Accenture)",
+   "Building Effective AI-Assisted Development Workflows (Independent Project)",
+   "MattGPT: RAG Architecture & Semantic Search Implementation (Independent Project)"
+  ],
+  "intent_family": "",
+  "seconds": 8.27,
+  "opening": "🐾 Perfect, here's what I found.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3170,
+     "cached": 3000,
+     "output": 28,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I searched Matt's whole record, and it doesn't mention any patents held by Matt. I can’t confirm whether he has any.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7824,
+     "cached": 3167,
+     "output": 92,
+     "reasoning": 58
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire patents patent inventor intellectual property",
+    "top_score": 0.324563205,
+    "n": 25
+   }
+  ],
+  "arm": "R",
+  "conv": "R",
+  "case": "Rt2",
+  "kind": "decline",
+  "run": 10,
+  "turn": 2,
+  "question": "Does Matt have any patents?",
+  "ui_reason": null,
+  "history_messages": 2,
+  "decline_line": "🐾 I searched Matt's whole record, and it doesn't mention [topic]."
+ },
+ {
+  "answer_md": "🐾 I can’t confirm whether Matt holds any patents. I don’t have patent ownership information for him.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Building Smart, Connected Devices at Accenture's Liquid Studio (Accenture)",
+   "Building Effective AI-Assisted Development Workflows (Independent Project)",
+   "MattGPT: RAG Architecture & Semantic Search Implementation (Independent Project)"
+  ],
+  "intent_family": "",
+  "seconds": 4.79,
+  "opening": "Got it! 🐾",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3215,
+     "cached": 3001,
+     "output": 28,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I can’t confirm whether Matt holds any patents. I don’t have patent ownership information for him.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7869,
+     "cached": 3212,
+     "output": 26,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire patents patent inventor intellectual property",
+    "top_score": 0.324295133,
+    "n": 25
+   }
+  ],
+  "arm": "R",
+  "conv": "R",
+  "case": "Rt3",
+  "kind": "decline",
+  "run": 10,
+  "turn": 3,
+  "question": "Does Matt have any patents?",
+  "ui_reason": null,
+  "history_messages": 4,
+  "decline_line": "🐾 I followed that trail and came up empty: Matt's stories don't cover [topic]."
+ },
+ {
+  "answer_md": "🐾 Found it. Matt worked on the payment engine, global gateway, and rollout behind **JP Morgan Chase’s** ACCESS Next Generation platform.\n\nFrom **August 2009 to June 2012**, Matt served as Technology Delivery Lead. The bank was consolidating regional treasury systems into a global portal serving **135,000+** corporations, financial institutions, governments, and municipalities across **180+ countries**. Bottomline Technologies’ WebSeries platform provided the foundation, but payment formats, approval workflows, security controls, and regulatory requirements needed custom engineering beyond its out-of-box capabilities.\n\nMatt managed a blended team of **40+** **Accenture** and **JP Morgan Chase** resources across Mumbai, Bangalore, and the US. He spent **70 to 80%** of his time embedded at Bottomline’s Portsmouth offices. He designed and delivered ACH credits and direct debits, wire payments, FX/cross-border payments, and federal tax payment capabilities. His work included NACHA file validation, integration with the bank’s foreign exchange engine, and Message Authentication Code security so corporate users could verify payment integrity before release.\n\nHe also designed the centralized payments gateway, handling message transformation, protocol translation, and routing across **12 countries**. For administrators, he replaced individual permission configuration with role-based profiles and bulk changes across users, accounts, and products, reducing entitlement management from **days to minutes**.\n\nDuring migration, Matt coordinated data verification and preserved client configurations, entitlement structures, transaction histories, and compliance traceability, with **zero disruption to live payment operations**. He mapped regional regulatory requirements into data visibility and access controls, sequencing launches by regulatory readiness rather than a single global deployment. He also owned production incident response and cross-team root-cause analysis.\n\nACCESS and its Integrated Global Payments Interface launched in **April 2011**, giving corporate treasurers a single entry point for payments across regions. The regional compliance framework enabled rollout across APAC, EMEA, and the Americas without regulatory blockers.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Building the Payment Engine Behind JP Morgan ACCESS (JP Morgan Chase)",
+   "Building JP Morgan's Global Payments Gateway Across 12 Countries (JP Morgan Chase)",
+   "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform (JP Morgan Chase)",
+   "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout (JP Morgan Chase)",
+   "Overhauling Entitlement Management for JP Morgan ACCESS (JP Morgan Chase)"
+  ],
+  "intent_family": "",
+  "seconds": 12.2,
+  "opening": "🐾 This is a strong one.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Let me track down Matt’s payments work at **JPMorgan**.\n",
+    "function_calls": 1,
+    "usage": {
+     "input": 3133,
+     "cached": 2993,
+     "output": 53,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Found it. Matt worked on the payment engine, global gateway, and rollout behind **JP Morgan Chase’s** ACCESS Next Generation platform.\n\nFrom **August 2009 to June 2012**, Matt served as Technology Delivery Lead. The bank was consolidating regional treasury systems into a global portal serving **135,000+** corporations, financial institutions, governments, and municipalities across **180+ countries**. Bottomline Technologies’ WebSeries platform provided the foundation, but payment formats, approval workflows, security controls, and regulatory requirements needed custom engineering beyond its out-of-box capabilities.\n\nMatt managed a blended team of **40+** Accenture and **JP Morgan Chase** resources across Mumbai, Bangalore, and the US. He spent **70–80%** of his time embedded at Bottomline’s Portsmouth offices. He designed and delivered ACH credits and direct debits, wire payments, FX/cross-border payments, and federal tax payment capabilities. His work included NACHA file validation, integration with the bank’s foreign exchange engine, and Message Authentication Code security so corporate users could verify payment integrity before release.\n\nHe also designed the centralized payments gateway, handling message transformation, protocol translation, and routing across **12 countries**. For administrators, he replaced individual permission configuration with role-based profiles and bulk changes across users, accounts, and products, reducing entitlement management from **days to minutes**.\n\nDuring migration, Matt coordinated data verification and preserved client configurations, entitlement structures, transaction histories, and compliance traceability, with **zero disruption to live payment operations**. He mapped regional regulatory requirements into data visibility and access controls, sequencing launches by regulatory readiness rather than a single global deployment. He also owned production incident response and cross-team root-cause analysis.\n\nACCESS and its Integrated Global Payments Interface launched in **April 2011**, giving corporate treasurers a single entry point for payments across regions. The regional compliance framework enabled rollout across APAC, EMEA, and the Americas without regulatory blockers.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7894,
+     "cached": 3130,
+     "output": 402,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt payments work at JP Morgan Chase payments modernization platform delivery",
+    "top_score": 0.660447121,
+    "n": 25
+   }
+  ],
+  "arm": "M",
+  "conv": "M",
+  "case": "Mt1",
+  "kind": "control",
+  "run": 5,
+  "turn": 1,
+  "question": "Tell me about Matt's payments work at JPMorgan",
+  "ui_reason": null,
+  "history_messages": 0,
+  "decline_line": "🐾 I followed that trail and came up empty: Matt's stories don't cover [topic]."
+ },
+ {
+  "answer_md": "🐾 I followed that trail and came up empty: Matt's stories don't cover his hobbies.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "MattGPT: RAG Architecture & Semantic Search Implementation (Independent Project)",
+   "Why Hire Matt? (Accenture)",
+   "I Let Speed Win Over Structure. Here's How I Fixed It. (Independent Project)"
+  ],
+  "intent_family": "",
+  "seconds": 3.94,
+  "opening": "🐾 Here's a great example.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3552,
+     "cached": 3009,
+     "output": 26,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I followed that trail and came up empty: Matt's stories don't cover his hobbies.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7532,
+     "cached": 3549,
+     "output": 23,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire hobbies personal interests",
+    "top_score": 0.324564457,
+    "n": 25
+   }
+  ],
+  "arm": "M",
+  "conv": "M",
+  "case": "Mt2",
+  "kind": "decline",
+  "run": 5,
+  "turn": 2,
+  "question": "What are Matt's hobbies?",
+  "ui_reason": null,
+  "history_messages": 2,
+  "decline_line": "🐾 I followed that trail and came up empty: Matt's stories don't cover [topic]."
+ },
+ {
+  "answer_md": "🐾 I searched Matt's whole record, and it doesn't mention any patents held by Matt.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Building Smart, Connected Devices at Accenture's Liquid Studio (Accenture)",
+   "Building Effective AI-Assisted Development Workflows (Independent Project)",
+   "Why Hire Matt? (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 5.4,
+  "opening": "🐾 Tracking this down...",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3585,
+     "cached": 2993,
+     "output": 26,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I searched Matt's whole record, and it doesn't mention any patents held by Matt.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7498,
+     "cached": 3582,
+     "output": 70,
+     "reasoning": 45
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire patents patent inventor",
+    "top_score": 0.312678516,
+    "n": 25
+   }
+  ],
+  "arm": "M",
+  "conv": "M",
+  "case": "Mt3",
+  "kind": "decline",
+  "run": 5,
+  "turn": 3,
+  "question": "Does Matt have any patents?",
+  "ui_reason": null,
+  "history_messages": 4,
+  "decline_line": "🐾 I searched Matt's whole record, and it doesn't mention [topic]."
+ },
+ {
+  "answer_md": "🐾 Here’s what Matt worked on at **JP Morgan Chase**.\n\nFrom August **2009** through June **2012**, Matt served as Technology Delivery Lead for payments on ACCESS Next Generation, the bank’s unified corporate banking portal. Bottomline Technologies’ WebSeries platform provided the foundation, but its out-of-box capabilities did not cover the payment formats, security controls, and approval workflows required by **135,000+** clients across **180+ countries**. Regional payment systems also had different data models, connectivity, and regulatory requirements.\n\nMatt managed a blended team of **40+** **Accenture** and bank resources across the US, Mumbai, and Bangalore. He spent **70 to 80%** of his time embedded at Bottomline’s Portsmouth offices, working through where native platform capabilities ended and bespoke engineering was required. He designed and delivered ACH, wire, FX/cross-border, and federal tax payment modules, including NACHA file validation, foreign exchange integration, and Message Authentication Code security so corporate users could verify payment integrity before release.\n\nHe also designed the centralized payments gateway: message transformation, protocol translation, and routing across **12 countries**, connecting ACCESS to clearing networks and internal compliance, settlement, and reporting systems. For administrators, he replaced individual permission configuration with role-based profiles and bulk changes across users, accounts, and products. Entitlement management dropped from days to minutes.\n\nFor migration and rollout, Matt coordinated legacy-data mapping, compliance verification, and production validation. He translated jurisdiction-specific requirements into data visibility and access controls, sequencing regional launches by regulatory readiness rather than a single global deployment. He also owned on-call and critical incident response for the live payment engine.\n\nACCESS launched in April **2011**. The gateway replaced fragmented regional integrations, legacy payment data migrated without disruption to live payment operations, and the regional compliance framework enabled launches across APAC, EMEA, and the Americas without regulatory blockers.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Building the Payment Engine Behind JP Morgan ACCESS (JP Morgan Chase)",
+   "Building JP Morgan's Global Payments Gateway Across 12 Countries (JP Morgan Chase)",
+   "Consolidating Legacy Payment Systems into JP Morgan's Unified ACCESS Platform (JP Morgan Chase)",
+   "Overhauling Entitlement Management for JP Morgan ACCESS (JP Morgan Chase)",
+   "Navigating Multi-Jurisdictional Compliance for JP Morgan's Global Payments Platform Rollout (JP Morgan Chase)"
+  ],
+  "intent_family": "",
+  "seconds": 12.3,
+  "opening": "🐾 On it!",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3133,
+     "cached": 2993,
+     "output": 27,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Here’s what Matt worked on at **JP Morgan Chase**.\n\nFrom August **2009** through June **2012**, Matt served as Technology Delivery Lead for payments on ACCESS Next Generation, the bank’s unified corporate banking portal. Bottomline Technologies’ WebSeries platform provided the foundation, but its out-of-box capabilities did not cover the payment formats, security controls, and approval workflows required by **135,000+** clients across **180+ countries**. Regional payment systems also had different data models, connectivity, and regulatory requirements.\n\nMatt managed a blended team of **40+** Accenture and bank resources across the US, Mumbai, and Bangalore. He spent **70–80%** of his time embedded at Bottomline’s Portsmouth offices, working through where native platform capabilities ended and bespoke engineering was required. He designed and delivered ACH, wire, FX/cross-border, and federal tax payment modules, including NACHA file validation, foreign exchange integration, and Message Authentication Code security so corporate users could verify payment integrity before release.\n\nHe also designed the centralized payments gateway: message transformation, protocol translation, and routing across **12 countries**, connecting ACCESS to clearing networks and internal compliance, settlement, and reporting systems. For administrators, he replaced individual permission configuration with role-based profiles and bulk changes across users, accounts, and products. Entitlement management dropped from days to minutes.\n\nFor migration and rollout, Matt coordinated legacy-data mapping, compliance verification, and production validation. He translated jurisdiction-specific requirements into data visibility and access controls, sequencing regional launches by regulatory readiness rather than a single global deployment. He also owned on-call and critical incident response for the live payment engine.\n\nACCESS launched in April **2011**. The gateway replaced fragmented regional integrations, legacy payment data migrated without disruption to live payment operations, and the regional compliance framework enabled launches across APAC, EMEA, and the Americas without regulatory blockers.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7868,
+     "cached": 3130,
+     "output": 387,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt JP Morgan Chase payments work payments platform modernization",
+    "top_score": 0.651651084,
+    "n": 25
+   }
+  ],
+  "arm": "M",
+  "conv": "M",
+  "case": "Mt1",
+  "kind": "control",
+  "run": 10,
+  "turn": 1,
+  "question": "Tell me about Matt's payments work at JPMorgan",
+  "ui_reason": null,
+  "history_messages": 0,
+  "decline_line": "🐾 I searched Matt's whole record, and it doesn't mention [topic]."
+ },
+ {
+  "answer_md": "🐾 I followed that trail and came up empty: Matt's stories don't cover his hobbies.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Integrating Play into Work to Enhance Team Motivation (Accenture)",
+   "Work Philosophy: Where I Do My Best Work (Accenture)",
+   "Transition Story: Why I’m Exploring Opportunities (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 5.46,
+  "opening": "Got it! 🐾",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3537,
+     "cached": 3009,
+     "output": 28,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I followed that trail and came up empty: Matt's stories don't cover his hobbies.",
+    "function_calls": 0,
+    "usage": {
+     "input": 6548,
+     "cached": 3534,
+     "output": 73,
+     "reasoning": 48
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire hobbies personal interests outside work",
+    "top_score": 0.349412024,
+    "n": 25
+   }
+  ],
+  "arm": "M",
+  "conv": "M",
+  "case": "Mt2",
+  "kind": "decline",
+  "run": 10,
+  "turn": 2,
+  "question": "What are Matt's hobbies?",
+  "ui_reason": null,
+  "history_messages": 2,
+  "decline_line": "🐾 I followed that trail and came up empty: Matt's stories don't cover [topic]."
+ },
+ {
+  "answer_md": "🐾 I searched Matt's whole record, and it doesn't mention any patents held by Matt.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Building Smart, Connected Devices at Accenture's Liquid Studio (Accenture)",
+   "Building Effective AI-Assisted Development Workflows (Independent Project)",
+   "Why Hire Matt? (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 5.14,
+  "opening": "🐾 This is a strong one.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3569,
+     "cached": 3006,
+     "output": 26,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I searched Matt's whole record, and it doesn't mention any patents held by Matt.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7482,
+     "cached": 3566,
+     "output": 67,
+     "reasoning": 42
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire patents patent inventor",
+    "top_score": 0.312678516,
+    "n": 25
+   }
+  ],
+  "arm": "M",
+  "conv": "M",
+  "case": "Mt3",
+  "kind": "decline",
+  "run": 10,
+  "turn": 3,
+  "question": "Does Matt have any patents?",
+  "ui_reason": null,
+  "history_messages": 4,
+  "decline_line": "🐾 I searched Matt's whole record, and it doesn't mention [topic]."
+ }
+]

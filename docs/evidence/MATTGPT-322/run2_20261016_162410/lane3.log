@@ -1,0 +1,52 @@
+lane 3/7: 24 of 170 jobs
+health check start: top Fiserv 0.439
+[VA q01 r4] 0.48s semantic_router:personal | "🐾 I'm focused on Matt's professional experience, i"
+[VB q01 r4] 4.12s  | '🐾 I have nothing on record about Matt’s marital st'
+[VB q02 r1] 4.19s  | '🐾 I don’t have Matt’s age or date of birth on reco'
+[VA q02 r1] 0.3s semantic_router:personal | "🐾 I'm focused on Matt's professional experience, i"
+[VA q02 r8] 0.32s semantic_router:personal | "🐾 I'm focused on Matt's professional experience, i"
+[VB q02 r8] 3.9s  | '🐾 I don’t have Matt’s age or date of birth on reco'
+[VB q03 r5] 5.04s  | '🐾 I don’t have anything on record about whether Ma'
+[VA q03 r5] 0.35s semantic_router:personal | "🐾 I'm focused on Matt's professional experience, i"
+[VA q04 r2] 5.39s  | '🐾 I don’t have anything on record about Matt’s hob'
+[VB q04 r2] 4.72s  | '🐾 I don’t have anything on record about Matt’s hob'
+[VB q04 r9] 4.56s  | '🐾 I don’t have anything on record about Matt’s hob'
+[VA q04 r9] 5.06s  | '🐾 I don’t have anything on record about what Matt '
+[VA q05 r6] 4.97s  | '🐾 I don’t have anything on record about Matt’s hob'
+[VB q05 r6] 4.65s  | '🐾 I don’t have anything on record about Matt’s hob'
+[VB q06 r3] 4.52s  | '🐾 I don’t have anything on record about Matt’s hob'
+[VA q06 r3] 3.89s  | '🐾 I don’t have anything on record about Matt’s hob'
+[VA q06 r10] 4.76s  | '🐾 I don’t have anything on record about Matt’s hob'
+[VB q06 r10] 4.0s  | '🐾 I don’t have anything on record about Matt’s hob'
+[VB q07 r7] 9.04s  | '🐾 I have nothing on record about Matt holding any '
+[VA q07 r7] 4.2s  | '🐾 I have nothing on record about Matt holding any '
+[VA q08 r4] 4.19s  | '🐾 I have nothing on record about Matt publishing a'
+[VB q08 r4] 6.12s  | '🐾 I have nothing on record about Matt publishing a'
+[VB q09 r1] 7.14s  | '🐾 Matt has held certifications, but none is curren'
+[VA q09 r1] 6.89s  | '🐾 Matt has held certifications, but none is curren'
+[VA q09 r8] 7.3s  | '🐾 Matt has held certifications, but none is curren'
+[VB q09 r8] 5.66s  | '🐾 Matt has held certifications, but none is curren'
+[VB q10 r5] 6.45s  | '🐾 No, Matt does not have a PMP. His certifications'
+[VA q10 r5] 5.53s  | '🐾 No, Matt does not have a PMP. His certifications'
+[VA q11 r2] 4.7s  | '🐾 Matt speaks English (native) and French (**B2**,'
+[VB q11 r2] 3.74s  | '🐾 Matt speaks English (native) and French (**B2**,'
+[VB q11 r9] 5.7s  | '🐾 Matt speaks English (native) and French (B2, sel'
+[VA q11 r9] 5.1s  | '🐾 Matt speaks English (native) and French (**B2**,'
+[VA q12 r6] 4.48s  | "🐾 Yes. Matt has a Master's degree, Information Tec"
+[VB q12 r6] 4.27s  | "🐾 Yes. Matt has a master's degree in Information T"
+[VB q13 r3] 13.0s  | '🐾 Here’s the story behind Matt’s payments work at '
+[VA q13 r3] 11.47s  | '🐾 Here’s what Matt built for **JP Morgan Chase’s**'
+[VA q13 r10] 11.53s  | '🐾 Here’s the story behind Matt’s payments work at '
+[VB q13 r10] 13.39s  | '🐾 Here’s what Matt built for **JP Morgan Chase**.\n'
+[VB q14 r7] 11.23s  | '🐾 Matt leads with empathy, clarity, and purpose.\n\n'
+[VA q14 r7] 8.5s  | '🐾 Here’s how Matt describes his leadership philoso'
+[VA q15 r4] 12.83s  | '🐾 Here’s what Matt has built and delivered.\n\nMatt’'
+[VB q15 r4] 11.23s  | '🐾 Matt builds products, platforms, and the teams t'
+[VB q16 r1] 10.54s  | '🐾 One failure Matt recounts involved production cu'
+[VA q16 r1] 9.02s  | '🐾 Matt’s example is a platform delivery where he a'
+[VA q16 r8] 10.51s  | '🐾 Here’s a time Matt’s assumptions led to a produc'
+[VB q16 r8] 9.85s  | '🐾 Here’s a time Matt’s assumptions led to a produc'
+[VB q17 r5] 9.19s  | '🐾 Found it!\n\nMatt led the AWS Launchpad program at'
+[VA q17 r5] 9.73s  | '🐾 Here’s how Matt built AWS Launchpad.\n\nAt **Accen'
+health check end: top Fiserv 0.439
+done | rows 48 | errors []

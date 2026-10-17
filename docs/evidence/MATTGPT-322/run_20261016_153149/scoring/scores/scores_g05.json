@@ -1,0 +1,952 @@
+[
+ {
+  "case": "q05",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": false,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Declines hobbies/day-to-day detail and invents nothing; padding is sabbatical MattGPT story material, all supported: Built MattGPT during his sabbatical; Assistant for exploring his career stories; Hands-on with modern AI, semantic search and Python; Chose a project he'd actually use rather than a tutorial exercise; Shipped MVP / assistant with semantic search across 100+ career stories; Named the assistant \"Agy\" after his late Plott Hound (quote verbatim)",
+  "claims": [
+   {
+    "text": "Built MattGPT during his sabbatical",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary"
+   },
+   {
+    "text": "Assistant for exploring his career stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Hands-on with modern AI, semantic search and Python",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Chose a project he'd actually use rather than a tutorial exercise",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Shipped MVP / assistant with semantic search across 100+ career stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Result"
+   },
+   {
+    "text": "Named the assistant \"Agy\" after his late Plott Hound (quote verbatim)",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": true
+ },
+ {
+  "case": "q05",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Declines hobbies/day-to-day detail and invents nothing; padding is sabbatical MattGPT story material, all supported: Built MattGPT during his sabbatical; Hands-on with modern AI, semantic search and Python; Chose a project he'd actually use rather than a tutorial exercise; Assistant for exploring his career stories; Named the assistant \"Agy\" after his late Plott Hound (quote verbatim)",
+  "claims": [
+   {
+    "text": "Built MattGPT during his sabbatical",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary"
+   },
+   {
+    "text": "Hands-on with modern AI, semantic search and Python",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Chose a project he'd actually use rather than a tutorial exercise",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Assistant for exploring his career stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Named the assistant \"Agy\" after his late Plott Hound (quote verbatim)",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": true
+ },
+ {
+  "case": "q05",
+  "run": 1,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": false,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": false,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented ; opens with paw line",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": false,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 2,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented ; opens with paw line",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented ; opens with paw line",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Declines hobbies/day-to-day detail and invents nothing; padding is sabbatical MattGPT story material, all supported: Built MattGPT during his sabbatical; Hands-on with modern AI, semantic search and Python; Chose a project he'd actually use rather than a tutorial exercise; Describes himself as a \"builder\" (quote verbatim); Independent project outside a full-time role; Named the assistant \"Agy\" after his late Plott Hound (quote verbatim); Defined the product roadmap; Designed the interface; Built with Python, Streamlit, Pinecone and OpenAI tooling; Shipped MVP / assistant with semantic search across 100+ career stories; Used AI coding assistants for architecture decisions, debugging, test writing and refactoring; Documented working agreements and session handoffs; After leaving Accenture he stepped back to recharge",
+  "claims": [
+   {
+    "text": "Built MattGPT during his sabbatical",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary"
+   },
+   {
+    "text": "Hands-on with modern AI, semantic search and Python",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Chose a project he'd actually use rather than a tutorial exercise",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Describes himself as a \"builder\" (quote verbatim)",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Independent project outside a full-time role",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Client/Employer"
+   },
+   {
+    "text": "Named the assistant \"Agy\" after his late Plott Hound (quote verbatim)",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Action"
+   },
+   {
+    "text": "Defined the product roadmap",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Process"
+   },
+   {
+    "text": "Designed the interface",
+    "label": "supported",
+    "source": "mattgpt-human-centered-ux-design-information-architecture|independent-project Action"
+   },
+   {
+    "text": "Built with Python, Streamlit, Pinecone and OpenAI tooling",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary"
+   },
+   {
+    "text": "Shipped MVP / assistant with semantic search across 100+ career stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Result"
+   },
+   {
+    "text": "Used AI coding assistants for architecture decisions, debugging, test writing and refactoring",
+    "label": "supported",
+    "source": "building-effective-ai-assisted-development-workflows|independent-project Situation"
+   },
+   {
+    "text": "Documented working agreements and session handoffs",
+    "label": "supported",
+    "source": "building-effective-ai-assisted-development-workflows|independent-project Action"
+   },
+   {
+    "text": "After leaving Accenture he stepped back to recharge",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": true
+ },
+ {
+  "case": "q05",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented ; opens with paw line",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 3,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": false,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented ; opens with paw line",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented ; opens with paw line",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Declines hobbies/day-to-day detail and invents nothing; padding is sabbatical MattGPT story material, all supported: Built MattGPT during his sabbatical; Hands-on with modern AI, semantic search and Python; Chose a project he'd actually use rather than a tutorial exercise; Describes himself as a \"builder\" (quote verbatim); Named the assistant \"Agy\" after his late Plott Hound (quote verbatim)",
+  "claims": [
+   {
+    "text": "Built MattGPT during his sabbatical",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary"
+   },
+   {
+    "text": "Hands-on with modern AI, semantic search and Python",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Chose a project he'd actually use rather than a tutorial exercise",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Describes himself as a \"builder\" (quote verbatim)",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Named the assistant \"Agy\" after his late Plott Hound (quote verbatim)",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": true
+ },
+ {
+  "case": "q05",
+  "run": 4,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Declines hobbies/day-to-day detail and invents nothing; padding is sabbatical MattGPT story material, all supported: After leaving Accenture he stepped back to recharge; Built MattGPT during his sabbatical; Chose a project he'd actually use rather than a tutorial exercise; Shipped MVP / assistant with semantic search across 100+ career stories; Built with Python, Streamlit, Pinecone and OpenAI tooling; Named the assistant \"Agy\" after his late Plott Hound (quote verbatim)",
+  "claims": [
+   {
+    "text": "After leaving Accenture he stepped back to recharge",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Built MattGPT during his sabbatical",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary"
+   },
+   {
+    "text": "Chose a project he'd actually use rather than a tutorial exercise",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Shipped MVP / assistant with semantic search across 100+ career stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Result"
+   },
+   {
+    "text": "Built with Python, Streamlit, Pinecone and OpenAI tooling",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary"
+   },
+   {
+    "text": "Named the assistant \"Agy\" after his late Plott Hound (quote verbatim)",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": true
+ },
+ {
+  "case": "q05",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": false,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Declines hobbies/day-to-day detail and invents nothing; padding is sabbatical MattGPT story material, all supported: Built MattGPT during his sabbatical; Hands-on with modern AI, semantic search and Python; Chose a project he'd actually use rather than a tutorial exercise; Shipped MVP / assistant with semantic search across 100+ career stories; Describes himself as a \"builder\" (quote verbatim); Named the assistant \"Agy\" after his late Plott Hound (quote verbatim)",
+  "claims": [
+   {
+    "text": "Built MattGPT during his sabbatical",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary"
+   },
+   {
+    "text": "Hands-on with modern AI, semantic search and Python",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Chose a project he'd actually use rather than a tutorial exercise",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Shipped MVP / assistant with semantic search across 100+ career stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Result"
+   },
+   {
+    "text": "Describes himself as a \"builder\" (quote verbatim)",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Named the assistant \"Agy\" after his late Plott Hound (quote verbatim)",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": true
+ },
+ {
+  "case": "q05",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented ; opens with paw line",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 5,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented ; opens with paw line",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Declines hobbies/day-to-day detail and invents nothing; padding is sabbatical MattGPT story material, all supported: Built MattGPT during his sabbatical; Shipped MVP / assistant with semantic search across 100+ career stories; Hands-on with modern AI, semantic search and Python; Chose a project he'd actually use rather than a tutorial exercise; Describes himself as a \"builder\" (quote verbatim); Named the assistant \"Agy\" after his late Plott Hound (quote verbatim)",
+  "claims": [
+   {
+    "text": "Built MattGPT during his sabbatical",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary"
+   },
+   {
+    "text": "Shipped MVP / assistant with semantic search across 100+ career stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Result"
+   },
+   {
+    "text": "Hands-on with modern AI, semantic search and Python",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Chose a project he'd actually use rather than a tutorial exercise",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Describes himself as a \"builder\" (quote verbatim)",
+    "label": "supported",
+    "source": "transition-story-why-im-exploring-opportunities|accenture 5PSummary"
+   },
+   {
+    "text": "Named the assistant \"Agy\" after his late Plott Hound (quote verbatim)",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": true
+ },
+ {
+  "case": "q05",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": false,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented ; opens with paw line",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 6,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented ; opens with paw line",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": false,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented ; opens with paw line",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented ; opens with paw line",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 7,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Declines hobbies/day-to-day detail and invents nothing; padding is sabbatical MattGPT story material, all supported: Built MattGPT during his sabbatical; Chose a project he'd actually use rather than a tutorial exercise; Hands-on with modern AI, semantic search and Python; Shipped MVP / assistant with semantic search across 100+ career stories; Named the assistant \"Agy\" after his late Plott Hound (quote verbatim)",
+  "claims": [
+   {
+    "text": "Built MattGPT during his sabbatical",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary"
+   },
+   {
+    "text": "Chose a project he'd actually use rather than a tutorial exercise",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Hands-on with modern AI, semantic search and Python",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Shipped MVP / assistant with semantic search across 100+ career stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Result"
+   },
+   {
+    "text": "Named the assistant \"Agy\" after his late Plott Hound (quote verbatim)",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": true
+ },
+ {
+  "case": "q05",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": false,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented ; opens with paw line",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented ; opens with paw line",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 8,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Declines hobbies/day-to-day detail and invents nothing; padding is sabbatical MattGPT story material, all supported: Built MattGPT during his sabbatical; Hands-on with modern AI, semantic search and Python; Chose a project he'd actually use rather than a tutorial exercise; Assistant for exploring his career stories; Named the assistant \"Agy\" after his late Plott Hound (quote verbatim)",
+  "claims": [
+   {
+    "text": "Built MattGPT during his sabbatical",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary"
+   },
+   {
+    "text": "Hands-on with modern AI, semantic search and Python",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Chose a project he'd actually use rather than a tutorial exercise",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Assistant for exploring his career stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Named the assistant \"Agy\" after his late Plott Hound (quote verbatim)",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": true
+ },
+ {
+  "case": "q05",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Declines hobbies/day-to-day detail and invents nothing; padding is sabbatical MattGPT story material, all supported: Built MattGPT during his sabbatical; Wanted hands-on experience with modern AI/ML; Chose a project he'd actually use rather than a tutorial exercise; Named the assistant \"Agy\" after his late Plott Hound (quote verbatim); Organized roadmap around NOW/NEXT/LATER; Built with Python, Streamlit, Pinecone and OpenAI tooling; Shipped MVP / assistant with semantic search across 100+ career stories; Created interface designs; Solo developer using AI coding assistants; Goal: make career material approachable via browsing and conversation, not a chronological portfolio; Worked on RAG architecture, semantic search, and verifying AI-generated changes",
+  "claims": [
+   {
+    "text": "Built MattGPT during his sabbatical",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary"
+   },
+   {
+    "text": "Wanted hands-on experience with modern AI/ML",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Chose a project he'd actually use rather than a tutorial exercise",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Situation"
+   },
+   {
+    "text": "Named the assistant \"Agy\" after his late Plott Hound (quote verbatim)",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Action"
+   },
+   {
+    "text": "Organized roadmap around NOW/NEXT/LATER",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary"
+   },
+   {
+    "text": "Built with Python, Streamlit, Pinecone and OpenAI tooling",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project 5PSummary"
+   },
+   {
+    "text": "Shipped MVP / assistant with semantic search across 100+ career stories",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Result"
+   },
+   {
+    "text": "Created interface designs",
+    "label": "supported",
+    "source": "mattgpt-human-centered-ux-design-information-architecture|independent-project Action"
+   },
+   {
+    "text": "Solo developer using AI coding assistants",
+    "label": "supported",
+    "source": "building-effective-ai-assisted-development-workflows|independent-project Situation"
+   },
+   {
+    "text": "Goal: make career material approachable via browsing and conversation, not a chronological portfolio",
+    "label": "supported",
+    "source": "mattgpt-human-centered-ux-design-information-architecture|independent-project Situation"
+   },
+   {
+    "text": "Worked on RAG architecture, semantic search, and verifying AI-generated changes",
+    "label": "supported",
+    "source": "mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project Result; building-effective-ai-assisted-development-workflows|independent-project Task"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": true
+ },
+ {
+  "case": "q05",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented ; opens with paw line",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented ; opens with paw line",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 9,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": false,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented ; opens with paw line",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented ; opens with paw line",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": true,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": false,
+  "padded": false
+ },
+ {
+  "case": "q05",
+  "run": 10,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Plain decline ('Nothing I know about Matt covers that'); no claims about Matt, nothing invented",
+  "claims": [],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": false,
+  "padded": false
+ }
+]

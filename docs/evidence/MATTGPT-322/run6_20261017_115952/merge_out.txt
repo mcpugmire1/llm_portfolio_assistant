@@ -1,0 +1,131 @@
+scored answers: 340, no duplicates; groups with no scores: none
+
+  declines pass                  FB: 79/80  DB: 80/80
+  0a facts pass                  FB: 40/40  DB: 40/40
+  story controls pass            FB: 49/50  DB: 49/50
+
+declines, Brand Voice Checklist (true):
+  voice_first_person             FB: 80/80  DB: 77/80
+  voice_paw_ok                   FB: 80/80  DB: 80/80
+  voice_smart_helpful            FB: 80/80  DB: 80/80
+  voice_professional             FB: 80/80  DB: 80/80
+  voice_no_dog_puns              FB: 80/80  DB: 80/80
+  voice_warm_credible            FB: 80/80  DB: 80/80
+  voice_ends_on_content          FB: 80/80  DB: 80/80
+  voice_substance_first          FB: 80/80  DB: 80/80
+  voice_trust                    FB: 80/80  DB: 80/80
+
+declines, the decline standard:
+  names_missing                  FB: 79/80  DB: 80/80
+  one_or_two_sentences           FB: 80/80  DB: 80/80
+  too_dismissive                 FB: 0/80  DB: 0/80
+  too_apologetic                 FB: 0/80  DB: 0/80
+  padded                         FB: 0/80  DB: 0/80
+  speculation                    FB: 0/80  DB: 0/80
+  meets_every_item               FB: 79/80  DB: 77/80
+  opening_fits                   FB: 80/80  DB: 80/80
+
+facts and controls, Brand Voice Checklist items not met:
+   FB: 0  DB: 0
+
+the bar, per decline question (runs meeting every item, of 10):
+  q01 FB 10/10  DB 10/10
+  q02 FB 10/10  DB 10/10
+  q03 FB 10/10  DB 10/10
+  q04 FB 10/10  DB  7/10
+  q05 FB 10/10  DB 10/10
+  q06 FB 10/10  DB 10/10
+  q07 FB 10/10  DB 10/10
+  q08 FB  9/10  DB 10/10
+
+declines from the answer text, per question: distinct first lines | 'trail' | example reuse (lines 1-4) | 'on record about'
+  FB
+    q01:  2/10 distinct | trail  7 | reuse [7, 0, 3, 0] | old phrase  0
+    q02:  3/10 distinct | trail  8 | reuse [8, 0, 1, 0] | old phrase  0
+    q03:  4/10 distinct | trail  4 | reuse [4, 0, 6, 0] | old phrase  0
+    q04:  3/10 distinct | trail  4 | reuse [4, 0, 6, 0] | old phrase  0
+    q05:  7/10 distinct | trail  8 | reuse [8, 0, 2, 0] | old phrase  0
+    q06:  2/10 distinct | trail  3 | reuse [3, 0, 7, 0] | old phrase  0
+    q07:  8/10 distinct | trail  5 | reuse [5, 0, 5, 0] | old phrase  0
+    q08:  8/10 distinct | trail  7 | reuse [7, 0, 2, 0] | old phrase  0
+    overall: 37/80 distinct first lines | trail 46/80 | reuse [46, 0, 32, 0] | old phrase 0/80
+  DB
+    q01:  5/10 distinct | trail  6 | reuse [5, 0, 2, 1] | old phrase  0
+    q02:  6/10 distinct | trail  5 | reuse [1, 0, 4, 0] | old phrase  0
+    q03:  4/10 distinct | trail  2 | reuse [1, 1, 0, 1] | old phrase  1
+    q04:  5/10 distinct | trail  6 | reuse [2, 3, 2, 0] | old phrase  3
+    q05:  6/10 distinct | trail  5 | reuse [5, 0, 4, 0] | old phrase  0
+    q06:  4/10 distinct | trail  3 | reuse [2, 1, 6, 1] | old phrase  1
+    q07:  7/10 distinct | trail  4 | reuse [0, 0, 1, 0] | old phrase  2
+    q08:  8/10 distinct | trail  3 | reuse [0, 0, 2, 0] | old phrase  2
+    overall: 45/80 distinct first lines | trail 34/80 | reuse [16, 5, 21, 3] | old phrase 9/80
+
+FB first lines by frequency:
+  q01 x7: I followed that trail and came up empty: Matt's stories don't cover his marital status.
+  q01 x3: I searched Matt's whole record, and it doesn't mention his marital status.
+  q02 x1: I don't have Matt's age or date of birth, so I can't say how old he is.
+  q02 x8: I followed that trail and came up empty: Matt's stories don't cover his age.
+  q02 x1: I searched Matt's whole record, and it doesn't mention his age.
+  q03 x2: I followed that trail and came up empty: Matt's stories don't cover whether he has children.
+  q03 x2: I followed that trail and came up empty: Matt's stories don't cover whether he has kids.
+  q03 x4: I searched Matt's whole record, and it doesn't mention whether he has children.
+  q03 x2: I searched Matt's whole record, and it doesn't mention whether he has kids.
+  q04 x2: I followed that trail and came up empty: Matt's stories don't cover his hobbies or what he does for fun.
+  q04 x2: I followed that trail and came up empty: Matt's stories don't cover his hobbies or what he likes to do for fun.
+  q04 x6: I searched Matt's whole record, and it doesn't mention his hobbies or what he likes to do for fun.
+  q05 x1: I followed that trail and came up empty: Matt's stories don't cover his hobbies or activities outside of work.
+  q05 x1: I followed that trail and came up empty: Matt's stories don't cover his hobbies or life outside of work.
+  q05 x1: I followed that trail and came up empty: Matt's stories don't cover his hobbies or life outside of work. I don't have details to share about those interests.
+  q05 x3: I followed that trail and came up empty: Matt's stories don't cover his hobbies or life outside work.
+  q05 x2: I followed that trail and came up empty: Matt's stories don't cover his hobbies or personal interests outside work.
+  q05 x1: I searched Matt's whole record, and it doesn't mention his hobbies or activities outside of work.
+  q05 x1: I searched Matt's whole record, and it doesn't mention his hobbies or how he spends his time outside of work.
+  q06 x3: I followed that trail and came up empty: Matt's stories don't cover his hobbies.
+  q06 x7: I searched Matt's whole record, and it doesn't mention his hobbies.
+  q07 x2: I followed that trail and came up empty: Matt's stories don't cover his patents. I can't confirm whether he holds any.
+  q07 x1: I followed that trail and came up empty: Matt's stories don't cover patents held by him. I can't confirm whether he has any patents.
+  q07 x1: I followed that trail and came up empty: Matt's stories don't cover patents held by him. I can't confirm whether he has any.
+  q07 x1: I followed that trail and came up empty: Matt's stories don't cover whether he holds any patents.
+  q07 x2: I searched Matt's whole record, and it doesn't mention any patents held by Matt.
+  q07 x1: I searched Matt's whole record, and it doesn't mention any patents held by him.
+  q07 x1: I searched Matt's whole record, and it doesn't mention any patents held by him. I can't confirm whether he has any.
+  q07 x1: I searched Matt's whole record, and it doesn't mention patents.
+  q08 x1: I can't confirm whether Matt has published any papers.
+  q08 x1: I followed that trail and came up empty: Matt's stories don't cover published academic papers. I can't confirm whether he has published any.
+  q08 x3: I followed that trail and came up empty: Matt's stories don't cover published papers. I can't confirm whether he has published any.
+  q08 x1: I followed that trail and came up empty: Matt's stories don't cover whether he has published academic papers. I can't confirm a publication history.
+  q08 x1: I followed that trail and came up empty: Matt's stories don't cover whether he has published papers.
+  q08 x1: I followed that trail and came up empty: Matt's stories don't cover whether he has published papers. I can't confirm a publication history.
+  q08 x1: I searched Matt's whole record, and it doesn't mention published academic papers. I can't confirm whether he has published any.
+  q08 x1: I searched Matt's whole record, and it doesn't mention published papers.
+
+FB: follows its assigned line, per question (whole line around [topic] | opening clause), of 10:
+  q01: 10 | 10 (of 10)
+  q02:  9 |  9 (of 10)
+  q03: 10 | 10 (of 10)
+  q04: 10 | 10 (of 10)
+  q05: 10 | 10 (of 10)
+  q06: 10 | 10 (of 10)
+  q07: 10 | 10 (of 10)
+  q08:  9 |  9 (of 10)
+  overall: whole 78/80 | clause 78/80
+
+FB per assigned line: assigned | whole | clause
+  line 1 (I followed that trail and came up empty:...): 48 | 46 | 46
+  line 2 (That trail goes cold here. There's nothi...): 0 | 0 | 0
+  line 3 (I searched Matt's whole record, and it d...): 32 | 32 | 32
+  line 4 (I've been through Matt's stories, and no...): 0 | 0 | 0
+
+declines scored opening_fits false:
+  none
+
+flags outside the bar, per decline question (of 10): presumes_exists | soft_cant_confirm
+  q01 FB  0 |  0  DB  0 |  0
+  q02 FB  0 |  1  DB  0 |  0
+  q03 FB  0 |  0  DB  0 |  0
+  q04 FB  0 |  0  DB  0 |  0
+  q05 FB  0 |  0  DB  0 |  0
+  q06 FB 10 |  0  DB 10 |  0
+  q07 FB  2 |  5  DB  4 |  1
+  q08 FB  0 |  8  DB  5 |  1
+  all  FB 12 | 14  DB 19 |  2

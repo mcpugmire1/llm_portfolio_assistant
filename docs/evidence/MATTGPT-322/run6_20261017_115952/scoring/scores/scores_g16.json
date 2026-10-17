@@ -1,0 +1,1907 @@
+[
+ {
+  "case": "q16",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered with the corpus failure story (what-i-learned-about-assumptions); every claim supported, all quoted text verbatim in the story; no closing. contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Client was Fortune 500",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation; 5PSummary"
+   },
+   {
+    "text": "Tech lead on a global platform modernization delivery for a financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Program under delivery pressure; offshore teams executing test cycles across dev, QA, UAT and production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configurations inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup; relied on assumptions/documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task; Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes; did not verify masking/scrubbing; no compensating controls (data masking, email interception)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered an email job in UAT sending unmasked production customer data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led root cause analysis and remediation, worked with the team on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action; Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Client demanded the tester be removed from the project",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary; Purpose; Performance"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q16",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered with the corpus failure story (what-i-learned-about-assumptions); every claim supported, all quoted text verbatim in the story; no closing. contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Tech lead on a global platform modernization delivery for a financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Program under delivery pressure; offshore teams executing test cycles across dev, QA, UAT and production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configurations inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup; relied on assumptions/documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task; Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes; did not verify masking/scrubbing; no compensating controls (data masking, email interception)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered an email job in UAT sending unmasked production customer data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led root cause analysis and remediation, worked with the team on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action; Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Client demanded the tester be removed from the project",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary; Purpose; Performance"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Leaders own the environment their teams operate in",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q16",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered with the corpus failure story (what-i-learned-about-assumptions); every claim supported, all quoted text verbatim in the story; no closing. contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Client was Fortune 500",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation; 5PSummary"
+   },
+   {
+    "text": "Tech lead on a global platform modernization delivery for a financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Program under delivery pressure; offshore teams executing test cycles across dev, QA, UAT and production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configurations inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup; relied on assumptions/documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task; Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes; did not verify masking/scrubbing; no compensating controls (data masking, email interception)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered an email job in UAT sending unmasked production customer data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led root cause analysis and remediation, worked with the team on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action; Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Client demanded the tester be removed from the project",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary; Purpose; Performance"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Assumptions he should have verified rather than inherited",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q16",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered with the corpus failure story (what-i-learned-about-assumptions); every claim supported, all quoted text verbatim in the story; no closing. contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Tech lead on a global platform modernization delivery for a financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Program under delivery pressure; offshore teams executing test cycles across dev, QA, UAT and production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configurations inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup; relied on assumptions/documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task; Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes; did not verify masking/scrubbing; no compensating controls (data masking, email interception)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered an email job in UAT sending unmasked production customer data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led root cause analysis and remediation, worked with the team on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action; Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Client demanded the tester be removed from the project",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "A systemic failure with an individual consequence (unquoted paraphrase)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary; Purpose; Performance"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q16",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered with the corpus failure story (what-i-learned-about-assumptions); every claim supported, all quoted text verbatim in the story; no closing. contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Tech lead on a global platform modernization delivery for a financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Program under delivery pressure; offshore teams executing test cycles across dev, QA, UAT and production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configurations inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup; relied on assumptions/documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task; Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes; did not verify masking/scrubbing; no compensating controls (data masking, email interception)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered an email job in UAT sending unmasked production customer data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led root cause analysis and remediation, worked with the team on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action; Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Client demanded the tester be removed from the project",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary; Purpose; Performance"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q16",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered with the corpus failure story (what-i-learned-about-assumptions); every claim supported, all quoted text verbatim in the story; no closing. contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Tech lead on a global platform modernization delivery for a financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Program under delivery pressure; offshore teams executing test cycles across dev, QA, UAT and production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configurations inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup; relied on assumptions/documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task; Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes; did not verify masking/scrubbing; no compensating controls (data masking, email interception)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered an email job in UAT sending unmasked production customer data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led root cause analysis and remediation, worked with the team on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action; Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Client demanded the tester be removed from the project",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q16",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered with the corpus failure story (what-i-learned-about-assumptions); every claim supported, all quoted text verbatim in the story; no closing. contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Client was Fortune 500",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation; 5PSummary"
+   },
+   {
+    "text": "Tech lead on a global platform modernization delivery for a financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Program under delivery pressure; offshore teams executing test cycles across dev, QA, UAT and production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configurations inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup; relied on assumptions/documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task; Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes; did not verify masking/scrubbing; no compensating controls (data masking, email interception)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered an email job in UAT sending unmasked production customer data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led root cause analysis and remediation, worked with the team on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action; Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Client demanded the tester be removed from the project",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary; Purpose; Performance"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q16",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered with the corpus failure story (what-i-learned-about-assumptions); every claim supported, all quoted text verbatim in the story; no closing. contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Tech lead on a global platform modernization delivery for a financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Program under delivery pressure; offshore teams executing test cycles across dev, QA, UAT and production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configurations inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup; relied on assumptions/documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task; Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes; did not verify masking/scrubbing; no compensating controls (data masking, email interception)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered an email job in UAT sending unmasked production customer data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led root cause analysis and remediation, worked with the team on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action; Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Client demanded the tester be removed from the project",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary; Purpose; Performance"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q16",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered with the corpus failure story (what-i-learned-about-assumptions); every claim supported, all quoted text verbatim in the story; no closing. contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Client was Fortune 500",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation; 5PSummary"
+   },
+   {
+    "text": "Tech lead on a global platform modernization delivery for a financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Program under delivery pressure; offshore teams executing test cycles across dev, QA, UAT and production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configurations inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup; relied on assumptions/documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task; Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes; did not verify masking/scrubbing; no compensating controls (data masking, email interception)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered an email job in UAT sending unmasked production customer data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led root cause analysis and remediation, worked with the team on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action; Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Client demanded the tester be removed from the project",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary; Purpose; Performance"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q16",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered with the corpus failure story (what-i-learned-about-assumptions); every claim supported, all quoted text verbatim in the story; no closing. contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Tech lead on a global platform modernization delivery for a financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Program under delivery pressure; offshore teams executing test cycles across dev, QA, UAT and production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configurations inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup; relied on assumptions/documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task; Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes; did not verify masking/scrubbing; no compensating controls (data masking, email interception)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered an email job in UAT sending unmasked production customer data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led root cause analysis and remediation, worked with the team on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action; Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Client demanded the tester be removed from the project",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary; Purpose; Performance"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Leaders own the environment their teams operate in",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q16",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered with the corpus failure story (what-i-learned-about-assumptions); every claim supported, all quoted text verbatim in the story; no closing. contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Tech lead on a global platform modernization delivery for a financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Program under delivery pressure; offshore teams executing test cycles across dev, QA, UAT and production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configurations inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup; relied on assumptions/documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task; Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes; did not verify masking/scrubbing; no compensating controls (data masking, email interception)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered an email job in UAT sending unmasked production customer data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led root cause analysis and remediation, worked with the team on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action; Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Client demanded the tester be removed from the project",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Leaders own the environment their teams operate in",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Change: day-one responsibilities rather than treating inherited configurations as verified facts (paraphrase)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result; Performance"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q16",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered with the corpus failure story (what-i-learned-about-assumptions); every claim supported, all quoted text verbatim in the story; no closing. contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Tech lead on a global platform modernization delivery for a financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Program under delivery pressure; offshore teams executing test cycles across dev, QA, UAT and production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configurations inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup; relied on assumptions/documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task; Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes; did not verify masking/scrubbing; no compensating controls (data masking, email interception)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered an email job in UAT sending unmasked production customer data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led root cause analysis and remediation, worked with the team on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action; Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Client demanded the tester be removed from the project",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary; Purpose; Performance"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Assumptions he should have verified rather than inherited",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q16",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered with the corpus failure story (what-i-learned-about-assumptions); every claim supported, all quoted text verbatim in the story; no closing. contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Tech lead on a global platform modernization delivery for a financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Program under delivery pressure; offshore teams executing test cycles across dev, QA, UAT and production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configurations inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup; relied on assumptions/documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task; Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes; did not verify masking/scrubbing; no compensating controls (data masking, email interception)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered an email job in UAT sending unmasked production customer data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led root cause analysis and remediation, worked with the team on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action; Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Client demanded the tester be removed from the project",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary; Purpose; Performance"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q16",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered with the corpus failure story (what-i-learned-about-assumptions); every claim supported, all quoted text verbatim in the story; no closing. contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Tech lead on a global platform modernization delivery for a financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Program under delivery pressure; offshore teams executing test cycles across dev, QA, UAT and production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configurations inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup; relied on assumptions/documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task; Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes; did not verify masking/scrubbing; no compensating controls (data masking, email interception)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered an email job in UAT sending unmasked production customer data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led root cause analysis and remediation, worked with the team on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action; Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Client demanded the tester be removed from the project",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary; Purpose; Performance"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Leaders own the environment their teams operate in",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q16",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered with the corpus failure story (what-i-learned-about-assumptions); every claim supported, all quoted text verbatim in the story; no closing. contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Tech lead on a global platform modernization delivery for a financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Program under delivery pressure; offshore teams executing test cycles across dev, QA, UAT and production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configurations inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup; relied on assumptions/documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task; Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes; did not verify masking/scrubbing; no compensating controls (data masking, email interception)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered an email job in UAT sending unmasked production customer data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led root cause analysis and remediation, worked with the team on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action; Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Client demanded the tester be removed from the project",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary; Purpose; Performance"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q16",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered with the corpus failure story (what-i-learned-about-assumptions); every claim supported, all quoted text verbatim in the story; no closing. contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Client was Fortune 500",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation; 5PSummary"
+   },
+   {
+    "text": "Tech lead on a global platform modernization delivery for a financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Program under delivery pressure; offshore teams executing test cycles across dev, QA, UAT and production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configurations inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup; relied on assumptions/documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task; Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes; did not verify masking/scrubbing; no compensating controls (data masking, email interception)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered an email job in UAT sending unmasked production customer data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led root cause analysis and remediation, worked with the team on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action; Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Client demanded the tester be removed from the project",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary; Purpose; Performance"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q16",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered with the corpus failure story (what-i-learned-about-assumptions); every claim supported, all quoted text verbatim in the story; no closing. contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Tech lead on a global platform modernization delivery for a financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Program under delivery pressure; offshore teams executing test cycles across dev, QA, UAT and production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configurations inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup; relied on assumptions/documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task; Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes; did not verify masking/scrubbing; no compensating controls (data masking, email interception)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered an email job in UAT sending unmasked production customer data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led root cause analysis and remediation, worked with the team on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action; Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Client demanded the tester be removed from the project",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary; Purpose; Performance"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q16",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered with the corpus failure story (what-i-learned-about-assumptions); every claim supported, all quoted text verbatim in the story; no closing. contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Tech lead on a global platform modernization delivery for a financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Program under delivery pressure; offshore teams executing test cycles across dev, QA, UAT and production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configurations inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup; relied on assumptions/documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task; Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes; did not verify masking/scrubbing; no compensating controls (data masking, email interception)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered an email job in UAT sending unmasked production customer data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led root cause analysis and remediation, worked with the team on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action; Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Client demanded the tester be removed from the project",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary; Purpose; Performance"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q16",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered with the corpus failure story (what-i-learned-about-assumptions); every claim supported, all quoted text verbatim in the story; no closing. contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Client was Fortune 500",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation; 5PSummary"
+   },
+   {
+    "text": "Tech lead on a global platform modernization delivery for a financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Program under delivery pressure; offshore teams executing test cycles across dev, QA, UAT and production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configurations inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup; relied on assumptions/documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task; Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes; did not verify masking/scrubbing; no compensating controls (data masking, email interception)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered an email job in UAT sending unmasked production customer data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led root cause analysis and remediation, worked with the team on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action; Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Client demanded the tester be removed from the project",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Story titled 'What I Learned About Assumptions' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Title"
+   },
+   {
+    "text": "Quote 'leaders own the environment their teams operate in' (verbatim), framed as his lesson",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q16",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered with the corpus failure story (what-i-learned-about-assumptions); every claim supported, all quoted text verbatim in the story; no closing. contradicted 0, unsupported 0.",
+  "claims": [
+   {
+    "text": "Tech lead on a global platform modernization delivery for a financial services client",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Program under delivery pressure; offshore teams executing test cycles across dev, QA, UAT and production",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "IAM controls, environment segregation and downstream access configurations inherited from prior phases with documentation",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Situation"
+   },
+   {
+    "text": "Responsible for safe environment setup; relied on assumptions/documentation instead of verifying",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Task; Action"
+   },
+   {
+    "text": "Did not audit who could trigger downstream jobs or email processes; did not verify masking/scrubbing; no compensating controls (data masking, email interception)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action"
+   },
+   {
+    "text": "Offshore tester triggered an email job in UAT sending unmasked production customer data to thousands of real clients",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Took accountability, led root cause analysis and remediation, worked with the team on corrective controls",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Action; Result"
+   },
+   {
+    "text": "Root causes: insufficient IAM checks, unclear environment boundaries, unscrubbed production data",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Client demanded the tester be removed from the project",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'a systemic failure that resulted in an individual consequence' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   },
+   {
+    "text": "Quote 'assumptions are risks in disguise' (verbatim)",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary; Purpose; Performance"
+   },
+   {
+    "text": "IAM validation, environment verification, PII scrubbing and risk ownership became day-one leadership responsibilities",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients 5PSummary"
+   },
+   {
+    "text": "Leaders own the environment their teams operate in",
+    "label": "supported",
+    "source": "what-i-learned-about-assumptions|fortune-500-clients Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ }
+]

@@ -1,0 +1,279 @@
+[
+ {
+  "answer_md": "🐾 I don’t have anything on record about Matt’s hobbies.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Integrating Play into Work to Enhance Team Motivation (Accenture)",
+   "Work Philosophy: Where I Do My Best Work (Accenture)",
+   "Transition Story: Why I’m Exploring Opportunities (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 4.44,
+  "opening": "🐾 I know just the story.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3129,
+     "cached": 0,
+     "output": 28,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I don’t have anything on record about Matt’s hobbies.",
+    "function_calls": 0,
+    "usage": {
+     "input": 6140,
+     "cached": 3126,
+     "output": 18,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire hobbies personal interests outside work",
+    "top_score": 0.349412024,
+    "n": 25
+   }
+  ],
+  "arm": "VB",
+  "case": "q06",
+  "kind": "decline",
+  "run": 1,
+  "turn": 1,
+  "question": "What are Matt's hobbies?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 I don’t have anything on record about Matt’s hobbies.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Owning the P&L: From Engagement Margin to Center Cost Base (Fortune 500 Clients)",
+   "Transition Story: Why I’m Exploring Opportunities (Accenture)",
+   "MattGPT: RAG Architecture & Semantic Search Implementation (Independent Project)"
+  ],
+  "intent_family": "background",
+  "seconds": 3.76,
+  "opening": "🐾 Tracking this down...",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3133,
+     "cached": 2997,
+     "output": 28,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I don’t have anything on record about Matt’s hobbies.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7684,
+     "cached": 3130,
+     "output": 18,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire hobbies personal interests leisure activities",
+    "top_score": 0.305119246,
+    "n": 17
+   }
+  ],
+  "arm": "VA",
+  "case": "q06",
+  "kind": "decline",
+  "run": 1,
+  "turn": 1,
+  "question": "What are Matt's hobbies?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 I have nothing on record about Matt holding any patents.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Building Smart, Connected Devices at Accenture's Liquid Studio (Accenture)",
+   "Building Effective AI-Assisted Development Workflows (Independent Project)",
+   "Why Hire Matt? (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 4.97,
+  "opening": "🐾 Found it!",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3134,
+     "cached": 0,
+     "output": 26,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I have nothing on record about Matt holding any patents.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7047,
+     "cached": 3131,
+     "output": 17,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire patents patent inventor",
+    "top_score": 0.312678516,
+    "n": 25
+   }
+  ],
+  "arm": "VB",
+  "case": "q07",
+  "kind": "decline",
+  "run": 1,
+  "turn": 1,
+  "question": "Does Matt have any patents?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 I have nothing on record about patents held by Matt.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Building Smart, Connected Devices at Accenture's Liquid Studio (Accenture)",
+   "Building Effective AI-Assisted Development Workflows (Independent Project)",
+   "Why Hire Matt? (Accenture)"
+  ],
+  "intent_family": "background",
+  "seconds": 4.19,
+  "opening": "🐾 This is a strong one.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3129,
+     "cached": 2993,
+     "output": 26,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I have nothing on record about patents held by Matt.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7042,
+     "cached": 3126,
+     "output": 17,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire patents patent inventor",
+    "top_score": 0.312678516,
+    "n": 25
+   }
+  ],
+  "arm": "VA",
+  "case": "q07",
+  "kind": "decline",
+  "run": 1,
+  "turn": 1,
+  "question": "Does Matt have any patents?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 I have nothing on record about Matt’s marital status.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [],
+  "intent_family": "",
+  "seconds": 5.35,
+  "opening": "🐾 I know just the story.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3127,
+     "cached": 2993,
+     "output": 27,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I have nothing on record about Matt’s marital status.",
+    "function_calls": 0,
+    "usage": {
+     "input": 3170,
+     "cached": 3124,
+     "output": 42,
+     "reasoning": 23
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire marital status married spouse",
+    "top_score": 0.192068815,
+    "n": 0
+   }
+  ],
+  "arm": "VB",
+  "case": "q01",
+  "kind": "decline",
+  "run": 1,
+  "turn": 1,
+  "question": "Is Matt married?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 I'm focused on Matt's professional experience, including the projects, teams, and outcomes.\n\nAsk me about his **transformation work**, **platform engineering**, or **how he builds teams** and I'll dig up the details.",
+  "rejection": "semantic_router:personal",
+  "degraded": null,
+  "sources": [],
+  "intent_family": "personal",
+  "seconds": 0.28,
+  "opening": null,
+  "calls": [],
+  "search_queries": [],
+  "arm": "VA",
+  "case": "q01",
+  "kind": "decline",
+  "run": 1,
+  "turn": 1,
+  "question": "Is Matt married?",
+  "ui_reason": "semantic_router:personal"
+ }
+]

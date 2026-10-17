@@ -1,0 +1,27 @@
+scored answers: 680, no duplicates; corrections applied: 0
+
+  declines pass            NA: 80/80  OA: 80/80  NB: 80/80  OB: 80/80
+  declines opener_present  NA: 80/80  OA: 35/80  NB: 80/80  OB: 3/80
+  declines padded          NA: 1/80  OA: 5/80  NB: 1/80  OB: 3/80
+  0a facts pass            NA: 40/40  OA: 40/40  NB: 40/40  OB: 40/40
+  story controls pass      NA: 48/50  OA: 50/50  NB: 50/50  OB: 49/50
+  bare decline (text)      NA: 0/80  OA: 45/80  NB: 0/80  OB: 77/80
+
+per question (pass of 10):
+  q01 decline  NA 10/10  OA 10/10  NB 10/10  OB 10/10
+  q02 decline  NA 10/10  OA 10/10  NB 10/10  OB 10/10
+  q03 decline  NA 10/10  OA 10/10  NB 10/10  OB 10/10
+  q04 decline  NA 10/10  OA 10/10  NB 10/10  OB 10/10
+  q05 decline  NA 10/10  OA 10/10  NB 10/10  OB 10/10
+  q06 decline  NA 10/10  OA 10/10  NB 10/10  OB 10/10
+  q07 decline  NA 10/10  OA 10/10  NB 10/10  OB 10/10
+  q08 decline  NA 10/10  OA 10/10  NB 10/10  OB 10/10
+  q09 fact     NA 10/10  OA 10/10  NB 10/10  OB 10/10
+  q10 fact     NA 10/10  OA 10/10  NB 10/10  OB 10/10
+  q11 fact     NA 10/10  OA 10/10  NB 10/10  OB 10/10
+  q12 fact     NA 10/10  OA 10/10  NB 10/10  OB 10/10
+  q13 control  NA 10/10  OA 10/10  NB 10/10  OB 10/10
+  q14 control  NA  8/10  OA 10/10  NB 10/10  OB 10/10
+  q15 control  NA 10/10  OA 10/10  NB 10/10  OB 10/10
+  q16 control  NA 10/10  OA 10/10  NB 10/10  OB  9/10
+  q17 control  NA 10/10  OA 10/10  NB 10/10  OB 10/10

@@ -1,0 +1,208 @@
+[
+ {
+  "answer_md": "🐾 I don’t have information about Matt’s hobbies. His stories cover his professional work, but don’t identify his hobbies outside work.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Integrating Play into Work to Enhance Team Motivation (Accenture)",
+   "Work Philosophy: Where I Do My Best Work (Accenture)",
+   "Transition Story: Why I’m Exploring Opportunities (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 5.38,
+  "opening": "🐾 Perfect, here's what I found.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3170,
+     "cached": 0,
+     "output": 28,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I don’t have information about Matt’s hobbies. His stories cover his professional work, but don’t identify his hobbies outside work.",
+    "function_calls": 0,
+    "usage": {
+     "input": 6181,
+     "cached": 3167,
+     "output": 32,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire hobbies personal interests outside work",
+    "top_score": 0.349412024,
+    "n": 25
+   }
+  ],
+  "arm": "TB",
+  "case": "q06",
+  "kind": "decline",
+  "run": 1,
+  "turn": 1,
+  "question": "What are Matt's hobbies?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 I don’t have any record of patents held by Matt.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Building Smart, Connected Devices at Accenture's Liquid Studio (Accenture)",
+   "Building Effective AI-Assisted Development Workflows (Independent Project)",
+   "Why Hire Matt? (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 5.28,
+  "opening": "🐾 On it!",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3174,
+     "cached": 0,
+     "output": 26,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I don’t have any record of patents held by Matt.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7087,
+     "cached": 3171,
+     "output": 18,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire patents patent inventor",
+    "top_score": 0.312678516,
+    "n": 25
+   }
+  ],
+  "arm": "TB",
+  "case": "q07",
+  "kind": "decline",
+  "run": 1,
+  "turn": 1,
+  "question": "Does Matt have any patents?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 I don’t have any information on Matt’s marital status.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [],
+  "intent_family": "",
+  "seconds": 4.91,
+  "opening": "🐾 Perfect, here's what I found.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3171,
+     "cached": 0,
+     "output": 27,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I don’t have any information on Matt’s marital status.",
+    "function_calls": 0,
+    "usage": {
+     "input": 3214,
+     "cached": 3168,
+     "output": 43,
+     "reasoning": 23
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire marital status married spouse",
+    "top_score": 0.192068815,
+    "n": 0
+   }
+  ],
+  "arm": "TB",
+  "case": "q01",
+  "kind": "decline",
+  "run": 1,
+  "turn": 1,
+  "question": "Is Matt married?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 Here’s how Matt describes his leadership philosophy.\n\nMatt leads with empathy, clarity, and purpose. He describes it as a “builder’s mindset, coach’s heart”: teach teams to fish, don’t just fix problems. His principles include psychological safety, decisions pushed to the people closest to the work, and balanced teams with Product, Engineering, and Design together.\n\nAcross his roles at **Accenture**, Matt inherited engineering teams that were “over-processed, under-trusted, waiting for permission instead of owning outcomes.” Some avoided risks because they feared blame. Hierarchies and role silos created bottlenecks, while innovation teams sometimes expected polished requirements and predictable outcomes before testing their assumptions.\n\nMatt made intent explicit, used transparency and direct feedback, and coached teams to think clearly rather than just execute tasks. He established a “permit to fail” environment through non-punitive post-mortems and lean, low-stakes experiments. Teams examined mistakes for lessons rather than pointing fingers. In product incubation, he set expectations that early prototypes and user tests would likely fail, then used those results to shape product direction week by week.\n\nHe also assembled engineers, product managers, and UX architects into balanced teams with shared accountability. Pair programming, collaborative coding, retrospectives, automation, and continuous delivery became part of daily work. Teams could voice feedback and implement changes autonomously.\n\nAt the **150-person** Cloud Innovation Center, teams achieved **4x delivery acceleration** after embracing lean product and modern engineering practices. The balanced-team work also reduced project delays and achieved **zero-defect production code** across client engagements.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Leadership Philosophy: How I Lead (Accenture)",
+   "Establishing a ‘Permit to Fail’ Culture for Continuous Improvement (Accenture)",
+   "Why Early Failure Is a Feature, Not a Bug, in Innovation (Accenture)",
+   "Work Philosophy: Where I Do My Best Work (Accenture)",
+   "Breaking Silos Between Engineering, Design, and Product (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 11.87,
+  "opening": "Got it! 🐾",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3172,
+     "cached": 0,
+     "output": 34,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Here’s how Matt describes his leadership philosophy.\n\nMatt leads with empathy, clarity, and purpose. He describes it as a “builder’s mindset, coach’s heart”: teach teams to fish, don’t just fix problems. His principles include psychological safety, decisions pushed to the people closest to the work, and balanced teams with Product, Engineering, and Design together.\n\nAcross his roles at **Accenture**, Matt inherited engineering teams that were “over-processed, under-trusted, waiting for permission instead of owning outcomes.” Some avoided risks because they feared blame. Hierarchies and role silos created bottlenecks, while innovation teams sometimes expected polished requirements and predictable outcomes before testing their assumptions.\n\nMatt made intent explicit, used transparency and direct feedback, and coached teams to think clearly rather than just execute tasks. He established a “permit to fail” environment through non-punitive post-mortems and lean, low-stakes experiments. Teams examined mistakes for lessons rather than pointing fingers. In product incubation, he set expectations that early prototypes and user tests would likely fail, then used those results to shape product direction week by week.\n\nHe also assembled engineers, product managers, and UX architects into balanced teams with shared accountability. Pair programming, collaborative coding, retrospectives, automation, and continuous delivery became part of daily work. Teams could voice feedback and implement changes autonomously.\n\nAt the **150-person** Cloud Innovation Center, teams achieved **4x delivery acceleration** after embracing lean product and modern engineering practices. The balanced-team work also reduced project delays and achieved **zero-defect production code** across client engagements.",
+    "function_calls": 0,
+    "usage": {
+     "input": 5373,
+     "cached": 3169,
+     "output": 360,
+     "reasoning": 30
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt leadership philosophy leads with empathy clarity purpose permit to fail balanced teams Product Engineering Design",
+    "top_score": 0.654256523,
+    "n": 25
+   }
+  ],
+  "arm": "TB",
+  "case": "q14",
+  "kind": "control",
+  "run": 1,
+  "turn": 1,
+  "question": "What's Matt's leadership philosophy?",
+  "ui_reason": null
+ }
+]

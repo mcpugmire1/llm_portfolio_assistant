@@ -1,0 +1,326 @@
+[
+ {
+  "answer_md": "🐾 I searched Matt's whole record, and it doesn't mention whether he has children.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Why Hire Matt? (Accenture)",
+   "MattGPT: RAG Architecture & Semantic Search Implementation (Independent Project)",
+   "Transition Story: Why I’m Exploring Opportunities (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 5.55,
+  "opening": "🐾 Perfect, here's what I found.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3127,
+     "cached": 0,
+     "output": 33,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I searched Matt's whole record, and it doesn't mention whether he has children.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7028,
+     "cached": 3124,
+     "output": 44,
+     "reasoning": 20
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Does Matt Pugmire have children or kids? Family parenthood.",
+    "top_score": 0.285063505,
+    "n": 7
+   }
+  ],
+  "arm": "BB",
+  "case": "q03",
+  "kind": "decline",
+  "run": 5,
+  "turn": 1,
+  "question": "Does Matt have kids?",
+  "ui_reason": null,
+  "decline_line": "🐾 I searched Matt's whole record, and it doesn't mention [topic]."
+ },
+ {
+  "answer_md": "🐾 I searched Matt's whole record, and it doesn't mention whether he has children.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Why Hire Matt? (Accenture)",
+   "MattGPT: RAG Architecture & Semantic Search Implementation (Independent Project)",
+   "Transition Story: Why I’m Exploring Opportunities (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 5.41,
+  "opening": "🐾 Perfect, here's what I found.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3125,
+     "cached": 0,
+     "output": 33,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I searched Matt's whole record, and it doesn't mention whether he has children.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7026,
+     "cached": 3122,
+     "output": 70,
+     "reasoning": 46
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Does Matt Pugmire have children or kids? Family parenthood.",
+    "top_score": 0.285063505,
+    "n": 7
+   }
+  ],
+  "arm": "BB",
+  "case": "q03",
+  "kind": "decline",
+  "run": 10,
+  "turn": 1,
+  "question": "Does Matt have kids?",
+  "ui_reason": null,
+  "decline_line": "🐾 I searched Matt's whole record, and it doesn't mention [topic]."
+ },
+ {
+  "answer_md": "🐾 I followed that trail and came up empty: Matt's stories don't cover his hobbies.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "MattGPT: RAG Architecture & Semantic Search Implementation (Independent Project)",
+   "Why Hire Matt? (Accenture)",
+   "I Let Speed Win Over Structure. Here's How I Fixed It. (Independent Project)"
+  ],
+  "intent_family": "",
+  "seconds": 3.67,
+  "opening": "Got it! 🐾",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3130,
+     "cached": 3004,
+     "output": 26,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I followed that trail and came up empty: Matt's stories don't cover his hobbies.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7110,
+     "cached": 3127,
+     "output": 23,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire hobbies personal interests",
+    "top_score": 0.324564457,
+    "n": 25
+   }
+  ],
+  "arm": "BB",
+  "case": "q06",
+  "kind": "decline",
+  "run": 5,
+  "turn": 1,
+  "question": "What are Matt's hobbies?",
+  "ui_reason": null,
+  "decline_line": "🐾 I followed that trail and came up empty: Matt's stories don't cover [topic]."
+ },
+ {
+  "answer_md": "🐾 I searched Matt's whole record, and it doesn't mention his hobbies.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "Work Philosophy: Where I Do My Best Work (Accenture)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "Integrating Play into Work to Enhance Team Motivation (Accenture)",
+   "Transition Story: Why I’m Exploring Opportunities (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 4.7,
+  "opening": "🐾 I know just the story.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3126,
+     "cached": 2990,
+     "output": 24,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I searched Matt's whole record, and it doesn't mention his hobbies.",
+    "function_calls": 0,
+    "usage": {
+     "input": 6133,
+     "cached": 3123,
+     "output": 39,
+     "reasoning": 17
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt hobbies personal interests outside work",
+    "top_score": 0.326429188,
+    "n": 25
+   }
+  ],
+  "arm": "BB",
+  "case": "q06",
+  "kind": "decline",
+  "run": 10,
+  "turn": 1,
+  "question": "What are Matt's hobbies?",
+  "ui_reason": null,
+  "decline_line": "🐾 I searched Matt's whole record, and it doesn't mention [topic]."
+ },
+ {
+  "answer_md": "🐾 I searched Matt's whole record, and it doesn't mention any patents held by him.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Building Smart, Connected Devices at Accenture's Liquid Studio (Accenture)",
+   "Building Effective AI-Assisted Development Workflows (Independent Project)",
+   "Why Hire Matt? (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 5.51,
+  "opening": "🐾 Here's a great example.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3127,
+     "cached": 2991,
+     "output": 26,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I searched Matt's whole record, and it doesn't mention any patents held by him.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7040,
+     "cached": 3124,
+     "output": 64,
+     "reasoning": 39
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire patents patent inventor",
+    "top_score": 0.312678516,
+    "n": 25
+   }
+  ],
+  "arm": "BB",
+  "case": "q07",
+  "kind": "decline",
+  "run": 5,
+  "turn": 1,
+  "question": "Does Matt have any patents?",
+  "ui_reason": null,
+  "decline_line": "🐾 I searched Matt's whole record, and it doesn't mention [topic]."
+ },
+ {
+  "answer_md": "🐾 I searched Matt's whole record, and it doesn't mention any patents held by him. I can’t confirm whether he has any.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Building Smart, Connected Devices at Accenture's Liquid Studio (Accenture)",
+   "Building Effective AI-Assisted Development Workflows (Independent Project)",
+   "Why Hire Matt? (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 4.69,
+  "opening": "Got it! 🐾",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3126,
+     "cached": 3000,
+     "output": 26,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 I searched Matt's whole record, and it doesn't mention any patents held by him. I can’t confirm whether he has any.",
+    "function_calls": 0,
+    "usage": {
+     "input": 7039,
+     "cached": 7036,
+     "output": 32,
+     "reasoning": 0
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire patents patent inventor",
+    "top_score": 0.312678516,
+    "n": 25
+   }
+  ],
+  "arm": "BB",
+  "case": "q07",
+  "kind": "decline",
+  "run": 10,
+  "turn": 1,
+  "question": "Does Matt have any patents?",
+  "ui_reason": null,
+  "decline_line": "🐾 I searched Matt's whole record, and it doesn't mention [topic]."
+ }
+]

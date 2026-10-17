@@ -1,0 +1,42 @@
+run 5, 'Begin with this line', 2 lines: whole | opening clause
+  q03: 10 | 10 of 10
+  q06: 10 | 10 of 10
+  q07: 10 | 10 of 10
+  all: 30 | 30 of 30
+run 4, 'Use this shape', 4 lines: whole | opening clause
+  q03: 3 | 2 of 10
+  q06: 10 | 9 of 10
+  q07: 1 | 3 of 10
+  all: 14 | 14 of 30
+
+run 5 answers:
+  q03 r01 WHOLE  | "🐾 I searched Matt's whole record, and it doesn't mention whether he has children."
+  q03 r02 WHOLE  | "🐾 I searched Matt's whole record, and it doesn't mention whether he has children."
+  q03 r03 WHOLE  | "🐾 I followed that trail and came up empty: Matt's stories don't cover whether he has children."
+  q03 r04 WHOLE  | "🐾 I followed that trail and came up empty: Matt's stories don't cover whether he has kids."
+  q03 r05 WHOLE  | "🐾 I searched Matt's whole record, and it doesn't mention whether he has children."
+  q03 r06 WHOLE  | "🐾 I searched Matt's whole record, and it doesn't mention whether he has kids."
+  q03 r07 WHOLE  | "🐾 I searched Matt's whole record, and it doesn't mention whether he has kids."
+  q03 r08 WHOLE  | "🐾 I searched Matt's whole record, and it doesn't mention whether he has kids."
+  q03 r09 WHOLE  | "🐾 I searched Matt's whole record, and it doesn't mention whether he has kids."
+  q03 r10 WHOLE  | "🐾 I searched Matt's whole record, and it doesn't mention whether he has children."
+  q06 r01 WHOLE  | "🐾 I followed that trail and came up empty: Matt's stories don't cover his hobbies."
+  q06 r02 WHOLE  | "🐾 I followed that trail and came up empty: Matt's stories don't cover his hobbies."
+  q06 r03 WHOLE  | "🐾 I followed that trail and came up empty: Matt's stories don't cover his hobbies."
+  q06 r04 WHOLE  | "🐾 I searched Matt's whole record, and it doesn't mention his hobbies."
+  q06 r05 WHOLE  | "🐾 I followed that trail and came up empty: Matt's stories don't cover his hobbies."
+  q06 r06 WHOLE  | "🐾 I followed that trail and came up empty: Matt's stories don't cover his hobbies. I don't have verified information to share about them."
+  q06 r07 WHOLE  | "🐾 I followed that trail and came up empty: Matt's stories don't cover his hobbies. I don't have confirmed information about what he enjoys outside work."
+  q06 r08 WHOLE  | "🐾 I searched Matt's whole record, and it doesn't mention his hobbies."
+  q06 r09 WHOLE  | "🐾 I followed that trail and came up empty: Matt's stories don't cover his hobbies."
+  q06 r10 WHOLE  | "🐾 I searched Matt's whole record, and it doesn't mention his hobbies."
+  q07 r01 WHOLE  | "🐾 I followed that trail and came up empty: Matt's stories don't cover his patents. I can’t confirm whether he holds any."
+  q07 r02 WHOLE  | "🐾 I followed that trail and came up empty: Matt's stories don't cover his patents."
+  q07 r03 WHOLE  | "🐾 I searched Matt's whole record, and it doesn't mention any patents held by him. I can’t confirm whether he has any."
+  q07 r04 WHOLE  | "🐾 I searched Matt's whole record, and it doesn't mention any patents held by him. I can’t confirm whether he has any."
+  q07 r05 WHOLE  | "🐾 I searched Matt's whole record, and it doesn't mention any patents held by him."
+  q07 r06 WHOLE  | "🐾 I followed that trail and came up empty: Matt's stories don't cover patents. I can’t confirm whether he has any."
+  q07 r07 WHOLE  | "🐾 I followed that trail and came up empty: Matt's stories don't cover his patents. I can't confirm whether he holds any."
+  q07 r08 WHOLE  | "🐾 I searched Matt's whole record, and it doesn't mention patents held by him. I can’t confirm whether he has any."
+  q07 r09 WHOLE  | "🐾 I searched Matt's whole record, and it doesn't mention any patents held by Matt. I can’t confirm whether he has any."
+  q07 r10 WHOLE  | "🐾 I searched Matt's whole record, and it doesn't mention any patents held by him. I can’t confirm whether he has any."

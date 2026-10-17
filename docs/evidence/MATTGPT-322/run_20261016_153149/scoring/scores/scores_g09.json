@@ -1,0 +1,1712 @@
+[
+ {
+  "case": "q09",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Oracle 'exams passed, not completed OCP certification' note read as supported paraphrase of the profile's 'exams passed (OCP track)'. No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   },
+   {
+    "text": "The Oracle entry is exams passed, not a completed OCP certification",
+    "label": "supported",
+    "source": "profile.certifications[3] (recorded as 'exams passed (OCP track)')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). Oracle 'exams passed, not completed OCP certification' note read as supported paraphrase of the profile's 'exams passed (OCP track)'. No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   },
+   {
+    "text": "The Oracle entry is exams passed, not a completed OCP certification",
+    "label": "supported",
+    "source": "profile.certifications[3] (recorded as 'exams passed (OCP track)')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 1,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 2,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Oracle 'exams passed, not completed OCP certification' note read as supported paraphrase of the profile's 'exams passed (OCP track)'. No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   },
+   {
+    "text": "The Oracle entry is exams passed, not a completed OCP certification",
+    "label": "supported",
+    "source": "profile.certifications[3] (recorded as 'exams passed (OCP track)')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). Oracle 'exams passed, not completed OCP certification' note read as supported paraphrase of the profile's 'exams passed (OCP track)'. No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   },
+   {
+    "text": "The Oracle entry is exams passed, not a completed OCP certification",
+    "label": "supported",
+    "source": "profile.certifications[3] (recorded as 'exams passed (OCP track)')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 3,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). Oracle 'exams passed, not completed OCP certification' note read as supported paraphrase of the profile's 'exams passed (OCP track)'. No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   },
+   {
+    "text": "The Oracle entry is exams passed, not a completed OCP certification",
+    "label": "supported",
+    "source": "profile.certifications[3] (recorded as 'exams passed (OCP track)')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Oracle 'exams passed, not completed OCP certification' note read as supported paraphrase of the profile's 'exams passed (OCP track)'. No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   },
+   {
+    "text": "The Oracle entry is exams passed, not a completed OCP certification",
+    "label": "supported",
+    "source": "profile.certifications[3] (recorded as 'exams passed (OCP track)')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). Oracle 'exams passed, not completed OCP certification' note read as supported paraphrase of the profile's 'exams passed (OCP track)'. No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   },
+   {
+    "text": "The Oracle entry is exams passed, not a completed OCP certification",
+    "label": "supported",
+    "source": "profile.certifications[3] (recorded as 'exams passed (OCP track)')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 4,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). Oracle 'exams passed, not completed OCP certification' note read as supported paraphrase of the profile's 'exams passed (OCP track)'. No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   },
+   {
+    "text": "The Oracle entry is exams passed, not a completed OCP certification",
+    "label": "supported",
+    "source": "profile.certifications[3] (recorded as 'exams passed (OCP track)')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 5,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). Oracle 'exams passed, not completed OCP certification' note read as supported paraphrase of the profile's 'exams passed (OCP track)'. No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   },
+   {
+    "text": "The Oracle entry is exams passed, not a completed OCP certification",
+    "label": "supported",
+    "source": "profile.certifications[3] (recorded as 'exams passed (OCP track)')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 6,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 7,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). Oracle 'exams passed, not completed OCP certification' note read as supported paraphrase of the profile's 'exams passed (OCP track)'. No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   },
+   {
+    "text": "The Oracle entry is exams passed, not a completed OCP certification",
+    "label": "supported",
+    "source": "profile.certifications[3] (recorded as 'exams passed (OCP track)')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Oracle 'exams passed, not completed OCP certification' note read as supported paraphrase of the profile's 'exams passed (OCP track)'. No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   },
+   {
+    "text": "The Oracle entry is exams passed, not a completed OCP certification",
+    "label": "supported",
+    "source": "profile.certifications[3] (recorded as 'exams passed (OCP track)')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 8,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). Oracle 'exams passed, not completed OCP certification' note read as supported paraphrase of the profile's 'exams passed (OCP track)'. No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   },
+   {
+    "text": "The Oracle entry is exams passed, not a completed OCP certification",
+    "label": "supported",
+    "source": "profile.certifications[3] (recorded as 'exams passed (OCP track)')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 9,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). Oracle 'exams passed, not completed OCP certification' note read as supported paraphrase of the profile's 'exams passed (OCP track)'. No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   },
+   {
+    "text": "The Oracle entry is exams passed, not a completed OCP certification",
+    "label": "supported",
+    "source": "profile.certifications[3] (recorded as 'exams passed (OCP track)')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). Oracle 'exams passed, not completed OCP certification' note read as supported paraphrase of the profile's 'exams passed (OCP track)'. No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   },
+   {
+    "text": "The Oracle entry is exams passed, not a completed OCP certification",
+    "label": "supported",
+    "source": "profile.certifications[3] (recorded as 'exams passed (OCP track)')"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). Quoted text matches profile_rendered verbatim (rule 8). No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ },
+ {
+  "case": "q09",
+  "run": 10,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Lists all four profile certifications with issued/expired status, says none is current; all supported (profile.certifications[0-3]). No closing; 0 contradicted, 0 unsupported.",
+  "claims": [
+   {
+    "text": "AWS Certified Solutions Architect - Associate, issued 2020, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[0]"
+   },
+   {
+    "text": "AWS Certified Cloud Practitioner, issued 2019, expired 2023",
+    "label": "supported",
+    "source": "profile.certifications[1]"
+   },
+   {
+    "text": "SAFe 4 Certified Agilist, issued 2017, expired",
+    "label": "supported",
+    "source": "profile.certifications[2]"
+   },
+   {
+    "text": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002)",
+    "label": "supported",
+    "source": "profile.certifications[3]"
+   },
+   {
+    "text": "None of his certifications is current",
+    "label": "supported",
+    "source": "profile.certifications (all expired; Oracle entry is exams passed, 2002)"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "opener_present": null,
+  "padded": null
+ }
+]

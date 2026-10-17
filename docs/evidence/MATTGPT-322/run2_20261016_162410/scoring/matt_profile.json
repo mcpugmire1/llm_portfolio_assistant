@@ -1,0 +1,68 @@
+{
+  "name": "Matt Pugmire",
+  "career_summary": "Senior engineering and transformation leader, most notably as Director of the Cloud Innovation Center, which he built from zero to 150+ practitioners across 15+ Fortune 500 clients. His background spans platform engineering, agile transformation, financial services technology, and AI-assisted development.",
+  "education": [
+    {
+      "degree": "Master's degree, Information Technology",
+      "institution": "American InterContinental University",
+      "note": "Information Technology is a recognized Computer Science-related discipline, and a Master's degree exceeds a Bachelor's."
+    },
+    {
+      "degree": "Graduate coursework, Romance Languages (Linguistics)",
+      "institution": "University of Georgia",
+      "note": "Teaching assistant; taught French 101, 102, and 103."
+    },
+    {
+      "degree": "BA, French Language and Literature",
+      "institution": "Queens University of Charlotte",
+      "note": "Included a year abroad at Université Paul Valéry, Montpellier, France, through an exchange program with the University of North Carolina at Chapel Hill."
+    }
+  ],
+  "certifications": [
+    {"name": "AWS Certified Solutions Architect - Associate", "issued": 2020, "expired": 2023},
+    {"name": "AWS Certified Cloud Practitioner", "issued": 2019, "expired": 2023},
+    {"name": "SAFe 4 Certified Agilist", "issued": 2017, "expired": true},
+    {"name": "Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery", "issued": 2002}
+  ],
+  "languages": [
+    {"language": "English", "level": "native"},
+    {"language": "French", "level": "B2, self-assessed"}
+  ],
+  "logistics": {
+    "location": {
+      "value": "Atlanta, GA",
+      "subline": "Open to relocation and travel"
+    },
+    "work_model": {
+      "value": "In-office preferred",
+      "subline": "Hybrid or remote fine"
+    },
+    "availability": {
+      "value": "Immediate",
+      "subline": "No notice period"
+    },
+    "authorization": {
+      "value": "US citizen",
+      "subline": "No sponsorship needed"
+    }
+  },
+  "career_arc": {
+    "progression": "Software Engineer → Solution Architect → Director → Cloud Innovation Center Leader",
+    "employers": [
+      {"name": "Wellfound Technology", "years": "2000-2001, 2002-2003"},
+      {"name": "American InterContinental University", "years": "2003-2004", "note": "adjunct, taught alongside full-time work"},
+      {"name": "Cendian Chemical Logistics", "years": "2003-2005"},
+      {"name": "Accenture", "years": "March 2005 - September 2023"}
+    ],
+    "current": "Sabbatical, building MattGPT. In active search for a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job."
+  },
+  "self_description": {
+    "label": "Matt's attested self-description (his own words, not independently verified)",
+    "statements": [
+      "I build what's next, modernize what's not, and grow teams along the way.",
+      "Builder's mindset, coach's heart",
+      "Teaches teams to fish, doesn't just fix problems",
+      "Core values: Empathy, Authenticity, Curiosity, Integrity, Leadership"
+    ]
+  }
+}

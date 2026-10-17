@@ -1,0 +1,3572 @@
+[
+ {
+  "case": "q17",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Program developed in collaboration with AWS...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Organized group coaching sessions and knowledge-sharing workshops",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Goal/outcome: equip engineers to lead cloud(-native) transformation",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Program developed in collaboration with AWS...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Goal/outcome: equip engineers to lead cloud(-native) transformation",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 1,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Program developed in collaboration with AWS...); no quotations, no closing offer. Also names NEW IT SKILLS NOW, labelled as separate programs with figures matching their stories; not a carry-over.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Separately built NEW IT SKILLS NOW: modular self-paced paths, hands-on labs, progress tracker, office hours",
+    "label": "supported",
+    "source": "launching-a-self-paced-learning-program-for-emerging-technologies|accenture Action/5PSummary"
+   },
+   {
+    "text": "NEW IT SKILLS NOW trained 300+ professionals across AWS and other modern technologies",
+    "label": "supported",
+    "source": "launching-a-self-paced-learning-program-for-emerging-technologies|accenture Result"
+   },
+   {
+    "text": "NEW IT SKILLS NOW became the standard self-paced learning path across CloudFirst",
+    "label": "supported",
+    "source": "launching-a-self-paced-learning-program-for-emerging-technologies|accenture Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 1,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Program developed in collaboration with AWS...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Goal/outcome: equip engineers to lead cloud(-native) transformation",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Role was Cloud Native Architecture Lead...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Role was Cloud Native Architecture Lead",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Role"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Program developed in collaboration with AWS...); no quotations, no closing offer. Also names NEW IT SKILLS NOW and ARISE, labelled as separate programs with figures matching their stories; not a carry-over.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Organized group coaching sessions and knowledge-sharing workshops",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Separately built NEW IT SKILLS NOW: modular self-paced paths, hands-on labs, progress tracker, office hours",
+    "label": "supported",
+    "source": "launching-a-self-paced-learning-program-for-emerging-technologies|accenture Action/5PSummary"
+   },
+   {
+    "text": "NEW IT SKILLS NOW trained 300+ professionals across AWS and other modern technologies",
+    "label": "supported",
+    "source": "launching-a-self-paced-learning-program-for-emerging-technologies|accenture Result"
+   },
+   {
+    "text": "Coordinated AWS training track for Accenture's ARISE HBCU Conference: curriculum, presenters, sessions, free AWS certificate training opportunities",
+    "label": "supported",
+    "source": "building-tangible-cloud-tech-skills-for-hbcu-students|accenture Action"
+   },
+   {
+    "text": "250+ HBCU students and recent graduates participated each year across four years (2020-2023)",
+    "label": "supported",
+    "source": "building-tangible-cloud-tech-skills-for-hbcu-students|accenture Result/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 2,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Role was Cloud Native Architecture Lead...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Role was Cloud Native Architecture Lead",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Role"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Organized group coaching sessions and knowledge-sharing workshops",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 2,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Program developed in collaboration with AWS...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Organized group coaching sessions and knowledge-sharing workshops",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Goal/outcome: equip engineers to lead cloud(-native) transformation",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Program developed in collaboration with AWS; Designed structured learning paths and certificati...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Goal/outcome: equip engineers to lead cloud(-native) transformation",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Program developed in collaboration with AWS...); no quotations, no closing offer. Also names NEW IT SKILLS NOW, labelled as separate programs with figures matching their stories; not a carry-over.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Organized group coaching sessions and knowledge-sharing workshops",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Separately built NEW IT SKILLS NOW: modular self-paced paths, hands-on labs, progress tracker, office hours",
+    "label": "supported",
+    "source": "launching-a-self-paced-learning-program-for-emerging-technologies|accenture Action/5PSummary"
+   },
+   {
+    "text": "NEW IT SKILLS NOW trained 300+ professionals across AWS and other modern technologies",
+    "label": "supported",
+    "source": "launching-a-self-paced-learning-program-for-emerging-technologies|accenture Result"
+   },
+   {
+    "text": "NEW IT SKILLS NOW became the standard self-paced learning path across CloudFirst",
+    "label": "supported",
+    "source": "launching-a-self-paced-learning-program-for-emerging-technologies|accenture Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 3,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Program developed in collaboration with AWS...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Goal/outcome: equip engineers to lead cloud(-native) transformation",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 3,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Role was Cloud Native Architecture Lead...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Role was Cloud Native Architecture Lead",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Role"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Program developed in collaboration with AWS...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Goal/outcome: equip engineers to lead cloud(-native) transformation",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Role was Cloud Native Architecture Lead...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Role was Cloud Native Architecture Lead",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Role"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Organized group coaching sessions and knowledge-sharing workshops",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Goal/outcome: equip engineers to lead cloud(-native) transformation",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 4,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Program developed in collaboration with AWS...); no quotations, no closing offer. Also names NEW IT SKILLS NOW, labelled as separate programs with figures matching their stories; not a carry-over.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Goal/outcome: equip engineers to lead cloud(-native) transformation",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task/Action"
+   },
+   {
+    "text": "Separately built NEW IT SKILLS NOW: modular self-paced paths, hands-on labs, progress tracker, office hours",
+    "label": "supported",
+    "source": "launching-a-self-paced-learning-program-for-emerging-technologies|accenture Action/5PSummary"
+   },
+   {
+    "text": "NEW IT SKILLS NOW trained 300+ professionals across AWS and other modern technologies",
+    "label": "supported",
+    "source": "launching-a-self-paced-learning-program-for-emerging-technologies|accenture Result"
+   },
+   {
+    "text": "NEW IT SKILLS NOW became the standard self-paced learning path across CloudFirst",
+    "label": "supported",
+    "source": "launching-a-self-paced-learning-program-for-emerging-technologies|accenture Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 4,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Program developed in collaboration with AWS...); no quotations, no closing offer. Also names ARISE, labelled as separate programs with figures matching their stories; not a carry-over.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Coordinated AWS training track for Accenture's ARISE HBCU Conference: curriculum, presenters, sessions, free AWS certificate training opportunities",
+    "label": "supported",
+    "source": "building-tangible-cloud-tech-skills-for-hbcu-students|accenture Action"
+   },
+   {
+    "text": "250+ HBCU students and recent graduates participated each year across four years (2020-2023)",
+    "label": "supported",
+    "source": "building-tangible-cloud-tech-skills-for-hbcu-students|accenture Result/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Program developed in collaboration with AWS...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Organized group coaching sessions and knowledge-sharing workshops",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Goal/outcome: equip engineers to lead cloud(-native) transformation",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Program developed in collaboration with AWS...); no quotations, no closing offer. Also names NEW IT SKILLS NOW and ARISE, labelled as separate programs with figures matching their stories; not a carry-over.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Organized group coaching sessions and knowledge-sharing workshops",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Separately built NEW IT SKILLS NOW: modular self-paced paths, hands-on labs, progress tracker, office hours",
+    "label": "supported",
+    "source": "launching-a-self-paced-learning-program-for-emerging-technologies|accenture Action/5PSummary"
+   },
+   {
+    "text": "NEW IT SKILLS NOW trained 300+ professionals across AWS and other modern technologies",
+    "label": "supported",
+    "source": "launching-a-self-paced-learning-program-for-emerging-technologies|accenture Result"
+   },
+   {
+    "text": "Coordinated AWS training track for Accenture's ARISE HBCU Conference: curriculum, presenters, sessions, free AWS certificate training opportunities",
+    "label": "supported",
+    "source": "building-tangible-cloud-tech-skills-for-hbcu-students|accenture Action"
+   },
+   {
+    "text": "250+ HBCU students and recent graduates participated each year across four years (2020-2023)",
+    "label": "supported",
+    "source": "building-tangible-cloud-tech-skills-for-hbcu-students|accenture Result/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 5,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Role was Cloud Native Architecture Lead...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Role was Cloud Native Architecture Lead",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Role"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Organized group coaching sessions and knowledge-sharing workshops",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Goal/outcome: equip engineers to lead cloud(-native) transformation",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 5,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Program developed in collaboration with AWS...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Organized group coaching sessions and knowledge-sharing workshops",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Role was Cloud Native Architecture Lead...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Role was Cloud Native Architecture Lead",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Role"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Goal/outcome: equip engineers to lead cloud(-native) transformation",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Role was Cloud Native Architecture Lead...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Role was Cloud Native Architecture Lead",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Role"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Goal/outcome: equip engineers to lead cloud(-native) transformation",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 6,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Role was Cloud Native Architecture Lead...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Role was Cloud Native Architecture Lead",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Role"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Organized group coaching sessions and knowledge-sharing workshops",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 6,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Program developed in collaboration with AWS...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Role was Cloud Native Architecture Lead...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Role was Cloud Native Architecture Lead",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Role"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Program developed in collaboration with AWS; Designed structured learning paths and certificati...); no quotations, no closing offer. Also names NEW IT SKILLS NOW and ARISE, labelled as separate programs with figures matching their stories; not a carry-over.",
+  "claims": [
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Organized group coaching sessions and knowledge-sharing workshops",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Separately built NEW IT SKILLS NOW: modular self-paced paths, hands-on labs, progress tracker, office hours",
+    "label": "supported",
+    "source": "launching-a-self-paced-learning-program-for-emerging-technologies|accenture Action/5PSummary"
+   },
+   {
+    "text": "NEW IT SKILLS NOW trained 300+ professionals across AWS and other modern technologies",
+    "label": "supported",
+    "source": "launching-a-self-paced-learning-program-for-emerging-technologies|accenture Result"
+   },
+   {
+    "text": "NEW IT SKILLS NOW became the standard self-paced learning path across CloudFirst",
+    "label": "supported",
+    "source": "launching-a-self-paced-learning-program-for-emerging-technologies|accenture Result/5PSummary"
+   },
+   {
+    "text": "Coordinated AWS training track for Accenture's ARISE HBCU Conference: curriculum, presenters, sessions, free AWS certificate training opportunities",
+    "label": "supported",
+    "source": "building-tangible-cloud-tech-skills-for-hbcu-students|accenture Action"
+   },
+   {
+    "text": "250+ HBCU students and recent graduates participated each year across four years (2020-2023)",
+    "label": "supported",
+    "source": "building-tangible-cloud-tech-skills-for-hbcu-students|accenture Result/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 7,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Role was Cloud Native Architecture Lead...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Role was Cloud Native Architecture Lead",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Role"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Organized group coaching sessions and knowledge-sharing workshops",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 7,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Program developed in collaboration with AWS...); no quotations, no closing offer. Also names ARISE, labelled as separate programs with figures matching their stories; not a carry-over.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Organized group coaching sessions and knowledge-sharing workshops",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Goal/outcome: equip engineers to lead cloud(-native) transformation",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task/Action"
+   },
+   {
+    "text": "Coordinated AWS training track for Accenture's ARISE HBCU Conference: curriculum, presenters, sessions, free AWS certificate training opportunities",
+    "label": "supported",
+    "source": "building-tangible-cloud-tech-skills-for-hbcu-students|accenture Action"
+   },
+   {
+    "text": "250+ HBCU students and recent graduates participated each year across four years (2020-2023)",
+    "label": "supported",
+    "source": "building-tangible-cloud-tech-skills-for-hbcu-students|accenture Result/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Role was Cloud Native Architecture Lead; Program developed in collaboration with AWS...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Role was Cloud Native Architecture Lead",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Role"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Organized group coaching sessions and knowledge-sharing workshops",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Role was Cloud Native Architecture Lead...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Role was Cloud Native Architecture Lead",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Role"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Goal/outcome: equip engineers to lead cloud(-native) transformation",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 8,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Program developed in collaboration with AWS...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Organized group coaching sessions and knowledge-sharing workshops",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 8,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Role was Cloud Native Architecture Lead...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Role was Cloud Native Architecture Lead",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Role"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Organized group coaching sessions and knowledge-sharing workshops",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Goal/outcome: equip engineers to lead cloud(-native) transformation",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Role was Cloud Native Architecture Lead...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Role was Cloud Native Architecture Lead",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Role"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Organized group coaching sessions and knowledge-sharing workshops",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Goal/outcome: equip engineers to lead cloud(-native) transformation",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Program developed in collaboration with AWS...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Goal/outcome: equip engineers to lead cloud(-native) transformation",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 9,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Program developed in collaboration with AWS...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 9,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Program developed in collaboration with AWS...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Goal/outcome: equip engineers to lead cloud(-native) transformation",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Program developed in collaboration with AWS...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Organized group coaching sessions and knowledge-sharing workshops",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Program developed in collaboration with AWS...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Organized group coaching sessions and knowledge-sharing workshops",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Goal/outcome: equip engineers to lead cloud(-native) transformation",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 10,
+  "turn": 1,
+  "label": "C",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Led AWS Launchpad July 2018 to November 2019; Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Program developed in collaboration with AWS...); no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Led AWS Launchpad July 2018 to November 2019",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Start_Date/End_Date"
+   },
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Organized group coaching sessions and knowledge-sharing workshops",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Goal/outcome: equip engineers to lead cloud(-native) transformation",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task/Action"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ },
+ {
+  "case": "q17",
+  "run": 10,
+  "turn": 1,
+  "label": "D",
+  "pass": true,
+  "reason": "Answered and Honest: AWS Launchpad story, every claim supported (Program was in Accenture's Atlanta Innovation Hub; Traditional training at Liquid Studio couldn't kee; Role was Cloud Native Architecture Lead; Program developed in collaboration with AWS...); no quotations, no closing offer. Also names NEW IT SKILLS NOW, labelled as separate programs with figures matching their stories; not a carry-over.",
+  "claims": [
+   {
+    "text": "Program was in Accenture's Atlanta Innovation Hub",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task"
+   },
+   {
+    "text": "Traditional training at Liquid Studio couldn't keep pace with evolving AWS technologies, creating competency gaps and slowing adoption",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Situation"
+   },
+   {
+    "text": "Role was Cloud Native Architecture Lead",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Role"
+   },
+   {
+    "text": "Program developed in collaboration with AWS",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/Situation"
+   },
+   {
+    "text": "Designed structured learning paths and certification programs on AWS core services (Lambda, API Gateway, DynamoDB, Kubernetes, ECS/Fargate) and cloud-native app development",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Delivered interactive workshops and hands-on labs in real-world AWS environments, practical application over theory",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action/5PSummary"
+   },
+   {
+    "text": "Established cloud expert mentorship teams embedding best practices and institutional knowledge",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "Certifications included AWS Solutions Architect and DevOps Engineer",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Action"
+   },
+   {
+    "text": "200+ professionals earned AWS certifications",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/Action"
+   },
+   {
+    "text": "Accelerated cloud/AWS adoption and launch of cloud-native initiatives",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Result/5PSummary"
+   },
+   {
+    "text": "Goal/outcome: equip engineers to lead cloud(-native) transformation",
+    "label": "supported",
+    "source": "launchpad-empowering-clients-and-teams-with-aws-enablement-and-cloud-certifications|accenture Task/Action"
+   },
+   {
+    "text": "Separately built NEW IT SKILLS NOW: modular self-paced paths, hands-on labs, progress tracker, office hours",
+    "label": "supported",
+    "source": "launching-a-self-paced-learning-program-for-emerging-technologies|accenture Action/5PSummary"
+   },
+   {
+    "text": "NEW IT SKILLS NOW trained 300+ professionals across AWS and other modern technologies",
+    "label": "supported",
+    "source": "launching-a-self-paced-learning-program-for-emerging-technologies|accenture Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null
+ }
+]

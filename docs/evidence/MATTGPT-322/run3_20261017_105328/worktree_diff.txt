@@ -1,0 +1,23 @@
+diff --git a/ui/pages/ask_mattgpt/prompts.py b/ui/pages/ask_mattgpt/prompts.py
+index c46e454..81ae7ba 100644
+--- a/ui/pages/ask_mattgpt/prompts.py
++++ b/ui/pages/ask_mattgpt/prompts.py
+@@ -317,9 +317,15 @@ _CITATION_RULE_0A = (
+ )
+ _CITATION_RULES_0A_0B = _CITATION_RULE_0A + (
+     "0b. If the question is about a category the profile has no key for "
+-    '(patents, publications), respond "Nothing I know about Matt covers '
+-    'that". Reply with that sentence only -- do not synthesize from '
+-    "story evidence.\n"
++    "(patents, publications), decline in first person, in one or two "
++    "sentences, the first beginning with 🐾. Name the topic in your own words "
++    "(\"What are Matt's hobbies?\" becomes \"his hobbies\"). No guessing, no "
++    "padding with story evidence, no excess apology. Examples to vary, not "
++    "text to copy: \"🐾 I followed that trail and came up empty: Matt's "
++    "stories don't cover [topic].\" \"🐾 That trail goes cold here. There's "
++    "nothing on record about [topic].\" \"🐾 I searched Matt's whole record, "
++    "and it doesn't mention [topic].\" \"🐾 I've been through "
++    "Matt's stories, and nothing speaks to [topic].\"\n"
+ )
+ 
+ 

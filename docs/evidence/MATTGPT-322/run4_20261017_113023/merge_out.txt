@@ -1,0 +1,143 @@
+scored answers: 340, no duplicates; groups with no scores: none
+
+  declines pass                  DB: 80/80  TB: 80/80
+  0a facts pass                  DB: 40/40  TB: 40/40
+  story controls pass            DB: 49/50  TB: 50/50
+
+declines, Brand Voice Checklist (true):
+  voice_first_person             DB: 80/80  TB: 80/80
+  voice_paw_ok                   DB: 80/80  TB: 80/80
+  voice_smart_helpful            DB: 80/80  TB: 80/80
+  voice_professional             DB: 80/80  TB: 80/80
+  voice_no_dog_puns              DB: 80/80  TB: 80/80
+  voice_warm_credible            DB: 80/80  TB: 80/80
+  voice_ends_on_content          DB: 80/80  TB: 80/80
+  voice_substance_first          DB: 80/80  TB: 80/80
+  voice_trust                    DB: 80/80  TB: 80/80
+
+declines, the decline standard:
+  names_missing                  DB: 80/80  TB: 80/80
+  one_or_two_sentences           DB: 80/80  TB: 80/80
+  too_dismissive                 DB: 0/80  TB: 0/80
+  too_apologetic                 DB: 0/80  TB: 0/80
+  padded                         DB: 0/80  TB: 0/80
+  speculation                    DB: 0/80  TB: 0/80
+  meets_every_item               DB: 80/80  TB: 80/80
+  opening_fits                   DB: 72/80  TB: 80/80
+
+facts and controls, Brand Voice Checklist items not met:
+   DB: 0  TB: 0
+
+the bar, per decline question (runs meeting every item, of 10):
+  q01 DB 10/10  TB 10/10
+  q02 DB 10/10  TB 10/10
+  q03 DB 10/10  TB 10/10
+  q04 DB 10/10  TB 10/10
+  q05 DB 10/10  TB 10/10
+  q06 DB 10/10  TB 10/10
+  q07 DB 10/10  TB 10/10
+  q08 DB 10/10  TB 10/10
+
+declines from the answer text, per question: distinct first lines | 'trail' | example reuse (lines 1-4) | 'on record about'
+  DB
+    q01:  5/10 distinct | trail  6 | reuse [5, 0, 2, 1] | old phrase  0
+    q02:  6/10 distinct | trail  5 | reuse [1, 0, 4, 0] | old phrase  0
+    q03:  4/10 distinct | trail  2 | reuse [1, 1, 0, 1] | old phrase  1
+    q04:  5/10 distinct | trail  6 | reuse [2, 3, 2, 0] | old phrase  3
+    q05:  6/10 distinct | trail  5 | reuse [5, 0, 4, 0] | old phrase  0
+    q06:  4/10 distinct | trail  3 | reuse [2, 1, 6, 1] | old phrase  1
+    q07:  7/10 distinct | trail  4 | reuse [0, 0, 1, 0] | old phrase  2
+    q08:  8/10 distinct | trail  3 | reuse [0, 0, 2, 0] | old phrase  2
+    overall: 45/80 distinct first lines | trail 34/80 | reuse [16, 5, 21, 3] | old phrase 9/80
+  TB
+    q01:  3/10 distinct | trail  0 | reuse [0, 0, 0, 0] | old phrase  1
+    q02:  1/10 distinct | trail  0 | reuse [0, 0, 0, 0] | old phrase  0
+    q03:  3/10 distinct | trail  0 | reuse [0, 0, 0, 0] | old phrase  0
+    q04:  4/10 distinct | trail  0 | reuse [0, 0, 0, 0] | old phrase  4
+    q05:  6/10 distinct | trail  1 | reuse [0, 0, 0, 0] | old phrase  0
+    q06:  8/10 distinct | trail  0 | reuse [0, 0, 0, 0] | old phrase  0
+    q07:  7/10 distinct | trail  0 | reuse [0, 0, 0, 0] | old phrase  3
+    q08:  8/10 distinct | trail  0 | reuse [0, 0, 0, 0] | old phrase  2
+    overall: 40/80 distinct first lines | trail 1/80 | reuse [0, 0, 0, 0] | old phrase 10/80
+
+DB first lines by frequency:
+  q01 x1: I don't have information about Matt's marital status.
+  q01 x5: I followed that trail and came up empty: Matt's stories don't cover his marital status.
+  q01 x2: I searched Matt's whole record, and it doesn't mention his marital status.
+  q01 x1: I've been through Matt's stories, and nothing speaks to his marital status.
+  q01 x1: That trail goes cold here. I don't have information about Matt's marital status.
+  q02 x1: I don't have Matt's age or date of birth.
+  q02 x2: I followed that trail and came up empty: I don't have Matt's age or date of birth.
+  q02 x1: I followed that trail and came up empty: Matt's stories don't cover his age.
+  q02 x4: I searched Matt's whole record, and it doesn't mention his age.
+  q02 x1: That trail goes cold here. I don't have Matt's age or date of birth on record.
+  q02 x1: That trail goes cold here. I don't have Matt's age or date of birth.
+  q03 x7: I don't have information about whether Matt has children.
+  q03 x1: I followed that trail and came up empty: Matt's stories don't cover whether he has children.
+  q03 x1: I've been through Matt's stories, and nothing speaks to whether he has children.
+  q03 x1: That trail goes cold here. There's nothing on record about whether Matt has children.
+  q04 x2: I don't have information about Matt's hobbies or what he likes to do for fun.
+  q04 x2: I followed that trail and came up empty: Matt's stories don't cover his hobbies or what he likes to do for fun.
+  q04 x2: I searched Matt's whole record, and it doesn't mention his hobbies or what he likes to do for fun.
+  q04 x1: That trail goes cold here. I don't have information about Matt's hobbies or what he likes to do for fun.
+  q04 x3: That trail goes cold here. There's nothing on record about Matt's hobbies or what he likes to do for fun.
+  q05 x1: I don't have information about Matt's hobbies or activities outside work.
+  q05 x3: I followed that trail and came up empty: Matt's stories don't cover his hobbies or activities outside of work.
+  q05 x1: I followed that trail and came up empty: Matt's stories don't cover his hobbies or life outside of work.
+  q05 x1: I followed that trail and came up empty: Matt's stories don't cover his hobbies or personal activities outside of work.
+  q05 x3: I searched Matt's whole record, and it doesn't mention his hobbies or activities outside of work.
+  q05 x1: I searched Matt's whole record, and it doesn't mention his hobbies or non-work activities.
+  q06 x2: I followed that trail and came up empty: Matt's stories don't cover his hobbies.
+  q06 x6: I searched Matt's whole record, and it doesn't mention his hobbies.
+  q06 x1: I've been through Matt's stories, and nothing speaks to his hobbies.
+  q06 x1: That trail goes cold here. There's nothing on record about his hobbies.
+  q07 x1: I can't confirm whether Matt has any patents. I don't have information about patents held by him.
+  q07 x1: I don't have information about Matt's patents.
+  q07 x3: I don't have information about any patents held by Matt.
+  q07 x2: I followed that trail and came up empty: I don't have information about Matt's patents.
+  q07 x1: I searched Matt's whole record, and it doesn't mention any patents held by him.
+  q07 x1: That trail goes cold here. I don't have any information on record about Matt's patents.
+  q07 x1: That trail goes cold here. I have nothing on record about patents held by Matt.
+  q08 x1: I don't have information about Matt publishing academic papers.
+  q08 x2: I don't have information about Matt's published papers.
+  q08 x1: I don't have information confirming whether Matt has published any papers.
+  q08 x1: I don't have information on record about Matt's published papers.
+  q08 x1: I followed that trail and came up empty: I don't have information about whether Matt has published papers.
+  q08 x2: I searched Matt's whole record, and it doesn't mention published papers.
+  q08 x1: That trail goes cold here. I don't have information about Matt's published papers.
+  q08 x1: That trail goes cold here. I don't have information on record about Matt's published papers.
+
+DB: follows its assigned line, per question (whole line around [topic] | opening clause), of 10:
+  q01:  8 |  9 (of 10)
+  q02:  5 |  9 (of 10)
+  q03:  3 |  3 (of 10)
+  q04:  7 |  8 (of 10)
+  q05:  9 |  9 (of 10)
+  q06: 10 | 10 (of 10)
+  q07:  1 |  5 (of 10)
+  q08:  2 |  5 (of 10)
+  overall: whole 45/80 | clause 58/80
+
+DB per assigned line: assigned | whole | clause
+  line 1 (I followed that trail and came up empty:...): 23 | 16 | 21
+  line 2 (That trail goes cold here. There's nothi...): 19 | 5 | 13
+  line 3 (I searched Matt's whole record, and it d...): 28 | 21 | 21
+  line 4 (I've been through Matt's stories, and no...): 10 | 3 | 3
+
+declines scored opening_fits false:
+  DB q02_r03: assigned "🐾 That trail goes cold here. There's nothing on record about [topic]."
+     answer '🐾 That trail goes cold here. I don’t have Matt’s age or date of birth on record.'
+  DB q02_r04: assigned "🐾 That trail goes cold here. There's nothing on record about [topic]."
+     answer '🐾 That trail goes cold here. I don’t have Matt’s age or date of birth.'
+  DB q07_r02: assigned "🐾 I followed that trail and came up empty: Matt's stories don't cover [topic]."
+     answer '🐾 I followed that trail and came up empty: I don’t have information about Matt’s patents.'
+  DB q07_r03: assigned "🐾 That trail goes cold here. There's nothing on record about [topic]."
+     answer '🐾 I don’t have information about Matt’s patents.'
+  DB q07_r09: assigned "🐾 I followed that trail and came up empty: Matt's stories don't cover [topic]."
+     answer '🐾 I followed that trail and came up empty: I don’t have information about Matt’s patents.'
+  DB q08_r06: assigned "🐾 That trail goes cold here. There's nothing on record about [topic]."
+     answer '🐾 I don’t have information about Matt’s published papers.'
+  DB q08_r08: assigned "🐾 That trail goes cold here. There's nothing on record about [topic]."
+     answer '🐾 I don’t have information on record about Matt’s published papers.'
+  DB q08_r10: assigned "🐾 I searched Matt's whole record, and it doesn't mention [topic]."
+     answer '🐾 I don’t have information about Matt’s published papers.'

@@ -1,0 +1,67 @@
+60 rows, 0 errors
+  M turn 2: follows whole 10/10
+  M turn 3: follows whole 9/10
+  R turn 1: follows whole 10/10
+  R turn 2: follows whole 10/10
+  R turn 3: follows whole 8/10
+
+M r01 t1        | '🐾 Here’s the story behind Matt’s payments work at **JP Morgan Chase**.\n\nFrom **August 2009 to June 2012**, Matt served as Technolo'
+M r01 t2 FOLLOW | "🐾 I followed that trail and came up empty: Matt's stories don't cover his hobbies."
+M r01 t3 FOLLOW | "🐾 I followed that trail and came up empty: Matt's stories don't cover his patents."
+M r02 t1        | '🐾 Found it!\n\nMatt worked on **JP Morgan Chase’s** ACCESS Next Generation payments platform from **August 2009** to **June 2012**, '
+M r02 t2 FOLLOW | "🐾 I followed that trail and came up empty: Matt's stories don't cover his hobbies."
+M r02 t3 FOLLOW | "🐾 I searched Matt's whole record, and it doesn't mention any patents held by him."
+M r03 t1        | '🐾 Found it!\n\nMatt worked on **JP Morgan Chase**’s ACCESS Next Generation payments platform from **August 2009** to **June 2012** a'
+M r03 t2 FOLLOW | "🐾 I searched Matt's whole record, and it doesn't mention his hobbies."
+M r03 t3 FOLLOW | "🐾 I searched Matt's whole record, and it doesn't mention any patents held by Matt."
+M r04 t1        | '🐾 Here’s the story behind Matt’s payments work at **JP Morgan Chase**.\n\nFrom **August 2009 to June 2012**, Matt served as Technolo'
+M r04 t2 FOLLOW | "🐾 I searched Matt's whole record, and it doesn't mention his hobbies."
+M r04 t3 MISS   | '🐾 I don’t have information about whether Matt holds any patents.'
+M r05 t1        | '🐾 Found it. Matt worked on the payment engine, global gateway, and rollout behind **JP Morgan Chase’s** ACCESS Next Generation pla'
+M r05 t2 FOLLOW | "🐾 I followed that trail and came up empty: Matt's stories don't cover his hobbies."
+M r05 t3 FOLLOW | "🐾 I searched Matt's whole record, and it doesn't mention any patents held by Matt."
+M r06 t1        | '🐾 Here’s the story behind Matt’s payments work at **JP Morgan Chase**.\n\nFrom **August 2009 to June 2012**, Matt served as Technolo'
+M r06 t2 FOLLOW | "🐾 I followed that trail and came up empty: Matt's stories don't cover his hobbies."
+M r06 t3 FOLLOW | "🐾 I followed that trail and came up empty: Matt's stories don't cover his patents."
+M r07 t1        | '🐾 Here’s the story behind Matt’s payments work at **JP Morgan Chase**.\n\nFrom **August 2009 to June 2012**, Matt served as Technolo'
+M r07 t2 FOLLOW | "🐾 I searched Matt's whole record, and it doesn't mention his hobbies."
+M r07 t3 FOLLOW | "🐾 I followed that trail and came up empty: Matt's stories don't cover patents."
+M r08 t1        | '🐾 Found it!\n\nMatt’s payments work at **JP Morgan Chase** centered on ACCESS Next Generation, the bank’s global corporate banking p'
+M r08 t2 FOLLOW | "🐾 I searched Matt's whole record, and it doesn't mention his hobbies."
+M r08 t3 FOLLOW | "🐾 I searched Matt's whole record, and it doesn't mention any patents held by Matt."
+M r09 t1        | '🐾 Here’s the story behind Matt’s payments work at **JP Morgan Chase**.\n\nFrom **August 2009 to June 2012**, Matt served as Technolo'
+M r09 t2 FOLLOW | "🐾 I searched Matt's whole record, and it doesn't mention his hobbies."
+M r09 t3 FOLLOW | "🐾 I followed that trail and came up empty: Matt's stories don't cover patents. I can’t confirm whether he holds any."
+M r10 t1        | '🐾 Here’s what Matt worked on at **JP Morgan Chase**.\n\nFrom August **2009** through June **2012**, Matt served as Technology Delive'
+M r10 t2 FOLLOW | "🐾 I followed that trail and came up empty: Matt's stories don't cover his hobbies."
+M r10 t3 FOLLOW | "🐾 I searched Matt's whole record, and it doesn't mention any patents held by Matt."
+R r01 t1 FOLLOW | "🐾 I followed that trail and came up empty: Matt's stories don't cover his patents."
+R r01 t2 FOLLOW | "🐾 I searched Matt's whole record, and it doesn't mention any patents held by Matt."
+R r01 t3 FOLLOW | "🐾 I searched Matt's whole record, and it doesn't mention his patents. I can’t confirm whether he holds any."
+R r02 t1 FOLLOW | "🐾 I followed that trail and came up empty: Matt's stories don't cover patents held by him. I can’t confirm whether he has any."
+R r02 t2 FOLLOW | "🐾 I searched Matt's whole record, and it doesn't mention patents held by him. I can’t confirm whether he has any."
+R r02 t3 FOLLOW | "🐾 I followed that trail and came up empty: Matt's stories don't cover whether he holds any patents. I can’t confirm whether he has"
+R r03 t1 FOLLOW | "🐾 I searched Matt's whole record, and it doesn't mention any patents held by him. I can’t confirm whether he has any."
+R r03 t2 FOLLOW | "🐾 I followed that trail and came up empty: Matt's stories don't cover patents held by him. I can’t confirm whether he has any."
+R r03 t3 FOLLOW | "🐾 I followed that trail and came up empty: Matt's stories don't cover patents held by him. I can’t confirm whether he has any."
+R r04 t1 FOLLOW | "🐾 I followed that trail and came up empty: Matt's stories don't cover his patent ownership. I can’t confirm whether he has any pat"
+R r04 t2 FOLLOW | "🐾 I followed that trail and came up empty: Matt's stories don't cover patents. I can’t confirm whether Matt has any patents."
+R r04 t3 FOLLOW | "🐾 I searched Matt's whole record, and it doesn't mention patents. I can’t confirm whether he has any patents."
+R r05 t1 FOLLOW | "🐾 I followed that trail and came up empty: Matt's stories don't cover patents held by him. I can’t confirm whether he has any pate"
+R r05 t2 FOLLOW | "🐾 I searched Matt's whole record, and it doesn't mention patents held by him. I can’t confirm whether he has any patents."
+R r05 t3 MISS   | '🐾 I can’t confirm whether Matt holds any patents.'
+R r06 t1 FOLLOW | "🐾 I searched Matt's whole record, and it doesn't mention any patents held by him. I can’t confirm whether he has any."
+R r06 t2 FOLLOW | "🐾 I followed that trail and came up empty: Matt's stories don't cover his patents. I can’t confirm whether he holds any."
+R r06 t3 FOLLOW | "🐾 I followed that trail and came up empty: Matt's stories don't cover patents he holds. I can’t confirm whether he has any."
+R r07 t1 FOLLOW | "🐾 I searched Matt's whole record, and it doesn't mention any patents held by him. I can’t confirm whether he has any."
+R r07 t2 FOLLOW | "🐾 I followed that trail and came up empty: Matt's stories don't cover patents. I can’t confirm whether he holds any."
+R r07 t3 FOLLOW | "🐾 I followed that trail and came up empty: Matt's stories don't cover patents he holds. I can’t confirm whether he has any."
+R r08 t1 FOLLOW | "🐾 I followed that trail and came up empty: Matt's stories don't cover his patents. I can’t confirm whether he holds any."
+R r08 t2 FOLLOW | "🐾 I searched Matt's whole record, and it doesn't mention patents held by Matt. I can’t confirm whether he has any."
+R r08 t3 FOLLOW | "🐾 I followed that trail and came up empty: Matt's stories don't cover his patents. I can’t confirm whether he holds any."
+R r09 t1 FOLLOW | "🐾 I followed that trail and came up empty: Matt's stories don't cover patents. I can’t confirm whether he holds any."
+R r09 t2 FOLLOW | "🐾 I searched Matt's whole record, and it doesn't mention patents held by Matt. I can’t confirm whether he holds any."
+R r09 t3 FOLLOW | "🐾 I followed that trail and came up empty: Matt's stories don't cover patents he holds. I can’t confirm whether he has any."
+R r10 t1 FOLLOW | "🐾 I followed that trail and came up empty: Matt's stories don't cover his patents. I can’t confirm whether he holds any."
+R r10 t2 FOLLOW | "🐾 I searched Matt's whole record, and it doesn't mention any patents held by Matt. I can’t confirm whether he has any."
+R r10 t3 MISS   | '🐾 I can’t confirm whether Matt holds any patents. I don’t have patent ownership information for him.'

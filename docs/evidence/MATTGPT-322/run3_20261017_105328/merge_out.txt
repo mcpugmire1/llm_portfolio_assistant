@@ -1,0 +1,102 @@
+scored answers: 340, no duplicates; groups with no scores: none
+
+  declines pass                  TB: 80/80  VB: 80/80
+  0a facts pass                  TB: 40/40  VB: 40/40
+  story controls pass            TB: 50/50  VB: 50/50
+
+declines, Brand Voice Checklist (true):
+  voice_first_person             TB: 80/80  VB: 80/80
+  voice_paw_ok                   TB: 80/80  VB: 80/80
+  voice_smart_helpful            TB: 80/80  VB: 80/80
+  voice_professional             TB: 80/80  VB: 80/80
+  voice_no_dog_puns              TB: 80/80  VB: 80/80
+  voice_warm_credible            TB: 80/80  VB: 80/80
+  voice_ends_on_content          TB: 80/80  VB: 80/80
+  voice_substance_first          TB: 80/80  VB: 80/80
+  voice_trust                    TB: 80/80  VB: 80/80
+
+declines, the decline standard:
+  names_missing                  TB: 80/80  VB: 80/80
+  one_or_two_sentences           TB: 80/80  VB: 80/80
+  too_dismissive                 TB: 0/80  VB: 0/80
+  too_apologetic                 TB: 0/80  VB: 0/80
+  padded                         TB: 0/80  VB: 0/80
+  speculation                    TB: 0/80  VB: 0/80
+  meets_every_item               TB: 80/80  VB: 80/80
+
+facts and controls, Brand Voice Checklist items not met:
+   TB: 0  VB: 0
+
+the bar, per decline question (runs meeting every item, of 10):
+  q01 TB 10/10  VB 10/10
+  q02 TB 10/10  VB 10/10
+  q03 TB 10/10  VB 10/10
+  q04 TB 10/10  VB 10/10
+  q05 TB 10/10  VB 10/10
+  q06 TB 10/10  VB 10/10
+  q07 TB 10/10  VB 10/10
+  q08 TB 10/10  VB 10/10
+
+declines from the answer text, per question: distinct first lines | 'trail' | example reuse (lines 1-4) | 'on record about'
+  TB
+    q01:  3/10 distinct | trail  0 | reuse [0, 0, 0, 0] | old phrase  1
+    q02:  1/10 distinct | trail  0 | reuse [0, 0, 0, 0] | old phrase  0
+    q03:  3/10 distinct | trail  0 | reuse [0, 0, 0, 0] | old phrase  0
+    q04:  4/10 distinct | trail  0 | reuse [0, 0, 0, 0] | old phrase  4
+    q05:  6/10 distinct | trail  1 | reuse [0, 0, 0, 0] | old phrase  0
+    q06:  8/10 distinct | trail  0 | reuse [0, 0, 0, 0] | old phrase  0
+    q07:  7/10 distinct | trail  0 | reuse [0, 0, 0, 0] | old phrase  3
+    q08:  8/10 distinct | trail  0 | reuse [0, 0, 0, 0] | old phrase  2
+    overall: 40/80 distinct first lines | trail 1/80 | reuse [0, 0, 0, 0] | old phrase 10/80
+  VB
+    q01:  1/10 distinct | trail  0 | reuse [0, 0, 0, 0] | old phrase 10
+    q02:  1/10 distinct | trail  0 | reuse [0, 0, 0, 0] | old phrase  0
+    q03:  2/10 distinct | trail  0 | reuse [0, 0, 0, 0] | old phrase 10
+    q04:  3/10 distinct | trail  0 | reuse [0, 0, 0, 0] | old phrase 10
+    q05:  2/10 distinct | trail  0 | reuse [0, 0, 0, 0] | old phrase 10
+    q06:  1/10 distinct | trail  0 | reuse [0, 0, 0, 0] | old phrase 10
+    q07:  2/10 distinct | trail  0 | reuse [0, 0, 0, 0] | old phrase 10
+    q08:  3/10 distinct | trail  0 | reuse [0, 0, 0, 0] | old phrase 10
+    overall: 15/80 distinct first lines | trail 0/80 | reuse [0, 0, 0, 0] | old phrase 70/80
+
+TB first lines by frequency:
+  q01 x1: I don't have any information about Matt's marital status.
+  q01 x1: I don't have any information on record about Matt's marital status.
+  q01 x8: I don't have information about Matt's marital status.
+  q02 x10: I don't have Matt's age or date of birth on record.
+  q03 x6: I don't have information about whether Matt has children.
+  q03 x2: I don't have information about whether Matt has kids.
+  q03 x2: I don't have information on whether Matt has kids.
+  q04 x4: I don't have anything on record about Matt's hobbies or what he likes to do for fun.
+  q04 x2: I don't have details about Matt's hobbies or what he likes to do for fun.
+  q04 x1: I don't have details on Matt's hobbies or what he likes to do for fun. His stories don't cover his leisure activities.
+  q04 x3: I don't have information about Matt's hobbies or what he likes to do for fun.
+  q05 x5: I don't have details about Matt's hobbies or how he spends his time outside of work.
+  q05 x1: I don't have details about Matt's hobbies or life outside of work. His stories focus on his professional experience.
+  q05 x1: I don't have details about his hobbies or life outside work, so I can't give you a reliable answer about how Matt spends his personal time.
+  q05 x1: I don't have information about Matt's hobbies or how he spends his time outside of work.
+  q05 x1: I don't have information about Matt's hobbies or what he does outside of work.
+  q05 x1: That trail goes cold here. I don't have details about Matt's hobbies or how he spends his time outside of work.
+  q06 x1: I don't have any information about Matt's hobbies. His stories focus on his professional work.
+  q06 x1: I don't have information about Matt's hobbies in his record.
+  q06 x1: I don't have information about Matt's hobbies. His record covers his professional work, not his outside interests.
+  q06 x1: I don't have information about Matt's hobbies. His stories cover his professional work, but don't describe his interests outside work.
+  q06 x1: I don't have information about Matt's hobbies. His stories cover his professional work, but don't specify his interests outside work.
+  q06 x1: I don't have information about Matt's hobbies. His stories cover his professional work, not his hobbies outside work.
+  q06 x2: I don't have information about Matt's hobbies. His stories cover his professional work, not his leisure interests.
+  q06 x2: I don't have information about Matt's hobbies. His stories focus on his professional work.
+  q07 x1: I don't have any information confirming patents held by Matt. I can't say whether he has any.
+  q07 x1: I don't have any information on patents held by Matt, so I can't confirm whether he has any.
+  q07 x1: I don't have any information on patents held by Matt. I can't confirm whether he has any.
+  q07 x3: I don't have any information on record about patents held by Matt.
+  q07 x2: I don't have any record of patents held by Matt, so I can't confirm that he has any.
+  q07 x1: I don't have any record of patents held by Matt, so I can't confirm whether he has any.
+  q07 x1: I don't have information about any patents held by Matt, so I can't confirm whether he has any.
+  q08 x2: I don't have any information on published papers by Matt, so I can't confirm whether he has published any.
+  q08 x1: I don't have any information on record about Matt publishing papers.
+  q08 x2: I don't have any published papers by Matt on record, so I can't confirm that he has published any.
+  q08 x1: I don't have any published papers on record for Matt. I can't confirm whether he has published any.
+  q08 x1: I don't have information confirming whether Matt has published any papers.
+  q08 x1: I don't have information on published papers by Matt, so I can't confirm whether he has authored any.
+  q08 x1: I don't have information on record about Matt publishing academic papers.
+  q08 x1: I don't have information on whether Matt has published papers.

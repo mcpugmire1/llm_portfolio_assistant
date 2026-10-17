@@ -1,0 +1,2127 @@
+[
+ {
+  "case": "q13",
+  "run": 1,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: all 15 claims supported by the five JP Morgan ACCESS stories (payment engine, gateway, migration, compliance rollout, entitlements): 2009-08 to 2012-06, Technology Delivery Lead, 40+ blended team, 70-80% at Bottomline Portsmouth, ACH/wire/FX/tax modules, MAC security, gateway across 12 countries, days to minutes, migration without disruption, April 2011 launch, 135,000+ clients across 180+ countries. No contradicted or unsupported claims, no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "From August 2009 to June 2012, Matt served as Technology Delivery Lead for JP Morgan Chase’s ACCESS Next Generation payments work.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Task/Role"
+   },
+   {
+    "text": "The bank was building its global corporate banking portal on Bottomline Technologies’ WebSeries platform, but its payment, security, and workflow requirements went well beyond the out-of-box offering.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Regional systems also had different data models, payment formats, and compliance requirements.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Entitlement changes that should have taken minutes required days of manual configuration.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt managed a blended team of 40+ across Accenture and JP Morgan Chase, spanning Mumbai, Bangalore, and the US.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He spent 70 to 80% of his time embedded at Bottomline’s Portsmouth offices, working through where the platform’s native capabilities ended and bespoke engineering was required.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He designed and delivered ACH, wire, FX/cross-border, and tax payment modules, including NACHA file validation, embedded foreign-exchange rate visibility, and Message Authentication Code security for payment verification before release.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He also designed the centralized gateway for message transformation, protocol translation, and payment routing across 12 countries, replacing fragmented point-to-point integrations.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "For corporate administrators, Matt introduced bulk permission changes across users, accounts, and products from a single screen, a capability absent from the legacy systems.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Payment-type-specific controls allowed, for example, wire approval without FX initiation.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt also led the payments data migration and translated regional regulatory requirements into data visibility and access controls.",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Rather than separate regional platform instances, the team maintained a single global architecture with jurisdiction-specific configuration and sequenced launches by regulatory readiness.",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched in April 2011, serving 135,000+ clients across 180+ countries.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "The gateway supported payments across 12 countries; the legacy migration completed without disruption to live payment operations, and regional launches proceeded without regulatory blockers.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q13",
+  "run": 1,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered and Honest: all 16 claims supported by the five JP Morgan ACCESS stories (payment engine, gateway, migration, compliance rollout, entitlements): 2009-08 to 2012-06, Technology Delivery Lead, 40+ blended team, 70-80% at Bottomline Portsmouth, ACH/wire/FX/tax modules, MAC security, gateway across 12 countries, days to minutes, migration without disruption, April 2011 launch, 135,000+ clients across 180+ countries. No contradicted or unsupported claims, no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "From August 2009 to June 2012, Matt served as Technology Delivery Lead for ACCESS Next Generation, the bank’s unified corporate banking portal.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Task/Role"
+   },
+   {
+    "text": "The starting point was fragmented: regional payment systems had different data models, client configurations, permissions, and compliance records.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Bottomline Technologies’ WebSeries platform provided the foundation, but the bank needed payment capabilities well beyond its out-of-box offering, under aggressive delivery timelines.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt managed a blended team of 40+ Accenture and bank resources across Mumbai, Bangalore, and the US.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He spent 70 to 80% of his time embedded at Bottomline’s Portsmouth offices, determining where native platform capabilities ended and custom engineering was required.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He designed and delivered ACH, wire, FX/cross-border, and tax payment modules, plus payment verification security, payment-type-specific permissions, and integration with transaction monitoring and sanctions screening.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Contextual help explained wire fields, tax codes, and FX requirements directly within payment workflows.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He also designed the centralized payments gateway, handling message transformation, protocol translation, and routing across 12 countries.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Corporate treasurers gained a single entry point for payments across regions rather than separate local logins.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "For corporate client administrators, his user administration engine replaced tedious per-user configuration with bulk permission changes across users, accounts, and products.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Entitlement management fell from days to minutes.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt led payments data migration without disruption to live payment operations and coordinated jurisdiction-specific data visibility and access controls across APAC, EMEA, and the Americas.",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Regional launches were sequenced by regulatory readiness, with compliance verification dashboards supporting sign-off.",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "He also owned production incident response and cross-team root-cause analysis.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "ACCESS launched in April 2011, consolidating regional systems into a portal serving 135,000+ corporations, financial institutions, governments, and municipalities across 180+ countries.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "The payments gateway supported 12 countries, while the regional compliance framework enabled launches without regulatory blockers.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q13",
+  "run": 2,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: all 15 claims supported by the five JP Morgan ACCESS stories (payment engine, gateway, migration, compliance rollout, entitlements): 2009-08 to 2012-06, Technology Delivery Lead, 40+ blended team, 70-80% at Bottomline Portsmouth, ACH/wire/FX/tax modules, MAC security, gateway across 12 countries, days to minutes, migration without disruption, April 2011 launch, 135,000+ clients across 180+ countries. No contradicted or unsupported claims, no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Matt worked on the payment engine, global gateway, and legacy migration behind JP Morgan Chase’s ACCESS Next Generation platform from August 2009 to June 2012.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "The bank’s regional payment systems had different data models, permissions, and compliance records.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Bottomline Technologies’ WebSeries platform provided the foundation, but its out-of-box capabilities did not cover the requirements of 135,000+ clients across 180+ countries.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Each payment type needed distinct formatting, validation, compliance, and workflows, under aggressive delivery timelines.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "As Technology Delivery Lead, Matt managed a blended team of 40+ Accenture and JP Morgan Chase resources across Mumbai, Bangalore, and the US.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He spent 70 to 80% of his time embedded at Bottomline’s Portsmouth offices, managing where platform configuration ended and bespoke engineering was required.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He designed and delivered ACH, wire, FX/cross-border, and federal tax payment modules, alongside Message Authentication Code security, payment-type-specific permissions, and contextual help explaining payment-screen requirements.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He also designed the centralized payments gateway: message transformation, protocol translation, and routing across payment networks in 12 countries.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Rather than retaining separate regional integrations, it gave corporate treasurers a single entry point for wire, ACH, and cross-border transfers.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "For administrators, Matt introduced bulk permission changes across users, accounts, and products from a single screen, replacing individual configuration.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He also mapped jurisdiction-specific requirements into data visibility and access controls, with regional launches sequenced by regulatory readiness rather than a single global deployment.",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched in April 2011.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "The legacy migration completed without disruption to live payment operations, preserving client configurations, entitlements, transaction histories, and compliance traceability.",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Matt’s responsibilities continued into production: on-call support, critical incident response, root-cause analysis, and leadership updates while payment issues were live.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q13",
+  "run": 2,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered and Honest: all 14 claims supported by the five JP Morgan ACCESS stories (payment engine, gateway, migration, compliance rollout, entitlements): 2009-08 to 2012-06, Technology Delivery Lead, 40+ blended team, 70-80% at Bottomline Portsmouth, ACH/wire/FX/tax modules, MAC security, gateway across 12 countries, days to minutes, migration without disruption, April 2011 launch, 135,000+ clients across 180+ countries. No contradicted or unsupported claims, no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "From August 2009 to June 2012, Matt served as Technology Delivery Lead for ACCESS Next Generation, the bank’s unified corporate banking portal.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Task/Role"
+   },
+   {
+    "text": "The challenge was more than replacing a user interface: regional payment systems had different data models, connectivity, entitlements, and regulatory requirements.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Bottomline Technologies’ WebSeries platform provided the foundation, but the bank needed payment capabilities beyond its out-of-box offering.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt managed a blended team of 40+ Accenture and bank resources across Mumbai, Bangalore, and the US.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He spent 70 to 80% of his time embedded at Bottomline’s Portsmouth offices, working through where native platform capabilities ended and bespoke engineering was required.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He designed and delivered ACH, wire, FX/cross-border, and tax payment modules, each with distinct validation, formatting, settlement, and compliance requirements.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He also built payment verification through Message Authentication Codes and payment-type-specific permissions, such as allowing wire approval without allowing FX initiation.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "For the global payments gateway, he designed message transformation, protocol translation, and routing across 12 countries, connecting ACCESS to clearing networks and internal compliance, settlement, and reporting systems.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Rather than retain individual permission configuration, Matt introduced role-based profiles and bulk changes across users, accounts, and products.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Entitlement management fell from days to minutes.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He also led legacy payment-data migration without disruption to live payment operations, preserving client configurations, transaction histories, and compliance traceability.",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "For regional rollout, Matt translated local regulatory requirements into data-visibility and access controls, sequencing launches by regulatory readiness rather than using a single global deployment.",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "He also owned production incident response and cross-team root-cause analysis.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "ACCESS launched in April 2011, consolidating regional systems into a single portal serving 135,000+ corporate, financial institution, government, and municipal clients across 180+ countries.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q13",
+  "run": 3,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: all 14 claims supported by the five JP Morgan ACCESS stories (payment engine, gateway, migration, compliance rollout, entitlements): 2009-08 to 2012-06, Technology Delivery Lead, 40+ blended team, 70-80% at Bottomline Portsmouth, ACH/wire/FX/tax modules, MAC security, gateway across 12 countries, days to minutes, migration without disruption, April 2011 launch, 135,000+ clients across 180+ countries. No contradicted or unsupported claims, no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "From August 2009 to June 2012, Matt served as Technology Delivery Lead for ACCESS Next Generation, the bank’s unified corporate banking portal.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Task/Role"
+   },
+   {
+    "text": "The starting point was fragmented: regional payment systems had different data models, client configurations, message formats, and compliance requirements.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Bottomline Technologies’ WebSeries platform provided the foundation, but the bank needed payment capabilities and controls well beyond its out-of-box offering.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt managed a blended team of 40+ Accenture and bank resources across the US, Mumbai, and Bangalore.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He spent 70 to 80% of his time embedded at Bottomline’s Portsmouth offices, managing the boundary between native platform capabilities and bank-specific engineering.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He designed and delivered ACH payments for payroll, suppliers, and collections; wire payments covering Fedwire, international wires, book transfers, and drawdowns; and FX/cross-border and federal tax payments.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He also implemented Message Authentication Code security, payment-type-specific permissions, sanctions screening, and integration with transaction monitoring.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Alongside the payment engine, Matt designed the centralized gateway handling message transformation, protocol translation, and routing across 12 countries.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Corporate treasurers gained a single entry point for wire, ACH, and cross-border transfers rather than separate regional logins.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "The supporting work included replacing individual permission configuration with role-based profiles and bulk changes, reducing entitlement management from days to minutes.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt also led payments data migration without disruption to live payment operations, preserving client configurations, entitlements, transaction histories, and compliance traceability.",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "For the regional rollout, he translated local regulatory requirements into data visibility and access controls, sequencing launches by regulatory readiness.",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched in April 2011, consolidating regional systems into a portal serving 135,000+ corporations, financial institutions, governments, and municipalities across 180+ countries.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "The regional compliance framework enabled launches across APAC, EMEA, and the Americas without regulatory blockers.",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q13",
+  "run": 3,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered and Honest: all 13 claims supported by the five JP Morgan ACCESS stories (payment engine, gateway, migration, compliance rollout, entitlements): 2009-08 to 2012-06, Technology Delivery Lead, 40+ blended team, 70-80% at Bottomline Portsmouth, ACH/wire/FX/tax modules, MAC security, gateway across 12 countries, days to minutes, migration without disruption, April 2011 launch, 135,000+ clients across 180+ countries. No contradicted or unsupported claims, no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "From August 2009 to June 2012, Matt served as Technology Delivery Lead for ACCESS Next Generation, the bank’s global corporate banking portal.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Task/Role"
+   },
+   {
+    "text": "Its regional payment systems had different data models, connectivity, entitlements, and compliance records.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Bottomline Technologies’ WebSeries platform provided the foundation, but the bank needed payment modules and controls well beyond its out-of-box capabilities.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Legacy entitlement changes alone took days of manual configuration.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt managed a blended team of 40+ Accenture and bank resources across Mumbai, Bangalore, and the US.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He spent 70 to 80% of his time embedded at Bottomline’s Portsmouth offices, working out where native platform capabilities ended and bespoke engineering was required, rather than treating ACCESS as a standard WebSeries deployment.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He designed and delivered ACH, wire, FX/cross-border, and federal tax payment modules, including NACHA file validation, foreign exchange engine integration, and Message Authentication Code payment verification.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He also built payment-type-specific permissions, so a user could approve wires without being authorized to initiate FX payments.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Role-based profiles and bulk permission changes replaced individual configuration, reducing entitlement management from days to minutes.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "For the global gateway, Matt designed message transformation, protocol translation, and routing across 12 countries, connecting ACCESS to clearing networks and internal compliance, settlement, and reporting systems.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "He also led payments data migration, introducing compliance dashboards, preserving regulatory traceability, and running production validation and post-cutover defect triage.",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched in April 2011, serving 135,000+ corporate, financial institution, government, and municipal clients across 180+ countries.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "The gateway gave corporate treasurers a single entry point for regional payments, and the legacy migration completed without disruption to live payment operations.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q13",
+  "run": 4,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: all 15 claims supported by the five JP Morgan ACCESS stories (payment engine, gateway, migration, compliance rollout, entitlements): 2009-08 to 2012-06, Technology Delivery Lead, 40+ blended team, 70-80% at Bottomline Portsmouth, ACH/wire/FX/tax modules, MAC security, gateway across 12 countries, days to minutes, migration without disruption, April 2011 launch, 135,000+ clients across 180+ countries. No contradicted or unsupported claims, no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "From August 2009 to June 2012, Matt served as Technology Delivery Lead for ACCESS Next Generation, the bank’s global corporate banking portal.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Task/Role"
+   },
+   {
+    "text": "Its treasury operations relied on separate regional systems, while Bottomline Technologies’ WebSeries platform needed custom engineering to meet the bank’s payment, security, and compliance requirements.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Corporate treasurers faced separate local logins and regional payment systems.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Client administrators spent days manually configuring permissions.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt managed a blended team of 40+ Accenture and bank resources across Mumbai, Bangalore, and the US.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He spent 70 to 80% of his time embedded at Bottomline’s Portsmouth offices, managing where the platform’s native capabilities ended and bank-specific development was required.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He designed and delivered ACH, wire, FX/cross-border, and government tax payment modules, including NACHA file validation, foreign exchange integration, and Message Authentication Code security so users could verify payment integrity before release.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Contextual help explained wire formatting, tax payment codes, and FX parameters directly within payment workflows.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He also delivered the centralized payments gateway, handling message transformation, protocol translation, and routing across 12 countries.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "For administrators, he replaced individual permission configuration with role-based profiles, bulk changes across users and accounts, and a centralized dashboard.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Alongside that engineering, Matt led payments data migration without disruption to live payment operations.",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "He coordinated jurisdiction-specific data visibility and access controls across APAC, EMEA, and the Americas, and owned production incident response, root-cause analysis, and live status communications.",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched in April 2011, consolidating regional systems into a unified portal serving 135,000+ corporations, financial institutions, governments, and municipalities across 180+ countries.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Corporate treasurers gained a single entry point for payments across regions, real-time global reporting, and single sign-on across treasury functions.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q13",
+  "run": 4,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered and Honest: all 15 claims supported by the five JP Morgan ACCESS stories (payment engine, gateway, migration, compliance rollout, entitlements): 2009-08 to 2012-06, Technology Delivery Lead, 40+ blended team, 70-80% at Bottomline Portsmouth, ACH/wire/FX/tax modules, MAC security, gateway across 12 countries, days to minutes, migration without disruption, April 2011 launch, 135,000+ clients across 180+ countries. No contradicted or unsupported claims, no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "From August 2009 to June 2012, Matt served as Technology Delivery Lead for ACCESS Next Generation, the bank’s global corporate banking portal.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Task/Role"
+   },
+   {
+    "text": "Bottomline Technologies’ WebSeries platform provided the foundation, but the bank needed payment modules, security controls, and workflows beyond its out-of-box capabilities.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Regional systems had different data models, payment formats, and regulatory requirements, while corporate administrators were spending days manually configuring user permissions.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt managed a blended team of 40+ Accenture and bank resources across the US, Mumbai, and Bangalore.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He spent 70 to 80% of his time embedded at Bottomline’s Portsmouth offices, determining where native platform capabilities ended and bespoke engineering was required.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He designed and delivered ACH, wire, FX/cross-border, and federal tax payment modules.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "That included NACHA file validation, integration with the bank’s foreign exchange engine, and a Message Authentication Code security layer for verifying payment integrity before release.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He also delivered the centralized payments gateway: message transformation, protocol translation, and routing across 12 countries, replacing fragmented point-to-point integrations.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "For administrators, Matt introduced bulk permission changes across users, accounts, and products from a single screen, plus payment-type-specific controls, such as allowing wire approval without FX initiation.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He led payments data migration without disruption to live payment operations and mapped regional compliance requirements into data visibility and access controls.",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Rather than a single big-bang deployment, rollout sequencing followed regulatory readiness across APAC, EMEA, and the Americas.",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "He also owned on-call and critical production incident response.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "ACCESS launched in April 2011, consolidating regional systems into a unified portal serving 135,000+ clients across 180+ countries.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "The gateway gave corporate treasurers a single entry point for wire, ACH, and cross-border transfers across regions.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q13",
+  "run": 5,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: all 14 claims supported by the five JP Morgan ACCESS stories (payment engine, gateway, migration, compliance rollout, entitlements): 2009-08 to 2012-06, Technology Delivery Lead, 40+ blended team, 70-80% at Bottomline Portsmouth, ACH/wire/FX/tax modules, MAC security, gateway across 12 countries, days to minutes, migration without disruption, April 2011 launch, 135,000+ clients across 180+ countries. No contradicted or unsupported claims, no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Matt worked on JP Morgan Chase’s ACCESS Next Generation payments platform from August 2009 to June 2012, serving as Technology Delivery Lead and Senior Technology Architecture Manager.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Task/Role"
+   },
+   {
+    "text": "The bank was consolidating regional treasury systems into a single global portal, but Bottomline Technologies’ WebSeries platform did not provide all the payment modules, security controls, or workflows its corporate clients required.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Each payment type had distinct formatting, validation, compliance, and approval requirements.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt managed a blended team of 40+ Accenture and bank resources across Mumbai, Bangalore, and the US.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He spent 70 to 80% of his time embedded at Bottomline’s Portsmouth offices, working through where the platform’s native capabilities ended and bespoke engineering was required.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He designed and delivered ACH, wire, FX/cross-border, and tax payment modules.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "These included NACHA file validation, integration with the bank’s foreign exchange engine, and Message Authentication Code security so corporate users could verify payment integrity before release.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He also built contextual help into payment screens, explaining wire fields, tax codes, and FX parameters within the workflow.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Alongside the payment engine, Matt designed the centralized gateway for message transformation, protocol translation, and routing across 12 countries, replacing fragmented point-to-point integrations.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "He introduced bulk entitlement changes across users, accounts, and products from a single screen, replacing individual permission configuration and reducing administration from days to minutes.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "For migration and rollout, he coordinated legacy-data verification, preserved compliance traceability, and mapped jurisdiction-specific requirements into data visibility and access controls.",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Regional launches were sequenced by regulatory readiness rather than a single global deployment.",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched in April 2011, serving 135,000+ corporate, financial institution, government, and municipal clients across 180+ countries.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "The legacy migration completed without disruption to live payments, and the regional compliance framework enabled rollout across APAC, EMEA, and the Americas without regulatory blockers.",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q13",
+  "run": 5,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered and Honest: all 16 claims supported by the five JP Morgan ACCESS stories (payment engine, gateway, migration, compliance rollout, entitlements): 2009-08 to 2012-06, Technology Delivery Lead, 40+ blended team, 70-80% at Bottomline Portsmouth, ACH/wire/FX/tax modules, MAC security, gateway across 12 countries, days to minutes, migration without disruption, April 2011 launch, 135,000+ clients across 180+ countries. No contradicted or unsupported claims, no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Matt worked on JP Morgan Chase’s ACCESS Next Generation payments platform from August 2009 to June 2012, serving as Technology Delivery Lead.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Task/Role"
+   },
+   {
+    "text": "The bank’s treasury operations depended on separate regional systems, while Bottomline Technologies’ WebSeries platform needed substantial custom engineering to meet its requirements.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Payment types had different formatting, validation, compliance, and approval workflows, all under aggressive delivery timelines.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt managed a blended team of 40+ Accenture and bank resources across Mumbai, Bangalore, and the US.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He spent 70 to 80% of his time embedded at Bottomline’s Portsmouth offices, working through where the platform’s native capabilities ended and bank-specific development was required.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He designed and delivered ACH, wire, FX/cross-border, and tax payment modules, plus Message Authentication Code security so corporate users could verify payment integrity before release.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Contextual help explained wire fields, tax codes, and FX requirements directly within payment workflows.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He also delivered the centralized payments gateway, handling message transformation, protocol translation, and routing across 12 countries.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "For corporate client administrators, Matt replaced tedious individual permission configuration with role-based access controls, bulk changes, and a centralized dashboard.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He also led payments data migration, preserving client configurations, entitlement structures, and transaction histories without disrupting live payment operations.",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Regional rollout required different data visibility and access rules.",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Matt translated jurisdiction-specific requirements into platform configuration and sequenced launches by regulatory readiness, enabling rollout across APAC, EMEA, and the Americas without regulatory blockers.",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched in April 2011, serving 135,000+ clients across 180+ countries.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Corporate treasurers gained a single portal for payments and cash visibility instead of separate regional logins.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt also owned production incident response, coordinating root-cause analysis and live status updates across bank, offshore, and vendor teams.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q13",
+  "run": 6,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: all 16 claims supported by the five JP Morgan ACCESS stories (payment engine, gateway, migration, compliance rollout, entitlements): 2009-08 to 2012-06, Technology Delivery Lead, 40+ blended team, 70-80% at Bottomline Portsmouth, ACH/wire/FX/tax modules, MAC security, gateway across 12 countries, days to minutes, migration without disruption, April 2011 launch, 135,000+ clients across 180+ countries. No contradicted or unsupported claims, no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "From August 2009 to June 2012, Matt served as Technology Delivery Lead for ACCESS Next Generation, the bank’s global corporate banking portal.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Task/Role"
+   },
+   {
+    "text": "Its treasury operations ran through separate regional systems, while Bottomline Technologies’ WebSeries platform needed custom engineering for the bank’s payment, security, and workflow requirements.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Corporate treasurers faced fragmented payment systems and separate local logins.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Client administrators spent days manually configuring user permissions.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt managed a blended team of 40+ Accenture and bank resources across Mumbai, Bangalore, and the US.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He spent 70 to 80% of his time embedded at Bottomline’s Portsmouth offices, working through where WebSeries’ native capabilities ended and bank-specific development was required.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He designed and delivered ACH, wire, FX/cross-border, and tax payment modules, including NACHA file validation, payment integrity verification through Message Authentication Codes, and payment-type-specific permissions.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Contextual help explained wire fields, tax codes, and FX requirements directly within payment workflows.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He also delivered the centralized gateway for message transformation, protocol translation, and routing across 12 countries.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "For client administrators, Matt replaced individual permission changes with role-based profiles and bulk changes across users, accounts, and products from a single screen.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He also led payments data migration without disruption to live payment operations, preserving client configurations, entitlements, transaction histories, and compliance traceability.",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "For the regional rollout, he translated jurisdiction-specific requirements into data visibility and access controls, sequencing launches around regulatory readiness.",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "He owned on-call and critical incident response, coordinating root-cause analysis and live status updates.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "ACCESS launched in April 2011, consolidating regional systems into a unified portal serving 135,000+ clients across 180+ countries.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Corporate treasurers gained a single entry point for payments across regions, with global cash reporting and single sign-on across treasury functions.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q13",
+  "run": 6,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered and Honest: all 15 claims supported by the five JP Morgan ACCESS stories (payment engine, gateway, migration, compliance rollout, entitlements): 2009-08 to 2012-06, Technology Delivery Lead, 40+ blended team, 70-80% at Bottomline Portsmouth, ACH/wire/FX/tax modules, MAC security, gateway across 12 countries, days to minutes, migration without disruption, April 2011 launch, 135,000+ clients across 180+ countries. No contradicted or unsupported claims, no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "From August 2009 to June 2012, Matt served as Technology Delivery Lead for ACCESS Next Generation, the bank’s unified corporate banking portal.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Task/Role"
+   },
+   {
+    "text": "Its regional payment systems had different data models, client configurations, entitlement structures, and compliance requirements.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Bottomline Technologies’ WebSeries platform provided the foundation, but the bank needed payment capabilities well beyond its out-of-box offering, under aggressive Wall Street delivery timelines.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt managed a blended team of 40+ Accenture and bank resources across Mumbai, Bangalore, and the US.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He defined the onshore-offshore engagement model and spent 70 to 80% of his time embedded at Bottomline’s Portsmouth offices, coordinating with bank stakeholders in Chicago and New York/New Jersey.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He worked with Bottomline to determine where native platform capabilities ended and bespoke engineering was required.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He designed and delivered ACH, wire, FX/cross-border, and federal tax payment modules, including NACHA file validation, payment integrity verification through Message Authentication Codes, and payment-type-specific permissions.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He also delivered the centralized gateway for message transformation, protocol translation, and payment routing across 12 countries.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Alongside that engineering, Matt brought together enterprise architects, security specialists, regional compliance officers, Bottomline, and the development team.",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "They translated jurisdiction-specific requirements into data visibility rules, access controls, and rollout decisions.",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "His entitlement engine introduced bulk permission changes and role-based profiles, reducing administration from days to minutes.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He also led legacy payment data migration, production validation, and critical incident response, including root-cause coordination and daily leadership calls.",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched in April 2011, consolidating regional systems into a portal serving 135,000+ clients across 180+ countries.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "The migration completed without disruption to live payments.",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Regional launches proceeded without regulatory blockers, with compliance dashboards becoming standard operational tooling.",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q13",
+  "run": 7,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: all 14 claims supported by the five JP Morgan ACCESS stories (payment engine, gateway, migration, compliance rollout, entitlements): 2009-08 to 2012-06, Technology Delivery Lead, 40+ blended team, 70-80% at Bottomline Portsmouth, ACH/wire/FX/tax modules, MAC security, gateway across 12 countries, days to minutes, migration without disruption, April 2011 launch, 135,000+ clients across 180+ countries. No contradicted or unsupported claims, no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "From August 2009 to June 2012, Matt served as Technology Delivery Lead for ACCESS Next Generation, the bank’s global corporate banking portal.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Task/Role"
+   },
+   {
+    "text": "Its treasury operations ran on disparate regional systems, and Bottomline Technologies’ WebSeries platform did not provide all the payment modules, security controls, or workflows the bank required.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Each payment type had distinct formatting, validation, compliance, and settlement requirements, with aggressive delivery timelines.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt managed a blended team of 40+ Accenture and bank resources across Mumbai, Bangalore, and the US.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He spent 70 to 80% of his time embedded at Bottomline’s Portsmouth offices, working through where the platform’s native capabilities ended and bespoke engineering was required.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He designed and delivered ACH credits and direct debits, wire payments, FX/cross-border payments, and federal tax payment capabilities.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "That included NACHA file validation, integration with the bank’s foreign exchange engine, and Message Authentication Code security so corporate users could verify payment integrity before release.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He also delivered the centralized payments gateway, handling message transformation, protocol translation, and routing across 12 countries, rather than retaining fragmented point-to-point integrations.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "The surrounding controls were part of the work: payment-type-specific permissions, sanctions screening, transaction-monitoring integration, and contextual guidance within payment screens.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "His user administration engine replaced individual permission configuration with role-based profiles and bulk changes, reducing entitlement management from days to minutes.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt also led payments data migration without disruption to live payment operations.",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "For regional rollout, he translated local regulatory requirements into data visibility and access controls, sequencing launches by regulatory readiness rather than a single global deployment.",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched in April 2011, consolidating regional systems into a unified portal serving 135,000+ clients across 180+ countries.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt’s production responsibilities included on-call incident response, root-cause analysis, and leadership updates while payment issues were live.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q13",
+  "run": 7,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered and Honest: all 14 claims supported by the five JP Morgan ACCESS stories (payment engine, gateway, migration, compliance rollout, entitlements): 2009-08 to 2012-06, Technology Delivery Lead, 40+ blended team, 70-80% at Bottomline Portsmouth, ACH/wire/FX/tax modules, MAC security, gateway across 12 countries, days to minutes, migration without disruption, April 2011 launch, 135,000+ clients across 180+ countries. No contradicted or unsupported claims, no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "At JP Morgan Chase, Matt was Technology Delivery Lead for payments work on ACCESS Next Generation from August 2009 to June 2012.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Task/Role"
+   },
+   {
+    "text": "The bank was consolidating regional treasury systems into a global corporate banking portal, but Bottomline Technologies’ WebSeries platform needed custom engineering.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Payment types had different formatting, validation, compliance, and approval requirements.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Regional systems also had different data models and entitlement structures, while live payments had to continue uninterrupted.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt managed a blended team of 40+ Accenture and JP Morgan Chase resources across the US, Mumbai, and Bangalore.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He defined the onshore-offshore engagement model and spent 70 to 80% of his time embedded at Bottomline’s Portsmouth offices, coordinating with bank stakeholders in Chicago and NY/NJ.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He worked with enterprise architects, security specialists, regional compliance officers, and developers to determine where WebSeries’ native capabilities ended and bank-specific development was required.",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "He designed and delivered ACH, wire, FX/cross-border, and federal tax payment modules, alongside Message Authentication Code security and payment-type-specific permissions.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He also designed the centralized payments gateway, handling message transformation, protocol translation, and routing across 12 countries.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "For administrators, he replaced individual permission configuration with role-based profiles and bulk changes across users, accounts, and products, reducing entitlement management from days to minutes.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt led payments data migration, preserving client configurations, transaction histories, and compliance traceability without disruption to live payment operations.",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "He coordinated regional launches around regulatory readiness rather than a single global deployment, and owned production incident response, cross-team root-cause analysis, status updates, and daily leadership calls.",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched in April 2011, serving 135,000+ clients across 180+ countries.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "The gateway gave corporate treasurers a single entry point for payments across regions, replacing fragmented regional integrations.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q13",
+  "run": 8,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: all 14 claims supported by the five JP Morgan ACCESS stories (payment engine, gateway, migration, compliance rollout, entitlements): 2009-08 to 2012-06, Technology Delivery Lead, 40+ blended team, 70-80% at Bottomline Portsmouth, ACH/wire/FX/tax modules, MAC security, gateway across 12 countries, days to minutes, migration without disruption, April 2011 launch, 135,000+ clients across 180+ countries. No contradicted or unsupported claims, no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "From August 2009 to June 2012, Matt served as Technology Delivery Lead for ACCESS Next Generation, the bank’s unified corporate banking portal.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Task/Role"
+   },
+   {
+    "text": "Its WebSeries foundation could not meet the bank’s requirements out of the box.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Regional payment systems had different formats, client configurations, entitlement structures, and compliance records.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Corporate administrators were spending days configuring permissions, while the program faced aggressive delivery timelines.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt managed a blended team of 40+ Accenture and JP Morgan Chase resources across Mumbai, Bangalore, and the US.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He spent 70 to 80% of his time embedded at Bottomline Technologies’ Portsmouth offices, determining where WebSeries’ native capabilities ended and bespoke engineering was required.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He designed and delivered ACH, wire, FX/cross-border, and federal tax payment modules, including NACHA validation, payment-integrity verification through Message Authentication Codes, and contextual help explaining payment-specific requirements.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He also built payment-type-specific permissions: a user could be authorized for wire approval without being permitted to initiate FX payments.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Alongside those modules, Matt designed the centralized payments gateway connecting internal settlement and compliance systems with payment rails across 12 countries.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "It handled message transformation, protocol translation, and routing instead of retaining fragmented point-to-point integrations.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "For administrators, he introduced bulk permission changes across users, accounts, and products from a single screen, reducing entitlement management from days to minutes.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "For regional compliance teams, he translated jurisdiction-specific requirements into data visibility and access controls, sequencing launches by regulatory readiness rather than a single global deployment.",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched in April 2011, serving 135,000+ clients across 180+ countries.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "The payments migration completed without disruption to live payment operations, and the regional compliance framework enabled launches across APAC, EMEA, and the Americas without regulatory blockers.",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q13",
+  "run": 8,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered and Honest: all 15 claims supported by the five JP Morgan ACCESS stories (payment engine, gateway, migration, compliance rollout, entitlements): 2009-08 to 2012-06, Technology Delivery Lead, 40+ blended team, 70-80% at Bottomline Portsmouth, ACH/wire/FX/tax modules, MAC security, gateway across 12 countries, days to minutes, migration without disruption, April 2011 launch, 135,000+ clients across 180+ countries. No contradicted or unsupported claims, no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "From August 2009 to June 2012, Matt served as Technology Delivery Lead for payments on ACCESS Next Generation, the bank’s global corporate banking portal.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Task/Role"
+   },
+   {
+    "text": "Its regional systems had different payment formats, client configurations, entitlement structures, and transaction histories.",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Bottomline Technologies’ WebSeries platform provided the foundation, but the bank’s requirements went well beyond its out-of-box capabilities.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "The broader portal served 135,000+ clients across 180+ countries, with aggressive delivery timelines and live payment operations to preserve.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt managed a blended team of 40+ Accenture and bank resources across Mumbai, Bangalore, and the US.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He spent 70 to 80% of his time embedded at Bottomline’s Portsmouth offices, determining where platform configuration ended and bespoke engineering was required.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He designed and delivered ACH, wire, FX/cross-border, and federal tax payment modules.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "That included NACHA file validation, integration with the bank’s foreign exchange engine, and Message Authentication Code security so corporate users could verify payment integrity before release.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He also built payment-type-specific permissions, such as allowing wire approval without FX initiation.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Alongside those modules, Matt designed the centralized payments gateway: message transformation, protocol translation, and routing across payment networks in 12 countries.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "He led payments data migration from legacy regional systems, preserving client configurations, entitlements, transaction histories, and compliance traceability.",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "He also owned production incident response and coordinated root-cause analysis across the bank, offshore teams, and Bottomline.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "ACCESS and the Integrated Global Payments Interface launched in April 2011.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Corporate treasurers gained a single entry point for payments across regions, replacing separate local logins and fragmented integrations.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "The migration completed without disruption to live payment operations, and the redesigned entitlement engine reduced administration from days to minutes through bulk permission changes and role-based profiles.",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q13",
+  "run": 9,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: all 15 claims supported by the five JP Morgan ACCESS stories (payment engine, gateway, migration, compliance rollout, entitlements): 2009-08 to 2012-06, Technology Delivery Lead, 40+ blended team, 70-80% at Bottomline Portsmouth, ACH/wire/FX/tax modules, MAC security, gateway across 12 countries, days to minutes, migration without disruption, April 2011 launch, 135,000+ clients across 180+ countries. No contradicted or unsupported claims, no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "From August 2009 to June 2012, Matt served as Technology Delivery Lead for ACCESS Next Generation, the bank’s unified corporate banking portal.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Task/Role"
+   },
+   {
+    "text": "The starting point was fragmented: regional payment systems had different data models, client configurations, entitlements, and connectivity.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Bottomline Technologies’ WebSeries platform provided the foundation, but the bank needed payment capabilities and controls beyond its out-of-box offering.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt managed a blended team of 40+ Accenture and bank resources across the US, Mumbai, and Bangalore.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He spent 70 to 80% of his time embedded at Bottomline’s Portsmouth offices, working through where native platform capabilities ended and bespoke engineering was required.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He designed and delivered ACH, wire, FX/cross-border, and federal tax payment modules.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "That included NACHA file validation, embedded FX rate visibility, payment-type-specific permissions, and a Message Authentication Code security layer so corporate users could validate payment integrity before release.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He also built contextual help directly into payment screens, explaining wire fields, tax codes, and cross-border requirements.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Alongside the payment engine, Matt designed the centralized gateway for message transformation, protocol translation, and routing across 12 countries.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "For administrators, he introduced bulk permission changes across users, accounts, and products from a single screen, reducing entitlement management from days to minutes.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt also led payments data migration without disruption to live payment operations and coordinated jurisdiction-specific data visibility and access controls.",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Regional launches were sequenced by regulatory readiness rather than a single global deployment.",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "He owned production incident response, including root-cause analysis and live leadership updates.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "ACCESS launched in April 2011, consolidating regional systems into a single portal serving 135,000+ corporate, financial institution, government, and municipal clients across 180+ countries.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "The gateway gave treasurers a single entry point for wire, ACH, and cross-border transfers across regions.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q13",
+  "run": 9,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered and Honest: all 15 claims supported by the five JP Morgan ACCESS stories (payment engine, gateway, migration, compliance rollout, entitlements): 2009-08 to 2012-06, Technology Delivery Lead, 40+ blended team, 70-80% at Bottomline Portsmouth, ACH/wire/FX/tax modules, MAC security, gateway across 12 countries, days to minutes, migration without disruption, April 2011 launch, 135,000+ clients across 180+ countries. No contradicted or unsupported claims, no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "From August 2009 to June 2012, Matt served as Technology Delivery Lead for ACCESS Next Generation, the bank’s unified corporate banking portal.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Task/Role"
+   },
+   {
+    "text": "The challenge went beyond replacing an interface: regional payment systems had different formats, client configurations, entitlement structures, and regulatory requirements.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Bottomline Technologies’ WebSeries platform provided the foundation, but the bank needed payment capabilities well beyond its out-of-box offering.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt managed a blended team of 40+ Accenture and JP Morgan Chase resources across the US, Mumbai, and Bangalore.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He spent 70 to 80% of his time embedded at Bottomline’s Portsmouth offices, managing the boundary between platform configuration and bespoke engineering.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He designed and delivered ACH, wire, FX/cross-border, and tax payment modules.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "That included NACHA file validation, foreign-exchange rate visibility, and Message Authentication Code security so corporate users could verify payment integrity before release.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He also built payment-type-specific permissions, such as allowing wire approval without permitting FX initiation, and contextual help explaining payment fields and compliance requirements.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Alongside the payment engine, Matt designed the centralized gateway for message transformation, protocol translation, and routing across 12 countries, replacing fragmented point-to-point integrations.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "He redesigned user administration with role-based profiles and bulk permission changes, reducing entitlement management from days to minutes.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt also led payments data migration without disruption to live payment operations.",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "For the global rollout, he translated jurisdiction-specific requirements into data visibility and access controls, sequencing regional launches by regulatory readiness rather than using a single big-bang deployment.",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "He owned on-call and severity-one incident response across releases and migrations.",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched in April 2011, consolidating regional systems into a single portal serving 135,000+ corporations, financial institutions, governments, and municipalities across 180+ countries.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "The regional compliance framework enabled rollout across APAC, EMEA, and the Americas without regulatory blockers.",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q13",
+  "run": 10,
+  "turn": 1,
+  "label": "A",
+  "pass": true,
+  "reason": "Answered and Honest: all 17 claims supported by the five JP Morgan ACCESS stories (payment engine, gateway, migration, compliance rollout, entitlements): 2009-08 to 2012-06, Technology Delivery Lead, 40+ blended team, 70-80% at Bottomline Portsmouth, ACH/wire/FX/tax modules, MAC security, gateway across 12 countries, days to minutes, migration without disruption, April 2011 launch, 135,000+ clients across 180+ countries. No contradicted or unsupported claims, no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Matt’s payments work at JP Morgan Chase centered on ACCESS Next Generation, its unified global corporate banking portal.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "From August 2009 to June 2012, Matt served as Technology Delivery Lead.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Task/Role"
+   },
+   {
+    "text": "The bank’s regional payment systems had different data models, client configurations, entitlement structures, and compliance records.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Bottomline Technologies’ WebSeries platform provided the foundation, but the bank needed payment capabilities beyond its out-of-box offering for 135,000+ clients across 180+ countries.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt managed a blended team of 40+ Accenture and bank resources across Mumbai, Bangalore, and the US.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He spent 70 to 80% of his time embedded at Bottomline’s Portsmouth, New Hampshire offices, working through where native platform capabilities ended and custom engineering was required.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He designed and delivered ACH, wire, FX/cross-border, and federal tax payment modules, including payment formatting, validation, and compliance requirements.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He also built the Message Authentication Code security layer for payment-integrity verification.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "For the centralized payments gateway, he designed message transformation, protocol translation, and routing across payment networks in 12 countries, connecting ACCESS to internal compliance, settlement, and reporting systems.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "The work also covered administration and rollout.",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Matt introduced role-based access controls, payment-type-specific permissions, and bulk permission changes, reducing entitlement management from days to minutes.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He led payments data migration without disruption to live payment operations, preserving client configurations, entitlements, transaction histories, and compliance traceability.",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Across APAC, EMEA, and the Americas, he translated jurisdiction-specific requirements into data-visibility rules, access controls, and platform configuration.",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Regional launches were sequenced by regulatory readiness rather than a single global deployment.",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched in April 2011.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Corporate treasurers gained a single entry point for payments across regions, replacing separate local logins and fragmented regional payment systems.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "Matt also owned on-call and critical production incident response across releases and migrations.",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ },
+ {
+  "case": "q13",
+  "run": 10,
+  "turn": 1,
+  "label": "B",
+  "pass": true,
+  "reason": "Answered and Honest: all 15 claims supported by the five JP Morgan ACCESS stories (payment engine, gateway, migration, compliance rollout, entitlements): 2009-08 to 2012-06, Technology Delivery Lead, 40+ blended team, 70-80% at Bottomline Portsmouth, ACH/wire/FX/tax modules, MAC security, gateway across 12 countries, days to minutes, migration without disruption, April 2011 launch, 135,000+ clients across 180+ countries. No contradicted or unsupported claims, no quotations, no closing offer.",
+  "claims": [
+   {
+    "text": "Matt’s payments work at JP Morgan Chase centered on ACCESS Next Generation, from August 2009 to June 2012.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Start_Date/End_Date/Task/Role"
+   },
+   {
+    "text": "The bank was consolidating regional treasury systems into a global corporate banking portal, but Bottomline Technologies’ WebSeries platform needed substantial custom engineering.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Payment types had different formatting, validation, compliance, and approval requirements.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Legacy connectivity spanned 12 countries, while entitlement changes required days of manual configuration.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "As Technology Delivery Lead, Matt managed a blended team of 40+ Accenture and bank resources across Mumbai, Bangalore, and the US.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He defined the onshore-offshore engagement model and spent 70 to 80% of his time embedded with Bottomline in Portsmouth, coordinating with bank stakeholders in Chicago and NY/NJ.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Task"
+   },
+   {
+    "text": "He worked with enterprise architects, security specialists, compliance teams, and developers to determine where WebSeries configuration ended and bank-specific engineering was required.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Matt designed and delivered ACH, wire, FX/cross-border, and government tax payment modules, along with Message Authentication Code security and payment-type-specific permissions.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He also designed the centralized payments gateway for message transformation, protocol translation, and routing to internal settlement and compliance systems and external payment rails.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "For client administrators, he replaced individual permission changes with role-based profiles and bulk grouping across users, accounts, and products.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "Entitlement management dropped from days to minutes.",
+    "label": "supported",
+    "source": "overhauling-entitlement-management-for-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "He also led payments data migration, preserving client configurations, entitlement structures, transaction histories, and compliance traceability, with zero disruption to live payment operations.",
+    "label": "supported",
+    "source": "consolidating-legacy-payment-systems-into-jp-morgans-unified-access-platform|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "ACCESS launched in April 2011, serving 135,000+ clients across 180+ countries.",
+    "label": "supported",
+    "source": "building-the-payment-engine-behind-jp-morgan-access|jp-morgan-chase Situation/Action/Result"
+   },
+   {
+    "text": "The gateway supported payments across 12 countries through a unified architecture.",
+    "label": "supported",
+    "source": "building-jp-morgans-global-payments-gateway-across-12-countries|jp-morgan-chase Action/Result"
+   },
+   {
+    "text": "During rollout and subsequent releases, Matt owned production incident response, coordinating root-cause analysis across bank, offshore, and vendor teams while running status updates and daily leadership calls.",
+    "label": "supported",
+    "source": "navigating-multi-jurisdictional-compliance-for-jp-morgans-global-payments-platform-rollout|jp-morgan-chase Action/Result"
+   }
+  ],
+  "contradicted": 0,
+  "unsupported": 0,
+  "invented": [],
+  "clarifying": false,
+  "voice_first_person": true,
+  "voice_paw_ok": true,
+  "voice_smart_helpful": true,
+  "voice_professional": true,
+  "voice_no_dog_puns": true,
+  "voice_warm_credible": true,
+  "voice_ends_on_content": true,
+  "voice_substance_first": true,
+  "voice_trust": true,
+  "names_missing": null,
+  "sentence_count": null,
+  "too_dismissive": null,
+  "too_apologetic": null,
+  "padded": null,
+  "speculation": null,
+  "opening_fits": null,
+  "presumes_exists": null,
+  "soft_cant_confirm": null
+ }
+]

@@ -1,0 +1,29 @@
+lane 1/7: 25 of 170 jobs
+health check start: top Fiserv 0.439
+[FB q01 r2] 5.66s  | "🐾 I followed that trail and came up empty: Matt's "
+[FB q01 r9] 4.98s  | "🐾 I followed that trail and came up empty: Matt's "
+[FB q02 r6] 5.07s  | "🐾 I searched Matt's whole record, and it doesn't m"
+[FB q03 r3] 4.96s  | "🐾 I followed that trail and came up empty: Matt's "
+[FB q03 r10] 5.79s  | "🐾 I searched Matt's whole record, and it doesn't m"
+[FB q04 r7] 5.11s  | "🐾 I followed that trail and came up empty: Matt's "
+[FB q05 r4] 4.06s  | "🐾 I searched Matt's whole record, and it doesn't m"
+[FB q06 r1] 5.24s  | "🐾 I followed that trail and came up empty: Matt's "
+[FB q06 r8] 4.5s  | "🐾 I searched Matt's whole record, and it doesn't m"
+[FB q07 r5] 5.23s  | "🐾 I searched Matt's whole record, and it doesn't m"
+[FB q08 r2] 5.63s  | "🐾 I followed that trail and came up empty: Matt's "
+[FB q08 r9] 6.33s  | "🐾 I followed that trail and came up empty: Matt's "
+[FB q09 r6] 6.69s  | '🐾 Here are Matt’s certifications. **None is curren'
+[FB q10 r3] 8.52s  | '🐾 No, Matt does not have a PMP.\n\nHis certification'
+[FB q10 r10] 6.41s  | '🐾 No, Matt does not have a PMP. His certifications'
+[FB q11 r7] 3.88s  | '🐾 Matt speaks English (native) and French (**B2**,'
+[FB q12 r4] 4.58s  | "🐾 Yes. Matt has a master's degree in Information T"
+[FB q13 r1] 12.23s  | '🐾 Here’s the story behind Matt’s payments work at '
+[FB q13 r8] 13.17s  | '🐾 Here’s the story behind Matt’s payments work at '
+[FB q14 r5] 12.65s  | '🐾 Here’s how Matt describes his leadership philoso'
+[FB q15 r2] 10.93s  | '🐾 Here’s what Matt has built, changed, and deliver'
+[FB q15 r9] 14.77s  | '🐾 Here’s what Matt has built and delivered.\n\nMatt’'
+[FB q16 r6] 11.59s  | '🐾 Here’s a time Matt failed, and what happened aft'
+[FB q17 r3] 10.8s  | '🐾 Found it!\n\nMatt led the AWS Launchpad program at'
+[FB q17 r10] 10.88s  | '🐾 Found it!\n\nAt **Accenture’s** Liquid Studio, tra'
+health check end: top Fiserv 0.439
+done | rows 25 | errors []

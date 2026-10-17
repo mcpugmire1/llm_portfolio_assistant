@@ -1,0 +1,344 @@
+[
+ {
+  "answer_md": "🐾 I'm focused on Matt's professional experience, including the projects, teams, and outcomes.\n\nAsk me about his **transformation work**, **platform engineering**, or **how he builds teams** and I'll dig up the details.",
+  "rejection": "semantic_router:personal",
+  "degraded": null,
+  "sources": [],
+  "intent_family": "personal",
+  "seconds": 0.38,
+  "opening": null,
+  "calls": [],
+  "search_queries": [],
+  "arm": "OA",
+  "case": "q01",
+  "kind": "decline",
+  "run": 1,
+  "turn": 1,
+  "question": "Is Matt married?",
+  "ui_reason": "semantic_router:personal"
+ },
+ {
+  "answer_md": "🐾 Here’s what I can share.\n\nNothing I know about Matt covers that.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [],
+  "intent_family": "",
+  "seconds": 4.35,
+  "opening": "🐾 Perfect, here's what I found.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3064,
+     "cached": 2930,
+     "output": 27,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Here’s what I can share.\n\nNothing I know about Matt covers that.",
+    "function_calls": 0,
+    "usage": {
+     "input": 3107,
+     "cached": 3061,
+     "output": 37,
+     "reasoning": 14
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire marital status married spouse",
+    "top_score": 0.192068815,
+    "n": 0
+   }
+  ],
+  "arm": "NB",
+  "case": "q01",
+  "kind": "decline",
+  "run": 1,
+  "turn": 1,
+  "question": "Is Matt married?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "Nothing I know about Matt covers that",
+  "rejection": null,
+  "degraded": false,
+  "sources": [],
+  "intent_family": "",
+  "seconds": 4.71,
+  "opening": "🐾 This is a strong one.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3060,
+     "cached": 0,
+     "output": 27,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "Nothing I know about Matt covers that",
+    "function_calls": 0,
+    "usage": {
+     "input": 3103,
+     "cached": 3057,
+     "output": 25,
+     "reasoning": 12
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire marital status married spouse",
+    "top_score": 0.192068815,
+    "n": 0
+   }
+  ],
+  "arm": "OB",
+  "case": "q01",
+  "kind": "decline",
+  "run": 1,
+  "turn": 1,
+  "question": "Is Matt married?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 I'm focused on Matt's professional experience, including the projects, teams, and outcomes.\n\nAsk me about his **transformation work**, **platform engineering**, or **how he builds teams** and I'll dig up the details.",
+  "rejection": "semantic_router:personal",
+  "degraded": null,
+  "sources": [],
+  "intent_family": "personal",
+  "seconds": 0.33,
+  "opening": null,
+  "calls": [],
+  "search_queries": [],
+  "arm": "NA",
+  "case": "q01",
+  "kind": "decline",
+  "run": 1,
+  "turn": 1,
+  "question": "Is Matt married?",
+  "ui_reason": "semantic_router:personal"
+ },
+ {
+  "answer_md": "Nothing I know about Matt covers that",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Integrating Play into Work to Enhance Team Motivation (Accenture)",
+   "Work Philosophy: Where I Do My Best Work (Accenture)",
+   "Transition Story: Why I’m Exploring Opportunities (Accenture)"
+  ],
+  "intent_family": "background",
+  "seconds": 5.7,
+  "opening": "🐾 This is a strong one.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3062,
+     "cached": 0,
+     "output": 28,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "Nothing I know about Matt covers that",
+    "function_calls": 0,
+    "usage": {
+     "input": 6073,
+     "cached": 3059,
+     "output": 38,
+     "reasoning": 25
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire hobbies personal interests outside work",
+    "top_score": 0.349412024,
+    "n": 25
+   }
+  ],
+  "arm": "OA",
+  "case": "q06",
+  "kind": "decline",
+  "run": 1,
+  "turn": 1,
+  "question": "What are Matt's hobbies?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 Here’s what I can say.\n\nNothing I know about Matt covers that.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Integrating Play into Work to Enhance Team Motivation (Accenture)",
+   "Work Philosophy: Where I Do My Best Work (Accenture)",
+   "Transition Story: Why I’m Exploring Opportunities (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 5.33,
+  "opening": "🐾 Tracking this down...",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3068,
+     "cached": 0,
+     "output": 28,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Here’s what I can say.\n\nNothing I know about Matt covers that.",
+    "function_calls": 0,
+    "usage": {
+     "input": 6079,
+     "cached": 3065,
+     "output": 43,
+     "reasoning": 20
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire hobbies personal interests outside work",
+    "top_score": 0.349395573,
+    "n": 25
+   }
+  ],
+  "arm": "NB",
+  "case": "q06",
+  "kind": "decline",
+  "run": 1,
+  "turn": 1,
+  "question": "What are Matt's hobbies?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "Nothing I know about Matt covers that.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "Transition Story: Why I’m Exploring Opportunities (Accenture)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Why Hire Matt? (Accenture)",
+   "About Matt: My Leadership Journey (Accenture)"
+  ],
+  "intent_family": "",
+  "seconds": 4.72,
+  "opening": "🐾 Tracking this down...",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3064,
+     "cached": 0,
+     "output": 25,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "Nothing I know about Matt covers that.",
+    "function_calls": 0,
+    "usage": {
+     "input": 6185,
+     "cached": 3061,
+     "output": 24,
+     "reasoning": 10
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt personal hobbies leisure interests outside work",
+    "top_score": 0.331242234,
+    "n": 25
+   }
+  ],
+  "arm": "OB",
+  "case": "q06",
+  "kind": "decline",
+  "run": 1,
+  "turn": 1,
+  "question": "What are Matt's hobbies?",
+  "ui_reason": null
+ },
+ {
+  "answer_md": "🐾 Here’s what I can say.\n\nNothing I know about Matt covers that.",
+  "rejection": null,
+  "degraded": false,
+  "sources": [
+   "MattGPT: Product Vision, Roadmap, Scope, and MVP Delivery (Independent Project)",
+   "MattGPT: Human-Centered UX Design & Information Architecture (Independent Project)",
+   "Integrating Play into Work to Enhance Team Motivation (Accenture)",
+   "Work Philosophy: Where I Do My Best Work (Accenture)",
+   "Transition Story: Why I’m Exploring Opportunities (Accenture)"
+  ],
+  "intent_family": "background",
+  "seconds": 5.56,
+  "opening": "🐾 Perfect, here's what I found.",
+  "calls": [
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "",
+    "function_calls": 1,
+    "usage": {
+     "input": 3066,
+     "cached": 2930,
+     "output": 28,
+     "reasoning": 0
+    }
+   },
+   {
+    "model": "gpt-6.1-sol",
+    "raw_text": "🐾 Here’s what I can say.\n\nNothing I know about Matt covers that.",
+    "function_calls": 0,
+    "usage": {
+     "input": 6077,
+     "cached": 3063,
+     "output": 49,
+     "reasoning": 26
+    }
+   }
+  ],
+  "search_queries": [
+   {
+    "query": "Matt Pugmire hobbies personal interests outside work",
+    "top_score": 0.349412024,
+    "n": 25
+   }
+  ],
+  "arm": "NA",
+  "case": "q06",
+  "kind": "decline",
+  "run": 1,
+  "turn": 1,
+  "question": "What are Matt's hobbies?",
+  "ui_reason": null
+ }
+]
