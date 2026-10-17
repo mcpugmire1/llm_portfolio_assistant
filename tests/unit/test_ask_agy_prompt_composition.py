@@ -135,7 +135,7 @@ _RULE_0B_VOICE = [
 _RULE_0B_EXAMPLES = [
     "🐾 I followed that trail and came up empty: Matt's stories don't cover [topic].",
     "🐾 That trail goes cold here. There's nothing on record about [topic].",
-    "🐾 I searched every trail I have, and Matt's record doesn't mention [topic].",
+    "🐾 I searched Matt's whole record, and it doesn't mention [topic].",
     "🐾 I've been through Matt's stories, and nothing speaks to [topic].",
 ]
 # MATTGPT-322: the fixed sentence came back bare, with no opener; the
