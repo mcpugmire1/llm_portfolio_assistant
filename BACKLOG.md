@@ -1028,6 +1028,8 @@ Each detail block uses these fields. Not every field is required for every item.
 **New observation (Oct 17, 2026; lane 2's MATTGPT-122 pre-flight; unmeasured, no probe run):** the Cards view click wiring calls `parentDoc.addEventListener('click', ...)` from inside a `components.html` iframe that Streamlit recreates on every rerun, so each rerun may add another delegated listener on the parent document. Not measured: whether listeners from destroyed iframes still fire, and so call the hidden `card_btn_*` button's `click()` more than once per card click.
 - Verified Oct 17, 2026 (HEAD fc56a3b, `explore_stories.py`): the Cards view `components.html` script adds the `parentDoc` click listener with no `removeEventListener` and no wired guard. The pagination wiring in the same file (`.es-pagination button`, inside a `setTimeout`) adds a `parentDoc` click listener the same way.
 
+**Probe (lane 2, Oct 17, 2026; as reported, not in a commit):** 30 of 30 runs loaded the frame and opened the detail; mutation check: 2 of 2 detected. The failure did not reproduce. Revisit with MATTGPT-039's nightly suite.
+
 
 
 ### MATTGPT-128
