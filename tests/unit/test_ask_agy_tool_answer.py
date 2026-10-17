@@ -449,7 +449,7 @@ class TestVoiceCarriesOver:
         with patch.object(bs, "_choose_decline_line", return_value=_DECLINE_SENTINEL):
             _, fake, _, _, _ = _run([_response("ok")], family=family)
         assert (
-            "**IF YOU DECLINE:** Use this shape, topic in your own words: "
+            "**IF YOU DECLINE:** Begin with this line, filling in the topic in your own words: "
             f'"{_DECLINE_SENTINEL}"'
         ) in _system(fake.requests[0])
 

@@ -119,7 +119,7 @@ class TestDeclineLine:
     def test_the_decline_line_is_given_as_a_shape(self, is_synthesis):
         prompt = _prompt(is_synthesis, decline_line=_DECLINE)
         assert (
-            "**IF YOU DECLINE:** Use this shape, topic in your own words: "
+            "**IF YOU DECLINE:** Begin with this line, filling in the topic in your own words: "
             f'"{_DECLINE}"'
         ) in prompt
 
