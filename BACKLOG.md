@@ -167,6 +167,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-328](#mattgpt-328) | Rule 0b decline follow-ups: repeat drift, "I can't confirm", possessive wording | Open | Low | Issue | value | October 17, 2026 |
 | [MATTGPT-329](#mattgpt-329) | Crude and sexual questions about Matt reach the answering model since 1095d2c removed the confidence and overlap gates | Open | High | Regression | value | October 17, 2026 |
 | [MATTGPT-330](#mattgpt-330) | Home to My Work card click shows a half-emptied Home for a frame or more: the stale-hide rule covers only the Ask Agy landing | Open | Medium | Bug | value | October 17, 2026 |
+| [MATTGPT-331](#mattgpt-331) | Home cards 3, 5 and 6 apply only their first Sub-category: My Work's single-select Domain box drops the rest | Open | High | Bug | value | October 17, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently | Parked | Medium | Action | value | August 3, 2026 |
@@ -3146,6 +3147,28 @@ The fails span four different rule 0b wordings, and controls never trigger 0b, s
 **Verified Oct 17, 2026 (HEAD 4e85149, `global_styles.py`):** two stale-hide rules exist. a6b427c's (MATTGPT-018) covers stale containers holding `.main-intro-section` or `.ask-header-landing`. 1095d2c's (MATTGPT-275) hides every stale element except the navbar and status bar, plus the intro card, but only under `body:has(.powered-by-text)`; its comment: "`.powered-by-text`, rendered only by landing_view". Neither applies on Home. 275's comment names the same symptom on the Ask Agy landing: "Hiding only some stale parts left the page half emptied ... until the conversation painted."
 
 **Fix direction:** extend 275's rule to Home's hand-offs, measured as 275's was: a headless recorder plus a browser trace.
+
+### MATTGPT-331
+**Home cards 3, 5 and 6 apply only their first Sub-category: My Work's single-select Domain box drops the rest**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **File:** `ui/pages/explore_stories.py` (the Domain selectbox in the filter bar), `ui/components/category_cards.py` (`card_btn_product`, `card_btn_consulting`, `card_btn_teams`)
+- **Related:** MATTGPT-065 (single-select filter bar, closed), MATTGPT-060 (post-navigation BDD; its strict xfails pin this once committed), MATTGPT-107 (whole-card click), MATTGPT-330 (same screenshot)
+- **Logged:** October 17, 2026
+
+**Verified Oct 17, 2026 (HEAD f10a544):**
+- `category_cards.py` sets `prefilter_domains` to a list for card 3 (`card_btn_product`, 5 values), card 5 (`card_btn_consulting`, 8 values; its comment: "~29 stories covered") and card 6 (`card_btn_teams`, 4 values). Card 4 (`card_btn_modernization`) sets `prefilter_capability` and is unaffected.
+- `explore_stories.py`'s Domain selectbox (MATTGPT-065's single-select bar) takes `current_domain_val = (F.get("domains") or [""])[0]` and writes back `F["domains"] = [] if sel_domain == "All" else [sel_domain]`, so every value after the first is dropped.
+
+**Evidence:**
+- Lane 2's probe (Oct 17, 2026; as reported, not in a commit): card 6 shows 1 story where its 4 values cover 15; card 3 shows 3, about 10 expected; card 5 shows 5, about 29 expected.
+- Matt's screenshot (Oct 17, 2026; not on disk): Teams & Talent Development lands on 1 story ("Unifying Norfolk Southern's Teams Around Cloud-Native Practices"), Domain "Client Upskilling & Enablement", one chip.
+
+**Fix (needs Matt's UX call):** a multi-select Domain, or one chip named for the card.
+
+**Tests:** MATTGPT-060's strict xfails pin this once committed.
 
 ### MATTGPT-160
 **JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs**
