@@ -86,12 +86,12 @@ _STORY_PN = {
 }
 _STORIES = [_STORY_A, _STORY_B, _STORY_PN]
 
-# MATTGPT-322: the four decline lines, one picked per turn in code.
+# MATTGPT-322: the two decline lines, one picked per turn in code. Run 4
+# dropped "That trail goes cold here..." (misread on a plain first
+# question) and "I've been through Matt's stories..." (followed 3 in 10).
 _DECLINE_LINES = [
     "🐾 I followed that trail and came up empty: Matt's stories don't cover [topic].",
-    "🐾 That trail goes cold here. There's nothing on record about [topic].",
     "🐾 I searched Matt's whole record, and it doesn't mention [topic].",
-    "🐾 I've been through Matt's stories, and nothing speaks to [topic].",
 ]
 _DECLINE_SENTINEL = "🐾 ZZZ decline line about [topic]."
 
@@ -438,10 +438,10 @@ class TestVoiceCarriesOver:
         )
         assert f"Examples of how Agy opens: {examples}." in _system(fake.requests[0])
 
-    def test_decline_line_is_one_of_the_four_and_all_four_come_up(self):
+    def test_decline_line_is_one_of_the_two_and_both_come_up(self):
         # MATTGPT-322: the model can't vary across calls it can't see, so
         # code picks the decline line each turn, as it picks the focus angle.
-        picks = {bs._choose_decline_line() for _ in range(400)}
+        picks = {bs._choose_decline_line() for _ in range(200)}
         assert picks == set(_DECLINE_LINES)
 
     @pytest.mark.parametrize("family", ["behavioral", "synthesis"])

@@ -130,12 +130,10 @@ _RULE_0B_VOICE = [
     "Name the topic in your own words",
 ]
 # MATTGPT-322: the model can't vary across calls it can't see, so code picks
-# one of four decline lines per turn; exactly one reaches the model.
+# one of two decline lines per turn; exactly one reaches the model.
 _RULE_0B_DECLINE_LINES = [
     "🐾 I followed that trail and came up empty: Matt's stories don't cover [topic].",
-    "🐾 That trail goes cold here. There's nothing on record about [topic].",
     "🐾 I searched Matt's whole record, and it doesn't mention [topic].",
-    "🐾 I've been through Matt's stories, and nothing speaks to [topic].",
 ]
 # MATTGPT-322: the fixed sentence came back bare, with no opener; the
 # first voiced wording's own phrase ("nothing on record about what was
@@ -293,7 +291,7 @@ class TestCitationRulesInCapturedSystemMessage:
         self, captured_agy_system_message
     ):
         """MATTGPT-322: code picks one decline line per turn; the model gets
-        that one, not the four to choose from."""
+        that one, not the list to choose from."""
         present = [
             line
             for line in _RULE_0B_DECLINE_LINES
