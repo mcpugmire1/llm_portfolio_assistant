@@ -17,4 +17,24 @@ if printf '%s\n' "$body" | grep -iq -e '^co-authored-by:'; then
   status=1
 fi
 
+# Production code removal: a def deleted from ui/, services/, utils/ or config/
+# (not re-added anywhere in the same commit, so edits and moves pass) needs a
+# Decision: trailer naming it as <file>:<function>, with the reason, e.g.
+# "Decision: delete utils/scoring.py:_build_retrieval_query, no caller since 1095d2c".
+removed=$(git diff --cached -M -U0 --no-color -- 'ui/*.py' 'services/*.py' 'utils/*.py' 'config/*.py' \
+  | awk '/^--- / { f = substr($2, 3) }
+         /^-[ \t]*(async[ \t]+)?def[ \t]+[A-Za-z_][A-Za-z0-9_]*[ \t]*\(/ {
+           sub(/^-[ \t]*(async[ \t]+)?def[ \t]+/, ""); sub(/[ \t]*\(.*/, ""); print f ":" $0 }')
+added=$(git diff --cached -M -U0 --no-color \
+  | sed -nE 's/^\+[ \t]*(async[ \t]+)?def[ \t]+([A-Za-z_][A-Za-z0-9_]*)[ \t]*\(.*/\2/p')
+decisions=$(printf '%s\n' "$body" | grep -e '^Decision:')
+while IFS= read -r entry; do
+  [ -z "$entry" ] && continue
+  printf '%s\n' "$added" | grep -qxF -e "${entry#*:}" && continue
+  pat=$(printf '%s' "$entry" | sed 's/[.]/\\./g')
+  printf '%s\n' "$decisions" | grep -Eq -e "(^|[^[:alnum:]_./-])${pat}([^[:alnum:]_]|$)" && continue
+  echo "⛔ WAKE UP MATT! PAY ATTENTION TO THIS. This commit deletes production code: $entry. Add a 'Decision: delete $entry, <reason>' trailer only after you've reviewed it." >&2
+  status=1
+done <<< "$removed"
+
 exit $status
