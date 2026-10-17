@@ -120,18 +120,32 @@ _RULE_0A_NEW_MARKERS = [
     _RULE_0A_MARKER_PLACEMENT,
     _RULE_0A_CERTS_DIRECT_NO,
 ]
-_RULE_0B_MARKER = "nothing on record about what was asked"
+_RULE_0B_MARKER = "decline in first person"
 # New at 9d5f575: for absent categories, Agy must not pad the honest gap
 # with story evidence. MATTGPT-322: the decline is written in Agy's voice
 # (design spec doc 05), opening with the 🐾 and naming what is not on record.
 _RULE_0B_REPLY_ONLY = "No guessing, no padding with story evidence, no excess apology"
 _RULE_0B_VOICE = [
-    "answer in one or two sentences, the first beginning with 🐾",
-    "and name it",
+    "decline in first person, in one or two sentences, the first beginning with 🐾",
+    "Name the topic in your own words",
+    "Examples to vary, not text to copy",
+]
+# MATTGPT-322: four decline lines to vary, so no one line becomes the
+# template; [topic] is a placeholder the model fills in its own words.
+_RULE_0B_EXAMPLES = [
+    "🐾 I followed that trail and came up empty: Matt's stories don't cover [topic].",
+    "🐾 That trail goes cold here. There's nothing on record about [topic].",
+    "🐾 I searched every trail I have, and Matt's record doesn't mention [topic].",
+    "🐾 I've been through Matt's stories, and nothing speaks to [topic].",
+]
+# MATTGPT-322: the fixed sentence came back bare, with no opener; the
+# first voiced wording's own phrase ("nothing on record about what was
+# asked") became the template every decline repeated.
+_RULE_0B_REMOVED = [
+    "Nothing I know about Matt covers that",
+    "nothing on record about what was asked",
     "Two examples of the shape, not text to copy",
 ]
-# MATTGPT-322: the fixed sentence came back bare, with no opener.
-_RULE_0B_FIXED_SENTENCE = "Nothing I know about Matt covers that"
 
 _GROUNDING_HEADER = "**GROUNDING RULES:**"
 
@@ -267,22 +281,33 @@ class TestCitationRulesInCapturedSystemMessage:
     def test_rule_0b_voice_fragment_present_in_system_message(
         self, captured_agy_system_message, fragment
     ):
-        """MATTGPT-322: the decline is one or two sentences, opening with
-        the 🐾, naming what is not on record, with two contrasting examples
-        so neither becomes the template."""
+        """MATTGPT-322: the decline is one or two first-person sentences,
+        opening with the 🐾, naming the topic in the model's own words."""
         assert fragment in captured_agy_system_message, (
             f"rule 0b voice fragment {fragment!r} not found in captured Agy "
             f"system message"
         )
 
-    def test_rule_0b_fixed_sentence_is_gone(self, captured_agy_system_message):
-        """MATTGPT-322: 'Nothing I know about Matt covers that', with 'Reply
-        with that sentence only', overrode the opener instruction, so the
-        decline came back bare, with no opener."""
-        assert _RULE_0B_FIXED_SENTENCE not in captured_agy_system_message, (
-            f"old fixed 0b sentence {_RULE_0B_FIXED_SENTENCE!r} still in "
-            f"captured Agy system message"
+    @pytest.mark.parametrize("example", _RULE_0B_EXAMPLES)
+    def test_rule_0b_example_present_in_system_message(
+        self, captured_agy_system_message, example
+    ):
+        """MATTGPT-322: four decline lines to vary, so no one line
+        becomes the template."""
+        assert example in captured_agy_system_message, (
+            f"rule 0b example {example!r} not found in captured Agy system " f"message"
         )
+
+    @pytest.mark.parametrize("removed", _RULE_0B_REMOVED)
+    def test_rule_0b_removed_text_absent_from_system_message(
+        self, captured_agy_system_message, removed
+    ):
+        """MATTGPT-322: 'Nothing I know about Matt covers that' overrode the
+        opener, so the decline came back bare; 'nothing on record about what
+        was asked' became the sentence every decline repeated."""
+        assert (
+            removed not in captured_agy_system_message
+        ), f"removed rule 0b text {removed!r} still in captured Agy system message"
 
 
 # ---------------------------------------------------------------------------
