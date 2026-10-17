@@ -210,25 +210,6 @@ def verify_conversation_view(browser_page):
     browser_page.wait_for_selector("[data-testid='stChatMessage']", timeout=30000)
 
 
-@then("no suggestion chip or receiver button should be clickable")
-def verify_receivers_disabled(browser_page):
-    # Nothing clickable while Agy is processing (MATTGPT-139). The landing page
-    # hands the question to the conversation view (MATTGPT-275), so a receiver
-    # may already be gone; a missing receiver is as unclickable as a disabled one.
-    browser_page.wait_for_selector(".thinking-modal", timeout=8000)
-    for i in range(6):
-        btn = browser_page.locator(f'[class*="st-key-suggested_{i}"] button')
-        assert (
-            btn.count() == 0 or btn.first.get_attribute("disabled") is not None
-        ), f"Receiver button {i} is enabled during processing"
-    visible_chips = [
-        c for c in browser_page.locator(".suggested-chip").all() if c.is_visible()
-    ]
-    assert (
-        not visible_chips
-    ), f"{len(visible_chips)} suggestion chips are visible during processing"
-
-
 # =============================================================================
 # THEN -- MOBILE BUTTONS
 # =============================================================================

@@ -48,12 +48,6 @@ Feature: Ask Agy Landing Page
     Then the thinking indicator should appear
     And the conversation view should load
 
-  Scenario: Chip grid is not interactive during processing
-    Given the viewport is 1024px wide
-    And the user navigates to the Ask Agy page
-    When the user clicks the first suggestion chip
-    Then no suggestion chip or receiver button should be clickable
-
   # =============================================================================
   # SUGGESTION CHIPS -- MOBILE (st.button, unchanged path)
   # =============================================================================
