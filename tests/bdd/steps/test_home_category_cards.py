@@ -210,6 +210,15 @@ def click_banking_card(browser_page):
         "page. MATTGPT-107: Banking card must remain titled 'Banking' "
         "after the redesign."
     )
+    # category_cards.py wires the card's onclick from its components.html
+    # bridge inside setTimeout(..., 200), after the card renders. A click
+    # before then lands on a bare div and never routes. Poll until the
+    # handler is bound, as the story-detail button steps do.
+    browser_page.wait_for_function(
+        "() => { const c = document.getElementById('card-banking'); "
+        "return c && c.onclick !== null; }",
+        timeout=LONG_WAIT,
+    )
     card.click()
     wait_for_streamlit_rerun(browser_page)
 
