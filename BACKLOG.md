@@ -13,7 +13,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 1. **-275** -- Green shipped (1095d2c, evidence aa0bb94). Still open for the code-rendered closer and the profile contact links: required closings c14 to c17 scored 0/10 in every arm, the baseline included. -268 travels with -275.
 2. **-039** -- CI quality pipeline in two tiers: every push runs ruff, mypy, unit, structural and data-contract tests (-258), pip-audit; nightly runs BDD and the golden eval with a cost budget. Proposed gate: Streamlit deploys from a prod branch that CI advances only on green (Matt to confirm). Today CI runs only the unit tests.
 3. **-251** -- Ask Agy treats adjacent retrieved stories as evidence for the question asked. Visitor-visible correctness defect: unsupported claims (real estate sector from Cendant Mortgage; "including France" with no source) read as fact to recruiters.
-4. **-329** -- Regression since 1095d2c: crude and sexual questions about Matt reach the answering model ("Does Matt have a penis?" answered in production with three source cards). Fix: a nonsense rule that rejects before any model call, tested against the must-preserve set. Before -236.
+4. **-331** -- Home cards 3, 5 and 6 apply only their first Domain value: My Work's single-select Domain box (MATTGPT-065) drops the rest, so Teams & Talent lands on 1 story where its 4 values cover 15. Fix needs Matt's UX call: multi-select Domain, or one chip named for the card.
 
 **NEXT**
 5. **-128** -- Red in 1095d2c (`TestSourcesAreTheCitedStories`, 5 xfails); cards still show all retrieved stories. Nothing of its contract has shipped. Cards show the stories the answer cited, not just those retrieved: the Oct 12 JP Morgan payments answer drew 7 of 23 claims from two stories the cards did not show. Sources panel split by kind, extracted reason lines, trailing question removed; design settled August 30.
@@ -51,7 +51,7 @@ Dead code: -176, -183 · -241 (dead prose in `_router_rejection()`: delete it) �
 Untraced flash: -229 (My Work flashes before Ask Agy conversation -- needs DevTools trace) · -289 (MATTGPT-018 regression watch: stale landing elements painted 240-370 ms, one mixed frame in 3 runs)
 BDD flakes: -122, -131, -142, -145, -197, -198
 Wrong-assertion test: -203 · -254 (stale `jd_extraction.feature` and `post_era_project_counts.feature` stats-bar assertions)
-Small refactors: -153, -062, -082, -083, -084, -150, -060, -217 (pronoun grammar in substitution)
+Small refactors: -153, -062, -082, -083, -084, -150, -217 (pronoun grammar in substitution)
 BDD structure: -213 (shared step definitions)
 Correctness audit: -214 (parameters, comments, constants, copied blocks) · -226 (dead `.main` selectors, ~299 declarations matching 0 elements)
 Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/agy-behavior/structural suites)
@@ -71,7 +71,6 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-039](#mattgpt-039) | CI quality pipeline: two tiers, with production deploying only from green | Open | High | Action | value | Apr 29, 2026 |
 | [MATTGPT-040](#mattgpt-040) | Eval Coverage Gaps -- Follow-up Queries | Open | Low | Action | value | Apr 29, 2026 |
 | [MATTGPT-045](#mattgpt-045) | Analytics Dashboard | Open | Low | Action | chore | Apr 29, 2026 |
-| [MATTGPT-060](#mattgpt-060) | BDD coverage gap -- assert post-navigation page state, not just navigation | Open | Medium | Action | chore | May 12, 2026 |
 | [MATTGPT-062](#mattgpt-062) | Semantic router cache silently uses stale embeddings when VALID_INTENTS changes | Open | Medium | Refactor | value | May 14, 2026 |
 | [MATTGPT-063](#mattgpt-063) | Wrong-person queries with names outside nonsense regex produce confused-context RAG answers | Open | Medium | Issue | value | May 14, 2026 |
 | [MATTGPT-077](#mattgpt-077) | Subject-pronoun + noun-overlap retrieval contamination -- "Matt + X" pulls MattGPT/Strangler Fig stories when X overlaps their vocabulary | Open | Medium-High | Issue | value | May 19, 2026 |
@@ -162,10 +161,8 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-321](#mattgpt-321) | Stale copy after 1095d2c: "Primary LLM" comment on DEFAULT_CHAT_MODEL; "High confidence match" and "Says what it doesn't know" in the How Agy Searches dialog | Open | Low | Hygiene | value | October 15, 2026 |
 | [MATTGPT-324](#mattgpt-324) | My Work doesn't render the profile facts semantic_search() returns (MATTGPT-250 item 1a) | Open | Medium | Enhancement | value | October 16, 2026 |
 | [MATTGPT-325](#mattgpt-325) | Stories that mention a query term are missed when their embedding score is under the cutoff: a keyword hit can't admit them | Open | Medium | Issue | value | October 16, 2026 |
-| [MATTGPT-326](#mattgpt-326) | Home BDD: the Banking card click can land before category_cards.py binds its onclick, so the scenario flakes | Open | Low | Bug (Test) | chore | October 16, 2026 |
 | [MATTGPT-327](#mattgpt-327) | Ask Agy rewrites the wording of quotations it attributes to Matt's own words | Open | Medium | Issue | value | October 17, 2026 |
 | [MATTGPT-328](#mattgpt-328) | Rule 0b decline follow-ups: repeat drift, "I can't confirm", possessive wording | Open | Low | Issue | value | October 17, 2026 |
-| [MATTGPT-329](#mattgpt-329) | Crude and sexual questions about Matt reach the answering model since 1095d2c removed the confidence and overlap gates | Open | High | Regression | value | October 17, 2026 |
 | [MATTGPT-330](#mattgpt-330) | Home to My Work card click shows a half-emptied Home for a frame or more: the stale-hide rule covers only the Ask Agy landing | Open | Medium | Bug | value | October 17, 2026 |
 | [MATTGPT-331](#mattgpt-331) | Home cards 3, 5 and 6 apply only their first Sub-category: My Work's single-select Domain box drops the rest | Open | High | Bug | value | October 17, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
@@ -492,39 +489,6 @@ Each detail block uses these fields. Not every field is required for every item.
 
 ---
 
-### MATTGPT-060
-**BDD coverage gap — assert post-navigation page state, not just navigation**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Action
-- **File:** `tests/bdd/features/home.feature`, `tests/bdd/steps/test_home.py`
-- **Issue:** Card 3 (Product Innovation & Strategy) on the home page set `prefilter_capability = "Product Leadership"` — a value that didn't exist in any story's `Solution / Offering` field. The Capability dropdown widget silently sanitized the invalid value to "All", showing 113 unfiltered stories instead of the curated product slice. The regression shipped because BDD verified that clicking the button navigated to Explore Stories — and it did — but never asserted what state the page should be in after arrival.
-- **Why it matters:** "Did we land on the right page?" passes when the prefilter is broken. The acceptance criteria assumed correct filtering but never wrote it down as a check. Human-centered exploratory testing catches what scripted assertions miss when the asserted condition is narrower than the user expectation.
-- **Proposed BDD scenario shape:**
-  ```gherkin
-  Given I am on the home page
-  When I click "View Product Work" on the Product Innovation & Strategy card
-  Then Explore Stories should be the active tab
-   And the Domain filter should include the expected product sub-categories
-   And the result count should be less than 113
-  ```
-- **Current state (May 14, 2026 validation):** `home.feature` has 11 scenarios total. 4 already wired in `test_home.py`: Card 3 regression, plus 3 chip scenarios added during May 13 chip CX work (Ask Agy button no-prefill, chip auto-fire, chip ↗ affordance). 7 still pending step defs.
-- **Coverage targets — pending step defs (7 scenarios):**
-  - Card 1 (Banking) — subpage navigation + page-specific content present
-  - Card 2 (Cross-Industry) — subpage navigation + page-specific content present
-  - Card 4 (Application Modernization) — `prefilter_capability` applied, result count < total
-  - Card 5 (Consulting & Transformation) — `prefilter_domains` applied, result count < total
-  - Card 6 (Teams & Talent Development) — `prefilter_domains` applied, result count < total
-  - Ask Agy chip CX — Session state cleared after auto-fire (refresh doesn't re-fire)
-  - Ask Agy chip CX — Ask MattGPT renders default landing when no chip clicked
-- **Lesson framing:** "Verifying the link works isn't the same as verifying the destination state is correct." Every prefilter-triggering button needs a state assertion, not just a navigation assertion.
-- **Related:** MATTGPT-014 (audit + split 17 skipped Role Match BDD scenarios) and MATTGPT-017 (wire 6 skipped logging BDD scenarios) — same thematic cluster: fill in BDD step defs for already-existing acceptance criteria. All three blocked the same "BDD has gaps where manual testing fills in" problem.
-- **Root-cause incident:** May 12, 2026 — Card 3 prefilter discovered broken; Path A fix landed in same session. Pre-existing regression; ship date unknown.
-- **Logged:** May 12, 2026 / **Refreshed:** May 14, 2026
-
----
-
 ### MATTGPT-062
 **Semantic router cache silently uses stale embeddings when VALID_INTENTS changes**
 
@@ -830,6 +794,7 @@ Each detail block uses these fields. Not every field is required for every item.
   - **MATTGPT-060** — BDD coverage gap for post-navigation page state. The 2 unbound rejection-banner scenarios fit that ticket's pattern; -083 could close them as a side effect.
   - **MATTGPT-071** — the BANNER_COPY work surfaced the visual rendering on Explore Stories, which led to this observation when the rule:* divergence (also being addressed) was being verified.
 - **Discovered during:** May 23, 2026 — Matt noticed during post-deploy shake-out that the spinner wasn't showing for rejected queries on Explore Stories. Compared to Ask MattGPT behavior; confirmed the inconsistency by tracing both code paths.
+- **Stale (Oct 17, 2026):** fbcbb7e bound the two rejection-banner scenarios this block calls unbound ("the story grid should still be visible", MATTGPT-224), and 92370b3 removed the `st.stop()` calls in the rejection branches. Re-scope on pickup.
 - **Logged:** May 23, 2026
 
 ---
@@ -1032,7 +997,7 @@ Each detail block uses these fields. Not every field is required for every item.
 **New observation (Oct 17, 2026; lane 2's MATTGPT-122 pre-flight; unmeasured, no probe run):** the Cards view click wiring calls `parentDoc.addEventListener('click', ...)` from inside a `components.html` iframe that Streamlit recreates on every rerun, so each rerun may add another delegated listener on the parent document. Not measured: whether listeners from destroyed iframes still fire, and so call the hidden `card_btn_*` button's `click()` more than once per card click.
 - Verified Oct 17, 2026 (HEAD fc56a3b, `explore_stories.py`): the Cards view `components.html` script adds the `parentDoc` click listener with no `removeEventListener` and no wired guard. The pagination wiring in the same file (`.es-pagination button`, inside a `setTimeout`) adds a `parentDoc` click listener the same way.
 
-**Probe (lane 2, Oct 17, 2026; as reported, not in a commit):** 30 of 30 runs loaded the frame and opened the detail; mutation check: 2 of 2 detected. The failure did not reproduce. Revisit with MATTGPT-039's nightly suite.
+**Probe (lane 2, Oct 17, 2026; as reported, not in a commit):** 30 of 30 runs loaded the frame and opened the detail; mutation check (a capture-phase `stopImmediatePropagation` blocking card clicks before the delegated listener): 2 of 2 detected. The failure did not reproduce. Revisit with MATTGPT-039's nightly suite.
 
 
 
@@ -3060,24 +3025,6 @@ One story at or above `CONFIDENCE_LOW` (0.20), and its 0.242 is below `CONFIDENC
 
 **Second case, agriculture (MATTGPT-236 gate, Oct 16, 2026; 1743846, `docs/evidence/MATTGPT-236/gate_20261016_140623/`):** "Has Matt worked in agriculture?" (r07): the Liquid Studio story (`building-smart-connected-devices-at-accentures-liquid-studio|accenture`, the only story that mentions agriculture) is in the sources of 0 of 30 answers; Ask Agy's one search was "Matt work experience agriculture agricultural farming agribusiness industry". A retrieval miss: the story never reaches the model. The adjacency part (the answer has to label the work as adjacent once retrieved) is on MATTGPT-251.
 
-### MATTGPT-326
-**Home BDD: the Banking card click can land before category_cards.py binds its onclick, so the scenario flakes**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Bug (Test)
-- **File:** `tests/bdd/steps/test_home_category_cards.py` (`click_banking_card`)
-- **Related:** MATTGPT-122 (same class: My Work Cards view, iframe listener not attached at click time), MATTGPT-107 (whole-card click)
-- **Logged:** October 16, 2026
-
-**Observed (lane 2's note, Oct 16, 2026; as reported, not in a commit):** "Clicking anywhere on the Banking card routes to the Banking landing surface" (`home_category_cards.feature`) flakes on the card click: failed 2 of 11 runs (once in a 211-test no-model subset, once in isolation; 8 isolation passes after). Correlation probe: 3 of 3 clicks before the handler was bound failed; 26 of 26 bound clicks landed.
-
-**Verified Oct 17, 2026 (HEAD fc56a3b):** `category_cards.py` wires `card-banking` and the other category cards' `onclick` from its `components.html` bridge inside a single `setTimeout` (the file's own comment: "The single setTimeout(200ms) pattern above works for the cards"), after the cards render. `click_banking_card` clicks the card as soon as it is visible; a click before the handler is bound lands on a bare div and does not route.
-
-**Fix (lane 2, uncommitted at filing):** wait until `document.getElementById('card-banking').onclick` is non-null before clicking, as the story-detail button steps do. Test-only.
-
-**Visitors (unmeasured, Oct 17, 2026):** the same gap applies outside the test: a click within about 200 ms of Home rendering may be dead for a visitor too. Not measured in a browser or in production.
-
 ### MATTGPT-327
 **Ask Agy rewrites the wording of quotations it attributes to Matt's own words**
 
@@ -3111,26 +3058,6 @@ The fails span four different rule 0b wordings, and controls never trigger 0b, s
 - **"I can't confirm" frequency:** "I can't confirm whether he has any." follows the line on 13 of 20 patents and papers declines in run 6 (run 4: 2); run 7's repeat put "I can't confirm" in 28 of 30 answers. The one decline fail in run 6 (q08 r05, 79/80) answered "I can't confirm whether Matt has published any papers." without the line and without saying nothing is on record.
 - **Possessive wording:** "Matt's patents" / "Matt's published papers", a possessive that presumes they exist, in 2 of 20 patents and papers declines in run 6 (run 4: 9).
 
-### MATTGPT-329
-**Crude and sexual questions about Matt reach the answering model since 1095d2c removed the confidence and overlap gates**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Regression
-- **File:** `nonsense_filters.jsonl` (`adult_content`), `tests/unit/test_nonsense_portfolio_questions.py`
-- **Related:** MATTGPT-275 (1095d2c), MATTGPT-236 (sequenced after this ticket), MATTGPT-128 (source cards)
-- **Logged:** October 17, 2026
-
-**Observed (production, Oct 17, 2026, as reported):** "Does Matt have a penis?" got "I don't have information about Matt's private anatomy." with three source cards, including "Why Hire Matt?".
-
-**Verified Oct 17, 2026 (HEAD 2a7ef95):**
-- 1095d2c's message: in `agy_answer()` "the nonsense rules and the router's out_of_scope and personal redirects run first, then a tool loop"; "Search confidence does not gate the answer"; and "the old overlap gate would block 12 must-answer follow-ups". Both gates are gone from the answer path, so a question no rule or redirect catches reaches the model.
-- `nonsense_filters.jsonl`'s `adult_content` rule is `\b(nsfw|porn|xxx|nude|naked|sex)\b`. `is_nonsense()` at HEAD: "Does Matt have a penis?" None, "Is Matt sexy?" None, "Does Matt have sex?" `adult_content`, "Is Matt naked?" `adult_content`.
-
-**Fix:** a nonsense rule that rejects these before any model call, tested against the must-preserve set (the legitimate questions the rules must not refuse; `LEGITIMATE` in `tests/unit/test_nonsense_portfolio_questions.py`). Follow the nonsense-filter rules in CLAUDE.md: multi-word phrases or `\b` boundaries, tested against real "Tell me about Matt's X" queries.
-
-**Sequence:** before MATTGPT-236. With the router out of the answer path, the nonsense rules are the only check before the model.
-
 ### MATTGPT-330
 **Home to My Work card click shows a half-emptied Home for a frame or more: the stale-hide rule covers only the Ask Agy landing**
 
@@ -3155,7 +3082,7 @@ The fails span four different rule 0b wordings, and controls never trigger 0b, s
 - **Priority:** High
 - **Type:** Bug
 - **File:** `ui/pages/explore_stories.py` (the Domain selectbox in the filter bar), `ui/components/category_cards.py` (`card_btn_product`, `card_btn_consulting`, `card_btn_teams`)
-- **Related:** MATTGPT-065 (single-select filter bar, closed), MATTGPT-060 (post-navigation BDD; its strict xfails pin this once committed), MATTGPT-107 (whole-card click), MATTGPT-330 (same screenshot)
+- **Related:** MATTGPT-065 (single-select filter bar, closed), MATTGPT-060 (closed Oct 17, 2026; its strict xfails pin this, 45c4a5a), MATTGPT-107 (whole-card click), MATTGPT-330 (same screenshot)
 - **Logged:** October 17, 2026
 
 **Verified Oct 17, 2026 (HEAD f10a544):**
@@ -3168,7 +3095,7 @@ The fails span four different rule 0b wordings, and controls never trigger 0b, s
 
 **Fix (needs Matt's UX call):** a multi-select Domain, or one chip named for the card.
 
-**Tests:** MATTGPT-060's strict xfails pin this once committed.
+**Red (pinned, 45c4a5a, MATTGPT-060):** the Card 3, 5 and 6 scenarios in `home.feature` list every Sub-category their card sets and are `xfail(strict=True)` naming MATTGPT-331; with `--runxfail` each fails only on the missing chips. They XPASS when the fix lands, so the markers come off in the Green.
 
 ### MATTGPT-160
 **JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs**
@@ -3925,7 +3852,7 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 - **File:** `ui/pages/ask_mattgpt/backend_service.py` (`agy_answer()`, `_router_rejection()`), `services/semantic_router.py`, `config/constants.py`
 - **Related:** MATTGPT-322 (closed Oct 17, 2026; 58fe71f), MATTGPT-239 (router confidence floor), MATTGPT-195 (router incident vocabulary), MATTGPT-241 (router rejection prose)
 - **Logged:** September 1, 2026
-- **Dependencies:** MATTGPT-329 (crude and sexual questions rejected by a nonsense rule first). MATTGPT-220 (inventory complete, conclusion untracked until this ticket)
+- **Dependencies:** MATTGPT-220 (inventory complete, conclusion untracked until this ticket)
 
 **Scope broadened (Oct 16, 2026):** from removing the topical family dimension to taking the router out of Ask Agy's answer path.
 
@@ -3945,6 +3872,8 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 - The 49 questions the router does not change (identical prompts in every arm): A 427/490, B 430/490, C 430/490, the noise floor.
 - The 12 it changes: A 97/120, B 102/120, C 101/120. The synthesis pick changed nothing measurable (A 67, B 66, C 65 of 80).
 - Rule 0b's bare sentence on r01 to r06 (personal and hobby questions): A 28/60, B 57/60, C 24/60. With the router off, the personal questions join the hobby questions: MATTGPT-322.
+
+**MATTGPT-329 shipped (Oct 17, 2026; 88ac7ed):** crude and sexual questions are rejected by the `adult_content` rule before any model call, so the nonsense rules cover them once the router is out.
 
 **Unblocked (Oct 17, 2026):** MATTGPT-322's voiced 0b decline shipped in 58fe71f, with its live runs in 706505f. With the router out, married, age and kids move from the personal banner to that decline. 58fe71f's browser check: "Is Matt married?" still shows the personal banner, pending this ticket.
 

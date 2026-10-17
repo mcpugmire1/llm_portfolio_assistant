@@ -32,6 +32,12 @@ Cited probe output copied byte-identical into docs/evidence/MATTGPT-<n>/ (42ddbe
 
 ### Tests
 
+**October 17, 2026 -- Home BDD: card-click and destination-state scenarios (MATTGPT-326, MATTGPT-060)** -- `2b08522`; `85d1e4e`, `45c4a5a`
+
+MATTGPT-326: `category_cards.py` binds each Home card's `onclick` inside a `setTimeout`, so the Banking scenario's click could land on a bare div. The step now waits until `#card-banking` has its `onclick` before clicking. Probe: 3 of 3 unbound clicks failed, 26 of 26 bound clicks landed; with the `onclick` nulled, the new step's wait timed out with no click sent (2 of 2). 50 isolated runs: 47 passed; two failed before the click (browser launch and page load timeouts, during machine pauses), and one failed inside the test body with its traceback lost, unexplained. Test-only.
+
+MATTGPT-060: `home.feature`'s card and Ask Agy scenarios assert the destination state, not just navigation. Cards 1 and 2 assert the landing page; cards 3 to 6 assert the filter chips and a count bound derived from the corpus (replacing the hardcoded 113); the chip round trip asserts the question appears once. `assert_active_tab` now fails on an unmapped tab instead of passing silently. 7 / 7 passing; cards 3, 5 and 6 are `xfail(strict=True)` on MATTGPT-331 (each card keeps only its first Domain value). Test-only.
+
 **October 16, 2026 -- MATT_DNA drift guard checks employers in the Career Arc only (MATTGPT-209)** -- `1b0e68c`
 
 `then_every_employer_in_dna` checked each corpus Employer against the whole MATT_DNA string, so an employer missing from the Career Arc passed when its name appeared elsewhere (Cendian and AIU, listed as clients). It now slices the Career Arc block and checks only that, and its failure message points to `career_arc` in `data/matt_profile.json`. Scenario renamed. 4 / 4 passing. Test-only.
@@ -43,6 +49,10 @@ Cited probe output copied byte-identical into docs/evidence/MATTGPT-<n>/ (42ddbe
 ---
 
 ### Ask Agy
+
+**October 17, 2026 -- Crude questions about Matt rejected before any model call (MATTGPT-329)** -- `f85969f` (evidence), `88ac7ed`
+
+1095d2c removed search confidence as a gate, and "Does Matt have a penis?" reached the answering model in production with three source cards. Before 1095d2c (d04396b), the low-confidence gate caught it (Pinecone 0.208); "Is Matt sexy?" reached the model even then. The `adult_content` nonsense rule widens from `\b(nsfw|porn|xxx|nude|naked|sex)\b` to add sexy, penis, vagina and genital(s) as whole words. Across 7,699 local log rows and the 327-row query log the new pattern matches only the five logged crude questions, and the must-preserve set (`LEGITIMATE`, 59) matches none. Live check: the five targets rejected with 0 model calls and 0 embeddings (10/10); six story and fact controls answered (12/12). Unblocks MATTGPT-236's removal of the router.
 
 **October 16 to 17, 2026 -- Rule 0b declines in Agy's voice, opening with a code-picked line (MATTGPT-322)** -- `706505f` (evidence), `58fe71f`
 

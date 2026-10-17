@@ -165,7 +165,7 @@ answers), -300 (thinking indicator shows real progress), -301 (em dashes left in
 after 275, Blocked), -307 (Key Metrics label cut), -310 (direct-reports
 answer varies), -311 (no ongoing-period End_Date), -319 (Q59 xfail
 reason stale), -327 (rewritten quotations),
--328 (rule 0b decline follow-ups), -329 (crude questions reach the model, High).
+-328 (rule 0b decline follow-ups).
 
 ## 4. Role Match
 
@@ -285,8 +285,8 @@ experience reliably and sustainably; failures are visible, not silent.
 - Model retirement: -302 (gpt-4o family retires January 14, 2027).
 - Silent failures: -292 (silent file-order fallback), -288 (Ask Agy ignores the Pinecone fallback signal).
 - Regression gates and test reliability: -039, -233, -235, -206, -153,
-  -274, -084, -180, -277, -198, -035, -060, -143 (Parked), -203,
-  -213, -326 (Home Banking card-click flake).
+  -274, -084, -180, -277, -198, -035, -143 (Parked), -203,
+  -213.
 - Architecture and maintainability: -258 (In Progress), -259, -260, -261, -262, -140,
   -202, -214, -226.
 - Dead code and hygiene: -176, -241, -152 (Parked), -287 (docs
