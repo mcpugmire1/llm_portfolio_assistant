@@ -286,7 +286,7 @@ experience reliably and sustainably; failures are visible, not silent.
 - Silent failures: -292 (silent file-order fallback), -288 (Ask Agy ignores the Pinecone fallback signal).
 - Regression gates and test reliability: -039, -233, -235, -206, -153,
   -274, -084, -180, -277, -198, -035, -060, -143 (Parked), -203,
-  -213.
+  -213, -326 (Home Banking card-click flake).
 - Architecture and maintainability: -258 (In Progress), -259, -260, -261, -262, -140,
   -202, -214, -226.
 - Dead code and hygiene: -176, -241, -152 (Parked), -287 (docs

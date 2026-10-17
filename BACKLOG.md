@@ -163,6 +163,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-322](#mattgpt-322) | Rule 0b's decline is a bare sentence with no opener: hobby questions today, and personal questions once the router is out (MATTGPT-236) | Open | Medium | Issue | value | October 16, 2026 |
 | [MATTGPT-324](#mattgpt-324) | My Work doesn't render the profile facts semantic_search() returns (MATTGPT-250 item 1a) | Open | Medium | Enhancement | value | October 16, 2026 |
 | [MATTGPT-325](#mattgpt-325) | Stories that mention a query term are missed when their embedding score is under the cutoff: a keyword hit can't admit them | Open | Medium | Issue | value | October 16, 2026 |
+| [MATTGPT-326](#mattgpt-326) | Home BDD: the Banking card click can land before category_cards.py binds its onclick, so the scenario flakes | Open | Low | Bug (Test) | chore | October 16, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently | Parked | Medium | Action | value | August 3, 2026 |
@@ -1023,6 +1024,9 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Fix shape:** After switching to Cards view, wait explicitly for the `components.html` iframe's JS to fire before clicking. Candidate: `wait_for_timeout(1000)` after cards appear, or wait for a zero-height `[data-testid='stCustomComponentV1']` iframe. Alternatively, add a retry loop around the click + wait_for_content.
 - **Note:** This test was never green before MATTGPT-105 — it always failed at an earlier step for different reasons. -105 advanced the failure mode to expose the timing issue. Not a -105 regression.
 - **Logged:** June 10, 2026
+
+**New observation (Oct 17, 2026; lane 2's MATTGPT-122 pre-flight; unmeasured, no probe run):** the Cards view click wiring calls `parentDoc.addEventListener('click', ...)` from inside a `components.html` iframe that Streamlit recreates on every rerun, so each rerun may add another delegated listener on the parent document. Not measured: whether listeners from destroyed iframes still fire, and so call the hidden `card_btn_*` button's `click()` more than once per card click.
+- Verified Oct 17, 2026 (HEAD fc56a3b, `explore_stories.py`): the Cards view `components.html` script adds the `parentDoc` click listener with no `removeEventListener` and no wired guard. The pagination wiring in the same file (`.es-pagination button`, inside a `setTimeout`) adds a `parentDoc` click listener the same way.
 
 
 
@@ -3077,6 +3081,24 @@ One story at or above `CONFIDENCE_LOW` (0.20), and its 0.242 is below `CONFIDENC
 **Constraint on the fix (Oct 16, 2026):** the full question admits 94 of 124 stories at 0.20, so the embedding score alone does not separate topic from noise. Any keyword admission stays narrow (literal term hits only), and is measured against story controls for noise: a live acceptance run in My Work and Ask Agy, with the five pandemic stories and unrelated queries.
 
 **Second case, agriculture (MATTGPT-236 gate, Oct 16, 2026; 1743846, `docs/evidence/MATTGPT-236/gate_20261016_140623/`):** "Has Matt worked in agriculture?" (r07): the Liquid Studio story (`building-smart-connected-devices-at-accentures-liquid-studio|accenture`, the only story that mentions agriculture) is in the sources of 0 of 30 answers; Ask Agy's one search was "Matt work experience agriculture agricultural farming agribusiness industry". A retrieval miss: the story never reaches the model. The adjacency part (the answer has to label the work as adjacent once retrieved) is on MATTGPT-251.
+
+### MATTGPT-326
+**Home BDD: the Banking card click can land before category_cards.py binds its onclick, so the scenario flakes**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Bug (Test)
+- **File:** `tests/bdd/steps/test_home_category_cards.py` (`click_banking_card`)
+- **Related:** MATTGPT-122 (same class: My Work Cards view, iframe listener not attached at click time), MATTGPT-107 (whole-card click)
+- **Logged:** October 16, 2026
+
+**Observed (lane 2's note, Oct 16, 2026; as reported, not in a commit):** "Clicking anywhere on the Banking card routes to the Banking landing surface" (`home_category_cards.feature`) flakes on the card click: failed 2 of 11 runs (once in a 211-test no-model subset, once in isolation; 8 isolation passes after). Correlation probe: 3 of 3 clicks before the handler was bound failed; 26 of 26 bound clicks landed.
+
+**Verified Oct 17, 2026 (HEAD fc56a3b):** `category_cards.py` wires `card-banking` and the other category cards' `onclick` from its `components.html` bridge inside a single `setTimeout` (the file's own comment: "The single setTimeout(200ms) pattern above works for the cards"), after the cards render. `click_banking_card` clicks the card as soon as it is visible; a click before the handler is bound lands on a bare div and does not route.
+
+**Fix (lane 2, uncommitted at filing):** wait until `document.getElementById('card-banking').onclick` is non-null before clicking, as the story-detail button steps do. Test-only.
+
+**Visitors (unmeasured, Oct 17, 2026):** the same gap applies outside the test: a click within about 200 ms of Home rendering may be dead for a visitor too. Not measured in a browser or in production.
 
 ### MATTGPT-160
 **JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs**
