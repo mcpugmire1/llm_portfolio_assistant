@@ -23,48 +23,70 @@ Feature: Home Page Category Cards
 
   # ---------------------------------------------------------------------------
   # CARDS WITH SUBPAGE DESTINATIONS (full custom pages)
-  # Documented as acceptance criteria. Step definitions pending — MATTGPT-060.
+  # The When step clicks each card's hidden card_btn_* button, isolating the
+  # routing logic; the visible-card JS bridge has its own coverage in
+  # home_category_cards.feature.
   # ---------------------------------------------------------------------------
 
-  Scenario: Card 1 — Banking opens the Banking subpage
-    When the user clicks "Explore Banking Work" on the Banking card
+  Scenario: Card 1: Banking opens the Banking subpage
+    When the user clicks the "Banking" category card
     Then the active tab should be "Banking"
-    And the Banking subpage content should be visible
+    And the landing card grid should be visible
 
-  Scenario: Card 2 — Cross-Industry opens the Cross-Industry subpage
-    When the user clicks "My Work" on the Cross-Industry Transformation card
+  Scenario: Card 2: Cross-Industry opens the Cross-Industry subpage
+    When the user clicks the "Cross-Industry" category card
     Then the active tab should be "Cross-Industry"
-    And the Cross-Industry subpage content should be visible
+    And the landing card grid should be visible
 
   # ---------------------------------------------------------------------------
   # CARDS WITH PREFILTER INTO MY WORK
-  # Card 3 is the regression test — its step definitions are implemented in
-  # test_home.py. Cards 4, 5, 6 are documented but pending step definitions.
+  # Card 3 is the May 12 regression test. The count bound is derived from the
+  # corpus (stories outside Professional Narrative), not hardcoded.
+  # Cards 3, 5 and 6 list every Sub-category their card sets (category_cards.py);
+  # all must show as chips. They are xfail under MATTGPT-331 (My Work keeps
+  # only the first) until that is fixed.
   # ---------------------------------------------------------------------------
 
-  Scenario: Card 3 — Product Innovation prefilters to product Sub-categories
-    When the user clicks "View Product Work" on the Product Innovation card
+  Scenario: Card 3: Product Innovation prefilters to product Sub-categories
+    When the user clicks the "Product Innovation" category card
     Then the active tab should be "My Work"
-    And the result count should be less than 113
-    And a filter chip "User-Centered Product Strategy & Innovation" should be visible
+    And the result count should be less than the unfiltered My Work total
+    And these filter chips should be visible:
+      | User-Centered Product Strategy & Innovation |
+      | Product Strategy & Innovation |
+      | Product Management |
+      | Digital Product Development & Delivery |
+      | Client Product Innovation & Co-Creation |
 
-  Scenario: Card 4 — Application Modernization prefilters by capability
-    When the user clicks "View Case Studies" on the Application Modernization card
+  Scenario: Card 4: Application Modernization prefilters by capability
+    When the user clicks the "Application Modernization" category card
     Then the active tab should be "My Work"
-    And the result count should be less than 113
+    And the result count should be less than the unfiltered My Work total
     And a filter chip "Application Modernization" should be visible
 
-  Scenario: Card 5 — Consulting & Transformation prefilters to consulting Sub-categories
-    When the user clicks "Browse Transformations" on the Consulting & Transformation card
+  Scenario: Card 5: Consulting & Transformation prefilters to consulting Sub-categories
+    When the user clicks the "Consulting & Transformation" category card
     Then the active tab should be "My Work"
-    And the result count should be less than 113
-    And a filter chip "Agile Planning & Value-Driven Delivery" should be visible
+    And the result count should be less than the unfiltered My Work total
+    And these filter chips should be visible:
+      | Agile Planning & Value-Driven Delivery |
+      | Leadership & Continuous Improvement |
+      | Agile Transformation & Leadership Enablement |
+      | Technology Strategy & Advisory Services |
+      | Strategic Client Partnerships |
+      | Cross-Functional Collaboration & Alignment |
+      | Process Optimization & Automation |
+      | Security & Compliance Solutions |
 
-  Scenario: Card 6 — Teams & Talent Development prefilters to talent Sub-categories
-    When the user clicks "Check Team Stories" on the Teams & Talent Development card
+  Scenario: Card 6: Teams & Talent Development prefilters to talent Sub-categories
+    When the user clicks the "Teams & Talent Development" category card
     Then the active tab should be "My Work"
-    And the result count should be less than 113
-    And a filter chip "Talent Enablement & Growth" should be visible
+    And the result count should be less than the unfiltered My Work total
+    And these filter chips should be visible:
+      | Client Upskilling & Enablement |
+      | Cross-Functional Team Enablement |
+      | Psychological Safety & Innovation Culture |
+      | Talent Enablement & Growth |
 
   # ---------------------------------------------------------------------------
   # ASK AGY ANYTHING — suggested-question chips
@@ -91,7 +113,7 @@ Feature: Home Page Category Cards
   Scenario: Ask Agy button navigates without pre-loading a question
     When the user clicks "Ask Agy 🐾" on the Ask Agy Anything card
     Then the active tab should be "Ask Agy"
-    And no seed prompt should be present in session state
+    And the Ask Agy landing should render with no conversation
 
   Scenario: Clicking a suggested chip auto-fires the question on Ask Agy
     When the user clicks the suggested chip "How did Matt scale a Cloud Innovation Center from 0 to 150+ engineers?"
@@ -99,17 +121,19 @@ Feature: Home Page Category Cards
     And the seed prompt in session state should be "How did Matt scale a Cloud Innovation Center from 0 to 150+ engineers?"
     And the suggestion flag should be set in session state
 
-  Scenario: Session state cleared after auto-fire
-    Given the user arrived at Ask Agy via a chip click
-    When the seed prompt has been consumed by the conversation view
-    Then the seed prompt key should be absent from session state
-    And refreshing the Ask Agy page should not re-fire the query
+  # Live: one real answer to chip 0. Playwright can't read session state, so
+  # "the seed prompt was consumed" is asserted through the DOM: going Home and
+  # back to Ask Agy shows the same transcript, with the question once.
+  Scenario: Returning to Ask Agy after a chip auto-fire does not fire it again
+    Given the user clicked the suggested chip "How did Matt scale a Cloud Innovation Center from 0 to 150+ engineers?" and its answer finished
+    When the user goes Home and returns to Ask Agy
+    Then the chip question should appear exactly once in the conversation
+    And the conversation should have the same number of messages as before
 
   Scenario: Ask Agy renders default landing when no chip was clicked
-    Given the user navigates to Ask Agy directly
-    When the page loads with no seed prompt in session state
-    Then the Ask Agy landing view should render
-    And no query should be auto-fired
+    When the user clicks the "Ask Agy" navigation label
+    Then the active tab should be "Ask Agy"
+    And the Ask Agy landing should render with no conversation
 
   Scenario: Suggested chips render with directional affordance
     Then three suggested-question chips should be visible on the Ask Agy Anything card

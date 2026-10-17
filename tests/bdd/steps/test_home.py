@@ -61,7 +61,7 @@ def wait_for_streamlit_rerun(page):
 
 @scenario(
     "../features/home.feature",
-    "Card 3 — Product Innovation prefilters to product Sub-categories",
+    "Card 3: Product Innovation prefilters to product Sub-categories",
 )
 def test_card3_product_innovation_prefilter():
     """Regression test for the May 12, 2026 broken-prefilter bug.
@@ -76,6 +76,46 @@ def test_card3_product_innovation_prefilter():
     targeting product work (~10 stories). Result count should be far less
     than 113, and at least one expected product domain chip must be visible.
     """
+
+
+@scenario(
+    "../features/home.feature",
+    "Card 1: Banking opens the Banking subpage",
+)
+def test_card1_banking_opens_subpage():
+    """Card 1 routes to the Banking landing."""
+
+
+@scenario(
+    "../features/home.feature",
+    "Card 2: Cross-Industry opens the Cross-Industry subpage",
+)
+def test_card2_cross_industry_opens_subpage():
+    """Card 2 routes to the Cross-Industry landing."""
+
+
+@scenario(
+    "../features/home.feature",
+    "Card 4: Application Modernization prefilters by capability",
+)
+def test_card4_modernization_prefilter():
+    """Card 4 lands on My Work with the Capability prefilter applied."""
+
+
+@scenario(
+    "../features/home.feature",
+    "Card 5: Consulting & Transformation prefilters to consulting Sub-categories",
+)
+def test_card5_consulting_prefilter():
+    """Card 5 lands on My Work with the consulting Sub-categories applied."""
+
+
+@scenario(
+    "../features/home.feature",
+    "Card 6: Teams & Talent Development prefilters to talent Sub-categories",
+)
+def test_card6_teams_prefilter():
+    """Card 6 lands on My Work with the talent Sub-categories applied."""
 
 
 # =============================================================================
@@ -209,12 +249,21 @@ def test_chips_render_with_arrow():
     """
 
 
-# Pending step defs (MATTGPT-060):
-# - "Session state cleared after auto-fire" — requires Streamlit rerun
-#   inspection across page transitions; covered by the conversation_view
-#   .pop() chain unit-tested elsewhere.
-# - "Ask Agy renders default landing when no chip was clicked" — covered
-#   by the default render path in landing_view.py.
+@scenario(
+    "../features/home.feature",
+    "Returning to Ask Agy after a chip auto-fire does not fire it again",
+)
+def test_return_to_ask_agy_does_not_refire_chip():
+    """Live: one real answer. The consumed seed prompt must not fire again
+    when the user goes Home and comes back to Ask Agy."""
+
+
+@scenario(
+    "../features/home.feature",
+    "Ask Agy renders default landing when no chip was clicked",
+)
+def test_ask_agy_nav_renders_default_landing():
+    """Ask Agy reached from the nav, with no chip clicked, shows the landing."""
 
 
 @when('the user clicks "Ask Agy 🐾" on the Ask Agy Anything card')
