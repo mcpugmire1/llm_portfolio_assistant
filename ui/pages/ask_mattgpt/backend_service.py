@@ -561,6 +561,10 @@ def _choose_opening_and_focus(is_synthesis: bool) -> tuple[str, str]:
     return random.choice(STANDARD_OPENERS), random.choice(FOCUS_ANGLES)
 
 
+def _choose_decline_line() -> str:
+    raise NotImplementedError
+
+
 def _openai_client():
     """OpenAI client for Ask Agy's answer calls, from the app's env vars.
 

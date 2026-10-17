@@ -86,6 +86,15 @@ _STORY_PN = {
 }
 _STORIES = [_STORY_A, _STORY_B, _STORY_PN]
 
+# MATTGPT-322: the four decline lines, one picked per turn in code.
+_DECLINE_LINES = [
+    "🐾 I followed that trail and came up empty: Matt's stories don't cover [topic].",
+    "🐾 That trail goes cold here. There's nothing on record about [topic].",
+    "🐾 I searched Matt's whole record, and it doesn't mention [topic].",
+    "🐾 I've been through Matt's stories, and nothing speaks to [topic].",
+]
+_DECLINE_SENTINEL = "🐾 ZZZ decline line about [topic]."
+
 
 def _response(content=None, tool_query=None, chunks=None, status="completed"):
     """One streamed Responses API reply: delta events, then the terminal
@@ -428,6 +437,21 @@ class TestVoiceCarriesOver:
             f'"{o}"' for o in bs.SYNTHESIS_OPENERS + bs.STANDARD_OPENERS
         )
         assert f"Examples of how Agy opens: {examples}." in _system(fake.requests[0])
+
+    def test_decline_line_is_one_of_the_four_and_all_four_come_up(self):
+        # MATTGPT-322: the model can't vary across calls it can't see, so
+        # code picks the decline line each turn, as it picks the focus angle.
+        picks = {bs._choose_decline_line() for _ in range(400)}
+        assert picks == set(_DECLINE_LINES)
+
+    @pytest.mark.parametrize("family", ["behavioral", "synthesis"])
+    def test_the_picked_decline_line_reaches_the_model_as_a_shape(self, family):
+        with patch.object(bs, "_choose_decline_line", return_value=_DECLINE_SENTINEL):
+            _, fake, _, _, _ = _run([_response("ok")], family=family)
+        assert (
+            "**IF YOU DECLINE:** Use this shape, topic in your own words: "
+            f'"{_DECLINE_SENTINEL}"'
+        ) in _system(fake.requests[0])
 
     def test_synthesis_voice_follows_the_router(self):
         _, fake, _, _, _ = _run([_response("ok")], family="synthesis")

@@ -128,11 +128,10 @@ _RULE_0B_REPLY_ONLY = "No guessing, no padding with story evidence, no excess ap
 _RULE_0B_VOICE = [
     "decline in first person, in one or two sentences, the first beginning with 🐾",
     "Name the topic in your own words",
-    "Examples to vary, not text to copy",
 ]
-# MATTGPT-322: four decline lines to vary, so no one line becomes the
-# template; [topic] is a placeholder the model fills in its own words.
-_RULE_0B_EXAMPLES = [
+# MATTGPT-322: the model can't vary across calls it can't see, so code picks
+# one of four decline lines per turn; exactly one reaches the model.
+_RULE_0B_DECLINE_LINES = [
     "🐾 I followed that trail and came up empty: Matt's stories don't cover [topic].",
     "🐾 That trail goes cold here. There's nothing on record about [topic].",
     "🐾 I searched Matt's whole record, and it doesn't mention [topic].",
@@ -140,11 +139,13 @@ _RULE_0B_EXAMPLES = [
 ]
 # MATTGPT-322: the fixed sentence came back bare, with no opener; the
 # first voiced wording's own phrase ("nothing on record about what was
-# asked") became the template every decline repeated.
+# asked") became the template every decline repeated; the model ignored
+# "Examples to vary" and kept its own line.
 _RULE_0B_REMOVED = [
     "Nothing I know about Matt covers that",
     "nothing on record about what was asked",
     "Two examples of the shape, not text to copy",
+    "Examples to vary, not text to copy",
 ]
 
 _GROUNDING_HEADER = "**GROUNDING RULES:**"
@@ -288,15 +289,19 @@ class TestCitationRulesInCapturedSystemMessage:
             f"system message"
         )
 
-    @pytest.mark.parametrize("example", _RULE_0B_EXAMPLES)
-    def test_rule_0b_example_present_in_system_message(
-        self, captured_agy_system_message, example
+    def test_exactly_one_decline_line_reaches_the_model(
+        self, captured_agy_system_message
     ):
-        """MATTGPT-322: four decline lines to vary, so no one line
-        becomes the template."""
-        assert example in captured_agy_system_message, (
-            f"rule 0b example {example!r} not found in captured Agy system " f"message"
-        )
+        """MATTGPT-322: code picks one decline line per turn; the model gets
+        that one, not the four to choose from."""
+        present = [
+            line
+            for line in _RULE_0B_DECLINE_LINES
+            if line in captured_agy_system_message
+        ]
+        assert (
+            len(present) == 1
+        ), f"decline lines in the Agy system message: {present!r}"
 
     @pytest.mark.parametrize("removed", _RULE_0B_REMOVED)
     def test_rule_0b_removed_text_absent_from_system_message(

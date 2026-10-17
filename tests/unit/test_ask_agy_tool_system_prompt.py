@@ -35,6 +35,7 @@ _DNA = "## ZZZ_SENTINEL facts\n- ZZZ career arc\n"
 _PROFILE = "Education: ZZZ_PROFILE_FACT"
 _OPENERS = ["🐾 ZZZ opener one.", "Got it! 🐾 ZZZ", "🐾 ZZZ opener three..."]
 _FOCUS = "ZZZ focus angle."
+_DECLINE = "🐾 ZZZ decline line about [topic]."
 
 # The tool note and opener line as the lever 2 runs sent them.
 _TOOL_NOTE = (
@@ -48,13 +49,14 @@ _OPENER_LINE = (
 )
 
 
-def _prompt(is_synthesis, profile_facts=_PROFILE, focus_angle=_FOCUS):
+def _prompt(is_synthesis, profile_facts=_PROFILE, focus_angle=_FOCUS, decline_line=""):
     return build_tool_system_prompt(
         is_synthesis=is_synthesis,
         matt_dna=_DNA,
         profile_facts=profile_facts,
         opener_examples=_OPENERS,
         focus_angle=focus_angle,
+        decline_line=decline_line,
     )
 
 
@@ -109,6 +111,22 @@ class TestModes:
         assert "**FOCUS:**" not in prompt
 
 
+class TestDeclineLine:
+    """MATTGPT-322: the decline line picked in code reaches the model as the
+    shape to use if it declines, in both modes, never as exact text."""
+
+    @pytest.mark.parametrize("is_synthesis", [False, True])
+    def test_the_decline_line_is_given_as_a_shape(self, is_synthesis):
+        prompt = _prompt(is_synthesis, decline_line=_DECLINE)
+        assert (
+            "**IF YOU DECLINE:** Use this shape, topic in your own words: "
+            f'"{_DECLINE}"'
+        ) in prompt
+
+    def test_no_decline_line_means_no_decline_instruction(self):
+        assert "**IF YOU DECLINE:**" not in _prompt(False, decline_line="")
+
+
 _RUN2 = json.loads(
     (
         Path(__file__).parents[1]
@@ -135,5 +153,6 @@ class TestParityWithRun2:
             profile_facts=turn["profile_facts"],
             opener_examples=turn["opener_examples"],
             focus_angle=turn["focus_angle"],
+            decline_line=turn["decline_line"],
         )
         assert prompt == turn["system_prompt"]

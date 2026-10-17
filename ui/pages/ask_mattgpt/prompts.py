@@ -357,6 +357,7 @@ def build_tool_system_prompt(
     profile_facts: str,
     opener_examples: list[str],
     focus_angle: str = "",
+    decline_line: str = "",
 ) -> str:
     """The tool-path (agy_answer) system prompt, in the shape lever 2 measured
     (MATTGPT-275; MATTGPT-282 run 2): the mode's system prompt, the tool
