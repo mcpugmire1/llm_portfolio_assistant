@@ -35,6 +35,7 @@ titles.
 
 import json
 import logging
+from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import MagicMock, patch
 
@@ -94,6 +95,7 @@ _DECLINE_LINES = [
     "🐾 I searched Matt's whole record, and it doesn't mention [topic].",
 ]
 _DECLINE_SENTINEL = "🐾 ZZZ decline line about [topic]."
+_NONSENSE_FILE = str(Path(__file__).resolve().parents[2] / "nonsense_filters.jsonl")
 
 
 def _response(content=None, tool_query=None, chunks=None, status="completed"):
@@ -166,12 +168,15 @@ def _run(
     search=None,
     history=None,
     nonsense=None,
+    nonsense_fn=None,
     on_delta=None,
     session_state=None,
     search_effect=None,
 ):
     """Run agy_answer with the model, router, search and loggers faked.
-    session_state seeds st.session_state (e.g. a chip's flags).
+    session_state seeds st.session_state (e.g. a chip's flags). nonsense_fn
+    runs in place of is_nonsense (e.g. the real rules); nonsense fixes its
+    return value.
     Returns (result, fake_model, search_mock, log_query_mock, session)."""
     fake = _FakeOpenAI(script)
     session = dict(session_state or {})
@@ -190,7 +195,11 @@ def _run(
             "is_portfolio_query_semantic",
             return_value=(True, router_score, "zzz-intent", family),
         ),
-        patch.object(bs, "is_nonsense", return_value=nonsense),
+        (
+            patch.object(bs, "is_nonsense", side_effect=nonsense_fn)
+            if nonsense_fn
+            else patch.object(bs, "is_nonsense", return_value=nonsense)
+        ),
         patch.object(bs, "log_query", log_query_mock),
         patch.object(bs, "log_offdomain", MagicMock()),
         patch.object(bs, "MATT_DNA", _DNA_SENTINEL),
@@ -266,6 +275,28 @@ class TestRejectionsKept:
         assert result["rejection_reason"] == "rule:joke"
         assert session["ask_last_reason"] == "rule:joke"
         assert result["answer_md"] == ""
+        assert fake.requests == []
+        search.assert_not_called()
+
+    @pytest.mark.parametrize("question", ["Does Matt have a penis?", "Is Matt sexy?"])
+    def test_crude_question_rejects_with_the_real_rules_and_no_model_call(
+        self, question
+    ):
+        # MATTGPT-329: since 1095d2c no confidence gate stands behind the
+        # rules, so a crude question no rule catches reaches the model.
+        from utils import validation
+
+        rules = validation._load_nonsense_rules(_NONSENSE_FILE)
+        with patch.object(validation, "_NONSENSE_RULES", rules):
+            result, fake, search, _, session = _run(
+                [_response("unused")],
+                question=question,
+                router_score=0.66,
+                family="personal",
+                nonsense_fn=validation.is_nonsense,
+            )
+        assert result["rejection_reason"] == "rule:adult_content"
+        assert session["ask_last_reason"] == "rule:adult_content"
         assert fake.requests == []
         search.assert_not_called()
 
