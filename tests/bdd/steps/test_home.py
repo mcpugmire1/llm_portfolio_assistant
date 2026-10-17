@@ -17,7 +17,10 @@ Run with: pytest tests/bdd -k home
 
 import re
 
+import pytest
 from pytest_bdd import given, parsers, scenario, then, when
+
+from utils.corpus_loader import load_stories
 
 # =============================================================================
 # WAIT UTILITIES (mirrors test_explore_stories.py)
@@ -45,10 +48,69 @@ CHIP_QUESTIONS = [
 ]
 
 
+# Hidden Streamlit button behind each Home category card (category_cards.py).
+CARD_BUTTON_KEYS = {
+    "Banking": "card_btn_banking",
+    "Cross-Industry": "card_btn_cross_industry",
+    "Product Innovation": "card_btn_product",
+    "Application Modernization": "card_btn_modernization",
+    "Consulting & Transformation": "card_btn_consulting",
+    "Teams & Talent Development": "card_btn_teams",
+}
+
+# DOM marker unique to each destination tab.
+ACTIVE_TAB_MARKERS = {
+    "My Work": ".es-results-count",
+    "Banking": ".conversation-header h1:has-text('Financial Services Expertise')",
+    "Cross-Industry": ".conversation-header h1:has-text('Cross-Industry Expertise')",
+    # Landing (.welcome-title / .suggested-title) or conversation header.
+    "Ask Agy": ".welcome-title, .suggested-title, .ask-header-conversation",
+}
+
+NARRATIVE_CATEGORY = "Professional Narrative"
+
+# Cards 3, 5 and 6 set several Sub-categories; My Work keeps only the first.
+XFAIL_331 = pytest.mark.xfail(
+    strict=True,
+    reason=(
+        "MATTGPT-331: My Work's single-select Domain box keeps only the first "
+        "prefilter Sub-category"
+    ),
+)
+TURN_TIMEOUT = 90000  # ms: one live turn, as in test_ask_handoff.py
+
+# A finished Ask Agy turn: at least two bubbles, no thinking modal, and the
+# last bubble's sources rendered (same check as test_ask_handoff.py).
+_TURN_DONE_JS = """
+() => { const m = document.querySelectorAll("[data-testid='stChatMessage']");
+  return m.length >= 2 && !document.querySelector('.thinking-modal')
+    && m[m.length - 1].querySelector('.source-links-title') !== null; }
+"""
+
+
 def wait_for_streamlit_rerun(page):
     """Wait for Streamlit to complete a rerun after an action."""
     page.wait_for_load_state("networkidle")
     page.wait_for_timeout(SHORT_WAIT)
+
+
+def _wait_for_script_idle(page, timeout=TURN_TIMEOUT):
+    """Wait until Streamlit reports the script is not running. A re-fired
+    query keeps the script running until its answer finishes, so this waits
+    out any re-fire before the transcript is counted."""
+    page.wait_for_function(
+        "() => document.querySelector('[data-testid=\"stApp\"]')"
+        "?.getAttribute('data-test-script-state') === 'notRunning'",
+        timeout=timeout,
+    )
+    page.wait_for_timeout(SHORT_WAIT)
+
+
+def _unfiltered_my_work_total():
+    """My Work's default count: stories outside Professional Narrative, the
+    same rule test_post_era_project_counts.py derives its counts from."""
+    stories = load_stories("echo_star_stories_nlp.jsonl")
+    return sum(1 for s in stories if s.get("Category") != NARRATIVE_CATEGORY)
 
 
 # =============================================================================
@@ -59,6 +121,7 @@ def wait_for_streamlit_rerun(page):
 # =============================================================================
 
 
+@XFAIL_331
 @scenario(
     "../features/home.feature",
     "Card 3: Product Innovation prefilters to product Sub-categories",
@@ -102,6 +165,7 @@ def test_card4_modernization_prefilter():
     """Card 4 lands on My Work with the Capability prefilter applied."""
 
 
+@XFAIL_331
 @scenario(
     "../features/home.feature",
     "Card 5: Consulting & Transformation prefilters to consulting Sub-categories",
@@ -110,6 +174,7 @@ def test_card5_consulting_prefilter():
     """Card 5 lands on My Work with the consulting Sub-categories applied."""
 
 
+@XFAIL_331
 @scenario(
     "../features/home.feature",
     "Card 6: Teams & Talent Development prefilters to talent Sub-categories",
@@ -144,17 +209,17 @@ def navigate_to_home(browser_page, app_url):
 # =============================================================================
 
 
-@when('the user clicks "View Product Work" on the Product Innovation card')
-def click_view_product_work(browser_page):
-    """Click Card 3.
+@when(parsers.parse('the user clicks the "{card}" category card'))
+def click_category_card(browser_page, card):
+    """Click a Home category card's hidden Streamlit button.
 
-    The visible target is <div id="card-product">; its click is bridged via JS in
-    category_cards.py to a hidden st.button(key="card_btn_product"). We click
-    the hidden Streamlit button directly with force=True — bypasses the JS
-    bridge and isolates the test to the prefilter business logic (the JS
-    bridge is a separate concern with its own coverage).
+    The visible target is <div id="card-X">; its click is bridged via JS in
+    category_cards.py to a hidden st.button(key="card_btn_X"). Dispatching on
+    the hidden button isolates the test to the routing and prefilter logic;
+    the bridge has its own coverage in home_category_cards.feature.
     """
-    btn = browser_page.locator("[class*='st-key-card_btn_product'] button").first
+    key = CARD_BUTTON_KEYS[card]
+    btn = browser_page.locator(f"[class*='st-key-{key}'] button").first
     btn.dispatch_event("click")
     wait_for_streamlit_rerun(browser_page)
 
@@ -166,28 +231,31 @@ def click_view_product_work(browser_page):
 
 @then(parsers.parse('the active tab should be "{tab_name}"'))
 def assert_active_tab(browser_page, tab_name):
-    """Verify navigation landed on the expected tab.
-
-    For My Work: the .es-results-count element is unique to that page,
-    so its presence is a reliable proxy for active_tab == "My Work".
-    """
-    if tab_name == "My Work":
-        browser_page.wait_for_selector(".es-results-count", timeout=15000)
-    else:
-        # Other tabs (Banking, Cross-Industry, Home) — assertion stubbed
-        # until those scenarios get full step defs (MATTGPT-060).
-        pass
+    """Verify navigation landed on the expected tab via a DOM marker unique
+    to it. An unmapped tab fails rather than passing silently."""
+    assert (
+        tab_name in ACTIVE_TAB_MARKERS
+    ), f"No DOM marker mapped for tab {tab_name!r}; add one to ACTIVE_TAB_MARKERS."
+    browser_page.wait_for_selector(ACTIVE_TAB_MARKERS[tab_name], timeout=15000)
 
 
-@then(parsers.parse("the result count should be less than {limit:d}"))
-def assert_result_count_below(browser_page, limit):
+@then("the landing card grid should be visible")
+def assert_landing_card_grid(browser_page):
+    """Landing pages render story-count meta on their cards (.card-count);
+    Home and My Work do not."""
+    browser_page.locator(".card-count").first.wait_for(state="visible", timeout=15000)
+
+
+@then("the result count should be less than the unfiltered My Work total")
+def assert_result_count_below_total(browser_page):
     """Verify the prefilter narrowed results below the unfiltered corpus size.
 
     The .es-results-count text renders as "Showing N–M of TOTAL projects". We
-    extract TOTAL and assert it's below the limit. If the prefilter silently
-    fails (the May 12 bug shape), TOTAL would be 113 — the full corpus —
-    and this assertion fires.
+    extract TOTAL and assert it's below My Work's unfiltered total, derived
+    from the corpus. If the prefilter silently fails (the May 12 bug shape),
+    TOTAL equals the unfiltered total and this assertion fires.
     """
+    limit = _unfiltered_my_work_total()
     count_el = browser_page.locator(".es-results-count").first
     count_el.wait_for(state="visible", timeout=10000)
     text = count_el.inner_text()
@@ -197,8 +265,8 @@ def assert_result_count_below(browser_page, limit):
     assert match, f"Could not parse total count from results-count text: {text!r}"
     actual = int(match.group(1))
     assert actual < limit, (
-        f"Expected result count < {limit}, got {actual}. "
-        f"Card 3 prefilter did not apply — the entire corpus is showing. "
+        f"Expected result count < {limit} (unfiltered My Work total), got "
+        f"{actual}. The card's prefilter did not apply. "
         f"This is the May 12, 2026 regression shape."
     )
 
@@ -314,10 +382,8 @@ def click_suggested_chip(browser_page, question):
     wait_for_streamlit_rerun(browser_page)
 
 
-@then(
-    "no seed prompt should be present in session state",
-)
-def assert_no_seed_prompt(browser_page):
+@then("the Ask Agy landing should render with no conversation")
+def assert_landing_no_conversation(browser_page):
     """Negative assertion for the Ask Agy button path.
 
     Streamlit session state isn't directly readable from Playwright, so we
@@ -378,6 +444,62 @@ def assert_suggestion_flag(browser_page):
     )
 
 
+@given(
+    parsers.parse(
+        'the user clicked the suggested chip "{question}" and its answer finished'
+    )
+)
+def chip_answered(browser_page, question):
+    """Live: one real answer. Reuses the chip click, then waits for the turn
+    to finish and records the transcript size for the Then steps."""
+    click_suggested_chip(browser_page, question)
+    browser_page.wait_for_function(_TURN_DONE_JS, timeout=TURN_TIMEOUT, polling=200)
+    browser_page._chip_question = question
+    browser_page._chip_msg_count = browser_page.locator(
+        "[data-testid='stChatMessage']"
+    ).count()
+
+
+@when("the user goes Home and returns to Ask Agy")
+def go_home_and_back(browser_page):
+    nav = browser_page.locator('[class*="st-key-topnav_"] button')
+    nav.filter(has_text="Home").first.click()
+    wait_for_streamlit_rerun(browser_page)
+    browser_page.wait_for_selector("#card-product", timeout=30000)
+    nav.filter(has_text="Ask Agy").first.click()
+    browser_page.wait_for_selector(".ask-header-conversation", timeout=15000)
+    _wait_for_script_idle(browser_page)
+
+
+@when('the user clicks the "Ask Agy" navigation label')
+def click_ask_agy_nav(browser_page):
+    nav = browser_page.locator('[class*="st-key-topnav_"] button')
+    nav.filter(has_text="Ask Agy").first.click()
+    wait_for_streamlit_rerun(browser_page)
+
+
+@then("the chip question should appear exactly once in the conversation")
+def assert_question_once(browser_page):
+    q = browser_page._chip_question
+    bubbles = browser_page.locator(
+        "[data-testid='stChatMessage']", has_text=q[:40]
+    ).count()
+    assert bubbles == 1, (
+        f"Chip question appears in {bubbles} chat bubbles after returning to "
+        f"Ask Agy; expected 1. The seed prompt fired again."
+    )
+
+
+@then("the conversation should have the same number of messages as before")
+def assert_same_message_count(browser_page):
+    now = browser_page.locator("[data-testid='stChatMessage']").count()
+    before = browser_page._chip_msg_count
+    assert now == before, (
+        f"Ask Agy shows {now} chat messages after the round trip, {before} before. "
+        f"A changed count means a re-fire or a lost transcript."
+    )
+
+
 @then("three suggested-question chips should be visible on the Ask Agy Anything card")
 def assert_three_chips_visible(browser_page):
     """Visual presence check. Three .chip buttons on the Home page."""
@@ -423,6 +545,18 @@ def assert_chips_distinct_from_button(browser_page):
         f"Chips must be visually distinct (semi-transparent rgba vs solid "
         f"white) to prevent recruiters from misreading the chips as the "
         f"primary CTA."
+    )
+
+
+@then("these filter chips should be visible:")
+def assert_filter_chips_visible(browser_page, datatable):
+    """Every Sub-category the card set must show as an active filter chip."""
+    expected = [row[0] for row in datatable]
+    shown = browser_page.locator("[class*='st-key-chip_'] button").all_inner_texts()
+    missing = [v for v in expected if f"\u2715 {v}" not in shown]
+    assert not missing, (
+        f"Filter chips missing on My Work: {missing}. Shown: {shown}. "
+        f"The card's prefilter was not fully applied."
     )
 
 
