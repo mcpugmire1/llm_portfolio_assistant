@@ -7,14 +7,15 @@ today, plus a search_stories tool backed by semantic_search(). It answers
 directly or searches first; nothing refuses on search confidence.
 
 Class W (wiring): send_to_backend() calls agy_answer() with the history.
-Class R (rejections kept): nonsense rules and router out_of_scope / personal
-  still reject before any model call (decision 1).
+Class R (rejections kept): nonsense rules still reject before any model call;
+  the router is out of the answer path (MATTGPT-236): a question it would
+  redirect is answered, and agy_answer never asks it.
 Class T (tool loop): no search when the model answers directly; a tool call
   runs semantic_search() with the model's query and returns story context;
   a weak search is answered, not refused; search rounds are capped and the
   last call must answer.
 Class V (voice): the same instructions reach the model (opener, focus angle,
-  prose, bolding, state facts), the synthesis voice follows the router, and
+  prose, bolding, state facts), every answer gets the standard voice, and
   Professional Narrative stories carry the verbatim requirement.
 Class P (post-processing and contract): profile markers become
   profile_categories, clients of the stories used and numbers are bolded,
@@ -43,6 +44,7 @@ import httpx
 import pytest
 
 from config import constants
+from services import semantic_router
 from ui.pages.ask_mattgpt import backend_service as bs
 
 logging.getLogger("streamlit").setLevel(logging.ERROR)
@@ -176,8 +178,11 @@ def _run(
     """Run agy_answer with the model, router, search and loggers faked.
     session_state seeds st.session_state (e.g. a chip's flags). nonsense_fn
     runs in place of is_nonsense (e.g. the real rules); nonsense fixes its
-    return value.
-    Returns (result, fake_model, search_mock, log_query_mock, session)."""
+    return value. family and router_score are what the router would say:
+    MATTGPT-236 patches its classifier (services.semantic_router), not
+    agy_answer's import, so a test can show agy_answer never asks it.
+    Returns (result, fake_model, search_mock, log_query_mock, session); the
+    router's classifier mock is in session["__router_classify__"]."""
     fake = _FakeOpenAI(script)
     session = dict(session_state or {})
     mock_st = MagicMock()
@@ -186,15 +191,16 @@ def _run(
     if search_effect is not None:
         search_mock.side_effect = lambda *a, **k: search_effect(session)
     log_query_mock = MagicMock()
+    classify = MagicMock(return_value=(True, router_score, "zzz-intent", family))
     with (
         patch("openai.OpenAI", return_value=fake),
         patch.object(bs, "st", mock_st),
         patch.object(bs, "semantic_search", search_mock),
-        patch.object(
-            bs,
-            "is_portfolio_query_semantic",
-            return_value=(True, router_score, "zzz-intent", family),
-        ),
+        patch.object(semantic_router, "_get_embedding", return_value=[0.0]),
+        patch.object(semantic_router, "_get_intent_embeddings", return_value={}),
+        patch.object(semantic_router, "_classify_embedding", classify),
+        patch.object(semantic_router, "_log_borderline", MagicMock()),
+        patch.object(semantic_router, "_log_router_low_confidence", MagicMock()),
         (
             patch.object(bs, "is_nonsense", side_effect=nonsense_fn)
             if nonsense_fn
@@ -205,6 +211,7 @@ def _run(
         patch.object(bs, "MATT_DNA", _DNA_SENTINEL),
     ):
         result = bs.agy_answer(question, _STORIES, history=history, on_delta=on_delta)
+    session["__router_classify__"] = classify
     return result, fake, search_mock, log_query_mock, session
 
 
@@ -301,20 +308,32 @@ class TestRejectionsKept:
         search.assert_not_called()
 
     @pytest.mark.parametrize("family", ["personal", "out_of_scope"])
-    def test_router_redirect_rejects_without_a_model_call(self, family):
-        result, fake, search, _, session = _run(
-            [_response("unused")], family=family, router_score=0.96
+    def test_a_question_the_router_would_redirect_reaches_the_model(self, family):
+        # MATTGPT-236: the router is out of the answer path. A question it
+        # scores personal or out_of_scope at 0.96 is answered, not redirected.
+        result, fake, _, _, session = _run(
+            [_response(tool_query="Matt"), _response("Answered.")],
+            question="Is Matt married?",
+            family=family,
+            router_score=0.96,
         )
-        assert result["rejection_reason"] == f"semantic_router:{family}"
-        assert result["intent_family"] == family
-        assert session["ask_last_reason"] == f"semantic_router:{family}"
-        assert result["answer_md"].startswith("🐾")
-        assert fake.requests == []
-        search.assert_not_called()
+        assert result["rejection_reason"] is None
+        assert "ask_last_reason" not in session
+        assert result["answer_md"].startswith("Answered")
+        assert len(fake.requests) == 2
 
-    def test_a_suggestion_chip_is_answered_past_the_nonsense_rules_and_router(self):
+    def test_agy_answer_never_consults_the_router(self):
+        result, _, _, _, session = _run(
+            [_response(tool_query="Matt"), _response("Answered.")],
+            family="personal",
+            router_score=0.96,
+        )
+        session["__router_classify__"].assert_not_called()
+        assert result["intent_family"] is None
+
+    def test_a_suggestion_chip_is_answered_past_the_nonsense_rules(self):
         """Landing chips set __ask_force_answer__: their fixed questions are
-        answered even when a rule or the router would redirect them."""
+        answered even when a rule would reject them."""
         result, fake, _, _, session = _run(
             [_response(tool_query="ledger"), _response("Here is the ledger work.")],
             family="out_of_scope",
@@ -329,13 +348,6 @@ class TestRejectionsKept:
         assert (
             "__ask_force_answer__" not in session
         ), "the flag must not outlive its turn"
-
-    def test_without_the_chip_flag_the_same_question_is_redirected(self):
-        result, fake, _, _, _ = _run(
-            [_response("unused")], family="out_of_scope", router_score=0.96
-        )
-        assert result["rejection_reason"] == "semantic_router:out_of_scope"
-        assert fake.requests == []
 
 
 # ---------------------------------------------------------------------------
@@ -484,11 +496,13 @@ class TestVoiceCarriesOver:
             f'"{_DECLINE_SENTINEL}"'
         ) in _system(fake.requests[0])
 
-    def test_synthesis_voice_follows_the_router(self):
+    def test_a_synthesis_question_gets_the_standard_voice(self):
+        # MATTGPT-236 (arm B): with the router out, nothing selects the
+        # synthesis prompt; the -236 gate measured standard mode for all.
         _, fake, _, _, _ = _run([_response("ok")], family="synthesis")
         system = _system(fake.requests[0])
-        assert "## SYNTHESIS MODE" in system
-        assert "## STANDARD MODE" not in system
+        assert "## STANDARD MODE" in system
+        assert "## SYNTHESIS MODE" not in system
 
     def test_standard_voice_otherwise(self):
         _, fake, _, _, _ = _run([_response("ok")], family="behavioral")
@@ -664,11 +678,15 @@ def _run_failing(error, script=()):
         patch.object(
             bs, "semantic_search", MagicMock(return_value=_search_result([_STORY_A]))
         ),
+        patch.object(semantic_router, "_get_embedding", return_value=[0.0]),
+        patch.object(semantic_router, "_get_intent_embeddings", return_value={}),
         patch.object(
-            bs,
-            "is_portfolio_query_semantic",
+            semantic_router,
+            "_classify_embedding",
             return_value=(True, 0.6, "zzz-intent", "behavioral"),
         ),
+        patch.object(semantic_router, "_log_borderline", MagicMock()),
+        patch.object(semantic_router, "_log_router_low_confidence", MagicMock()),
         patch.object(bs, "is_nonsense", return_value=None),
         patch.object(bs, "log_query", MagicMock()),
         patch.object(bs, "log_offdomain", MagicMock()),
@@ -785,11 +803,15 @@ def _run_breaking(script, on_delta=None):
         patch.object(
             bs, "semantic_search", MagicMock(return_value=_search_result([_STORY_A]))
         ),
+        patch.object(semantic_router, "_get_embedding", return_value=[0.0]),
+        patch.object(semantic_router, "_get_intent_embeddings", return_value={}),
         patch.object(
-            bs,
-            "is_portfolio_query_semantic",
+            semantic_router,
+            "_classify_embedding",
             return_value=(True, 0.6, "zzz-intent", "behavioral"),
         ),
+        patch.object(semantic_router, "_log_borderline", MagicMock()),
+        patch.object(semantic_router, "_log_router_low_confidence", MagicMock()),
         patch.object(bs, "is_nonsense", return_value=None),
         patch.object(bs, "log_query", MagicMock()),
         patch.object(bs, "log_offdomain", MagicMock()),

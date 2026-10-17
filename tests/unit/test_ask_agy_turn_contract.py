@@ -30,6 +30,7 @@ stories from test_ask_agy_tool_answer.py.
 import json
 from unittest.mock import MagicMock, patch
 
+from services import semantic_router
 from tests.unit.test_ask_agy_tool_answer import (
     _DNA_SENTINEL,
     _STORIES,
@@ -77,11 +78,15 @@ def _turn(question, history, script):
         patch("openai.OpenAI", return_value=fake),
         patch.object(bs, "st", mock_st),
         patch.object(bs, "semantic_search", search),
+        patch.object(semantic_router, "_get_embedding", return_value=[0.0]),
+        patch.object(semantic_router, "_get_intent_embeddings", return_value={}),
         patch.object(
-            bs,
-            "is_portfolio_query_semantic",
+            semantic_router,
+            "_classify_embedding",
             return_value=(True, 0.6, "zzz-intent", "behavioral"),
         ),
+        patch.object(semantic_router, "_log_borderline", MagicMock()),
+        patch.object(semantic_router, "_log_router_low_confidence", MagicMock()),
         patch.object(bs, "is_nonsense", return_value=None),
         patch.object(bs, "log_query", MagicMock()),
         patch.object(bs, "log_offdomain", MagicMock()),

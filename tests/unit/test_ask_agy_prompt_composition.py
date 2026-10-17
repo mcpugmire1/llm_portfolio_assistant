@@ -15,6 +15,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
+from services import semantic_router
 from ui.pages.ask_mattgpt import backend_service as bs
 from utils.corpus_loader import load_stories
 
@@ -188,11 +189,15 @@ def _capture_agy_system_message(real_stories):
         patch.object(bs, "DEBUG", False),
         patch.object(bs, "_openai_client", return_value=client),
         patch.object(bs, "is_nonsense", return_value=None),
+        patch.object(semantic_router, "_get_embedding", return_value=[0.0]),
+        patch.object(semantic_router, "_get_intent_embeddings", return_value={}),
         patch.object(
-            bs,
-            "is_portfolio_query_semantic",
+            semantic_router,
+            "_classify_embedding",
             return_value=(True, 0.6, "zzz-intent", "behavioral"),
         ),
+        patch.object(semantic_router, "_log_borderline", MagicMock()),
+        patch.object(semantic_router, "_log_router_low_confidence", MagicMock()),
         patch.object(bs, "semantic_search", MagicMock()),
         patch.object(bs, "log_query", MagicMock()),
         patch.object(bs, "log_offdomain", MagicMock()),

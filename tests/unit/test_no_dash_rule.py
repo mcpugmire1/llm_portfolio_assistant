@@ -156,9 +156,7 @@ class TestVisitorText:
         }
         assert all(_no_dash(c) for c in copies)
 
-    @pytest.mark.parametrize(
-        "chips", ["RULE_CHIPS", "PERSONAL_CHIPS", "OUT_OF_SCOPE_CHIPS"]
-    )
+    @pytest.mark.parametrize("chips", ["RULE_CHIPS"])
     def test_suggestion_chip_labels_and_questions_have_no_dash(self, chips):
         for label, question in getattr(ui_helpers, chips):
             assert _no_dash(label) and _no_dash(question), (label, question)

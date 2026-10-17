@@ -37,8 +37,11 @@ from utils.corpus_loader import load_stories  # noqa: E402
 # META_COMMENTARY_PATTERNS is centralized in constants.py
 # to ensure consistency between evaluation tests and production code.
 
-# Phrases the semantic router / personal intent branch produces when redirecting
-# out-of-scope queries. Used by TestIntentRouting to check graceful redirection.
+# Phrases a graceful decline uses for out-of-scope and personal queries. Used
+# by TestIntentRouting to check graceful redirection. Since MATTGPT-236 the
+# router no longer redirects in Ask Agy; the model declines, opening with one
+# of rule 0b's code-picked lines (MATTGPT-322: "came up empty", "doesn't
+# mention").
 GRACEFUL_REDIRECT_PHRASES = [
     "don't have",
     "haven't worked",
@@ -46,6 +49,8 @@ GRACEFUL_REDIRECT_PHRASES = [
     "outside",
     "limited experience",
     "focused on",
+    "came up empty",
+    "doesn't mention",
 ]
 
 # =============================================================================

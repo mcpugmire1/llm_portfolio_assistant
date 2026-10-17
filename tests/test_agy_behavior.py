@@ -217,9 +217,9 @@ class TestOutOfScope:
     Rewritten to call the pipeline end-to-end (agy_answer() since MATTGPT-275)
     and assert on the retrieval-side
     rejection reason. Two queries take two different mechanisms:
-      - "Tell me about Matt's retail sales work": semantic router routes to
-        out_of_scope; intent_family is set, rejection_reason is
-        "semantic_router:out_of_scope"
+      - "Tell me about Matt's retail sales work": was a semantic router
+        out_of_scope redirect; since MATTGPT-236 it reaches the model
+        (test_retail_question_is_answered_not_router_redirected)
       - "What is Matt's favorite food?": nonsense filter fires before the
         router runs; intent_family is None, rejection_reason is
         "rule:personal_trivia"
@@ -231,11 +231,6 @@ class TestOutOfScope:
     @pytest.mark.parametrize(
         "query,expected_rejection_reason,expected_intent_family",
         [
-            (
-                "Tell me about Matt's retail sales work",
-                "semantic_router:out_of_scope",
-                "out_of_scope",
-            ),
             (
                 "What is Matt's favorite food?",
                 "rule:personal_trivia",
@@ -262,6 +257,18 @@ class TestOutOfScope:
             f"Expected intent_family: {expected_intent_family!r}\n"
             f"Got intent_family: {result.get('intent_family')!r}"
         )
+
+    def test_retail_question_is_answered_not_router_redirected(self, stories):
+        """MATTGPT-236: the router is out of Ask Agy's answer path. "Tell me
+        about Matt's retail sales work" was a semantic_router:out_of_scope
+        redirect; now it reaches the model, which answers or declines."""
+        result = agy_answer("Tell me about Matt's retail sales work", stories)
+
+        assert (
+            result.get("rejection_reason") is None
+        ), f"Expected no rejection; got {result.get('rejection_reason')!r}"
+        assert result.get("intent_family") is None
+        assert result.get("answer_md"), "Expected an answer from the model"
 
 
 # =============================================================================
