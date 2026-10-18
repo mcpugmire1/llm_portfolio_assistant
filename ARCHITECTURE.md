@@ -350,9 +350,8 @@ search_stories tool results → gpt-6.1-sol (Ask Agy) → User
 - `echo_star_stories.jsonl` (100+ records)
 
 **Key Features:**
-- **Merge strategy:** Excel is authoritative for `public_tags` (blank in Excel means blank in the JSONL). `content` is kept from the prior JSONL when Excel doesn't supply it. `id` is `Title|Client` slugs.
+- **Rebuild rule:** the JSONL is rebuilt from the Excel master on every run; nothing from the prior JSONL carries over, so a blank Public Tags cell is blank `public_tags`. `id` is `Title|Client` slugs. The prior JSONL is read only for the change report and its Created, Updated and Unchanged counts. See ADR 059 in `docs/ADR.md`.
 - **Backup:** Writes `archive/jsonl-backups/<name>.bak-<timestamp>` (gitignored) before overwriting
-- **Normalization:** Slug-based key matching (`Title|Client`)
 - **Dry-run mode:** Edit `DRY_RUN = True` in the script to preview without writing (a constant, not a flag)
 
 **Fields Extracted:**
@@ -558,6 +557,7 @@ This section defines the **job, rules, and constraints** for each retrieval comp
 
 **Log lines:**
 - `[API_ERROR_DETECTED] source=embed_failure` (`pinecone_semantic_search()`): the query embedding failed; `__embed_failure__` is set and Ask Agy returns the breather message.
+- `[API_ERROR_DETECTED] source=pinecone_query` (`pinecone_semantic_search()`): the Pinecone query, or turning its matches into hits, raised; logged whether or not `DEBUG` is on. The function returns None, and `semantic_search()` reports `fallback:pinecone_unavailable`.
 - `agy_answer fatal error` (`logger.exception` in `agy_answer()`): an answer call failed with anything other than a rate limit.
 - `Ask Agy stream broke before any answer text (...); sending it again` (`logger.warning` in `_stream_response()`).
 
@@ -671,9 +671,11 @@ MATT_DNA states only facts that a story or `data/matt_profile.json` backs. It do
 - The themes list, from `SYNTHESIS_THEMES`
 - Industry Experience: every Industry value except "Cross Industry", as "{Industry}: {n} stories ({clients})", most stories first, with the non-generic clients of that industry's stories. See ADR 042 in `docs/ADR.md`.
 
-**Read from the profile:** `self_description` in `data/matt_profile.json`, rendered under its own label as Matt's self-description, not as verified fact. If the profile can't be read, the block is omitted and the failure is logged. Role Match grounding (`jd_assessor.load_matt_profile()`) does not include it. See ADR 038 in `docs/ADR.md`.
+**Read from the profile** (`data/matt_profile.json`; if it can't be read, the failure is logged and both render empty, the Career Arc keeping only its CIC line). Role Match grounding (`jd_assessor.load_matt_profile()`) includes neither.
+- `self_description`, rendered under its own label as Matt's self-description, not as verified fact. See ADR 038 in `docs/ADR.md`.
+- `career_arc`, rendered as the Career Arc: the `progression` line, one line per `employers` entry (`name`, `years`, optional `note`), the CIC line with the derived practitioner count, then `current`. A line is left out when its field is empty. See ADR 057 in `docs/ADR.md`.
 
-**Curated sections:** Career Arc (employers and date ranges), Theme Strengths (tiered by story count: Execution & Delivery primary, Org Transformation a strong secondary theme, the rest narrower), Signature Achievements, How Matt Wins Business, and Leadership Philosophy.
+**Curated sections:** Theme Strengths (tiered by story count: Execution & Delivery primary, Org Transformation a strong secondary theme, the rest narrower), Signature Achievements, How Matt Wins Business, and Leadership Philosophy.
 
 **Grounding rules:** cite only clients, projects, and metrics in the retrieved stories; say "In one engagement..." when unsure; never invent outcomes or name clients not on the list; frame revenue impact as delivery excellence, not sales; lead synthesis answers with the Themes.
 
@@ -1174,7 +1176,7 @@ Retrieval is driven primarily by Use Case(s) and 5P Summary; STAR fields provide
 | **scoring.py** | Hybrid scoring (semantic + keyword) | `_keyword_score_for_story()`, `_hybrid_score()` |
 | **ui_helpers.py** | Debug logging, branch-aware rejection banner | `dbg()`, `safe_container()`, `render_no_match_banner()`, `BANNER_COPY` / `RULE_CHIPS` / `PERSONAL_CHIPS` / `OUT_OF_SCOPE_CHIPS` |
 
-**corpus_loader.py contract:** no Streamlit dependency. `normalize_story()` coerces the 8 `_LIST_FIELDS` (Situation, Task, Action, Result, Process, Performance, Competencies, Use Case(s)) from a string or None to a list, and parses `public_tags` from a comma-separated string, without adding absent fields. `load_stories()` skips empty lines and records whose id is None, empty or 0, strips the id and casts it to str, and normalizes each record.
+**corpus_loader.py contract:** no Streamlit dependency. `normalize_story()` coerces the 8 `_LIST_FIELDS` (Situation, Task, Action, Result, Process, Performance, Competencies, Use Case(s)) from a string or None to a list, and parses `public_tags` from a comma-separated string, without adding absent fields. `story_id_or_none()` is the id rule for both loaders (`load_stories()` and `app.py`'s `load_star_stories()`): None, empty or 0 skips the record; any other id is cast to str and stripped. `load_stories()` skips empty lines, applies that rule and normalizes each record.
 
 `app.py:load_star_stories()` wraps `normalize_story()` with Streamlit-specific error handling: `st.warning` on file-not-found (returns `[]`), `st.warning` per malformed line (continues). corpus_loader raises instead -- intentional split for the eval/probe context where fail-fast is correct. Nine call sites across eval and probe scripts use `corpus_loader.load_stories()` directly.
 
@@ -1212,13 +1214,13 @@ def build_system_prompt(is_synthesis: bool, matt_dna: str, client_list: str = ""
     When profile_facts is non-empty, injects the attested-facts block before
     **GROUNDING RULES:** and citation rules 0a/0b immediately after it."""
 
-def build_tool_system_prompt(is_synthesis, matt_dna, profile_facts, opener_examples, focus_angle="") -> str:
+def build_tool_system_prompt(is_synthesis, matt_dna, profile_facts, opener_examples, focus_angle="", decline_line="") -> str:
     """Ask Agy's system prompt: build_system_prompt(), then "**TOOLS:** " and
     TOOL_STORY_NOTE, then build_answer_instructions() with the opener lines as
     examples. The user message is the question as asked."""
 
-def build_answer_instructions(opening_line, is_synthesis, verbatim_requirement="", focus_angle="", profile_facts="") -> str:
-    """The "## INSTRUCTIONS" block: opener line, focus angle, verbatim requirement,
+def build_answer_instructions(opening_line, is_synthesis, verbatim_requirement="", focus_angle="", profile_facts="", decline_line="") -> str:
+    """The "## INSTRUCTIONS" block: opener line, focus angle, the IF YOU DECLINE line, verbatim requirement,
     prose, NO_DASH_RULE, COMPARISON_RULE, bolding, "State facts", and citation rule 0a."""
 
 def get_verbatim_requirement(summary: str) -> str:
@@ -1228,6 +1230,8 @@ def get_verbatim_requirement(summary: str) -> str:
 **Profile Fact Markers:**
 
 Rule 0a instructs the LLM to place `[[profile:<category>]]` on its own line at the end of the response, once per category stated. `_extract_profile_markers(text)` in `backend_service.py` strips these markers from the raw LLM output before bolding and meta-strip run, and returns `(cleaned_text, cited_categories)` in first-cited order. Unknown markers (`[[profile:patents]]`, malformed forms) are removed without adding a category. A line holding only markers is dropped together with the blank line before it. The marker instruction is part of rule 0a's text, so it reaches the LLM whenever `profile_facts` is non-empty.
+
+**Rule 0b and the decline line:** for a category the profile has no key for (patents, publications), rule 0b tells the model to decline in first person, in one or two sentences, the first beginning with 🐾, naming the topic in its own words, with no guessing and no padding from story evidence. `_choose_decline_line()` in `backend_service.py` picks one of `DECLINE_LINES` per answer, and `build_answer_instructions()` gives it in both modes as "**IF YOU DECLINE:** Begin with this line, filling in the topic in your own words". Nothing is inserted into the answer. See ADR 056 in `docs/ADR.md`.
 
 **Sources Fact Cards:**
 
@@ -1944,9 +1948,9 @@ python tests/eval_rag_quality.py --report [--output FILE]
 - Response quality (no hallucinations)
 - Intent classification
 
-**Scoring:** xfailed and xpassed results are counted separately from failures. An expected failure (`xfail_reason` set on the query spec) is not counted as failed; a pass on an xfailed item reports as xpassed so the marker can be reviewed. Q59 carries `xfail_reason` (low_confidence, score 0.242 < 0.25). The "70/70" pass count predates this xfail and is no longer a clean figure.
+**Scoring:** xfailed and xpassed results are counted separately from failures. An expected failure (`xfail_reason` set on the query spec) is not counted as failed; a pass on an xfailed item reports as xpassed so the marker can be reviewed. No golden query sets `xfail_reason`.
 
-**`profile_fact` behavior:** A query spec with `"expected_behavior": "profile_fact"` passes when every `must_contain` string appears in the answer. Q59 uses this with `must_contain: ["Atlanta"]`.
+**`profile_fact` behavior:** A query spec with `"expected_behavior": "profile_fact"` passes when every `must_contain` string appears in the answer (case-insensitive), in `evaluate_query()`'s report and in pytest's `test_intent_query`. Q59 uses this with `must_contain: ["Atlanta"]`.
 
 ### Unit Tests
 
@@ -1959,6 +1963,7 @@ pytest tests/unit -v
 
 **Coverage:**
 - `test_structural_assertions.py` - Threshold boundary tests
+- `TestArchitectureFitness` (same file): one AST walk over `app.py`, `ui/`, `services/`, `utils/` and `config/`, with limits that may only go down: no `ui/` imports from `services/`, `utils/` or `config/`; `streamlit` imports outside `ui/` only in `STREAMLIT_ALLOWED`; at most `OPENAI_CLIENT_SITES_MAX` OpenAI client sites; `DATA_FILE` defined once (a strict xfail while it has duplicates)
 - `test_filters.py` - Filter logic
 - `test_formatting.py` - STAR story formatting
 
@@ -1975,7 +1980,7 @@ Two automated gates enforce the hermetic unit suite:
 
 **xfail markers:** 10 known-failure tests carry `@pytest.mark.xfail` so they register as expected failures rather than silently degrading the pass count. If a new persistent failure appears, add `xfail` with a ticket reference rather than deleting the test.
 
-**Commit-time checks:** `.githooks/pre-commit` fails on em dashes in added lines (files under `docs/evidence/` are skipped) and on dynamically hashed Streamlit classes in added lines of `ui/` or `app.py`. `.githooks/commit-msg` fails on an em dash in the message, a `Co-Authored-By` line, or a Green commit that reports a gate as "not run". In a Claude Code session (`CLAUDECODE` set), a role check limits which doc files a commit may contain: `MATTGPT_DOCS_SESSION=arch` (launched by `scripts/arch-sync-session.sh`) commits only `ARCHITECTURE.md` and `docs/ADR.md`; `MATTGPT_DOCS_SESSION=backlog` (`scripts/backlog-session.sh`) commits only `BACKLOG.md`, `CHANGELOG.md` and `docs/value_scorecard.md`; a session with no value commits none of these five; any other value is refused. Commits from a terminal outside Claude Code are not role-checked. A Claude Code session cannot push: `.claude/settings.json` denies push commands and `.claude/hooks/guard-bash.sh` blocks `git push` in any form, so pushes run from Matt's terminal. See ADR 027 in `docs/ADR.md`.
+**Commit-time checks:** `.githooks/pre-commit` fails on em dashes in added lines (files under `docs/evidence/` are skipped) and on dynamically hashed Streamlit classes in added lines of `ui/` or `app.py`. `.githooks/commit-msg` fails on an em dash in the message, a `Co-Authored-By` line, a Green commit that reports a gate as "not run", or a def removed from a `.py` file under `ui/`, `services/`, `utils/` or `config/` (and not re-added in the commit) that no `Decision:` line names as `<file>:<function>` (see ADR 058 in `docs/ADR.md`). In a Claude Code session (`CLAUDECODE` set), a role check limits which doc files a commit may contain: `MATTGPT_DOCS_SESSION=arch` (launched by `scripts/arch-sync-session.sh`) commits only `ARCHITECTURE.md` and `docs/ADR.md`; `MATTGPT_DOCS_SESSION=backlog` (`scripts/backlog-session.sh`) commits only `BACKLOG.md`, `CHANGELOG.md` and `docs/value_scorecard.md`; a session with no value commits none of these five; any other value is refused. Commits from a terminal outside Claude Code are not role-checked. A Claude Code session cannot push: `.claude/settings.json` denies push commands and `.claude/hooks/guard-bash.sh` blocks `git push` in any form, so pushes run from Matt's terminal. `guard-bash.sh` also blocks a session from running an ingestion script (`INGEST_RE`) or touching the OneDrive master folder, and `.claude/settings.json` denies Read on it. See ADR 027 in `docs/ADR.md`.
 
 **Probes and evidence:** Probe scripts and their output live in `probes/`, which is gitignored; output goes under `probes/output/<ticket>/<timestamp>/`. Output that a ticket, commit, or ADR cites is copied byte-identical into `docs/evidence/MATTGPT-<n>/`, which is tracked. Tracked scripts at the repo root include `probe_assessor.py` (with its `probe_extraction_*.json` caches) and the corpus pipeline's `generate_*.py` tools. `tests/fixtures/evaluator_conversations.md` holds the evaluator conversations and approved expected answers, the acceptance set for Ask Agy conversation changes. See ADR 039 in `docs/ADR.md`.
 

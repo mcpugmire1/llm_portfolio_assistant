@@ -1373,3 +1373,195 @@ The assessor received the extraction model's compressed `requirement`, which dro
 **Consequences:**
 - `source_text` fidelity is checked by exact match against JD lines, not containment; a truncated span still passes a containment check.
 - The `requirement` field stays compressed, and implicit rows are inferred text by design (Role Match Known Defects in ARCHITECTURE.md).
+
+---
+
+## ADR 053: Ask Agy Accepts Seven Behaviors the 1095d2c Audit Found Dropped
+
+**Date:** 2026-10-17
+**Status:** Accepted
+**Related tickets:** MATTGPT-236, MATTGPT-275, MATTGPT-077, MATTGPT-128
+
+**Context:**
+A Code audit compared 1095d2c^ with 1095d2c and listed each behavior dropped or changed when `rag_answer()` became `agy_answer()` (ADR 047). A golden comparison from recorded calls only went with it: `docs/evidence/MATTGPT-275/golden_rag_20261014_140843/` vs `docs/evidence/MATTGPT-320/golden_20261016_102942/`. The figures below are the audit session's, as recorded on MATTGPT-236.
+
+**Decision:**
+Seven audit rows are accepted as part of the target answer path, in which the router is out of Ask Agy and the model judges (5e3e99f):
+- Row 12: a router failure (error_fallback) with a low or empty search no longer shows "I need a quick breather".
+- Row 15: suggestion-chip and forced answers no longer add the top 5 keyword-matched stories to the pool.
+- Row 16: entity cluster promotion no longer sends "What did Matt do at RBC?"-shaped questions to the synthesis prompt.
+- Row 18: the synthesis pool no longer puts named-client stories ahead of generic ones.
+- Row 19: the narrative family's ordering step (Professional Narrative kept at #1, the rest diversified) is gone.
+- Row 28: SYNTHESIS_DELTA no longer fills `{client_list}` with the retrieved named clients.
+- Row 41: the query log no longer records search confidence (high, low or none).
+
+**Rationale:**
+- The recorded reason: the model judges, with no router (ADR 054).
+- Row 28: 0 confirmed figure misattributions in synthesis answers in either golden run; no effect established either way.
+- Row 12: not measured (0 error_fallback rows in either golden run).
+
+**Consequences:**
+- Row 13 (every search empty: the model answers instead of refusing) is covered by rule 0b's decline (ADR 056): in the -236 gate and MATTGPT-322 run 6, 20 turns had every search empty, all "Is Matt married?", and all 20 declined without invented content. Empty searches on work-history questions aren't covered.
+- Row 27 is open on MATTGPT-236: the Professional Narrative verbatim-phrase block is added for every narrative story any search returns, not only when the top story is one.
+- Row 8 stays on MATTGPT-077, unmeasured. Row 38 folds into MATTGPT-128.
+
+---
+
+## ADR 054: Ask Agy Makes No Semantic Router Call
+
+**Date:** 2026-10-17
+**Status:** Planned
+**Related tickets:** MATTGPT-236, MATTGPT-322, MATTGPT-329, MATTGPT-223, MATTGPT-239
+
+**Context:**
+`agy_answer()` calls the semantic router after the nonsense rules: an out_of_scope or personal family at `HARD_ACCEPT` gets a redirect banner, and the synthesis family picks the synthesis prompt. A gate run on a frozen checkout of 725d564 (1743846, `docs/evidence/MATTGPT-236/gate_20261016_140623/`; 10 runs, 1,830 turns, blind-scored) compared arm A as shipped, arm B with the router returning an empty family, and arm C passing only a personal family.
+
+**Decision:**
+Ask Agy makes no router call, including no score-only call: no redirects and no synthesis pick (5e3e99f). Arm B was decided on Oct 16, 2026, sequenced after MATTGPT-322's decline; the target was set on Oct 17. MATTGPT-223 and MATTGPT-239 are re-scoped to My Work. Status becomes Accepted when MATTGPT-236's Green lands.
+
+**Rationale:**
+- All turns: A 524/610, B 532/610, C 531/610. The 49 questions the router does not change: A 427/490, B 430/490, C 430/490, the noise floor.
+- The 12 questions it changes: A 97/120, B 102/120, C 101/120. The synthesis pick changed nothing measurable (A 67, B 66, C 65 of 80).
+- Rule 0b's sentence on the personal and hobby questions (r01 to r06): A 28/60, B 57/60, C 24/60.
+- Rejected: arm C, a personal-only gate (24/60 on r01 to r06).
+
+**Consequences:**
+- The nonsense rules are the only check before the model; crude questions about Matt are caught there (ADR 055).
+- Married, age and kids questions move from the personal banner to rule 0b's decline (ADR 056).
+- My Work keeps its router call.
+- ARCHITECTURE.md keeps describing Ask Agy's router redirects until the Green lands.
+
+---
+
+## ADR 055: Crude Questions About Matt Are Rejected by the adult_content Rule
+
+**Date:** 2026-10-17
+**Status:** Accepted
+**Related tickets:** MATTGPT-329, MATTGPT-236
+
+**Context:**
+Crude questions about Matt ("Does Matt have a penis?") were rejected by `rag_answer()`'s low-confidence gate until 1095d2c removed it (ADR 047), and then reached the answering model. "Is Matt sexy?" reached the model before 1095d2c too.
+
+**Decision:**
+`adult_content` in `nonsense_filters.jsonl` widens from `\b(nsfw|porn|xxx|nude|naked|sex)\b` to `\b(nsfw|porn|xxx|nude|naked|sex|sexy|penis|vagina|genitals?)\b`, so these questions are rejected before the router, search or any model call (88ac7ed).
+
+**Rationale:**
+- Across the local logs (6,369 borderline, 1,075 off-domain and 255 router low-confidence rows) and the query log (327 rows), the new pattern matches only the five logged crude questions (old pattern: 0); the must-preserve set (59) matches 0. "Essex", "Sussex", "sextant" and "sexton" do not match.
+- Live check (`docs/evidence/MATTGPT-329/live_20261017_130336/`): the five targets hit `rule:adult_content` with 0 model calls, 10/10; six story and fact controls answered, 12/12.
+- Rejected: restoring a search-confidence gate (1095d2c removed it because it blocked 12 must-answer follow-ups).
+- Rejected: relying on the router's personal family (it scores these 0.58 to 0.68, below `HARD_ACCEPT`, and leaves Ask Agy's answer path under ADR 054).
+
+**Consequences:**
+- With the router out of Ask Agy (ADR 054), the nonsense rules are the only check before the model.
+
+---
+
+## ADR 056: Rule 0b Declines in Agy's Voice, Opening With a Line Picked in Code
+
+**Date:** 2026-10-17
+**Status:** Accepted
+**Related tickets:** MATTGPT-322, MATTGPT-236
+
+**Context:**
+Rule 0b (a question about a category the profile has no key for, such as patents or publications) told the model to reply "Nothing I know about Matt covers that" and nothing else. After an opener that promised content it read as bare and dismissive: with the router off, it met the voice checklist and decline standard 0/80 and was too dismissive 57/80.
+
+**Decision:**
+Rule 0b states only the requirements: decline in first person, in one or two sentences, the first beginning with 🐾, the topic named in the model's own words, no guessing, no padding with story evidence, no excess apology. `_choose_decline_line()` in `backend_service.py` picks one of `DECLINE_LINES` per answer, and `build_answer_instructions()` gives it to the model in both modes as "**IF YOU DECLINE:** Begin with this line, filling in the topic in your own words". Nothing is inserted into the answer (58fe71f).
+
+**Rationale:**
+- Live run (`docs/evidence/MATTGPT-322/run6_20261017_115952/`, router off, 17 questions x 10): declines 79/80, the assigned line followed whole 78/80 (run 4: 45/80), facts 40/40, story controls 49/50, no decline-line wording in any fact or control answer.
+- Rejected: the fixed reply-only sentence (0/80 on the voice checklist and decline standard).
+- Rejected: examples to vary in the prompt (run 3: the model used none of four lines; it cannot vary across calls it does not see; 7a866bc's "Vary your opening naturally" failed the same way).
+- Rejected: "Use this shape" (run 4: line followed whole 45/80, patents 1 of 10).
+- Rejected: four decline lines ("That trail goes cold here" misread on age, followed 5 of 19; "I've been through Matt's stories" followed 3 of 10).
+- Rejected: inserting the line into the answer after the response (text chosen without knowing the answer).
+
+**Consequences:**
+- In a conversation that repeats the question, the model follows the line less often on later turns (repeat run: 10/10, 10/10, 8/10, `docs/evidence/MATTGPT-322/run7_20261017_123603/`).
+
+---
+
+## ADR 057: The Career Arc's Facts Live in matt_profile.json
+
+**Date:** 2026-10-15
+**Status:** Accepted
+**Related tickets:** MATTGPT-294, MATTGPT-275, MATTGPT-209
+
+**Context:**
+MATT_DNA's Career Arc lines (progression, employers and years, current status) were hard-coded in `generate_dynamic_dna()`.
+
+**Decision:**
+The arc's facts live in `data/matt_profile.json` as `career_arc` (`progression`, `employers` with `name`, `years` and an optional `note`, and `current`), and `generate_dynamic_dna()` renders them from the profile, as it does `self_description` (ADR 038). The CIC line stays derived from the CIC story's practitioner count. Each line is left out when its field is empty (24d00ca).
+
+**Rationale:**
+- MATT_DNA rendered by the new code matched the old code's output, 3,219 vs 3,219 characters, 0 diff lines; Ask Agy's standard and synthesis system prompts were identical before and after.
+- Rejected: moving the CIC line into the profile (it would hard-code a corpus value).
+
+**Consequences:**
+- Editing "current" is a one-line profile change.
+- Role Match grounding (`jd_assessor.load_matt_profile()`) does not render the arc.
+- The drift guard checks each corpus Employer against the Career Arc block only, and its failure points to `career_arc` (1b0e68c).
+
+---
+
+## ADR 058: A Commit Deleting a Production Function Names It in a Decision Trailer
+
+**Date:** 2026-10-17
+**Status:** Accepted
+**Related tickets:** MATTGPT-287, MATTGPT-217
+
+**Context:**
+In the MATTGPT-287 and MATTGPT-217 pre-flight, "no production caller" for MATTGPT-077's query substitution turned out to mean its only caller was retired in 1095d2c, which a deletion would have buried.
+
+**Decision:**
+`.githooks/commit-msg` fails a commit that removes a def (including async defs and methods, and every def in a deleted file) from a `.py` file under `ui/`, `services/`, `utils/` or `config/` without re-adding it anywhere in the commit, unless a `Decision:` line names it as `<file>:<function>`. The session that deletes it writes the trailer (62d975b; message wording in f3cb599).
+
+**Rationale:**
+- Signature edits and moves between files pass, since the name is re-added; removals under `tests/` are not checked.
+- Rejected: a `Removal-Approved: Matt` trailer only Matt can write, enforced by `guard-bash.sh` (sessions record the decision themselves; naming each function is the check).
+
+**Consequences:**
+- Deleted calls are not checked, only deleted defs.
+
+---
+
+## ADR 059: The Excel Export Rebuilds the JSONL; the Prior-JSONL Merge Is Removed
+
+**Date:** 2026-10-16
+**Status:** Accepted
+**Related tickets:** MATTGPT-323, MATTGPT-072, MATTGPT-270
+
+**Context:**
+`generate_jsonl_from_excel.py` merged each Excel record with the prior JSONL record matched by `norm_key()`: `_merge_with_existing()` kept `content` and any prior-only field when Excel did not supply them. The lookup used `norm_key()` while ids use slugs, so the merge matched only when the two keys agreed: 0 of 124 keys in today's corpus, but any one-word Title and Client.
+
+**Decision:**
+The JSONL is rebuilt from the Excel master on every run; nothing from the prior JSONL carries over. `_merge_with_existing()`, `norm_key()` and the `existing_by_key` lookup are deleted. `load_existing_jsonl()` returns the prior records only, for the change report and the summary counters (a66ce99).
+
+**Rationale:**
+- The rule is that the JSONL is rebuilt from the Excel master; MATTGPT-072 had already made Excel authoritative for `public_tags`. The merge was dead for today's corpus but not for one-word titles and clients.
+- On the real master, the export's output JSONL was byte-identical before and after.
+
+**Consequences:**
+- A field that exists only in the JSONL does not survive an export.
+
+---
+
+## ADR 060: Q15 Keeps Its Client-Name Check
+
+**Date:** 2026-10-16
+**Status:** Rejected
+**Ticket:** MATTGPT-082
+**Related tickets:** MATTGPT-275, MATTGPT-320
+
+**Context:**
+Q15 ("Matt's work at Fiserv") once failed because the answer described the Fiserv engagement without naming Fiserv. The ticket proposed checking response correctness instead: project-anchor phrases, a looser `client_variants` list, or removing Q15.
+
+**Decision:**
+Q15 stays as it is.
+
+**Rationale:**
+- Q15 is a `category: "client"` query in `TestClientAttribution`: `check_client_attribution()` looks for a variant of the expected client, and a single-client query also fails when the client is not bolded. Checking that the client is named and bolded is the test's purpose; content correctness is covered by the ground-truth checks.
+- Q15 passed in both golden runs: `docs/evidence/MATTGPT-275/golden_agy_20261014_150939/` and `docs/evidence/MATTGPT-320/golden_20261016_102942/`.
+
+**Consequences:**
+- None.
