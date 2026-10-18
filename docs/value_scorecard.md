@@ -321,4 +321,4 @@ Ask Agy feedback are not logged.
 requests, open decision), -298 (salary questions get the nonsense
 banner), -312 (stream shows an unclosed bold marker), -315 (source-card
 separators differ), -318 (ask_answer_model
-fact), -321 (stale model comment and How Agy dialog copy).
+fact), -321 (stale model comment and How Agy dialog copy), -337 (spec's golden-query count includes 11 queries the eval doesn't check).

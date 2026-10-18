@@ -50,6 +50,7 @@ Answer mode: -284 (synthesis mode decided in four places; a promoted query such 
 Dead code: -176, -183 · -241 (dead prose in `_router_rejection()`: delete it) · Hidden error: -204 (zero-filter-match only -- st.stop() blanking was MATTGPT-224, shipped `92370b3`)
 Untraced flash: -229 (My Work flashes before Ask Agy conversation -- needs DevTools trace) · -289 (MATTGPT-018 regression watch: stale landing elements painted 240-370 ms, one mixed frame in 3 runs)
 BDD flakes: -122, -131, -142, -145, -197, -198
+Eval honesty: -337 (spec query count includes 11 unchecked entity_detection queries)
 Small refactors: -153, -062, -082, -083, -084, -150, -217 (pronoun grammar in substitution)
 Process: -335 (governor skill pilot, advisory)
 BDD structure: -213 (shared step definitions)
@@ -163,6 +164,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-332](#mattgpt-332) | Delete Ask Agy's synthesis prompt path, unreachable since MATTGPT-236 | Blocked | Low | Refactor | chore | October 17, 2026 |
 | [MATTGPT-335](#mattgpt-335) | Governor skill pilot: spec, then a blind MATTGPT-275 replay plus a MATTGPT-323 control (advisory only) | Open | Medium | Action | chore | October 17, 2026 |
 | [MATTGPT-336](#mattgpt-336) | query_logger stamps Timestamp with datetime.now() and no timezone | Open | Low | Bug | chore | October 18, 2026 |
+| [MATTGPT-337](#mattgpt-337) | eval_query_count counts the 11 entity_detection golden queries, which no eval test asserts since MATTGPT-275 | Open | Low | Bug | value | October 18, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently | Parked | Medium | Action | value | August 3, 2026 |
@@ -3056,6 +3058,28 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 **Observed (Matt, Oct 18, 2026):** cloud rows look like UTC and local rows like Eastern. Inferred from row order, not verified.
 
 **Fix:** stamp with an explicit timezone.
+
+---
+
+### MATTGPT-337
+**eval_query_count counts the 11 entity_detection golden queries, which no eval test asserts since MATTGPT-275**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Bug
+- **File:** `scripts/extract_facts.py` (eval query count), `tests/eval_rag_quality.py` (`GOLDEN_QUERIES["entity_detection"]`)
+- **Logged:** October 18, 2026
+
+**Issue (app-side handoff, Oct 18, 2026):** the design spec's home page says the golden-query set has `{{ site.data.facts.eval_query_count }}` questions (`mattgpt-design-spec/index.md`). `extract_facts.py` gets that number by counting every `"id": <n>,` in `tests/eval_rag_quality.py`, so it includes queries the eval doesn't check.
+
+**Verified Oct 18, 2026 (HEAD 9c79a92):**
+- `extract_facts.py`: `eval_query_count = len(re.findall(r'"id":\s*\d+,', eval_content))`; `eval_summary` is that count over itself, not a run result.
+- `tests/eval_rag_quality.py` has 68 such ids; 11 are in `GOLDEN_QUERIES["entity_detection"]`.
+- No pytest class in `eval_rag_quality.py` parametrizes `entity_detection` (the parametrized categories are narrative, client, intent, edge, surgical, marketing and context_story). 9247236's gate: the file collects 60 tests.
+- `run_full_evaluation()` runs every category, and `evaluate_query()` marks each entity_detection query `passed = True` with "skipped: detect_entity() removed (MATTGPT-275)", so a full-run report counts 11 skips as passes.
+- Not quite "no test runs them": `test_structural_assertions.py` parametrizes over every `GOLDEN_QUERIES` value (e.g. `TestNoMetaCommentary`), so the 11 still feed the structural checks as query text, as the `evaluate_query()` comment says.
+
+**Fix direction (handoff's two options, with the coupling):** count only the categories a test asserts, or retire the entity_detection block. Retiring it also removes 11 queries from the structural suites, so that option needs a decision on keeping them as query text under another category. The design spec stopped presenting `eval_summary` as a pass rate (`mattgpt-design-spec/CONTEXT.md`).
 
 ---
 
