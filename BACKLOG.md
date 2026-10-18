@@ -16,23 +16,24 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 4. **-331** -- Home cards 3, 5 and 6 apply only their first Domain value: My Work's single-select Domain box (MATTGPT-065) drops the rest, so Teams & Talent lands on 1 story where its 4 values cover 15. Fix needs Matt's UX call: multi-select Domain, or one chip named for the card.
 
 **NEXT**
-5. **-128** -- Red in 1095d2c (`TestSourcesAreTheCitedStories`, 5 xfails); cards still show all retrieved stories. Nothing of its contract has shipped. Cards show the stories the answer cited, not just those retrieved: the Oct 12 JP Morgan payments answer drew 7 of 23 claims from two stories the cards did not show. Sources panel split by kind, extracted reason lines, trailing question removed; design settled August 30.
-6. **-302** -- OpenAI retires gpt-4o, gpt-4o-mini, gpt-4.1 and gpt-4.1-mini on January 14, 2027. Migrate Role Match (`ASSESSMENT_MODEL`, assessment and extraction prompts) and the generator scripts; delete the unused `DEFAULT_CLASSIFICATION_MODEL`. Ask Agy is on gpt-6.1-sol (1095d2c). Deadline-driven: schedule well before January. -140 travels with it.
-7. **-140** -- Remaining model names outside `config/constants.py`: `ASSESSMENT_MODEL` in `services/jd_assessor.py` and the root `generate_*.py` scripts. Ask Agy's half is done (`ASK_ANSWER_MODEL`). Travels with -302.
-8. **-266** -- Role Match labels responsibility-derived rows as "Required Qualifications". Every visitor sees job duties presented as must-have credentials. Fix is in `_flatten_extraction()`, not the prompt. -264 is sequenced after it.
-9. **-255** -- The meta-commentary strip regex corrupts decimal amounts (`$2.5M` becomes an unclosed `**$2.`) and merges paragraphs. Visible correctness bug. Ticket's fix: remove the strip, run structural meta-commentary tests without it, then a live acceptance run on stories with decimal amounts, including story controls. Acceptance counts evaluative sentences before and after (252 coupling).
-10. **-228** -- Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
-11. **-146** -- Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
-12. **-160** -- In Progress. JD extraction split into three concurrent calls (required / preferred / implicit) landed at `5aee8a4`. After-measurement on the AT&T fixture (count spread 1-2 across five runs) not yet recorded. No longer gates -244.
-13. **-244** -- In Progress; prep Greens landed. Role Match assessor calibration: cited evidence doesn't address the specific claim; `confidence` field deletion. Not gated on -160: qualifier preservation was resolved by the `source_text` instruction fix (`5aee8a4`/`b28a080`), not the split. Next: verify the CI/CD-qualifier row after that fix; fixture count and the 22% over-called figure depend on it. Land before -249 (see -249 ordering constraint).
-14. **-168** -- Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data. Re-measure now that -275's Green has shipped (tunes behavior 275 replaces).
-15. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
-16. **-129 stories 3-5** -- Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
-17. **-252** -- Ask Agy writes evaluative sentences about Matt despite prompt instructions against it. Visitor-visible; isolating probe spec in the detail block.
-18. **-235** -- Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-19. **-223** -- My Work only (Ask Agy makes no router call after -236): add router_score and router_family columns to My Work's Sheet query row; unblocks -239's floor threshold decision.
-20. **-222** -- Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
-21. Rest of Role Match: -173, -014, -012, -081, -099.
+5. **-338** -- Breadth as a standing measure: distinct named clients and eras per answer in the gate scorer and the golden eval, and skipped queries reported as skipped (with -337). The -236 gate scored pass/fail and missed router-off answers citing Accenture alone. Lane 2, after -336.
+6. **-128** -- Red in 1095d2c (`TestSourcesAreTheCitedStories`, 5 xfails); cards still show all retrieved stories. Nothing of its contract has shipped. Cards show the stories the answer cited, not just those retrieved: the Oct 12 JP Morgan payments answer drew 7 of 23 claims from two stories the cards did not show. Sources panel split by kind, extracted reason lines, trailing question removed; design settled August 30.
+7. **-302** -- OpenAI retires gpt-4o, gpt-4o-mini, gpt-4.1 and gpt-4.1-mini on January 14, 2027. Migrate Role Match (`ASSESSMENT_MODEL`, assessment and extraction prompts) and the generator scripts; delete the unused `DEFAULT_CLASSIFICATION_MODEL`. Ask Agy is on gpt-6.1-sol (1095d2c). Deadline-driven: schedule well before January. -140 travels with it.
+8. **-140** -- Remaining model names outside `config/constants.py`: `ASSESSMENT_MODEL` in `services/jd_assessor.py` and the root `generate_*.py` scripts. Ask Agy's half is done (`ASK_ANSWER_MODEL`). Travels with -302.
+9. **-266** -- Role Match labels responsibility-derived rows as "Required Qualifications". Every visitor sees job duties presented as must-have credentials. Fix is in `_flatten_extraction()`, not the prompt. -264 is sequenced after it.
+10. **-255** -- The meta-commentary strip regex corrupts decimal amounts (`$2.5M` becomes an unclosed `**$2.`) and merges paragraphs. Visible correctness bug. Ticket's fix: remove the strip, run structural meta-commentary tests without it, then a live acceptance run on stories with decimal amounts, including story controls. Acceptance counts evaluative sentences before and after (252 coupling).
+11. **-228** -- Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
+12. **-146** -- Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
+13. **-160** -- In Progress. JD extraction split into three concurrent calls (required / preferred / implicit) landed at `5aee8a4`. After-measurement on the AT&T fixture (count spread 1-2 across five runs) not yet recorded. No longer gates -244.
+14. **-244** -- In Progress; prep Greens landed. Role Match assessor calibration: cited evidence doesn't address the specific claim; `confidence` field deletion. Not gated on -160: qualifier preservation was resolved by the `source_text` instruction fix (`5aee8a4`/`b28a080`), not the split. Next: verify the CI/CD-qualifier row after that fix; fixture count and the 22% over-called figure depend on it. Land before -249 (see -249 ordering constraint).
+15. **-168** -- Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data. Re-measure now that -275's Green has shipped (tunes behavior 275 replaces).
+16. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
+17. **-129 stories 3-5** -- Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+18. **-252** -- Ask Agy writes evaluative sentences about Matt despite prompt instructions against it. Visitor-visible; isolating probe spec in the detail block.
+19. **-235** -- Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
+20. **-223** -- My Work only (Ask Agy makes no router call after -236): add router_score and router_family columns to My Work's Sheet query row; unblocks -239's floor threshold decision.
+21. **-222** -- Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
+22. Rest of Role Match: -173, -014, -012, -081, -099.
 
 **LATER — tier 1:** real defects with known fixes
 -177 (bound violation) · -190 (tokenizer divergence) · -166 (arc story reframe) · -063 (wrong-person queries) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (re-scoped Oct 18: decide how big-picture questions get breadth, keep or replace the synthesis pick, before the router comes out; arm B lost breadth) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- better ranking surfaces more adjacent candidates into verdict definitions that still absorb them as partial, so ranking before calibrating makes over-calling worse before better; full constraint in -249 detail block)
@@ -165,6 +166,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-335](#mattgpt-335) | Governor skill pilot: spec, then a blind MATTGPT-275 replay plus a MATTGPT-323 control (advisory only) | Open | Medium | Action | chore | October 17, 2026 |
 | [MATTGPT-336](#mattgpt-336) | query_logger stamps Timestamp with datetime.now() and no timezone | Open | Low | Bug | chore | October 18, 2026 |
 | [MATTGPT-337](#mattgpt-337) | eval_query_count counts the 11 entity_detection golden queries, which no eval test asserts since MATTGPT-275 | Open | Low | Bug | value | October 18, 2026 |
+| [MATTGPT-338](#mattgpt-338) | Breadth as a standing measure: distinct named clients and eras per answer in the gate scorer and the golden eval | Open | High | Enhancement | value | October 18, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently | Parked | Medium | Action | value | August 3, 2026 |
@@ -3084,6 +3086,25 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 - Not quite "no test runs them": `test_structural_assertions.py` parametrizes over every `GOLDEN_QUERIES` value (e.g. `TestNoMetaCommentary`), so the 11 still feed the structural checks as query text, as the `evaluate_query()` comment says.
 
 **Fix direction (handoff's two options, with the coupling):** count only the categories a test asserts, or retire the entity_detection block. Retiring it also removes 11 queries from the structural suites, so that option needs a decision on keeping them as query text under another category. The design spec stopped presenting `eval_summary` as a pass rate (`mattgpt-design-spec/CONTEXT.md`).
+
+---
+
+### MATTGPT-338
+**Breadth as a standing measure: distinct named clients and eras per answer in the gate scorer and the golden eval**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Enhancement
+- **File:** the gate scorer (`docs/evidence/MATTGPT-236/gate_20261016_140623/probes/probe_236_merge.py`, `scoring/RUBRIC.md`, as the template for the next gate), `tests/eval_rag_quality.py` (`evaluate_query()`, `generate_report()`)
+- **Related:** MATTGPT-236 (the miss this measure would have caught), MATTGPT-337 (the eval query count), MATTGPT-336
+- **Logged:** October 18, 2026
+- **Sequence:** lane 2, after MATTGPT-336.
+
+**Why (Matt, Oct 18, 2026):** the MATTGPT-236 gate scored pass/fail and missed that router-off big-picture answers cite Accenture alone (c05 t2: answer text names Accenture and no named client in 2/10 arm A, 10/10 arm B; see -236's second reading).
+
+**Scope:**
+- Add two counts per answer to the gate scorer and the golden eval: distinct named clients and distinct eras. Era is a corpus field (7 values, verified Oct 18, 2026); named clients exclude the generic ones, using `utils/client_utils.py`'s `is_generic_client()` rather than a list.
+- With MATTGPT-337: make the full-run report count skipped queries as skipped, not passed. Verified Oct 18, 2026 (HEAD 09cb280): `evaluate_query()` sets `passed = True` on each entity_detection query with "skipped: detect_entity() removed (MATTGPT-275)", and `generate_report()` counts it in `passed`.
 
 ---
 
