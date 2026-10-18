@@ -7,32 +7,33 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-10-16)
+## Value Prioritized Roadmap (updated 2026-10-17)
 
 **NOW**
-1. **-275** -- Green shipped (1095d2c, evidence aa0bb94). Still open for the code-rendered closer and the profile contact links: required closings c14 to c17 scored 0/10 in every arm, the baseline included. -268 travels with -275.
-2. **-039** -- CI quality pipeline in two tiers: every push runs ruff, mypy, unit, structural and data-contract tests (-258), pip-audit; nightly runs BDD and the golden eval with a cost budget. Proposed gate: Streamlit deploys from a prod branch that CI advances only on green (Matt to confirm). Today CI runs only the unit tests.
-3. **-251** -- Ask Agy treats adjacent retrieved stories as evidence for the question asked. Visitor-visible correctness defect: unsupported claims (real estate sector from Cendant Mortgage; "including France" with no source) read as fact to recruiters.
-4. **-331** -- Home cards 3, 5 and 6 apply only their first Domain value: My Work's single-select Domain box (MATTGPT-065) drops the rest, so Teams & Talent lands on 1 story where its 4 values cover 15. Fix needs Matt's UX call: multi-select Domain, or one chip named for the card.
+1. **-333** -- Production query logging has written no cloud rows to the Sheet since Sep 20. Every value driver's measurement depends on it; -222, -223 and -239 read those rows.
+2. **-275** -- Green shipped (1095d2c, evidence aa0bb94). Still open for the code-rendered closer and the profile contact links: required closings c14 to c17 scored 0/10 in every arm, the baseline included. -268 travels with -275.
+3. **-039** -- CI quality pipeline in two tiers: every push runs ruff, mypy, unit, structural and data-contract tests (-258), pip-audit; nightly runs BDD and the golden eval with a cost budget. Proposed gate: Streamlit deploys from a prod branch that CI advances only on green (Matt to confirm). Today CI runs only the unit tests.
+4. **-251** -- Ask Agy treats adjacent retrieved stories as evidence for the question asked. Visitor-visible correctness defect: unsupported claims (real estate sector from Cendant Mortgage; "including France" with no source) read as fact to recruiters.
+5. **-331** -- Home cards 3, 5 and 6 apply only their first Domain value: My Work's single-select Domain box (MATTGPT-065) drops the rest, so Teams & Talent lands on 1 story where its 4 values cover 15. Fix needs Matt's UX call: multi-select Domain, or one chip named for the card.
 
 **NEXT**
-5. **-128** -- Red in 1095d2c (`TestSourcesAreTheCitedStories`, 5 xfails); cards still show all retrieved stories. Nothing of its contract has shipped. Cards show the stories the answer cited, not just those retrieved: the Oct 12 JP Morgan payments answer drew 7 of 23 claims from two stories the cards did not show. Sources panel split by kind, extracted reason lines, trailing question removed; design settled August 30.
-6. **-302** -- OpenAI retires gpt-4o, gpt-4o-mini, gpt-4.1 and gpt-4.1-mini on January 14, 2027. Migrate Role Match (`ASSESSMENT_MODEL`, assessment and extraction prompts) and the generator scripts; delete the unused `DEFAULT_CLASSIFICATION_MODEL`. Ask Agy is on gpt-6.1-sol (1095d2c). Deadline-driven: schedule well before January. -140 travels with it.
-7. **-140** -- Remaining model names outside `config/constants.py`: `ASSESSMENT_MODEL` in `services/jd_assessor.py` and the root `generate_*.py` scripts. Ask Agy's half is done (`ASK_ANSWER_MODEL`). Travels with -302.
-8. **-266** -- Role Match labels responsibility-derived rows as "Required Qualifications". Every visitor sees job duties presented as must-have credentials. Fix is in `_flatten_extraction()`, not the prompt. -264 is sequenced after it.
-9. **-255** -- The meta-commentary strip regex corrupts decimal amounts (`$2.5M` becomes an unclosed `**$2.`) and merges paragraphs. Visible correctness bug. Ticket's fix: remove the strip, run structural meta-commentary tests without it, then a live acceptance run on stories with decimal amounts, including story controls. Acceptance counts evaluative sentences before and after (252 coupling).
-10. **-228** -- Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
-11. **-146** -- Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
-12. **-160** -- In Progress. JD extraction split into three concurrent calls (required / preferred / implicit) landed at `5aee8a4`. After-measurement on the AT&T fixture (count spread 1-2 across five runs) not yet recorded. No longer gates -244.
-13. **-244** -- In Progress; prep Greens landed. Role Match assessor calibration: cited evidence doesn't address the specific claim; `confidence` field deletion. Not gated on -160: qualifier preservation was resolved by the `source_text` instruction fix (`5aee8a4`/`b28a080`), not the split. Next: verify the CI/CD-qualifier row after that fix; fixture count and the 22% over-called figure depend on it. Land before -249 (see -249 ordering constraint).
-14. **-168** -- Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data. Re-measure now that -275's Green has shipped (tunes behavior 275 replaces).
-15. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
-16. **-129 stories 3-5** -- Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
-17. **-252** -- Ask Agy writes evaluative sentences about Matt despite prompt instructions against it. Visitor-visible; isolating probe spec in the detail block.
-18. **-235** -- Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-19. **-223** -- Add router_score and router_family columns to Sheet query row; unblocks -239's floor threshold decision.
-20. **-222** -- Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
-21. Rest of Role Match: -173, -014, -012, -081, -099.
+6. **-128** -- Red in 1095d2c (`TestSourcesAreTheCitedStories`, 5 xfails); cards still show all retrieved stories. Nothing of its contract has shipped. Cards show the stories the answer cited, not just those retrieved: the Oct 12 JP Morgan payments answer drew 7 of 23 claims from two stories the cards did not show. Sources panel split by kind, extracted reason lines, trailing question removed; design settled August 30.
+7. **-302** -- OpenAI retires gpt-4o, gpt-4o-mini, gpt-4.1 and gpt-4.1-mini on January 14, 2027. Migrate Role Match (`ASSESSMENT_MODEL`, assessment and extraction prompts) and the generator scripts; delete the unused `DEFAULT_CLASSIFICATION_MODEL`. Ask Agy is on gpt-6.1-sol (1095d2c). Deadline-driven: schedule well before January. -140 travels with it.
+8. **-140** -- Remaining model names outside `config/constants.py`: `ASSESSMENT_MODEL` in `services/jd_assessor.py` and the root `generate_*.py` scripts. Ask Agy's half is done (`ASK_ANSWER_MODEL`). Travels with -302.
+9. **-266** -- Role Match labels responsibility-derived rows as "Required Qualifications". Every visitor sees job duties presented as must-have credentials. Fix is in `_flatten_extraction()`, not the prompt. -264 is sequenced after it.
+10. **-255** -- The meta-commentary strip regex corrupts decimal amounts (`$2.5M` becomes an unclosed `**$2.`) and merges paragraphs. Visible correctness bug. Ticket's fix: remove the strip, run structural meta-commentary tests without it, then a live acceptance run on stories with decimal amounts, including story controls. Acceptance counts evaluative sentences before and after (252 coupling).
+11. **-228** -- Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
+12. **-146** -- Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
+13. **-160** -- In Progress. JD extraction split into three concurrent calls (required / preferred / implicit) landed at `5aee8a4`. After-measurement on the AT&T fixture (count spread 1-2 across five runs) not yet recorded. No longer gates -244.
+14. **-244** -- In Progress; prep Greens landed. Role Match assessor calibration: cited evidence doesn't address the specific claim; `confidence` field deletion. Not gated on -160: qualifier preservation was resolved by the `source_text` instruction fix (`5aee8a4`/`b28a080`), not the split. Next: verify the CI/CD-qualifier row after that fix; fixture count and the 22% over-called figure depend on it. Land before -249 (see -249 ordering constraint).
+15. **-168** -- Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data. Re-measure now that -275's Green has shipped (tunes behavior 275 replaces).
+16. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
+17. **-129 stories 3-5** -- Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+18. **-252** -- Ask Agy writes evaluative sentences about Matt despite prompt instructions against it. Visitor-visible; isolating probe spec in the detail block.
+19. **-235** -- Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
+20. **-223** -- My Work only (Ask Agy makes no router call after -236): add router_score and router_family columns to My Work's Sheet query row; unblocks -239's floor threshold decision. Needs -333.
+21. **-222** -- Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
+22. Rest of Role Match: -173, -014, -012, -081, -099.
 
 **LATER — tier 1:** real defects with known fixes
 -177 (bound violation) · -190 (tokenizer divergence) · -166 (arc story reframe) · -063 (wrong-person queries) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (take the router out of Ask Agy's answer path; decided arm B; -322 shipped in 58fe71f) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- better ranking surfaces more adjacent candidates into verdict definitions that still absorb them as partial, so ranking before calibrating makes over-calling worse before better; full constraint in -249 detail block)
@@ -44,13 +45,15 @@ Meta: -079, -156, -096
 Answer mode: -284 (synthesis mode decided in four places; a promoted query such as RBC gets 3 source cards, not 6 (code path); after -275, ahead of tier 3 tuning)
 
 **LATER — tier 3:** blocked or dependent
--077 (re-measure after -181) · -171 (coupled to -190) · -185 (negation) · -239 (router confidence floor, blocked on -223 Sheet data) · -281 (openers by answer type; Matt writes the lists) · -280 (narrative tone depends on which story leads; measure after -281) · -283 (embedding model PoC) · -324 (My Work profile facts, split from -250; re-check its hold first)
+-077 (re-measure after -181) · -171 (coupled to -190) · -185 (negation) · -239 (My Work router confidence floor, blocked on -223 Sheet data) · -281 (openers by answer type; Matt writes the lists) · -280 (narrative tone depends on which story leads; measure after -281) · -283 (embedding model PoC) · -324 (My Work profile facts, split from -250; re-check its hold first)
 
 **LATER — tier 4:** hygiene
 Dead code: -176, -183 · -241 (dead prose in `_router_rejection()`: delete it) · Hidden error: -204 (zero-filter-match only -- st.stop() blanking was MATTGPT-224, shipped `92370b3`)
 Untraced flash: -229 (My Work flashes before Ask Agy conversation -- needs DevTools trace) · -289 (MATTGPT-018 regression watch: stale landing elements painted 240-370 ms, one mixed frame in 3 runs)
 BDD flakes: -122, -131, -142, -145, -197, -198
 Small refactors: -153, -062, -082, -083, -084, -150, -217 (pronoun grammar in substitution)
+Test reliability: -334 (synthesis first-person test runs on no stories)
+Process: -335 (governor skill pilot, advisory)
 BDD structure: -213 (shared step definitions)
 Correctness audit: -214 (parameters, comments, constants, copied blocks) · -226 (dead `.main` selectors, ~299 declarations matching 0 elements)
 Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/agy-behavior/structural suites)
@@ -160,6 +163,9 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-330](#mattgpt-330) | Home to My Work card click shows a half-emptied Home for a frame or more: the stale-hide rule covers only the Ask Agy landing | Open | Medium | Bug | value | October 17, 2026 |
 | [MATTGPT-331](#mattgpt-331) | Home cards 3, 5 and 6 apply only their first Sub-category: My Work's single-select Domain box drops the rest | Open | High | Bug | value | October 17, 2026 |
 | [MATTGPT-332](#mattgpt-332) | Delete Ask Agy's synthesis prompt path, unreachable since MATTGPT-236 | Blocked | Low | Refactor | chore | October 17, 2026 |
+| [MATTGPT-333](#mattgpt-333) | Production query logging has written no cloud rows to the Sheet since Sep 20 | Open | High | Bug | chore | October 17, 2026 |
+| [MATTGPT-334](#mattgpt-334) | test_synthesis_mode_no_first_person filters on Client == "Career Narrative", which matches no story, so it tests nothing | Open | Medium | Bug | chore | October 17, 2026 |
+| [MATTGPT-335](#mattgpt-335) | Governor skill pilot: spec, then a blind MATTGPT-275 replay plus a MATTGPT-323 control (advisory only) | Open | Medium | Action | chore | October 17, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently | Parked | Medium | Action | value | August 3, 2026 |
@@ -186,11 +192,11 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-233](#mattgpt-233) | Phase 2: extend pre-push gate to BDD suite, `test_agy_behavior.py`, `test_structural_assertions.py` | Open | Medium | Infra | chore | September 1, 2026 |
 | [MATTGPT-235](#mattgpt-235) | Resolve LLM-text assertion classes so pre-push gate can widen to agy-behavior and structural suites | Open | High | Refactor / Test | value | September 1, 2026 |
 | [MATTGPT-236](#mattgpt-236) | Take the semantic router out of Ask Agy's answer path | Open | Medium | Refactor | value | September 1, 2026 |
-| [MATTGPT-239](#mattgpt-239) | Router confidence floor: reject queries that score below a threshold across all families before Pinecone query | Blocked | Medium | Enhancement | value | September 2, 2026 |
+| [MATTGPT-239](#mattgpt-239) | My Work router confidence floor: reject queries that score below a threshold across all families before Pinecone query | Blocked | Medium | Enhancement | value | September 2, 2026 |
 | [MATTGPT-241](#mattgpt-241) | Dead prose in backend_service.py: out_of_scope_response and personal_response built but never rendered | Open | Low | Hygiene | chore | September 2, 2026 |
 | [MATTGPT-226](#mattgpt-226) | Dead `.main` selectors across `ui/styles/` after `.main → .stMain` refactor: 31 selectors, ~299 declarations, all matching 0 elements | Open | Medium | Refactor / Tech debt | chore | August 31, 2026 |
 | [MATTGPT-222](#mattgpt-222) | Three operational alarms: zero-score, anchor-cache drift, out_of_scope on known entity | Open | High | Enhancement | chore | August 30, 2026 |
-| [MATTGPT-223](#mattgpt-223) | Add router_score and router_family columns to Sheet query row | Open | Medium | Enhancement | chore | August 30, 2026 |
+| [MATTGPT-223](#mattgpt-223) | Add router_score and router_family columns to My Work's Sheet query row | Open | Medium | Enhancement | chore | August 30, 2026 |
 
 ---
 
@@ -607,6 +613,14 @@ Each detail block uses these fields. Not every field is required for every item.
 - **Sequencing note (August 13, 2026):** Demoted to NEXT, behind -181. Phase 1 shipped (627f6f4). Phase 2 target is the MattGPT / Independent Project cluster (9 stories each, 3.8x their corpus share) -- distinct from the CIC cull that was -172's scope. -172 was parked (premise disconfirmed: CIC leads 26% of queries against 46% corpus share, under-represented not dominant). Phase 2's premise is intact; the MattGPT cluster is still overrepresented. Phase 3 (BM25) cannot reach P5/P8: the query says "platform refactoring," Rearchitecting Live Railroad Systems says "rearchitecting" / "rearchitecture" -- no stemmer, no match. Re-measure P5/P8 after -181 corpus additions. If the additions change pool composition, the problem may partly dissolve; if not, Phase 2 scoping proceeds and Phase 3 addresses the vocabulary gap.
 - **Status note:** Phase 1 Green landed at 627f6f4. Phase 2 (MattGPT cluster cull) premise intact -- awaiting -181 re-measurement before scoping.
 - **Logged:** May 19, 2026
+
+**Phase 1 may have stopped running (Oct 17, 2026):** `_build_retrieval_query()` and `_substitute_matt_subject()` (Phase 1, 627f6f4) were called only from the retired `rag_answer()` path (`retrieval_q = _build_retrieval_query(_raw_q, intent_family)`, removed in 1095d2c, MATTGPT-275). `agy_answer()`'s `search_stories` does not call them; verified Oct 17, 2026 (HEAD 4695479): outside `utils/scoring.py` their only caller is `tests/bdd/steps/test_query_substitution_077.py`.
+- Not measured: whether the model's tool-written search queries contain "Matt" often enough for the contamination to return.
+- MATTGPT-236 removes the router, so `intent_family` no longer reaches the tool path; any re-wire would key on something else.
+- **Decide before MATTGPT-287 deletes them (and MATTGPT-217 with them):** re-wire into `search_stories`, or delete if the tool queries make it moot. `probes/probe_163_substitution_impact.py` (local, untracked) is the before-and-after benchmark.
+- probe_163 measured substitution on the user's raw question into rag_answer(); on the tool path the input is the model's own query, so the Aug 26 numbers don't carry over. A re-wire needs its own before-and-after run on tool-written queries. First check the existing run logs: the -322 and -236 runs record each search_stories query (search_queries in the rows), so counting how often they contain 'Matt' may answer the 'Not measured' question at no cost.
+- **Counted (Oct 17, 2026; committed rows, read-only, no model calls; matches `\bmatt\b` or `\bmatt's\b`, case-insensitive):** 3,100 of 3,453 tool-written `search_stories` queries contain "Matt" (90%), in 3,024 of 3,290 turns that searched. MATTGPT-236 gate (`gate_20261016_140623`): 1,551 of 1,897 queries (82%). MATTGPT-322 runs 1 to 7: 99 to 100% each. Example: "Matt Pugmire payments work payment processing payments modernization Fiserv American Express ...". The turns repeat the same questions across arms and runs, so this is a rate over those question sets, not over production traffic. It shows the input Phase 1 acted on is present on the tool path; whether it still pulls MattGPT stories is not measured (that is probe_163's before-and-after, on tool-written queries).
+- **1095d2c audit, row 8 (Matt, Oct 17, 2026): stays here, unmeasured.** ADR 047's Removed list doesn't name `_build_retrieval_query()` or `_substitute_matt_subject()` (0 matches in `docs/ADR.md`). By arm (same rows): -236 gate A 79%, B 84%, C 82% of queries contain "Matt", and 28%, 34%, 29% contain "Matt Pugmire"; -322 run 6: 99% and 59%. Phase 1's regex knows only "Matt", so a full-name query becomes "He Pugmire payments work ..." and "by Matt Pugmire" becomes "by he Pugmire". A re-wire would need its own rule for the full name, measured the same way.
 
 ---
 
@@ -1050,6 +1064,8 @@ None of these stories is cited in the answer. This is the "retrieved, not cited"
 
 **Observed (Oct 17, 2026; MATTGPT-322 Green 58fe71f, browser check):** the Sources row still lists three stories under a rule 0b decline that says nothing is on record.
 
+
+**Folded in (Matt, Oct 17, 2026; 1095d2c audit row 38):** synthesis answers lost their source-card layout. Before 1095d2c the router family was stored as `__ask_query_intent__`, and synthesis messages got up to 6 cards (`SOURCES_MAX_SYNTHESIS`) with theme-phrase labels. `agy_answer()` stores None, so every answer gets at most 3 cards (`SOURCES_MAX_SURGICAL`) labeled "Client - Title". Not measured. The dead branches are on MATTGPT-332.
 
 **Stale in part (verified Oct 17, 2026, HEAD 836bf4d):** `_generate_agy_response()`, whose `random.choice` closings this block describes, is gone from production code (1095d2c), and "dive deeper" appears in none. The trailing-question item needs a re-measure on the tool path before it is worked.
 
@@ -2184,6 +2200,13 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 - the dead `initialize_vocab()` in `services/rag_service.py`
 - the three dead functions in `story_intelligence.py`
 - `_build_retrieval_query()` and `_substitute_matt_subject()` in `utils/scoring.py` (Architecture Sync, Oct 15, 2026; re-checked at HEAD): the first calls the second, and outside `utils/scoring.py` the only caller is `tests/bdd/steps/test_query_substitution_077.py` (MATTGPT-077's Phase 1 strip). Remove them with that feature and its binding.
+  - **Hold (Oct 17, 2026):** don't delete until MATTGPT-077 decides re-wire into `search_stories` or delete.
+- **1095d2c audit, leftovers from `rag_answer()` with no visible effect (Oct 17, 2026; the audit session's greps at 1095d2c):** decision needed: remove, or accept as is.
+  - Row 4: typed "narrative", "key points" and "deep dive" are still caught by `conversation_view.py`'s `cmd_map`.
+  - Row 5: `ask_last_overlap` is only ever set to None, yet `shared_state.py` and the banner code still read it.
+  - Row 37: the key_points and deep_dive modes' one reader, `push_card_snapshot_from_state()`, has no caller.
+  - Row 39: only `semantic_search()` still sets `__last_ranked_sources__`.
+  - Row 40: `__ask_confidence__` and the `__ask_dbg_*` keys have no reader.
 
 **Pickup (Oct 16, 2026):** before MATTGPT-180.
 
@@ -3010,6 +3033,53 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 - Not yet unreachable: -236's Green has not landed, and `agy_answer()` still sets `is_synthesis = intent_family == "synthesis"` and passes it to `_choose_opening_and_focus()` and the prompt builders. Blocked on -236 for that reason.
 - Already dead at HEAD, not in the note: `agy_answer()` sets `st.session_state["__ask_query_intent__"] = None` on every answer ("Source cards use the 3-card layout"), and `conversation_view.py` stores that on each message as `query_intent`. So `conversation_helpers.py`'s two synthesis branches never fire: `_sources_layout()`'s `SOURCES_MAX_SYNTHESIS` (6-card) cap and the Sources label that swaps the client for a `THEME_TO_PATTERN` phrase. `tests/unit/test_ask_agy_sources_layout.py` exercises the cap. `THEME_TO_PATTERN` itself stays: `story_intelligence.py` uses it.
 
+### MATTGPT-333
+**Production query logging has written no cloud rows to the Sheet since Sep 20**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Bug
+- **File:** `services/query_logger.py`
+- **Logged:** October 17, 2026
+
+**Issue (Matt, Oct 17, 2026):** the Sheet has no rows with Env `cloud` after Sep 20, so no visitor traffic has been recorded since. Every value driver's measurement depends on those rows; MATTGPT-222's alarms, MATTGPT-223's router columns and MATTGPT-239's threshold all read them. The scorecard's driver 7 status already records the gap.
+
+**Verified Oct 17, 2026 (HEAD f3cb599):** the last commit to `services/query_logger.py` is 89a3774 (Sep 16). That dates the file, not the failure; the cause is not diagnosed.
+
+**First step:** find where the cloud write stops (secrets, the Sheet client, or the call sites), with a production check, before any fix.
+
+---
+
+### MATTGPT-334
+**test_synthesis_mode_no_first_person filters on Client == "Career Narrative", which matches no story, so it tests nothing**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `tests/test_agy_behavior.py` (`test_synthesis_mode_no_first_person`)
+- **Related:** MATTGPT-180 (tests that pass against a schema that isn't there), MATTGPT-332 (synthesis prompt path)
+- **Logged:** October 17, 2026
+
+**Defect (verified Oct 17, 2026, HEAD f3cb599):** the test builds its stories with `s.get("Client") == "Career Narrative"`, which matches 0 of the 124 stories in `echo_star_stories_nlp.jsonl`. `_agy_answer_with_stories()` patches `semantic_search` to return that empty list, so the first-person check runs on an answer built from no stories and passes without testing first-person leakage.
+
+**Evidence (1095d2c audit session, Oct 17, 2026):** the MATTGPT-320 golden run's only zero-source answer is this test (`docs/evidence/MATTGPT-320/golden_20261016_102942/calls.jsonl`).
+
+**Fix direction:** select first-person stories by a field the corpus has, or delete the test if MATTGPT-236 and -332 leave no synthesis mode for it to test. Either way, assert the selected list is non-empty.
+
+---
+
+### MATTGPT-335
+**Governor skill pilot: spec, then a blind MATTGPT-275 replay plus a MATTGPT-323 control (advisory only)**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Action
+- **Logged:** October 17, 2026
+
+**Scope (Matt, Oct 17, 2026):** write the governor skill's spec, then pilot it on a blind replay of MATTGPT-275 with MATTGPT-323 as the control. Advisory only: it doesn't gate commits.
+
+---
+
 ### MATTGPT-160
 **JD extraction: split into three concurrent calls (required / preferred / implicit) to stabilize requirement count on long JDs**
 
@@ -3652,7 +3722,7 @@ Grep targets for Class 3: `except Exception: pass`, `except: pass`, bare `except
 ---
 
 ### MATTGPT-223
-**Add router_score and router_family columns to Sheet query row**
+**Add router_score and router_family columns to My Work's Sheet query row**
 
 - **Status:** Open
 - **Priority:** Medium
@@ -3676,6 +3746,8 @@ Grep targets for Class 3: `except Exception: pass`, `except: pass`, bare `except
 - `router_score` and `router_family` appear on every Sheet query row.
 - Columns are appended at the end of HEADERS; historical rows are not misaligned.
 - Call sites confirmed -- both surfaces pass the values at the `log_query` call.
+
+**Re-scoped to My Work (Matt, Oct 17, 2026):** MATTGPT-236's target is no router call in Ask Agy, including no score-only call, so these columns are for My Work's search rows. My Work still calls the router: `explore_stories.py` imports `is_portfolio_query_semantic` and `router_rejection_reason` (verified Oct 17, 2026, HEAD f3cb599). The acceptance line "both surfaces" becomes My Work's `log_query` call. The Sheet data it feeds needs MATTGPT-333 (no cloud rows since Sep 20).
 
 **Pickup (Oct 16, 2026):** append at the end of `HEADERS`; Top Score stays at position 33 (of 44 at HEAD 77f72c2). The pre-commit doc checklist applies (query logger schema change).
 
@@ -3742,6 +3814,21 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 
 **Unblocked (Oct 17, 2026):** MATTGPT-322's voiced 0b decline shipped in 58fe71f, with its live runs in 706505f. With the router out, married, age and kids move from the personal banner to that decline. 58fe71f's browser check: "Is Matt married?" still shows the personal banner, pending this ticket.
 
+**Target (Matt, Oct 17, 2026):** no router call in Ask Agy, including no score-only call. MATTGPT-223 and MATTGPT-239 are re-scoped to My Work.
+
+**1095d2c audit decisions (Matt, Oct 17, 2026):** source: a Code audit of 1095d2c^ vs 1095d2c (behavior dropped or changed when `rag_answer()` became `agy_answer()`), with a golden comparison from recorded calls only (`docs/evidence/MATTGPT-275/golden_rag_20261014_140843/` vs `docs/evidence/MATTGPT-320/golden_20261016_102942/`). Figures are the audit session's, not re-measured here.
+- Accepted as part of the target answer path (no router in Ask Agy; the model judges):
+  - Row 12: a router failure (error_fallback) with a low or empty search no longer shows "I need a quick breather". Not measured (0 error_fallback rows in either golden run).
+  - Row 15: suggestion-chip and forced answers no longer add the top 5 keyword-matched stories to the pool.
+  - Row 16: entity cluster promotion (MATTGPT-074) no longer sends "What did Matt do at RBC?"-shaped questions to the synthesis prompt.
+  - Row 18: the synthesis pool no longer puts named-client stories ahead of generic ones.
+  - Row 19: the narrative family's ordering step (Professional Narrative kept at #1, rest diversified) is gone.
+  - Row 28: SYNTHESIS_DELTA no longer fills `{client_list}` with the retrieved named clients. Golden: 0 confirmed figure misattributions in synthesis answers in either run; no effect established either way.
+  - Row 41: the query log no longer records search confidence (high, low or none).
+- Row 13 (every search empty: the model answers instead of refusing): covered by rule 0b's decline. In the -236 gate and -322 run 6, 20 turns had every search empty, all "Is Matt married?", and all 20 declined without invented content. Empty searches on work-history questions aren't covered.
+- Row 27, open for Matt's call: the Professional Narrative "MUST include these EXACT phrases" block is now added for every narrative story any search returns, not only when the top story is one. Golden: a narrative story lower in the list had a phrase used 0/45 old, 5/16 now, 3 of the 5 on technical questions; "Matt's GenAI work" says "Matt is a builder." in 4 of 4. Options: narrow the signature phrases to personal questions, or leave.
+- Row 8 stays on MATTGPT-077, unmeasured. Row 38 folds into MATTGPT-128.
+
 **Earlier scope (Sept 1, 2026), kept for the router's other callers:**
 
 _Verified Oct 17, 2026 (HEAD 836bf4d): `_PN_EXCLUDED_FAMILIES` was deleted in 1095d2c; `SUBSTITUTION_FAMILIES` (`config/constants.py`) is still read by `utils/scoring.py`._
@@ -3772,14 +3859,16 @@ Fallback if no entity is detected: surviving-family membership (`background`, `n
 ---
 
 ### MATTGPT-239
-**Router confidence floor: reject queries that score below a threshold across all families before Pinecone query**
+**My Work router confidence floor: reject queries that score below a threshold across all families before Pinecone query**
 
 - **Status:** Blocked
 - **Priority:** Medium
 - **Type:** Enhancement
 - **File:** `services/semantic_router.py`
 - **Logged:** September 2, 2026
-- **Dependencies:** MATTGPT-223 (must accumulate production router score distribution via Sheet before a threshold can be chosen; -238 is local-only)
+- **Dependencies:** MATTGPT-223 (must accumulate production router score distribution via Sheet before a threshold can be chosen; -238 is local-only), MATTGPT-333 (the Sheet has no cloud rows since Sep 20)
+
+**Re-scoped to My Work (Matt, Oct 17, 2026):** MATTGPT-236 takes every router call out of Ask Agy, so the floor applies to My Work's search only (`explore_stories.py` calls `is_portfolio_query_semantic()`; verified Oct 17, 2026, HEAD f3cb599). The `overlap:0.00` path this block cites was Ask Agy's and is gone (MATTGPT-287); the copy rule needs restating against My Work's rejection copy before pickup.
 
 **What the floor does:** When the router's best match scores very low across all families, the family it returns is noise -- the argmax picked something, but nothing was close. Today these queries fall through to Pinecone and get rejected by `overlap:0.00`, which produces the right outcome for the wrong reason: it works because no story happens to share vocabulary with the query. Add a story mentioning bananas and it stops working. The floor makes "the router has no confident opinion" an explicit decision rather than something the retrieval layer cleans up by accident.
 
@@ -3969,6 +4058,8 @@ Two more inert-selector patterns confirmed during the -242 dark-mode scan:
 **Discovery context:** Surfaced during MATTGPT-163 session, August 26, 2026.
 
 **Pickup (Oct 16, 2026):** before MATTGPT-180.
+
+**Depends on MATTGPT-077's decision (Oct 17, 2026):** `_substitute_matt_subject()` has had no production caller since 1095d2c. If -077 deletes Phase 1, this ticket closes with it; if -077 re-wires it into `search_stories`, the pronoun fix still applies.
 
 ---
 

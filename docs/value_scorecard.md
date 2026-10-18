@@ -278,18 +278,19 @@ experience reliably and sustainably; failures are visible, not silent.
   `story_detail_feedback`), plus `search.feature` commented out.
 
 **Open tickets:**
-- Alarms and telemetry: -222, -223.
+- Alarms and telemetry: -333 (no cloud Sheet rows since Sep 20, High), -222, -223 (My Work only).
 - Latency: -299.
 - Runtime and dependencies: -313 (Python 3.11 in prod, 3.13 local), -314 (pin pyarrow<25).
 - Model retirement: -302 (gpt-4o family retires January 14, 2027).
 - Silent failures: -292 (silent file-order fallback), -288 (Ask Agy ignores the Pinecone fallback signal).
 - Regression gates and test reliability: -039, -233, -235, -206, -153,
   -084, -180, -198, -035, -143 (Parked),
-  -213.
+  -213, -334 (synthesis first-person test runs on no stories).
 - Architecture and maintainability: -258 (In Progress), -259, -260, -261, -262, -140,
   -214, -226.
 - Dead code and hygiene: -176, -241, -152 (Parked), -287 (docs
   describe a removed overlap gate), -332 (synthesis prompt path, after -236).
+- Process: -335 (governor skill pilot, advisory).
 - Visible glitches: -229, -289 (MATTGPT-018 regression watch), -330 (Home to My Work half-emptied frame).
 
 ## 8. Professional demonstration
