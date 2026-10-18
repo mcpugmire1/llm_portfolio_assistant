@@ -16,7 +16,7 @@ Run git and repo commands yourself against the local repo. Never clone the repo 
 **Trigger:** On demand. Run this pass before the backlog pass in a cycle. Matt may also hand this pass a one-off migration batch (see Step 1b); apply the same ADR and content rules to it.
 
 **Range:** The range is `<anchor>..<end>`.
-- `<anchor>`: the end commit of the most recent Sync-Range: trailer (`git log --grep='^Sync-Range:' -1`), or the SHA Matt gives when starting ("sync from `<sha>`"). Fall back to BACKLOG.md's last-backlog-sync marker only if no Sync-Range trailer exists. Never update the anchor.
+- `<anchor>`: the end commit of the most recent Sync-Range: trailer (`git log --grep='^Architecture Sync:' --grep='^Sync-Range:' --all-match -1`), or the SHA Matt gives when starting ("sync from `<sha>`"). Fall back to BACKLOG.md's last-backlog-sync marker only if no Sync-Range trailer exists. Never update the anchor.
 - `<end>`: HEAD at the start of this pass. Fix it once and use it for every step. Commits that land during the pass, including this pass's own commit, belong to the next range.
 
 **Handoff:** Commit messages from dev sessions feed this pass: a commit that changes structure describes it fully, and a commit that makes a design decision or removes a layer carries `Decision:` and `Rejected:` trailers.
