@@ -1065,7 +1065,7 @@ None of these stories is cited in the answer. This is the "retrieved, not cited"
 **Observed (Oct 17, 2026; MATTGPT-322 Green 58fe71f, browser check):** the Sources row still lists three stories under a rule 0b decline that says nothing is on record.
 
 
-**Folded in (Matt, Oct 17, 2026; 1095d2c audit row 38):** synthesis answers lost their source-card layout. Before 1095d2c the router family was stored as `__ask_query_intent__`, and synthesis messages got up to 6 cards (`SOURCES_MAX_SYNTHESIS`) with theme-phrase labels. `agy_answer()` stores None, so every answer gets at most 3 cards (`SOURCES_MAX_SURGICAL`) labeled "Client - Title". Not measured. The dead branches are on MATTGPT-332.
+**1095d2c audit row 38 not accepted (Matt re-reviewing); its evidence is filed here (Oct 17, 2026):** synthesis answers lost their source-card layout. Before 1095d2c the router family was stored as `__ask_query_intent__`, and synthesis messages got up to 6 cards (`SOURCES_MAX_SYNTHESIS`) with theme-phrase labels. `agy_answer()` stores None, so every answer gets at most 3 cards (`SOURCES_MAX_SURGICAL`) labeled "Client - Title". Not measured. The dead branches are on MATTGPT-332.
 
 **Stale in part (verified Oct 17, 2026, HEAD 836bf4d):** `_generate_agy_response()`, whose `random.choice` closings this block describes, is gone from production code (1095d2c), and "dive deeper" appears in none. The trailing-question item needs a re-measure on the tool path before it is worked.
 
@@ -3806,7 +3806,7 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
   - Answer text naming Accenture and no named client, arms A / B / C: c05 t2 2 / 10 / 10; c14 1 / 5 / 8; r12 3 / 3 / 0. c05 t2 matches the report. c14 and r12 don't reproduce at 8/10 in arm B by this measure, so the two counts differ in method (not reconciled).
   - Sources per turn: in arm A (router family `synthesis` on all three) c05 t2 has 5 to 10 sources from 2 to 4 clients, and c14 5 to 10 from 2 to 5. In arm B every c05 t2 and c14 turn has 5 sources from 1 to 3 clients. r12 is mixed in both arms (A 1 to 5 clients, B 1 to 5).
   - This shows less breadth present under arm B on c05 t2 and c14; it doesn't separate the prompt from the source count, which is lane 1's check.
-- Rows 16 and 18 of the 1095d2c audit (synthesis treatment and named-client ranking), accepted Oct 17 below, bear on this decision and may need revisiting with it.
+- Rows 16 and 18 of the 1095d2c audit (synthesis treatment and named-client ranking), provisional (not validated) below, bear on this decision and may need revisiting with it.
 - The Red commits 31ae616 (scenarios) and dbd03b2 (step defs) were written for removing the router; check them against the re-scope before Green.
 
 **Scope broadened (Oct 16, 2026):** from removing the topical family dimension to taking the router out of Ask Agy's answer path.
@@ -3834,8 +3834,9 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 
 **Target (Matt, Oct 17, 2026):** no router call in Ask Agy, including no score-only call. MATTGPT-223 and MATTGPT-239 are re-scoped to My Work.
 
-**1095d2c audit decisions (Matt, Oct 17, 2026):** source: a Code audit of 1095d2c^ vs 1095d2c (behavior dropped or changed when `rag_answer()` became `agy_answer()`), with a golden comparison from recorded calls only (`docs/evidence/MATTGPT-275/golden_rag_20261014_140843/` vs `docs/evidence/MATTGPT-320/golden_20261016_102942/`). Figures are the audit session's, not re-measured here.
-- Accepted as part of the target answer path (no router in Ask Agy; the model judges):
+**1095d2c audit (Oct 17, 2026; rows under Matt's re-review, none validated):** source: a Code audit of 1095d2c^ vs 1095d2c (behavior dropped or changed when `rag_answer()` became `agy_answer()`), with a golden comparison from recorded calls only (`docs/evidence/MATTGPT-275/golden_rag_20261014_140843/` vs `docs/evidence/MATTGPT-320/golden_20261016_102942/`). Figures are the audit session's, not re-measured here.
+- Rows 12, 15, 16, 18, 19, 28 and 41 are provisional, not accepted: Matt is re-reviewing all 11 undecided rows in visitor terms. Row 38 is not accepted.
+- Provisional, not validated: proposed as part of the target answer path (no router in Ask Agy; the model judges):
   - Row 12: a router failure (error_fallback) with a low or empty search no longer shows "I need a quick breather". Not measured (0 error_fallback rows in either golden run).
   - Row 15: suggestion-chip and forced answers no longer add the top 5 keyword-matched stories to the pool.
   - Row 16: entity cluster promotion (MATTGPT-074) no longer sends "What did Matt do at RBC?"-shaped questions to the synthesis prompt.
@@ -3845,7 +3846,7 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
   - Row 41: the query log no longer records search confidence (high, low or none).
 - Row 13 (every search empty: the model answers instead of refusing): covered by rule 0b's decline. In the -236 gate and -322 run 6, 20 turns had every search empty, all "Is Matt married?", and all 20 declined without invented content. Empty searches on work-history questions aren't covered.
 - Row 27, open for Matt's call: the Professional Narrative "MUST include these EXACT phrases" block is now added for every narrative story any search returns, not only when the top story is one. Golden: a narrative story lower in the list had a phrase used 0/45 old, 5/16 now, 3 of the 5 on technical questions; "Matt's GenAI work" says "Matt is a builder." in 4 of 4. Options: narrow the signature phrases to personal questions, or leave.
-- Row 8 stays on MATTGPT-077, unmeasured. Row 38 folds into MATTGPT-128.
+- Row 8 stays on MATTGPT-077, unmeasured. Row 38's evidence is filed on MATTGPT-128.
 
 **Earlier scope (Sept 1, 2026), kept for the router's other callers:**
 
