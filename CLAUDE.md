@@ -30,6 +30,7 @@ Rules marked "Enforced" are also blocked by hooks. If a hook blocks a command, s
 - `scripts/arch-sync-session.sh` and `scripts/backlog-session.sh`: launch the two docs sessions, one per pass.
 - `mattgpt-architecture-sync` skill (`.claude/skills/`): ARCHITECTURE.md and `docs/ADR.md` from recent commits. Arch sync session only.
 - `mattgpt-backlog-maintenance` skill (`.claude/skills/`): BACKLOG.md, CHANGELOG.md and `docs/value_scorecard.md`. Backlog session only.
+- `change-governor` skill (`.claude/skills/`): advisory review, before "go", of a change that removes or alters production behavior. Runs when Matt asks; its output is a question for Matt, not an approval.
 - `ARCHITECTURE.md`: full system context, including the file structure.
 - [Design Specification](https://mcpugmire1.github.io/mattgpt-design-spec/): canonical tech stack and system architecture. Do not duplicate tech stack facts here.
 
@@ -177,11 +178,11 @@ Applies to: `.streamlit/secrets.toml`, `.env`, `.env.local`, any service-account
 ## Pre-Commit Doc Checklist
 Before committing, answer for each:
 - **ARCHITECTURE.md and `docs/ADR.md`:** Does this change a pattern, surface, or fact in ARCHITECTURE.md? Describe the change fully in the commit message. Does it make a design decision, or remove a layer, component, prompt clause, or gate? Add trailers: `--trailer "Decision: <what was decided or removed>" --trailer "Rejected: <alternative> (<why>)"`. The Architecture Sync pass turns both into ARCHITECTURE.md edits and ADRs.
-- **mattgpt-design-spec** (Jekyll repo): Does this change anything in the user-facing spec?
+- **mattgpt-design-spec** (Jekyll repo): Does this change anything in the user-facing spec? Say so in the commit message. The spec repo's `mattgpt-design-spec-sync` pass fixes the spec; app sessions never edit that repo.
 - **`ui/components/how_agy_dialog.py`:** Does this change anything described in the Ask MattGPT architecture exposition?
 - **`ui/components/how_i_built_dialog.py`:** Does this change anything described in "How I Built MattGPT"?
 
-If yes to any of the last three: the doc-update commit pairs with this code commit. Same session, same push. Not a follow-up.
+If yes to either of the last two: the doc-update commit pairs with this code commit. Same session, same push. Not a follow-up.
 
 Always triggers this check:
 - New file in `services/`, `ui/pages/`, `ui/components/`, `utils/`, or `config/`
