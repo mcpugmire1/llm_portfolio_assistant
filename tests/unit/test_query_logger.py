@@ -12,6 +12,7 @@ These tests pin the contract: log_query() consults is_bot() and short-
 circuits before spawning the daemon thread that writes to the sheet.
 """
 
+from datetime import UTC, datetime
 from unittest.mock import MagicMock, patch
 
 
@@ -839,6 +840,47 @@ class TestEnvInjection:
             f"(index {HEADERS.index('Env')}) when MATTGPT_ENV is "
             f"unset; got {row[HEADERS.index('Env')]!r}"
         )
+
+
+class TestTimestampTimezone:
+    """MATTGPT-336: `_build_row` stamps Timestamp as America/New_York
+    wall-clock in "%Y-%m-%d %H:%M:%S", whatever zone the host runs in.
+    The fake datetime's naive now() returns UTC wall-clock, standing in
+    for a UTC host such as Streamlit Cloud."""
+
+    @staticmethod
+    def _frozen_datetime(instant_utc):
+        class _FrozenDatetime(datetime):
+            @classmethod
+            def now(cls, tz=None):
+                if tz is None:
+                    return instant_utc.replace(tzinfo=None)
+                return instant_utc.astimezone(tz)
+
+        return _FrozenDatetime
+
+    def test_query_log_timezone_constant_is_new_york(self):
+        from config import constants
+
+        assert getattr(constants, "QUERY_LOG_TIMEZONE", None) == "America/New_York"
+
+    def test_timestamp_is_eastern_daylight_on_a_utc_host(self, monkeypatch):
+        from services import query_logger
+
+        instant = datetime(2026, 10, 18, 15, 5, 58, tzinfo=UTC)
+        monkeypatch.setattr(query_logger, "datetime", self._frozen_datetime(instant))
+        row = query_logger._build_row("test_event")
+
+        assert row[query_logger.HEADERS.index("Timestamp")] == "2026-10-18 11:05:58"
+
+    def test_timestamp_is_eastern_standard_on_a_utc_host(self, monkeypatch):
+        from services import query_logger
+
+        instant = datetime(2026, 1, 15, 15, 0, 0, tzinfo=UTC)
+        monkeypatch.setattr(query_logger, "datetime", self._frozen_datetime(instant))
+        row = query_logger._build_row("test_event")
+
+        assert row[query_logger.HEADERS.index("Timestamp")] == "2026-01-15 10:00:00"
 
 
 class TestBuildRoleMatchLogKwargsArithmeticInvariant:
