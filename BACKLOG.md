@@ -51,7 +51,6 @@ Dead code: -176, -183 · -241 (dead prose in `_router_rejection()`: delete it) �
 Untraced flash: -229 (My Work flashes before Ask Agy conversation -- needs DevTools trace) · -289 (MATTGPT-018 regression watch: stale landing elements painted 240-370 ms, one mixed frame in 3 runs)
 BDD flakes: -122, -131, -142, -145, -197, -198
 Small refactors: -153, -062, -082, -083, -084, -150, -217 (pronoun grammar in substitution)
-Test reliability: -334 (synthesis first-person test runs on no stories)
 Process: -335 (governor skill pilot, advisory)
 BDD structure: -213 (shared step definitions)
 Correctness audit: -214 (parameters, comments, constants, copied blocks) · -226 (dead `.main` selectors, ~299 declarations matching 0 elements)
@@ -162,7 +161,6 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-330](#mattgpt-330) | Home to My Work card click shows a half-emptied Home for a frame or more: the stale-hide rule covers only the Ask Agy landing | Open | Medium | Bug | value | October 17, 2026 |
 | [MATTGPT-331](#mattgpt-331) | Home cards 3, 5 and 6 apply only their first Sub-category: My Work's single-select Domain box drops the rest | Open | High | Bug | value | October 17, 2026 |
 | [MATTGPT-332](#mattgpt-332) | Delete Ask Agy's synthesis prompt path, unreachable since MATTGPT-236 | Blocked | Low | Refactor | chore | October 17, 2026 |
-| [MATTGPT-334](#mattgpt-334) | test_synthesis_mode_no_first_person filters on Client == "Career Narrative", which matches no story, so it tests nothing | Open | Medium | Bug | chore | October 17, 2026 |
 | [MATTGPT-335](#mattgpt-335) | Governor skill pilot: spec, then a blind MATTGPT-275 replay plus a MATTGPT-323 control (advisory only) | Open | Medium | Action | chore | October 17, 2026 |
 | [MATTGPT-336](#mattgpt-336) | query_logger stamps Timestamp with datetime.now() and no timezone | Open | Low | Bug | chore | October 18, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
@@ -3031,24 +3029,6 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 **Verified Oct 17, 2026 (HEAD 20c8e59):**
 - Not yet unreachable: -236's Green has not landed, and `agy_answer()` still sets `is_synthesis = intent_family == "synthesis"` and passes it to `_choose_opening_and_focus()` and the prompt builders. Blocked on -236 for that reason.
 - Already dead at HEAD, not in the note: `agy_answer()` sets `st.session_state["__ask_query_intent__"] = None` on every answer ("Source cards use the 3-card layout"), and `conversation_view.py` stores that on each message as `query_intent`. So `conversation_helpers.py`'s two synthesis branches never fire: `_sources_layout()`'s `SOURCES_MAX_SYNTHESIS` (6-card) cap and the Sources label that swaps the client for a `THEME_TO_PATTERN` phrase. `tests/unit/test_ask_agy_sources_layout.py` exercises the cap. `THEME_TO_PATTERN` itself stays: `story_intelligence.py` uses it.
-
-### MATTGPT-334
-**test_synthesis_mode_no_first_person filters on Client == "Career Narrative", which matches no story, so it tests nothing**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Bug
-- **File:** `tests/test_agy_behavior.py` (`test_synthesis_mode_no_first_person`)
-- **Related:** MATTGPT-180 (tests that pass against a schema that isn't there), MATTGPT-332 (synthesis prompt path)
-- **Logged:** October 17, 2026
-
-**Defect (verified Oct 17, 2026, HEAD f3cb599):** the test builds its stories with `s.get("Client") == "Career Narrative"`, which matches 0 of the 124 stories in `echo_star_stories_nlp.jsonl`. `_agy_answer_with_stories()` patches `semantic_search` to return that empty list, so the first-person check runs on an answer built from no stories and passes without testing first-person leakage.
-
-**Evidence (1095d2c audit session, Oct 17, 2026):** the MATTGPT-320 golden run's only zero-source answer is this test (`docs/evidence/MATTGPT-320/golden_20261016_102942/calls.jsonl`).
-
-**Fix direction:** select first-person stories by a field the corpus has, or delete the test if MATTGPT-236 and -332 leave no synthesis mode for it to test. Either way, assert the selected list is non-empty.
-
----
 
 ### MATTGPT-335
 **Governor skill pilot: spec, then a blind MATTGPT-275 replay plus a MATTGPT-323 control (advisory only)**

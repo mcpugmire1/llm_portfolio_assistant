@@ -44,6 +44,10 @@ Cited probe output copied byte-identical into docs/evidence/MATTGPT-<n>/ (42ddbe
 
 ### Tests
 
+**October 18, 2026 -- Narrative voice test runs on real stories (MATTGPT-334)** -- `265e563`
+
+`test_synthesis_mode_no_first_person` filtered on Client == "Career Narrative", which matches 0 of the 124 stories, so `agy_answer()` was built from no stories and the first-person check passed without testing anything. Renamed `test_narrative_stories_no_first_person`, it now selects first-person stories by Theme == "Professional Narrative" (3 stories) and asserts the selection is non-empty. Mutation check: with the old Client filter restored, the test fails on the new assertion. Live: 2 runs, 2 passed, both answers drawing on the narrative stories. Test-only.
+
 **October 17, 2026 -- Chip-grid "not interactive during processing" scenario deleted (MATTGPT-203)** -- `20c8e59`; superseded by `1095d2c`
 
 The scenario asserted that landing's six hidden chip receivers were missing or disabled during processing. The guard against a second click was never that attribute: it was the thinking indicator's full-viewport backdrop. Since 1095d2c (MATTGPT-275), a chip or input submit hands off to the conversation view in a widget callback, stale landing elements are hidden during the hand-off (`global_styles.py`), and the conversation view's backdrop covers the answer, so the scenario passed only because the receivers were gone. The scenario and its step are deleted; the hand-off stays covered by "Clicking a suggestion chip routes to conversation" and "Submit question via Enter key". landing_page 13 / 13 passing. Test-only; the dead `processing_suggestion` in `landing_view.py` is left to MATTGPT-287.
