@@ -270,15 +270,18 @@ experience reliably and sustainably; failures are visible, not silent.
 **Criteria:** undefined.
 
 **Status:**
-- Not measured. Production logging is unverified: the Sheet has no cloud
-  rows after Sep 20.
+- Not measured. The Sheet has cloud rows on Sep 20 and Oct 15 to 17.
+  The Sep 20 to Oct 15 gap is explained: Matt purged the Sheet into an
+  extract when the cloud/local split was added (MATTGPT-333, closed Oct 18,
+  2026, not a bug). Cloud rows to date appear to be Matt's own sessions, so
+  production visitor data is not yet a usable signal for the drivers.
 - Unbound or stale tests reduce what a green run proves: 7 feature files
   unbound (`agy_voice`, `evidence_fidelity`, `mode_routing`,
   `entity_routing`, `jd_assessment`, `jd_extraction`,
   `story_detail_feedback`), plus `search.feature` commented out.
 
 **Open tickets:**
-- Alarms and telemetry: -333 (no cloud Sheet rows since Sep 20, High), -222, -223 (My Work only).
+- Alarms and telemetry: -222, -223 (My Work only), -336 (log timestamps carry no timezone).
 - Latency: -299.
 - Runtime and dependencies: -313 (Python 3.11 in prod, 3.13 local), -314 (pin pyarrow<25).
 - Model retirement: -302 (gpt-4o family retires January 14, 2027).

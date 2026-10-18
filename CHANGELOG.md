@@ -8,6 +8,10 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Process
 
+**October 18, 2026 -- Production logging gap closed as not a bug (MATTGPT-333)** -- no commit
+
+Filed Oct 17 because the Sheet showed no cloud rows after Sep 20. The view was filtered: cloud rows exist on Sep 20 and Oct 15 to 17. The Sep 20 to Oct 15 gap is explained: Matt purged the Sheet into an extract when the cloud/local split was added. No code change. Follow-up: the Timestamp column carries no timezone (MATTGPT-336).
+
 **October 16, 2026 -- --surgical runs without writing log rows (MATTGPT-274)** -- `725d564`, `14ace5a`
 
 `run_surgical_diagnostics()` now patches `log_query`, `log_offdomain`, `_log_borderline` and `_log_router_low_confidence` for the run, and its "Missed Entity Detection" summary, which read a field 1095d2c removed and raised `KeyError` after every query, is deleted. One live run: exit 0, 11/11 surgical queries passed; Sheet and the three CSVs unchanged before and after.
