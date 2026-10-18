@@ -63,7 +63,7 @@ runs agreed on every pair. Failures:
 (tokenizer divergence), -171 (phrase matching), -177 (token_overlap_ratio
 bound), -063 (wrong-person queries), -077
 (pronoun and noun-overlap contamination), -195 (incident vocabulary
-routing), -236 (router out of Ask Agy's answer path; decided arm B), -239 (router confidence floor,
+routing), -236 (re-scoped Oct 18: breadth for big-picture questions before the router comes out), -239 (router confidence floor,
 Blocked), -062 (stale router embeddings), -167 (entity detection for
 Project and Place, Parked), -304 (reranker spike).
 

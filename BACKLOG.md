@@ -35,7 +35,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 21. Rest of Role Match: -173, -014, -012, -081, -099.
 
 **LATER — tier 1:** real defects with known fixes
--177 (bound violation) · -190 (tokenizer divergence) · -166 (arc story reframe) · -063 (wrong-person queries) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (take the router out of Ask Agy's answer path; decided arm B; -322 shipped in 58fe71f) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- better ranking surfaces more adjacent candidates into verdict definitions that still absorb them as partial, so ranking before calibrating makes over-calling worse before better; full constraint in -249 detail block)
+-177 (bound violation) · -190 (tokenizer divergence) · -166 (arc story reframe) · -063 (wrong-person queries) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (re-scoped Oct 18: decide how big-picture questions get breadth, keep or replace the synthesis pick, before the router comes out; arm B lost breadth) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- better ranking surfaces more adjacent candidates into verdict definitions that still absorb them as partial, so ranking before calibrating makes over-calling worse before better; full constraint in -249 detail block)
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
@@ -190,7 +190,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-229](#mattgpt-229) | Asking Agy "why hire matt" flashes My Work table view before landing on conversation | Open | Medium | Bug | value | September 1, 2026 |
 | [MATTGPT-233](#mattgpt-233) | Phase 2: extend pre-push gate to BDD suite, `test_agy_behavior.py`, `test_structural_assertions.py` | Open | Medium | Infra | chore | September 1, 2026 |
 | [MATTGPT-235](#mattgpt-235) | Resolve LLM-text assertion classes so pre-push gate can widen to agy-behavior and structural suites | Open | High | Refactor / Test | value | September 1, 2026 |
-| [MATTGPT-236](#mattgpt-236) | Take the semantic router out of Ask Agy's answer path | Open | Medium | Refactor | value | September 1, 2026 |
+| [MATTGPT-236](#mattgpt-236) | Decide how big-picture questions get breadth, then take the semantic router out of Ask Agy's answer path | Open | Medium | Refactor | value | September 1, 2026 |
 | [MATTGPT-239](#mattgpt-239) | My Work router confidence floor: reject queries that score below a threshold across all families before Pinecone query | Blocked | Medium | Enhancement | value | September 2, 2026 |
 | [MATTGPT-241](#mattgpt-241) | Dead prose in backend_service.py: out_of_scope_response and personal_response built but never rendered | Open | Low | Hygiene | chore | September 2, 2026 |
 | [MATTGPT-226](#mattgpt-226) | Dead `.main` selectors across `ui/styles/` after `.main → .stMain` refactor: 31 selectors, ~299 declarations, all matching 0 elements | Open | Medium | Refactor / Tech debt | chore | August 31, 2026 |
@@ -3032,6 +3032,10 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 - Not yet unreachable: -236's Green has not landed, and `agy_answer()` still sets `is_synthesis = intent_family == "synthesis"` and passes it to `_choose_opening_and_focus()` and the prompt builders. Blocked on -236 for that reason.
 - Already dead at HEAD, not in the note: `agy_answer()` sets `st.session_state["__ask_query_intent__"] = None` on every answer ("Source cards use the 3-card layout"), and `conversation_view.py` stores that on each message as `query_intent`. So `conversation_helpers.py`'s two synthesis branches never fire: `_sources_layout()`'s `SOURCES_MAX_SYNTHESIS` (6-card) cap and the Sources label that swaps the client for a `THEME_TO_PATTERN` phrase. `tests/unit/test_ask_agy_sources_layout.py` exercises the cap. `THEME_TO_PATTERN` itself stays: `story_intelligence.py` uses it.
 
+**Depends on MATTGPT-236's re-scope (Oct 18, 2026):** -236 now decides whether to keep the synthesis pick or replace it before the router comes out. If it keeps it, this deletion doesn't happen; if it replaces it, re-check this list against the replacement.
+
+---
+
 ### MATTGPT-335
 **Governor skill pilot: spec, then a blind MATTGPT-275 replay plus a MATTGPT-323 control (advisory only)**
 
@@ -3784,7 +3788,7 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 ---
 
 ### MATTGPT-236
-**Take the semantic router out of Ask Agy's answer path**
+**Decide how big-picture questions get breadth, then take the semantic router out of Ask Agy's answer path**
 
 - **Status:** Open
 - **Priority:** Medium
@@ -3793,6 +3797,14 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 - **Related:** MATTGPT-322 (closed Oct 17, 2026; 58fe71f), MATTGPT-239 (router confidence floor), MATTGPT-195 (router incident vocabulary), MATTGPT-241 (router rejection prose)
 - **Logged:** September 1, 2026
 - **Dependencies:** MATTGPT-220 (inventory complete, conclusion untracked until this ticket)
+
+**Re-scoped (Matt, Oct 18, 2026): the premise was wrong.** The gate scored pass/fail and missed breadth. With the router off, big-picture answers cite Accenture alone (as reported: c05 t2 10/10, r12 8/10, c14 8/10; `gate_20261016_140623`). Status stays Open. Before the router comes out, decide how big-picture questions get breadth: keep the synthesis pick, or replace it. Lane 1 is checking whether breadth comes from the prompt or from the source count.
+- **Second reading (backlog session, Oct 18, 2026; the gate's committed rows, no model calls):**
+  - Answer text naming Accenture and no named client, arms A / B / C: c05 t2 2 / 10 / 10; c14 1 / 5 / 8; r12 3 / 3 / 0. c05 t2 matches the report. c14 and r12 don't reproduce at 8/10 in arm B by this measure, so the two counts differ in method (not reconciled).
+  - Sources per turn: in arm A (router family `synthesis` on all three) c05 t2 has 5 to 10 sources from 2 to 4 clients, and c14 5 to 10 from 2 to 5. In arm B every c05 t2 and c14 turn has 5 sources from 1 to 3 clients. r12 is mixed in both arms (A 1 to 5 clients, B 1 to 5).
+  - This shows less breadth present under arm B on c05 t2 and c14; it doesn't separate the prompt from the source count, which is lane 1's check.
+- Rows 16 and 18 of the 1095d2c audit (synthesis treatment and named-client ranking), accepted Oct 17 below, bear on this decision and may need revisiting with it.
+- The Red commits 31ae616 (scenarios) and dbd03b2 (step defs) were written for removing the router; check them against the re-scope before Green.
 
 **Scope broadened (Oct 16, 2026):** from removing the topical family dimension to taking the router out of Ask Agy's answer path.
 
