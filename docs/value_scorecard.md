@@ -281,7 +281,7 @@ experience reliably and sustainably; failures are visible, not silent.
   `story_detail_feedback`), plus `search.feature` commented out.
 
 **Open tickets:**
-- Alarms and telemetry: -222, -223 (My Work only), -336 (log timestamps carry no timezone).
+- Alarms and telemetry: -222, -223 (My Work only).
 - Latency: -299.
 - Runtime and dependencies: -313 (Python 3.11 in prod, 3.13 local), -314 (pin pyarrow<25).
 - Model retirement: -302 (gpt-4o family retires January 14, 2027).

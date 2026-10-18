@@ -8,6 +8,10 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Process
 
+**October 18, 2026 -- Query log Timestamp in America/New_York on every host (MATTGPT-336)** -- `1f13db6` (Red), `c7ea5cd` (Green)
+
+`_build_row()` stamped Timestamp with `datetime.now()`, the host's zone, so Cloud rows read as UTC and local rows as Eastern. It now stamps `datetime.now(ZoneInfo(QUERY_LOG_TIMEZONE))`, with `QUERY_LOG_TIMEZONE = "America/New_York"` in `config/constants.py`, in the same format. Rows written before the deploy keep the host's zone, and the Sheet has no marker for which rows predate it. The router CSVs and `log_offdomain` already wrote explicit UTC. Gates: 3 new unit tests (UTC host in EDT and EST), full unit suite 923 passed, 10 xfailed.
+
 **October 18, 2026 -- Production logging gap closed as not a bug (MATTGPT-333)** -- no commit
 
 Filed Oct 17 because the Sheet showed no cloud rows after Sep 20. The view was filtered: cloud rows exist on Sep 20 and Oct 15 to 17. The Sep 20 to Oct 15 gap is explained: Matt purged the Sheet into an extract when the cloud/local split was added. No code change. Follow-up: the Timestamp column carries no timezone (MATTGPT-336).

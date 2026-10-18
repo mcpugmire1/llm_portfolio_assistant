@@ -16,7 +16,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 4. **-331** -- Home cards 3, 5 and 6 apply only their first Domain value: My Work's single-select Domain box (MATTGPT-065) drops the rest, so Teams & Talent lands on 1 story where its 4 values cover 15. Fix needs Matt's UX call: multi-select Domain, or one chip named for the card.
 
 **NEXT**
-5. **-338** -- Breadth as a standing measure: distinct named clients and eras per answer in the gate scorer and the golden eval, and skipped queries reported as skipped (with -337). The -236 gate scored pass/fail and missed router-off answers citing Accenture alone. Lane 2, after -336.
+5. **-338** -- Breadth as a standing measure: distinct named clients and eras per answer in the gate scorer and the golden eval, and skipped queries reported as skipped (with -337). The -236 gate scored pass/fail and missed router-off answers citing Accenture alone. Lane 2 (-336 shipped c7ea5cd).
 6. **-128** -- Red in 1095d2c (`TestSourcesAreTheCitedStories`, 5 xfails); cards still show all retrieved stories. Nothing of its contract has shipped. Cards show the stories the answer cited, not just those retrieved: the Oct 12 JP Morgan payments answer drew 7 of 23 claims from two stories the cards did not show. Sources panel split by kind, extracted reason lines, trailing question removed; design settled August 30.
 7. **-302** -- OpenAI retires gpt-4o, gpt-4o-mini, gpt-4.1 and gpt-4.1-mini on January 14, 2027. Migrate Role Match (`ASSESSMENT_MODEL`, assessment and extraction prompts) and the generator scripts; delete the unused `DEFAULT_CLASSIFICATION_MODEL`. Ask Agy is on gpt-6.1-sol (1095d2c). Deadline-driven: schedule well before January. -140 travels with it.
 8. **-140** -- Remaining model names outside `config/constants.py`: `ASSESSMENT_MODEL` in `services/jd_assessor.py` and the root `generate_*.py` scripts. Ask Agy's half is done (`ASK_ANSWER_MODEL`). Travels with -302.
@@ -164,7 +164,6 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-331](#mattgpt-331) | Home cards 3, 5 and 6 apply only their first Sub-category: My Work's single-select Domain box drops the rest | Open | High | Bug | value | October 17, 2026 |
 | [MATTGPT-332](#mattgpt-332) | Delete Ask Agy's synthesis prompt path, unreachable since MATTGPT-236 | Blocked | Low | Refactor | chore | October 17, 2026 |
 | [MATTGPT-335](#mattgpt-335) | Governor skill pilot: spec, then a blind MATTGPT-275 replay plus a MATTGPT-323 control (advisory only) | Open | Medium | Action | chore | October 17, 2026 |
-| [MATTGPT-336](#mattgpt-336) | query_logger stamps Timestamp with datetime.now() and no timezone | Open | Low | Bug | chore | October 18, 2026 |
 | [MATTGPT-337](#mattgpt-337) | eval_query_count counts the 11 entity_detection golden queries, which no eval test asserts since MATTGPT-275 | Open | Low | Bug | value | October 18, 2026 |
 | [MATTGPT-338](#mattgpt-338) | Breadth as a standing measure: distinct named clients and eras per answer in the gate scorer and the golden eval | Open | High | Enhancement | value | October 18, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
@@ -3050,23 +3049,6 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 
 ---
 
-### MATTGPT-336
-**query_logger stamps Timestamp with datetime.now() and no timezone**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Bug
-- **File:** `services/query_logger.py` (`_build_row()`)
-- **Logged:** October 18, 2026
-
-**Verified Oct 18, 2026 (HEAD 5e3e99f):** `_build_row()` writes the Timestamp column as `datetime.now().strftime("%Y-%m-%d %H:%M:%S")`, with no timezone, so the time is whatever zone the host runs in.
-
-**Observed (Matt, Oct 18, 2026):** cloud rows look like UTC and local rows like Eastern. Inferred from row order, not verified.
-
-**Fix:** stamp with an explicit timezone.
-
----
-
 ### MATTGPT-337
 **eval_query_count counts the 11 entity_detection golden queries, which no eval test asserts since MATTGPT-275**
 
@@ -3096,9 +3078,9 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 - **Priority:** High
 - **Type:** Enhancement
 - **File:** the gate scorer (`docs/evidence/MATTGPT-236/gate_20261016_140623/probes/probe_236_merge.py`, `scoring/RUBRIC.md`, as the template for the next gate), `tests/eval_rag_quality.py` (`evaluate_query()`, `generate_report()`)
-- **Related:** MATTGPT-236 (the miss this measure would have caught), MATTGPT-337 (the eval query count), MATTGPT-336
+- **Related:** MATTGPT-236 (the miss this measure would have caught), MATTGPT-337 (the eval query count)
 - **Logged:** October 18, 2026
-- **Sequence:** lane 2, after MATTGPT-336.
+- **Sequence:** lane 2, after MATTGPT-336 (shipped Oct 18, 2026, c7ea5cd).
 
 **Why (Matt, Oct 18, 2026):** the MATTGPT-236 gate scored pass/fail and missed that router-off big-picture answers cite Accenture alone (c05 t2: answer text names Accenture and no named client in 2/10 arm A, 10/10 arm B; see -236's second reading).
 
