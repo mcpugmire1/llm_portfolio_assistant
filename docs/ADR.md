@@ -1410,7 +1410,7 @@ Seven audit rows are accepted as part of the target answer path, in which the ro
 ## ADR 054: Ask Agy Makes No Semantic Router Call
 
 **Date:** 2026-10-17
-**Status:** Planned
+**Status:** Planned, conditional: MATTGPT-236 was re-scoped on 2026-10-18 to first decide how big-picture questions get breadth (keep or replace the synthesis pick); it becomes Accepted only after that decision and -236's Green
 **Related tickets:** MATTGPT-236, MATTGPT-322, MATTGPT-329, MATTGPT-223, MATTGPT-239
 
 **Context:**
