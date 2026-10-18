@@ -127,7 +127,7 @@ class TestVoiceFidelity:
             ("Tell me about Matt's work at RBC", "RBC"),
             # Use JP Morgan Chase stories - also first-person
             ("Tell me about Matt's payments work at JP Morgan", "JP Morgan Chase"),
-            # Use synthesis mode with first-person Career Narrative stories
+            # No client filter: the first five first-person stories of any client
             ("What are the themes in Matt's work?", None),
         ],
     )
@@ -172,19 +172,22 @@ class TestVoiceFidelity:
             f"Response excerpt: {response[:500]}..."
         )
 
-    def test_synthesis_mode_no_first_person(self, stories_with_first_person, stories):
+    def test_narrative_stories_no_first_person(
+        self, stories_with_first_person, stories
+    ):
         """
-        Synthesis mode specifically should never leak first-person voice.
-        Tests the Career Narrative stories which are heavily first-person.
+        Answers built from Professional Narrative stories, which are heavily
+        first-person, should never leak first-person voice.
         """
         query = "What are Matt's core leadership themes?"
 
-        # Get Career Narrative stories (heavily first-person)
+        # Get Professional Narrative stories (heavily first-person)
         career_stories = [
             s
             for s in stories_with_first_person
-            if s.get("Client") == "Career Narrative"
+            if s.get("Theme") == "Professional Narrative"
         ][:5]
+        assert career_stories, "No first-person Professional Narrative stories selected"
 
         response = _agy_answer_with_stories(query, career_stories, stories)
 
@@ -196,7 +199,7 @@ class TestVoiceFidelity:
                 violations.append(match.group())
 
         assert not violations, (
-            f"Synthesis mode leaked first-person voice: {violations}\n"
+            f"Narrative answer leaked first-person voice: {violations}\n"
             f"Response: {response[:600]}..."
         )
 
