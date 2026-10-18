@@ -206,6 +206,13 @@ PINECONE_LOWERCASE_FIELDS = {"division", "employer", "project", "place"}
 MONITORING_BOT_SIGNATURES = ["UptimeRobot", "HeadlessChrome", "Chrome/103.0.0.0"]
 
 # =============================================================================
+# QUERY LOG
+# =============================================================================
+# Zone for the Sheet's Timestamp column, so Cloud (UTC host) and local rows
+# read the same wall-clock time.
+QUERY_LOG_TIMEZONE = "America/New_York"
+
+# =============================================================================
 # PRIVATE VIEW (Phase 4, MATTGPT-012)
 # =============================================================================
 # Constants for the private view password gate (slice 1) and the agentic

@@ -1,11 +1,13 @@
 import logging
 from datetime import datetime
 from threading import Thread
+from zoneinfo import ZoneInfo
 
 import gspread
 import streamlit as st
 from google.oauth2.service_account import Credentials
 
+from config.constants import QUERY_LOG_TIMEZONE
 from config.settings import get_conf
 
 logger = logging.getLogger(__name__)
@@ -198,13 +200,18 @@ def _build_row(event_type, **fields):
     unset -- that's the substitute for a startup-validation module
     (the -086 default-fires unit test pins it), so if the Cloud
     secret is missing the row carries `"local"` explicitly rather
-    than empty."""
+    than empty.
+
+    MATTGPT-336: Timestamp is QUERY_LOG_TIMEZONE (America/New_York)
+    wall-clock on every host, so Cloud and local rows read alike."""
     row = []
     for header in HEADERS:
         if header == "Event Type":
             row.append(event_type)
         elif header == "Timestamp":
-            row.append(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+            row.append(
+                datetime.now(ZoneInfo(QUERY_LOG_TIMEZONE)).strftime("%Y-%m-%d %H:%M:%S")
+            )
         elif header == "Env":
             row.append(get_conf("MATTGPT_ENV", "local"))
         else:
