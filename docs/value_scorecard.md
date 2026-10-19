@@ -107,7 +107,7 @@ turns, 10 runs per arm, scored blind (32 scorers, brief_v2):
   automatically (`tests/eval_rag_quality.py`).
 
 **Open tickets:** -275, -040 (follow-up eval
-coverage), -281 (openers), -340 (pass the picked opener, remove stale prompt lines), -280
+coverage), -281 (openers), -340 (restore the code-picked opener, used word for word), -280
 (tone), -284 (synthesis mode decided in four places), -316 (blur submits the landing
 question), -317 (Ask Agy About This dropped mid-answer).
 

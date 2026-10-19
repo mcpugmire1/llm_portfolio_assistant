@@ -19,7 +19,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 5. **-338** -- Breadth as a standing measure: distinct eras and projects per answer (Professional Narrative excluded) and Financial Services era presence, over full sources and the cards shown (the applicable card cap), in the gate scorer and the golden eval; named clients secondary; and skipped queries reported as skipped (with -337). The -236 gate scored pass/fail and missed router-off answers citing Accenture alone. Lane 2 (-336 shipped c7ea5cd).
 6. **-339** -- Row 13 check: work-history questions whose search returns nothing, run through `agy_answer()`, every claim checked against the corpus and profile. Clean means row 13 is fully accepted. Lane 2, after -338.
 7. **-128** -- Red in 1095d2c (`TestSourcesAreTheCitedStories`, 5 xfails); cards still show all retrieved stories. Nothing of its contract has shipped. Cards show the stories the answer cited, not just those retrieved: the Oct 12 JP Morgan payments answer drew 7 of 23 claims from two stories the cards did not show. Sources panel split by kind, extracted reason lines, trailing question removed; design settled August 30.
-8. **-340** -- Rows 29 and 26: pass the picked opener as "Begin with this line" (the -322 pattern), fix "Start with the opening provided", remove "Go deep on the primary story". One Red and a live run with story controls counting answers that begin with the picked line.
+8. **-340** -- Rows 29 and 26: restore the opener as before 1095d2c (code picks one fixed line at random, the model uses it word for word, the example list removed) and remove "Go deep on the primary story" from `STANDARD_DELTA`. A live run with story controls counts answers that begin with the picked line.
 9. **-341** -- Rows 20 and 27 with the "builder" revisit: Professional Narrative stories on technical questions and the verbatim phrases required for every narrative story retrieved, decided together with row 8. Depends on -128's row 20 measurement.
 10. **-302** -- OpenAI retires gpt-4o, gpt-4o-mini, gpt-4.1 and gpt-4.1-mini on January 14, 2027. Migrate Role Match (`ASSESSMENT_MODEL`, assessment and extraction prompts) and the generator scripts; delete the unused `DEFAULT_CLASSIFICATION_MODEL`. Ask Agy is on gpt-6.1-sol (1095d2c). Deadline-driven: schedule well before January. -140 travels with it.
 11. **-140** -- Remaining model names outside `config/constants.py`: `ASSESSMENT_MODEL` in `services/jd_assessor.py` and the root `generate_*.py` scripts. Ask Agy's half is done (`ASK_ANSWER_MODEL`). Travels with -302.
@@ -170,7 +170,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-337](#mattgpt-337) | eval_query_count counts the 11 entity_detection golden queries, which no eval test asserts since MATTGPT-275 | Open | Low | Bug | value | October 18, 2026 |
 | [MATTGPT-338](#mattgpt-338) | Breadth as a standing measure: distinct eras and projects per answer, and Financial Services era presence, in the gate scorer and the golden eval | Open | High | Enhancement | value | October 18, 2026 |
 | [MATTGPT-339](#mattgpt-339) | Row 13 check: work-history questions whose search returns nothing, every claim checked against the corpus | Open | Medium | Action | value | October 19, 2026 |
-| [MATTGPT-340](#mattgpt-340) | Rows 29 and 26: pass the picked opener and remove stale prompt lines | Open | Medium | Issue | value | October 19, 2026 |
+| [MATTGPT-340](#mattgpt-340) | Rows 29 and 26: restore the code-picked opener, used word for word | Open | Medium | Issue | value | October 19, 2026 |
 | [MATTGPT-341](#mattgpt-341) | Rows 20 and 27 with the "builder" revisit: Professional Narrative on technical questions and its verbatim phrases | Open | Medium | Issue | value | October 19, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
@@ -3140,7 +3140,7 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 ---
 
 ### MATTGPT-340
-**Rows 29 and 26: pass the picked opener and remove stale prompt lines**
+**Rows 29 and 26: restore the code-picked opener, used word for word**
 
 - **Status:** Open
 - **Priority:** Medium
@@ -3149,12 +3149,11 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 - **Related:** MATTGPT-322 (the "Begin with this line" pattern), MATTGPT-281 (openers by answer type)
 - **Logged:** October 19, 2026
 
-**Scope (Matt, Oct 19, 2026; 1095d2c walkthrough rows 29 and 26):** one Red and one live run with story controls:
-- pass the picked opener as "Begin with this line" (the -322 pattern);
-- fix "Start with the opening provided";
-- remove "Go deep on the primary story".
+**Scope (Matt, Oct 19, 2026; 1095d2c walkthrough rows 29 and 26):** restore the opener in the `agy_answer()` path as before 1095d2c: code picks one of the fixed lines at random, the model uses it word for word, and the example list is removed. Also remove "Go deep on the primary story" from `STANDARD_DELTA` (row 26), in the same Red and live run.
 
-**Acceptance:** the live run counts how many answers begin with the picked line.
+**Verified Oct 19, 2026 (HEAD 4ad5b02):** before 1095d2c, `_choose_opening_and_focus()` returned `random.choice(SYNTHESIS_OPENERS)` or `random.choice(STANDARD_OPENERS)`; it still does, but `agy_answer()` also passes `opener_examples=SYNTHESIS_OPENERS + STANDARD_OPENERS` to the prompt. `prompts.py` still has "Start with the opening provided" and "This is a specific question. Go deep on the primary story."
+
+**Acceptance:** a live run, with story controls, counts answers that begin with the picked line.
 
 ---
 
@@ -3275,7 +3274,7 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 **Prior art -- read before unparking:** MATTGPT-036 (Entity Cluster Promotion Override, Decided Against) and MATTGPT-037 (Score Gap Override, Decided Against) are both retrieval-override mechanisms that were rejected. The DA rationale for each may apply to the per-field exclusion map approach in this ticket. Read both DA blocks and confirm the objection does not carry over before activating this work.
 
 
-**Stale (verified Oct 19, 2026):** `ENTITY_DETECTION_FIELDS` is gone from production code at HEAD (removed in 1095d2c; only an evidence archive copy remains). Re-scope on unpark.
+**Stale (verified Oct 19, 2026):** `ENTITY_DETECTION_FIELDS` is gone from production code at HEAD (removed in 1095d2c; README.md's Entity Detection row and evidence archives still name it). Re-scope on unpark.
 ---
 
 ### MATTGPT-168
