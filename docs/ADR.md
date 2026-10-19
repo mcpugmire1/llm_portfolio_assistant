@@ -515,7 +515,7 @@ The "low-confidence banner edge cases" backlog ticket (logged April 2026 test au
 ## ADR 019 — No Cross-Query Session State in `diversify_results`
 
 **Date:** 2026-05-18
-**Status:** Accepted
+**Status:** Superseded by ADR 047
 **Related tickets:** MATTGPT-073 (resolved), MATTGPT-061, MATTGPT-021, MATTGPT-074
 
 **Context:**
@@ -635,7 +635,7 @@ Remove hard filtering for Title. `detect_entity()` still returns `("Title", valu
 ## ADR 023: Remove the ENTITY_NORMALIZATION Alias Map and Fuzzy Matching
 
 **Date:** 2026-01-26 (removed); 2026-10-05 (recorded)
-**Status:** Accepted
+**Status:** Superseded by ADR 047
 **Related tickets:** None
 
 **Context:**
@@ -659,7 +659,7 @@ Delete `ENTITY_NORMALIZATION` and the fuzzy-matching helpers. Query variants are
 ## ADR 024: Remove Project and Place from Entity Detection
 
 **Date:** 2026-01-26 (removed); 2026-10-05 (recorded)
-**Status:** Accepted
+**Status:** Superseded by ADR 047
 **Related tickets:** None
 
 **Context:**
@@ -907,7 +907,7 @@ This supersedes ADR 026. The 0.20 value of `CONFIDENCE_LOW` and its reason (filt
 ## ADR 034: Ask Agy Follow-Ups Carry the Last Two Exchanges
 
 **Date:** 2026-10-06
-**Status:** Accepted
+**Status:** Accepted; its line that retrieval sees only the current question is superseded by ADR 061 (row 9)
 **Related tickets:** MATTGPT-273, MATTGPT-275
 
 **Context:**
@@ -931,7 +931,7 @@ This supersedes ADR 026. The 0.20 value of `CONFIDENCE_LOW` and its reason (filt
 ## ADR 035: Agy's Closing Offers Are Removed Until Follow-Ups Can Be Honored
 
 **Date:** 2026-10-06
-**Status:** Accepted
+**Status:** Accepted; its opener line is reconciled in ADR 061 (row 29)
 **Related tickets:** MATTGPT-276, MATTGPT-275
 
 **Context:**
@@ -1222,7 +1222,7 @@ Do not stabilize it.
 ## ADR 047: Ask Agy Answers Through a Search Tool Loop on gpt-6.1-sol; rag_answer() and Its Gates Are Retired
 
 **Date:** 2026-10-15
-**Status:** Accepted
+**Status:** Accepted; ADR 061 corrects its `_degraded_fallback()` line and does not accept its opener lines as examples
 **Related tickets:** MATTGPT-275, MATTGPT-282, MATTGPT-273, MATTGPT-169, MATTGPT-128, MATTGPT-292, MATTGPT-306
 
 **Context:**
@@ -1379,7 +1379,7 @@ The assessor received the extraction model's compressed `requirement`, which dro
 ## ADR 053: Ask Agy Accepts Seven Behaviors the 1095d2c Audit Found Dropped
 
 **Date:** 2026-10-17
-**Status:** Accepted
+**Status:** Superseded by ADR 061
 **Related tickets:** MATTGPT-236, MATTGPT-275, MATTGPT-077, MATTGPT-128
 
 **Context:**
@@ -1565,3 +1565,66 @@ Q15 stays as it is.
 
 **Consequences:**
 - None.
+
+---
+
+## ADR 061: Decisions on the Behaviors 1095d2c Dropped From Ask Agy
+
+**Date:** 2026-10-19
+**Status:** Accepted
+**Related tickets:** MATTGPT-236, MATTGPT-275, MATTGPT-128, MATTGPT-338, MATTGPT-292, MATTGPT-077, MATTGPT-322
+
+**Context:**
+A Code audit compared 1095d2c^ with 1095d2c, where `agy_answer()` replaced `rag_answer()`, and listed each behavior dropped or changed by row. Independent confined checkers re-checked it claim by claim, and Matt walked it row by row on Oct 18 and 19, 2026 against recorded runs: the old path's golden run (`docs/evidence/MATTGPT-275/golden_rag_20261014_140843/`), the new path's (`docs/evidence/MATTGPT-320/golden_20261016_102942/`), the MATTGPT-236 gate, MATTGPT-322 run 6 and the MATTGPT-320 extras. ADR 047, ADR 053 and the BACKLOG audit lines were provisional records until this walkthrough, not decisions. The audit's row table is not in the repo; rows without a description here are cited by number only.
+
+**Decision:**
+- **Kept:**
+  - Row 1: suggestion-chip and force-answer flags skip the checks. Chips are static questions, designed at design time.
+  - Rows 10, 31 and 34: the embedding-failure breather, what the model is told, and the rate-limit breather.
+  - Row 3: the router's out_of_scope and personal redirects, unchanged. Whether the router stays in Ask Agy is MATTGPT-236's decision (ADR 054).
+- **Accepted:**
+  - Row 2: the `gibberish` and `local_recommendations` nonsense rules added in 1095d2c.
+  - Row 4: removal of the mode-word shortcut; it was not a valid scenario.
+  - Rows 6, 7 and 21: removal of entity detection, the hard client filter and the slot-1 pin.
+  - Row 36: source cards are every story retrieved, until MATTGPT-128's cited cards replace them.
+  - Rows 16, 17, 18, 22, 23, 28 and 30: removal of synthesis promotion, per-theme retrieval, named-client ordering, client diversity, era diversity, `{client_list}` and synthesis selection, as mechanisms. The capability they served comes back as a priority, through MATTGPT-236's breadth decision.
+  - Rows 11, 12 and 33: removal of the confidence gate, the router-failure breather and the error fallbacks.
+  - Row 9: the model writes each search from the question and the conversation.
+  - Row 15: chip pool widening.
+  - Row 19: narrative ordering.
+  - Row 24: the ranking-error safety net.
+  - Row 25: the story count read by the model.
+  - Row 32: the answer model and its settings.
+  - Row 35: post-processing.
+  - Row 13, for the personal case only: an empty search on a personal question is declined by rule 0b (ADR 056).
+- **Dropped:** row 5 (debug-only), and rows 37, 39, 40, 41 and 42.
+- **Not accepted:**
+  - Row 29: the opener. The opener `_choose_opening_and_focus()` picks is to be passed to the model as "Begin with this line", not shown among the opener lines as examples.
+  - Rows 20 and 27: Professional Narrative stories on technical questions, and their verbatim-phrase block. Decided together with the "builder" revisit.
+- **To change:** row 26: remove "Go deep on the primary story" from `STANDARD_DELTA`.
+- **Open:**
+  - Row 14 (the file-order fallback when Pinecone returns nothing), on MATTGPT-292.
+  - Row 8 (Matt substitution in the search query), on MATTGPT-077, decided with rows 20 and 27.
+  - Row 13 for work-history questions: a NEXT chore after MATTGPT-338 checks empty searches there.
+
+**Rationale:**
+- Row 2: `local_recommendations`' broad case, a food or venue word anywhere in a portfolio question, is untested in the logs.
+- Row 42: the check it lost is covered by MATTGPT-338's breadth measures.
+- Rows 6, 7 and 21: card accuracy on questions that name a client goes to MATTGPT-128.
+- Row 13: the personal case is measured. In the MATTGPT-236 gate and MATTGPT-322 run 6, 20 turns had every search empty, all "Is Matt married?", and all 20 declined without invented content.
+
+**Corrections:**
+- ADR 053's text was wrong in four places:
+  - Row 15 is not "keyword-matched". `_score_story_for_prompt()` scored a story only when the whole question was a substring of its Title, Client, Industry or tags, so almost every question scored 0 on every story, and the sort kept the first 5 corpus stories in file order.
+  - Row 16's example, "What did Matt do at RBC?", is in neither golden run. In the old run's directory it appears only in the as-run copy of `backend_service.py`.
+  - Row 28's "0 confirmed figure misattributions" has no recorded method.
+  - Row 12 left out that the embedding-failure breather still fires: `agy_answer()` returns it when `__embed_failure__` is set.
+- ADR 047 (row 33) and the 1095d2c commit say `ANSWER_ERROR_MESSAGE` replaces `_degraded_fallback()`. Model errors never reached `_degraded_fallback()`, which ran only on an exception before ranking. `_generate_agy_response()` caught a model error other than a rate limit and returned "🐾 Let me show you what I found..." followed by `_format_narrative()` of the top story, and `rag_answer()` still returned the ranked stories as source cards.
+
+**Consequences:**
+- ADR 053 is superseded by this ADR.
+- ADR 019, ADR 023 and ADR 024 are superseded by ADR 047: `diversify_results()`, `ENTITY_ALIASES`, `detect_entity()` and its fields were deleted in 1095d2c.
+- ADR 034's "Retrieval, the gates, and the semantic router still see only the current question" no longer holds for retrieval (row 9). The nonsense rules and the router still see only the current question.
+- ADR 035's "The random opener and focus angle stay" holds for the focus angle. Since 1095d2c the picked opener has been discarded and the model shown the opener lines as examples; row 29 restores the picked opener.
+- MATTGPT-236 owns breadth for big-picture answers (rows 16 to 30) and the card cap on them (row 38); MATTGPT-128 references it.
+- Rows 26 and 29 are prompt changes, each under the answer-pipeline gates.
