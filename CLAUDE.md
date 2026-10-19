@@ -30,7 +30,7 @@ Rules marked "Enforced" are also blocked by hooks. If a hook blocks a command, s
 - `scripts/arch-sync-session.sh` and `scripts/backlog-session.sh`: launch the two docs sessions, one per pass.
 - `mattgpt-architecture-sync` skill (`.claude/skills/`): ARCHITECTURE.md and `docs/ADR.md` from recent commits. Arch sync session only.
 - `mattgpt-backlog-maintenance` skill (`.claude/skills/`): BACKLOG.md, CHANGELOG.md and `docs/value_scorecard.md`. Backlog session only.
-- `change-governor` skill (`.claude/skills/`): advisory review, before "go", of a change that removes or alters production behavior. Runs when Matt asks; its output is a question for Matt, not an approval.
+- `change-governor` skill (`.claude/skills/`): advisory review of a change that removes or alters production behavior, run at pre-flight and again at Green, with a separate checker. Runs when Matt asks; its output feeds his decision packet, not an approval.
 - `ARCHITECTURE.md`: full system context, including the file structure.
 - [Design Specification](https://mcpugmire1.github.io/mattgpt-design-spec/): canonical tech stack and system architecture. Do not duplicate tech stack facts here.
 
