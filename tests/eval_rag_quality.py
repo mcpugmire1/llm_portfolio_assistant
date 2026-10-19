@@ -29,6 +29,7 @@ import pytest
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from config.constants import META_COMMENTARY_PATTERNS
+from utils.client_utils import is_generic_client  # noqa: E402
 from utils.corpus_loader import load_stories  # noqa: E402
 
 # =============================================================================
@@ -872,6 +873,7 @@ class EvalResult:
     response: str = ""
     error: str | None = None
     details: dict[str, Any] = field(default_factory=dict)
+    skipped: bool = False
 
 
 def check_meta_commentary(response: str) -> tuple[bool, list[str]]:
@@ -1046,28 +1048,96 @@ def count_clients_mentioned(response: str) -> int:
 # BREADTH (MATTGPT-338)
 # =============================================================================
 
+# Single corpus values the breadth counts key on (Theme and Era fields).
+NARRATIVE_THEME = "Professional Narrative"
+FS_ERA = "Financial Services Platform Modernization"
+
+# Per-category stats in generate_report(): min and mean for the counts,
+# number of queries where the flag is true for the flags.
+BREADTH_COUNT_KEYS = (
+    "eras",
+    "projects",
+    "named_clients",
+    "eras_shown",
+    "projects_shown",
+)
+BREADTH_FLAG_KEYS = ("fs_era_present", "fs_era_present_shown")
+
+
+def _counted_stories(sources: list[dict], stories: list[dict]) -> list[dict]:
+    """Source stories looked up by id, unknown ids and Professional Narrative
+    stories left out."""
+    by_id = {s.get("id"): s for s in stories}
+    counted = []
+    for src in sources:
+        story = by_id.get(src.get("id"))
+        if story and story.get("Theme") != NARRATIVE_THEME:
+            counted.append(story)
+    return counted
+
 
 def count_eras(sources: list[dict], stories: list[dict]) -> int:
     """Distinct Era values of the answer's source stories, looked up by id,
     excluding Professional Narrative stories (Theme)."""
-    raise NotImplementedError
+    return len({s["Era"] for s in _counted_stories(sources, stories) if s.get("Era")})
 
 
 def count_projects(sources: list[dict], stories: list[dict]) -> int:
     """Distinct Project values of the answer's source stories, looked up by id,
     excluding Professional Narrative stories (Theme)."""
-    raise NotImplementedError
+    counted = _counted_stories(sources, stories)
+    return len({s["Project"] for s in counted if s.get("Project")})
 
 
 def fs_era_present(sources: list[dict], stories: list[dict]) -> bool:
     """True if any counted source story (Professional Narrative excluded) has
     the Financial Services era."""
-    raise NotImplementedError
+    return any(s.get("Era") == FS_ERA for s in _counted_stories(sources, stories))
+
+
+def _normalize(text: str) -> str:
+    return " ".join(text.lower().split())
 
 
 def count_named_clients(answer_md: str, stories: list[dict]) -> int:
     """Distinct non-generic corpus Client names that appear in the answer text."""
-    raise NotImplementedError
+    text = _normalize(answer_md)
+    names = {
+        _normalize(s.get("Client") or "")
+        for s in stories
+        if (s.get("Client") or "").strip() and not is_generic_client(s["Client"])
+    }
+    # Whole-name match: a name is not counted inside a longer word.
+    return sum(1 for n in names if re.search(rf"(?<!\w){re.escape(n)}(?!\w)", text))
+
+
+def _shown_card_cap() -> int:
+    """Number of source cards the visitor sees for the answer just produced.
+
+    agy_answer() leaves the card layout in __ask_query_intent__, which the UI
+    reads to pick its cap (_sources_layout() in conversation_helpers.py).
+    """
+    import streamlit as st
+
+    from ui.pages.ask_mattgpt.conversation_helpers import (
+        SOURCES_MAX_SURGICAL,
+        SOURCES_MAX_SYNTHESIS,
+    )
+
+    if st.session_state.get("__ask_query_intent__") == "synthesis":
+        return SOURCES_MAX_SYNTHESIS
+    return SOURCES_MAX_SURGICAL
+
+
+def _record_breadth(result: "EvalResult", rag_result: dict, stories: list[dict]):
+    """Breadth over all sources and over the cards shown, into result.details."""
+    sources = rag_result.get("sources", []) or []
+    shown = sources[: _shown_card_cap()]
+    for suffix, srcs in (("", sources), ("_shown", shown)):
+        result.details[f"eras{suffix}"] = count_eras(srcs, stories)
+        result.details[f"projects{suffix}"] = count_projects(srcs, stories)
+        result.details[f"fs_era_present{suffix}"] = fs_era_present(srcs, stories)
+    result.details["named_clients"] = count_named_clients(result.response, stories)
 
 
 # =============================================================================
@@ -1311,7 +1381,8 @@ def evaluate_query(
             # detect_entity() removed with rag_answer() (MATTGPT-275); these
             # golden queries stay as query text for the structural checks.
             result.error = "skipped: detect_entity() removed (MATTGPT-275)"
-            result.passed = True
+            result.skipped = True
+            result.passed = False
 
         elif category == "marketing":
             # Marketing/landing page queries - ground truth + meta-commentary
@@ -1396,6 +1467,9 @@ def evaluate_query(
                 all_checks_pass = all_checks_pass and has_response
 
                 result.passed = all_checks_pass
+
+        if not result.skipped:
+            _record_breadth(result, rag_result, stories)
 
     except Exception as e:
         result.error = str(e)
@@ -1707,17 +1781,20 @@ class TestContextStory:
 
 def generate_report(results: list[EvalResult]) -> dict:
     """Generate evaluation report from results."""
+    # A skipped query is neither passed nor failed, and stays out of pass_rate.
+    run = [r for r in results if not r.skipped]
     report = {
         "timestamp": datetime.now().isoformat(),
         "total_queries": len(results),
-        "passed": sum(1 for r in results if r.passed),
+        "skipped": len(results) - len(run),
+        "passed": sum(1 for r in run if r.passed),
         # An expected failure (xfail_reason set) is not counted as failed;
         # a pass on one is reported as xpassed so the marker gets removed.
         "failed": sum(
-            1 for r in results if not r.passed and not r.details.get("xfail_reason")
+            1 for r in run if not r.passed and not r.details.get("xfail_reason")
         ),
         "xfailed": sum(
-            1 for r in results if not r.passed and r.details.get("xfail_reason")
+            1 for r in run if not r.passed and r.details.get("xfail_reason")
         ),
         "xpassed": [
             {"id": r.query_id, "query": r.query}
@@ -1729,8 +1806,8 @@ def generate_report(results: list[EvalResult]) -> dict:
         "failed_queries": [],
     }
 
-    if results:
-        report["pass_rate"] = report["passed"] / report["total_queries"] * 100
+    if run:
+        report["pass_rate"] = report["passed"] / len(run) * 100
 
     # Group by category
     for category in [
@@ -1745,16 +1822,27 @@ def generate_report(results: list[EvalResult]) -> dict:
     ]:
         cat_results = [r for r in results if r.category == category]
         if cat_results:
-            report["by_category"][category] = {
+            cat_run = [r for r in cat_results if not r.skipped]
+            cat_passed = sum(1 for r in cat_run if r.passed)
+            stats = {
                 "total": len(cat_results),
-                "passed": sum(1 for r in cat_results if r.passed),
-                "pass_rate": sum(1 for r in cat_results if r.passed)
-                / len(cat_results)
-                * 100,
+                "skipped": len(cat_results) - len(cat_run),
+                "passed": cat_passed,
+                "pass_rate": cat_passed / len(cat_run) * 100 if cat_run else 0.0,
             }
+            for key in BREADTH_COUNT_KEYS:
+                values = [r.details[key] for r in cat_run if key in r.details]
+                if values:
+                    stats[f"{key}_min"] = min(values)
+                    stats[f"{key}_mean"] = sum(values) / len(values)
+            for key in BREADTH_FLAG_KEYS:
+                values = [r.details[key] for r in cat_run if key in r.details]
+                if values:
+                    stats[f"{key}_count"] = sum(1 for v in values if v)
+            report["by_category"][category] = stats
 
     # Collect failures
-    for r in results:
+    for r in run:
         if not r.passed and not r.details.get("xfail_reason"):
             report["failed_queries"].append(
                 {
@@ -1810,8 +1898,11 @@ def run_full_evaluation() -> dict:
                 )
                 result = evaluate_query(query_spec, rag_answer, stories)
                 results.append(result)
-                status = "✅" if result.passed else "❌"
-                print(f"  {status} passed={result.passed}")
+                if result.skipped:
+                    print(f"  ⏭️ skipped: {result.error}")
+                else:
+                    status = "✅" if result.passed else "❌"
+                    print(f"  {status} passed={result.passed}")
 
     return generate_report(results)
 
@@ -1835,6 +1926,7 @@ def main():
         print(f"Total Queries: {report['total_queries']}")
         print(f"Passed: {report['passed']}")
         print(f"Failed: {report['failed']}")
+        print(f"Skipped: {report['skipped']}")
         print(f"Expected failures (xfail): {report['xfailed']}")
         for xp in report["xpassed"]:
             print(f"XPASS Q{xp['id']}: {xp['query']} -- remove its xfail_reason")
@@ -1842,9 +1934,24 @@ def main():
 
         print("\nBy Category:")
         for cat, stats in report["by_category"].items():
-            print(
-                f"  {cat}: {stats['passed']}/{stats['total']} ({stats['pass_rate']:.1f}%)"
-            )
+            ran = stats["total"] - stats["skipped"]
+            line = f"  {cat}: {stats['passed']}/{ran} ({stats['pass_rate']:.1f}%)"
+            if stats["skipped"]:
+                line += f", {stats['skipped']} skipped"
+            print(line)
+            if "eras_mean" in stats:
+                print(
+                    "    breadth all / shown (mean, min):"
+                    f" eras {stats['eras_mean']:.1f} / {stats['eras_shown_mean']:.1f}"
+                    f" ({stats['eras_min']} / {stats['eras_shown_min']}),"
+                    f" projects {stats['projects_mean']:.1f}"
+                    f" / {stats['projects_shown_mean']:.1f}"
+                    f" ({stats['projects_min']} / {stats['projects_shown_min']}),"
+                    f" FS era in {stats['fs_era_present_count']}"
+                    f" / {stats['fs_era_present_shown_count']},"
+                    f" named clients {stats['named_clients_mean']:.1f}"
+                    f" ({stats['named_clients_min']})"
+                )
 
         if report["failed_queries"]:
             print(f"\nFailed Queries ({len(report['failed_queries'])}):")
