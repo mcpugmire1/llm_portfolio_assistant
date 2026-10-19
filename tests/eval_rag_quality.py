@@ -1043,6 +1043,34 @@ def count_clients_mentioned(response: str) -> int:
 
 
 # =============================================================================
+# BREADTH (MATTGPT-338)
+# =============================================================================
+
+
+def count_eras(sources: list[dict], stories: list[dict]) -> int:
+    """Distinct Era values of the answer's source stories, looked up by id,
+    excluding Professional Narrative stories (Theme)."""
+    raise NotImplementedError
+
+
+def count_projects(sources: list[dict], stories: list[dict]) -> int:
+    """Distinct Project values of the answer's source stories, looked up by id,
+    excluding Professional Narrative stories (Theme)."""
+    raise NotImplementedError
+
+
+def fs_era_present(sources: list[dict], stories: list[dict]) -> bool:
+    """True if any counted source story (Professional Narrative excluded) has
+    the Financial Services era."""
+    raise NotImplementedError
+
+
+def count_named_clients(answer_md: str, stories: list[dict]) -> int:
+    """Distinct non-generic corpus Client names that appear in the answer text."""
+    raise NotImplementedError
+
+
+# =============================================================================
 # MAIN EVALUATION FUNCTION
 # =============================================================================
 
