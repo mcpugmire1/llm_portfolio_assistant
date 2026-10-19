@@ -49,7 +49,24 @@ import re
 
 import pytest
 
+from services import semantic_router
+from ui.pages.ask_mattgpt import backend_service as bs
 from ui.pages.ask_mattgpt.backend_service import agy_answer
+
+
+@pytest.fixture(autouse=True)
+def _no_logging():
+    """Every test here runs the real pipeline: keep its query-log row and the
+    router's CSV rows out of the production logs."""
+    from unittest.mock import MagicMock, patch
+
+    with (
+        patch.object(bs, "log_query", MagicMock()),
+        patch.object(bs, "log_offdomain", MagicMock()),
+        patch.object(semantic_router, "_log_borderline", MagicMock()),
+        patch.object(semantic_router, "_log_router_low_confidence", MagicMock()),
+    ):
+        yield
 
 
 def _agy_answer_with_stories(query, given, all_stories):

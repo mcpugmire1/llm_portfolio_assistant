@@ -68,6 +68,15 @@ scenarios(FEATURE)
 SHORT_WAIT = 200  # ms — quick UI updates
 MEDIUM_WAIT = 500  # ms — component renders
 LONG_WAIT = 3000  # ms — query response latency
+TURN_TIMEOUT = 90000  # ms: one live turn, as in test_ask_handoff.py
+
+# A finished Ask Agy turn: at least two bubbles, no thinking modal, and the
+# last bubble's sources rendered (same check as test_ask_handoff.py).
+_TURN_DONE_JS = """
+() => { const m = document.querySelectorAll("[data-testid='stChatMessage']");
+  return m.length >= 2 && !document.querySelector('.thinking-modal')
+    && m[m.length - 1].querySelector('.source-links-title') !== null; }
+"""
 
 
 def wait_for_streamlit_rerun(page):
@@ -509,10 +518,10 @@ def then_chip_prompt_in_chat(browser_page):
 
 @then("a response should be generated")
 def then_response_generated(browser_page):
-    """An assistant response should appear after the chip-injected prompt."""
-    browser_page.wait_for_timeout(LONG_WAIT)
-    messages = browser_page.locator("[data-testid='stChatMessage']")
-    assert messages.count() > 0, "Expected at least one chat message"
+    """The chip-injected prompt's turn finishes: the newest bubble is an
+    answer with its sources. Waiting it out also keeps the page open until
+    the answer is sent, so teardown doesn't close the socket mid-stream."""
+    browser_page.wait_for_function(_TURN_DONE_JS, timeout=TURN_TIMEOUT, polling=200)
 
 
 @then("Agy's answer should be displayed")

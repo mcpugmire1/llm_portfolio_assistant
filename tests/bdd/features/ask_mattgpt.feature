@@ -89,6 +89,7 @@ Feature: Ask Agy — Nonsense rejection banner + contextual chip sets
     Given the personal rejection banner is showing
     When the user clicks the first personal chip
     Then that chip's prompt should appear as the next user message
+    And a response should be generated
 
   # ---------------------------------------------------------------------------
   # BRANCH 3: out_of_scope (semantic router out_of_scope intent)
@@ -105,6 +106,7 @@ Feature: Ask Agy — Nonsense rejection banner + contextual chip sets
     Given the out_of_scope rejection banner is showing
     When the user clicks the first out_of_scope chip
     Then that chip's prompt should appear as the next user message
+    And a response should be generated
 
   # ---------------------------------------------------------------------------
   # MATTGPT-236 (xfail until its Green restarts): the router off Ask Agy

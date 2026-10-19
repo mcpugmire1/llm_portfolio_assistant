@@ -7,15 +7,16 @@ today, plus a search_stories tool backed by semantic_search(). It answers
 directly or searches first; nothing refuses on search confidence.
 
 Class W (wiring): send_to_backend() calls agy_answer() with the history.
-Class R (rejections kept): nonsense rules still reject before any model call;
-  the router is out of the answer path (MATTGPT-236): a question it would
-  redirect is answered, and agy_answer never asks it.
+Class R (rejections kept): nonsense rules and router out_of_scope / personal
+  still reject before any model call (decision 1). MATTGPT-236's expectations
+  (the router out of the answer path) are xfail until its Green restarts.
 Class T (tool loop): no search when the model answers directly; a tool call
   runs semantic_search() with the model's query and returns story context;
   a weak search is answered, not refused; search rounds are capped and the
   last call must answer.
 Class V (voice): the same instructions reach the model (opener, focus angle,
-  prose, bolding, state facts), every answer gets the standard voice, and
+  prose, bolding, state facts), the synthesis voice follows the router
+  (MATTGPT-236's standard-voice-for-all is xfail), and
   Professional Narrative stories carry the verbatim requirement.
 Class P (post-processing and contract): profile markers become
   profile_categories, clients of the stories used and numbers are bolded,
@@ -312,6 +313,18 @@ class TestRejectionsKept:
         assert fake.requests == []
         search.assert_not_called()
 
+    @pytest.mark.parametrize("family", ["personal", "out_of_scope"])
+    def test_router_redirect_rejects_without_a_model_call(self, family):
+        result, fake, search, _, session = _run(
+            [_response("unused")], family=family, router_score=0.96
+        )
+        assert result["rejection_reason"] == f"semantic_router:{family}"
+        assert result["intent_family"] == family
+        assert session["ask_last_reason"] == f"semantic_router:{family}"
+        assert result["answer_md"].startswith("🐾")
+        assert fake.requests == []
+        search.assert_not_called()
+
     @_XFAIL_236
     @pytest.mark.parametrize("family", ["personal", "out_of_scope"])
     def test_a_question_the_router_would_redirect_reaches_the_model(self, family):
@@ -338,9 +351,9 @@ class TestRejectionsKept:
         session["__router_classify__"].assert_not_called()
         assert result["intent_family"] is None
 
-    def test_a_suggestion_chip_is_answered_past_the_nonsense_rules(self):
+    def test_a_suggestion_chip_is_answered_past_the_nonsense_rules_and_router(self):
         """Landing chips set __ask_force_answer__: their fixed questions are
-        answered even when a rule would reject them."""
+        answered even when a rule or the router would redirect them."""
         result, fake, _, _, session = _run(
             [_response(tool_query="ledger"), _response("Here is the ledger work.")],
             family="out_of_scope",
@@ -355,6 +368,13 @@ class TestRejectionsKept:
         assert (
             "__ask_force_answer__" not in session
         ), "the flag must not outlive its turn"
+
+    def test_without_the_chip_flag_the_same_question_is_redirected(self):
+        result, fake, _, _, _ = _run(
+            [_response("unused")], family="out_of_scope", router_score=0.96
+        )
+        assert result["rejection_reason"] == "semantic_router:out_of_scope"
+        assert fake.requests == []
 
 
 # ---------------------------------------------------------------------------
@@ -502,6 +522,12 @@ class TestVoiceCarriesOver:
             "**IF YOU DECLINE:** Begin with this line, filling in the topic in your own words: "
             f'"{_DECLINE_SENTINEL}"'
         ) in _system(fake.requests[0])
+
+    def test_synthesis_voice_follows_the_router(self):
+        _, fake, _, _, _ = _run([_response("ok")], family="synthesis")
+        system = _system(fake.requests[0])
+        assert "## SYNTHESIS MODE" in system
+        assert "## STANDARD MODE" not in system
 
     @_XFAIL_236
     def test_a_synthesis_question_gets_the_standard_voice(self):
