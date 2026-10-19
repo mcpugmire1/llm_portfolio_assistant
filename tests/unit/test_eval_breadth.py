@@ -1,9 +1,9 @@
 """Breadth counts and skip accounting in the golden eval (MATTGPT-338).
 
-Eras and projects are counted from the answer's source stories, looked up by
-id, leaving out Professional Narrative stories (Theme). Named clients are
-counted from the answer text against the corpus Client values, generic ones
-excluded. A skipped query is reported as skipped, not passed. Pure functions
+Eras, projects and named clients are counted from the answer's source
+stories, looked up by id, leaving out Professional Narrative stories (Theme).
+Named clients are the distinct non-generic Client values of those stories, so
+an answer that calls a client by another name still counts it. A skipped query is reported as skipped, not passed. Pure functions
 and a fake rag_fn: no model or Pinecone call.
 """
 
@@ -31,13 +31,14 @@ def _story(sid, client, era, project, theme="Execution & Delivery"):
 
 
 STORIES = [
-    _story("a", "JP Morgan Chase", "Era One", "Project A"),
+    _story("a", "JP Morgan", "Era One", "Project A"),
     _story("b", "Accenture", "Era One", "Project B"),
     _story("c", "Fortune 500 Clients", "Era Two", "Project B"),
     _story("d", "Independent Project", "Era Three", "Project C"),
     _story("e", "Accenture", "Era Four", "Project D", "Professional Narrative"),
     _story("f", "RBC", FS_ERA, "Project E"),
     _story("g", "Accenture", FS_ERA, "Project F", "Professional Narrative"),
+    _story("h", "JP Morgan Chase", FS_ERA, "Project G"),
 ]
 
 
@@ -91,20 +92,27 @@ class TestFsEraPresent:
 
 class TestCountNamedClients:
     def test_every_named_client_counts_including_accenture(self):
-        answer = "He led work at JP Morgan Chase and at Accenture."
-        assert count_named_clients(answer, STORIES) == 2
+        assert count_named_clients(_sources("a", "b", "f"), STORIES) == 3
+
+    def test_each_client_value_counts_once_per_story_client(self):
+        # JP Morgan and JP Morgan Chase are distinct Client values.
+        assert count_named_clients(_sources("a", "h"), STORIES) == 2
 
     def test_generic_clients_are_not_counted(self):
-        answer = "For Fortune 500 Clients, and in an Independent Project."
-        assert count_named_clients(answer, STORIES) == 0
+        assert count_named_clients(_sources("c", "d"), STORIES) == 0
 
-    def test_match_ignores_case_and_whitespace(self):
-        answer = "At jp morgan\n  chase he built the platform."
-        assert count_named_clients(answer, STORIES) == 1
+    def test_repeated_client_counts_once(self):
+        assert count_named_clients(_sources("f", "f"), STORIES) == 1
 
-    def test_repeated_name_counts_once(self):
-        answer = "JP Morgan Chase first, then JP Morgan Chase again."
-        assert count_named_clients(answer, STORIES) == 1
+    def test_unknown_id_is_ignored(self):
+        assert count_named_clients(_sources("f", "zzz"), STORIES) == 1
+
+    def test_professional_narrative_source_is_excluded(self):
+        assert count_named_clients(_sources("e"), STORIES) == 0
+        assert count_named_clients(_sources("e", "b"), STORIES) == 1
+
+    def test_no_sources_is_zero(self):
+        assert count_named_clients([], STORIES) == 0
 
 
 def _rag_fn(answer_md, sources):
@@ -114,19 +122,28 @@ def _rag_fn(answer_md, sources):
 class TestEvaluateQuery:
     def test_breadth_lands_in_details(self):
         spec = {"id": 1, "query": "q", "category": "marketing"}
-        answer = "Work at JP Morgan Chase and Accenture."
+        answer = "Work at JP Morgan and Accenture."
         result = evaluate_query(spec, _rag_fn(answer, _sources("a", "c")), STORIES)
 
         assert result.details.get("eras") == 2
         assert result.details.get("projects") == 2
+        # "a" is JP Morgan, "c" is generic: Accenture is named in the text
+        # but is no source's client.
+        assert result.details.get("named_clients") == 1
+
+    def test_a_client_called_by_another_name_counts_from_its_sources(self):
+        # The text says only "JP Morgan"; the sources are JP Morgan Chase and
+        # RBC, so both count and the text's wording does not.
+        spec = {"id": 1, "query": "q", "category": "marketing"}
+        answer = "At JP Morgan he rebuilt the identity platform."
+        result = evaluate_query(spec, _rag_fn(answer, _sources("h", "f")), STORIES)
+
         assert result.details.get("named_clients") == 2
 
     def test_counts_over_all_sources_and_shown_cards(self):
         spec = {"id": 1, "query": "q", "category": "marketing"}
         sources = _sources("a", "b", "c", "f")
-        result = evaluate_query(
-            spec, _rag_fn("Work at JP Morgan Chase.", sources), STORIES
-        )
+        result = evaluate_query(spec, _rag_fn("Work at JP Morgan.", sources), STORIES)
         d = result.details
 
         assert d.get("eras") == 3
@@ -135,7 +152,7 @@ class TestEvaluateQuery:
         assert d.get("projects_shown") == 2
         assert d.get("fs_era_present") is True
         assert d.get("fs_era_present_shown") is False
-        assert d.get("named_clients") == 1
+        assert d.get("named_clients") == 3
         assert "named_clients_shown" not in d
 
     def test_synthesis_answer_uses_the_synthesis_card_cap(self, monkeypatch):
