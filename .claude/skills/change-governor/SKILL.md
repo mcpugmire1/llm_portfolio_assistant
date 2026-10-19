@@ -72,6 +72,10 @@ not review the change itself.
    quote) or CANNOT CONFIRM (say what is missing). Keep every row;
    never drop one. Quotes must match exactly. Read nothing outside this
    folder." Save the final output as "$RUN/check/checker.md".
+   Re-checks: after the first full check, a later round checks only the
+   changed lines and what they depend on, not the whole output. Only a
+   flag that changes a fact, a citation or a decision triggers another
+   round. A wording-only flag is fixed once, without a re-check.
 7. Audit both runs: list every tool call in each run.jsonl and flag any
    path outside its folder or any tool other than Read, Grep, Glob.
 8. Build the decision packet. Keep governor.md and checker.md unedited;
