@@ -48,6 +48,10 @@ Cited probe output copied byte-identical into docs/evidence/MATTGPT-<n>/ (42ddbe
 
 ### Tests
 
+**October 19, 2026 -- Breadth counts and skip accounting in the golden eval (MATTGPT-338)** -- `d5836d3` (Red), `0521897` (Green)
+
+The MATTGPT-236 gate scored pass/fail and missed that router-off big-picture answers cite Accenture alone. `tests/eval_rag_quality.py` now records, per answer, distinct eras, distinct projects and Financial Services era presence, each over all sources and over the cards shown (`SOURCES_MAX_SYNTHESIS` when `__ask_query_intent__` is "synthesis", else `SOURCES_MAX_SURGICAL`; today always the first 3), with Professional Narrative stories left out by Theme; and distinct non-generic named clients in the answer text, via `is_generic_client()`, as a secondary measure. Entity_detection queries are now skipped, not passed: `generate_report()` counts skipped separately, outside passed, failed and pass_rate, and adds per-category min, mean and FS-era counts. Not in these commits: the same counts in the gate scorer, which MATTGPT-236's run carries. Gates: 23 new unit tests, full unit suite 942 passed, 14 xfailed.
+
 **October 18, 2026 -- Narrative voice test runs on real stories (MATTGPT-334)** -- `265e563`
 
 `test_synthesis_mode_no_first_person` filtered on Client == "Career Narrative", which matches 0 of the 124 stories, so `agy_answer()` was built from no stories and the first-person check passed without testing anything. Renamed `test_narrative_stories_no_first_person`, it now selects first-person stories by Theme == "Professional Narrative" (3 stories) and asserts the selection is non-empty. Mutation check: with the old Client filter restored, the test fails on the new assertion. Live: 2 runs, 2 passed, both answers drawing on the narrative stories. Test-only.
