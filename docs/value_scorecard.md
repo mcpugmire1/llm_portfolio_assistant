@@ -107,7 +107,7 @@ turns, 10 runs per arm, scored blind (32 scorers, brief_v2):
   automatically (`tests/eval_rag_quality.py`).
 
 **Open tickets:** -275, -040 (follow-up eval
-coverage), -281 (openers), -280
+coverage), -281 (openers), -340 (pass the picked opener, remove stale prompt lines), -280
 (tone), -284 (synthesis mode decided in four places), -316 (blur submits the landing
 question), -317 (Ask Agy About This dropped mid-answer).
 
@@ -164,7 +164,8 @@ responsibility, In Progress), -296 (closing offer in a prompt example), -297 (no
 answers), -300 (thinking indicator shows real progress), -301 (em dashes left in the repo), -306 (set store=False
 after 275, Blocked), -307 (Key Metrics label cut), -310 (direct-reports
 answer varies), -311 (no ongoing-period End_Date), -327 (rewritten quotations),
--328 (rule 0b decline follow-ups).
+-328 (rule 0b decline follow-ups), -339 (row 13: empty-search work-history answers, claims checked),
+-341 (rows 20 and 27 with the "builder" revisit).
 
 ## 4. Role Match
 
@@ -285,7 +286,7 @@ experience reliably and sustainably; failures are visible, not silent.
 - Latency: -299.
 - Runtime and dependencies: -313 (Python 3.11 in prod, 3.13 local), -314 (pin pyarrow<25).
 - Model retirement: -302 (gpt-4o family retires January 14, 2027).
-- Silent failures: -292 (silent file-order fallback), -288 (Ask Agy ignores the Pinecone fallback signal).
+- Silent failures: -292 (silent file-order fallback, High), -288 (Ask Agy ignores the Pinecone fallback signal).
 - Regression gates and test reliability: -039, -233, -235, -206, -153,
   -084, -180, -198, -035, -143 (Parked),
   -213, -338 (breadth per answer: eras, projects and FS era presence in the gate scorer and golden eval, High).

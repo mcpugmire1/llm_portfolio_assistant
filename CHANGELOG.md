@@ -112,7 +112,7 @@ Two evidence runs measured the answering model before the switch. `9d046c1` (`do
 
 **October 15, 2026 -- Ask Agy's confidence gate leaves the answer path (MATTGPT-253)** -- `1095d2c`
 
-The gate in `rag_answer()` refused a question whose top Pinecone score fell under `CONFIDENCE_HIGH` before the model saw the profile or the conversation: "Where did Matt get his degree?" at 0.218, the follow-up "Why is he looking?" at 0.214. The MATTGPT-275 Green deletes `rag_answer()`; `agy_answer()`'s docstring states "Search confidence does not gate the answer." `CONFIDENCE_HIGH` and `CONFIDENCE_LOW` are unchanged and still drive My Work. Closed on the code: the refused queries have not been rerun on `1095d2c`, and that run is on MATTGPT-320's list.
+The gate in `rag_answer()` refused a question whose top Pinecone score fell under `CONFIDENCE_HIGH` before the model saw the profile or the conversation: "Where did Matt get his degree?" at 0.218, the follow-up "Why is he looking?" at 0.214. The MATTGPT-275 Green deletes `rag_answer()`; `agy_answer()`'s docstring states "Search confidence does not gate the answer." `CONFIDENCE_HIGH` and `CONFIDENCE_LOW` are unchanged and still drive My Work. Closed on the code. The refused queries were re-run on the new path in the MATTGPT-320 extras run (2e46a59, `docs/evidence/MATTGPT-320/extras_20261016_103026/rows.json`): 2 runs each, all answered (corrected Oct 19, 2026).
 
 **October 15, 2026 -- Ask Agy stream gets a 30 s read timeout and one retry before first text (MATTGPT-303)** -- `1095d2c`
 
