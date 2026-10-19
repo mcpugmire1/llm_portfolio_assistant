@@ -148,6 +148,13 @@ Ask Agy sends the last two exchanges (`ASK_HISTORY_MAX_MESSAGES = 4`) to the res
 
 ---
 
+### Role Match
+
+**October 19, 2026 -- Thought-leadership requirement no longer a gap (MATTGPT-272)** -- `ab65efc` (story); validated by Matt's Role Match run
+
+Role Match returned a gap on "Published thought leadership or conference speaking" in every run because the corpus had no thought leadership story. "Thought Leadership Through Client PoVs and Published Enablement Content" landed in ab65efc (Oct 9). Matt's Role Match run on Oct 19 (Senior Engineering Leader, Product Platform JD, pasted in the backlog session, not committed) rates "Published thought leadership or conference speaking on engineering culture, modernization, or AI adoption" Strong and cites that story. Correction to the Oct 4 observation: the ARISE HBCU Conference was speaking, not attendance; the thought leadership story says Matt "spoke at Accenture's ARISE HBCU Conference", and the HBCU story says he delivered sessions. Not pursued: the separate I&TL mandate story (candidate 1) and its NITSN ownership question. Client-attended symposiums are not in the corpus.
+
+
 ## September 2026
 
 ### Query Logger

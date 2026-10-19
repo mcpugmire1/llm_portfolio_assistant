@@ -186,8 +186,6 @@ answer varies), -311 (no ongoing-period End_Date), -327 (rewritten quotations),
   prompt, response schema, and all downstream consumers."
 - MATTGPT-160: "Count spread on the AT&T fixture narrows to 1-2 across five
   cold-path runs"; "No wall-clock target."
-- MATTGPT-272: "Role Match no longer returns a blanket gap on the
-  thought-leadership requirement."
 - Over-claim rate, evidence selection, 90-second budget: **undefined**
   measurement.
 
@@ -197,14 +195,13 @@ answer varies), -311 (no ongoing-period End_Date), -327 (rewritten quotations),
 - Not measured: over-claim rate on the current pipeline (the -244 baseline
   predates its fix); -160's after-measurement not recorded; the 90-second
   goal.
-- -272: awaiting validation. A thought leadership story landed in ab65efc
-  (Oct 9); re-embed and the Acceptance run are not recorded.
+- Thought-leadership requirement: Strong, citing the thought leadership
+  story (Matt's Role Match run, Oct 19, 2026; MATTGPT-272 closed).
 - `compute_recommendation()` has no caller in `ui/`: the overall
   recommendation is not shown to visitors.
 - Unbound: `jd_assessment.feature`, `jd_extraction.feature`.
 
-**Open tickets:** -244 (In Progress), -160 (In Progress), -266, -249, -272
-(awaiting validation), -012 (In Progress), -014, -081, -099,
+**Open tickets:** -244 (In Progress), -160 (In Progress), -266, -249, -012 (In Progress), -014, -081, -099,
 -173, -079, -264, -267.
 
 ## 5. Evidence parity (Ask Agy and Role Match)
