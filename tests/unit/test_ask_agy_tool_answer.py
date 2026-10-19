@@ -49,6 +49,11 @@ from ui.pages.ask_mattgpt import backend_service as bs
 
 logging.getLogger("streamlit").setLevel(logging.ERROR)
 
+_XFAIL_236 = pytest.mark.xfail(
+    reason="MATTGPT-236 re-scoped; Green restarts after the breadth decision",
+    strict=False,
+)
+
 
 # MATT_DNA is "" until sync_portfolio_metadata() runs; patch an invented
 # sentinel so the system-prompt assertion does not depend on test order.
@@ -307,6 +312,7 @@ class TestRejectionsKept:
         assert fake.requests == []
         search.assert_not_called()
 
+    @_XFAIL_236
     @pytest.mark.parametrize("family", ["personal", "out_of_scope"])
     def test_a_question_the_router_would_redirect_reaches_the_model(self, family):
         # MATTGPT-236: the router is out of the answer path. A question it
@@ -322,6 +328,7 @@ class TestRejectionsKept:
         assert result["answer_md"].startswith("Answered")
         assert len(fake.requests) == 2
 
+    @_XFAIL_236
     def test_agy_answer_never_consults_the_router(self):
         result, _, _, _, session = _run(
             [_response(tool_query="Matt"), _response("Answered.")],
@@ -496,6 +503,7 @@ class TestVoiceCarriesOver:
             f'"{_DECLINE_SENTINEL}"'
         ) in _system(fake.requests[0])
 
+    @_XFAIL_236
     def test_a_synthesis_question_gets_the_standard_voice(self):
         # MATTGPT-236 (arm B): with the router out, nothing selects the
         # synthesis prompt; the -236 gate measured standard mode for all.
