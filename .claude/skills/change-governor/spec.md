@@ -1,4 +1,4 @@
-# Change Governor (advisory), v3
+# Change Governor (advisory), v4
 
 **Job.** Before a consequential change is approved, list every behavior it removes or alters, the value driver each serves, what replaces it, and the evidence or decision behind it. Advisory only: it informs the person approving; it never blocks, edits, approves or rejects.
 
@@ -9,7 +9,7 @@
 - Wording-only changes to operator-facing output (console prints, log message text, developer error strings) when what is computed, written or returned is unchanged. Visitor-facing text stays in scope.
 
 **Inputs (nothing else).**
-1. The proposed change: its diff, plus its ticket text if one exists.
+1. The proposed change: at pre-flight, the planned change list (`plan.md`); at Green, its diff (`change.diff`) and the approved plan (`plan.md`). Plus its ticket text if one exists.
 2. The repository as it stands before the change (the parent).
 3. Value drivers: `docs/value_scorecard.md` at the parent, including each driver's **Status** (met, failing, not measured).
 4. Decision records at the parent: `docs/ADR.md`, `BACKLOG.md`, and commit SHAs those documents cite.
@@ -24,7 +24,7 @@
 - No fix proposals, no severity scores, no approve or reject recommendation.
 
 **Procedure.**
-1. **Enumerate.** From the diff, list every deleted or changed in-scope: function, call site, branch, constant, prompt string, session-state write, logged field, returned field. For each deleted or bypassed function, follow what it called in the parent until reaching code the change leaves intact; behaviors in that call tree count too, including helpers in other modules left with no production caller.
+1. **Enumerate.** From the diff (at pre-flight, from `plan.md`, reading each function, call and prompt line it names in the parent), list every deleted or changed in-scope: function, call site, branch, constant, prompt string, session-state write, logged field, returned field. For each deleted or bypassed function, follow what it called in the parent until reaching code the change leaves intact; behaviors in that call tree count too, including helpers in other modules left with no production caller.
 2. **Kept items.** Behaviors in that call tree that survive the change unaltered get a row marked "kept", with where they now run. One line each.
 3. **Added items.** Behavior the parent did not have at all (a new clause, rule, step, constant or setting with no predecessor) is classified "added". If it replaces something the parent did, it is "replaced" or "altered", not "added".
 4. **Stale references.** For every prompt string, instruction, template or code path in production code that the change keeps or adds, check whether it refers to an input, tag, field, variable or step the change removes (for example "the primary story" when no story is marked primary any more). Each one is a row classified "altered (stale reference)", quoting the text and naming the removed input. Documentation (README, ARCHITECTURE, ADR, BACKLOG, other docs) that describes removed behavior is not a row: it goes in Doc follow-ups.
@@ -42,5 +42,6 @@
    - Row order in each table: undecided rows first, ordered by driver status (failing, then not measured, then met); then decided rows; then added rows; kept rows last.
 4. **Added.** One line per added row: "#n: <behavior>: decided (<quote>) / no decision found". Added rows never appear in Decisions needed.
 5. **Doc follow-ups.** One line per document passage that still describes removed or altered behavior, quoting it. Never in Decisions needed.
-6. **Decisions needed.** Every undecided row classified dropped, altered, relocated or replaced, plus every conflict, as two ranked lists, A then B, each in table order, one line per row: "#n: <behavior>: <visible to a visitor / no visible effect>". If the list is empty, say "No decisions needed".
-7. **Size line.** If Decisions needed has more than 10 entries, end with: "Decisions needed: N (over 10). Consider splitting this change into smaller changes, each with its own review." Otherwise end with "Decisions needed: N."
+6. **Differs from plan** (Green only). One line each: an in-scope item the diff changes that `plan.md` does not name, or a `plan.md` item the diff does not make, citing both. If none: "Matches the approved plan". Each one also goes in Decisions needed.
+7. **Decisions needed.** Every undecided row classified dropped, altered, relocated or replaced, plus every conflict, as two ranked lists, A then B, each in table order, one line per row: "#n: <behavior>: <visible to a visitor / no visible effect>". If the list is empty, say "No decisions needed".
+8. **Size line.** If Decisions needed has more than 10 entries, end with: "Decisions needed: N (over 10). Consider splitting this change into smaller changes, each with its own review." Otherwise end with "Decisions needed: N."
