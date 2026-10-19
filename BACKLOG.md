@@ -55,6 +55,7 @@ Dead code: -176, -183 · -241 (dead prose in `_router_rejection()`: delete it) �
 Untraced flash: -229 (My Work flashes before Ask Agy conversation -- needs DevTools trace) · -289 (MATTGPT-018 regression watch: stale landing elements painted 240-370 ms, one mixed frame in 3 runs)
 BDD flakes: -122, -131, -142, -145, -197, -198
 Eval honesty: -337 (spec query count includes 11 unchecked entity_detection queries)
+Test reliability: -342 (golden Q50 to Q52 send a placeholder question)
 Small refactors: -153, -062, -082, -083, -084, -150, -217 (pronoun grammar in substitution)
 Process: -335 (governor skill pilot, advisory)
 BDD structure: -213 (shared step definitions)
@@ -172,6 +173,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-339](#mattgpt-339) | Row 13 check: work-history questions whose search returns nothing, every claim checked against the corpus | Open | Medium | Action | value | October 19, 2026 |
 | [MATTGPT-340](#mattgpt-340) | Rows 29 and 26: restore the code-picked opener, used word for word | Open | Medium | Issue | value | October 19, 2026 |
 | [MATTGPT-341](#mattgpt-341) | Rows 20 and 27 with the "builder" revisit: Professional Narrative on technical questions and its verbatim phrases | Open | Medium | Issue | value | October 19, 2026 |
+| [MATTGPT-342](#mattgpt-342) | Golden eval Q50 to Q52 send the placeholder "(dynamic - built from story_index)" instead of a real question | Open | Low | Issue | chore | October 19, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently | Parked | Medium | Action | value | August 3, 2026 |
@@ -1687,6 +1689,8 @@ Same class as the no-inference clause in MATTGPT-250: retrieved text that sits n
 
 **Stale in part (verified Oct 17, 2026, HEAD 836bf4d):** `build_user_message()` is gone (1095d2c), so the count of anti-evaluation rules above (8 places) predates the tool prompt. Recount in `build_tool_system_prompt()`'s prompt on pickup.
 
+
+**Voice comparison (Oct 19, 2026; read-only, no model calls; `golden_rag_20261014_140843` vs MATTGPT-320 `golden_20261016_102942`, answered rows only):** -252's evaluative phrases ("showcasing his", "demonstrated through his", "illustrate Matt's", "highlights his", "reflects his") in 15 of 249 old answers and 0 of 259 new; "commitment" 10 of 249 old, 6 of 259 new. It is a phrase match on the text after the strip, so a lower bound, not -252's raw-text rate (which needs text captured before the strip).
 ---
 
 ### MATTGPT-255
@@ -3173,6 +3177,28 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 **Where "builder" is codified (verified Oct 19, 2026):** CLAUDE.md's RAG Pipeline section ("'builder' is used verbatim in Professional Narrative responses"), `get_verbatim_requirement()` in `prompts.py`, 2 corpus 5PSummaries, and 7 test files. A change to the CLAUDE.md rule is Matt's.
 
 **Row 27's figure (corrected Oct 19, 2026):** "Matt is a builder." appears in 1 of the 4 "Matt's GenAI work" answers in the MATTGPT-320 golden run; the other 3 say he "describes himself as a 'builder'".
+
+---
+
+### MATTGPT-342
+**Golden eval Q50 to Q52 send the placeholder "(dynamic - built from story_index)" instead of a real question**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Issue
+- **File:** `tests/eval_rag_quality.py` (`GOLDEN_QUERIES["context_story"]`, `evaluate_query()`), `tests/test_structural_assertions.py`
+- **Related:** MATTGPT-337, MATTGPT-338 (golden eval measures)
+- **Logged:** October 19, 2026
+
+**Issue (Matt, Oct 19, 2026):** golden eval Q50 to Q52 send the placeholder "(dynamic - built from story_index)" instead of a real question, and both golden runs record it. Fix the question builder or drop the three.
+
+**Verified Oct 19, 2026 (HEAD 304d0fc):**
+- The three `context_story` specs have `"query": "(dynamic - built from story_index)"` with `story_index` 0, 10 and 50.
+- `evaluate_query()` calls `rag_fn(query, filters, stories)` with that placeholder before any category branch. The `context_story` branch then builds `f"Tell me more about: {story_title}"` and calls the pipeline a second time.
+- Both golden runs record 12 placeholder calls each (`golden_rag_20261014_140843` and MATTGPT-320 `golden_20261016_102942`): 3 from `TestContextStory`, plus 3 each from `test_structural_assertions.py`'s `TestNoMetaCommentary`, `TestAgyVoice` and `TestAllStructuralChecks`, which parametrize over every `GOLDEN_QUERIES` value and never build the real question. Each run also has the 3 real "Tell me more about:" calls.
+- On the new path all 12 placeholder answers are "🐾 What would you like to explore about Matt’s work: ...?" (the voice comparison, Oct 19, 2026); the old path answered them with a Sparkfly story.
+
+**Fix direction:** build the question once, where the spec is read, so every suite sends the real one; or drop the three specs. A fix also removes the 12 closing-offer answers from voice comparisons.
 
 ---
 
