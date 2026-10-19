@@ -164,7 +164,7 @@ responsibility, In Progress), -296 (closing offer in a prompt example), -297 (no
 answers), -300 (thinking indicator shows real progress), -301 (em dashes left in the repo), -306 (set store=False
 after 275, Blocked), -307 (Key Metrics label cut), -310 (direct-reports
 answer varies), -311 (no ongoing-period End_Date), -327 (rewritten quotations),
--328 (rule 0b decline follow-ups), -339 (row 13: empty-search work-history answers, claims checked),
+-328 (rule 0b decline follow-ups),
 -341 (rows 20 and 27 with the "builder" revisit).
 
 ## 4. Role Match
@@ -261,7 +261,7 @@ Match).
 **Open tickets:** -146, -228, -204, -150, -122, -131, -197, -145,
 -183, -210, -166, -083, -271, -295 (Timeline era order), -308
 (My Work first page is MattGPT stories), -324 (My Work profile facts, from -250), -325 (query-term mentions
-missed under the embedding cutoff), -331 (Home cards 3, 5 and 6 keep only their first Domain, High).
+missed under the cutoff or below the top 25), -331 (Home cards 3, 5 and 6 keep only their first Domain, High).
 
 ## 7. Operational reliability
 

@@ -82,6 +82,10 @@ MATTGPT-060: `home.feature`'s card and Ask Agy scenarios assert the destination 
 
 ### Ask Agy
 
+**October 19, 2026 -- Row 13 accepted: empty-search work-history answers checked against the corpus (MATTGPT-339)** -- `26ffa39` (evidence)
+
+The 1095d2c walkthrough accepted row 13 (Ask Agy answers instead of refusing when every search is empty) only for the measured personal case. This run took work-history questions through `agy_answer()` in two arms: natural (Pinecone as is) and forced (every search handed `results=[]`), 2 runs each, 20 turns, $0.1454 (`docs/evidence/MATTGPT-339/row13_20261019_152759/`). No natural run returned zero results (0 of 10), so the empty path is rare on work-history questions. The forced arm's claim check (`claims.md`) found 11 claims, 7 supported; the 4 unsupported are the agriculture absence claim, which the natural arm also made with 5 stories retrieved, so it is a retrieval miss, not an empty-search effect, filed as MATTGPT-325's second case. Row 13 is fully accepted. No code change.
+
 **October 17, 2026 -- Crude questions about Matt rejected before any model call (MATTGPT-329)** -- `f85969f` (evidence), `88ac7ed`
 
 1095d2c removed search confidence as a gate, and "Does Matt have a penis?" reached the answering model in production with three source cards. Before 1095d2c (d04396b), the low-confidence gate caught it (Pinecone 0.208); "Is Matt sexy?" reached the model even then. The `adult_content` nonsense rule widens from `\b(nsfw|porn|xxx|nude|naked|sex)\b` to add sexy, penis, vagina and genital(s) as whole words. Across 7,699 local log rows and the 327-row query log the new pattern matches only the five logged crude questions, and the must-preserve set (`LEGITIMATE`, 59) matches none. Live check: the five targets rejected with 0 model calls and 0 embeddings (10/10); six story and fact controls answered (12/12). Unblocks MATTGPT-236's removal of the router.
