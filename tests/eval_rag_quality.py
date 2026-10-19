@@ -1094,20 +1094,13 @@ def fs_era_present(sources: list[dict], stories: list[dict]) -> bool:
     return any(s.get("Era") == FS_ERA for s in _counted_stories(sources, stories))
 
 
-def _normalize(text: str) -> str:
-    return " ".join(text.lower().split())
-
-
-def count_named_clients(answer_md: str, stories: list[dict]) -> int:
-    """Distinct non-generic corpus Client names that appear in the answer text."""
-    text = _normalize(answer_md)
-    names = {
-        _normalize(s.get("Client") or "")
-        for s in stories
-        if (s.get("Client") or "").strip() and not is_generic_client(s["Client"])
-    }
-    # Whole-name match: a name is not counted inside a longer word.
-    return sum(1 for n in names if re.search(rf"(?<!\w){re.escape(n)}(?!\w)", text))
+def count_named_clients(sources: list[dict], stories: list[dict]) -> int:
+    """Distinct non-generic Client values of the answer's source stories,
+    looked up by id, excluding Professional Narrative stories (Theme). Counted
+    from the sources, not the answer text, so a client the answer calls by
+    another name still counts."""
+    clients = {s.get("Client") or "" for s in _counted_stories(sources, stories)}
+    return sum(1 for c in clients if not is_generic_client(c))
 
 
 def _shown_card_cap() -> int:
@@ -1136,7 +1129,7 @@ def _record_breadth(result: "EvalResult", rag_result: dict, stories: list[dict])
         result.details[f"eras{suffix}"] = count_eras(srcs, stories)
         result.details[f"projects{suffix}"] = count_projects(srcs, stories)
         result.details[f"fs_era_present{suffix}"] = fs_era_present(srcs, stories)
-    result.details["named_clients"] = count_named_clients(result.response, stories)
+    result.details["named_clients"] = count_named_clients(sources, stories)
 
 
 # =============================================================================
