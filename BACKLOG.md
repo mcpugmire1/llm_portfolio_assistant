@@ -443,6 +443,8 @@ Each detail block uses these fields. Not every field is required for every item.
 
 **Sequence:** tier 1 first. Tier 2 after MATTGPT-258's data-contract check (check f) exists. BDD in tier 2 also depends on MATTGPT-014 (skipped Role Match BDD scenarios; MATTGPT-017's six run since 5e84710); until it lands, those scenarios are reported as skipped, not run.
 
+
+**Cost record (Matt, Oct 19, 2026):** every live run records its dollar cost in its evidence folder, so briefs can cite real figures and Tier 2's cost budget can be set from them. Verified Oct 19, 2026: of the committed evidence folders, only MATTGPT-282's two runs carry a cost file (`sol_arms_20261011_211830/cost_latency.txt`, with `cost_latency.py`, and `sol_vs_4o_20261011_183401/cost_summary.py`).
 ---
 
 ### MATTGPT-040
