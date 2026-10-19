@@ -21,15 +21,42 @@ Run with: pytest tests/bdd/steps/test_ask_mattgpt.py -v
 """
 
 import pytest
-from pytest_bdd import given, parsers, scenarios, then, when
+from pytest_bdd import given, parsers, scenario, scenarios, then, when
 
 from utils.ui_helpers import (
     BANNER_COPY,
     RULE_CHIPS,
 )
 
-# Auto-bind all 10 scenarios from the .feature file
-scenarios("../features/ask_mattgpt.feature")
+FEATURE = "../features/ask_mattgpt.feature"
+
+# The router still redirects in Ask Agy; these expect it removed.
+XFAIL_236 = pytest.mark.xfail(
+    reason="MATTGPT-236 re-scoped; Green restarts after the breadth decision",
+    strict=False,
+)
+
+
+@XFAIL_236
+@scenario(FEATURE, "A personal question gets Agy's decline, not a banner")
+def test_a_personal_question_gets_agys_decline_not_a_banner():
+    pass
+
+
+@XFAIL_236
+@scenario(FEATURE, "An out-of-industry question gets Agy's answer, not a banner")
+def test_an_outofindustry_question_gets_agys_answer_not_a_banner():
+    pass
+
+
+@XFAIL_236
+@scenario(FEATURE, "A personal question after a rule rejection gets an answer")
+def test_a_personal_question_after_a_rule_rejection_gets_an_answer():
+    pass
+
+
+# Auto-bind the remaining scenarios from the .feature file
+scenarios(FEATURE)
 
 # =============================================================================
 # WAIT CONSTANTS

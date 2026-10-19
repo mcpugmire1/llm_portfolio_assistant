@@ -220,9 +220,10 @@ class TestOutOfScope:
     Rewritten to call the pipeline end-to-end (agy_answer() since MATTGPT-275)
     and assert on the retrieval-side
     rejection reason. Two queries take two different mechanisms:
-      - "Tell me about Matt's retail sales work": was a semantic router
-        out_of_scope redirect; since MATTGPT-236 it reaches the model
-        (test_retail_question_is_answered_not_router_redirected)
+      - "Tell me about Matt's retail sales work": semantic router routes to
+        out_of_scope; MATTGPT-236's expectation that it reaches the model
+        (test_retail_question_is_answered_not_router_redirected) is xfail
+        until -236's Green restarts
       - "What is Matt's favorite food?": nonsense filter fires before the
         router runs; intent_family is None, rejection_reason is
         "rule:personal_trivia"
@@ -261,6 +262,10 @@ class TestOutOfScope:
             f"Got intent_family: {result.get('intent_family')!r}"
         )
 
+    @pytest.mark.xfail(
+        reason="MATTGPT-236 re-scoped; Green restarts after the breadth decision",
+        strict=False,
+    )
     def test_retail_question_is_answered_not_router_redirected(self, stories):
         """MATTGPT-236: the router is out of Ask Agy's answer path. "Tell me
         about Matt's retail sales work" was a semantic_router:out_of_scope
