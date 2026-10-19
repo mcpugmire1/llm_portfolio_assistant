@@ -167,6 +167,45 @@ answer varies), -311 (no ongoing-period End_Date), -327 (rewritten quotations),
 -328 (rule 0b decline follow-ups),
 -341 (rows 20 and 27 with the "builder" revisit).
 
+## Ask Agy (drivers 1 to 3): fitness functions and open decisions
+
+Source: the change-governor's Ask Agy draft, checker-passed Oct 19, 2026 (relayed by Matt). The intent lines themselves stay in the design spec. Intent numbers: 1 no router in the answer path; 2 follow-up searches written by the model; 3 cards are the cited stories; 4 breadth on big-picture and named division or client questions; 5 profile facts as fact cards; 6 rule 0b decline; 7 voice; 8 every claim traceable; 9 failures visible; 10 wording variants.
+
+**Fitness functions**
+
+| Intent | Measure | Status | Latest result |
+|---|---|---|---|
+| 1 | Forced first search; nonsense rule fires with no model call | Exists (unit tests) | None recorded |
+| 1 | No router call | Exists, xfailed until -236's Green (unit and BDD) | Router-off gate: A 524, B 532, C 531 of 610 |
+| 2 | Model writes its own search; history placement | Exists (unit tests) | None for this measure; aggregate threshold undefined |
+| 3 | Cards are the cited stories | Exists as an xfailed Red (5 tests) | None; `test_sources_are_the_stories_the_searches_returned` pins today's behavior |
+| 3 | Cards back up the claims | Missing: -128's retrieval check ("Zero of the 65 eval queries") | None |
+| 4 | Eras, projects, FS era presence over sources and cards shown | Exists, counts only (-338, no threshold) | None: no -338 run recorded |
+| 4 | Breadth in the gate scorer; misattribution check | Missing: planned in -236's run | None |
+| 5 | Fact cards come from the profile | Exists (unit tests) | None specific to fact cards |
+| 5 | No story cards on a fact answer | Exists as an xfailed Red (-128) | None |
+| 6 | Decline line reaches the model | Exists | -322 run 6: 79/80 declines pass |
+| 6, 8 | Empty searches on work-history questions, every claim checked | Exists (-339 run, 26ffa39) | 7 of 11 claims supported; the 4 unsupported are the agriculture absence claim, a retrieval miss on -325. 0 of 10 natural runs had a zero-result search |
+| 7 | Opener used word for word | Missing: planned on -340; a committed test currently asserts the opposite | None |
+| 7 | No closing offer | Exists (gate c14 to c17, the -276 closers run) | 0 in every arm |
+| 7 | Evaluative sentences | Exists on the final text; missing on raw text before the strip (-252) | 15 of 249 old vs 0 of 259 new (a lower bound) |
+| 7 | No dashes | Exists | 0 of 450 gate turns |
+| 8 | No invented figures, clients or dates | Exists (gate run) | None found; 16 runs with a contradicted claim |
+| 9 | Breathers and error message | Exists (unit tests) | None recorded |
+| 9 | Fallback is logged | Missing: planned on -292 | None |
+| 10 | Wording variants vs controls | Exists on the old pipeline only; missing on `agy_answer()` | 2 of 20 pairs failing (Oct 10, old pipeline) |
+
+**Open decisions**
+
+| # | Question | Decide by |
+|---|---|---|
+| D1 | With no router, what makes a big-picture answer show more than 3 cards? Today `agy_answer()` sets the intent to None, so every answer gets at most 3. No record names a replacement signal. | -236's breadth decision, before -128's go |
+| D2 | How is "cited" decided? Decided: option A, text match (Matt, Oct 19, 2026; recorded on -128). Still open on -128: where META-IND cards go, and the thin-answer shape. | -128's go |
+| D3 | Breadth on big-picture questions: keep the synthesis pick, or replace it? -332 waits on this. | Before -236's Green |
+| D4 | Rows 20, 27 and 8: narrative stories on technical questions, the verbatim phrases, and Matt substitution in the search query. | -341's go, after -128's row 20 measurement; -077's re-wire-or-delete call before -287 deletes the functions |
+| D5 | Row 14, the file-order fallback | -292's go |
+| D6 | Row 13, empty searches on work-history questions | Resolved (Matt, Oct 19, 2026): -339 closed; row 13 accepted; the agriculture claims are on -325 |
+
 ## 4. Role Match
 
 **Intended outcome:**

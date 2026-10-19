@@ -1072,6 +1072,7 @@ None of these stories is cited in the answer. This is the "retrieved, not cited"
 
 **After the 1095d2c walkthrough (Matt, Oct 19, 2026):** lane 1, after the walkthrough.
 - First decision: define "cited", measured on both the client-named controls and the big-picture questions, since MATTGPT-236's breadth fix depends on the same cards.
+- **Decided (Matt, Oct 19, 2026):** "cited" is option A, text match.
 - Covers card accuracy on client-named questions (rows 6, 7 and 21) and row 20's measurement: on technical questions, how often a narrative story is retrieved, quoted and shown as a card.
 - The card cap on big-picture answers is MATTGPT-236's (row 38); this ticket references it.
 
