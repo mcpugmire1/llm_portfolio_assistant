@@ -256,7 +256,7 @@ Match).
 - The career-narrative field differs by surface (Theme, Era, Category).
 
 **Open tickets:** -146, -228, -204, -150, -122, -131, -197, -145,
--183, -210, -166, -083, -271, -295 (Timeline era order), -308
+-183, -210, -166, -083, -295 (Timeline era order), -308
 (My Work first page is MattGPT stories), -324 (My Work profile facts, from -250), -325 (query-term mentions
 missed under the cutoff or below the top 25), -331 (Home cards 3, 5 and 6 keep only their first Domain, High).
 

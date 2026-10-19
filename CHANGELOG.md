@@ -154,6 +154,9 @@ Ask Agy sends the last two exchanges (`ASK_HISTORY_MAX_MESSAGES = 4`) to the res
 
 Role Match returned a gap on "Published thought leadership or conference speaking" in every run because the corpus had no thought leadership story. "Thought Leadership Through Client PoVs and Published Enablement Content" landed in ab65efc (Oct 9). Matt's Role Match run on Oct 19 (Senior Engineering Leader, Product Platform JD, pasted in the backlog session, not committed) rates "Published thought leadership or conference speaking on engineering culture, modernization, or AI adoption" Strong and cites that story. Correction to the Oct 4 observation: the ARISE HBCU Conference was speaking, not attendance; the thought leadership story says Matt "spoke at Accenture's ARISE HBCU Conference", and the HBCU story says he delivered sessions. Not pursued: the separate I&TL mandate story (candidate 1) and its NITSN ownership question. Client-attended symposiums are not in the corpus.
 
+**October 19, 2026 -- Near-duplicate public_tags consolidated in the master (MATTGPT-271)** -- no commit (master edit)
+
+The Oct 4 re-tagging pass left near-duplicate tag pairs ("Discovery & Framing" / "Discovery and Framing", "Prototyping" / "Rapid Prototyping", "Financial Services" / "Financial Services Industry"). Matt consolidated them in the master; the corpus maintenance skill's search of 15OCT26 finds one form per pair in Public Tags. The repo JSONL can still drift: `generate_public_tags.py` merges LLM tags into Excel tags for any story it re-tags, and "Financial Services Industry" has toggled on the Career Intent story across five exports (5b72809, 3c4b068, ab65efc, dacf2ff, 9bb0458; present at HEAD). Accepted: no visitor-facing filter or count uses tags (no tag filter in the UI; keyword scoring uses token sets), so a variant only shows in that story's detail tag list. Matt merges generated tags back into the master by hand.
 
 ## September 2026
 

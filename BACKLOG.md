@@ -119,7 +119,6 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-266](#mattgpt-266) | Role Match labels responsibility-derived rows as Required Qualifications | Open | High | Bug | value | October 3, 2026 |
 | [MATTGPT-267](#mattgpt-267) | Have model return line numbers; Python fills source_text from JD -- saves ~1.7s on long JDs | Open | Medium | Refactor | value | October 3, 2026 |
 | [MATTGPT-268](#mattgpt-268) | "Does Matt have a CS degree?" leads with a no that Role Match doesn't give -- parity fix | Open | High | Bug | value | October 4, 2026 |
-| [MATTGPT-271](#mattgpt-271) | Near-duplicate public_tags from re-tagging pass in master Excel | Open | Low | Corpus | value | October 4, 2026 |
 | [MATTGPT-275](#mattgpt-275) | Ask Agy moves to tool-calling retrieval: the model answers from profile and conversation, and calls search_stories when needed | Open | High | Action | value | October 6, 2026 |
 | [MATTGPT-278](#mattgpt-278) | Tool-path and short-form client names go unbolded | Open | Medium | Issue | value | October 6, 2026 |
 | [MATTGPT-280](#mattgpt-280) | Tool-path narrative tone depends on which story leads | Open | Medium | Issue | value | October 8, 2026 |
@@ -1139,6 +1138,8 @@ None of these stories is cited in the answer. This is the "retrieved, not cited"
 
 **Acceptance criterion:** `grep -rn "150+ engineers" ui/ tests/ data/` returns 0 hits (excluding code comments and regex patterns in backend_service.py).
 
+
+**Progress (Oct 19, 2026; corpus maintenance check of the 15OCT26 master, relayed by Matt):** corpus side done: no story says "150+ engineers". The test files still do. Verified Oct 19, 2026 in the repo: the acceptance grep finds `tests/eval_rag_quality.py`, `tests/unit/test_category_cards.py`, `tests/bdd/features/home.feature` and `tests/bdd/steps/test_home.py`; it also matches the untracked log `data/borderline_queries.csv`, which the acceptance grep should leave out.
 ---
 
 ### MATTGPT-131
@@ -1423,6 +1424,8 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 - **Fix:** Audit banking stories (JPM ACCESS, RBC, HSBC, others) for cross-border payment specifics -- SWIFT, wire, ACH, FX, correspondent banking -- and add explicit mentions to Situation/Action/Competencies where the substance is real. Same audit likely surfaces adjacent gaps (ISO 20022, SEPA, etc.).
 - **Probe additions:** "Has Matt worked with SWIFT payments?", "Tell me about Matt's cross-border payment experience", "Does Matt know ACH/wire/FX?"
 
+
+**Progress (Oct 19, 2026; corpus maintenance check of the 15OCT26 master, relayed by Matt):** 10 stories already carry the operational vocabulary (Sev-1, on-call, incident; 10 in the repo JSONL too, verified Oct 19, 2026), including Building AT&T's Service Delivery Platform and the Fiserv and ACCESS stories. The audit itself hasn't been written up.
 ---
 
 ### MATTGPT-155
@@ -1446,6 +1449,8 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 
 **Elicitation note:** Follow the same elicitation-first approach as -078/-129. Do not write the story without a session to pull the specific numbers and decision moments.
 
+
+**Progress (Oct 19, 2026; corpus maintenance check of the 15OCT26 master, relayed by Matt):** "Driving HSBC's Mortgage Transformation from Assessment to $10M Contract" covers the ROM, pricing model, staffing and SOW. CFM, LCR/UCR, CRs, SOW expansions and outcome-based contracting are still the gap, so "zero sell-side substance" is overstated.
 ---
 
 ### MATTGPT-156
@@ -1468,6 +1473,8 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 
 **Remaining question:** Whether vendor commercial management warrants its own story. Evidence is currently Action/Competencies-level on one story, so it will not retrieve on a vendor-spend query. Rate-card management, procurement process, and vendor governance remain corpus-zero. RBC confirmed not applicable; the invoice review was ACCESS only.
 
+
+**Progress (Oct 19, 2026; corpus maintenance check of the 15OCT26 master, relayed by Matt):** the Bottomline fee and cost approval is now in "Building the Payment Engine Behind JP Morgan ACCESS", in both Action and Competencies ("Vendor Invoice Review & Approval"; both present in the repo JSONL, verified Oct 19, 2026). The rest of the gap is undecided.
 ---
 
 ### MATTGPT-244
@@ -1973,27 +1980,6 @@ f. Data-contract check against the real corpus (added Oct 11, 2026): field names
 **Acceptance:** CS phrasings no longer lead with a no; PMP still produces a no; story controls unchanged.
 
 **Update (Oct 4, 2026, b2c85ba):** Rule 0a's direct no scoped to certifications (ADR 030). CS leading no 8/50, down from 9/10; PMP direct phrasings 20/20. Any direct-no wording in rule 0a leaks into education answers (4/20 with the scoped sentence, 0/20 with it removed in memory). The "What about PMP" follow-up pivot moved to MATTGPT-273. Acceptance not fully met; D1 still open.
-
----
-
-### MATTGPT-271
-**Near-duplicate public_tags from re-tagging pass in master Excel**
-
-- **Status:** Open
-- **Priority:** Low
-- **Type:** Corpus
-- **File:** Master Excel (via corpus maintenance skill)
-- **Logged:** October 4, 2026
-
-**Issue:** The re-tagging pass produced near-duplicate tag variants across stories (Oct 4, 2026):
-
-- "Discovery & Framing" and "Discovery and Framing"
-- "Prototyping" and "Rapid Prototyping"
-- "Financial Services" and "Financial Services Industry"
-
-These only affect behavior if tags feed filters or counts. Fix is in the master Excel: pick one canonical form per pair and update all stories to use it.
-
-**Fix:** Corpus maintenance pass -- Matt consolidates in the master, then regenerates the JSONL.
 
 ---
 
