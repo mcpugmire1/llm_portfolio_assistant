@@ -1,11 +1,12 @@
 """
 BDD Step Definitions for Ask Agy — Nonsense rejection banner + chip sets.
 
-Implements the 10 scenarios in tests/bdd/features/ask_mattgpt.feature.
+Implements the 13 scenarios in tests/bdd/features/ask_mattgpt.feature.
 Step definitions use Playwright (via the shared browser_page fixture in
 conftest.py) to drive the running Streamlit app at localhost:8501.
 
-Constants (RULE_CHIPS, BANNER_COPY) are imported from utils/ui_helpers.py, the single source of truth. Chip
+Constants (RULE_CHIPS, PERSONAL_CHIPS, OUT_OF_SCOPE_CHIPS, BANNER_COPY)
+are imported from utils/ui_helpers.py, the single source of truth. Chip
 copy edits change utils/ui_helpers.py only; this test file picks up the
 new values automatically.
 
@@ -25,6 +26,8 @@ from pytest_bdd import given, parsers, scenario, scenarios, then, when
 
 from utils.ui_helpers import (
     BANNER_COPY,
+    OUT_OF_SCOPE_CHIPS,
+    PERSONAL_CHIPS,
     RULE_CHIPS,
 )
 
@@ -263,13 +266,15 @@ def given_banner_showing(browser_page, reason):
     """Trigger the named rejection branch by submitting a known query.
 
     Maps reason → trigger query (mirrors the trigger phrases used in
-    the Scenario "When" steps). Ask Agy has one rejection branch since
-    MATTGPT-236 took the router's personal and out_of_scope redirects off
-    its answer path:
+    the Scenario "When" steps):
       rule:*        → "Tell me a joke about Matt's career"
+      personal      → "Is Matt married?"
+      out_of_scope  → "Tell me about Matt's retail experience"
     """
     triggers = {
         "rule:*": "Tell me a joke about Matt's career",
+        "personal": "Is Matt married?",
+        "out_of_scope": "Tell me about Matt's retail experience",
     }
     query = triggers.get(reason)
     assert query, f"No known trigger query for reason={reason!r}"
@@ -400,7 +405,7 @@ def then_banner_displays_copy(browser_page, reason):
 
 
 # =============================================================================
-# THEN: Chip visibility assertions (RULE_CHIPS)
+# THEN: Chip visibility assertions (RULE_CHIPS / PERSONAL_CHIPS / OUT_OF_SCOPE_CHIPS)
 # =============================================================================
 
 
@@ -411,6 +416,32 @@ def then_all_rule_chips_visible(browser_page):
     missing = [c for c in expected if c not in visible]
     assert not missing, (
         f"RULE_CHIPS labels not all visible.\n"
+        f"  Expected: {expected!r}\n"
+        f"  Missing:  {missing!r}\n"
+        f"  Visible:  {visible!r}"
+    )
+
+
+@then("all PERSONAL_CHIPS should be visible")
+def then_all_personal_chips_visible(browser_page):
+    visible = get_visible_chip_labels(browser_page)
+    expected = [label for label, _ in PERSONAL_CHIPS]
+    missing = [c for c in expected if c not in visible]
+    assert not missing, (
+        f"PERSONAL_CHIPS labels not all visible.\n"
+        f"  Expected: {expected!r}\n"
+        f"  Missing:  {missing!r}\n"
+        f"  Visible:  {visible!r}"
+    )
+
+
+@then("all OUT_OF_SCOPE_CHIPS should be visible")
+def then_all_out_of_scope_chips_visible(browser_page):
+    visible = get_visible_chip_labels(browser_page)
+    expected = [label for label, _ in OUT_OF_SCOPE_CHIPS]
+    missing = [c for c in expected if c not in visible]
+    assert not missing, (
+        f"OUT_OF_SCOPE_CHIPS labels not all visible.\n"
         f"  Expected: {expected!r}\n"
         f"  Missing:  {missing!r}\n"
         f"  Visible:  {visible!r}"

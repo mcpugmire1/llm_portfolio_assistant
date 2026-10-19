@@ -221,9 +221,10 @@ class TestOutOfScope:
     and assert on the retrieval-side
     rejection reason. Two queries take two different mechanisms:
       - "Tell me about Matt's retail sales work": semantic router routes to
-        out_of_scope; MATTGPT-236's expectation that it reaches the model
-        (test_retail_question_is_answered_not_router_redirected) is xfail
-        until -236's Green restarts
+        out_of_scope; intent_family is set, rejection_reason is
+        "semantic_router:out_of_scope". MATTGPT-236's expectation that it
+        reaches the model (test_retail_question_is_answered_not_router_redirected)
+        is xfail until -236's Green restarts
       - "What is Matt's favorite food?": nonsense filter fires before the
         router runs; intent_family is None, rejection_reason is
         "rule:personal_trivia"
@@ -235,6 +236,11 @@ class TestOutOfScope:
     @pytest.mark.parametrize(
         "query,expected_rejection_reason,expected_intent_family",
         [
+            (
+                "Tell me about Matt's retail sales work",
+                "semantic_router:out_of_scope",
+                "out_of_scope",
+            ),
             (
                 "What is Matt's favorite food?",
                 "rule:personal_trivia",

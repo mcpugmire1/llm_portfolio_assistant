@@ -3,13 +3,15 @@ Feature: Ask Agy — Nonsense rejection banner + contextual chip sets
   I want the rejection banner to explain the reason and offer relevant follow-ups
   So that a dead-end query becomes a productive redirect into Matt's portfolio
 
-  # See MATTGPT-071 in BACKLOG.md for the full design rationale. Ask Agy now
-  # has one rejection branch, rule:* (banner + RULE_CHIPS, capability verbs).
-  # MATTGPT-275 took low_confidence off Ask Agy's answer path and MATTGPT-236
-  # took the router's personal and out_of_scope redirects off it; their
-  # banners stay on My Work. The original four-branch design, for history:
+  # See MATTGPT-071 in BACKLOG.md for the full design rationale. Ask Agy has
+  # three rejection branches, each with a distinct banner and chip set:
+  #   rule:*         → banner + RULE_CHIPS (capability verbs)
   #   personal       → banner + PERSONAL_CHIPS (character questions)
   #   out_of_scope   → banner + OUT_OF_SCOPE_CHIPS (named anchors)
+  # MATTGPT-275 took low_confidence off Ask Agy's answer path; its banner stays
+  # on My Work. MATTGPT-236's scenarios (the router's personal and
+  # out_of_scope redirects off Ask Agy) are xfail until its Green restarts.
+  # The original low_confidence branch, for history:
   #   low_confidence → banner + rephrase prompt + OUT_OF_SCOPE_CHIPS
   #     (MATTGPT-234 reversal: the no-chips rule was right while low_confidence
   #     meant near-miss only. -234 routed off-topic fall-through queries into
@@ -29,7 +31,7 @@ Feature: Ask Agy — Nonsense rejection banner + contextual chip sets
   # MattGPT/Strangler Fig self-referential responses).
   #
   # Chip label literals AND banner copy live as module-level constants in
-  # utils/ui_helpers.py (RULE_CHIPS, and
+  # utils/ui_helpers.py (RULE_CHIPS, PERSONAL_CHIPS, OUT_OF_SCOPE_CHIPS, and
   # BANNER_COPY — a dict keyed by reason: "rule", "personal", "out_of_scope",
   # "low_confidence"). BDD step definitions read those constants — DO NOT
   # inline chip text or banner copy in this file. This keeps copy edits
@@ -73,10 +75,42 @@ Feature: Ask Agy — Nonsense rejection banner + contextual chip sets
     And a response should be generated
 
   # ---------------------------------------------------------------------------
-  # BRANCHES 2 AND 3 (MATTGPT-236): the router is out of Ask Agy's answer path
+  # BRANCH 2: personal (semantic router personal intent)
   # ---------------------------------------------------------------------------
-  # The semantic router's personal and out_of_scope redirects no longer run in
-  # Ask Agy. A personal question gets Agy's voiced decline (rule 0b,
+
+  Scenario: personal rejection shows banner and the character chip set
+    When the user submits "Is Matt married?"
+    Then the personal rejection banner should be displayed
+    And the banner displays the personal copy from BANNER_COPY
+    And all PERSONAL_CHIPS should be visible
+
+  @regression
+  Scenario: Clicking a personal chip injects its prompt
+    Given the personal rejection banner is showing
+    When the user clicks the first personal chip
+    Then that chip's prompt should appear as the next user message
+
+  # ---------------------------------------------------------------------------
+  # BRANCH 3: out_of_scope (semantic router out_of_scope intent)
+  # ---------------------------------------------------------------------------
+
+  Scenario: out_of_scope rejection shows banner and the named-anchor chip set
+    When the user submits "Tell me about Matt's retail experience"
+    Then the out_of_scope rejection banner should be displayed
+    And the banner displays the out_of_scope copy from BANNER_COPY
+    And all OUT_OF_SCOPE_CHIPS should be visible
+
+  @regression
+  Scenario: Clicking an out_of_scope chip injects its prompt
+    Given the out_of_scope rejection banner is showing
+    When the user clicks the first out_of_scope chip
+    Then that chip's prompt should appear as the next user message
+
+  # ---------------------------------------------------------------------------
+  # MATTGPT-236 (xfail until its Green restarts): the router off Ask Agy
+  # ---------------------------------------------------------------------------
+  # With the semantic router's personal and out_of_scope redirects off Ask
+  # Agy, a personal question gets Agy's voiced decline (rule 0b,
   # MATTGPT-322); an out-of-industry question is answered or declined by the
   # model. My Work keeps the router and its banners.
 
@@ -115,6 +149,16 @@ Feature: Ask Agy — Nonsense rejection banner + contextual chip sets
   # STATE LIFECYCLE
   # ---------------------------------------------------------------------------
 
+  Scenario: Sequential rejections swap chip sets per branch
+    When the user submits "Tell me a joke about Matt's career"
+    Then the rule:* rejection banner should be displayed
+    And all RULE_CHIPS should be visible
+    When the user submits "Is Matt married?"
+    Then the personal rejection banner should be displayed
+    And all PERSONAL_CHIPS should be visible
+    And no RULE_CHIPS should be visible
+
+  # MATTGPT-236, xfail until its Green restarts.
   Scenario: A personal question after a rule rejection gets an answer
     When the user submits "Tell me a joke about Matt's career"
     Then the rule:* rejection banner should be displayed
