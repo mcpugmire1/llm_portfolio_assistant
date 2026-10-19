@@ -3865,7 +3865,9 @@ This hits the exact audience deep links serve: a hiring manager who follows a fo
 
 **Unblocked (Oct 17, 2026):** MATTGPT-322's voiced 0b decline shipped in 58fe71f, with its live runs in 706505f. With the router out, married, age and kids move from the personal banner to that decline. 58fe71f's browser check: "Is Matt married?" still shows the personal banner, pending this ticket.
 
-**Target (Matt, Oct 17, 2026):** no router call in Ask Agy, including no score-only call. MATTGPT-223 and MATTGPT-239 are re-scoped to My Work.
+**Target (Matt, Oct 19, 2026; supersedes Oct 17):** the plan restores pre-275 breadth, with per-Era search instead of the old per-Theme search (free checks, Oct 19), and the router's synthesis family as the trigger for per-Era search and 6 cards (`SOURCES_MAX_SYNTHESIS`). Whether the router stays for that is decided by this ticket's run. ADR 054 (Planned: no router call in Ask Agy) is in question until then.
+- Verified Oct 19, 2026 (1095d2c^): the pre-275 synthesis search, `get_synthesis_stories(stories, top_per_theme=2, query=...)`, ran a "parallel metadata-filtered search across themes", per Theme. Per-Era is deliberate (Matt, Oct 19, 2026): the free check measured it (FS era present in 100 of 100 at 6 cards; as reported, not in a commit); the old per-Theme search was not measured.
+- Superseded target (Oct 17): no router call in Ask Agy, including no score-only call. MATTGPT-223 and MATTGPT-239 were re-scoped to My Work on it; they stay there unless the run keeps the router in Ask Agy.
 
 **1095d2c walkthrough (Matt, Oct 18 to 19, 2026):** replaces the Oct 17 provisional audit block. The row-by-row decisions (rows 1 to 42) are ADR 061 (79f7a8f); this ticket carries the breadth decision and the rows below.
 - **Breadth decision:** breadth comes back as a priority.
