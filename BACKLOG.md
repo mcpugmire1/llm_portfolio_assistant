@@ -16,7 +16,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 4. **-331** -- Home cards 3, 5 and 6 apply only their first Domain value: My Work's single-select Domain box (MATTGPT-065) drops the rest, so Teams & Talent lands on 1 story where its 4 values cover 15. Fix needs Matt's UX call: multi-select Domain, or one chip named for the card.
 
 **NEXT**
-5. **-338** -- Breadth as a standing measure: distinct named clients and eras per answer in the gate scorer and the golden eval, and skipped queries reported as skipped (with -337). The -236 gate scored pass/fail and missed router-off answers citing Accenture alone. Lane 2 (-336 shipped c7ea5cd).
+5. **-338** -- Breadth as a standing measure: distinct eras and projects per answer (Professional Narrative excluded) and Financial Services era presence, over full sources and the cards shown (the applicable card cap), in the gate scorer and the golden eval; named clients secondary; and skipped queries reported as skipped (with -337). The -236 gate scored pass/fail and missed router-off answers citing Accenture alone. Lane 2 (-336 shipped c7ea5cd).
 6. **-128** -- Red in 1095d2c (`TestSourcesAreTheCitedStories`, 5 xfails); cards still show all retrieved stories. Nothing of its contract has shipped. Cards show the stories the answer cited, not just those retrieved: the Oct 12 JP Morgan payments answer drew 7 of 23 claims from two stories the cards did not show. Sources panel split by kind, extracted reason lines, trailing question removed; design settled August 30.
 7. **-302** -- OpenAI retires gpt-4o, gpt-4o-mini, gpt-4.1 and gpt-4.1-mini on January 14, 2027. Migrate Role Match (`ASSESSMENT_MODEL`, assessment and extraction prompts) and the generator scripts; delete the unused `DEFAULT_CLASSIFICATION_MODEL`. Ask Agy is on gpt-6.1-sol (1095d2c). Deadline-driven: schedule well before January. -140 travels with it.
 8. **-140** -- Remaining model names outside `config/constants.py`: `ASSESSMENT_MODEL` in `services/jd_assessor.py` and the root `generate_*.py` scripts. Ask Agy's half is done (`ASK_ANSWER_MODEL`). Travels with -302.
@@ -165,7 +165,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-332](#mattgpt-332) | Delete Ask Agy's synthesis prompt path, unreachable since MATTGPT-236 | Blocked | Low | Refactor | chore | October 17, 2026 |
 | [MATTGPT-335](#mattgpt-335) | Governor skill pilot: spec, then a blind MATTGPT-275 replay plus a MATTGPT-323 control (advisory only) | Open | Medium | Action | chore | October 17, 2026 |
 | [MATTGPT-337](#mattgpt-337) | eval_query_count counts the 11 entity_detection golden queries, which no eval test asserts since MATTGPT-275 | Open | Low | Bug | value | October 18, 2026 |
-| [MATTGPT-338](#mattgpt-338) | Breadth as a standing measure: distinct named clients and eras per answer in the gate scorer and the golden eval | Open | High | Enhancement | value | October 18, 2026 |
+| [MATTGPT-338](#mattgpt-338) | Breadth as a standing measure: distinct eras and projects per answer, and Financial Services era presence, in the gate scorer and the golden eval | Open | High | Enhancement | value | October 18, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently | Parked | Medium | Action | value | August 3, 2026 |
@@ -3072,7 +3072,7 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 ---
 
 ### MATTGPT-338
-**Breadth as a standing measure: distinct named clients and eras per answer in the gate scorer and the golden eval**
+**Breadth as a standing measure: distinct eras and projects per answer, and Financial Services era presence, in the gate scorer and the golden eval**
 
 - **Status:** Open
 - **Priority:** High
@@ -3082,10 +3082,16 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 - **Logged:** October 18, 2026
 - **Sequence:** lane 2, after MATTGPT-336 (shipped Oct 18, 2026, c7ea5cd).
 
-**Why (Matt, Oct 18, 2026):** the MATTGPT-236 gate scored pass/fail and missed that router-off big-picture answers cite Accenture alone (c05 t2: answer text names Accenture and no named client in 2/10 arm A, 10/10 arm B; see -236's second reading).
+**Why (Matt, Oct 18, 2026; measures revised Oct 19, 2026):** breadth is measured per answer by distinct eras and distinct projects, with Professional Narrative stories excluded by Theme, and by whether the Financial Services era is present, each over both the full sources and the cards shown (the applicable card cap). Named clients are a secondary measure. The MATTGPT-236 gate scored pass/fail and missed that router-off big-picture answers cite Accenture alone (c05 t2: answer text names Accenture and no named client in 2/10 arm A, 10/10 arm B; see -236's second reading).
 
 **Scope:**
-- Add two counts per answer to the gate scorer and the golden eval: distinct named clients and distinct eras. Era is a corpus field (7 values, verified Oct 18, 2026); named clients exclude the generic ones, using `utils/client_utils.py`'s `is_generic_client()` rather than a list.
+- Primary, per answer, in the gate scorer and the golden eval, each computed over the full sources and over the cards shown (the applicable card cap):
+  - distinct eras;
+  - distinct projects;
+  - Financial Services era present or not.
+  - Professional Narrative stories are excluded from these counts by `Theme == "Professional Narrative"`.
+  - Corpus fields, verified Oct 19, 2026: `Era` has 7 values, one of them "Financial Services Platform Modernization" (26 stories); `Project` has 44 distinct values; 10 stories have Theme "Professional Narrative". Read the era name from the data or a constant, not a literal in the scorer.
+- Secondary: distinct named clients, excluding generic ones via `utils/client_utils.py`'s `is_generic_client()` rather than a list.
 - With MATTGPT-337: make the full-run report count skipped queries as skipped, not passed. Verified Oct 18, 2026 (HEAD 09cb280): `evaluate_query()` sets `passed = True` on each entity_detection query with "skipped: detect_entity() removed (MATTGPT-275)", and `generate_report()` counts it in `passed`.
 
 ---
