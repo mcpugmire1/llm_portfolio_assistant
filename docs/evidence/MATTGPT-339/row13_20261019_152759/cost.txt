@@ -1,0 +1,6 @@
+turns 20, model calls 41 (usage missing on 0)
+prices $/1M (input, cached, output): (2.0, 0.1, 10.0)
+tokens: input 171032, cached 111461, output 1507 (reasoning 199)
+natural: $0.1122
+forced: $0.0332
+total $0.1454 ($0.0073/turn)
