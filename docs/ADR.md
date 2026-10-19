@@ -1571,7 +1571,7 @@ Q15 stays as it is.
 ## ADR 061: Decisions on the Behaviors 1095d2c Dropped From Ask Agy
 
 **Date:** 2026-10-19
-**Status:** Accepted
+**Status:** Accepted; row 13 accepted in full for work-history questions too (MATTGPT-339, 94f256c; the agriculture miss is a retrieval miss on -325).
 **Related tickets:** MATTGPT-236, MATTGPT-275, MATTGPT-128, MATTGPT-338, MATTGPT-292, MATTGPT-077, MATTGPT-322
 
 **Context:**
