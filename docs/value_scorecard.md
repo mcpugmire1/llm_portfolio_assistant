@@ -25,7 +25,7 @@ repo. Evaluator fixture: `tests/fixtures/evaluator_conversations.md` at
 | 4 | Role Match | Yes | Partly | Not measured on the current pipeline; role_match BDD passing (1095d2c) |
 | 5 | Evidence parity | Yes | One case only (CS degree) | Failing on that case; general parity not measured |
 | 6 | Evidence discovery | Yes | Yes (BDD); search relevance undefined | Stale; two known failures |
-| 7 | Operational reliability | Yes (Matt, Oct 10, 2026) | Undefined | Not measured; production logging unverified |
+| 7 | Operational reliability | Yes (Matt, Oct 10, 2026) | Undefined | Not measured |
 | 8 | Professional demonstration | Yes | Goals with time budgets; measurement undefined | Not measured |
 
 ## 1. Semantic understanding
@@ -201,7 +201,7 @@ Source: the change-governor's Ask Agy draft, checker-passed Oct 19, 2026 (relaye
 |---|---|---|
 | D1 | With no router, what makes a big-picture answer show more than 3 cards? Today `agy_answer()` sets the intent to None, so every answer gets at most 3. No record names a replacement signal. | -236's breadth decision, before -128's go |
 | D2 | How is "cited" decided? Decided: option A, text match (Matt, Oct 19, 2026; recorded on -128). Still open on -128: where META-IND cards go, and the thin-answer shape. | -128's go |
-| D3 | Breadth on big-picture questions: keep the synthesis pick, or replace it? -332 waits on this. | Before -236's Green |
+| D3 | Breadth on big-picture questions: keep the synthesis pick, or replace it? Proposed (Matt, Oct 19): keep the router's synthesis family as the trigger, per -236's target; decided by -236's run. -332 waits on this. | Before -236's Green |
 | D4 | Rows 20, 27 and 8: narrative stories on technical questions, the verbatim phrases, and Matt substitution in the search query. | -341's go, after -128's row 20 measurement; -077's re-wire-or-delete call before -287 deletes the functions |
 | D5 | Row 14, the file-order fallback | -292's go |
 | D6 | Row 13, empty searches on work-history questions | Resolved (Matt, Oct 19, 2026): -339 closed; row 13 accepted; the agriculture claims are on -325 |
