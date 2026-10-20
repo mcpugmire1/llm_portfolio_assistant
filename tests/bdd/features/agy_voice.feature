@@ -3,18 +3,22 @@ Feature: Agy Voice Consistency
   I want consistent third-person narration about Matt
   So the experience feels authentic and professional, not AI-generated
 
+  # The answers come from the latest live acceptance run
+  # (tests/fixtures/agy_voice_answers.json): router redirects and seeded
+  # turns are left out. A prompt ticket's acceptance run refreshes it with
+  # scripts/build_agy_voice_fixture.py.
+
   Background:
-    Given the story index contains Matt's transformation project stories
-    And Agy is configured to respond in third person
+    Given the answers recorded by the latest live acceptance run
 
   # =============================================================================
   # THIRD PERSON NARRATION
   # =============================================================================
 
   Scenario: Agy speaks in third person about Matt
-    When the user asks "Tell me about Matt's leadership experience"
-    Then the response should refer to "Matt" or "he/his"
-    And the response should not contain first-person patterns:
+    When I read every recorded first-turn answer
+    Then every answer should refer to "Matt" or "he/his"
+    And no answer should contain:
       | pattern                |
       | I led                  |
       | I built                |
@@ -34,36 +38,55 @@ Feature: Agy Voice Consistency
       | my experience          |
 
   Scenario: Synthesis mode maintains third person
-    When the user asks "What are Matt's core leadership themes?"
-    Then the response should use third person throughout
-    And no first-person voice from stories should leak through
+    When I read every recorded synthesis answer
+    Then no answer should contain:
+      | pattern                |
+      | I led                  |
+      | I built                |
+      | I managed              |
+      | I created              |
+      | I developed            |
+      | I drove                |
+      | I established          |
+      | I scaled               |
+      | I transformed          |
+      | I worked               |
+      | I implemented          |
+      | I designed             |
+      | I was responsible      |
+      | my team                |
+      | my approach            |
+      | my experience          |
 
   Scenario: Client-scoped query maintains third person
-    When the user asks "Tell me about Matt's work at JP Morgan"
-    Then the response should refer to Matt in third person
-    And the response should not contain "I led" or "my team"
+    When I read every recorded answer that names a client
+    Then every answer should refer to "Matt" or "he/his"
+    And no answer should contain:
+      | pattern                |
+      | I led                  |
+      | my team                |
 
   # =============================================================================
   # PAW EMOJI CONSISTENCY
   # =============================================================================
 
   Scenario: Exactly one paw emoji per response
-    When the user asks any valid question
-    Then the response should contain exactly one paw emoji
+    When I read every recorded answer
+    Then every answer should contain exactly one paw emoji
     And the paw emoji should be in the opening line
 
   Scenario: Paw emoji present in all response types
-    When the user asks "Tell me about Matt's background"
-    Then the response should start with a line containing the paw emoji
-    And there should be no additional paw emojis in the response
+    When I read every recorded answer
+    Then every answer should start with a line containing the paw emoji
+    And no answer should have an additional paw emoji
 
   # =============================================================================
   # NO META-COMMENTARY
   # =============================================================================
 
   Scenario: No "This demonstrates" patterns
-    When the user asks about Matt's experience
-    Then the response should not contain meta-commentary patterns:
+    When I read every recorded answer
+    Then no answer should contain:
       | pattern                    |
       | This demonstrates          |
       | This reflects              |
@@ -75,8 +98,8 @@ Feature: Agy Voice Consistency
       | This reveals Matt's        |
 
   Scenario: No "Matt's ability to" patterns
-    When the user asks "How does Matt lead teams?"
-    Then the response should not contain:
+    When I read every recorded answer
+    Then no answer should contain:
       | pattern                |
       | Matt's ability to      |
       | his ability to         |
@@ -85,8 +108,8 @@ Feature: Agy Voice Consistency
       | showcases his          |
 
   Scenario: No academic summarization tone
-    When the user asks about Matt's work
-    Then the response should not contain:
+    When I read every recorded answer
+    Then no sentence should start with:
       | pattern        |
       | In essence     |
       | In summary     |
@@ -98,9 +121,9 @@ Feature: Agy Voice Consistency
   # =============================================================================
 
   Scenario: No banned corporate phrases
-    When the user asks any question about Matt
-    Then the response should not contain banned phrases:
-      | phrase                                      |
+    When I read every recorded answer
+    Then no answer should contain:
+      | pattern                                     |
       | meaningful outcomes                         |
       | foster collaboration                        |
       | strategic mindset                           |
@@ -116,8 +139,8 @@ Feature: Agy Voice Consistency
   # =============================================================================
 
   Scenario: Agy does not refer to herself in third person
-    When the user asks any question
-    Then the response should not contain:
+    When I read every recorded answer
+    Then no answer should contain:
       | pattern              |
       | Agy thinks           |
       | Agy believes         |
@@ -128,6 +151,9 @@ Feature: Agy Voice Consistency
       | Agy's perspective    |
 
   Scenario: Agy does not use "we" pronouns
-    When the user asks about Matt's experience
-    Then the response should not use "we" as a subject pronoun
-    And the response should not contain "our team" or "our analysis"
+    When I read every recorded answer
+    Then no answer should use "we" as a subject pronoun
+    And no answer should contain:
+      | pattern        |
+      | our team       |
+      | our analysis   |

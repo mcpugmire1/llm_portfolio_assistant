@@ -1,0 +1,919 @@
+{
+ "source": "probes/output/MATTGPT-340/run_20261020_094428",
+ "arm": "N",
+ "commit": "9534aea",
+ "answers": [
+  {
+   "case": "c01",
+   "turn": 1,
+   "run": 1,
+   "question": "Tell me about his payments work.",
+   "intent_family": "domain_payments",
+   "answer_md": "🐾 Found it!\n\nMatt’s payments work includes building payment engines, consolidating legacy payment systems, designing cross-border workflows, and simplifying developer integration for **JP Morgan Chase**, **RBC**, and **American Express**.\n\nAt **JP Morgan Chase**, ACCESS Next Generation needed capabilities beyond Bottomline Technologies’ WebSeries platform. Regional systems had different data models, client configurations, entitlements, and transaction histories. The scope covered **135,000+ clients** across **180+ countries**, with distinct formatting, validation, compliance, and workflow requirements for each payment type.\n\nAs Technology Delivery Lead, Matt managed a blended team of **40+** across Mumbai, Bangalore, and the US. He designed and delivered ACH, wire, FX/cross-border, and federal tax payment modules, alongside Message Authentication Code security, payment-type-specific entitlements, sanctions screening, and real-time global reporting. He also led payments data migration, preserving compliance traceability and maintaining uninterrupted live payment processing. ACCESS launched in **April 2011**, consolidating previously separate regional systems into a single global corporate banking portal.\n\nAt **RBC**, fragmented systems and manual processes delayed bulk payments, while clients lacked real-time FX tools. Matt designed cross-border workflows from initiation through settlement and reconciliation. Working with the FX team, he defined real-time currency conversion integration, automated alerts, recurring payments, Interac e-Transfer workflows, and batch processing. The deliverable was a complete implementation blueprint, ready for development execution. Revised payment cutoff processes reduced wire transfer delays.\n\nAt **American Express**, Virtual Payments Platform adoption lagged because SDKs were missing, documentation was fragmented, and clients had no sandbox. Matt co-created a developer portal, developed Java, .NET, and Python SDKs, and built a secure sandbox with refreshed client data. He introduced environment virtualization, Lean Product and XP practices, and a Client Onboarding Test Drive. API consumption and trial usage increased within **3 months** of relaunch; the portal team also exceeded its delivery commitment by over **261 story points**."
+  },
+  {
+   "case": "c01",
+   "turn": 2,
+   "run": 1,
+   "question": "How big was the team?",
+   "intent_family": "team_scaling",
+   "answer_md": "🐾 This is a strong one.\n\nFor **JP Morgan Chase’s** ACCESS Next Generation payments work, Matt managed a blended onshore/offshore team of **40+ people**, comprising **Accenture** and **JP Morgan Chase** resources across Mumbai, Bangalore, and the US. He served as Technology Delivery Lead and defined the onshore-offshore engagement model."
+  },
+  {
+   "case": "c01",
+   "turn": 3,
+   "run": 1,
+   "question": "What went wrong?",
+   "intent_family": "behavioral",
+   "answer_md": "🐾 Found it!\n\nOn **JP Morgan Chase’s** ACCESS program, a Message Authentication Code (MAC) security-layer failure traced back to **missing unit tests and weak error handling**. That layer let corporate users validate payment integrity before release. Matt used break-glass production access and queried live payment data through SQL to triage the defect. The story does not specify the outage duration, affected payment volume, or customer losses.\n\nThere were also production defects after cutover, primarily **data issues carried over from the legacy platform during migration**. The regional systems had different schemas, formats, client configurations, entitlement structures, and compliance records. Consolidating them meant preserving those records while live payment processing continued for a platform serving **135,000+ clients** across **180+ countries and territories**.\n\nMatt owned production support during rollout, ran UAT and production validation/shakeout testing, and triaged post-cutover defects. Across successive releases, waves, and migrations, he repeatedly owned Sev-**1** incident response and on-call accountability. He coordinated root-cause analysis across New York, Mumbai, Bangalore, and the Bottomline vendor team, while running status updates and daily leadership calls during live issues.\n\nThe migration story records **no disruption to live payment operations**, despite the post-cutover data defects. ACCESS launched in **April 2011**. Those outcomes do not mean the rollout was defect-free: the stories explicitly record the MAC-layer failure, inherited data issues, and repeated production incident response, but do not give incident counts or recovery times."
+  },
+  {
+   "case": "c03",
+   "turn": 1,
+   "run": 1,
+   "question": "What’s his leadership style?",
+   "intent_family": "leadership",
+   "answer_md": "Matt leads with empathy, clarity, and purpose. He describes the teams he inherited as “over-processed, under-trusted, waiting for permission instead of owning outcomes.” At **Accenture**, his response was to remove those barriers: make intent explicit, build psychological safety so people could speak honestly, and push decisions to the people closest to the work.\n\nThat included changing how teams handled mistakes. At the Cloud Innovation Center, fear of blame had discouraged experimentation and slowed delivery. Matt introduced a “permit to fail” culture through non-punitive post-mortems, transparent sharing of errors, and lean, low-stakes experiments. Teams applied lessons to subsequent sprints rather than pointing fingers. Repeat failure patterns declined, and project timelines shortened.\n\nIn innovation work, he set expectations upfront that early prototypes and user tests would likely fail, intentionally. Instead of waiting for polished requirements, teams used user research, Jobs to Be Done framing, and rapid testing to validate assumptions before committing to costly builds. Failed experiments became decision inputs, with product direction shaped week by week.\n\nHe also assembled balanced teams of engineers, product managers, and UX architects with equal participation and shared accountability. Pair programming, collaborative coding, retrospectives, and real-time feedback replaced role silos and reduced handoffs. Those teams achieved **zero-defect production code** across client engagements.\n\nMatt coaches teams to think clearly, not just execute tasks. His stated non-negotiables include integrity, respect, continuous learning, and “outcomes, not optics.” At the Cloud Innovation Center, teams achieved **4x delivery acceleration** after embracing lean product and modern engineering practices."
+  },
+  {
+   "case": "c03",
+   "turn": 2,
+   "run": 1,
+   "question": "Give me an example where that didn’t work.",
+   "intent_family": "behavioral",
+   "answer_md": "🐾 I know just the story.\n\nOn a global platform modernization for a financial services client, Matt’s responsibility was to ensure a safe environment setup. He relied on assumptions rather than verifying IAM configuration and downstream access controls. Under delivery pressure, he accepted inherited environment documentation without confirming that it was accurate.\n\nAn offshore tester accidentally triggered an email job in UAT containing unmasked production customer data. Communications went to **thousands of real clients**. IAM checks were insufficient, environment boundaries were unclear, and production data had not been scrubbed from downstream environments.\n\nMatt had not audited who could trigger downstream jobs or email processes. He also had not implemented compensating controls such as data masking or email interception. He took accountability and led the team through root cause analysis and remediation, working collectively to understand what happened and implement corrective controls.\n\nBut the client demanded that the tester be removed from the project. Matt described it as “a systemic failure that resulted in an individual consequence.” The team member still bore that consequence despite Matt taking accountability.\n\nThis was not a documented failed “permit to fail” experiment at the Cloud Innovation Center. It was a delivery failure in which Matt did not verify the environment his team was operating in. Afterward, he made IAM validation, environment verification, PII scrubbing, and risk ownership “day-one leadership responsibilities” in his delivery approach."
+  },
+  {
+   "case": "c05",
+   "turn": 1,
+   "run": 1,
+   "question": "Why is he looking?",
+   "intent_family": "narrative",
+   "answer_md": "🐾 Found it!\n\nMatt is looking for his next build: a senior leadership role where building the product engineering organization, establishing the culture, and delivering results are part of the same job.\n\nHis chapter at **Accenture** came to a close after a long tenure that included **four years** leading a **150-person** Cloud Innovation Center. That created the first pause in his career after years of continuous delivery and leadership. He stepped back to recharge and clarify the type of work he wanted next: platform modernization, product leadership, and engineering culture.\n\nDuring that sabbatical, he stayed hands-on by building MattGPT rather than working through a tutorial exercise. He used RAG architecture, semantic search, Pinecone, Python, and modern LLM tooling, and shipped an MVP with semantic search across **100+ career stories**. He also rebuilt his portfolio and refined his guiding principles as an engineering leader.\n\nHis search now centers on senior leadership opportunities in platform engineering, product leadership, technology transformation, cloud modernization, and AI-enabled product innovation. He wants real delivery with engineers and product managers, not strategy decks. Matt describes himself as a “builder,” and he is looking for an organization that needs a builder rather than a maintainer, where he is in the work, not above it."
+  },
+  {
+   "case": "c05",
+   "turn": 2,
+   "run": 1,
+   "question": "Why should we hire him over someone who stayed in-house?",
+   "intent_family": "synthesis",
+   "answer_md": "🐾 Here's what connects the dots across Matt's work.\n\nThe hiring question is whether Matt has owned the organization behind the delivery, not just advised a client or completed an engagement. At **Accenture**, his Cloud Innovation Center responsibilities included hiring, evaluation, promotion, compensation, remediation, and full P&L accountability for Atlanta and Tampa. The record does not establish that he is better than a particular in-house candidate. It does document what he owned.\n\nExecution & Delivery and Org & Working-Model Transformation met in the same assignment. Clients were moving from waterfall and feature factories to iterative, customer-centric product development, while dealing with legacy systems, compliance requirements, and siloed teams. Inside the centers, Matt also had to recruit and develop practitioners who lacked hands-on cloud-native or Agile experience. The organization needed to keep delivering while building its talent pipeline and management processes.\n\nMatt built and ran a **150+** practitioner organization through **11 to 13** direct-report practice and client leads. He made the final hiring decision on every offer, facilitated promotion calibration, allocated compensation budgets, and owned end-of-remediation calls. He established monthly P&L and utilization reviews, quarterly planning checkpoints, and a standing biweekly HR review.\n\nHe also built the delivery practices: balanced teams combining product, engineering, and design; pair programming; test-driven development; and automated delivery pipelines. At **JP Morgan**, teams outpaced peer velocity within the first **2** sprints and shipped working code to production in weeks rather than months.\n\nAcross **4 years**, the centers grew from zero to **150+** practitioners, delivered **30+** product engagements across **15+** Fortune **500** clients, and contributed to **\\$100M+** in repeatable business through delivery excellence and client advocacy. The organization recorded near-zero attrition in its first **2 years**. CIC teams of **10** delivered equivalent output to traditional teams of **20**, with **4X** faster velocity and zero-defect deployments."
+  },
+  {
+   "case": "c07",
+   "turn": 1,
+   "run": 1,
+   "question": "Where is he based?",
+   "intent_family": "narrative",
+   "answer_md": "Got it! 🐾\n\nMatt is based in Atlanta, GA. Open to relocation and travel."
+  },
+  {
+   "case": "c07",
+   "turn": 2,
+   "run": 1,
+   "question": "Would he relocate?",
+   "intent_family": "narrative",
+   "answer_md": "Got it! 🐾\n\nYes. Matt is open to relocation and travel."
+  },
+  {
+   "case": "c09",
+   "turn": 1,
+   "run": 1,
+   "question": "Tell me about his payments work.",
+   "intent_family": "domain_payments",
+   "answer_md": "🐾 Found it!\n\nMatt’s payments work includes building corporate payment engines and global gateways at **JP Morgan Chase**, then reducing integration barriers for **American Express**’s Virtual Payments Platform.\n\nAt **JP Morgan Chase**, regional payment systems had different formats, protocols, client configurations, and compliance records. Bottomline Technologies’ WebSeries platform provided the foundation for ACCESS Next Generation, but the bank needed payment modules and controls beyond its out-of-box offering.\n\nMatt led a blended team of **40+** across **Accenture** and the bank, working closely with Bottomline’s engineers in Portsmouth. He designed and delivered ACH, wire, FX/cross-border, and government tax payment modules. The custom engineering included payment-type-specific permissions, Message Authentication Code verification, sanctions screening, and contextual help explaining payment fields and requirements. He also designed a centralized gateway for message transformation, protocol translation, and routing across **12 countries**, replacing fragmented point-to-point integrations.\n\nACCESS launched in **April 2011**, serving **135,000+** corporations, financial institutions, governments, and municipalities across **180+ countries**. Matt also led payments-workstream data migration, preserving client configurations, entitlements, transaction histories, and compliance traceability without disruption to live payment operations.\n\nAt **American Express**, the challenge was adoption: clients faced missing SDKs, fragmented documentation, no sandbox, and testing dependencies while moving away from a legacy mainframe platform. Matt co-created a developer portal, developed Java, .NET, and Python SDKs, and built a secure sandbox with refreshed client data. Environment virtualization enabled earlier testing instead of waiting on downstream systems. His team used Lean Product and XP practices, automated documentation updates through CI/CD, and ran a Client Onboarding Test Drive.\n\nAPI consumption and trial usage increased within **3 months** of relaunch, onboarding time decreased, and the developer-portal team delivered over **261 additional story points** beyond its commitment."
+  },
+  {
+   "case": "c09",
+   "turn": 2,
+   "run": 1,
+   "question": "What’s his leadership style?",
+   "intent_family": "leadership",
+   "answer_md": "🐾 Found it!\n\nMatt leads with empathy, clarity, and purpose. In teams he inherited, engineers were often over-processed, under-trusted, and waiting for permission instead of owning outcomes. At **Accenture**’s Cloud Innovation Center, even a flat organizational design did not immediately change those habits: decisions drifted upward, and teams waited for direction.\n\nMatt brought product managers, designers, and engineers together with shared ownership and decision-making authority. He pushed decisions to the people closest to the work, while team leads focused on removing obstacles rather than controlling outcomes. He established weekly brainstorming sessions where ideas were considered without judgment and recognized contributions that advanced shared goals rather than individual accolades. In innovation work, he set expectations upfront that prototypes and experiments would fail, then helped teams use those results to shape product direction week by week.\n\nAt **Norfolk Southern**, that approach included taking ownership when delivery went wrong. The client reported rising defects despite near-complete test coverage. Matt acknowledged the failure in front of the client and **Accenture** account leadership rather than defending the dashboard. An audit exposed tests written after code and backlog stories without defined scenarios or a definition of done.\n\nHe rebuilt the backlog with SMART, testable stories, brought frontend and backend TDD experts alongside the engineers, and used boot camps, coding katas, and an “I do, we do, you do” coaching progression. He also restructured ceremonies to keep stakeholders, developers, and product managers working from the same requirements.\n\nAt **Norfolk Southern**, defect rates dropped and the client stopped finding defects the dashboard could not see. Across the Cloud Innovation Center, teams achieved **4x delivery acceleration** once they embraced lean product and modern engineering practices."
+  },
+  {
+   "case": "c09",
+   "turn": 3,
+   "run": 1,
+   "question": "Give me an example.",
+   "intent_family": "behavioral",
+   "answer_md": "🐾 I know just the story.\n\nAt **Norfolk Southern** in **2020**, Matt’s team was modernizing the Revenue and Shipment Planning platform when the client reported rising defects. The dashboards showed near-complete test coverage. The concern landed in front of both the client and **Accenture** account leadership just as the pandemic forced the team into remote work.\n\nMatt took ownership of the failure rather than defending the metrics. He ran a bottom-up audit of the codebase and test suite and showed the gaps openly. An engineer had been building from his own interpretation, then writing tests after the code. The backlog also contributed: stories lacked defined scenarios and a definition of done.\n\nMatt rebuilt the backlog with SMART, testable stories and brought frontend and backend TDD experts from Columbus to work alongside the engineers. Instead of simply telling the team to follow the process, he used boot camps, coding katas, and an “I do, we do, you do” coaching progression.\n\nHe then changed the daily workflow so the practices would hold after the experts left. Pairs rotated daily, test cases came before implementation, and standups checked that sequence. Stories entered sprints only when testable and small enough for a **one-week** iteration, capped at **three points**. During remote work, pairs traded drivers frequently.\n\nDefect rates dropped, and the client stopped finding defects the dashboard could not see. The failure mode did not recur after the experts left. Pairing and test-first remained the team’s default, release cycles shortened, and delivery became more predictable. The account does not give a numerical defect-reduction percentage."
+  },
+  {
+   "case": "c09",
+   "turn": 4,
+   "run": 1,
+   "question": "How big was the team on that project?",
+   "intent_family": "team_scaling",
+   "answer_md": "🐾 Perfect, here's what I found.\n\nThe **Norfolk Southern** engagement scaled to **three balanced teams**. The record does not specify the total headcount or how many people were on the initial team during the quality crisis in **2020**.\n\nMatt also brought in frontend and backend TDD experts from Columbus to coach the team, but their headcount is not specified."
+  },
+  {
+   "case": "c11",
+   "turn": 1,
+   "run": 1,
+   "question": "How did Matt scale engineering teams from 4 to 150+ people?",
+   "intent_family": "team_scaling",
+   "answer_md": "🐾 Found it!\n\nMatt built **Accenture’s** Atlanta and Tampa Cloud Innovation Centers to **150+ practitioners** across engineering, architecture, product, and design. The documented CIC starting point was a **10-person pilot**, rather than **4**. Growing demand required more hires, but many lacked hands-on cloud-native or Agile experience. Matt also needed hiring, development, and performance management to work without adding layers of managers.\n\nHe built a hiring engine across internal bench searches, campus recruiting, contract-to-hire, and job requisitions. Instead of relying on interview answers alone, engineers completed hands-on TDD pairing auditions at a shared workstation. Product managers and designers worked through live scoping exercises. Interviewers recorded independent votes, and Matt held the closing interview and made every final hiring decision. During scaling pushes, the process produced **4 to 6 net-new practitioners per week**, with interview participation capped to protect delivery.\n\nTraining was followed by practice, not just course completion. Matt used tailored enablement, skills matrices, and an “I do, we do, you do” progression. New joiners rotated through pairing with experienced practitioners. Weekly tech talks, peer-led demos, mentoring, and retrospectives continued alongside client work. Teams combined product, engineering, and design, with pair programming, TDD, and CI/CD embedded in delivery.\n\nThe organization stayed deliberately flat: **11 to 13 practice and client leads** reported directly to Matt. Experienced engineers served as team anchors rather than another management layer. Monday allocation reviews matched practitioners to engagements and learning work. Because managers did not sit on daily teams, performance reviews drew on evidence from recent pairing partners, product managers, and anchors, rather than visibility to the boss.\n\nThe organization reached **150+ practitioners**, with near-zero attrition in the first **2 years**. Across CIC delivery, **10-person** balanced teams delivered equivalent output to traditional **20-person** teams, with **4X faster velocity** and zero-defect deployments."
+  },
+  {
+   "case": "c11",
+   "turn": 2,
+   "run": 1,
+   "question": "Tell me about his payments work",
+   "intent_family": "domain_payments",
+   "answer_md": "🐾 Perfect, here's what I found.\n\nAt **JP Morgan Chase**, Matt worked on ACCESS Next Generation, a global corporate banking portal. Regional payment systems had different data models, entitlements, message formats, and regulatory requirements. Bottomline Technologies’ WebSeries platform provided the foundation, but the bank needed custom payment capabilities for **135,000+ clients** across **180+ countries**.\n\nAs Technology Delivery Lead, Matt managed a blended team of **40+** across **Accenture** and bank resources in Mumbai, Bangalore, and the US. He defined the onshore-offshore engagement model and served as the primary technical interface with Bottomline, spending **70 to 80%** of his time embedded at its Portsmouth offices. He coordinated with bank stakeholders in Chicago and NY/NJ and worked with the vendor to determine where platform configuration ended and custom engineering was required.\n\nHis work covered ACH credits and direct debits, Fedwire and international wires, FX/cross-border payments, and federal tax payments. He also delivered payment verification controls, payment-type-specific permissions, sanctions screening, and integration with internal transaction monitoring. The centralized gateway handled message transformation, protocol translation, and routing across **12 countries**.\n\nMatt coordinated migration verification with compliance teams, preserved client configurations and transaction histories, and led production incident response, including cross-team root-cause analysis and daily leadership calls. ACCESS launched in **April 2011**; the legacy migration completed without disruption to live payment operations.\n\nAt **American Express**, his payments work focused on adoption of the Virtual Payments Platform. Missing SDKs, fragmented documentation, and no sandbox were slowing integration. Matt brought business and technical stakeholders together through North Star and Discovery and Framing workshops. His team delivered cross-stack SDKs, use-case-driven documentation, a secure sandbox, and virtualized testing environments, then gathered user feedback through a Client Onboarding Test Drive. API consumption and trial usage increased within **3 months**, onboarding time fell, and the team exceeded its delivery commitment by over **261 story points**."
+  },
+  {
+   "case": "c11",
+   "turn": 3,
+   "run": 1,
+   "question": "how big was his teams",
+   "intent_family": "team_scaling",
+   "answer_md": "🐾 Tracking this down...\n\nFor the payments work at **JP Morgan Chase**, Matt managed a blended team of **40+ people** across **Accenture** and bank resources, based in Mumbai, Bangalore, and the US. He defined the onshore-offshore engagement model and served as the primary technical interface with Bottomline Technologies.\n\nFor the **American Express** Virtual Payments Platform engagement, the story does not specify a team headcount. Matt led the developer portal redesign and coordinated with business stakeholders, technical stakeholders, and client teams on priorities and testing environments.\n\nThe **150+ practitioners** mentioned earlier refers to the broader Cloud Innovation Centers in Atlanta and Tampa, not a single payments delivery team."
+  },
+  {
+   "case": "c13",
+   "turn": 1,
+   "run": 1,
+   "question": "Tell me about his Fiserv work.",
+   "intent_family": "domain_payments",
+   "answer_md": "🐾 This is a strong one.\n\nMatt worked on **Fiserv’s \\$8.5M** white-label card portal from December **2014** to June **2015**, serving as Development Manager. The platform supported **2M+ cardholders across 15 financial institutions**. He joined roughly **7 months** into an initiative with repeated missed deadlines, poor quality, and stakeholders threatening contract cancellation.\n\nThe **45-person** globally dispersed team had no visibility into work status. Developers in India, testers in the Philippines, and designers in Ireland were working from **200-page** requirements documents under **6-month** release cycles. External vendors handling payment processing, fraud detection, and hosting had uncoordinated dependencies.\n\nMatt traveled Monday through Thursday to Omaha, reprioritized the backlog, reset timelines, and coordinated **3 external vendors**. He managed the integration of legacy mainframe payment processing into a Java EE/Spring portal through MuleSoft, Tibco, and WebMethods while the underlying platform moved toward API-based architecture.\n\nFor the team, he replaced a single To Do/Done board with a multi-tiered JIRA workflow and decomposed requirements into persona-based user stories. He established offshore/onshore handoffs and introduced demos every **2 weeks**, so stakeholders reviewed branding, UI, and accessibility before the end of a long release cycle. Offshore teams adopted an empowerment model, with screen reader audits built into the Definition of Done. JIRA gave **50+ stakeholders across 3 time zones** real-time visibility and satisfied compliance audit requirements.\n\nThe team moved to **2-week sprints within 3 months**. Matt recovered a release that was **3 weeks behind**, avoiding **\\$500K in penalties**. The program finished **3% under budget**, achieved **47 of 47 acceptance criteria**, and launched with **zero critical defects**. The portal processed **\\$45M in transactions in its first month** with **99.97% uptime**, and the recovery secured a **\\$3M contract extension**."
+  },
+  {
+   "case": "c13",
+   "turn": 2,
+   "run": 1,
+   "question": "How big was the team?",
+   "intent_family": "team_scaling",
+   "answer_md": "🐾 Perfect, here's what I found.\n\nMatt coordinated a **45-person** globally dispersed team on **Fiserv’s** white-label card portal, including developers in India, testers in the Philippines, and designers in Ireland, alongside the onshore team in Omaha.\n\nHe also coordinated **3 external vendors** handling payment processing, fraud detection, and hosting. He ran daily offshore/onshore transition calls to coordinate handoffs and resolve dependencies."
+  },
+  {
+   "case": "c15",
+   "turn": 1,
+   "run": 1,
+   "question": "How do I get in touch with Matt?",
+   "intent_family": "background",
+   "answer_md": "🐾 I searched Matt's whole record, and it doesn't mention his contact details. I don’t have a verified email address, phone number, or LinkedIn URL to share."
+  },
+  {
+   "case": "c17",
+   "turn": 2,
+   "run": 1,
+   "question": "Sure.",
+   "intent_family": "domain_payments",
+   "answer_md": "Got it! 🐾\n\nAt **Fiserv**, the **45-person** team was working through **6-month** waterfall release cycles with no visibility into work status. Requirements lived in a **200-page** BRD organized by system modules. Developers were in India, testers in the Philippines, and designers in Ireland. Multiple deadlines had slipped, stakeholders were threatening contract cancellation, and PMO and compliance teams resisted moving to agile.\n\nMatt restructured JIRA from a single To Do/Done board into a multi-tiered Kanban/Scrum architecture. He tracked the **47** acceptance criteria as Epics and decomposed the BRD into persona-based user stories. Instead of organizing work around system modules, the team worked through tasks tied to the people using the portal.\n\nTo coordinate across locations, he established follow-the-sun synchronization: **7 AM CST** scrum-of-scrums for offshore-to-onshore handoffs and **11 PM CST** calls for the reverse handoff. He introduced biweekly sprint demos for **Fiserv** stakeholders, getting early sign-off on branding, UI, and ADA compliance rather than discovering problems at month **6**. When stakeholders lacked bandwidth for frequent feedback, he negotiated dedicated review windows.\n\nMatt maintained existing steering committee reporting while adding sprint-level visibility. To address compliance resistance, he used JIRA as the system of record, with audit trails, attached ADA scans, and developer comments instead of static Word documents. He also coached offshore teams on empowerment over command-and-control and trained them on screen reader audits as part of the Definition of Done. Alongside that work, he introduced mandatory senior-developer code reviews, unit tests, and automated quality gates.\n\nThe team moved to **2-week** sprints within **3 months**. JIRA provided real-time visibility to **50+** stakeholders across **3** time zones, and PMO and compliance accepted it as the system of record."
+  },
+  {
+   "case": "x1",
+   "turn": 1,
+   "run": 1,
+   "question": "Has Matt worked in real estate?",
+   "intent_family": "out_of_scope",
+   "answer_md": "🐾 Found it!\n\nMatt has worked in mortgage lending, within Financial Services / Banking. His engagements include mortgage underwriting, origination, servicing, and an HR portal for a mortgage lender. Those are mortgage-sector engagements, rather than property development, brokerage, or property management.\n\nAt **Cendant Mortgage**, during **2002 to 2003**, underwriters and loan officers worked in a mainframe green-screen application. Matt built the JSP and MVC front end for capturing borrower income, credit score, and home value. He configured the TIBCO layer for credit report requests, verification flows, and conditional routing to manager approval based on risk and loan amount. Underwriters moved to a web application, and he found and corrected errors in the Oracle stored procedures calculating risk factors.\n\nAt **HSBC**, during **2016 to 2017**, fragmented legacy mortgage systems and manual processes created compliance risk following a federal settlement. Matt conducted on-site assessment workshops in Buffalo and developed a target state architecture using Mortgage Cadence for origination and Black Knight for servicing. He delivered heat maps, gap analysis, estimates, a staffing plan, and a Statement of Work for a **\\$10M** implementation contract.\n\nAt **Accredited Home Lenders**, during **2002 to 2003**, Matt helped deliver an enterprise HR portal supporting hiring, onboarding, and succession planning while the lender was scaling its workforce faster than existing processes could support."
+  },
+  {
+   "case": "x3",
+   "turn": 1,
+   "run": 1,
+   "question": "Has Matt worked on trading platforms?",
+   "intent_family": "background",
+   "answer_md": "🐾 This is a strong one.\n\nMatt’s stories cover payments, treasury services, and FX/cross-border payment integration, but they do not establish experience building a securities trading or trade-execution platform.\n\nAt **JP Morgan Chase**, Matt was Technology Delivery Lead for ACCESS Next Generation, a corporate banking portal built on Bottomline Technologies’ WebSeries platform. The bank needed payment modules, security controls, and workflows beyond the platform’s out-of-box offering.\n\nMatt designed and delivered the FX/cross-border payment module integrating with the bank’s foreign exchange engine. Corporate treasurers could initiate cross-currency payments within ACCESS, with embedded rate visibility and connectivity to international clearing systems. He also architected Single Sign-On connecting cash, trade, and investment operations into the same portal and drove the groundwork for trade finance integration, providing visibility from transaction initiation to final payment. Those were corporate banking and payment capabilities, not documented securities trading functionality.\n\nHe managed a blended team of **40+** across **Accenture** and bank resources. ACCESS launched in April **2011**, serving **135,000+** corporations, financial institutions, governments, and municipalities across **180+** countries.\n\nMatt also worked with webMethods B2B Trading Networks at **Cendian Chemical Logistics**. Despite the name, that was a document-exchange platform for shipment orders, invoices, EDI, XML, and flat files, not financial-market trading.\n\nThe closest documented experience is therefore FX payment integration and trade finance within **JP Morgan Chase**’s corporate banking platform."
+  },
+  {
+   "case": "x5",
+   "turn": 1,
+   "run": 1,
+   "question": "Has Matt worked on gaming platforms?",
+   "intent_family": "out_of_scope",
+   "answer_md": "🐾 I searched Matt's whole record, and it doesn't mention work on gaming platforms."
+  },
+  {
+   "case": "r05",
+   "turn": 1,
+   "run": 1,
+   "question": "What does Matt do outside of work?",
+   "intent_family": "background",
+   "answer_md": "🐾 I followed that trail and came up empty: Matt's stories don't cover his hobbies or life outside work."
+  },
+  {
+   "case": "r07",
+   "turn": 1,
+   "run": 1,
+   "question": "Has Matt worked in agriculture?",
+   "intent_family": "background",
+   "answer_md": "🐾 I followed that trail and came up empty: Matt's stories don't cover agriculture."
+  },
+  {
+   "case": "r11",
+   "turn": 1,
+   "run": 1,
+   "question": "Why hire Matt?",
+   "intent_family": "synthesis",
+   "answer_md": "🐾 Here's what connects the dots across Matt's work.\n\nExecution & Delivery and Org & Working-Model Transformation run through the work: shipping software while changing how teams build it. At **Accenture**, enterprise clients wanted to move from waterfall releases and feature factories to iterative, customer-centric product development, but needed practices that worked with legacy systems, compliance requirements, and enterprise governance. At **Norfolk Southern**, the difficulty became concrete: defects were rising even though dashboards showed near-complete test coverage. Meanwhile, expanding the Cloud Innovation Centers required hiring practitioners who often lacked hands-on cloud-native or Agile experience.\n\nMatt built the Atlanta and Tampa Cloud Innovation Centers from the ground up, owning full P&L accountability, recruiting, training, and delivery practices. He brought product managers, designers, and engineers together in balanced teams, embedded pair programming, test-driven development, and automated pipelines, and created reusable engagement playbooks. Training combined technical work, user-centered design, mentoring, and an “I do, we do, you do” progression. Practitioners progressed from guided to independent delivery, with near-zero attrition in the first **2 years**.\n\nAt **Norfolk Southern**, Matt took ownership of the quality failure rather than defending the dashboard. He audited the code and tests, found tests written after code and backlog stories without defined scenarios, rebuilt the backlog with testable stories, and brought in frontend and backend TDD experts for hands-on coaching. Defect rates dropped, and the client stopped finding defects the dashboard could not see.\n\nThe centers grew from **0 to 150+ practitioners**, delivered **30+ product engagements** across **15+ Fortune 500 clients**, and achieved **4X faster velocity** and zero-defect deployments. At **JP Morgan Chase**, teams outpaced peer velocity within the first **2 sprints**, shipping production code in weeks. Delivery excellence and client relationships generated **\\$100M+ in repeat business**."
+  },
+  {
+   "case": "r13",
+   "turn": 1,
+   "run": 1,
+   "question": "What patterns show up across Matt's work?",
+   "intent_family": "synthesis",
+   "answer_md": "🐾 Looking across Matt's portfolio, I see clear patterns.\n\nExecution & Delivery and Org & Working-Model Transformation recur together, with Talent & Enablement built into the work. Clients hired Matt’s teams to modernize technology but kept the same silos, handoffs, and bottlenecks. Development teams could write code quickly, then wait days or weeks for builds, tests, and approvals. New architecture did not remove the old ways of organizing work.\n\nThe constraints also extended beyond engineering. At **JP Morgan Chase**, regional payment systems had different data models, entitlement structures, and compliance records, and migration could not interrupt live payments. At **Accenture**, expanding the Cloud Innovation Centers required recruiting and onboarding practitioners who lacked hands-on experience with cloud-native technologies or Agile practices. Across these engagements, delivery included changing systems, changing daily work, and preparing people to carry it forward.\n\nMatt brought product managers, designers, and engineers into balanced teams with shared accountability. He prioritized essential features and delivered thin-slice, production-ready solutions for rapid user feedback. He embedded pair programming, test-driven development, automated testing, and CI/CD into daily work rather than leaving quality to a separate testing phase. Across the cloud-native engagements, lead time from commit to production dropped from weeks to days, with **90%+** automated test coverage.\n\nHe also adapted the work to enterprise constraints. At **JP Morgan Chase**, he coordinated legacy data mapping with compliance teams, introduced migration safeguards and compliance dashboards, and owned production validation during rollout. For operating-model changes, he ran **6-week** Agility Coaching Labs on clients’ actual work and coached through “I do, we do, you do.” Clients adopted balanced teams and lean product practices that outlasted the engagement, with cost reductions of **15% to 35%**.\n\nThe Atlanta and Tampa centers grew from zero to **150+** practitioners and delivered **30+** product engagements. CIC results included **4X** faster velocity and zero-defect deployments. At **Capital One**, automated testing supported zero-defect payment-system deployments. At **JP Morgan Chase**, the ACCESS migration completed without disruption to live payment operations."
+  },
+  {
+   "case": "r15",
+   "turn": 1,
+   "run": 1,
+   "question": "Does Matt have a master's degree?",
+   "intent_family": "out_of_scope",
+   "answer_md": "🐾 Found it!\n\nYes. Matt has a master's degree in Information Technology from **American InterContinental University**."
+  },
+  {
+   "case": "c01",
+   "turn": 1,
+   "run": 2,
+   "question": "Tell me about his payments work.",
+   "intent_family": "domain_payments",
+   "answer_md": "🐾 Here's a great example.\n\nMatt’s payments work included building the payment engine and global gateway for **JP Morgan Chase** ACCESS, consolidating legacy payment systems, and designing cross-border payment workflows for **RBC**. At **JP Morgan Chase**, corporate treasurers worked across separate regional systems, while payment networks across **12 countries** had different formats, protocols, and regulatory requirements. At **RBC**, business clients faced manual processes, bulk-payment delays, and a lack of real-time FX tools.\n\nFor ACCESS, Matt managed a blended team of **40+** across **Accenture** and bank resources in Mumbai, Bangalore, and the US. Working directly with Bottomline Technologies, he designed and delivered ACH credits and direct debits, wire payments, FX/cross-border payments, and federal tax payment capabilities. He built payment verification, payment-type-specific permissions, sanctions screening, and contextual help explaining field requirements, tax codes, and FX parameters. Corporate users could check payment integrity before release and get guidance within the payment workflow.\n\nHe also designed the centralized gateway for message transformation, protocol translation, and routing across domestic and international payment networks. Alongside that work, he led the payments data migration, preserving client configurations, entitlements, transaction histories, and compliance traceability. He owned production support and coordinated incident response across the bank, offshore teams, and the vendor.\n\nACCESS launched in **April 2011**, serving **135,000+ clients** across **180+ countries**. The gateway supported payments across **12 countries**, giving treasurers a single entry point instead of separate local logins. The legacy migration completed **without disruption to live payment operations**.\n\nAt **RBC**, Matt delivered an implementation blueprint covering initiation through settlement and reconciliation, real-time FX integration, automated alerts, recurring payments, Interac e-Transfer, and batch processing. Revised cutoff processes reduced wire-transfer delays and improved SLA compliance. Training materials equipped business clients to manage multi-currency accounts without ongoing support dependency."
+  },
+  {
+   "case": "c01",
+   "turn": 2,
+   "run": 2,
+   "question": "How big was the team?",
+   "intent_family": "team_scaling",
+   "answer_md": "🐾 Here's a great example.\n\nFor **JP Morgan Chase** ACCESS, Matt managed a blended onshore/offshore team of **40+ people** across **Accenture** and **JP Morgan Chase**, based in Mumbai, Bangalore, and the US.\n\nHe also served as the primary technical interface with Bottomline Technologies, working from its Portsmouth, New Hampshire offices. The **40+** figure describes the blended delivery team, not the entire ACCESS program."
+  },
+  {
+   "case": "c01",
+   "turn": 3,
+   "run": 2,
+   "question": "What went wrong?",
+   "intent_family": "behavioral",
+   "answer_md": "🐾 On it!\n\nAt **JP Morgan Chase** ACCESS, production defects did surface. The most specific example was a failure in the Message Authentication Code (MAC) security layer, which let corporate users verify payment integrity before release. The root cause was **missing unit tests and weak error handling**. The account does not specify the incident’s duration, how many customers were affected, or whether payments were delayed.\n\nThere were also post-cutover production defects, primarily data issues carried over from the legacy platform during migration. Regional systems had different schemas, client configurations, entitlement structures, and transaction histories that had to be mapped into a unified platform. Separately, Matt debugged ACH formatting and mapping issues for federal tax payment compliance.\n\nMatt had break-glass production access and queried live payment data through SQL to triage the hardest defects. He owned on-call and severity-**1** incident response, coordinating root-cause analysis across the bank’s New York team, engineers in Mumbai and Bangalore, and Bottomline Technologies. While incidents were live, he ran status updates and daily leadership calls. During rollout, he also ran user acceptance testing and production validation/shakeout testing.\n\nThe scope was a blended team of **40+** and a payments gateway connecting networks across **12 countries**. The migration account records **no disruption to live payment operations**, but that does not mean there were no defects: it explicitly records issues found after cutover. ACCESS launched in **April 2011**."
+  },
+  {
+   "case": "c03",
+   "turn": 1,
+   "run": 2,
+   "question": "What’s his leadership style?",
+   "intent_family": "leadership",
+   "answer_md": "🐾 Here's a great example.\n\nMatt leads with empathy, clarity, and purpose. He pushes decisions to the people closest to the work, uses direct feedback and open communication, and coaches teams to think clearly rather than just execute tasks.\n\nAt **Accenture’s** Cloud Innovation Center, practitioners often arrived from command-and-control organizations. Decisions drifted upward, teams waited for direction, and bottlenecks formed where autonomy was supposed to be. Matt established cross-functional teams of product managers, designers, and engineers with shared ownership and decision-making authority. Team leads focused on removing obstacles rather than controlling outcomes. Making that model stick required repeated enforcement and revalidation.\n\nHe introduced weekly brainstorming sessions where ideas were considered without judgment and recognized contributions to shared goals rather than individual accolades. For development, he paired senior engineers with junior team members, established weekly tech talks and peer-led demos, and embedded learning in live client projects.\n\nAt **Norfolk Southern**, that coaching included confronting a quality failure. Defects were rising despite near-complete test coverage. Matt took ownership in front of the client and **Accenture** account leadership instead of defending the dashboard. He audited the code and tests, exposed gaps in the backlog, and rebuilt stories with defined scenarios and a definition of done. TDD experts worked alongside engineers through an “I do, we do, you do” progression, supported by boot camps and coding katas.\n\nThe client stopped finding defects the dashboard could not see, and defect rates dropped. Across the Cloud Innovation Center, teams achieved **4x delivery acceleration** after embracing lean product and modern engineering practices."
+  },
+  {
+   "case": "c03",
+   "turn": 2,
+   "run": 2,
+   "question": "Give me an example where that didn’t work.",
+   "intent_family": "behavioral",
+   "answer_md": "🐾 Here's a great example.\n\nIn one financial services platform modernization engagement, Matt was the technical lead responsible for ensuring a safe environment setup. Under delivery pressure, he relied on inherited documentation rather than verifying identity and access management (IAM), environment boundaries, and downstream access controls. That was a failure in his own oversight, not simply a team member making a mistake.\n\nThe program had development, QA, UAT, and production environments, with offshore teams executing test cycles. Matt did not audit who could trigger downstream jobs or email processes. He also did not verify whether production customer names and email addresses had been masked or scrubbed, or implement compensating controls such as email interception.\n\nAn offshore tester accidentally triggered an email job in UAT. Communications containing unmasked production customer data went to **thousands of real clients**.\n\nMatt took accountability and worked with the team on root cause analysis and corrective controls. But taking ownership afterward did not prevent an individual consequence: the client demanded that the tester be removed from the project.\n\nMatt describes the incident as “a systemic failure that resulted in an individual consequence.” His stated change afterward was to make IAM validation, environment verification, PII scrubbing, and risk ownership day-one leadership responsibilities, rather than assume those protections were already in place. The story records remediation, but it does not report a quantified recovery or say that the tester’s removal was reversed."
+  },
+  {
+   "case": "c05",
+   "turn": 1,
+   "run": 2,
+   "question": "Why is he looking?",
+   "intent_family": "narrative",
+   "answer_md": "Got it! 🐾\n\nMatt is looking for his next build: a senior leadership role where building the product engineering organization, establishing the culture, and delivering results are part of the same job.\n\nAfter his tenure at **Accenture**, including **four years** leading a **150-person** Cloud Innovation Center, his chapter there came to a close. He stepped back to recharge and focus on what was next. It was his first pause after years of continuous delivery and leadership, and he used that time to clarify the work he wanted to return to: platform modernization, product leadership, and engineering culture.\n\nDuring his sabbatical, he stayed hands-on by building MattGPT. Rather than doing a tutorial exercise, he chose a project he would actually use: an AI-powered assistant over his own career stories. He shipped semantic search across **100+ stories**, working with RAG architecture, Python, Pinecone, and modern LLM tooling.\n\nMatt describes himself as a “builder.” He is pursuing senior leadership roles in platform engineering, AI-era transformation, and enterprise modernization, with real delivery alongside engineers and product managers, not strategy decks. He wants to be in the work, not above it: building, taking on change, and solving hard problems as part of a team.\n\nHe is available immediately. No notice period."
+  },
+  {
+   "case": "c05",
+   "turn": 2,
+   "run": 2,
+   "question": "Why should we hire him over someone who stayed in-house?",
+   "intent_family": "synthesis",
+   "answer_md": "🐾 Stepping back to see the themes...\n\nThe relevant themes are execution and delivery, organizational transformation, and talent development. The stories don’t establish that Matt would be a better hire than a particular in-house candidate. They do address the concern behind the question: whether he owned an organization over time or only delivered projects and moved on. At **Accenture**, clients were struggling with slow development cycles, siloed teams, and legacy systems. Meanwhile, building the Atlanta and Tampa Cloud Innovation Centers required more than staffing engagements. New hires needed hands-on cloud-native experience, and the growing organization needed hiring, evaluation, promotion, compensation, and remediation processes.\n\nMatt built and ran those centers over **four years**, growing from a **10-person** pilot to **150+ practitioners**. He owned full P&L accountability, including budget and cost management. Through **11 to 13** direct-report practice and client leads, he ran allocation reviews, hiring pipelines, performance feedback, career development, and compensation allocation. He made the final hiring decision on every offer and owned the calls to end performance remediation. The organization recorded near-zero attrition in its first **two years**, with multiple hires promoted.\n\nFor client delivery, Matt established balanced teams combining product managers, designers, and engineers. He embedded pair programming, test-driven development, automated delivery pipelines, and customer research. He also created reusable playbooks and knowledge-transfer practices so client teams could sustain those methods after engagements ended. Practitioners progressed through an “I do, we do, you do” learning model to independent delivery.\n\nThe centers delivered **30+ product engagements** across **15+ Fortune 500 clients**, with **4X faster velocity** and zero-defect deployments. Delivery excellence and client advocacy contributed to **\\$100M+** in repeatable business. His record includes both client engagements and sustained ownership of the organization responsible for delivering them."
+  },
+  {
+   "case": "c07",
+   "turn": 1,
+   "run": 2,
+   "question": "Where is he based?",
+   "intent_family": "narrative",
+   "answer_md": "🐾 I know just the story.\n\nMatt is based in Atlanta, GA. Open to relocation and travel."
+  },
+  {
+   "case": "c07",
+   "turn": 2,
+   "run": 2,
+   "question": "Would he relocate?",
+   "intent_family": "narrative",
+   "answer_md": "Got it! 🐾\n\nYes, Matt is open to relocation and travel."
+  },
+  {
+   "case": "c09",
+   "turn": 1,
+   "run": 2,
+   "question": "Tell me about his payments work.",
+   "intent_family": "domain_payments",
+   "answer_md": "Got it! 🐾\n\nMatt’s payments work includes building the payment engine and global gateway for **JP Morgan Chase**’s ACCESS platform, migrating legacy payment systems, and reducing integration friction for **American Express**’s Virtual Payments Platform.\n\nAt **JP Morgan Chase**, regional systems had different data models, entitlement structures, message formats, and regulatory requirements. Bottomline Technologies’ WebSeries platform provided the foundation, but the bank needed payment capabilities beyond its out-of-box offering.\n\nMatt led a blended team of **40+** across **Accenture** and **JP Morgan Chase**, working across the US, Mumbai, and Bangalore. He managed the build-versus-configure boundary with Bottomline, determining where native platform functionality ended and bespoke engineering was required. His team delivered ACH, wire, FX/cross-border, and tax payment modules, with payment-type-specific permissions, compliance validation, and Message Authentication Code security controls.\n\nHe also designed the gateway’s message transformation, protocol translation, and routing across **12 countries**. For the legacy migration, he coordinated data verification with compliance teams, preserved client configurations and transaction histories, and introduced compliance dashboards that became standard operational tooling. The migration completed **without disruption to live payment operations**. ACCESS launched in **April 2011**, serving **135,000+** clients across **180+ countries**.\n\nAt **American Express**, the challenge was adoption: clients faced missing SDKs, fragmented documentation, no sandbox, and delayed testing caused by dependencies. Matt co-created a developer portal with Java, .NET, and Python SDKs, use-case-driven API documentation, and a secure sandbox with refreshed client data. He introduced environment virtualization for earlier testing, used Lean Product and XP practices, and ran a Client Onboarding Test Drive to gather end-user feedback.\n\nAPI consumption and trial usage increased within **3 months** of relaunch, and client onboarding time decreased. The developer-portal team also exceeded its delivery commitment by **over 261 story points** of customer-focused value."
+  },
+  {
+   "case": "c09",
+   "turn": 2,
+   "run": 2,
+   "question": "What’s his leadership style?",
+   "intent_family": "leadership",
+   "answer_md": "Got it! 🐾\n\nMatt leads with empathy, clarity, and purpose. He describes teams he inherited as “over-processed, under-trusted, waiting for permission instead of owning outcomes.” His response was to remove those barriers: make intent explicit, push decisions to the people closest to the work, and coach teams to think clearly, not just execute tasks.\n\nAt **Accenture**’s Cloud Innovation Center, a rigid hierarchical culture initially made people slow to share ideas. As the centers scaled to **150+ practitioners**, some arriving from legacy command-and-control delivery cultures still hesitated to take risks or voice concerns. Matt introduced weekly brainstorming sessions where ideas were considered without judgment, emphasized shared goals over individual accolades, and recognized contributions that advanced project goals.\n\nHis “permit to fail” approach included non-punitive post-mortems, open retrospectives, and sharing his own experiences with mistakes. Instead of pointing fingers, teams applied lessons to subsequent sprints. Repeat failure patterns declined, team members experimented more freely, and project timelines shortened.\n\nFor innovation work, he set expectations upfront that prototypes, experiments, and user tests would likely fail, intentionally. Rather than waiting for polished requirements, teams used user research, Jobs to Be Done framing, and lean, low-stakes experiments to test assumptions before committing to costly builds. Failed experiments became decision inputs, with product direction shaped week by week.\n\nHe paired that freedom to experiment with automation, continuous delivery, and quality-first engineering practices. At the Cloud Innovation Center, teams achieved **4x delivery acceleration** after embracing lean product and modern engineering practices."
+  },
+  {
+   "case": "c09",
+   "turn": 3,
+   "run": 2,
+   "question": "Give me an example.",
+   "intent_family": "behavioral",
+   "answer_md": "At **Norfolk Southern** in **2020**, Matt’s team was modernizing a legacy Revenue and Shipment Planning platform when the client reported rising defects. The dashboards showed near-complete test coverage, but the client was finding problems those dashboards missed. The engagement was also moving to fully remote work as the pandemic began.\n\nMatt took ownership of the failure in front of the client and **Accenture** account leadership rather than defending the metrics. He ran a bottom-up audit of the codebase and test suite and showed the gaps openly. An engineer had been working from his own interpretation instead of the backlog story and writing tests after the code. The backlog contributed to the problem: stories lacked defined scenarios and a definition of done.\n\nInstead of treating it solely as an individual performance issue, Matt rebuilt the backlog with SMART, testable stories. He brought frontend and backend test-driven development experts from Columbus to work side by side with the team, then had the code and test cases redone properly.\n\nThe coaching followed an “I do, we do, you do” progression, supported by boot camps, coding katas, practice learning sessions, and lunch and learns. He also restructured agile ceremonies and provided product management and SMART story training.\n\nDefect rates dropped as story quality and test-first discipline took hold. **The client stopped finding defects the dashboard could not see**, and client and account leadership confidence was restored through the open audit and visible improvement. The story does not give a numerical defect reduction."
+  },
+  {
+   "case": "c09",
+   "turn": 4,
+   "run": 2,
+   "question": "How big was the team on that project?",
+   "intent_family": "team_scaling",
+   "answer_md": "🐾 Here's a great example.\n\nThe **Norfolk Southern** engagement scaled to **three balanced teams**, and Matt began transitioning **one team** to Monterrey. The stories don’t specify the total headcount or how many people were on the team during the **2020** quality crisis."
+  },
+  {
+   "case": "c11",
+   "turn": 1,
+   "run": 2,
+   "question": "How did Matt scale engineering teams from 4 to 150+ people?",
+   "intent_family": "team_scaling",
+   "answer_md": "Got it! 🐾\n\nThe CIC stories document growth from a **10-person pilot to 150+ practitioners**, rather than a starting team of **4**. At **Accenture’s** Atlanta and Tampa Cloud Innovation Centers, growing client demand meant recruiting while many new hires lacked hands-on cloud-native or Agile experience. Matt also needed hiring, coaching, evaluation, and promotion processes that worked without adding layers of managers.\n\nHe built a hiring engine across internal bench searches, campus recruiting, contract-to-hire, and approved job requisitions. Engineers completed hands-on TDD pairing auditions; product managers and designers worked through live scoping exercises. Matt held the closing interview and made every final hiring decision. During scaling pushes, the process added **4 to 6 practitioners per week**, with interviewer participation capped at **2 slots per week** so recruiting did not overwhelm delivery teams.\n\nNew joiners received tailored enablement, then rotated through pairing with experienced practitioners. Matt used “I do, we do, you do” coaching, skills assessments, and learning plans rather than relying on classroom concepts alone. Weekly peer-led tech talks, engineering forums, and learning within live client projects gave people repeated opportunities to practice. Practitioners progressed from guided to independent delivery.\n\nThe organization stayed deliberately flat, with **11 to 13 practice and client leads** reporting directly to Matt. Balanced teams combined engineering, product, and design. Experienced team anchors surfaced technical progress and resource needs without another management layer. Career conversations and evaluations drew on feedback from recent pairing partners, product managers, and anchors, rather than a manager’s visibility into daily work.\n\nOver **4 years**, the organization reached **150+ practitioners**, with near-zero attrition in the first **2 years** and multiple hires promoted. CIC teams achieved **4X faster velocity**, with **10-person teams** delivering equivalent output to traditional **20-person teams**, alongside zero-defect deployments."
+  },
+  {
+   "case": "c11",
+   "turn": 2,
+   "run": 2,
+   "question": "Tell me about his payments work",
+   "intent_family": "domain_payments",
+   "answer_md": "🐾 I know just the story.\n\nAt **JP Morgan Chase**, global payments relied on fragmented connectivity across **12 countries**, each with different message formats, protocols, and regulatory requirements. Its ACCESS Next Generation portal also needed payment capabilities beyond Bottomline Technologies’ WebSeries platform. At **American Express**, clients struggled to adopt its Virtual Payments Platform because SDKs were missing, documentation was fragmented, and there was no sandbox. **RBC** faced manual cross-border processes, bulk-payment delays, and a lack of real-time FX tools.\n\nFor **JP Morgan Chase**, Matt served as Technology Delivery Lead, managing a **40+ person** blended onshore/offshore team. He designed and delivered ACH, wire, FX/cross-border, and tax-payment modules, alongside payment verification, payment-type-specific permissions, sanctions screening, and risk-based approval controls. He also designed the centralized gateway for message transformation, protocol translation, and routing to clearing networks. He spent **70 to 80%** of his time embedded with Bottomline’s team in Portsmouth and owned production incident response.\n\nFor **American Express**, Matt led developer-portal work that included Java, .NET, and Python SDKs, use case-driven API documentation, and a secure sandbox. Environment virtualization reduced downstream dependencies so developers could test earlier. The team used Lean Product and XP practices and validated the portal through a Client Onboarding Test Drive.\n\nFor **RBC**, he designed workflows from payment initiation through settlement and reconciliation, including real-time FX integration, automated alerts, recurring payments, Interac e-Transfer, and batch processing. The deliverable was an implementation blueprint ready for development.\n\nACCESS launched in **April 2011**, serving **135,000+ clients across 180+ countries**, with the gateway supporting payments across **12 countries**. At **American Express**, API consumption and trial usage increased within **3 months**, onboarding time fell, and the team delivered over **261 additional story points** beyond its commitment. At **RBC**, revised payment cutoff processes reduced wire-transfer delays and improved SLA compliance."
+  },
+  {
+   "case": "c11",
+   "turn": 3,
+   "run": 2,
+   "question": "how big was his teams",
+   "intent_family": "team_scaling",
+   "answer_md": "🐾 I know just the story.\n\nFor the payments engagements, the documented team size is **40+ people at JP Morgan Chase**. Matt managed a blended onshore/offshore team comprising **Accenture** and **JP Morgan Chase** staff across Mumbai, Bangalore, and the United States. That figure covers the blended delivery team, not an explicitly stated count of engineers or direct reports.\n\nMatt was the Technology Delivery Lead for the ACCESS payments work. He defined the onshore/offshore engagement model, tracked development progress, and served as the primary technical interface with Bottomline Technologies. He spent **70 to 80%** of his time embedded at Bottomline’s Portsmouth, New Hampshire offices, while also traveling to Chicago and New York/New Jersey for **JP Morgan Chase** coordination.\n\nThe team’s scope included ACH, wire, FX/cross-border, and tax-payment modules, security and entitlement controls, and the centralized payments gateway. ACCESS launched in **April 2011**, serving **135,000+ clients across 180+ countries**. The gateway supported payment connectivity across **12 countries**.\n\nFor **American Express**, the payments stories describe a distributed, cross-functional team involving product managers, CX architects, engineers, and business stakeholders, but do not specify a headcount. The **RBC** cross-border payments story also does not give a team size. Neither engagement has a documented engineer count or direct-report count in these stories."
+  },
+  {
+   "case": "c13",
+   "turn": 1,
+   "run": 2,
+   "question": "Tell me about his Fiserv work.",
+   "intent_family": "domain_payments",
+   "answer_md": "🐾 This is a strong one.\n\nAt **Fiserv**, Matt took over development management of an **\\$8.5M** white-label card portal roughly **7 months** into a troubled engagement. The platform served **2M+ cardholders** across **15 financial institutions**. The **45-person** team had missed multiple deadlines, production payment processing had critical defects, and client stakeholders were threatening contract cancellation. Requirements lived in **200-page** documents, releases followed **6-month** cycles, and external vendors had uncoordinated dependencies.\n\nMatt traveled Monday through Thursday to Omaha and ran **7 AM** and **11 PM** transition calls across offshore and onshore teams. He reprioritized the backlog, reset timelines, and coordinated **3 external vendors** covering payment processing, fraud detection, and hosting. The technical work included an SOA integration layer connecting the VisionPLUS **350** mainframe’s COBOL processing to a Java EE/Spring portal through MuleSoft, Tibco, and WebMethods.\n\nHe also changed how the team defined and tracked work. Matt decomposed requirements into persona-based user stories, tracked **47 acceptance criteria** as JIRA Epics, and introduced demos every **2 weeks** so stakeholders could review branding, UI, and ADA compliance before the final release. Despite PMO and compliance resistance, JIRA became the system of record, with audit trails, attached accessibility scans, and developer comments. Within **3 months**, the team moved to **2-week sprints**, with real-time visibility for **50+ stakeholders** across **3 time zones**.\n\nThe program finished **3% under budget**, saving **\\$255K**, and met **47 of 47 acceptance criteria** with **zero critical defects at launch**. Matt recovered a release that was **3 weeks behind**, avoiding **\\$500K in penalties**. The portal processed **\\$45M in transactions in its first month** with **99.97% uptime**, and the recovery secured a **\\$3M contract extension**."
+  },
+  {
+   "case": "c13",
+   "turn": 2,
+   "run": 2,
+   "question": "How big was the team?",
+   "intent_family": "team_scaling",
+   "answer_md": "🐾 Found it!\n\nMatt managed a **45-person globally dispersed team** at **Fiserv**, including developers in India, testers in the Philippines, and designers in Ireland, with onshore coordination in Omaha. He also coordinated **3 external vendors** responsible for payment processing, fraud detection, and hosting infrastructure."
+  },
+  {
+   "case": "c15",
+   "turn": 1,
+   "run": 2,
+   "question": "How do I get in touch with Matt?",
+   "intent_family": "background",
+   "answer_md": "🐾 I searched Matt's whole record, and it doesn't mention his contact details. I don’t have a verified email address, phone number, or LinkedIn URL to share."
+  },
+  {
+   "case": "c17",
+   "turn": 2,
+   "run": 2,
+   "question": "Sure.",
+   "intent_family": "domain_payments",
+   "answer_md": "🐾 Found it!\n\nAt **Fiserv**, the **45-person** team was working in **6-month** release cycles, with requirements buried in **200-page** business requirements documents organized by system module. Developers in India, testers in the Philippines, and designers in Ireland had no shared visibility into work status. Deadlines kept slipping, and PMO and compliance teams resisted moving to agile.\n\nMatt changed how work was defined and reviewed, rather than just shortening the calendar. He decomposed the requirements into persona-based user stories and replaced a single To Do/Done JIRA board with a multi-tiered Kanban/Scrum architecture. The program’s **47** acceptance criteria became Epics, with stories moving through specific workflow columns.\n\nHe established follow-the-sun synchronization: a **7 AM CST** scrum-of-scrums for offshore-to-onshore handoffs and **11 PM CST** syncs for the reverse handoff. Biweekly sprint demos brought branding, UI, and ADA compliance decisions forward instead of leaving them until month **6**. When stakeholders lacked time for frequent feedback, he negotiated dedicated review windows.\n\nMatt retained steering committee reporting while adding sprint-level visibility. To address compliance resistance, he used JIRA as the system of record, with audit trails, attached ADA scans, and developer comments instead of static Word documents. He trained teams on screen reader audits using JAWS/NVDA and incorporated those checks into the Definition of Done.\n\nThe engineering workflow changed too: Git replaced SVN, senior-developer reviews became mandatory before merge, and unit tests, Hudson CI, and SonarQube quality gates replaced builds without enforced reviews or automated testing.\n\nWithin **3 months**, the team moved to **2-week** sprints. JIRA gave **50+** stakeholders across **3** time zones real-time visibility, and PMO and compliance accepted it as the system of record. The sprint cadence was distinct from production deployment frequency, which improved to weekly-to-monthly releases."
+  },
+  {
+   "case": "x1",
+   "turn": 1,
+   "run": 2,
+   "question": "Has Matt worked in real estate?",
+   "intent_family": "out_of_scope",
+   "answer_md": "🐾 Perfect, here's what I found.\n\nYes, Matt has worked in mortgage lending and mortgage technology, classified as Financial Services / Banking rather than real estate development, brokerage, or property management.\n\nAt **Cendant Mortgage**, Matt helped replace a mainframe green-screen underwriting application with a web application. Underwriters and loan officers used it to capture borrower income, credit score, and home value. He built the JSP and MVC front end, configured underwriting workflows in TIBCO, and corrected errors in Oracle stored procedures that calculated risk factors. The workflows included credit report requests, verification steps, and routing to manager approval based on risk and loan amount.\n\nAt **HSBC**, mortgage operations faced regulatory pressure following a federal settlement. Fragmented legacy systems and manual processes created compliance risk. Matt led on-site interviews and assessment workshops in Buffalo, developed a target state architecture using Mortgage Cadence for origination and Black Knight for servicing, and presented recommendations to business and IT leadership. The assessment progressed into a **\\$10M** implementation contract. He then brought together **HSBC**, **Accenture**, and Mortgage Cadence around a shared execution plan, establishing requirements, staffing, governance, and timelines before transitioning a fully operational program to the ongoing delivery team.\n\nAt **Accredited Home Lenders**, Matt worked with HR, technology, and in-house design teams to deliver an enterprise HR portal supporting hiring, onboarding, and succession planning during rapid workforce growth. That engagement served a mortgage lender, but the application itself was an HR system."
+  },
+  {
+   "case": "x3",
+   "turn": 1,
+   "run": 2,
+   "question": "Has Matt worked on trading platforms?",
+   "intent_family": "background",
+   "answer_md": "🐾 On it!\n\nMatt’s documented work includes payments, treasury services, FX/cross-border payments, and trade finance integration. The stories do not establish that he worked on securities trading or trade-execution platforms.\n\nAt **JP Morgan Chase**, Matt was Technology Delivery Lead for the payment engine behind ACCESS Next Generation, a global corporate banking portal. The bank needed purpose-built payment modules, security controls, and workflows beyond Bottomline Technologies’ WebSeries platform’s out-of-box capabilities. Matt managed a blended team of **40+** across Mumbai, Bangalore, and the United States.\n\nHe built the FX/cross-border payment module integrating with the bank’s foreign exchange engine. Corporate treasurers could initiate cross-currency payments within ACCESS, with embedded rate visibility and connectivity to international clearing systems. He also architected Single Sign-On connecting cash, trade, and investment operations, and drove the groundwork for trade finance integration, providing visibility from trade initiation to final payment. Those are payments and treasury functions, not documented securities trading work.\n\nACCESS launched in April **2011**, serving **135,000+** corporations, financial institutions, governments, and municipalities across **180+** countries.\n\nSeparately, at **Cendian Chemical Logistics**, Matt worked with webMethods B2B Trading Networks. Here, “trading” meant exchanging shipment, order, and invoice documents with logistics partners across more than **300** carriers and more than **80** countries, rather than financial-market trading."
+  },
+  {
+   "case": "x5",
+   "turn": 1,
+   "run": 2,
+   "question": "Has Matt worked on gaming platforms?",
+   "intent_family": "out_of_scope",
+   "answer_md": "🐾 I searched Matt's whole record, and it doesn't mention work on gaming platforms."
+  },
+  {
+   "case": "r05",
+   "turn": 1,
+   "run": 2,
+   "question": "What does Matt do outside of work?",
+   "intent_family": "background",
+   "answer_md": "🐾 I searched Matt's whole record, and it doesn't mention his hobbies or activities outside of work."
+  },
+  {
+   "case": "r07",
+   "turn": 1,
+   "run": 2,
+   "question": "Has Matt worked in agriculture?",
+   "intent_family": "background",
+   "answer_md": "🐾 I searched Matt's whole record, and it doesn't mention agriculture experience."
+  },
+  {
+   "case": "r11",
+   "turn": 1,
+   "run": 2,
+   "question": "Why hire Matt?",
+   "intent_family": "synthesis",
+   "answer_md": "🐾 Looking across Matt's portfolio, I see clear patterns.\n\nMatt’s work spans Execution & Delivery, Org & Working-Model Transformation, and Talent & Enablement. At **Accenture**, clients wanted to move from waterfall to iterative development and from siloed functions to balanced teams, but the practices had to work with legacy systems, compliance requirements, and enterprise governance. At **Capital One**, slow, misaligned product iterations extended time-to-market and disconnected solutions from user needs. At **JP Morgan Chase**, regional leaders competing for requirements prioritization threatened to fragment a global Salesforce rollout into separate regional projects.\n\nMatt worked on both the delivery and the organization doing the delivery. He built **Accenture’s** Atlanta and Tampa Cloud Innovation Centers from the ground up, owning full P&L accountability, recruiting practitioners, and establishing training and career development. He brought product managers, designers, and engineers together in balanced teams, embedded pair programming and test-driven development, and adapted delivery playbooks for enterprise security and compliance. Practitioners progressed from guided to independent delivery through an “I do, we do, you do” learning model.\n\nAt **Capital One**, he built a cross-functional team of **8** and introduced a client-prioritized, testable backlog with disciplined red-green-refactor practice. The team delivered features **3-4x faster** than other **Accenture** teams on the same engagement, with **zero production defects**. The client sought to retain the team beyond its planned end.\n\nAt **JP Morgan Chase**, Matt established a shared requirements backlog, cross-regional prioritization sessions, and dependency tracking across **7 workstreams**. The Salesforce platform launched on schedule across **12 countries**, with no scope renegotiations.\n\nThe Cloud Innovation Centers grew from **0 to 150+ practitioners**, delivered **30+ product engagements**, and achieved **4X faster velocity** and **zero-defect deployments**. Delivery excellence and customer relationships generated **\\$100M+ in repeat business**. Clients adopted pair programming, test-driven development, discovery and framing, and balanced teams after the engagements ended."
+  },
+  {
+   "case": "r13",
+   "turn": 1,
+   "run": 2,
+   "question": "What patterns show up across Matt's work?",
+   "intent_family": "synthesis",
+   "answer_md": "🐾 Looking across Matt's portfolio, I see clear patterns.\n\nExecution & Delivery and Org & Working-Model Transformation recur throughout the work, alongside Talent & Enablement. Clients hired Matt’s teams to modernize technology but kept the same silos, handoffs, and bottlenecks. Others could write code quickly but waited days or weeks for builds, tests, and approvals. In regulated environments, teams also had to change systems without interrupting live operations or compromising compliance. At **JP Morgan Chase**, regional payment systems had different data models, client configurations, and compliance records. Across the Cloud Innovation Center engagements, clients needed changes to how they built software, not just replacement technology.\n\nMatt restructured teams around business domains and brought product managers, designers, and engineers together in balanced teams. He used customer journey-led design, prioritized essential features, and delivered thin-slice, production-ready solutions for user feedback. Rather than leaving quality to a separate testing phase, he embedded test-driven development, automated testing, and deployment gates. At **Capital One**, automated testing supported zero-defect deployments to payment systems. At **American Express**, automated security scanning supported faster digital experience delivery while maintaining enterprise security.\n\nCoaching accompanied delivery. Matt used “I do, we do, you do,” paired with client teams on their actual work, and ran **6-week** Agility Coaching Labs. He also built competency frameworks, assessed gaps, and prescribed coaching interventions rather than giving everyone the same training. Clients adopted balanced teams and lean product practices that outlasted the engagement; operating-model restructuring reduced costs by **15-35%**.\n\nAt **Accenture**, Matt built the Atlanta and Tampa Cloud Innovation Centers from **0** to **150+** trained practitioners. The centers delivered **30+** product engagements across **15+** Fortune **500** clients, with **4X** faster velocity and zero-defect deployments. Delivery excellence and client advocacy contributed to **\\$100M+** in repeatable business. In the earlier **JP Morgan Chase** payments migration, Matt consolidated legacy data into ACCESS without disruption to live payment operations, and the compliance dashboards became standard operational tooling."
+  },
+  {
+   "case": "r15",
+   "turn": 1,
+   "run": 2,
+   "question": "Does Matt have a master's degree?",
+   "intent_family": "out_of_scope",
+   "answer_md": "🐾 Here's a great example.\n\nYes. Matt has a master's degree in Information Technology from **American InterContinental University**."
+  },
+  {
+   "case": "c02",
+   "turn": 1,
+   "run": 1,
+   "question": "Does he have a CS degree?",
+   "intent_family": "technical",
+   "answer_md": "Got it! 🐾\n\nMatt has a **Master’s degree in Information Technology from American InterContinental University**, not a degree titled Computer Science. Information Technology is a recognized Computer Science-related discipline, and a Master’s degree exceeds a Bachelor’s."
+  },
+  {
+   "case": "c02",
+   "turn": 2,
+   "run": 1,
+   "question": "Why shouldn’t that worry me?",
+   "intent_family": "synthesis",
+   "answer_md": "🐾 Looking across Matt's portfolio, I see clear patterns.\n\nMatt has a Master's degree, Information Technology, **American InterContinental University**. Information Technology is a recognized Computer Science-related discipline, and a Master's degree exceeds a Bachelor's. That is not a degree titled Computer Science. Separately, his work history includes software engineering, cloud-native architecture, and production delivery.\n\nThe engineering problems in these engagements were concrete. At **Accenture**, engineers struggled to onboard to modern cloud-native technologies, creating bottlenecks and delayed timelines. At **Capital One**, internal teams faced Federal Reserve Board-mandated compliance updates alongside heavy development workloads, burnout, and tight deadlines. While building MattGPT, Matt encountered context resets, forgotten architectural decisions, brittle multi-file changes, and AI-generated code that required verification.\n\nFor Project Octane at **Accenture**, Matt led the creation of reusable reference applications and infrastructure-as-code templates. His team automated infrastructure provisioning using Terraform and AWS CloudFormation. He built the Summit conference reference app using AWS AppSync for real-time GraphQL sync, backed by ElastiCache, and embedded OWASP principles and IAM standards across the engineering work.\n\nAt **Capital One**, Matt organized Go upskilling, implemented pair programming and continuous integration, and developed an automated testing suite. His teams delivered defect-free production code at **4x** the output of internal teams. The engagement led to additional work.\n\nFor MattGPT, he documented architectural decisions, maintained an architecture document, and integrated eval-driven checks and behavior-first tests. He shipped a working product with **100+** stories, RAG architecture, and a polished UI as a solo developer. Those checks prevented AI-generated regressions from reaching production.\n\nThese are the recorded education credentials and engineering outcomes, rather than a claim that his degree is titled Computer Science."
+  },
+  {
+   "case": "c04",
+   "turn": 1,
+   "run": 1,
+   "question": "Is he certified?",
+   "intent_family": "background",
+   "answer_md": "Matt has held certifications, but **none is current**:\n\n- AWS Certified Solutions Architect - Associate (issued **2020**, expired **2023**)\n- AWS Certified Cloud Practitioner (issued **2019**, expired **2023**)\n- SAFe **4** Certified Agilist (issued **2017**, expired)\n\nHe also passed Oracle **8i** DBA exams (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (**2002**)."
+  },
+  {
+   "case": "c04",
+   "turn": 2,
+   "run": 1,
+   "question": "What about PMP?",
+   "intent_family": "domain_payments",
+   "answer_md": "🐾 This is a strong one.\n\nNo, Matt does not hold a PMP certification. His certifications and exams are:\n\n- AWS Certified Solutions Architect - Associate (issued **2020**, expired **2023**)\n- AWS Certified Cloud Practitioner (issued **2019**, expired **2023**)\n- SAFe **4** Certified Agilist (issued **2017**, expired)\n- Oracle **8i** DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (**2002**).\n\nNone of his certifications is current."
+  },
+  {
+   "case": "c04",
+   "turn": 3,
+   "run": 1,
+   "question": "Are any of those current?",
+   "intent_family": "synthesis",
+   "answer_md": "🐾 Here's what connects the dots across Matt's work.\n\nNo. None of Matt’s certifications is current. Both AWS certifications expired in **2023**, and his SAFe certification is also expired."
+  },
+  {
+   "case": "c06",
+   "turn": 1,
+   "run": 1,
+   "question": "Has he worked in healthcare?",
+   "intent_family": "domain_healthcare",
+   "answer_md": "🐾 This is a strong one.\n\nYes. Matt worked as a Director at **Accenture** for a **Major U.S. Health System** from May through September **2023**, leading AI-powered chronic disease management and responsible AI governance work.\n\nThe health system had an existing condition management application supporting diabetes, hypertension, and heart disease, but care relied on reactive approaches with limited real-time patient insights. The CIO also raised concerns about HIPAA compliance and the risks of processing sensitive medical information.\n\nMatt led the initiative to add a data lake, machine learning pipeline, LLM-driven chat, and proactive alerting to the existing application. The team connected data from electronic medical records, glucometers, activity trackers, and other devices. Patients received personalized recommendations through a mobile app, including medication reminders and lifestyle guidance. Matt also trained healthcare teams to interpret AI-generated insights and incorporate them into treatment plans.\n\nFor governance, he brought together legal, compliance, IT security, data science, and clinical representatives to agree on responsible AI practices. He established policies for data access, model transparency, and accountability, with continuous monitoring and auditing. He regularly updated the CIO and executive team and made adjustments based on their feedback.\n\nThe team delivered a working MVP in **16 weeks**, built as an extensible foundation rather than a throwaway proof of concept. The pilot maintained full HIPAA compliance, and clinical teams incorporated AI-generated insights into treatment planning."
+  },
+  {
+   "case": "c06",
+   "turn": 2,
+   "run": 1,
+   "question": "What did he actually do there?",
+   "intent_family": "background",
+   "answer_md": "🐾 Here's a great example.\n\nMatt led the work at a **Major U.S. Health System** to add AI capabilities to an existing chronic disease management application, starting with diabetes. Care was reactive, with limited real-time patient insights. The CIO also raised concerns about HIPAA compliance and processing sensitive medical information.\n\nMatt designed and implemented a data lake, machine learning pipeline, LLM instance, and full-stack components to ingest and analyze data from electronic medical records, glucometers, activity trackers, and other devices. He integrated AI capabilities into a mobile app: a chat interface, medication reminders, lifestyle adjustments, and condition-specific guidance. He used iterative product slicing to deliver working, extensible software rather than a throwaway proof of concept.\n\nHe also trained healthcare teams to interpret AI-generated insights and incorporate them into treatment plans. He established a feedback loop so patient data insights could refine the machine learning models and personalization over time.\n\nOn privacy and governance, Matt brought together legal, compliance, IT security, data science, and clinical representatives. He operationalized **Accenture**’s Responsible AI Framework through anonymization, encryption, differential privacy, and HIPAA-compliant data pipelines. He created policies for data access, model transparency, and accountability, set up continuous monitoring and auditing, and reported to the CIO and executive team throughout the pilot.\n\nThe team delivered the working MVP in **16 weeks**. During the **4-month pilot**, patients received real-time AI-generated recommendations through the mobile app, clinical teams incorporated those insights into treatment planning, and the pilot maintained full HIPAA compliance. The executive team approved consideration of broader AI implementation."
+  },
+  {
+   "case": "c08",
+   "turn": 1,
+   "run": 1,
+   "question": "Tell me about a time he failed.",
+   "intent_family": "behavioral",
+   "answer_md": "🐾 I know just the story.\n\nMatt was the tech lead on a global platform modernization delivery for a financial services client. The program was under delivery pressure, with offshore teams executing test cycles across development, QA, UAT, and production. IAM controls, environment segregation, and downstream access configurations had been inherited from prior phases. Matt was responsible for ensuring a safe environment setup, but he relied on the existing documentation rather than verifying it.\n\nHe did not validate who could trigger downstream jobs or email processes. He also did not implement compensating controls, such as data masking or email interception, or verify that production customer names and email addresses had been scrubbed from downstream environments.\n\nAn offshore tester accidentally triggered an email job in UAT. It sent communications containing unmasked production customer data to **thousands of real clients**.\n\nMatt took accountability and led the team through root cause analysis and remediation. He worked with the team to understand the insufficient IAM checks, unclear environment boundaries, and unscrubbed production data, then implement corrective controls. The client nevertheless demanded that the tester be removed from the project: a systemic failure resulted in an individual consequence.\n\nAfterward, Matt made IAM validation, environment verification, PII scrubbing, and risk ownership day-one responsibilities in his delivery approach. His stated lesson was that “assumptions are risks in disguise.”"
+  },
+  {
+   "case": "c08",
+   "turn": 2,
+   "run": 1,
+   "question": "What did he change afterward?",
+   "intent_family": "agile_transformation",
+   "answer_md": "🐾 This is a strong one.\n\nMatt made “IAM validation, environment verification, PII scrubbing, and risk ownership” day-one leadership responsibilities in his delivery approach. Before the incident, he had relied on inherited documentation while offshore teams ran test cycles across development, QA, UAT, and production. Afterward, those configurations became things to verify rather than assumptions to inherit.\n\nFor IAM, the change was validating the configuration and downstream access controls, including who could trigger downstream jobs or email processes. For environment verification, it was checking the boundaries between environments rather than accepting the existing documentation as accurate.\n\nFor PII scrubbing, it was verifying whether production customer data, including names and email addresses, had been masked or scrubbed from downstream environments. The incident had reached **thousands of real clients** because an email job could run in UAT with unmasked production customer data.\n\nHe also took accountability and led the team through root cause analysis and remediation. They worked collectively to understand the insufficient IAM checks, unclear environment boundaries, and unscrubbed production data, then implement corrective controls.\n\nThe client still demanded that the tester be removed from the project. Matt described that as “a systemic failure that resulted in an individual consequence.” His stated lesson was that “leaders own the environment their teams operate in,” and that “assumptions are risks in disguise.”"
+  },
+  {
+   "case": "c10",
+   "turn": 1,
+   "run": 1,
+   "question": "Tell me about his Norfolk Southern work.",
+   "intent_family": "error_fallback",
+   "answer_md": "Matt led **Norfolk Southern’s** Revenue and Shipment Planning modernization as a Director at **Accenture**, from **November 2019 to September 2023**. It was the Cloud Innovation Center’s first engagement. The railroad’s mainframe dated to the **1970s**: orders could fall out unnoticed until customers called, business rules lived in COBOL and assembly maintained by a shrinking workforce, and clerks manually worked through waybill and rating fallout on green-screen consoles.\n\nThe job was to modernize the revenue engine without stopping the railroad. Matt led domain-driven design and event storming, mapped APIs and data flows using the Boris Exercise, and documented dependencies and risks through SNAP-E. The mainframe remained the system of record while APIs, microservices, and CockroachDB rose beside it, with change data capture and reconciliation keeping the platforms connected.\n\nWhen the client grew restless for tangible progress, Matt brought revenue management staff into the innovation hub to co-create the Shipper Revenue System workspace. They worked from personas through prototypes in weekly build-measure-learn iterations. Billing clerks and shippers gained a workspace to audit and clean malformed waybill data before it caused downstream pricing errors.\n\nThe engagement also hit a quality crisis: defects were rising despite near-complete test coverage. Matt took ownership, audited the code and tests, and found tests written after code alongside vague backlog stories. He brought in TDD experts, rebuilt stories with testable scenarios, and reinforced test-first work through rotating pairs, coding katas, and coaching. Daily pairing spread scarce domain knowledge beyond thin-stretched experts; frequent driver changes helped reduce remote fatigue. A **2-day** CIC Academy course ran twice monthly over **6 months**, while client contributors learned Angular, Node, Spring Boot, and cloud-native concepts.\n\nThe MVP launched covering **95%** of its targeted use cases. EDI validation began detecting fallout proactively and notifying trading partners rather than waiting for customer calls. The quality-crisis failure mode did not recur, and client contributors gained the skills to support and manage the new application themselves."
+  },
+  {
+   "case": "c10",
+   "turn": 2,
+   "run": 1,
+   "question": "Sure, the deep dive on that one.",
+   "intent_family": "domain_payments",
+   "answer_md": "🐾 Here's a great example.\n\nAt **Norfolk Southern**, modernization meant changing the platform and how people worked while the railroad kept running. The mainframe dated to the **1970s**, orders could fall out unnoticed until customers called, and scarce domain experts maintained business rules embedded in COBOL and assembly. The client organization worked around mainframe practices, **Accenture** account leadership expected waterfall delivery, and Matt’s team was learning a new working model as the pandemic forced remote work.\n\nMatt brought cross-workstream representatives into domain-driven design and event storming sessions to map business functions, dependencies, and data flows. He used the Boris Exercise to map APIs and SNAP-E documentation to record dependencies and risks. The mainframe stayed the system of record while APIs, microservices, and CockroachDB rose beside it, connected through change data capture and reconciliation.\n\nWhen the client grew restless for tangible progress, Matt brought revenue management staff into the innovation hub to co-create the Shipper Revenue System workspace. They worked through personas, user flows, and prototypes in weekly build-measure-learn iterations. Difficult prioritization conversations established business-value priorities through OKRs rather than promising everything at once.\n\nA quality crisis then exposed defects despite near-complete test coverage. Matt took ownership before the client and account leadership. A bottom-up audit found tests written after code and backlog stories without defined scenarios or a definition of done. He rebuilt the backlog, brought in TDD experts from Columbus, and reinforced test-first work through coaching and rotating pairs.\n\nPairing faced explicit resistance: “I’m not paying for two people to do the work of one.” Matt stepped back so the client could experience it firsthand. Domain experts used an “I do, we do, you do” progression, while client contributors paired into the new-state build.\n\nThe MVP covered **95%** of targeted use cases. EDI validation began notifying trading partners proactively about fallout. The quality-crisis failure mode did not recur, and client contributors gained the skills to support and manage the application themselves."
+  },
+  {
+   "case": "c10",
+   "turn": 3,
+   "run": 1,
+   "question": "How long did that take?",
+   "intent_family": "delivery",
+   "answer_md": "🐾 Here's a great example.\n\nMatt’s **Norfolk Southern** engagement ran from **November 2019 to September 2023**, approximately **3 years and 10 months**. That is the overall engagement window, not a documented time to the MVP.\n\nWithin that work, the CIC Academy training ran over **6 months**, with a **2-day** course delivered **twice a month**. Matt brought product leaders and technical contributors together around cloud-native development, backlog ownership, prioritization, and pair programming.\n\nThe quality crisis surfaced a couple of months into the CIC’s first engagement, around the shift to remote work in early **2020**. The story covers **January through December 2020**, but does not specify how many weeks or months the remediation took. It also does not give an exact elapsed time to the MVP launch covering **95%** of targeted use cases."
+  },
+  {
+   "case": "c12",
+   "turn": 1,
+   "run": 1,
+   "question": "Compare his Fiserv and JP Morgan ACCESS work.",
+   "intent_family": "domain_payments",
+   "answer_md": "🐾 I know just the story.\n\nThe distinction is delivery recovery at **Fiserv** versus payment-platform engineering and regional-system consolidation at **JP Morgan Chase**. Both involved Execution & Delivery and changes to how globally dispersed teams worked, but the starting problems and scope differed.\n\nAt **Fiserv**, Matt inherited an **\\$8.5M** white-label card portal roughly **7 months** into the engagement. It served **2M+ cardholders across 15 financial institutions**, but the **45-person** team had missed consecutive deadlines, production quality was poor, and contract cancellation was on the table. **3 external vendors** had uncoordinated dependencies while First Data moved from the VisionPLUS **350** mainframe toward API-based architecture.\n\nMatt reset the backlog and timelines, coordinated payment-processing, fraud-detection, and hosting vendors, and moved the team from **6-month** releases to **2-week** sprints within **3 months**. He replaced SVN with Git, introduced mandatory reviews, and added Hudson CI, SonarQube, and JUnit quality gates. The program finished **3% under budget**, met **all 47 acceptance criteria**, and launched with **zero critical defects**. A recovered release avoided **\\$500K in penalties**.\n\nAt **JP Morgan Chase**, ACCESS required capabilities beyond Bottomline’s WebSeries platform for **135,000+ clients across 180+ countries**. Matt managed a **40+ blended team** across the US, Mumbai, and Bangalore, spending **70 to 80%** of his time embedded with Bottomline in Portsmouth.\n\nHis remit covered bespoke ACH, wire, FX/cross-border, and tax-payment modules; MAC security; payment-specific entitlements; reporting; SSO; and trade-finance integration. He also delivered gateway connectivity across **12 countries** and led payments-data migration from regional systems without disruption to live payments. Bulk permission changes and role-based administration reduced entitlement management from days to minutes. ACCESS launched in **April 2011**.\n\nThe scale measures differ: **Fiserv’s 2M+ cardholders** and **JP Morgan Chase’s 135,000+ institutional clients** are different populations, not a like-for-like size comparison."
+  },
+  {
+   "case": "c12",
+   "turn": 2,
+   "run": 1,
+   "question": "Which was bigger?",
+   "intent_family": "team_scaling",
+   "answer_md": "🐾 I know just the story.\n\nThe stories don’t establish which was bigger on a like-for-like measure.\n\nMatt coordinated a **45-person** team at **Fiserv** and managed a **40+** blended team on **JP Morgan Chase ACCESS**. Because **40+** is open-ended, those figures don’t establish which team was larger.\n\n**Fiserv** was an **\\$8.5M** program. No comparable ACCESS budget is given. Its **2M+ cardholders** also cannot be compared directly with ACCESS’s **135,000+ institutional clients**: they are different populations.\n\nThe documented scopes were a white-label card portal across **15 financial institutions** at **Fiserv**, and a global corporate banking portal serving clients across **180+ countries** at **JP Morgan Chase**, with payment-gateway connectivity across **12 countries**. Those describe the work, but don’t provide a common size ranking."
+  },
+  {
+   "case": "c14",
+   "turn": 1,
+   "run": 1,
+   "question": "I’m hiring a VP of Platform Engineering. Would Matt be a fit?",
+   "intent_family": "synthesis",
+   "answer_md": "Matt’s work spans Execution & Delivery, Org & Working-Model Transformation, and Talent & Enablement. At **Accenture**, engineers struggled to onboard to cloud-native technologies because standardized resources were missing. Enterprise clients faced a related problem: developers could write code quickly but waited days or weeks for builds, tests, and approvals. At **Norfolk Southern**, modernization had to happen on live production systems without disrupting rail operations. These engagements involved changing both the technical foundations and how teams built, deployed, and operated software.\n\nMatt addressed the engineering-readiness problem through Project Octane: reusable reference applications, infrastructure-as-code templates, automated provisioning, and hands-on workshops. He guided automation using Terraform, AWS CloudFormation, and serverless architectures, embedding OWASP principles and IAM standards. With TICARA, he used Terraform and the Serverless Framework against pre-provisioned cloud accounts. A working environment, including networking, services, and sample code, could be stood up in **30 to 40 minutes**, rather than waiting for the standard **2 to 3-day** account-provisioning process.\n\nHe also built the Atlanta and Tampa Cloud Innovation Centers from **0 to 150+ practitioners**, with full P&L accountability, budget and cost management, recruiting, training, and career progression frameworks. He established development environments, CI/CD pipelines, cloud platforms, and balanced teams spanning product, engineering, and design. Across enterprise engagements, he introduced automated testing and deployment gates, infrastructure as code, monitoring, and observability, tracking lead time, deployment frequency, change failure rate, and mean time to recovery.\n\nThe CIC reported **4X faster velocity**, with **10-person** balanced teams delivering equivalent output to traditional **20-person** teams. At **Capital One**, automated testing supported zero-defect deployments to payment systems. At **Norfolk Southern**, Matt led incremental replacement of mainframe components using microservices, Docker, Kubernetes, and automated pipelines while rail operations continued.\n\nHis titles included Cloud Native Architecture Lead and Director. His documented scope includes organization building, engineering enablement, cloud-native architecture, delivery automation, and production reliability. What would your VP own: an internal developer platform, infrastructure and SRE, product engineering, or a combination?"
+  },
+  {
+   "case": "c16",
+   "turn": 1,
+   "run": 1,
+   "question": "Can I see his résumé?",
+   "intent_family": "background",
+   "answer_md": "🐾 On it!\n\nI don’t have a résumé file or download link to share here, but here’s a text overview of Matt’s career.\n\nMatt Pugmire’s career spans Software Engineer → Solution Architect → Director → Cloud Innovation Center Leader. He worked at Wellfound Technology in **2000 to 2001** and **2002 to 2003**, **Cendian Chemical Logistics** in **2003 to 2005**, and **Accenture** from **March 2005 to September 2023**. He also taught as an adjunct at **American InterContinental University** in **2003 to 2004**, alongside full-time work.\n\nAt **Accenture**, Matt built the Cloud Innovation Center from **0 to 150+ practitioners** across Atlanta and Tampa. The organization delivered at **4X faster velocity**, with **zero-defect deployments** through TDD and automated pipelines. He drove **\\$100M+ in repeat business** through delivery excellence and customer relationship building.\n\nHis work included payments and banking modernization for **JP Morgan Chase**, **RBC**, **Capital One**, and **HSBC**. At **JP Morgan Chase**, payments and Salesforce platforms each rolled out across **12 countries**. He also recovered troubled programs and architected cloud-native systems from prototype to production.\n\nMatt built partnerships connecting clients with emerging technology, including work with Georgia Tech’s innovation community, hackathon judging, recruiting, and job fairs.\n\nCurrently on sabbatical, Matt is building MattGPT using RAG, semantic search, and modern LLM tooling. Matt is a builder seeking a role where building the product engineering organization, establishing the culture, and delivering results are part of the same job."
+  },
+  {
+   "case": "c18",
+   "turn": 1,
+   "run": 1,
+   "question": "Tell me about his Norfolk Southern work.",
+   "intent_family": "out_of_scope",
+   "answer_md": "🐾 Found it!\n\nMatt led **Norfolk Southern’s** Revenue and Shipment Planning modernization as a Director at **Accenture**, from **November 2019 to September 2023**. It was the Cloud Innovation Center’s first engagement. The railroad’s revenue engine ran on a mainframe dating to the **1970s**. Orders could fall out unnoticed until customers called, business rules were embedded in COBOL and assembly, and clerks manually handled waybill and rating fallout. The work also faced resistance from a client organization shaped around mainframe thinking and account leadership accustomed to waterfall delivery.\n\nMatt led domain-driven design and event storming to map the business functions and dependencies. Rather than replace the mainframe outright, his team kept it as the system of record while building APIs, microservices, and CockroachDB alongside it. Change data capture synchronized the platforms, and reconciliation checked that nothing was lost. The architecture used anti-corruption layers and asynchronous messaging to connect legacy systems with real-time processing.\n\nWhen the client grew restless for tangible progress, Matt brought revenue management into the innovation hub to co-create the Shipper Revenue System interface, from personas to high-fidelity prototypes, in weekly build-measure-learn iterations.\n\nThe engagement also hit a quality crisis: defects rose despite near-complete test coverage. Matt audited the code and tests rather than defending the dashboard. He rebuilt vague backlog stories, brought in TDD experts, and reinforced test-first work through rotating pairs, coding katas, and daily workflow checks. A tailored CIC Academy course ran over **6 months**. Pairing also spread scarce legacy knowledge and helped client contributors learn Angular, Node, Spring Boot, and cloud-native concepts.\n\nThe MVP launched covering **95% of its targeted use cases**, capturing real orders with clean data feeding the mainframe. EDI validation moved fallout detection from customer complaints to proactive trading-partner notifications. The quality-crisis failure mode did not recur, and client contributors gained the skills to support and manage the new application after **Accenture** rolled off."
+  },
+  {
+   "case": "c18",
+   "turn": 2,
+   "run": 1,
+   "question": "Tell me about his RBC work.",
+   "intent_family": "domain_payments",
+   "answer_md": "🐾 Perfect, here's what I found.\n\nMatt worked on **RBC’s** Day**2Day** Corporate Banking modernization as a Senior Technology Architecture Manager from June **2012** to June **2013**. The bank’s existing systems had performance and scalability limitations and lacked digital offerings. **RBC** was evaluating Bottomline WebSeries as the payment hub engine to replace **RBC Express**, and leadership needed an assessment before committing further investment.\n\nMatt conducted code reviews, stakeholder interviews, and documentation analysis. He assessed Data, Application, Technology, and Business Architecture, then created architectural heat maps and target-system models with cost-to-fix versus benefit comparisons. Drawing on prior WebSeries implementation experience, he identified that the platform lacked the modularity required for **RBC’s** long-term digital operating model. The assessment provided justification for a strategic pivot, preventing investment in a platform path that could not deliver what the bank needed and allowing technical resources to move to higher-priority initiatives.\n\nAlongside that assessment, Matt established the PMO: the project management plan, budget and schedule reporting, risk and dependency management, and a centralized communication framework. He introduced designated team contacts, daily summaries, and a task-tracking matrix. The framework coordinated **3 organizations**, **RBC**, **Accenture**, and Bottomline Technologies, and eliminated missed program updates.\n\nWhen the previous data conversion lead left early in the initiative, Matt took over the workstream from scratch. He analyzed legacy payment records, documented source-to-target transformation rules, planned mock conversion cycles, and established reconciliation checks for payment amounts and beneficiary details. He also managed onshore and offshore data-scrubbing and validation teams.\n\nFor mobile readiness, he defined API integration points, cheque deposit requirements, and cross-device scalability needs. The deliverables included an end-to-end conversion plan and a mobile modernization blueprint. The stories do not quantify dollar savings or performance improvements for this engagement."
+  },
+  {
+   "case": "c18",
+   "turn": 3,
+   "run": 1,
+   "question": "How long did that take?",
+   "intent_family": "delivery",
+   "answer_md": "🐾 This is a strong one.\n\nMatt’s **RBC** engagement ran from **June 2012 to June 2013**, approximately **12 months**. That covered the architecture assessment, PMO setup, data conversion planning, and mobile-readiness work. The stories don’t give separate durations for those workstreams or a completion date for the full modernization."
+  },
+  {
+   "case": "x2",
+   "turn": 1,
+   "run": 1,
+   "question": "Has Matt worked with SAP?",
+   "intent_family": "stakeholders",
+   "answer_md": "🐾 I followed that trail and came up empty: Matt's stories don't cover SAP experience. I can’t confirm that he has worked with SAP."
+  },
+  {
+   "case": "x4",
+   "turn": 1,
+   "run": 1,
+   "question": "How did Matt calculate ROI?",
+   "intent_family": "personal",
+   "answer_md": "Matt’s stories describe cost-to-benefit comparisons and financial tracking, but they do not give a specific ROI formula, payback period, or calculated ROI percentage.\n\nAt the Cloud Innovation Centers, clients questioned the cost of pair programming, and investment in the practice needed justification. Matt compared delivery results with traditional approaches: **10-person** balanced teams delivered equivalent output to traditional **20-person** teams, with **4X faster velocity** and **zero-defect deployments** through test-driven development and automated pipelines. He used executive briefings and client case studies to address pairing costs with evidence of velocity gains and quality improvements.\n\nHe also tracked the cost side. Across the Atlanta and Tampa centers, with **150+ practitioners**, Matt owned budget and cost management, chargeability, unbillable downtime, and contractor approvals. He required internal bench deployment before external contractors. Team scorecards tracked lead time, cycle time, throughput, team stability, and backlog health rather than treating velocity alone as the performance measure.\n\nAt **RBC**, the investment decision involved whether Bottomline WebSeries could meet corporate banking requirements. Matt conducted code reviews and a gap/fit analysis, created architectural heat maps, and delivered target-system models with a “transparent cost-to-fix vs. benefit comparison.” The assessment found that WebSeries lacked the required modularity, preventing further investment in that platform path.\n\nAt **Fiserv**, the recorded financial results were **\\$255K in preserved margin**, delivery **3% under budget** on an **\\$8.5M program**, **\\$500K in contractual penalties avoided**, and a **\\$3M contract extension**. Those were reported separately, not as a single ROI percentage."
+  },
+  {
+   "case": "x7",
+   "turn": 1,
+   "run": 1,
+   "question": "When was he at JP Morgan?",
+   "intent_family": "domain_payments",
+   "answer_md": "🐾 Here's a great example.\n\nMatt worked with **JP Morgan Chase** through **Accenture** during these engagements:\n\n- **August 2009 to June 2012:** ACCESS Next Generation and the global payments gateway.\n- **September 2014 to December 2014:** Identity & Access Management Uplift.\n- **June 2015 to June 2016:** Asset Management Salesforce cloud integration.\n\nHis role on these engagements was Senior Technology Architecture Manager."
+  },
+  {
+   "case": "r04",
+   "turn": 1,
+   "run": 1,
+   "question": "What does Matt like to do for fun?",
+   "intent_family": "background",
+   "answer_md": "🐾 I followed that trail and came up empty: Matt's stories don't cover his hobbies or what he likes to do for fun."
+  },
+  {
+   "case": "r06",
+   "turn": 1,
+   "run": 1,
+   "question": "What are Matt's hobbies?",
+   "intent_family": "background",
+   "answer_md": "🐾 I searched Matt's whole record, and it doesn't mention his hobbies."
+  },
+  {
+   "case": "r08",
+   "turn": 1,
+   "run": 1,
+   "question": "Has Matt worked in oil and gas?",
+   "intent_family": "background",
+   "answer_md": "Got it! 🐾\n\nMatt’s stories don’t establish direct oil and gas experience. His related industry work was at **Cendian Chemical Logistics**, a lead logistics provider for the chemical and plastics industry, from **2003** to **2005**. That was transportation and logistics work, not a documented oil and gas engagement.\n\n**Cendian Chemical Logistics** coordinated shipments across more than **300** preferred carriers into and out of more than **80** countries. Shippers and carriers used different formats, including EDI, XML, and flat files, and some had no integration capability. Matt built and maintained integrations in Java and webMethods, created common data representations based on CIDX, the chemical industry’s exchange standard, and developed portal capability for partners who could not integrate directly.\n\nThe resulting integrations gave the transportation management system a common shipment representation. Document generation moved in house, replacing an external service and manual key entry. Transaction tracking gave operations visibility into where messages stopped across previously disconnected entry points.\n\nIn **2004**, Matt also onboarded a plastics company onto the trading network. He was the only engineer on the onboarding, worked with the client’s technology team, designed the interface, and validated it against live shipment planning in production. The client went from signed contract to live shipment planning through the network."
+  },
+  {
+   "case": "r10",
+   "turn": 1,
+   "run": 1,
+   "question": "Has Matt worked in insurance?",
+   "intent_family": "background",
+   "answer_md": "🐾 I followed that trail and came up empty: Matt's stories don't cover insurance engagements.\n\nI can confirm banking experience with **JP Morgan Chase**, **RBC**, **Fiserv**, and **HSBC**, but I can’t confirm that Matt has worked in insurance."
+  },
+  {
+   "case": "r12",
+   "turn": 1,
+   "run": 1,
+   "question": "What are Matt's core themes?",
+   "intent_family": "synthesis",
+   "answer_md": "🐾 Looking across Matt's portfolio, I see clear patterns.\n\nMatt’s core themes are **Execution & Delivery**, **Org & Working-Model Transformation**, **Emerging Tech**, **Professional Narrative**, **Risk & Responsible Tech**, **Strategic & Advisory**, and **Talent & Enablement**. Execution & Delivery is the primary theme, with Org & Working-Model Transformation a strong secondary theme.\n\nAt **Accenture**, enterprise clients wanted to move from waterfall to iterative development, from feature factories to customer-centric product development, and from siloed teams to balanced teams. Teams also needed different coaching interventions across product management, agile, DevOps, and modern engineering. At **RBC**, leadership faced a different decision: whether a proposed payment hub could meet corporate banking requirements before further investment.\n\nFor **Execution & Delivery** and **Org & Working-Model Transformation**, Matt built the Atlanta and Tampa Cloud Innovation Centers, adapting Lean XP for legacy systems, compliance requirements, and enterprise governance. He established pair programming, test-driven development, automated pipelines, and balanced teams across product, engineering, and design. The centers grew from **0** to **150+ practitioners**, delivering **4X faster velocity** and zero-defect deployments.\n\nFor **Talent & Enablement**, Matt built competency frameworks, assessed individual and team gaps, and prescribed dojo, lab, immersive, and self-paced interventions. He used “I do, we do, you do” coaching with real work. The frameworks became the diagnostic tool for capability development across CloudFirst in North America.\n\nFor **Emerging Tech**, Matt led design thinking and rapid prototyping at **Accenture’s** Liquid Studio. Clients left with working prototypes or MVPs rather than strategy decks, and validation cycles compressed from months to weeks. For **Risk & Responsible Tech**, he embedded security scanning and compliance checks into delivery workflows.\n\nFor **Strategic & Advisory**, Matt’s architecture assessment at **RBC** found that WebSeries lacked the required modularity. The bank redirected resources rather than continuing that platform investment.\n\n**Professional Narrative** covers his career journey and role intent: engineer to Director, building products, platforms, and teams. Across the CIC work, delivery excellence and client relationships generated **\\$100M+ in repeat business**."
+  },
+  {
+   "case": "r14",
+   "turn": 1,
+   "run": 1,
+   "question": "What languages does Matt speak?",
+   "intent_family": "synthesis",
+   "answer_md": "🐾 Looking across Matt's portfolio, I see clear patterns.\n\nMatt speaks English (native) and French (**B2**, self-assessed)."
+  },
+  {
+   "case": "r16",
+   "turn": 1,
+   "run": 1,
+   "question": "Does Matt speak French?",
+   "intent_family": "personal",
+   "answer_md": "🐾 This is a strong one.\n\nYes. Matt speaks French (**B2**, self-assessed)."
+  },
+  {
+   "case": "c02",
+   "turn": 1,
+   "run": 2,
+   "question": "Does he have a CS degree?",
+   "intent_family": "technical",
+   "answer_md": "🐾 This is a strong one.\n\nMatt holds a Master’s degree in Information Technology from **American InterContinental University**, not a degree titled Computer Science. Information Technology is a recognized Computer Science-related discipline, and a Master’s degree exceeds a Bachelor’s."
+  },
+  {
+   "case": "c02",
+   "turn": 2,
+   "run": 2,
+   "question": "Why shouldn’t that worry me?",
+   "intent_family": "synthesis",
+   "answer_md": "🐾 Let me show you what ties Matt's work together.\n\nMatt holds a Master's degree, Information Technology, **American InterContinental University**. Information Technology is a recognized Computer Science-related discipline. His degree is not titled Computer Science. If that exact degree title is a non-negotiable requirement, that distinction remains. His work history supplies separate facts about what he has built and delivered.\n\nExecution & Delivery and Emerging Tech feature in the following engagements. At **Accenture**, engineers struggled to onboard to modern cloud-native technologies because project demands and a lack of standardized resources created bottlenecks. At **Capital One**, internal teams faced Federal Reserve Board-mandated compliance updates alongside heavy development workloads, burnout, and tight deadlines. Across these engagements, the problems included environment setup, engineering readiness, and production quality.\n\nMatt led the creation of Project Octane, developing reusable reference applications and infrastructure-as-code templates. He guided automated infrastructure provisioning with Terraform and AWS CloudFormation, embedded OWASP principles and IAM standards, and built the Summit conference reference app using AWS AppSync for real-time GraphQL sync, backed by ElastiCache.\n\nFor TICARA, he designed infrastructure provisioning with Terraform and application packaging and deployment with the Serverless Framework. Using pre-provisioned AWS or Azure accounts, the team stood up a working environment, including VPC, services, and sample code, in **30 to 40 minutes**. That setup depended on keeping accounts ready, rather than eliminating the account-provisioning process.\n\nAt **Capital One**, Matt built a balanced team of **8**, introduced Lean XP, pair programming, continuous integration, and an automated testing suite. His teams delivered defect-free production code at **4x** the output of internal teams, and **Capital One** awarded additional engagements."
+  },
+  {
+   "case": "c04",
+   "turn": 1,
+   "run": 2,
+   "question": "Is he certified?",
+   "intent_family": "background",
+   "answer_md": "🐾 This is a strong one.\n\nMatt has held certifications, but **none is current**. His certifications and exam history are:\n\n- AWS Certified Solutions Architect - Associate (issued **2020**, expired **2023**)\n- AWS Certified Cloud Practitioner (issued **2019**, expired **2023**)\n- SAFe **4** Certified Agilist (issued **2017**, expired)\n- Oracle **8i** DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (**2002**)."
+  },
+  {
+   "case": "c04",
+   "turn": 2,
+   "run": 2,
+   "question": "What about PMP?",
+   "intent_family": "domain_payments",
+   "answer_md": "🐾 Perfect, here's what I found.\n\nNo, Matt does not hold PMP certification. His certifications and exam history are: AWS Certified Solutions Architect - Associate (issued **2020**, expired **2023**), AWS Certified Cloud Practitioner (issued **2019**, expired **2023**), SAFe **4** Certified Agilist (issued **2017**, expired), and Oracle **8i** DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (**2002**).\n\nNone of his certifications is current."
+  },
+  {
+   "case": "c04",
+   "turn": 3,
+   "run": 2,
+   "question": "Are any of those current?",
+   "intent_family": "synthesis",
+   "answer_md": "🐾 Looking across Matt's portfolio, I see clear patterns.\n\nNo. None of Matt’s certifications is current. Both AWS certifications expired in **2023**, and his SAFe certification has also expired. The Oracle entry records exams passed, not a current certification."
+  },
+  {
+   "case": "c06",
+   "turn": 1,
+   "run": 2,
+   "question": "Has he worked in healthcare?",
+   "intent_family": "domain_healthcare",
+   "answer_md": "🐾 Here's a great example.\n\nYes. Matt worked as a Director at **Accenture** for a **Major U.S. Health System** from May to September **2023**, leading AI-powered chronic disease management and responsible AI governance work.\n\nThe health system’s existing condition management application supported diabetes, hypertension, and heart disease, but care relied on reactive approaches with limited real-time patient insights. Starting with diabetes management, Matt led the development of a data lake, machine learning pipeline, LLM-driven chat, and mobile capabilities. These components processed data from electronic medical records, glucometers, activity trackers, and other devices to deliver personalized recommendations, medication reminders, and lifestyle guidance.\n\nHis team delivered a working MVP in **16 weeks**, using iterative product slicing to build an extensible foundation rather than a throwaway proof of concept. During the **4-month pilot**, patients received real-time, generative AI-driven insights through a mobile app, and clinical teams incorporated those insights into treatment planning.\n\nThe CIO also raised concerns about HIPAA compliance and patient privacy. Matt brought together legal, compliance, IT security, data science, and clinical representatives. He operationalized **Accenture**’s Responsible AI Framework with anonymization, encryption, differential privacy, continuous monitoring, and auditing.\n\nThe pilot maintained full HIPAA compliance. Its governance performance led the executive team to approve consideration of broader AI implementation across the health system."
+  },
+  {
+   "case": "c06",
+   "turn": 2,
+   "run": 2,
+   "question": "What did he actually do there?",
+   "intent_family": "background",
+   "answer_md": "Got it! 🐾\n\nAt the **Major U.S. Health System**, Matt led the work to add AI-powered capabilities to an existing chronic disease management application, starting with diabetes. Care was largely reactive, and clinicians had limited real-time patient insights. The CIO also raised concerns about HIPAA compliance and the risks of processing sensitive medical information.\n\nMatt designed and implemented a data lake, machine learning pipeline, LLM instance, and full-stack components to ingest and analyze data from electronic medical records, glucometers, activity trackers, and other devices. He applied generative AI to provide a patient chat interface, medication reminders, lifestyle adjustments, and condition-specific guidance. He integrated those capabilities into a mobile app so patients could track metrics, receive recommendations, and monitor progress.\n\nHe also trained healthcare teams to interpret AI-generated insights and incorporate them into treatment plans. He established a feedback loop so patient data insights could refine the machine learning models and personalization over time.\n\nFor privacy and governance, Matt brought together legal, compliance, IT security, data science, and clinical representatives. He operationalized **Accenture**’s Responsible AI Framework through data anonymization, encryption, differential privacy, and HIPAA-compliant data pipelines. He created policies for data access, model transparency, and accountability, set up continuous monitoring and auditing, and regularly updated the CIO and executive team.\n\nThe team delivered a working MVP in **16 weeks**, using iterative product slicing to build an extensible foundation rather than a throwaway proof of concept. The **4-month pilot** maintained full HIPAA compliance, and clinical teams adopted AI-generated insights into treatment planning. Executives approved consideration of broader implementation, not a completed health-system-wide rollout."
+  },
+  {
+   "case": "c08",
+   "turn": 1,
+   "run": 2,
+   "question": "Tell me about a time he failed.",
+   "intent_family": "behavioral",
+   "answer_md": "🐾 This is a strong one.\n\nMatt was the tech lead on a global platform modernization delivery for a financial services client. The program was under delivery pressure, with offshore teams running test cycles across development, QA, UAT, and production. His responsibility was to ensure a safe environment setup, but he relied on inherited documentation rather than verifying the identity and access management (IAM) configuration, environment boundaries, and downstream access controls.\n\nThat assumption had a real consequence: an offshore tester accidentally triggered an email job in UAT that sent communications containing unmasked production customer data to thousands of real clients.\n\nMatt had not audited who could trigger downstream jobs or email processes. He had not implemented compensating controls such as data masking or email interception, and he had not verified whether customer names and email addresses had been scrubbed from downstream environments. He had focused on delivery pressures instead of validating those access patterns.\n\nAfter the incident, Matt took accountability and brought the team together for root cause analysis and remediation. They worked collectively to understand what happened and implement corrective controls rather than treating the accidental trigger as the whole explanation.\n\nThe client nevertheless demanded that the tester be removed from the project. Matt described it as “a systemic failure that resulted in an individual consequence.” Following the incident, he made IAM validation, environment verification, PII scrubbing, and risk ownership day-one leadership responsibilities in his delivery approach."
+  },
+  {
+   "case": "c08",
+   "turn": 2,
+   "run": 2,
+   "question": "What did he change afterward?",
+   "intent_family": "agile_transformation",
+   "answer_md": "Afterward, Matt made “IAM validation, environment verification, PII scrubbing, and risk ownership” day-one leadership responsibilities in his delivery approach, rather than relying on inherited documentation and assuming the controls were correct.\n\nThe change addressed the specific checks he had missed. He had not confirmed the identity and access management configuration, verified environment boundaries, audited who could trigger downstream jobs or email processes, or checked whether production customer names and email addresses had been scrubbed from downstream environments. Those were the assumptions he identified as his responsibility to verify, even under delivery pressure.\n\nImmediately after the incident, Matt took accountability and led the team through root cause analysis and remediation. He worked collectively with the team to understand what happened and implement corrective controls. The investigation identified insufficient IAM checks, unclear environment boundaries, and production data that had not been scrubbed, rather than stopping at the tester’s accidental action.\n\nThe client still demanded that the tester be removed from the project. Matt called that “a systemic failure that resulted in an individual consequence.” His stated change was to treat the environment his team operated in as a leadership responsibility from the start. The account does not specify the individual corrective controls ultimately deployed or report a measured reduction in subsequent incidents."
+  },
+  {
+   "case": "c10",
+   "turn": 1,
+   "run": 2,
+   "question": "Tell me about his Norfolk Southern work.",
+   "intent_family": "out_of_scope",
+   "answer_md": "🐾 Here's a great example.\n\nMatt led **Norfolk Southern’s** Revenue and Shipment Planning modernization as a director at **Accenture**, from **November 2019** to **September 2023**. Its core scheduling, billing, and order-to-cash ran on a mainframe dating to the **1970s**. Orders could fall out unnoticed until customers called, business rules lived in COBOL and assembly maintained by a shrinking workforce, and clerks manually handled waybill and rating fallout through green-screen consoles.\n\nMatt led domain-driven design and event storming sessions to map the business functions and dependencies. Rather than replace the mainframe outright, his team kept it as the system of record and built APIs, microservices, and CockroachDB alongside it. Change data capture synchronized the platforms, with reconciliation checking that nothing was lost. When the client grew restless for tangible progress, Matt brought its revenue management team into the innovation hub to co-create the Shipper Revenue System workspace through personas, prototypes, and weekly build-measure-learn iterations.\n\nThe engagement also hit a quality crisis: defects rose despite near-complete test coverage. Matt took ownership, audited the code and tests, and found tests written after code and backlog stories without defined scenarios. He brought in frontend and backend TDD experts, rebuilt the backlog with testable stories, and reinforced test-first development through rotating pairs and coaching. His CIC Academy course ran twice a month over **6 months**, while client contributors paired into the build to learn Angular, Node, Spring Boot, and cloud-native practices.\n\nThe MVP launched covering **95%** of its targeted use cases, capturing real orders with clean data feeding the mainframe. EDI validation moved fallout detection from customer complaints to proactive trading-partner notifications. Delivery scaled to **3 balanced teams**. The client stopped finding defects the dashboard could not see, and pairing and test-first practices held after the outside experts left."
+  },
+  {
+   "case": "c10",
+   "turn": 2,
+   "run": 2,
+   "question": "Sure, the deep dive on that one.",
+   "intent_family": "domain_payments",
+   "answer_md": "🐾 Here's a great example.\n\nAt **Norfolk Southern**, modernization had to happen without stopping the railroad. From **November 2019** to **September 2023**, Matt led work spanning scheduling, billing, and order-to-cash on a mainframe dating to the **1970s**. Orders disappeared unnoticed until customers called. Clerks manually handled waybill and rating fallout through green-screen consoles. The client organization worked around mainframe practices, account leadership expected waterfall delivery, and Matt’s team was learning a new working model during the transition to remote work.\n\nMatt started with domain-driven design and event storming to map embedded business rules, data flows, and dependencies. The scope covered order management, booking, credit, service fulfillment, planning, billing, and accounts receivable. Rather than attempt a wholesale replacement, his team introduced APIs, microservices, and CockroachDB alongside the mainframe. Change data capture synchronized the platforms; reconciliation reports checked that no functionality or data was lost. API gateways and anti-corruption layers supported incremental replacement on live production, with Docker, Kubernetes, and automated CI/CD supporting the new services.\n\nWhen the client grew restless for tangible progress, Matt brought revenue management into the innovation hub to co-create the Shipper Revenue System workspace. They worked from personas and user flows through high-fidelity prototypes in weekly build-measure-learn iterations. Billing clerks and shippers could audit malformed waybill data before it caused downstream pricing errors.\n\nA quality crisis required another correction. Despite near-complete test coverage, defects were rising. Matt’s audit found tests written after code and backlog stories without defined scenarios or a definition of done. He rebuilt the backlog with testable stories and brought frontend and backend TDD experts into hands-on pairing and coaching.\n\nFor adoption, Matt delivered a **2-day** CIC Academy course twice monthly over **6 months**. Domain experts paired with team members using “I do, we do, you do,” rotating scarce legacy knowledge through the team.\n\nThe MVP covered **95%** of targeted use cases, capturing real orders with clean data feeding the mainframe. Delivery scaled to **3 balanced teams**. EDI validation notified trading partners proactively, and the client stopped finding defects the dashboard could not see."
+  },
+  {
+   "case": "c10",
+   "turn": 3,
+   "run": 2,
+   "question": "How long did that take?",
+   "intent_family": "delivery",
+   "answer_md": "🐾 Tracking this down...\n\nMatt’s **Norfolk Southern** engagement ran from **November 2019** to **September 2023**, approximately **3 years and 10 months**. That is the engagement window, not a documented time to complete the entire modernization.\n\nThe CIC Academy training ran over **6 months**, with a **2-day** course delivered twice a month.\n\nThe stories do not specify how long it took to launch the MVP covering **95%** of targeted use cases, or to resolve the quality crisis."
+  },
+  {
+   "case": "c12",
+   "turn": 1,
+   "run": 2,
+   "question": "Compare his Fiserv and JP Morgan ACCESS work.",
+   "intent_family": "domain_payments",
+   "answer_md": "🐾 Here's a great example.\n\nAt **Fiserv**, Matt took over a card portal in disaster/recovery mode: missed deadlines, poor quality, and stakeholders threatening contract cancellation. At **JP Morgan Chase**, ACCESS required custom payment, security, and administration capabilities beyond Bottomline Technologies’ WebSeries platform. The distinction was delivery recovery at **Fiserv**, versus purpose-built engineering and consolidation of regional payment systems for ACCESS.\n\nFor **Fiserv**, Matt changed both how work was defined and how code reached production. He decomposed a **200-page** requirements document into persona-based user stories, organized **47** acceptance criteria in JIRA, and introduced biweekly demos to catch branding and accessibility issues before release. Rather than replace compliance reporting outright, he maintained steering committee reporting while establishing JIRA as the audit system of record. He also replaced SVN with Git, required senior-developer reviews and story-linked unit tests, and introduced Maven, Artifactory, Hudson, SonarQube, and JUnit quality gates. The **45-person** team moved from **6-month** release cycles to **2-week** sprints within **3 months**.\n\nFor **JP Morgan Chase** ACCESS, Matt managed a **40+** blended team and spent **70-80%** of his time embedded with Bottomline. He determined where WebSeries configuration ended and bespoke engineering was required. His work included ACH, wire, FX/cross-border and tax payment modules; payment verification; payment-type-specific permissions; and a gateway handling transformation and routing across **12 countries**. Instead of administering permissions individually, he introduced role-based profiles and bulk changes across users, accounts, and products. He also led payments data migration with compliance verification and production validation.\n\n**Fiserv** delivered the **\\$8.5M** program **3% under budget**, meeting **47 of 47** acceptance criteria with **zero critical defects at launch**. ACCESS launched in **April 2011**, serving **135,000+ clients across 180+ countries**; entitlement administration fell from days to minutes, and migration completed without disruption to live payments."
+  },
+  {
+   "case": "c12",
+   "turn": 2,
+   "run": 2,
+   "question": "Which was bigger?",
+   "intent_family": "team_scaling",
+   "answer_md": "🐾 I know just the story.\n\nThe stories don’t establish which was bigger overall.\n\nFor team size, **Fiserv** had **45 people**, while **JP Morgan Chase** ACCESS had **40+**. Because **40+** is open-ended, those figures don’t establish which team was larger.\n\nFor budget, **Fiserv** was an **\\$8.5M** program. There’s no comparable ACCESS budget in the stories.\n\nFor reach, **Fiserv** served **2M+ cardholders across 15 financial institutions**. ACCESS served **135,000+ corporations, financial institutions, governments, and municipalities across 180+ countries**. Cardholders and institutional clients are different measures, so those counts cannot settle the comparison.\n\nThe scope differed: Matt’s **Fiserv** work covered recovery of a white-label card portal, coordinating **3 external vendors** during a mainframe-to-API transition. His ACCESS work covered bespoke payment modules, security, entitlements, regional-system consolidation, and a payments gateway across **12 countries**."
+  },
+  {
+   "case": "c14",
+   "turn": 1,
+   "run": 2,
+   "question": "I’m hiring a VP of Platform Engineering. Would Matt be a fit?",
+   "intent_family": "synthesis",
+   "answer_md": "🐾 Looking across Matt's portfolio, I see clear patterns.\n\nFor a VP of Platform Engineering search, the relevant work spans execution and delivery, organization transformation, and talent enablement. At **Accenture**, engineers struggled to onboard to modern cloud-native technologies because standardized resources were missing and project demands left little room for learning. Enterprise clients faced another bottleneck: developers could write code quickly, then wait days or weeks for builds, tests, and approvals. At **Norfolk Southern**, modernization had to happen on live production without disrupting rail operations. Replacing everything at once was too risky.\n\nMatt led Project Octane to address engineering readiness: reusable reference applications, infrastructure-as-code templates, automated provisioning using Terraform and AWS CloudFormation, and hands-on workshops. The reference applications included their own infrastructure definitions. He embedded OWASP principles and IAM standards and standardized cloud-native architecture practices across **Accenture**’s CloudFirst engineering community.\n\nHe also built the Atlanta and Tampa Cloud Innovation Centers from the ground up, owning full P&L accountability, hiring, training, and development across engineering, architecture, product, and design. He grew the centers to **150+ practitioners**, established career progression frameworks, and created reusable architectural patterns and delivery playbooks. Across CIC engagements, **10-person** balanced teams delivered equivalent output to traditional **20-person** teams, with **4X faster velocity** and zero-defect deployments.\n\nThe work included production accountability, not just enablement. At **JP Morgan Chase**, Matt managed a blended team of **40+** and owned on-call and Sev-1 incident response for the ACCESS payment engine. At **Norfolk Southern**, he led incremental replacement of mainframe components using microservices, API gateways, Docker, Kubernetes, automated CI/CD, and reconciliation reports.\n\nThe hiring questions still to resolve are specific to your mandate: ownership of an internal developer platform as a long-lived product, SLOs and error budgets, cloud-cost accountability, and managing managers. His stories document organization building, shared engineering accelerators, platform modernization, and production incident ownership; they do not establish every one of those responsibilities."
+  },
+  {
+   "case": "c16",
+   "turn": 1,
+   "run": 2,
+   "question": "Can I see his résumé?",
+   "intent_family": "background",
+   "answer_md": "🐾 Here's a great example.\n\nI don’t have Matt’s résumé file or a verified download link to share here. I can provide a résumé-style summary of his career, experience, and education in this chat if that would help."
+  },
+  {
+   "case": "c18",
+   "turn": 1,
+   "run": 2,
+   "question": "Tell me about his Norfolk Southern work.",
+   "intent_family": "out_of_scope",
+   "answer_md": "🐾 I know just the story.\n\nMatt led **Norfolk Southern’s** Revenue and Shipment Planning modernization as an **Accenture** Director from **November 2019** to **September 2023**. The railroad’s core revenue engine ran on a mainframe dating to the **1970s**. Orders could fall out unnoticed until customers called, business rules lived in COBOL and assembly, and billing clerks manually handled waybill and rating fallout. The client organization was accustomed to mainframe thinking, account leadership to waterfall delivery, and Matt’s team was learning a new working model as the pandemic forced remote work.\n\nMatt brought business and technical contributors together for domain-driven design and event storming workshops. The mainframe remained the system of record while APIs, microservices, and CockroachDB were built alongside it, with change data capture and reconciliation keeping the platforms synchronized. When the client grew restless for tangible progress, he brought revenue management into the innovation hub to co-create the Shipper Revenue System workspace through personas, prototypes, and weekly build-measure-learn iterations.\n\nThe work also included a quality crisis: defects were rising despite near-complete test coverage. Matt took ownership in front of the client and account leadership, audited the code and tests, and exposed vague backlog stories and tests written after code. He brought in frontend and backend TDD experts, rebuilt testable stories, and reinforced test-first work through daily rotating pairs, coding katas, and coaching. A **2-day** CIC Academy course ran twice monthly over **6 months**. Domain experts paired with engineers through “I do, we do, you do,” spreading scarce legacy knowledge while client contributors learned Angular, Node, Spring Boot, and cloud-native concepts.\n\nThe MVP launched covering **95%** of its targeted use cases, capturing real orders with clean data feeding the mainframe. EDI validation identified fallout proactively rather than waiting for customer calls. The quality-crisis failure mode did not recur, pairing and test-first practices held after outside experts left, and client contributors gained the skills to support and manage the new application."
+  },
+  {
+   "case": "c18",
+   "turn": 2,
+   "run": 2,
+   "question": "Tell me about his RBC work.",
+   "intent_family": "domain_payments",
+   "answer_md": "🐾 On it!\n\nMatt worked with **RBC** as a Senior Technology Architecture Manager from **June 2012** to **June 2013** on its Day**2Day** Corporate Banking modernization. The bank’s existing systems faced performance and scalability limitations, lacked mobile capabilities and API integration with external financial applications, and relied on fragmented processes for cross-border payments. **RBC** was evaluating Bottomline WebSeries as the payment hub engine to replace its aging **RBC** Express portal.\n\nBefore further investment, Matt assessed whether WebSeries could meet the bank’s requirements. He conducted code reviews, stakeholder interviews, and documentation analysis, then created architectural heat maps and target-system models with transparent cost-to-fix versus benefit comparisons. The assessment identified that WebSeries lacked the modularity required for **RBC’s** long-term digital operating model. The bank redirected critical technical resources toward higher-priority initiatives rather than investing further in that platform path.\n\nThe proposed modernization included mobile cheque deposit, real-time account access across devices, and API connections to external financial applications. Matt delivered a blueprint defining those capabilities and scalability requirements. For cross-border payments, he mapped workflows from initiation through settlement and reconciliation, working with **RBC’s** FX team on real-time currency conversion, transaction visibility, automated alerts, recurring payments, and bulk processing. These were solution designs and implementation blueprints, not claims of a completed platform launch. Revised payment cutoff processes reduced wire-transfer delays and improved SLA compliance.\n\nMatt also established the PMO, introducing a shared platform for real-time updates, daily summaries, and a task-tracking matrix that clarified assignments and reduced redundant effort. When the previous conversion lead left, he took over data-conversion planning from scratch: legacy-data analysis, source-to-target transformation rules, mock conversion cycles, and reconciliation checks for payment amounts and beneficiary details. The resulting plan covered the migration approach, while the architecture assessment supplied the basis for changing the investment direction."
+  },
+  {
+   "case": "c18",
+   "turn": 3,
+   "run": 2,
+   "question": "How long did that take?",
+   "intent_family": "delivery",
+   "answer_md": "🐾 Here's a great example.\n\nMatt’s **RBC** engagement ran from **June 2012 to June 2013**, approximately **12 months**. That period covered the architecture assessment, modernization blueprints, PMO setup, and data-conversion planning, not a completed platform rollout.\n\nThe stories don’t specify how long each individual workstream took."
+  },
+  {
+   "case": "x2",
+   "turn": 1,
+   "run": 2,
+   "question": "Has Matt worked with SAP?",
+   "intent_family": "stakeholders",
+   "answer_md": "🐾 I followed that trail and came up empty: Matt's stories don't cover SAP experience."
+  },
+  {
+   "case": "x4",
+   "turn": 1,
+   "run": 2,
+   "question": "How did Matt calculate ROI?",
+   "intent_family": "personal",
+   "answer_md": "🐾 Tracking this down...\n\nMatt used cost-to-fix versus benefit comparisons, delivery measures, and engagement financials to make the investment case. His stories do not specify a single ROI formula, a calculated ROI percentage, or a payback period.\n\nAt **RBC**, leadership needed to decide whether Bottomline WebSeries could support its corporate banking requirements before committing further investment. Matt conducted code reviews, stakeholder interviews, and a gap/fit analysis. He worked with the enterprise architecture team on target-system models and a “transparent cost-to-fix vs. benefit comparison,” then conducted workshops with leadership to connect business goals with the technical findings. The assessment found that WebSeries lacked the required modularity. **RBC** redirected technical resources toward higher-priority initiatives rather than investing further in that platform path. No dollar value for the avoided investment is recorded.\n\nFor **Accenture’s** Cloud Innovation Centers, Matt addressed concerns about pair programming costs by presenting velocity gains and quality improvements against the investment. The recorded comparisons were **4X faster velocity**, **10-person** balanced teams delivering equivalent output to traditional **20-person** teams, and zero-defect deployments through TDD and automated pipelines. He brought clients into the centers to observe the practices and used executive briefings and client workshops to review results. He also owned the centers’ budgets, cost management, and P&L.\n\nOn engagement economics, the **Fiserv** recovery tracked distinct financial outcomes: an **\\$8.5M** program delivered **3%** under budget, preserving **\\$255K**, with **\\$500K** in contractual penalties avoided and a **\\$3M** extension secured. Those were separate outcomes, not a stated ROI percentage."
+  },
+  {
+   "case": "x7",
+   "turn": 1,
+   "run": 2,
+   "question": "When was he at JP Morgan?",
+   "intent_family": "domain_payments",
+   "answer_md": "Got it! 🐾\n\nMatt worked with **JP Morgan Chase** through **Accenture** during these periods:\n\n- **August 2009 to June 2012:** ACCESS Next Generation, including the payment engine and global payments gateway.\n- **September 2014 to December 2014:** Identity & Access Management Uplift.\n- **June 2015 to June 2016:** Cloud integration architecture for Asset Management’s Salesforce rollout.\n\nHis role on these engagements was Senior Technology Architecture Manager."
+  },
+  {
+   "case": "r04",
+   "turn": 1,
+   "run": 2,
+   "question": "What does Matt like to do for fun?",
+   "intent_family": "background",
+   "answer_md": "🐾 I followed that trail and came up empty: Matt's stories don't cover his hobbies or what he likes to do for fun."
+  },
+  {
+   "case": "r06",
+   "turn": 1,
+   "run": 2,
+   "question": "What are Matt's hobbies?",
+   "intent_family": "background",
+   "answer_md": "🐾 I followed that trail and came up empty: Matt's stories don't cover his hobbies."
+  },
+  {
+   "case": "r08",
+   "turn": 1,
+   "run": 2,
+   "question": "Has Matt worked in oil and gas?",
+   "intent_family": "background",
+   "answer_md": "🐾 Perfect, here's what I found.\n\nMatt’s stories do not document direct oil and gas experience. His closest documented work was at **Cendian Chemical Logistics**, a lead logistics provider for the chemical and plastics industry, where he worked as a Software Engineer from December **2003** to February **2005**. That work is classified as transportation and logistics, not oil and gas.\n\n**Cendian Chemical Logistics** coordinated shipments across more than **300** preferred carriers into and out of more than **80** countries. Shippers and carriers had different technology capabilities: some exchanged EDI, XML, or flat files, while others had no integration capability. Operations teams needed to track orders, shipments, and invoices across those disconnected entry points.\n\nMatt built integrations in Java and webMethods, using CIDX, the chemical industry’s B2B standard, to normalize different shipment formats. He also built portal capability so partners without code-based integrations could view and submit shipment data. The portal replaced clerks taking orders by phone and keying them into the system. He brought document generation in house, removing manual key entry, and worked on transaction tracking so operations could see where messages stopped.\n\nHe also onboarded a plastics company, working onsite with its technology team in rural Pennsylvania and validating the integration against live shipment planning before real freight depended on it."
+  },
+  {
+   "case": "r10",
+   "turn": 1,
+   "run": 2,
+   "question": "Has Matt worked in insurance?",
+   "intent_family": "background",
+   "answer_md": "🐾 I searched Matt's whole record, and it doesn't mention insurance industry experience. I can’t confirm that he has worked in insurance."
+  },
+  {
+   "case": "r12",
+   "turn": 1,
+   "run": 2,
+   "question": "What are Matt's core themes?",
+   "intent_family": "synthesis",
+   "answer_md": "🐾 Let me show you what ties Matt's work together.\n\nMatt’s core themes are **Execution & Delivery**, **Org & Working-Model Transformation**, **Emerging Tech**, **Professional Narrative**, **Risk & Responsible Tech**, **Strategic & Advisory**, and **Talent & Enablement**. His work spans building products and platforms, changing how teams deliver software, assessing technology investments, and developing practitioners.\n\nAt **Accenture**, clients wanted to move from waterfall to iterative development, from feature factories to customer-centric product development, and from siloed teams to balanced teams. Modern engineering practices also had to work within legacy systems, compliance requirements, and enterprise governance. At **RBC**, leadership faced a different decision: whether a proposed payment platform could meet the bank’s requirements before further investment.\n\nFor **Execution & Delivery** and **Org & Working-Model Transformation**, Matt built the Atlanta and Tampa Cloud Innovation Centers. He introduced pair programming, test-driven development, CI/CD, and balanced teams combining product, engineering, and design. The centers grew from **zero to 150+ practitioners**, with **4X faster velocity** and zero-defect deployments. **Talent & Enablement** included competency frameworks, gap assessments, custom training, and an “I do, we do, you do” coaching progression applied to real work.\n\nFor **Strategic & Advisory**, Matt assessed **RBC**’s proposed WebSeries investment through code reviews, architectural heat maps, and gap/fit analysis. The assessment found that the platform lacked the required modularity, and the bank redirected resources toward higher-priority initiatives. For **Risk & Responsible Tech**, he mobilized the identity and access management program structure, roadmap, and migration plan covering **341 applications** at **JP Morgan Chase**.\n\n**Emerging Tech** includes cloud-native systems and modern engineering practices. **Professional Narrative** includes Matt’s account of his progression from engineer to Director, building products, platforms, and teams. Across the CIC work, delivery reputation and client relationships contributed to **\\$100M+ in repeatable business**."
+  },
+  {
+   "case": "r14",
+   "turn": 1,
+   "run": 2,
+   "question": "What languages does Matt speak?",
+   "intent_family": "synthesis",
+   "answer_md": "🐾 Here's what connects the dots across Matt's work.\n\nMatt speaks English (native) and French (**B2**, self-assessed)."
+  },
+  {
+   "case": "r16",
+   "turn": 1,
+   "run": 2,
+   "question": "Does Matt speak French?",
+   "intent_family": "personal",
+   "answer_md": "🐾 Found it!\n\nYes. Matt speaks French at **B2** level (self-assessed)."
+  }
+ ]
+}
