@@ -199,7 +199,7 @@ Source: the change-governor's Ask Agy draft, checker-passed Oct 19, 2026 (relaye
 
 | # | Question | Decide by |
 |---|---|---|
-| D1 | With no router, what makes a big-picture answer show more than 3 cards? Today `agy_answer()` sets the intent to None, so every answer gets at most 3. No record names a replacement signal. | -236's breadth decision, before -128's go |
+| D1 | What makes a big-picture answer show more than 3 cards? Today `agy_answer()` sets the intent to None, so every answer gets at most 3. -236's target proposes the router's synthesis family as the signal. | -236's breadth decision, before -128's go |
 | D2 | How is "cited" decided? Decided: option A, text match (Matt, Oct 19, 2026; recorded on -128). Still open on -128: where META-IND cards go, and the thin-answer shape. | -128's go |
 | D3 | Breadth on big-picture questions: keep the synthesis pick, or replace it? Proposed (Matt, Oct 19): keep the router's synthesis family as the trigger, per -236's target; decided by -236's run. -332 waits on this. | Before -236's Green |
 | D4 | Rows 20, 27 and 8: narrative stories on technical questions, the verbatim phrases, and Matt substitution in the search query. | -341's go, after -128's row 20 measurement; -077's re-wire-or-delete call before -287 deletes the functions |
