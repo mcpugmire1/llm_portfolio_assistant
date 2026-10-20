@@ -431,6 +431,10 @@ def normalize_dashes(text: str) -> str:
     return _CLAUSE_DASH_RE.sub(_clause_dash, text)
 
 
+def escape_dollars(text: str) -> str:
+    raise NotImplementedError
+
+
 def _postprocess_agy_text(
     response_text: str, stories: list[dict[str, Any]]
 ) -> tuple[str, list[str]]:

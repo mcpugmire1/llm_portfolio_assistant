@@ -37,6 +37,7 @@ titles.
 
 import json
 import logging
+import re
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import MagicMock, patch
@@ -1105,3 +1106,96 @@ class TestDashesInTheAnswer:
         the stream did."""
         result, deltas = self._answer(self._CHUNKS)
         assert result["answer_md"].replace("**", "") == "".join(deltas)
+
+
+class TestDollarsAndBoldInTheStream:
+    """MATTGPT-346 and -312: every frame the stream shows renders as the
+    finished answer will. A $ is escaped as the finished answer escapes it
+    (so two amounts never read as math), and the text from an unpaired **
+    (or a lone trailing *) is held back until its pair arrives, as a
+    trailing dash is held, then released at the end."""
+
+    def _answer(self, chunks):
+        deltas = []
+        result, _, _, _, _ = _run(
+            [_response(tool_query="ledger"), _response("".join(chunks), chunks=chunks)],
+            on_delta=deltas.append,
+        )
+        return result, deltas
+
+    @staticmethod
+    def _frames(deltas):
+        frames, shown = [], ""
+        for d in deltas:
+            shown += d
+            frames.append(shown)
+        return frames
+
+    def test_no_frame_shows_an_unescaped_dollar(self):
+        chunks = [
+            "Saving $255K, he ",
+            "met every criterion and avoided ",
+            "$500K in penalties.",
+        ]
+        _, deltas = self._answer(chunks)
+        for frame in self._frames(deltas):
+            assert re.search(r"(?<!\\)\$", frame) is None, frame
+        assert "".join(deltas) == (
+            "Saving \\$255K, he met every criterion and avoided \\$500K in penalties."
+        )
+
+    def test_no_frame_shows_an_unpaired_bold_marker(self):
+        chunks = [
+            "Matt worked on **Fiserv",
+            "'s card portal** and later ",
+            "recovered a release **3",
+            " weeks late**.",
+        ]
+        _, deltas = self._answer(chunks)
+        for frame in self._frames(deltas):
+            assert frame.count("**") % 2 == 0, frame
+        assert "".join(deltas) == "".join(chunks)
+
+    def test_a_marker_split_across_chunks_never_shows_a_lone_asterisk(self):
+        chunks = ["a release that was *", "*3 weeks late** and ", "done."]
+        _, deltas = self._answer(chunks)
+        for frame in self._frames(deltas):
+            trailing = len(frame) - len(frame.rstrip("*"))
+            assert trailing % 2 == 0, frame
+            assert frame.count("**") % 2 == 0, frame
+        assert "".join(deltas) == "".join(chunks)
+
+    def test_a_bold_marker_never_closed_is_released_at_the_end(self):
+        _, deltas = self._answer(["He led **40", " engineers."])
+        assert "".join(deltas) == "He led **40 engineers."
+
+    def test_the_swap_keeps_the_streamed_wording_with_dollar_amounts(self):
+        result, deltas = self._answer(
+            ["The budget was ", "$2M and the savings ", "$255K."]
+        )
+        assert result["answer_md"].replace("**", "") == "".join(deltas)
+
+
+class TestOneDollarEscape:
+    """MATTGPT-346: the stream and the finished answer escape $ through one
+    helper, escape_dollars(), so there is a single copy of the rule."""
+
+    def test_every_dollar_is_escaped(self):
+        assert bs.escape_dollars("Saved $255K and $500K.") == (
+            "Saved \\$255K and \\$500K."
+        )
+
+    def test_the_stream_and_the_finished_answer_both_use_it(self):
+        deltas = []
+        with patch.object(
+            bs, "escape_dollars", side_effect=lambda t: t.replace("$", "ZZZ_SENTINEL")
+        ):
+            result, _, _, _, _ = _run(
+                [
+                    _response(tool_query="ledger"),
+                    _response("It cost $2M.", chunks=["It cost ", "$2M."]),
+                ],
+                on_delta=deltas.append,
+            )
+        assert "ZZZ_SENTINEL" in "".join(deltas)
+        assert "ZZZ_SENTINEL" in result["answer_md"]
