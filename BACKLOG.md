@@ -167,6 +167,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-343](#mattgpt-343) | Era and Theme values written as literals in production code; -258's literal guard covers only Client, Project and Title | Open | Low | Hygiene | chore | October 20, 2026 |
 | [MATTGPT-344](#mattgpt-344) | Functions with no production caller: 55 name-match candidates, provisional | Open | Low | Hygiene | chore | October 20, 2026 |
 | [MATTGPT-345](#mattgpt-345) | 7 BDD feature files have no binding: bind or delete each | In Progress | Low | Hygiene | chore | October 20, 2026 |
+| [MATTGPT-347](#mattgpt-347) | page_load rows carry no outside referrer and no screen width: capture both browser-side so LinkedIn visits are labeled | Open | Medium | Feature | value | October 20, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently | Parked | Medium | Action | value | August 3, 2026 |
@@ -3183,6 +3184,24 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 **Check before deleting `mode_routing`:** `services/semantic_router.py` still defines the router's intent families, and -236's target proposes its synthesis family as the trigger for per-Era search and 6 cards (D1, D3). If -236's run keeps the router, the synthesis-family scenarios may be worth binding instead.
 
 **On pickup:** each deletion takes a `Decision:` trailer naming the file.
+
+---
+
+### MATTGPT-347
+**page_load rows carry no outside referrer and no screen width: capture both browser-side so LinkedIn visits are labeled**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Feature
+- **File:** `app.py` (first-mount guard; screen-size capture), `services/query_logger.py` (`log_page_load()`)
+- **Related:** MATTGPT-345 (`page_load_tracking.feature` bound in d99ed82)
+- **Logged:** October 20, 2026
+
+**Issue (Matt, Oct 20, 2026; lane 2):** `page_load` captures the browser-side referrer (`window.top.document.referrer`) and screen width, written when the screen-size JS returns, so LinkedIn visits are labeled.
+
+**Evidence (d99ed82's findings, and Matt's DevTools check, Oct 20, 2026):** LinkedIn strips the query string from links it stores, so LinkedIn visits carry no UTM. LinkedIn sends Referer `https://www.linkedin.com/`, but on Streamlit Cloud it reaches only Cloud's outer page; the app iframe's requests carry Cloud's own URL, so the Sheet's Referrer column is empty for every outside source. A component-frame read of `window.top.document.referrer` returns `https://www.linkedin.com/`. Separately, every `page_load` row has an empty Screen Width.
+
+**Verified Oct 20, 2026 (HEAD d99ed82):** `app.py`'s first-mount guard reads the referrer from `st.context.headers.get("Referer", "")` and calls `log_page_load()` with `""` for screen size, then `st.rerun()`; the `streamlit_js_eval` screen-size capture runs after that rerun.
 
 ---
 

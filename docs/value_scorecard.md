@@ -362,7 +362,7 @@ experience reliably and sustainably; failures are visible, not silent.
   `agy_voice` bound in 69dda9b).
 
 **Open tickets:**
-- Alarms and telemetry: -222, -223 (My Work only).
+- Alarms and telemetry: -222, -223 (My Work only), -347 (page_load referrer and screen width, so LinkedIn visits are labeled).
 - Latency: -299.
 - Runtime and dependencies: -313 (Python 3.11 in prod, 3.13 local), -314 (pin pyarrow<25).
 - Model retirement: -302 (gpt-4o family retires January 14, 2027).
