@@ -107,7 +107,7 @@ turns, 10 runs per arm, scored blind (32 scorers, brief_v2):
   automatically (`tests/eval_rag_quality.py`).
 
 **Open tickets:** -275, -040 (follow-up eval
-coverage), -281 (openers), -340 (restore the code-picked opener, used word for word), -280
+coverage), -281 (openers), -280
 (tone), -284 (synthesis mode decided in four places), -316 (blur submits the landing
 question), -317 (Ask Agy About This dropped mid-answer).
 
@@ -186,7 +186,7 @@ Source: the change-governor's Ask Agy draft, checker-passed Oct 19, 2026 (relaye
 | 5 | No story cards on a fact answer | Exists as an xfailed Red (-128) | None |
 | 6 | Decline line reaches the model | Exists | -322 run 6: 79/80 declines pass |
 | 6, 8 | Empty searches on work-history questions, every claim checked | Exists (-339 run, 26ffa39) | 7 of 11 claims supported; the 4 unsupported are the agriculture absence claim, a retrieval miss on -325. 0 of 10 natural runs had a zero-result search |
-| 7 | Opener used word for word | Missing: planned on -340; a committed test currently asserts the opposite | None |
+| 7 | Opener used word for word | Exists (-340, 9534aea: unit tests on the prompt; live run `probes/output/MATTGPT-340/run_20261020_094428/`) | Begins with the picked line: 91 of 114 new vs 0 of 114 HEAD; 7 non-decline answers have no opener and no paw (one reading, 2 runs) |
 | 7 | No closing offer | Exists (gate c14 to c17, the -276 closers run) | 0 in every arm |
 | 7 | Evaluative sentences | Exists on the final text; missing on raw text before the strip (-252) | 15 of 249 old vs 0 of 259 new (a lower bound) |
 | 7 | No dashes | Exists | 0 of 450 gate turns |
