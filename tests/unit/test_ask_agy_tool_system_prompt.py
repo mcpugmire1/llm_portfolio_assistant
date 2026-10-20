@@ -5,13 +5,14 @@ build_tool_system_prompt() is the system prompt the lever 2 runs sent
 docs/evidence/MATTGPT-282/sol_arms_20261011_211830/, arm lever2_sol, on
 gpt-6.1-sol): the old pipeline's system prompt for the mode, then the
 tool note, then the per-answer instruction block that used to end the user
-message, with Matt's opener lines given as examples instead of one opener
-as exact text. Those runs built it by splitting the wrapped user message in
+message. The run gave Matt's opener lines as examples; since MATTGPT-340
+the opener picked in code is given word for word instead, as before
+1095d2c. Those runs built it by splitting the wrapped user message in
 a probe patch; this function builds the same text directly.
 
 These tests pin that composition: the mode's system prompt first and
 unchanged, the "**TOOLS:**" note, then build_answer_instructions() with the
-opener examples line, the focus angle on standard answers only, and citation
+picked opener line, the focus angle on standard answers only, and citation
 rule 0a when profile facts are present. The parity test holds it to the text
 run 2's lever2_sol arm sent for one standard and one synthesis turn
 (tests/fixtures/ask_agy_lever2_sol_system_prompts.json, with the inputs that
@@ -37,16 +38,15 @@ _OPENERS = ["🐾 ZZZ opener one.", "Got it! 🐾 ZZZ", "🐾 ZZZ opener three..
 _FOCUS = "ZZZ focus angle."
 _DECLINE = "🐾 ZZZ decline line about [topic]."
 
-# The tool note and opener line as the lever 2 runs sent them.
+# The tool note as the lever 2 runs sent it; the opener line as MATTGPT-340
+# gives the picked opener.
 _TOOL_NOTE = (
     "No stories are preloaded. Call search_stories when the question needs "
     "evidence from Matt's work history. Answer directly from the facts about "
     "Matt above or from the conversation when they already answer it."
 )
-_OPENER_LINE = (
-    "Begin with a short opening line in Agy's voice. Examples of how Agy opens: "
-    '"🐾 ZZZ opener one."; "Got it! 🐾 ZZZ"; "🐾 ZZZ opener three...".'
-)
+_OPENING = "🐾 ZZZ picked opener."
+_OPENER_LINE = f'Begin with this line, word for word: "{_OPENING}"'
 
 
 def _prompt(is_synthesis, profile_facts=_PROFILE, focus_angle=_FOCUS, decline_line=""):
@@ -88,9 +88,16 @@ class TestComposition:
 
 
 class TestOpeners:
+    """MATTGPT-340: the opener picked in code, used word for word, in both
+    modes; no list of opener lines as examples."""
+
     @pytest.mark.parametrize("is_synthesis", [False, True])
-    def test_openers_are_examples_in_order(self, is_synthesis):
+    def test_the_picked_opener_is_given_word_for_word(self, is_synthesis):
         assert _OPENER_LINE in _prompt(is_synthesis)
+
+    @pytest.mark.parametrize("is_synthesis", [False, True])
+    def test_no_opener_lines_are_given_as_examples(self, is_synthesis):
+        assert "Examples of how Agy opens" not in _prompt(is_synthesis)
 
     @pytest.mark.parametrize("is_synthesis", [False, True])
     def test_no_opener_is_given_as_exact_text(self, is_synthesis):
@@ -103,6 +110,12 @@ class TestModes:
         assert "## STANDARD MODE" in prompt
         assert "## SYNTHESIS MODE" not in prompt
         assert f"**FOCUS:** {_FOCUS}" in prompt
+
+    def test_standard_mode_does_not_say_go_deep_on_one_story(self):
+        # MATTGPT-340 (ADR 061 row 26).
+        prompt = _prompt(False)
+        assert "This is a specific question." in prompt
+        assert "Go deep on the primary story" not in prompt
 
     def test_synthesis_answers_get_the_synthesis_mode_and_no_focus_angle(self):
         prompt = _prompt(True)

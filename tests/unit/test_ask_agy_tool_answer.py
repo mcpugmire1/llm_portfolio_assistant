@@ -103,6 +103,7 @@ _DECLINE_LINES = [
     "🐾 I searched Matt's whole record, and it doesn't mention [topic].",
 ]
 _DECLINE_SENTINEL = "🐾 ZZZ decline line about [topic]."
+_OPENER_SENTINEL = "🐾 ZZZ_SENTINEL opener."
 _NONSENSE_FILE = str(Path(__file__).resolve().parents[2] / "nonsense_filters.jsonl")
 
 
@@ -485,11 +486,12 @@ class TestVoiceCarriesOver:
         assert "**About Matt (attested facts):**" in system
 
     def test_per_answer_voice_instructions_reach_the_model(self):
-        # MATTGPT-275: the instruction block moved to the system prompt with
-        # the openers as examples; the user message is the question as asked.
+        # MATTGPT-275: the instruction block moved to the system prompt; the
+        # user message is the question as asked. MATTGPT-340: no opener
+        # examples.
         _, fake, _, _, _ = _run([_response("ok")])
         system = _system(fake.requests[0])
-        assert "Examples of how Agy opens" in system
+        assert "Examples of how Agy opens" not in system
         assert "**FOCUS:**" in system
         assert "Write natural prose paragraphs" in system
         assert "**Bold ALL client names and numbers.**" in system
@@ -499,14 +501,18 @@ class TestVoiceCarriesOver:
         assert "Start your response with this exact text" not in system + user
 
     @pytest.mark.parametrize("family", ["behavioral", "synthesis"])
-    def test_every_opener_line_is_an_example_synthesis_first(self, family):
-        # As measured: one example list, synthesis openers then standard ones,
-        # in both modes.
-        _, fake, _, _, _ = _run([_response("ok")], family=family)
-        examples = "; ".join(
-            f'"{o}"' for o in bs.SYNTHESIS_OPENERS + bs.STANDARD_OPENERS
-        )
-        assert f"Examples of how Agy opens: {examples}." in _system(fake.requests[0])
+    def test_the_picked_opener_reaches_the_model_word_for_word(self, family):
+        # MATTGPT-340: the opener _choose_opening_and_focus() picks, as before
+        # 1095d2c, not the opener lines as examples.
+        with patch.object(
+            bs,
+            "_choose_opening_and_focus",
+            return_value=(_OPENER_SENTINEL, "ZZZ focus angle."),
+        ):
+            _, fake, _, _, _ = _run([_response("ok")], family=family)
+        assert (
+            f'Begin with this line, word for word: "{_OPENER_SENTINEL}"'
+        ) in _system(fake.requests[0])
 
     def test_decline_line_is_one_of_the_two_and_both_come_up(self):
         # MATTGPT-322: the model can't vary across calls it can't see, so
