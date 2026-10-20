@@ -896,6 +896,8 @@ with st.container(key="r2_row"):
 
 **Purpose:** Accepts a job description and returns a structured assessment of Matt's fit: per-requirement verdicts (Strong / Partial / Gap), an overall recommendation, and supporting evidence drawn from the STAR corpus.
 
+**Desktop only:** below 1024px, or when `app.py` captured no width, the page shows "Best experienced on desktop" in place of the JD input. The width is `window.innerWidth`, captured once per session into `st.session_state["_browser_screen_size"]`. See ADR 062 in `docs/ADR.md`.
+
 #### Three-Stage Pipeline
 
 ```

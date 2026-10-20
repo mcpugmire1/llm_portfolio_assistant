@@ -1628,3 +1628,29 @@ A Code audit compared 1095d2c^ with 1095d2c, where `agy_answer()` replaced `rag_
 - ADR 035's "The random opener and focus angle stay" holds for the focus angle. Since 1095d2c the picked opener has been discarded and the model shown the opener lines as examples; row 29 restores the picked opener.
 - MATTGPT-236 owns breadth for big-picture answers (rows 16 to 30) and the card cap on them (row 38); MATTGPT-128 references it.
 - Rows 26 and 29 are prompt changes, each under the answer-pipeline gates.
+
+---
+
+## ADR 062: Role Match Is Desktop Only; Below 1024px a Gate Replaces the Input
+
+**Date:** 2026-10-14
+**Status:** Accepted
+**Related tickets:** MATTGPT-102
+
+**Context:**
+Role Match's two-column workspace is legible only at iPad Pro width or wider. The gate below 1024px has been in place since April 2026, but no ADR or ticket recorded desktop only as a decision; only the BDD "DESKTOP ONLY" scenarios and a CHANGELOG entry carried it. The Role Match intent review (Oct 20, 2026) listed it as an intent line with no decision record.
+
+**Decision:**
+Role Match is desktop only (Matt, Oct 14, 2026). Below 1024px the page shows "Best experienced on desktop" in place of the JD input. Mobile Role Match is not a supported surface: skipped mobile Role Match scenarios are not coverage gaps, and mobile fixes beyond the gate itself are out of scope.
+
+**Rationale:**
+- The comment above the gate in `ui/pages/role_match.py` records why the threshold is 1024px: visual testing showed the two-column workspace is legible only at iPad Pro width or wider, and tablets in the 768 to 1023px range rendered it cramped.
+
+**Consequences:**
+- `app.py` captures `window.innerWidth` once per session into `st.session_state["_browser_screen_size"]`. The gate in `ui/pages/role_match.py` shows when that value is below 1024 or missing.
+- Measured by `tests/bdd/steps/test_role_match.py`: "Role Match shows mobile gate at 375px" and "Desktop shows full Role Match interface", both bound and not skipped.
+
+**History:**
+- f033c64 (Apr 8, 2026) raised the gate threshold from 768px to 1024px.
+- dd4314d (Apr 11, 2026) switched the capture to `screen.width`, after the `streamlit_js_eval` iframe could report `window.innerWidth` as 0 on Streamlit Cloud and fire the gate on desktop.
+- d4354fc (Jun 6, 2026, MATTGPT-102) switched back to `window.innerWidth`: `screen.width` reports the physical display resolution, so the gate never fired on desktop browsers emulating mobile viewports. The capture iframe is excluded from the `stIFrame` collapse rule by its `st-key-screen_size_capture` class.
