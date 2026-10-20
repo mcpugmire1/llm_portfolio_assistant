@@ -3,96 +3,130 @@ Unit tests for utils/scoring.py
 
 Tests for hybrid scoring functionality combining semantic similarity
 with keyword-based overlap scoring.
+
+Keyword-score stories come from the corpus via load_stories(), picked by
+field value, so the tests read the fields production reads.
 """
+
+import pytest
+
+from utils.corpus_loader import load_stories
+from utils.validation import _tokenize
+
+
+@pytest.fixture(scope="module")
+def stories():
+    return load_stories("echo_star_stories_nlp.jsonl")
+
+
+def _toks(*texts):
+    return set(_tokenize(" ".join(texts)))
 
 
 class TestKeywordScoreForStory:
     """Tests for _keyword_score_for_story() function."""
 
-    def test_perfect_match_returns_high_score(self):
+    def test_perfect_match_returns_high_score(self, stories):
         """Should return high score for perfect keyword match."""
         from utils.scoring import _keyword_score_for_story
 
-        story = {
-            "Title": "Platform Modernization",
-            "Client": "JPMC",
-            "Sub-category": "Platform Engineering",
-        }
-        score = _keyword_score_for_story(story, "platform modernization jpmc")
+        story = stories[0]
+        score = _keyword_score_for_story(story, story["Title"])
         assert score > 0.8  # Should be high due to all tokens matching
 
-    def test_no_match_returns_zero(self):
+    def test_no_match_returns_zero(self, stories):
         """Should return 0.0 for no keyword overlap."""
         from utils.scoring import _keyword_score_for_story
 
-        story = {"Title": "Platform Modernization", "Client": "JPMC"}
-        score = _keyword_score_for_story(story, "unrelated query terms")
+        score = _keyword_score_for_story(stories[0], "zzzsentinel qqqsentinel")
         assert score == 0.0
 
-    def test_partial_match_returns_proportional_score(self):
+    def test_partial_match_returns_proportional_score(self, stories):
         """Should return proportional score for partial match."""
         from utils.scoring import _keyword_score_for_story
 
-        story = {"Title": "Platform Modernization", "Client": "JPMC"}
-        # Only "platform" matches
-        score = _keyword_score_for_story(story, "platform database migration")
+        story = stories[0]
+        # Only the title token matches
+        title_tok = _tokenize(story["Title"])[0]
+        score = _keyword_score_for_story(story, f"{title_tok} zzzsentinel qqqsentinel")
         assert 0.0 < score < 1.0
 
-    def test_title_domain_weighted_twice(self):
+    def test_title_domain_weighted_twice(self, stories):
         """Should weight title and domain matches twice."""
         from utils.scoring import _keyword_score_for_story
 
         # Match in title should score higher than match elsewhere
-        story_title = {"Title": "Platform Engineering", "Client": "Other"}
-        story_other = {"Title": "Other", "Role": "Platform Engineering"}
+        story_title = stories[0]
+        token = _tokenize(story_title["Title"])[0]
+        story_other = next(
+            s
+            for s in stories
+            if token in _toks(*s["Process"], *s["Performance"])
+            and token not in _toks(s["Title"], s["Sub-category"])
+        )
 
-        score_title = _keyword_score_for_story(story_title, "platform")
-        score_other = _keyword_score_for_story(story_other, "platform")
+        score_title = _keyword_score_for_story(story_title, token)
+        score_other = _keyword_score_for_story(story_other, token)
 
         assert score_title >= score_other
 
-    def test_searches_competencies_field(self):
+    def test_searches_competencies_field(self, stories):
         """Should search Competencies list."""
         from utils.scoring import _keyword_score_for_story
 
-        story = {"Competencies": ["Python", "AWS", "Docker"]}
-        score = _keyword_score_for_story(story, "python aws")
+        story = stories[0]
+        query = " ".join(_tokenize(" ".join(story["Competencies"]))[:2])
+        score = _keyword_score_for_story(story, query)
         assert score > 0.0
 
-    def test_searches_public_tags(self):
+    def test_searches_public_tags(self, stories):
         """Should search public_tags list."""
         from utils.scoring import _keyword_score_for_story
 
-        story = {"public_tags": ["agile", "transformation", "leadership"]}
-        score = _keyword_score_for_story(story, "agile transformation")
+        story = stories[0]
+        query = " ".join(_tokenize(" ".join(story["public_tags"]))[:2])
+        score = _keyword_score_for_story(story, query)
         assert score > 0.0
 
-    def test_searches_process_and_performance(self):
+    def test_searches_process_and_performance(self, stories):
         """Should search Process and Performance lists."""
         from utils.scoring import _keyword_score_for_story
 
-        story = {
-            "Process": ["Migrated to microservices"],
-            "Performance": ["Reduced latency by 60%"],
-        }
-        score = _keyword_score_for_story(story, "microservices latency")
+        story = stories[0]
+        process_tok = _tokenize(" ".join(story["Process"]))[0]
+        performance_tok = _tokenize(" ".join(story["Performance"]))[0]
+        score = _keyword_score_for_story(story, f"{process_tok} {performance_tok}")
         assert score > 0.0
 
-    def test_uses_5p_summary(self):
-        """Should search 5P summary text."""
+    def test_uses_5p_summary(self, stories):
+        """Should search the curated 5PSummary text."""
+        from utils.formatting import build_5p_summary
         from utils.scoring import _keyword_score_for_story
 
-        story = {"why": "Modernize legacy platform", "how": ["Migrated to AWS"]}
-        # build_5p_summary will create summary text
-        score = _keyword_score_for_story(story, "modernize legacy")
+        # A token of the summary text the scorer reads (build_5p_summary(s, 400),
+        # which cuts longer 5PSummary text) that no other scored field holds
+        def only_in_summary(s):
+            others = _toks(
+                s["Title"],
+                s["Client"],
+                s["Role"],
+                s["Sub-category"],
+                *s["Competencies"],
+                *s["public_tags"],
+                *s["Process"],
+                *s["Performance"],
+            )
+            return sorted(_toks(build_5p_summary(s, 400)) - others)
+
+        story = next(s for s in stories if only_in_summary(s))
+        score = _keyword_score_for_story(story, only_in_summary(story)[0])
         assert score > 0.0
 
-    def test_empty_query_returns_zero(self):
+    def test_empty_query_returns_zero(self, stories):
         """Should return 0.0 for empty query."""
         from utils.scoring import _keyword_score_for_story
 
-        story = {"Title": "Some Story"}
-        assert _keyword_score_for_story(story, "") == 0.0
+        assert _keyword_score_for_story(stories[0], "") == 0.0
 
     def test_handles_missing_fields(self):
         """Should handle missing fields gracefully."""
@@ -102,16 +136,12 @@ class TestKeywordScoreForStory:
         score = _keyword_score_for_story(story, "some query")
         assert score == 0.0  # No fields to match
 
-    def test_normalizes_to_max_1_0(self):
+    def test_normalizes_to_max_1_0(self, stories):
         """Should cap score at 1.0."""
         from utils.scoring import _keyword_score_for_story
 
-        story = {
-            "Title": "test test test",
-            "Client": "test",
-            "Sub-category": "test",
-        }
-        score = _keyword_score_for_story(story, "test")
+        story = stories[0]
+        score = _keyword_score_for_story(story, story["Title"])
         assert score <= 1.0
 
 

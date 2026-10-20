@@ -2,215 +2,209 @@
 Unit tests for utils/filters.py
 
 Tests for story filtering functionality including industry, capability,
-client, domain, role, tags, metrics, and keyword search filtering.
+client, domain, role, tags, and keyword search filtering.
+
+Stories come from the corpus via load_stories(), picked by field value, so
+the tests read the fields production reads.
 """
+
+import pytest
+
+from utils.corpus_loader import load_stories
+
+
+@pytest.fixture(scope="module")
+def stories():
+    return load_stories("echo_star_stories_nlp.jsonl")
+
+
+def _first(stories, pred):
+    return next(s for s in stories if pred(s))
+
+
+def _distinct(stories, field, n):
+    """The first n stories with pairwise different values of field."""
+    picked = []
+    for s in stories:
+        if all(s[field] != p[field] for p in picked):
+            picked.append(s)
+        if len(picked) == n:
+            return picked
+    raise AssertionError(f"corpus has fewer than {n} distinct {field} values")
 
 
 class TestMatchesFilters:
     """Tests for matches_filters() function."""
 
-    def test_returns_true_for_no_filters(self):
+    def test_returns_true_for_no_filters(self, stories):
         """Should return True when no filters are active."""
         from utils.filters import matches_filters
 
-        story = {"Title": "Test Story", "Client": "Test Client"}
-        assert matches_filters(story, F={}) is True
+        assert matches_filters(stories[0], F={}) is True
 
-    def test_filters_by_industry(self):
+    def test_filters_by_industry(self, stories):
         """Should filter by single industry selection."""
         from utils.filters import matches_filters
 
-        story_fs = {"Industry": "Financial Services", "Client": "JPMC"}
-        story_hc = {"Industry": "Healthcare", "Client": "Mayo Clinic"}
+        story_a, story_b = _distinct(stories, "Industry", 2)
 
-        filters_fs = {"industry": "Financial Services"}
-        filters_hc = {"industry": "Healthcare"}
+        filters_a = {"industry": story_a["Industry"]}
+        filters_b = {"industry": story_b["Industry"]}
 
-        assert matches_filters(story_fs, filters_fs) is True
-        assert matches_filters(story_fs, filters_hc) is False
-        assert matches_filters(story_hc, filters_hc) is True
-        assert matches_filters(story_hc, filters_fs) is False
+        assert matches_filters(story_a, filters_a) is True
+        assert matches_filters(story_a, filters_b) is False
+        assert matches_filters(story_b, filters_b) is True
+        assert matches_filters(story_b, filters_a) is False
 
-    def test_filters_by_capability(self):
+    def test_filters_by_capability(self, stories):
         """Should filter by single capability/offering selection."""
         from utils.filters import matches_filters
 
-        story_platform = {"Solution / Offering": "Platform Engineering"}
-        story_data = {"Solution / Offering": "Data & Analytics"}
+        story_a, story_b = _distinct(stories, "Solution / Offering", 2)
 
-        filters_platform = {"capability": "Platform Engineering"}
-        filters_data = {"capability": "Data & Analytics"}
+        filters_a = {"capability": story_a["Solution / Offering"]}
+        filters_b = {"capability": story_b["Solution / Offering"]}
 
-        assert matches_filters(story_platform, filters_platform) is True
-        assert matches_filters(story_platform, filters_data) is False
-        assert matches_filters(story_data, filters_data) is True
+        assert matches_filters(story_a, filters_a) is True
+        assert matches_filters(story_a, filters_b) is False
+        assert matches_filters(story_b, filters_b) is True
 
-    def test_filters_by_clients_list(self):
+    def test_filters_by_clients_list(self, stories):
         """Should filter by client list (OR logic)."""
         from utils.filters import matches_filters
 
-        story_jpmc = {"Client": "JPMC"}
-        story_google = {"Client": "Google"}
-        story_amazon = {"Client": "Amazon"}
+        story_a, story_b, story_c = _distinct(stories, "Client", 3)
 
-        filters = {"clients": ["JPMC", "Google"]}
+        filters = {"clients": [story_a["Client"], story_b["Client"]]}
 
-        assert matches_filters(story_jpmc, filters) is True
-        assert matches_filters(story_google, filters) is True
-        assert matches_filters(story_amazon, filters) is False
+        assert matches_filters(story_a, filters) is True
+        assert matches_filters(story_b, filters) is True
+        assert matches_filters(story_c, filters) is False
 
-    def test_filters_by_domains_list(self):
+    def test_filters_by_domains_list(self, stories):
         """Should filter by Sub-category/domain list (OR logic)."""
         from utils.filters import matches_filters
 
-        story_platform = {"Sub-category": "Platform Engineering"}
-        story_cloud = {"Sub-category": "Cloud-Native Architecture"}
-        story_data = {"Sub-category": "Data Engineering"}
+        story_a, story_b, story_c = _distinct(stories, "Sub-category", 3)
 
-        filters = {"domains": ["Platform Engineering", "Cloud-Native Architecture"]}
+        filters = {"domains": [story_a["Sub-category"], story_b["Sub-category"]]}
 
-        assert matches_filters(story_platform, filters) is True
-        assert matches_filters(story_cloud, filters) is True
-        assert matches_filters(story_data, filters) is False
+        assert matches_filters(story_a, filters) is True
+        assert matches_filters(story_b, filters) is True
+        assert matches_filters(story_c, filters) is False
 
-    def test_filters_by_roles_list(self):
+    def test_filters_by_roles_list(self, stories):
         """Should filter by role list (OR logic)."""
         from utils.filters import matches_filters
 
-        story_director = {"Role": "Director of Engineering"}
-        story_consultant = {"Role": "Principal Consultant"}
-        story_advisor = {"Role": "Technical Advisor"}
+        story_a, story_b, story_c = _distinct(stories, "Role", 3)
 
-        filters = {"roles": ["Director of Engineering", "Principal Consultant"]}
+        filters = {"roles": [story_a["Role"], story_b["Role"]]}
 
-        assert matches_filters(story_director, filters) is True
-        assert matches_filters(story_consultant, filters) is True
-        assert matches_filters(story_advisor, filters) is False
+        assert matches_filters(story_a, filters) is True
+        assert matches_filters(story_b, filters) is True
+        assert matches_filters(story_c, filters) is False
 
-    def test_filters_by_tags_case_insensitive(self):
+    def test_filters_by_tags_case_insensitive(self, stories):
         """Should filter by tags with case-insensitive matching (OR logic)."""
         from utils.filters import matches_filters
 
-        story_agile = {"public_tags": ["Agile", "Transformation"]}
-        story_devops = {"public_tags": ["DevOps", "CI/CD"]}
+        story_a = stories[0]
+        tag_a = story_a["public_tags"][0]
+        story_b = _first(stories, lambda s: tag_a not in s["public_tags"])
+        tag_b = next(
+            t for t in story_b["public_tags"] if t not in story_a["public_tags"]
+        )
 
-        filters = {"tags": ["agile", "devops"]}  # Lowercase
+        filters = {"tags": [tag_a.lower(), tag_b.lower()]}
 
-        assert matches_filters(story_agile, filters) is True  # "Agile" matches "agile"
-        assert (
-            matches_filters(story_devops, filters) is True
-        )  # "DevOps" matches "devops"
+        assert matches_filters(story_a, filters) is True
+        assert matches_filters(story_b, filters) is True
 
-    def test_filters_by_tags_requires_at_least_one_match(self):
+    def test_filters_by_tags_requires_at_least_one_match(self, stories):
         """Should require at least one tag match."""
         from utils.filters import matches_filters
 
-        story_with_tags = {"public_tags": ["Agile", "Transformation"]}
-        story_no_match = {"public_tags": ["Unrelated", "Other"]}
+        story_with_tag = stories[0]
+        tag = story_with_tag["public_tags"][0]
+        story_no_match = _first(stories, lambda s: tag not in s["public_tags"])
 
-        filters = {"tags": ["agile", "leadership"]}
+        filters = {"tags": [tag.lower(), "zzz_sentinel_tag"]}
 
-        assert matches_filters(story_with_tags, filters) is True  # "Agile" matches
-        assert matches_filters(story_no_match, filters) is False  # No matches
+        assert matches_filters(story_with_tag, filters) is True
+        assert matches_filters(story_no_match, filters) is False
 
-    def test_filters_by_has_metric(self):
-        """Should filter stories with quantified metrics."""
-        from utils.filters import matches_filters
-
-        story_with_metric = {"what": ["Reduced latency by 60%"]}
-        story_no_metric = {"what": ["Improved collaboration"]}
-
-        filters_metric = {"has_metric": True}
-        filters_no_metric = {"has_metric": False}
-
-        assert matches_filters(story_with_metric, filters_metric) is True
-        assert matches_filters(story_no_metric, filters_metric) is False
-        assert matches_filters(story_with_metric, filters_no_metric) is True
-        assert matches_filters(story_no_metric, filters_no_metric) is True
-
-    def test_filters_by_keyword_query_token_match(self):
+    def test_filters_by_keyword_query_token_match(self, stories):
         """Should filter by keyword query using token-based matching."""
         from utils.filters import matches_filters
+        from utils.validation import _tokenize
 
-        story = {
-            "Title": "Platform Modernization",
-            "Client": "JPMC",
-            "Sub-category": "Platform Engineering",
-        }
+        story = _first(stories, lambda s: len(_tokenize(s["Title"])) >= 2)
+        title_toks = _tokenize(story["Title"])
 
         # All tokens match
-        filters_match = {"q": "platform modernization"}
+        filters_match = {"q": f"{title_toks[0]} {title_toks[1]}"}
         assert matches_filters(story, filters_match) is True
 
         # Some tokens match
-        filters_partial = {"q": "platform database"}
-        assert matches_filters(story, filters_partial) is False  # "database" missing
+        filters_partial = {"q": f"{title_toks[0]} zzzsentinel"}
+        assert matches_filters(story, filters_partial) is False
 
         # No tokens match
-        filters_no_match = {"q": "unrelated query"}
+        filters_no_match = {"q": "zzzsentinel qqqsentinel"}
         assert matches_filters(story, filters_no_match) is False
 
-    def test_keyword_query_fallback_substring(self):
+    def test_keyword_query_fallback_substring(self, stories):
         """Should fall back to substring match for non-tokenizable queries."""
         from utils.filters import matches_filters
 
-        story = {"Title": "AI-ML Platform", "Client": "Test"}
+        story = stories[0]
 
-        # Query has no 3+ char tokens, falls back to substring
-        filters = {"q": "AI"}
+        # Two characters: no 3+ char tokens, so substring match applies
+        filters = {"q": story["Title"][:2]}
         assert matches_filters(story, filters) is True
 
-    def test_keyword_query_searches_multiple_fields(self):
+    def test_keyword_query_searches_multiple_fields(self, stories):
         """Should search across Title, Client, Role, Purpose, Process, Performance, tags."""
         from utils.filters import matches_filters
+        from utils.validation import _tokenize
 
-        story = {
-            "Title": "Project Alpha",
-            "Client": "ClientCo",
-            "Role": "Technical Lead",
-            "Purpose": "Modernize infrastructure",
-            "Process": ["Migrated to cloud"],
-            "Performance": ["Reduced costs"],
-            "public_tags": ["agile"],
+        story = stories[0]
+        fields = {
+            "Title": story["Title"],
+            "Client": story["Client"],
+            "Role": story["Role"],
+            "Purpose": story["Purpose"],
+            "Process": " ".join(story["Process"]),
+            "Performance": " ".join(story["Performance"]),
+            "public_tags": " ".join(story["public_tags"]),
         }
 
         # Each field should be searchable
-        assert matches_filters(story, {"q": "alpha"}) is True
-        assert matches_filters(story, {"q": "clientco"}) is True
-        assert matches_filters(story, {"q": "technical"}) is True
-        assert matches_filters(story, {"q": "modernize"}) is True
-        assert matches_filters(story, {"q": "cloud"}) is True
-        assert matches_filters(story, {"q": "costs"}) is True
-        assert matches_filters(story, {"q": "agile"}) is True
+        for field, text in fields.items():
+            token = _tokenize(text)[0]
+            assert matches_filters(story, {"q": token}) is True, field
 
-    def test_combines_multiple_filters_with_and_logic(self):
+    def test_combines_multiple_filters_with_and_logic(self, stories):
         """Should apply AND logic across all filter types."""
         from utils.filters import matches_filters
 
-        story = {
-            "Industry": "Financial Services",
-            "Client": "JPMC",
-            "Sub-category": "Platform Engineering",
-            "Role": "Director",
-            "public_tags": ["agile"],
-            "what": ["Reduced costs by 40%"],
-        }
+        story, other = _distinct(stories, "Client", 2)
 
         # All filters match
         filters_all = {
-            "industry": "Financial Services",
-            "clients": ["JPMC", "Google"],
-            "domains": ["Platform Engineering"],
-            "roles": ["Director"],
-            "tags": ["agile"],
-            "has_metric": True,
+            "industry": story["Industry"],
+            "clients": [story["Client"], other["Client"]],
+            "domains": [story["Sub-category"]],
+            "roles": [story["Role"]],
+            "tags": [story["public_tags"][0]],
         }
         assert matches_filters(story, filters_all) is True
 
         # One filter fails
         filters_fail = {
-            "industry": "Financial Services",
-            "clients": ["Google"],  # Wrong client
+            "industry": story["Industry"],
+            "clients": [other["Client"]],  # Wrong client
         }
         assert matches_filters(story, filters_fail) is False
 
@@ -223,16 +217,15 @@ class TestMatchesFilters:
         filters = {
             "industry": "Test",
             "clients": ["Test"],
-            "has_metric": True,
         }
 
         assert matches_filters(story, filters) is False
 
-    def test_handles_empty_filter_values(self):
+    def test_handles_empty_filter_values(self, stories):
         """Should treat empty/None filter values as inactive."""
         from utils.filters import matches_filters
 
-        story = {"Industry": "Financial Services"}
+        story = stories[0]
 
         # Empty strings and None should be treated as inactive
         filters = {
@@ -243,21 +236,11 @@ class TestMatchesFilters:
 
         assert matches_filters(story, filters) is True
 
-    def test_normalizes_tag_whitespace(self):
-        """Should normalize whitespace in tag matching."""
+    def test_normalizes_tag_whitespace(self, stories):
+        """Should normalize whitespace in filter tags."""
         from utils.filters import matches_filters
 
-        story = {"public_tags": ["  Agile  ", "Leadership"]}
-        filters = {"tags": ["agile", "  leadership  "]}
+        story = stories[0]
+        filters = {"tags": [f"  {story['public_tags'][0].lower()}  "]}
 
         assert matches_filters(story, filters) is True
-
-    def test_persona_filter_not_used(self):
-        """Should handle persona filter (field doesn't exist in data)."""
-        from utils.filters import matches_filters
-
-        story = {}
-        filters = {"personas": ["Test Persona"]}
-
-        # Should not crash, just return False (no match)
-        assert matches_filters(story, filters) is False

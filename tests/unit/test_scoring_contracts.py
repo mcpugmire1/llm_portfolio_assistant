@@ -52,8 +52,8 @@ def _normalized_story():
 
 
 @pytest.mark.xfail(
-    reason="MATTGPT-180: fixture built on phantom schema (failing by design "
-    "as pre-registered fix). Remove xfail when -180 lands the schema unification.",
+    reason="MATTGPT-177: token_overlap_ratio can exceed 1.0 on repeated query "
+    "tokens. Remove xfail when -177 lands.",
     strict=False,
 )
 def test_token_overlap_ratio_stays_within_unit_interval():
@@ -63,8 +63,8 @@ def test_token_overlap_ratio_stays_within_unit_interval():
 
 
 @pytest.mark.xfail(
-    reason="MATTGPT-180: fixture built on phantom schema (failing by design "
-    "as pre-registered fix). Remove xfail when -180 lands the schema unification.",
+    reason="MATTGPT-183: story_has_metric reads phantom fields (what, "
+    "star.result); -183 deletes it and this test.",
     strict=False,
 )
 def test_story_has_metric_detects_percentage_in_performance():
@@ -73,8 +73,8 @@ def test_story_has_metric_detects_percentage_in_performance():
 
 
 @pytest.mark.xfail(
-    reason="MATTGPT-180: fixture built on phantom schema (failing by design "
-    "as pre-registered fix). Remove xfail when -180 lands the schema unification.",
+    reason="MATTGPT-183: story_has_metric reads phantom fields (what, "
+    "star.result); -183 deletes it and this test.",
     strict=False,
 )
 def test_matches_filters_passes_has_metric_gate_for_story_with_metric():
