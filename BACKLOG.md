@@ -168,6 +168,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-343](#mattgpt-343) | Era and Theme values written as literals in production code; -258's literal guard covers only Client, Project and Title | Open | Low | Hygiene | chore | October 20, 2026 |
 | [MATTGPT-344](#mattgpt-344) | Functions with no production caller: 55 name-match candidates, provisional | Open | Low | Hygiene | chore | October 20, 2026 |
 | [MATTGPT-345](#mattgpt-345) | 7 BDD feature files have no binding: bind or delete each | Open | Low | Hygiene | chore | October 20, 2026 |
+| [MATTGPT-346](#mattgpt-346) | Ask Agy stream renders text between two $ amounts as KaTeX math until the answer finishes | Open | Low | Bug | value | October 20, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently | Parked | Medium | Action | value | August 3, 2026 |
@@ -1083,6 +1084,8 @@ None of these stories is cited in the answer. This is the "retrieved, not cited"
 - Observed: turn 1, a test-table row pasted by mistake ("| 1 | Tell me about his Fiserv work. | ... |"), was answered as the Fiserv question. Cards: two Fiserv stories plus "JP Morgan Chase - Building the Payment Engine Behind JP Morgan ACCESS", which the answer never mentions. Turn 2, "Sorry, i pasted the wrong info", got "Got it! 🐾 No problem. Send the question or information you meant to share." with 3 Fiserv cards.
 - Why (verified Oct 20, 2026): `agy_answer()` sets `tool_choice = "required"` on round 0, so every turn searches, and cards are every story retrieved until this ticket ships (ADR 061 row 36).
 - Not covered by the existing xfails in `TestSourcesAreTheCitedStories`: they cover an off-topic refusal and a profile-fact answer, not an aside that isn't a question.
+
+**More instances (Matt's manual test of -340, Oct 20, 2026; as reported):** declines showed source cards under "it doesn't mention X": "What are Matt's hobbies?" (MattGPT and Fortune 500 stories) and "Has Matt worked in agriculture?" (MattGPT and Why Hire Matt?); Chrome Claude also lists "Work Philosophy: Where I Do My Best Work" and "MattGPT: RAG Architecture & Semantic Search Implementation". "Is he certified?" showed 3 story cards next to the profile certifications block. Covered by the existing xfails `test_an_off_topic_refusal_shows_no_source_cards` and `test_a_profile_fact_answer_shows_no_story_cards`.
 
 ---
 
@@ -2082,6 +2085,8 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 - Related: on declines the model dropped the picked opener and began with the decline line, 16 of 16 in that run (9534aea).
 - Asks nothing of the opener lines, which are Agy's voice and stay as they are.
 
+**Observed on profile-fact answers (Matt's manual test of -340, Oct 20, 2026, 9534aea; as reported):** "Is he certified?" was asked 4 times (Matt once, Chrome Claude 3 times). 3 of the 4 picks were story lines ahead of a certifications list with no story ("🐾 I know just the story." twice, "🐾 Here's a great example." once); the fourth, "🐾 Tracking this down...", fits. Each was used word for word, as -340 requires. Nothing about the opener lines themselves is in question.
+
 ---
 
 ### MATTGPT-283
@@ -2766,6 +2771,8 @@ Any sentinel has to be translated in one place before anything uses it. With tha
 
 **Also listed in 1095d2c's known issues (Oct 15, 2026):** seen once, dark mode, "How big was the team?". Fix direction there matches: hold back an unclosed `**` in `_show()`, as it holds back dashes.
 
+**Frequency (Chrome Claude's DOM capture, Matt's manual test of -340, Oct 20, 2026; as reported):** an unclosed `**` showed as literal asterisks in 72 of 285 frames of one answer, e.g. "Matt worked on **Fiserv's $8.5M white-label card portal" and "a release that was **3". This ticket had it seen once. Fix direction unchanged; -346 touches the same function.
+
 ---
 
 ### MATTGPT-313
@@ -3188,6 +3195,8 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 
 **`agy_voice` acceptance (Matt, Oct 20, 2026):** Acceptance includes the one-🐾 rule on live answers; -340's run had 7 of 98 non-declined answers with no opener and no 🐾 (9534aea), the baseline to beat.
 
+**Manual runs (Matt and Chrome Claude, Oct 20, 2026, 9534aea; as reported):** the questions that missed in -340's run ("Tell me about his Norfolk Southern work.", "What's his leadership style?", "Is he certified?") were asked 12 times; every answer began with the picked opener and carried one 🐾. A small sample against the run's 7 misses, so it doesn't show the defect is gone.
+
 **Proposed (Matt's review chat, Oct 20, 2026; pending Matt's OK; the `agy_voice` bind is decided, above):**
 - Bind: `agy_voice`, `page_load_tracking`, `story_detail_feedback`.
 - Delete: `entity_routing` and `mode_routing` (the pipeline they describe was removed in 1095d2c; `detect_entity()` went then); `evidence_fidelity` and `jd_assessment` (content rules belong in the evals).
@@ -3197,6 +3206,24 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 **Check before deleting `mode_routing`:** `services/semantic_router.py` still defines the router's intent families, and -236's target proposes its synthesis family as the trigger for per-Era search and 6 cards (D1, D3). If -236's run keeps the router, the synthesis-family scenarios may be worth binding instead.
 
 **On pickup:** each deletion takes a `Decision:` trailer naming the file.
+
+---
+
+### MATTGPT-346
+**Ask Agy stream renders text between two $ amounts as KaTeX math until the answer finishes**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Bug
+- **File:** `ui/pages/ask_mattgpt/backend_service.py` (`_show()` in `_stream_response()`), `ui/pages/ask_mattgpt/conversation_view.py` (`_show_delta()`)
+- **Related:** MATTGPT-312 (same function; could ship together)
+- **Logged:** October 20, 2026
+
+**Observed (Matt's manual test of -340, Oct 20, 2026; local, 9534aea, desktop; as reported):** with two $ amounts on screen, the text between them renders as math until the final swap. Matt's screenshot (not on disk) shows "ectsatlaunch∗∗.Theportalprocessed∗∗45M in transactions … 500Kinpenalties∗∗.Theengagement". Chrome Claude's DOM capture of one streamed answer (285 snapshots over about 18 s) has it in 24 frames (about 17.3 s to 18.2 s), e.g. "preserving **255K∗∗,andmet∗∗47of47acceptancecriteria∗∗...". The final render has 0 `.katex` elements and shows `<strong>$255K</strong>`.
+
+**Verified Oct 20, 2026 (HEAD f48546e):** the finished answer is escaped: `_postprocess_agy_text()` ends with `response_text.replace("$", "\\$")`, commented as preventing LaTeX. The stream isn't: `_show()` applies only `normalize_dashes()`, and `_show_delta()` renders `st.markdown("".join(streamed))`.
+
+**Fix direction:** escape `$` in `_show()`, next to the dash handling. The finished answer already carries `\$`, so the stream would show the same wording.
 
 ---
 

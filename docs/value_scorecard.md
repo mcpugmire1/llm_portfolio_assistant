@@ -401,6 +401,6 @@ Ask Agy feedback are not logged.
 **Open tickets:** -045 (analytics dashboard), -129, -078, -091, -155,
 -022, -015, -095, -097, -154, -130, -156, -291 (role-play
 requests, open decision), -298 (salary questions get the nonsense
-banner), -312 (stream shows an unclosed bold marker), -315 (source-card
+banner), -312 (stream shows an unclosed bold marker), -346 (stream renders $ amounts as math), -315 (source-card
 separators differ), -318 (ask_answer_model
 fact), -321 (stale model comment and How Agy dialog copy), -337 (spec's golden-query count includes 11 queries the eval doesn't check).
