@@ -167,7 +167,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-342](#mattgpt-342) | Golden eval Q50 to Q52 send the placeholder "(dynamic - built from story_index)" instead of a real question | Open | Low | Issue | chore | October 19, 2026 |
 | [MATTGPT-343](#mattgpt-343) | Era and Theme values written as literals in production code; -258's literal guard covers only Client, Project and Title | Open | Low | Hygiene | chore | October 20, 2026 |
 | [MATTGPT-344](#mattgpt-344) | Functions with no production caller: 55 name-match candidates, provisional | Open | Low | Hygiene | chore | October 20, 2026 |
-| [MATTGPT-345](#mattgpt-345) | 7 BDD feature files have no binding: bind or delete each | Open | Low | Hygiene | chore | October 20, 2026 |
+| [MATTGPT-345](#mattgpt-345) | 7 BDD feature files have no binding: bind or delete each | In Progress | Low | Hygiene | chore | October 20, 2026 |
 | [MATTGPT-346](#mattgpt-346) | Ask Agy stream renders text between two $ amounts as KaTeX math until the answer finishes | Open | Low | Bug | value | October 20, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
@@ -3180,7 +3180,7 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 ### MATTGPT-345
 **7 BDD feature files have no binding: bind or delete each**
 
-- **Status:** Open
+- **Status:** In Progress
 - **Priority:** Low
 - **Type:** Hygiene
 - **File:** `tests/bdd/features/` (`agy_voice`, `entity_routing`, `evidence_fidelity`, `jd_assessment`, `mode_routing`, `page_load_tracking`, `story_detail_feedback`; `search.feature`), `tests/bdd/steps/test_steps.py`
@@ -3194,6 +3194,8 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 **Decided (Matt, Oct 20, 2026):** bind `agy_voice.feature` (one 🐾, in the opening line).
 
 **`agy_voice` acceptance (Matt, Oct 20, 2026):** Acceptance includes the one-🐾 rule on live answers; -340's run had 7 of 98 non-declined answers with no opener and no 🐾 (9534aea), the baseline to beat.
+
+**Progress (Oct 20, 2026):** `agy_voice.feature` bound in 69dda9b on `tests/fixtures/agy_voice_answers.json`, the 114 N-arm answers of -340's run (9534aea): 11 scenarios, 9 passing, 2 xfail(strict) on the 7 non-declined answers with no paw, the baseline above. They turn red as XPASS when every non-declined answer carries the opener and its paw. `scripts/build_agy_voice_fixture.py` rebuilds the fixture from a run's rows; each prompt ticket's acceptance run refreshes it. Remaining: `entity_routing`, `evidence_fidelity`, `jd_assessment`, `mode_routing`, `page_load_tracking`, `story_detail_feedback`, and `search.feature`'s commented binding.
 
 **Manual runs (Matt and Chrome Claude, Oct 20, 2026, 9534aea; as reported):** the questions that missed in -340's run ("Tell me about his Norfolk Southern work.", "What's his leadership style?", "Is he certified?") were asked 12 times; every answer began with the picked opener and carried one 🐾. A small sample against the run's 7 misses, so it doesn't show the defect is gone.
 

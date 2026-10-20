@@ -355,10 +355,11 @@ experience reliably and sustainably; failures are visible, not silent.
   extract when the cloud/local split was added (MATTGPT-333, closed Oct 18,
   2026, not a bug). Cloud rows to date appear to be Matt's own sessions, so
   production visitor data is not yet a usable signal for the drivers.
-- Unbound or stale tests reduce what a green run proves: 7 feature files
-  unbound (`agy_voice`, `evidence_fidelity`, `mode_routing`,
+- Unbound or stale tests reduce what a green run proves: 6 feature files
+  unbound (`evidence_fidelity`, `mode_routing`,
   `entity_routing`, `jd_assessment`, `page_load_tracking`,
-  `story_detail_feedback`), plus `search.feature` commented out (-345).
+  `story_detail_feedback`), plus `search.feature` commented out (-345;
+  `agy_voice` bound in 69dda9b).
 
 **Open tickets:**
 - Alarms and telemetry: -222, -223 (My Work only).
@@ -369,7 +370,7 @@ experience reliably and sustainably; failures are visible, not silent.
 - Regression gates and test reliability: -039, -233, -235, -206, -153,
   -084, -198, -035, -143 (Parked),
   -213, -342 (golden Q50 to Q52 send a placeholder question),
-  -345 (7 unbound feature files: bind or delete).
+  -345 (In Progress; 6 unbound feature files left: bind or delete).
 - Architecture and maintainability: -258 (In Progress), -259, -260, -261, -262, -140,
   -214, -226, -343 (Era and Theme literals; extend -258's guard).
 - Dead code and hygiene: -176, -241, -152 (Parked), -287 (docs
