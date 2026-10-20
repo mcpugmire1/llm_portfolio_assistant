@@ -168,6 +168,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-344](#mattgpt-344) | Functions with no production caller: 55 name-match candidates, provisional | Open | Low | Hygiene | chore | October 20, 2026 |
 | [MATTGPT-345](#mattgpt-345) | 7 BDD feature files have no binding: bind or delete each | In Progress | Low | Hygiene | chore | October 20, 2026 |
 | [MATTGPT-347](#mattgpt-347) | page_load rows carry no outside referrer and no screen width: capture both browser-side so LinkedIn visits are labeled | Open | Medium | Feature | value | October 20, 2026 |
+| [MATTGPT-348](#mattgpt-348) | MONITORING_BOT_SIGNATURES' "Chrome/103.0.0.0" drops page_load rows for real Chrome 103 visitors | Open | Low | Hygiene | chore | October 20, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently | Parked | Medium | Action | value | August 3, 2026 |
@@ -3171,7 +3172,7 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 
 **`agy_voice` acceptance (Matt, Oct 20, 2026):** Acceptance includes the one-🐾 rule on live answers; -340's run had 7 of 98 non-declined answers with no opener and no 🐾 (9534aea), the baseline to beat.
 
-**Progress (Oct 20, 2026):** `agy_voice.feature` bound in 69dda9b on `tests/fixtures/agy_voice_answers.json`, the 114 N-arm answers of -340's run (9534aea): 11 scenarios, 9 passing, 2 xfail(strict) on the 7 non-declined answers with no paw, the baseline above. They turn red as XPASS when every non-declined answer carries the opener and its paw. `scripts/build_agy_voice_fixture.py` rebuilds the fixture from a run's rows; each prompt ticket's acceptance run refreshes it. Remaining: `entity_routing`, `evidence_fidelity`, `jd_assessment`, `mode_routing`, `page_load_tracking`, `story_detail_feedback`, and `search.feature`'s commented binding.
+**Progress (Oct 20, 2026):** `agy_voice.feature` bound in 69dda9b on `tests/fixtures/agy_voice_answers.json`, the 114 N-arm answers of -340's run (9534aea): 11 scenarios, 9 passing, 2 xfail(strict) on the 7 non-declined answers with no paw, the baseline above. They turn red as XPASS when every non-declined answer carries the opener and its paw. `scripts/build_agy_voice_fixture.py` rebuilds the fixture from a run's rows; each prompt ticket's acceptance run refreshes it. `page_load_tracking.feature` bound in d99ed82 under `streamlit.testing` AppTest: 6 scenarios, 6 passing. Remaining (5 files): `entity_routing`, `evidence_fidelity`, `jd_assessment`, `mode_routing`, `story_detail_feedback`, and `search.feature`'s commented binding.
 
 **Manual runs (Matt and Chrome Claude, Oct 20, 2026, 9534aea; as reported):** the questions that missed in -340's run ("Tell me about his Norfolk Southern work.", "What's his leadership style?", "Is he certified?") were asked 12 times; every answer began with the picked opener and carried one 🐾. A small sample against the run's 7 misses, so it doesn't show the defect is gone.
 
@@ -3202,6 +3203,24 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 **Evidence (d99ed82's findings, and Matt's DevTools check, Oct 20, 2026):** LinkedIn strips the query string from links it stores, so LinkedIn visits carry no UTM. LinkedIn sends Referer `https://www.linkedin.com/`, but on Streamlit Cloud it reaches only Cloud's outer page; the app iframe's requests carry Cloud's own URL, so the Sheet's Referrer column is empty for every outside source. A component-frame read of `window.top.document.referrer` returns `https://www.linkedin.com/`. Separately, every `page_load` row has an empty Screen Width.
 
 **Verified Oct 20, 2026 (HEAD d99ed82):** `app.py`'s first-mount guard reads the referrer from `st.context.headers.get("Referer", "")` and calls `log_page_load()` with `""` for screen size, then `st.rerun()`; the `streamlit_js_eval` screen-size capture runs after that rerun.
+
+---
+
+### MATTGPT-348
+**MONITORING_BOT_SIGNATURES' "Chrome/103.0.0.0" drops page_load rows for real Chrome 103 visitors**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Hygiene
+- **File:** `config/constants.py` (`MONITORING_BOT_SIGNATURES`), `app.py` (first-mount guard)
+- **Related:** MATTGPT-345 (finding from the `page_load_tracking` binding, d99ed82), MATTGPT-347
+- **Logged:** October 20, 2026
+
+**Issue (Matt, Oct 20, 2026; from d99ed82's findings):** `MONITORING_BOT_SIGNATURES` includes `"Chrome/103.0.0.0"`, so a real visitor on Chrome 103 logs no `page_load` row.
+
+**Fix (Matt, Oct 20, 2026):** check whether that signature still catches a real monitor before narrowing it.
+
+**Verified Oct 20, 2026 (HEAD 7494221):** `MONITORING_BOT_SIGNATURES = ["UptimeRobot", "HeadlessChrome", "Chrome/103.0.0.0"]`; `app.py` skips `log_page_load()` when any signature is a substring of the User-Agent. The comment above the constant records why it was added (cfe1704, Apr 13, 2026): a stale user agent "seen hitting the app from Windows/UTC with no referrer: an automated crawler masquerading as a real browser. First observed Apr 11, 2026."
 
 ---
 

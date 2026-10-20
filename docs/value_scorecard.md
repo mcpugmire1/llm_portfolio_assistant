@@ -355,14 +355,14 @@ experience reliably and sustainably; failures are visible, not silent.
   extract when the cloud/local split was added (MATTGPT-333, closed Oct 18,
   2026, not a bug). Cloud rows to date appear to be Matt's own sessions, so
   production visitor data is not yet a usable signal for the drivers.
-- Unbound or stale tests reduce what a green run proves: 6 feature files
+- Unbound or stale tests reduce what a green run proves: 5 feature files
   unbound (`evidence_fidelity`, `mode_routing`,
-  `entity_routing`, `jd_assessment`, `page_load_tracking`,
+  `entity_routing`, `jd_assessment`,
   `story_detail_feedback`), plus `search.feature` commented out (-345;
-  `agy_voice` bound in 69dda9b).
+  `agy_voice` bound in 69dda9b, `page_load_tracking` in d99ed82).
 
 **Open tickets:**
-- Alarms and telemetry: -222, -223 (My Work only), -347 (page_load referrer and screen width, so LinkedIn visits are labeled).
+- Alarms and telemetry: -222, -223 (My Work only), -347 (page_load referrer and screen width, so LinkedIn visits are labeled), -348 (the "Chrome/103.0.0.0" bot signature drops real Chrome 103 visitors).
 - Latency: -299.
 - Runtime and dependencies: -313 (Python 3.11 in prod, 3.13 local), -314 (pin pyarrow<25).
 - Model retirement: -302 (gpt-4o family retires January 14, 2027).
@@ -370,7 +370,7 @@ experience reliably and sustainably; failures are visible, not silent.
 - Regression gates and test reliability: -039, -233, -235, -206, -153,
   -084, -198, -035, -143 (Parked),
   -213, -342 (golden Q50 to Q52 send a placeholder question),
-  -345 (In Progress; 6 unbound feature files left: bind or delete).
+  -345 (In Progress; 5 unbound feature files left: bind or delete).
 - Architecture and maintainability: -258 (In Progress), -259, -260, -261, -262, -140,
   -214, -226, -343 (Era and Theme literals; extend -258's guard).
 - Dead code and hygiene: -176, -241, -152 (Parked), -287 (docs
