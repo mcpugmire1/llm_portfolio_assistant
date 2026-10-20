@@ -432,7 +432,20 @@ def normalize_dashes(text: str) -> str:
 
 
 def escape_dollars(text: str) -> str:
-    raise NotImplementedError
+    """$ -> \\$, so Streamlit's markdown renderer never reads $...$ as LaTeX
+    math. The finished answer and the stream both apply it (MATTGPT-346)."""
+    return text.replace("$", "\\$")
+
+
+def _hold_unpaired_bold(text: str) -> str:
+    """Streamed text cut back to before an unpaired ** (or a lone trailing
+    *), so a bold marker never shows as asterisks before its pair arrives
+    (MATTGPT-312). The held text is released at the end of the stream."""
+    if text.count("**") % 2:
+        return text[: text.rfind("**")]
+    if (len(text) - len(text.rstrip("*"))) % 2:
+        return text[:-1]
+    return text
 
 
 def _postprocess_agy_text(
@@ -517,7 +530,7 @@ def _postprocess_agy_text(
     # Escape dollar signs to prevent Streamlit's markdown renderer
     # from interpreting $...$ as LaTeX math notation.
     # Must run AFTER all other post-processing (bolding, meta-strip, etc.)
-    response_text = response_text.replace("$", "\\$")
+    response_text = escape_dollars(response_text)
 
     return response_text, cited_categories
 
@@ -758,9 +771,11 @@ def _stream_response(
     arrives, with normalize_dashes() applied: a dash, and the spaces and
     commas next to it, is held back until the next character shows how it
     resolves, so the stream shows the finished answer's wording and never
-    takes text back. Returns the final response. An incomplete response
-    (output cap reached) is returned with whatever it produced; a failed one
-    raises.
+    takes text back. Text from an unpaired ** is held back the same way
+    (_hold_unpaired_bold()), and $ is escaped as the finished answer
+    escapes it (escape_dollars()). Returns the final response. An
+    incomplete response (output cap reached) is returned with whatever it
+    produced; a failed one raises.
 
     The SDK retries the request, not a stream that breaks after it starts
     (MATTGPT-303). A stream that breaks before any answer text arrives is
@@ -774,6 +789,9 @@ def _stream_response(
     def _show(at_end: bool) -> None:
         nonlocal shown
         text = normalize_dashes(raw if at_end else raw.rstrip(_DASH_HOLD_CHARS))
+        if not at_end:
+            text = _hold_unpaired_bold(text)
+        text = escape_dollars(text)
         if on_delta is not None and len(text) > len(shown):
             on_delta(text[len(shown) :])
             shown = text

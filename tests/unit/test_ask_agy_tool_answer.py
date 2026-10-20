@@ -657,7 +657,7 @@ class TestTheCall:
         assert "".join(received) == "He led 40 engineers."
 
     def test_answer_md_is_the_post_processed_whole_text(self):
-        # Stream, then swap: the visitor sees raw deltas while the answer
+        # Stream, then swap: the visitor sees the deltas while the answer
         # arrives; the transcript keeps the post-processed text.
         result, _, _, _, _ = _run(
             [
