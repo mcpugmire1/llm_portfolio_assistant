@@ -4,8 +4,9 @@ The expected client is attributed when it is the Client of one of the
 answer's source stories, looked up by id; no list of name variants. The
 bolding check passes when the answer bolds the client of one of its sources
 as the answer writes it: a bold span whose words run inside that Client
-value, or contain it. Pure functions and a fake rag_fn: no model or Pinecone
-call.
+value, or contain it. The synthesis min_clients check counts the named
+clients of the answer's sources the same way, not names in the answer text.
+Pure functions and a fake rag_fn: no model or Pinecone call.
 """
 
 from tests.eval_rag_quality import evaluate_query
@@ -144,4 +145,36 @@ class TestSurgicalAndEdge:
         }
         r = _run(spec, "At **JP Morgan** delivery changed.", _sources("r"))
         assert r.checks.get("client_attribution") is False
+        assert r.passed is False
+
+
+def _synthesis_spec(min_clients):
+    return {
+        "id": 1,
+        "query": "q",
+        "category": "intent",
+        "expected_behavior": "synthesis",
+        "min_clients": min_clients,
+    }
+
+
+class TestSynthesisMinClients:
+    def test_named_source_clients_count_without_names_in_text(self):
+        r = _run(
+            _synthesis_spec(2), "Themes recur across his work.", _sources("j", "r")
+        )
+        assert r.checks.get("synthesis_mode") is True
+        assert r.details.get("client_count") == 2
+        assert r.passed is True
+
+    def test_names_in_text_do_not_count_without_sources(self):
+        answer = "Work at JP Morgan, RBC and Accenture."
+        r = _run(_synthesis_spec(2), answer, _sources("j"))
+        assert r.checks.get("synthesis_mode") is False
+        assert r.details.get("client_count") == 1
+        assert r.passed is False
+
+    def test_generic_source_client_is_not_counted(self):
+        r = _run(_synthesis_spec(2), "An answer.", _sources("j", "m"))
+        assert r.details.get("client_count") == 1
         assert r.passed is False
