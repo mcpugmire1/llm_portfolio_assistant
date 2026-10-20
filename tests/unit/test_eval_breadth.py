@@ -31,7 +31,7 @@ def _story(sid, client, era, project, theme="Execution & Delivery"):
 
 
 STORIES = [
-    _story("a", "JP Morgan", "Era One", "Project A"),
+    _story("a", "JP Morgan Chase", "Era One", "Project A"),
     _story("b", "Accenture", "Era One", "Project B"),
     _story("c", "Fortune 500 Clients", "Era Two", "Project B"),
     _story("d", "Independent Project", "Era Three", "Project C"),
@@ -94,9 +94,8 @@ class TestCountNamedClients:
     def test_every_named_client_counts_including_accenture(self):
         assert count_named_clients(_sources("a", "b", "f"), STORIES) == 3
 
-    def test_each_client_value_counts_once_per_story_client(self):
-        # JP Morgan and JP Morgan Chase are distinct Client values.
-        assert count_named_clients(_sources("a", "h"), STORIES) == 2
+    def test_one_client_across_several_stories_counts_once(self):
+        assert count_named_clients(_sources("a", "h"), STORIES) == 1
 
     def test_generic_clients_are_not_counted(self):
         assert count_named_clients(_sources("c", "d"), STORIES) == 0
@@ -127,8 +126,8 @@ class TestEvaluateQuery:
 
         assert result.details.get("eras") == 2
         assert result.details.get("projects") == 2
-        # "a" is JP Morgan, "c" is generic: Accenture is named in the text
-        # but is no source's client.
+        # "a" is JP Morgan Chase, "c" is generic: Accenture is named in the
+        # text but is no source's client.
         assert result.details.get("named_clients") == 1
 
     def test_a_client_called_by_another_name_counts_from_its_sources(self):
