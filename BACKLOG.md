@@ -2140,7 +2140,7 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 - **Status:** Open
 - **Priority:** Low
 - **Type:** Hygiene
-- **File:** `app.py`, `backend_service.py`, `config/constants.py`, `conversation_helpers.py`, `services/rag_service.py`, `story_intelligence.py`, `tests/unit/test_semantic_router_gating.py`, `tests/unit/test_story_intelligence.py`, `ui/pages/explore_stories.py`, `utils/scoring.py`, `tests/bdd/steps/test_query_substitution_077.py`
+- **File:** `app.py`, `backend_service.py`, `config/constants.py`, `conversation_helpers.py`, `services/rag_service.py`, `story_intelligence.py`, `tests/unit/test_semantic_router_gating.py`, `tests/unit/test_story_intelligence.py`, `ui/pages/explore_stories.py`, `utils/scoring.py`, `tests/bdd/steps/test_query_substitution_077.py`, `tests/eval_rag_quality.py`
 - **Logged:** October 10, 2026
 
 **Issue:** Verified Oct 10, 2026: on the Ask path, `rag_answer()` computes `token_overlap_ratio()` only for the `ask_last_overlap` banner field, and both of its `semantic_search()` calls omit `enforce_overlap` (default False).
@@ -2186,6 +2186,8 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 **Pickup (Oct 16, 2026):** before MATTGPT-180.
 
 "MATTGPT-287 (dead code), add (Oct 17, 2026, lane 2): ui/pages/ask_mattgpt/landing_view.py still initializes processing_suggestion, reads it into disabled, and passes disabled=disabled to the six chip receivers (suggested_*) and as a term in the Ask button's disabled. Nothing sets it True since 1095d2c (MATTGPT-275) removed the landing answer path, so it is always False. Remove later with its own gates: landing_page BDD on a restarted server plus a browser check of the chip, Enter and Ask-button hand-offs."
+
+**Eval hygiene, add (Oct 20, 2026):** in `tests/eval_rag_quality.py`, `check_synthesis_mode()`'s `min_clients` and the `min_source_named_clients` check both count named clients from the answer's sources (since 932e8f3). They differ in the client field read (`min_clients` looks up each story's `Client` by id; `min_source_named_clients` reads the source's own `client`) and in what they leave out (`min_clients` drops Professional Narrative stories and unknown ids). Fold them into one check. Only Q17 uses `min_clients`; only Q65 uses `min_source_named_clients` (verified Oct 20, 2026).
 
 ---
 
