@@ -168,6 +168,8 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-340](#mattgpt-340) | Rows 29 and 26: restore the code-picked opener, used word for word | Open | Medium | Issue | value | October 19, 2026 |
 | [MATTGPT-341](#mattgpt-341) | Rows 20 and 27 with the "builder" revisit: Professional Narrative on technical questions and its verbatim phrases | Open | Medium | Issue | value | October 19, 2026 |
 | [MATTGPT-342](#mattgpt-342) | Golden eval Q50 to Q52 send the placeholder "(dynamic - built from story_index)" instead of a real question | Open | Low | Issue | chore | October 19, 2026 |
+| [MATTGPT-343](#mattgpt-343) | Era and Theme values written as literals in production code; -258's literal guard covers only Client, Project and Title | Open | Low | Hygiene | chore | October 20, 2026 |
+| [MATTGPT-344](#mattgpt-344) | Functions with no production caller: 55 name-match candidates, provisional | Open | Low | Hygiene | chore | October 20, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently | Parked | Medium | Action | value | August 3, 2026 |
@@ -3120,6 +3122,51 @@ Mechanism (lane 2, measured Oct 19, 2026, read-only; after 26ffa39, not in a com
 - On the new path all 12 placeholder answers are "🐾 What would you like to explore about Matt’s work: ...?" (the voice comparison, Oct 19, 2026); the old path answered them with a Sparkfly story.
 
 **Fix direction:** build the question once, where the spec is read, so every suite sends the real one; or drop the three specs. A fix also removes the 12 closing-offer answers from voice comparisons.
+
+---
+
+### MATTGPT-343
+**Era and Theme values written as literals in production code; -258's literal guard covers only Client, Project and Title**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Hygiene
+- **File:** `ui/components/timeline_view.py`, `utils/landing_cards.py`, `ui/pages/ask_mattgpt/story_intelligence.py`, `ui/pages/ask_mattgpt/backend_service.py`, `ui/pages/about_matt.py`, `ui/pages/banking_landing.py`, `ui/pages/cross_industry_landing.py`, `ui/pages/explore_stories.py`, `utils/formatting.py`, `tests/test_structural_assertions.py`
+- **Related:** MATTGPT-258 (check f; `TestCorpusLiterals`), MATTGPT-295 (`ERA_ORDER`'s missing era)
+- **Logged:** October 20, 2026
+
+**Issue (lane 2's read-only sweep, Oct 20, 2026; provisional):** using `find_corpus_literals()`'s matching rule, production code holds 34 corpus-value literals in 10 files: 12 Era, 19 Theme, 3 Title. The 3 Titles (`services/semantic_router.py`) are on -258's allowlist. The 31 Era and Theme hits are outside the guard. The sweep's rule misses a one-word value inside a longer string, and it doesn't scan JSON, Markdown or `data/matt_profile.json`. The counts are provisional until step 1 runs.
+
+**Verified Oct 20, 2026 (HEAD 37a8990):**
+- `CORPUS_LITERAL_FIELDS = ("Client", "Project", "Title")` in `tests/test_structural_assertions.py`.
+- `timeline_view.py` writes the 5 `ERA_ORDER` values, again as `ERA_SUBTITLES` keys, and `EXCLUDED_ERA = "Leadership & Professional Narrative"`.
+- `story_intelligence.py` writes all 7 `THEME_*` constants as literals.
+
+**Steps:**
+1. Widen the scan to embedded values (a one-word value inside a longer string) and re-count.
+2. Give each Era and Theme value one source, then extend -258's guard to Era and Theme.
+
+**Not in scope:** the eval's and tests' literals (29 and 152 in the sweep). The CLAUDE.md test rule covers story titles only.
+
+---
+
+### MATTGPT-344
+**Functions with no production caller: 55 name-match candidates, provisional**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Hygiene
+- **File:** `ui/pages/ask_mattgpt/shared_state.py`, `ui/pages/ask_mattgpt/conversation_helpers.py`, `ui/pages/ask_mattgpt/utils.py`, `ui/pages/ask_mattgpt/styles.py`, `ui/components/ask_mattgpt_header.py`, `ui/pages/explore_stories.py`, `ui/styles/mobile_overrides.py`, `services/semantic_router.py`, `utils/ui_helpers.py`
+- **Related:** MATTGPT-287 (already lists the `story_intelligence.py` functions, `push_card_snapshot_from_state()`, and `_build_retrieval_query()` / `_substitute_matt_subject()`, held for -077)
+- **Logged:** October 20, 2026
+
+**Issue (lane 2's read-only sweep, Oct 20, 2026; provisional):** of 333 functions in 60 files, 55 have no caller outside tests: ui 51, services 2, utils 2. Another 5 are called only by those 55, and 7 of the 55 are still exercised by tests. The scan matched by name, not by resolved import. The largest group is 32 methods of `AskMattGPTState`. The counts are provisional until step 1 runs.
+
+**Verified Oct 20, 2026 (HEAD 37a8990):** `git grep AskMattGPTState` finds only `shared_state.py` (the definition and one call inside the class). `render_sources_badges`, `build_domain_options` and `get_mobile_css` appear only at their own definitions, apart from text inside strings in `scripts/enable_mobile_css.py`.
+
+**Steps:**
+1. Trace imports and calls for every candidate, including getattr, string references and dynamic imports. Do `AskMattGPTState` first.
+2. Remove only what the trace confirms, with the test gates each file needs. Nothing is deleted on a name match. The candidates already on -287 stay there.
 
 ---
 

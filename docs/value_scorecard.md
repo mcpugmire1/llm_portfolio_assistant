@@ -327,9 +327,10 @@ experience reliably and sustainably; failures are visible, not silent.
   -084, -180, -198, -035, -143 (Parked),
   -213, -342 (golden Q50 to Q52 send a placeholder question).
 - Architecture and maintainability: -258 (In Progress), -259, -260, -261, -262, -140,
-  -214, -226.
+  -214, -226, -343 (Era and Theme literals; extend -258's guard).
 - Dead code and hygiene: -176, -241, -152 (Parked), -287 (docs
-  describe a removed overlap gate), -332 (synthesis prompt path, after -236).
+  describe a removed overlap gate), -332 (synthesis prompt path, after -236),
+  -344 (uncalled functions, provisional).
 - Process: -335 (governor skill pilot, advisory).
 - Visible glitches: -229, -289 (MATTGPT-018 regression watch), -330 (Home to My Work half-emptied frame).
 
