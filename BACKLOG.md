@@ -3174,6 +3174,8 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 
 **Decided (Matt, Oct 20, 2026):** bind `agy_voice.feature` (one 🐾, in the opening line).
 
+**`agy_voice` acceptance (Matt, Oct 20, 2026):** Acceptance includes the one-🐾 rule on live answers; -340's run had 7 of 98 non-declined answers with no opener and no 🐾 (9534aea), the baseline to beat.
+
 **Proposed (lane 2, Oct 20, 2026; pending Matt's OK):**
 - Bind: `agy_voice`, `page_load_tracking`, `story_detail_feedback`.
 - Delete: `entity_routing` and `mode_routing` (the pipeline they describe was removed in 1095d2c; `detect_entity()` went then); `evidence_fidelity` and `jd_assessment` (content rules belong in the evals).
