@@ -2568,6 +2568,7 @@ Kept off the roadmap's NOW.
 **Acceptance:**
 - A measured before/after run on the AT&T JD (`data/probe_jd_att_principal.txt`) and the demo JD (`data/demo_jd.txt`): extracted `source_text` stays verbatim, requirement counts, and strong/partial/gap counts.
 - A dash check on Role Match output. The no-dash rule was left out of Role Match only because gpt-4o wrote none (Matt, Oct 14, 2026); Sol answers have been seen to contain em dashes (8fa0270).
+- RM-D10 decided at this ticket's go (Matt, Oct 20, 2026; scorecard, Role Match section): Role Match's retry behavior. It sets no `max_retries` or timeout today, and no record says what it should have.
 
 **openai 3.x (from 130febd, Oct 15, 2026):** `requirements.txt` pins `openai==2.5.0`, the version every test, probe and gate ran on. Unpinned, Cloud builds had installed 3.28.0 (Oct 11) and 3.31.0 (Oct 15 reboot). openai 3.x moved to httpx2, so `_stream_response()`'s before-text retry, which catches `httpx.TransportError`, was inert in prod (as reported in 130febd). Moving to 3.x deliberately, with tests, goes with this ticket. `requirements-ci.txt` stays unpinned.
 
@@ -3176,9 +3177,10 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 
 **`agy_voice` acceptance (Matt, Oct 20, 2026):** Acceptance includes the one-🐾 rule on live answers; -340's run had 7 of 98 non-declined answers with no opener and no 🐾 (9534aea), the baseline to beat.
 
-**Proposed (lane 2, Oct 20, 2026; pending Matt's OK):**
+**Proposed (Matt's review chat, Oct 20, 2026; pending Matt's OK; the `agy_voice` bind is decided, above):**
 - Bind: `agy_voice`, `page_load_tracking`, `story_detail_feedback`.
 - Delete: `entity_routing` and `mode_routing` (the pipeline they describe was removed in 1095d2c; `detect_entity()` went then); `evidence_fidelity` and `jd_assessment` (content rules belong in the evals).
+- **Condition (Matt, Oct 20, 2026):** `jd_assessment.feature` is deleted only after RM-F1 (scorecard, Role Match section) has an eval stating the Strong / Partial / Gap rules.
 - Not covered: `search.feature` (binding commented out in `test_steps.py`).
 
 **Check before deleting `mode_routing`:** `services/semantic_router.py` still defines the router's intent families, and -236's target proposes its synthesis family as the trigger for per-Era search and 6 cards (D1, D3). If -236's run keeps the router, the synthesis-family scenarios may be worth binding instead.

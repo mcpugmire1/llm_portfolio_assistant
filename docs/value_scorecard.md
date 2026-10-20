@@ -206,7 +206,50 @@ Source: the change-governor's Ask Agy draft, checker-passed Oct 19, 2026 (relaye
 | D5 | Row 14, the file-order fallback | -292's go |
 | D6 | Row 13, empty searches on work-history questions | Resolved (Matt, Oct 19, 2026): -339 closed; row 13 accepted; the agriculture claims are on -325 |
 
+## Role Match (drivers 4, 3, 5, 7 and 8): fitness functions and open decisions
+
+Source: the Arch Governor's Role Match draft, checker-passed Oct 20, 2026 (relayed by Matt; app HEAD 4753532, spec d62c35a). The intent lines themselves stay in the design spec. Intent numbers: R1 honest rating, no over-call or under-call; R2 verbatim `source_text` and steady requirement count; R3 every rating cites stories or profile, nothing invented, no `confidence` field; R4 under 90 seconds (J1); R5 agrees with Ask Agy on the same claim; R6 recommendation and fit score private only; R7 no dashes in model-written text; R8 failures visible; R9 model name in `config/constants.py`; R10 desktop only (decided, Matt, Oct 20, 2026: Role Match is out of scope on mobile; Architecture Sync records the ADR).
+
+**Fitness functions**
+
+| # | Intent | Measure | Status | Latest result |
+|---|---|---|---|---|
+| RM-F1 | R1 | Per-row honesty audit on the demo JD (-244 row 22 benchmark, plus the under-call case) | Missing on the current pipeline; the audit script `probes/probe_244_audit.py` is untracked; `jd_assessment.feature` is unbound | 17 honest, 5 over-called, 1 borderline of 23 rows (Sept 18, 2026, `docs/evidence/MATTGPT-244/`), before -244's fix |
+| RM-F2 | R2 | Prompts require verbatim `source_text`; the hand-off passes it | Exists (3 unit tests, no model call) | None recorded |
+| RM-F3 | R2 | Verbatim extraction and row counts on the AT&T and demo JDs | Exists (`docs/evidence/MATTGPT-275/role_match_dashes_20261014_113329/`, gpt-4o, 3 runs per JD) | AT&T 34/34/33 rows, `source_text` 29/29 exact; demo 21/22/21, 17/17 exact (one derivation; before 1095d2c's prompt edit) |
+| RM-F4 | R2 | Five-run count spread on AT&T (-160) | Missing; `probes/probe_160_extraction_variance.py` untracked | None |
+| RM-F5 | R3 | Ratings cite real stories; nothing invented | Missing: no test checks model output against the corpus | Only the -244 audit (RM-F1) |
+| RM-F6 | R3 | No `confidence` field | Missing: planned in -244's acceptance | Still in `services/jd_assessor.py` at HEAD |
+| RM-F7 | R4 | 90 seconds on the J1 journey | Missing; only a timing-line unit test exists | Probe pipeline time 15.9 to 29.8 s (the Oct 14 run above), not the journey |
+| RM-F8 | R5 | Same claim, same answer | Exists for the CS degree only (-268 paired run); general parity missing | -268 failing |
+| RM-F9 | R6 | No recommendation in the recruiter view | Exists as a bound BDD scenario, skipped ("Pending decision on pipeline test strategy"); private-view scenarios not bound | Structural only: `compute_recommendation()` has no `ui/` or `app.py` caller |
+| RM-F10 | R7 | No dashes in prompts and generated share and export text | Exists (3 unit tests, no model call) | None recorded |
+| RM-F11 | R7 | No dashes in model-written text | Exists for gpt-4o (Oct 14 run; ADR 048); missing for the replacement model, planned on -302 | 0 of 165 rows before, 0 of 167 after |
+| RM-F12 | R8 | Breather and error copy; failed rows marked unassessed | Exists (8 unit tests) | None recorded |
+| RM-F13 | R8 | Behavior on openai 3.x | Missing: planned on -302; the rate-limit test simulates the exception with a local subclass | None |
+| RM-F14 | R9 | No model name literal outside `config/constants.py` | Missing: planned in -140's acceptance | Would fail at HEAD (`ASSESSMENT_MODEL = "gpt-4o"` in `jd_assessor.py`) |
+| RM-F15 | R10 | Mobile gate at 375px; full interface on desktop | Exists (2 BDD scenarios, bound, not skipped) | Whole file: 24 passed, 28 skipped (1095d2c) |
+
+**Open decisions**
+
+| # | Question | Decide by |
+|---|---|---|
+| RM-D1 | Which model replaces gpt-4o for extraction and assessment? -302 names none; -140 records that mini "produces subpar assessment reasoning". | -302's go |
+| RM-D2 | No-dash rule in Role Match's prompts, or a check on output only? ADR 048 rejected the rule on gpt-4o. | -302's go |
+| RM-D3 | What count tolerance passes extraction? -160: "Code defines the exact pass threshold at Red time." | -160's Red; -302's go for its own before and after |
+| RM-D4 | Private view: evaluation grid, and whether strategic fit notes and action items come from the model or from rules (-012: "Decision needed before implementation"). | -012's go, private-view slice |
+| RM-D5 | Recommendation thresholds ("may be tuned after testing against real JDs"), and unassessed rows counted in the total, pulling toward Pass | -012's go |
+| RM-D6 | How the 90-second budget is measured | Not set by any record |
+| RM-D7 | CS-degree answer framing (-268's D1, still open) | Before -268's Green |
+| RM-D8 | What Role Match context crosses to Ask Agy, and through which pattern (-309) | -309's go |
+| RM-D9 | Pipeline-dependent BDD: real backend or mocks? -014's May 14 decision says mocks for structural checks, but the skip reason still reads "Pending decision on pipeline test strategy". | -014's go |
+| RM-D10 | Role Match retry and timeout behavior. `_get_openai_client()` and `role_match.py` set no `max_retries` or timeout, and no record states the intended behavior. The retry -302 calls inert on openai 3.x is Ask Agy's `_stream_response()`. | -302's go |
+
+Checked, not open: the recommendation stays private (-012); the move to openai 3.x goes with -302.
+
 ## 4. Role Match
+
+Fitness functions and open decisions: see "Role Match (drivers 4, 3, 5, 7 and 8)" above.
 
 **Intended outcome:**
 - "Role Match scores honestly, not generously." (design spec `index.md`)
@@ -238,7 +281,7 @@ Source: the change-governor's Ask Agy draft, checker-passed Oct 19, 2026 (relaye
   story (Matt's Role Match run, Oct 19, 2026; MATTGPT-272 closed).
 - `compute_recommendation()` has no caller in `ui/`: the overall
   recommendation is not shown to visitors.
-- Unbound: `jd_assessment.feature`, `jd_extraction.feature`.
+- Unbound: `jd_assessment.feature` (-345); `jd_extraction.feature` was deleted in 1aa2c07 (MATTGPT-254).
 
 **Open tickets:** -244 (In Progress), -160 (In Progress), -266, -249, -012 (In Progress), -014, -081, -099,
 -173, -079, -264, -267.
