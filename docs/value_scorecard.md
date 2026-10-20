@@ -324,7 +324,7 @@ experience reliably and sustainably; failures are visible, not silent.
 - Model retirement: -302 (gpt-4o family retires January 14, 2027).
 - Silent failures: -292 (silent file-order fallback, High), -288 (Ask Agy ignores the Pinecone fallback signal).
 - Regression gates and test reliability: -039, -233, -235, -206, -153,
-  -084, -180, -198, -035, -143 (Parked),
+  -084, -198, -035, -143 (Parked),
   -213, -342 (golden Q50 to Q52 send a placeholder question),
   -345 (7 unbound feature files: bind or delete).
 - Architecture and maintainability: -258 (In Progress), -259, -260, -261, -262, -140,

@@ -28,13 +28,12 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 14. **-160** -- In Progress. JD extraction split into three concurrent calls (required / preferred / implicit) landed at `5aee8a4`. After-measurement on the AT&T fixture (count spread 1-2 across five runs) not yet recorded. No longer gates -244.
 15. **-244** -- In Progress; prep Greens landed. Role Match assessor calibration: cited evidence doesn't address the specific claim; `confidence` field deletion. Not gated on -160: qualifier preservation was resolved by the `source_text` instruction fix (`5aee8a4`/`b28a080`), not the split. Next: verify the CI/CD-qualifier row after that fix; fixture count and the 22% over-called figure depend on it. Land before -249 (see -249 ordering constraint).
 16. **-168** -- Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data. Re-measure now that -275's Green has shipped (tunes behavior 275 replaces).
-17. **-180** -- Three test files build on a phantom schema and pass against it. Undermines what the unit suite tells us; same class of problem as the gate pointing at the wrong directory.
-18. **-129 stories 3-5** -- Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
-19. **-252** -- Ask Agy writes evaluative sentences about Matt despite prompt instructions against it. Visitor-visible; isolating probe spec in the detail block.
-20. **-235** -- Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-21. **-223** -- My Work only (Ask Agy makes no router call after -236): add router_score and router_family columns to My Work's Sheet query row; unblocks -239's floor threshold decision.
-22. **-222** -- Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
-23. Rest of Role Match: -173, -014, -012, -081, -099.
+17. **-129 stories 3-5** -- Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+18. **-252** -- Ask Agy writes evaluative sentences about Matt despite prompt instructions against it. Visitor-visible; isolating probe spec in the detail block.
+19. **-235** -- Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
+20. **-223** -- My Work only (Ask Agy makes no router call after -236): add router_score and router_family columns to My Work's Sheet query row; unblocks -239's floor threshold decision.
+21. **-222** -- Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
+22. Rest of Role Match: -173, -014, -012, -081, -099.
 
 **LATER — tier 1:** real defects with known fixes
 -177 (bound violation) · -190 (tokenizer divergence) · -166 (arc story reframe) · -063 (wrong-person queries) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (breadth decision, Oct 19 walkthrough: breadth on big-picture and named division or client questions, more than 3 cards across eras and projects, measured by -338) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- better ranking surfaces more adjacent candidates into verdict definitions that still absorb them as partial, so ranking before calibrating makes over-calling worse before better; full constraint in -249 detail block)
@@ -179,7 +178,6 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-173](#mattgpt-173) | Role Match JD validation: comp-heavy JD behavior unverified (short JD and non-JD input now handled by gate) | Open | Medium | Issue | value | August 8, 2026 |
 | [MATTGPT-176](#mattgpt-176) | Dead code: zero-caller function, 200-line commented block, duplicate typed-alias map | Open | Low | Refactor | chore | August 11, 2026 |
 | [MATTGPT-177](#mattgpt-177) | token_overlap_ratio bound violation -- repeated in-vocab tokens inflate ratio above 1.0; docstring example independently wrong | Open | Medium | Bug | value | August 11, 2026 |
-| [MATTGPT-180](#mattgpt-180) | Test fixture blind spot: test_formatting.py, test_filters.py, test_scoring.py build on phantom schema and pass against it | Open | High | Bug | chore | August 11, 2026 |
 | [MATTGPT-183](#mattgpt-183) | has_metric filter dead -- nothing in UI sets it to True; remove rather than fix | Open | Low | Refactor | chore | August 13, 2026 |
 | [MATTGPT-185](#mattgpt-185) | Query negation unsupported -- "outside of MattGPT" returns MattGPT stories | Open | Medium | Enhancement | value | August 13, 2026 |
 | [MATTGPT-190](#mattgpt-190) | Tokenizer character-set divergence: _tokenize keeps +#-. while token_overlap_ratio splits on non-\w | Open | Medium | Bug | value | August 16, 2026 |
@@ -2929,6 +2927,19 @@ One story at or above `CONFIDENCE_LOW` (0.20), and its 0.242 is below `CONFIDENC
 
 **Second case, agriculture (MATTGPT-236 gate, Oct 16, 2026; 1743846, `docs/evidence/MATTGPT-236/gate_20261016_140623/`):** "Has Matt worked in agriculture?" (r07): the Liquid Studio story (`building-smart-connected-devices-at-accentures-liquid-studio|accenture`, the only story that mentions agriculture) is in the sources of 0 of 30 answers; Ask Agy's one search was "Matt work experience agriculture agricultural farming agribusiness industry". A retrieval miss: the story never reaches the model. The adjacency part (the answer has to label the work as adjacent once retrieved) is on MATTGPT-251.
 
+**Second case (MATTGPT-339 run, Oct 19, 2026; evidence `docs/evidence/MATTGPT-339/row13_20261019_152759/`, 26ffa39):** for "Has Matt worked in agriculture?" and "Agriculture experience?", Ask Agy said agriculture isn't in the record in 4 of 4 natural runs and 4 of 4 forced runs (the forced runs had results withheld). Quotes:
+- natural r1: "I searched Matt's whole record, and it doesn't mention agriculture experience."
+- natural r2: "I followed that trail and came up empty: Matt's stories don't cover agriculture. I can't confirm that he has worked in that industry."
+- "Agriculture experience?" natural r1 and r2: "Matt's stories don't cover agriculture experience."
+- forced r2: "I searched Matt's whole record, and it doesn't mention work in agriculture."
+
+The corpus does mention it. In `building-smart-connected-devices-at-accentures-liquid-studio|accenture`, the 5PSummary says the prototypes "proved feasibility across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods", and a Result bullet says they "Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods" (verified Oct 19, 2026).
+
+Mechanism (lane 2, measured Oct 19, 2026, read-only; after 26ffa39, not in a commit): the story is absent from Pinecone's top 25 for all 6 distinct agriculture queries the model wrote, and the 25th hit scored 0.225 to 0.284. So it misses by ranking (`SEARCH_TOP_K`, 25), not by the `CONFIDENCE_LOW` cutoff the first case hit (title broadened Oct 19, 2026 to cover both). The term appears in a passing list, and the story's embedding doesn't surface it. As with the first case, a keyword hit on the query term would have admitted it.
+
+**Keyword scorer reads 400 characters of 5PSummary (MATTGPT-180, 16f6b2b; Oct 20, 2026):** `_keyword_score_for_story()` reads `build_5p_summary(s, 400)`; 105 of 124 summaries are longer, so a term past character 400 can't raise a story's keyword score. Check whether this applies to the agriculture case.
+- **Checked (Oct 20, 2026, read-only):** it applies. In the Liquid Studio story's 5PSummary (892 characters), "agricultur" starts at character 738, past the cut. The story's only other mention is in Result, which the scorer doesn't read (Title, Client, Role, Sub-category, Competencies, public_tags, Process and Performance don't mention it). So its keyword score for "agriculture" is 0, and the second case's "a keyword hit on the query term would have admitted it" needs the scorer to read past 400 characters or read Result (fix direction b).
+
 ### MATTGPT-327
 **Ask Agy rewrites the wording of quotations it attributes to Matt's own words**
 
@@ -3025,16 +3036,6 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 
 **Depends on MATTGPT-236's re-scope (Oct 18, 2026):** -236 now decides whether to keep the synthesis pick or replace it before the router comes out. If it keeps it, this deletion doesn't happen; if it replaces it, re-check this list against the replacement.
 
-
-**Second case (MATTGPT-339 run, Oct 19, 2026; evidence `docs/evidence/MATTGPT-339/row13_20261019_152759/`, 26ffa39):** for "Has Matt worked in agriculture?" and "Agriculture experience?", Ask Agy said agriculture isn't in the record in 4 of 4 natural runs and 4 of 4 forced runs (the forced runs had results withheld). Quotes:
-- natural r1: "I searched Matt's whole record, and it doesn't mention agriculture experience."
-- natural r2: "I followed that trail and came up empty: Matt's stories don't cover agriculture. I can't confirm that he has worked in that industry."
-- "Agriculture experience?" natural r1 and r2: "Matt's stories don't cover agriculture experience."
-- forced r2: "I searched Matt's whole record, and it doesn't mention work in agriculture."
-
-The corpus does mention it. In `building-smart-connected-devices-at-accentures-liquid-studio|accenture`, the 5PSummary says the prototypes "proved feasibility across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods", and a Result bullet says they "Explored the art of the possible across five distinct industries, life sciences, transportation, entertainment, agriculture, and consumer goods" (verified Oct 19, 2026).
-
-Mechanism (lane 2, measured Oct 19, 2026, read-only; after 26ffa39, not in a commit): the story is absent from Pinecone's top 25 for all 6 distinct agriculture queries the model wrote, and the 25th hit scored 0.225 to 0.284. So it misses by ranking (`SEARCH_TOP_K`, 25), not by the `CONFIDENCE_LOW` cutoff the first case hit (title broadened Oct 19, 2026 to cover both). The term appears in a passing list, and the story's embedding doesn't surface it. As with the first case, a keyword hit on the query term would have admitted it.
 ---
 
 ### MATTGPT-335
@@ -3478,33 +3479,6 @@ The phrase is not invisible to keyword scoring. It scores on a single stopword t
 ---
 
 
-### MATTGPT-180
-**Test fixture blind spot: test_formatting.py, test_filters.py, test_scoring.py:85 pass against phantom schema**
-
-- **Status:** Open
-- **Priority:** High
-- **Type:** Bug
-- **File:** `tests/unit/test_formatting.py`, `tests/unit/test_filters.py`, `tests/unit/test_scoring.py`
-- **Logged:** August 11, 2026
-
-**Issue:** Three test files build fixtures using the phantom field names (`why`, `how`, `what`, `star.situation`, etc.) rather than the verified JSONL schema (`Purpose`, `Process`, `Performance`, `Situation`, etc.). Because the tests operate on their own in-memory dicts, they pass against the phantom schema with no coverage of the actual data the production code reads.
-
-Specific location: `test_scoring.py:85` constructs a fixture dict using phantom field names. `test_formatting.py` and `test_filters.py` do the same throughout.
-
-**Why this matters:** This is not a cleanup item. It is the reason the `formatting.py` phantom schema defect was invisible -- a passing test suite is meaningless if the fixtures do not match production data shape. Any refactor or fix that passes these tests is unverified.
-
-**Recurrence prevention rule:** Story fixtures must be built by calling `utils.corpus_loader.load_stories()` (reads from `echo_star_stories_nlp.jsonl` at repo root, applies full normalization) and selecting by index, Client, Domain, or Era. Do not call `app.py`'s `load_star_stories()` from tests -- it fires `st.set_page_config()` at import. Inline fixture dicts built from field names guessed from code are not valid. This rule applies to all three files and any future test file that handles story objects.
-
-**Work items:**
-1. Rebuild fixtures in `test_formatting.py`, `test_filters.py`, and `test_scoring.py:85` using `utils.corpus_loader.load_stories()`.
-2. Confirm previously-passing tests still pass after fixture replacement (a test that breaks on correct fixtures was never actually testing the thing it claimed to test -- investigate each failure before discarding).
-
-**Work item 1, revised (Oct 20, 2026):** delete the phantom-field formatter tests (`story_has_metric`, `strongest_metric_line`, key points, narrative, deep dive, `test_uses_5p_summary_lowercase_field`) rather than rebuild them; the formatters go with `cmd_map` under -287. Rebuild only the real-field tests (filters, scoring keywords, curated 5PSummary) on corpus fixtures.
-
-**Pickup (Oct 16, 2026):** after MATTGPT-287 and MATTGPT-217.
-
----
-
 ### MATTGPT-183
 **has_metric filter dead -- remove rather than fix**
 
@@ -3530,6 +3504,8 @@ Specific location: `test_scoring.py:85` constructs a fixture dict using phantom 
 **Note -- personas:** `personas` in `filters.py` is already self-documented as dead ("not used -- field doesn't exist in data"). `conversation_helpers.py` reads it for badge rendering (search: `personas` in that file); the badges never render because the field is absent from corpus stories. Same class; not in scope for this ticket but worth a cleanup pass alongside it.
 
 **Cross-references:** MATTGPT-180 (test_filters.py:116 is a phantom-schema fixture that should be deleted, not rebuilt). Note: MATTGPT-179 is DA -- the three dead formatters (`_format_narrative`, `_format_key_points`, `_format_deep_dive`) are documented there as a finding; `story_has_metric` deletion is in scope for this ticket as step 5 above.
+
+**Step 4 done (Oct 20, 2026):** the `has_metric` phantom-fixture test in `test_filters.py` was deleted in 16f6b2b (MATTGPT-180); `has_metric` was also dropped from that file's combined-filters and missing-fields tests. `git grep has_metric -- tests/unit/test_filters.py` finds nothing at HEAD.
 
 **Pickup (Oct 16, 2026):** run the full BDD suite (`pytest tests/bdd/steps -v`): the change touches `ui/pages/explore_stories.py`.
 
