@@ -968,56 +968,17 @@ def check_client_attribution(
     return True, expected, is_bolded
 
 
-def check_synthesis_mode(response: str, min_clients: int = 3) -> tuple[bool, int]:
-    """Check if response is in synthesis mode with multiple clients.
+def check_synthesis_mode(
+    sources: list[dict], stories: list[dict], min_clients: int = 3
+) -> tuple[bool, int]:
+    """Check the answer's sources span at least min_clients named clients
+    (count_named_clients(): non-generic Client values, looked up by id).
 
     Returns:
         Tuple of (passed, client_count)
     """
-    response_lower = response.lower()
-    known_clients = [
-        "jpmorgan",
-        "jp morgan",
-        "rbc",
-        "accenture",
-        "fiserv",
-        "norfolk southern",
-        "at&t",
-        "capital one",
-        "american express",
-        "hsbc",
-        "takeda",
-    ]
-    found = [c for c in known_clients if c in response_lower]
-    return len(found) >= min_clients, len(found)
-
-
-def count_clients_mentioned(response: str) -> int:
-    """Count distinct clients mentioned in response."""
-    response_lower = response.lower()
-    known_clients = [
-        "jpmorgan",
-        "jp morgan",
-        "rbc",
-        "accenture",
-        "fiserv",
-        "norfolk southern",
-        "at&t",
-        "capital one",
-        "american express",
-        "hsbc",
-        "takeda",
-        "level 3",
-    ]
-    # Dedupe jp morgan variants
-    found = set()
-    for c in known_clients:
-        if c in response_lower:
-            if "jp morgan" in c or "jpmorgan" in c:
-                found.add("jpmorgan")
-            else:
-                found.add(c)
-    return len(found)
+    n = count_named_clients(sources, stories)
+    return n >= min_clients, n
 
 
 # =============================================================================
@@ -1222,7 +1183,9 @@ def evaluate_query(
                 synth_pass = True
                 if "min_clients" in query_spec:
                     client_pass, client_count = check_synthesis_mode(
-                        response, query_spec["min_clients"]
+                        rag_result.get("sources") or [],
+                        stories,
+                        query_spec["min_clients"],
                     )
                     result.checks["synthesis_mode"] = client_pass
                     result.details["client_count"] = client_count
@@ -1534,7 +1497,7 @@ class TestIntentRouting:
             if "min_clients" in query_spec:
                 assert result.checks.get("synthesis_mode", False), (
                     f"Synthesis client-diversity failed - only "
-                    f"{result.details.get('client_count', 0)} clients mentioned, "
+                    f"{result.details.get('client_count', 0)} named source clients, "
                     f"need {query_spec['min_clients']}"
                 )
             if "min_source_stories" in query_spec:
