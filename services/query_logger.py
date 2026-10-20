@@ -300,6 +300,28 @@ def log_page_load(
     Thread(target=_append_row, args=(row,), daemon=True).start()
 
 
+def log_page_context(
+    referrer: str,
+    screen_size: str,
+    utm_source: str = "",
+    utm_medium: str = "",
+    utm_campaign: str = "",
+    utm_content: str = "",
+    utm_term: str = "",
+):
+    """Log a page_context event: what the browser reports about the visit.
+
+    Written once per session, when app.py's screen-size capture returns,
+    alongside the page_load row from the first-mount guard (same Session
+    ID). On Streamlit Cloud the server only ever sees Cloud's own page as
+    the referrer, so page_load's Referrer is never an outside site;
+    page_context carries the browser's window.top.document.referrer
+    (for example https://www.linkedin.com/, whose links drop UTM params),
+    the viewport width, and the session's UTM values. Same HEADERS
+    columns as page_load; Event Type "page_context"."""
+    raise NotImplementedError
+
+
 def log_feedback(
     rating: str,
     query: str,

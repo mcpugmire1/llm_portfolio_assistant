@@ -1027,3 +1027,53 @@ class TestBuildRoleMatchLogKwargsArithmeticInvariant:
                     f"derived from different passes over the results "
                     f"list. Full counts: {counts!r}"
                 )
+
+
+class TestLogPageContext:
+    """MATTGPT-347: `log_page_context()` writes the page_context row, what
+    the browser reports once app.py's screen-size capture returns. It joins
+    the session's page_load row by Session ID."""
+
+    def test_row_carries_referrer_screen_width_session_id_and_utms(self):
+        from services import query_logger
+        from services.query_logger import HEADERS
+
+        with (
+            patch.object(query_logger.st, "session_state", {"_session_id": "s-347"}),
+            patch.object(query_logger, "Thread") as mock_thread,
+        ):
+            query_logger.log_page_context(
+                "https://www.linkedin.com/",
+                "1440",
+                utm_source="linkedin",
+                utm_medium="profile",
+                utm_campaign="portfolio",
+                utm_content="featured",
+                utm_term="ai",
+            )
+            row = dict(zip(HEADERS, _captured_row(mock_thread), strict=True))
+
+        assert {
+            k: row[k]
+            for k in (
+                "Event Type",
+                "Referrer",
+                "Screen Width",
+                "Session ID",
+                "UTM Source",
+                "UTM Medium",
+                "UTM Campaign",
+                "UTM Content",
+                "UTM Term",
+            )
+        } == {
+            "Event Type": "page_context",
+            "Referrer": "https://www.linkedin.com/",
+            "Screen Width": "1440",
+            "Session ID": "s-347",
+            "UTM Source": "linkedin",
+            "UTM Medium": "profile",
+            "UTM Campaign": "portfolio",
+            "UTM Content": "featured",
+            "UTM Term": "ai",
+        }

@@ -9,7 +9,9 @@ the real log_page_load and _append_row write rows to mock_sheet.append_row and
 never reach Google (the test_role_match_logging.py pattern).
 """
 
+import json
 import time
+from contextlib import ExitStack
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import MagicMock, patch
@@ -143,3 +145,150 @@ def logged(visit):
 @then("log_page_load is not called")
 def not_logged(visit):
     assert visit["rows"] == []
+
+
+# ── page_context: what the browser reports (MATTGPT-347) ───────────────────
+#
+# streamlit_js_eval never runs under AppTest (no browser), so these steps
+# patch it to return what the browser would: a JSON object with the viewport
+# width and window.top.document.referrer. That object is the contract the
+# screen-size capture in app.py reads. None stands for a browser that has not
+# answered yet.
+
+
+def _browser_report(width, referrer):
+    return json.dumps({"innerWidth": width, "referrer": referrer})
+
+
+@pytest.fixture
+def browser():
+    """The browser's report for the next load, and the patches that stay
+    active until the scenario ends (the visitor may keep using the app)."""
+    with ExitStack() as stack:
+        yield {"report": _browser_report(1440, ""), "stack": stack, "loads": []}
+
+
+def _rows_of(sheet, event_type):
+    return [
+        dict(zip(query_logger.HEADERS, call.args[0], strict=False))
+        for call in sheet.append_row.call_args_list
+        if call.args[0][0] == event_type
+    ]
+
+
+def _load(browser, headers, params):
+    """Run app.py for one request with the browser's report patched in. The
+    patches stay active so a later step can rerun the same session."""
+    from streamlit.testing.v1 import AppTest
+
+    stack = browser["stack"]
+    sheet = MagicMock()
+    sheet.row_values.return_value = []
+    request = SimpleNamespace(headers=HTTPHeaders(headers))
+    stack.enter_context(
+        patch("streamlit.runtime.context._get_request", return_value=request)
+    )
+    stack.enter_context(patch("services.query_logger.get_sheet", return_value=sheet))
+    stack.enter_context(patch("services.query_logger._headers_checked", False))
+    stack.enter_context(
+        patch("streamlit_js_eval.streamlit_js_eval", return_value=browser["report"])
+    )
+    at = AppTest.from_file(APP, default_timeout=60)
+    for key, value in params.items():
+        at.query_params[key] = value
+    at.run()
+    assert not at.exception, [e.value for e in at.exception]
+    time.sleep(0.3)  # let the logging daemon threads finish
+    browser["loads"].append({"at": at, "sheet": sheet})
+
+
+def _context_rows(browser):
+    return [
+        r for load in browser["loads"] for r in _rows_of(load["sheet"], "page_context")
+    ]
+
+
+def _only_load(browser):
+    assert len(browser["loads"]) == 1, browser["loads"]
+    return browser["loads"][0]
+
+
+@given(
+    parsers.parse(
+        "the browser reports referrer {referrer} and viewport width {width:d}"
+    )
+)
+def browser_reports(browser, referrer, width):
+    browser["report"] = _browser_report(width, referrer)
+
+
+@given("the browser has not reported its context yet")
+def browser_silent(browser):
+    browser["report"] = None
+
+
+@given("a request arrives with a User-Agent matching each entry")
+def signature_visits(visit):
+    for signature in MONITORING_BOT_SIGNATURES:
+        visit["requests"].append(({"User-Agent": f"Mozilla/5.0 {signature}"}, {}))
+
+
+@when("the page loads and the browser reports its context")
+def page_loads(visit, browser):
+    for headers, params in visit["requests"]:
+        _load(browser, headers, params)
+    visit["rows"] += [
+        r for load in browser["loads"] for r in _rows_of(load["sheet"], "page_load")
+    ]
+
+
+@when("the visitor keeps using the app")
+def keeps_using(browser):
+    load = _only_load(browser)
+    for _ in range(2):
+        load["at"].run()
+        assert not load["at"].exception, [e.value for e in load["at"].exception]
+    time.sleep(0.3)
+
+
+@then(parsers.parse("the page_context row contains {pairs}"))
+def context_row_contains(browser, pairs):
+    rows = _context_rows(browser)
+    assert len(rows) == 1, rows
+    expected = dict(pair.split("=", 1) for pair in pairs.split(", "))
+    assert {k: rows[0][k] for k in expected} == expected
+
+
+@then("the page_context row has the page_load row's Session ID")
+def same_session(visit, browser):
+    rows = _context_rows(browser)
+    assert len(rows) == 1, rows
+    page_load = _one_row(visit)
+    assert page_load["Session ID"], page_load
+    assert rows[0]["Session ID"] == page_load["Session ID"]
+
+
+@then(parsers.parse("the mobile gate reads a screen width of {width}"))
+def mobile_gate_width(browser, width):
+    # role_match.py and landing_view.py read this key with int(); its value
+    # stays the bare width string it was before page_context.
+    at = _only_load(browser)["at"]
+    assert at.session_state["_browser_screen_size"] == width
+
+
+@then(parsers.parse("later rows in the session carry Referrer {referrer}"))
+def later_rows_referrer(browser, referrer):
+    # _capture_context() reads this key into query and Role Match rows.
+    at = _only_load(browser)["at"]
+    assert at.session_state["_browser_referrer"] == referrer
+
+
+@then("exactly one page_context row is written")
+def one_context_row(browser):
+    rows = _context_rows(browser)
+    assert len(rows) == 1, rows
+
+
+@then("no page_context row is written")
+def no_context_row(browser):
+    assert _context_rows(browser) == []
