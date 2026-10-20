@@ -72,7 +72,7 @@ def _agy_prompt(is_synthesis):
         is_synthesis=is_synthesis,
         matt_dna=_corpus_dna(),
         profile_facts=jd_assessor.load_matt_profile(),
-        opener_examples=bs.SYNTHESIS_OPENERS + bs.STANDARD_OPENERS,
+        opening=(bs.SYNTHESIS_OPENERS if is_synthesis else bs.STANDARD_OPENERS)[0],
         focus_angle="",
     )
 

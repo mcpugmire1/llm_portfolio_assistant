@@ -519,8 +519,8 @@ def _postprocess_agy_text(
 
 
 # Agy's opener lines and focus angles, chosen at random per answer by
-# _choose_opening_and_focus(); the tool path also shows the opener lines to
-# the model as examples of how Agy opens.
+# _choose_opening_and_focus(); the tool path gives the model the picked
+# opener to use word for word.
 SYNTHESIS_OPENERS = [
     "🐾 Looking across Matt's portfolio, I see clear patterns.",
     "🐾 Here's what connects the dots across Matt's work.",
@@ -855,7 +855,7 @@ def agy_answer(
     st.session_state["__ask_query_intent__"] = None
 
     profile_facts = load_matt_profile()
-    _opening, focus = _choose_opening_and_focus(is_synthesis)
+    opening, focus = _choose_opening_and_focus(is_synthesis)
     items: list[dict[str, Any]] = [
         {
             "role": "system",
@@ -863,7 +863,7 @@ def agy_answer(
                 is_synthesis=is_synthesis,
                 matt_dna=MATT_DNA,
                 profile_facts=profile_facts,
-                opener_examples=SYNTHESIS_OPENERS + STANDARD_OPENERS,
+                opening=opening,
                 focus_angle=focus,
                 decline_line=_choose_decline_line(),
             ),

@@ -30,7 +30,7 @@ def _agy_prompt(is_synthesis):
         is_synthesis=is_synthesis,
         matt_dna="## ZZZ_SENTINEL facts\n- ZZZ career arc\n",
         profile_facts="Education: ZZZ_PROFILE_FACT",
-        opener_examples=["🐾 ZZZ opener one."],
+        opening="🐾 ZZZ opener one.",
         focus_angle="",
     )
 

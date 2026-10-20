@@ -22,6 +22,7 @@ COMPARISON_RULE on the line after it (the fixture's "edited" field).
 """
 
 import json
+import re
 from pathlib import Path
 
 import pytest
@@ -34,7 +35,6 @@ from ui.pages.ask_mattgpt.prompts import (
 
 _DNA = "## ZZZ_SENTINEL facts\n- ZZZ career arc\n"
 _PROFILE = "Education: ZZZ_PROFILE_FACT"
-_OPENERS = ["🐾 ZZZ opener one.", "Got it! 🐾 ZZZ", "🐾 ZZZ opener three..."]
 _FOCUS = "ZZZ focus angle."
 _DECLINE = "🐾 ZZZ decline line about [topic]."
 
@@ -54,7 +54,7 @@ def _prompt(is_synthesis, profile_facts=_PROFILE, focus_angle=_FOCUS, decline_li
         is_synthesis=is_synthesis,
         matt_dna=_DNA,
         profile_facts=profile_facts,
-        opener_examples=_OPENERS,
+        opening=_OPENING,
         focus_angle=focus_angle,
         decline_line=decline_line,
     )
@@ -100,8 +100,10 @@ class TestOpeners:
         assert "Examples of how Agy opens" not in _prompt(is_synthesis)
 
     @pytest.mark.parametrize("is_synthesis", [False, True])
-    def test_no_opener_is_given_as_exact_text(self, is_synthesis):
-        assert "Start your response with this exact text" not in _prompt(is_synthesis)
+    def test_the_only_opener_given_is_the_picked_one_word_for_word(self, is_synthesis):
+        assert re.findall(
+            r'Begin with this line, word for word: "([^"]*)"', _prompt(is_synthesis)
+        ) == [_OPENING]
 
 
 class TestModes:
@@ -164,7 +166,7 @@ class TestParityWithRun2:
             is_synthesis=turn["is_synthesis"],
             matt_dna=turn["matt_dna"],
             profile_facts=turn["profile_facts"],
-            opener_examples=turn["opener_examples"],
+            opening=turn["opening"],
             focus_angle=turn["focus_angle"],
             decline_line=turn["decline_line"],
         )

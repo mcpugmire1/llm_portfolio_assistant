@@ -125,7 +125,7 @@ Only cite these clients (from the stories provided): {client_list}
 
 STANDARD_DELTA = """
 ## STANDARD MODE
-This is a specific question. Go deep on the primary story.
+This is a specific question.
 
 ## RESPONSE STRUCTURE
 Write natural prose paragraphs. Do NOT use section headers or labels in your output.
@@ -356,21 +356,17 @@ def build_tool_system_prompt(
     is_synthesis: bool,
     matt_dna: str,
     profile_facts: str,
-    opener_examples: list[str],
+    opening: str,
     focus_angle: str = "",
     decline_line: str = "",
 ) -> str:
     """The tool-path (agy_answer) system prompt, in the shape lever 2 measured
     (MATTGPT-275; MATTGPT-282 run 2): the mode's system prompt, the tool
     note, then the per-answer instructions (build_answer_instructions()),
-    giving Agy's opener lines as examples rather than one as exact text.
+    giving the opener picked in code to use word for word (MATTGPT-340).
     The user message is then the question as asked.
     """
-    opening_line = (
-        "Begin with a short opening line in Agy's voice. Examples of how Agy opens: "
-        + "; ".join(f'"{o}"' for o in opener_examples)
-        + "."
-    )
+    opening_line = f'Begin with this line, word for word: "{opening}"'
     return (
         build_system_prompt(
             is_synthesis=is_synthesis, matt_dna=matt_dna, profile_facts=profile_facts
@@ -399,8 +395,8 @@ def build_answer_instructions(
     """The per-answer instruction block: opener line, focus angle, verbatim
     requirement, prose, bolding, "State facts", and citation rule 0a.
 
-    The tool path (agy_answer) puts it in the system prompt with the openers
-    as examples.
+    The tool path (agy_answer) puts it in the system prompt with the picked
+    opener.
     """
     focus_line = (
         f"\n**FOCUS:** {focus_angle}" if focus_angle and not is_synthesis else ""

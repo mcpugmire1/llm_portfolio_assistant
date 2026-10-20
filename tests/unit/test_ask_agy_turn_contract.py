@@ -148,12 +148,13 @@ class TestVoicePlacement:
         ):
             assert line in system, f"{line!r} missing from the system prompt"
 
-    def test_openers_are_examples_not_exact_text(self):
+    def test_the_picked_opener_is_given_word_for_word_not_as_examples(self):
+        # MATTGPT-340: one opener, picked in code, in the system prompt only.
         _, fake, _, _ = _turn(_FOLLOW_UP, _HISTORY, _SEARCH_THEN_ANSWER)
         everything = " ".join(
             m.get("content") or "" for r in fake.requests for m in r["input"]
         )
         assert "Start your response with this exact text" not in everything
         system = fake.requests[0]["input"][0]["content"]
-        assert "Examples of how Agy opens" in system
-        assert system.count("🐾") >= 2, "expected several opener lines as examples"
+        assert "Examples of how Agy opens" not in system
+        assert 'Begin with this line, word for word: "' in system
