@@ -2191,6 +2191,8 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 
 **Eval hygiene, add (Oct 20, 2026):** in `tests/eval_rag_quality.py`, `check_synthesis_mode()`'s `min_clients` and the `min_source_named_clients` check both count named clients from the answer's sources (since 932e8f3). They differ in the client field read (`min_clients` looks up each story's `Client` by id; `min_source_named_clients` reads the source's own `client`) and in what they leave out (`min_clients` drops Professional Narrative stories and unknown ids). Fold them into one check. Only Q17 uses `min_clients`; only Q65 uses `min_source_named_clients` (verified Oct 20, 2026).
 
+**Dead formatters, add (Oct 20, 2026):** the key points, deep dive and narrative formatters in `utils/formatting.py` read mostly phantom fields (`why`, `how`, `what`, `star`, lowercase `title` and `client`: 0 of 124 stories have any; verified Oct 20, 2026). They are reached only through `cmd_map`'s mode words, which Matt ruled invalid (row 4); the transcript's view pills need `push_card_snapshot_from_state()`, which has no caller. Delete them with `cmd_map` rather than fix them; -179 stands. -180 deletes their phantom-field tests.
+
 ---
 
 ### MATTGPT-288
@@ -3464,6 +3466,8 @@ Specific location: `test_scoring.py:85` constructs a fixture dict using phantom 
 **Work items:**
 1. Rebuild fixtures in `test_formatting.py`, `test_filters.py`, and `test_scoring.py:85` using `utils.corpus_loader.load_stories()`.
 2. Confirm previously-passing tests still pass after fixture replacement (a test that breaks on correct fixtures was never actually testing the thing it claimed to test -- investigate each failure before discarding).
+
+**Work item 1, revised (Oct 20, 2026):** delete the phantom-field formatter tests (`story_has_metric`, `strongest_metric_line`, key points, narrative, deep dive, `test_uses_5p_summary_lowercase_field`) rather than rebuild them; the formatters go with `cmd_map` under -287. Rebuild only the real-field tests (filters, scoring keywords, curated 5PSummary) on corpus fixtures.
 
 **Pickup (Oct 16, 2026):** after MATTGPT-287 and MATTGPT-217.
 
