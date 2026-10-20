@@ -1079,6 +1079,11 @@ None of these stories is cited in the answer. This is the "retrieved, not cited"
 
 **Stale in part (verified Oct 17, 2026, HEAD 836bf4d):** `_generate_agy_response()`, whose `random.choice` closings this block describes, is gone from production code (1095d2c), and "dive deeper" appears in none. The trailing-question item needs a re-measure on the tool path before it is worked.
 
+**Acceptance case (Matt's manual test of -340, Oct 20, 2026; local, 9534aea, desktop):** a conversational aside shows no cards. "Sorry, i pasted the wrong info" after a work answer shows no source cards.
+- Observed: turn 1, a test-table row pasted by mistake ("| 1 | Tell me about his Fiserv work. | ... |"), was answered as the Fiserv question. Cards: two Fiserv stories plus "JP Morgan Chase - Building the Payment Engine Behind JP Morgan ACCESS", which the answer never mentions. Turn 2, "Sorry, i pasted the wrong info", got "Got it! 🐾 No problem. Send the question or information you meant to share." with 3 Fiserv cards.
+- Why (verified Oct 20, 2026): `agy_answer()` sets `tool_choice = "required"` on round 0, so every turn searches, and cards are every story retrieved until this ticket ships (ADR 061 row 36).
+- Not covered by the existing xfails in `TestSourcesAreTheCitedStories`: they cover an off-topic refusal and a profile-fact answer, not an aside that isn't a question.
+
 ---
 
 ### MATTGPT-129
@@ -2070,6 +2075,12 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 **Issue:** Openers chosen by answer type (fact, story, synthesis, gap/no) after the answer is known, in Agy's hound voice; Matt writes the lists. Source: MATTGPT-276's open question (the random opener and focus angle) and the Oct 6 browser evidence of mismatched openers (e.g. "This is a strong one" before a "no"; "Tracking this down..." before the scripted off-topic reply, MATTGPT-263).
 
 **Sequence after -282 (Oct 8, 2026):** a model change may move the voice.
+
+**Note, unmeasured (Matt's manual test of -340, Oct 20, 2026):** since -340, every answer that isn't a decline is told to begin with the line `_choose_opening_and_focus()` picks, word for word. On a conversational aside some lines would read oddly before a reply like "No problem. Send the question...", for example "🐾 I know just the story." or "🐾 Here's a great example."
+- Observed once, and it fit: the -128 aside above picked "Got it! 🐾".
+- Not measured: the -340 live run (`probes/output/MATTGPT-340/run_20261020_094428/`) had no aside turns (as reported; a grep of its `answers.md` for "sorry", "wrong info", "thanks" and "never mind" finds none).
+- Related: on declines the model dropped the picked opener and began with the decline line, 16 of 16 in that run (9534aea).
+- Asks nothing of the opener lines, which are Agy's voice and stay as they are.
 
 ---
 

@@ -208,7 +208,7 @@ Source: the change-governor's Ask Agy draft, checker-passed Oct 19, 2026 (relaye
 
 ## Role Match (drivers 4, 3, 5, 7 and 8): fitness functions and open decisions
 
-Source: the Arch Governor's Role Match draft, checker-passed Oct 20, 2026 (relayed by Matt; app HEAD 4753532, spec d62c35a). The intent lines themselves stay in the design spec. Intent numbers: R1 honest rating, no over-call or under-call; R2 verbatim `source_text` and steady requirement count; R3 every rating cites stories or profile, nothing invented, no `confidence` field; R4 under 90 seconds (J1); R5 agrees with Ask Agy on the same claim; R6 recommendation and fit score private only; R7 no dashes in model-written text; R8 failures visible; R9 model name in `config/constants.py`; R10 desktop only (decided, Matt, Oct 20, 2026: Role Match is out of scope on mobile; Architecture Sync records the ADR).
+Source: the Arch Governor's Role Match draft, checker-passed Oct 20, 2026 (relayed by Matt; app HEAD 4753532, spec d62c35a). The intent lines themselves stay in the design spec. Intent numbers: R1 honest rating, no over-call or under-call; R2 verbatim `source_text` and steady requirement count; R3 every rating cites stories or profile, nothing invented, no `confidence` field; R4 under 90 seconds (J1); R5 agrees with Ask Agy on the same claim; R6 recommendation and fit score private only; R7 no dashes in model-written text; R8 failures visible; R9 model name in `config/constants.py`; R10 desktop only (decided, Matt, Oct 14, 2026, confirmed Oct 20: Role Match is out of scope on mobile; ADR 062).
 
 **Fitness functions**
 
