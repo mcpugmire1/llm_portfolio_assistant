@@ -259,21 +259,12 @@ GOLDEN_QUERIES = {
             "id": 11,
             "query": "Tell me about Matt's payments work at JPMorgan",
             "expected_client": "JP Morgan Chase",
-            "client_variants": [
-                "JP Morgan Chase",
-                "JPMorgan Chase",
-                "JPMorgan",
-                "J.P. Morgan",
-                "JPMC",
-                "JP Morgan",
-            ],
             "category": "client",
         },
         {
             "id": 12,
             "query": "Matt's modernization work at RBC",
             "expected_client": "RBC",
-            "client_variants": ["RBC", "Royal Bank"],
             "category": "client",
         },
         {
@@ -282,12 +273,6 @@ GOLDEN_QUERIES = {
             # CIC was Accenture's org, but client work was for "Multiple Clients"
             # LLM can correctly say Accenture (org), Multiple Clients (work), or CIC (entity)
             "expected_client": "Accenture",
-            "client_variants": [
-                "Accenture",
-                "Multiple Clients",
-                "CIC",
-                "Cloud Innovation Center",
-            ],
             "is_multi_client": True,
             "category": "client",
         },
@@ -295,14 +280,12 @@ GOLDEN_QUERIES = {
             "id": 14,
             "query": "Norfolk Southern transformation",
             "expected_client": "Norfolk Southern",
-            "client_variants": ["Norfolk Southern", "Norfolk"],
             "category": "client",
         },
         {
             "id": 15,
             "query": "Matt's work at Fiserv",
             "expected_client": "Fiserv",
-            "client_variants": ["Fiserv"],
             "category": "client",
         },
         {
@@ -310,7 +293,6 @@ GOLDEN_QUERIES = {
             "query": "Tell me about scaling learning programs",
             # Updated Jan 2026: Accenture is primary client for L&D stories
             "expected_client": "Accenture",
-            "client_variants": ["Accenture"],
             "category": "client",
         },
     ],
@@ -443,7 +425,6 @@ GOLDEN_QUERIES = {
             "id": 26,
             "query": "How did Matt modernize payments across 12+ countries at JP Morgan?",
             "expected_client": "JP Morgan Chase",
-            "client_variants": ["JPMorgan", "JP Morgan", "JPMC", "JP Morgan Chase"],
             "ground_truth": [
                 "12 countries",
                 "12+",
@@ -492,7 +473,6 @@ GOLDEN_QUERIES = {
             "id": 29,
             "query": "How did Matt establish and expand the Cloud Innovation Center in Atlanta?",
             "expected_client": "Accenture",
-            "client_variants": ["Accenture", "CIC", "Cloud Innovation Center"],
             "ground_truth": [
                 "0 to 150",
                 "150+",
@@ -509,7 +489,6 @@ GOLDEN_QUERIES = {
             "query": "How did Matt scale learning and talent development at Accenture?",
             "expected_client": "Accenture",
             # L&D work was at Accenture org but served multiple clients
-            "client_variants": ["Accenture", "Multiple Clients"],
             "ground_truth": [
                 "learning",
                 "talent",
@@ -530,7 +509,6 @@ GOLDEN_QUERIES = {
             "id": 31,
             "query": "How did Matt align stakeholders across 3 regions at JP Morgan?",
             "expected_client": "JP Morgan Chase",
-            "client_variants": ["JPMorgan", "JP Morgan", "JPMC", "JP Morgan Chase"],
             "ground_truth": ["3 regions", "stakeholder", "alignment", "global"],
             "min_matches": 2,
             "expected_intent": "client",
@@ -544,7 +522,6 @@ GOLDEN_QUERIES = {
             "id": 53,
             "query": "How did you build the CIC?",
             "expected_client": "Accenture",
-            "client_variants": ["Accenture"],
             "ground_truth": [
                 "Cloud Innovation Center",
                 "CIC",
@@ -600,7 +577,6 @@ GOLDEN_QUERIES = {
             "id": 57,
             "query": "How did you build the Cloud Innovation Center?",
             "expected_client": "Accenture",
-            "client_variants": ["Accenture"],
             "ground_truth": [
                 "Cloud Innovation Center",
                 "CIC",
@@ -667,12 +643,12 @@ GOLDEN_QUERIES = {
             "note": "CIC alias resolves to Division:Cloud Innovation Center",
             "category": "entity_detection",
         },
-        # SHOULD scope (exact full names in query or alias-mapped shortened forms)
+        # SHOULD scope (exact full names or shortened forms in query)
         {
             "id": 36,
             "query": "What did Matt do at JP Morgan?",
             "expect_entity": ("Client", "JP Morgan Chase"),
-            "note": "'jp morgan' alias resolves to canonical Client:JP Morgan Chase (shortened form of long client name)",
+            "note": "'jp morgan' is a shortened form of Client:JP Morgan Chase",
             "category": "entity_detection",
         },
         {
@@ -925,20 +901,50 @@ def check_ground_truth(
     return len(matched) >= min_matches, len(matched), matched
 
 
-def check_client_attribution(
-    response: str, expected: str, variants: list[str], is_multi: bool = False
-) -> tuple[bool, str | None, bool]:
-    """Check if correct client is attributed.
+def _words(text: str) -> list[str]:
+    return re.findall(r"[a-z0-9&]+", text.lower())
 
-    For multi-client queries, checks for "Multiple Clients", "various", or 3+ distinct companies.
+
+def _runs_inside(inner: list[str], outer: list[str]) -> bool:
+    """inner is a non-empty contiguous run of outer's words."""
+    n = len(inner)
+    return n > 0 and any(outer[i : i + n] == inner for i in range(len(outer) - n + 1))
+
+
+def check_client_attribution(
+    response: str,
+    expected: str,
+    sources: list[dict],
+    stories: list[dict],
+    is_multi: bool = False,
+) -> tuple[bool, str | None, bool]:
+    """Check the expected client is the Client of one of the answer's source
+    stories (looked up by id), and whether the answer bolds the client of one
+    of its sources as the answer writes it: a bold span whose words run inside
+    a named source Client value, or contain it ("**JP Morgan**" for "JP Morgan
+    Chase"). No name-variant lists.
+
+    For multi-client queries, also passes on "Multiple Clients", "various", or
+    3+ named source clients.
 
     Returns:
         Tuple of (passed, found_client_or_reason, is_bolded)
     """
-    response_lower = response.lower()
+    by_id = {s.get("id"): s for s in stories}
+    clients = {
+        by_id[src.get("id")].get("Client") or ""
+        for src in sources
+        if src.get("id") in by_id
+    }
+    named = [_words(c) for c in clients if not is_generic_client(c)]
+    spans = [_words(b) for b in re.findall(r"\*\*(.+?)\*\*", response)]
+    is_bolded = any(
+        _runs_inside(span, c) or _runs_inside(c, span) for span in spans for c in named
+    )
 
     if is_multi:
         # Check for multi-client indicators
+        response_lower = response.lower()
         multi_indicators = [
             "multiple clients",
             "various",
@@ -949,46 +955,17 @@ def check_client_attribution(
             if indicator in response_lower:
                 return True, indicator, True  # Boldness N/A for multi-client
 
-        # Check for 3+ distinct company names
-        known_clients = [
-            "jpmorgan",
-            "jp morgan",
-            "rbc",
-            "accenture",
-            "fiserv",
-            "norfolk southern",
-            "at&t",
-            "capital one",
-            "american express",
-            "hsbc",
-        ]
-        found_clients = [c for c in known_clients if c in response_lower]
-        if len(found_clients) >= 3:
-            return True, f"Found {len(found_clients)} clients", True  # Boldness N/A
+        n_named = count_named_clients(sources, stories)
+        if n_named >= 3:
+            return True, f"Found {n_named} clients", True  # Boldness N/A
 
         # Fall through to single client check - multi-client queries can also
         # correctly attribute to a single valid client (e.g., "Accenture" for CIC work)
 
-    # Single client check - find if any variant is mentioned
-    found_variant = None
-    for variant in variants:
-        if variant.lower() in response_lower:
-            found_variant = variant
-            break
-
-    if not found_variant:
+    if expected not in clients:
         return False, None, False
 
-    # Check if ANY variant is bolded (not just the one found)
-    # This handles cases like "**JPMorgan Chase**" when we found "JPMorgan"
-    is_bolded = False
-    for variant in variants:
-        bold_pattern = rf"\*\*{re.escape(variant)}\*\*"
-        if re.search(bold_pattern, response, re.IGNORECASE):
-            is_bolded = True
-            break
-
-    return True, found_variant, is_bolded
+    return True, expected, is_bolded
 
 
 def check_synthesis_mode(response: str, min_clients: int = 3) -> tuple[bool, int]:
@@ -1207,7 +1184,8 @@ def evaluate_query(
             client_pass, found, is_bolded = check_client_attribution(
                 response,
                 query_spec["expected_client"],
-                query_spec.get("client_variants", []),
+                rag_result.get("sources") or [],
+                stories,
                 is_multi,
             )
             result.checks["client_attribution"] = client_pass
@@ -1315,14 +1293,8 @@ def evaluate_query(
                 client_pass, found, is_bolded = check_client_attribution(
                     response,
                     query_spec["expected_client"],
-                    [
-                        "JP Morgan Chase",
-                        "JPMorgan Chase",
-                        "JPMorgan",
-                        "J.P. Morgan",
-                        "JPMC",
-                        "JP Morgan",
-                    ],
+                    rag_result.get("sources") or [],
+                    stories,
                 )
                 result.checks["client_attribution"] = client_pass
                 result.details["found_client"] = found
@@ -1360,7 +1332,8 @@ def evaluate_query(
                 client_pass, found, is_bolded = check_client_attribution(
                     response,
                     query_spec["expected_client"],
-                    query_spec.get("client_variants", []),
+                    rag_result.get("sources") or [],
+                    stories,
                 )
                 result.checks["client_attribution"] = client_pass
                 result.details["found_client"] = found
