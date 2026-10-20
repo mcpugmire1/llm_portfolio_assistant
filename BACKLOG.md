@@ -170,6 +170,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-342](#mattgpt-342) | Golden eval Q50 to Q52 send the placeholder "(dynamic - built from story_index)" instead of a real question | Open | Low | Issue | chore | October 19, 2026 |
 | [MATTGPT-343](#mattgpt-343) | Era and Theme values written as literals in production code; -258's literal guard covers only Client, Project and Title | Open | Low | Hygiene | chore | October 20, 2026 |
 | [MATTGPT-344](#mattgpt-344) | Functions with no production caller: 55 name-match candidates, provisional | Open | Low | Hygiene | chore | October 20, 2026 |
+| [MATTGPT-345](#mattgpt-345) | 7 BDD feature files have no binding: bind or delete each | Open | Low | Hygiene | chore | October 20, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently | Parked | Medium | Action | value | August 3, 2026 |
@@ -2193,6 +2194,10 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 
 **Dead formatters, add (Oct 20, 2026):** the key points, deep dive and narrative formatters in `utils/formatting.py` read mostly phantom fields (`why`, `how`, `what`, `star`, lowercase `title` and `client`: 0 of 124 stories have any; verified Oct 20, 2026). They are reached only through `cmd_map`'s mode words, which Matt ruled invalid (row 4); the transcript's view pills need `push_card_snapshot_from_state()`, which has no caller. Delete them with `cmd_map` rather than fix them; -179 stands. -180 deletes their phantom-field tests.
 
+`test_no_dash_rule.py`'s two Key points tests (`test_the_key_points_scope_line_has_no_dash`, `test_the_scope_line_without_a_client_is_the_title_alone`) call `_format_key_points()` on a source-card dict; they go with the formatters (lane 2, Oct 20, 2026; verified at HEAD 4753532).
+
+build_5p_summary()'s fallback (and strongest_metric_line()) runs only when a story has no 5PSummary; 124 of 124 have one (lane 2, Oct 20). Candidate for removal with the formatters.
+
 ---
 
 ### MATTGPT-288
@@ -3169,6 +3174,33 @@ Mechanism (lane 2, measured Oct 19, 2026, read-only; after 26ffa39, not in a com
 **Steps:**
 1. Trace imports and calls for every candidate, including getattr, string references and dynamic imports. Do `AskMattGPTState` first.
 2. Remove only what the trace confirms, with the test gates each file needs. Nothing is deleted on a name match. The candidates already on -287 stay there.
+
+---
+
+### MATTGPT-345
+**7 BDD feature files have no binding: bind or delete each**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Hygiene
+- **File:** `tests/bdd/features/` (`agy_voice`, `entity_routing`, `evidence_fidelity`, `jd_assessment`, `mode_routing`, `page_load_tracking`, `story_detail_feedback`; `search.feature`), `tests/bdd/steps/test_steps.py`
+- **Related:** MATTGPT-254 (deleted the unbound `jd_extraction.feature`, 1aa2c07)
+- **Logged:** October 20, 2026
+
+**Issue (Matt, Oct 20, 2026):** a `.feature` file without a binding is documentation, not a test, so a green BDD run says nothing about it. For each file, bind it or delete it.
+
+**Verified Oct 20, 2026 (HEAD 4753532):** no non-comment line in `tests/bdd/**/*.py` names these files: `agy_voice` (11 scenarios), `entity_routing` (18), `evidence_fidelity` (19), `jd_assessment` (15), `mode_routing` (22), `page_load_tracking` (6), `story_detail_feedback` (4). `search.feature` (10) is bound only by a commented-out line in `tests/bdd/steps/test_steps.py`.
+
+**Decided (Matt, Oct 20, 2026):** bind `agy_voice.feature` (one 🐾, in the opening line).
+
+**Proposed (lane 2, Oct 20, 2026; pending Matt's OK):**
+- Bind: `agy_voice`, `page_load_tracking`, `story_detail_feedback`.
+- Delete: `entity_routing` and `mode_routing` (the pipeline they describe was removed in 1095d2c; `detect_entity()` went then); `evidence_fidelity` and `jd_assessment` (content rules belong in the evals).
+- Not covered: `search.feature` (binding commented out in `test_steps.py`).
+
+**Check before deleting `mode_routing`:** `services/semantic_router.py` still defines the router's intent families, and -236's target proposes its synthesis family as the trigger for per-Era search and 6 cards (D1, D3). If -236's run keeps the router, the synthesis-family scenarios may be worth binding instead.
+
+**On pickup:** each deletion takes a `Decision:` trailer naming the file.
 
 ---
 

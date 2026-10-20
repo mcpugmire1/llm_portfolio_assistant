@@ -167,7 +167,7 @@ answer varies), -311 (no ongoing-period End_Date), -327 (rewritten quotations),
 -328 (rule 0b decline follow-ups),
 -341 (rows 20 and 27 with the "builder" revisit).
 
-## Ask Agy (drivers 1 to 3): fitness functions and open decisions
+## Ask Agy (drivers 1 to 3, and 7): fitness functions and open decisions
 
 Source: the change-governor's Ask Agy draft, checker-passed Oct 19, 2026 (relayed by Matt). The intent lines themselves stay in the design spec. Intent numbers: 1 no router in the answer path; 2 follow-up searches written by the model; 3 cards are the cited stories; 4 breadth on big-picture and named division or client questions; 5 profile facts as fact cards; 6 rule 0b decline; 7 voice; 8 every claim traceable; 9 failures visible; 10 wording variants.
 
@@ -314,8 +314,8 @@ experience reliably and sustainably; failures are visible, not silent.
   production visitor data is not yet a usable signal for the drivers.
 - Unbound or stale tests reduce what a green run proves: 7 feature files
   unbound (`agy_voice`, `evidence_fidelity`, `mode_routing`,
-  `entity_routing`, `jd_assessment`, `jd_extraction`,
-  `story_detail_feedback`), plus `search.feature` commented out.
+  `entity_routing`, `jd_assessment`, `page_load_tracking`,
+  `story_detail_feedback`), plus `search.feature` commented out (-345).
 
 **Open tickets:**
 - Alarms and telemetry: -222, -223 (My Work only).
@@ -325,7 +325,8 @@ experience reliably and sustainably; failures are visible, not silent.
 - Silent failures: -292 (silent file-order fallback, High), -288 (Ask Agy ignores the Pinecone fallback signal).
 - Regression gates and test reliability: -039, -233, -235, -206, -153,
   -084, -180, -198, -035, -143 (Parked),
-  -213, -342 (golden Q50 to Q52 send a placeholder question).
+  -213, -342 (golden Q50 to Q52 send a placeholder question),
+  -345 (7 unbound feature files: bind or delete).
 - Architecture and maintainability: -258 (In Progress), -259, -260, -261, -262, -140,
   -214, -226, -343 (Era and Theme literals; extend -258's guard).
 - Dead code and hygiene: -176, -241, -152 (Parked), -287 (docs
