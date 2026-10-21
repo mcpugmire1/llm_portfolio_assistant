@@ -482,3 +482,23 @@ class TestDropRestatedFields:
             "Data Architecture",
             "Order Management",
         ]
+
+
+class TestSlugify:
+    """slugify() builds Role Match's utm_content from role and company. The
+    expected values are what scripts/utils.py's slugify returned before it
+    moved here, so the move changes no link."""
+
+    @pytest.mark.parametrize(
+        ("text", "expected"),
+        [
+            ("Senior Director, Acme Corp.", "senior-director-acme-corp"),
+            ("VP  of Data - Platform", "vp-of-data---platform"),
+            ("Head of AI & ML (Remote)", "head-of-ai-ml-remote"),
+            ("", ""),
+        ],
+    )
+    def test_slug_matches_the_scripts_utils_output(self, text, expected):
+        from utils.formatting import slugify
+
+        assert slugify(text) == expected

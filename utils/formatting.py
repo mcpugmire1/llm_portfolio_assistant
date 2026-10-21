@@ -556,3 +556,7 @@ def _prompt_view(story: dict) -> dict:
         "Process": " ".join(story.get("Process") or []),
         "Performance": " ".join(story.get("Performance") or []),
     }
+
+
+def slugify(text: str) -> str:
+    raise NotImplementedError
