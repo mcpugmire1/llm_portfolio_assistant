@@ -559,4 +559,10 @@ def _prompt_view(story: dict) -> dict:
 
 
 def slugify(text: str) -> str:
-    raise NotImplementedError
+    """Lowercase, punctuation removed, whitespace runs to hyphens. Role
+    Match's utm_content uses it; moved unchanged from scripts/utils.py so no
+    production module imports from scripts/."""
+    text = text.lower().strip()
+    text = re.sub(r"[^\w\s-]", "", text)  # remove punctuation
+    text = re.sub(r"\s+", "-", text)  # replace spaces with hyphens
+    return text

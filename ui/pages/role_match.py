@@ -17,7 +17,6 @@ from urllib.parse import urlencode
 import streamlit as st
 
 from config.debug import DEBUG
-from scripts.utils import slugify
 from services import matt_profile
 from services.query_logger import (
     is_bot,
@@ -35,6 +34,7 @@ from ui.components.story_detail import render_story_detail
 from ui.components.thinking_indicator import render_thinking_indicator
 from ui.components.why_agy_dialog import render_why_agy_dialog
 from ui.image_assets import AGY_AVATAR_64_B64
+from utils.formatting import slugify
 
 logger = logging.getLogger(__name__)
 
