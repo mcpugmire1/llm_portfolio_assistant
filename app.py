@@ -94,10 +94,12 @@ if not st.session_state.get("__first_mount_rerun__", False):
     # Persist UTM params in session state so Role Match logging can
     # read them later when an assessment is submitted. These are set
     # once per session (inside the first-mount guard) and never change.
+    # page_context (MATTGPT-347) repeats all five UTM values.
     st.session_state["_utm_source"] = utm_source
     st.session_state["_utm_medium"] = utm_medium
     st.session_state["_utm_campaign"] = utm_campaign
     st.session_state["_utm_content"] = utm_content
+    st.session_state["_utm_term"] = utm_term
 
     # Session ID — stable UUID for correlating Role Match events (assessment,
     # chip clicks, actions) within the same browser session. Generated once
@@ -124,6 +126,9 @@ if not st.session_state.get("__first_mount_rerun__", False):
             utm_content,
             utm_term,
         )
+        # The screen-size capture writes page_context only for sessions
+        # that logged page_load, so the bot filter above covers both rows.
+        st.session_state["_page_load_logged"] = True
     st.rerun()
 
 # Capture screen size once per session via JS eval
@@ -140,12 +145,43 @@ if "_browser_screen_size" not in st.session_state:
     #   2. The stIFrame collapse rule excludes this iframe via
     #      :not([class*="st-key-screen_size_capture"]) so it's never hidden
     #   3. The iframe is visible and executes correctly, returning viewport width
+    # MATTGPT-347: the same call reads window.top.document.referrer. On
+    # Streamlit Cloud the server only sees Cloud's own page as the referrer;
+    # the top page's document.referrer holds the outside site (for example
+    # https://www.linkedin.com/, whose links drop UTM params).
     _screen = streamlit_js_eval(
-        js_expressions="String(window.innerWidth)",
+        js_expressions=(
+            "JSON.stringify({innerWidth: window.innerWidth, referrer: (() => {"
+            " try { return window.top.document.referrer; }"
+            " catch (e) { return ''; } })()})"
+        ),
         key="screen_size_capture",
     )
     if _screen:
-        st.session_state["_browser_screen_size"] = _screen
+        try:
+            _report = json.loads(_screen)
+            _width = str(_report["innerWidth"])
+            _referrer = str(_report.get("referrer") or "")
+        except (ValueError, TypeError, KeyError):
+            # Never block the page on a malformed report: keep the width
+            # reading as before and record no referrer.
+            _width, _referrer = str(_screen), ""
+        # The mobile gates read this with int(): a bare width string, as before.
+        st.session_state["_browser_screen_size"] = _width
+        # _capture_context() reads this into later query and Role Match rows.
+        st.session_state["_browser_referrer"] = _referrer
+        if st.session_state.get("_page_load_logged"):
+            from services.query_logger import log_page_context
+
+            log_page_context(
+                _referrer,
+                _width,
+                st.session_state.get("_utm_source", ""),
+                st.session_state.get("_utm_medium", ""),
+                st.session_state.get("_utm_campaign", ""),
+                st.session_state.get("_utm_content", ""),
+                st.session_state.get("_utm_term", ""),
+            )
         st.rerun()  # Rerun to remove the iframe from the DOM
 
 # Initialize session state for active tab

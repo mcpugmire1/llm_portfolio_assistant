@@ -319,7 +319,25 @@ def log_page_context(
     (for example https://www.linkedin.com/, whose links drop UTM params),
     the viewport width, and the session's UTM values. Same HEADERS
     columns as page_load; Event Type "page_context"."""
-    raise NotImplementedError
+    session_id = ""
+    try:
+        session_id = st.session_state.get("_session_id", "")
+    except Exception:
+        pass
+    row = _build_row(
+        "page_context",
+        Referrer=referrer,
+        **{
+            "Screen Width": screen_size,
+            "UTM Source": utm_source,
+            "UTM Medium": utm_medium,
+            "UTM Campaign": utm_campaign,
+            "UTM Content": utm_content,
+            "UTM Term": utm_term,
+            "Session ID": session_id,
+        },
+    )
+    Thread(target=_append_row, args=(row,), daemon=True).start()
 
 
 def log_feedback(
