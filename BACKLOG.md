@@ -49,7 +49,7 @@ Answer mode: -284 (synthesis mode decided in four places; a promoted query such 
 **LATER — tier 4:** hygiene
 Dead code: -176, -183 · -241 (dead prose in `_router_rejection()`: delete it) · Hidden error: -204 (zero-filter-match only -- st.stop() blanking was MATTGPT-224, shipped `92370b3`)
 Untraced flash: -229 (My Work flashes before Ask Agy conversation -- needs DevTools trace) · -289 (MATTGPT-018 regression watch: stale landing elements painted 240-370 ms, one mixed frame in 3 runs)
-BDD flakes: -122, -131, -142, -145, -197, -198
+BDD flakes: -122, -131, -142, -145, -197, -198 · `test_match_button_enables_at_30_words` (`test_role_match.py`, no ticket): failed once in a combined three-file Playwright run on 8501 during -347 (1 failed, 46 passed), then passed alone, in its file alone, and in a repeat combined run; traceback not captured (noted Oct 21, 2026). Unexplained; capture the traceback next time it fails.
 Eval honesty: -337 (spec query count includes 11 unchecked entity_detection queries)
 Test reliability: -342 (golden Q50 to Q52 send a placeholder question)
 Small refactors: -153, -062, -082, -083, -084, -150, -217 (pronoun grammar in substitution)
@@ -439,6 +439,8 @@ Each detail block uses these fields. Not every field is required for every item.
 
 
 **Cost record (Matt, Oct 19, 2026):** every live run records its dollar cost in its evidence folder, so briefs can cite real figures and Tier 2's cost budget can be set from them. Verified Oct 19, 2026: of the committed evidence folders, only MATTGPT-282's two runs carry a cost file (`sol_arms_20261011_211830/cost_latency.txt`, with `cost_latency.py`, and `sol_vs_4o_20261011_183401/cost_summary.py`).
+
+**Pre-commit hooks (f84993c, Oct 21, 2026):** ruff, ruff-format and mypy reported "no files to check" on f84993c's commit of `app.py` and `services/query_logger.py`; check their path filters. Checked Oct 21, 2026 (HEAD f84993c): in `.pre-commit-config.yaml`, ruff and ruff-format set no `files` or `exclude`, mypy excludes only `^(tests/|migrations/|ui/pages/ask_mattgpt\.py$)`, and the top-level `exclude` is `^docs/evidence/`; none matches either file. No `default_stages` is set, and the three hooks set no `stages`, so they also run at commit-msg, where no files are passed. Hypothesis, not measured: the "no files to check" lines came from the commit-msg run, not the pre-commit run. The full hook output of a commit that stages a `.py` file settles it.
 ---
 
 ### MATTGPT-040
@@ -3219,6 +3221,8 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 **Issue (Matt, Oct 20, 2026; from d99ed82's findings):** `MONITORING_BOT_SIGNATURES` includes `"Chrome/103.0.0.0"`, so a real visitor on Chrome 103 logs no `page_load` row.
 
 **Fix (Matt, Oct 20, 2026):** check whether that signature still catches a real monitor before narrowing it.
+
+**Related (f84993c, Oct 21, 2026):** `log_feedback()` has no bot check. Verified at HEAD f84993c: `log_query()` returns early when `is_bot()` is true; `log_page_load()` has no check of its own, and its filter is `app.py`'s call-site `MONITORING_BOT_SIGNATURES` check. Neither `log_feedback()` call site checks `is_bot()`: the Helpful click in `ui/components/action_buttons.py` (whose Role Match action logging beside it does) and the Helpful click in `ui/components/story_detail.py`.
 
 **Verified Oct 20, 2026 (HEAD 7494221):** `MONITORING_BOT_SIGNATURES = ["UptimeRobot", "HeadlessChrome", "Chrome/103.0.0.0"]`; `app.py` skips `log_page_load()` when any signature is a substring of the User-Agent. The comment above the constant records why it was added (cfe1704, Apr 13, 2026): a stale user agent "seen hitting the app from Windows/UTC with no referrer: an automated crawler masquerading as a real browser. First observed Apr 11, 2026."
 
