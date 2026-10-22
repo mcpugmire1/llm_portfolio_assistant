@@ -440,6 +440,8 @@ Each detail block uses these fields. Not every field is required for every item.
 
 **Cost record (Matt, Oct 19, 2026):** every live run records its dollar cost in its evidence folder, so briefs can cite real figures and Tier 2's cost budget can be set from them. Verified Oct 19, 2026: of the committed evidence folders, only MATTGPT-282's two runs carry a cost file (`sol_arms_20261011_211830/cost_latency.txt`, with `cost_latency.py`, and `sol_vs_4o_20261011_183401/cost_summary.py`).
 
+**Deploy smoke check (reported Oct 22, 2026; low priority):** a hot update that changes `services/` along with `app.py` can crash until a reboot; a reboot at 11:33 cleared it, which the report takes as confirming the hot update was the cause. The deploy gate should reboot or smoke-check after each push. As reported; not in a commit.
+
 **Pre-commit hooks (f84993c, Oct 21, 2026):** ruff, ruff-format and mypy reported "no files to check" on f84993c's commit of `app.py` and `services/query_logger.py`. They came from the commit-msg stage: the three hooks have no `stages:` key, so they also run there, where no files are passed. The pre-commit stage passed on both files (`pre-commit run --hook-stage pre-commit`, Oct 21, 2026). No path filter in `.pre-commit-config.yaml` excludes either file (checked Oct 21, 2026, HEAD f84993c). Optional cosmetic fix, Matt's file: `stages: [pre-commit]` on ruff, ruff-format and mypy.
 ---
 
@@ -2787,6 +2789,8 @@ Any sentinel has to be translated in one place before anything uses it. With tha
 
 **Change:** add `pyarrow<25` to `requirements.txt`.
 
+**torch and CUDA packages (reported Oct 22, 2026; low priority):** production installs the CUDA builds of torch and the nvidia packages, and warns about two requirements files. Worth checking whether torch is needed at all. Checked Oct 22, 2026 (HEAD 5787bdf): `requirements.txt` pins `torch==2.7.1`, `sentence-transformers==4.1.0` and `transformers==4.52.4`; `git grep` finds no import of torch, `sentence_transformers` or `transformers` in `app.py`, `backend_service.py`, `services/`, `ui/`, `utils/` or `config/`. The importers are `scripts/download_model.py`, `scripts/vector_search.py`, `scripts/chat_snippet_based.py` and two files in `archive/legacy_scripts/`. Not checked: whether another pinned package pulls torch in, and which two files the warning names.
+
 ---
 
 ### MATTGPT-315
@@ -3187,6 +3191,14 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 **Check before deleting `mode_routing`:** `services/semantic_router.py` still defines the router's intent families, and -236's target proposes its synthesis family as the trigger for per-Era search and 6 cards (D1, D3). If -236's run keeps the router, the synthesis-family scenarios may be worth binding instead.
 
 **On pickup:** each deletion takes a `Decision:` trailer naming the file.
+
+**`scripts/build_agy_voice_fixture.py` review (Oct 22, 2026; none blocking):**
+1. The fixture can't be rebuilt from the repo: its source run, `probes/output/MATTGPT-340/run_20261020_094428`, is under the gitignored `/probes/`, so once that folder is cleaned up nobody can regenerate or audit `tests/fixtures/agy_voice_answers.json`. Rebuilding from the local run today gives an identical fixture, 114 answers (as reported).
+2. The `commit` argument is free text and isn't checked against the run folder's `head.txt`, so a wrong SHA is written unnoticed.
+3. `KEEP` includes `case` and `run`, but the docstring's list of required row fields doesn't. A run without them writes `None`, and `test_agy_voice.py`'s `_label()` then reports offenders as `None t1 rNone`. The current fixture has no `None` fields.
+4. Without `--arm`, a run that has arms gets every arm's answers mixed into one fixture. The docstring says rows need `arm` when the run has arms; the code doesn't stop a mixed build.
+
+Verified Oct 22, 2026 (HEAD 5787bdf): `.gitignore` has `/probes/`; the run folder exists locally with a `head.txt`; `build()` writes `commit` as given and keeps rows of every arm when `arm` is None; `KEEP` is `("case", "turn", "run", "question", "intent_family", "answer_md")`; `_label()` formats `case`, `turn` and `run`. The fixture holds 114 answers (commit 9534aea, arm N) with 0 `None` fields.
 
 ---
 
