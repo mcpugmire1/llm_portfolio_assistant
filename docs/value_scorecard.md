@@ -220,7 +220,7 @@ Source: the Arch Governor's Role Match draft, checker-passed Oct 20, 2026 (relay
 | RM-F4 | R2 | Five-run count spread on AT&T (-160) | Missing; `probes/probe_160_extraction_variance.py` untracked | None |
 | RM-F5 | R3 | Ratings cite real stories; nothing invented | Missing: no test checks model output against the corpus | Only the -244 audit (RM-F1) |
 | RM-F6 | R3 | No `confidence` field | Missing: planned in -244's acceptance | Still in `services/jd_assessor.py` at HEAD |
-| RM-F7 | R4 | 90 seconds on the J1 journey | Missing; only a timing-line unit test exists | Probe pipeline time 15.9 to 29.8 s (the Oct 14 run above), not the journey |
+| RM-F7 | R4 | 90 seconds on the J1 journey | Missing; only a timing-line unit test exists | Probe pipeline time 15.9 to 29.8 s (the Oct 14 run above), not the journey; gpt-4o 21 to 25 s (AT&T) and 14 to 17 s (demo JD) over 3 runs, Sol medium 50 to 65 s on AT&T (Matt, Oct 22, 2026, as reported). The 90 s budget measures a successful run; RM-D10's failure ceiling is separate |
 | RM-F8 | R5 | Same claim, same answer | Exists for the CS degree only (-268 paired run); general parity missing | -268 failing |
 | RM-F9 | R6 | No recommendation in the recruiter view | Exists as a bound BDD scenario, skipped ("Pending decision on pipeline test strategy"); private-view scenarios not bound | Structural only: `compute_recommendation()` has no `ui/` or `app.py` caller |
 | RM-F10 | R7 | No dashes in prompts and generated share and export text | Exists (3 unit tests, no model call) | None recorded |
@@ -234,7 +234,7 @@ Source: the Arch Governor's Role Match draft, checker-passed Oct 20, 2026 (relay
 
 | # | Question | Decide by |
 |---|---|---|
-| RM-D1 | Which model replaces gpt-4o for extraction and assessment? -302 names none; -140 records that mini "produces subpar assessment reasoning". | -302's go |
+| RM-D1 | Which model replaces gpt-4o for extraction and assessment? -302 names none; -140 records that mini "produces subpar assessment reasoning". Reopened (Matt, Oct 22, 2026) as a measured choice on speed, honesty and dashes: Sol medium measured 50 to 65 s on AT&T, against gpt-4o's 21 to 25 s (AT&T) and 14 to 17 s (demo JD) over 3 runs (as reported). | -302's go |
 | RM-D2 | No-dash rule in Role Match's prompts, or a check on output only? ADR 048 rejected the rule on gpt-4o. | -302's go |
 | RM-D3 | What count tolerance passes extraction? -160: "Code defines the exact pass threshold at Red time." | -160's Red; -302's go for its own before and after |
 | RM-D4 | Private view: evaluation grid, and whether strategic fit notes and action items come from the model or from rules (-012: "Decision needed before implementation"). | -012's go, private-view slice |
@@ -243,7 +243,7 @@ Source: the Arch Governor's Role Match draft, checker-passed Oct 20, 2026 (relay
 | RM-D7 | CS-degree answer framing (-268's D1, still open) | Before -268's Green |
 | RM-D8 | What Role Match context crosses to Ask Agy, and through which pattern (-309) | -309's go |
 | RM-D9 | Pipeline-dependent BDD: real backend or mocks? -014's May 14 decision says mocks for structural checks, but the skip reason still reads "Pending decision on pipeline test strategy". | -014's go |
-| RM-D10 | Role Match retry and timeout behavior. `_get_openai_client()` and `role_match.py` set no `max_retries` or timeout, and no record states the intended behavior. The retry -302 calls inert on openai 3.x is Ask Agy's `_stream_response()`. | -302's go |
+| RM-D10 | Role Match retry and timeout behavior. `_get_openai_client()` and `role_match.py` set no `max_retries` or timeout, and no record states the intended behavior. The retry -302 calls inert on openai 3.x is Ask Agy's `_stream_response()`. Its failure ceiling is separate from R4's 90 s budget, which measures a successful run (Matt, Oct 22, 2026). | -302's go |
 
 Checked, not open: the recommendation stays private (-012); the move to openai 3.x goes with -302.
 
