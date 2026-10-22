@@ -7,10 +7,15 @@ went from 42 of 55 to 4 of 55, every one left a number range). It reaches
 Ask Agy through build_answer_instructions(), so both the standard and
 synthesis system prompts.
 
-Role Match's prompts carry no rule: on gpt-4o its model-written text had no
-dash with or without one (probes/output/MATTGPT-275/role_match_dashes_*/,
-0 of 165 rows before, 0 of 167 after). Its source_text verbatim rule stays
-as it is, since required and preferred rows show the JD's own words.
+Role Match's assessment prompt carries the rule on its own line, before the
+JSON-only line (MATTGPT-302). On gpt-6.1-sol without it, the assessment
+wrote en-dash number ranges; with it, 0 dashes and no rating flips in 3 runs
+per JD (docs/evidence/MATTGPT-302/live_20261020_172609/,
+rule_20261021_154537/). The rule against no rule on fixed evidence covered
+one row, the demo JD's product-company requirement: 20 of 20 partial both
+ways (product_row_20261022_152648/). The extraction prompts carry no rule: their
+source_text verbatim rule stays as it is, since required and preferred rows
+show the JD's own words.
 
 The prompts the models receive, and the source files that hold them,
 contain no em or en dash of their own. Nor does the fixed text visitors read:
@@ -104,6 +109,19 @@ class TestRoleMatch:
     @pytest.mark.parametrize("section", ["required", "preferred"])
     def test_the_source_text_verbatim_rule_is_unchanged(self, section):
         assert VERBATIM_SOURCE_TEXT in EXTRACTION_PROMPTS[section]
+
+    def test_the_assessment_prompt_carries_the_rule_once(self):
+        assert jd_assessor.build_assessment_prompt().count(LINE) == 1
+
+    def test_the_rule_is_its_own_line_before_the_json_only_line(self):
+        assert (
+            "- " + LINE + "\n- Output valid JSON only, no preamble"
+            in jd_assessor.JD_ASSESSMENT_PROMPT_TEMPLATE
+        )
+
+    @pytest.mark.parametrize("section", list(EXTRACTION_PROMPTS))
+    def test_the_extraction_prompts_carry_no_rule(self, section):
+        assert LINE not in EXTRACTION_PROMPTS[section]
 
     @pytest.mark.parametrize(
         "name", ["assessment", *EXTRACTION_PROMPTS], ids=lambda n: n

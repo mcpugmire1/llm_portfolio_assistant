@@ -177,7 +177,9 @@ def test_career_arc_kept(matt_dna, arc_line):
 
 # MATTGPT-294: the Career Arc's facts live in data/matt_profile.json
 # (career_arc) and MATT_DNA renders them; its CIC line stays derived from the
-# CIC story. Role Match's grounding does not carry the arc.
+# CIC story. load_matt_profile(), which Ask Agy reads as profile_facts, carries
+# no arc; Role Match's assessment prompt adds the employer lines on its own,
+# in build_assessment_prompt() (tests/unit/test_role_match_model.py).
 
 
 def _career_arc_block(matt_dna):
@@ -206,7 +208,7 @@ def test_matt_dna_renders_the_career_arc_from_the_profile():
     assert not any("Wellfound" in line for line in block)
 
 
-def test_role_match_grounding_has_no_career_arc():  # guard
+def test_the_shared_profile_facts_carry_no_career_arc():  # guard
     from services.jd_assessor import load_matt_profile
 
     grounding = load_matt_profile()
