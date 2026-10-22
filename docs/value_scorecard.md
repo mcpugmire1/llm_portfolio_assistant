@@ -362,7 +362,7 @@ experience reliably and sustainably; failures are visible, not silent.
   `agy_voice` bound in 69dda9b, `page_load_tracking` in d99ed82).
 
 **Open tickets:**
-- Alarms and telemetry: -222, -223 (My Work only), -348 (the "Chrome/103.0.0.0" bot signature drops real Chrome 103 visitors).
+- Alarms and telemetry: -222, -223 (My Work only), -348 (the "Chrome/103.0.0.0" bot signature drops real Chrome 103 visitors), -351 (query rows carry no Session ID).
 - Latency: -299.
 - Runtime and dependencies: -313 (Python 3.11 in prod, 3.13 local), -314 (pin pyarrow<25).
 - Model retirement: -302 (gpt-4o family retires January 14, 2027).
