@@ -107,7 +107,7 @@ turns, 10 runs per arm, scored blind (32 scorers, brief_v2):
   automatically (`tests/eval_rag_quality.py`).
 
 **Open tickets:** -275, -040 (follow-up eval
-coverage), -281 (openers), -280
+coverage), -281 (openers), -350 (the opener written in a tool round is dropped from the answer), -280
 (tone), -284 (synthesis mode decided in four places), -316 (blur submits the landing
 question), -317 (Ask Agy About This dropped mid-answer).
 
@@ -186,7 +186,7 @@ Source: the change-governor's Ask Agy draft, checker-passed Oct 19, 2026 (relaye
 | 5 | No story cards on a fact answer | Exists as an xfailed Red (-128) | None |
 | 6 | Decline line reaches the model | Exists | -322 run 6: 79/80 declines pass |
 | 6, 8 | Empty searches on work-history questions, every claim checked | Exists (-339 run, 26ffa39) | 7 of 11 claims supported; the 4 unsupported are the agriculture absence claim, a retrieval miss on -325. 0 of 10 natural runs had a zero-result search |
-| 7 | Opener used word for word | Exists (-340, 9534aea: unit tests on the prompt; live run `probes/output/MATTGPT-340/run_20261020_094428/`) | Begins with the picked line: 91 of 114 new vs 0 of 114 HEAD; 7 non-decline answers have no opener and no paw (one reading, 2 runs) |
+| 7 | Opener used word for word | Exists (-340, 9534aea: unit tests on the prompt; live run `probes/output/MATTGPT-340/run_20261020_094428/`) | Begins with the picked line: 91 of 114 new vs 0 of 114 HEAD; 7 non-decline answers have no opener and no paw (one reading, 2 runs); all 7 wrote the opener in round 0, which `agy_answer()` drops (-350) |
 | 7 | No closing offer | Exists (gate c14 to c17, the -276 closers run) | 0 in every arm |
 | 7 | Evaluative sentences | Exists on the final text; missing on raw text before the strip (-252) | 15 of 249 old vs 0 of 259 new (a lower bound) |
 | 7 | No dashes | Exists | 0 of 450 gate turns |
@@ -362,11 +362,11 @@ experience reliably and sustainably; failures are visible, not silent.
   `agy_voice` bound in 69dda9b, `page_load_tracking` in d99ed82).
 
 **Open tickets:**
-- Alarms and telemetry: -222, -223 (My Work only), -347 (page_load referrer and screen width, so LinkedIn visits are labeled), -348 (the "Chrome/103.0.0.0" bot signature drops real Chrome 103 visitors).
+- Alarms and telemetry: -222, -223 (My Work only), -348 (the "Chrome/103.0.0.0" bot signature drops real Chrome 103 visitors).
 - Latency: -299.
 - Runtime and dependencies: -313 (Python 3.11 in prod, 3.13 local), -314 (pin pyarrow<25).
 - Model retirement: -302 (gpt-4o family retires January 14, 2027).
-- Silent failures: -292 (silent file-order fallback, High), -288 (Ask Agy ignores the Pinecone fallback signal).
+- Silent failures: -292 (silent file-order fallback, High), -288 (Ask Agy ignores the Pinecone fallback signal), -349 (an exception after startup init renders a blank page).
 - Regression gates and test reliability: -039, -233, -235, -206, -153,
   -084, -198, -035, -143 (Parked),
   -213, -342 (golden Q50 to Q52 send a placeholder question),

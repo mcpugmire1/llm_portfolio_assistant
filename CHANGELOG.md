@@ -8,6 +8,10 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Process
 
+**October 22, 2026 -- page_context row records the browser's referrer and width, so LinkedIn visits are labeled (MATTGPT-347)** -- `902d1a0` (Red, scenarios), `0bd25d4` (Red, step defs), `f84993c` (Green)
+
+On Streamlit Cloud the server's Referer header only ever held Cloud's own page, so LinkedIn visits (whose links drop UTM params) logged with no referrer, and every `page_load` row had an empty Screen Width. When the screen-size capture returns, `log_page_context()` now writes one `page_context` row (Referrer from `window.top.document.referrer`, Screen Width, Session ID and the five UTM values) for sessions that logged `page_load`; `page_load` is unchanged, and `_browser_referrer` holds the browser's referrer, so later query and Role Match rows carry it too. Cloud check from LinkedIn (Matt, Oct 22, 2026, as reported): session c7aeba16's `page_load` has an empty Referrer and its `page_context` row a second later has 1634 and `https://www.linkedin.com/`; the session's three query rows and its `role_match_assessment` row carry the same referrer and width; direct visits a88b90e5 and 9de0dbbe have an empty referrer; every `page_context` row shares its `page_load` row's Session ID and comes 1 to 2 seconds after it. The first deploy hit an ImportError until a reboot (MATTGPT-039, MATTGPT-349).
+
 **October 18, 2026 -- Query log Timestamp in America/New_York on every host (MATTGPT-336)** -- `1f13db6` (Red), `c7ea5cd` (Green)
 
 `_build_row()` stamped Timestamp with `datetime.now()`, the host's zone, so Cloud rows read as UTC and local rows as Eastern. It now stamps `datetime.now(ZoneInfo(QUERY_LOG_TIMEZONE))`, with `QUERY_LOG_TIMEZONE = "America/New_York"` in `config/constants.py`, in the same format. Rows written before the deploy keep the host's zone, and the Sheet has no marker for which rows predate it. The router CSVs and `log_offdomain` already wrote explicit UTC. Gates: 3 new unit tests (UTC host in EDT and EST), full unit suite 923 passed, 10 xfailed.

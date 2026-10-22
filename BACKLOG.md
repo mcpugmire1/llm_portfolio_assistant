@@ -167,8 +167,9 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-343](#mattgpt-343) | Era and Theme values written as literals in production code; -258's literal guard covers only Client, Project and Title | Open | Low | Hygiene | chore | October 20, 2026 |
 | [MATTGPT-344](#mattgpt-344) | Functions with no production caller: 55 name-match candidates, provisional | Open | Low | Hygiene | chore | October 20, 2026 |
 | [MATTGPT-345](#mattgpt-345) | 7 BDD feature files have no binding: bind or delete each | In Progress | Low | Hygiene | chore | October 20, 2026 |
-| [MATTGPT-347](#mattgpt-347) | page_load rows carry no outside referrer and no screen width: capture both browser-side so LinkedIn visits are labeled | In Progress | Medium | Feature | value | October 20, 2026 |
 | [MATTGPT-348](#mattgpt-348) | MONITORING_BOT_SIGNATURES' "Chrome/103.0.0.0" drops page_load rows for real Chrome 103 visitors | Open | Low | Hygiene | chore | October 20, 2026 |
+| [MATTGPT-349](#mattgpt-349) | An exception after app.py's startup init renders a blank page: no error and no "temporarily unavailable" page | Open | Medium | Bug | value | October 22, 2026 |
+| [MATTGPT-350](#mattgpt-350) | agy_answer() keeps only the final round's text, so the opener written alongside a search_stories call is streamed but dropped from answer_md | Open | Medium | Bug | value | October 22, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently | Parked | Medium | Action | value | August 3, 2026 |
@@ -440,7 +441,7 @@ Each detail block uses these fields. Not every field is required for every item.
 
 **Cost record (Matt, Oct 19, 2026):** every live run records its dollar cost in its evidence folder, so briefs can cite real figures and Tier 2's cost budget can be set from them. Verified Oct 19, 2026: of the committed evidence folders, only MATTGPT-282's two runs carry a cost file (`sol_arms_20261011_211830/cost_latency.txt`, with `cost_latency.py`, and `sol_vs_4o_20261011_183401/cost_summary.py`).
 
-**Deploy smoke check (reported Oct 22, 2026; low priority):** a hot update that changes `services/` along with `app.py` can crash until a reboot; a reboot at 11:33 cleared it, which the report takes as confirming the hot update was the cause. The deploy gate should reboot or smoke-check after each push. As reported; not in a commit.
+**Deploy smoke check (Oct 22, 2026; low priority):** prod outage on the deploy of 5787bdf, Oct 22, 2026, about 11:29 to 11:35 UTC (as reported). Cloud's in-place "🔄 Updated app!" re-ran the new `app.py` against the old `services.query_logger` still loaded in the process, so `from services.query_logger import log_page_context` (in the screen-size capture) raised `ImportError: cannot import name 'log_page_context'`. A reboot fixed it with no code change. Any push that adds a name to an already-imported module and imports that name from `app.py` can repeat this. Options: reboot after such pushes as a deploy step, or have the import fail safe; the deploy gate should reboot or smoke-check after each push. Four Cloud `page_load` rows from 11:30:47 to 11:32:49 have no `page_context` row. Verified Oct 22, 2026 (HEAD bf7d9d9): `app.py` imports `log_page_context` from `services.query_logger` inside the screen-size capture. MATTGPT-349: the outage showed a blank page.
 
 **Pre-commit hooks (f84993c, Oct 21, 2026):** ruff, ruff-format and mypy reported "no files to check" on f84993c's commit of `app.py` and `services/query_logger.py`. They came from the commit-msg stage: the three hooks have no `stages:` key, so they also run there, where no files are passed. The pre-commit stage passed on both files (`pre-commit run --hook-stage pre-commit`, Oct 21, 2026). No path filter in `.pre-commit-config.yaml` excludes either file (checked Oct 21, 2026, HEAD f84993c). Optional cosmetic fix, Matt's file: `stages: [pre-commit]` on ruff, ruff-format and mypy.
 ---
@@ -1725,6 +1726,8 @@ Same class as the no-inference clause in MATTGPT-250: retrieved text that sits n
 **Evidence (Oct 9, 2026):** The strip's `[^.]*{pattern}[^.]*\.` treats a period inside a token (`$8.5M`, `app.py`) as a sentence boundary, so a deleted meta sentence takes text from its neighbour ("talent.5M program", "zero defects.py by 82%"). Reproduced with the real `META_COMMENTARY_REGEX_PATTERNS` in `_postprocess_agy_text()`, no model call: `docs/evidence/MATTGPT-275/candidate_20261009_085832/strip_repro.txt` (6d41ff8). In that run, 6 of 130 answers are garbled across the old path, lever 2 and the candidate, so it's live in production: one token-boundary case ("zero defects.py by 82%", candidate) and five consistent with a matched sentence removed whole (one on the old `rag_answer()` path); which pattern matched is not recorded, since pre-strip text isn't captured. "talent.5M program" is from `arm_theme1_20261009_083210` (d65fdc5).
 
 **Coupling with MATTGPT-252 (Oct 5, 2026):** The strip also removes some of the evaluative sentences 252 is about (252's measurement gap: probe outputs are counted after the strip). With 255 at NOW #5 and 252 at NEXT #14, removing the strip lets more evaluative sentences through until 252 lands. The acceptance run counts evaluative sentences in raw LLM text and in final `answer_md`, before and after the removal, so the trade is measured, not discovered.
+
+**Opener removal (Matt, Oct 22, 2026):** the strip's `[^.]*{pattern}[^.]*\.` reaches back across a newline and removes a period-less opener ("On it!") when the next sentence matches. Reproduced Oct 22, 2026 (HEAD bf7d9d9) with the real `META_COMMENTARY_REGEX_PATTERNS` and the strip's loop: `'🐾 On it!\n\nThis demonstrates his range. Next point.'` becomes `' Next point.'`.
 
 **Unverified Oct 2:** Check whether `_log_bandaid` exists and what it shows before removing anything.
 
@@ -3178,6 +3181,8 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 
 **`agy_voice` acceptance (Matt, Oct 20, 2026):** Acceptance includes the one-🐾 rule on live answers; -340's run had 7 of 98 non-declined answers with no opener and no 🐾 (9534aea), the baseline to beat.
 
+**Baseline measured a bug (Oct 22, 2026):** the 7-of-98 baseline measured MATTGPT-350, not the model: all 7 had the opener in round 0's text, which `agy_answer()` drops from `answer_md`. The 2 xfail(strict) scenarios on those answers measure -350's defect.
+
 **Progress (Oct 20, 2026):** `agy_voice.feature` bound in 69dda9b on `tests/fixtures/agy_voice_answers.json`, the 114 N-arm answers of -340's run (9534aea): 11 scenarios, 9 passing, 2 xfail(strict) on the 7 non-declined answers with no paw, the baseline above. They turn red as XPASS when every non-declined answer carries the opener and its paw. `scripts/build_agy_voice_fixture.py` rebuilds the fixture from a run's rows; each prompt ticket's acceptance run refreshes it. `page_load_tracking.feature` bound in d99ed82 under `streamlit.testing` AppTest: 6 scenarios, 6 passing. Remaining (5 files): `entity_routing`, `evidence_fidelity`, `jd_assessment`, `mode_routing`, `story_detail_feedback`, and `search.feature`'s commented binding.
 
 **Manual runs (Matt and Chrome Claude, Oct 20, 2026, 9534aea; as reported):** the questions that missed in -340's run ("Tell me about his Norfolk Southern work.", "What's his leadership style?", "Is he certified?") were asked 12 times; every answer began with the picked opener and carried one 🐾. A small sample against the run's 7 misses, so it doesn't show the defect is gone.
@@ -3202,26 +3207,6 @@ Verified Oct 22, 2026 (HEAD 5787bdf): `.gitignore` has `/probes/`; the run folde
 
 ---
 
-### MATTGPT-347
-**page_load rows carry no outside referrer and no screen width: capture both browser-side so LinkedIn visits are labeled**
-
-- **Status:** In Progress
-- **Priority:** Medium
-- **Type:** Feature
-- **File:** `app.py` (first-mount guard; screen-size capture), `services/query_logger.py` (`log_page_load()`)
-- **Related:** MATTGPT-345 (`page_load_tracking.feature` bound in d99ed82)
-- **Logged:** October 20, 2026
-
-**Issue (Matt, Oct 20, 2026; lane 2):** `page_load` captures the browser-side referrer (`window.top.document.referrer`) and screen width, written when the screen-size JS returns, so LinkedIn visits are labeled.
-
-**Evidence (d99ed82's findings, and Matt's DevTools check, Oct 20, 2026):** LinkedIn strips the query string from links it stores, so LinkedIn visits carry no UTM. LinkedIn sends Referer `https://www.linkedin.com/`, but on Streamlit Cloud it reaches only Cloud's outer page; the app iframe's requests carry Cloud's own URL, so the Sheet's Referrer column is empty for every outside source. A component-frame read of `window.top.document.referrer` returns `https://www.linkedin.com/`. Separately, every `page_load` row has an empty Screen Width.
-
-**Verified Oct 20, 2026 (HEAD d99ed82):** `app.py`'s first-mount guard reads the referrer from `st.context.headers.get("Referer", "")` and calls `log_page_load()` with `""` for screen size, then `st.rerun()`; the `streamlit_js_eval` screen-size capture runs after that rerun.
-
-**Progress (Oct 21, 2026):** Green in f84993c: when the screen-size capture returns, `log_page_context()` writes one `page_context` row (Referrer from `window.top.document.referrer`, Screen Width, Session ID, the five UTM values) for sessions that logged `page_load`; `page_load` is unchanged. `test_page_load_tracking.py` 12 of 12 passing. **Closes after** Matt's Cloud browser check from LinkedIn, after push (Matt, Oct 21, 2026).
-
----
-
 ### MATTGPT-348
 **MONITORING_BOT_SIGNATURES' "Chrome/103.0.0.0" drops page_load rows for real Chrome 103 visitors**
 
@@ -3239,6 +3224,42 @@ Verified Oct 22, 2026 (HEAD 5787bdf): `.gitignore` has `/probes/`; the run folde
 **Related (f84993c, Oct 21, 2026):** `log_feedback()` has no bot check. Verified at HEAD f84993c: `log_query()` returns early when `is_bot()` is true; `log_page_load()` has no check of its own, and its filter is `app.py`'s call-site `MONITORING_BOT_SIGNATURES` check. Neither `log_feedback()` call site checks `is_bot()`: the Helpful click in `ui/components/action_buttons.py` (whose Role Match action logging beside it does) and the Helpful click in `ui/components/story_detail.py`.
 
 **Verified Oct 20, 2026 (HEAD 7494221):** `MONITORING_BOT_SIGNATURES = ["UptimeRobot", "HeadlessChrome", "Chrome/103.0.0.0"]`; `app.py` skips `log_page_load()` when any signature is a substring of the User-Agent. The comment above the constant records why it was added (cfe1704, Apr 13, 2026): a stale user agent "seen hitting the app from Windows/UTC with no referrer: an automated crawler masquerading as a real browser. First observed Apr 11, 2026."
+
+---
+
+### MATTGPT-349
+**An exception after app.py's startup init renders a blank page: no error and no "temporarily unavailable" page**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `app.py` (startup `try`/`except`), `ui/styles/global_styles.py` (alert hiding)
+- **Related:** MATTGPT-039 (the Oct 22 deploy outage)
+- **Logged:** October 22, 2026
+
+**Issue (Oct 22, 2026, as reported):** during the 5787bdf deploy outage the page showed only the navbar, with no error and no "temporarily unavailable" page. The global CSS hides Streamlit's exception and alert boxes, and the startup `try`/`except` in `app.py` covers only startup init, not the script after it. The error showed up only through DevTools (`textContent` of `[data-testid="stException"]`) and the Cloud log.
+
+**Verified Oct 22, 2026 (HEAD bf7d9d9):** `app.py`'s `try` wraps `initialize_vocab()`, `preload_nonsense_rules()`, `sync_portfolio_metadata()` and `validate_pinecone_config()`; its `except` renders the "MattGPT is temporarily unavailable" page. `ui/styles/global_styles.py` sets `display: none !important` on `.stAlert`, `[data-testid="stAlert"]`, `div[data-baseweb="notification"]` and `div[kind="info"]` unless they contain a thinking-ball element. No `.py` or `.css` file outside `tests/` names `stException` (`git grep`); whether the exception box is hidden by one of those rules is not checked.
+
+---
+
+### MATTGPT-350
+**agy_answer() keeps only the final round's text, so the opener written alongside a search_stories call is streamed but dropped from answer_md**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `ui/pages/ask_mattgpt/backend_service.py` (`agy_answer()`)
+- **Related:** MATTGPT-340 (the picked opener, 9534aea), MATTGPT-345 (`agy_voice` baseline), MATTGPT-255 (the strip can also remove the opener)
+- **Logged:** October 22, 2026
+
+**Issue (Matt, Oct 22, 2026):** `agy_answer()` keeps only the final round's `output_text`, so text the model writes alongside a `search_stories` call (the picked opener) is streamed but dropped from `answer_md`.
+
+**Verified Oct 22, 2026 (HEAD bf7d9d9):** in `agy_answer()`'s tool loop, a round with function calls appends its `output_text` to `items` as an assistant message and goes on; only the round with no calls (or the last round) sets `text = response.output_text or ""`. `_stream_response()` streams every round's deltas through `on_delta`.
+
+**Evidence (-340's run, `probes/output/MATTGPT-340/run_20261020_094428/`, local and gitignored; run head 4753532, results committed in 9534aea):** all 7 of arm N's non-declined answers with no 🐾 had the opener in round 0's `raw_text` (six "🐾 Tracking this down..." or "🐾 On it!", one "🐾 Let me show you what ties Matt's work..."). Arm N: 8 of 124 tool rounds carried text. Arm H: 0 of 125 tool rounds carried text.
+
+**Fix (Matt, Oct 22, 2026):** keep earlier rounds' text in the answer.
 
 ---
 
