@@ -1,0 +1,382 @@
+[
+ {
+  "arm": "rule",
+  "i": 1,
+  "seconds": 7.7,
+  "result": {
+   "requirement": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "Matt built Sparkfly's commercial platform alongside its founder and led four developers, but participated through Wellfound Technology rather than documented direct product-company employment."
+    }
+   ],
+   "gap_explanation": "Note: Direct employment within a product company beyond consulting/services engagements is not documented.",
+   "confidence": "high"
+  }
+ },
+ {
+  "arm": "no_rule",
+  "i": 1,
+  "seconds": 5.6,
+  "result": {
+   "requirement": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "Matt built Sparkfly's commercial platform alongside its founder and led four developers, but participated through technology partner Wellfound rather than documented direct product-company employment."
+    }
+   ],
+   "gap_explanation": "Note: Direct employment within a product company is not established.",
+   "confidence": "high"
+  }
+ },
+ {
+  "arm": "no_rule",
+  "i": 2,
+  "seconds": 4.9,
+  "result": {
+   "requirement": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "Matt built Sparkfly's commercial platform alongside its founder and led four developers, but participated through technology partner Wellfound rather than documented direct product-company employment."
+    }
+   ],
+   "gap_explanation": "Note: Direct employment within a SaaS, platform, or marketplace company is not documented.",
+   "confidence": "high"
+  }
+ },
+ {
+  "arm": "rule",
+  "i": 2,
+  "seconds": 12.4,
+  "result": {
+   "requirement": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "Matt built Sparkfly's commercial platform alongside its founder and led four developers, but participated through Wellfound Technology rather than documented in-house employment."
+    }
+   ],
+   "gap_explanation": "Note: In-house experience at a SaaS, platform, or marketplace company is not established.",
+   "confidence": "medium"
+  }
+ },
+ {
+  "arm": "rule",
+  "i": 3,
+  "seconds": 9.5,
+  "result": {
+   "requirement": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "Matt built Sparkfly's commercial platform alongside its founder and led four developers, but participated through technology partner Wellfound rather than documented direct product-company employment."
+    }
+   ],
+   "gap_explanation": "Note: Direct employment within a product company is not documented.",
+   "confidence": "medium"
+  }
+ },
+ {
+  "arm": "no_rule",
+  "i": 3,
+  "seconds": 5.6,
+  "result": {
+   "requirement": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "Through technology partner Wellfound, Matt worked alongside Sparkfly's founder, leading four developers and shipping its commercial platform for enterprise customers, but direct product-company employment is not established."
+    }
+   ],
+   "gap_explanation": "Note: Direct employment within a product company is not established.",
+   "confidence": "high"
+  }
+ },
+ {
+  "arm": "no_rule",
+  "i": 4,
+  "seconds": 6.2,
+  "result": {
+   "requirement": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "Matt built Sparkfly's commercial platform alongside its founder and led four developers, but participated through technology partner Wellfound rather than a confirmed in-house product-company role."
+    }
+   ],
+   "gap_explanation": "Note: Direct in-house experience at a SaaS, platform, or marketplace company is not established.",
+   "confidence": "medium"
+  }
+ },
+ {
+  "arm": "rule",
+  "i": 4,
+  "seconds": 6.7,
+  "result": {
+   "requirement": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "Matt built Sparkfly's commercial platform alongside its founder and led four developers, but participated through technology partner Wellfound rather than documented direct product-company employment."
+    }
+   ],
+   "gap_explanation": "Note: Direct in-house experience at a product company is not documented.",
+   "confidence": "high"
+  }
+ },
+ {
+  "arm": "rule",
+  "i": 5,
+  "seconds": 5.1,
+  "result": {
+   "requirement": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "Through Wellfound Technology, Matt worked alongside Sparkfly's founder, leading four developers and building its live commerce platform, but direct product-company employment is not established."
+    }
+   ],
+   "gap_explanation": "Note: Direct employment within a SaaS, platform, or marketplace company is not established.",
+   "confidence": "high"
+  }
+ },
+ {
+  "arm": "no_rule",
+  "i": 5,
+  "seconds": 5.6,
+  "result": {
+   "requirement": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "Through technology partner Wellfound, Matt worked alongside Sparkfly's founder, leading four developers and shipping its customer-facing commerce platform, but direct product-company employment is not established."
+    }
+   ],
+   "gap_explanation": "Note: Direct in-house experience at a product company is not established.",
+   "confidence": "high"
+  }
+ },
+ {
+  "arm": "no_rule",
+  "i": 6,
+  "seconds": 5.1,
+  "result": {
+   "requirement": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "Through Wellfound Technology, Matt worked alongside Sparkfly's founder, leading four developers and building its live commercial platform for enterprise customers, demonstrating product-company exposure through a technology partner."
+    }
+   ],
+   "gap_explanation": "Note: Direct employment within a SaaS, platform, or marketplace company is not established.",
+   "confidence": "high"
+  }
+ },
+ {
+  "arm": "rule",
+  "i": 6,
+  "seconds": 6.9,
+  "result": {
+   "requirement": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "Through Wellfound Technology, Matt worked alongside Sparkfly's founder, leading four developers and shipping its customer-facing commerce platform, providing product-company exposure through a technology partnership."
+    }
+   ],
+   "gap_explanation": "Note: Direct employment within a product company outside consulting or services is not established.",
+   "confidence": "medium"
+  }
+ },
+ {
+  "arm": "rule",
+  "i": 7,
+  "seconds": 6.5,
+  "result": {
+   "requirement": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "Through Wellfound Technology, Matt worked alongside Sparkfly's founder and led development of its live commerce platform, demonstrating product-company exposure through a services partnership."
+    }
+   ],
+   "gap_explanation": "Note: Direct employment within a SaaS, platform, or marketplace company is not established.",
+   "confidence": "medium"
+  }
+ },
+ {
+  "arm": "no_rule",
+  "i": 7,
+  "seconds": 4.8,
+  "result": {
+   "requirement": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "Through Wellfound Technology, Matt worked alongside Sparkfly's founder and led development of its live commercial platform, demonstrating product-company exposure but not direct product-company employment."
+    }
+   ],
+   "gap_explanation": "Note: Direct employment within a SaaS, platform, or marketplace company is not established.",
+   "confidence": "high"
+  }
+ },
+ {
+  "arm": "no_rule",
+  "i": 8,
+  "seconds": 5.9,
+  "result": {
+   "requirement": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "Through Wellfound Technology, Matt worked directly alongside Sparkfly's founder, leading four developers and shipping its customer-facing commerce platform, but this was a technology-partner engagement."
+    }
+   ],
+   "gap_explanation": "Note: Direct in-house employment at a SaaS, platform, or marketplace company is not established.",
+   "confidence": "high"
+  }
+ },
+ {
+  "arm": "rule",
+  "i": 8,
+  "seconds": 5.4,
+  "result": {
+   "requirement": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "Matt built Sparkfly's live commerce platform alongside its founder and led four developers through Wellfound Technology's partnership, demonstrating product-company exposure through a services employer."
+    }
+   ],
+   "gap_explanation": "Note: Direct employment within a product company is not established.",
+   "confidence": "high"
+  }
+ },
+ {
+  "arm": "rule",
+  "i": 9,
+  "seconds": 5.7,
+  "result": {
+   "requirement": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "Matt built Sparkfly's commercial platform alongside its founder and led four developers, but participated through technology partner Wellfound rather than documented direct employment at Sparkfly."
+    }
+   ],
+   "gap_explanation": "Note: In-house experience at a product company is not established.",
+   "confidence": "high"
+  }
+ },
+ {
+  "arm": "no_rule",
+  "i": 9,
+  "seconds": 6.1,
+  "result": {
+   "requirement": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "Matt built Sparkfly's live commerce platform alongside its founder and led four developers, but participated through technology partner Wellfound rather than documented product-company employment."
+    }
+   ],
+   "gap_explanation": "Note: Non-consulting tenure within a product company is not established.",
+   "confidence": "high"
+  }
+ },
+ {
+  "arm": "no_rule",
+  "i": 10,
+  "seconds": 4.3,
+  "result": {
+   "requirement": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "Matt built Sparkfly's live commerce platform alongside its founder and led four developers, but participated through technology partner Wellfound rather than documented direct product-company employment."
+    }
+   ],
+   "gap_explanation": "Note: Direct employment within a SaaS, platform, or marketplace company is not established.",
+   "confidence": "high"
+  }
+ },
+ {
+  "arm": "rule",
+  "i": 10,
+  "seconds": 8.1,
+  "result": {
+   "requirement": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "Matt built Sparkfly's live commerce platform alongside its founder and led four developers, but participated through technology partner Wellfound rather than documented in-house employment."
+    }
+   ],
+   "gap_explanation": "Note: Product-company operating experience outside a services engagement is not established.",
+   "confidence": "high"
+  }
+ }
+]

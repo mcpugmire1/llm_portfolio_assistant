@@ -1,0 +1,7 @@
+r1 att Bmed rows=32 calls=35 call_errors=0 65.2s
+r1 demo Bmed rows=20 calls=23 call_errors=0 36.1s
+r2 att Bmed rows=33 calls=36 call_errors=0 51.9s
+r2 demo Bmed rows=20 calls=23 call_errors=0 35.7s
+r3 att Bmed rows=33 calls=36 call_errors=0 50.4s
+r3 demo Bmed rows=20 calls=23 call_errors=0 37.2s
+done 6 runs

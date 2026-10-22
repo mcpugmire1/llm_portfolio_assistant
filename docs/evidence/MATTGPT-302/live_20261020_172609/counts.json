@@ -1,0 +1,986 @@
+{
+ "A/att": {
+  "runs": 3,
+  "run_errors": [],
+  "per_run": [
+   {
+    "rows": 34,
+    "by_category": {
+     "required": 24,
+     "preferred": 10
+    },
+    "status": {
+     "strong": 27,
+     "partial": 7
+    }
+   },
+   {
+    "rows": 34,
+    "by_category": {
+     "required": 24,
+     "preferred": 10
+    },
+    "status": {
+     "strong": 26,
+     "partial": 7,
+     "gap": 1
+    }
+   },
+   {
+    "rows": 36,
+    "by_category": {
+     "required": 26,
+     "preferred": 10
+    },
+    "status": {
+     "strong": 28,
+     "partial": 7,
+     "gap": 1
+    }
+   }
+  ],
+  "source_text_verbatim": "87/87",
+  "source_text_dashes_total": 0,
+  "jd_dashes": 0,
+  "model_written_dashes": 0,
+  "keys_in_all_runs": 30,
+  "keys_missing_from_some_runs": 11,
+  "keys_with_rating_flip": 2,
+  "flips": [
+   {
+    "category": "required",
+    "requirement": "Calm, decisive leadership during incidents, escalations, and high-pressure situations.",
+    "statuses": [
+     "strong",
+     "strong",
+     "partial"
+    ]
+   },
+   {
+    "category": "preferred",
+    "requirement": "Experience influencing architecture review boards, technology standards, or enterprise engineering practices.",
+    "statuses": [
+     "strong",
+     "partial",
+     "strong"
+    ]
+   }
+  ],
+  "call_errors": [],
+  "stage_seconds": {
+   "required": {
+    "n": 3,
+    "p50": 10.4,
+    "max": 10.61
+   },
+   "preferred": {
+    "n": 3,
+    "p50": 4.4,
+    "max": 4.4
+   },
+   "implicit": {
+    "n": 3,
+    "p50": 2.7,
+    "max": 3.04
+   },
+   "assess": {
+    "n": 104,
+    "p50": 1.8,
+    "max": 4.23
+   }
+  },
+  "pipeline_seconds": [
+   24.7,
+   22.7,
+   20.7
+  ],
+  "cost_per_run_usd": 0.288,
+  "reasoning_tokens_mean_per_call": 0
+ },
+ "A/demo": {
+  "runs": 3,
+  "run_errors": [],
+  "per_run": [
+   {
+    "rows": 21,
+    "by_category": {
+     "required": 16,
+     "preferred": 5
+    },
+    "status": {
+     "strong": 17,
+     "partial": 4
+    }
+   },
+   {
+    "rows": 22,
+    "by_category": {
+     "required": 17,
+     "preferred": 5
+    },
+    "status": {
+     "strong": 19,
+     "partial": 3
+    }
+   },
+   {
+    "rows": 21,
+    "by_category": {
+     "required": 16,
+     "preferred": 5
+    },
+    "status": {
+     "strong": 19,
+     "partial": 2
+    }
+   }
+  ],
+  "source_text_verbatim": "51/51",
+  "source_text_dashes_total": 6,
+  "jd_dashes": 4,
+  "model_written_dashes": 0,
+  "keys_in_all_runs": 19,
+  "keys_missing_from_some_runs": 5,
+  "keys_with_rating_flip": 1,
+  "flips": [
+   {
+    "category": "preferred",
+    "requirement": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+    "statuses": [
+     "partial",
+     "strong",
+     "strong"
+    ]
+   }
+  ],
+  "call_errors": [],
+  "stage_seconds": {
+   "required": {
+    "n": 3,
+    "p50": 6.4,
+    "max": 7.16
+   },
+   "preferred": {
+    "n": 3,
+    "p50": 2.7,
+    "max": 2.74
+   },
+   "implicit": {
+    "n": 3,
+    "p50": 2.0,
+    "max": 2.62
+   },
+   "assess": {
+    "n": 64,
+    "p50": 2.0,
+    "max": 3.44
+   }
+  },
+  "pipeline_seconds": [
+   14.4,
+   16.7,
+   14.7
+  ],
+  "cost_per_run_usd": 0.181,
+  "reasoning_tokens_mean_per_call": 0
+ },
+ "Bmed/att": {
+  "runs": 3,
+  "run_errors": [],
+  "per_run": [
+   {
+    "rows": 32,
+    "by_category": {
+     "required": 22,
+     "preferred": 10
+    },
+    "status": {
+     "strong": 17,
+     "partial": 15
+    }
+   },
+   {
+    "rows": 32,
+    "by_category": {
+     "required": 22,
+     "preferred": 10
+    },
+    "status": {
+     "strong": 17,
+     "partial": 15
+    }
+   },
+   {
+    "rows": 33,
+    "by_category": {
+     "required": 23,
+     "preferred": 10
+    },
+    "status": {
+     "strong": 18,
+     "partial": 15
+    }
+   }
+  ],
+  "source_text_verbatim": "90/90",
+  "source_text_dashes_total": 0,
+  "jd_dashes": 0,
+  "model_written_dashes": 3,
+  "keys_in_all_runs": 30,
+  "keys_missing_from_some_runs": 6,
+  "keys_with_rating_flip": 0,
+  "flips": [],
+  "call_errors": [],
+  "stage_seconds": {
+   "required": {
+    "n": 3,
+    "p50": 22.0,
+    "max": 24.55
+   },
+   "preferred": {
+    "n": 3,
+    "p50": 8.9,
+    "max": 9.15
+   },
+   "implicit": {
+    "n": 3,
+    "p50": 7.4,
+    "max": 7.57
+   },
+   "assess": {
+    "n": 97,
+    "p50": 5.6,
+    "max": 12.43
+   }
+  },
+  "pipeline_seconds": [
+   55.6,
+   62.8,
+   49.5
+  ],
+  "cost_per_run_usd": 0.192,
+  "reasoning_tokens_mean_per_call": 17.5
+ },
+ "Bmed/demo": {
+  "runs": 3,
+  "run_errors": [],
+  "per_run": [
+   {
+    "rows": 20,
+    "by_category": {
+     "required": 15,
+     "preferred": 5
+    },
+    "status": {
+     "partial": 5,
+     "strong": 15
+    }
+   },
+   {
+    "rows": 20,
+    "by_category": {
+     "required": 15,
+     "preferred": 5
+    },
+    "status": {
+     "partial": 4,
+     "strong": 16
+    }
+   },
+   {
+    "rows": 20,
+    "by_category": {
+     "required": 15,
+     "preferred": 5
+    },
+    "status": {
+     "partial": 4,
+     "strong": 16
+    }
+   }
+  ],
+  "source_text_verbatim": "51/51",
+  "source_text_dashes_total": 6,
+  "jd_dashes": 4,
+  "model_written_dashes": 8,
+  "keys_in_all_runs": 17,
+  "keys_missing_from_some_runs": 7,
+  "keys_with_rating_flip": 1,
+  "flips": [
+   {
+    "category": "preferred",
+    "requirement": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+    "statuses": [
+     "partial",
+     "strong",
+     "strong"
+    ]
+   }
+  ],
+  "call_errors": [],
+  "stage_seconds": {
+   "required": {
+    "n": 3,
+    "p50": 16.3,
+    "max": 17.14
+   },
+   "preferred": {
+    "n": 3,
+    "p50": 6.4,
+    "max": 7.29
+   },
+   "implicit": {
+    "n": 3,
+    "p50": 7.4,
+    "max": 8.14
+   },
+   "assess": {
+    "n": 60,
+    "p50": 5.0,
+    "max": 11.84
+   }
+  },
+  "pipeline_seconds": [
+   46.4,
+   37.6,
+   37.0
+  ],
+  "cost_per_run_usd": 0.116,
+  "reasoning_tokens_mean_per_call": 12.0
+ },
+ "Blow/att": {
+  "runs": 3,
+  "run_errors": [],
+  "per_run": [
+   {
+    "rows": 33,
+    "by_category": {
+     "required": 23,
+     "preferred": 10
+    },
+    "status": {
+     "strong": 18,
+     "partial": 15
+    }
+   },
+   {
+    "rows": 33,
+    "by_category": {
+     "required": 23,
+     "preferred": 10
+    },
+    "status": {
+     "strong": 18,
+     "partial": 15
+    }
+   },
+   {
+    "rows": 33,
+    "by_category": {
+     "required": 23,
+     "preferred": 10
+    },
+    "status": {
+     "strong": 18,
+     "partial": 15
+    }
+   }
+  ],
+  "source_text_verbatim": "90/90",
+  "source_text_dashes_total": 0,
+  "jd_dashes": 0,
+  "model_written_dashes": 3,
+  "keys_in_all_runs": 31,
+  "keys_missing_from_some_runs": 5,
+  "keys_with_rating_flip": 0,
+  "flips": [],
+  "call_errors": [],
+  "stage_seconds": {
+   "required": {
+    "n": 3,
+    "p50": 22.2,
+    "max": 22.37
+   },
+   "preferred": {
+    "n": 3,
+    "p50": 8.8,
+    "max": 9.4
+   },
+   "implicit": {
+    "n": 3,
+    "p50": 5.1,
+    "max": 6.04
+   },
+   "assess": {
+    "n": 99,
+    "p50": 5.0,
+    "max": 6.83
+   }
+  },
+  "pipeline_seconds": [
+   48.2,
+   50.6,
+   46.4
+  ],
+  "cost_per_run_usd": 0.188,
+  "reasoning_tokens_mean_per_call": 1.4
+ },
+ "Blow/demo": {
+  "runs": 3,
+  "run_errors": [],
+  "per_run": [
+   {
+    "rows": 20,
+    "by_category": {
+     "required": 15,
+     "preferred": 5
+    },
+    "status": {
+     "partial": 5,
+     "strong": 15
+    }
+   },
+   {
+    "rows": 20,
+    "by_category": {
+     "required": 15,
+     "preferred": 5
+    },
+    "status": {
+     "partial": 5,
+     "strong": 15
+    }
+   },
+   {
+    "rows": 20,
+    "by_category": {
+     "required": 15,
+     "preferred": 5
+    },
+    "status": {
+     "partial": 5,
+     "strong": 15
+    }
+   }
+  ],
+  "source_text_verbatim": "51/51",
+  "source_text_dashes_total": 6,
+  "jd_dashes": 4,
+  "model_written_dashes": 7,
+  "keys_in_all_runs": 18,
+  "keys_missing_from_some_runs": 5,
+  "keys_with_rating_flip": 0,
+  "flips": [],
+  "call_errors": [],
+  "stage_seconds": {
+   "required": {
+    "n": 3,
+    "p50": 14.0,
+    "max": 19.37
+   },
+   "preferred": {
+    "n": 3,
+    "p50": 6.4,
+    "max": 6.53
+   },
+   "implicit": {
+    "n": 3,
+    "p50": 5.1,
+    "max": 6.79
+   },
+   "assess": {
+    "n": 60,
+    "p50": 4.9,
+    "max": 7.06
+   }
+  },
+  "pipeline_seconds": [
+   31.1,
+   42.6,
+   31.7
+  ],
+  "cost_per_run_usd": 0.117,
+  "reasoning_tokens_mean_per_call": 0.5
+ },
+ "cross_arm": {
+  "A_vs_Bmed/att": {
+   "keys_in_both": 29,
+   "modal_status_differs": 11,
+   "only_in_A": 12,
+   "only_in_Bmed": 7,
+   "rows": [
+    {
+     "category": "preferred",
+     "requirement": "Experience driving cultural change toward automation, accountability, reliability, and self-service engineering.",
+     "A": [
+      "strong",
+      "strong",
+      "strong"
+     ],
+     "Bmed": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    },
+    {
+     "category": "preferred",
+     "requirement": "Experience managing vendor relationships, licensing strategy, or platform service contracts.",
+     "A": [
+      "partial",
+      "partial",
+      "partial"
+     ],
+     "Bmed": [
+      "strong",
+      "strong",
+      "strong"
+     ]
+    },
+    {
+     "category": "preferred",
+     "requirement": "Experience mentoring technical leads or senior engineers in a matrixed organization.",
+     "A": [
+      "strong",
+      "strong",
+      "strong"
+     ],
+     "Bmed": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    },
+    {
+     "category": "preferred",
+     "requirement": "Experience with large-scale compliance programs, cybersecurity scorecards, audit preparation, and remediation tracking.",
+     "A": [
+      "strong",
+      "strong",
+      "strong"
+     ],
+     "Bmed": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    },
+    {
+     "category": "required",
+     "requirement": "7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.",
+     "A": [
+      "strong",
+      "strong",
+      "strong"
+     ],
+     "Bmed": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    },
+    {
+     "category": "required",
+     "requirement": "Ability to define standards for SOPs, runbooks, operational playbooks, technical documentation, and support readiness.",
+     "A": [
+      "strong",
+      "strong",
+      "strong"
+     ],
+     "Bmed": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    },
+    {
+     "category": "required",
+     "requirement": "Calm, decisive leadership during incidents, escalations, and high-pressure situations.",
+     "A": [
+      "strong",
+      "strong",
+      "partial"
+     ],
+     "Bmed": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    },
+    {
+     "category": "required",
+     "requirement": "Experience leading platform upgrades, lifecycle management, migration planning, disaster recovery, and resiliency improvements.",
+     "A": [
+      "strong",
+      "strong",
+      "strong"
+     ],
+     "Bmed": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    },
+    {
+     "category": "required",
+     "requirement": "Strong collaboration skills with Architecture, Development, Operations, Security, Product, and Support teams.",
+     "A": [
+      "strong",
+      "strong",
+      "strong"
+     ],
+     "Bmed": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    },
+    {
+     "category": "required",
+     "requirement": "Strong knowledge of security controls, access governance, role-based access management, separation of duties, and compliance practices.",
+     "A": [
+      "strong",
+      "strong",
+      "strong"
+     ],
+     "Bmed": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    },
+    {
+     "category": "required",
+     "requirement": "Strong troubleshooting skills across infrastructure, application platforms, integrations, networking, and operational workflows.",
+     "A": [
+      "strong",
+      "strong",
+      "strong"
+     ],
+     "Bmed": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    }
+   ]
+  },
+  "A_vs_Bmed/demo": {
+   "keys_in_both": 17,
+   "modal_status_differs": 4,
+   "only_in_A": 7,
+   "only_in_Bmed": 7,
+   "rows": [
+    {
+     "category": "required",
+     "requirement": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+     "A": [
+      "strong",
+      "strong",
+      "strong"
+     ],
+     "Bmed": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    },
+    {
+     "category": "required",
+     "requirement": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+     "A": [
+      "strong",
+      "strong",
+      "strong"
+     ],
+     "Bmed": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    },
+    {
+     "category": "required",
+     "requirement": "AI/ML adoption strategy — practical experience introducing AI-assisted development practices into an engineering organization",
+     "A": [
+      "strong",
+      "strong",
+      "strong"
+     ],
+     "Bmed": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    },
+    {
+     "category": "required",
+     "requirement": "Modern technology stack fluency across frontend and backend (React or equivalent, Python/Node.js/Go, containerized microservices)",
+     "A": [
+      "partial",
+      "partial",
+      "partial"
+     ],
+     "Bmed": [
+      "strong",
+      "strong",
+      "strong"
+     ]
+    }
+   ]
+  },
+  "A_vs_Blow/att": {
+   "keys_in_both": 29,
+   "modal_status_differs": 11,
+   "only_in_A": 12,
+   "only_in_Blow": 7,
+   "rows": [
+    {
+     "category": "preferred",
+     "requirement": "Experience driving cultural change toward automation, accountability, reliability, and self-service engineering.",
+     "A": [
+      "strong",
+      "strong",
+      "strong"
+     ],
+     "Blow": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    },
+    {
+     "category": "preferred",
+     "requirement": "Experience managing vendor relationships, licensing strategy, or platform service contracts.",
+     "A": [
+      "partial",
+      "partial",
+      "partial"
+     ],
+     "Blow": [
+      "strong",
+      "strong",
+      "strong"
+     ]
+    },
+    {
+     "category": "preferred",
+     "requirement": "Experience mentoring technical leads or senior engineers in a matrixed organization.",
+     "A": [
+      "strong",
+      "strong",
+      "strong"
+     ],
+     "Blow": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    },
+    {
+     "category": "preferred",
+     "requirement": "Experience with large-scale compliance programs, cybersecurity scorecards, audit preparation, and remediation tracking.",
+     "A": [
+      "strong",
+      "strong",
+      "strong"
+     ],
+     "Blow": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    },
+    {
+     "category": "required",
+     "requirement": "7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.",
+     "A": [
+      "strong",
+      "strong",
+      "strong"
+     ],
+     "Blow": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    },
+    {
+     "category": "required",
+     "requirement": "Ability to define standards for SOPs, runbooks, operational playbooks, technical documentation, and support readiness.",
+     "A": [
+      "strong",
+      "strong",
+      "strong"
+     ],
+     "Blow": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    },
+    {
+     "category": "required",
+     "requirement": "Calm, decisive leadership during incidents, escalations, and high-pressure situations.",
+     "A": [
+      "strong",
+      "strong",
+      "partial"
+     ],
+     "Blow": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    },
+    {
+     "category": "required",
+     "requirement": "Experience leading platform upgrades, lifecycle management, migration planning, disaster recovery, and resiliency improvements.",
+     "A": [
+      "strong",
+      "strong",
+      "strong"
+     ],
+     "Blow": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    },
+    {
+     "category": "required",
+     "requirement": "Strong collaboration skills with Architecture, Development, Operations, Security, Product, and Support teams.",
+     "A": [
+      "strong",
+      "strong",
+      "strong"
+     ],
+     "Blow": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    },
+    {
+     "category": "required",
+     "requirement": "Strong knowledge of security controls, access governance, role-based access management, separation of duties, and compliance practices.",
+     "A": [
+      "strong",
+      "strong",
+      "strong"
+     ],
+     "Blow": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    },
+    {
+     "category": "required",
+     "requirement": "Strong troubleshooting skills across infrastructure, application platforms, integrations, networking, and operational workflows.",
+     "A": [
+      "strong",
+      "strong",
+      "strong"
+     ],
+     "Blow": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    }
+   ]
+  },
+  "A_vs_Blow/demo": {
+   "keys_in_both": 17,
+   "modal_status_differs": 5,
+   "only_in_A": 7,
+   "only_in_Blow": 6,
+   "rows": [
+    {
+     "category": "preferred",
+     "requirement": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+     "A": [
+      "partial",
+      "strong",
+      "strong"
+     ],
+     "Blow": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    },
+    {
+     "category": "required",
+     "requirement": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+     "A": [
+      "strong",
+      "strong",
+      "strong"
+     ],
+     "Blow": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    },
+    {
+     "category": "required",
+     "requirement": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+     "A": [
+      "strong",
+      "strong",
+      "strong"
+     ],
+     "Blow": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    },
+    {
+     "category": "required",
+     "requirement": "AI/ML adoption strategy — practical experience introducing AI-assisted development practices into an engineering organization",
+     "A": [
+      "strong",
+      "strong",
+      "strong"
+     ],
+     "Blow": [
+      "partial",
+      "partial",
+      "partial"
+     ]
+    },
+    {
+     "category": "required",
+     "requirement": "Modern technology stack fluency across frontend and backend (React or equivalent, Python/Node.js/Go, containerized microservices)",
+     "A": [
+      "partial",
+      "partial",
+      "partial"
+     ],
+     "Blow": [
+      "strong",
+      "strong",
+      "strong"
+     ]
+    }
+   ]
+  }
+ },
+ "demo_row_22": {
+  "A": [
+   {
+    "run": 2,
+    "status": "partial",
+    "evidence": [
+     "Keeping Roadmaps Alive When Priorities Keep Shifting",
+     "Scaling CIC Impact Through Intentional Client Engagement"
+    ],
+    "gap": "Note: Direct C-suite partnership evidence is missing."
+   }
+  ]
+ }
+}

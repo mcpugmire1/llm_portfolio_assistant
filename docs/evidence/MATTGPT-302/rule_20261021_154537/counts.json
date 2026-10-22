@@ -1,0 +1,158 @@
+{
+ "Bmed/att": {
+  "runs": 3,
+  "run_errors": [],
+  "per_run": [
+   {
+    "rows": 32,
+    "by_category": {
+     "required": 22,
+     "preferred": 10
+    },
+    "status": {
+     "strong": 17,
+     "partial": 15
+    }
+   },
+   {
+    "rows": 33,
+    "by_category": {
+     "required": 23,
+     "preferred": 10
+    },
+    "status": {
+     "strong": 18,
+     "partial": 15
+    }
+   },
+   {
+    "rows": 33,
+    "by_category": {
+     "required": 23,
+     "preferred": 10
+    },
+    "status": {
+     "strong": 18,
+     "partial": 15
+    }
+   }
+  ],
+  "source_text_verbatim": "90/90",
+  "source_text_dashes_total": 0,
+  "jd_dashes": 0,
+  "model_written_dashes": 0,
+  "keys_in_all_runs": 31,
+  "keys_missing_from_some_runs": 5,
+  "keys_with_rating_flip": 0,
+  "flips": [],
+  "call_errors": [],
+  "stage_seconds": {
+   "required": {
+    "n": 3,
+    "p50": 20.5,
+    "max": 21.55
+   },
+   "preferred": {
+    "n": 3,
+    "p50": 9.7,
+    "max": 9.92
+   },
+   "implicit": {
+    "n": 3,
+    "p50": 8.1,
+    "max": 12.17
+   },
+   "assess": {
+    "n": 98,
+    "p50": 5.4,
+    "max": 10.38
+   }
+  },
+  "pipeline_seconds": [
+   65.2,
+   51.9,
+   50.4
+  ],
+  "cost_per_run_usd": 0.187,
+  "reasoning_tokens_mean_per_call": 20.4
+ },
+ "Bmed/demo": {
+  "runs": 3,
+  "run_errors": [],
+  "per_run": [
+   {
+    "rows": 20,
+    "by_category": {
+     "required": 15,
+     "preferred": 5
+    },
+    "status": {
+     "partial": 5,
+     "strong": 15
+    }
+   },
+   {
+    "rows": 20,
+    "by_category": {
+     "required": 15,
+     "preferred": 5
+    },
+    "status": {
+     "partial": 5,
+     "strong": 15
+    }
+   },
+   {
+    "rows": 20,
+    "by_category": {
+     "required": 15,
+     "preferred": 5
+    },
+    "status": {
+     "partial": 5,
+     "strong": 15
+    }
+   }
+  ],
+  "source_text_verbatim": "51/51",
+  "source_text_dashes_total": 6,
+  "jd_dashes": 4,
+  "model_written_dashes": 0,
+  "keys_in_all_runs": 19,
+  "keys_missing_from_some_runs": 3,
+  "keys_with_rating_flip": 0,
+  "flips": [],
+  "call_errors": [],
+  "stage_seconds": {
+   "required": {
+    "n": 3,
+    "p50": 16.6,
+    "max": 16.92
+   },
+   "preferred": {
+    "n": 3,
+    "p50": 6.7,
+    "max": 7.01
+   },
+   "implicit": {
+    "n": 3,
+    "p50": 6.2,
+    "max": 6.69
+   },
+   "assess": {
+    "n": 60,
+    "p50": 5.4,
+    "max": 8.59
+   }
+  },
+  "pipeline_seconds": [
+   36.1,
+   35.7,
+   37.2
+  ],
+  "cost_per_run_usd": 0.119,
+  "reasoning_tokens_mean_per_call": 11.9
+ },
+ "cross_arm": {},
+ "demo_row_22": {}
+}
