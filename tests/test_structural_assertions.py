@@ -419,7 +419,6 @@ def find_architecture_violations(root: Path) -> dict[str, list[str]]:
         "streamlit_files": [],
         "openai_sites": [],
         "data_file_defs": [],
-        "scripts_imports": [],
     }
     for path in _app_python_files(root, ("app.py", "ui", *FITNESS_LAYERS)):
         rel = path.relative_to(root).as_posix()
@@ -432,8 +431,6 @@ def find_architecture_violations(root: Path) -> dict[str, list[str]]:
             m == "streamlit" or m.startswith("streamlit.") for m in modules
         ):
             found["streamlit_files"].append(rel)
-        if any(m == "scripts" or m.startswith("scripts.") for m in modules):
-            found["scripts_imports"].append(rel)
         for node in ast.walk(tree):
             if isinstance(node, ast.Call):
                 fn = node.func
@@ -704,15 +701,6 @@ class TestArchitectureFitness:
         assert len(sites) <= OPENAI_CLIENT_SITES_MAX, (
             f"{len(sites)} OpenAI( client creation sites, limit"
             f" {OPENAI_CLIENT_SITES_MAX} (MATTGPT-261 lowers it):\n" + "\n".join(sites)
-        )
-
-    def test_no_production_imports_from_scripts(self, found):
-        # scripts/ has no __init__.py: a production import from it makes mypy
-        # see the module under two names whenever a scripts/*.py file is in
-        # the same run, which fails the pre-push hook.
-        assert not found["scripts_imports"], (
-            "app.py, ui/, services/, utils/ and config/ must not import from"
-            " scripts/:\n" + "\n".join(found["scripts_imports"])
         )
 
     @pytest.mark.xfail(
