@@ -172,6 +172,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-349](#mattgpt-349) | An exception after app.py's startup init renders a blank page: no error and no "temporarily unavailable" page | Open | Medium | Bug | value | October 22, 2026 |
 | [MATTGPT-350](#mattgpt-350) | agy_answer() keeps only the final round's text, so the opener written alongside a search_stories call is streamed but dropped from answer_md | Open | Medium | Bug | value | October 22, 2026 |
 | [MATTGPT-351](#mattgpt-351) | log_query() writes no Session ID, so query rows can't be joined to their session's page_load or page_context row | Open | Low | Bug | value | October 22, 2026 |
+| [MATTGPT-352](#mattgpt-352) | _flatten_extraction() crashes with AttributeError when implicit_requirements holds a plain string instead of an object | Open | Medium | Bug | value | October 22, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently | Parked | Medium | Action | value | August 3, 2026 |
@@ -3283,6 +3284,24 @@ Verified Oct 22, 2026 (HEAD 5787bdf): `.gitignore` has `/probes/`; the run folde
 **Verified Oct 22, 2026 (HEAD 53bfb63):** `log_query()`'s `_build_row("query", ...)` call passes no Session ID; `log_page_load()`, `log_page_context()`, `log_role_match_assessment()`, `log_role_match_gate_rejection()`, `log_role_match_chip_click()` and `log_role_match_action()` each read `st.session_state.get("_session_id", "")`.
 
 **Fix (Matt, Oct 22, 2026):** `log_query()` reads `_session_id`; test it like `test_row_carries_referrer_screen_width_session_id_and_utms` in `tests/unit/test_query_logger.py`.
+
+---
+
+### MATTGPT-352
+**_flatten_extraction() crashes with AttributeError when implicit_requirements holds a plain string instead of an object**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `services/jd_assessor.py` (`_flatten_extraction()`), its unit tests
+- **Related:** MATTGPT-302 (relevant to the model choice, RM-D1)
+- **Logged:** October 22, 2026
+
+**Issue (Matt, Oct 22, 2026):** `_flatten_extraction()` crashes with `AttributeError` when `implicit_requirements` contains a plain string instead of an object (`r.get` on a `str`). Seen on gpt-5.6-luna, low effort, demo JD, in -302's candidate run (Oct 22). The response body wasn't saved; the traceback is in the run's stderr.
+
+**Verified Oct 22, 2026 (HEAD 3ec3d9c):** the run's `stderr.txt` (`probes/output/MATTGPT-302/candidates_low_20261022_163255/`, gitignored) shows `run failed gpt-5.6-luna@low demo r3`: `run_assessment()` calls `_flatten_extraction(extraction)`, whose implicit loop raises `AttributeError: 'str' object has no attribute 'get'` on `out.append({"text": r.get("requirement", ""), "category": "required"})`. The required and preferred loops also call `r.get()` with no type check.
+
+**Fix (Matt, Oct 22, 2026):** skip or coerce non-object items, with a unit test.
 
 ---
 
