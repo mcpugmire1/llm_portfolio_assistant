@@ -8,12 +8,16 @@ Ask Agy through build_answer_instructions(), so both the standard and
 synthesis system prompts.
 
 Role Match's assessment prompt carries the rule on its own line, before the
-JSON-only line (MATTGPT-302). On gpt-6.1-sol without it, the assessment
-wrote en-dash number ranges; with it, 0 dashes and no rating flips in 3 runs
-per JD (docs/evidence/MATTGPT-302/live_20261020_172609/,
+JSON-only line (MATTGPT-302). On gpt-5.6-terra at low effort without it,
+the assessment wrote 10 dashes in 6 runs: en-dash number ranges (20 to 25
+developers, 2000 to 2001) and two em dashes. With it, 0, and the
+recommendation matched gpt-4o's in all 6 runs; without it, one AT&T run
+moved from Consider to Apply (docs/evidence/MATTGPT-302/dash_rule_20261023_130917/,
+3 runs per JD). On gpt-6.1-sol, measured first, it wrote en-dash ranges
+without the rule and 0 dashes with it (live_20261020_172609/,
 rule_20261021_154537/). The rule against no rule on fixed evidence covered
 one row, the demo JD's product-company requirement: 20 of 20 partial both
-ways (product_row_20261022_152648/). The extraction prompts carry no rule: their
+ways on gpt-6.1-sol (product_row_20261022_152648/). The extraction prompts carry no rule: their
 source_text verbatim rule stays as it is, since required and preferred rows
 show the JD's own words.
 
