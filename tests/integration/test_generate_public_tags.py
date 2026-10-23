@@ -21,12 +21,15 @@ hit real external services; these mock everything.
 Test coverage preserved:
 - MATTGPT-211 backup contract (was TestGeneratePublicTagsBackup)
 - MATTGPT-072 skip-unchanged logic (was TestSkipUnchangedStories)
+- Read timeout and one retry on the tag call (TestTagCallTimeoutAndRetry)
 """
 
 import json
 from types import SimpleNamespace
 from unittest.mock import MagicMock
 
+import httpx
+import openai
 import pytest
 
 
@@ -355,3 +358,98 @@ class TestSkipUnchangedStories:
             f"Change in Situation[1] must trigger a retag once _prompt_view "
             f"reads the full Situation. Got {env.mock_create.call_count}."
         )
+
+
+_REQUEST = httpx.Request("POST", "https://api.openai.com/v1/chat/completions")
+
+
+def _timeout():
+    return openai.APITimeoutError(request=_REQUEST)
+
+
+def _connection():
+    return openai.APIConnectionError(request=_REQUEST)
+
+
+def _rate_limit():
+    return openai.RateLimitError(
+        "Rate limit reached",
+        response=httpx.Response(429, request=_REQUEST),
+        body=None,
+    )
+
+
+class TestTagCallTimeoutAndRetry:
+    """A slow or failed gpt call must not hang the run silently: the client
+    has a 60 s read timeout and no SDK retries, and extract_semantic_tags()
+    retries once on a timeout, connection error or rate limit, printing the
+    story ID and error type. Any other error goes straight to the ❌ line.
+    """
+
+    STORY = {"id": "s-retry", "Title": "T", "Situation": ["s"]}
+
+    @pytest.fixture
+    def g(self):
+        import generate_public_tags as g
+
+        return g
+
+    @staticmethod
+    def _completion():
+        completion = MagicMock()
+        completion.choices = [
+            MagicMock(message=MagicMock(content='{"tags": ["freshly-generated-tag"]}'))
+        ]
+        return completion
+
+    def test_client_has_read_timeout_and_no_sdk_retries(self, g):
+        assert g.client.timeout.read == 60
+        assert g.client.timeout.connect == 5.0
+        assert g.client.max_retries == 0
+
+    @pytest.mark.parametrize(
+        "make_error, error_type",
+        [
+            (_timeout, "APITimeoutError"),
+            (_connection, "APIConnectionError"),
+            (_rate_limit, "RateLimitError"),
+        ],
+    )
+    def test_retryable_error_retries_once_and_logs_story_and_type(
+        self, g, monkeypatch, capsys, make_error, error_type
+    ):
+        mock_create = MagicMock(side_effect=[make_error(), self._completion()])
+        monkeypatch.setattr(g.client.chat.completions, "create", mock_create)
+
+        tags = g.extract_semantic_tags(self.STORY)
+
+        assert tags == ["freshly-generated-tag"]
+        assert mock_create.call_count == 2
+        retry_lines = [
+            line for line in capsys.readouterr().out.splitlines() if "s-retry" in line
+        ]
+        assert len(retry_lines) == 1, retry_lines
+        assert error_type in retry_lines[0]
+
+    def test_second_failure_returns_empty_with_error_line(self, g, monkeypatch, capsys):
+        mock_create = MagicMock(side_effect=[_rate_limit(), _timeout()])
+        monkeypatch.setattr(g.client.chat.completions, "create", mock_create)
+
+        tags = g.extract_semantic_tags(self.STORY)
+
+        assert tags == []
+        assert mock_create.call_count == 2
+        out = capsys.readouterr().out
+        assert "RateLimitError" in out
+        assert "❌ Error generating tags for story ID s-retry" in out
+
+    def test_other_error_is_not_retried(self, g, monkeypatch, capsys):
+        mock_create = MagicMock(side_effect=ValueError("bad payload"))
+        monkeypatch.setattr(g.client.chat.completions, "create", mock_create)
+
+        tags = g.extract_semantic_tags(self.STORY)
+
+        assert tags == []
+        assert mock_create.call_count == 1
+        out = capsys.readouterr().out
+        assert "❌ Error generating tags for story ID s-retry" in out
