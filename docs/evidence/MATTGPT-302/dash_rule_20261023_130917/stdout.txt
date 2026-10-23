@@ -1,0 +1,19 @@
+r1 att A rows=34 calls=37 call_errors=0 22.3s
+r1 att gpt-5.6-terra@low rows=33 calls=36 call_errors=0 24.9s
+r1 att gpt-5.6-terra@low#norule rows=34 calls=37 call_errors=0 25.1s
+r1 demo A rows=21 calls=24 call_errors=0 13.6s
+r1 demo gpt-5.6-terra@low rows=21 calls=24 call_errors=0 19.3s
+r1 demo gpt-5.6-terra@low#norule rows=20 calls=23 call_errors=0 19.2s
+r2 att gpt-5.6-terra@low rows=34 calls=37 call_errors=0 26.4s
+r2 att gpt-5.6-terra@low#norule rows=35 calls=38 call_errors=0 26.6s
+r2 att A rows=36 calls=39 call_errors=0 19.2s
+r2 demo gpt-5.6-terra@low rows=20 calls=23 call_errors=0 17.7s
+r2 demo gpt-5.6-terra@low#norule rows=20 calls=23 call_errors=0 19.4s
+r2 demo A rows=22 calls=25 call_errors=0 16.5s
+r3 att gpt-5.6-terra@low#norule rows=34 calls=37 call_errors=0 26.8s
+r3 att A rows=34 calls=37 call_errors=0 18.4s
+r3 att gpt-5.6-terra@low rows=34 calls=37 call_errors=0 26.7s
+r3 demo gpt-5.6-terra@low#norule rows=21 calls=24 call_errors=0 18.3s
+r3 demo A rows=22 calls=25 call_errors=0 14.5s
+r3 demo gpt-5.6-terra@low rows=21 calls=24 call_errors=0 20.1s
+done 18 runs

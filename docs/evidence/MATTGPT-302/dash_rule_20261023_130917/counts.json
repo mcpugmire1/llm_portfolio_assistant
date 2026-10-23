@@ -1,0 +1,924 @@
+{
+ "A/att": {
+  "errors": [],
+  "per_run": [
+   {
+    "run": 1,
+    "seconds": 22.3,
+    "extraction_end_s": 10.9,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 2.24,
+    "required_s": [
+     8.7
+    ],
+    "preferred_s": [
+     5.46
+    ],
+    "implicit_s": [
+     2.24
+    ],
+    "assess_p50_s": 1.8,
+    "assess_max_s": 2.66,
+    "rows": 34,
+    "status": {
+     "strong": 27,
+     "partial": 6,
+     "gap": 1
+    },
+    "strong_share": 0.79,
+    "recommendation": {
+     "recommendation": "Consider",
+     "fit_score": "Medium",
+     "strong_count": 27,
+     "partial_count": 6,
+     "gap_count": 1,
+     "required_gap_count": 1,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "29/29",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 0,
+    "cost_usd": 0.3537
+   },
+   {
+    "run": 2,
+    "seconds": 19.2,
+    "extraction_end_s": 10.2,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 2.52,
+    "required_s": [
+     7.72
+    ],
+    "preferred_s": [
+     4.71
+    ],
+    "implicit_s": [
+     2.52
+    ],
+    "assess_p50_s": 1.6,
+    "assess_max_s": 2.21,
+    "rows": 36,
+    "status": {
+     "strong": 27,
+     "partial": 8,
+     "gap": 1
+    },
+    "strong_share": 0.75,
+    "recommendation": {
+     "recommendation": "Consider",
+     "fit_score": "Medium",
+     "strong_count": 27,
+     "partial_count": 8,
+     "gap_count": 1,
+     "required_gap_count": 1,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "29/29",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 0,
+    "cost_usd": 0.2555
+   },
+   {
+    "run": 3,
+    "seconds": 18.4,
+    "extraction_end_s": 10.0,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 1.98,
+    "required_s": [
+     8.01
+    ],
+    "preferred_s": [
+     3.03
+    ],
+    "implicit_s": [
+     1.98
+    ],
+    "assess_p50_s": 1.6,
+    "assess_max_s": 2.63,
+    "rows": 34,
+    "status": {
+     "strong": 26,
+     "partial": 7,
+     "gap": 1
+    },
+    "strong_share": 0.76,
+    "recommendation": {
+     "recommendation": "Consider",
+     "fit_score": "Medium",
+     "strong_count": 26,
+     "partial_count": 7,
+     "gap_count": 1,
+     "required_gap_count": 1,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "29/29",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 0,
+    "cost_usd": 0.2409
+   }
+  ]
+ },
+ "A/demo": {
+  "errors": [],
+  "per_run": [
+   {
+    "run": 1,
+    "seconds": 13.6,
+    "extraction_end_s": 7.6,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 1.95,
+    "required_s": [
+     5.65
+    ],
+    "preferred_s": [
+     2.7
+    ],
+    "implicit_s": [
+     1.95
+    ],
+    "assess_p50_s": 1.9,
+    "assess_max_s": 2.43,
+    "rows": 21,
+    "status": {
+     "strong": 17,
+     "partial": 4
+    },
+    "strong_share": 0.81,
+    "recommendation": {
+     "recommendation": "Apply",
+     "fit_score": "High",
+     "strong_count": 17,
+     "partial_count": 4,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "17/17",
+    "model_written_dashes": 0,
+    "jd_dashes": 4,
+    "reasoning_tokens_mean": 0,
+    "cost_usd": 0.2279
+   },
+   {
+    "run": 2,
+    "seconds": 16.5,
+    "extraction_end_s": 7.5,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 2.3,
+    "required_s": [
+     5.15
+    ],
+    "preferred_s": [
+     2.18
+    ],
+    "implicit_s": [
+     2.3
+    ],
+    "assess_p50_s": 1.9,
+    "assess_max_s": 3.52,
+    "rows": 22,
+    "status": {
+     "strong": 19,
+     "partial": 3
+    },
+    "strong_share": 0.86,
+    "recommendation": {
+     "recommendation": "Apply",
+     "fit_score": "High",
+     "strong_count": 19,
+     "partial_count": 3,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "17/17",
+    "model_written_dashes": 0,
+    "jd_dashes": 4,
+    "reasoning_tokens_mean": 0,
+    "cost_usd": 0.1706
+   },
+   {
+    "run": 3,
+    "seconds": 14.5,
+    "extraction_end_s": 7.8,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 2.24,
+    "required_s": [
+     5.56
+    ],
+    "preferred_s": [
+     2.11
+    ],
+    "implicit_s": [
+     2.24
+    ],
+    "assess_p50_s": 1.9,
+    "assess_max_s": 2.68,
+    "rows": 22,
+    "status": {
+     "strong": 20,
+     "partial": 2
+    },
+    "strong_share": 0.91,
+    "recommendation": {
+     "recommendation": "Apply",
+     "fit_score": "High",
+     "strong_count": 20,
+     "partial_count": 2,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "17/17",
+    "model_written_dashes": 0,
+    "jd_dashes": 4,
+    "reasoning_tokens_mean": 0,
+    "cost_usd": 0.1676
+   }
+  ]
+ },
+ "gpt-5.6-terra@low/att": {
+  "errors": [],
+  "per_run": [
+   {
+    "run": 1,
+    "seconds": 24.9,
+    "extraction_end_s": 12.3,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 2.5,
+    "required_s": [
+     9.81
+    ],
+    "preferred_s": [
+     3.91
+    ],
+    "implicit_s": [
+     2.5
+    ],
+    "assess_p50_s": 2.7,
+    "assess_max_s": 3.88,
+    "rows": 33,
+    "status": {
+     "strong": 22,
+     "partial": 11
+    },
+    "strong_share": 0.67,
+    "recommendation": {
+     "recommendation": "Consider",
+     "fit_score": "Medium",
+     "strong_count": 22,
+     "partial_count": 11,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [
+     "Modernizing Railroad Revenue: Transitioning from Legacy to Cloud"
+    ],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "30/30",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 16.1,
+    "cost_usd": 0.3268
+   },
+   {
+    "run": 2,
+    "seconds": 26.4,
+    "extraction_end_s": 13.7,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 3.39,
+    "required_s": [
+     10.35
+    ],
+    "preferred_s": [
+     3.61
+    ],
+    "implicit_s": [
+     3.39
+    ],
+    "assess_p50_s": 2.7,
+    "assess_max_s": 4.04,
+    "rows": 34,
+    "status": {
+     "strong": 22,
+     "partial": 12
+    },
+    "strong_share": 0.65,
+    "recommendation": {
+     "recommendation": "Consider",
+     "fit_score": "Medium",
+     "strong_count": 22,
+     "partial_count": 12,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "30/30",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 23.1,
+    "cost_usd": 0.1759
+   },
+   {
+    "run": 3,
+    "seconds": 26.7,
+    "extraction_end_s": 13.4,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 3.52,
+    "required_s": [
+     9.89
+    ],
+    "preferred_s": [
+     3.3
+    ],
+    "implicit_s": [
+     3.52
+    ],
+    "assess_p50_s": 2.8,
+    "assess_max_s": 4.2,
+    "rows": 34,
+    "status": {
+     "strong": 22,
+     "partial": 11,
+     "gap": 1
+    },
+    "strong_share": 0.65,
+    "recommendation": {
+     "recommendation": "Consider",
+     "fit_score": "Medium",
+     "strong_count": 22,
+     "partial_count": 11,
+     "gap_count": 1,
+     "required_gap_count": 1,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [
+     "Modernizing Railroad Revenue: Transitioning from Legacy to Cloud"
+    ],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "30/30",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 28.7,
+    "cost_usd": 0.1712
+   }
+  ]
+ },
+ "gpt-5.6-terra@low/demo": {
+  "errors": [],
+  "per_run": [
+   {
+    "run": 1,
+    "seconds": 19.3,
+    "extraction_end_s": 9.4,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 2.56,
+    "required_s": [
+     6.8
+    ],
+    "preferred_s": [
+     2.45
+    ],
+    "implicit_s": [
+     2.56
+    ],
+    "assess_p50_s": 3.1,
+    "assess_max_s": 4.65,
+    "rows": 21,
+    "status": {
+     "strong": 18,
+     "partial": 3
+    },
+    "strong_share": 0.86,
+    "recommendation": {
+     "recommendation": "Apply",
+     "fit_score": "High",
+     "strong_count": 18,
+     "partial_count": 3,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "17/17",
+    "model_written_dashes": 0,
+    "jd_dashes": 4,
+    "reasoning_tokens_mean": 16.2,
+    "cost_usd": 0.2137
+   },
+   {
+    "run": 2,
+    "seconds": 17.7,
+    "extraction_end_s": 9.6,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 2.97,
+    "required_s": [
+     6.63
+    ],
+    "preferred_s": [
+     2.76
+    ],
+    "implicit_s": [
+     2.97
+    ],
+    "assess_p50_s": 2.8,
+    "assess_max_s": 4.26,
+    "rows": 20,
+    "status": {
+     "strong": 18,
+     "partial": 2
+    },
+    "strong_share": 0.9,
+    "recommendation": {
+     "recommendation": "Apply",
+     "fit_score": "High",
+     "strong_count": 18,
+     "partial_count": 2,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "17/17",
+    "model_written_dashes": 0,
+    "jd_dashes": 4,
+    "reasoning_tokens_mean": 20.9,
+    "cost_usd": 0.1125
+   },
+   {
+    "run": 3,
+    "seconds": 20.1,
+    "extraction_end_s": 11.2,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 3.75,
+    "required_s": [
+     7.48
+    ],
+    "preferred_s": [
+     2.75
+    ],
+    "implicit_s": [
+     3.75
+    ],
+    "assess_p50_s": 2.8,
+    "assess_max_s": 3.83,
+    "rows": 21,
+    "status": {
+     "partial": 3,
+     "strong": 18
+    },
+    "strong_share": 0.86,
+    "recommendation": {
+     "recommendation": "Apply",
+     "fit_score": "High",
+     "strong_count": 18,
+     "partial_count": 3,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "17/17",
+    "model_written_dashes": 0,
+    "jd_dashes": 4,
+    "reasoning_tokens_mean": 18.5,
+    "cost_usd": 0.1106
+   }
+  ]
+ },
+ "gpt-5.6-terra@low#norule/att": {
+  "errors": [],
+  "per_run": [
+   {
+    "run": 1,
+    "seconds": 25.1,
+    "extraction_end_s": 12.9,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 3.45,
+    "required_s": [
+     9.45
+    ],
+    "preferred_s": [
+     3.32
+    ],
+    "implicit_s": [
+     3.45
+    ],
+    "assess_p50_s": 2.7,
+    "assess_max_s": 4.4,
+    "rows": 34,
+    "status": {
+     "strong": 21,
+     "partial": 13
+    },
+    "strong_share": 0.62,
+    "recommendation": {
+     "recommendation": "Consider",
+     "fit_score": "Medium",
+     "strong_count": 21,
+     "partial_count": 13,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "30/30",
+    "model_written_dashes": 1,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 22.9,
+    "cost_usd": 0.3234
+   },
+   {
+    "run": 2,
+    "seconds": 26.6,
+    "extraction_end_s": 12.8,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 3.23,
+    "required_s": [
+     9.58
+    ],
+    "preferred_s": [
+     3.84
+    ],
+    "implicit_s": [
+     3.23
+    ],
+    "assess_p50_s": 2.7,
+    "assess_max_s": 4.84,
+    "rows": 35,
+    "status": {
+     "strong": 24,
+     "partial": 11
+    },
+    "strong_share": 0.69,
+    "recommendation": {
+     "recommendation": "Consider",
+     "fit_score": "Medium",
+     "strong_count": 24,
+     "partial_count": 11,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "30/30",
+    "model_written_dashes": 1,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 21.6,
+    "cost_usd": 0.1809
+   },
+   {
+    "run": 3,
+    "seconds": 26.8,
+    "extraction_end_s": 12.2,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 3.0,
+    "required_s": [
+     9.25
+    ],
+    "preferred_s": [
+     3.28
+    ],
+    "implicit_s": [
+     3.0
+    ],
+    "assess_p50_s": 2.9,
+    "assess_max_s": 5.13,
+    "rows": 34,
+    "status": {
+     "strong": 24,
+     "partial": 10
+    },
+    "strong_share": 0.71,
+    "recommendation": {
+     "recommendation": "Apply",
+     "fit_score": "High",
+     "strong_count": 24,
+     "partial_count": 10,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [
+     "Modernizing Railroad Revenue: Transitioning from Legacy to Cloud"
+    ],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "30/30",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 26.9,
+    "cost_usd": 0.1624
+   }
+  ]
+ },
+ "gpt-5.6-terra@low#norule/demo": {
+  "errors": [],
+  "per_run": [
+   {
+    "run": 1,
+    "seconds": 19.2,
+    "extraction_end_s": 11.4,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 3.88,
+    "required_s": [
+     7.57
+    ],
+    "preferred_s": [
+     2.91
+    ],
+    "implicit_s": [
+     3.88
+    ],
+    "assess_p50_s": 2.6,
+    "assess_max_s": 3.68,
+    "rows": 20,
+    "status": {
+     "strong": 18,
+     "partial": 2
+    },
+    "strong_share": 0.9,
+    "recommendation": {
+     "recommendation": "Apply",
+     "fit_score": "High",
+     "strong_count": 18,
+     "partial_count": 2,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "17/17",
+    "model_written_dashes": 4,
+    "jd_dashes": 4,
+    "reasoning_tokens_mean": 22.8,
+    "cost_usd": 0.1984
+   },
+   {
+    "run": 2,
+    "seconds": 19.4,
+    "extraction_end_s": 11.6,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 4.82,
+    "required_s": [
+     6.79
+    ],
+    "preferred_s": [
+     2.7
+    ],
+    "implicit_s": [
+     4.82
+    ],
+    "assess_p50_s": 2.8,
+    "assess_max_s": 3.61,
+    "rows": 20,
+    "status": {
+     "partial": 3,
+     "strong": 17
+    },
+    "strong_share": 0.85,
+    "recommendation": {
+     "recommendation": "Apply",
+     "fit_score": "High",
+     "strong_count": 17,
+     "partial_count": 3,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "17/17",
+    "model_written_dashes": 2,
+    "jd_dashes": 4,
+    "reasoning_tokens_mean": 26.5,
+    "cost_usd": 0.1072
+   },
+   {
+    "run": 3,
+    "seconds": 18.3,
+    "extraction_end_s": 9.3,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 2.38,
+    "required_s": [
+     6.88
+    ],
+    "preferred_s": [
+     2.76
+    ],
+    "implicit_s": [
+     2.38
+    ],
+    "assess_p50_s": 2.7,
+    "assess_max_s": 3.45,
+    "rows": 21,
+    "status": {
+     "strong": 19,
+     "partial": 2
+    },
+    "strong_share": 0.9,
+    "recommendation": {
+     "recommendation": "Apply",
+     "fit_score": "High",
+     "strong_count": 19,
+     "partial_count": 2,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "17/17",
+    "model_written_dashes": 2,
+    "jd_dashes": 4,
+    "reasoning_tokens_mean": 18.5,
+    "cost_usd": 0.1088
+   }
+  ]
+ }
+}

@@ -1,0 +1,23 @@
+reference: union of today's runs, 6 (category, sentences) keys: r[2], r[6], r[7], r[9], r[10], r[11]
+=== gpt-5.6-terra@low/today
+  r1 extraction 10.91s (calls {'preferred': 5.44, 'required': 7.78, 'implicit': 3.13}) | output tokens {'preferred': 43, 'required': 1050, 'implicit': 12} | required 11 preferred 0 implicit 0 | kinds {'whole sentence': 11} | verbatim 11/11 | vs today: matched 5, extra 0, missing 1
+     keys: r[6], r[6], r[7], r[7], r[9], r[9], r[9], r[10], r[11], r[11], r[11]
+     missing: r[2]
+  r2 extraction 9.8s (calls {'preferred': 2.73, 'required': 7.28, 'implicit': 2.52}) | output tokens {'preferred': 40, 'required': 1026, 'implicit': 138} | required 11 preferred 0 implicit 1 | kinds {'whole sentence': 11} | verbatim 11/11 | vs today: matched 5, extra 0, missing 1
+     keys: r[6], r[6], r[7], r[7], r[9], r[9], r[9], r[10], r[11], r[11], r[11]
+     missing: r[2]
+  r3 extraction 9.89s (calls {'preferred': 1.24, 'required': 8.61, 'implicit': 1.28}) | output tokens {'preferred': 44, 'required': 1067, 'implicit': 38} | required 11 preferred 0 implicit 0 | kinds {'whole sentence': 11} | verbatim 11/11 | vs today: matched 6, extra 0, missing 0
+     keys: r[6], r[6], r[7], r[7], r[9], r[9], r[9], r[10], r[11], r[11], r[2]
+=== gpt-5.6-terra@low/sentences
+  r1 extraction 7.27s (calls {'preferred': 1.49, 'required': 4.32, 'implicit': 2.95}) | output tokens {'preferred': 28, 'required': 473, 'implicit': 61} | required 10 preferred 0 implicit 0 | kinds {'2 numbers': 5, 'one number': 4, '3 numbers': 1} | verbatim 4/10 | vs today: matched 3, extra 6, missing 3
+     keys: r[5, 6], r[6], r[6], r[7, 9, 11], r[7, 9], r[7, 11], r[9], r[9, 11], r[3, 5], r[10]
+     extra: r[3, 5], r[5, 6], r[7, 9], r[7, 9, 11], r[7, 11], r[9, 11]
+     missing: r[2], r[7], r[11]
+  r2 extraction 5.33s (calls {'preferred': 1.28, 'required': 4.43, 'implicit': 0.9}) | output tokens {'preferred': 27, 'required': 489, 'implicit': 12} | required 10 preferred 0 implicit 0 | kinds {'2 numbers': 2, 'one number': 4, '3 numbers': 4} | verbatim 4/10 | vs today: matched 3, extra 4, missing 3
+     keys: r[5, 6], r[6], r[6], r[7, 9, 11], r[7, 9, 11], r[7, 9, 11], r[9], r[9, 11], r[10], r[3, 5, 9]
+     extra: r[3, 5, 9], r[5, 6], r[7, 9, 11], r[9, 11]
+     missing: r[2], r[7], r[11]
+  r3 extraction 5.48s (calls {'preferred': 1.23, 'required': 3.51, 'implicit': 1.97}) | output tokens {'preferred': 28, 'required': 435, 'implicit': 168} | required 8 preferred 0 implicit 3 | kinds {'2 numbers': 3, 'one number': 3, '3 numbers': 2} | verbatim 3/8 | vs today: matched 2, extra 5, missing 4
+     keys: r[5, 6], r[6], r[6], r[7, 9, 11], r[7, 9], r[7, 11], r[9], r[3, 5, 9]
+     extra: r[3, 5, 9], r[5, 6], r[7, 9], r[7, 9, 11], r[7, 11]
+     missing: r[2], r[7], r[10], r[11]

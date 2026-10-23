@@ -1,0 +1,2 @@
+{"read_timeout_s": 3.0, "outcome": "APITimeoutError", "seconds": 3.32}
+{"read_timeout_s": 30.0, "outcome": "ok", "seconds": 9.11, "output_tokens": 1520}
