@@ -18,8 +18,9 @@ import shutil
 from datetime import UTC, datetime
 from pathlib import Path
 
+import httpx
 from dotenv import load_dotenv
-from openai import OpenAI
+from openai import APIConnectionError, APITimeoutError, OpenAI, RateLimitError
 
 # Pure helpers moved to utils/formatting.py (MATTGPT-216) so unit tests can
 # exercise them without importing this module and triggering the eager
@@ -38,8 +39,21 @@ api_key = os.getenv("OPENAI_API_KEY")
 project_id = os.getenv("OPENAI_PROJECT_ID")
 org_id = os.getenv("OPENAI_ORG_ID")
 
+# A slow reply fails after TAG_READ_TIMEOUT_S instead of the SDK's 600 s, and
+# the SDK's silent retries are off: extract_semantic_tags() retries itself so
+# the output names the story and the error type.
+TAG_READ_TIMEOUT_S = 60
+TAG_ATTEMPTS = 2
+RETRYABLE_ERRORS = (APITimeoutError, APIConnectionError, RateLimitError)
+
 # Initialize OpenAI client
-client = OpenAI(api_key=api_key, project=project_id, organization=org_id)
+client = OpenAI(
+    api_key=api_key,
+    project=project_id,
+    organization=org_id,
+    timeout=httpx.Timeout(TAG_READ_TIMEOUT_S, connect=5.0),
+    max_retries=0,
+)
 
 INPUT_FILE = "echo_star_stories.jsonl"
 OUTPUT_FILE = "echo_star_stories_nlp.jsonl"  # Overwrites original after backup
@@ -64,7 +78,8 @@ def extract_semantic_tags(story) -> list[str]:
     """Generate discovery-vocabulary tags for a story.
 
     Returns a list of tag strings parsed from the LLM's JSON response.
-    Empty list on API or parse error.
+    Empty list on API or parse error. A timeout, connection error or rate
+    limit is retried once (TAG_ATTEMPTS), printing the story ID and type.
     """
     # For Independent Product Development stories, append a context note so
     # the LLM doesn't hallucinate stakeholder/change-management/coordination
@@ -113,34 +128,44 @@ def extract_semantic_tags(story) -> list[str]:
     )
 
     try:
-        response = client.chat.completions.create(
-            model=MODEL,
-            messages=[
-                {"role": "system", "content": system_msg},
-                {"role": "user", "content": user_msg},
-            ],
-            temperature=0.3,
-            response_format={
-                "type": "json_schema",
-                "json_schema": {
-                    "name": "story_tags",
-                    "strict": True,
-                    "schema": {
-                        "type": "object",
-                        "properties": {
-                            "tags": {
-                                "type": "array",
-                                "items": {"type": "string"},
-                                "minItems": 8,
-                                "maxItems": 15,
+        for attempt in range(1, TAG_ATTEMPTS + 1):
+            try:
+                response = client.chat.completions.create(
+                    model=MODEL,
+                    messages=[
+                        {"role": "system", "content": system_msg},
+                        {"role": "user", "content": user_msg},
+                    ],
+                    temperature=0.3,
+                    response_format={
+                        "type": "json_schema",
+                        "json_schema": {
+                            "name": "story_tags",
+                            "strict": True,
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "tags": {
+                                        "type": "array",
+                                        "items": {"type": "string"},
+                                        "minItems": 8,
+                                        "maxItems": 15,
+                                    },
+                                },
+                                "required": ["tags"],
+                                "additionalProperties": False,
                             },
                         },
-                        "required": ["tags"],
-                        "additionalProperties": False,
                     },
-                },
-            },
-        )
+                )
+                break
+            except RETRYABLE_ERRORS as e:
+                print(
+                    f"⚠️  Story ID {story.get('id')}: {type(e).__name__}"
+                    f" (attempt {attempt} of {TAG_ATTEMPTS})"
+                )
+                if attempt == TAG_ATTEMPTS:
+                    raise
         payload = json.loads(response.choices[0].message.content)
         raw_tags = [
             str(t).strip() for t in (payload.get("tags") or []) if str(t).strip()
