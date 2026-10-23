@@ -1,0 +1,117 @@
+[
+ {
+  "arm": "dates off",
+  "row": "demo 5+ leading",
+  "i": 1,
+  "seconds": 3.05,
+  "input": 2986,
+  "cached": 0,
+  "output": 185,
+  "result": {
+   "requirement": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+   "match_status": "strong",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Leading People: From Delivery Teams to a 150-Person Organization",
+     "client": "Fortune 500 Clients",
+     "relevance": "From 2009 through 2023, Matt led managers and senior technical leads across multiple delivery teams and later managed 11 to 13 practice and client leads in a 150+ person organization."
+    }
+   ],
+   "gap_explanation": "",
+   "confidence": "high"
+  }
+ },
+ {
+  "arm": "dates off",
+  "row": "demo 5+ leading",
+  "i": 2,
+  "seconds": 5.26,
+  "input": 2986,
+  "cached": 2983,
+  "output": 168,
+  "result": {
+   "requirement": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+   "match_status": "strong",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Leading People: From Delivery Teams to a 150-Person Organization",
+     "client": "Fortune 500 Clients",
+     "relevance": "From 2009 through 2023, Matt led managers and senior technical leads across multiple delivery teams and a 150+ person, two-layer organization with 11-13 leads reporting directly to him."
+    }
+   ],
+   "gap_explanation": "",
+   "confidence": "high"
+  }
+ },
+ {
+  "arm": "dates off",
+  "row": "demo 5+ leading",
+  "i": 3,
+  "seconds": 2.13,
+  "input": 2986,
+  "cached": 2983,
+  "output": 141,
+  "result": {
+   "requirement": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+   "match_status": "strong",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Leading People: From Delivery Teams to a 150-Person Organization",
+     "client": "Fortune 500 Clients",
+     "relevance": "From 2009 through 2023, Matt led managers and senior technical leads across multiple delivery teams and a 150+ person, two-layer organization."
+    }
+   ],
+   "gap_explanation": "",
+   "confidence": "high"
+  }
+ },
+ {
+  "arm": "dates off",
+  "row": "demo 5+ leading",
+  "i": 4,
+  "seconds": 2.56,
+  "input": 2986,
+  "cached": 2983,
+  "output": 160,
+  "result": {
+   "requirement": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+   "match_status": "strong",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Leading People: From Delivery Teams to a 150-Person Organization",
+     "client": "Fortune 500 Clients",
+     "relevance": "From 2009 through 2023, he led managers and senior technical leads across multiple delivery teams and later directed 11 to 13 practice and client leads in a 150+ person organization."
+    }
+   ],
+   "gap_explanation": "",
+   "confidence": "high"
+  }
+ },
+ {
+  "arm": "dates off",
+  "row": "demo 5+ leading",
+  "i": 5,
+  "seconds": 8.24,
+  "input": 2986,
+  "cached": 2983,
+  "output": 191,
+  "result": {
+   "requirement": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+   "match_status": "strong",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Leading People: From Delivery Teams to a 150-Person Organization",
+     "client": "Fortune 500 Clients",
+     "relevance": "From 2009 through 2023, Matt led managers and senior technical leads across multiple delivery teams and later directly led 11-13 practice and client leads in a 150+ person, two-layer organization."
+    }
+   ],
+   "gap_explanation": "",
+   "confidence": "high"
+  }
+ }
+]

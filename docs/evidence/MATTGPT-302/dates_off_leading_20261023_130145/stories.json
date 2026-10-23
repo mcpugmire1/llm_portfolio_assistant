@@ -1,0 +1,47 @@
+{
+ "dates off / demo 5+ leading": {
+  "requirement": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+  "stories": [
+   {
+    "title": "Leading People: From Delivery Teams to a 150-Person Organization",
+    "id": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients",
+    "score": 0.532327831,
+    "Theme": "Talent & Enablement",
+    "Start_Date": "2005-03",
+    "End_Date": "2023-09"
+   },
+   {
+    "title": "Enhancing Team Proficiency through Servant Leadership and Mentorship",
+    "id": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture",
+    "score": 0.531640232,
+    "Theme": "Org & Working-Model Transformation",
+    "Start_Date": "2019-11",
+    "End_Date": "2023-09"
+   },
+   {
+    "title": "Leadership Philosophy: How I Lead",
+    "id": "leadership-philosophy-how-i-lead|accenture",
+    "score": 0.510937691,
+    "Theme": "Professional Narrative",
+    "Start_Date": "2005-03",
+    "End_Date": "2023-09"
+   },
+   {
+    "title": "Architecting Enhancements for AT&T's Network Engineering Platform",
+    "id": "architecting-enhancements-for-atts-network-engineering-platform|att",
+    "score": 0.484702229,
+    "Theme": "Execution & Delivery",
+    "Start_Date": "2007-08",
+    "End_Date": "2008-06"
+   },
+   {
+    "title": "About Matt: My Leadership Journey",
+    "id": "about-matt-my-leadership-journey|accenture",
+    "score": 0.49458015,
+    "Theme": "Professional Narrative",
+    "Start_Date": "2005-03",
+    "End_Date": "2023-09"
+   }
+  ]
+ }
+}

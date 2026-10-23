@@ -1,0 +1,182 @@
+{
+ "dates off / att 7+ cloud": {
+  "requirement": "7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.",
+  "stories": [
+   {
+    "title": "Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD",
+    "id": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients",
+    "score": 0.456605792,
+    "Theme": "Execution & Delivery",
+    "Start_Date": "2019-11",
+    "End_Date": "2023-09"
+   },
+   {
+    "title": "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+    "id": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture",
+    "score": 0.444978297,
+    "Theme": "Talent & Enablement",
+    "Start_Date": "2019-11",
+    "End_Date": "2023-09"
+   },
+   {
+    "title": "Why Hire Matt?",
+    "id": "why-hire-matt|accenture",
+    "score": 0.460894108,
+    "Theme": "Professional Narrative",
+    "Start_Date": "2026-02",
+    "End_Date": "2026-02"
+   },
+   {
+    "title": "Enhancing Team Proficiency through Servant Leadership and Mentorship",
+    "id": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture",
+    "score": 0.463630229,
+    "Theme": "Org & Working-Model Transformation",
+    "Start_Date": "2019-11",
+    "End_Date": "2023-09"
+   },
+   {
+    "title": "Building Self-Healing Systems through Resilience Engineering",
+    "id": "building-self-healing-systems-through-resilience-engineering|fortune-500-clients",
+    "score": 0.442988306,
+    "Theme": "Execution & Delivery",
+    "Start_Date": "2019-11",
+    "End_Date": "2023-09"
+   }
+  ]
+ },
+ "dates off / demo 10+ SE": {
+  "requirement": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+  "stories": [
+   {
+    "title": "Why Hire Matt?",
+    "id": "why-hire-matt|accenture",
+    "score": 0.463986725,
+    "Theme": "Professional Narrative",
+    "Start_Date": "2026-02",
+    "End_Date": "2026-02"
+   },
+   {
+    "title": "Scaling Development Capacity with Modern Engineering Practices",
+    "id": "scaling-development-capacity-with-modern-engineering-practices|capital-one",
+    "score": 0.461220026,
+    "Theme": "Execution & Delivery",
+    "Start_Date": "2021-01",
+    "End_Date": "2021-12"
+   },
+   {
+    "title": "About Matt: My Leadership Journey",
+    "id": "about-matt-my-leadership-journey|accenture",
+    "score": 0.462714314,
+    "Theme": "Professional Narrative",
+    "Start_Date": "2005-03",
+    "End_Date": "2023-09"
+   },
+   {
+    "title": "Enhancing Team Proficiency through Servant Leadership and Mentorship",
+    "id": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture",
+    "score": 0.457550347,
+    "Theme": "Org & Working-Model Transformation",
+    "Start_Date": "2019-11",
+    "End_Date": "2023-09"
+   },
+   {
+    "title": "Building Sparkfly's Platform Alongside Its Founder",
+    "id": "building-sparkflys-platform-alongside-its-founder|sparkfly",
+    "score": 0.439274967,
+    "Theme": "Execution & Delivery",
+    "Start_Date": "2000-11",
+    "End_Date": "2001-12"
+   }
+  ]
+ },
+ "dates off / demo 5+ leading": {
+  "requirement": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+  "stories": [
+   {
+    "title": "Leading People: From Delivery Teams to a 150-Person Organization",
+    "id": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients",
+    "score": 0.532327831,
+    "Theme": "Talent & Enablement",
+    "Start_Date": "2005-03",
+    "End_Date": "2023-09"
+   },
+   {
+    "title": "Enhancing Team Proficiency through Servant Leadership and Mentorship",
+    "id": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture",
+    "score": 0.531640232,
+    "Theme": "Org & Working-Model Transformation",
+    "Start_Date": "2019-11",
+    "End_Date": "2023-09"
+   },
+   {
+    "title": "Leadership Philosophy: How I Lead",
+    "id": "leadership-philosophy-how-i-lead|accenture",
+    "score": 0.510937691,
+    "Theme": "Professional Narrative",
+    "Start_Date": "2005-03",
+    "End_Date": "2023-09"
+   },
+   {
+    "title": "Architecting Enhancements for AT&T's Network Engineering Platform",
+    "id": "architecting-enhancements-for-atts-network-engineering-platform|att",
+    "score": 0.484702229,
+    "Theme": "Execution & Delivery",
+    "Start_Date": "2007-08",
+    "End_Date": "2008-06"
+   },
+   {
+    "title": "About Matt: My Leadership Journey",
+    "id": "about-matt-my-leadership-journey|accenture",
+    "score": 0.49458015,
+    "Theme": "Professional Narrative",
+    "Start_Date": "2005-03",
+    "End_Date": "2023-09"
+   }
+  ]
+ },
+ "narrative excluded / demo 10+ SE": {
+  "requirement": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+  "stories": [
+   {
+    "title": "Scaling Development Capacity with Modern Engineering Practices",
+    "id": "scaling-development-capacity-with-modern-engineering-practices|capital-one",
+    "score": 0.461220026,
+    "Theme": "Execution & Delivery",
+    "Start_Date": "2021-01",
+    "End_Date": "2021-12"
+   },
+   {
+    "title": "Enhancing Team Proficiency through Servant Leadership and Mentorship",
+    "id": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture",
+    "score": 0.457550347,
+    "Theme": "Org & Working-Model Transformation",
+    "Start_Date": "2019-11",
+    "End_Date": "2023-09"
+   },
+   {
+    "title": "Building Sparkfly's Platform Alongside Its Founder",
+    "id": "building-sparkflys-platform-alongside-its-founder|sparkfly",
+    "score": 0.439274967,
+    "Theme": "Execution & Delivery",
+    "Start_Date": "2000-11",
+    "End_Date": "2001-12"
+   },
+   {
+    "title": "Leading People: From Delivery Teams to a 150-Person Organization",
+    "id": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients",
+    "score": 0.430616975,
+    "Theme": "Talent & Enablement",
+    "Start_Date": "2005-03",
+    "End_Date": "2023-09"
+   },
+   {
+    "title": "Transforming Legacy Systems through Incremental App Modernization",
+    "id": "transforming-legacy-systems-through-incremental-app-modernization|fortune-500-clients",
+    "score": 0.4318223,
+    "Theme": "Execution & Delivery",
+    "Start_Date": "2019-11",
+    "End_Date": "2023-09"
+   }
+  ]
+ }
+}

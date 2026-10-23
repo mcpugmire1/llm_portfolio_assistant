@@ -1,0 +1,152 @@
+{
+ "att 7+ cloud": {
+  "requirement": "7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.",
+  "stories": [
+   {
+    "title": "Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD",
+    "client": "Fortune 500 Clients",
+    "id": "accelerating-enterprise-delivery-through-cloud-native-architecture-and-cicd|fortune-500-clients",
+    "score": 0.456605792,
+    "Start_Date": "2019-11",
+    "End_Date": "2023-09",
+    "Theme": "Execution & Delivery"
+   },
+   {
+    "title": "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+    "client": "Accenture",
+    "id": "building-cloud-innovation-centers-cic---bringing-silicon-valley-product-culture-to-fortune-500|accenture",
+    "score": 0.444978297,
+    "Start_Date": "2019-11",
+    "End_Date": "2023-09",
+    "Theme": "Talent & Enablement"
+   },
+   {
+    "title": "Why Hire Matt?",
+    "client": "Accenture",
+    "id": "why-hire-matt|accenture",
+    "score": 0.460894108,
+    "Start_Date": "2026-02",
+    "End_Date": "2026-02",
+    "Theme": "Professional Narrative"
+   },
+   {
+    "title": "Enhancing Team Proficiency through Servant Leadership and Mentorship",
+    "client": "Accenture",
+    "id": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture",
+    "score": 0.463630229,
+    "Start_Date": "2019-11",
+    "End_Date": "2023-09",
+    "Theme": "Org & Working-Model Transformation"
+   },
+   {
+    "title": "Building Self-Healing Systems through Resilience Engineering",
+    "client": "Fortune 500 Clients",
+    "id": "building-self-healing-systems-through-resilience-engineering|fortune-500-clients",
+    "score": 0.442988306,
+    "Start_Date": "2019-11",
+    "End_Date": "2023-09",
+    "Theme": "Execution & Delivery"
+   }
+  ]
+ },
+ "demo 10+ SE": {
+  "requirement": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+  "stories": [
+   {
+    "title": "Why Hire Matt?",
+    "client": "Accenture",
+    "id": "why-hire-matt|accenture",
+    "score": 0.463986725,
+    "Start_Date": "2026-02",
+    "End_Date": "2026-02",
+    "Theme": "Professional Narrative"
+   },
+   {
+    "title": "Scaling Development Capacity with Modern Engineering Practices",
+    "client": "Capital One",
+    "id": "scaling-development-capacity-with-modern-engineering-practices|capital-one",
+    "score": 0.461220026,
+    "Start_Date": "2021-01",
+    "End_Date": "2021-12",
+    "Theme": "Execution & Delivery"
+   },
+   {
+    "title": "About Matt: My Leadership Journey",
+    "client": "Accenture",
+    "id": "about-matt-my-leadership-journey|accenture",
+    "score": 0.462714314,
+    "Start_Date": "2005-03",
+    "End_Date": "2023-09",
+    "Theme": "Professional Narrative"
+   },
+   {
+    "title": "Enhancing Team Proficiency through Servant Leadership and Mentorship",
+    "client": "Accenture",
+    "id": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture",
+    "score": 0.457550347,
+    "Start_Date": "2019-11",
+    "End_Date": "2023-09",
+    "Theme": "Org & Working-Model Transformation"
+   },
+   {
+    "title": "Building Sparkfly's Platform Alongside Its Founder",
+    "client": "Sparkfly",
+    "id": "building-sparkflys-platform-alongside-its-founder|sparkfly",
+    "score": 0.439274967,
+    "Start_Date": "2000-11",
+    "End_Date": "2001-12",
+    "Theme": "Execution & Delivery"
+   }
+  ]
+ },
+ "demo 5+ leading": {
+  "requirement": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+  "stories": [
+   {
+    "title": "Leading People: From Delivery Teams to a 150-Person Organization",
+    "client": "Fortune 500 Clients",
+    "id": "leading-people-from-delivery-teams-to-a-150-person-organization|fortune-500-clients",
+    "score": 0.532327831,
+    "Start_Date": "2005-03",
+    "End_Date": "2023-09",
+    "Theme": "Talent & Enablement"
+   },
+   {
+    "title": "Enhancing Team Proficiency through Servant Leadership and Mentorship",
+    "client": "Accenture",
+    "id": "enhancing-team-proficiency-through-servant-leadership-and-mentorship|accenture",
+    "score": 0.531640232,
+    "Start_Date": "2019-11",
+    "End_Date": "2023-09",
+    "Theme": "Org & Working-Model Transformation"
+   },
+   {
+    "title": "Leadership Philosophy: How I Lead",
+    "client": "Accenture",
+    "id": "leadership-philosophy-how-i-lead|accenture",
+    "score": 0.510937691,
+    "Start_Date": "2005-03",
+    "End_Date": "2023-09",
+    "Theme": "Professional Narrative"
+   },
+   {
+    "title": "Architecting Enhancements for AT&T's Network Engineering Platform",
+    "client": "AT&T",
+    "id": "architecting-enhancements-for-atts-network-engineering-platform|att",
+    "score": 0.484702229,
+    "Start_Date": "2007-08",
+    "End_Date": "2008-06",
+    "Theme": "Execution & Delivery"
+   },
+   {
+    "title": "About Matt: My Leadership Journey",
+    "client": "Accenture",
+    "id": "about-matt-my-leadership-journey|accenture",
+    "score": 0.49458015,
+    "Start_Date": "2005-03",
+    "End_Date": "2023-09",
+    "Theme": "Professional Narrative"
+   }
+  ]
+ }
+}

@@ -1,0 +1,224 @@
+att | A r1 | strong (high)
+  requirement: 7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.
+  evidence: [story] Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD: Demonstrates extensive experience with cloud-native architecture and infrastructure services.; [story] Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500: Shows leadership in cloud platform engineering and governance practices over multiple years.
+  note: none
+
+att | A r2 | strong (high)
+  requirement: 7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.
+  evidence: [story] Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD: Demonstrates extensive experience with cloud-native architecture and infrastructure services.; [story] Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500: Shows leadership in cloud platform engineering and governance practices over multiple years.
+  note: none
+
+att | A r3 | strong (high)
+  requirement: 7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.
+  evidence: [story] Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD: Demonstrates extensive experience with cloud-native architecture and infrastructure services.; [story] Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500: Shows leadership in cloud platform engineering and governance practices.
+  note: none
+
+att | gpt-5.6-terra@low r1 | partial (high)
+  requirement: 7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.
+  evidence: [story] Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD: Established cloud-native architecture patterns, infrastructure as code, CI/CD, observability, and delivery practices within enterprise governance and compliance constraints.; [story] Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500: Built cloud platforms and CI/CD infrastructure while integrating enterprise security scanning, access controls, governance checkpoints, and stage-gate processes over four years.
+  note: Note: Evidence does not establish seven or more years of cloud experience.
+
+att | gpt-5.6-terra@low r2 | partial (medium)
+  requirement: 7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.
+  evidence: [story] Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500: Built and led Cloud Innovation Centers over four years, establishing cloud platforms, CI/CD, security scanning, deployment pipelines, access controls, and enterprise governance checkpoints.; [story] Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD: Established cloud-native architecture, infrastructure as code, Kubernetes, monitoring, and delivery practices across 15+ enterprise engagements.
+  note: Note: Seven or more years of cloud and governance experience is not explicitly documented.
+
+att | gpt-5.6-terra@low r3 | partial (high)
+  requirement: 7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.
+  evidence: [story] Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD: Designed cloud-native architecture patterns, infrastructure as code, CI/CD, monitoring, and delivery practices within enterprise governance and compliance constraints.; [story] Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500: Built cloud platforms and engineering capabilities, integrating CI/CD with enterprise security scanning, access controls, governance checkpoints, and stage gates.
+  note: Note: Provided evidence does not establish seven or more years of cloud experience.
+
+att | gpt-5.6-terra@low#lines r1 | partial (high)
+  requirement: 7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.
+  evidence: [story] Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD: Established cloud-native architecture patterns, infrastructure as code, Kubernetes, serverless approaches, monitoring, and delivery practices under enterprise governance and compliance requirements.; [story] Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500: Built cloud platforms and CI/CD infrastructure while integrating enterprise security scanning, access controls, governance checkpoints, and stage-gate processes over four years.
+  note: Note: Evidence does not establish seven or more years of cloud experience.
+
+att | gpt-5.6-terra@low#lines r2 | partial (high)
+  requirement: 7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.
+  evidence: [story] Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD: Designed cloud-native architecture patterns, infrastructure as code, CI/CD, observability, and enterprise delivery practices under compliance and governance constraints.; [story] Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500: Built cloud platforms and engineering practices for enterprise engagements over four years, including security scanning, access controls, and governance checkpoints.
+  note: Note: Provided evidence does not establish seven or more years of cloud experience.
+
+att | gpt-5.6-terra@low#lines r3 | partial (medium)
+  requirement: 7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.
+  evidence: [story] Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500: Built Cloud Innovation Centers over four years, establishing cloud platforms, CI/CD infrastructure, and enterprise governance checkpoints, security scanning, and access controls.; [story] Building Self-Healing Systems through Resilience Engineering: Led cloud-native resilience practices including auto-scaling, load balancing, health checks, monitoring, and automated recovery across client engagements.
+  note: Note: Evidence does not explicitly establish seven years of cloud and governance experience.
+
+att | gpt-5.6-terra@medium r1 | partial (medium)
+  requirement: 7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.
+  evidence: [story] Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD: Established cloud-native architecture, infrastructure as code, Kubernetes, serverless patterns, observability, and deployment controls across 15+ enterprise engagements.; [story] Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500: Built cloud platforms and CI/CD infrastructure while integrating enterprise governance checkpoints, security scanning, deployment pipelines, and access controls.
+  note: Note: Provided evidence does not document seven or more years of cloud experience.
+
+att | gpt-5.6-terra@medium r2 | partial (medium)
+  requirement: 7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.
+  evidence: [story] Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD: Designed cloud-native architecture patterns, infrastructure as code, Kubernetes, serverless approaches, CI/CD, monitoring, and enterprise governance-aware delivery across 15+ engagements.; [story] Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500: Built cloud-platform delivery capability over four years, including CI/CD, cloud platforms, security scanning, deployment pipelines, access controls, and enterprise governance checkpoints.
+  note: Note: Evidence does not clearly establish seven or more years of cloud experience.
+
+att | gpt-5.6-terra@medium r3 | partial (high)
+  requirement: 7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.
+  evidence: [story] Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD: Designed cloud-native architecture patterns, infrastructure as code, Kubernetes, serverless approaches, CI/CD, monitoring, and practices adapted to enterprise governance and compliance.; [story] Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500: Built cloud platforms and delivery infrastructure, integrating CI/CD with enterprise security scanning, access controls, and governance checkpoints over four years.
+  note: Note: Provided evidence does not verify seven or more years of cloud experience.
+
+att | gpt-5.6-terra@medium#lines r1 | partial (medium)
+  requirement: 7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.
+  evidence: [story] Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD: Designed cloud-native architecture patterns, infrastructure as code, CI/CD, monitoring, and enterprise practices across 15+ client engagements.; [story] Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500: Built cloud platforms and delivery infrastructure for a four-year Cloud Innovation Center practice, integrating security, access controls, and enterprise governance checkpoints.
+  note: Note: Seven years of cloud and governance experience is not directly evidenced.
+
+att | gpt-5.6-terra@medium#lines r2 | partial (medium)
+  requirement: 7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.
+  evidence: [story] Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD: Designed cloud-native architecture patterns and infrastructure as code, with monitoring, automated deployment gates, and delivery practices aligned to enterprise governance and regulatory constraints.; [story] Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500: Built cloud platforms and CI/CD infrastructure, integrating security scanning, access controls, and enterprise governance checkpoints over four years.
+  note: Note: Provided evidence does not establish seven or more years of relevant experience.
+
+att | gpt-5.6-terra@medium#lines r3 | partial (high)
+  requirement: 7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.
+  evidence: [story] Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD: Established cloud-native architecture patterns, infrastructure as code, automated deployment gates, monitoring, and practices designed for enterprise governance and regulatory constraints.; [story] Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500: Built cloud platforms and CI/CD infrastructure, integrating enterprise security scanning, access controls, governance checkpoints, and deployment pipelines over four years.
+  note: Note: Provided evidence does not clearly establish seven or more years.
+
+demo | A r1 | strong (high)
+  requirement: 10+ years of progressive software engineering experience, including hands-on development earlier in career
+  evidence: [story] Building Sparkfly's Platform Alongside Its Founder: Describes early hands-on development and progression to lead developer role.; [story] Why Hire Matt?: Details progression from engineer to Director, indicating over 10 years of experience.
+  note: none
+
+demo | A r1 | strong (high)
+  requirement: 5+ years leading engineering managers and senior technical leaders in a multi-team environment
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: Managed a 150+ person organization with 11-13 direct-report practice and client leads.; [story] About Matt: My Leadership Journey: Scaled the Cloud Innovation Center from 0 to 150+ professionals, leading cross-functional teams.
+  note: none
+
+demo | A r2 | strong (high)
+  requirement: 10+ years of progressive software engineering experience, including hands-on development earlier in career
+  evidence: [story] Building Sparkfly's Platform Alongside Its Founder: Describes early hands-on development and progression to lead developer role.; [story] Why Hire Matt?: Details progression from engineer to Director, indicating over 10 years of experience.
+  note: none
+
+demo | A r2 | strong (high)
+  requirement: 5+ years leading engineering managers and senior technical leaders in a multi-team environment
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: Managed a 150+ person organization with 11-13 direct-report practice and client leads.; [story] About Matt: My Leadership Journey: Scaled the Cloud Innovation Center from 0 to 150+ professionals, leading cross-functional teams.
+  note: none
+
+demo | A r3 | strong (high)
+  requirement: 10+ years of progressive software engineering experience, including hands-on development earlier in career
+  evidence: [story] Why Hire Matt?: Describes progression from engineer to Director, indicating extensive experience.; [story] Building Sparkfly's Platform Alongside Its Founder: Details early career hands-on development, showing foundational engineering experience.
+  note: none
+
+demo | A r3 | strong (high)
+  requirement: 5+ years leading engineering managers and senior technical leaders in a multi-team environment
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: Managed a 150+ person organization with 11-13 direct-report practice and client leads.; [story] About Matt: My Leadership Journey: Scaled the Cloud Innovation Center from 0 to 150+ professionals, leading cross-functional teams.
+  note: none
+
+demo | gpt-5.6-terra@low r1 | partial (medium)
+  requirement: 5+ years leading engineering managers and senior technical leaders in a multi-team environment
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: Led a 150+ person, multi-team organization through 11 to 13 direct-report practice and client leads, including engineering practice leads.; [story] Enhancing Team Proficiency through Servant Leadership and Mentorship: Developed senior engineers through a tiered coaching framework and engineering learning communities across cloud-native, DevOps, and Agile practices.
+  note: Note: Evidence does not establish five or more years leading engineering managers.
+
+demo | gpt-5.6-terra@low r1 | strong (high)
+  requirement: 10+ years of progressive software engineering experience, including hands-on development earlier in career
+  evidence: [story] Why Hire Matt?: States progression from engineer to Director, including enterprise platform engineering, cloud-native architecture, and engineering leadership.; [story] Building Sparkfly's Platform Alongside Its Founder: Directly documents early-career hands-on production development, progressing from developer to lead while building and refactoring a production platform.
+  note: none
+
+demo | gpt-5.6-terra@low r2 | partial (medium)
+  requirement: 10+ years of progressive software engineering experience, including hands-on development earlier in career
+  evidence: [story] Why Hire Matt?: Describes progression from engineer to Director while building and integrating enterprise platforms and architecting cloud-native systems.; [story] Building Sparkfly's Platform Alongside Its Founder: Directly documents early-career hands-on production development, including leading developers while coding and refactoring a live Java web platform.
+  note: Note: Stories do not explicitly document 10 or more years of engineering duration.
+
+demo | gpt-5.6-terra@low r2 | partial (medium)
+  requirement: 5+ years leading engineering managers and senior technical leaders in a multi-team environment
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: Led a 150+ person, multi-team organization through 11-13 direct-report practice and client leads, including engineering practice leadership.
+  note: Note: Five-plus years and direct leadership of engineering managers are not established.
+
+demo | gpt-5.6-terra@low r3 | partial (medium)
+  requirement: 5+ years leading engineering managers and senior technical leaders in a multi-team environment
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: Led a 150+ person, multi-team organization through 11-13 direct-report practice and client leads, including engineering practice leadership.; [story] Enhancing Team Proficiency through Servant Leadership and Mentorship: Developed senior engineers through a tiered coaching framework and engineering learning communities across cloud-native, DevOps, and Agile practices.
+  note: Note: Evidence does not establish five or more years leading engineering leaders.
+
+demo | gpt-5.6-terra@low r3 | strong (high)
+  requirement: 10+ years of progressive software engineering experience, including hands-on development earlier in career
+  evidence: [story] Why Hire Matt?: Matt describes progressing from engineer to Director while building and integrating enterprise platforms and architecting cloud-native systems.; [story] Building Sparkfly's Platform Alongside Its Founder: Early-career evidence shows hands-on production development, including commerce features, Oracle PL/SQL, and refactoring from JSPs to an MVC servlet and bean architecture.
+  note: none
+
+demo | gpt-5.6-terra@low#lines r1 | partial (medium)
+  requirement: 5+ years leading engineering managers and senior technical leaders in a multi-team environment
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: Led a 150+ person, multi-team organization through 11 to 13 practice and client leads, including engineering practice leads and team technical leadership bridges.; [story] Enhancing Team Proficiency through Servant Leadership and Mentorship: Developed senior engineers through a tiered coaching framework and engineering learning communities across cloud-native, DevOps, and Agile practices.
+  note: Note: Five-year duration leading engineering managers and senior technical leaders is not specified.
+
+demo | gpt-5.6-terra@low#lines r1 | strong (high)
+  requirement: 10+ years of progressive software engineering experience, including hands-on development earlier in career
+  evidence: [story] Why Hire Matt?: States Matt progressed from engineer to Director while building and integrating enterprise platforms and architecting cloud-native systems.; [story] Building Sparkfly's Platform Alongside Its Founder: Documents hands-on production development in 2000-2001, including leading developers while coding an enterprise commerce platform.
+  note: none
+
+demo | gpt-5.6-terra@low#lines r2 | partial (medium)
+  requirement: 10+ years of progressive software engineering experience, including hands-on development earlier in career
+  evidence: [story] Why Hire Matt?: Describes progression from engineer to Director while building and integrating enterprise platforms and architecting cloud-native systems.; [story] Building Sparkfly's Platform Alongside Its Founder: Provides direct early-career hands-on development evidence, including production coding, MVC refactoring, Oracle schema, and PL/SQL work.
+  note: Note: The stories do not explicitly establish 10 or more years of engineering experience.
+
+demo | gpt-5.6-terra@low#lines r2 | partial (medium)
+  requirement: 5+ years leading engineering managers and senior technical leaders in a multi-team environment
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: Led multi-team delivery organizations and a 150+ person Cloud Innovation Center through 11-13 practice and client leads.; [story] Enhancing Team Proficiency through Servant Leadership and Mentorship: Developed senior engineers through a tiered coaching framework and engineering practice communities.
+  note: Note: Five-year duration and direct management of engineering managers are not specified.
+
+demo | gpt-5.6-terra@low#lines r3 | partial (medium)
+  requirement: 10+ years of progressive software engineering experience, including hands-on development earlier in career
+  evidence: [story] Why Hire Matt?: Describes progression from engineer to Director while building and integrating enterprise platforms and architecting cloud-native systems.; [story] Building Sparkfly's Platform Alongside Its Founder: Directly documents early-career hands-on development, including production coding, Oracle PL/SQL, and an MVC refactor.
+  note: Note: Cited stories do not clearly establish a 10-plus-year engineering duration.
+
+demo | gpt-5.6-terra@low#lines r3 | partial (medium)
+  requirement: 5+ years leading engineering managers and senior technical leaders in a multi-team environment
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: Led a 150+ practitioner, multi-team organization through 11-13 direct-report practice and client leads, including engineering practice leadership.; [story] Leadership Philosophy: How I Lead: Describes leadership of a 150-person Cloud Innovation Center and cross-functional engineering teams.
+  note: Note: Evidence does not establish five or more years leading engineering managers.
+
+demo | gpt-5.6-terra@medium r1 | partial (medium)
+  requirement: 10+ years of progressive software engineering experience, including hands-on development earlier in career
+  evidence: [story] Building Sparkfly's Platform Alongside Its Founder: Matt describes early-career hands-on development, advancing from developer to lead while writing production code and refactoring a live platform.; [story] Why Hire Matt?: Matt states he progressed from engineer to Director while building and integrating enterprise platforms and architecting cloud-native systems.
+  note: Note: Provided stories do not explicitly document 10 or more years of engineering experience.
+
+demo | gpt-5.6-terra@medium r1 | partial (medium)
+  requirement: 5+ years leading engineering managers and senior technical leaders in a multi-team environment
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: Led a 150+ practitioner, multi-team organization through 11 to 13 direct-report practice and client leads, including management systems for hiring, evaluation, promotion, compensation, and performance remediation.; [story] Architecting Enhancements for AT&T's Network Engineering Platform: Led cross-functional Planning and Analysis and Enhancement Design teams spanning Accenture, Avanade, third-party consultants, and an offshore team.
+  note: Note: No evidence confirms five years leading engineering managers and senior technical leaders.
+
+demo | gpt-5.6-terra@medium r2 | partial (medium)
+  requirement: 10+ years of progressive software engineering experience, including hands-on development earlier in career
+  evidence: [story] Why Hire Matt?: Matt describes progressing from engineer to Director while building and integrating enterprise platforms and architecting cloud-native systems.; [story] Building Sparkfly's Platform Alongside Its Founder: Matt provides direct early-career hands-on development evidence, including production coding, MVC refactoring, commerce features, and Oracle PL/SQL work.
+  note: Note: Stories do not explicitly establish at least 10 years of engineering experience.
+
+demo | gpt-5.6-terra@medium r2 | partial (medium)
+  requirement: 5+ years leading engineering managers and senior technical leaders in a multi-team environment
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: Led a 150+ person, multi-team organization through 11 to 13 direct-report practice and client leads, with responsibility for hiring, performance evaluation, promotions, compensation, and remediation.
+  note: Note: Five-plus years leading engineering managers and senior technical leaders is not established.
+
+demo | gpt-5.6-terra@medium r3 | partial (medium)
+  requirement: 10+ years of progressive software engineering experience, including hands-on development earlier in career
+  evidence: [story] Building Sparkfly's Platform Alongside Its Founder: Describes early-career hands-on production development, progression from developer to lead, and end-to-end platform, database, and architecture work.; [story] Why Hire Matt?: Describes progression from engineer to Director while building and integrating enterprise platforms and architecting cloud-native systems.
+  note: Note: Stories do not explicitly establish 10 or more years of engineering experience.
+
+demo | gpt-5.6-terra@medium r3 | partial (medium)
+  requirement: 5+ years leading engineering managers and senior technical leaders in a multi-team environment
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: Led a 150+ person, multi-team organization through 11 to 13 direct-report practice and client leads, including engineering practice leadership.; [story] Enhancing Team Proficiency through Servant Leadership and Mentorship: Established coaching and peer-learning structures involving senior engineers across cloud-native engineering, DevOps, and Agile communities.
+  note: Note: Five or more years leading engineering managers and senior technical leaders is not specified.
+
+demo | gpt-5.6-terra@medium#lines r1 | partial (medium)
+  requirement: 5+ years leading engineering managers and senior technical leaders in a multi-team environment
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: Led a 150+ person, multi-team organization through 11-13 direct-report practice and client leads, including engineering practice leads.
+  note: Note: Evidence does not establish at least five years leading engineering managers or senior technical leaders.
+
+demo | gpt-5.6-terra@medium#lines r1 | strong (high)
+  requirement: 10+ years of progressive software engineering experience, including hands-on development earlier in career
+  evidence: [story] Why Hire Matt?: Describes progression from engineer to Director, including enterprise platform engineering, cloud-native architecture, and engineering leadership.; [story] Building Sparkfly's Platform Alongside Its Founder: Provides direct early-career hands-on development evidence, including production coding, MVC refactoring, Java servlets and beans, and Oracle PL/SQL work.
+  note: none
+
+demo | gpt-5.6-terra@medium#lines r2 | partial (high)
+  requirement: 5+ years leading engineering managers and senior technical leaders in a multi-team environment
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: Led a 150+ practitioner, multi-team organization through 11-13 direct-report practice and client leads, including engineering practice leads.; [story] Architecting Enhancements for AT&T's Network Engineering Platform: Led Planning and Analysis and Enhancement Design teams across Accenture, Avanade, third-party consultants, and an offshore delivery team.
+  note: Note: Evidence does not establish five or more years leading managers and senior leaders.
+
+demo | gpt-5.6-terra@medium#lines r2 | partial (medium)
+  requirement: 10+ years of progressive software engineering experience, including hands-on development earlier in career
+  evidence: [story] Building Sparkfly's Platform Alongside Its Founder: Matt describes early-career hands-on development, progressing from developer to lead while writing production code and refactoring the platform.; [story] Why Hire Matt?: Matt describes progressing from engineer to Director while building and integrating enterprise platforms and architecting cloud-native systems.
+  note: Note: Stories do not explicitly establish 10 or more years of engineering experience.
+
+demo | gpt-5.6-terra@medium#lines r3 | partial (medium)
+  requirement: 5+ years leading engineering managers and senior technical leaders in a multi-team environment
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: Led a 150+ practitioner, multi-team organization through 11-13 direct-report practice and client leads, including engineering practice leadership.
+  note: Note: Evidence does not establish five or more years leading engineering managers.
+
+demo | gpt-5.6-terra@medium#lines r3 | strong (high)
+  requirement: 10+ years of progressive software engineering experience, including hands-on development earlier in career
+  evidence: [story] Why Hire Matt?: Matt describes progressing from engineer to Director while building and integrating enterprise platforms and architecting cloud-native systems.; [story] Building Sparkfly's Platform Alongside Its Founder: Early-career evidence shows hands-on production development, including commerce features, Oracle and PL/SQL work, and an MVC refactor.
+  note: none

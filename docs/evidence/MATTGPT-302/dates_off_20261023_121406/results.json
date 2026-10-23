@@ -1,0 +1,552 @@
+[
+ {
+  "arm": "dates off",
+  "row": "att 7+ cloud",
+  "i": 1,
+  "seconds": 4.07,
+  "input": 3765,
+  "cached": 0,
+  "output": 290,
+  "result": {
+   "requirement": "7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD",
+     "client": "Fortune 500 Clients",
+     "relevance": "Designed cloud-native architecture patterns, infrastructure as code, Kubernetes, serverless approaches, monitoring, and delivery practices within enterprise governance and compliance constraints."
+    },
+    {
+     "evidence_type": "story",
+     "story_title": "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+     "client": "Accenture",
+     "relevance": "Built cloud platforms and CI/CD infrastructure, integrating enterprise security scanning, access controls, compliance, and governance checkpoints over four years."
+    }
+   ],
+   "gap_explanation": "Note: Evidence does not establish seven or more years across all required areas.",
+   "confidence": "medium"
+  }
+ },
+ {
+  "arm": "dates off",
+  "row": "demo 10+ SE",
+  "i": 1,
+  "seconds": 2.68,
+  "input": 2842,
+  "cached": 0,
+  "output": 147,
+  "result": {
+   "requirement": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+   "match_status": "strong",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "Documents hands-on production development from 2000 to 2001, progressing from developer to lead while building and refactoring a live enterprise commerce platform."
+    },
+    {
+     "evidence_type": "story",
+     "story_title": "Why Hire Matt?",
+     "client": "Accenture",
+     "relevance": "States a progression from engineer to Director, including enterprise platform development, cloud-native architecture, and engineering leadership."
+    }
+   ],
+   "gap_explanation": "",
+   "confidence": "high"
+  }
+ },
+ {
+  "arm": "dates off",
+  "row": "demo 5+ leading",
+  "i": 1,
+  "seconds": 4.28,
+  "input": 2980,
+  "cached": 0,
+  "output": 313,
+  "result": {
+   "requirement": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Leading People: From Delivery Teams to a 150-Person Organization",
+     "client": "Fortune 500 Clients",
+     "relevance": "From 2009 onward, Matt led managers and senior technical leads across multiple delivery teams and later managed 11-13 practice and client leads in a 150+ person organization."
+    }
+   ],
+   "gap_explanation": "Note: Five or more years of leadership duration is not explicitly quantified.",
+   "confidence": "medium"
+  }
+ },
+ {
+  "arm": "narrative excluded",
+  "row": "demo 10+ SE",
+  "i": 1,
+  "seconds": 6.47,
+  "input": 3248,
+  "cached": 0,
+  "output": 447,
+  "result": {
+   "requirement": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "In 2000 to 2001, Matt progressed from developer to lead while remaining hands-on, writing production code and refactoring the platform."
+    },
+    {
+     "evidence_type": "story",
+     "story_title": "Leading People: From Delivery Teams to a 150-Person Organization",
+     "client": "Fortune 500 Clients",
+     "relevance": "His scope progressed from delivery-team management to leading managers and a 150-plus practitioner organization, with management experience described from 2009 onward."
+    }
+   ],
+   "gap_explanation": "Note: Provided timeline does not explicitly verify 10 or more total years.",
+   "confidence": "medium"
+  }
+ },
+ {
+  "arm": "dates off",
+  "row": "att 7+ cloud",
+  "i": 2,
+  "seconds": 5.16,
+  "input": 3765,
+  "cached": 3762,
+  "output": 331,
+  "result": {
+   "requirement": "7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+     "client": "Accenture",
+     "relevance": "Built Cloud Innovation Centers over four years, establishing cloud platforms, CI/CD infrastructure, and enterprise governance checkpoints, security scanning, and access controls."
+    },
+    {
+     "evidence_type": "story",
+     "story_title": "Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD",
+     "client": "Fortune 500 Clients",
+     "relevance": "Implemented cloud-native architecture, infrastructure as code, Kubernetes, observability, and delivery practices within regulated enterprise governance requirements."
+    }
+   ],
+   "gap_explanation": "Note: Seven or more years of cloud experience are not directly documented.",
+   "confidence": "medium"
+  }
+ },
+ {
+  "arm": "dates off",
+  "row": "demo 10+ SE",
+  "i": 2,
+  "seconds": 2.27,
+  "input": 2842,
+  "cached": 2839,
+  "output": 148,
+  "result": {
+   "requirement": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+   "match_status": "strong",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Why Hire Matt?",
+     "client": "Accenture",
+     "relevance": "Matt describes progressing from engineer to Director while building and integrating enterprise platforms and architecting cloud-native systems."
+    },
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "In 2000 through 2001, Matt developed and later led production work on Sparkfly's portal, including Java web components and Oracle PL/SQL."
+    }
+   ],
+   "gap_explanation": "",
+   "confidence": "high"
+  }
+ },
+ {
+  "arm": "dates off",
+  "row": "demo 5+ leading",
+  "i": 2,
+  "seconds": 3.19,
+  "input": 2980,
+  "cached": 2977,
+  "output": 201,
+  "result": {
+   "requirement": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+   "match_status": "strong",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Leading People: From Delivery Teams to a 150-Person Organization",
+     "client": "Fortune 500 Clients",
+     "relevance": "From 2009 onward, Matt led managers and senior technical leads across multiple delivery teams and later managed 11 to 13 practice and client leads in a 150+ person organization."
+    }
+   ],
+   "gap_explanation": "",
+   "confidence": "high"
+  }
+ },
+ {
+  "arm": "narrative excluded",
+  "row": "demo 10+ SE",
+  "i": 2,
+  "seconds": 4.24,
+  "input": 3248,
+  "cached": 3245,
+  "output": 332,
+  "result": {
+   "requirement": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "In 2000 through 2001, Matt progressed from developer to lead while continuing to write production code and build core platform capabilities."
+    },
+    {
+     "evidence_type": "story",
+     "story_title": "Leading People: From Delivery Teams to a 150-Person Organization",
+     "client": "Fortune 500 Clients",
+     "relevance": "The story describes management progression from delivery teams to leading managers and a 150-plus practitioner organization, with leadership responsibilities stated from 2009 onward."
+    }
+   ],
+   "gap_explanation": "Note: Explicit evidence does not quantify 10 or more total engineering years.",
+   "confidence": "medium"
+  }
+ },
+ {
+  "arm": "dates off",
+  "row": "att 7+ cloud",
+  "i": 3,
+  "seconds": 3.81,
+  "input": 3765,
+  "cached": 3762,
+  "output": 257,
+  "result": {
+   "requirement": "7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD",
+     "client": "Fortune 500 Clients",
+     "relevance": "Designed cloud-native architecture patterns, infrastructure as code, automated deployment gates, monitoring, and observability across 15+ enterprise engagements with governance and compliance constraints."
+    },
+    {
+     "evidence_type": "story",
+     "story_title": "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+     "client": "Accenture",
+     "relevance": "Built cloud platforms and CI/CD infrastructure, integrating enterprise governance checkpoints, security scanning, deployment pipelines, and access controls over four years."
+    }
+   ],
+   "gap_explanation": "Note: Provided evidence does not establish seven or more years of experience.",
+   "confidence": "medium"
+  }
+ },
+ {
+  "arm": "dates off",
+  "row": "demo 10+ SE",
+  "i": 3,
+  "seconds": 2.39,
+  "input": 2842,
+  "cached": 2839,
+  "output": 206,
+  "result": {
+   "requirement": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Why Hire Matt?",
+     "client": "Accenture",
+     "relevance": "Describes progression from engineer to Director, including enterprise platform development, integration, and cloud-native system architecture."
+    },
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "Provides direct evidence of earlier-career hands-on development, production coding, technical leadership, and platform refactoring in 2000 to 2001."
+    }
+   ],
+   "gap_explanation": "Note: Provided evidence does not explicitly establish 10 or more years.",
+   "confidence": "medium"
+  }
+ },
+ {
+  "arm": "dates off",
+  "row": "demo 5+ leading",
+  "i": 3,
+  "seconds": 2.54,
+  "input": 2980,
+  "cached": 2977,
+  "output": 193,
+  "result": {
+   "requirement": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+   "match_status": "strong",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Leading People: From Delivery Teams to a 150-Person Organization",
+     "client": "Fortune 500 Clients",
+     "relevance": "From 2009 onward, Matt led managers and senior technical leads across multiple delivery teams and later managed 11-13 practice and client leads within a 150+ person organization."
+    }
+   ],
+   "gap_explanation": "",
+   "confidence": "high"
+  }
+ },
+ {
+  "arm": "narrative excluded",
+  "row": "demo 10+ SE",
+  "i": 3,
+  "seconds": 3.93,
+  "input": 3248,
+  "cached": 3245,
+  "output": 359,
+  "result": {
+   "requirement": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+   "match_status": "strong",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "From late 2000 through 2001, Matt progressed from developer to lead while continuing to write production code and build the platform's commerce, personalization, administration, and database capabilities."
+    },
+    {
+     "evidence_type": "story",
+     "story_title": "Leading People: From Delivery Teams to a 150-Person Organization",
+     "client": "Fortune 500 Clients",
+     "relevance": "His scope progressed from managing delivery teams to leading managers and senior technical leads from 2009 onward, culminating in leadership of a 150-plus practitioner engineering organization."
+    }
+   ],
+   "gap_explanation": "",
+   "confidence": "high"
+  }
+ },
+ {
+  "arm": "dates off",
+  "row": "att 7+ cloud",
+  "i": 4,
+  "seconds": 4.02,
+  "input": 3765,
+  "cached": 3762,
+  "output": 254,
+  "result": {
+   "requirement": "7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD",
+     "client": "Fortune 500 Clients",
+     "relevance": "Designed cloud-native microservices, container, serverless, infrastructure-as-code, observability, and deployment practices while addressing enterprise governance, security, and regulatory constraints."
+    },
+    {
+     "evidence_type": "story",
+     "story_title": "Building Self-Healing Systems through Resilience Engineering",
+     "client": "Fortune 500 Clients",
+     "relevance": "Implemented cloud-native infrastructure capabilities including auto-restart, health checks, load balancing, auto-scaling, monitoring, and blue-green deployments."
+    }
+   ],
+   "gap_explanation": "Note: No evidence verifies seven or more years of cloud experience.",
+   "confidence": "medium"
+  }
+ },
+ {
+  "arm": "dates off",
+  "row": "demo 10+ SE",
+  "i": 4,
+  "seconds": 2.23,
+  "input": 2842,
+  "cached": 2839,
+  "output": 205,
+  "result": {
+   "requirement": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Why Hire Matt?",
+     "client": "Accenture",
+     "relevance": "Describes progression from engineer to Director, including enterprise platform development, cloud-native architecture, and engineering leadership."
+    },
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "Provides direct early-career hands-on development evidence, including production coding, Java MVC refactoring, commerce features, and Oracle PL/SQL work."
+    }
+   ],
+   "gap_explanation": "Note: Exact duration of 10+ years is not explicitly documented.",
+   "confidence": "medium"
+  }
+ },
+ {
+  "arm": "dates off",
+  "row": "demo 5+ leading",
+  "i": 4,
+  "seconds": 3.75,
+  "input": 2980,
+  "cached": 2977,
+  "output": 296,
+  "result": {
+   "requirement": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Leading People: From Delivery Teams to a 150-Person Organization",
+     "client": "Fortune 500 Clients",
+     "relevance": "Led managers and senior technical leads across multiple delivery teams from 2009 onward, including 11 to 13 practice and client leads in a 150-plus person organization."
+    }
+   ],
+   "gap_explanation": "Note: Evidence does not explicitly establish five or more years of leadership duration.",
+   "confidence": "medium"
+  }
+ },
+ {
+  "arm": "narrative excluded",
+  "row": "demo 10+ SE",
+  "i": 4,
+  "seconds": 3.89,
+  "input": 3248,
+  "cached": 3245,
+  "output": 330,
+  "result": {
+   "requirement": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "In 2000 to 2001, Matt progressed from developer to lead while continuing to write production code and build core platform capabilities."
+    },
+    {
+     "evidence_type": "story",
+     "story_title": "Leading People: From Delivery Teams to a 150-Person Organization",
+     "client": "Fortune 500 Clients",
+     "relevance": "The story documents progressive leadership across delivery teams and technical organizations, including leading managers and senior technical leads from 2009 onward."
+    }
+   ],
+   "gap_explanation": "Note: Explicit evidence verifying at least 10 total years of software engineering experience is missing.",
+   "confidence": "medium"
+  }
+ },
+ {
+  "arm": "dates off",
+  "row": "att 7+ cloud",
+  "i": 5,
+  "seconds": 2.67,
+  "input": 3765,
+  "cached": 3762,
+  "output": 237,
+  "result": {
+   "requirement": "7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500",
+     "client": "Accenture",
+     "relevance": "Built and led Cloud Innovation Centers for four years, establishing cloud platforms, CI/CD infrastructure, and enterprise governance controls including security scanning, access controls, and stage gates."
+    },
+    {
+     "evidence_type": "story",
+     "story_title": "Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD",
+     "client": "Fortune 500 Clients",
+     "relevance": "Implemented cloud-native architecture, infrastructure as code, observability, automated deployment gates, and practices adapted to enterprise compliance and regulatory requirements."
+    }
+   ],
+   "gap_explanation": "Note: Provided evidence does not establish seven or more years of cloud experience.",
+   "confidence": "medium"
+  }
+ },
+ {
+  "arm": "dates off",
+  "row": "demo 10+ SE",
+  "i": 5,
+  "seconds": 2.29,
+  "input": 2842,
+  "cached": 2839,
+  "output": 198,
+  "result": {
+   "requirement": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Why Hire Matt?",
+     "client": "Accenture",
+     "relevance": "Describes progression from engineer to Director, including enterprise platform development, cloud-native architecture, and engineering leadership."
+    },
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "Provides direct evidence of early-career hands-on development and progression from developer to lead while writing production code."
+    }
+   ],
+   "gap_explanation": "Note: Evidence does not explicitly establish 10 or more years of experience.",
+   "confidence": "medium"
+  }
+ },
+ {
+  "arm": "dates off",
+  "row": "demo 5+ leading",
+  "i": 5,
+  "seconds": 3.32,
+  "input": 2980,
+  "cached": 2977,
+  "output": 207,
+  "result": {
+   "requirement": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+   "match_status": "strong",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Leading People: From Delivery Teams to a 150-Person Organization",
+     "client": "Fortune 500 Clients",
+     "relevance": "From 2009 onward, Matt led managers and senior technical leads across multiple delivery teams, later directly leading 11 to 13 practice and client leads in a 150+ person organization."
+    }
+   ],
+   "gap_explanation": "",
+   "confidence": "high"
+  }
+ },
+ {
+  "arm": "narrative excluded",
+  "row": "demo 10+ SE",
+  "i": 5,
+  "seconds": 4.31,
+  "input": 3248,
+  "cached": 3245,
+  "output": 378,
+  "result": {
+   "requirement": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+   "match_status": "partial",
+   "evidence": [
+    {
+     "evidence_type": "story",
+     "story_title": "Building Sparkfly's Platform Alongside Its Founder",
+     "client": "Sparkfly",
+     "relevance": "Documents hands-on production development in 2000-2001, progressing from developer to lead while building and refactoring the platform."
+    },
+    {
+     "evidence_type": "story",
+     "story_title": "Leading People: From Delivery Teams to a 150-Person Organization",
+     "client": "Fortune 500 Clients",
+     "relevance": "Shows later progression from delivery-team leadership to leading managers, senior technical leads, and a 150-plus practitioner organization."
+    }
+   ],
+   "gap_explanation": "Note: Explicit evidence confirming 10 or more total engineering years is missing.",
+   "confidence": "medium"
+  }
+ }
+]
