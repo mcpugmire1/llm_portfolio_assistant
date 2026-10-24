@@ -3314,7 +3314,7 @@ Verified Oct 22, 2026 (HEAD 5787bdf): `.gitignore` has `/probes/`; the run folde
 - **Type:** Issue
 - **File:** `services/jd_assessor.py` (`_format_candidates_for_prompt()`), `build_custom_embeddings.py` (`build_embedding_text()`)
 - **Related:** MATTGPT-302 (the same AT&T and demo JD runs), MATTGPT-325 (mentions `build_embedding_text()`'s Situation limit in passing), MATTGPT-079 (Role Match corpus anchors)
-- **Holds up:** rewording existing stories for Role Match: facts past the 3rd Action or Result item don't reach the rating. New stories can put their key facts within the first 3 items, so MATTGPT-079 stays linked, not Blocked (Matt, Oct 24, 2026).
+- **Story edits:** Story edits put key facts in the Summary, the Situation or the first 3 Action or Result items, which work with or without the cap. MATTGPT-079 stays linked, not Blocked (Matt, Oct 24, 2026).
 - **Logged:** October 24, 2026
 
 **Issue (Matt, Oct 24, 2026):** Role Match sees a truncated story. `_format_candidates_for_prompt()` sends only the first 3 Action and Result items, and `build_embedding_text()` caps list fields for the search embedding (noted in passing in an existing entry, not tracked on its own). No ADR sets either cap.
@@ -3325,6 +3325,10 @@ Verified Oct 22, 2026 (HEAD 5787bdf): `.gitignore` has `/probes/`; the run folde
 - `docs/ADR.md` has no entry for either cap (grep for the function names, `[:3]`, "first 3" and the character limits).
 
 **Measure before changing (Matt, Oct 24, 2026):** AT&T and demo JDs with full Action and Result sent, strong share and over-calls against today's; plus Ask Agy controls if the embedding text changes.
+
+**Finding (lane 1, Oct 24, 2026; read-only, corpus at 3d12116; as reported):** of the 8 AT&T strong-to-partial rows, 0 of 8 have the missing clause past the 3rd Action or Result item of a cited story. One known case where the cap hides evidence: "Ran the incident communication cadence during production outages", Action 13 of "Stabilizing and Delivering AT&T's Southeast CRM Replacement" (row 4's clause); whether that story was retrieved for row 4 is unchecked. Verified Oct 24, 2026 (HEAD 185e5fd): the story has 13 Action items and that text is item 13.
+
+**Story-edit guidance (lane 1, Oct 24, 2026):** key facts go in the Summary, the Situation or the first 3 Action or Result items.
 
 ---
 
