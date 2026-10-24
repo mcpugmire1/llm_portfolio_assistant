@@ -37,4 +37,38 @@ while IFS= read -r entry; do
   status=1
 done <<< "$removed"
 
+# Backlog check, print only: for each function or module-level constant this
+# commit deletes (not re-added), list the BACKLOG.md tickets that name it, so
+# the backlog session can update them. Never changes the exit status.
+removed_consts=$(git diff --cached -M -U0 --no-color -- 'ui/*.py' 'services/*.py' 'utils/*.py' 'config/*.py' \
+  | awk '/^--- / { f = substr($2, 3) }
+         /^-[A-Z][A-Z0-9_]*[ \t]*(:[^=]*)?=[^=]/ {
+           n = substr($0, 2); sub(/[ \t]*[:=].*/, "", n); print f ":" n }')
+added_consts=$(git diff --cached -M -U0 --no-color \
+  | sed -nE 's/^\+([A-Z][A-Z0-9_]*)[ \t]*(:[^=]*)?=[^=].*/\1/p')
+deleted=""
+while IFS= read -r entry; do
+  [ -z "$entry" ] && continue
+  printf '%s\n%s\n' "$added" "$added_consts" | grep -qxF -e "${entry#*:}" && continue
+  deleted+="$entry"$'\n'
+done <<< "$(printf '%s\n%s\n' "$removed" "$removed_consts")"
+if [ -n "$deleted" ]; then
+  echo "commit-msg: BACKLOG.md tickets naming code this commit deletes (relay to the backlog session):" >&2
+  while IFS= read -r entry; do
+    [ -z "$entry" ] && continue
+    lines=$(git grep -n -w -e "${entry#*:}" -- BACKLOG.md | cut -d: -f2)
+    if [ -z "$lines" ]; then
+      echo "  $entry: no hits" >&2
+      continue
+    fi
+    ids=$(printf '%s\n' "$lines" | awk 'NR == FNR { w[$1] = 1; next }
+      /^### MATTGPT-[0-9]+/ { t = $2 }
+      FNR in w {
+        if (t != "") print t
+        else if (match($0, /MATTGPT-[0-9]+/)) print substr($0, RSTART, RLENGTH)
+        else print "line " FNR }' - BACKLOG.md | sort -u | tr '\n' ' ')
+    echo "  $entry: $ids" >&2
+  done <<< "$deleted"
+fi
+
 exit $status
