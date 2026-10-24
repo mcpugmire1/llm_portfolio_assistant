@@ -90,6 +90,11 @@ Plain language, one screen, no command output.
    from the approved plan. Show only rows that need a decision or that
    the checker marked DISAGREES or CANNOT CONFIRM. Every other row goes
    in one line: "N rows agreed with the checker; no decision needed."
+2a. At Green: for each function and module-level constant the diff
+   deletes, `git grep -n -w <name> -- BACKLOG.md` at HEAD, and list the
+   ticket IDs that name it, one line per name. "No hits" is listed too.
+   These go to the backlog session as a relay; the packet does not judge
+   them.
 3. The checker's result on the governor rows: counts of CONFIRMED,
    DISAGREES and CANNOT CONFIRM.
 4. One recommendation: go, go with changes, or not yet.
