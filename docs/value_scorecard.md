@@ -284,7 +284,8 @@ Fitness functions and open decisions: see "Role Match (drivers 4, 3, 5, 7 and 8)
 - Unbound: `jd_assessment.feature` (-345); `jd_extraction.feature` was deleted in 1aa2c07 (MATTGPT-254).
 
 **Open tickets:** -244 (In Progress), -160 (In Progress), -266, -249, -012 (In Progress), -014, -081, -099,
--173, -079, -264, -267, -352 (`_flatten_extraction()` crashes on a string implicit item; relevant to RM-D1).
+-173, -079, -264, -267, -352 (`_flatten_extraction()` crashes on a string implicit item; relevant to RM-D1),
+-353 (the assessor sees only the first 3 Action and Result items; holds up rewording existing stories for Role Match).
 
 ## 5. Evidence parity (Ask Agy and Role Match)
 

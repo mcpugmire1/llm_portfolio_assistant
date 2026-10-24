@@ -173,6 +173,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-350](#mattgpt-350) | agy_answer() keeps only the final round's text, so the opener written alongside a search_stories call is streamed but dropped from answer_md | Open | Medium | Bug | value | October 22, 2026 |
 | [MATTGPT-351](#mattgpt-351) | log_query() writes no Session ID, so query rows can't be joined to their session's page_load or page_context row | Open | Low | Bug | value | October 22, 2026 |
 | [MATTGPT-352](#mattgpt-352) | _flatten_extraction() crashes with AttributeError when implicit_requirements holds a plain string instead of an object | Open | Medium | Bug | value | October 22, 2026 |
+| [MATTGPT-353](#mattgpt-353) | Role Match sees a truncated story: the assessor prompt gets only the first 3 Action and Result items | Open | High | Issue | value | October 24, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently | Parked | Medium | Action | value | August 3, 2026 |
@@ -3302,6 +3303,28 @@ Verified Oct 22, 2026 (HEAD 5787bdf): `.gitignore` has `/probes/`; the run folde
 **Verified Oct 22, 2026 (HEAD 3ec3d9c):** the run's `stderr.txt` (`probes/output/MATTGPT-302/candidates_low_20261022_163255/`, gitignored) shows `run failed gpt-5.6-luna@low demo r3`: `run_assessment()` calls `_flatten_extraction(extraction)`, whose implicit loop raises `AttributeError: 'str' object has no attribute 'get'` on `out.append({"text": r.get("requirement", ""), "category": "required"})`. The required and preferred loops also call `r.get()` with no type check.
 
 **Fix (Matt, Oct 22, 2026):** skip or coerce non-object items, with a unit test.
+
+---
+
+### MATTGPT-353
+**Role Match sees a truncated story: the assessor prompt gets only the first 3 Action and Result items**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Issue
+- **File:** `services/jd_assessor.py` (`_format_candidates_for_prompt()`), `build_custom_embeddings.py` (`build_embedding_text()`)
+- **Related:** MATTGPT-302 (the same AT&T and demo JD runs), MATTGPT-325 (mentions `build_embedding_text()`'s Situation limit in passing), MATTGPT-079 (Role Match corpus anchors)
+- **Holds up:** rewording existing stories for Role Match: facts past the 3rd Action or Result item don't reach the rating. New stories can put their key facts within the first 3 items, so MATTGPT-079 stays linked, not Blocked (Matt, Oct 24, 2026).
+- **Logged:** October 24, 2026
+
+**Issue (Matt, Oct 24, 2026):** Role Match sees a truncated story. `_format_candidates_for_prompt()` sends only the first 3 Action and Result items, and `build_embedding_text()` caps list fields for the search embedding (noted in passing in an existing entry, not tracked on its own). No ADR sets either cap.
+
+**Verified Oct 24, 2026 (HEAD d6c1fb4; repo `echo_star_stories_nlp.jsonl`, 124 stories):**
+- **Assessor prompt:** `_format_candidates_for_prompt()` joins `Action[:3]` and `Result[:3]`; Situation and the 5PSummary go in whole. The candidate dicts carry the story's full `Action` and `Result` lists. 115 of 124 stories lose Action items (484 in all); 70 lose Result items (118 in all). The 3-item cap dates from 119441d (Apr 7, 2026, the move into `services/jd_assessor.py`).
+- **Embedding text:** `build_embedding_text()` caps by characters, not items: Situation 2,000, Task 1,500, Action 2,500, Result 2,000, Process 1,500, Use Case(s) 600, Competencies 600, Interview Questions 1,200. Cut today: Action in 7 stories (12,904 characters), Result in 1 (1,606), Competencies in 1 (80); no other field.
+- `docs/ADR.md` has no entry for either cap (grep for the function names, `[:3]`, "first 3" and the character limits).
+
+**Measure before changing (Matt, Oct 24, 2026):** AT&T and demo JDs with full Action and Result sent, strong share and over-calls against today's; plus Ask Agy controls if the embedding text changes.
 
 ---
 
