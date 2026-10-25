@@ -7,33 +7,34 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 
 ---
 
-## Value Prioritized Roadmap (updated 2026-10-22)
+## Value Prioritized Roadmap (updated 2026-10-24)
 
 **NOW**
-1. **-350** -- `agy_answer()` keeps only the final round's text, so the picked opener written alongside a `search_stories` call is streamed but dropped from `answer_md`. All 7 of -340's no-paw answers had it in round 0, so -345's `agy_voice` 7-of-98 baseline measured this bug, not the model. Fix: keep earlier rounds' text in the answer. Lane 1 picks it up next (Matt, Oct 22, 2026).
-2. **-275** -- Green shipped (1095d2c, evidence aa0bb94). Still open for the code-rendered closer and the profile contact links: required closings c14 to c17 scored 0/10 in every arm, the baseline included. -268 travels with -275.
-3. **-039** -- CI quality pipeline in two tiers: every push runs ruff, mypy, unit, structural and data-contract tests (-258), pip-audit; nightly runs BDD and the golden eval with a cost budget. Proposed gate: Streamlit deploys from a prod branch that CI advances only on green (Matt to confirm). Today CI runs only the unit tests.
-4. **-251** -- Ask Agy treats adjacent retrieved stories as evidence for the question asked. Visitor-visible correctness defect: unsupported claims (real estate sector from Cendant Mortgage; "including France" with no source) read as fact to recruiters.
-5. **-331** -- Home cards 3, 5 and 6 apply only their first Domain value: My Work's single-select Domain box (MATTGPT-065) drops the rest, so Teams & Talent lands on 1 story where its 4 values cover 15. Fix needs Matt's UX call: multi-select Domain, or one chip named for the card.
+1. **-354** -- The profile tells visitors remote is fine: `matt_profile.json["logistics"]["work_model"]` has subline "Hybrid or remote fine", which entered in c4daab4 with no record of Matt choosing it. Role Match, Share, Export and Ask Agy's fact card all show it, and Agy's prompt carries it. About Matt hardcodes "Hybrid or in-person" twice. Fix: profile to "In-office preferred" / "Hybrid fine"; About Matt reads from it. Top priority (Matt, Oct 24, 2026).
+2. **-350** -- `agy_answer()` keeps only the final round's text, so the picked opener written alongside a `search_stories` call is streamed but dropped from `answer_md`. All 7 of -340's no-paw answers had it in round 0, so -345's `agy_voice` 7-of-98 baseline measured this bug, not the model. Fix: keep earlier rounds' text in the answer. Lane 1 picks it up next (Matt, Oct 22, 2026).
+3. **-275** -- Green shipped (1095d2c, evidence aa0bb94). Still open for the code-rendered closer and the profile contact links: required closings c14 to c17 scored 0/10 in every arm, the baseline included. -268 travels with -275.
+4. **-039** -- CI quality pipeline in two tiers: every push runs ruff, mypy, unit, structural and data-contract tests (-258), pip-audit; nightly runs BDD and the golden eval with a cost budget. Proposed gate: Streamlit deploys from a prod branch that CI advances only on green (Matt to confirm). Today CI runs only the unit tests.
+5. **-251** -- Ask Agy treats adjacent retrieved stories as evidence for the question asked. Visitor-visible correctness defect: unsupported claims (real estate sector from Cendant Mortgage; "including France" with no source) read as fact to recruiters.
+6. **-331** -- Home cards 3, 5 and 6 apply only their first Domain value: My Work's single-select Domain box (MATTGPT-065) drops the rest, so Teams & Talent lands on 1 story where its 4 values cover 15. Fix needs Matt's UX call: multi-select Domain, or one chip named for the card.
 
 **NEXT**
-6. **-128** -- Red in 1095d2c (`TestSourcesAreTheCitedStories`, 5 xfails); cards still show all retrieved stories. Nothing of its contract has shipped. Cards show the stories the answer cited, not just those retrieved: the Oct 12 JP Morgan payments answer drew 7 of 23 claims from two stories the cards did not show. Sources panel split by kind, extracted reason lines, trailing question removed; design settled August 30.
-7. **-341** -- Rows 20 and 27 with the "builder" revisit: Professional Narrative stories on technical questions and the verbatim phrases required for every narrative story retrieved, decided together with row 8. Depends on -128's row 20 measurement.
-8. **-302** -- OpenAI retires gpt-4o, gpt-4o-mini, gpt-4.1 and gpt-4.1-mini on January 14, 2027. Migrate Role Match (`ASSESSMENT_MODEL`, assessment and extraction prompts) and the generator scripts; delete the unused `DEFAULT_CLASSIFICATION_MODEL`. Ask Agy is on gpt-6.1-sol (1095d2c). Deadline-driven: schedule well before January. -140 travels with it.
-9. **-140** -- Remaining model names outside `config/constants.py`: `ASSESSMENT_MODEL` in `services/jd_assessor.py` and the root `generate_*.py` scripts. Ask Agy's half is done (`ASK_ANSWER_MODEL`). Travels with -302.
-10. **-266** -- Role Match labels responsibility-derived rows as "Required Qualifications". Every visitor sees job duties presented as must-have credentials. Fix is in `_flatten_extraction()`, not the prompt. -264 is sequenced after it.
-11. **-255** -- The meta-commentary strip regex corrupts decimal amounts (`$2.5M` becomes an unclosed `**$2.`) and merges paragraphs. Visible correctness bug. Ticket's fix: remove the strip, run structural meta-commentary tests without it, then a live acceptance run on stories with decimal amounts, including story controls. Acceptance counts evaluative sentences before and after (252 coupling).
-12. **-228** -- Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
-13. **-146** -- Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
-14. **-160** -- In Progress. JD extraction split into three concurrent calls (required / preferred / implicit) landed at `5aee8a4`. After-measurement on the AT&T fixture (count spread 1-2 across five runs) not yet recorded. No longer gates -244.
-15. **-244** -- In Progress; prep Greens landed. Role Match assessor calibration: cited evidence doesn't address the specific claim; `confidence` field deletion. Not gated on -160: qualifier preservation was resolved by the `source_text` instruction fix (`5aee8a4`/`b28a080`), not the split. Next: verify the CI/CD-qualifier row after that fix; fixture count and the 22% over-called figure depend on it. Land before -249 (see -249 ordering constraint).
-16. **-168** -- Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data. Re-measure now that -275's Green has shipped (tunes behavior 275 replaces).
-17. **-129 stories 3-5** -- Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
-18. **-252** -- Ask Agy writes evaluative sentences about Matt despite prompt instructions against it. Visitor-visible; isolating probe spec in the detail block.
-19. **-235** -- Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
-20. **-223** -- My Work only (Ask Agy makes no router call after -236): add router_score and router_family columns to My Work's Sheet query row; unblocks -239's floor threshold decision.
-21. **-222** -- Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
-22. Rest of Role Match: -173, -014, -012, -081, -099.
+7. **-128** -- Red in 1095d2c (`TestSourcesAreTheCitedStories`, 5 xfails); cards still show all retrieved stories. Nothing of its contract has shipped. Cards show the stories the answer cited, not just those retrieved: the Oct 12 JP Morgan payments answer drew 7 of 23 claims from two stories the cards did not show. Sources panel split by kind, extracted reason lines, trailing question removed; design settled August 30.
+8. **-341** -- Rows 20 and 27 with the "builder" revisit: Professional Narrative stories on technical questions and the verbatim phrases required for every narrative story retrieved, decided together with row 8. Depends on -128's row 20 measurement.
+9. **-302** -- OpenAI retires gpt-4o, gpt-4o-mini, gpt-4.1 and gpt-4.1-mini on January 14, 2027. Migrate Role Match (`ASSESSMENT_MODEL`, assessment and extraction prompts) and the generator scripts; delete the unused `DEFAULT_CLASSIFICATION_MODEL`. Ask Agy is on gpt-6.1-sol (1095d2c). Deadline-driven: schedule well before January. -140 travels with it.
+10. **-140** -- Remaining model names outside `config/constants.py`: `ASSESSMENT_MODEL` in `services/jd_assessor.py` and the root `generate_*.py` scripts. Ask Agy's half is done (`ASK_ANSWER_MODEL`). Travels with -302.
+11. **-266** -- Role Match labels responsibility-derived rows as "Required Qualifications". Every visitor sees job duties presented as must-have credentials. Fix is in `_flatten_extraction()`, not the prompt. -264 is sequenced after it.
+12. **-255** -- The meta-commentary strip regex corrupts decimal amounts (`$2.5M` becomes an unclosed `**$2.`) and merges paragraphs. Visible correctness bug. Ticket's fix: remove the strip, run structural meta-commentary tests without it, then a live acceptance run on stories with decimal amounts, including story controls. Acceptance counts evaluative sentences before and after (252 coupling).
+13. **-228** -- Deep link param never consumed. A hiring manager opens a forwarded story and cannot get out to browse the work. Offset inherited across searches as a second symptom.
+14. **-146** -- Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
+15. **-160** -- In Progress. JD extraction split into three concurrent calls (required / preferred / implicit) landed at `5aee8a4`. After-measurement on the AT&T fixture (count spread 1-2 across five runs) not yet recorded. No longer gates -244.
+16. **-244** -- In Progress; prep Greens landed. Role Match assessor calibration: cited evidence doesn't address the specific claim; `confidence` field deletion. Not gated on -160: qualifier preservation was resolved by the `source_text` instruction fix (`5aee8a4`/`b28a080`), not the split. Next: verify the CI/CD-qualifier row after that fix; fixture count and the 22% over-called figure depend on it. Land before -249 (see -249 ordering constraint).
+17. **-168** -- Slot 1 tie or near-tie gets 80% of the synthesis answer. MATTGPT-174 shipped the Top Score distribution August 13; blocker is cleared. Conditional-pin threshold now derivable from accumulated data. Re-measure now that -275's Green has shipped (tunes behavior 275 replaces).
+18. **-129 stories 3-5** -- Capital One elicitation, Launchpad timeline and downstream impact, Lean Innovation depth. Blocked on elicitation.
+19. **-252** -- Ask Agy writes evaluative sentences about Matt despite prompt instructions against it. Visitor-visible; isolating probe spec in the detail block.
+20. **-235** -- Bucket B: resolve LLM-text assertion classes so the pre-push gate can widen. Unblocks -233. Three defects shipped this week through the gap it leaves.
+21. **-223** -- My Work only (Ask Agy makes no router call after -236): add router_score and router_family columns to My Work's Sheet query row; unblocks -239's floor threshold decision.
+22. **-222** -- Three operational alarms. Zero-score alarm, extended to distinguish upstream failure (None) from genuine zero-result, would have caught the September 1 outage on the first row. More useful once -223 data is flowing.
+23. Rest of Role Match: -173, -014, -012, -081, -099.
 
 **LATER — tier 1:** real defects with known fixes
 -177 (bound violation) · -190 (tokenizer divergence) · -166 (arc story reframe) · -063 (wrong-person queries) · -195 (incident vocabulary routing hygiene) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (breadth decision, Oct 19 walkthrough: breadth on big-picture and named division or client questions, more than 3 cards across eras and projects, measured by -338) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- better ranking surfaces more adjacent candidates into verdict definitions that still absorb them as partial, so ranking before calibrating makes over-calling worse before better; full constraint in -249 detail block)
@@ -174,6 +175,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-351](#mattgpt-351) | log_query() writes no Session ID, so query rows can't be joined to their session's page_load or page_context row | Open | Low | Bug | value | October 22, 2026 |
 | [MATTGPT-352](#mattgpt-352) | _flatten_extraction() crashes with AttributeError when implicit_requirements holds a plain string instead of an object | Open | Medium | Bug | value | October 22, 2026 |
 | [MATTGPT-353](#mattgpt-353) | Role Match sees a truncated story: the assessor prompt gets only the first 3 Action and Result items | Open | High | Issue | value | October 24, 2026 |
+| [MATTGPT-354](#mattgpt-354) | Work model: the profile says "Hybrid or remote fine", which Matt never chose, and About Matt hardcodes "Hybrid or in-person"; both move to "In-office preferred" / "Hybrid fine" | Open | High | Issue | value | October 24, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; row 7 pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata excluded from entity-scoped queries -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently | Parked | Medium | Action | value | August 3, 2026 |
@@ -3329,6 +3331,32 @@ Verified Oct 22, 2026 (HEAD 5787bdf): `.gitignore` has `/probes/`; the run folde
 **Finding (lane 1, Oct 24, 2026; read-only, corpus at 3d12116; as reported):** of the 8 AT&T strong-to-partial rows, 0 of 8 have the missing clause past the 3rd Action or Result item of a cited story. One known case where the cap hides evidence: "Ran the incident communication cadence during production outages", Action 13 of "Stabilizing and Delivering AT&T's Southeast CRM Replacement" (row 4's clause); whether that story was retrieved for row 4 is unchecked. Verified Oct 24, 2026 (HEAD 185e5fd): the story has 13 Action items and that text is item 13.
 
 **Story-edit guidance (lane 1, Oct 24, 2026):** key facts go in the Summary, the Situation or the first 3 Action or Result items.
+
+---
+
+### MATTGPT-354
+**Work model: the profile says "Hybrid or remote fine", which Matt never chose, and About Matt hardcodes "Hybrid or in-person"; both move to "In-office preferred" / "Hybrid fine"**
+
+- **Status:** Open
+- **Priority:** High
+- **Type:** Issue
+- **File:** `data/matt_profile.json` (`logistics.work_model`), `ui/pages/about_matt.py` (Signals panel and the print profile), `tests/bdd/features/about_matt.feature`
+- **Logged:** October 24, 2026
+
+**Issue (Matt, Oct 24, 2026):** `matt_profile.json["logistics"]["work_model"]` becomes "In-office preferred" / "Hybrid fine". `about_matt.py`'s two hardcoded "Hybrid or in-person" lines read from the profile. Role Match's Location & Availability panel reads the same field, so both surfaces change together.
+
+**Verified Oct 24, 2026 (HEAD be00085):**
+- `work_model` is currently value "In-office preferred", subline "Hybrid or remote fine". The change keeps the value and shortens the subline to "Hybrid fine".
+- `about_matt.py` hardcodes "Hybrid or in-person" twice: the Signals panel tile ("Work mode") and the print-profile HTML tile.
+- Role Match reads the field through `matt_profile.iter_location_cells()`.
+- Ask Agy reads it the same way: the Location & Availability fact card in `conversation_helpers.py` and the profile facts `load_matt_profile()` builds. That makes three surfaces, not two.
+- Tests that pin the text: `about_matt.feature`'s "Signals panel tile values match the wireframe spec" asserts "Hybrid or in-person". `test_load_matt_profile_format.py` and `test_role_match_render.py` carry the current wording in their own fixtures, so they don't read the file.
+
+**Origin (dev session, Oct 24, 2026):** "Hybrid or remote fine" entered `data/matt_profile.json` in c4daab4 (MATTGPT-089 Green, Sep 19, 2026), which created the Location & Availability block. No record shows Matt choosing it: BACKLOG.md, CHANGELOG.md and `docs/ADR.md` have no "remote fine" or "or remote" outside this ticket. Matt is not fine with remote. Agy's prompt fact block carries "Work model: In-office preferred. Hybrid or remote fine." (34 files under `docs/evidence/` hold the string, checked Oct 24), so Agy has been able to tell visitors remote is fine. None of the 8 Professional Narrative stories mentions remote, hybrid or relocation.
+
+**Priority (Matt, Oct 24, 2026):** top priority, NOW #1.
+
+**Fix:** one edit to `data/matt_profile.json` fixes Role Match's cell, Share and Export, and Ask Agy's fact card and profile facts. `about_matt.py`'s two tiles then read from the profile. Update any test that pins the old subline or "Hybrid or in-person" in the same commit.
 
 ---
 
