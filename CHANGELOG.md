@@ -67,6 +67,10 @@ Cited probe output copied byte-identical into docs/evidence/MATTGPT-<n>/ (42ddbe
 
 ### Tests
 
+**October 25, 2026 -- Golden eval made hermetic; the Q28 flap no longer reproduces (MATTGPT-206)** -- `f2be1aa`
+
+The eval's `rag_fn` fixture now patches the four loggers (f2be1aa); a hermetic check found mocks in 60 of 60 tests. Q28 passed 5 of 5 on the `agy_answer()` path. The full run passed 59 of 60 at a cost of $1.0293; the one failure, Q6, is not a flap (3 of 4 runs, plus -320's Oct 16 golden run) and moved to MATTGPT-304. Evidence: `docs/evidence/MATTGPT-206/20261025_071826/` (64a074c). Closed by Matt, Oct 25, 2026.
+
 **October 16, 2026 -- BDD app_url honors STREAMLIT_TEST_URL (MATTGPT-143)** -- `d748ad2`
 
 `app_url` in `tests/bdd/steps/conftest.py` returned `http://localhost:8501` with no override, so with two Streamlit sessions running the BDD suite could test the wrong app. It now reads `STREAMLIT_TEST_URL` and falls back to localhost:8501. The ticket was still Parked when the fix shipped; closed in the Oct 24 accuracy pass.

@@ -366,7 +366,7 @@ experience reliably and sustainably; failures are visible, not silent.
 - Runtime and dependencies: -313 (Python 3.11 in prod, 3.13 local), -314 (pin pyarrow<25).
 - Model retirement: -302 (In Progress; gpt-4o family retires January 14, 2027).
 - Silent failures: -292 (silent file-order fallback, High), -288 (Ask Agy ignores the Pinecone fallback signal), -349 (an exception after startup init renders a blank page).
-- Regression gates and test reliability: -039, -233, -235, -206, -153,
+- Regression gates and test reliability: -039, -233, -235, -153,
   -084, -198, -035 (Parked),
   -213, -342 (golden Q50 to Q52 send a placeholder question),
   -345 (In Progress; 5 unbound feature files left: bind or delete).

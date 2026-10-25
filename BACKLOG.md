@@ -30,7 +30,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 14. **-349** (all journeys · driver 7) -- An exception after `app.py`'s startup init renders a blank page: no error and no "temporarily unavailable" page.
 15. **-275** (J3 · driver 2) -- Green shipped (1095d2c, evidence aa0bb94). Still open for the code-rendered closer and the profile contact links: required closings c14 to c17 scored 0/10 in every arm, the baseline included. -268 travels with -275.
 16. **-268** (J3 · driver 5) -- "Does Matt have a CS degree?" leads with a no that Role Match doesn't give. Parity fix.
-17. **Retrieval-miss cluster: -304, -210, -325** (J3 · driver 1, failing) -- stories that answer the question don't reach the model. -304 carries Q6 ("Where does Matt do his best work?"), which fails 3 of 4 at HEAD with the work-philosophy story ranked 7th, 14th and below 25th (Arch Governor, Oct 25, 2026); -206's close depends on it. -251 records -210's Oct 15 STRATCOM miss. -325 covers query-term mentions under the cutoff or below the top 25.
+17. **Retrieval-miss cluster: -304, -210, -325** (J3 · driver 1, failing) -- stories that answer the question don't reach the model. -304 carries Q6 ("Where does Matt do his best work?"), which fails 3 of 4 at HEAD: the work-philosophy story ranked 14th, 7th and outside the top 25 of `search_stories`' matches (lane 2, Oct 25, 2026). Until -304 lands, a full eval at HEAD is expected to fail Q6 most runs. -251 records -210's Oct 15 STRATCOM miss. -325 covers query-term mentions under the cutoff or below the top 25.
 18. **-341** -- Rows 20 and 27 with the "builder" revisit: Professional Narrative stories on technical questions and the verbatim phrases required for every narrative story retrieved, decided together with row 8. Depends on -128's row 20 measurement.
 19. **-140** -- Remaining model names outside `config/constants.py`: `ASSESSMENT_MODEL` in `services/jd_assessor.py` and the root `generate_*.py` scripts. Ask Agy's half is done (`ASK_ANSWER_MODEL`). Travels with -302.
 20. **-146** -- Positioning stories appear in filtered results. Acceptance criterion is 8 on the Client axis, asserted across the whole filtered set rather than page 1.
@@ -44,7 +44,7 @@ Work state for the MattGPT project. The matrix below is the scannable view. Deta
 **J0 (Matt, job search):** -012 (Open; slice 1, the lock icon and password gate shell, shipped in 329a8bf) · -081 (corrective actions by asset type) · -045 (analytics dashboard)
 
 **LATER — tier 1:** real defects with known fixes
--166 (arc story reframe) · -063 (wrong-person queries) · -202 (id-skip predicate divergence) · -206 (eval suite stochastic Q28) · -236 (breadth decision, Oct 19 walkthrough: breadth on big-picture and named division or client questions, more than 3 cards across eras and projects, measured by -338) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- better ranking surfaces more adjacent candidates into verdict definitions that still absorb them as partial, so ranking before calibrating makes over-calling worse before better; full constraint in -249 detail block)
+-166 (arc story reframe) · -063 (wrong-person queries) · -202 (id-skip predicate divergence) · -236 (breadth decision, Oct 19 walkthrough: breadth on big-picture and named division or client questions, more than 3 cards across eras and projects, measured by -338) · -249 (retrieval ranking: crisis story at rank 18; ranking problem confirmed; -244 must land first -- better ranking surfaces more adjacent candidates into verdict definitions that still absorb them as partial, so ranking before calibrating makes over-calling worse before better; full constraint in -249 detail block)
 
 **LATER — tier 2:** corpus work
 Register passes batched as one edit cycle: -154, -095, -097, -015, -130
@@ -190,7 +190,6 @@ Infrastructure: -035 (Parked), -040 · -233 (Phase 2: extend pre-push gate to BD
 | [MATTGPT-197](#mattgpt-197) | BDD suite-order flake: test_tapping_filters_toggle_shows_row_2_on_mobile fails in marathon, passes in isolation | Open | Low | Bug | chore | August 17, 2026 |
 | [MATTGPT-198](#mattgpt-198) | BDD suite-order flake: test_clicking_a_nav_label_still_routes_to_its_surface_no_regression fails in marathon, passes in isolation | Open | Low | Bug | chore | August 17, 2026 |
 | [MATTGPT-204](#mattgpt-204) | Explore Stories zero-filter-match: Table view renders empty grid chrome; Cards/Timeline empty-state text hidden by CSS | Open | Low | Bug | value | August 18, 2026 |
-| [MATTGPT-206](#mattgpt-206) | Eval suite ~1-in-70 stochastic flap; Q28 confirmed non-deterministic | Open | Medium | Bug (Test) | value | August 19, 2026 |
 | [MATTGPT-210](#mattgpt-210) | Ask Agy landing page suggestion chips are static; stories like STRATCOM invisible on career queries | Open | Low | Enhancement | value | August 24, 2026 |
 | [MATTGPT-213](#mattgpt-213) | BDD suite: navigation step definitions duplicated across modules; no shared step module | Open | Low | Refactor / Test | chore | August 26, 2026 |
 | [MATTGPT-214](#mattgpt-214) | Targeted audit: parameters never referenced, comments asserting absent behavior, constants unused, copied blocks with stale variable names | Open | Low | Refactor | chore | August 26, 2026 |
@@ -425,7 +424,7 @@ Verified Oct 25, 2026 (HEAD 9bcefac): 493809d (MATTGPT-245, Sep 19) replaced the
 
 **Q10 wording miss (Oct 6, 2026; 9744634, `docs/evidence/MATTGPT-269/not_clients_20261006_164532/` q10 files):** Q10's "clarity" phrase matched 0/40 runs across both trees, because the model writes "clarify". The check lists 5 phrases and needs 2 (`min_matches: 2`); with "clarity" never matching, it draws on the other 4. Failing answers read in full carry the same content and miss on wording.
 
-**Parked (Matt, Oct 25, 2026; priority pass):** it replaces a scorer that isn't failing; -206's plan is the live eval work.
+**Parked (Matt, Oct 25, 2026; priority pass):** it replaces a scorer that isn't failing. MATTGPT-206 closed Oct 25, 2026 with the eval made hermetic.
 
 ---
 
@@ -2683,7 +2682,9 @@ Kept off the roadmap's NOW.
 
 **Second named case, Q6 "Where does Matt do his best work?" (Oct 16, 2026; 2e46a59, `docs/evidence/MATTGPT-320/golden_20261016_102942/calls.jsonl`):** the corpus has a story for it, `work-philosophy-where-i-do-my-best-work|accenture` ("Work Philosophy: Where I Do My Best Work"; the en dash became a colon in 9bb0458, Oct 16). It is in the sources of 0 of the 4 Q6 calls in that run, and 0 of 4 in the Oct 14 run (`docs/evidence/MATTGPT-275/golden_agy_20261014_150939/calls.jsonl`). Q6 failed on Oct 16 (none of its ground-truth phrases matched) and passed on Oct 14 on phrases alone. The same run's "What's Matt's leadership philosophy?" (Q4_voice) did list it. The Oct 16 answers open from MATT_DNA's Career Arc "current" line ("in active search for a role where building the product engineering organization..."), MATTGPT-294's background-as-evidence pattern. Not measured: the story's rank among the 25 matches `search_stories` fetched.
 
-**Retrieval-miss cluster (Matt, Oct 25, 2026; Arch Governor relay):** not parked. The title sequences it after MATTGPT-275, which has shipped. Q6 fails 3 of 4 at HEAD, with the work-philosophy story ranked 7th, 14th and below 25th (as relayed; not re-run here), and -206's close depends on Q6. Grouped with -210 and -325 under driver 1, NEXT.
+**Retrieval-miss cluster (Matt, Oct 25, 2026):** not parked. The title sequences it after MATTGPT-275, which has shipped. Grouped with -210 and -325 under driver 1, NEXT.
+
+**Evidence, Q6 (lane 2, Oct 25, 2026; `docs/evidence/MATTGPT-206/20261025_071826/`, 64a074c):** Q6 failed 3 of 4 runs at HEAD (2 of 3 isolated runs and the full eval), plus -320's Oct 16 golden run, so it is not a flap. In the rank probe the dedicated story `work-philosophy-where-i-do-my-best-work|accenture` ranked 14th, 7th and outside the top 25 of `search_stories`' matches across 3 calls, so it never reached the 5 passed to the model. The model's search queries echoed the profile's Career Arc line and "Cloud Innovation Center" and dropped the question's "best work". Cause of the rank is not measured. Until -304 lands, a full eval at HEAD is expected to fail Q6 most runs.
 
 ---
 
@@ -4187,40 +4188,6 @@ Two more inert-selector patterns confirmed during the -242 dark-mode scan:
 **Depends on MATTGPT-077's decision (Oct 17, 2026):** `_substitute_matt_subject()` has had no production caller since 1095d2c. If -077 deletes Phase 1, this ticket closes with it; if -077 re-wires it into `search_stories`, the pronoun fix still applies.
 
 **Hold (Matt, Oct 25, 2026; priority pass):** `_substitute_matt_subject()`'s only caller is `_build_retrieval_query()`, which no production code calls (`git grep -n -w` at HEAD b023e6d). Fold into MATTGPT-287 once MATTGPT-077 decides whether to re-wire or delete it.
-
----
-
-### MATTGPT-206
-**Eval suite ~1-in-70 stochastic flap; Q28 confirmed non-deterministic**
-
-- **Status:** Open
-- **Priority:** Medium
-- **Type:** Bug (Test)
-- **File:** `tests/eval_rag_quality.py` (ground-truth concept-cluster assertions)
-- **Logged:** August 19, 2026
-
-**Issue:** The eval suite has an observed ~1-in-70 flap rate on ground-truth-match queries. Q28 is confirmed stochastic -- it failed in both pre-Green and post-Green runs on different days, ruling out a regression cause.
-
-**Evidence (August 19, 2026, MATTGPT-161 verification):**
-- Pre-Green run 1 (bi4s8nlke): 70/70
-- Pre-Green run 2 (bha0kkcrp): 70/70
-- Pre-Green run 3 (bbo7aajay): 69/70 -- Q28 failed
-- Post-Green run 1 (bh3mfbbnw): 69/70 -- Q64 failed
-- Post-Green run 2 (bjtxaif0r): 69/70 -- Q28 failed
-
-**Q28 pattern:** Asserts ground-truth concept cluster for "rapid prototyping for client products." Matched `prototype` alone in failing runs; second required phrase absent. Root cause is retrieval non-determinism or LLM sampling variance in concept-match extraction.
-
-**Q64 pattern:** 3 pre-Green passes, 1 post-Green fail, 1 post-Green pass -- inconclusive. Per eval discipline, 1 fail + 1 pass = noise. Not attributable to MATTGPT-161.
-
-**Q44 pattern (August 24, 2026 -- observed once, unconfirmed):** During MATTGPT-208 Case A verification, Q44_landing failed once in the third of three eval runs (69/70) with the same concept-cluster mechanism as Q28. Required 2 matches from ['permit to fail', 'psychological safety', 'failure', 'resistance', 'early failure']; LLM produced only 'permit to fail'. Runs 1 and 2 on identical code both passed Q44 in 70/70. One data point; not a pattern until reproduced across multiple states.
-
-**Gate reliability consequence:** A single clean 70/70 run does not prove correctness; a single failure does not prove regression. The eval gate requires multiple runs to be meaningful for any ticket that touches retrieval or LLM paths.
-
-**Context:** The eval suite now has three tests with documented stochastic behavior: Q1_voice, Q45_structural (marked in `tests/test_structural_assertions.py` header per f0d8870), and Q28 (this finding). Not a MATTGPT-161 regression -- Q28 failed in pre-Green runs.
-
-**Plan (Matt, Oct 24, 2026; Arch Governor relay):** stays Open until lane 2 reports. Lane 2 has the plan: patch the four loggers in the `rag_fn` fixture (making the eval hermetic is the fix); run `test_surgical_query[Q28]` 5 times, then the full eval once, with each run's cost cited in its evidence folder. Close as no longer reproducing on the `agy_answer` path if Q28 is clean 5 of 5 and the full run has no failures.
-
-**Counts, to stop the drift (checked at HEAD by AST, Oct 25):** `GOLDEN_QUERIES` holds 65 queries across 8 categories; 11 are `entity_detection` and aren't collected. pytest collects 60 items (Arch Governor's collection run, Oct 24): 54 assessed golden queries plus 6 landing-page meta-commentary items. The earlier "68" counts `"id":` lines, 3 of which are report code.
 
 ---
 
