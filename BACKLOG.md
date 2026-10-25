@@ -3362,6 +3362,10 @@ Verified Oct 22, 2026 (HEAD 5787bdf): `.gitignore` has `/probes/`; the run folde
 
 **Fix:** one edit to `data/matt_profile.json` fixes Role Match's cell, Share and Export, and Ask Agy's fact card and profile facts. `about_matt.py`'s two tiles then read from the profile. Update any test that pins the old subline or "Hybrid or in-person" in the same commit.
 
+**Before Red (Oct 25, 2026):**
+- **Design call:** the profile's `work_model` has two parts (value "In-office preferred", subline "Hybrid fine"), and About Matt's "Work mode" tile is one line. Which part or parts the tile shows is a Design call, settled before the Red test, since `about_matt.feature` will pin it.
+- **Spec sync:** the pinning scenario is titled "Signals panel tile values match the wireframe spec", and the spec carries the old text: `mattgpt-design-spec/wireframes/MATTGPT_WIREFRAMES_v4.html` has the "Work mode" tile with "Hybrid or in-person" (local copy at 9985965, checked Oct 25). The fix commit flags the mattgpt-design-spec sync per the Pre-Commit Doc Checklist.
+
 ---
 
 ### MATTGPT-160
