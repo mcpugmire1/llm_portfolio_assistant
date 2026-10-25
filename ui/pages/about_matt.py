@@ -34,6 +34,10 @@ _ABOUT_HTML = f"""
         """
 
 
+def _work_mode_text(profile: dict) -> str:
+    raise NotImplementedError
+
+
 def render_about_matt():
     """
     Render the About Matt page with professional background and contact info.

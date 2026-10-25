@@ -158,7 +158,7 @@ Feature: My Profile — Content polish bundle (MATTGPT-068)
     And the signals panel should contain "150+ practitioners"
     And the signals panel should contain "Atlanta"
     And the signals panel should contain "Active conversations"
-    And the signals panel should contain "Hybrid or in-person"
+    And the signals panel should contain "In-office preferred · Hybrid fine"
 
   # ---------------------------------------------------------------------------
   # IN MY OWN WORDS — voice block (MATTGPT-093, expanded scope)
