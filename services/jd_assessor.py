@@ -16,9 +16,17 @@ import logging
 import os
 import time
 
+import httpx
 from openai import OpenAI
 
-from config.constants import PROFILE_LOCATION_AVAILABILITY_FIELDS
+from config.constants import (
+    DEFAULT_CHAT_MODEL,
+    DEFAULT_REASONING_EFFORT,
+    NO_DASH_RULE,
+    PROFILE_LOCATION_AVAILABILITY_FIELDS,
+    ROLE_MATCH_MAX_RETRIES,
+    ROLE_MATCH_READ_TIMEOUT_S,
+)
 from config.debug import DEBUG
 from services import matt_profile
 from services.pinecone_service import pinecone_semantic_search
@@ -118,10 +126,12 @@ Rules:
 # describing its wave-1 context, so a schema-key classifier would
 # misclassify it).
 #
-# key_responsibilities and seniority_signals from the pre-split schema
-# are intentionally omitted: nothing in services/ or ui/ reads them
-# (grep-confirmed September 2026), and generating output nothing reads
-# is directly against the count-stability mechanism this split targets.
+# seniority_signals from the pre-split schema is intentionally omitted:
+# nothing in services/ or ui/ reads it, and generating output nothing
+# reads is directly against the count-stability mechanism this split
+# targets. key_responsibilities is kept in the required prompt as ADR
+# 016's planned responsibilities output; extract_requirements() returns
+# it.
 
 
 _REQUIRED_EXTRACTION_PROMPT = """=== SECTION: required ===
@@ -146,7 +156,7 @@ Extract the following as JSON:
 
 Rules:
 - Extract company name from anywhere in the full JD text including company description and closing sections. If truly undisclosed, use "Undisclosed".
-- Populate `key_responsibilities` with the JD's stated responsibilities (what the role does, not what the candidate must have). One item per distinct responsibility. Empty list if none are stated.
+- Populate `key_responsibilities` with the JD's stated responsibilities. One item per distinct responsibility. Empty list if none are stated.
 - Normalize requirements into clear, testable statements.
 - Copy source_text as the entire JD bullet or sentence, verbatim and complete. Do not shorten, summarize, or truncate.
 - Do not invent requirements -- only extract what is stated or clearly implied.
@@ -262,7 +272,8 @@ Output valid JSON only, no preamble."""
 # Produces per-requirement match status, evidence, and gap analysis.
 # Grounding context (Matt DNA) is loaded from data/matt_profile.json at runtime.
 
-JD_ASSESSMENT_PROMPT_TEMPLATE = """You are assessing how well Matt Pugmire's experience matches a specific job requirement.
+JD_ASSESSMENT_PROMPT_TEMPLATE = (
+    """You are assessing how well Matt Pugmire's experience matches a specific job requirement.
 
 {matt_profile}
 
@@ -302,7 +313,11 @@ Rules:
 - gap_explanation must start with 'Note:' and stay under 15 words
 - gap_explanation must describe ONLY what's missing. Do NOT restate what's present (no "While Matt's profile confirms..." preambles)
 - gap_explanation must be specific, not apologetic
+- """
+    + NO_DASH_RULE
+    + """
 - Output valid JSON only, no preamble"""
+)
 
 
 def load_matt_profile() -> str:
@@ -367,8 +382,7 @@ def build_assessment_prompt() -> str:
 # UI. They were promoted from tests/jd_pipeline_validation.py so the UI and the
 # validation script share a single source of truth.
 
-ASSESSMENT_MODEL = "gpt-4o"
-ASSESSMENT_TEMPERATURE = 0.0
+ASSESSMENT_MODEL = DEFAULT_CHAT_MODEL
 DEFAULT_TOP_K = 5
 
 # MATTGPT-248 Cycle 2: per-mode unassessed row copy. Populated on
@@ -401,6 +415,8 @@ def _get_openai_client() -> OpenAI:
         api_key=os.getenv("OPENAI_API_KEY"),
         project=os.getenv("OPENAI_PROJECT_ID"),
         organization=os.getenv("OPENAI_ORG_ID"),
+        max_retries=ROLE_MATCH_MAX_RETRIES,
+        timeout=httpx.Timeout(ROLE_MATCH_READ_TIMEOUT_S, connect=5.0),
     )
 
 
@@ -526,7 +542,7 @@ def _call_required(client: OpenAI, jd_text: str) -> dict:
             {"role": "system", "content": _REQUIRED_EXTRACTION_PROMPT},
             {"role": "user", "content": jd_text},
         ],
-        temperature=ASSESSMENT_TEMPERATURE,
+        reasoning_effort=DEFAULT_REASONING_EFFORT,
         response_format={"type": "json_object"},
     )
     return json.loads(response.choices[0].message.content)
@@ -540,7 +556,7 @@ def _call_preferred(client: OpenAI, jd_text: str) -> dict:
             {"role": "system", "content": _PREFERRED_EXTRACTION_PROMPT},
             {"role": "user", "content": jd_text},
         ],
-        temperature=ASSESSMENT_TEMPERATURE,
+        reasoning_effort=DEFAULT_REASONING_EFFORT,
         response_format={"type": "json_object"},
     )
     return json.loads(response.choices[0].message.content)
@@ -566,7 +582,7 @@ def _call_implicit(
             {"role": "system", "content": _IMPLICIT_EXTRACTION_PROMPT},
             {"role": "user", "content": user_message},
         ],
-        temperature=ASSESSMENT_TEMPERATURE,
+        reasoning_effort=DEFAULT_REASONING_EFFORT,
         response_format={"type": "json_object"},
     )
     return json.loads(response.choices[0].message.content)
@@ -678,7 +694,7 @@ def assess_requirement(
             {"role": "system", "content": build_assessment_prompt()},
             {"role": "user", "content": user_message},
         ],
-        temperature=ASSESSMENT_TEMPERATURE,
+        reasoning_effort=DEFAULT_REASONING_EFFORT,
         response_format={"type": "json_object"},
     )
     return json.loads(response.choices[0].message.content)
@@ -887,7 +903,7 @@ async def _assess_one_with_index(
     - Mode 2 (`retrieval-returned-None`): pinecone_semantic_search
       returned None (outage). Emit an unassessed row directly without
       calling the LLM. During a total Pinecone outage on an
-      N-requirement JD this avoids paying N gpt-4o calls that would
+      N-requirement JD this avoids paying N ASSESSMENT_MODEL calls that would
       each produce 'gap' verdicts the reader would have to disbelieve
       row-by-row.
     - Mode 1 (`assess-caught`): assess_requirement raised (rate limit,
@@ -933,7 +949,7 @@ async def _assess_one_with_index(
         # assess_call_ms sample is emitted for a requirement that
         # never reached the LLM. That's correct -- the sample count
         # equals the number of requirements that actually called
-        # gpt-4o, not the number of requirements submitted. A short
+        # ASSESSMENT_MODEL, not the number of requirements submitted. A short
         # sample count during a Pinecone outage is honest, not a
         # dropped measurement. Mode 1 (assess-caught) DOES emit a
         # sample: a call that hangs for 30s then raises is exactly

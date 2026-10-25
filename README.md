@@ -193,7 +193,7 @@ All application constants are centralized in `config/constants.py`:
 
 | Category | Constants |
 |----------|-----------|
-| **Models** | `DEFAULT_CHAT_MODEL`, `DEFAULT_CLASSIFICATION_MODEL`, `DEFAULT_EMBEDDING_MODEL` |
+| **Models** | `DEFAULT_CHAT_MODEL`, `DEFAULT_REASONING_EFFORT`, `DEFAULT_EMBEDDING_MODEL` |
 | **Thresholds** | `HARD_ACCEPT`, `SOFT_ACCEPT`, `CONFIDENCE_HIGH`, `CONFIDENCE_LOW`, `PINECONE_MIN_SIM`, `ENTITY_GATE_THRESHOLD` |
 | **Voice Quality** | `BANNED_PHRASES`, `META_COMMENTARY_PATTERNS` |
 | **Entity Detection** | `ENTITY_DETECTION_FIELDS`, `ENTITY_SEARCH_FIELDS`, `EXCLUDED_DIVISION_VALUES` |

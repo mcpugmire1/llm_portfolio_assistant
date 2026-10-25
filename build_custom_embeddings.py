@@ -33,6 +33,8 @@ from dotenv import load_dotenv
 from openai import OpenAI
 from pinecone import Pinecone
 
+from config.constants import DEFAULT_EMBEDDING_MODEL
+
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s — %(levelname)s — %(message)s"
 )
@@ -44,7 +46,7 @@ PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 PINECONE_INDEX_NAME = os.getenv("PINECONE_INDEX_NAME")
 PINECONE_NAMESPACE = os.getenv("PINECONE_NAMESPACE", "default")
 
-EMBEDDING_MODEL = "text-embedding-3-small"  # 1536 dims
+EMBEDDING_MODEL = DEFAULT_EMBEDDING_MODEL  # 1536 dims
 
 
 # ---------------------------

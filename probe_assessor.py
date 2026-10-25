@@ -26,9 +26,9 @@ sys.path.insert(0, str(Path(__file__).parent))
 from dotenv import load_dotenv
 from openai import OpenAI
 
+from config.constants import DEFAULT_REASONING_EFFORT
 from services.jd_assessor import (
     ASSESSMENT_MODEL,
-    ASSESSMENT_TEMPERATURE,
     _format_candidates_for_prompt,
     build_assessment_prompt,
     compute_recommendation,
@@ -146,7 +146,7 @@ def _assess(
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_message},
         ],
-        temperature=ASSESSMENT_TEMPERATURE,
+        reasoning_effort=DEFAULT_REASONING_EFFORT,
         response_format={"type": "json_object"},
     )
     return json.loads(response.choices[0].message.content)

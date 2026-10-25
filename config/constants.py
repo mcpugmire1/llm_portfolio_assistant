@@ -23,11 +23,20 @@ Related:
 # These can be overridden via .env if needed (e.g., for cost testing)
 # Usage: model = get_conf("CHAT_MODEL") or DEFAULT_CHAT_MODEL
 
-DEFAULT_CHAT_MODEL = "gpt-4o"  # Primary LLM for responses
-DEFAULT_CLASSIFICATION_MODEL = (
-    "gpt-4o-mini"  # Lightweight model for intent classification
-)
+# Role Match's four calls (services/jd_assessor.py ASSESSMENT_MODEL) and
+# the facts sync (scripts/extract_facts.py). It rejects temperature, so each
+# call sends DEFAULT_REASONING_EFFORT instead. Ask Agy's answers use
+# ASK_ANSWER_MODEL below.
+DEFAULT_CHAT_MODEL = "gpt-5.6-terra"
+DEFAULT_REASONING_EFFORT = "low"
 DEFAULT_EMBEDDING_MODEL = "text-embedding-3-small"  # 1536 dimensions
+
+# Role Match client (_get_openai_client()). Its calls are not streamed, so
+# the read timeout covers the whole call; the slowest one measured on
+# DEFAULT_CHAT_MODEL at DEFAULT_REASONING_EFFORT was the required extraction
+# on the longest test JD, at 10.35 s over 722 calls (MATTGPT-302).
+ROLE_MATCH_MAX_RETRIES = 2
+ROLE_MATCH_READ_TIMEOUT_S = 30
 
 # =============================================================================
 # SEMANTIC ROUTER THRESHOLDS
@@ -289,8 +298,10 @@ CAPABILITY_SUBTITLES: dict[str, str] = {
 # build_answer_instructions(). It took answers with a dash from 42 of 55 to
 # 4 of 55, each of those a number range (MATTGPT-275 four-arm dash run);
 # normalize_dashes() in backend_service.py stays as the backstop on Ask
-# Agy's output. Role Match's prompts don't carry it: on gpt-4o its
-# model-written text had no dash with or without the rule.
+# Agy's output. Role Match's assessment prompt carries it too, as its own
+# line in JD_ASSESSMENT_PROMPT_TEMPLATE: on gpt-5.6-terra its model-written
+# text had 10 dashes in 6 runs without the rule and 0 with it (MATTGPT-302).
+# The extraction prompts don't, so source_text keeps the JD's punctuation.
 NO_DASH_RULE = (
     "Don't use em dashes or en dashes; use a comma, a colon, parentheses or a "
     "separate sentence, whichever fits."
