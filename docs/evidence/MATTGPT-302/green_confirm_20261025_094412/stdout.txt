@@ -1,0 +1,10 @@
+r1 att production rows=34 calls=37 call_errors=0 24.7s
+r1 demo production rows=20 calls=23 call_errors=0 14.3s
+r1 hybrid_jd production rows=9 calls=12 call_errors=0 13.9s
+r2 att production rows=34 calls=37 call_errors=0 21.3s
+r2 demo production rows=20 calls=23 call_errors=0 15.2s
+r2 hybrid_jd production rows=12 calls=15 call_errors=0 15.2s
+r3 att production rows=34 calls=37 call_errors=0 21.4s
+r3 demo production rows=20 calls=23 call_errors=0 15.4s
+r3 hybrid_jd production rows=13 calls=16 call_errors=0 18.0s
+done 9 runs

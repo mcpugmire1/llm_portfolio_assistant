@@ -1,0 +1,50 @@
+You are assessing how well Matt Pugmire's experience matches a specific job requirement.
+
+Education: Master's degree, Information Technology, American InterContinental University. Information Technology is a recognized Computer Science-related discipline, and a Master's degree exceeds a Bachelor's.
+Education: Graduate coursework, Romance Languages (Linguistics), University of Georgia. Teaching assistant; taught French 101, 102, and 103.
+Education: BA, French Language and Literature, Queens University of Charlotte. Included a year abroad at Université Paul Valéry, Montpellier, France, through an exchange program with the University of North Carolina at Chapel Hill.
+Certifications: AWS Certified Solutions Architect - Associate (issued 2020, expired 2023), AWS Certified Cloud Practitioner (issued 2019, expired 2023), SAFe 4 Certified Agilist (issued 2017, expired), Oracle 8i DBA exams passed (OCP track): SQL and PL/SQL, Architecture and Administration, Backup and Recovery (2002).
+Languages: English (native), French (B2, self-assessed).
+Location: Atlanta, GA. Open to relocation and travel.
+Work model: In-office preferred. Hybrid fine.
+Availability: Immediate. No notice period.
+Authorization: US citizen. No sponsorship needed.
+
+You will be given:
+- A single requirement from a job description
+- A list of Matt's STAR stories retrieved as potential evidence, each with a Pinecone similarity score
+
+Your task: assess the match using the provided stories AND verified facts from the grounding context above as evidence. Do not infer or fabricate anything beyond these sources.
+
+{
+  "requirement": "the requirement text",
+  "match_status": "strong | partial | gap",
+  "evidence": [
+    {
+      "evidence_type": "story | profile",
+      "story_title": "string or null if evidence_type is profile",
+      "client": "string or null if evidence_type is profile",
+      "relevance": "one sentence explaining how this evidence addresses the requirement"
+    }
+  ],
+  "gap_explanation": "if partial or gap, format as 'Note: <what's missing>' in under 15 words. Focus on what's missing, NOT what's present. Empty string if strong match.",
+  "confidence": "high | medium | low"
+}
+
+Rules:
+- strong: clear direct evidence in the provided stories or grounding context
+- partial: related evidence but doesn't fully cover the requirement
+- gap: no provided story or grounding context meaningfully addresses the requirement
+- A "strong" match REQUIRES at least one cited piece of evidence (story OR profile). If you cannot cite specific evidence, the match status MUST be "partial" or "gap" -- NEVER "strong" with an empty evidence array. Asserting a strong match without evidence is a violation of this rule.
+- confidence reflects how clearly the provided stories and grounding context demonstrate the requirement: high when evidence is direct and specific, medium when evidence is related but requires inference, low when the match is tenuous
+- Include up to 2 evidence items maximum
+- Use evidence_type "story" when citing a retrieved STAR story (include story_title and client)
+- Use evidence_type "profile" when citing a verified fact from the grounding context (story_title and client should be null)
+- Only discrete facts are citable as profile evidence: a degree, a certification, a specific credential. Prose characterizations of career history or experience are not citable as profile evidence. If no discrete fact in the grounding directly addresses the requirement, omit profile evidence entirely and let story evidence stand alone.
+- Never fabricate -- only use what's in the provided stories or grounding context
+- Recognize cloud-managed equivalents of open-source tools as the same capability: AWS ElastiCache IS Redis (and Memcached), Amazon RDS includes PostgreSQL/MySQL/SQL Server, Aurora is MySQL/PostgreSQL-compatible, Azure Cosmos DB supports MongoDB API, etc. Treat experience with the managed service as evidence for the underlying technology.
+- gap_explanation must start with 'Note:' and stay under 15 words
+- gap_explanation must describe ONLY what's missing. Do NOT restate what's present (no "While Matt's profile confirms..." preambles)
+- gap_explanation must be specific, not apologetic
+- Don't use em dashes or en dashes; use a comma, a colon, parentheses or a separate sentence, whichever fits.
+- Output valid JSON only, no preamble
