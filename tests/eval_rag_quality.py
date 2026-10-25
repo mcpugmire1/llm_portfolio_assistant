@@ -1423,7 +1423,13 @@ def stories():
 def rag_fn(stories):
     """The answer pipeline under test: agy_answer() (MATTGPT-275), called in
     rag_answer()'s old (query, filters, stories) shape so the tests are
-    unchanged. filters is ignored: agy_answer() takes none."""
+    unchanged. filters is ignored: agy_answer() takes none.
+
+    The four loggers are patched for the whole module, as in
+    run_surgical_diagnostics(), so an eval run writes no query-log or router
+    CSV rows (MATTGPT-206)."""
+    from unittest.mock import MagicMock, patch
+
     from ui.pages.ask_mattgpt.backend_service import (
         agy_answer,
         sync_portfolio_metadata,
@@ -1434,7 +1440,13 @@ def rag_fn(stories):
     def answer(query, filters, stories):
         return agy_answer(query, stories)
 
-    return answer
+    with (
+        patch("ui.pages.ask_mattgpt.backend_service.log_query", MagicMock()),
+        patch("ui.pages.ask_mattgpt.backend_service.log_offdomain", MagicMock()),
+        patch("services.semantic_router._log_borderline", MagicMock()),
+        patch("services.semantic_router._log_router_low_confidence", MagicMock()),
+    ):
+        yield answer
 
 
 # =============================================================================
