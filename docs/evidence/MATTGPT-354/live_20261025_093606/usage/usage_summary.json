@@ -1,0 +1,16 @@
+{
+  "embeddings:text-embedding-3-small": {
+    "calls": 8,
+    "input_tokens": 65,
+    "cached_input_tokens": 0,
+    "output_tokens": 0,
+    "reasoning_tokens": 0
+  },
+  "responses:gpt-6.1-sol": {
+    "calls": 8,
+    "input_tokens": 36614,
+    "cached_input_tokens": 11530,
+    "output_tokens": 293,
+    "reasoning_tokens": 22
+  }
+}

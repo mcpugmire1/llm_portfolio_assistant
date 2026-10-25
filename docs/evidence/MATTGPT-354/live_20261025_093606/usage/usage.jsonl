@@ -1,0 +1,16 @@
+{"test": "", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 7}
+{"test": "", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3001, "cached_input_tokens": 0, "output_tokens": 31, "reasoning_tokens": 0}
+{"test": "", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 13}
+{"test": "", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 5979, "cached_input_tokens": 2998, "output_tokens": 59, "reasoning_tokens": 10}
+{"test": "", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 7}
+{"test": "", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3000, "cached_input_tokens": 0, "output_tokens": 27, "reasoning_tokens": 0}
+{"test": "", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 9}
+{"test": "", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 6110, "cached_input_tokens": 2997, "output_tokens": 54, "reasoning_tokens": 12}
+{"test": "", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 7}
+{"test": "", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 2770, "cached_input_tokens": 0, "output_tokens": 25, "reasoning_tokens": 0}
+{"test": "", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 7}
+{"test": "", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 5947, "cached_input_tokens": 2767, "output_tokens": 35, "reasoning_tokens": 0}
+{"test": "", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 7}
+{"test": "", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 2771, "cached_input_tokens": 0, "output_tokens": 26, "reasoning_tokens": 0}
+{"test": "", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 8}
+{"test": "", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 7036, "cached_input_tokens": 2768, "output_tokens": 36, "reasoning_tokens": 0}

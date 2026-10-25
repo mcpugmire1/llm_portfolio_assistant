@@ -1453,7 +1453,7 @@ class TestLocationAvailabilityBlock:
             },
             "work_model": {
                 "value": "In-office preferred",
-                "subline": "Hybrid or remote fine",
+                "subline": "Hybrid fine",
             },
             "availability": {
                 "value": "Immediate",

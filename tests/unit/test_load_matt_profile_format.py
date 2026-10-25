@@ -268,13 +268,13 @@ class TestAssessmentPromptContainsLanguages:
 
 _LOC_FIXTURE = {
     "location": {"value": "Atlanta, GA", "subline": "Open to relocation and travel"},
-    "work_model": {"value": "In-office preferred", "subline": "Hybrid or remote fine"},
+    "work_model": {"value": "In-office preferred", "subline": "Hybrid fine"},
     "availability": {"value": "Immediate", "subline": ""},
     "authorization": {"value": "", "subline": "No sponsorship needed"},
 }
 _LOC_EXPECTED_LINES = [
     "Location: Atlanta, GA. Open to relocation and travel.",
-    "Work model: In-office preferred. Hybrid or remote fine.",
+    "Work model: In-office preferred. Hybrid fine.",
     "Availability: Immediate.",
 ]
 

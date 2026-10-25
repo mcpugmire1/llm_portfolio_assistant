@@ -5,9 +5,12 @@ Professional background, resume, and contact information.
 Updated for dark mode compatibility using CSS variables.
 """
 
+import html
+
 import streamlit as st
 import streamlit.components.v1 as components
 
+from services import matt_profile
 from ui.image_assets import MATT_CARTOON_B64
 
 # One subtitle for the page header and the Download PDF, so they can't drift.
@@ -35,7 +38,16 @@ _ABOUT_HTML = f"""
 
 
 def _work_mode_text(profile: dict) -> str:
-    raise NotImplementedError
+    """The "Work mode" tile from data/matt_profile.json's
+    logistics.work_model, the source Role Match and Ask Agy read: the value,
+    " · ", then the subline, as stored (MATTGPT-354). No value gives "", and
+    the tile is left out (the MATTGPT-089 omit-cleanly contract)."""
+    cell = ((profile or {}).get("logistics") or {}).get("work_model") or {}
+    value = str(cell.get("value", "")).strip()
+    if not value:
+        return ""
+    subline = str(cell.get("subline", "")).strip()
+    return f"{value} · {subline}" if subline else value
 
 
 def render_about_matt():
@@ -64,6 +76,14 @@ def render_about_matt():
     # Inner labels/values use wireframe class names: prof-signal-lbl/prof-signal-val.
     # =========================================================================
 
+    # A profile read error leaves the tile out rather than breaking the page,
+    # as Role Match's _load_matt_profile_dict() does.
+    try:
+        profile = matt_profile.load_profile_dict()
+    except Exception:
+        profile = {}
+    work_mode = html.escape(_work_mode_text(profile), quote=False)
+
     with st.container(key="am_signals_panel"):
         st.markdown('<p class="prof-section-h">Signals</p>', unsafe_allow_html=True)
         st.markdown(
@@ -73,8 +93,12 @@ def render_about_matt():
             '<div class="am-signal-tile prof-signal-tile"><p class="prof-signal-lbl">Peak team</p><p class="prof-signal-val">150+ practitioners</p></div>'
             '<div class="am-signal-tile prof-signal-tile"><p class="prof-signal-lbl">Geo</p><p class="prof-signal-val">Atlanta · open to relocate</p></div>'
             '<div class="am-signal-tile prof-signal-tile"><p class="prof-signal-lbl">Status</p><p class="prof-signal-val">Active conversations</p></div>'
-            '<div class="am-signal-tile prof-signal-tile"><p class="prof-signal-lbl">Work mode</p><p class="prof-signal-val">Hybrid or in-person</p></div>'
-            "</div>",
+            + (
+                f'<div class="am-signal-tile prof-signal-tile"><p class="prof-signal-lbl">Work mode</p><p class="prof-signal-val">{work_mode}</p></div>'
+                if work_mode
+                else ""
+            )
+            + "</div>",
             unsafe_allow_html=True,
         )
 
@@ -233,8 +257,12 @@ def render_about_matt():
             "<div class='tile'><p class='tile-lbl'>Peak team</p><p class='tile-val'>150+ practitioners</p></div>"
             "<div class='tile'><p class='tile-lbl'>Geo</p><p class='tile-val'>Atlanta &middot; open to relocate</p></div>"
             "<div class='tile'><p class='tile-lbl'>Status</p><p class='tile-val'>Active conversations</p></div>"
-            "<div class='tile'><p class='tile-lbl'>Work mode</p><p class='tile-val'>Hybrid or in-person</p></div>"
-            "</div>"
+            + (
+                f"<div class='tile'><p class='tile-lbl'>Work mode</p><p class='tile-val'>{work_mode}</p></div>"
+                if work_mode
+                else ""
+            )
+            + "</div>"
             "<h2>In My Own Words</h2>"
             "<p class='voice'>I build what&#39;s next, modernize what&#39;s not, and grow teams along the way.</p>"
             "<p class='voice'>My foundation is in financial services technology at JP Morgan, Fiserv, RBC, and HSBC. "
