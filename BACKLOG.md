@@ -1261,7 +1261,7 @@ The bug is that Blocks A and B have no lower bound, so they leak into the ≤480
 - r2 labels render `display: block` (real labels above) at <=480px and `display: none` + `::before` injection at 481-767px, with no two `!important` rules applying to the same element at the same width.
 - Removing or reordering any single mobile block does not change r2-label visibility at any width (no cascade-order dependency).
 - Industry/Capability labels and general mobile filter layout unchanged at 375px.
-- Visual parity with current behavior confirmed at <=480 and in the 481-767 band.
+- A visible change at 481 to 767 px, verified with computed styles; not visual parity (Matt, Oct 24, 2026).
 
 **Cross-references:**
 - The mobile filter CSS this refactors was added in the explore_stories mobile-fix work (validated and committed June 24, 2026). Do this as the opening move of any future session that touches mobile filter CSS — it makes the cascade safe before edits land on top of it.
@@ -2215,6 +2215,7 @@ If the tool design offers a continuation, accepting it resolves to the story it 
 **Dead code in the Ask Agy files (Oct 14, 2026):**
 - **Removed by MATTGPT-275 (1095d2c):** 275 deletes `get_theme_guidance()` (`story_intelligence.py`; its only caller was commented out in `backend_service.py`) and, in `backend_service.py`, `get_narrative_titles()`, `_build_sources()`, `get_diverse_stories()` and `is_query_on_topic_llm()`. Confirmed Oct 15, 2026: no definition or reference at HEAD outside the `as_run/` copies under `docs/evidence/MATTGPT-275/`.
 - **Still dead after 275:** `get_all_themes()`, `get_theme_distribution()` and `get_theme_emoji()` in `story_intelligence.py` are still defined at HEAD (Oct 15, 2026); their only callers are `tests/unit/test_story_intelligence.py`, which skips when they are missing. Remove the functions and those tests together.
+- **Still dead (added Oct 25, 2026, from MATTGPT-185):** the `$or` entity filter in `services/pinecone_service.py` (built across `ENTITY_SEARCH_FIELDS` when `filters` carries an entity field). No production caller passes one.
 - **Stays:** `THEME_PROFESSIONAL`. It is a key in `THEME_TO_PATTERN`, which `conversation_helpers.py` and `build_story_context_for_rag()` use.
 
 **Update (Oct 15, 2026, re-checked at HEAD):** the `_router_rejection()` docstring is fixed in 5d70164. Remaining:
@@ -3586,6 +3587,8 @@ The phrase is not invisible to keyword scoring. It scores on a single stopword t
 **Stale against 1095d2c (verified Oct 17, 2026, HEAD 836bf4d):** `ENTITY_ALIASES` and `detect_entity()` are gone from production code; the model writes its own search queries now. Re-measure "outside of MattGPT" on the tool path before re-scoping.
 
 **Verified Oct 25, 2026 (HEAD 9bcefac):** the `$or` entity filter in `services/pinecone_service.py` is still built when `filters` carries an entity field, but no production caller passes one (`git grep -n -E 'entity_field|entity_value'` outside `pinecone_service.py` finds nothing). "The codebase already builds `$or` entity filters" above is code with no caller.
+
+**Re-scope (Matt, Oct 25, 2026):** stays Open. The defect is visitor-facing (negation queries return MattGPT stories) and hasn't been re-measured since 1095d2c. The unused `$or` entity filter moves to MATTGPT-287's leftover list. Next step, the ticket's own: run the three logged queries above through `agy_answer()`, 2 runs each. If the answers no longer lead with MattGPT, close it as fixed by the tool path; otherwise the "Tension to resolve before building" section stands.
 
 ---
 
