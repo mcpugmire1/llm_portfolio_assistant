@@ -1,0 +1,1374 @@
+{
+ "att": {
+  "gpt-4o": {
+   "counts": [
+    {
+     "required": 19,
+     "preferred": 10,
+     "implicit": 5,
+     "required+implicit": 24
+    },
+    {
+     "required": 19,
+     "preferred": 10,
+     "implicit": 5,
+     "required+implicit": 24
+    },
+    {
+     "required": 19,
+     "preferred": 10,
+     "implicit": 5,
+     "required+implicit": 24
+    }
+   ],
+   "seconds": [
+    9.7,
+    11.1,
+    8.9
+   ],
+   "errors": [],
+   "key_responsibilities": [
+    15,
+    15,
+    15
+   ]
+  },
+  "bar_range_required_plus_implicit": [
+   18.0,
+   30.0
+  ],
+  "today": [
+   {
+    "run": 1,
+    "counts": {
+     "required": 20,
+     "preferred": 10,
+     "implicit": 3,
+     "required+implicit": 23
+    },
+    "in_bar": true,
+    "reference_items": 15,
+    "landing": {
+     "none": 13,
+     "required": 1,
+     "implicit": 1
+    },
+    "key_responsibilities": 15
+   },
+   {
+    "run": 2,
+    "counts": {
+     "required": 20,
+     "preferred": 10,
+     "implicit": 3,
+     "required+implicit": 23
+    },
+    "in_bar": true,
+    "reference_items": 15,
+    "landing": {
+     "none": 13,
+     "required": 1,
+     "implicit": 1
+    },
+    "key_responsibilities": 15
+   },
+   {
+    "run": 3,
+    "counts": {
+     "required": 20,
+     "preferred": 10,
+     "implicit": 5,
+     "required+implicit": 25
+    },
+    "in_bar": true,
+    "reference_items": 15,
+    "landing": {
+     "implicit": 2,
+     "none": 12,
+     "required": 1
+    },
+    "key_responsibilities": 15
+   }
+  ],
+  "no_kr": [
+   {
+    "run": 1,
+    "counts": {
+     "required": 20,
+     "preferred": 10,
+     "implicit": 5,
+     "required+implicit": 25
+    },
+    "in_bar": true,
+    "reference_items": 15,
+    "landing": {
+     "none": 13,
+     "required": 1,
+     "implicit": 1
+    },
+    "key_responsibilities": 0
+   },
+   {
+    "run": 2,
+    "counts": {
+     "required": 20,
+     "preferred": 10,
+     "implicit": 4,
+     "required+implicit": 24
+    },
+    "in_bar": true,
+    "reference_items": 15,
+    "landing": {
+     "implicit": 2,
+     "none": 12,
+     "required": 1
+    },
+    "key_responsibilities": 0
+   },
+   {
+    "run": 3,
+    "counts": {
+     "required": 20,
+     "preferred": 10,
+     "implicit": 4,
+     "required+implicit": 24
+    },
+    "in_bar": true,
+    "reference_items": 15,
+    "landing": {
+     "implicit": 2,
+     "none": 12,
+     "required": 1
+    },
+    "key_responsibilities": 0
+   }
+  ]
+ },
+ "demo": {
+  "gpt-4o": {
+   "counts": [
+    {
+     "required": 12,
+     "preferred": 5,
+     "implicit": 5,
+     "required+implicit": 17
+    },
+    {
+     "required": 12,
+     "preferred": 5,
+     "implicit": 5,
+     "required+implicit": 17
+    },
+    {
+     "required": 12,
+     "preferred": 5,
+     "implicit": 5,
+     "required+implicit": 17
+    }
+   ],
+   "seconds": [
+    6.7,
+    6.8,
+    6.3
+   ],
+   "errors": [],
+   "key_responsibilities": [
+    6,
+    6,
+    6
+   ]
+  },
+  "bar_range_required_plus_implicit": [
+   12.8,
+   21.2
+  ],
+  "today": [
+   {
+    "run": 1,
+    "counts": {
+     "required": 12,
+     "preferred": 5,
+     "implicit": 3,
+     "required+implicit": 15
+    },
+    "in_bar": true,
+    "reference_items": 6,
+    "landing": {
+     "none": 3,
+     "implicit": 2,
+     "required": 1
+    },
+    "key_responsibilities": 6
+   },
+   {
+    "run": 2,
+    "counts": {
+     "required": 12,
+     "preferred": 5,
+     "implicit": 3,
+     "required+implicit": 15
+    },
+    "in_bar": true,
+    "reference_items": 7,
+    "landing": {
+     "none": 4,
+     "implicit": 2,
+     "required": 1
+    },
+    "key_responsibilities": 7
+   },
+   {
+    "run": 3,
+    "counts": {
+     "required": 12,
+     "preferred": 5,
+     "implicit": 3,
+     "required+implicit": 15
+    },
+    "in_bar": true,
+    "reference_items": 7,
+    "landing": {
+     "none": 4,
+     "implicit": 2,
+     "required": 1
+    },
+    "key_responsibilities": 7
+   }
+  ],
+  "no_kr": [
+   {
+    "run": 1,
+    "counts": {
+     "required": 12,
+     "preferred": 5,
+     "implicit": 3,
+     "required+implicit": 15
+    },
+    "in_bar": true,
+    "reference_items": 6,
+    "landing": {
+     "none": 3,
+     "implicit": 2,
+     "required": 1
+    },
+    "key_responsibilities": 0
+   },
+   {
+    "run": 2,
+    "counts": {
+     "required": 12,
+     "preferred": 5,
+     "implicit": 3,
+     "required+implicit": 15
+    },
+    "in_bar": true,
+    "reference_items": 7,
+    "landing": {
+     "none": 4,
+     "implicit": 2,
+     "required": 1
+    },
+    "key_responsibilities": 0
+   },
+   {
+    "run": 3,
+    "counts": {
+     "required": 12,
+     "preferred": 5,
+     "implicit": 4,
+     "required+implicit": 16
+    },
+    "in_bar": true,
+    "reference_items": 7,
+    "landing": {
+     "none": 3,
+     "implicit": 3,
+     "required": 1
+    },
+    "key_responsibilities": 0
+   }
+  ]
+ },
+ "fiserv_ai_transformation_lead_jd": {
+  "gpt-4o": {
+   "counts": [
+    {
+     "required": 10,
+     "preferred": 3,
+     "implicit": 9,
+     "required+implicit": 19
+    },
+    {
+     "required": 10,
+     "preferred": 3,
+     "implicit": 8,
+     "required+implicit": 18
+    },
+    {
+     "required": 10,
+     "preferred": 3,
+     "implicit": 8,
+     "required+implicit": 18
+    }
+   ],
+   "seconds": [
+    8.3,
+    7.5,
+    7.3
+   ],
+   "errors": [],
+   "key_responsibilities": [
+    12,
+    12,
+    12
+   ]
+  },
+  "bar_range_required_plus_implicit": [
+   13.8,
+   22.9
+  ],
+  "today": [
+   {
+    "run": 1,
+    "counts": {
+     "required": 10,
+     "preferred": 5,
+     "implicit": 6,
+     "required+implicit": 16
+    },
+    "in_bar": true,
+    "reference_items": 12,
+    "landing": {
+     "none": 4,
+     "implicit": 8
+    },
+    "key_responsibilities": 12
+   },
+   {
+    "run": 2,
+    "counts": {
+     "required": 10,
+     "preferred": 5,
+     "implicit": 6,
+     "required+implicit": 16
+    },
+    "in_bar": true,
+    "reference_items": 12,
+    "landing": {
+     "implicit": 7,
+     "none": 5
+    },
+    "key_responsibilities": 12
+   },
+   {
+    "run": 3,
+    "counts": {
+     "required": 10,
+     "preferred": 5,
+     "implicit": 7,
+     "required+implicit": 17
+    },
+    "in_bar": true,
+    "reference_items": 12,
+    "landing": {
+     "implicit": 8,
+     "none": 4
+    },
+    "key_responsibilities": 12
+   }
+  ],
+  "no_kr": [
+   {
+    "run": 1,
+    "counts": {
+     "required": 10,
+     "preferred": 5,
+     "implicit": 6,
+     "required+implicit": 16
+    },
+    "in_bar": true,
+    "reference_items": 12,
+    "landing": {
+     "none": 5,
+     "implicit": 7
+    },
+    "key_responsibilities": 0
+   },
+   {
+    "run": 2,
+    "counts": {
+     "required": 10,
+     "preferred": 5,
+     "implicit": 6,
+     "required+implicit": 16
+    },
+    "in_bar": true,
+    "reference_items": 12,
+    "landing": {
+     "implicit": 8,
+     "none": 4
+    },
+    "key_responsibilities": 0
+   },
+   {
+    "run": 3,
+    "counts": {
+     "required": 10,
+     "preferred": 5,
+     "implicit": 7,
+     "required+implicit": 17
+    },
+    "in_bar": true,
+    "reference_items": 12,
+    "landing": {
+     "implicit": 9,
+     "none": 3
+    },
+    "key_responsibilities": 0
+   }
+  ]
+ },
+ "088_bounded_range_jd": {
+  "gpt-4o": {
+   "counts": [
+    {
+     "required": 1,
+     "preferred": 0,
+     "implicit": 1,
+     "required+implicit": 2
+    },
+    {
+     "required": 2,
+     "preferred": 0,
+     "implicit": 0,
+     "required+implicit": 2
+    },
+    {
+     "required": 1,
+     "preferred": 0,
+     "implicit": 1,
+     "required+implicit": 2
+    }
+   ],
+   "seconds": [
+    2.4,
+    2.1,
+    2.2
+   ],
+   "errors": [],
+   "key_responsibilities": [
+    0,
+    0,
+    0
+   ]
+  },
+  "bar_range_required_plus_implicit": [
+   1.5,
+   2.5
+  ],
+  "today": [
+   {
+    "run": 1,
+    "counts": {
+     "required": 1,
+     "preferred": 0,
+     "implicit": 0,
+     "required+implicit": 1
+    },
+    "in_bar": false,
+    "reference_items": 0,
+    "landing": {},
+    "key_responsibilities": 0
+   },
+   {
+    "run": 2,
+    "counts": {
+     "required": 1,
+     "preferred": 0,
+     "implicit": 0,
+     "required+implicit": 1
+    },
+    "in_bar": false,
+    "reference_items": 0,
+    "landing": {},
+    "key_responsibilities": 0
+   },
+   {
+    "run": 3,
+    "counts": {
+     "required": 1,
+     "preferred": 0,
+     "implicit": 0,
+     "required+implicit": 1
+    },
+    "in_bar": false,
+    "reference_items": 0,
+    "landing": {},
+    "key_responsibilities": 0
+   }
+  ],
+  "no_kr": [
+   {
+    "run": 1,
+    "counts": {
+     "required": 1,
+     "preferred": 0,
+     "implicit": 0,
+     "required+implicit": 1
+    },
+    "in_bar": false,
+    "reference_items": 0,
+    "landing": {},
+    "key_responsibilities": 0
+   },
+   {
+    "run": 2,
+    "counts": {
+     "required": 1,
+     "preferred": 0,
+     "implicit": 0,
+     "required+implicit": 1
+    },
+    "in_bar": false,
+    "reference_items": 0,
+    "landing": {},
+    "key_responsibilities": 0
+   },
+   {
+    "run": 3,
+    "counts": {
+     "required": 1,
+     "preferred": 0,
+     "implicit": 0,
+     "required+implicit": 1
+    },
+    "in_bar": false,
+    "reference_items": 0,
+    "landing": {},
+    "key_responsibilities": 0
+   }
+  ]
+ },
+ "088_inhouse_org_jd": {
+  "gpt-4o": {
+   "counts": [
+    {
+     "required": 1,
+     "preferred": 0,
+     "implicit": 2,
+     "required+implicit": 3
+    },
+    {
+     "required": 1,
+     "preferred": 0,
+     "implicit": 2,
+     "required+implicit": 3
+    },
+    {
+     "required": 1,
+     "preferred": 0,
+     "implicit": 2,
+     "required+implicit": 3
+    }
+   ],
+   "seconds": [
+    2.3,
+    3.0,
+    2.3
+   ],
+   "errors": [],
+   "key_responsibilities": [
+    3,
+    3,
+    3
+   ]
+  },
+  "bar_range_required_plus_implicit": [
+   2.2,
+   3.8
+  ],
+  "today": [
+   {
+    "run": 1,
+    "counts": {
+     "required": 1,
+     "preferred": 0,
+     "implicit": 2,
+     "required+implicit": 3
+    },
+    "in_bar": true,
+    "reference_items": 3,
+    "landing": {
+     "required": 1,
+     "implicit": 2
+    },
+    "key_responsibilities": 3
+   },
+   {
+    "run": 2,
+    "counts": {
+     "required": 1,
+     "preferred": 0,
+     "implicit": 2,
+     "required+implicit": 3
+    },
+    "in_bar": true,
+    "reference_items": 3,
+    "landing": {
+     "none": 1,
+     "implicit": 2
+    },
+    "key_responsibilities": 3
+   },
+   {
+    "run": 3,
+    "counts": {
+     "required": 1,
+     "preferred": 0,
+     "implicit": 2,
+     "required+implicit": 3
+    },
+    "in_bar": true,
+    "reference_items": 3,
+    "landing": {
+     "none": 1,
+     "implicit": 2
+    },
+    "key_responsibilities": 3
+   }
+  ],
+  "no_kr": [
+   {
+    "run": 1,
+    "counts": {
+     "required": 1,
+     "preferred": 0,
+     "implicit": 2,
+     "required+implicit": 3
+    },
+    "in_bar": true,
+    "reference_items": 3,
+    "landing": {
+     "none": 1,
+     "implicit": 2
+    },
+    "key_responsibilities": 0
+   },
+   {
+    "run": 2,
+    "counts": {
+     "required": 1,
+     "preferred": 0,
+     "implicit": 2,
+     "required+implicit": 3
+    },
+    "in_bar": true,
+    "reference_items": 3,
+    "landing": {
+     "none": 1,
+     "implicit": 2
+    },
+    "key_responsibilities": 0
+   },
+   {
+    "run": 3,
+    "counts": {
+     "required": 1,
+     "preferred": 0,
+     "implicit": 3,
+     "required+implicit": 4
+    },
+    "in_bar": false,
+    "reference_items": 3,
+    "landing": {
+     "implicit": 3
+    },
+    "key_responsibilities": 0
+   }
+  ]
+ },
+ "088_open_floor_jd": {
+  "gpt-4o": {
+   "counts": [
+    {
+     "required": 2,
+     "preferred": 0,
+     "implicit": 0,
+     "required+implicit": 2
+    },
+    {
+     "required": 2,
+     "preferred": 0,
+     "implicit": 0,
+     "required+implicit": 2
+    },
+    {
+     "required": 2,
+     "preferred": 0,
+     "implicit": 0,
+     "required+implicit": 2
+    }
+   ],
+   "seconds": [
+    1.7,
+    1.8,
+    1.7
+   ],
+   "errors": [],
+   "key_responsibilities": [
+    0,
+    0,
+    0
+   ]
+  },
+  "bar_range_required_plus_implicit": [
+   1.5,
+   2.5
+  ],
+  "today": [
+   {
+    "run": 1,
+    "counts": {
+     "required": 1,
+     "preferred": 0,
+     "implicit": 0,
+     "required+implicit": 1
+    },
+    "in_bar": false,
+    "reference_items": 0,
+    "landing": {},
+    "key_responsibilities": 0
+   },
+   {
+    "run": 2,
+    "counts": {
+     "required": 1,
+     "preferred": 0,
+     "implicit": 0,
+     "required+implicit": 1
+    },
+    "in_bar": false,
+    "reference_items": 0,
+    "landing": {},
+    "key_responsibilities": 0
+   },
+   {
+    "run": 3,
+    "counts": {
+     "required": 1,
+     "preferred": 0,
+     "implicit": 0,
+     "required+implicit": 1
+    },
+    "in_bar": false,
+    "reference_items": 0,
+    "landing": {},
+    "key_responsibilities": 0
+   }
+  ],
+  "no_kr": [
+   {
+    "run": 1,
+    "counts": {
+     "required": 1,
+     "preferred": 0,
+     "implicit": 0,
+     "required+implicit": 1
+    },
+    "in_bar": false,
+    "reference_items": 0,
+    "landing": {},
+    "key_responsibilities": 0
+   },
+   {
+    "run": 2,
+    "counts": {
+     "required": 1,
+     "preferred": 0,
+     "implicit": 0,
+     "required+implicit": 1
+    },
+    "in_bar": false,
+    "reference_items": 0,
+    "landing": {},
+    "key_responsibilities": 0
+   },
+   {
+    "run": 3,
+    "counts": {
+     "required": 1,
+     "preferred": 0,
+     "implicit": 0,
+     "required+implicit": 1
+    },
+    "in_bar": false,
+    "reference_items": 0,
+    "landing": {},
+    "key_responsibilities": 0
+   }
+  ]
+ },
+ "hybrid_jd": {
+  "gpt-4o": {
+   "counts": [
+    {
+     "required": 15,
+     "preferred": 0,
+     "implicit": 6,
+     "required+implicit": 21
+    },
+    {
+     "required": 15,
+     "preferred": 0,
+     "implicit": 6,
+     "required+implicit": 21
+    },
+    {
+     "required": 15,
+     "preferred": 0,
+     "implicit": 5,
+     "required+implicit": 20
+    }
+   ],
+   "seconds": [
+    7.6,
+    7.3,
+    7.8
+   ],
+   "errors": [],
+   "key_responsibilities": [
+    15,
+    15,
+    15
+   ]
+  },
+  "bar_range_required_plus_implicit": [
+   15.5,
+   25.8
+  ],
+  "today": [
+   {
+    "run": 1,
+    "counts": {
+     "required": 12,
+     "preferred": 0,
+     "implicit": 1,
+     "required+implicit": 13
+    },
+    "in_bar": false,
+    "reference_items": 16,
+    "landing": {
+     "required": 12,
+     "none": 4
+    },
+    "key_responsibilities": 16
+   },
+   {
+    "run": 2,
+    "counts": {
+     "required": 0,
+     "preferred": 0,
+     "implicit": 9,
+     "required+implicit": 9
+    },
+    "in_bar": false,
+    "reference_items": 18,
+    "landing": {
+     "none": 12,
+     "implicit": 6
+    },
+    "key_responsibilities": 18
+   },
+   {
+    "run": 3,
+    "counts": {
+     "required": 12,
+     "preferred": 0,
+     "implicit": 0,
+     "required+implicit": 12
+    },
+    "in_bar": false,
+    "reference_items": 18,
+    "landing": {
+     "required": 12,
+     "none": 6
+    },
+    "key_responsibilities": 18
+   }
+  ],
+  "no_kr": [
+   {
+    "run": 1,
+    "counts": {
+     "required": 12,
+     "preferred": 0,
+     "implicit": 1,
+     "required+implicit": 13
+    },
+    "in_bar": false,
+    "reference_items": 16,
+    "landing": {
+     "required": 12,
+     "none": 3,
+     "implicit": 1
+    },
+    "key_responsibilities": 0
+   },
+   {
+    "run": 2,
+    "counts": {
+     "required": 12,
+     "preferred": 0,
+     "implicit": 0,
+     "required+implicit": 12
+    },
+    "in_bar": false,
+    "reference_items": 18,
+    "landing": {
+     "required": 18
+    },
+    "key_responsibilities": 0
+   },
+   {
+    "run": 3,
+    "counts": {
+     "required": 12,
+     "preferred": 0,
+     "implicit": 2,
+     "required+implicit": 14
+    },
+    "in_bar": false,
+    "reference_items": 18,
+    "landing": {
+     "required": 13,
+     "none": 3,
+     "implicit": 2
+    },
+    "key_responsibilities": 0
+   }
+  ]
+ },
+ "mixed_jd": {
+  "gpt-4o": {
+   "counts": [
+    {
+     "required": 9,
+     "preferred": 3,
+     "implicit": 7,
+     "required+implicit": 16
+    },
+    {
+     "required": 9,
+     "preferred": 3,
+     "implicit": 7,
+     "required+implicit": 16
+    },
+    {
+     "required": 9,
+     "preferred": 3,
+     "implicit": 5,
+     "required+implicit": 14
+    }
+   ],
+   "seconds": [
+    7.0,
+    6.0,
+    5.8
+   ],
+   "errors": [],
+   "key_responsibilities": [
+    7,
+    7,
+    7
+   ]
+  },
+  "bar_range_required_plus_implicit": [
+   11.5,
+   19.2
+  ],
+  "today": [
+   {
+    "run": 1,
+    "counts": {
+     "required": 8,
+     "preferred": 3,
+     "implicit": 8,
+     "required+implicit": 16
+    },
+    "in_bar": true,
+    "reference_items": 12,
+    "landing": {
+     "none": 7,
+     "implicit": 5
+    },
+    "key_responsibilities": 12
+   },
+   {
+    "run": 2,
+    "counts": {
+     "required": 8,
+     "preferred": 3,
+     "implicit": 10,
+     "required+implicit": 18
+    },
+    "in_bar": true,
+    "reference_items": 14,
+    "landing": {
+     "none": 10,
+     "implicit": 4
+    },
+    "key_responsibilities": 14
+   },
+   {
+    "run": 3,
+    "counts": {
+     "required": 8,
+     "preferred": 3,
+     "implicit": 8,
+     "required+implicit": 16
+    },
+    "in_bar": true,
+    "reference_items": 7,
+    "landing": {
+     "none": 5,
+     "implicit": 2
+    },
+    "key_responsibilities": 7
+   }
+  ],
+  "no_kr": [
+   {
+    "run": 1,
+    "counts": {
+     "required": 8,
+     "preferred": 3,
+     "implicit": 8,
+     "required+implicit": 16
+    },
+    "in_bar": true,
+    "reference_items": 12,
+    "landing": {
+     "none": 5,
+     "implicit": 7
+    },
+    "key_responsibilities": 0
+   },
+   {
+    "run": 2,
+    "counts": {
+     "required": 8,
+     "preferred": 3,
+     "implicit": 7,
+     "required+implicit": 15
+    },
+    "in_bar": true,
+    "reference_items": 14,
+    "landing": {
+     "none": 9,
+     "implicit": 5
+    },
+    "key_responsibilities": 0
+   },
+   {
+    "run": 3,
+    "counts": {
+     "required": 8,
+     "preferred": 3,
+     "implicit": 10,
+     "required+implicit": 18
+    },
+    "in_bar": true,
+    "reference_items": 7,
+    "landing": {
+     "none": 3,
+     "implicit": 4
+    },
+    "key_responsibilities": 0
+   }
+  ]
+ },
+ "narrative_jd": {
+  "gpt-4o": {
+   "counts": [
+    {
+     "required": 7,
+     "preferred": 0,
+     "implicit": 3,
+     "required+implicit": 10
+    },
+    {
+     "required": 7,
+     "preferred": 0,
+     "implicit": 3,
+     "required+implicit": 10
+    },
+    {
+     "required": 7,
+     "preferred": 0,
+     "implicit": 3,
+     "required+implicit": 10
+    }
+   ],
+   "seconds": [
+    5.3,
+    4.9,
+    5.1
+   ],
+   "errors": [],
+   "key_responsibilities": [
+    9,
+    9,
+    9
+   ]
+  },
+  "bar_range_required_plus_implicit": [
+   7.5,
+   12.5
+  ],
+  "today": [
+   {
+    "run": 1,
+    "counts": {
+     "required": 13,
+     "preferred": 0,
+     "implicit": 0,
+     "required+implicit": 13
+    },
+    "in_bar": false,
+    "reference_items": 11,
+    "landing": {
+     "required": 9,
+     "none": 2
+    },
+    "key_responsibilities": 11
+   },
+   {
+    "run": 2,
+    "counts": {
+     "required": 11,
+     "preferred": 0,
+     "implicit": 0,
+     "required+implicit": 11
+    },
+    "in_bar": true,
+    "reference_items": 9,
+    "landing": {
+     "required": 7,
+     "none": 2
+    },
+    "key_responsibilities": 9
+   },
+   {
+    "run": 3,
+    "counts": {
+     "required": 10,
+     "preferred": 0,
+     "implicit": 0,
+     "required+implicit": 10
+    },
+    "in_bar": true,
+    "reference_items": 9,
+    "landing": {
+     "required": 7,
+     "none": 2
+    },
+    "key_responsibilities": 9
+   }
+  ],
+  "no_kr": [
+   {
+    "run": 1,
+    "counts": {
+     "required": 10,
+     "preferred": 0,
+     "implicit": 0,
+     "required+implicit": 10
+    },
+    "in_bar": true,
+    "reference_items": 11,
+    "landing": {
+     "required": 8,
+     "none": 3
+    },
+    "key_responsibilities": 0
+   },
+   {
+    "run": 2,
+    "counts": {
+     "required": 10,
+     "preferred": 0,
+     "implicit": 0,
+     "required+implicit": 10
+    },
+    "in_bar": true,
+    "reference_items": 9,
+    "landing": {
+     "required": 7,
+     "none": 2
+    },
+    "key_responsibilities": 0
+   },
+   {
+    "run": 3,
+    "counts": {
+     "required": 11,
+     "preferred": 0,
+     "implicit": 0,
+     "required+implicit": 11
+    },
+    "in_bar": true,
+    "reference_items": 9,
+    "landing": {
+     "required": 7,
+     "none": 2
+    },
+    "key_responsibilities": 0
+   }
+  ]
+ },
+ "structured_jd": {
+  "gpt-4o": {
+   "counts": [
+    {
+     "required": 11,
+     "preferred": 4,
+     "implicit": 9,
+     "required+implicit": 20
+    },
+    {
+     "required": 11,
+     "preferred": 4,
+     "implicit": 9,
+     "required+implicit": 20
+    },
+    {
+     "required": 11,
+     "preferred": 4,
+     "implicit": 9,
+     "required+implicit": 20
+    }
+   ],
+   "seconds": [
+    7.2,
+    7.3,
+    7.5
+   ],
+   "errors": [],
+   "key_responsibilities": [
+    21,
+    21,
+    21
+   ]
+  },
+  "bar_range_required_plus_implicit": [
+   15.0,
+   25.0
+  ],
+  "today": [
+   {
+    "run": 1,
+    "counts": {
+     "required": 11,
+     "preferred": 4,
+     "implicit": 10,
+     "required+implicit": 21
+    },
+    "in_bar": true,
+    "reference_items": 21,
+    "landing": {
+     "implicit": 11,
+     "none": 9,
+     "required": 1
+    },
+    "key_responsibilities": 21
+   },
+   {
+    "run": 2,
+    "counts": {
+     "required": 11,
+     "preferred": 4,
+     "implicit": 8,
+     "required+implicit": 19
+    },
+    "in_bar": true,
+    "reference_items": 21,
+    "landing": {
+     "implicit": 8,
+     "none": 12,
+     "required": 1
+    },
+    "key_responsibilities": 21
+   },
+   {
+    "run": 3,
+    "counts": {
+     "required": 11,
+     "preferred": 4,
+     "implicit": 8,
+     "required+implicit": 19
+    },
+    "in_bar": true,
+    "reference_items": 21,
+    "landing": {
+     "implicit": 9,
+     "none": 11,
+     "required": 1
+    },
+    "key_responsibilities": 21
+   }
+  ],
+  "no_kr": [
+   {
+    "run": 1,
+    "counts": {
+     "required": 11,
+     "preferred": 4,
+     "implicit": 11,
+     "required+implicit": 22
+    },
+    "in_bar": true,
+    "reference_items": 21,
+    "landing": {
+     "implicit": 13,
+     "none": 7,
+     "required": 1
+    },
+    "key_responsibilities": 0
+   },
+   {
+    "run": 2,
+    "counts": {
+     "required": 11,
+     "preferred": 4,
+     "implicit": 10,
+     "required+implicit": 21
+    },
+    "in_bar": true,
+    "reference_items": 21,
+    "landing": {
+     "implicit": 12,
+     "none": 8,
+     "required": 1
+    },
+    "key_responsibilities": 0
+   },
+   {
+    "run": 3,
+    "counts": {
+     "required": 11,
+     "preferred": 4,
+     "implicit": 8,
+     "required+implicit": 19
+    },
+    "in_bar": true,
+    "reference_items": 21,
+    "landing": {
+     "implicit": 10,
+     "none": 10,
+     "required": 1
+    },
+    "key_responsibilities": 0
+   }
+  ]
+ }
+}

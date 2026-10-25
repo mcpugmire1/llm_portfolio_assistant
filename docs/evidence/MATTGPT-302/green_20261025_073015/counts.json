@@ -1,0 +1,1507 @@
+{
+ "production/att": {
+  "errors": [],
+  "per_run": [
+   {
+    "run": 1,
+    "seconds": 22.0,
+    "extraction_end_s": 9.8,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 2.35,
+    "required_s": [
+     7.41
+    ],
+    "preferred_s": [
+     2.77
+    ],
+    "implicit_s": [
+     2.35
+    ],
+    "assess_p50_s": 2.1,
+    "assess_max_s": 3.5,
+    "rows": 33,
+    "status": {
+     "strong": 22,
+     "partial": 11
+    },
+    "strong_share": 0.67,
+    "recommendation": {
+     "recommendation": "Consider",
+     "fit_score": "Medium",
+     "strong_count": 22,
+     "partial_count": 11,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "30/30",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 24.4,
+    "cost_usd": 0.3298
+   },
+   {
+    "run": 2,
+    "seconds": 21.0,
+    "extraction_end_s": 10.6,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 2.84,
+    "required_s": [
+     7.79
+    ],
+    "preferred_s": [
+     2.56
+    ],
+    "implicit_s": [
+     2.84
+    ],
+    "assess_p50_s": 2.2,
+    "assess_max_s": 4.14,
+    "rows": 33,
+    "status": {
+     "strong": 22,
+     "partial": 11
+    },
+    "strong_share": 0.67,
+    "recommendation": {
+     "recommendation": "Consider",
+     "fit_score": "Medium",
+     "strong_count": 22,
+     "partial_count": 11,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "30/30",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 17.7,
+    "cost_usd": 0.1452
+   },
+   {
+    "run": 3,
+    "seconds": 20.8,
+    "extraction_end_s": 10.3,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 3.12,
+    "required_s": [
+     7.15
+    ],
+    "preferred_s": [
+     2.52
+    ],
+    "implicit_s": [
+     3.12
+    ],
+    "assess_p50_s": 2.0,
+    "assess_max_s": 3.38,
+    "rows": 34,
+    "status": {
+     "strong": 23,
+     "partial": 10,
+     "gap": 1
+    },
+    "strong_share": 0.68,
+    "recommendation": {
+     "recommendation": "Consider",
+     "fit_score": "Medium",
+     "strong_count": 23,
+     "partial_count": 10,
+     "gap_count": 1,
+     "required_gap_count": 1,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "30/30",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 8.7,
+    "cost_usd": 0.1589
+   }
+  ]
+ },
+ "production/demo": {
+  "errors": [],
+  "per_run": [
+   {
+    "run": 1,
+    "seconds": 15.8,
+    "extraction_end_s": 8.9,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 3.43,
+    "required_s": [
+     5.47
+    ],
+    "preferred_s": [
+     2.22
+    ],
+    "implicit_s": [
+     3.43
+    ],
+    "assess_p50_s": 2.1,
+    "assess_max_s": 3.21,
+    "rows": 20,
+    "status": {
+     "strong": 17,
+     "partial": 3
+    },
+    "strong_share": 0.85,
+    "recommendation": {
+     "recommendation": "Apply",
+     "fit_score": "High",
+     "strong_count": 17,
+     "partial_count": 3,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "17/17",
+    "model_written_dashes": 0,
+    "jd_dashes": 4,
+    "reasoning_tokens_mean": 28.1,
+    "cost_usd": 0.2032
+   },
+   {
+    "run": 2,
+    "seconds": 17.8,
+    "extraction_end_s": 8.8,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 3.39,
+    "required_s": [
+     5.41
+    ],
+    "preferred_s": [
+     2.08
+    ],
+    "implicit_s": [
+     3.39
+    ],
+    "assess_p50_s": 2.4,
+    "assess_max_s": 4.18,
+    "rows": 20,
+    "status": {
+     "strong": 17,
+     "partial": 3
+    },
+    "strong_share": 0.85,
+    "recommendation": {
+     "recommendation": "Apply",
+     "fit_score": "High",
+     "strong_count": 17,
+     "partial_count": 3,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "17/17",
+    "model_written_dashes": 0,
+    "jd_dashes": 4,
+    "reasoning_tokens_mean": 29.0,
+    "cost_usd": 0.1113
+   },
+   {
+    "run": 3,
+    "seconds": 15.8,
+    "extraction_end_s": 9.0,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 3.43,
+    "required_s": [
+     5.6
+    ],
+    "preferred_s": [
+     2.04
+    ],
+    "implicit_s": [
+     3.43
+    ],
+    "assess_p50_s": 2.1,
+    "assess_max_s": 3.41,
+    "rows": 20,
+    "status": {
+     "strong": 17,
+     "partial": 3
+    },
+    "strong_share": 0.85,
+    "recommendation": {
+     "recommendation": "Apply",
+     "fit_score": "High",
+     "strong_count": 17,
+     "partial_count": 3,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "17/17",
+    "model_written_dashes": 0,
+    "jd_dashes": 4,
+    "reasoning_tokens_mean": 22.2,
+    "cost_usd": 0.1009
+   }
+  ]
+ },
+ "production/fiserv_ai_transformation_lead_jd": {
+  "errors": [],
+  "per_run": [
+   {
+    "run": 1,
+    "seconds": 18.3,
+    "extraction_end_s": 10.7,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 3.36,
+    "required_s": [
+     7.34
+    ],
+    "preferred_s": [
+     1.89
+    ],
+    "implicit_s": [
+     3.36
+    ],
+    "assess_p50_s": 2.1,
+    "assess_max_s": 3.07,
+    "rows": 22,
+    "status": {
+     "strong": 15,
+     "partial": 5,
+     "gap": 2
+    },
+    "strong_share": 0.68,
+    "recommendation": {
+     "recommendation": "Consider",
+     "fit_score": "Medium",
+     "strong_count": 15,
+     "partial_count": 5,
+     "gap_count": 2,
+     "required_gap_count": 0,
+     "preferred_gap_count": 2
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "15/15",
+    "model_written_dashes": 0,
+    "jd_dashes": 1,
+    "reasoning_tokens_mean": 22.7,
+    "cost_usd": 0.2175
+   },
+   {
+    "run": 2,
+    "seconds": 18.6,
+    "extraction_end_s": 10.1,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 1,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 3.89,
+    "required_s": [
+     6.23
+    ],
+    "preferred_s": [
+     1.92
+    ],
+    "implicit_s": [
+     3.89
+    ],
+    "assess_p50_s": 2.2,
+    "assess_max_s": 4.15,
+    "rows": 21,
+    "status": {
+     "strong": 15,
+     "partial": 4,
+     "gap": 2
+    },
+    "strong_share": 0.71,
+    "recommendation": {
+     "recommendation": "Apply",
+     "fit_score": "High",
+     "strong_count": 15,
+     "partial_count": 4,
+     "gap_count": 2,
+     "required_gap_count": 0,
+     "preferred_gap_count": 2
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "15/15",
+    "model_written_dashes": 0,
+    "jd_dashes": 1,
+    "reasoning_tokens_mean": 30.4,
+    "cost_usd": 0.1648
+   },
+   {
+    "run": 3,
+    "seconds": 17.4,
+    "extraction_end_s": 9.0,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 3.58,
+    "required_s": [
+     5.45
+    ],
+    "preferred_s": [
+     1.94
+    ],
+    "implicit_s": [
+     3.58
+    ],
+    "assess_p50_s": 2.3,
+    "assess_max_s": 3.73,
+    "rows": 21,
+    "status": {
+     "strong": 16,
+     "partial": 4,
+     "gap": 1
+    },
+    "strong_share": 0.76,
+    "recommendation": {
+     "recommendation": "Apply",
+     "fit_score": "High",
+     "strong_count": 16,
+     "partial_count": 4,
+     "gap_count": 1,
+     "required_gap_count": 0,
+     "preferred_gap_count": 1
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "15/15",
+    "model_written_dashes": 0,
+    "jd_dashes": 1,
+    "reasoning_tokens_mean": 22.8,
+    "cost_usd": 0.1109
+   }
+  ]
+ },
+ "production/088_bounded_range_jd": {
+  "errors": [],
+  "per_run": [
+   {
+    "run": 1,
+    "seconds": 5.2,
+    "extraction_end_s": 2.7,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 0.79,
+    "required_s": [
+     1.95
+    ],
+    "preferred_s": [
+     0.98
+    ],
+    "implicit_s": [
+     0.79
+    ],
+    "assess_p50_s": 2.0,
+    "assess_max_s": 1.97,
+    "rows": 1,
+    "status": {
+     "strong": 1
+    },
+    "strong_share": 1.0,
+    "recommendation": {
+     "recommendation": "Apply",
+     "fit_score": "High",
+     "strong_count": 1,
+     "partial_count": 0,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "1/1",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 8.5,
+    "cost_usd": 0.0135
+   },
+   {
+    "run": 2,
+    "seconds": 5.9,
+    "extraction_end_s": 2.3,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 0.74,
+    "required_s": [
+     1.54
+    ],
+    "preferred_s": [
+     1.22
+    ],
+    "implicit_s": [
+     0.74
+    ],
+    "assess_p50_s": 3.1,
+    "assess_max_s": 3.09,
+    "rows": 1,
+    "status": {
+     "partial": 1
+    },
+    "strong_share": 0.0,
+    "recommendation": {
+     "recommendation": "Consider",
+     "fit_score": "Medium",
+     "strong_count": 0,
+     "partial_count": 1,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "1/1",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 29.5,
+    "cost_usd": 0.0089
+   },
+   {
+    "run": 3,
+    "seconds": 4.8,
+    "extraction_end_s": 2.4,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 0.7,
+    "required_s": [
+     1.7
+    ],
+    "preferred_s": [
+     1.03
+    ],
+    "implicit_s": [
+     0.7
+    ],
+    "assess_p50_s": 2.0,
+    "assess_max_s": 1.96,
+    "rows": 1,
+    "status": {
+     "strong": 1
+    },
+    "strong_share": 1.0,
+    "recommendation": {
+     "recommendation": "Apply",
+     "fit_score": "High",
+     "strong_count": 1,
+     "partial_count": 0,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "1/1",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 7,
+    "cost_usd": 0.0133
+   }
+  ]
+ },
+ "production/088_inhouse_org_jd": {
+  "errors": [],
+  "per_run": [
+   {
+    "run": 1,
+    "seconds": 6.9,
+    "extraction_end_s": 3.2,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 1.34,
+    "required_s": [
+     1.91
+    ],
+    "preferred_s": [
+     1.04
+    ],
+    "implicit_s": [
+     1.34
+    ],
+    "assess_p50_s": 2.2,
+    "assess_max_s": 2.84,
+    "rows": 4,
+    "status": {
+     "partial": 2,
+     "strong": 2
+    },
+    "strong_share": 0.5,
+    "recommendation": {
+     "recommendation": "Consider",
+     "fit_score": "Medium",
+     "strong_count": 2,
+     "partial_count": 2,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "1/1",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 19.4,
+    "cost_usd": 0.0436
+   },
+   {
+    "run": 2,
+    "seconds": 7.7,
+    "extraction_end_s": 3.7,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 2.01,
+    "required_s": [
+     1.73
+    ],
+    "preferred_s": [
+     1.03
+    ],
+    "implicit_s": [
+     2.01
+    ],
+    "assess_p50_s": 2.1,
+    "assess_max_s": 3.14,
+    "rows": 4,
+    "status": {
+     "partial": 1,
+     "strong": 3
+    },
+    "strong_share": 0.75,
+    "recommendation": {
+     "recommendation": "Apply",
+     "fit_score": "High",
+     "strong_count": 3,
+     "partial_count": 1,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "1/1",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 22.3,
+    "cost_usd": 0.0356
+   },
+   {
+    "run": 3,
+    "seconds": 6.6,
+    "extraction_end_s": 3.2,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 1.22,
+    "required_s": [
+     1.98
+    ],
+    "preferred_s": [
+     1.01
+    ],
+    "implicit_s": [
+     1.22
+    ],
+    "assess_p50_s": 2.0,
+    "assess_max_s": 2.24,
+    "rows": 3,
+    "status": {
+     "partial": 1,
+     "strong": 2
+    },
+    "strong_share": 0.67,
+    "recommendation": {
+     "recommendation": "Consider",
+     "fit_score": "Medium",
+     "strong_count": 2,
+     "partial_count": 1,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "1/1",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 4.8,
+    "cost_usd": 0.0251
+   }
+  ]
+ },
+ "production/088_open_floor_jd": {
+  "errors": [],
+  "per_run": [
+   {
+    "run": 1,
+    "seconds": 6.6,
+    "extraction_end_s": 2.7,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 0.88,
+    "required_s": [
+     1.81
+    ],
+    "preferred_s": [
+     0.92
+    ],
+    "implicit_s": [
+     0.88
+    ],
+    "assess_p50_s": 3.4,
+    "assess_max_s": 3.42,
+    "rows": 1,
+    "status": {
+     "partial": 1
+    },
+    "strong_share": 0.0,
+    "recommendation": {
+     "recommendation": "Consider",
+     "fit_score": "Medium",
+     "strong_count": 0,
+     "partial_count": 1,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "1/1",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 35.5,
+    "cost_usd": 0.0149
+   },
+   {
+    "run": 2,
+    "seconds": 4.9,
+    "extraction_end_s": 2.6,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 0.87,
+    "required_s": [
+     1.69
+    ],
+    "preferred_s": [
+     0.98
+    ],
+    "implicit_s": [
+     0.87
+    ],
+    "assess_p50_s": 2.0,
+    "assess_max_s": 1.99,
+    "rows": 1,
+    "status": {
+     "strong": 1
+    },
+    "strong_share": 1.0,
+    "recommendation": {
+     "recommendation": "Apply",
+     "fit_score": "High",
+     "strong_count": 1,
+     "partial_count": 0,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "1/1",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 10.2,
+    "cost_usd": 0.0076
+   },
+   {
+    "run": 3,
+    "seconds": 5.3,
+    "extraction_end_s": 2.6,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 0.75,
+    "required_s": [
+     1.88
+    ],
+    "preferred_s": [
+     0.91
+    ],
+    "implicit_s": [
+     0.75
+    ],
+    "assess_p50_s": 2.0,
+    "assess_max_s": 2.0,
+    "rows": 1,
+    "status": {
+     "strong": 1
+    },
+    "strong_share": 1.0,
+    "recommendation": {
+     "recommendation": "Apply",
+     "fit_score": "High",
+     "strong_count": 1,
+     "partial_count": 0,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "1/1",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 5.2,
+    "cost_usd": 0.013
+   }
+  ]
+ },
+ "production/hybrid_jd": {
+  "errors": [],
+  "per_run": [
+   {
+    "run": 1,
+    "seconds": 5.1,
+    "extraction_end_s": 5.1,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 1.88,
+    "required_s": [
+     3.23
+    ],
+    "preferred_s": [
+     1.09
+    ],
+    "implicit_s": [
+     1.88
+    ],
+    "assess_p50_s": null,
+    "assess_max_s": null,
+    "rows": 0,
+    "status": {},
+    "strong_share": null,
+    "recommendation": {},
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "0/0",
+    "model_written_dashes": 0,
+    "jd_dashes": 2,
+    "reasoning_tokens_mean": 48,
+    "cost_usd": 0.0125
+   },
+   {
+    "run": 2,
+    "seconds": 12.6,
+    "extraction_end_s": 9.0,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 5.21,
+    "required_s": [
+     3.79
+    ],
+    "preferred_s": [
+     1.05
+    ],
+    "implicit_s": [
+     5.21
+    ],
+    "assess_p50_s": 2.2,
+    "assess_max_s": 2.89,
+    "rows": 10,
+    "status": {
+     "partial": 4,
+     "strong": 6
+    },
+    "strong_share": 0.6,
+    "recommendation": {
+     "recommendation": "Consider",
+     "fit_score": "Medium",
+     "strong_count": 6,
+     "partial_count": 4,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "0/0",
+    "model_written_dashes": 0,
+    "jd_dashes": 2,
+    "reasoning_tokens_mean": 34,
+    "cost_usd": 0.1106
+   },
+   {
+    "run": 3,
+    "seconds": 15.6,
+    "extraction_end_s": 10.0,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 6.28,
+    "required_s": [
+     3.75
+    ],
+    "preferred_s": [
+     1.18
+    ],
+    "implicit_s": [
+     6.28
+    ],
+    "assess_p50_s": 3.0,
+    "assess_max_s": 4.55,
+    "rows": 10,
+    "status": {
+     "partial": 7,
+     "strong": 3
+    },
+    "strong_share": 0.3,
+    "recommendation": {
+     "recommendation": "Consider",
+     "fit_score": "Medium",
+     "strong_count": 3,
+     "partial_count": 7,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "0/0",
+    "model_written_dashes": 0,
+    "jd_dashes": 2,
+    "reasoning_tokens_mean": 53.8,
+    "cost_usd": 0.1105
+   }
+  ]
+ },
+ "production/mixed_jd": {
+  "errors": [],
+  "per_run": [
+   {
+    "run": 1,
+    "seconds": 18.4,
+    "extraction_end_s": 11.4,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 5.55,
+    "required_s": [
+     5.87
+    ],
+    "preferred_s": [
+     1.87
+    ],
+    "implicit_s": [
+     5.55
+    ],
+    "assess_p50_s": 2.3,
+    "assess_max_s": 2.97,
+    "rows": 20,
+    "status": {
+     "strong": 17,
+     "partial": 3
+    },
+    "strong_share": 0.85,
+    "recommendation": {
+     "recommendation": "Apply",
+     "fit_score": "High",
+     "strong_count": 17,
+     "partial_count": 3,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "11/11",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 16.9,
+    "cost_usd": 0.1964
+   },
+   {
+    "run": 2,
+    "seconds": 18.2,
+    "extraction_end_s": 11.1,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 5.18,
+    "required_s": [
+     5.88
+    ],
+    "preferred_s": [
+     1.86
+    ],
+    "implicit_s": [
+     5.18
+    ],
+    "assess_p50_s": 2.2,
+    "assess_max_s": 4.06,
+    "rows": 19,
+    "status": {
+     "strong": 15,
+     "partial": 4
+    },
+    "strong_share": 0.79,
+    "recommendation": {
+     "recommendation": "Apply",
+     "fit_score": "High",
+     "strong_count": 15,
+     "partial_count": 4,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "11/11",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 23.8,
+    "cost_usd": 0.1686
+   },
+   {
+    "run": 3,
+    "seconds": 19.4,
+    "extraction_end_s": 10.6,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 5.65,
+    "required_s": [
+     4.97
+    ],
+    "preferred_s": [
+     1.79
+    ],
+    "implicit_s": [
+     5.65
+    ],
+    "assess_p50_s": 2.5,
+    "assess_max_s": 4.12,
+    "rows": 21,
+    "status": {
+     "strong": 16,
+     "partial": 5
+    },
+    "strong_share": 0.76,
+    "recommendation": {
+     "recommendation": "Apply",
+     "fit_score": "High",
+     "strong_count": 16,
+     "partial_count": 5,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "11/11",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 28.9,
+    "cost_usd": 0.1502
+   }
+  ]
+ },
+ "production/narrative_jd": {
+  "errors": [],
+  "per_run": [
+   {
+    "run": 1,
+    "seconds": 14.8,
+    "extraction_end_s": 7.7,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 1.64,
+    "required_s": [
+     6.04
+    ],
+    "preferred_s": [
+     1.0
+    ],
+    "implicit_s": [
+     1.64
+    ],
+    "assess_p50_s": 3.5,
+    "assess_max_s": 5.31,
+    "rows": 11,
+    "status": {
+     "partial": 11
+    },
+    "strong_share": 0.0,
+    "recommendation": {
+     "recommendation": "Consider",
+     "fit_score": "Medium",
+     "strong_count": 0,
+     "partial_count": 11,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "11/11",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 97.9,
+    "cost_usd": 0.1079
+   },
+   {
+    "run": 2,
+    "seconds": 13.5,
+    "extraction_end_s": 6.5,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 0.87,
+    "required_s": [
+     5.59
+    ],
+    "preferred_s": [
+     1.11
+    ],
+    "implicit_s": [
+     0.87
+    ],
+    "assess_p50_s": 3.5,
+    "assess_max_s": 4.36,
+    "rows": 11,
+    "status": {
+     "partial": 10,
+     "strong": 1
+    },
+    "strong_share": 0.09,
+    "recommendation": {
+     "recommendation": "Consider",
+     "fit_score": "Medium",
+     "strong_count": 1,
+     "partial_count": 10,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "11/11",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 70.1,
+    "cost_usd": 0.0722
+   },
+   {
+    "run": 3,
+    "seconds": 14.4,
+    "extraction_end_s": 7.7,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 1.94,
+    "required_s": [
+     5.76
+    ],
+    "preferred_s": [
+     1.11
+    ],
+    "implicit_s": [
+     1.94
+    ],
+    "assess_p50_s": 3.4,
+    "assess_max_s": 3.97,
+    "rows": 11,
+    "status": {
+     "partial": 11
+    },
+    "strong_share": 0.0,
+    "recommendation": {
+     "recommendation": "Consider",
+     "fit_score": "Medium",
+     "strong_count": 0,
+     "partial_count": 11,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "10/10",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 81.4,
+    "cost_usd": 0.0742
+   }
+  ]
+ },
+ "production/structured_jd": {
+  "errors": [],
+  "per_run": [
+   {
+    "run": 1,
+    "seconds": 19.1,
+    "extraction_end_s": 10.6,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 4.88,
+    "required_s": [
+     5.74
+    ],
+    "preferred_s": [
+     1.63
+    ],
+    "implicit_s": [
+     4.88
+    ],
+    "assess_p50_s": 2.1,
+    "assess_max_s": 4.47,
+    "rows": 23,
+    "status": {
+     "strong": 16,
+     "partial": 7
+    },
+    "strong_share": 0.7,
+    "recommendation": {
+     "recommendation": "Consider",
+     "fit_score": "Medium",
+     "strong_count": 16,
+     "partial_count": 7,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "15/15",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 32.4,
+    "cost_usd": 0.2193
+   },
+   {
+    "run": 2,
+    "seconds": 17.9,
+    "extraction_end_s": 9.5,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 4.51,
+    "required_s": [
+     5.01
+    ],
+    "preferred_s": [
+     1.49
+    ],
+    "implicit_s": [
+     4.51
+    ],
+    "assess_p50_s": 2.1,
+    "assess_max_s": 5.05,
+    "rows": 24,
+    "status": {
+     "strong": 16,
+     "partial": 8
+    },
+    "strong_share": 0.67,
+    "recommendation": {
+     "recommendation": "Consider",
+     "fit_score": "Medium",
+     "strong_count": 16,
+     "partial_count": 8,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "15/15",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 26.8,
+    "cost_usd": 0.1308
+   },
+   {
+    "run": 3,
+    "seconds": 19.4,
+    "extraction_end_s": 11.1,
+    "shape_failures": 0,
+    "non_object_items": {
+     "required_qualifications": 0,
+     "preferred_qualifications": 0,
+     "implicit_requirements": 0
+    },
+    "error": null,
+    "lines_in_both_sections": 0,
+    "invalid_line_numbers": 0,
+    "implicit_own_s": 5.75,
+    "required_s": [
+     5.37
+    ],
+    "preferred_s": [
+     1.33
+    ],
+    "implicit_s": [
+     5.75
+    ],
+    "assess_p50_s": 2.1,
+    "assess_max_s": 4.46,
+    "rows": 24,
+    "status": {
+     "strong": 17,
+     "partial": 7
+    },
+    "strong_share": 0.71,
+    "recommendation": {
+     "recommendation": "Apply",
+     "fit_score": "High",
+     "strong_count": 17,
+     "partial_count": 7,
+     "gap_count": 0,
+     "required_gap_count": 0,
+     "preferred_gap_count": 0
+    },
+    "strong_without_evidence": [],
+    "story_title_not_in_corpus": [],
+    "story_title_not_given_this_run": [],
+    "source_text_verbatim": "15/15",
+    "model_written_dashes": 0,
+    "jd_dashes": 0,
+    "reasoning_tokens_mean": 24.4,
+    "cost_usd": 0.1419
+   }
+  ]
+ }
+}

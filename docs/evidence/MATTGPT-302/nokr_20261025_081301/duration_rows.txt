@@ -1,0 +1,299 @@
+088_bounded_range_jd | no_kr r1 | partial (medium)
+  requirement: - 5-10 years of experience managing a large engineering organization directly as the accountable leader.
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: He grew and ran a 150+ practitioner organization through 11-13 direct-report practice and client leads, owning hiring, evaluation, promotions, compensation, and remediation.; [story] Owning the P&L: From Engagement Margin to Center Cost Base: As a Director running two Cloud Innovation Centers with 150+ practitioners, he held accountability for center cost base, chargeability, and contractor spending.
+  note: Note: Duration of large-organization accountable leadership is not explicitly established as 5-10 years.
+
+088_bounded_range_jd | no_kr r2 | strong (high)
+  requirement: - 5-10 years of experience managing a large engineering organization directly as the accountable leader.
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: From 2009 through 2023, Matt led managers and technical leads and ran a 150+ practitioner organization, directly owning hiring, evaluation, promotions, compensation, and performance decisions.
+  note: none
+
+088_bounded_range_jd | no_kr r3 | partial (medium)
+  requirement: - 5-10 years of experience managing a large engineering organization directly as the accountable leader.
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: Matt grew and ran a 150+ practitioner organization through 11-13 direct-report practice and client leads, owning hiring, performance evaluation, promotions, compensation, and remediation.; [story] Owning the P&L: From Engagement Margin to Center Cost Base: As a Director, he ran two Cloud Innovation Centers with 150+ practitioners and accountability for center cost base, chargeability, and contractor spend.
+  note: Note: Duration managing a large organization for 5-10 years is not specified.
+
+088_bounded_range_jd | today r1 | partial (medium)
+  requirement: - 5-10 years of experience managing a large engineering organization directly as the accountable leader.
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: Matt grew and ran a 150+ practitioner organization, with 11-13 practice and client leads directly reporting to him and accountability for hiring, evaluation, promotion, compensation, and performance decisions.; [story] Owning the P&L: From Engagement Margin to Center Cost Base: As a Director running two Cloud Innovation Centers with 150+ practitioners, he was accountable for the centers' cost base, chargeability, and contractor spending.
+  note: Note: Duration managing the 150+ organization is not specified as 5-10 years.
+
+088_bounded_range_jd | today r2 | partial (medium)
+  requirement: - 5-10 years of experience managing a large engineering organization directly as the accountable leader.
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: Matt grew and ran a 150+ practitioner organization, with 11-13 practice and client leads reporting directly to him and accountability for hiring, evaluation, promotions, compensation, and remediation.; [story] Owning the P&L: From Engagement Margin to Center Cost Base: As a Director running two Cloud Innovation Centers with 150+ practitioners, he held accountability for center cost base, chargeability, and contractor-spend approvals.
+  note: Note: Duration leading the 150+ organization is not specified as 5-10 years.
+
+088_bounded_range_jd | today r3 | strong (high)
+  requirement: 5-10 years of experience managing a large engineering organization directly as the accountable leader.
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: From 2009 through 2023, Matt led engineering leaders and delivery teams, including direct accountability for a 150+ practitioner organization through 11-13 direct-report practice and client leads.; [story] Owning the P&L: From Engagement Margin to Center Cost Base: As a Director running two Cloud Innovation Centers with 150+ practitioners, Matt held accountability for the centers' cost base, chargeability, and contractor spend.
+  note: none
+
+088_open_floor_jd | no_kr r1 | partial (medium)
+  requirement: - 10+ years of experience managing a large engineering organization directly as the accountable leader.
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: From 2009 through 2023, Matt led managers and technical leads and ultimately ran a 150+ practitioner organization through 11 to 13 direct-report practice and client leads.; [story] Owning the P&L: From Engagement Margin to Center Cost Base: As a Director, Matt ran two Cloud Innovation Centers with 150+ practitioners and held accountability for their cost base, chargeability, and contractor spend.
+  note: Note: Ten years leading a large organization directly is not explicitly established.
+
+088_open_floor_jd | no_kr r2 | partial (medium)
+  requirement: 10+ years of experience managing a large engineering organization directly as the accountable leader.
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: Matt led managers and technical leads from 2009 through 2023 and grew and ran a 150+ practitioner organization through 11 to 13 direct-report leads.
+  note: Note: Ten years leading a large organization directly is not specifically established.
+
+088_open_floor_jd | no_kr r3 | strong (high)
+  requirement: - 10+ years of experience managing a large engineering organization directly as the accountable leader.
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: From 2009 through 2023, Matt led managers and technical leads and ultimately ran a 150+ practitioner organization through 11-13 direct-report practice and client leads, accountable for hiring, evaluation, promotions, compensation, and performance actions.; [story] Owning the P&L: From Engagement Margin to Center Cost Base: As Director of two Cloud Innovation Centers with 150+ practitioners, Matt held accountability for the centers' cost base, chargeability, and contractor spending.
+  note: none
+
+088_open_floor_jd | today r1 | strong (high)
+  requirement: - 10+ years of experience managing a large engineering organization directly as the accountable leader.
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: From 2009 through 2023, Matt led managers and technical leads and ultimately ran a 150+ practitioner organization, with 11-13 practice and client leads directly reporting to him.; [story] Owning the P&L: From Engagement Margin to Center Cost Base: As a Director running two Cloud Innovation Centers with 150+ practitioners, Matt held accountability for center cost base, chargeability, and contractor spend.
+  note: none
+
+088_open_floor_jd | today r2 | strong (high)
+  requirement: - 10+ years of experience managing a large engineering organization directly as the accountable leader.
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: From 2009 through 2023, Matt led managers and technical leads and ultimately grew and ran a 150+ practitioner engineering organization, with 11-13 leads directly reporting to him and accountability for hiring, performance, promotions, compensation, and remediation.; [story] Owning the P&L: From Engagement Margin to Center Cost Base: As a Director running two Cloud Innovation Centers with 150+ practitioners, Matt was accountable for the centers' cost base, chargeability, and contractor spending.
+  note: none
+
+088_open_floor_jd | today r3 | partial (medium)
+  requirement: 10+ years of experience managing a large engineering organization directly as the accountable leader.
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: From 2009 through 2023, Matt led team managers and technical leads, and directly ran a 150+ practitioner organization through 11 to 13 direct-report practice and client leads.
+  note: Note: Ten years managing a large organization is not explicitly established.
+
+att | no_kr r1 | partial (high)
+  requirement: 7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.
+  evidence: [story] Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD: Designed cloud-native architecture patterns, infrastructure as code, Kubernetes, serverless approaches, monitoring, and delivery practices within enterprise governance and compliance constraints.; [story] Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500: Established cloud platforms and CI/CD infrastructure, integrating security scanning, deployment pipelines, access controls, and enterprise governance checkpoints.
+  note: Note: Evidence does not establish seven or more years of relevant experience.
+
+att | no_kr r2 | partial (medium)
+  requirement: 7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.
+  evidence: [story] Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD: Designed cloud-native architecture patterns, infrastructure as code, CI/CD, observability, and delivery practices within enterprise governance and compliance constraints.; [story] Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500: Built cloud platforms and CI/CD infrastructure, integrating security scanning, access controls, and enterprise governance checkpoints across a four-year practice.
+  note: Note: Evidence does not establish seven or more years of relevant experience.
+
+att | no_kr r3 | partial (medium)
+  requirement: 7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.
+  evidence: [story] Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500: Built cloud platforms and CI/CD infrastructure, integrating enterprise governance checkpoints, security scanning, deployment pipelines, and access controls over four years.; [story] Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD: Established cloud-native architecture, infrastructure as code, observability, automated deployment gates, and practices aligned to enterprise compliance and governance requirements.
+  note: Note: Explicit evidence of at least seven years is not provided.
+
+att | today r1 | partial (medium)
+  requirement: 7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.
+  evidence: [story] Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD: Established cloud-native architecture patterns, infrastructure as code, automated CI/CD, monitoring, and delivery practices across 15+ Fortune 500 engagements.; [story] Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500: Built cloud platforms and engineering infrastructure, integrating CI/CD, security scanning, access controls, and enterprise governance checkpoints over four years.
+  note: Note: Seven or more years of relevant cloud experience is not explicitly evidenced.
+
+att | today r2 | partial (medium)
+  requirement: 7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.
+  evidence: [story] Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD: Designed cloud-native architecture patterns, infrastructure as code, CI/CD, observability, and delivery practices within enterprise governance, security, and regulatory constraints.; [story] Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500: Built cloud platforms and CI/CD infrastructure and integrated engineering practices with enterprise governance checkpoints, security scanning, deployment controls, and access controls over four years.
+  note: Note: Seven or more years of relevant cloud experience is not explicitly evidenced.
+
+att | today r3 | partial (medium)
+  requirement: 7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.
+  evidence: [story] Accelerating Enterprise Delivery Through Cloud-Native Architecture and CI/CD: Established cloud-native architecture, infrastructure as code, automated delivery, monitoring, and practices aligned to enterprise governance and regulatory requirements across 15+ engagements.; [story] Building Cloud Innovation Centers (CIC) - Bringing Silicon Valley Product Culture to Fortune 500: Built cloud-platform and CI/CD capabilities and integrated engineering practices with enterprise governance checkpoints, security scanning, deployment pipelines, and access controls over four years.
+  note: Note: Seven or more years of directly documented cloud and governance experience is not established.
+
+demo | no_kr r1 | strong (high)
+  requirement: 10+ years of progressive software engineering experience, including hands-on development earlier in career
+  evidence: [story] Why Hire Matt?: Matt describes progression from engineer to Director, including enterprise platform development, cloud-native architecture, and engineering leadership.; [story] Building Sparkfly's Platform Alongside Its Founder: In 2000 to 2001, Matt progressed from developer to lead while personally writing production code and building core commerce, personalization, and database capabilities.
+  note: none
+
+demo | no_kr r1 | strong (high)
+  requirement: 5+ years leading engineering managers and senior technical leaders in a multi-team environment
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: From 2009 through 2023, Matt led managers and senior technical leads across multiple delivery teams and a 150+ person, two-layer organization.; [story] Enhancing Team Proficiency through Servant Leadership and Mentorship: He established coaching and peer-learning structures across cross-functional engineering teams at the Cloud Innovation Center.
+  note: none
+
+demo | no_kr r2 | strong (high)
+  requirement: 10+ years of progressive software engineering experience, including hands-on development earlier in career
+  evidence: [story] Building Sparkfly's Platform Alongside Its Founder: In 2000 to 2001, Matt progressed from developer to lead while writing production code and building the portal's commerce, personalization, and Oracle components.; [story] Why Hire Matt?: Matt describes progression from engineer to Director, including enterprise-platform delivery, cloud-native architecture, and engineering-organization leadership.
+  note: none
+
+demo | no_kr r2 | strong (high)
+  requirement: 5+ years leading engineering managers and senior technical leaders in a multi-team environment
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: From 2009 through 2023, Matt led managers and senior technical leads across multiple delivery teams and a 150+ person organization with 11-13 direct-report practice and client leads.
+  note: none
+
+demo | no_kr r3 | strong (high)
+  requirement: 10+ years of progressive software engineering experience, including hands-on development earlier in career
+  evidence: [story] Building Sparkfly's Platform Alongside Its Founder: Matt describes early-career hands-on production development, progressing from developer to lead while building and refactoring a live enterprise platform.; [story] Why Hire Matt?: Matt states a progression from engineer to Director, including enterprise platform delivery, cloud-native architecture, and engineering-organization leadership.
+  note: none
+
+demo | no_kr r3 | strong (high)
+  requirement: 5+ years leading engineering managers and senior technical leaders in a multi-team environment
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: From 2009 through 2023, he led managers and senior technical leads across multiple delivery teams and a 150+ person, two-layer Cloud Innovation Center organization.
+  note: none
+
+demo | today r1 | partial (medium)
+  requirement: 10+ years of progressive software engineering experience, including hands-on development earlier in career
+  evidence: [story] Building Sparkfly's Platform Alongside Its Founder: Matt worked as a developer and progressed to lead while continuing to write production code, delivering Java web, Oracle schema, and PL/SQL capabilities in 2000 to 2001.; [story] Why Hire Matt?: Matt describes progression from engineer to Director, with enterprise platform building, cloud-native architecture, and engineering-organization leadership.
+  note: Note: Evidence does not explicitly establish 10 or more years of experience.
+
+demo | today r1 | strong (high)
+  requirement: 5+ years leading engineering managers and senior technical leaders in a multi-team environment
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: From 2009 through 2023, he led managers and senior technical leads across multiple delivery teams and a 150+ person, two-layer organization with 11 to 13 practice and client leads reporting directly to him.; [story] About Matt: My Leadership Journey: He describes scaling and leading a 150+ professional Cloud Innovation Center and cross-functional teams across major modernization programs.
+  note: none
+
+demo | today r2 | strong (high)
+  requirement: 10+ years of progressive software engineering experience, including hands-on development earlier in career
+  evidence: [story] Building Sparkfly's Platform Alongside Its Founder: Documents hands-on early-career development from 2000 to 2001, progressing from developer to lead while writing production code and building a production commerce platform.; [story] Why Hire Matt?: Describes progression from engineer to Director, including enterprise platform development, cloud-native architecture, and engineering leadership.
+  note: none
+
+demo | today r2 | strong (high)
+  requirement: 5+ years leading engineering managers and senior technical leaders in a multi-team environment
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: From 2009 through 2023, Matt led managers and senior technical leads across multiple delivery teams and a 150+ person, two-layer organization.
+  note: none
+
+demo | today r3 | strong (high)
+  requirement: 10+ years of progressive software engineering experience, including hands-on development earlier in career
+  evidence: [story] Building Sparkfly's Platform Alongside Its Founder: In 2000 to 2001, Matt progressed from developer to lead while writing production code and building core commerce, personalization, administration, Oracle, and PL/SQL capabilities.; [story] Why Hire Matt?: Matt describes progression from engineer to Director, including enterprise platform development and integration, cloud-native architecture, and engineering organization leadership.
+  note: none
+
+demo | today r3 | strong (high)
+  requirement: 5+ years leading engineering managers and senior technical leaders in a multi-team environment
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: From 2009 through 2023, Matt led managers and senior technical leads across multiple delivery teams, including 11 to 13 practice and client leads in a 150+ person organization.
+  note: none
+
+fiserv_ai_transformation_lead_jd | no_kr r1 | partial (medium)
+  requirement: - 5-10 years of experience in artificial intelligence, machine learning, data analytics, software development, or related technical disciplines.
+  evidence: [story] Why Hire Matt?: Describes progression from engineer to Director, enterprise platform delivery, cloud-native architecture, and leading a 150-person engineering organization.; [story] Delivering AI-Powered Chronic Disease Management for Healthcare: Directly demonstrates delivery of an AI and machine-learning solution, including a data lake, ML pipeline, LLM, and full-stack components.
+  note: Note: Exact 5-10-year duration in qualifying disciplines is not provided.
+
+fiserv_ai_transformation_lead_jd | no_kr r2 | strong (high)
+  requirement: - 5-10 years of experience in artificial intelligence, machine learning, data analytics, software development, or related technical disciplines.
+  evidence: [story] Why Hire Matt?: Matt progressed from engineer to Director and architected cloud-native systems while leading enterprise platform delivery and engineering organizations.; [story] Delivering AI-Powered Chronic Disease Management for Healthcare: He led delivery of an AI-powered healthcare MVP including a data lake, machine learning pipeline, LLM, real-time data processing, and full-stack application components.
+  note: none
+
+fiserv_ai_transformation_lead_jd | no_kr r3 | partial (medium)
+  requirement: - 5-10 years of experience in artificial intelligence, machine learning, data analytics, software development, or related technical disciplines.
+  evidence: [story] Delivering AI-Powered Chronic Disease Management for Healthcare: Led delivery of an AI-powered healthcare MVP involving a data lake, machine learning pipeline, LLM, and full-stack application components.; [story] Why Hire Matt?: Describes progression from engineer to Director, including enterprise platform delivery and cloud-native systems architecture.
+  note: Note: Provided evidence does not document 5-10 years of relevant technical experience.
+
+fiserv_ai_transformation_lead_jd | today r1 | strong (high)
+  requirement: - 5-10 years of experience in artificial intelligence, machine learning, data analytics, software development, or related technical disciplines.
+  evidence: [story] Why Hire Matt?: Matt progressed from engineer to Director and architected cloud-native systems, demonstrating extensive software development and related technical experience.; [story] Delivering AI-Powered Chronic Disease Management for Healthcare: He designed and implemented a data lake, machine learning pipeline, LLM instance, and full-stack AI-enabled application components.
+  note: none
+
+fiserv_ai_transformation_lead_jd | today r2 | partial (medium)
+  requirement: - 5-10 years of experience in artificial intelligence, machine learning, data analytics, software development, or related technical disciplines.
+  evidence: [story] Delivering AI-Powered Chronic Disease Management for Healthcare: Led delivery of an AI-powered healthcare MVP, including a data lake, machine learning pipeline, LLM capabilities, and full-stack components.; [story] Why Hire Matt?: Describes progression from engineer to Director, including enterprise platform delivery and cloud-native systems architecture.
+  note: Note: No evidence verifies 5-10 years of relevant technical experience.
+
+fiserv_ai_transformation_lead_jd | today r3 | partial (medium)
+  requirement: 5-10 years of experience in artificial intelligence, machine learning, data analytics, software development, or related technical disciplines.
+  evidence: [story] Delivering AI-Powered Chronic Disease Management for Healthcare: Led delivery of a real-time data lake, machine learning pipeline, LLM capabilities, and full-stack mobile application components.; [story] Why Hire Matt?: Describes progression from engineer to Director, including enterprise platform delivery, cloud-native architecture, and engineering leadership.
+  note: Note: Documented evidence does not establish 5-10 years of relevant technical experience.
+
+mixed_jd | no_kr r1 | partial (medium)
+  requirement: 12+ years of software development experience with at least 8 years managing medium to large technology projects.
+  evidence: [story] Recovering Fiserv's $8.5M White-Label Card Portal: Managed recovery and delivery of an $8.5M technology program involving 45 team members and three external vendors.; [story] About Matt: My Leadership Journey: Describes leading major modernization programs and scaling a Cloud Innovation Center to 150+ professionals.
+  note: Note: Evidence does not establish 12 years development or 8 years project management.
+
+mixed_jd | no_kr r1 | partial (medium)
+  requirement: 5 years experience in delivering projects involving emerging tech such as Mobile/Wearables, IoT, Game Engines, CV, NLP, and Advanced ML
+  evidence: [story] Delivering AI-Powered Chronic Disease Management for Healthcare: Led delivery of an AI-powered MVP using machine learning, generative AI, device data, and a mobile app.; [story] Building Smart, Connected Devices at Accenture's Liquid Studio: Delivered working prototypes involving IoT, wearables, conversational AI, computer vision, robotics, and cloud AI services.
+  note: Note: No evidence establishes five years of emerging-technology project delivery.
+
+mixed_jd | no_kr r2 | partial (medium)
+  requirement: 12+ years of software development experience with at least 8 years managing medium to large technology projects.
+  evidence: [story] Recovering Fiserv's $8.5M White-Label Card Portal: Managed recovery and delivery of an $8.5M technology program with 45 team members and three external vendors.; [story] About Matt: My Leadership Journey: Led modernization programs and scaled a Cloud Innovation Center to more than 150 professionals.
+  note: Note: Exact durations for software development and project management are not provided.
+
+mixed_jd | no_kr r2 | partial (medium)
+  requirement: 5 years experience in delivering projects involving emerging tech such as Mobile/Wearables, IoT, Game Engines, CV, NLP, and Advanced ML
+  evidence: [story] Delivering AI-Powered Chronic Disease Management for Healthcare: Led delivery of an AI and machine learning MVP integrating health-tracking devices and mobile-app delivery, including an LLM-driven chat interface.; [story] Building Smart, Connected Devices at Accenture's Liquid Studio: Delivered working IoT, wearable, conversational AI, computer vision, and robotics prototypes across five industries.
+  note: Note: Evidence does not establish five years of emerging-technology project delivery.
+
+mixed_jd | no_kr r3 | partial (medium)
+  requirement: - 12+ years of software development experience with at least 8 years managing medium to large technology projects.
+  evidence: [story] Recovering Fiserv's $8.5M White-Label Card Portal: Managed recovery and delivery of an $8.5M technology program with 45 team members and three external vendors.; [story] Stabilizing and Delivering AT&T's Southeast CRM Replacement: Led delivery of a $5M CRM replacement involving 10+ teams, multiple vendors, and eight production servers.
+  note: Note: Documented evidence does not establish 12 years development and 8 years project management.
+
+mixed_jd | no_kr r3 | partial (medium)
+  requirement: - 5 years experience in delivering projects involving emerging tech such as Mobile/Wearables, IoT, Game Engines, CV, NLP, and Advanced ML
+  evidence: [story] Building Smart, Connected Devices at Accenture's Liquid Studio: Delivered IoT, wearables, conversational AI, computer vision, robotics, and cloud AI prototypes across five industries.; [story] Delivering AI-Powered Chronic Disease Management for Healthcare: Led delivery of an AI and ML-enabled mobile healthcare MVP integrating health-tracking devices, LLM chat, and real-time data.
+  note: Note: Five years of emerging-technology project delivery is not explicitly evidenced.
+
+mixed_jd | today r1 | partial (medium)
+  requirement: - 12+ years of software development experience with at least 8 years managing medium to large technology projects.
+  evidence: [story] Recovering Fiserv's $8.5M White-Label Card Portal: Managed recovery and delivery of an $8.5M technology program involving 45 team members and three external vendors.; [story] About Matt: My Leadership Journey: Describes leadership of major modernization programs and a 150-person Cloud Innovation Center.
+  note: Note: No evidence quantifies 12 development years or 8 project-management years.
+
+mixed_jd | today r1 | partial (medium)
+  requirement: - 5 years experience in delivering projects involving emerging tech such as Mobile/Wearables, IoT, Game Engines, CV, NLP, and Advanced ML
+  evidence: [story] Building Smart, Connected Devices at Accenture's Liquid Studio: Delivered IoT, wearable, conversational AI, computer vision, robotics, and cloud AI prototypes across five industries.; [story] Delivering AI-Powered Chronic Disease Management for Healthcare: Led delivery of a mobile, device-integrated healthcare MVP using machine learning, generative AI, an LLM, and real-time data pipelines.
+  note: Note: No evidence establishes five years of emerging-technology project delivery.
+
+mixed_jd | today r2 | partial (high)
+  requirement: 12+ years of software development experience with at least 8 years managing medium to large technology projects.
+  evidence: [story] Recovering Fiserv's $8.5M White-Label Card Portal: Managed recovery and delivery of an $8.5M technology program involving 45 team members, three vendors, and a complex API architecture transition.; [story] About Matt: My Leadership Journey: Describes leading major modernization programs and scaling a Cloud Innovation Center to 150+ professionals.
+  note: Note: No evidence verifies 12 years development or 8 years project management.
+
+mixed_jd | today r2 | partial (high)
+  requirement: 5 years experience in delivering projects involving emerging tech such as Mobile/Wearables, IoT, Game Engines, CV, NLP, and Advanced ML
+  evidence: [story] Delivering AI-Powered Chronic Disease Management for Healthcare: Led delivery of an AI and ML-powered healthcare MVP integrating health-tracking devices and mobile app delivery.; [story] Building Smart, Connected Devices at Accenture's Liquid Studio: Delivered IoT, wearables, conversational AI, computer vision, and robotics prototypes across five industries.
+  note: Note: Evidence does not establish five years of emerging-technology project delivery.
+
+mixed_jd | today r3 | partial (medium)
+  requirement: - 12+ years of software development experience with at least 8 years managing medium to large technology projects.
+  evidence: [story] Recovering Fiserv's $8.5M White-Label Card Portal: Managed recovery and delivery of an $8.5M technology program involving 45 team members and three external vendors.; [story] About Matt: My Leadership Journey: Led major modernization programs and scaled a Cloud Innovation Center to more than 150 professionals.
+  note: Note: Specific evidence of 12 years development and 8 years project management is missing.
+
+mixed_jd | today r3 | partial (medium)
+  requirement: - 5 years experience in delivering projects involving emerging tech such as Mobile/Wearables, IoT, Game Engines, CV, NLP, and Advanced ML
+  evidence: [story] Building Smart, Connected Devices at Accenture's Liquid Studio: Delivered rapid prototypes involving IoT, wearables, conversational AI, computer vision, robotics, and AWS AI services across five industries.; [story] Delivering AI-Powered Chronic Disease Management for Healthcare: Led delivery of an AI-powered mobile MVP using health-tracking devices, an ML pipeline, LLM-driven chat, and real-time patient insights.
+  note: Note: Stories do not establish five years of emerging-technology project delivery.
+
+structured_jd | no_kr r1 | strong (high)
+  requirement: - 10+ years of professional software development experience.
+  evidence: [story] Building Sparkfly's Platform Alongside Its Founder: Matt performed production software development and led developers on Sparkfly's platform from late 2000 through 2001.; [story] Why Hire Matt?: Matt's Accenture experience includes engineering leadership, enterprise platform delivery, cloud-native architecture, and building engineering organizations.
+  note: none
+
+structured_jd | no_kr r1 | strong (high)
+  requirement: - 5+ years managing managers and senior engineering leaders.
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: From 2009 through 2023, Matt led managers and senior technical leads, including 11 to 13 practice and client leads directly reporting to him.; [story] Leading People: From Delivery Teams to a 150-Person Organization: He ran a 150+ person organization through a two-layer structure and owned manager evaluation, promotions, compensation allocation, and performance remediation.
+  note: none
+
+structured_jd | no_kr r2 | partial (medium)
+  requirement: - 10+ years of professional software development experience.
+  evidence: [story] Building Sparkfly's Platform Alongside Its Founder: Matt performed production software development and technical leadership on a platform build from late 2000 through 2001.; [story] Building an HR Portal for a Subprime Lender Scaling Faster Than It Could Hire: Matt designed the SQL Server schema and built EJB-based application components during a late-2002 to 2003 enterprise portal engagement.
+  note: Note: Documented evidence does not establish a cumulative 10-year development duration.
+
+structured_jd | no_kr r2 | strong (high)
+  requirement: - 5+ years managing managers and senior engineering leaders.
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: From 2009 through 2023, Matt led managers and senior technical leads, including 11-13 practice and client leads directly in a 150+ person organization.
+  note: none
+
+structured_jd | no_kr r3 | partial (medium)
+  requirement: - 10+ years of professional software development experience.
+  evidence: [story] Building Sparkfly's Platform Alongside Its Founder: Matt worked as a production developer and later lead on Sparkfly's platform from late 2000 through 2001.; [story] Building an HR Portal for a Subprime Lender Scaling Faster Than It Could Hire: Matt performed enterprise software development work, including EJB and SQL Server schema development, from late 2002 into 2003.
+  note: Note: Provided evidence does not explicitly document a cumulative 10-year development duration.
+
+structured_jd | no_kr r3 | strong (high)
+  requirement: - 5+ years managing managers and senior engineering leaders.
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: From 2009 through 2023, Matt led managers and senior technical leads, including 11 to 13 practice and client leads reporting directly to him.
+  note: none
+
+structured_jd | today r1 | partial (medium)
+  requirement: - 10+ years of professional software development experience.
+  evidence: [story] Building Sparkfly's Platform Alongside Its Founder: Documents professional software development work from late 2000 through 2001, including production development and technical leadership.; [story] Building an HR Portal for a Subprime Lender Scaling Faster Than It Could Hire: Documents additional enterprise software development consulting work from late 2002 into 2003.
+  note: Note: Provided evidence does not document a cumulative 10 years of development experience.
+
+structured_jd | today r1 | strong (high)
+  requirement: - 5+ years managing managers and senior engineering leaders.
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: From 2009 through 2023, Matt led managers and senior technical leads, including 11-13 practice and client leads directly in a 150+ person organization.
+  note: none
+
+structured_jd | today r2 | partial (medium)
+  requirement: 10+ years of professional software development experience.
+  evidence: [story] Building Sparkfly's Platform Alongside Its Founder: Documents professional production software development work from late 2000 through 2001, including hands-on platform development and technical leadership.; [story] Why Hire Matt?: Describes progression from engineer to Director, including enterprise platform engineering, cloud-native architecture, and engineering leadership.
+  note: Note: Explicit evidence totaling 10 or more years of professional development experience is missing.
+
+structured_jd | today r2 | strong (high)
+  requirement: 5+ years managing managers and senior engineering leaders.
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: From 2009 through 2023, Matt led managers and senior technical leads, including 11 to 13 practice and client leads directly reporting to him.
+  note: none
+
+structured_jd | today r3 | partial (medium)
+  requirement: - 10+ years of professional software development experience.
+  evidence: [story] Building Sparkfly's Platform Alongside Its Founder: Matt worked as a developer and later lead, writing production code for Sparkfly from late 2000 through 2001.; [story] Building an HR Portal for a Subprime Lender Scaling Faster Than It Could Hire: Matt performed software design and development work on an enterprise HR portal from late 2002 into 2003.
+  note: Note: Provided evidence does not document a full 10 years of development experience.
+
+structured_jd | today r3 | strong (high)
+  requirement: - 5+ years managing managers and senior engineering leaders.
+  evidence: [story] Leading People: From Delivery Teams to a 150-Person Organization: From 2009 through 2023, Matt led managers and senior technical leads, including 11 to 13 practice and client leads directly in a 150+ person organization.
+  note: none

@@ -1,0 +1,107 @@
+=== att | gpt-4o R+I [24, 24, 24] mean 24.0, band 18.0 to 30.0
+  paren  r1 R 20 P 10 I 3 R+I 23 ok | lands {'none': 13, 'required': 1, 'implicit': 1} | 23.2s ext 11.4 retrieve max 3.27 embed 0.9 pinecone 1.73
+  paren  r2 R 20 P 10 I 3 R+I 23 ok | lands {'none': 13, 'required': 1, 'implicit': 1} | 21.1s ext 10.6 retrieve max 1.6 embed 0.89 pinecone 1.0
+  paren  r3 R 20 P 10 I 3 R+I 23 ok | lands {'implicit': 2, 'none': 12, 'required': 1} | 21.5s ext 10.1 retrieve max 1.51 embed 0.83 pinecone 0.69
+  no_kr  r1 R 20 P 10 I 5 R+I 25 ok | lands {'none': 13, 'required': 1, 'implicit': 1} | 20.5s ext 9.5 retrieve max None embed None pinecone None
+  no_kr  r2 R 20 P 10 I 4 R+I 24 ok | lands {'implicit': 2, 'none': 12, 'required': 1} | 20.9s ext 10.3 retrieve max None embed None pinecone None
+  no_kr  r3 R 20 P 10 I 4 R+I 24 ok | lands {'implicit': 2, 'none': 12, 'required': 1} | 20.8s ext 9.9 retrieve max None embed None pinecone None
+=== demo | gpt-4o R+I [17, 17, 17] mean 17.0, band 12.8 to 21.2
+  paren  r1 R 12 P 5 I 4 R+I 16 ok | lands {'none': 3, 'implicit': 3, 'required': 1} | 17.3s ext 9.8 retrieve max 1.33 embed 0.56 pinecone 0.85
+  paren  r2 R 12 P 5 I 4 R+I 16 ok | lands {'implicit': 4, 'none': 2, 'required': 1} | 16.4s ext 9.1 retrieve max 1.23 embed 0.53 pinecone 0.87
+  paren  r3 R 12 P 5 I 3 R+I 15 ok | lands {'none': 3, 'implicit': 2, 'required': 1} | 16.6s ext 9.9 retrieve max 2.57 embed 0.52 pinecone 2.17
+  no_kr  r1 R 12 P 5 I 3 R+I 15 ok | lands {'none': 3, 'implicit': 2, 'required': 1} | 16.6s ext 9.2 retrieve max None embed None pinecone None
+  no_kr  r2 R 12 P 5 I 3 R+I 15 ok | lands {'none': 4, 'implicit': 2, 'required': 1} | 15.7s ext 9.4 retrieve max None embed None pinecone None
+  no_kr  r3 R 12 P 5 I 4 R+I 16 ok | lands {'none': 3, 'implicit': 3, 'required': 1} | 15.3s ext 8.4 retrieve max None embed None pinecone None
+=== fiserv_ai_transformation_lead_jd | gpt-4o R+I [19, 18, 18] mean 18.3, band 13.8 to 22.9
+  paren  r1 R 14 P 5 I 6 R+I 20 ok | lands {'implicit': 8, 'none': 4} | 18.9s ext 11.4 retrieve max 1.28 embed 0.63 pinecone 0.65
+  paren  r2 R 10 P 5 I 6 R+I 16 ok | lands {'implicit': 7, 'none': 5} | 16.1s ext 9.6 retrieve max 1.26 embed 0.76 pinecone 0.52
+  paren  r3 R 10 P 5 I 7 R+I 17 ok | lands {'none': 4, 'implicit': 8} | 19.1s ext 11.2 retrieve max 1.38 embed 0.55 pinecone 0.94
+  no_kr  r1 R 10 P 5 I 6 R+I 16 ok | lands {'none': 5, 'implicit': 7} | 15.3s ext 8.2 retrieve max None embed None pinecone None
+  no_kr  r2 R 10 P 5 I 6 R+I 16 ok | lands {'implicit': 8, 'none': 4} | 15.5s ext 8.5 retrieve max None embed None pinecone None
+  no_kr  r3 R 10 P 5 I 7 R+I 17 ok | lands {'implicit': 9, 'none': 3} | 15.2s ext 8.0 retrieve max None embed None pinecone None
+=== 088_bounded_range_jd | gpt-4o R+I [2, 2, 2] mean 2.0, no band (gpt-4o under 5)
+  paren  r1 R 1 P 0 I 0 R+I 1 ok | lands {'required': 1} | 6.9s ext 2.6 retrieve max 0.34 embed 0.22 pinecone 0.11
+  paren  r2 R 1 P 0 I 0 R+I 1 ok | lands {'required': 1} | 4.8s ext 2.4 retrieve max 0.41 embed 0.32 pinecone 0.09
+  paren  r3 R 1 P 0 I 0 R+I 1 ok | lands {'required': 1} | 4.9s ext 2.5 retrieve max 0.4 embed 0.3 pinecone 0.09
+  no_kr  r1 R 1 P 0 I 0 R+I 1 ok | lands no reference run | 5.6s ext 2.4 retrieve max None embed None pinecone None
+  no_kr  r2 R 1 P 0 I 0 R+I 1 ok | lands no reference run | 5.5s ext 2.2 retrieve max None embed None pinecone None
+  no_kr  r3 R 1 P 0 I 0 R+I 1 ok | lands no reference run | 5.1s ext 2.4 retrieve max None embed None pinecone None
+=== 088_inhouse_org_jd | gpt-4o R+I [3, 3, 3] mean 3.0, no band (gpt-4o under 5)
+  paren  r1 R 1 P 0 I 2 R+I 3 ok | lands {'required': 1, 'implicit': 2} | 6.7s ext 3.5 retrieve max 0.42 embed 0.31 pinecone 0.12
+  paren  r2 R 1 P 0 I 3 R+I 4 ok | lands {'implicit': 3} | 7.7s ext 3.9 retrieve max 1.74 embed 0.63 pinecone 1.12
+  paren  r3 R 1 P 0 I 3 R+I 4 ok | lands {'implicit': 3} | 6.4s ext 3.2 retrieve max 0.56 embed 0.42 pinecone 0.19
+  no_kr  r1 R 1 P 0 I 2 R+I 3 ok | lands {'none': 1, 'implicit': 2} | 7.1s ext 4.1 retrieve max None embed None pinecone None
+  no_kr  r2 R 1 P 0 I 2 R+I 3 ok | lands {'none': 1, 'implicit': 2} | 5.6s ext 3.1 retrieve max None embed None pinecone None
+  no_kr  r3 R 1 P 0 I 3 R+I 4 ok | lands {'implicit': 3} | 7.0s ext 3.3 retrieve max None embed None pinecone None
+=== 088_open_floor_jd | gpt-4o R+I [2, 2, 2] mean 2.0, no band (gpt-4o under 5)
+  paren  r1 R 1 P 0 I 0 R+I 1 ok | lands {'required': 1} | 6.8s ext 4.2 retrieve max 0.72 embed 0.52 pinecone 0.21
+  paren  r2 R 1 P 0 I 0 R+I 1 ok | lands no reference run | 5.4s ext 2.8 retrieve max 0.48 embed 0.35 pinecone 0.13
+  paren  r3 R 1 P 0 I 0 R+I 1 ok | lands no reference run | 5.2s ext 2.7 retrieve max 0.43 embed 0.26 pinecone 0.17
+  no_kr  r1 R 1 P 0 I 0 R+I 1 ok | lands no reference run | 5.8s ext 2.1 retrieve max None embed None pinecone None
+  no_kr  r2 R 1 P 0 I 0 R+I 1 ok | lands no reference run | 5.2s ext 2.5 retrieve max None embed None pinecone None
+  no_kr  r3 R 1 P 0 I 0 R+I 1 ok | lands no reference run | 4.6s ext 2.1 retrieve max None embed None pinecone None
+=== hybrid_jd | gpt-4o R+I [21, 21, 20] mean 20.7, band 15.5 to 25.8
+  paren  r1 R 12 P 0 I 1 R+I 13 FAIL | lands {'required': 13, 'none': 3, 'implicit': 2} | 16.3s ext 9.6 retrieve max 1.35 embed 0.74 pinecone 0.71
+  paren  r2 R 12 P 0 I 1 R+I 13 FAIL | lands {'required': 12, 'none': 6} | 17.9s ext 11.4 retrieve max 1.23 embed 0.5 pinecone 0.87
+  paren  r3 R 12 P 0 I 1 R+I 13 FAIL | lands {'required': 13, 'none': 5} | 17.0s ext 9.7 retrieve max 2.12 embed 0.79 pinecone 1.68
+  paren  r4 R 12 P 0 I 0 R+I 12 FAIL | lands {'required': 12, 'none': 6} | 12.8s ext 7.3 retrieve max 1.08 embed 0.56 pinecone 0.68
+  paren  r5 R 0 P 0 I 10 R+I 10 FAIL | lands {'implicit': 10, 'none': 8} | 11.8s ext 8.1 retrieve max 1.36 embed 0.77 pinecone 0.59
+  paren  r6 R 10 P 0 I 1 R+I 11 FAIL | lands {'required': 7, 'none': 2} | 15.2s ext 9.7 retrieve max 1.49 embed 0.48 pinecone 1.01
+  paren  r7 R 13 P 0 I 0 R+I 13 FAIL | lands {'required': 13, 'none': 5} | 14.6s ext 8.4 retrieve max 1.49 embed 0.73 pinecone 0.8
+  paren  r8 R 12 P 0 I 0 R+I 12 FAIL | lands {'required': 12, 'none': 6} | 14.6s ext 8.3 retrieve max 0.82 embed 0.54 pinecone 0.41
+  paren  r9 R 12 P 0 I 2 R+I 14 FAIL | lands {'required': 13, 'none': 4, 'implicit': 1} | 14.6s ext 9.1 retrieve max 1.09 embed 0.56 pinecone 0.53
+  no_kr  r1 R 12 P 0 I 1 R+I 13 FAIL | lands {'required': 12, 'none': 3, 'implicit': 1} | 14.3s ext 7.3 retrieve max None embed None pinecone None
+  no_kr  r2 R 12 P 0 I 0 R+I 12 FAIL | lands {'required': 18} | 13.8s ext 7.3 retrieve max None embed None pinecone None
+  no_kr  r3 R 12 P 0 I 2 R+I 14 FAIL | lands {'required': 13, 'none': 3, 'implicit': 2} | 14.0s ext 8.8 retrieve max None embed None pinecone None
+  no_kr  r4 R 12 P 0 I 1 R+I 13 FAIL | lands no reference run | 23.9s ext 6.2 retrieve max 4.15 embed 3.91 pinecone 0.65
+  no_kr  r5 R 12 P 0 I 1 R+I 13 FAIL | lands no reference run | 41.8s ext 19.8 retrieve max 18.13 embed 17.84 pinecone 3.64
+  no_kr  r6 R 12 P 0 I 1 R+I 13 FAIL | lands no reference run | 13.6s ext 7.6 retrieve max 1.39 embed 1.05 pinecone 0.39
+  no_kr  r7 R 12 P 0 I 2 R+I 14 FAIL | lands no reference run | 13.0s ext 7.3 retrieve max 1.33 embed 0.55 pinecone 0.77
+  no_kr  r8 R 12 P 0 I 1 R+I 13 FAIL | lands no reference run | 13.5s ext 7.5 retrieve max 1.3 embed 0.7 pinecone 0.85
+  no_kr  r9 R 12 P 0 I 0 R+I 12 FAIL | lands no reference run | 14.7s ext 8.2 retrieve max 1.3 embed 0.66 pinecone 0.91
+=== mixed_jd | gpt-4o R+I [16, 16, 14] mean 15.3, band 11.5 to 19.2
+  paren  r1 R 8 P 3 I 7 R+I 15 ok | lands {'none': 2, 'implicit': 5} | 15.9s ext 9.4 retrieve max 1.1 embed 0.53 pinecone 0.69
+  paren  r2 R 8 P 3 I 9 R+I 17 ok | lands {'none': 5, 'implicit': 2} | 18.9s ext 11.7 retrieve max 1.45 embed 0.62 pinecone 0.96
+  paren  r3 R 8 P 3 I 8 R+I 16 ok | lands {'none': 6, 'implicit': 1} | 18.1s ext 9.9 retrieve max 1.44 embed 0.58 pinecone 0.99
+  no_kr  r1 R 8 P 3 I 8 R+I 16 ok | lands {'none': 5, 'implicit': 7} | 13.8s ext 7.8 retrieve max None embed None pinecone None
+  no_kr  r2 R 8 P 3 I 7 R+I 15 ok | lands {'none': 9, 'implicit': 5} | 16.2s ext 8.4 retrieve max None embed None pinecone None
+  no_kr  r3 R 8 P 3 I 10 R+I 18 ok | lands {'none': 3, 'implicit': 4} | 16.1s ext 9.4 retrieve max None embed None pinecone None
+=== narrative_jd | gpt-4o R+I [10, 10, 10] mean 10.0, band 7.5 to 12.5
+  paren  r1 R 10 P 0 I 0 R+I 10 ok | lands {'required': 7, 'none': 2} | 12.7s ext 7.9 retrieve max 1.24 embed 0.52 pinecone 0.77
+  paren  r2 R 11 P 0 I 0 R+I 11 ok | lands {'required': 7, 'none': 2} | 15.6s ext 7.8 retrieve max 1.9 embed 1.24 pinecone 0.83
+  paren  r3 R 10 P 0 I 0 R+I 10 ok | lands {'required': 8} | 28.1s ext 13.1 retrieve max 10.46 embed 8.78 pinecone 2.16
+  no_kr  r1 R 10 P 0 I 0 R+I 10 ok | lands {'required': 8, 'none': 3} | 10.4s ext 5.5 retrieve max None embed None pinecone None
+  no_kr  r2 R 10 P 0 I 0 R+I 10 ok | lands {'required': 7, 'none': 2} | 42.2s ext 8.9 retrieve max None embed None pinecone None
+  no_kr  r3 R 11 P 0 I 0 R+I 11 ok | lands {'required': 7, 'none': 2} | 14.6s ext 7.1 retrieve max None embed None pinecone None
+  no_kr rerun r1 13.6s ext 6.9 retrieve max 1.22 embed 0.63 pinecone 0.74 assess max 3.75
+  no_kr rerun r2 13.6s ext 7.9 retrieve max 1.98 embed 0.79 pinecone 1.22 assess max 4.52
+  no_kr rerun r3 38.2s ext 7.5 retrieve max 13.28 embed 10.75 pinecone 2.52 assess max 17.79
+=== structured_jd | gpt-4o R+I [20, 20, 20] mean 20.0, band 15.0 to 25.0
+  paren  r1 R 11 P 4 I 8 R+I 19 ok | lands {'implicit': 9, 'none': 11, 'required': 1} | 17.9s ext 10.2 retrieve max 1.41 embed 0.86 pinecone 0.55
+  paren  r2 R 11 P 4 I 6 R+I 17 ok | lands {'implicit': 8, 'none': 12, 'required': 1} | 18.0s ext 10.9 retrieve max 0.91 embed 0.65 pinecone 0.37
+  paren  r3 R 11 P 4 I 8 R+I 19 ok | lands {'implicit': 8, 'none': 12, 'required': 1} | 20.6s ext 13.5 retrieve max 1.85 embed 0.76 pinecone 1.08
+  no_kr  r1 R 11 P 4 I 11 R+I 22 ok | lands {'implicit': 13, 'none': 7, 'required': 1} | 16.0s ext 7.8 retrieve max None embed None pinecone None
+  no_kr  r2 R 11 P 4 I 10 R+I 21 ok | lands {'implicit': 12, 'none': 8, 'required': 1} | 16.1s ext 8.9 retrieve max None embed None pinecone None
+  no_kr  r3 R 11 P 4 I 8 R+I 19 ok | lands {'implicit': 10, 'none': 10, 'required': 1} | 15.9s ext 8.2 retrieve max None embed None pinecone None
+=== runs failing the extraction bar
+  paren hybrid_jd r1: R+I 13 band
+  paren hybrid_jd r2: R+I 13 band
+  paren hybrid_jd r3: R+I 13 band
+  paren hybrid_jd r4: R+I 12 band
+  paren hybrid_jd r5: R+I 10 band
+  paren hybrid_jd r6: R+I 11 band
+  paren hybrid_jd r7: R+I 13 band
+  paren hybrid_jd r8: R+I 12 band
+  paren hybrid_jd r9: R+I 14 band
+  no_kr hybrid_jd r1: R+I 13 band
+  no_kr hybrid_jd r2: R+I 12 band
+  no_kr hybrid_jd r3: R+I 14 band
+  no_kr hybrid_jd r4: R+I 13 band
+  no_kr hybrid_jd r5: R+I 13 band
+  no_kr hybrid_jd r6: R+I 13 band
+  no_kr hybrid_jd r7: R+I 14 band
+  no_kr hybrid_jd r8: R+I 13 band
+  no_kr hybrid_jd r9: R+I 12 band
+=== runs over 30 s (paren_dir)
+  no_kr rerun narrative_jd r3 38.2s
+  no_kr hybrid_jd r5 41.8s

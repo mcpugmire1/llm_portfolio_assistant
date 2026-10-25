@@ -1,0 +1,3951 @@
+[
+ {
+  "seconds": 9.7,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 2.82,
+    "input": 1911,
+    "cached": 0,
+    "output": 544
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 7.94,
+    "input": 2601,
+    "cached": 0,
+    "output": 1440
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 1.78,
+    "input": 2445,
+    "cached": 0,
+    "output": 269
+   }
+  ],
+  "extraction": {
+   "role_title": "Principal Systems Engineer",
+   "company": "AT&T",
+   "jd_format": "hybrid",
+   "required_qualifications": [
+    {
+     "requirement": "Deep experience designing, operating, and governing enterprise-scale platforms and cloud infrastructure",
+     "source_text": "Deep experience designing, operating, and governing enterprise-scale platforms and cloud infrastructure.",
+     "type": "experience"
+    },
+    {
+     "requirement": "7+ years of experience in cloud platforms, infrastructure services, platform engineering, and cloud governance practices",
+     "source_text": "7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience with containerized workloads, orchestration platforms, microservices architectures, and cloud-native deployment patterns",
+     "source_text": "Experience with containerized workloads, orchestration platforms, microservices architectures, and cloud-native deployment patterns.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Strong understanding of CI/CD pipelines, release automation, artifact management, infrastructure automation, and deployment governance",
+     "source_text": "Strong understanding of CI/CD pipelines, release automation, artifact management, infrastructure automation, and deployment governance.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Experience with monitoring, alerting, observability, logging, service health, and operational telemetry strategies",
+     "source_text": "Experience with monitoring, alerting, observability, logging, service health, and operational telemetry strategies.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Strong knowledge of security controls, access governance, role-based access management, separation of duties, and compliance practices",
+     "source_text": "Strong knowledge of security controls, access governance, role-based access management, separation of duties, and compliance practices.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Experience leading platform upgrades, lifecycle management, migration planning, disaster recovery, and resiliency improvements",
+     "source_text": "Experience leading platform upgrades, lifecycle management, migration planning, disaster recovery, and resiliency improvements.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Strong troubleshooting skills across infrastructure, application platforms, integrations, networking, and operational workflows",
+     "source_text": "Strong troubleshooting skills across infrastructure, application platforms, integrations, networking, and operational workflows.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Ability to define standards for SOPs, runbooks, operational playbooks, technical documentation, and support readiness",
+     "source_text": "Ability to define standards for SOPs, runbooks, operational playbooks, technical documentation, and support readiness.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Working knowledge of cost optimization, capacity planning, license management, and technology lifecycle planning",
+     "source_text": "Working knowledge of cost optimization, capacity planning, license management, and technology lifecycle planning.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Proven ability to lead through influence across multiple teams and organizations",
+     "source_text": "Proven ability to lead through influence across multiple teams and organizations.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Strong executive communication, stakeholder management, and decision-framing skills",
+     "source_text": "Strong executive communication, stakeholder management, and decision-framing skills.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Ability to mentor, coach, and develop engineering talent",
+     "source_text": "Ability to mentor, coach, and develop engineering talent.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Strong ownership mindset with accountability for outcomes, reliability, governance, and customer impact",
+     "source_text": "Strong ownership mindset with accountability for outcomes, reliability, governance, and customer impact.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Ability to drive alignment across technical, operational, security, and business priorities",
+     "source_text": "Ability to drive alignment across technical, operational, security, and business priorities.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Calm, decisive leadership during incidents, escalations, and high-pressure situations",
+     "source_text": "Calm, decisive leadership during incidents, escalations, and high-pressure situations.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Strong collaboration skills with Architecture, Development, Operations, Security, Product, and Support teams",
+     "source_text": "Strong collaboration skills with Architecture, Development, Operations, Security, Product, and Support teams.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Ability to simplify complex problems and communicate clear recommendations",
+     "source_text": "Ability to simplify complex problems and communicate clear recommendations.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Commitment to continuous improvement, operational excellence, innovation, and engineering discipline",
+     "source_text": "Commitment to continuous improvement, operational excellence, innovation, and engineering discipline.",
+     "type": "skill"
+    }
+   ],
+   "preferred_qualifications": [
+    {
+     "requirement": "Experience leading enterprise platform modernization or transformation initiatives.",
+     "source_text": "Experience leading enterprise platform modernization or transformation initiatives.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience defining platform roadmaps, maturity models, service ownership models, or operational governance frameworks.",
+     "source_text": "Experience defining platform roadmaps, maturity models, service ownership models, or operational governance frameworks.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience applying AI or intelligent automation to improve support operations, engineering productivity, or customer experience.",
+     "source_text": "Experience applying AI or intelligent automation to improve support operations, engineering productivity, or customer experience.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience with large-scale compliance programs, cybersecurity scorecards, audit preparation, and remediation tracking.",
+     "source_text": "Experience with large-scale compliance programs, cybersecurity scorecards, audit preparation, and remediation tracking.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience leading disaster recovery exercises, business continuity planning, and resiliency validation.",
+     "source_text": "Experience leading disaster recovery exercises, business continuity planning, and resiliency validation.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience influencing architecture review boards, technology standards, or enterprise engineering practices.",
+     "source_text": "Experience influencing architecture review boards, technology standards, or enterprise engineering practices.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience managing vendor relationships, licensing strategy, or platform service contracts.",
+     "source_text": "Experience managing vendor relationships, licensing strategy, or platform service contracts.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience developing metrics and executive dashboards for reliability, cost, risk, and operational performance.",
+     "source_text": "Experience developing metrics and executive dashboards for reliability, cost, risk, and operational performance.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience mentoring technical leads or senior engineers in a matrixed organization.",
+     "source_text": "Experience mentoring technical leads or senior engineers in a matrixed organization.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience driving cultural change toward automation, accountability, reliability, and self-service engineering.",
+     "source_text": "Experience driving cultural change toward automation, accountability, reliability, and self-service engineering.",
+     "type": "experience"
+    }
+   ],
+   "implicit_requirements": [
+    {
+     "requirement": "Ability to influence decisions without direct authority",
+     "inferred_from": "Influence decisions without direct authority by building alignment, communicating tradeoffs, and driving consensus.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in strategic oversight for CI/CD pipeline governance",
+     "inferred_from": "Provide strategic oversight for CI/CD pipeline governance, release standards, artifact management, infrastructure automation, and deployment maturity.",
+     "confidence": "medium"
+    },
+    {
+     "requirement": "Experience in leading root cause analysis and problem management",
+     "inferred_from": "Lead root cause analysis, problem management, corrective action planning, and prevention of recurring issues.",
+     "confidence": "medium"
+    },
+    {
+     "requirement": "Experience in guiding capacity planning and cloud cost optimization",
+     "inferred_from": "Guide capacity planning, cloud cost optimization, licensing strategy, technology lifecycle management, and platform sustainability.",
+     "confidence": "medium"
+    },
+    {
+     "requirement": "Experience in disaster recovery strategy and planning",
+     "inferred_from": "Own disaster recovery strategy, planning, exercises, documentation, and continuous improvement.",
+     "confidence": "medium"
+    }
+   ],
+   "key_responsibilities": [
+    "Serve as the senior technical leader and primary platform steward for critical enterprise platforms and cloud services.",
+    "Define and influence platform strategy, technical direction, architecture alignment, and long-term modernization roadmaps.",
+    "Lead cross-functional initiatives across Engineering, Operations, Architecture, Cybersecurity, Support, and business stakeholders.",
+    "Establish and promote engineering standards, operational best practices, automation principles, and platform governance models.",
+    "Own platform reliability, scalability, resiliency, lifecycle planning, operational readiness, and business continuity posture.",
+    "Lead compliance, cybersecurity, access governance, risk-management, and audit-readiness initiatives.",
+    "Drive automation-first approaches across infrastructure, deployments, operational workflows, support processes, and self-service capabilities.",
+    "Provide strategic oversight for CI/CD pipeline governance, release standards, artifact management, infrastructure automation, and deployment maturity.",
+    "Lead observability, monitoring, alerting, logging, and service health strategies to improve operational visibility and reduce incident impact.",
+    "Act as the highest-level escalation point for complex technical issues, major incidents, and platform-impacting events.",
+    "Lead root cause analysis, problem management, corrective action planning, and prevention of recurring issues.",
+    "Guide capacity planning, cloud cost optimization, licensing strategy, technology lifecycle management, and platform sustainability.",
+    "Own disaster recovery strategy, planning, exercises, documentation, and continuous improvement.",
+    "Mentor senior engineers and technical leads, helping raise the engineering maturity of the broader organization.",
+    "Influence decisions without direct authority by building alignment, communicating tradeoffs, and driving consensus."
+   ]
+  },
+  "jd": "att",
+  "run": 1
+ },
+ {
+  "seconds": 6.7,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 2.08,
+    "input": 973,
+    "cached": 0,
+    "output": 295
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 4.54,
+    "input": 1663,
+    "cached": 0,
+    "output": 867
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 2.11,
+    "input": 1317,
+    "cached": 0,
+    "output": 307
+   }
+  ],
+  "extraction": {
+   "role_title": "Senior Engineering Leader, Product Platform",
+   "company": "Undisclosed",
+   "jd_format": "hybrid",
+   "required_qualifications": [
+    {
+     "requirement": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+     "source_text": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+     "type": "experience"
+    },
+    {
+     "requirement": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+     "source_text": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience building or scaling an engineering organization from early stage to 100+ or inheriting and restructuring an existing org",
+     "source_text": "Demonstrated experience building or scaling an engineering organization (from early stage to 100+ or inheriting and restructuring an existing org)",
+     "type": "experience"
+    },
+    {
+     "requirement": "Cloud-native architecture experience with AWS, Azure, or GCP at the platform level",
+     "source_text": "Cloud-native architecture experience (AWS, Azure, or GCP) at the platform level",
+     "type": "skill"
+    },
+    {
+     "requirement": "Track record of legacy platform modernization in production environments without business disruption",
+     "source_text": "Track record of legacy platform modernization in production environments without business disruption",
+     "type": "experience"
+    },
+    {
+     "requirement": "Cross-functional leadership experience in engineering, product, and design operating as integrated units",
+     "source_text": "Cross-functional leadership experience — engineering, product, and design operating as integrated units",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience establishing or maturing engineering delivery practices such as CI/CD, automated testing, observability, and release management",
+     "source_text": "Experience establishing or maturing engineering delivery practices (CI/CD, automated testing, observability, release management)",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience in a regulated industry such as financial services, healthcare, government, or equivalent complexity",
+     "source_text": "Regulated industry experience (financial services, healthcare, government, or equivalent complexity)",
+     "type": "domain"
+    },
+    {
+     "requirement": "Ability to translate business strategy into engineering roadmap and organizational structure",
+     "source_text": "Demonstrated ability to translate business strategy into engineering roadmap and organizational structure",
+     "type": "skill"
+    },
+    {
+     "requirement": "Practical experience introducing AI-assisted development practices into an engineering organization",
+     "source_text": "AI/ML adoption strategy — practical experience introducing AI-assisted development practices into an engineering organization",
+     "type": "experience"
+    },
+    {
+     "requirement": "Fluency in modern technology stack across frontend and backend, including React or equivalent, Python/Node.js/Go, and containerized microservices",
+     "source_text": "Modern technology stack fluency across frontend and backend (React or equivalent, Python/Node.js/Go, containerized microservices)",
+     "type": "skill"
+    },
+    {
+     "requirement": "Budget ownership or P&L accountability for an engineering function",
+     "source_text": "Budget ownership or P&L accountability for an engineering function",
+     "type": "experience"
+    }
+   ],
+   "preferred_qualifications": [
+    {
+     "requirement": "Experience in a product company such as SaaS, platform, or marketplace",
+     "source_text": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+     "type": "experience"
+    },
+    {
+     "requirement": "Domain knowledge in healthcare, insurance, or life sciences",
+     "source_text": "Healthcare, insurance, or life sciences domain knowledge",
+     "type": "domain"
+    },
+    {
+     "requirement": "Hands-on Kubernetes experience at production scale, including cluster management, service mesh, and multi-tenant orchestration",
+     "source_text": "Hands-on Kubernetes experience at production scale (cluster management, service mesh, multi-tenant orchestration)",
+     "type": "skill"
+    },
+    {
+     "requirement": "Graduate degree in a technical field such as Computer Science, Engineering, or Information Technology",
+     "source_text": "Graduate degree in a technical field (Computer Science, Engineering, Information Technology, or related)",
+     "type": "education"
+    },
+    {
+     "requirement": "Published thought leadership or conference speaking on engineering culture, modernization, or AI adoption",
+     "source_text": "Published thought leadership or conference speaking on engineering culture, modernization, or AI adoption",
+     "type": "experience"
+    }
+   ],
+   "implicit_requirements": [
+    {
+     "requirement": "Ability to lead and scale a large cross-functional product engineering organization",
+     "inferred_from": "Lead and scale a cross-functional product engineering organization (150-300 engineers, product managers, and designers)",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in defining engineering operating models, including hiring philosophy, team structure, delivery practices, quality standards, and career development",
+     "inferred_from": "Define the engineering operating model: hiring philosophy, team structure, delivery practices, quality standards, and career development",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to establish AI-assisted engineering practices with guardrails for quality, security, and responsible adoption",
+     "inferred_from": "Establish AI-assisted engineering practices with guardrails for quality, security, and responsible adoption",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience partnering with C-suite to translate business strategy into technical roadmap and organizational priorities",
+     "inferred_from": "Partner with C-suite to translate business strategy into technical roadmap and organizational priorities",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to build a culture of sustainable delivery with high throughput without heroics",
+     "inferred_from": "Build a culture of sustainable delivery — high throughput without heroics",
+     "confidence": "high"
+    }
+   ],
+   "key_responsibilities": [
+    "Lead and scale a cross-functional product engineering organization (150-300 engineers, product managers, and designers)",
+    "Define the engineering operating model: hiring philosophy, team structure, delivery practices, quality standards, and career development",
+    "Drive platform modernization across a legacy core while maintaining business continuity",
+    "Establish AI-assisted engineering practices with guardrails for quality, security, and responsible adoption",
+    "Partner with C-suite to translate business strategy into technical roadmap and organizational priorities",
+    "Build a culture of sustainable delivery — high throughput without heroics"
+   ]
+  },
+  "jd": "demo",
+  "run": 1
+ },
+ {
+  "seconds": 8.3,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 1.24,
+    "input": 1018,
+    "cached": 0,
+    "output": 138
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 4.99,
+    "input": 1708,
+    "cached": 0,
+    "output": 865
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 3.33,
+    "input": 1270,
+    "cached": 0,
+    "output": 515
+   }
+  ],
+  "extraction": {
+   "role_title": "A.I. Transformation Lead",
+   "company": "Fiserv",
+   "jd_format": "hybrid",
+   "required_qualifications": [
+    {
+     "requirement": "Bachelor's degree in Computer Science, Data Science, Artificial Intelligence, Machine Learning, or a related field",
+     "source_text": "Bachelor's degree in Computer Science, Data Science, Artificial Intelligence, Machine Learning, or a related field; advanced degree preferred.",
+     "type": "education"
+    },
+    {
+     "requirement": "Strong foundation in machine learning, natural language processing, data analytics, and AI platforms",
+     "source_text": "Strong foundation in machine learning, natural language processing, data analytics, and AI platforms.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Experience working with structured and unstructured data, model lifecycle management, and enterprise data ecosystems",
+     "source_text": "Experience working with structured and unstructured data, model lifecycle management, and enterprise data ecosystems.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Ability to analyze complex data sets, assess business problems, and derive actionable, data-driven insights",
+     "source_text": "Ability to analyze complex data sets, assess business problems, and derive actionable, data-driven insights.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Excellent verbal and written communication skills with the ability to explain technical concepts to diverse audiences",
+     "source_text": "Excellent verbal and written communication skills with the ability to explain technical concepts to diverse audiences.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Proven ability to influence stakeholders and drive alignment across cross-functional teams",
+     "source_text": "Proven ability to influence stakeholders and drive alignment across cross-functional teams.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Demonstrated experience leading projects in complex, cross-functional environments",
+     "source_text": "Demonstrated experience leading projects in complex, cross-functional environments.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Ability to manage multiple initiatives, prioritize work, and deliver results in fast-paced settings",
+     "source_text": "Ability to manage multiple initiatives, prioritize work, and deliver results in fast-paced settings.",
+     "type": "skill"
+    },
+    {
+     "requirement": "5-10 years of experience in artificial intelligence, machine learning, data analytics, software development, or related technical disciplines",
+     "source_text": "5-10 years of experience in artificial intelligence, machine learning, data analytics, software development, or related technical disciplines.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience in the payments, financial services, or regulated industry environment",
+     "source_text": "Prior experience within the payments, financial services, or regulated industry environment strongly preferred.",
+     "type": "experience"
+    }
+   ],
+   "preferred_qualifications": [
+    {
+     "requirement": "Experience in software development",
+     "source_text": "Software Development experience",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience in Cobol programming",
+     "source_text": "Cobol Programming",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience with IBM tools, monitoring tools, RMF, DB2 utilities, Platinum Detector, etc.",
+     "source_text": "IBM tools, monitoring tools, RMF, DB2 utilities, Platinum Detector, etc.",
+     "type": "experience"
+    }
+   ],
+   "implicit_requirements": [
+    {
+     "requirement": "Ability to partner with clients and internal stakeholders to understand business objectives",
+     "inferred_from": "Partner with clients and internal stakeholders to understand business objectives and identify high impact AI use cases.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in defining AI roadmaps and transformation strategies",
+     "inferred_from": "Define AI roadmaps and transformation strategies aligned to organizational priorities and long-term value creation.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to ensure seamless integration of AI solutions with existing systems, data pipelines, and operational processes",
+     "inferred_from": "Ensure seamless integration of AI solutions with existing systems, data pipelines, and operational processes.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in assessing data readiness, quality, and governance",
+     "inferred_from": "Assess data readiness, quality, and governance to support AI initiatives.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to act as a trusted advisor and liaison between technical teams and non-technical stakeholders",
+     "inferred_from": "Act as a trusted advisor and liaison between technical teams and non-technical stakeholders.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in translating complex AI concepts into clear, actionable insights and business recommendations",
+     "inferred_from": "Translate complex AI concepts into clear, actionable insights and business recommendations for executive and operational audiences.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in delivering training, best practices, and enablement sessions on AI tools and capabilities",
+     "inferred_from": "Support organizational readiness by delivering training, best practices, and enablement sessions on AI tools and capabilities.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to monitor AI system performance, accuracy, and business impact post implementation",
+     "inferred_from": "Monitor AI system performance, accuracy, and business impact post implementation.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Knowledge of ethical standards, regulatory requirements, data privacy policies, and internal governance frameworks",
+     "inferred_from": "Ensure AI solutions comply with ethical standards, regulatory requirements, data privacy policies, and internal governance frameworks.",
+     "confidence": "high"
+    }
+   ],
+   "key_responsibilities": [
+    "Partner with clients and internal stakeholders to understand business objectives and identify high impact AI use cases.",
+    "Define AI roadmaps and transformation strategies aligned to organizational priorities and long-term value creation.",
+    "Lead the design, development, and deployment of AI and machine learning solutions across business and technology platforms.",
+    "Ensure seamless integration of AI solutions with existing systems, data pipelines, and operational processes.",
+    "Assess data readiness, quality, and governance to support AI initiatives.",
+    "Design and guide the development of AI/ML models tailored to specific business challenges and operational workflows.",
+    "Act as a trusted advisor and liaison between technical teams and non-technical stakeholders.",
+    "Translate complex AI concepts into clear, actionable insights and business recommendations for executive and operational audiences.",
+    "Support organizational readiness by delivering training, best practices, and enablement sessions on AI tools and capabilities.",
+    "Drive adoption by embedding AI solutions into day-to-day workflows and decision-making processes.",
+    "Monitor AI system performance, accuracy, and business impact post implementation.",
+    "Ensure AI solutions comply with ethical standards, regulatory requirements, data privacy policies, and internal governance frameworks."
+   ]
+  },
+  "jd": "fiserv_ai_transformation_lead_jd",
+  "run": 1
+ },
+ {
+  "seconds": 2.4,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 0.87,
+    "input": 393,
+    "cached": 0,
+    "output": 10
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 1.55,
+    "input": 1083,
+    "cached": 0,
+    "output": 104
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 0.88,
+    "input": 449,
+    "cached": 0,
+    "output": 55
+   }
+  ],
+  "extraction": {
+   "role_title": "Engineering Leader",
+   "company": "Undisclosed",
+   "jd_format": "bulleted",
+   "required_qualifications": [
+    {
+     "requirement": "5-10 years of experience managing a large engineering organization directly as the accountable leader",
+     "source_text": "5-10 years of experience managing a large engineering organization directly as the accountable leader.",
+     "type": "experience"
+    }
+   ],
+   "preferred_qualifications": [],
+   "implicit_requirements": [
+    {
+     "requirement": "direct people management experience",
+     "inferred_from": "We are seeking an engineering leader with direct people management experience running large organizations.",
+     "confidence": "high"
+    }
+   ],
+   "key_responsibilities": []
+  },
+  "jd": "088_bounded_range_jd",
+  "run": 1
+ },
+ {
+  "seconds": 2.3,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 0.68,
+    "input": 453,
+    "cached": 0,
+    "output": 10
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 1.23,
+    "input": 1143,
+    "cached": 0,
+    "output": 151
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 1.04,
+    "input": 509,
+    "cached": 0,
+    "output": 104
+   }
+  ],
+  "extraction": {
+   "role_title": "VP of Engineering",
+   "company": "Undisclosed",
+   "jd_format": "bulleted",
+   "required_qualifications": [
+    {
+     "requirement": "Experience running an in-house engineering organization of 60+ engineers as a direct accountable leader",
+     "source_text": "Experience running an in-house engineering organization of 60+ engineers as a direct accountable leader.",
+     "type": "experience"
+    }
+   ],
+   "preferred_qualifications": [],
+   "implicit_requirements": [
+    {
+     "requirement": "Experience in hiring, performance management, compensation, and career development",
+     "inferred_from": "Own hiring, performance management, compensation, and career development for the engineering staff.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in managing software delivery",
+     "inferred_from": "Drive software delivery through direct management of engineering teams.",
+     "confidence": "high"
+    }
+   ],
+   "key_responsibilities": [
+    "Build and lead an in-house product engineering organization.",
+    "Own hiring, performance management, compensation, and career development for the engineering staff.",
+    "Drive software delivery through direct management of engineering teams."
+   ]
+  },
+  "jd": "088_inhouse_org_jd",
+  "run": 1
+ },
+ {
+  "seconds": 1.7,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 0.54,
+    "input": 392,
+    "cached": 0,
+    "output": 10
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 1.24,
+    "input": 1082,
+    "cached": 0,
+    "output": 149
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 0.49,
+    "input": 457,
+    "cached": 0,
+    "output": 9
+   }
+  ],
+  "extraction": {
+   "role_title": "Engineering Leader",
+   "company": "Undisclosed",
+   "jd_format": "bulleted",
+   "required_qualifications": [
+    {
+     "requirement": "10+ years of experience managing a large engineering organization directly as the accountable leader",
+     "source_text": "10+ years of experience managing a large engineering organization directly as the accountable leader.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience with direct people management running large organizations",
+     "source_text": "We are seeking an engineering leader with direct people management experience running large organizations.",
+     "type": "experience"
+    }
+   ],
+   "preferred_qualifications": [],
+   "implicit_requirements": [],
+   "key_responsibilities": []
+  },
+  "jd": "088_open_floor_jd",
+  "run": 1
+ },
+ {
+  "seconds": 7.6,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 0.61,
+    "input": 943,
+    "cached": 0,
+    "output": 10
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 5.37,
+    "input": 1633,
+    "cached": 0,
+    "output": 1159
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 2.25,
+    "input": 1197,
+    "cached": 0,
+    "output": 331
+   }
+  ],
+  "extraction": {
+   "role_title": "Regional Practice Area Director",
+   "company": "Meridian Strategy Group",
+   "jd_format": "bulleted",
+   "required_qualifications": [
+    {
+     "requirement": "Experience serving as a senior thought partner to leadership in shaping strategic choices and trade-offs",
+     "source_text": "Serve as a senior thought partner to TMT NAMR leadership (RPAL, topic leads, nodes), shaping strategic choices and trade-offs",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience co-creating regional strategy and annual plans, translating strategic priorities into a coherent operating agenda",
+     "source_text": "Co-create the regional strategy and annual plan, translating strategic priorities into a coherent operating agenda",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience stewarding regional commercial strategy using business signals to inform leadership decisions",
+     "source_text": "Steward the regional commercial strategy, using business signals to inform leadership decisions and course correction",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience integrating perspectives across leadership and teams to drive business evolution",
+     "source_text": "Integrate perspectives across leadership and teams to drive the evolution of the North American TMT business",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience developing forward-looking insights into commercial pipelines and highlighting strategic inflection points",
+     "source_text": "Develop forward-looking insight into the commercial pipeline, highlighting risks, opportunities, and strategic inflection points",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience synthesizing business data into leadership-relevant insights and recommendations",
+     "source_text": "Synthesize business data into leadership-relevant insights and recommendations",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience advising proposal and case teams on strategic positioning and differentiation",
+     "source_text": "Advise proposal and case teams on strategic positioning, storytelling, and differentiation",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience shaping client prioritization and account strategies in partnership with leadership",
+     "source_text": "Shape client prioritization and account strategies in partnership with regional leadership",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience shaping regional narratives and influencing market presence",
+     "source_text": "Shape the regional narrative for TMT, influencing how the practice shows up with clients and in the market",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience partnering with marketing to define thought leadership priorities and high-impact events",
+     "source_text": "Partner with Marketing to define thought leadership priorities, flagship publications, and high-impact events",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience designing leadership forums and agendas to drive strategic alignment and decision-making",
+     "source_text": "Design leadership forums and agendas to drive alignment, decision-making, and momentum on strategic priorities",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience orchestrating major regional meetings to advance strategy",
+     "source_text": "Orchestrate major regional meetings to advance strategy, not just share updates",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience shaping regional people strategy and aligning talent to business needs",
+     "source_text": "Shape the regional people strategy, aligning talent, capability building, and staffing to future business needs",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience leading global practice-area workstreams and contributing to firmwide strategy",
+     "source_text": "Lead a global practice-area workstream over time, contributing to firmwide strategy and innovation",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience acting as a connector between regional and global leadership to align priorities",
+     "source_text": "Act as a connector between regional and global TMT leadership to align priorities and accelerate impact",
+     "type": "experience"
+    }
+   ],
+   "preferred_qualifications": [],
+   "implicit_requirements": [
+    {
+     "requirement": "Ability to translate strategic priorities into execution",
+     "inferred_from": "co-developing strategy, translating priorities into execution, and driving priority initiatives across the practice",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to integrate perspectives across leadership and teams",
+     "inferred_from": "Integrate perspectives across leadership and teams to drive the evolution of the North American TMT business",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to shape the direction for regional marketing and internal communications",
+     "inferred_from": "Set the direction for regional marketing and internal communications to reinforce strategic priorities",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to design and orchestrate leadership forums and agendas",
+     "inferred_from": "Design leadership forums and agendas to drive alignment, decision-making, and momentum on strategic priorities",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to ensure leadership and affiliate communications reinforce a consistent, strategic storyline",
+     "inferred_from": "Ensure leadership and affiliate communications reinforce a consistent, strategic storyline",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to partner with Global TMT People and Talent leaders to influence career paths and capability investments",
+     "inferred_from": "Partner with Global TMT People and Talent leaders to influence career paths, capability investments, and capacity planning",
+     "confidence": "high"
+    }
+   ],
+   "key_responsibilities": [
+    "Serve as a senior thought partner to TMT NAMR leadership, shaping strategic choices and trade-offs",
+    "Co-create the regional strategy and annual plan, translating strategic priorities into a coherent operating agenda",
+    "Steward the regional commercial strategy, using business signals to inform leadership decisions and course correction",
+    "Integrate perspectives across leadership and teams to drive the evolution of the North American TMT business",
+    "Develop forward-looking insight into the commercial pipeline, highlighting risks, opportunities, and strategic inflection points",
+    "Synthesize business data into leadership-relevant insights and recommendations",
+    "Advise proposal and case teams on strategic positioning, storytelling, and differentiation",
+    "Shape client prioritization and account strategies in partnership with regional leadership",
+    "Shape the regional narrative for TMT, influencing how the practice shows up with clients and in the market",
+    "Partner with Marketing to define thought leadership priorities, flagship publications, and high-impact events",
+    "Design leadership forums and agendas to drive alignment, decision-making, and momentum on strategic priorities",
+    "Orchestrate major regional meetings to advance strategy, not just share updates",
+    "Shape the regional people strategy, aligning talent, capability building, and staffing to future business needs",
+    "Lead a global practice-area workstream over time, contributing to firmwide strategy and innovation",
+    "Act as a connector between regional and global TMT leadership to align priorities and accelerate impact"
+   ]
+  },
+  "jd": "hybrid_jd",
+  "run": 1
+ },
+ {
+  "seconds": 7.0,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 2.01,
+    "input": 1214,
+    "cached": 0,
+    "output": 215
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 4.49,
+    "input": 1904,
+    "cached": 0,
+    "output": 719
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 2.5,
+    "input": 1463,
+    "cached": 0,
+    "output": 400
+   }
+  ],
+  "extraction": {
+   "role_title": "Director, Software Engineering",
+   "company": "Pinnacle Entertainment Group",
+   "jd_format": "hybrid",
+   "required_qualifications": [
+    {
+     "requirement": "Experience managing specialized, diverse teams pursuing challenging and ambiguous goals",
+     "source_text": "Proven innovation leader with experience managing specialized, diverse teams pursuing challenging and ambiguous goals",
+     "type": "experience"
+    },
+    {
+     "requirement": "12+ years of software development experience",
+     "source_text": "12+ years of software development experience with at least 8 years managing medium to large technology projects.",
+     "type": "experience"
+    },
+    {
+     "requirement": "8+ years managing medium to large technology projects",
+     "source_text": "12+ years of software development experience with at least 8 years managing medium to large technology projects.",
+     "type": "experience"
+    },
+    {
+     "requirement": "5 years experience in delivering projects involving emerging tech such as Mobile/Wearables, IoT, Game Engines, CV, NLP, and Advanced ML",
+     "source_text": "5 years experience in delivering projects involving emerging tech such as Mobile/Wearables, IoT, Game Engines, CV, NLP, and Advanced ML",
+     "type": "experience"
+    },
+    {
+     "requirement": "Track record of leading and driving initiatives to deliver business value on time and within budget",
+     "source_text": "Track record of leading and driving initiatives to the next level, with a focus on delivering business value, being on time and within budget",
+     "type": "experience"
+    },
+    {
+     "requirement": "Ability to deconstruct complex problems and help teams create clarity out of ambiguous or conflicting requirements",
+     "source_text": "Deconstruct complex problems and help teams create clarity out of ambiguous or conflicting requirements",
+     "type": "skill"
+    },
+    {
+     "requirement": "Ability to simultaneously manage teams on multiple engineering projects of significant complexity",
+     "source_text": "Ability to simultaneously manage teams on multiple engineering projects of significant complexity",
+     "type": "skill"
+    },
+    {
+     "requirement": "Ability to navigate a large, complex stakeholder environment",
+     "source_text": "Ability to navigate a large, complex stakeholder environment",
+     "type": "skill"
+    },
+    {
+     "requirement": "BS or MS in Computer Science or equivalent quantitative field OR equivalent experience",
+     "source_text": "BS or MS in Computer Science or equivalent quantitative field OR equivalent experience",
+     "type": "education"
+    }
+   ],
+   "preferred_qualifications": [
+    {
+     "requirement": "Recent experience delivering Next Gen projects using emerging technologies such as CV, NLP, ML, IoT, Recommendations and Predictions, Robotics and Automation, Game Engines, Mixed Reality, Mobile and Wearables, advanced Security and Privacy, Wireless Networks (5G)",
+     "source_text": "Recent experience delivering Next Gen projects using emerging technologies such as CV, NLP, ML, IoT, Recommendations and Predictions, Robotics and Automation, Game Engines, Mixed Reality, Mobile and Wearables, advanced Security and Privacy, Wireless Networks (5G)",
+     "type": "experience"
+    },
+    {
+     "requirement": "Proven professional networking among technology companies",
+     "source_text": "Proven professional networking among technology companies",
+     "type": "skill"
+    },
+    {
+     "requirement": "MSCS/Engineering or related work experience",
+     "source_text": "MSCS/Engineering or related work experience",
+     "type": "education"
+    }
+   ],
+   "implicit_requirements": [
+    {
+     "requirement": "Ability to manage relationships with external partners to foster innovation and collaboration",
+     "inferred_from": "managing relationships with external partners to foster innovation and collaboration",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in overseeing stakeholder testing to validate concepts, user experience, and business value",
+     "inferred_from": "overseeing stakeholder testing to validate concepts, user experience, and business value",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to provide technical thought leadership across the organization",
+     "inferred_from": "serves as a technical thought leader across the organization",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Strong communication skills to translate complex technical concepts into accessible narratives for senior technology leadership",
+     "inferred_from": "translate complex technical concepts into accessible narratives for senior technology leadership, including C-level executives",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to connect emerging technology work to tangible business outcomes",
+     "inferred_from": "ability to connect emerging technology work to tangible business outcomes will be critical in driving alignment and support across the enterprise",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in facilitating the transfer of validated insights, prototypes, and technical guidance to delivery teams",
+     "inferred_from": "Facilitate the transfer of validated insights, prototypes, and technical guidance to delivery teams and the Initial Tech Implementation team",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to manage sponsor and stakeholder expectations, ensuring transparency around scope, outcomes, and value realization",
+     "inferred_from": "Manage sponsor and stakeholder expectations, ensuring transparency around scope, outcomes, and value realization",
+     "confidence": "high"
+    }
+   ],
+   "key_responsibilities": [
+    "Guide the exploration and evaluation of emerging technologies in alignment with the quarterly Emerging Product prioritized opportunity map.",
+    "Oversee the development of proofs of concept and stakeholder testing to validate technical feasibility, user experience, and business value.",
+    "Facilitate the transfer of validated insights, prototypes, and technical guidance to delivery teams and the Initial Tech Implementation team.",
+    "Engage with key stakeholders, users, and partners to ensure alignment, gather feedback, and support early-stage validation efforts.",
+    "Communicate emerging technology strategies, findings, and recommendations to senior executives, translating complex concepts into actionable insights.",
+    "Manage sponsor and stakeholder expectations, ensuring transparency around scope, outcomes, and value realization.",
+    "Provide technical leadership to the Emerging Technology team, ensuring adherence to sound engineering and architectural practices."
+   ]
+  },
+  "jd": "mixed_jd",
+  "run": 1
+ },
+ {
+  "seconds": 5.3,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 0.86,
+    "input": 651,
+    "cached": 0,
+    "output": 10
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 3.81,
+    "input": 1341,
+    "cached": 1152,
+    "output": 637
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 1.52,
+    "input": 780,
+    "cached": 0,
+    "output": 161
+   }
+  ],
+  "extraction": {
+   "role_title": "Global Head of Advanced Engineering",
+   "company": "Undisclosed",
+   "jd_format": "narrative",
+   "required_qualifications": [
+    {
+     "requirement": "Experience leading teams of 40+ across AI, ML, data science, and data engineering",
+     "source_text": "You'll lead a team of 40 across AI, ML, data science, and data engineering, owning the strategy, architecture, and hands-on delivery of AI initiatives across the business.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience owning strategy, architecture, and hands-on delivery of AI initiatives",
+     "source_text": "You'll lead a team of 40 across AI, ML, data science, and data engineering, owning the strategy, architecture, and hands-on delivery of AI initiatives across the business.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience building and scaling LLM-driven systems",
+     "source_text": "The focus is to build and scale LLM-driven systems, develop intelligent workflows, and clearly articulate and deliver measurable business impact.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience designing production-grade systems around large language models",
+     "source_text": "That means designing production-grade systems around large language models, driving automation and insight across investment, operations, and enterprise functions, and partnering directly with senior stakeholders who care deeply about ROI.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience partnering with senior business stakeholders on ROI-driven outcomes",
+     "source_text": "That means designing production-grade systems around large language models, driving automation and insight across investment, operations, and enterprise functions, and partnering directly with senior stakeholders who care deeply about ROI.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience incubating new technology and building components for engineering teams",
+     "source_text": "You will focus on incubating new technology, building components for other engineering teams, and incubating agentic engineering across the firm.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience in financial services / asset management at scale",
+     "source_text": "This is a rare opportunity to step into a Global Head of Advanced Engineering role at one of the world's largest, most sophisticated asset managers.",
+     "type": "domain"
+    }
+   ],
+   "preferred_qualifications": [],
+   "implicit_requirements": [
+    {
+     "requirement": "Ability to articulate and deliver measurable business impact",
+     "inferred_from": "The focus is to build and scale LLM-driven systems, develop intelligent workflows, and clearly articulate and deliver measurable business impact.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience with agentic engineering",
+     "inferred_from": "incubating agentic engineering across the firm",
+     "confidence": "medium"
+    },
+    {
+     "requirement": "Strong understanding of AI strategy in a complex financial ecosystem",
+     "inferred_from": "It's about leading and executing an AI vision inside a complex, high-impact financial ecosystem.",
+     "confidence": "medium"
+    }
+   ],
+   "key_responsibilities": [
+    "Lead a team of 40 across AI, ML, data science, and data engineering",
+    "Own the strategy, architecture, and hands-on delivery of AI initiatives",
+    "Build and scale LLM-driven systems",
+    "Develop intelligent workflows",
+    "Design production-grade systems around large language models",
+    "Drive automation and insight across investment, operations, and enterprise functions",
+    "Partner directly with senior stakeholders on ROI-driven outcomes",
+    "Incubate new technology and build components for engineering teams",
+    "Incubate agentic engineering across the firm"
+   ]
+  },
+  "jd": "narrative_jd",
+  "run": 1
+ },
+ {
+  "seconds": 7.2,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 1.88,
+    "input": 1034,
+    "cached": 0,
+    "output": 163
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 4.55,
+    "input": 1724,
+    "cached": 0,
+    "output": 983
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 2.62,
+    "input": 1287,
+    "cached": 0,
+    "output": 468
+   }
+  ],
+  "extraction": {
+   "role_title": "Director of Engineering",
+   "company": "RiskTech Solutions",
+   "jd_format": "hybrid",
+   "required_qualifications": [
+    {
+     "requirement": "Bachelor's Degree in Computer Science or related field",
+     "source_text": "Bachelor's Degree in Computer Science or related field.",
+     "type": "education"
+    },
+    {
+     "requirement": "10+ years of professional software development experience",
+     "source_text": "10+ years of professional software development experience.",
+     "type": "experience"
+    },
+    {
+     "requirement": "5+ years managing managers and senior engineering leaders",
+     "source_text": "5+ years managing managers and senior engineering leaders.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Proficient in at least one strongly-typed language (Java, C/C++, C#, etc.)",
+     "source_text": "Proficient in at least one strongly-typed language (Java, C/C++, C#, etc.).",
+     "type": "skill"
+    },
+    {
+     "requirement": "Experience with a modern backend framework (e.g. Node.js, Python/FastAPI, or Go) and a frontend framework (e.g. React or Vue)",
+     "source_text": "Experience with a modern backend framework (e.g. Node.js, Python/FastAPI, or Go) and a frontend framework (e.g. React or Vue).",
+     "type": "skill"
+    },
+    {
+     "requirement": "Cloud-native experience (AWS, Azure, or GCP)",
+     "source_text": "Cloud-native experience (AWS, Azure, or GCP)",
+     "type": "skill"
+    },
+    {
+     "requirement": "Experience with modern relational and NoSQL databases (SQL Server, PostgreSQL, or Redis)",
+     "source_text": "Experience with modern relational and NoSQL databases (SQL Server, PostgreSQL, or Redis).",
+     "type": "skill"
+    },
+    {
+     "requirement": "Experience modernizing legacy systems into modular or service-oriented architecture",
+     "source_text": "Experience modernizing legacy systems into modular or service-oriented architecture.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Demonstrated experience leading large-scale platform or shared services organizations",
+     "source_text": "Demonstrated experience leading large-scale platform or shared services organizations.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Strong working knowledge of application security, secure coding practices, and risk mitigation",
+     "source_text": "Strong working knowledge of application security, secure coding practices, and risk mitigation.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Working knowledge of AI tools in software development (code generation, testing, documentation, observability)",
+     "source_text": "Working knowledge of AI tools in software development (code generation, testing, documentation, observability)",
+     "type": "skill"
+    }
+   ],
+   "preferred_qualifications": [
+    {
+     "requirement": "Experience with Agile/Scrum methodologies",
+     "source_text": "Agile/Scrum experience",
+     "type": "experience"
+    },
+    {
+     "requirement": "Domain knowledge in insurance or risk management",
+     "source_text": "Insurance or risk management domain knowledge",
+     "type": "domain"
+    },
+    {
+     "requirement": "Experience managing client product implementations",
+     "source_text": "Experience managing client product implementations",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience building mobile applications using React Native",
+     "source_text": "Experience with building mobile applications using React Native",
+     "type": "experience"
+    }
+   ],
+   "implicit_requirements": [
+    {
+     "requirement": "Ability to define and execute a platform modernization roadmap",
+     "inferred_from": "Define and execute the platform modernization roadmap in alignment with long-term business and technology strategy.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in promoting modular, API-driven, and service-oriented design principles",
+     "inferred_from": "Promote modular, API-driven, and service-oriented design principles.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in establishing SLAs and engagement models for shared capabilities",
+     "inferred_from": "Establish clear SLAs and engagement models for shared capabilities.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to lead adoption of AI-assisted engineering practices",
+     "inferred_from": "Lead adoption of AI-assisted engineering practices across the platform organization.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in establishing guardrails for responsible AI usage",
+     "inferred_from": "Establish guardrails for responsible AI usage in code generation, test automation, documentation, and architectural analysis.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to partner with leadership to define measurable AI productivity and quality metrics",
+     "inferred_from": "Partner with leadership to define measurable AI productivity and quality metrics.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in embedding secure-by-design principles across platforms",
+     "inferred_from": "Embed secure-by-design principles across the platform.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to partner with Security and Architecture to ensure compliance with industry standards and regulatory expectations",
+     "inferred_from": "Partner with Security and Architecture to ensure compliance with industry standards and regulatory expectations.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in strengthening identity, authentication, authorization, secrets management, and data protection strategies",
+     "inferred_from": "Strengthen identity, authentication, authorization, secrets management, and data protection strategies.",
+     "confidence": "high"
+    }
+   ],
+   "key_responsibilities": [
+    "Define and execute the platform modernization roadmap in alignment with long-term business and technology strategy.",
+    "Deliver shared platform services that enable IRM and Insurance engineering teams to build faster and more consistently.",
+    "Drive architectural improvements across APIs, data, caching, CI/CD, observability, identity, and cloud infrastructure.",
+    "Promote modular, API-driven, and service-oriented design principles.",
+    "Operate the Platform team as a force multiplier for product-aligned engineering teams.",
+    "Partner with IRM and Insurance Product Directors to balance platform enablement with delivery timelines.",
+    "Establish clear SLAs and engagement models for shared capabilities.",
+    "Promote knowledge sharing and cross-team collaboration.",
+    "Lead adoption of AI-assisted engineering practices across the platform organization.",
+    "Establish guardrails for responsible AI usage in code generation, test automation, documentation, and architectural analysis.",
+    "Partner with leadership to define measurable AI productivity and quality metrics.",
+    "Provide leadership, management, and technical vision to the Platform engineering organization.",
+    "Manage managers and senior technical leaders.",
+    "Inspire and motivate teams to deliver innovative solutions with urgency and accountability.",
+    "Lead hiring, performance management, compensation, and career development processes.",
+    "Mentor engineering leaders and foster a culture of design excellence and continuous learning.",
+    "Identify and coordinate technical training opportunities.",
+    "Stimulate knowledge sharing and elevate best practices across teams.",
+    "Embed secure-by-design principles across the platform.",
+    "Partner with Security and Architecture to ensure compliance with industry standards and regulatory expectations.",
+    "Strengthen identity, authentication, authorization, secrets management, and data protection strategies."
+   ]
+  },
+  "jd": "structured_jd",
+  "run": 1
+ },
+ {
+  "seconds": 11.1,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 3.02,
+    "input": 1911,
+    "cached": 1792,
+    "output": 544
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 9.04,
+    "input": 2601,
+    "cached": 0,
+    "output": 1440
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 2.01,
+    "input": 2445,
+    "cached": 0,
+    "output": 268
+   }
+  ],
+  "extraction": {
+   "role_title": "Principal Systems Engineer",
+   "company": "AT&T",
+   "jd_format": "hybrid",
+   "required_qualifications": [
+    {
+     "requirement": "Deep experience designing, operating, and governing enterprise-scale platforms and cloud infrastructure",
+     "source_text": "Deep experience designing, operating, and governing enterprise-scale platforms and cloud infrastructure.",
+     "type": "experience"
+    },
+    {
+     "requirement": "7+ years of experience with cloud platforms, infrastructure services, platform engineering, and cloud governance practices",
+     "source_text": "7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience with containerized workloads, orchestration platforms, microservices architectures, and cloud-native deployment patterns",
+     "source_text": "Experience with containerized workloads, orchestration platforms, microservices architectures, and cloud-native deployment patterns.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Strong understanding of CI/CD pipelines, release automation, artifact management, infrastructure automation, and deployment governance",
+     "source_text": "Strong understanding of CI/CD pipelines, release automation, artifact management, infrastructure automation, and deployment governance.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Experience with monitoring, alerting, observability, logging, service health, and operational telemetry strategies",
+     "source_text": "Experience with monitoring, alerting, observability, logging, service health, and operational telemetry strategies.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Strong knowledge of security controls, access governance, role-based access management, separation of duties, and compliance practices",
+     "source_text": "Strong knowledge of security controls, access governance, role-based access management, separation of duties, and compliance practices.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Experience leading platform upgrades, lifecycle management, migration planning, disaster recovery, and resiliency improvements",
+     "source_text": "Experience leading platform upgrades, lifecycle management, migration planning, disaster recovery, and resiliency improvements.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Strong troubleshooting skills across infrastructure, application platforms, integrations, networking, and operational workflows",
+     "source_text": "Strong troubleshooting skills across infrastructure, application platforms, integrations, networking, and operational workflows.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Ability to define standards for SOPs, runbooks, operational playbooks, technical documentation, and support readiness",
+     "source_text": "Ability to define standards for SOPs, runbooks, operational playbooks, technical documentation, and support readiness.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Working knowledge of cost optimization, capacity planning, license management, and technology lifecycle planning",
+     "source_text": "Working knowledge of cost optimization, capacity planning, license management, and technology lifecycle planning.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Proven ability to lead through influence across multiple teams and organizations",
+     "source_text": "Proven ability to lead through influence across multiple teams and organizations.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Strong executive communication, stakeholder management, and decision-framing skills",
+     "source_text": "Strong executive communication, stakeholder management, and decision-framing skills.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Ability to mentor, coach, and develop engineering talent",
+     "source_text": "Ability to mentor, coach, and develop engineering talent.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Strong ownership mindset with accountability for outcomes, reliability, governance, and customer impact",
+     "source_text": "Strong ownership mindset with accountability for outcomes, reliability, governance, and customer impact.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Ability to drive alignment across technical, operational, security, and business priorities",
+     "source_text": "Ability to drive alignment across technical, operational, security, and business priorities.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Calm, decisive leadership during incidents, escalations, and high-pressure situations",
+     "source_text": "Calm, decisive leadership during incidents, escalations, and high-pressure situations.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Strong collaboration skills with Architecture, Development, Operations, Security, Product, and Support teams",
+     "source_text": "Strong collaboration skills with Architecture, Development, Operations, Security, Product, and Support teams.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Ability to simplify complex problems and communicate clear recommendations",
+     "source_text": "Ability to simplify complex problems and communicate clear recommendations.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Commitment to continuous improvement, operational excellence, innovation, and engineering discipline",
+     "source_text": "Commitment to continuous improvement, operational excellence, innovation, and engineering discipline.",
+     "type": "skill"
+    }
+   ],
+   "preferred_qualifications": [
+    {
+     "requirement": "Experience leading enterprise platform modernization or transformation initiatives.",
+     "source_text": "Experience leading enterprise platform modernization or transformation initiatives.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience defining platform roadmaps, maturity models, service ownership models, or operational governance frameworks.",
+     "source_text": "Experience defining platform roadmaps, maturity models, service ownership models, or operational governance frameworks.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience applying AI or intelligent automation to improve support operations, engineering productivity, or customer experience.",
+     "source_text": "Experience applying AI or intelligent automation to improve support operations, engineering productivity, or customer experience.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience with large-scale compliance programs, cybersecurity scorecards, audit preparation, and remediation tracking.",
+     "source_text": "Experience with large-scale compliance programs, cybersecurity scorecards, audit preparation, and remediation tracking.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience leading disaster recovery exercises, business continuity planning, and resiliency validation.",
+     "source_text": "Experience leading disaster recovery exercises, business continuity planning, and resiliency validation.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience influencing architecture review boards, technology standards, or enterprise engineering practices.",
+     "source_text": "Experience influencing architecture review boards, technology standards, or enterprise engineering practices.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience managing vendor relationships, licensing strategy, or platform service contracts.",
+     "source_text": "Experience managing vendor relationships, licensing strategy, or platform service contracts.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience developing metrics and executive dashboards for reliability, cost, risk, and operational performance.",
+     "source_text": "Experience developing metrics and executive dashboards for reliability, cost, risk, and operational performance.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience mentoring technical leads or senior engineers in a matrixed organization.",
+     "source_text": "Experience mentoring technical leads or senior engineers in a matrixed organization.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience driving cultural change toward automation, accountability, reliability, and self-service engineering.",
+     "source_text": "Experience driving cultural change toward automation, accountability, reliability, and self-service engineering.",
+     "type": "experience"
+    }
+   ],
+   "implicit_requirements": [
+    {
+     "requirement": "Ability to influence decisions without direct authority",
+     "inferred_from": "Influence decisions without direct authority by building alignment, communicating tradeoffs, and driving consensus.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience with event-driven architectures and real-time data exchange",
+     "inferred_from": "Provide technical leadership for Kafka and IXBUS platforms, enabling event-driven architectures, real-time data exchange, and enterprise integration capabilities.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience with platform governance models",
+     "inferred_from": "Establish and promote engineering standards, operational best practices, automation principles, and platform governance models.",
+     "confidence": "medium"
+    },
+    {
+     "requirement": "Experience with root cause analysis and problem management",
+     "inferred_from": "Lead root cause analysis, problem management, corrective action planning, and prevention of recurring issues.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience with disaster recovery strategy and exercises",
+     "inferred_from": "Own disaster recovery strategy, planning, exercises, documentation, and continuous improvement.",
+     "confidence": "high"
+    }
+   ],
+   "key_responsibilities": [
+    "Serve as the senior technical leader and primary platform steward for critical enterprise platforms and cloud services.",
+    "Define and influence platform strategy, technical direction, architecture alignment, and long-term modernization roadmaps.",
+    "Lead cross-functional initiatives across Engineering, Operations, Architecture, Cybersecurity, Support, and business stakeholders.",
+    "Establish and promote engineering standards, operational best practices, automation principles, and platform governance models.",
+    "Own platform reliability, scalability, resiliency, lifecycle planning, operational readiness, and business continuity posture.",
+    "Lead compliance, cybersecurity, access governance, risk-management, and audit-readiness initiatives.",
+    "Drive automation-first approaches across infrastructure, deployments, operational workflows, support processes, and self-service capabilities.",
+    "Provide strategic oversight for CI/CD pipeline governance, release standards, artifact management, infrastructure automation, and deployment maturity.",
+    "Lead observability, monitoring, alerting, logging, and service health strategies to improve operational visibility and reduce incident impact.",
+    "Act as the highest-level escalation point for complex technical issues, major incidents, and platform-impacting events.",
+    "Lead root cause analysis, problem management, corrective action planning, and prevention of recurring issues.",
+    "Guide capacity planning, cloud cost optimization, licensing strategy, technology lifecycle management, and platform sustainability.",
+    "Own disaster recovery strategy, planning, exercises, documentation, and continuous improvement.",
+    "Mentor senior engineers and technical leads, helping raise the engineering maturity of the broader organization.",
+    "Influence decisions without direct authority by building alignment, communicating tradeoffs, and driving consensus."
+   ]
+  },
+  "jd": "att",
+  "run": 2
+ },
+ {
+  "seconds": 6.8,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 2.51,
+    "input": 973,
+    "cached": 0,
+    "output": 295
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 4.82,
+    "input": 1663,
+    "cached": 1536,
+    "output": 864
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 2.02,
+    "input": 1314,
+    "cached": 0,
+    "output": 308
+   }
+  ],
+  "extraction": {
+   "role_title": "Senior Engineering Leader, Product Platform",
+   "company": "Undisclosed",
+   "jd_format": "hybrid",
+   "required_qualifications": [
+    {
+     "requirement": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+     "source_text": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+     "type": "experience"
+    },
+    {
+     "requirement": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+     "source_text": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience building or scaling an engineering organization from early stage to 100+ or inheriting and restructuring an existing org",
+     "source_text": "Demonstrated experience building or scaling an engineering organization (from early stage to 100+ or inheriting and restructuring an existing org)",
+     "type": "experience"
+    },
+    {
+     "requirement": "Cloud-native architecture experience with AWS, Azure, or GCP at the platform level",
+     "source_text": "Cloud-native architecture experience (AWS, Azure, or GCP) at the platform level",
+     "type": "skill"
+    },
+    {
+     "requirement": "Experience in legacy platform modernization in production environments without business disruption",
+     "source_text": "Track record of legacy platform modernization in production environments without business disruption",
+     "type": "experience"
+    },
+    {
+     "requirement": "Cross-functional leadership experience in engineering, product, and design operating as integrated units",
+     "source_text": "Cross-functional leadership experience — engineering, product, and design operating as integrated units",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience establishing or maturing engineering delivery practices such as CI/CD, automated testing, observability, and release management",
+     "source_text": "Experience establishing or maturing engineering delivery practices (CI/CD, automated testing, observability, release management)",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience in regulated industries such as financial services, healthcare, or government",
+     "source_text": "Regulated industry experience (financial services, healthcare, government, or equivalent complexity)",
+     "type": "domain"
+    },
+    {
+     "requirement": "Ability to translate business strategy into engineering roadmap and organizational structure",
+     "source_text": "Demonstrated ability to translate business strategy into engineering roadmap and organizational structure",
+     "type": "skill"
+    },
+    {
+     "requirement": "Practical experience introducing AI-assisted development practices into an engineering organization",
+     "source_text": "AI/ML adoption strategy — practical experience introducing AI-assisted development practices into an engineering organization",
+     "type": "experience"
+    },
+    {
+     "requirement": "Fluency in modern technology stack across frontend and backend, including React or equivalent, Python/Node.js/Go, and containerized microservices",
+     "source_text": "Modern technology stack fluency across frontend and backend (React or equivalent, Python/Node.js/Go, containerized microservices)",
+     "type": "skill"
+    },
+    {
+     "requirement": "Experience with budget ownership or P&L accountability for an engineering function",
+     "source_text": "Budget ownership or P&L accountability for an engineering function",
+     "type": "experience"
+    }
+   ],
+   "preferred_qualifications": [
+    {
+     "requirement": "Experience in a product company such as SaaS, platform, or marketplace",
+     "source_text": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+     "type": "experience"
+    },
+    {
+     "requirement": "Domain knowledge in healthcare, insurance, or life sciences",
+     "source_text": "Healthcare, insurance, or life sciences domain knowledge",
+     "type": "domain"
+    },
+    {
+     "requirement": "Hands-on Kubernetes experience at production scale, including cluster management, service mesh, and multi-tenant orchestration",
+     "source_text": "Hands-on Kubernetes experience at production scale (cluster management, service mesh, multi-tenant orchestration)",
+     "type": "skill"
+    },
+    {
+     "requirement": "Graduate degree in a technical field such as Computer Science, Engineering, or Information Technology",
+     "source_text": "Graduate degree in a technical field (Computer Science, Engineering, Information Technology, or related)",
+     "type": "education"
+    },
+    {
+     "requirement": "Published thought leadership or conference speaking on engineering culture, modernization, or AI adoption",
+     "source_text": "Published thought leadership or conference speaking on engineering culture, modernization, or AI adoption",
+     "type": "experience"
+    }
+   ],
+   "implicit_requirements": [
+    {
+     "requirement": "Ability to lead and scale a large cross-functional product engineering organization",
+     "inferred_from": "Lead and scale a cross-functional product engineering organization (150-300 engineers, product managers, and designers)",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in defining engineering operating models, including hiring philosophy, team structure, delivery practices, quality standards, and career development",
+     "inferred_from": "Define the engineering operating model: hiring philosophy, team structure, delivery practices, quality standards, and career development",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in establishing AI-assisted engineering practices with guardrails for quality, security, and responsible adoption",
+     "inferred_from": "Establish AI-assisted engineering practices with guardrails for quality, security, and responsible adoption",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to partner with C-suite to translate business strategy into technical roadmap and organizational priorities",
+     "inferred_from": "Partner with C-suite to translate business strategy into technical roadmap and organizational priorities",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Skill in building a culture of sustainable delivery with high throughput without heroics",
+     "inferred_from": "Build a culture of sustainable delivery — high throughput without heroics",
+     "confidence": "high"
+    }
+   ],
+   "key_responsibilities": [
+    "Lead and scale a cross-functional product engineering organization (150-300 engineers, product managers, and designers)",
+    "Define the engineering operating model: hiring philosophy, team structure, delivery practices, quality standards, and career development",
+    "Drive platform modernization across a legacy core while maintaining business continuity",
+    "Establish AI-assisted engineering practices with guardrails for quality, security, and responsible adoption",
+    "Partner with C-suite to translate business strategy into technical roadmap and organizational priorities",
+    "Build a culture of sustainable delivery — high throughput without heroics"
+   ]
+  },
+  "jd": "demo",
+  "run": 2
+ },
+ {
+  "seconds": 7.5,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 1.4,
+    "input": 1018,
+    "cached": 0,
+    "output": 138
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 4.87,
+    "input": 1708,
+    "cached": 1536,
+    "output": 865
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 2.65,
+    "input": 1270,
+    "cached": 1152,
+    "output": 460
+   }
+  ],
+  "extraction": {
+   "role_title": "A.I. Transformation Lead",
+   "company": "Fiserv",
+   "jd_format": "hybrid",
+   "required_qualifications": [
+    {
+     "requirement": "Bachelor's degree in Computer Science, Data Science, Artificial Intelligence, Machine Learning, or a related field",
+     "source_text": "Bachelor's degree in Computer Science, Data Science, Artificial Intelligence, Machine Learning, or a related field; advanced degree preferred.",
+     "type": "education"
+    },
+    {
+     "requirement": "Strong foundation in machine learning, natural language processing, data analytics, and AI platforms",
+     "source_text": "Strong foundation in machine learning, natural language processing, data analytics, and AI platforms.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Experience working with structured and unstructured data, model lifecycle management, and enterprise data ecosystems",
+     "source_text": "Experience working with structured and unstructured data, model lifecycle management, and enterprise data ecosystems.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Ability to analyze complex data sets, assess business problems, and derive actionable, data-driven insights",
+     "source_text": "Ability to analyze complex data sets, assess business problems, and derive actionable, data-driven insights.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Excellent verbal and written communication skills with the ability to explain technical concepts to diverse audiences",
+     "source_text": "Excellent verbal and written communication skills with the ability to explain technical concepts to diverse audiences.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Proven ability to influence stakeholders and drive alignment across cross-functional teams",
+     "source_text": "Proven ability to influence stakeholders and drive alignment across cross-functional teams.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Demonstrated experience leading projects in complex, cross-functional environments",
+     "source_text": "Demonstrated experience leading projects in complex, cross-functional environments.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Ability to manage multiple initiatives, prioritize work, and deliver results in fast-paced settings",
+     "source_text": "Ability to manage multiple initiatives, prioritize work, and deliver results in fast-paced settings.",
+     "type": "skill"
+    },
+    {
+     "requirement": "5-10 years of experience in artificial intelligence, machine learning, data analytics, software development, or related technical disciplines",
+     "source_text": "5-10 years of experience in artificial intelligence, machine learning, data analytics, software development, or related technical disciplines.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience in the payments, financial services, or regulated industry environment",
+     "source_text": "Prior experience within the payments, financial services, or regulated industry environment strongly preferred.",
+     "type": "experience"
+    }
+   ],
+   "preferred_qualifications": [
+    {
+     "requirement": "Experience in software development",
+     "source_text": "Software Development experience",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience in Cobol programming",
+     "source_text": "Cobol Programming",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience with IBM tools, monitoring tools, RMF, DB2 utilities, Platinum Detector, etc.",
+     "source_text": "IBM tools, monitoring tools, RMF, DB2 utilities, Platinum Detector, etc.",
+     "type": "experience"
+    }
+   ],
+   "implicit_requirements": [
+    {
+     "requirement": "Ability to partner with clients and internal stakeholders to understand business objectives",
+     "inferred_from": "Partner with clients and internal stakeholders to understand business objectives and identify high impact AI use cases.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in defining AI roadmaps and transformation strategies",
+     "inferred_from": "Define AI roadmaps and transformation strategies aligned to organizational priorities and long-term value creation.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in ensuring seamless integration of AI solutions with existing systems",
+     "inferred_from": "Ensure seamless integration of AI solutions with existing systems, data pipelines, and operational processes.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to act as a trusted advisor and liaison between technical teams and non-technical stakeholders",
+     "inferred_from": "Act as a trusted advisor and liaison between technical teams and non-technical stakeholders.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in translating complex AI concepts into clear, actionable insights and business recommendations",
+     "inferred_from": "Translate complex AI concepts into clear, actionable insights and business recommendations for executive and operational audiences.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in delivering training, best practices, and enablement sessions on AI tools and capabilities",
+     "inferred_from": "Support organizational readiness by delivering training, best practices, and enablement sessions on AI tools and capabilities.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to monitor AI system performance, accuracy, and business impact post implementation",
+     "inferred_from": "Monitor AI system performance, accuracy, and business impact post implementation.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Knowledge of ethical standards, regulatory requirements, data privacy policies, and internal governance frameworks",
+     "inferred_from": "Ensure AI solutions comply with ethical standards, regulatory requirements, data privacy policies, and internal governance frameworks.",
+     "confidence": "high"
+    }
+   ],
+   "key_responsibilities": [
+    "Partner with clients and internal stakeholders to understand business objectives and identify high impact AI use cases.",
+    "Define AI roadmaps and transformation strategies aligned to organizational priorities and long-term value creation.",
+    "Lead the design, development, and deployment of AI and machine learning solutions across business and technology platforms.",
+    "Ensure seamless integration of AI solutions with existing systems, data pipelines, and operational processes.",
+    "Assess data readiness, quality, and governance to support AI initiatives.",
+    "Design and guide the development of AI/ML models tailored to specific business challenges and operational workflows.",
+    "Act as a trusted advisor and liaison between technical teams and non-technical stakeholders.",
+    "Translate complex AI concepts into clear, actionable insights and business recommendations for executive and operational audiences.",
+    "Support organizational readiness by delivering training, best practices, and enablement sessions on AI tools and capabilities.",
+    "Drive adoption by embedding AI solutions into day-to-day workflows and decision-making processes.",
+    "Monitor AI system performance, accuracy, and business impact post implementation.",
+    "Ensure AI solutions comply with ethical standards, regulatory requirements, data privacy policies, and internal governance frameworks."
+   ]
+  },
+  "jd": "fiserv_ai_transformation_lead_jd",
+  "run": 2
+ },
+ {
+  "seconds": 2.1,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 0.66,
+    "input": 393,
+    "cached": 0,
+    "output": 10
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 1.51,
+    "input": 1083,
+    "cached": 0,
+    "output": 151
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 0.56,
+    "input": 459,
+    "cached": 0,
+    "output": 9
+   }
+  ],
+  "extraction": {
+   "role_title": "Engineering Leader",
+   "company": "Undisclosed",
+   "jd_format": "bulleted",
+   "required_qualifications": [
+    {
+     "requirement": "5-10 years of experience managing a large engineering organization directly as the accountable leader",
+     "source_text": "5-10 years of experience managing a large engineering organization directly as the accountable leader.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience with direct people management in large organizations",
+     "source_text": "We are seeking an engineering leader with direct people management experience running large organizations.",
+     "type": "experience"
+    }
+   ],
+   "preferred_qualifications": [],
+   "implicit_requirements": [],
+   "key_responsibilities": []
+  },
+  "jd": "088_bounded_range_jd",
+  "run": 2
+ },
+ {
+  "seconds": 3.0,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 0.8,
+    "input": 453,
+    "cached": 0,
+    "output": 10
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 1.57,
+    "input": 1143,
+    "cached": 1024,
+    "output": 151
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 1.46,
+    "input": 509,
+    "cached": 0,
+    "output": 113
+   }
+  ],
+  "extraction": {
+   "role_title": "VP of Engineering",
+   "company": "Undisclosed",
+   "jd_format": "bulleted",
+   "required_qualifications": [
+    {
+     "requirement": "Experience running an in-house engineering organization of 60+ engineers as a direct accountable leader",
+     "source_text": "Experience running an in-house engineering organization of 60+ engineers as a direct accountable leader.",
+     "type": "experience"
+    }
+   ],
+   "preferred_qualifications": [],
+   "implicit_requirements": [
+    {
+     "requirement": "Experience in hiring, performance management, compensation, and career development for engineering staff",
+     "inferred_from": "Own hiring, performance management, compensation, and career development for the engineering staff.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in driving software delivery through direct management of engineering teams",
+     "inferred_from": "Drive software delivery through direct management of engineering teams.",
+     "confidence": "high"
+    }
+   ],
+   "key_responsibilities": [
+    "Build and lead an in-house product engineering organization.",
+    "Own hiring, performance management, compensation, and career development for the engineering staff.",
+    "Drive software delivery through direct management of engineering teams."
+   ]
+  },
+  "jd": "088_inhouse_org_jd",
+  "run": 2
+ },
+ {
+  "seconds": 1.8,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 0.6,
+    "input": 392,
+    "cached": 0,
+    "output": 10
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 1.27,
+    "input": 1082,
+    "cached": 0,
+    "output": 149
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 0.5,
+    "input": 457,
+    "cached": 0,
+    "output": 9
+   }
+  ],
+  "extraction": {
+   "role_title": "Engineering Leader",
+   "company": "Undisclosed",
+   "jd_format": "bulleted",
+   "required_qualifications": [
+    {
+     "requirement": "10+ years of experience managing a large engineering organization directly as the accountable leader",
+     "source_text": "10+ years of experience managing a large engineering organization directly as the accountable leader.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience with direct people management running large organizations",
+     "source_text": "We are seeking an engineering leader with direct people management experience running large organizations.",
+     "type": "experience"
+    }
+   ],
+   "preferred_qualifications": [],
+   "implicit_requirements": [],
+   "key_responsibilities": []
+  },
+  "jd": "088_open_floor_jd",
+  "run": 2
+ },
+ {
+  "seconds": 7.3,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 0.78,
+    "input": 943,
+    "cached": 0,
+    "output": 10
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 5.09,
+    "input": 1633,
+    "cached": 1408,
+    "output": 1157
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 2.21,
+    "input": 1195,
+    "cached": 0,
+    "output": 326
+   }
+  ],
+  "extraction": {
+   "role_title": "Regional Practice Area Director",
+   "company": "Meridian Strategy Group",
+   "jd_format": "bulleted",
+   "required_qualifications": [
+    {
+     "requirement": "Experience serving as a senior thought partner to leadership in shaping strategic choices and trade-offs",
+     "source_text": "Serve as a senior thought partner to TMT NAMR leadership (RPAL, topic leads, nodes), shaping strategic choices and trade-offs",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience co-creating regional strategy and annual plans, translating strategic priorities into a coherent operating agenda",
+     "source_text": "Co-create the regional strategy and annual plan, translating strategic priorities into a coherent operating agenda",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience stewarding regional commercial strategy using business signals to inform leadership decisions",
+     "source_text": "Steward the regional commercial strategy, using business signals to inform leadership decisions and course correction",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience integrating perspectives across leadership and teams to drive business evolution",
+     "source_text": "Integrate perspectives across leadership and teams to drive the evolution of the North American TMT business",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience developing forward-looking insights into commercial pipelines, highlighting risks and opportunities",
+     "source_text": "Develop forward-looking insight into the commercial pipeline, highlighting risks, opportunities, and strategic inflection points",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience synthesizing business data into leadership-relevant insights and recommendations",
+     "source_text": "Synthesize business data into leadership-relevant insights and recommendations",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience advising proposal and case teams on strategic positioning and differentiation",
+     "source_text": "Advise proposal and case teams on strategic positioning, storytelling, and differentiation",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience shaping client prioritization and account strategies in partnership with leadership",
+     "source_text": "Shape client prioritization and account strategies in partnership with regional leadership",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience shaping regional narratives and influencing market presence",
+     "source_text": "Shape the regional narrative for TMT, influencing how the practice shows up with clients and in the market",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience partnering with marketing to define thought leadership priorities and high-impact events",
+     "source_text": "Partner with Marketing to define thought leadership priorities, flagship publications, and high-impact events",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience designing leadership forums and agendas to drive alignment and decision-making",
+     "source_text": "Design leadership forums and agendas to drive alignment, decision-making, and momentum on strategic priorities",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience orchestrating major regional meetings to advance strategy",
+     "source_text": "Orchestrate major regional meetings to advance strategy, not just share updates",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience shaping regional people strategy and aligning talent to business needs",
+     "source_text": "Shape the regional people strategy, aligning talent, capability building, and staffing to future business needs",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience leading global practice-area workstreams and contributing to firmwide strategy",
+     "source_text": "Lead a global practice-area workstream over time, contributing to firmwide strategy and innovation",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience acting as a connector between regional and global leadership to align priorities",
+     "source_text": "Act as a connector between regional and global TMT leadership to align priorities and accelerate impact",
+     "type": "experience"
+    }
+   ],
+   "preferred_qualifications": [],
+   "implicit_requirements": [
+    {
+     "requirement": "Ability to translate strategic priorities into execution",
+     "inferred_from": "co-developing strategy, translating priorities into execution, and driving priority initiatives across the practice",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to integrate perspectives across leadership and teams",
+     "inferred_from": "Integrate perspectives across leadership and teams to drive the evolution of the North American TMT business",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to shape the regional narrative for TMT",
+     "inferred_from": "Shape the regional narrative for TMT, influencing how the practice shows up with clients and in the market",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to set the direction for regional marketing and internal communications",
+     "inferred_from": "Set the direction for regional marketing and internal communications to reinforce strategic priorities",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to ensure leadership and affiliate communications reinforce a consistent, strategic storyline",
+     "inferred_from": "Ensure leadership and affiliate communications reinforce a consistent, strategic storyline",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to partner with Global TMT People and Talent leaders",
+     "inferred_from": "Partner with Global TMT People and Talent leaders to influence career paths, capability investments, and capacity planning",
+     "confidence": "high"
+    }
+   ],
+   "key_responsibilities": [
+    "Serve as a senior thought partner to TMT NAMR leadership, shaping strategic choices and trade-offs",
+    "Co-create the regional strategy and annual plan, translating strategic priorities into a coherent operating agenda",
+    "Steward the regional commercial strategy, using business signals to inform leadership decisions and course correction",
+    "Integrate perspectives across leadership and teams to drive the evolution of the North American TMT business",
+    "Develop forward-looking insight into the commercial pipeline, highlighting risks, opportunities, and strategic inflection points",
+    "Synthesize business data into leadership-relevant insights and recommendations",
+    "Advise proposal and case teams on strategic positioning, storytelling, and differentiation",
+    "Shape client prioritization and account strategies in partnership with regional leadership",
+    "Shape the regional narrative for TMT, influencing how the practice shows up with clients and in the market",
+    "Partner with Marketing to define thought leadership priorities, flagship publications, and high-impact events",
+    "Design leadership forums and agendas to drive alignment, decision-making, and momentum on strategic priorities",
+    "Orchestrate major regional meetings to advance strategy, not just share updates",
+    "Shape the regional people strategy, aligning talent, capability building, and staffing to future business needs",
+    "Lead a global practice-area workstream over time, contributing to firmwide strategy and innovation",
+    "Act as a connector between regional and global TMT leadership to align priorities and accelerate impact"
+   ]
+  },
+  "jd": "hybrid_jd",
+  "run": 2
+ },
+ {
+  "seconds": 6.0,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 1.59,
+    "input": 1214,
+    "cached": 1024,
+    "output": 215
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 3.5,
+    "input": 1904,
+    "cached": 1664,
+    "output": 718
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 2.46,
+    "input": 1462,
+    "cached": 0,
+    "output": 409
+   }
+  ],
+  "extraction": {
+   "role_title": "Director, Software Engineering",
+   "company": "Pinnacle Entertainment Group",
+   "jd_format": "hybrid",
+   "required_qualifications": [
+    {
+     "requirement": "Experience managing specialized, diverse teams pursuing challenging and ambiguous goals",
+     "source_text": "Proven innovation leader with experience managing specialized, diverse teams pursuing challenging and ambiguous goals",
+     "type": "experience"
+    },
+    {
+     "requirement": "12+ years of software development experience",
+     "source_text": "12+ years of software development experience with at least 8 years managing medium to large technology projects.",
+     "type": "experience"
+    },
+    {
+     "requirement": "8+ years managing medium to large technology projects",
+     "source_text": "12+ years of software development experience with at least 8 years managing medium to large technology projects.",
+     "type": "experience"
+    },
+    {
+     "requirement": "5 years experience in delivering projects involving emerging tech such as Mobile/Wearables, IoT, Game Engines, CV, NLP, and Advanced ML",
+     "source_text": "5 years experience in delivering projects involving emerging tech such as Mobile/Wearables, IoT, Game Engines, CV, NLP, and Advanced ML",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience leading and driving initiatives to deliver business value, on time and within budget",
+     "source_text": "Track record of leading and driving initiatives to the next level, with a focus on delivering business value, being on time and within budget",
+     "type": "experience"
+    },
+    {
+     "requirement": "Ability to deconstruct complex problems and help teams create clarity out of ambiguous or conflicting requirements",
+     "source_text": "Deconstruct complex problems and help teams create clarity out of ambiguous or conflicting requirements",
+     "type": "skill"
+    },
+    {
+     "requirement": "Ability to simultaneously manage teams on multiple engineering projects of significant complexity",
+     "source_text": "Ability to simultaneously manage teams on multiple engineering projects of significant complexity",
+     "type": "skill"
+    },
+    {
+     "requirement": "Ability to navigate a large, complex stakeholder environment",
+     "source_text": "Ability to navigate a large, complex stakeholder environment",
+     "type": "skill"
+    },
+    {
+     "requirement": "BS or MS in Computer Science or equivalent quantitative field OR equivalent experience",
+     "source_text": "BS or MS in Computer Science or equivalent quantitative field OR equivalent experience",
+     "type": "education"
+    }
+   ],
+   "preferred_qualifications": [
+    {
+     "requirement": "Recent experience delivering Next Gen projects using emerging technologies such as CV, NLP, ML, IoT, Recommendations and Predictions, Robotics and Automation, Game Engines, Mixed Reality, Mobile and Wearables, advanced Security and Privacy, Wireless Networks (5G)",
+     "source_text": "Recent experience delivering Next Gen projects using emerging technologies such as CV, NLP, ML, IoT, Recommendations and Predictions, Robotics and Automation, Game Engines, Mixed Reality, Mobile and Wearables, advanced Security and Privacy, Wireless Networks (5G)",
+     "type": "experience"
+    },
+    {
+     "requirement": "Proven professional networking among technology companies",
+     "source_text": "Proven professional networking among technology companies",
+     "type": "skill"
+    },
+    {
+     "requirement": "MSCS/Engineering or related work experience",
+     "source_text": "MSCS/Engineering or related work experience",
+     "type": "education"
+    }
+   ],
+   "implicit_requirements": [
+    {
+     "requirement": "Ability to manage relationships with external partners to foster innovation and collaboration",
+     "inferred_from": "managing relationships with external partners to foster innovation and collaboration",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in overseeing stakeholder testing to validate concepts, user experience, and business value",
+     "inferred_from": "overseeing stakeholder testing to validate concepts, user experience, and business value",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Strong communication skills to translate complex technical concepts into accessible narratives for senior technology leadership",
+     "inferred_from": "translate complex technical concepts into accessible narratives for senior technology leadership, including C-level executives",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to produce well-documented insights, validated prototypes, technical evaluations, and architectural guidance",
+     "inferred_from": "producing well-documented insights, validated prototypes, technical evaluations, and architectural guidance",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in facilitating the transfer of validated insights, prototypes, and technical guidance to delivery teams",
+     "inferred_from": "Facilitate the transfer of validated insights, prototypes, and technical guidance to delivery teams",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to ensure that work is rigorously prioritized and aligned with strategic goals",
+     "inferred_from": "ensure that all work is rigorously prioritized and aligned with the approved quarterly Emerging Product opportunity map",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in managing sponsor and stakeholder expectations, ensuring transparency around scope, outcomes, and value realization",
+     "inferred_from": "Manage sponsor and stakeholder expectations, ensuring transparency around scope, outcomes, and value realization",
+     "confidence": "high"
+    }
+   ],
+   "key_responsibilities": [
+    "Guide the exploration and evaluation of emerging technologies in alignment with the quarterly Emerging Product prioritized opportunity map.",
+    "Oversee the development of proofs of concept and stakeholder testing to validate technical feasibility, user experience, and business value.",
+    "Facilitate the transfer of validated insights, prototypes, and technical guidance to delivery teams and the Initial Tech Implementation team.",
+    "Engage with key stakeholders, users, and partners to ensure alignment, gather feedback, and support early-stage validation efforts.",
+    "Communicate emerging technology strategies, findings, and recommendations to senior executives, translating complex concepts into actionable insights.",
+    "Manage sponsor and stakeholder expectations, ensuring transparency around scope, outcomes, and value realization.",
+    "Provide technical leadership to the Emerging Technology team, ensuring adherence to sound engineering and architectural practices."
+   ]
+  },
+  "jd": "mixed_jd",
+  "run": 2
+ },
+ {
+  "seconds": 4.9,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 0.81,
+    "input": 651,
+    "cached": 0,
+    "output": 10
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 3.59,
+    "input": 1341,
+    "cached": 1152,
+    "output": 638
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 1.27,
+    "input": 780,
+    "cached": 0,
+    "output": 159
+   }
+  ],
+  "extraction": {
+   "role_title": "Global Head of Advanced Engineering",
+   "company": "Undisclosed",
+   "jd_format": "narrative",
+   "required_qualifications": [
+    {
+     "requirement": "Experience leading teams of 40+ across AI, ML, data science, and data engineering",
+     "source_text": "You'll lead a team of 40 across AI, ML, data science, and data engineering, owning the strategy, architecture, and hands-on delivery of AI initiatives across the business.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience owning strategy, architecture, and hands-on delivery of AI initiatives",
+     "source_text": "You'll lead a team of 40 across AI, ML, data science, and data engineering, owning the strategy, architecture, and hands-on delivery of AI initiatives across the business.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience building and scaling LLM-driven systems",
+     "source_text": "The focus is to build and scale LLM-driven systems, develop intelligent workflows, and clearly articulate and deliver measurable business impact.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience designing production-grade systems around large language models",
+     "source_text": "That means designing production-grade systems around large language models, driving automation and insight across investment, operations, and enterprise functions, and partnering directly with senior stakeholders who care deeply about ROI.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience partnering with senior business stakeholders on ROI-driven outcomes",
+     "source_text": "That means designing production-grade systems around large language models, driving automation and insight across investment, operations, and enterprise functions, and partnering directly with senior stakeholders who care deeply about ROI.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience incubating new technology and building components for engineering teams",
+     "source_text": "You will focus on incubating new technology, building components for other engineering teams, and incubating agentic engineering across the firm.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience in financial services / asset management at scale",
+     "source_text": "This is a rare opportunity to step into a Global Head of Advanced Engineering role at one of the world's largest, most sophisticated asset managers.",
+     "type": "domain"
+    }
+   ],
+   "preferred_qualifications": [],
+   "implicit_requirements": [
+    {
+     "requirement": "Ability to articulate and deliver measurable business impact",
+     "inferred_from": "The focus is to build and scale LLM-driven systems, develop intelligent workflows, and clearly articulate and deliver measurable business impact.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in agentic engineering",
+     "inferred_from": "incubating agentic engineering across the firm",
+     "confidence": "medium"
+    },
+    {
+     "requirement": "Strong understanding of AI strategy in a complex financial ecosystem",
+     "inferred_from": "leading and executing an AI vision inside a complex, high-impact financial ecosystem",
+     "confidence": "medium"
+    }
+   ],
+   "key_responsibilities": [
+    "Lead a team of 40 across AI, ML, data science, and data engineering",
+    "Own the strategy, architecture, and hands-on delivery of AI initiatives",
+    "Build and scale LLM-driven systems",
+    "Develop intelligent workflows",
+    "Design production-grade systems around large language models",
+    "Drive automation and insight across investment, operations, and enterprise functions",
+    "Partner directly with senior stakeholders on ROI-driven outcomes",
+    "Incubate new technology and build components for other engineering teams",
+    "Incubate agentic engineering across the firm"
+   ]
+  },
+  "jd": "narrative_jd",
+  "run": 2
+ },
+ {
+  "seconds": 7.3,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 1.41,
+    "input": 1034,
+    "cached": 0,
+    "output": 163
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 4.51,
+    "input": 1724,
+    "cached": 1536,
+    "output": 983
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 2.81,
+    "input": 1287,
+    "cached": 1152,
+    "output": 468
+   }
+  ],
+  "extraction": {
+   "role_title": "Director of Engineering",
+   "company": "RiskTech Solutions",
+   "jd_format": "hybrid",
+   "required_qualifications": [
+    {
+     "requirement": "Bachelor's Degree in Computer Science or related field",
+     "source_text": "Bachelor's Degree in Computer Science or related field.",
+     "type": "education"
+    },
+    {
+     "requirement": "10+ years of professional software development experience",
+     "source_text": "10+ years of professional software development experience.",
+     "type": "experience"
+    },
+    {
+     "requirement": "5+ years managing managers and senior engineering leaders",
+     "source_text": "5+ years managing managers and senior engineering leaders.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Proficient in at least one strongly-typed language (Java, C/C++, C#, etc.)",
+     "source_text": "Proficient in at least one strongly-typed language (Java, C/C++, C#, etc.).",
+     "type": "skill"
+    },
+    {
+     "requirement": "Experience with a modern backend framework (e.g. Node.js, Python/FastAPI, or Go) and a frontend framework (e.g. React or Vue)",
+     "source_text": "Experience with a modern backend framework (e.g. Node.js, Python/FastAPI, or Go) and a frontend framework (e.g. React or Vue).",
+     "type": "skill"
+    },
+    {
+     "requirement": "Cloud-native experience (AWS, Azure, or GCP)",
+     "source_text": "Cloud-native experience (AWS, Azure, or GCP)",
+     "type": "skill"
+    },
+    {
+     "requirement": "Experience with modern relational and NoSQL databases (SQL Server, PostgreSQL, or Redis)",
+     "source_text": "Experience with modern relational and NoSQL databases (SQL Server, PostgreSQL, or Redis).",
+     "type": "skill"
+    },
+    {
+     "requirement": "Experience modernizing legacy systems into modular or service-oriented architecture",
+     "source_text": "Experience modernizing legacy systems into modular or service-oriented architecture.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Demonstrated experience leading large-scale platform or shared services organizations",
+     "source_text": "Demonstrated experience leading large-scale platform or shared services organizations.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Strong working knowledge of application security, secure coding practices, and risk mitigation",
+     "source_text": "Strong working knowledge of application security, secure coding practices, and risk mitigation.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Working knowledge of AI tools in software development (code generation, testing, documentation, observability)",
+     "source_text": "Working knowledge of AI tools in software development (code generation, testing, documentation, observability)",
+     "type": "skill"
+    }
+   ],
+   "preferred_qualifications": [
+    {
+     "requirement": "Experience with Agile/Scrum methodologies",
+     "source_text": "Agile/Scrum experience",
+     "type": "experience"
+    },
+    {
+     "requirement": "Domain knowledge in insurance or risk management",
+     "source_text": "Insurance or risk management domain knowledge",
+     "type": "domain"
+    },
+    {
+     "requirement": "Experience managing client product implementations",
+     "source_text": "Experience managing client product implementations",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience building mobile applications using React Native",
+     "source_text": "Experience with building mobile applications using React Native",
+     "type": "experience"
+    }
+   ],
+   "implicit_requirements": [
+    {
+     "requirement": "Ability to define and execute a platform modernization roadmap",
+     "inferred_from": "Define and execute the platform modernization roadmap in alignment with long-term business and technology strategy.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in promoting modular, API-driven, and service-oriented design principles",
+     "inferred_from": "Promote modular, API-driven, and service-oriented design principles.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in establishing SLAs and engagement models for shared capabilities",
+     "inferred_from": "Establish clear SLAs and engagement models for shared capabilities.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to lead adoption of AI-assisted engineering practices",
+     "inferred_from": "Lead adoption of AI-assisted engineering practices across the platform organization.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in establishing guardrails for responsible AI usage",
+     "inferred_from": "Establish guardrails for responsible AI usage in code generation, test automation, documentation, and architectural analysis.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to partner with leadership to define measurable AI productivity and quality metrics",
+     "inferred_from": "Partner with leadership to define measurable AI productivity and quality metrics.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in embedding secure-by-design principles across platforms",
+     "inferred_from": "Embed secure-by-design principles across the platform.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to partner with Security and Architecture to ensure compliance with industry standards and regulatory expectations",
+     "inferred_from": "Partner with Security and Architecture to ensure compliance with industry standards and regulatory expectations.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in strengthening identity, authentication, authorization, secrets management, and data protection strategies",
+     "inferred_from": "Strengthen identity, authentication, authorization, secrets management, and data protection strategies.",
+     "confidence": "high"
+    }
+   ],
+   "key_responsibilities": [
+    "Define and execute the platform modernization roadmap in alignment with long-term business and technology strategy.",
+    "Deliver shared platform services that enable IRM and Insurance engineering teams to build faster and more consistently.",
+    "Drive architectural improvements across APIs, data, caching, CI/CD, observability, identity, and cloud infrastructure.",
+    "Promote modular, API-driven, and service-oriented design principles.",
+    "Operate the Platform team as a force multiplier for product-aligned engineering teams.",
+    "Partner with IRM and Insurance Product Directors to balance platform enablement with delivery timelines.",
+    "Establish clear SLAs and engagement models for shared capabilities.",
+    "Promote knowledge sharing and cross-team collaboration.",
+    "Lead adoption of AI-assisted engineering practices across the platform organization.",
+    "Establish guardrails for responsible AI usage in code generation, test automation, documentation, and architectural analysis.",
+    "Partner with leadership to define measurable AI productivity and quality metrics.",
+    "Provide leadership, management, and technical vision to the Platform engineering organization.",
+    "Manage managers and senior technical leaders.",
+    "Inspire and motivate teams to deliver innovative solutions with urgency and accountability.",
+    "Lead hiring, performance management, compensation, and career development processes.",
+    "Mentor engineering leaders and foster a culture of design excellence and continuous learning.",
+    "Identify and coordinate technical training opportunities.",
+    "Stimulate knowledge sharing and elevate best practices across teams.",
+    "Embed secure-by-design principles across the platform.",
+    "Partner with Security and Architecture to ensure compliance with industry standards and regulatory expectations.",
+    "Strengthen identity, authentication, authorization, secrets management, and data protection strategies."
+   ]
+  },
+  "jd": "structured_jd",
+  "run": 2
+ },
+ {
+  "seconds": 8.9,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 3.09,
+    "input": 1911,
+    "cached": 1792,
+    "output": 544
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 7.11,
+    "input": 2601,
+    "cached": 2432,
+    "output": 1440
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 1.8,
+    "input": 2445,
+    "cached": 2304,
+    "output": 270
+   }
+  ],
+  "extraction": {
+   "role_title": "Principal Systems Engineer",
+   "company": "AT&T",
+   "jd_format": "hybrid",
+   "required_qualifications": [
+    {
+     "requirement": "Deep experience designing, operating, and governing enterprise-scale platforms and cloud infrastructure",
+     "source_text": "Deep experience designing, operating, and governing enterprise-scale platforms and cloud infrastructure.",
+     "type": "experience"
+    },
+    {
+     "requirement": "7+ years of experience in cloud platforms, infrastructure services, platform engineering, and cloud governance practices",
+     "source_text": "7+ years of cloud platforms, infrastructure services, platform engineering, and cloud governance practices.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience with containerized workloads, orchestration platforms, microservices architectures, and cloud-native deployment patterns",
+     "source_text": "Experience with containerized workloads, orchestration platforms, microservices architectures, and cloud-native deployment patterns.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Strong understanding of CI/CD pipelines, release automation, artifact management, infrastructure automation, and deployment governance",
+     "source_text": "Strong understanding of CI/CD pipelines, release automation, artifact management, infrastructure automation, and deployment governance.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Experience with monitoring, alerting, observability, logging, service health, and operational telemetry strategies",
+     "source_text": "Experience with monitoring, alerting, observability, logging, service health, and operational telemetry strategies.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Strong knowledge of security controls, access governance, role-based access management, separation of duties, and compliance practices",
+     "source_text": "Strong knowledge of security controls, access governance, role-based access management, separation of duties, and compliance practices.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Experience leading platform upgrades, lifecycle management, migration planning, disaster recovery, and resiliency improvements",
+     "source_text": "Experience leading platform upgrades, lifecycle management, migration planning, disaster recovery, and resiliency improvements.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Strong troubleshooting skills across infrastructure, application platforms, integrations, networking, and operational workflows",
+     "source_text": "Strong troubleshooting skills across infrastructure, application platforms, integrations, networking, and operational workflows.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Ability to define standards for SOPs, runbooks, operational playbooks, technical documentation, and support readiness",
+     "source_text": "Ability to define standards for SOPs, runbooks, operational playbooks, technical documentation, and support readiness.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Working knowledge of cost optimization, capacity planning, license management, and technology lifecycle planning",
+     "source_text": "Working knowledge of cost optimization, capacity planning, license management, and technology lifecycle planning.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Proven ability to lead through influence across multiple teams and organizations",
+     "source_text": "Proven ability to lead through influence across multiple teams and organizations.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Strong executive communication, stakeholder management, and decision-framing skills",
+     "source_text": "Strong executive communication, stakeholder management, and decision-framing skills.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Ability to mentor, coach, and develop engineering talent",
+     "source_text": "Ability to mentor, coach, and develop engineering talent.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Strong ownership mindset with accountability for outcomes, reliability, governance, and customer impact",
+     "source_text": "Strong ownership mindset with accountability for outcomes, reliability, governance, and customer impact.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Ability to drive alignment across technical, operational, security, and business priorities",
+     "source_text": "Ability to drive alignment across technical, operational, security, and business priorities.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Calm, decisive leadership during incidents, escalations, and high-pressure situations",
+     "source_text": "Calm, decisive leadership during incidents, escalations, and high-pressure situations.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Strong collaboration skills with Architecture, Development, Operations, Security, Product, and Support teams",
+     "source_text": "Strong collaboration skills with Architecture, Development, Operations, Security, Product, and Support teams.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Ability to simplify complex problems and communicate clear recommendations",
+     "source_text": "Ability to simplify complex problems and communicate clear recommendations.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Commitment to continuous improvement, operational excellence, innovation, and engineering discipline",
+     "source_text": "Commitment to continuous improvement, operational excellence, innovation, and engineering discipline.",
+     "type": "skill"
+    }
+   ],
+   "preferred_qualifications": [
+    {
+     "requirement": "Experience leading enterprise platform modernization or transformation initiatives.",
+     "source_text": "Experience leading enterprise platform modernization or transformation initiatives.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience defining platform roadmaps, maturity models, service ownership models, or operational governance frameworks.",
+     "source_text": "Experience defining platform roadmaps, maturity models, service ownership models, or operational governance frameworks.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience applying AI or intelligent automation to improve support operations, engineering productivity, or customer experience.",
+     "source_text": "Experience applying AI or intelligent automation to improve support operations, engineering productivity, or customer experience.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience with large-scale compliance programs, cybersecurity scorecards, audit preparation, and remediation tracking.",
+     "source_text": "Experience with large-scale compliance programs, cybersecurity scorecards, audit preparation, and remediation tracking.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience leading disaster recovery exercises, business continuity planning, and resiliency validation.",
+     "source_text": "Experience leading disaster recovery exercises, business continuity planning, and resiliency validation.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience influencing architecture review boards, technology standards, or enterprise engineering practices.",
+     "source_text": "Experience influencing architecture review boards, technology standards, or enterprise engineering practices.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience managing vendor relationships, licensing strategy, or platform service contracts.",
+     "source_text": "Experience managing vendor relationships, licensing strategy, or platform service contracts.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience developing metrics and executive dashboards for reliability, cost, risk, and operational performance.",
+     "source_text": "Experience developing metrics and executive dashboards for reliability, cost, risk, and operational performance.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience mentoring technical leads or senior engineers in a matrixed organization.",
+     "source_text": "Experience mentoring technical leads or senior engineers in a matrixed organization.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience driving cultural change toward automation, accountability, reliability, and self-service engineering.",
+     "source_text": "Experience driving cultural change toward automation, accountability, reliability, and self-service engineering.",
+     "type": "experience"
+    }
+   ],
+   "implicit_requirements": [
+    {
+     "requirement": "Ability to influence decisions without direct authority",
+     "inferred_from": "Influence decisions without direct authority by building alignment, communicating tradeoffs, and driving consensus.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in strategic oversight for CI/CD pipeline governance",
+     "inferred_from": "Provide strategic oversight for CI/CD pipeline governance, release standards, artifact management, infrastructure automation, and deployment maturity.",
+     "confidence": "medium"
+    },
+    {
+     "requirement": "Experience in leading root cause analysis and problem management",
+     "inferred_from": "Lead root cause analysis, problem management, corrective action planning, and prevention of recurring issues.",
+     "confidence": "medium"
+    },
+    {
+     "requirement": "Experience in guiding capacity planning and cloud cost optimization",
+     "inferred_from": "Guide capacity planning, cloud cost optimization, licensing strategy, technology lifecycle management, and platform sustainability.",
+     "confidence": "medium"
+    },
+    {
+     "requirement": "Experience in owning disaster recovery strategy and planning",
+     "inferred_from": "Own disaster recovery strategy, planning, exercises, documentation, and continuous improvement.",
+     "confidence": "medium"
+    }
+   ],
+   "key_responsibilities": [
+    "Serve as the senior technical leader and primary platform steward for critical enterprise platforms and cloud services.",
+    "Define and influence platform strategy, technical direction, architecture alignment, and long-term modernization roadmaps.",
+    "Lead cross-functional initiatives across Engineering, Operations, Architecture, Cybersecurity, Support, and business stakeholders.",
+    "Establish and promote engineering standards, operational best practices, automation principles, and platform governance models.",
+    "Own platform reliability, scalability, resiliency, lifecycle planning, operational readiness, and business continuity posture.",
+    "Lead compliance, cybersecurity, access governance, risk-management, and audit-readiness initiatives.",
+    "Drive automation-first approaches across infrastructure, deployments, operational workflows, support processes, and self-service capabilities.",
+    "Provide strategic oversight for CI/CD pipeline governance, release standards, artifact management, infrastructure automation, and deployment maturity.",
+    "Lead observability, monitoring, alerting, logging, and service health strategies to improve operational visibility and reduce incident impact.",
+    "Act as the highest-level escalation point for complex technical issues, major incidents, and platform-impacting events.",
+    "Lead root cause analysis, problem management, corrective action planning, and prevention of recurring issues.",
+    "Guide capacity planning, cloud cost optimization, licensing strategy, technology lifecycle management, and platform sustainability.",
+    "Own disaster recovery strategy, planning, exercises, documentation, and continuous improvement.",
+    "Mentor senior engineers and technical leads, helping raise the engineering maturity of the broader organization.",
+    "Influence decisions without direct authority by building alignment, communicating tradeoffs, and driving consensus."
+   ]
+  },
+  "jd": "att",
+  "run": 3
+ },
+ {
+  "seconds": 6.3,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 1.92,
+    "input": 973,
+    "cached": 0,
+    "output": 298
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 4.27,
+    "input": 1663,
+    "cached": 1536,
+    "output": 864
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 2.0,
+    "input": 1317,
+    "cached": 0,
+    "output": 307
+   }
+  ],
+  "extraction": {
+   "role_title": "Senior Engineering Leader, Product Platform",
+   "company": "Undisclosed",
+   "jd_format": "hybrid",
+   "required_qualifications": [
+    {
+     "requirement": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+     "source_text": "10+ years of progressive software engineering experience, including hands-on development earlier in career",
+     "type": "experience"
+    },
+    {
+     "requirement": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+     "source_text": "5+ years leading engineering managers and senior technical leaders in a multi-team environment",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience building or scaling an engineering organization from early stage to 100+ or inheriting and restructuring an existing org",
+     "source_text": "Demonstrated experience building or scaling an engineering organization (from early stage to 100+ or inheriting and restructuring an existing org)",
+     "type": "experience"
+    },
+    {
+     "requirement": "Cloud-native architecture experience with AWS, Azure, or GCP at the platform level",
+     "source_text": "Cloud-native architecture experience (AWS, Azure, or GCP) at the platform level",
+     "type": "skill"
+    },
+    {
+     "requirement": "Track record of legacy platform modernization in production environments without business disruption",
+     "source_text": "Track record of legacy platform modernization in production environments without business disruption",
+     "type": "experience"
+    },
+    {
+     "requirement": "Cross-functional leadership experience in engineering, product, and design operating as integrated units",
+     "source_text": "Cross-functional leadership experience — engineering, product, and design operating as integrated units",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience establishing or maturing engineering delivery practices such as CI/CD, automated testing, observability, and release management",
+     "source_text": "Experience establishing or maturing engineering delivery practices (CI/CD, automated testing, observability, release management)",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience in a regulated industry such as financial services, healthcare, or government",
+     "source_text": "Regulated industry experience (financial services, healthcare, government, or equivalent complexity)",
+     "type": "domain"
+    },
+    {
+     "requirement": "Ability to translate business strategy into engineering roadmap and organizational structure",
+     "source_text": "Demonstrated ability to translate business strategy into engineering roadmap and organizational structure",
+     "type": "skill"
+    },
+    {
+     "requirement": "Practical experience introducing AI-assisted development practices into an engineering organization",
+     "source_text": "AI/ML adoption strategy — practical experience introducing AI-assisted development practices into an engineering organization",
+     "type": "experience"
+    },
+    {
+     "requirement": "Fluency in modern technology stack across frontend and backend, including React or equivalent, Python/Node.js/Go, and containerized microservices",
+     "source_text": "Modern technology stack fluency across frontend and backend (React or equivalent, Python/Node.js/Go, containerized microservices)",
+     "type": "skill"
+    },
+    {
+     "requirement": "Budget ownership or P&L accountability for an engineering function",
+     "source_text": "Budget ownership or P&L accountability for an engineering function",
+     "type": "experience"
+    }
+   ],
+   "preferred_qualifications": [
+    {
+     "requirement": "Experience in a product company such as SaaS, platform, or marketplace",
+     "source_text": "Product company experience (SaaS, platform, or marketplace) in addition to or instead of consulting/services background",
+     "type": "experience"
+    },
+    {
+     "requirement": "Domain knowledge in healthcare, insurance, or life sciences",
+     "source_text": "Healthcare, insurance, or life sciences domain knowledge",
+     "type": "domain"
+    },
+    {
+     "requirement": "Hands-on Kubernetes experience at production scale, including cluster management, service mesh, and multi-tenant orchestration",
+     "source_text": "Hands-on Kubernetes experience at production scale (cluster management, service mesh, multi-tenant orchestration)",
+     "type": "skill"
+    },
+    {
+     "requirement": "Graduate degree in a technical field such as Computer Science, Engineering, or Information Technology",
+     "source_text": "Graduate degree in a technical field (Computer Science, Engineering, Information Technology, or related)",
+     "type": "education"
+    },
+    {
+     "requirement": "Published thought leadership or conference speaking on topics such as engineering culture, modernization, or AI adoption",
+     "source_text": "Published thought leadership or conference speaking on engineering culture, modernization, or AI adoption",
+     "type": "experience"
+    }
+   ],
+   "implicit_requirements": [
+    {
+     "requirement": "Ability to lead and scale a large cross-functional product engineering organization",
+     "inferred_from": "Lead and scale a cross-functional product engineering organization (150-300 engineers, product managers, and designers)",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in defining engineering operating models, including hiring philosophy, team structure, delivery practices, quality standards, and career development",
+     "inferred_from": "Define the engineering operating model: hiring philosophy, team structure, delivery practices, quality standards, and career development",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to establish AI-assisted engineering practices with guardrails for quality, security, and responsible adoption",
+     "inferred_from": "Establish AI-assisted engineering practices with guardrails for quality, security, and responsible adoption",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience partnering with C-suite to translate business strategy into technical roadmap and organizational priorities",
+     "inferred_from": "Partner with C-suite to translate business strategy into technical roadmap and organizational priorities",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to build a culture of sustainable delivery with high throughput without heroics",
+     "inferred_from": "Build a culture of sustainable delivery — high throughput without heroics",
+     "confidence": "high"
+    }
+   ],
+   "key_responsibilities": [
+    "Lead and scale a cross-functional product engineering organization (150-300 engineers, product managers, and designers)",
+    "Define the engineering operating model: hiring philosophy, team structure, delivery practices, quality standards, and career development",
+    "Drive platform modernization across a legacy core while maintaining business continuity",
+    "Establish AI-assisted engineering practices with guardrails for quality, security, and responsible adoption",
+    "Partner with C-suite to translate business strategy into technical roadmap and organizational priorities",
+    "Build a culture of sustainable delivery — high throughput without heroics"
+   ]
+  },
+  "jd": "demo",
+  "run": 3
+ },
+ {
+  "seconds": 7.3,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 1.14,
+    "input": 1018,
+    "cached": 0,
+    "output": 137
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 4.11,
+    "input": 1708,
+    "cached": 1536,
+    "output": 865
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 3.14,
+    "input": 1269,
+    "cached": 0,
+    "output": 460
+   }
+  ],
+  "extraction": {
+   "role_title": "A.I. Transformation Lead",
+   "company": "Fiserv",
+   "jd_format": "hybrid",
+   "required_qualifications": [
+    {
+     "requirement": "Bachelor's degree in Computer Science, Data Science, Artificial Intelligence, Machine Learning, or a related field",
+     "source_text": "Bachelor's degree in Computer Science, Data Science, Artificial Intelligence, Machine Learning, or a related field; advanced degree preferred.",
+     "type": "education"
+    },
+    {
+     "requirement": "Strong foundation in machine learning, natural language processing, data analytics, and AI platforms",
+     "source_text": "Strong foundation in machine learning, natural language processing, data analytics, and AI platforms.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Experience working with structured and unstructured data, model lifecycle management, and enterprise data ecosystems",
+     "source_text": "Experience working with structured and unstructured data, model lifecycle management, and enterprise data ecosystems.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Ability to analyze complex data sets, assess business problems, and derive actionable, data-driven insights",
+     "source_text": "Ability to analyze complex data sets, assess business problems, and derive actionable, data-driven insights.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Excellent verbal and written communication skills with the ability to explain technical concepts to diverse audiences",
+     "source_text": "Excellent verbal and written communication skills with the ability to explain technical concepts to diverse audiences.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Proven ability to influence stakeholders and drive alignment across cross-functional teams",
+     "source_text": "Proven ability to influence stakeholders and drive alignment across cross-functional teams.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Demonstrated experience leading projects in complex, cross-functional environments",
+     "source_text": "Demonstrated experience leading projects in complex, cross-functional environments.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Ability to manage multiple initiatives, prioritize work, and deliver results in fast-paced settings",
+     "source_text": "Ability to manage multiple initiatives, prioritize work, and deliver results in fast-paced settings.",
+     "type": "skill"
+    },
+    {
+     "requirement": "5-10 years of experience in artificial intelligence, machine learning, data analytics, software development, or related technical disciplines",
+     "source_text": "5-10 years of experience in artificial intelligence, machine learning, data analytics, software development, or related technical disciplines.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience in the payments, financial services, or regulated industry environment",
+     "source_text": "Prior experience within the payments, financial services, or regulated industry environment strongly preferred.",
+     "type": "experience"
+    }
+   ],
+   "preferred_qualifications": [
+    {
+     "requirement": "Software development experience",
+     "source_text": "Software Development experience",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience with Cobol programming",
+     "source_text": "Cobol Programming",
+     "type": "skill"
+    },
+    {
+     "requirement": "Experience with IBM tools, monitoring tools, RMF, DB2 utilities, Platinum Detector, etc.",
+     "source_text": "IBM tools, monitoring tools, RMF, DB2 utilities, Platinum Detector, etc.",
+     "type": "skill"
+    }
+   ],
+   "implicit_requirements": [
+    {
+     "requirement": "Ability to partner with clients and internal stakeholders to understand business objectives",
+     "inferred_from": "Partner with clients and internal stakeholders to understand business objectives and identify high impact AI use cases.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in defining AI roadmaps and transformation strategies",
+     "inferred_from": "Define AI roadmaps and transformation strategies aligned to organizational priorities and long-term value creation.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in ensuring seamless integration of AI solutions with existing systems",
+     "inferred_from": "Ensure seamless integration of AI solutions with existing systems, data pipelines, and operational processes.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to act as a trusted advisor and liaison between technical teams and non-technical stakeholders",
+     "inferred_from": "Act as a trusted advisor and liaison between technical teams and non-technical stakeholders.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in translating complex AI concepts into clear, actionable insights and business recommendations",
+     "inferred_from": "Translate complex AI concepts into clear, actionable insights and business recommendations for executive and operational audiences.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in delivering training, best practices, and enablement sessions on AI tools and capabilities",
+     "inferred_from": "Support organizational readiness by delivering training, best practices, and enablement sessions on AI tools and capabilities.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in monitoring AI system performance, accuracy, and business impact post implementation",
+     "inferred_from": "Monitor AI system performance, accuracy, and business impact post implementation.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Knowledge of ethical standards, regulatory requirements, data privacy policies, and internal governance frameworks",
+     "inferred_from": "Ensure AI solutions comply with ethical standards, regulatory requirements, data privacy policies, and internal governance frameworks.",
+     "confidence": "high"
+    }
+   ],
+   "key_responsibilities": [
+    "Partner with clients and internal stakeholders to understand business objectives and identify high impact AI use cases.",
+    "Define AI roadmaps and transformation strategies aligned to organizational priorities and long-term value creation.",
+    "Lead the design, development, and deployment of AI and machine learning solutions across business and technology platforms.",
+    "Ensure seamless integration of AI solutions with existing systems, data pipelines, and operational processes.",
+    "Assess data readiness, quality, and governance to support AI initiatives.",
+    "Design and guide the development of AI/ML models tailored to specific business challenges and operational workflows.",
+    "Act as a trusted advisor and liaison between technical teams and non-technical stakeholders.",
+    "Translate complex AI concepts into clear, actionable insights and business recommendations for executive and operational audiences.",
+    "Support organizational readiness by delivering training, best practices, and enablement sessions on AI tools and capabilities.",
+    "Drive adoption by embedding AI solutions into day-to-day workflows and decision-making processes.",
+    "Monitor AI system performance, accuracy, and business impact post implementation.",
+    "Ensure AI solutions comply with ethical standards, regulatory requirements, data privacy policies, and internal governance frameworks."
+   ]
+  },
+  "jd": "fiserv_ai_transformation_lead_jd",
+  "run": 3
+ },
+ {
+  "seconds": 2.2,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 0.65,
+    "input": 393,
+    "cached": 0,
+    "output": 10
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 1.43,
+    "input": 1083,
+    "cached": 0,
+    "output": 104
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 0.72,
+    "input": 449,
+    "cached": 0,
+    "output": 55
+   }
+  ],
+  "extraction": {
+   "role_title": "Engineering Leader",
+   "company": "Undisclosed",
+   "jd_format": "bulleted",
+   "required_qualifications": [
+    {
+     "requirement": "5-10 years of experience managing a large engineering organization directly as the accountable leader",
+     "source_text": "5-10 years of experience managing a large engineering organization directly as the accountable leader.",
+     "type": "experience"
+    }
+   ],
+   "preferred_qualifications": [],
+   "implicit_requirements": [
+    {
+     "requirement": "direct people management experience",
+     "inferred_from": "We are seeking an engineering leader with direct people management experience running large organizations.",
+     "confidence": "high"
+    }
+   ],
+   "key_responsibilities": []
+  },
+  "jd": "088_bounded_range_jd",
+  "run": 3
+ },
+ {
+  "seconds": 2.3,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 0.65,
+    "input": 453,
+    "cached": 0,
+    "output": 10
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 1.1,
+    "input": 1143,
+    "cached": 1024,
+    "output": 151
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 1.23,
+    "input": 509,
+    "cached": 0,
+    "output": 104
+   }
+  ],
+  "extraction": {
+   "role_title": "VP of Engineering",
+   "company": "Undisclosed",
+   "jd_format": "bulleted",
+   "required_qualifications": [
+    {
+     "requirement": "Experience running an in-house engineering organization of 60+ engineers as a direct accountable leader",
+     "source_text": "Experience running an in-house engineering organization of 60+ engineers as a direct accountable leader.",
+     "type": "experience"
+    }
+   ],
+   "preferred_qualifications": [],
+   "implicit_requirements": [
+    {
+     "requirement": "Experience in hiring, performance management, compensation, and career development",
+     "inferred_from": "Own hiring, performance management, compensation, and career development for the engineering staff.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in managing software delivery",
+     "inferred_from": "Drive software delivery through direct management of engineering teams.",
+     "confidence": "high"
+    }
+   ],
+   "key_responsibilities": [
+    "Build and lead an in-house product engineering organization.",
+    "Own hiring, performance management, compensation, and career development for the engineering staff.",
+    "Drive software delivery through direct management of engineering teams."
+   ]
+  },
+  "jd": "088_inhouse_org_jd",
+  "run": 3
+ },
+ {
+  "seconds": 1.7,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 0.67,
+    "input": 392,
+    "cached": 0,
+    "output": 10
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 1.22,
+    "input": 1082,
+    "cached": 0,
+    "output": 149
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 0.52,
+    "input": 457,
+    "cached": 0,
+    "output": 9
+   }
+  ],
+  "extraction": {
+   "role_title": "Engineering Leader",
+   "company": "Undisclosed",
+   "jd_format": "bulleted",
+   "required_qualifications": [
+    {
+     "requirement": "10+ years of experience managing a large engineering organization directly as the accountable leader",
+     "source_text": "10+ years of experience managing a large engineering organization directly as the accountable leader.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience with direct people management running large organizations",
+     "source_text": "We are seeking an engineering leader with direct people management experience running large organizations.",
+     "type": "experience"
+    }
+   ],
+   "preferred_qualifications": [],
+   "implicit_requirements": [],
+   "key_responsibilities": []
+  },
+  "jd": "088_open_floor_jd",
+  "run": 3
+ },
+ {
+  "seconds": 7.8,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 0.72,
+    "input": 943,
+    "cached": 0,
+    "output": 10
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 6.1,
+    "input": 1633,
+    "cached": 1408,
+    "output": 1159
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 1.72,
+    "input": 1197,
+    "cached": 0,
+    "output": 282
+   }
+  ],
+  "extraction": {
+   "role_title": "Regional Practice Area Director",
+   "company": "Meridian Strategy Group",
+   "jd_format": "bulleted",
+   "required_qualifications": [
+    {
+     "requirement": "Experience serving as a senior thought partner to leadership in shaping strategic choices and trade-offs",
+     "source_text": "Serve as a senior thought partner to TMT NAMR leadership (RPAL, topic leads, nodes), shaping strategic choices and trade-offs",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience co-creating regional strategy and annual plans, translating strategic priorities into a coherent operating agenda",
+     "source_text": "Co-create the regional strategy and annual plan, translating strategic priorities into a coherent operating agenda",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience stewarding regional commercial strategy using business signals to inform leadership decisions",
+     "source_text": "Steward the regional commercial strategy, using business signals to inform leadership decisions and course correction",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience integrating perspectives across leadership and teams to drive business evolution",
+     "source_text": "Integrate perspectives across leadership and teams to drive the evolution of the North American TMT business",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience developing forward-looking insights into commercial pipelines and highlighting strategic inflection points",
+     "source_text": "Develop forward-looking insight into the commercial pipeline, highlighting risks, opportunities, and strategic inflection points",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience synthesizing business data into leadership-relevant insights and recommendations",
+     "source_text": "Synthesize business data into leadership-relevant insights and recommendations",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience advising proposal and case teams on strategic positioning and differentiation",
+     "source_text": "Advise proposal and case teams on strategic positioning, storytelling, and differentiation",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience shaping client prioritization and account strategies in partnership with leadership",
+     "source_text": "Shape client prioritization and account strategies in partnership with regional leadership",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience shaping regional narratives and influencing market presence",
+     "source_text": "Shape the regional narrative for TMT, influencing how the practice shows up with clients and in the market",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience partnering with marketing to define thought leadership priorities and high-impact events",
+     "source_text": "Partner with Marketing to define thought leadership priorities, flagship publications, and high-impact events",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience designing leadership forums and agendas to drive strategic alignment and decision-making",
+     "source_text": "Design leadership forums and agendas to drive alignment, decision-making, and momentum on strategic priorities",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience orchestrating major regional meetings to advance strategy",
+     "source_text": "Orchestrate major regional meetings to advance strategy, not just share updates",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience shaping regional people strategy and aligning talent to business needs",
+     "source_text": "Shape the regional people strategy, aligning talent, capability building, and staffing to future business needs",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience leading global practice-area workstreams and contributing to firmwide strategy",
+     "source_text": "Lead a global practice-area workstream over time, contributing to firmwide strategy and innovation",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience acting as a connector between regional and global leadership to align priorities",
+     "source_text": "Act as a connector between regional and global TMT leadership to align priorities and accelerate impact",
+     "type": "experience"
+    }
+   ],
+   "preferred_qualifications": [],
+   "implicit_requirements": [
+    {
+     "requirement": "Ability to translate strategic priorities into execution",
+     "inferred_from": "co-developing strategy, translating priorities into execution, and driving priority initiatives across the practice",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to integrate perspectives across leadership and teams",
+     "inferred_from": "Integrate perspectives across leadership and teams to drive the evolution of the North American TMT business",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to shape the direction for regional marketing and internal communications",
+     "inferred_from": "Set the direction for regional marketing and internal communications to reinforce strategic priorities",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to ensure leadership and affiliate communications reinforce a consistent, strategic storyline",
+     "inferred_from": "Ensure leadership and affiliate communications reinforce a consistent, strategic storyline",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to partner with Global TMT People and Talent leaders to influence career paths, capability investments, and capacity planning",
+     "inferred_from": "Partner with Global TMT People and Talent leaders to influence career paths, capability investments, and capacity planning",
+     "confidence": "high"
+    }
+   ],
+   "key_responsibilities": [
+    "Serve as a senior thought partner to TMT NAMR leadership, shaping strategic choices and trade-offs",
+    "Co-create the regional strategy and annual plan, translating strategic priorities into a coherent operating agenda",
+    "Steward the regional commercial strategy, using business signals to inform leadership decisions and course correction",
+    "Integrate perspectives across leadership and teams to drive the evolution of the North American TMT business",
+    "Develop forward-looking insight into the commercial pipeline, highlighting risks, opportunities, and strategic inflection points",
+    "Synthesize business data into leadership-relevant insights and recommendations",
+    "Advise proposal and case teams on strategic positioning, storytelling, and differentiation",
+    "Shape client prioritization and account strategies in partnership with regional leadership",
+    "Shape the regional narrative for TMT, influencing how the practice shows up with clients and in the market",
+    "Partner with Marketing to define thought leadership priorities, flagship publications, and high-impact events",
+    "Design leadership forums and agendas to drive alignment, decision-making, and momentum on strategic priorities",
+    "Orchestrate major regional meetings to advance strategy, not just share updates",
+    "Shape the regional people strategy, aligning talent, capability building, and staffing to future business needs",
+    "Lead a global practice-area workstream over time, contributing to firmwide strategy and innovation",
+    "Act as a connector between regional and global TMT leadership to align priorities and accelerate impact"
+   ]
+  },
+  "jd": "hybrid_jd",
+  "run": 3
+ },
+ {
+  "seconds": 5.8,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 1.6,
+    "input": 1214,
+    "cached": 1024,
+    "output": 215
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 3.85,
+    "input": 1904,
+    "cached": 1664,
+    "output": 720
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 1.94,
+    "input": 1464,
+    "cached": 0,
+    "output": 275
+   }
+  ],
+  "extraction": {
+   "role_title": "Director, Software Engineering",
+   "company": "Pinnacle Entertainment Group",
+   "jd_format": "hybrid",
+   "required_qualifications": [
+    {
+     "requirement": "Experience managing specialized, diverse teams pursuing challenging and ambiguous goals",
+     "source_text": "Proven innovation leader with experience managing specialized, diverse teams pursuing challenging and ambiguous goals",
+     "type": "experience"
+    },
+    {
+     "requirement": "12+ years of software development experience",
+     "source_text": "12+ years of software development experience with at least 8 years managing medium to large technology projects.",
+     "type": "experience"
+    },
+    {
+     "requirement": "8+ years managing medium to large technology projects",
+     "source_text": "12+ years of software development experience with at least 8 years managing medium to large technology projects.",
+     "type": "experience"
+    },
+    {
+     "requirement": "5 years experience in delivering projects involving emerging tech such as Mobile/Wearables, IoT, Game Engines, CV, NLP, and Advanced ML",
+     "source_text": "5 years experience in delivering projects involving emerging tech such as Mobile/Wearables, IoT, Game Engines, CV, NLP, and Advanced ML",
+     "type": "experience"
+    },
+    {
+     "requirement": "Track record of leading and driving initiatives to deliver business value, on time and within budget",
+     "source_text": "Track record of leading and driving initiatives to the next level, with a focus on delivering business value, being on time and within budget",
+     "type": "experience"
+    },
+    {
+     "requirement": "Ability to deconstruct complex problems and help teams create clarity out of ambiguous or conflicting requirements",
+     "source_text": "Deconstruct complex problems and help teams create clarity out of ambiguous or conflicting requirements",
+     "type": "skill"
+    },
+    {
+     "requirement": "Ability to simultaneously manage teams on multiple engineering projects of significant complexity",
+     "source_text": "Ability to simultaneously manage teams on multiple engineering projects of significant complexity",
+     "type": "skill"
+    },
+    {
+     "requirement": "Ability to navigate a large, complex stakeholder environment",
+     "source_text": "Ability to navigate a large, complex stakeholder environment",
+     "type": "skill"
+    },
+    {
+     "requirement": "BS or MS in Computer Science or equivalent quantitative field OR equivalent experience",
+     "source_text": "BS or MS in Computer Science or equivalent quantitative field OR equivalent experience",
+     "type": "education"
+    }
+   ],
+   "preferred_qualifications": [
+    {
+     "requirement": "Recent experience delivering Next Gen projects using emerging technologies such as CV, NLP, ML, IoT, Recommendations and Predictions, Robotics and Automation, Game Engines, Mixed Reality, Mobile and Wearables, advanced Security and Privacy, Wireless Networks (5G)",
+     "source_text": "Recent experience delivering Next Gen projects using emerging technologies such as CV, NLP, ML, IoT, Recommendations and Predictions, Robotics and Automation, Game Engines, Mixed Reality, Mobile and Wearables, advanced Security and Privacy, Wireless Networks (5G)",
+     "type": "experience"
+    },
+    {
+     "requirement": "Proven professional networking among technology companies",
+     "source_text": "Proven professional networking among technology companies",
+     "type": "skill"
+    },
+    {
+     "requirement": "MSCS/Engineering or related work experience",
+     "source_text": "MSCS/Engineering or related work experience",
+     "type": "education"
+    }
+   ],
+   "implicit_requirements": [
+    {
+     "requirement": "Ability to manage relationships with external partners to foster innovation and collaboration",
+     "inferred_from": "managing relationships with external partners to foster innovation and collaboration",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in overseeing stakeholder testing to validate concepts, user experience, and business value",
+     "inferred_from": "overseeing stakeholder testing to validate concepts, user experience, and business value",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to produce well-documented insights, validated prototypes, technical evaluations, and architectural guidance",
+     "inferred_from": "producing well-documented insights, validated prototypes, technical evaluations, and architectural guidance",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Strong communication skills to translate complex technical concepts into accessible narratives for senior technology leadership",
+     "inferred_from": "translate complex technical concepts into accessible narratives for senior technology leadership, including C-level executives",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to connect emerging technology work to tangible business outcomes",
+     "inferred_from": "connect emerging technology work to tangible business outcomes",
+     "confidence": "high"
+    }
+   ],
+   "key_responsibilities": [
+    "Guide the exploration and evaluation of emerging technologies in alignment with the quarterly Emerging Product prioritized opportunity map.",
+    "Oversee the development of proofs of concept and stakeholder testing to validate technical feasibility, user experience, and business value.",
+    "Facilitate the transfer of validated insights, prototypes, and technical guidance to delivery teams and the Initial Tech Implementation team.",
+    "Engage with key stakeholders, users, and partners to ensure alignment, gather feedback, and support early-stage validation efforts.",
+    "Communicate emerging technology strategies, findings, and recommendations to senior executives, translating complex concepts into actionable insights.",
+    "Manage sponsor and stakeholder expectations, ensuring transparency around scope, outcomes, and value realization.",
+    "Provide technical leadership to the Emerging Technology team, ensuring adherence to sound engineering and architectural practices."
+   ]
+  },
+  "jd": "mixed_jd",
+  "run": 3
+ },
+ {
+  "seconds": 5.1,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 0.8,
+    "input": 651,
+    "cached": 0,
+    "output": 10
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 3.79,
+    "input": 1341,
+    "cached": 1152,
+    "output": 638
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 1.32,
+    "input": 780,
+    "cached": 0,
+    "output": 159
+   }
+  ],
+  "extraction": {
+   "role_title": "Global Head of Advanced Engineering",
+   "company": "Undisclosed",
+   "jd_format": "narrative",
+   "required_qualifications": [
+    {
+     "requirement": "Experience leading teams of 40+ across AI, ML, data science, and data engineering",
+     "source_text": "You'll lead a team of 40 across AI, ML, data science, and data engineering, owning the strategy, architecture, and hands-on delivery of AI initiatives across the business.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience owning strategy, architecture, and hands-on delivery of AI initiatives",
+     "source_text": "You'll lead a team of 40 across AI, ML, data science, and data engineering, owning the strategy, architecture, and hands-on delivery of AI initiatives across the business.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience building and scaling LLM-driven systems",
+     "source_text": "The focus is to build and scale LLM-driven systems, develop intelligent workflows, and clearly articulate and deliver measurable business impact.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience designing production-grade systems around large language models",
+     "source_text": "That means designing production-grade systems around large language models, driving automation and insight across investment, operations, and enterprise functions, and partnering directly with senior stakeholders who care deeply about ROI.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience partnering with senior business stakeholders on ROI-driven outcomes",
+     "source_text": "That means designing production-grade systems around large language models, driving automation and insight across investment, operations, and enterprise functions, and partnering directly with senior stakeholders who care deeply about ROI.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience incubating new technology and building components for engineering teams",
+     "source_text": "You will focus on incubating new technology, building components for other engineering teams, and incubating agentic engineering across the firm.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience in financial services / asset management at scale",
+     "source_text": "This is a rare opportunity to step into a Global Head of Advanced Engineering role at one of the world's largest, most sophisticated asset managers.",
+     "type": "domain"
+    }
+   ],
+   "preferred_qualifications": [],
+   "implicit_requirements": [
+    {
+     "requirement": "Ability to articulate and deliver measurable business impact",
+     "inferred_from": "The focus is to build and scale LLM-driven systems, develop intelligent workflows, and clearly articulate and deliver measurable business impact.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in agentic engineering",
+     "inferred_from": "incubating agentic engineering across the firm",
+     "confidence": "medium"
+    },
+    {
+     "requirement": "Strong understanding of AI strategy in a complex financial ecosystem",
+     "inferred_from": "leading and executing an AI vision inside a complex, high-impact financial ecosystem",
+     "confidence": "medium"
+    }
+   ],
+   "key_responsibilities": [
+    "Lead a team of 40 across AI, ML, data science, and data engineering",
+    "Own the strategy, architecture, and hands-on delivery of AI initiatives",
+    "Build and scale LLM-driven systems",
+    "Develop intelligent workflows",
+    "Design production-grade systems around large language models",
+    "Drive automation and insight across investment, operations, and enterprise functions",
+    "Partner directly with senior stakeholders on ROI-driven outcomes",
+    "Incubate new technology and build components for other engineering teams",
+    "Incubate agentic engineering across the firm"
+   ]
+  },
+  "jd": "narrative_jd",
+  "run": 3
+ },
+ {
+  "seconds": 7.5,
+  "error": null,
+  "calls": [
+   {
+    "stage": "preferred",
+    "model_sent": "gpt-4o",
+    "seconds": 1.33,
+    "input": 1034,
+    "cached": 0,
+    "output": 163
+   },
+   {
+    "stage": "required",
+    "model_sent": "gpt-4o",
+    "seconds": 4.73,
+    "input": 1724,
+    "cached": 1536,
+    "output": 975
+   },
+   {
+    "stage": "implicit",
+    "model_sent": "gpt-4o",
+    "seconds": 2.79,
+    "input": 1280,
+    "cached": 0,
+    "output": 468
+   }
+  ],
+  "extraction": {
+   "role_title": "Director of Engineering",
+   "company": "RiskTech Solutions",
+   "jd_format": "hybrid",
+   "required_qualifications": [
+    {
+     "requirement": "Bachelor's Degree in Computer Science or related field",
+     "source_text": "Bachelor's Degree in Computer Science or related field.",
+     "type": "education"
+    },
+    {
+     "requirement": "10+ years of professional software development experience",
+     "source_text": "10+ years of professional software development experience.",
+     "type": "experience"
+    },
+    {
+     "requirement": "5+ years managing managers and senior engineering leaders",
+     "source_text": "5+ years managing managers and senior engineering leaders.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Proficient in at least one strongly-typed language (Java, C/C++, C#)",
+     "source_text": "Proficient in at least one strongly-typed language (Java, C/C++, C#, etc.).",
+     "type": "skill"
+    },
+    {
+     "requirement": "Experience with a modern backend framework (Node.js, Python/FastAPI, or Go) and a frontend framework (React or Vue)",
+     "source_text": "Experience with a modern backend framework (e.g. Node.js, Python/FastAPI, or Go) and a frontend framework (e.g. React or Vue).",
+     "type": "skill"
+    },
+    {
+     "requirement": "Cloud-native experience (AWS, Azure, or GCP)",
+     "source_text": "Cloud-native experience (AWS, Azure, or GCP)",
+     "type": "skill"
+    },
+    {
+     "requirement": "Experience with modern relational and NoSQL databases (SQL Server, PostgreSQL, or Redis)",
+     "source_text": "Experience with modern relational and NoSQL databases (SQL Server, PostgreSQL, or Redis).",
+     "type": "skill"
+    },
+    {
+     "requirement": "Experience modernizing legacy systems into modular or service-oriented architecture",
+     "source_text": "Experience modernizing legacy systems into modular or service-oriented architecture.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Demonstrated experience leading large-scale platform or shared services organizations",
+     "source_text": "Demonstrated experience leading large-scale platform or shared services organizations.",
+     "type": "experience"
+    },
+    {
+     "requirement": "Strong working knowledge of application security, secure coding practices, and risk mitigation",
+     "source_text": "Strong working knowledge of application security, secure coding practices, and risk mitigation.",
+     "type": "skill"
+    },
+    {
+     "requirement": "Working knowledge of AI tools in software development (code generation, testing, documentation, observability)",
+     "source_text": "Working knowledge of AI tools in software development (code generation, testing, documentation, observability)",
+     "type": "skill"
+    }
+   ],
+   "preferred_qualifications": [
+    {
+     "requirement": "Experience with Agile/Scrum methodologies",
+     "source_text": "Agile/Scrum experience",
+     "type": "experience"
+    },
+    {
+     "requirement": "Domain knowledge in insurance or risk management",
+     "source_text": "Insurance or risk management domain knowledge",
+     "type": "domain"
+    },
+    {
+     "requirement": "Experience managing client product implementations",
+     "source_text": "Experience managing client product implementations",
+     "type": "experience"
+    },
+    {
+     "requirement": "Experience building mobile applications using React Native",
+     "source_text": "Experience with building mobile applications using React Native",
+     "type": "experience"
+    }
+   ],
+   "implicit_requirements": [
+    {
+     "requirement": "Ability to define and execute a platform modernization roadmap",
+     "inferred_from": "Define and execute the platform modernization roadmap in alignment with long-term business and technology strategy.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in promoting modular, API-driven, and service-oriented design principles",
+     "inferred_from": "Promote modular, API-driven, and service-oriented design principles.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in establishing SLAs and engagement models for shared capabilities",
+     "inferred_from": "Establish clear SLAs and engagement models for shared capabilities.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to lead adoption of AI-assisted engineering practices",
+     "inferred_from": "Lead adoption of AI-assisted engineering practices across the platform organization.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in establishing guardrails for responsible AI usage",
+     "inferred_from": "Establish guardrails for responsible AI usage in code generation, test automation, documentation, and architectural analysis.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to partner with leadership to define measurable AI productivity and quality metrics",
+     "inferred_from": "Partner with leadership to define measurable AI productivity and quality metrics.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in embedding secure-by-design principles across platforms",
+     "inferred_from": "Embed secure-by-design principles across the platform.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Ability to partner with Security and Architecture to ensure compliance with industry standards and regulatory expectations",
+     "inferred_from": "Partner with Security and Architecture to ensure compliance with industry standards and regulatory expectations.",
+     "confidence": "high"
+    },
+    {
+     "requirement": "Experience in strengthening identity, authentication, authorization, secrets management, and data protection strategies",
+     "inferred_from": "Strengthen identity, authentication, authorization, secrets management, and data protection strategies.",
+     "confidence": "high"
+    }
+   ],
+   "key_responsibilities": [
+    "Define and execute the platform modernization roadmap in alignment with long-term business and technology strategy.",
+    "Deliver shared platform services that enable IRM and Insurance engineering teams to build faster and more consistently.",
+    "Drive architectural improvements across APIs, data, caching, CI/CD, observability, identity, and cloud infrastructure.",
+    "Promote modular, API-driven, and service-oriented design principles.",
+    "Operate the Platform team as a force multiplier for product-aligned engineering teams.",
+    "Partner with IRM and Insurance Product Directors to balance platform enablement with delivery timelines.",
+    "Establish clear SLAs and engagement models for shared capabilities.",
+    "Promote knowledge sharing and cross-team collaboration.",
+    "Lead adoption of AI-assisted engineering practices across the platform organization.",
+    "Establish guardrails for responsible AI usage in code generation, test automation, documentation, and architectural analysis.",
+    "Partner with leadership to define measurable AI productivity and quality metrics.",
+    "Provide leadership, management, and technical vision to the Platform engineering organization.",
+    "Manage managers and senior technical leaders.",
+    "Inspire and motivate teams to deliver innovative solutions with urgency and accountability.",
+    "Lead hiring, performance management, compensation, and career development processes.",
+    "Mentor engineering leaders and foster a culture of design excellence and continuous learning.",
+    "Identify and coordinate technical training opportunities.",
+    "Stimulate knowledge sharing and elevate best practices across teams.",
+    "Embed secure-by-design principles across the platform.",
+    "Partner with Security and Architecture to ensure compliance with industry standards and regulatory expectations.",
+    "Strengthen identity, authentication, authorization, secrets management, and data protection strategies."
+   ]
+  },
+  "jd": "structured_jd",
+  "run": 3
+ }
+]

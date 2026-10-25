@@ -1,0 +1,91 @@
+r1 att today rows=33 calls=36 call_errors=0 24.2s
+r1 att no_kr rows=35 calls=38 call_errors=0 20.5s
+r1 att gpt-4o extraction 9.7s 
+r1 demo today rows=20 calls=23 call_errors=0 14.7s
+r1 demo no_kr rows=20 calls=23 call_errors=0 16.6s
+r1 demo gpt-4o extraction 6.7s 
+r1 fiserv_ai_transformation_lead_jd today rows=21 calls=24 call_errors=0 18.3s
+r1 fiserv_ai_transformation_lead_jd no_kr rows=21 calls=24 call_errors=0 15.3s
+r1 fiserv_ai_transformation_lead_jd gpt-4o extraction 8.3s 
+r1 088_bounded_range_jd today rows=1 calls=4 call_errors=0 5.1s
+r1 088_bounded_range_jd no_kr rows=1 calls=4 call_errors=0 5.6s
+r1 088_bounded_range_jd gpt-4o extraction 2.4s 
+r1 088_inhouse_org_jd today rows=3 calls=6 call_errors=0 6.3s
+r1 088_inhouse_org_jd no_kr rows=3 calls=6 call_errors=0 7.1s
+r1 088_inhouse_org_jd gpt-4o extraction 2.3s 
+r1 088_open_floor_jd today rows=1 calls=4 call_errors=0 5.4s
+r1 088_open_floor_jd no_kr rows=1 calls=4 call_errors=0 5.8s
+r1 088_open_floor_jd gpt-4o extraction 1.7s 
+r1 hybrid_jd today rows=13 calls=16 call_errors=0 17.1s
+r1 hybrid_jd no_kr rows=13 calls=16 call_errors=0 14.3s
+r1 hybrid_jd gpt-4o extraction 7.6s 
+r1 mixed_jd today rows=19 calls=22 call_errors=0 17.5s
+r1 mixed_jd no_kr rows=19 calls=22 call_errors=0 13.8s
+r1 mixed_jd gpt-4o extraction 7.0s 
+r1 narrative_jd today rows=13 calls=16 call_errors=0 14.4s
+r1 narrative_jd no_kr rows=10 calls=13 call_errors=0 10.4s
+r1 narrative_jd gpt-4o extraction 5.3s 
+r1 structured_jd today rows=25 calls=28 call_errors=0 17.6s
+r1 structured_jd no_kr rows=26 calls=29 call_errors=0 16.0s
+r1 structured_jd gpt-4o extraction 7.2s 
+r2 att no_kr rows=34 calls=37 call_errors=0 20.9s
+r2 att today rows=33 calls=36 call_errors=0 19.9s
+r2 att gpt-4o extraction 11.1s 
+r2 demo no_kr rows=20 calls=23 call_errors=0 15.7s
+r2 demo today rows=20 calls=23 call_errors=0 13.8s
+r2 demo gpt-4o extraction 6.8s 
+r2 fiserv_ai_transformation_lead_jd no_kr rows=21 calls=24 call_errors=0 15.5s
+r2 fiserv_ai_transformation_lead_jd today rows=21 calls=24 call_errors=0 16.2s
+r2 fiserv_ai_transformation_lead_jd gpt-4o extraction 7.5s 
+r2 088_bounded_range_jd no_kr rows=1 calls=4 call_errors=0 5.5s
+r2 088_bounded_range_jd today rows=1 calls=4 call_errors=0 6.0s
+r2 088_bounded_range_jd gpt-4o extraction 2.1s 
+r2 088_inhouse_org_jd no_kr rows=3 calls=6 call_errors=0 5.6s
+r2 088_inhouse_org_jd today rows=3 calls=6 call_errors=0 6.2s
+r2 088_inhouse_org_jd gpt-4o extraction 3.0s 
+r2 088_open_floor_jd no_kr rows=1 calls=4 call_errors=0 5.2s
+r2 088_open_floor_jd today rows=1 calls=4 call_errors=0 4.7s
+r2 088_open_floor_jd gpt-4o extraction 1.8s 
+r2 hybrid_jd no_kr rows=12 calls=15 call_errors=0 13.8s
+r2 hybrid_jd today rows=9 calls=12 call_errors=0 12.4s
+r2 hybrid_jd gpt-4o extraction 7.3s 
+r2 mixed_jd no_kr rows=18 calls=21 call_errors=0 16.2s
+r2 mixed_jd today rows=21 calls=24 call_errors=0 18.1s
+r2 mixed_jd gpt-4o extraction 6.0s 
+r2 narrative_jd no_kr rows=10 calls=13 call_errors=0 42.2s
+r2 narrative_jd today rows=11 calls=14 call_errors=0 14.5s
+r2 narrative_jd gpt-4o extraction 4.9s 
+r2 structured_jd no_kr rows=25 calls=28 call_errors=0 16.1s
+r2 structured_jd today rows=23 calls=26 call_errors=0 18.4s
+r2 structured_jd gpt-4o extraction 7.3s 
+r3 att today rows=35 calls=38 call_errors=0 21.5s
+r3 att no_kr rows=34 calls=37 call_errors=0 20.8s
+r3 att gpt-4o extraction 8.9s 
+r3 demo today rows=20 calls=23 call_errors=0 15.3s
+r3 demo no_kr rows=21 calls=24 call_errors=0 15.3s
+r3 demo gpt-4o extraction 6.3s 
+r3 fiserv_ai_transformation_lead_jd today rows=22 calls=25 call_errors=0 16.1s
+r3 fiserv_ai_transformation_lead_jd no_kr rows=22 calls=25 call_errors=0 15.2s
+r3 fiserv_ai_transformation_lead_jd gpt-4o extraction 7.3s 
+r3 088_bounded_range_jd today rows=1 calls=4 call_errors=0 4.9s
+r3 088_bounded_range_jd no_kr rows=1 calls=4 call_errors=0 5.1s
+r3 088_bounded_range_jd gpt-4o extraction 2.2s 
+r3 088_inhouse_org_jd today rows=3 calls=6 call_errors=0 6.1s
+r3 088_inhouse_org_jd no_kr rows=4 calls=7 call_errors=0 7.0s
+r3 088_inhouse_org_jd gpt-4o extraction 2.3s 
+r3 088_open_floor_jd today rows=1 calls=4 call_errors=0 6.3s
+r3 088_open_floor_jd no_kr rows=1 calls=4 call_errors=0 4.6s
+r3 088_open_floor_jd gpt-4o extraction 1.7s 
+r3 hybrid_jd today rows=12 calls=15 call_errors=0 15.8s
+r3 hybrid_jd no_kr rows=14 calls=17 call_errors=0 14.0s
+r3 hybrid_jd gpt-4o extraction 7.8s 
+r3 mixed_jd today rows=19 calls=22 call_errors=0 15.1s
+r3 mixed_jd no_kr rows=21 calls=24 call_errors=0 16.1s
+r3 mixed_jd gpt-4o extraction 5.8s 
+r3 narrative_jd today rows=10 calls=13 call_errors=0 12.4s
+r3 narrative_jd no_kr rows=11 calls=14 call_errors=0 14.6s
+r3 narrative_jd gpt-4o extraction 5.1s 
+r3 structured_jd today rows=23 calls=26 call_errors=0 17.9s
+r3 structured_jd no_kr rows=23 calls=26 call_errors=0 15.9s
+r3 structured_jd gpt-4o extraction 7.5s 
+done 60 runs

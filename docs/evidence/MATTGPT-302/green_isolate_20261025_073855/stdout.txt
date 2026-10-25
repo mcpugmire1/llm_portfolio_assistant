@@ -1,0 +1,13 @@
+r1 hybrid_jd production rows=10 calls=13 call_errors=0 13.7s
+r1 hybrid_jd gpt-4o rows=24 calls=27 call_errors=0 13.9s
+r1 narrative_jd production rows=11 calls=14 call_errors=0 15.2s
+r1 narrative_jd gpt-4o rows=10 calls=13 call_errors=0 7.6s
+r2 hybrid_jd gpt-4o rows=22 calls=25 call_errors=0 14.0s
+r2 hybrid_jd production rows=13 calls=16 call_errors=0 16.2s
+r2 narrative_jd gpt-4o rows=10 calls=13 call_errors=0 9.1s
+r2 narrative_jd production rows=13 calls=16 call_errors=0 17.1s
+r3 hybrid_jd production rows=12 calls=15 call_errors=0 13.3s
+r3 hybrid_jd gpt-4o rows=20 calls=23 call_errors=0 12.1s
+r3 narrative_jd production rows=11 calls=14 call_errors=0 14.8s
+r3 narrative_jd gpt-4o rows=10 calls=13 call_errors=0 7.5s
+done 12 runs

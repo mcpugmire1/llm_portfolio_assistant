@@ -1,0 +1,81 @@
+=== att | gpt-4o R+P+I per run 19+10+5, 19+10+5, 19+10+5 | R+I mean 24.0, bar 18.0 to 30.0 | gpt-4o KR [15, 15, 15]
+  today  r1 R 20 P 10 I 3 R+I 23 in bar | KR 15 | 15 responsibility items land: {'none': 13, 'required': 1, 'implicit': 1}
+  today  r2 R 20 P 10 I 3 R+I 23 in bar | KR 15 | 15 responsibility items land: {'none': 13, 'required': 1, 'implicit': 1}
+  today  r3 R 20 P 10 I 5 R+I 25 in bar | KR 15 | 15 responsibility items land: {'implicit': 2, 'none': 12, 'required': 1}
+  no_kr  r1 R 20 P 10 I 5 R+I 25 in bar | KR 0 | 15 responsibility items land: {'none': 13, 'required': 1, 'implicit': 1}
+  no_kr  r2 R 20 P 10 I 4 R+I 24 in bar | KR 0 | 15 responsibility items land: {'implicit': 2, 'none': 12, 'required': 1}
+  no_kr  r3 R 20 P 10 I 4 R+I 24 in bar | KR 0 | 15 responsibility items land: {'implicit': 2, 'none': 12, 'required': 1}
+=== demo | gpt-4o R+P+I per run 12+5+5, 12+5+5, 12+5+5 | R+I mean 17.0, bar 12.8 to 21.2 | gpt-4o KR [6, 6, 6]
+  today  r1 R 12 P 5 I 3 R+I 15 in bar | KR 6 | 6 responsibility items land: {'none': 3, 'implicit': 2, 'required': 1}
+  today  r2 R 12 P 5 I 3 R+I 15 in bar | KR 7 | 7 responsibility items land: {'none': 4, 'implicit': 2, 'required': 1}
+  today  r3 R 12 P 5 I 3 R+I 15 in bar | KR 7 | 7 responsibility items land: {'none': 4, 'implicit': 2, 'required': 1}
+  no_kr  r1 R 12 P 5 I 3 R+I 15 in bar | KR 0 | 6 responsibility items land: {'none': 3, 'implicit': 2, 'required': 1}
+  no_kr  r2 R 12 P 5 I 3 R+I 15 in bar | KR 0 | 7 responsibility items land: {'none': 4, 'implicit': 2, 'required': 1}
+  no_kr  r3 R 12 P 5 I 4 R+I 16 in bar | KR 0 | 7 responsibility items land: {'none': 3, 'implicit': 3, 'required': 1}
+=== fiserv_ai_transformation_lead_jd | gpt-4o R+P+I per run 10+3+9, 10+3+8, 10+3+8 | R+I mean 18.3, bar 13.8 to 22.9 | gpt-4o KR [12, 12, 12]
+  today  r1 R 10 P 5 I 6 R+I 16 in bar | KR 12 | 12 responsibility items land: {'none': 4, 'implicit': 8}
+  today  r2 R 10 P 5 I 6 R+I 16 in bar | KR 12 | 12 responsibility items land: {'implicit': 7, 'none': 5}
+  today  r3 R 10 P 5 I 7 R+I 17 in bar | KR 12 | 12 responsibility items land: {'implicit': 8, 'none': 4}
+  no_kr  r1 R 10 P 5 I 6 R+I 16 in bar | KR 0 | 12 responsibility items land: {'none': 5, 'implicit': 7}
+  no_kr  r2 R 10 P 5 I 6 R+I 16 in bar | KR 0 | 12 responsibility items land: {'implicit': 8, 'none': 4}
+  no_kr  r3 R 10 P 5 I 7 R+I 17 in bar | KR 0 | 12 responsibility items land: {'implicit': 9, 'none': 3}
+=== 088_bounded_range_jd | gpt-4o R+P+I per run 1+0+1, 2+0+0, 1+0+1 | R+I mean 2.0, bar 1.5 to 2.5 | gpt-4o KR [0, 0, 0]
+  today  r1 R 1 P 0 I 0 R+I 1 OUTSIDE BAR | KR 0 | 0 responsibility items land: {}
+  today  r2 R 1 P 0 I 0 R+I 1 OUTSIDE BAR | KR 0 | 0 responsibility items land: {}
+  today  r3 R 1 P 0 I 0 R+I 1 OUTSIDE BAR | KR 0 | 0 responsibility items land: {}
+  no_kr  r1 R 1 P 0 I 0 R+I 1 OUTSIDE BAR | KR 0 | 0 responsibility items land: {}
+  no_kr  r2 R 1 P 0 I 0 R+I 1 OUTSIDE BAR | KR 0 | 0 responsibility items land: {}
+  no_kr  r3 R 1 P 0 I 0 R+I 1 OUTSIDE BAR | KR 0 | 0 responsibility items land: {}
+=== 088_inhouse_org_jd | gpt-4o R+P+I per run 1+0+2, 1+0+2, 1+0+2 | R+I mean 3.0, bar 2.2 to 3.8 | gpt-4o KR [3, 3, 3]
+  today  r1 R 1 P 0 I 2 R+I 3 in bar | KR 3 | 3 responsibility items land: {'required': 1, 'implicit': 2}
+  today  r2 R 1 P 0 I 2 R+I 3 in bar | KR 3 | 3 responsibility items land: {'none': 1, 'implicit': 2}
+  today  r3 R 1 P 0 I 2 R+I 3 in bar | KR 3 | 3 responsibility items land: {'none': 1, 'implicit': 2}
+  no_kr  r1 R 1 P 0 I 2 R+I 3 in bar | KR 0 | 3 responsibility items land: {'none': 1, 'implicit': 2}
+  no_kr  r2 R 1 P 0 I 2 R+I 3 in bar | KR 0 | 3 responsibility items land: {'none': 1, 'implicit': 2}
+  no_kr  r3 R 1 P 0 I 3 R+I 4 OUTSIDE BAR | KR 0 | 3 responsibility items land: {'implicit': 3}
+=== 088_open_floor_jd | gpt-4o R+P+I per run 2+0+0, 2+0+0, 2+0+0 | R+I mean 2.0, bar 1.5 to 2.5 | gpt-4o KR [0, 0, 0]
+  today  r1 R 1 P 0 I 0 R+I 1 OUTSIDE BAR | KR 0 | 0 responsibility items land: {}
+  today  r2 R 1 P 0 I 0 R+I 1 OUTSIDE BAR | KR 0 | 0 responsibility items land: {}
+  today  r3 R 1 P 0 I 0 R+I 1 OUTSIDE BAR | KR 0 | 0 responsibility items land: {}
+  no_kr  r1 R 1 P 0 I 0 R+I 1 OUTSIDE BAR | KR 0 | 0 responsibility items land: {}
+  no_kr  r2 R 1 P 0 I 0 R+I 1 OUTSIDE BAR | KR 0 | 0 responsibility items land: {}
+  no_kr  r3 R 1 P 0 I 0 R+I 1 OUTSIDE BAR | KR 0 | 0 responsibility items land: {}
+=== hybrid_jd | gpt-4o R+P+I per run 15+0+6, 15+0+6, 15+0+5 | R+I mean 20.7, bar 15.5 to 25.8 | gpt-4o KR [15, 15, 15]
+  today  r1 R 12 P 0 I 1 R+I 13 OUTSIDE BAR | KR 16 | 16 responsibility items land: {'required': 12, 'none': 4}
+  today  r2 R 0 P 0 I 9 R+I 9 OUTSIDE BAR | KR 18 | 18 responsibility items land: {'none': 12, 'implicit': 6}
+  today  r3 R 12 P 0 I 0 R+I 12 OUTSIDE BAR | KR 18 | 18 responsibility items land: {'required': 12, 'none': 6}
+  no_kr  r1 R 12 P 0 I 1 R+I 13 OUTSIDE BAR | KR 0 | 16 responsibility items land: {'required': 12, 'none': 3, 'implicit': 1}
+  no_kr  r2 R 12 P 0 I 0 R+I 12 OUTSIDE BAR | KR 0 | 18 responsibility items land: {'required': 18}
+  no_kr  r3 R 12 P 0 I 2 R+I 14 OUTSIDE BAR | KR 0 | 18 responsibility items land: {'required': 13, 'none': 3, 'implicit': 2}
+=== mixed_jd | gpt-4o R+P+I per run 9+3+7, 9+3+7, 9+3+5 | R+I mean 15.3, bar 11.5 to 19.2 | gpt-4o KR [7, 7, 7]
+  today  r1 R 8 P 3 I 8 R+I 16 in bar | KR 12 | 12 responsibility items land: {'none': 7, 'implicit': 5}
+  today  r2 R 8 P 3 I 10 R+I 18 in bar | KR 14 | 14 responsibility items land: {'none': 10, 'implicit': 4}
+  today  r3 R 8 P 3 I 8 R+I 16 in bar | KR 7 | 7 responsibility items land: {'none': 5, 'implicit': 2}
+  no_kr  r1 R 8 P 3 I 8 R+I 16 in bar | KR 0 | 12 responsibility items land: {'none': 5, 'implicit': 7}
+  no_kr  r2 R 8 P 3 I 7 R+I 15 in bar | KR 0 | 14 responsibility items land: {'none': 9, 'implicit': 5}
+  no_kr  r3 R 8 P 3 I 10 R+I 18 in bar | KR 0 | 7 responsibility items land: {'none': 3, 'implicit': 4}
+=== narrative_jd | gpt-4o R+P+I per run 7+0+3, 7+0+3, 7+0+3 | R+I mean 10.0, bar 7.5 to 12.5 | gpt-4o KR [9, 9, 9]
+  today  r1 R 13 P 0 I 0 R+I 13 OUTSIDE BAR | KR 11 | 11 responsibility items land: {'required': 9, 'none': 2}
+  today  r2 R 11 P 0 I 0 R+I 11 in bar | KR 9 | 9 responsibility items land: {'required': 7, 'none': 2}
+  today  r3 R 10 P 0 I 0 R+I 10 in bar | KR 9 | 9 responsibility items land: {'required': 7, 'none': 2}
+  no_kr  r1 R 10 P 0 I 0 R+I 10 in bar | KR 0 | 11 responsibility items land: {'required': 8, 'none': 3}
+  no_kr  r2 R 10 P 0 I 0 R+I 10 in bar | KR 0 | 9 responsibility items land: {'required': 7, 'none': 2}
+  no_kr  r3 R 11 P 0 I 0 R+I 11 in bar | KR 0 | 9 responsibility items land: {'required': 7, 'none': 2}
+=== structured_jd | gpt-4o R+P+I per run 11+4+9, 11+4+9, 11+4+9 | R+I mean 20.0, bar 15.0 to 25.0 | gpt-4o KR [21, 21, 21]
+  today  r1 R 11 P 4 I 10 R+I 21 in bar | KR 21 | 21 responsibility items land: {'implicit': 11, 'none': 9, 'required': 1}
+  today  r2 R 11 P 4 I 8 R+I 19 in bar | KR 21 | 21 responsibility items land: {'implicit': 8, 'none': 12, 'required': 1}
+  today  r3 R 11 P 4 I 8 R+I 19 in bar | KR 21 | 21 responsibility items land: {'implicit': 9, 'none': 11, 'required': 1}
+  no_kr  r1 R 11 P 4 I 11 R+I 22 in bar | KR 0 | 21 responsibility items land: {'implicit': 13, 'none': 7, 'required': 1}
+  no_kr  r2 R 11 P 4 I 10 R+I 21 in bar | KR 0 | 21 responsibility items land: {'implicit': 12, 'none': 8, 'required': 1}
+  no_kr  r3 R 11 P 4 I 8 R+I 19 in bar | KR 0 | 21 responsibility items land: {'implicit': 10, 'none': 10, 'required': 1}
+=== no_kr and paren runs outside the bar
+  no_kr 088_bounded_range_jd r1: R+I 1 outside 1.5 to 2.5
+  no_kr 088_bounded_range_jd r2: R+I 1 outside 1.5 to 2.5
+  no_kr 088_bounded_range_jd r3: R+I 1 outside 1.5 to 2.5
+  no_kr 088_inhouse_org_jd r3: R+I 4 outside 2.2 to 3.8
+  no_kr 088_open_floor_jd r1: R+I 1 outside 1.5 to 2.5
+  no_kr 088_open_floor_jd r2: R+I 1 outside 1.5 to 2.5
+  no_kr 088_open_floor_jd r3: R+I 1 outside 1.5 to 2.5
+  no_kr hybrid_jd r1: R+I 13 outside 15.5 to 25.8
+  no_kr hybrid_jd r2: R+I 12 outside 15.5 to 25.8
+  no_kr hybrid_jd r3: R+I 14 outside 15.5 to 25.8
