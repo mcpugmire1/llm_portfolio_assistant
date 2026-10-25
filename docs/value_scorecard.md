@@ -284,7 +284,7 @@ Fitness functions and open decisions: see "Role Match (drivers 4, 3, 5, 7 and 8)
 
 **Open tickets:** -244 (In Progress), -266, -249, -012 (In Progress), -014, -081, -099,
 -173, -079, -264, -267, -352 (`_flatten_extraction()` crashes on a string implicit item; relevant to RM-D1),
--353 (the assessor sees only the first 3 Action and Result items; Story edits put key facts in the Summary, the Situation or the first 3 Action or Result items, which work with or without the cap).
+-353 (the assessor sees only the first 3 Action and Result items; Story edits put key facts in the Summary, the Situation or the first 3 Action or Result items, which work with or without the cap), -355 (0-requirement extraction logged as a success, no next step).
 
 ## 5. Evidence parity (Ask Agy and Role Match)
 

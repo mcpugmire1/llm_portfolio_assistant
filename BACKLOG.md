@@ -170,6 +170,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-352](#mattgpt-352) | _flatten_extraction() crashes with AttributeError when implicit_requirements holds a plain string instead of an object | Open | Medium | Bug | value | October 22, 2026 |
 | [MATTGPT-353](#mattgpt-353) | Role Match sees a truncated story: the assessor prompt gets only the first 3 Action and Result items | Open | High | Issue | value | October 24, 2026 |
 | [MATTGPT-354](#mattgpt-354) | Work model: the profile says "Hybrid or remote fine", which Matt never chose, and About Matt hardcodes "Hybrid or in-person"; both move to "In-office preferred" / "Hybrid fine" | Open | High | Issue | value | October 24, 2026 |
+| [MATTGPT-355](#mattgpt-355) | Role Match: an extraction that returns 0 requirements is logged as a success and leaves the visitor one line with no next step | Open | Medium | Bug | value | October 25, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; CI/CD-qualifier row pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata don't appear under My Work's named-client filter -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently | Parked | Medium | Action | value | August 3, 2026 |
@@ -3389,6 +3390,27 @@ Verified Oct 22, 2026 (HEAD 5787bdf): `.gitignore` has `/probes/`; the run folde
 **Before Red (Oct 25, 2026):**
 - **Design call:** the profile's `work_model` has two parts (value "In-office preferred", subline "Hybrid fine"), and About Matt's "Work mode" tile is one line. Which part or parts the tile shows is a Design call, settled before the Red test, since `about_matt.feature` will pin it.
 - **Spec sync:** the pinning scenario is titled "Signals panel tile values match the wireframe spec", and the spec carries the old text: `mattgpt-design-spec/wireframes/MATTGPT_WIREFRAMES_v4.html` has the "Work mode" tile with "Hybrid or in-person" (local copy at 9985965, checked Oct 25). The fix commit flags the mattgpt-design-spec sync per the Pre-Commit Doc Checklist.
+
+---
+
+### MATTGPT-355
+**Role Match: an extraction that returns 0 requirements is logged as a success and leaves the visitor one line with no next step**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Bug
+- **File:** `ui/pages/role_match.py` (`_log_role_match_success()`, `_build_role_match_log_kwargs()`, the empty-results branch of the results renderer, the submit button label)
+- **Related:** MATTGPT-302 (where it was seen)
+- **Logged:** October 25, 2026
+
+**Issue (lane 1, Oct 25, 2026; read from the code, not browser-checked):** when extraction returns 0 requirements, the run is logged as a success with zero counts. The page replaces the results with one centred line, "Couldn't extract any requirements from this job description.", with no retry banner, no CTA, and the button still reading "Match this role". Seen under gpt-5.6-terra on `hybrid_jd` (1 of 6 runs) during -302. It skews success logging and leaves the visitor with no next step; it can occur on any JD the extraction misreads.
+
+**Verified Oct 25, 2026 (HEAD b023e6d):**
+- The results renderer returns early on empty `results` after one `st.markdown` line: "Couldn't extract any requirements from this job description."
+- `_log_role_match_success()` passes the empty `results` to `_build_role_match_log_kwargs()`, which sets `failure_type` to "ok" and takes every count from `compute_summary_counts(results)`, so the row logs as a success with all counts 0.
+- The button label is "Update Match 🐾" only when `role_match_result` has `results`; otherwise "Match this role 🐾".
+
+**Related rule:** the relay cites the ADR line "Rows the run didn't reach show as unassessed, never as gaps." That wording isn't in `docs/ADR.md` (`grep -n -i -E "didn.t reach|unassessed" docs/ADR.md` returns nothing); ARCHITECTURE.md documents the unassessed row shape for Modes 1 and 2. Confirm the source before the fix cites it.
 
 ---
 
