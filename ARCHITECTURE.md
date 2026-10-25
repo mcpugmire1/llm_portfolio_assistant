@@ -28,7 +28,7 @@
 ## Executive Summary
 
 **Project:** MattGPT Portfolio Assistant - AI-powered career story search and chat interface
-**Tech Stack:** Streamlit, OpenAI (gpt-6.1-sol answers Ask Agy; gpt-4o runs Role Match and tag generation), Pinecone vector DB, Python 3.11+
+**Tech Stack:** Streamlit, OpenAI (gpt-6.1-sol answers Ask Agy; gpt-5.6-terra runs Role Match; gpt-4o runs tag generation), Pinecone vector DB, Python 3.11+
 **Data Corpus:** 100+ STAR-formatted transformation project stories
 
 **For design decisions, removed components, and rejected approaches,** see [docs/ADR.md](docs/ADR.md).
@@ -894,7 +894,7 @@ with st.container(key="r2_row"):
 
 **Entry point:** `ui/pages/role_match.py` (page) + `services/jd_assessor.py` (engine)
 
-**Purpose:** Accepts a job description and returns a structured assessment of Matt's fit: per-requirement verdicts (Strong / Partial / Gap), an overall recommendation, and supporting evidence drawn from the STAR corpus.
+**Purpose:** Accepts a job description and returns a structured assessment of Matt's fit: per-requirement verdicts (Strong / Partial / Gap) and supporting evidence drawn from the STAR corpus.
 
 **Desktop only:** below 1024px, or when `app.py` captured no width, the page shows "Best experienced on desktop" in place of the JD input. The width is `window.innerWidth`, captured once per session into `st.session_state["_browser_screen_size"]`. See ADR 062 in `docs/ADR.md`.
 
@@ -902,11 +902,12 @@ with st.container(key="r2_row"):
 
 ```
 JD Input
-  → Stage 1: Extraction          gpt-4o, three section-scoped calls in two waves
+  → Stage 1: Extraction          gpt-5.6-terra, three section-scoped calls in two waves
   → Stage 2: Retrieval           Pinecone per requirement, DEFAULT_TOP_K = 5
-  → Stage 3: Assessment          gpt-4o, one call per requirement; parallelized via asyncio
-  → compute_recommendation()     Aggregates verdicts to Strong / Likely / Partial / Gap
+  → Stage 3: Assessment          gpt-5.6-terra, one call per requirement; parallelized via asyncio
 ```
+
+**Model and client:** all four calls (`_call_required`, `_call_preferred`, `_call_implicit`, `assess_requirement()`) use `ASSESSMENT_MODEL` (`DEFAULT_CHAT_MODEL`) with `reasoning_effort=DEFAULT_REASONING_EFFORT` and no temperature, which the model rejects. `_get_openai_client()` sets `ROLE_MATCH_MAX_RETRIES` and a `ROLE_MATCH_READ_TIMEOUT_S` read timeout (connect 5 s); the calls aren't streamed, so the read timeout covers the whole call. `JD_ASSESSMENT_PROMPT_TEMPLATE` carries `NO_DASH_RULE`; the extraction prompts don't. `compute_recommendation()` aggregates verdicts for `scripts/assess_jd.py`; the page shows no recommendation. See ADR 063 in `docs/ADR.md`.
 
 Stage 1 runs through `extract_requirements()` → `_extract_all_sections()`. Wave 1 runs `_call_required` and `_call_preferred` concurrently via `asyncio.gather`; the required call also returns the JD-level metadata (role_title, company, jd_format, key_responsibilities). Wave 2 runs `_call_implicit`, with the wave 1 lists injected into its user message so its dedup rule can check them. If any section call raises, the error leaves `extract_requirements`. Wave 2 never starts when wave 1 fails. The wave 1 siblings are cancelled and then drained with a `return_exceptions=True` gather; the drain is the load-bearing part, because `to_thread` workers can't be cancelled from outside. Each prompt constant (`_REQUIRED_EXTRACTION_PROMPT`, `_PREFERRED_EXTRACTION_PROMPT`, `_IMPLICIT_EXTRACTION_PROMPT`) has a `=== SECTION: <name> ===` marker line that tests use to classify calls. `JD_EXTRACTION_PROMPT` is not used in production; probes import it. Return shape: three requirement lists, key_responsibilities (the planned responsibilities output in ADR 016, not consumed yet), role_title, company, jd_format.
 

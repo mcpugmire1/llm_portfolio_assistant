@@ -395,7 +395,7 @@ const button = container.querySelector('button');
 ## ADR 016 — Two-Step Pipeline for JD Requirement Extraction
 
 **Date:** 2026-03-25
-**Status:** Accepted
+**Status:** Accepted; ADR 063 corrects its extraction model: Role Match's calls run on DEFAULT_CHAT_MODEL, not Claude
 
 **Context:**
 The JD Match feature requires mapping job description requirements to STAR stories in Pinecone. Job descriptions vary widely in format — bulleted lists, narrative paragraphs, mixed structures, implicit requirements embedded in responsibilities. A single Pinecone query against raw JD text would produce imprecise retrieval and no structured output.
@@ -1259,7 +1259,7 @@ ADR 040 set the design: Ask Agy is a conversational system, and retrieval is its
 ## ADR 048: Ask Agy's Prompt Carries NO_DASH_RULE; normalize_dashes() Stays as the Backstop
 
 **Date:** 2026-10-15
-**Status:** Accepted
+**Status:** Accepted; its Rejected line on Role Match's prompts is superseded for the assessment prompt by ADR 063
 **Related tickets:** MATTGPT-275, MATTGPT-301
 
 **Context:**
@@ -1654,3 +1654,38 @@ Role Match is desktop only (Matt, Oct 14, 2026). Below 1024px the page shows "Be
 - f033c64 (Apr 8, 2026) raised the gate threshold from 768px to 1024px.
 - dd4314d (Apr 11, 2026) switched the capture to `screen.width`, after the `streamlit_js_eval` iframe could report `window.innerWidth` as 0 on Streamlit Cloud and fire the gate on desktop.
 - d4354fc (Jun 6, 2026, MATTGPT-102) switched back to `window.innerWidth`: `screen.width` reports the physical display resolution, so the gate never fired on desktop browsers emulating mobile viewports. The capture iframe is excluded from the `stIFrame` collapse rule by its `st-key-screen_size_capture` class.
+
+---
+
+## ADR 063: Role Match Runs on gpt-5.6-terra at Low Effort, With a 30 s Read Timeout and 2 Retries
+
+**Date:** 2026-10-25
+**Status:** Accepted
+**Related tickets:** MATTGPT-302, MATTGPT-012
+
+**Context:**
+The gpt-4o family retires January 14, 2027. Role Match's four calls (`_call_required`, `_call_preferred`, `_call_implicit`, `assess_requirement()`) ran on gpt-4o at temperature 0.0, and its client had the SDK's default timeout and retries.
+
+**Decision:**
+- All four calls use `ASSESSMENT_MODEL`, which is `DEFAULT_CHAT_MODEL` (`config/constants.py`, "gpt-5.6-terra"), with `reasoning_effort=DEFAULT_REASONING_EFFORT` ("low"). They send no temperature, since the model rejects it; `ASSESSMENT_TEMPERATURE` is removed.
+- `_get_openai_client()` sets `ROLE_MATCH_MAX_RETRIES = 2` and a read timeout of `ROLE_MATCH_READ_TIMEOUT_S = 30` s, connect 5 s. The calls are not streamed, so the read timeout covers the whole call.
+- `JD_ASSESSMENT_PROMPT_TEMPLATE` carries `NO_DASH_RULE`, on the line before the JSON-only line.
+- `_REQUIRED_EXTRACTION_PROMPT`'s Populate rule drops "(what the role does, not what the candidate must have)". `key_responsibilities` stays in the schema.
+- `DEFAULT_CLASSIFICATION_MODEL` is removed; nothing read it.
+- The acceptance bar no longer requires recommendations unchanged from gpt-4o: `compute_recommendation()` has no `ui/` caller, so visitors never see one.
+
+**Rationale:**
+- Acceptance, live through `run_assessment()` on all 10 test JDs, 3 runs (`docs/evidence/MATTGPT-302/`: `green_20261025_073015`, `paren_20261025_091309`, `green_confirm_20261025_094412`): end to end at most 30 s on every JD (slowest 28.1 s; AT&T 21.1 to 24.7 s; demo 14.3 to 17.3 s, against gpt-4o's 13.6 to 16.5 s). Required plus implicit never 0; within 25% of gpt-4o's count wherever gpt-4o extracts 5 or more. 0 strong rows without evidence, 0 cited stories outside those given, 0 dashes, 0 output shape failures.
+- Rejected: gpt-6.1-sol at medium. AT&T took 49.5 to 65.2 s end to end.
+- Rejected: a 60 s read timeout, sized for gpt-6.1-sol's 24.6 s call. On Terra at low, the slowest call measured was 10.35 s over 722 calls.
+- Rejected: no dash rule. Terra wrote 10 dashes in 6 runs without it.
+- Rejected: removing `key_responsibilities`. Extraction was also steady without it, but removing it would supersede ADR 016's responsibilities output and MATTGPT-012's option on it.
+
+**Consequences:**
+- ADR 048's rejection of the rule in Role Match's prompts no longer holds for the assessment prompt, where gpt-4o wrote no dashes and Terra does. The extraction prompts still don't carry it.
+- ADR 016 names Claude as the extraction model; extraction runs on `ASSESSMENT_MODEL`.
+- `compute_recommendation()` serves `scripts/assess_jd.py`. On Terra, AT&T gave Apply/High in 4 of 12 production-shaped runs, where gpt-4o always gave Consider/Medium.
+- Two runs over 30 s, both on the `key_responsibilities` removal arm (hybrid_jd 41.8 s, narrative_jd 38.2 s), had embedding calls of 6 to 17.8 s (median 0.4 s) and slower chat calls in the same runs.
+- The four root generator scripts stay on gpt-4o until MATTGPT-302's later cycles (three deleted, the tag script moved), and openai 3.x is still pending (ADR 050).
+
+**History:** 4818c59 (Red on gpt-6.1-sol), 2a7a56d (RM-D1 reopened), d6c1fb4 (Red on gpt-5.6-terra), de3b698 (Populate rule Red), 466b55a (Green).
