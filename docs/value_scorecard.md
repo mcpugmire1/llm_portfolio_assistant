@@ -59,11 +59,11 @@ runs agreed on every pair. Failures:
   MATTGPT-253, closed: the gate left Ask Agy's answer path in 1095d2c.
   The wording is on MATTGPT-320's run list.
 
-**Open tickets:** -283 (embedding model PoC), -185 (negation), -171 (phrase matching), -177 (token_overlap_ratio
-bound), -063 (wrong-person queries), -077
+**Open tickets:** -283 (embedding model PoC), -185 (negation), -171 (phrase matching), -063 (wrong-person queries), -077
 (pronoun and noun-overlap contamination), -236 (re-scoped Oct 18: breadth for big-picture questions before the router comes out), -239 (router confidence floor,
-Blocked), -062 (stale router embeddings), -167 (entity detection for
-Project and Place, Parked), -304 (reranker spike).
+Blocked), -062 (stale router embeddings), and the retrieval-miss cluster: -304 (reranker spike;
+carries Q6), -210 (static landing chips; the STRATCOM miss), -325 (query-term mentions
+missed under the cutoff or below the top 25).
 
 ## 2. Conversational continuity
 
@@ -282,7 +282,7 @@ Fitness functions and open decisions: see "Role Match (drivers 4, 3, 5, 7 and 8)
   recommendation is not shown to visitors.
 - Unbound: `jd_assessment.feature` (-345); `jd_extraction.feature` was deleted in 1aa2c07 (MATTGPT-254).
 
-**Open tickets:** -244 (In Progress), -266, -249, -012 (In Progress), -014, -081, -099,
+**Open tickets:** -244 (In Progress), -266, -249, -012 (J0), -014, -081, -099,
 -173, -079, -264, -267, -352 (`_flatten_extraction()` crashes on a string implicit item; relevant to RM-D1),
 -353 (the assessor sees only the first 3 Action and Result items; Story edits put key facts in the Summary, the Situation or the first 3 Action or Result items, which work with or without the cap), -355 (0-requirement extraction logged as a success, no next step).
 
@@ -338,9 +338,8 @@ Match).
 - The career-narrative field differs by surface (Theme, Era, Category).
 
 **Open tickets:** -146, -228, -204, -150, -122, -131, -197, -145,
--183, -210, -166, -083, -295 (Timeline era order), -308
-(My Work first page is MattGPT stories), -324 (My Work profile facts, from -250), -325 (query-term mentions
-missed under the cutoff or below the top 25), -331 (Home cards 3, 5 and 6 keep only their first Domain, High).
+-183, -166, -083, -295 (Timeline era order), -308
+(My Work first page is MattGPT stories), -324 (My Work profile facts, from -250), -331 (Home cards 3, 5 and 6 keep only their first Domain, High).
 
 ## 7. Operational reliability
 
@@ -368,7 +367,7 @@ experience reliably and sustainably; failures are visible, not silent.
 - Model retirement: -302 (In Progress; gpt-4o family retires January 14, 2027).
 - Silent failures: -292 (silent file-order fallback, High), -288 (Ask Agy ignores the Pinecone fallback signal), -349 (an exception after startup init renders a blank page).
 - Regression gates and test reliability: -039, -233, -235, -206, -153,
-  -084, -198, -035,
+  -084, -198, -035 (Parked),
   -213, -342 (golden Q50 to Q52 send a placeholder question),
   -345 (In Progress; 5 unbound feature files left: bind or delete).
 - Architecture and maintainability: -258 (In Progress), -259, -260, -261, -262, -140,
@@ -399,7 +398,7 @@ experience reliably and sustainably; failures are visible, not silent.
 Ask Agy feedback are not logged.
 
 **Open tickets:** -045 (analytics dashboard), -129, -078, -091, -155,
--022, -015, -095, -097, -154, -130, -156, -291 (role-play
+-022, -015, -095, -097, -154, -130, -156 (Parked), -291 (role-play
 requests, open decision), -298 (salary questions get the nonsense
 banner), -315 (source-card
 separators differ), -318 (ask_answer_model

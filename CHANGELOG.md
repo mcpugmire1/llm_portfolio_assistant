@@ -8,6 +8,10 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Process
 
+**October 25, 2026 -- token_overlap_ratio bound ticket folded into MATTGPT-287 (MATTGPT-177)**
+
+Closed in the Oct 25 priority pass (Matt). The bound violation (repeated in-vocab tokens push the ratio above 1.0) is reachable only under `enforce_overlap`, which no production caller sets, so it goes with -287's overlap-gate cleanup.
+
 **October 25, 2026 -- Three dead-code tickets folded into MATTGPT-287 (MATTGPT-176, MATTGPT-190, MATTGPT-195)**
 
 Closed in the Oct 24 accuracy pass (Matt), each folded into MATTGPT-287's dead-code list:
