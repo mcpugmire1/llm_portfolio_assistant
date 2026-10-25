@@ -3334,6 +3334,8 @@ Verified Oct 22, 2026 (HEAD 5787bdf): `.gitignore` has `/probes/`; the run folde
 
 **Fix (Matt, Oct 22, 2026):** keep earlier rounds' text in the answer.
 
+**Note (lane 2, Oct 25, 2026):** the doubled and dropped openers in Chrome's stream-check runs are this ticket, not the streamed profile-marker fix (ed66b9b): text without a `[` streams identically before and after it. ed66b9b's message records the same ("Opener drop/doubling seen in controls is MATTGPT-350, reproduced with fakes, unchanged by this commit"). Caution for the fix: keeping earlier rounds' text in the answer would put both copies of a doubled opener into the final answer, so the fix needs a de-duplication rule or a single source for the opener.
+
 ---
 
 ### MATTGPT-351
