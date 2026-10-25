@@ -448,6 +448,20 @@ def _hold_unpaired_bold(text: str) -> str:
     return text
 
 
+def _hold_profile_markers(text: str) -> str:
+    """Streamed text with [[...]] markers removed as the finished answer
+    removes them (_extract_profile_markers()), cut back to before a [[ not
+    yet closed (or a lone trailing [) and the spaces and commas before it,
+    so no frame shows a marker or part of one. The held text is released
+    at the end of the stream."""
+    open_at = text.rfind("[[")
+    if open_at > text.rfind("]]"):
+        text = text[:open_at].rstrip(" \t,")
+    elif text.endswith("["):
+        text = text[:-1].rstrip(" \t,")
+    return _extract_profile_markers(text)[0]
+
+
 def _postprocess_agy_text(
     response_text: str, stories: list[dict[str, Any]]
 ) -> tuple[str, list[str]]:
@@ -772,7 +786,9 @@ def _stream_response(
     commas next to it, is held back until the next character shows how it
     resolves, so the stream shows the finished answer's wording and never
     takes text back. Text from an unpaired ** is held back the same way
-    (_hold_unpaired_bold()), and $ is escaped as the finished answer
+    (_hold_unpaired_bold()), as is text from a [[ profile marker not yet
+    closed; a closed marker is removed as the finished answer removes it
+    (_hold_profile_markers()). $ is escaped as the finished answer
     escapes it (escape_dollars()). Returns the final response. An
     incomplete response (output cap reached) is returned with whatever it
     produced; a failed one raises.
@@ -789,8 +805,10 @@ def _stream_response(
     def _show(at_end: bool) -> None:
         nonlocal shown
         text = normalize_dashes(raw if at_end else raw.rstrip(_DASH_HOLD_CHARS))
-        if not at_end:
-            text = _hold_unpaired_bold(text)
+        if at_end:
+            text = _extract_profile_markers(text)[0]
+        else:
+            text = _hold_unpaired_bold(_hold_profile_markers(text))
         text = escape_dollars(text)
         if on_delta is not None and len(text) > len(shown):
             on_delta(text[len(shown) :])
