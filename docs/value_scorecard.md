@@ -59,11 +59,9 @@ runs agreed on every pair. Failures:
   MATTGPT-253, closed: the gate left Ask Agy's answer path in 1095d2c.
   The wording is on MATTGPT-320's run list.
 
-**Open tickets:** -283 (embedding model PoC), -185 (negation), -190
-(tokenizer divergence), -171 (phrase matching), -177 (token_overlap_ratio
+**Open tickets:** -283 (embedding model PoC), -185 (negation), -171 (phrase matching), -177 (token_overlap_ratio
 bound), -063 (wrong-person queries), -077
-(pronoun and noun-overlap contamination), -195 (incident vocabulary
-routing), -236 (re-scoped Oct 18: breadth for big-picture questions before the router comes out), -239 (router confidence floor,
+(pronoun and noun-overlap contamination), -236 (re-scoped Oct 18: breadth for big-picture questions before the router comes out), -239 (router confidence floor,
 Blocked), -062 (stale router embeddings), -167 (entity detection for
 Project and Place, Parked), -304 (reranker spike).
 
@@ -157,7 +155,7 @@ question), -317 (Ask Agy About This dropped mid-answer).
 - 275's surface-parity hedge: not measured.
 
 **Open tickets:** -251, -252, -255, -128 (source cards substantiate
-claims), -168 (slot 1 amplification), -257, -263, -278, -096, -217 (pronoun grammar), -286 (meta-commentary
+claims), -257, -263, -278, -096, -217 (pronoun grammar), -286 (meta-commentary
 strip deletes paragraphs), -290 (internal-content
 extraction), -294 (split MATT_DNA by
 responsibility, In Progress), -296 (closing offer in a prompt example), -297 (no dog humor in
@@ -202,7 +200,7 @@ Source: the change-governor's Ask Agy draft, checker-passed Oct 19, 2026 (relaye
 |---|---|---|
 | D1 | What makes a big-picture answer show more than 3 cards? Today `agy_answer()` sets the intent to None, so every answer gets at most 3. -236's target proposes the router's synthesis family as the signal. | -236's breadth decision, before -128's go |
 | D2 | How is "cited" decided? Decided: option A, text match (Matt, Oct 19, 2026; recorded on -128). Still open on -128: where META-IND cards go, and the thin-answer shape. | -128's go |
-| D3 | Breadth on big-picture questions: keep the synthesis pick, or replace it? Proposed (Matt, Oct 19): keep the router's synthesis family as the trigger, per -236's target; decided by -236's run. -332 waits on this. | Before -236's Green |
+| D3 | Breadth on big-picture questions: keep the synthesis pick, or replace it? Proposed (Matt, Oct 19): keep the router's synthesis family as the trigger, per -236's target; decided by -236's run. -332 Decided Against (Matt, Oct 24, 2026): it keeps the trigger. | Before -236's Green |
 | D4 | Rows 20, 27 and 8: narrative stories on technical questions, the verbatim phrases, and Matt substitution in the search query. | -341's go, after -128's row 20 measurement; -077's re-wire-or-delete call before -287 deletes the functions |
 | D5 | Row 14, the file-order fallback | -292's go |
 | D6 | Row 13, empty searches on work-history questions | Resolved (Matt, Oct 19, 2026): -339 closed; row 13 accepted; the agriculture claims are on -325 |
@@ -235,16 +233,16 @@ Source: the Arch Governor's Role Match draft, checker-passed Oct 20, 2026 (relay
 
 | # | Question | Decide by |
 |---|---|---|
-| RM-D1 | Which model replaces gpt-4o for extraction and assessment? -302 names none; -140 records that mini "produces subpar assessment reasoning". Reopened (Matt, Oct 22, 2026) as a measured choice on speed, honesty and dashes: Sol medium measured 50 to 65 s on AT&T, against gpt-4o's 21 to 25 s (AT&T) and 14 to 17 s (demo JD) over 3 runs (as reported). | -302's go |
+| RM-D1 | Which model replaces gpt-4o for extraction and assessment? -302 names none; -140 records that mini "produces subpar assessment reasoning". Decided in d6c1fb4 (Red, Oct 23, 2026): gpt-5.6-terra at reasoning_effort low (Rejected: gpt-6.1-sol at medium, 49.5 to 65.2 s end to end on AT&T). -302's acceptance bar (Matt, Oct 24): at most 30 s end to end on every test JD over 3 runs. | Decided |
 | RM-D2 | No-dash rule in Role Match's prompts, or a check on output only? ADR 048 rejected the rule on gpt-4o. | -302's go |
-| RM-D3 | What count tolerance passes extraction? -160: "Code defines the exact pass threshold at Red time." | -160's Red; -302's go for its own before and after |
+| RM-D3 | What count tolerance passes extraction? -160: "Code defines the exact pass threshold at Red time." | -302's go for its own before and after (-160 closed without setting one; its AT&T spread was 3) |
 | RM-D4 | Private view: evaluation grid, and whether strategic fit notes and action items come from the model or from rules (-012: "Decision needed before implementation"). | -012's go, private-view slice |
 | RM-D5 | Recommendation thresholds ("may be tuned after testing against real JDs"), and unassessed rows counted in the total, pulling toward Pass | -012's go |
 | RM-D6 | How the 90-second budget is measured | Not set by any record |
 | RM-D7 | CS-degree answer framing (-268's D1, still open) | Before -268's Green |
 | RM-D8 | What Role Match context crosses to Ask Agy, and through which pattern (-309) | -309's go |
 | RM-D9 | Pipeline-dependent BDD: real backend or mocks? -014's May 14 decision says mocks for structural checks, but the skip reason still reads "Pending decision on pipeline test strategy". | -014's go |
-| RM-D10 | Role Match retry and timeout behavior. `_get_openai_client()` and `role_match.py` set no `max_retries` or timeout, and no record states the intended behavior. The retry -302 calls inert on openai 3.x is Ask Agy's `_stream_response()`. Its failure ceiling is separate from R4's 90 s budget, which measures a successful run (Matt, Oct 22, 2026). | -302's go |
+| RM-D10 | Role Match retry and timeout behavior. `_get_openai_client()` and `role_match.py` set no `max_retries` or timeout, and no record states the intended behavior. The retry -302 calls inert on openai 3.x is Ask Agy's `_stream_response()`. Its failure ceiling is separate from R4's 90 s budget, which measures a successful run (Matt, Oct 22, 2026). Decided in d6c1fb4: 30 s read timeout with 2 retries (Rejected: 60 s). | Decided |
 
 Checked, not open: the recommendation stays private (-012); the move to openai 3.x goes with -302.
 
@@ -276,7 +274,7 @@ Fitness functions and open decisions: see "Role Match (drivers 4, 3, 5, 7 and 8)
 - BDD role_match: 24 passed, 28 skipped (1095d2c, Oct 15); the five
   Sept 26 failures (53ef187) are fixed there.
 - Not measured: over-claim rate on the current pipeline (the -244 baseline
-  predates its fix); -160's after-measurement not recorded; the 90-second
+  predates its fix); -160 closed with its AT&T spread at 3 against the 1-to-2 target (5aee8a4); the 90-second
   goal.
 - Thought-leadership requirement: Strong, citing the thought leadership
   story (Matt's Role Match run, Oct 19, 2026; MATTGPT-272 closed).
@@ -284,7 +282,7 @@ Fitness functions and open decisions: see "Role Match (drivers 4, 3, 5, 7 and 8)
   recommendation is not shown to visitors.
 - Unbound: `jd_assessment.feature` (-345); `jd_extraction.feature` was deleted in 1aa2c07 (MATTGPT-254).
 
-**Open tickets:** -244 (In Progress), -160 (In Progress), -266, -249, -012 (In Progress), -014, -081, -099,
+**Open tickets:** -244 (In Progress), -266, -249, -012 (In Progress), -014, -081, -099,
 -173, -079, -264, -267, -352 (`_flatten_extraction()` crashes on a string implicit item; relevant to RM-D1),
 -353 (the assessor sees only the first 3 Action and Result items; Story edits put key facts in the Summary, the Situation or the first 3 Action or Result items, which work with or without the cap).
 
@@ -367,18 +365,17 @@ experience reliably and sustainably; failures are visible, not silent.
 - Alarms and telemetry: -222, -223 (My Work only), -348 (the "Chrome/103.0.0.0" bot signature drops real Chrome 103 visitors), -351 (query rows carry no Session ID).
 - Latency: -299.
 - Runtime and dependencies: -313 (Python 3.11 in prod, 3.13 local), -314 (pin pyarrow<25).
-- Model retirement: -302 (gpt-4o family retires January 14, 2027).
+- Model retirement: -302 (In Progress; gpt-4o family retires January 14, 2027).
 - Silent failures: -292 (silent file-order fallback, High), -288 (Ask Agy ignores the Pinecone fallback signal), -349 (an exception after startup init renders a blank page).
 - Regression gates and test reliability: -039, -233, -235, -206, -153,
-  -084, -198, -035, -143 (Parked),
+  -084, -198, -035,
   -213, -342 (golden Q50 to Q52 send a placeholder question),
   -345 (In Progress; 5 unbound feature files left: bind or delete).
 - Architecture and maintainability: -258 (In Progress), -259, -260, -261, -262, -140,
   -214, -226, -343 (Era and Theme literals; extend -258's guard).
-- Dead code and hygiene: -176, -241, -152, -287 (docs
-  describe a removed overlap gate), -332 (synthesis prompt path, after -236),
+- Dead code and hygiene: -241, -152, -287 (docs
+  describe a removed overlap gate; -176, -190 and -195 folded in),
   -344 (uncalled functions, provisional).
-- Process: -335 (governor skill pilot, advisory).
 - Visible glitches: -229, -289 (MATTGPT-018 regression watch), -330 (Home to My Work half-emptied frame).
 
 ## 8. Professional demonstration

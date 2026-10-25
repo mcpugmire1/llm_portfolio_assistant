@@ -8,6 +8,17 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Process
 
+**October 25, 2026 -- Three dead-code tickets folded into MATTGPT-287 (MATTGPT-176, MATTGPT-190, MATTGPT-195)**
+
+Closed in the Oct 24 accuracy pass (Matt), each folded into MATTGPT-287's dead-code list:
+- MATTGPT-176: items 2 and 3 (the commented-out `_generate_agy_response()` block and `_diversify_for_background()`'s alias map) went in 1095d2c. Item 1, `push_card_snapshot_from_state()`, has no caller and was already on -287's list.
+- MATTGPT-190: the `_tokenize` and `token_overlap_ratio` character-set divergence reaches production only through `enforce_overlap`, which no production caller sets.
+- MATTGPT-195: `SUBSTITUTION_FAMILIES`, which the incident-vocabulary finding fed, is read only by `_build_retrieval_query()`, whose only caller is a BDD test. The re-wire-or-delete call is MATTGPT-077's.
+
+**October 25, 2026 -- Change governor skill, advisory review of removed or altered behavior (MATTGPT-335)** -- `674923c`, `48eda14`, `f7b234f`
+
+674923c added the skill and its pilot: a blind replay of the MATTGPT-275 Green (42 of 42 audit rows) and MATTGPT-323 as the no-alarm control (no conflicts, 0 decisions needed). 48eda14 added pre-flight and Green runs, a confined checker and a one-screen decision packet; f7b234f limited the checker's re-check rounds to changed lines. Advisory only: it doesn't gate commits. Closed in the Oct 24 accuracy pass.
+
 **October 22, 2026 -- page_context row records the browser's referrer and width, so LinkedIn visits are labeled (MATTGPT-347)** -- `902d1a0` (Red, scenarios), `0bd25d4` (Red, step defs), `f84993c` (Green)
 
 On Streamlit Cloud the server's Referer header only ever held Cloud's own page, so LinkedIn visits (whose links drop UTM params) logged with no referrer, and every `page_load` row had an empty Screen Width. When the screen-size capture returns, `log_page_context()` now writes one `page_context` row (Referrer from `window.top.document.referrer`, Screen Width, Session ID and the five UTM values) for sessions that logged `page_load`; `page_load` is unchanged, and `_browser_referrer` holds the browser's referrer, so later query and Role Match rows carry it too. Cloud check from LinkedIn (Matt, Oct 22, 2026, as reported): session c7aeba16's `page_load` has an empty Referrer and its `page_context` row a second later has 1634 and `https://www.linkedin.com/`; the session's three query rows and its `role_match_assessment` row carry the same referrer and width; direct visits a88b90e5 and 9de0dbbe have an empty referrer; every `page_context` row shares its `page_load` row's Session ID and comes 1 to 2 seconds after it. The first deploy hit an ImportError until a reboot (MATTGPT-039, MATTGPT-349).
@@ -52,6 +63,10 @@ Cited probe output copied byte-identical into docs/evidence/MATTGPT-<n>/ (42ddbe
 
 ### Tests
 
+**October 16, 2026 -- BDD app_url honors STREAMLIT_TEST_URL (MATTGPT-143)** -- `d748ad2`
+
+`app_url` in `tests/bdd/steps/conftest.py` returned `http://localhost:8501` with no override, so with two Streamlit sessions running the BDD suite could test the wrong app. It now reads `STREAMLIT_TEST_URL` and falls back to localhost:8501. The ticket was still Parked when the fix shipped; closed in the Oct 24 accuracy pass.
+
 **October 20, 2026 -- Story-handling unit tests read corpus stories; phantom-field tests deleted (MATTGPT-180)** -- `16f6b2b`
 
 `test_filters.py`, `test_scoring.py` and `test_formatting.py` built fixtures from field names guessed from code (`why`, `how`, `what`, `star.*`, lowercase `title` and `client`, `5p_summary`, `personas`), none of which exist in the corpus, so they passed with no coverage of the data production reads. Tests that read real fields now take stories from `load_stories()`, picked by field value, with assertions derived from the picked story: 13 filter tests, 10 keyword-score tests, and the curated 5PSummary and truncation tests. 32 phantom-field tests were deleted rather than rebuilt (Matt, Oct 20, 2026): `story_has_metric`, `strongest_metric_line`, the key points, narrative and deep dive formatters, three `build_5p_summary` fallback tests, and in `test_filters.py` the `has_metric` test (MATTGPT-183 step 4) and the persona test. The formatters themselves go with `cmd_map` under MATTGPT-287. `test_scoring_contracts.py`'s three xfails now cite MATTGPT-177 and MATTGPT-183. Gates: the four files (82 passed, 3 xfailed) and the full unit suite (936 passed, 14 xfailed). Finding, filed on MATTGPT-325: keyword scoring reads only the first 400 characters of each 5PSummary.
@@ -89,6 +104,10 @@ MATTGPT-060: `home.feature`'s card and Ask Agy scenarios assert the destination 
 ---
 
 ### Ask Agy
+
+**October 25, 2026 -- Slot 1 amplification closed: its mechanism is gone (MATTGPT-168)**
+
+MATTGPT-168 covered the `<primary_story>` wrapping and the prompt's 80% floor, which gave a tie or near-tie at slot 1 most of the answer. `_generate_agy_response()` and `diversify_results()` went in 1095d2c; `prompts.py` has no `primary_story` and no "80%" (checked Oct 25); "Go deep" was removed in MATTGPT-340 (9534aea). Closed in the Oct 24 accuracy pass with no fix of its own.
 
 **October 20, 2026 -- The stream escapes $ and holds an unpaired ** (MATTGPT-346, MATTGPT-312)** -- `9136184` (Red), `5014ffb` (Green)
 
@@ -165,6 +184,10 @@ Ask Agy sends the last two exchanges (`ASK_HISTORY_MAX_MESSAGES = 4`) to the res
 ---
 
 ### Role Match
+
+**October 25, 2026 -- JD extraction runs as three section calls; the AT&T spread target was missed (MATTGPT-160)** -- `5aee8a4`
+
+`extract_requirements()` has run three concurrent section-scoped calls (required, preferred, implicit) since 5aee8a4 (Sep 20). The target was a requirement-count spread of 1 to 2 across five runs on the AT&T fixture; 5aee8a4's message records a spread of 3. Closed with the miss recorded (Matt, Oct 24, 2026).
 
 **October 19, 2026 -- Thought-leadership requirement no longer a gap (MATTGPT-272)** -- `ab65efc` (story); validated by Matt's Role Match run
 
