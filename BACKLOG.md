@@ -2026,6 +2026,8 @@ f. Data-contract check against the real corpus (added Oct 11, 2026): field names
 
 **Second lever, unmeasured (Arch Governor, Oct 25, 2026):** assessment calls run `_CONCURRENCY = 10` at a time (`services/jd_assessor.py`; its comment says "Reasoning, not measurement"). With 20 to 22 calls that's 3 waves at about 2.8 s per Terra call, which matches the measured 8.1 to 9.9 s. Hypothesis, not measured: a concurrency arm (for example, all requirements at once) could cut assessment by more than line numbers cut extraction, with no prompt change. Measure it on AT&T and demo, 3 runs each, recording rate-limit errors and unassessed rows. A change to the constant then needs its own Red and Green.
 
+**Refinement (lane 1, Oct 25, 2026; 466b55a's message):** the assessment half of Terra low's extra demo time is each call about 1 s slower, across 20 to 22 calls at 10 concurrent. Same runs (`dash_rule_20261023_130917`, `terra_20261022_165617`); the concurrency arm above is still unmeasured.
+
 ---
 
 ### MATTGPT-268
@@ -2567,6 +2569,8 @@ Kept off the roadmap's NOW.
 - **Candidates:** enable OpenAI's prompt cache diagnostics (a comparison response ID on requests, a small code change); keep the system prompt's fixed part first so the prefix caches across visitors. Measure production's hit rate after 275's Green ships.
 - **Controls (Matt, outside the code):** a hard spend limit, and approving each run's cost before it starts.
 
+**J1 first-visible-response note (Chrome, Oct 25, 2026, localhost on a tethered connection; as reported):** first text 1.8 to 6.2 s, final render 11.0 to 13.7 s, and the work-model fact at about 5 s. One environment, not production timing.
+
 ---
 
 ### MATTGPT-300
@@ -2680,6 +2684,8 @@ Kept off the roadmap's NOW.
 - AT&T reached Apply/High in 4 of 12 production-shaped Terra runs, against Consider/Medium in all of gpt-4o's. Not visitor-facing (no `ui/` caller); MATTGPT-244 tracks `RECOMMENDATION_STRONG_RATIO`.
 - hybrid_jd extracted 0 required in 2 of 12 runs, with every row in implicit (paren run 5, confirm run 1).
 - Two corpus titles have a double space after the colon (checked in `echo_star_stories_nlp.jsonl`, Oct 25): "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud" and "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications". The model writes one space; chips still resolve because `_find_story_by_title_client()` collapses whitespace. 466b55a's runs flagged only the Railroad title.
+
+**Note quality (Oct 25, 2026; `docs/evidence/MATTGPT-302/dash_rule_20261023_130917/rows.json`, entry 14: arm gpt-5.6-terra@low, AT&T, run 3):** one assessment note has no predicate: "Note: Explicit mentoring of technical leads or senior engineers in a matrixed organization." The same row's note in the run's other 5 Terra runs, with and without the dash rule, has one ("is not explicitly stated", "is unspecified", "is not established"). Rate unmeasured.
 
 ---
 
