@@ -163,8 +163,8 @@ answers), -300 (thinking indicator shows real progress), -301 (em dashes left in
 after 275, Blocked), -307 (Key Metrics label cut), -310 (direct-reports
 answer varies), -311 (no ongoing-period End_Date), -327 (rewritten quotations),
 -328 (rule 0b decline follow-ups),
--341 (rows 20 and 27 with the "builder" revisit), -354 (work model
-says remote is fine; Matt never chose it), -356 (My Profile Geo text hardcoded).
+-341 (rows 20 and 27 with the "builder" revisit), -356 (My Profile Geo text
+hardcoded).
 
 ## Ask Agy (drivers 1 to 3, and 7): fitness functions and open decisions
 

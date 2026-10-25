@@ -8,6 +8,10 @@ Shipped work for the MattGPT project, organized by month. For open work, see `BA
 
 ### Process
 
+**October 25, 2026 -- The commit-msg hook's BACKLOG list now shows on every commit (MATTGPT-358)** -- `f7872b6` (Red), `b5e6a86` (Green)
+
+`.githooks/commit-msg` prints the BACKLOG tickets that name code a commit deletes, but pre-commit hides a passing hook's output, so the list had never shown on a real commit. `verbose: true` on `repo-rules-commit-msg` shows it, pinned by `tests/unit/test_pre_commit_config.py`. Replaying 466b55a through plain `pre-commit run --hook-stage commit-msg`: the old config printed only "Passed"; the new one prints `DEFAULT_CLASSIFICATION_MODEL` (line 21, MATTGPT-140, MATTGPT-302) and `ASSESSMENT_TEMPERATURE` (no hits). Change directed by Matt; filed closed.
+
 **October 25, 2026 -- token_overlap_ratio bound ticket folded into MATTGPT-287 (MATTGPT-177)**
 
 Closed in the Oct 25 priority pass (Matt). The bound violation (repeated in-vocab tokens push the ratio above 1.0) is reachable only under `enforce_overlap`, which no production caller sets, so it goes with -287's overlap-gate cleanup.
@@ -113,6 +117,10 @@ MATTGPT-060: `home.feature`'s card and Ask Agy scenarios assert the destination 
 
 ### Ask Agy
 
+**October 25, 2026 -- Streamed answers no longer show [[profile:...]] markers (MATTGPT-357)** -- `bc45cc5` (Red), `ed66b9b` (Green)
+
+`_hold_profile_markers()` cuts streamed text back to before a `[[` not yet closed (or a lone trailing `[`), then removes closed markers with `_extract_profile_markers()`, as the finished answer does. Chrome stream check, 14 runs on a restarted Streamlit (profile questions and JP Morgan and Fiserv controls): 0 frames with `[[`, `profile:` or a trailing `[`. The opener doubling and dropping seen in the controls is MATTGPT-350, unchanged by this fix. Filed closed (no ticket existed); -312's unpaired-** hold runs in the same `_show()`.
+
 **October 25, 2026 -- Slot 1 amplification closed: its mechanism is gone (MATTGPT-168)**
 
 MATTGPT-168 covered the `<primary_story>` wrapping and the prompt's 80% floor, which gave a tie or near-tie at slot 1 most of the answer. `_generate_agy_response()` and `diversify_results()` went in 1095d2c; `prompts.py` has no `primary_story` and no "80%" (checked Oct 25); "Go deep" was removed in MATTGPT-340 (9534aea). Closed in the Oct 24 accuracy pass with no fix of its own.
@@ -192,6 +200,10 @@ Ask Agy sends the last two exchanges (`ASK_HISTORY_MAX_MESSAGES = 4`) to the res
 ---
 
 ### Role Match
+
+**October 25, 2026 -- The work model reads "In-office preferred" / "Hybrid fine" everywhere (MATTGPT-354)** -- `5f3ce76` (Red), `1e79f4e` (Green), `6c74f86`
+
+`data/matt_profile.json`'s `work_model` subline "Hybrid or remote fine", which entered in c4daab4 with no record of Matt choosing it, is now "Hybrid fine" (exact text approved by Matt, Oct 25). Role Match's Location & Availability cell, Share, Export and Ask Agy's fact card and profile facts read it from the profile. My Profile's Work mode tile, in the Signals panel and the print profile, now reads the profile too, showing "In-office preferred · Hybrid fine" (Design's call); 6c74f86 keeps "· Hybrid fine" together at 375 px. Matt checked Download PDF on Role Match and My Profile (Oct 25), which supersedes 6c74f86's "print preview not checked". Left over: the design spec's wireframe v4 still shows "Hybrid or in-person" (spec sync); the Geo tile's text and its 375 px break are MATTGPT-356.
 
 **October 25, 2026 -- JD extraction runs as three section calls; the AT&T spread target was missed (MATTGPT-160)** -- `5aee8a4`
 
