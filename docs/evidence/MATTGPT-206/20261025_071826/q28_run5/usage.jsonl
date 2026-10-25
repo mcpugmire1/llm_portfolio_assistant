@@ -1,0 +1,4 @@
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q28]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 12}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q28]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3003, "cached_input_tokens": 0, "output_tokens": 46, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q28]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 15}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q28]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 6100, "cached_input_tokens": 3000, "output_tokens": 416, "reasoning_tokens": 0}

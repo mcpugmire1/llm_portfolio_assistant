@@ -1,0 +1,110 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.3, pytest-9.0.1, pluggy-1.6.0 -- /Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant
+configfile: pytest.ini
+plugins: anyio-4.11.0, langsmith-0.4.37, bdd-8.1.0, cov-7.0.0
+collecting ... collected 60 items
+
+tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q1] PASSED [  1%]
+tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q2] PASSED [  3%]
+tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q3] PASSED [  5%]
+tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q4] PASSED [  6%]
+tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q5] PASSED [  8%]
+tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q6] FAILED [ 10%]
+tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q7] PASSED [ 11%]
+tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q8] PASSED [ 13%]
+tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q9] PASSED [ 15%]
+tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q10] PASSED [ 16%]
+tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q62] PASSED [ 18%]
+tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q63] PASSED [ 20%]
+tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q64] PASSED [ 21%]
+tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q11] PASSED [ 23%]
+tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q12] PASSED [ 25%]
+tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q13] PASSED [ 26%]
+tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q14] PASSED [ 28%]
+tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q15] PASSED [ 30%]
+tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q16] PASSED [ 31%]
+tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q17] PASSED [ 33%]
+tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q18] PASSED [ 35%]
+tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q19] PASSED [ 36%]
+tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q20] PASSED [ 38%]
+tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q21] PASSED [ 40%]
+tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q58] PASSED [ 41%]
+tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q59] PASSED [ 43%]
+tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q60] PASSED [ 45%]
+tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q61] PASSED [ 46%]
+tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q65] PASSED [ 48%]
+tests/eval_rag_quality.py::TestEdgeCases::test_edge_query[Q22] PASSED    [ 50%]
+tests/eval_rag_quality.py::TestEdgeCases::test_edge_query[Q23] PASSED    [ 51%]
+tests/eval_rag_quality.py::TestEdgeCases::test_edge_query[Q24] PASSED    [ 53%]
+tests/eval_rag_quality.py::TestEdgeCases::test_edge_query[Q25] PASSED    [ 55%]
+tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q26] PASSED [ 56%]
+tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q27] PASSED [ 58%]
+tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q28] PASSED [ 60%]
+tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q29] PASSED [ 61%]
+tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q30] PASSED [ 63%]
+tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q31] PASSED [ 65%]
+tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q53] PASSED [ 66%]
+tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q54] PASSED [ 68%]
+tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q55] PASSED [ 70%]
+tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q56] PASSED [ 71%]
+tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q57] PASSED [ 73%]
+tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q43_landing] PASSED [ 75%]
+tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q44_landing] PASSED [ 76%]
+tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q45_probe] PASSED [ 78%]
+tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q46_landing] PASSED [ 80%]
+tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q47_landing] PASSED [ 81%]
+tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q48_landing] PASSED [ 83%]
+tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q49_landing] PASSED [ 85%]
+tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q43_landing_page_meta] PASSED [ 86%]
+tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q44_landing_page_meta] PASSED [ 88%]
+tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q46_landing_page_meta] PASSED [ 90%]
+tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q47_landing_page_meta] PASSED [ 91%]
+tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q48_landing_page_meta] PASSED [ 93%]
+tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q49_landing_page_meta] PASSED [ 95%]
+tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q50_story_0] PASSED [ 96%]
+tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q51_story_10] PASSED [ 98%]
+tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q52_story_50] PASSED [100%]
+
+=================================== FAILURES ===================================
+______________ TestProfessionalNarrative.test_narrative_query[Q6] ______________
+tests/eval_rag_quality.py:1468: in test_narrative_query
+    assert result.checks.get("ground_truth", False), (
+E   AssertionError: Ground truth check failed - matched 0 of 1 required. Matched: []
+E   assert False
+E    +  where False = <built-in method get of dict object at 0x10b944640>('ground_truth', False)
+E    +    where <built-in method get of dict object at 0x10b944640> = {'ground_truth': False}.get
+E    +      where {'ground_truth': False} = EvalResult(query_id=6, query='Where does Matt do his best work?', category='narrative', passed=False, checks={'ground_truth': False}, response="\U0001f43e Perfect, here's what I found.\n\nMatt is looking for work where building the product engineering organization, establishing the culture, and delivering results are part of the same job. He describes his next build as senior leadership in platform engineering, AI-era transformation, and enterprise modernization, where he is \u201cin the work, not above it.\u201d\n\nHis work centers on Execution & Delivery and Org & Working-Model Transformation. At **Accenture**, clients were struggling with slow development cycles, fragmented workflows, and legacy systems. They wanted to move from feature factories to customer-centric product development, but teams were still separated by functions and handoffs.\n\nMatt built the Atlanta and Tampa Cloud Innovation Centers around a different working model: product managers, designers, and engineers working together in balanced teams. He established pairing stations, whiteboards, and client co-location spaces. Instead of presenting slides about the methodology, he invited prospective clients to watch standups and see teams solving problems together.\n\nHe recruited for mindset and potential, including people without hands-on cloud-native experience. Practitioners progressed through an \u201cI do, we do, you do\u201d learning model, with mentoring, pair programming, test-driven development, rapid prototyping, and user feedback embedded in delivery.\n\nThe centers grew from **0 to 150+ practitioners**, achieving **4X faster velocity** and **zero-defect deployments**. Balanced teams of **10** delivered equivalent output to traditional teams of **20**. Client teams continued using the practices after engagements ended, and delivery excellence generated **\\$100M+ in repeat business**.", error=None, details={'ground_truth_matches': 0, 'matched_phrases': [], 'eras': 1, 'projects': 1, 'fs_era_present': False, 'eras_shown': 1, 'projects_shown': 1, 'fs_era_present_shown': False, 'named_clients': 1}, skipped=False).checks
+----------------------------- Captured stderr call -----------------------------
+2026-10-25 07:20:53.153 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-25 07:20:53.153 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-25 07:20:53.563 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-25 07:20:53.564 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-25 07:20:56.211 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-25 07:20:56.211 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-25 07:20:56.216 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-25 07:20:56.216 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-25 07:20:56.216 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-25 07:20:56.216 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-25 07:20:56.216 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-25 07:20:56.216 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-25 07:20:56.216 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-25 07:20:56.216 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-25 07:20:56.216 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-25 07:20:56.216 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-25 07:20:56.216 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-25 07:20:56.216 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-25 07:20:56.216 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-25 07:20:56.216 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-25 07:20:56.216 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-25 07:20:56.216 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-25 07:20:56.216 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-10-25 07:21:04.744 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+=========================== short test summary info ============================
+FAILED tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q6] - AssertionError: Ground truth check failed - matched 0 of 1 required. Matched: []
+assert False
+ +  where False = <built-in method get of dict object at 0x10b944640>('ground_truth', False)
+ +    where <built-in method get of dict object at 0x10b944640> = {'ground_truth': False}.get
+ +      where {'ground_truth': False} = EvalResult(query_id=6, query='Where does Matt do his best work?', category='narrative', passed=False, checks={'ground_truth': False}, response="\U0001f43e Perfect, here's what I found.\n\nMatt is looking for work where building the product engineering organization, establishing the culture, and delivering results are part of the same job. He describes his next build as senior leadership in platform engineering, AI-era transformation, and enterprise modernization, where he is \u201cin the work, not above it.\u201d\n\nHis work centers on Execution & Delivery and Org & Working-Model Transformation. At **Accenture**, clients were struggling with slow development cycles, fragmented workflows, and legacy systems. They wanted to move from feature factories to customer-centric product development, but teams were still separated by functions and handoffs.\n\nMatt built the Atlanta and Tampa Cloud Innovation Centers around a different working model: product managers, designers, and engineers working together in balanced teams. He established pairing stations, whiteboards, and client co-location spaces. Instead of presenting slides about the methodology, he invited prospective clients to watch standups and see teams solving problems together.\n\nHe recruited for mindset and potential, including people without hands-on cloud-native experience. Practitioners progressed through an \u201cI do, we do, you do\u201d learning model, with mentoring, pair programming, test-driven development, rapid prototyping, and user feedback embedded in delivery.\n\nThe centers grew from **0 to 150+ practitioners**, achieving **4X faster velocity** and **zero-defect deployments**. Balanced teams of **10** delivered equivalent output to traditional teams of **20**. Client teams continued using the practices after engagements ended, and delivery excellence generated **\\$100M+ in repeat business**.", error=None, details={'ground_truth_matches': 0, 'matched_phrases': [], 'eras': 1, 'projects': 1, 'fs_era_present': False, 'eras_shown': 1, 'projects_shown': 1, 'fs_era_present_shown': False, 'named_clients': 1}, skipped=False).checks
+=================== 1 failed, 59 passed in 689.72s (0:11:29) ===================

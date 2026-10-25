@@ -1,0 +1,249 @@
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q1]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 7}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q1]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3004, "cached_input_tokens": 0, "output_tokens": 56, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q1]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 25}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q1]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 7534, "cached_input_tokens": 3001, "output_tokens": 484, "reasoning_tokens": 63}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q2]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 9}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q2]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3003, "cached_input_tokens": 0, "output_tokens": 52, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q2]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 22}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q2]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 5562, "cached_input_tokens": 3000, "output_tokens": 356, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q3]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 7}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q3]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 2999, "cached_input_tokens": 0, "output_tokens": 35, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q3]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 17}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q3]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 6560, "cached_input_tokens": 2996, "output_tokens": 470, "reasoning_tokens": 53}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q4]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 7}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q4]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 2997, "cached_input_tokens": 2861, "output_tokens": 34, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q4]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 16}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q4]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 5203, "cached_input_tokens": 2994, "output_tokens": 208, "reasoning_tokens": 94}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q5]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 6}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q5]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 2997, "cached_input_tokens": 0, "output_tokens": 39, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q5]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 22}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q5]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 6084, "cached_input_tokens": 2994, "output_tokens": 347, "reasoning_tokens": 52}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q6]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 8}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q6]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3003, "cached_input_tokens": 0, "output_tokens": 39, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q6]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 21}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q6]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 7659, "cached_input_tokens": 3000, "output_tokens": 378, "reasoning_tokens": 57}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q7]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 8}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q7]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3003, "cached_input_tokens": 0, "output_tokens": 33, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q7]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 15}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q7]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 6094, "cached_input_tokens": 3000, "output_tokens": 394, "reasoning_tokens": 83}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q8]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 6}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q8]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 2999, "cached_input_tokens": 0, "output_tokens": 47, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q8]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 16}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q8]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 5675, "cached_input_tokens": 2996, "output_tokens": 341, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q9]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 8}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q9]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 2999, "cached_input_tokens": 0, "output_tokens": 40, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q9]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 23}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q9]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 5424, "cached_input_tokens": 2996, "output_tokens": 403, "reasoning_tokens": 75}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q10]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 7}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q10]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3001, "cached_input_tokens": 0, "output_tokens": 41, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q10]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 24}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q10]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 5549, "cached_input_tokens": 2998, "output_tokens": 353, "reasoning_tokens": 39}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q62]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 17}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q62]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3016, "cached_input_tokens": 0, "output_tokens": 49, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q62]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 33}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q62]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 9554, "cached_input_tokens": 3013, "output_tokens": 410, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q63]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 12}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q63]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3000, "cached_input_tokens": 0, "output_tokens": 63, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q63]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 33}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q63]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 8269, "cached_input_tokens": 2997, "output_tokens": 509, "reasoning_tokens": 76}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q64]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 11}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q64]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 2999, "cached_input_tokens": 0, "output_tokens": 30, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q64]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 12}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q64]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 8588, "cached_input_tokens": 2996, "output_tokens": 519, "reasoning_tokens": 83}
+{"test": "tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q11]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 11}
+{"test": "tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q11]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3005, "cached_input_tokens": 0, "output_tokens": 31, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q11]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 15}
+{"test": "tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q11]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 7136, "cached_input_tokens": 3002, "output_tokens": 451, "reasoning_tokens": 27}
+{"test": "tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q12]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 8}
+{"test": "tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q12]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 2998, "cached_input_tokens": 2862, "output_tokens": 32, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q12]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 16}
+{"test": "tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q12]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 5638, "cached_input_tokens": 2995, "output_tokens": 435, "reasoning_tokens": 50}
+{"test": "tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q13]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 11}
+{"test": "tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q13]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3002, "cached_input_tokens": 2862, "output_tokens": 44, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q13]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 27}
+{"test": "tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q13]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 9535, "cached_input_tokens": 2999, "output_tokens": 426, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q14]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 4}
+{"test": "tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q14]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 2998, "cached_input_tokens": 0, "output_tokens": 39, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q14]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 8}
+{"test": "tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q14]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 7044, "cached_input_tokens": 2995, "output_tokens": 394, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q15]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 7}
+{"test": "tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q15]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3002, "cached_input_tokens": 2865, "output_tokens": 35, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q15]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 17}
+{"test": "tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q15]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 6332, "cached_input_tokens": 2999, "output_tokens": 44, "reasoning_tokens": 14}
+{"test": "tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q15]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 11}
+{"test": "tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q15]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 10097, "cached_input_tokens": 6329, "output_tokens": 441, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q16]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 6}
+{"test": "tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q16]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3001, "cached_input_tokens": 2865, "output_tokens": 33, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q16]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 15}
+{"test": "tests/eval_rag_quality.py::TestClientAttribution::test_client_query[Q16]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 6211, "cached_input_tokens": 2998, "output_tokens": 402, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q17]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 7}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q17]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 2772, "cached_input_tokens": 0, "output_tokens": 44, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q17]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 27}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q17]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 7707, "cached_input_tokens": 2769, "output_tokens": 69, "reasoning_tokens": 36}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q17]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 15}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q17]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 11819, "cached_input_tokens": 7704, "output_tokens": 487, "reasoning_tokens": 55}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q18]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 7}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q18]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3000, "cached_input_tokens": 0, "output_tokens": 32, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q18]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 14}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q18]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 5822, "cached_input_tokens": 2997, "output_tokens": 328, "reasoning_tokens": 44}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q19]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 8}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q19]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3006, "cached_input_tokens": 2869, "output_tokens": 31, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q19]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 14}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q19]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 6074, "cached_input_tokens": 3003, "output_tokens": 467, "reasoning_tokens": 56}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q20]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 8}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q20]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3004, "cached_input_tokens": 0, "output_tokens": 42, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q20]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 24}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q20]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 9522, "cached_input_tokens": 3001, "output_tokens": 369, "reasoning_tokens": 53}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q21]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 7}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q58]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 5}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q59]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 5}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q59]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 2994, "cached_input_tokens": 0, "output_tokens": 26, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q59]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 8}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q59]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 8150, "cached_input_tokens": 2991, "output_tokens": 24, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q61]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 7}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q65]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 4}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q65]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 2769, "cached_input_tokens": 2635, "output_tokens": 41, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q65]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 23}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q65]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 7478, "cached_input_tokens": 2766, "output_tokens": 48, "reasoning_tokens": 14}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q65]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 15}
+{"test": "tests/eval_rag_quality.py::TestIntentRouting::test_intent_query[Q65]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 11759, "cached_input_tokens": 7475, "output_tokens": 439, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestEdgeCases::test_edge_query[Q22]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 5}
+{"test": "tests/eval_rag_quality.py::TestEdgeCases::test_edge_query[Q22]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 2999, "cached_input_tokens": 0, "output_tokens": 34, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestEdgeCases::test_edge_query[Q22]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 17}
+{"test": "tests/eval_rag_quality.py::TestEdgeCases::test_edge_query[Q22]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 7208, "cached_input_tokens": 2996, "output_tokens": 447, "reasoning_tokens": 55}
+{"test": "tests/eval_rag_quality.py::TestEdgeCases::test_edge_query[Q23]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 9}
+{"test": "tests/eval_rag_quality.py::TestEdgeCases::test_edge_query[Q23]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3001, "cached_input_tokens": 0, "output_tokens": 30, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestEdgeCases::test_edge_query[Q23]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 12}
+{"test": "tests/eval_rag_quality.py::TestEdgeCases::test_edge_query[Q23]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 6363, "cached_input_tokens": 2998, "output_tokens": 538, "reasoning_tokens": 59}
+{"test": "tests/eval_rag_quality.py::TestEdgeCases::test_edge_query[Q24]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 7}
+{"test": "tests/eval_rag_quality.py::TestEdgeCases::test_edge_query[Q24]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 2997, "cached_input_tokens": 0, "output_tokens": 31, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestEdgeCases::test_edge_query[Q24]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 14}
+{"test": "tests/eval_rag_quality.py::TestEdgeCases::test_edge_query[Q24]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 7736, "cached_input_tokens": 2994, "output_tokens": 380, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestEdgeCases::test_edge_query[Q25]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 9}
+{"test": "tests/eval_rag_quality.py::TestEdgeCases::test_edge_query[Q25]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3000, "cached_input_tokens": 0, "output_tokens": 36, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestEdgeCases::test_edge_query[Q25]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 18}
+{"test": "tests/eval_rag_quality.py::TestEdgeCases::test_edge_query[Q25]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 7204, "cached_input_tokens": 2997, "output_tokens": 409, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q26]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 15}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q26]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3011, "cached_input_tokens": 0, "output_tokens": 29, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q26]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 12}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q26]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 7748, "cached_input_tokens": 3008, "output_tokens": 380, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q27]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 10}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q27]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3001, "cached_input_tokens": 2861, "output_tokens": 47, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q27]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 16}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q27]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 7747, "cached_input_tokens": 2998, "output_tokens": 451, "reasoning_tokens": 88}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q28]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 12}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q28]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3003, "cached_input_tokens": 0, "output_tokens": 31, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q28]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 13}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q28]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 6085, "cached_input_tokens": 3000, "output_tokens": 414, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q29]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 13}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q29]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3002, "cached_input_tokens": 0, "output_tokens": 38, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q29]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 21}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q29]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 7726, "cached_input_tokens": 2999, "output_tokens": 423, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q30]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 12}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q30]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3004, "cached_input_tokens": 2862, "output_tokens": 38, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q30]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 21}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q30]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 5825, "cached_input_tokens": 3001, "output_tokens": 378, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q31]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 13}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q31]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3011, "cached_input_tokens": 0, "output_tokens": 31, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q31]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 13}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q31]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 7446, "cached_input_tokens": 3008, "output_tokens": 351, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q53]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 8}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q53]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 2996, "cached_input_tokens": 2859, "output_tokens": 55, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q53]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 25}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q53]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 7737, "cached_input_tokens": 2993, "output_tokens": 425, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q54]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 11}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q54]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3009, "cached_input_tokens": 0, "output_tokens": 33, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q54]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 15}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q54]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 6015, "cached_input_tokens": 3006, "output_tokens": 390, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q55]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 9}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q55]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3003, "cached_input_tokens": 0, "output_tokens": 44, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q55]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 13}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q55]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 7041, "cached_input_tokens": 3000, "output_tokens": 393, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q56]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 6}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q56]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 2776, "cached_input_tokens": 0, "output_tokens": 50, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q56]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 32}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q56]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 7494, "cached_input_tokens": 2773, "output_tokens": 69, "reasoning_tokens": 38}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q56]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 12}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q56]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 11530, "cached_input_tokens": 7491, "output_tokens": 446, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q57]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 9}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q57]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 2999, "cached_input_tokens": 2860, "output_tokens": 53, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q57]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 24}
+{"test": "tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q57]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 9541, "cached_input_tokens": 2996, "output_tokens": 571, "reasoning_tokens": 124}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q43_landing]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 12}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q43_landing]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3004, "cached_input_tokens": 0, "output_tokens": 50, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q43_landing]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 32}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q43_landing]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 8170, "cached_input_tokens": 3001, "output_tokens": 419, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q44_landing]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 10}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q44_landing]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3003, "cached_input_tokens": 0, "output_tokens": 54, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q44_landing]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 36}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q44_landing]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 5650, "cached_input_tokens": 3000, "output_tokens": 44, "reasoning_tokens": 8}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q44_landing]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 16}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q44_landing]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 9315, "cached_input_tokens": 5647, "output_tokens": 483, "reasoning_tokens": 51}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q45_probe]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 12}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q45_probe]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3005, "cached_input_tokens": 0, "output_tokens": 63, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q45_probe]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 30}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q45_probe]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 8361, "cached_input_tokens": 3002, "output_tokens": 562, "reasoning_tokens": 157}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q46_landing]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 15}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q46_landing]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3006, "cached_input_tokens": 0, "output_tokens": 43, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q46_landing]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 14}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q46_landing]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 7569, "cached_input_tokens": 3003, "output_tokens": 410, "reasoning_tokens": 37}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q47_landing]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 10}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q47_landing]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3008, "cached_input_tokens": 0, "output_tokens": 32, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q47_landing]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 14}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q47_landing]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 6514, "cached_input_tokens": 3005, "output_tokens": 485, "reasoning_tokens": 63}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q48_landing]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 13}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q48_landing]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3001, "cached_input_tokens": 2858, "output_tokens": 39, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q48_landing]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 22}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q48_landing]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 7726, "cached_input_tokens": 2998, "output_tokens": 414, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q49_landing]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 12}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q49_landing]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3005, "cached_input_tokens": 2863, "output_tokens": 42, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q49_landing]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 24}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_marketing_query[Q49_landing]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 6224, "cached_input_tokens": 3002, "output_tokens": 388, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q43_landing_page_meta]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 12}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q43_landing_page_meta]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3008, "cached_input_tokens": 0, "output_tokens": 50, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q43_landing_page_meta]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 32}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q43_landing_page_meta]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 8283, "cached_input_tokens": 3005, "output_tokens": 400, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q44_landing_page_meta]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 10}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q44_landing_page_meta]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3004, "cached_input_tokens": 0, "output_tokens": 48, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q44_landing_page_meta]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 30}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q44_landing_page_meta]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 6314, "cached_input_tokens": 3001, "output_tokens": 456, "reasoning_tokens": 62}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q46_landing_page_meta]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 15}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q46_landing_page_meta]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3009, "cached_input_tokens": 0, "output_tokens": 29, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q46_landing_page_meta]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 12}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q46_landing_page_meta]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 7746, "cached_input_tokens": 3006, "output_tokens": 402, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q47_landing_page_meta]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 10}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q47_landing_page_meta]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3006, "cached_input_tokens": 2866, "output_tokens": 33, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q47_landing_page_meta]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 15}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q47_landing_page_meta]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 6000, "cached_input_tokens": 3003, "output_tokens": 487, "reasoning_tokens": 86}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q48_landing_page_meta]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 13}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q48_landing_page_meta]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3008, "cached_input_tokens": 2882, "output_tokens": 42, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q48_landing_page_meta]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 24}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q48_landing_page_meta]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 7759, "cached_input_tokens": 3005, "output_tokens": 512, "reasoning_tokens": 48}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q49_landing_page_meta]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 12}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q49_landing_page_meta]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3009, "cached_input_tokens": 2867, "output_tokens": 56, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q49_landing_page_meta]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 25}
+{"test": "tests/eval_rag_quality.py::TestMarketing::test_landing_page_no_meta_commentary[Q49_landing_page_meta]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 6242, "cached_input_tokens": 3006, "output_tokens": 408, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q50_story_0]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 7}
+{"test": "tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q50_story_0]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 2999, "cached_input_tokens": 2862, "output_tokens": 34, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q50_story_0]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 16}
+{"test": "tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q50_story_0]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 5811, "cached_input_tokens": 2996, "output_tokens": 93, "reasoning_tokens": 44}
+{"test": "tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q50_story_0]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 11}
+{"test": "tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q50_story_0]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3002, "cached_input_tokens": 2861, "output_tokens": 34, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q50_story_0]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 16}
+{"test": "tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q50_story_0]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 5371, "cached_input_tokens": 2999, "output_tokens": 353, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q51_story_10]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 7}
+{"test": "tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q51_story_10]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3004, "cached_input_tokens": 0, "output_tokens": 26, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q51_story_10]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 8}
+{"test": "tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q51_story_10]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 6126, "cached_input_tokens": 3001, "output_tokens": 78, "reasoning_tokens": 34}
+{"test": "tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q51_story_10]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 15}
+{"test": "tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q51_story_10]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3009, "cached_input_tokens": 2865, "output_tokens": 29, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q51_story_10]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 12}
+{"test": "tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q51_story_10]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 5636, "cached_input_tokens": 3006, "output_tokens": 442, "reasoning_tokens": 52}
+{"test": "tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q52_story_50]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 7}
+{"test": "tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q52_story_50]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3004, "cached_input_tokens": 2878, "output_tokens": 33, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q52_story_50]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 16}
+{"test": "tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q52_story_50]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 5642, "cached_input_tokens": 3001, "output_tokens": 121, "reasoning_tokens": 68}
+{"test": "tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q52_story_50]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 18}
+{"test": "tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q52_story_50]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3011, "cached_input_tokens": 2864, "output_tokens": 33, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q52_story_50]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 15}
+{"test": "tests/eval_rag_quality.py::TestContextStory::test_context_story_title_detection[Q52_story_50]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 5820, "cached_input_tokens": 3008, "output_tokens": 377, "reasoning_tokens": 0}

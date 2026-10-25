@@ -1,0 +1,20 @@
+{
+  "source": "https://developers.openai.com/api/docs/pricing (fetched 2026-10-25, Standard, short context)",
+  "usage": {
+    "embeddings:text-embedding-3-small": {
+      "calls": 2,
+      "input_tokens": 24,
+      "cached_input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_tokens": 0
+    },
+    "responses:gpt-6.1-sol": {
+      "calls": 2,
+      "input_tokens": 9125,
+      "cached_input_tokens": 3001,
+      "output_tokens": 406,
+      "reasoning_tokens": 0
+    }
+  },
+  "dollars": 0.0166
+}

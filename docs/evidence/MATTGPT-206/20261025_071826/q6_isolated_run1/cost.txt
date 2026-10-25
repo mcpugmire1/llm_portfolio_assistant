@@ -1,0 +1,3 @@
+embeddings:text-embedding-3-small: 2 calls, input 30 (cached 0), output 0 (reasoning 0): $0.0000
+responses:gpt-6.1-sol: 2 calls, input 11016 (cached 3002), output 460 (reasoning 63): $0.0209
+total: $0.0209  (prices: https://developers.openai.com/api/docs/pricing (fetched 2026-10-25, Standard, short context))

@@ -1,0 +1,4 @@
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q6]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 8}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q6]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 3002, "cached_input_tokens": 2864, "output_tokens": 42, "reasoning_tokens": 0}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q6]", "api": "embeddings", "model": "text-embedding-3-small", "input_tokens": 24}
+{"test": "tests/eval_rag_quality.py::TestProfessionalNarrative::test_narrative_query[Q6]", "api": "responses", "model": "gpt-6.1-sol", "input_tokens": 7231, "cached_input_tokens": 2999, "output_tokens": 359, "reasoning_tokens": 0}

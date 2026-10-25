@@ -1,0 +1,11 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.13.3, pytest-9.0.1, pluggy-1.6.0 -- /Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant/venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/matthewpugmire/Projects/portfolio/llm_portfolio_assistant
+configfile: pytest.ini
+plugins: anyio-4.11.0, langsmith-0.4.37, bdd-8.1.0, cov-7.0.0
+collecting ... collected 1 item
+
+tests/eval_rag_quality.py::TestSurgicalPrecision::test_surgical_query[Q28] PASSED [100%]
+
+============================== 1 passed in 15.29s ==============================
