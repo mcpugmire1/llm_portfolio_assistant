@@ -1584,6 +1584,12 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 
 **Recommendation threshold on gpt-5.6-terra (lane 1, Oct 25, 2026; `probes/output/MATTGPT-302/nokr_20261025_081301/`, untracked):** AT&T reached Apply/High in 1 of 6 production runs (25 of 33 strong, no required gaps), while gpt-4o always had one required gap and stayed at Consider. `RECOMMENDATION_STRONG_RATIO` (0.7, `services/jd_assessor.py`) may need recalibrating against the stricter model. Visitors don't see the recommendation today: `compute_recommendation()` has no `ui/` caller (`git grep -n -w compute_recommendation` at HEAD finds only `scripts/assess_jd.py`, `probe_assessor.py` and tests). Recalibrate when MATTGPT-012's private view (J0) surfaces it.
 
+**Weak second citations (Matt, Oct 25, 2026; Role Match export on the demo JD, not on disk):**
+- The graduate-degree row cites a teaching story beside the profile degree.
+- The thought-leadership row cites a mentoring story.
+- The culture row's strong leans on "Leadership Philosophy: How I Lead", a self-description (its Theme is Professional Narrative in `echo_star_stories_nlp.jsonl`).
+- The product-company row came back strong this run, against partial 20 of 20 on fixed stories on Oct 22 (as reported; that run not re-checked here).
+
 ---
 
 ### MATTGPT-249
