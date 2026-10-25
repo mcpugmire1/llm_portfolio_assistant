@@ -98,7 +98,7 @@ Infrastructure: -035, -040, -045 · -233 (Phase 2: extend pre-push gate to BDD/a
 | [MATTGPT-145](#mattgpt-145) | Mobile filter breakpoints overlap -- r2-label show/hide depends on !important cascade order, not design | Open | Low | Refactor | chore | Jun 24, 2026 |
 | [MATTGPT-146](#mattgpt-146) | Professional Narrative stories leak into My Work filtered results -- filter branch leaks; search stays as-is | Open | Medium | Bug | value | Jun 25, 2026 |
 | [MATTGPT-150](#mattgpt-150) | MATTGPT-144 test fallout -- decouple BDD assertions from display copy and stranded AgGrid selectors | Open | Medium | Refactor / Test | chore | July 1, 2026 |
-| [MATTGPT-152](#mattgpt-152) | Move debug output from UI sidecar to terminal log only | Parked | Low | Refactor | chore | July 16, 2026 |
+| [MATTGPT-152](#mattgpt-152) | Move debug output from UI sidecar to terminal log only | Open | Low | Refactor | chore | July 16, 2026 |
 | [MATTGPT-153](#mattgpt-153) | Q64 eval stochastic -- replace phrase-cluster with concept-cluster robust to story-selection variance | Open | Low | Refactor / Test | chore | July 16, 2026 |
 | [MATTGPT-154](#mattgpt-154) | Operational-breadth tagging pass -- surface operational ownership into all corpus stories where it's genuinely true | Open | Medium | Action | value | July 16, 2026 |
 | [MATTGPT-155](#mattgpt-155) | New corpus story -- sell-side commercial story (HSBC-anchored): pricing/costing, resourcing, outcome-based contracting | Open | Medium | Action | value | July 29, 2026 |
@@ -976,12 +976,17 @@ Each detail block uses these fields. Not every field is required for every item.
   - **Phase 3 — Implementation:** Small parser extension + result panel addition once design lands. Likely similar scope to -089 (small, scoped change in the Role Match JD parser + result rendering).
 - **Audience impact:** Recruiter persona finding (May 27, 2026) called out comp as *"the single biggest miss"* on the chat side. Now closed there (-090 Decided Against). But the Role Match side has the same recruiter sitting there with the same expectation — paste a JD, get a complete answer to "can we hire him." Silent drop on comp on Role Match reintroduces the same recruiter-confusion failure mode that the chat side now correctly avoids.
 - **Effort:** Phase 1 audit: ~30 min. Phase 2 design call: short conversation. Phase 3 implementation: ~1-2 hours.
-- **Latency context (measured June 24, 2026, `jd_assessor.py`):** 1+N sequential gpt-4o calls; loop is linear in N requirements. `assess` dominates; `extract` is a large N-independent cost (~22s local on the demo JD). Parallelizing `assess` buys ~3-4x but `extract` is the floor. Relevant when deciding where comp handling sits in the call sequence.
+- **Latency context (June 24, 2026), stale:** the "1+N sequential gpt-4o calls" note no longer holds. Requirement rows now show a waiting marker and fill in as each call returns.
 - **Cross-references:**
   - MATTGPT-089 — sibling JD-parser ticket (location / work-model / availability); -089 explicitly excludes comp, -099 owns it
   - MATTGPT-090 — Decided Against, but its closure note points here for the Role Match-side gap; consistency with the personal-family anchors block in `services/semantic_router.py` is the cross-surface anchor
   - MATTGPT-088 — Role Match scorer honesty discipline (the "no Strong Match when chat would say no" principle applies here too: Role Match shouldn't silently disclose what chat declines)
 - **Logged:** May 29, 2026
+
+- **Design decided (Matt and Design, Oct 24, 2026; Arch Governor relay, checked at HEAD be00085):**
+  - **Role Match:** when the JD mentions pay, the Location & Availability panel adds a cell: label "Compensation", value "Discussed directly", second line "With Matt". It never repeats the JD's range and has no 🐾 (the panel is "Facts only, no LLM", per the comment above the block in `role_match.py`). The label is a code constant, not a `matt_profile.json` key; no comp figure appears anywhere. Layout: `.loc-grid` is `repeat(4, 1fr)`, so a fifth cell wraps alone onto a second row; placement is Design's call. The JD extraction step also needs a way to detect a comp mention without turning it into a requirement row.
+  - **Ask Agy, so the surfaces agree:** today a salary question is caught by `rule:recruiter_logistics` or `rule:personal_compensation` and shows `BANNER_COPY["rule"]` ("🐾 Wrong trail... Give me a real scent to follow."), found by reading the code, not a live run. Proposed: comp rule rejections get their own banner, "🐾 Compensation is a conversation Matt has directly. Reach out and he'll take it from there." (Design's line in Agy's voice). `BANNER_COPY` is locked per MATTGPT-071, so the new copy needs Matt's approval.
+  - **Narrow the rule first:** the `personal_compensation` pattern in `nonsense_filters.jsonl` matches bare "compensation" and "bonus", so questions about how Matt managed pay decisions for his teams are caught as salary questions. The comp banner fires only on questions about Matt's own pay, so narrow the rule before giving it its own banner. Rule-only check (`re.search(..., re.IGNORECASE)`, as `utils/validation.py` does; re-run by the backlog session Oct 25): "How did Matt handle compensation and promotion decisions at the CIC?" and "Did Matt manage bonus pools for his team?" both hit `personal_compensation`, though the corpus covers Matt's compensation-allocation work. "How much does Matt make?" hits no rule, so the narrowed rule must still catch own-pay phrasings. "What are Matt's salary expectations?" hits `personal_compensation` only: `recruiter_logistics` misses it because its trailing `\b` fails on "expectations". Test the new pattern against real queries per the nonsense-filter guidance in CLAUDE.md. Not yet confirmed through the full Ask Agy pipeline; a live run of those questions settles it.
 
 ---
 
@@ -1362,10 +1367,10 @@ Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consiste
 ### MATTGPT-152
 **Move debug output from UI sidecar to terminal log only**
 
-- **Status:** Parked
+- **Status:** Open
 - **Priority:** Low
 - **Type:** Refactor
-- **File:** `utils/ui_helpers.py`, `services/backend_service.py`, `ui/pages/ask_mattgpt/conversation_view.py`
+- **File:** `utils/ui_helpers.py`, `utils/validation.py`, `app.py`, `services/pinecone_service.py`, `ui/pages/ask_mattgpt/conversation_view.py`
 - **Logged:** July 16, 2026
 
 **Issue:** Debug output currently appears in the Streamlit UI sidebar as well as the terminal. When `DEBUG=True`, `dbg()` in `utils/ui_helpers.py` calls `st.sidebar.write("🧪", *args)` at four call sites in `backend_service.py` (search: `dbg(` in that file). A second debug block in `conversation_view.py` (the `# DEBUG INFO` block) renders a static `st.caption` showing `VECTOR_BACKEND`, `PINECONE_INDEX_NAME`, and `PINECONE_NAMESPACE`. Goal is terminal-only.
@@ -1380,11 +1385,12 @@ Action: replace with `wait_for_selector("[data-testid='stDataFrame']")` consiste
 
 **No BDD cycle needed:** debug-mode-only output, no DOM-observable behavior changes.
 
-**Parked because:** 080 is higher priority. Revisit when 080 closes.
+**Re-scope (Arch Governor, Oct 24, 2026; checked at HEAD be00085):** stays open, not closed. Matt set DEBUG=True on Oct 24, 2026, and the debug output still renders. The Oct 16 pickup note ("no caller") was wrong: `\b` is unsupported in git grep's ERE, so `git grep -nE '\bdbg\('` matches nothing, not even `def dbg(`. `git grep -n -w dbg` finds the callers. Three UI debug sources at HEAD:
+1. `dbg()` in `utils/ui_helpers.py` writes to `st.sidebar.write`. Its callers are in `utils/validation.py`, called when the rules load. `services/backend_service.py`, which the ticket named, no longer exists.
+2. `app.py` renders an `if DEBUG:` sidebar expander, "📊 Pinecone debug (last query)", from `st.session_state["__pc_debug__"]`, which `services/pinecone_service.py` sets. The ticket didn't list it.
+3. The `# DEBUG INFO` `st.caption` block in `conversation_view.py`.
 
-**Pickup (Oct 16, 2026):** hold while MATTGPT-128 is open. Stale: `dbg()` is still defined in `utils/ui_helpers.py`, but `git grep -nE "\bdbg\("` over `*.py` (excluding `docs/` and `archive/`) finds no caller.
-
-**Stale against 1095d2c; re-scope on pickup.**
+Goal unchanged: debug output goes to the terminal or the Streamlit log only. The proposed change above predates this list; re-plan it at pickup. The Oct 16 hold on MATTGPT-128 is dropped: no reason was recorded, and removing the `# DEBUG INFO` block also removes its one shared read (`has_last`, from `last_sources`).
 
 ---
 
@@ -1672,6 +1678,11 @@ Same class as the no-inference clause in MATTGPT-250: retrieved text that sits n
 **Retail (MATTGPT-236 gate, Oct 16, 2026; 1743846, `docs/evidence/MATTGPT-236/gate_20261016_140623/`):** "Has Matt worked in retail?" (r09) scores out_of_scope 0.833 at the router, and the shipped redirect shows "That's outside Matt's experience." It fails 10/10, unsupported: the corpus says the Fiserv portal served "retailers like Home Depot, Citi, and Meijer" and calls Sparkfly "the retail technology platform Sparkfly is today". Without the redirect (arms B and C): 6/10 each, and all 20 answers name the Fiserv or Sparkfly work.
 
 **Adjacency case, agriculture (same gate):** "Has Matt worked in agriculture?" (r07) 0/30 in every arm. All 30 say not on record and none names the Liquid Studio prototype work across "life sciences, transportation, entertainment, agriculture, and consumer goods" (`building-smart-connected-devices-at-accentures-liquid-studio|accenture`, the only story that mentions agriculture). The Liquid Studio story is in the sources of 0 of 30 answers; the tool's one search was "Matt work experience agriculture agricultural farming agribusiness industry". Same family as x1 "Has Matt worked in real estate?" (5/30) and x3 "Has Matt worked on trading platforms?" (8/30). A retrieval miss first (MATTGPT-325's pattern: the story never reaches the model); it stays here for the adjacency part, since once retrieved the answer has to label the work as adjacent.
+
+**Update (Arch Governor, Oct 24, 2026; Matt: still an issue):** stays Open, High.
+- **Headline example:** x1 replaces the Cendant screenshot as the headline real-estate example (`docs/evidence/MATTGPT-275/poc_rerun_20261011_084138/NOTES.md`: "the gap action's search returned no stories; answers named Accredited and Cendant and called the work real estate"; 5/5 under lever 2, 1/5 under the PoC).
+- **Open question answered:** the Cendant story's `Industry` is "Financial Services / Banking" (`echo_star_stories_nlp.jsonl`, "Replacing a Mainframe Underwriting System at Cendant Mortgage", checked Oct 25).
+- **Retail (r09) stays under the absence-claim half:** the failure was the router's "That's outside Matt's experience" (10/10); with the router off, answers named the real Fiserv and Sparkfly retail work (6/10 per arm). It is not over-claim evidence.
 
 ---
 
@@ -3360,7 +3371,7 @@ Verified Oct 22, 2026 (HEAD 5787bdf): `.gitignore` has `/probes/`; the run folde
 
 **Priority (Matt, Oct 24, 2026):** top priority, NOW #1.
 
-**Fix:** one edit to `data/matt_profile.json` fixes Role Match's cell, Share and Export, and Ask Agy's fact card and profile facts. `about_matt.py`'s two tiles then read from the profile. Update any test that pins the old subline or "Hybrid or in-person" in the same commit.
+**Fix:** one edit to `data/matt_profile.json`, Matt's to make, fixes Role Match's cell, Share and Export, and Ask Agy's fact card and profile facts. `about_matt.py`'s two tiles then read from the profile. Update any test that pins the old subline or "Hybrid or in-person" in the same commit.
 
 **Before Red (Oct 25, 2026):**
 - **Design call:** the profile's `work_model` has two parts (value "In-office preferred", subline "Hybrid fine"), and About Matt's "Work mode" tile is one line. Which part or parts the tile shows is a Design call, settled before the Red test, since `about_matt.feature` will pin it.
@@ -3863,6 +3874,14 @@ Chrome Claude's test report under "The five interactions that collapsed the grid
 **Surfaced during:** MATTGPT-165 Cycle A session (August 18, 2026). Out of scope for -165. Defect 3 surfaced August 31, 2026 in Chrome Claude test report.
 
 **Cross-references:** MATTGPT-202 (`load_star_stories` error handling -- the Streamlit-context concern intentionally kept in `app.py`; defect 1 is that handling being broken). MATTGPT-224 (st.stop() rejection blanking -- different cause, same symptom on screen; shipped `92370b3`).
+
+**Re-scope (Arch Governor, Oct 24, 2026; checked at HEAD be00085):** the filter-only zero-match banner ("No stories match {filter_desc}.") covers the message for all three views; it dates to 5591516 (Jan 5, 2026), and 5f6a15a (Sep 3, 2026) changed its wording from "projects" to "stories". Outstanding:
+- (a) The Table branch still renders the empty grid and the "Check any row to read the full story" hint with zero rows.
+- (b) Cards and Timeline `st.info("No stories match your filters yet.")` is hidden by CSS and now redundant with the banner: remove it rather than convert it to `st.markdown`. This replaces the "Fix (full)" above.
+- (c) Defect 1, a corpus-load failure where `app.py` calls `st.error` and the visitor sees a blank page, has a separate cause and can split out (compare MATTGPT-349, the blank page after startup init).
+- (d) Defect 3 is still unconfirmed.
+
+Not checked: zero results with a search query active.
 
 ---
 
@@ -4370,6 +4389,10 @@ Two more inert-selector patterns confirmed during the -242 dark-mode scan:
 **Gate reliability consequence:** A single clean 70/70 run does not prove correctness; a single failure does not prove regression. The eval gate requires multiple runs to be meaningful for any ticket that touches retrieval or LLM paths.
 
 **Context:** The eval suite now has three tests with documented stochastic behavior: Q1_voice, Q45_structural (marked in `tests/test_structural_assertions.py` header per f0d8870), and Q28 (this finding). Not a MATTGPT-161 regression -- Q28 failed in pre-Green runs.
+
+**Plan (Matt, Oct 24, 2026; Arch Governor relay):** stays Open until lane 2 reports. Lane 2 has the plan: patch the four loggers in the `rag_fn` fixture (making the eval hermetic is the fix); run `test_surgical_query[Q28]` 5 times, then the full eval once, with each run's cost cited in its evidence folder. Close as no longer reproducing on the `agy_answer` path if Q28 is clean 5 of 5 and the full run has no failures.
+
+**Counts, to stop the drift (checked at HEAD by AST, Oct 25):** `GOLDEN_QUERIES` holds 65 queries across 8 categories; 11 are `entity_detection` and aren't collected. pytest collects 60 items (Arch Governor's collection run, Oct 24): 54 assessed golden queries plus 6 landing-page meta-commentary items. The earlier "68" counts `"id":` lines, 3 of which are report code.
 
 ---
 

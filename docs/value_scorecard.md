@@ -375,7 +375,7 @@ experience reliably and sustainably; failures are visible, not silent.
   -345 (In Progress; 5 unbound feature files left: bind or delete).
 - Architecture and maintainability: -258 (In Progress), -259, -260, -261, -262, -140,
   -214, -226, -343 (Era and Theme literals; extend -258's guard).
-- Dead code and hygiene: -176, -241, -152 (Parked), -287 (docs
+- Dead code and hygiene: -176, -241, -152, -287 (docs
   describe a removed overlap gate), -332 (synthesis prompt path, after -236),
   -344 (uncalled functions, provisional).
 - Process: -335 (governor skill pilot, advisory).
