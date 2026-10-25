@@ -1176,6 +1176,64 @@ class TestDollarsAndBoldInTheStream:
         assert result["answer_md"].replace("**", "") == "".join(deltas)
 
 
+class TestProfileMarkersInTheStream:
+    """No streamed frame shows a [[profile:...]] marker, whole or in part.
+    Text from a [[ not yet closed is held back, as an unpaired ** is held
+    (MATTGPT-312); a closed marker is removed as the finished answer removes
+    it (_extract_profile_markers()). Held text is released at the end."""
+
+    def _answer(self, chunks):
+        deltas = []
+        result, _, _, _, _ = _run(
+            [_response(tool_query="ledger"), _response("".join(chunks), chunks=chunks)],
+            on_delta=deltas.append,
+        )
+        return result, deltas
+
+    _frames = staticmethod(TestDollarsAndBoldInTheStream._frames)
+
+    def test_no_frame_shows_an_inline_marker_or_a_run(self):
+        chunks = [
+            "Matt holds SAFe ",
+            "[[prof",
+            "ile:certifications]] and ",
+            "a degree. ",
+            "[[profile:education]], [[profile:",
+            "languages]]",
+        ]
+        result, deltas = self._answer(chunks)
+        for frame in self._frames(deltas):
+            assert "[[" not in frame, frame
+            assert "profile:" not in frame, frame
+        assert "".join(deltas) == "Matt holds SAFe and a degree."
+        assert result["answer_md"].replace("**", "") == "".join(deltas)
+
+    def test_no_frame_shows_a_marker_on_its_own_line(self):
+        chunks = [
+            "He studied at Georgia Tech.\n\n",
+            "[[profile:",
+            "education]]\n\n",
+            "He also speaks Spanish.",
+        ]
+        _, deltas = self._answer(chunks)
+        for frame in self._frames(deltas):
+            assert "[[" not in frame, frame
+        assert (
+            "".join(deltas) == "He studied at Georgia Tech.\n\nHe also speaks Spanish."
+        )
+
+    def test_a_split_opening_bracket_never_shows(self):
+        _, deltas = self._answer(["He holds SAFe [", "[profile:certifications]]."])
+        for frame in self._frames(deltas):
+            assert "[" not in frame, frame
+        assert "".join(deltas) == "He holds SAFe."
+
+    def test_a_bracket_never_closed_is_released_at_the_end(self):
+        result, deltas = self._answer(["He kept ", "[[draft", " notes."])
+        assert "".join(deltas) == "He kept [[draft notes."
+        assert result["answer_md"].replace("**", "") == "".join(deltas)
+
+
 class TestOneDollarEscape:
     """MATTGPT-346: the stream and the finished answer escape $ through one
     helper, escape_dollars(), so there is a single copy of the rule."""
