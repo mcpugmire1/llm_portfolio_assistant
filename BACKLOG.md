@@ -1977,6 +1977,10 @@ f. Data-contract check against the real corpus (added Oct 11, 2026): field names
 
 **Update (Oct 6, 2026, ba8dd48):** The AT&T principal JD is now tracked at data/probe_jd_att_principal.txt as the long-JD measurement input. The source_text fix and its before/after measurement have not landed.
 
+**Update (Arch Governor, Oct 25, 2026; lane 1's split from saved runs, no new calls):** Terra low's extra time on the demo JD splits about in half: extraction +2 to 3 s (`dash_rule_20261023_130917` and `terra_20261022_165617` agree), and assessment +about 2 s. Assessment is derived as end-to-end minus extraction, not measured. The first line-numbers prompt cut Terra extraction by 4 to 5 s on AT&T and 1.5 to 4 s on demo and left assessment unchanged (`terra_20261022_165617`). That arm's requirement list wasn't checked, so the timings show the speed gain, not a usable format. Both run folders are committed under `docs/evidence/MATTGPT-302/`.
+
+**Second lever, unmeasured (Arch Governor, Oct 25, 2026):** assessment calls run `_CONCURRENCY = 10` at a time (`services/jd_assessor.py`; its comment says "Reasoning, not measurement"). With 20 to 22 calls that's 3 waves at about 2.8 s per Terra call, which matches the measured 8.1 to 9.9 s. Hypothesis, not measured: a concurrency arm (for example, all requirements at once) could cut assessment by more than line numbers cut extraction, with no prompt change. Measure it on AT&T and demo, 3 runs each, recording rate-limit errors and unassessed rows. A change to the constant then needs its own Red and Green.
+
 ---
 
 ### MATTGPT-268
