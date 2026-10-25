@@ -363,6 +363,8 @@ Verified Oct 25, 2026 (HEAD 9bcefac): 493809d (MATTGPT-245, Sep 19) replaced the
 
 **Status (Matt, Oct 25, 2026; priority pass):** In Progress to Open. Slice 1, the lock icon and password gate shell (`render_lock_icon()`, 329a8bf), has shipped; nothing after it is in progress. Journey J0 (Matt, job search), listed below the top 10.
 
+**Recommendation threshold (Oct 25, 2026):** when the private view surfaces `compute_recommendation()`, recalibrate `RECOMMENDATION_STRONG_RATIO` first; see MATTGPT-244's Oct 25 note (Apply/High in 1 of 6 AT&T runs on gpt-5.6-terra).
+
 ---
 
 ### MATTGPT-014
@@ -1578,6 +1580,8 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 - **Python is an under-call.** Verified Oct 15: 8 stories name Python, among them three MattGPT Product Development stories that list it in Competencies (`mattgpt-product-vision-roadmap-scope-and-mvp-delivery|independent-project`, `mattgpt-rag-architecture-semantic-search-implementation|independent-project`, `simplifying-mattgpts-rag-pipeline-through-entity-gate-removal|independent-project`).
 - **Go is correct**, for the reason above.
 - The row bundles two languages into one verdict, so one correct gap hid an under-call.
+
+**Recommendation threshold on gpt-5.6-terra (lane 1, Oct 25, 2026; `probes/output/MATTGPT-302/nokr_20261025_081301/`, untracked):** AT&T reached Apply/High in 1 of 6 production runs (25 of 33 strong, no required gaps), while gpt-4o always had one required gap and stayed at Consider. `RECOMMENDATION_STRONG_RATIO` (0.7, `services/jd_assessor.py`) may need recalibrating against the stricter model. Visitors don't see the recommendation today: `compute_recommendation()` has no `ui/` caller (`git grep -n -w compute_recommendation` at HEAD finds only `scripts/assess_jd.py`, `probe_assessor.py` and tests). Recalibrate when MATTGPT-012's private view (J0) surfaces it.
 
 ---
 
