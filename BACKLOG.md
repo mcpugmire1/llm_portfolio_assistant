@@ -3418,6 +3418,7 @@ Verified Oct 22, 2026 (HEAD 5787bdf): `.gitignore` has `/probes/`; the run folde
 
 **Before Red (Oct 25, 2026):**
 - **Design call:** the profile's `work_model` has two parts (value "In-office preferred", subline "Hybrid fine"), and About Matt's "Work mode" tile is one line. Which part or parts the tile shows is a Design call, settled before the Red test, since `about_matt.feature` will pin it.
+- **Design decided (Design, Oct 25, 2026):** the tile shows "In-office preferred · Hybrid fine". Build it as the profile's `work_model` value + " · " + subline, exactly as stored, with no case change, and pin that exact string in `about_matt.feature` and the `_work_mode_text()` test (`_work_mode_text()` is in lane 2's uncommitted working tree, not at HEAD). Why: "In-office preferred" alone reads as in-office only to a recruiter scanning the panel, and hybrid roles are ones Matt would take; the value, middle dot, qualifier shape matches the Geo tile; at phone width (two tiles to a row) it wraps to two lines at most, like the "Most recent" tile (500px screenshot, Oct 20).
 - **Spec sync:** the pinning scenario is titled "Signals panel tile values match the wireframe spec", and the spec carries the old text: `mattgpt-design-spec/wireframes/MATTGPT_WIREFRAMES_v4.html` has the "Work mode" tile with "Hybrid or in-person" (local copy at 9985965, checked Oct 25). The fix commit flags the mattgpt-design-spec sync per the Pre-Commit Doc Checklist.
 
 
@@ -3459,6 +3460,8 @@ Verified Oct 22, 2026 (HEAD 5787bdf): `.gitignore` has `/probes/`; the run folde
 
 **Verified Oct 25, 2026 (HEAD 7bdb5cd):** `about_matt.py` carries the wording in four places: the Signals panel Geo tile and the print-profile Geo tile ("Atlanta · open to relocate"), the subtitle string ("builds organizations from zero · Atlanta · open to relocate"), and the "Copy this intro language" text ("Atlanta-based, open to relocate."). The last is J4's intro-language surface; whether the subtitle and the intro text should read from the profile, or stay hand-written prose, is a Design call.
 
+
+**Design note (Oct 25, 2026):** the Geo tile also lowercases its qualifier ("open to relocate"), so once -354 lands the Work mode tile ("Hybrid fine", as stored) and the Geo tile will capitalize differently. Reading Geo the same way (value + " · " + subline) would make them match.
 ---
 
 
