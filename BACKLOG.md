@@ -180,6 +180,7 @@ Infrastructure: -035 (Parked), -040 · -233 (Phase 2: extend pre-push gate to BD
 | [MATTGPT-353](#mattgpt-353) | Role Match sees a truncated story: the assessor prompt gets only the first 3 Action and Result items | Open | High | Issue | value | October 24, 2026 |
 | [MATTGPT-354](#mattgpt-354) | Work model: the profile says "Hybrid or remote fine", which Matt never chose, and About Matt hardcodes "Hybrid or in-person"; both move to "In-office preferred" / "Hybrid fine" | Open | High | Issue | value | October 24, 2026 |
 | [MATTGPT-355](#mattgpt-355) | Role Match: an extraction that returns 0 requirements is logged as a success and leaves the visitor one line with no next step | Open | Medium | Bug | value | October 25, 2026 |
+| [MATTGPT-356](#mattgpt-356) | My Profile hardcodes "Atlanta · open to relocate" while the profile's location says "Atlanta, GA" / "Open to relocation and travel" | Open | Low | Issue | value | October 25, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; CI/CD-qualifier row pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata don't appear under My Work's named-client filter -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently | Decided Against | Medium | Action | value | August 3, 2026 |
@@ -3413,12 +3414,14 @@ Verified Oct 22, 2026 (HEAD 5787bdf): `.gitignore` has `/probes/`; the run folde
 
 **Priority (Matt, Oct 24, 2026):** top priority, NOW #1. Assigned to lane 2 (Matt, Oct 25, 2026).
 
-**Fix:** one edit to `data/matt_profile.json`, Matt's to make, fixes Role Match's cell, Share and Export, and Ask Agy's fact card and profile facts. `about_matt.py`'s two tiles then read from the profile. Update any test that pins the old subline or "Hybrid or in-person" in the same commit.
+**Fix:** one edit to `data/matt_profile.json`, which a session makes after Matt's explicit approval of the exact text (given Oct 25, 2026: value "In-office preferred", subline "Hybrid fine"), fixes Role Match's cell, Share and Export, and Ask Agy's fact card and profile facts. `about_matt.py`'s two tiles then read from the profile. Update any test that pins the old subline or "Hybrid or in-person" in the same commit.
 
 **Before Red (Oct 25, 2026):**
 - **Design call:** the profile's `work_model` has two parts (value "In-office preferred", subline "Hybrid fine"), and About Matt's "Work mode" tile is one line. Which part or parts the tile shows is a Design call, settled before the Red test, since `about_matt.feature` will pin it.
 - **Spec sync:** the pinning scenario is titled "Signals panel tile values match the wireframe spec", and the spec carries the old text: `mattgpt-design-spec/wireframes/MATTGPT_WIREFRAMES_v4.html` has the "Work mode" tile with "Hybrid or in-person" (local copy at 9985965, checked Oct 25). The fix commit flags the mattgpt-design-spec sync per the Pre-Commit Doc Checklist.
 
+
+**Correction (Matt, Oct 25, 2026):** the earlier "Matt's to make" wording came from an unsourced Arch Governor relay, not from Matt. Side finding, out of scope here: the Geo text, filed as MATTGPT-356.
 ---
 
 ### MATTGPT-355
@@ -3439,6 +3442,22 @@ Verified Oct 22, 2026 (HEAD 5787bdf): `.gitignore` has `/probes/`; the run folde
 - The button label is "Update Match 🐾" only when `role_match_result` has `results`; otherwise "Match this role 🐾".
 
 **Related rule:** the relay cites the ADR line "Rows the run didn't reach show as unassessed, never as gaps." That wording isn't in `docs/ADR.md` (`grep -n -i -E "didn.t reach|unassessed" docs/ADR.md` returns nothing); ARCHITECTURE.md documents the unassessed row shape for Modes 1 and 2. Confirm the source before the fix cites it.
+
+---
+
+### MATTGPT-356
+**My Profile hardcodes "Atlanta · open to relocate" while the profile's location says "Atlanta, GA" / "Open to relocation and travel"**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Issue
+- **File:** `ui/pages/about_matt.py`, `data/matt_profile.json` (`logistics.location`)
+- **Related:** MATTGPT-354 (the same two-sources pattern for the work model; whichever ticket makes My Profile read the profile can take this too)
+- **Logged:** October 25, 2026
+
+**Issue (Matt, Oct 25, 2026; side finding from MATTGPT-354):** About Matt's Geo tile hardcodes "Atlanta · open to relocate", while `logistics.location` says value "Atlanta, GA", subline "Open to relocation and travel". Two sources for one fact, and My Profile drops "travel". Journey J2, driver 3.
+
+**Verified Oct 25, 2026 (HEAD 7bdb5cd):** `about_matt.py` carries the wording in four places: the Signals panel Geo tile and the print-profile Geo tile ("Atlanta · open to relocate"), the subtitle string ("builds organizations from zero · Atlanta · open to relocate"), and the "Copy this intro language" text ("Atlanta-based, open to relocate."). The last is J4's intro-language surface; whether the subtitle and the intro text should read from the profile, or stay hand-written prose, is a Design call.
 
 ---
 
