@@ -1592,6 +1592,10 @@ Same mechanism as the operational gap above: vocabulary absent from corpus stori
 - The culture row's strong leans on "Leadership Philosophy: How I Lead", a self-description (its Theme is Professional Narrative in `echo_star_stories_nlp.jsonl`).
 - The product-company row came back strong this run, against partial 20 of 20 on fixed stories on Oct 22 (as reported; that run not re-checked here).
 
+**Note quality (Oct 25, 2026, moved from MATTGPT-302; `docs/evidence/MATTGPT-302/dash_rule_20261023_130917/rows.json`, entry 14: arm gpt-5.6-terra@low, AT&T, run 3):** one assessment note has no predicate: "Note: Explicit mentoring of technical leads or senior engineers in a matrixed organization." The same row's note in the run's other 5 Terra runs, with and without the dash rule, has one ("is not explicitly stated", "is unspecified", "is not established"). Rate unmeasured. Fix to weigh: a check that each gap note is a full sentence; not a prompt rule unless a live run shows it recurs.
+
+**Partials on one unevidenced clause (Arch Governor, Oct 25, 2026; `docs/evidence/MATTGPT-302/dash_rule_20261023_130917/`; as reported):** of 8 AT&T rows that went from strong to partial, 5 went partial on one unevidenced clause (rows 1, 2, 3, 6, 8) and 3 on two (rows 4, 5, 7). Rows 3 and 7 may be under-credits: row 3 has adjacent disaster-recovery evidence, and row 7 turns on the matrix wording. The run files don't number the rows. Filtering for strong on gpt-4o in at least 2 runs and partial on gpt-5.6-terra@low in at least 2 gives 7 rows (checked Oct 25), so the governor's 8 uses a different cut. Lane 1's 8 includes row 4 (calm leadership during incidents: gpt-4o S P P, Terra P P P, checked in `rows.json` Oct 25), which the strong-in-2-of-3 filter drops. The Oct 24 relay named rows 3 and 7.
+
 ---
 
 ### MATTGPT-249
@@ -1651,6 +1655,8 @@ Full ranked 25 available from `probes/probe_243_top_k_rank.py` (local, untracked
 - MATTGPT-168 (topically-correct-but-general stories outranking specifically-right ones -- same class of retrieval quality problem)
 - MATTGPT-169 (closed Aug 17, 2026, 6a581d5; positioning-story attractor finding; PN exclusion absent on Role Match path is the structural half of what -169 tracked)
 - MATTGPT-243 (parallelization; top_k removed from that ticket on this finding)
+
+**AT&T retrieval gaps (Arch Governor, Oct 25, 2026; `docs/evidence/MATTGPT-302/dash_rule_20261023_130917/`; as reported):** on 3 rows a fitting story wasn't in the top 5 retrieved. Row 5, Operations: HSBC Mortgage and AT&T Southeast CRM. Row 6, remediation tracking: Driving Agile Adoption. Row 8, self-service: Norfolk Southern CIC. `rows.json` keeps the cited evidence but not the retrieved candidates, so the top 5 can't be checked from the run files.
 
 ---
 
@@ -2022,11 +2028,15 @@ f. Data-contract check against the real corpus (added Oct 11, 2026): field names
 
 **Update (Oct 6, 2026, ba8dd48):** The AT&T principal JD is now tracked at data/probe_jd_att_principal.txt as the long-JD measurement input. The source_text fix and its before/after measurement have not landed.
 
-**Update (Arch Governor, Oct 25, 2026; lane 1's split from saved runs, no new calls):** Terra low's extra time on the demo JD splits about in half: extraction +2 to 3 s (`dash_rule_20261023_130917` and `terra_20261022_165617` agree), and assessment +about 2 s. Assessment is derived as end-to-end minus extraction, not measured. The first line-numbers prompt cut Terra extraction by 4 to 5 s on AT&T and 1.5 to 4 s on demo and left assessment unchanged (`terra_20261022_165617`). That arm's requirement list wasn't checked, so the timings show the speed gain, not a usable format. Both run folders are committed under `docs/evidence/MATTGPT-302/`.
+**Update (Arch Governor, Oct 25, 2026; lane 1's split from saved runs, no new calls):** Terra low's extra time on the demo JD splits about in half: extraction +2 to 3 s (`dash_rule_20261023_130917` and `terra_20261022_165617` agree), and assessment +about 2 s. Assessment is derived as end-to-end minus extraction, not measured. The first line-numbers prompt cut Terra extraction by 4 to 5 s on AT&T and 1.5 to 4 s on demo and left assessment unchanged (`terra_20261022_165617`). Only that speed gain is measured; the format is not decided (below). Both run folders are committed under `docs/evidence/MATTGPT-302/`.
 
 **Second lever, unmeasured (Arch Governor, Oct 25, 2026):** assessment calls run `_CONCURRENCY = 10` at a time (`services/jd_assessor.py`; its comment says "Reasoning, not measurement"). With 20 to 22 calls that's 3 waves at about 2.8 s per Terra call, which matches the measured 8.1 to 9.9 s. Hypothesis, not measured: a concurrency arm (for example, all requirements at once) could cut assessment by more than line numbers cut extraction, with no prompt change. Measure it on AT&T and demo, 3 runs each, recording rate-limit errors and unassessed rows. A change to the constant then needs its own Red and Green.
 
 **Refinement (lane 1, Oct 25, 2026; 466b55a's message):** the assessment half of Terra low's extra demo time is each call about 1 s slower, across 20 to 22 calls at 10 concurrent. Same runs (`dash_rule_20261023_130917`, `terra_20261022_165617`); the concurrency arm above is still unmeasured.
+
+**Format not decided (Arch Governor, Oct 25, 2026; verified in `docs/evidence/MATTGPT-302/sentences_20261023_131547/summary.txt`):** one number per requirement failed on narrative_jd. The sentence-number arm gave requirements 1 to 3 numbers each, and verbatim `source_text` came out 4/10, 4/10 and 3/8, against 11/11 on today's prompt. `jd_format` can't pick the format, because it comes from the same required-extraction call (`extract_requirements()` reads it from `required_result`).
+
+**J1 Role Match timing (Matt's -302 browser check, localhost, Oct 25, 2026):** first rows at 8.1 and 9.9 s, full results at 15.1 and 17.7 s. 466b55a's message records the full-results times; the first-row times are as reported.
 
 ---
 
@@ -2684,8 +2694,6 @@ Kept off the roadmap's NOW.
 - AT&T reached Apply/High in 4 of 12 production-shaped Terra runs, against Consider/Medium in all of gpt-4o's. Not visitor-facing (no `ui/` caller); MATTGPT-244 tracks `RECOMMENDATION_STRONG_RATIO`.
 - hybrid_jd extracted 0 required in 2 of 12 runs, with every row in implicit (paren run 5, confirm run 1).
 - Two corpus titles have a double space after the colon (checked in `echo_star_stories_nlp.jsonl`, Oct 25): "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud" and "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications". The model writes one space; chips still resolve because `_find_story_by_title_client()` collapses whitespace. 466b55a's runs flagged only the Railroad title.
-
-**Note quality (Oct 25, 2026; `docs/evidence/MATTGPT-302/dash_rule_20261023_130917/rows.json`, entry 14: arm gpt-5.6-terra@low, AT&T, run 3):** one assessment note has no predicate: "Note: Explicit mentoring of technical leads or senior engineers in a matrixed organization." The same row's note in the run's other 5 Terra runs, with and without the dash rule, has one ("is not explicitly stated", "is unspecified", "is not established"). Rate unmeasured.
 
 ---
 
