@@ -179,6 +179,7 @@ Infrastructure: -035 (Parked), -040 · -233 (Phase 2: extend pre-push gate to BD
 | [MATTGPT-353](#mattgpt-353) | Role Match sees a truncated story: the assessor prompt gets only the first 3 Action and Result items | Open | High | Issue | value | October 24, 2026 |
 | [MATTGPT-355](#mattgpt-355) | Role Match: an extraction that returns 0 requirements is logged as a success and leaves the visitor one line with no next step | Open | Medium | Bug | value | October 25, 2026 |
 | [MATTGPT-356](#mattgpt-356) | My Profile hardcodes "Atlanta · open to relocate" while the profile's location says "Atlanta, GA" / "Open to relocation and travel" | Open | Low | Issue | value | October 25, 2026 |
+| [MATTGPT-359](#mattgpt-359) | `_render_degraded_banner()`'s docstring says keyword rows still render during an outage; `_should_suppress_page_ui()` hides them | Open | Low | Hygiene | chore | October 25, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; CI/CD-qualifier row pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata don't appear under My Work's named-client filter -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently | Decided Against | Medium | Action | value | August 3, 2026 |
@@ -3241,6 +3242,8 @@ SYNTHESIS_OPENERS stays: they're shown to the model as opener examples. The pari
 
 **Not in scope:** the eval's and tests' literals (29 and 152 in the sweep). The CLAUDE.md test rule covers story titles only.
 
+**Duplicate constant (arch sync, 7060115, Oct 25, 2026; verified at HEAD 25a5a08):** `EXCLUDED_ERA = "Leadership & Professional Narrative"` is defined twice, in `utils/landing_cards.py` and `ui/components/timeline_view.py`. CLAUDE.md's configuration rules treat a duplicated hardcoded value as a bug; step 2's one source per Era value covers it.
+
 ---
 
 ### MATTGPT-344
@@ -3468,6 +3471,24 @@ Verified Oct 22, 2026 (HEAD 5787bdf): `.gitignore` has `/probes/`; the run folde
 **Design note (Oct 25, 2026):** the Geo tile also lowercases its qualifier ("open to relocate"), so once -354 lands the Work mode tile ("Hybrid fine", as stored) and the Geo tile will capitalize differently. Reading Geo the same way (value + " · " + subline) would make them match.
 
 **375 px wrap (Arch Governor, Oct 25, 2026; as reported):** the Geo tile breaks after its dot at 375 px ("Atlanta · open to" / "relocate"). MATTGPT-354 fixed the same break on the Work mode tile in 6c74f86 by wrapping "· Hybrid fine" as a unit.
+---
+
+### MATTGPT-359
+**`_render_degraded_banner()`'s docstring says keyword rows still render during an outage; `_should_suppress_page_ui()` hides them**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Hygiene
+- **File:** `ui/pages/explore_stories.py` (`_render_degraded_banner()`)
+- **Related:** MATTGPT-230 (the outage banner and suppression), ADR 065 (records the hiding)
+- **Logged:** October 25, 2026
+
+**Issue (arch sync, 7060115, Oct 25, 2026):** a stale comment; visitors are not affected.
+
+**Verified Oct 25, 2026 (HEAD 25a5a08):** `_render_degraded_banner()`'s docstring says "Keyword rows still render below when present". `_should_suppress_page_ui()` returns True whenever `reason == "fallback:pinecone_unavailable"`, "regardless of whether keyword matches were found", so keyword rows are hidden during an outage.
+
+**Fix:** correct the docstring. Per CLAUDE.md's scope rule, the next session that edits `explore_stories.py` fixes it as a trivial change and names it in its commit message. Driver 7 (dead code and hygiene).
+
 ---
 
 

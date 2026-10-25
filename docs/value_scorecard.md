@@ -374,7 +374,7 @@ experience reliably and sustainably; failures are visible, not silent.
   -214, -226, -343 (Era and Theme literals; extend -258's guard).
 - Dead code and hygiene: -241, -152, -287 (docs
   describe a removed overlap gate; -176, -190 and -195 folded in),
-  -344 (uncalled functions, provisional).
+  -344 (uncalled functions, provisional), -359 (stale outage-banner docstring).
 - Visible glitches: -229, -289 (MATTGPT-018 regression watch), -330 (Home to My Work half-emptied frame).
 
 ## 8. Professional demonstration
