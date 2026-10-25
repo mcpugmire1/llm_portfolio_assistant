@@ -2689,7 +2689,7 @@ Kept off the roadmap's NOW.
 - Cycle 2: delete `generate_competencies.py`, `generate_interview_questions.py` and `generate_use_cases.py`, and archive `echo_star_stories_interview_questions.jsonl` and `echo_star_stories_nlp_use_cases.jsonl` to `data/archive/{name}_{date}` (Matt, Oct 21 and 22; archive, not delete). Its commit carries the `Decision:` trailers naming each deleted function.
 - Cycle 3: the public tags script moves to `DEFAULT_CHAT_MODEL` (Matt runs it).
 - Cycle 4: openai 3.x (ADR 050).
-- Before push: Streamlit Cloud end-to-end timing.
+- Right after push: Streamlit Cloud end-to-end timing; revert 466b55a if any run is over 30 s or errors (Matt, Oct 25, 2026).
 
 **Observations from the runs (Oct 25, 2026; from 466b55a's message):**
 - AT&T reached Apply/High in 4 of 12 production-shaped Terra runs, against Consider/Medium in all of gpt-4o's. Not visitor-facing (no `ui/` caller); MATTGPT-244 tracks `RECOMMENDATION_STRONG_RATIO`.
