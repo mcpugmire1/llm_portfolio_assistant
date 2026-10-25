@@ -1689,3 +1689,88 @@ The gpt-4o family retires January 14, 2027. Role Match's four calls (`_call_requ
 - The four root generator scripts stay on gpt-4o until MATTGPT-302's later cycles (three deleted, the tag script moved), and openai 3.x is still pending (ADR 050).
 
 **History:** 4818c59 (Red on gpt-6.1-sol), 2a7a56d (RM-D1 reopened), d6c1fb4 (Red on gpt-5.6-terra), de3b698 (Populate rule Red), 466b55a (Green).
+
+---
+
+## ADR 064: Role Match Scores Capability Only and Reports the Same Facts on Every Surface
+
+**Date:** 2026-10-25
+**Status:** Accepted
+**Related tickets:** MATTGPT-089, MATTGPT-160, MATTGPT-240, MATTGPT-246, MATTGPT-248
+
+**Context:**
+Four Role Match rules have been live since April to September 2026, recorded only in code comments and commit messages. This ADR records them as they stand in the code.
+
+**Decision:**
+- **Location & Availability is shown, never scored.** Every extraction prompt in `services/jd_assessor.py` says "DO NOT extract logistics as requirements: location, work mode (onsite/remote/hybrid), salary, visa, interview process, start date". Matt's facts are shown in the Location & Availability block on `role_match.py`, read from the `logistics` key of `data/matt_profile.json`.
+- **A row the run didn't reach is Unassessed, never Gap.** When a requirement's assessment raises, or its retrieval returns None, `_unassessed_row()` builds the row: status `unassessed`, no evidence, no confidence. `_incomplete_notice_text()` adds "I couldn't get to N of these M requirements" ("any of these M" when none were reached), and on screen it also adds "Try again for the full picture". `compute_summary_counts()` counts unassessed rows separately under required and preferred.
+- **Share and Export carry what the screen carries.** `_build_share_text()` and `_build_export_html()` use the same summary counts, the same legend (`_legend_entries()`, in a fixed order), the same incomplete notice and the same Location & Availability cells as the screen, with up to two evidence lines per assessed row. The differences, by surface:
+  - only the screen shows "Try again" and the paw;
+  - Share and Export name the evidence type in words where the screen shows 🔗;
+  - Share ends with "Explore Matt's full portfolio:", linking to `askmattgpt.streamlit.app` with `utm_source=role_match`, `utm_medium=clipboard`, `utm_campaign=fit_assessment` and `utm_content=<role-company>`.
+- **A paste that isn't a JD never reaches the model.** `_handle_submit_click()` rejects text under `_MIN_JD_WORDS` (30) or failing `_looks_like_jd()`, before any LLM call. It shows the rejection banner and logs `role_match_gate_rejection`. Empty text is a no-op.
+
+**Rationale:**
+- Location & Availability: the prompt's reason is "These are filters, not capability fit signals."
+- Unassessed: from `_unassessed_row()`, "stamping a value for a verdict we didn't reach would be a fabrication". Showing an unreached row as Gap would claim Matt lacks something nobody checked. Before MATTGPT-248, a partial failure either suppressed the summary or asserted a clean match.
+- Surface parity: from `_build_share_text()`, Share's header makes a forwarded report self-contained, and the trailing portfolio URL "turns every paste into a referral channel back to the live experience". `_incomplete_notice_text()` holds the facts the same on every surface and keeps the action clause where retry is possible.
+- JD gate: from `_MIN_JD_WORDS`'s comment, below 30 words the extractor "consistently returns near-empty results that read as failed assessments". "From their side, a 25-word paste and a recipe are the same problem", so both get the same banner.
+
+**Consequences:**
+- A new Role Match surface carries the counts, legend, notice and Location & Availability block. Counts route through `compute_summary_counts()`.
+- A JD whose only requirements are logistics yields no scored rows.
+- ADR 062's mobile gate and this ADR's JD gate both sit ahead of any model call.
+
+**History:** 5e01460 (Share referral link with UTM, April 9, 2026); 455cac3 (logistics prompt line, April 11, 2026); 0f08f10 (MATTGPT-240 Green, JD gate, September 9, 2026); 0c1189f to 43ca523 (MATTGPT-248, with MATTGPT-246 parity folded in, September 2026); c4daab4 (MATTGPT-089 Location & Availability block, September 19, 2026); 5aee8a4 (MATTGPT-160, the line in each section-scoped prompt).
+
+---
+
+## ADR 065: My Work's Default View Leaves Out Professional Narrative; an Outage Shows No Results
+
+**Date:** 2026-10-25
+**Status:** Accepted
+**Related tickets:** MATTGPT-098, MATTGPT-224, MATTGPT-230, MATTGPT-308
+
+**Context:**
+Two My Work rules have been live since June and September 2026, recorded only in code comments, commit messages and a feature file's user story.
+
+**Decision:**
+- **Default view:** with no query and no filters, and on a rejected query, `_default_view()` in `explore_stories.py` returns every story whose Theme is not "Professional Narrative", sorted by `Start_Date` descending. When any non-query filter is set, it applies the filters without that exclusion.
+- **Search outage:** when `semantic_search()` reports `fallback:pinecone_unavailable`, My Work shows only the breather banner. The story count, grid, affordance lines, filter chips and story detail are hidden (`_should_suppress_page_ui()`), even when the keyword fallback found matches; its stories are never shown as results.
+
+**Rationale:**
+- Default view: the MATTGPT-098 user story in `tests/bdd/features/explore_stories_default_state.feature` asks for project work, most recent first, "So that the first impression represents Matt's project portfolio rather than career-narrative meta-stories that don't categorize into a capability area". `docs/value_scorecard.md` quotes it as an intended outcome of driver 6, evidence discovery. The exclusion uses the same Theme hook as MATT_DNA (`_default_view()`'s docstring).
+- Outage: from `_should_suppress_page_ui()`, "keyword rows are fallback output too. Lexical matches ranked by nothing, presented with the same count and pagination as semantic results, are the same false-confidence problem the ticket exists to fix." The breather replaces the "closest matches, relevance may be low" copy, which turned an outage into an apparent content gap.
+
+**Consequences:**
+- MATTGPT-308 (open) found the ordering puts the 9 MattGPT Product Development stories in 9 of the first 10 rows, and all 9 in Cards' first page. Changing the ordering is that ticket's decision; it supersedes this ADR's ordering line when it lands.
+- Search with Pinecone down is not degraded to keyword results anywhere on My Work.
+
+**History:** 856c908 (MATTGPT-098 Green, June 1, 2026); 92370b3 (MATTGPT-224 Green, a rejected query renders the default view, September 1, 2026); 013d9ac (MATTGPT-230 Green, September 2, 2026).
+
+---
+
+## ADR 066: Landing Pages Show Single-Story Capabilities, Keep Narrative Stories Off Cards, and Give Cross-Industry No Client Count
+
+**Date:** 2026-10-25
+**Status:** Accepted
+**Related tickets:** MATTGPT-060, MATTGPT-144
+
+**Context:**
+Three landing page rules are recorded only in code comments and commit messages.
+
+**Decision:**
+- **Single-story capabilities are shown.** Cards with fewer than the Core threshold of stories go in the Specialized Capabilities tier (`banking_landing.py`), including capabilities backed by one story. They are not hidden.
+- **Narrative stories stay off cards and counts.** `build_landing_cards()` in `utils/landing_cards.py` leaves out stories whose Era is `EXCLUDED_ERA` ("Leadership & Professional Narrative"), the same rule the Timeline view applies.
+- **Cross-Industry shows no client count.** Its header counts distinct projects only (`cross_industry_landing.py`).
+
+**Rationale:**
+- Single-story capabilities: from `banking_landing.py`'s comment, hiding them "creates false-negative signal for hiring managers searching for specific niche capabilities". Thin capabilities are shown in a lower tier, not left out.
+- Narrative stories: from `landing_cards.py`'s comment, "narrative content stays off project-categorization surfaces".
+- Cross-Industry: from the page's comment, that work "is client-anonymized (stories attribute to "Fortune 500 Clients" and similar placeholders), so a filtered-then-derived client count would surface the anonymization as a wrong-looking number rather than information".
+
+**Consequences:**
+- `EXCLUDED_ERA` is defined twice, in `utils/landing_cards.py` and `ui/components/timeline_view.py`, and `landing_cards.py`'s comment says a change must be made in both.
+- A new landing page derives its cards through `build_landing_cards()` and inherits the exclusion.
+
+**History:** 8ae3d66 and 5fd62f6 (data-derived landing cards and the Specialized tier, May 12, 2026); c6b6786 (MATTGPT-144, Cross-Industry project count, September 3, 2026).
