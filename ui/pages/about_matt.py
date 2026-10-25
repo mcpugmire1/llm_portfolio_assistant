@@ -42,12 +42,28 @@ def _work_mode_text(profile: dict) -> str:
     logistics.work_model, the source Role Match and Ask Agy read: the value,
     " · ", then the subline, as stored (MATTGPT-354). No value gives "", and
     the tile is left out (the MATTGPT-089 omit-cleanly contract)."""
+    value, subline = _work_mode_parts(profile)
+    return f"{value} · {subline}" if subline else value
+
+
+def _work_mode_parts(profile: dict) -> tuple[str, str]:
+    """(value, subline) of logistics.work_model, stripped; ("", "") when
+    there is no value."""
     cell = ((profile or {}).get("logistics") or {}).get("work_model") or {}
     value = str(cell.get("value", "")).strip()
     if not value:
-        return ""
-    subline = str(cell.get("subline", "")).strip()
-    return f"{value} · {subline}" if subline else value
+        return "", ""
+    return value, str(cell.get("subline", "")).strip()
+
+
+def _work_mode_html(profile: dict) -> str:
+    """_work_mode_text() as tile markup, escaped. The separator and subline
+    wrap as one unit, so a narrow tile breaks before the dot, never after it
+    (375 px: "In-office preferred" / "· Hybrid fine")."""
+    value, subline = (html.escape(p, quote=False) for p in _work_mode_parts(profile))
+    if not subline:
+        return value
+    return f'{value} <span style="white-space:nowrap">· {subline}</span>'
 
 
 def render_about_matt():
@@ -82,7 +98,7 @@ def render_about_matt():
         profile = matt_profile.load_profile_dict()
     except Exception:
         profile = {}
-    work_mode = html.escape(_work_mode_text(profile), quote=False)
+    work_mode = _work_mode_html(profile)
 
     with st.container(key="am_signals_panel"):
         st.markdown('<p class="prof-section-h">Signals</p>', unsafe_allow_html=True)
