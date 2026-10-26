@@ -180,6 +180,8 @@ Infrastructure: -035 (Parked), -040 · -233 (Phase 2: extend pre-push gate to BD
 | [MATTGPT-355](#mattgpt-355) | Role Match: an extraction that returns 0 requirements is logged as a success and leaves the visitor one line with no next step | Open | Medium | Bug | value | October 25, 2026 |
 | [MATTGPT-356](#mattgpt-356) | My Profile hardcodes "Atlanta · open to relocate" while the profile's location says "Atlanta, GA" / "Open to relocation and travel" | Open | Low | Issue | value | October 25, 2026 |
 | [MATTGPT-359](#mattgpt-359) | `_render_degraded_banner()`'s docstring says keyword rows still render during an outage; `_should_suppress_page_ui()` hides them | Open | Low | Hygiene | chore | October 25, 2026 |
+| [MATTGPT-360](#mattgpt-360) | openai 3.x: requirements.txt pins openai==2.5.0; move to 3.x deliberately, with tests | Open | Low | Infra | value | October 26, 2026 |
+| [MATTGPT-361](#mattgpt-361) | Role Match: hybrid_jd extracted 0 required in 2 of 12 gpt-5.6-terra runs, with every row in implicit | Open | Medium | Issue | value | October 26, 2026 |
 | [MATTGPT-244](#mattgpt-244) | Role Match assessor prompt calibration: cited evidence doesn't address the specific claim (22% over-called on demo JD; row 22 confirmed scope; CI/CD-qualifier row pending verification) | In Progress | High | Issue | value | September 2, 2026 |
 | [MATTGPT-166](#mattgpt-166) | Arc stories with placeholder client metadata don't appear under My Work's named-client filter -- tradeoff, not defect | Open | Medium | Issue | value | August 3, 2026 |
 | [MATTGPT-167](#mattgpt-167) | Widen entity detection to Project and Place -- specification complete, no confirmed failing case currently | Decided Against | Medium | Action | value | August 3, 2026 |
@@ -2663,38 +2665,25 @@ Kept off the roadmap's NOW.
 - **Type:** Action
 - **Deadline:** January 14, 2027 (retirement date per OpenAI's notice, as reported by Matt; not in the repo). Schedule well before January.
 - **File:** `services/jd_assessor.py` (`ASSESSMENT_MODEL`, the assessment and extraction prompts), `config/constants.py`, root generator scripts
-- **Related:** MATTGPT-140 (model names in constants), MATTGPT-282 (answering-model comparison), MATTGPT-275 (moves Ask Agy to gpt-6.1-sol)
+- **Related:** MATTGPT-360 (openai 3.x, moved out Oct 26, 2026), MATTGPT-361 (hybrid_jd's 0 required rows, moved out Oct 26, 2026), MATTGPT-140 (model names in constants), MATTGPT-282 (answering-model comparison), MATTGPT-275 (moves Ask Agy to gpt-6.1-sol)
 - **Logged:** October 14, 2026
 
-**Verified Oct 14, 2026 (`git grep` over `*.py`, excluding `tests/`, `archive/`, `probes/`, `docs/`):**
-- **Role Match:** `services/jd_assessor.py` sets `ASSESSMENT_MODEL = "gpt-4o"`, used by its four model calls; root `probe_assessor.py` imports it.
-- **Ask Agy at HEAD:** `backend_service.py` calls `"gpt-4o"` for the answer and `"gpt-4o-mini"` in `is_query_on_topic_llm()`. MATTGPT-275's working tree replaces these with `ASK_ANSWER_MODEL = "gpt-6.1-sol"` in `config/constants.py` (uncommitted). If 275 has not shipped by the deadline, production Ask Agy breaks too.
-- **Constants:** `config/constants.py` has `DEFAULT_CHAT_MODEL = "gpt-4o"` and `DEFAULT_CLASSIFICATION_MODEL = "gpt-4o-mini"`. `DEFAULT_CHAT_MODEL` is read by `scripts/extract_facts.py`, which records it as `facts["chat_model"]`; `DEFAULT_CLASSIFICATION_MODEL` has no reader outside `config/constants.py`: delete it rather than migrate.
-- **Generator scripts:** `MODEL = "gpt-4o"` in `generate_competencies.py`, `generate_interview_questions.py`, `generate_public_tags.py` and `generate_use_cases.py`.
-- No gpt-4.1 or gpt-4.1-mini found in those paths.
+**Verified Oct 26, 2026 (HEAD 4f358cb; `git grep -n -E 'gpt-4o|gpt-4\.1'` excluding `tests/`, `archive/`, `probes/`, `docs/`, BACKLOG.md and CHANGELOG.md):**
+- **Code:** only the four root generator scripts: `MODEL = "gpt-4o"` in `generate_competencies.py`, `generate_interview_questions.py`, `generate_public_tags.py` and `generate_use_cases.py` (plus a gpt-4o pricing comment in `generate_public_tags.py`). Role Match (466b55a) and Ask Agy (1095d2c) are off the retiring models.
+- **Prose:** ARCHITECTURE.md's tech-stack line ("gpt-4o runs tag generation", accurate until cycle 3) and three lines in the root `080_Skill_Evidence_Approach.md`.
+- No gpt-4.1 or gpt-4.1-mini found.
 
 **Fix:** move Role Match's assessment and extraction to a current model, and every script above off the retiring models. Model names go through `config/constants.py` (MATTGPT-140), so the next retirement is a one-line change.
 
 **Acceptance:**
 - A measured before/after run on the AT&T JD (`data/probe_jd_att_principal.txt`) and the demo JD (`data/demo_jd.txt`): extracted `source_text` stays verbatim, requirement counts, and strong/partial/gap counts.
 - A dash check on Role Match output. The no-dash rule was left out of Role Match only because gpt-4o wrote none (Matt, Oct 14, 2026); Sol answers have been seen to contain em dashes (8fa0270).
-- Acceptance bar (Matt, Oct 24, 2026; replaces "no worse than gpt-4o's"): gpt-5.6-terra at low effort with today's extraction prompt runs end to end in at most 30 s on every JD in the test data over 3 runs (AT&T is the longest); recommendations are unchanged from gpt-4o on the AT&T and demo JDs; the honesty, dash and output-shape checks stay as set; line numbers stay out (that's the speed ticket, MATTGPT-267). R4's 90 s budget measures a successful run; RM-D10's failure ceiling is separate.
-- RM-D1 and RM-D10 decided in d6c1fb4 (Red, Oct 23, 2026): Role Match runs on gpt-5.6-terra at reasoning_effort low (Rejected: gpt-6.1-sol at medium, 49.5 to 65.2 s end to end on AT&T); the read timeout is 30 s with 2 retries (Rejected: 60 s). Status In Progress since Red 4818c59 (Oct 22). The run folders are committed under `docs/evidence/MATTGPT-302/` (3ec3d9c, 6fbf6e2, a0f161b), so 2a7a56d's "RM-D1 is reopened" and "not committed" lines no longer hold.
-
-**openai 3.x (from 130febd, Oct 15, 2026):** `requirements.txt` pins `openai==2.5.0`, the version every test, probe and gate ran on. Unpinned, Cloud builds had installed 3.28.0 (Oct 11) and 3.31.0 (Oct 15 reboot). openai 3.x moved to httpx2, so `_stream_response()`'s before-text retry, which catches `httpx.TransportError`, was inert in prod (as reported in 130febd). Moving to 3.x deliberately, with tests, goes with this ticket. `requirements-ci.txt` stays unpinned.
-
-**Pickup (Oct 16, 2026):** after MATTGPT-140.
+- Acceptance bar (Matt, Oct 24, 2026; replaces "no worse than gpt-4o's"): gpt-5.6-terra at low effort with today's extraction prompt runs end to end in at most 30 s on every JD in the test data over 3 runs (AT&T is the longest); the honesty, dash and output-shape checks stay as set; line numbers stay out (that's the speed ticket, MATTGPT-267). R4's 90 s budget measures a successful run; RM-D10's failure ceiling is separate.
+- RM-D1 and RM-D10 decided in d6c1fb4 (Red, Oct 23, 2026): Role Match runs on gpt-5.6-terra at reasoning_effort low (Rejected: gpt-6.1-sol at medium, 49.5 to 65.2 s end to end on AT&T); the read timeout is 30 s with 2 retries (Rejected: 60 s). Status In Progress since Red 4818c59 (Oct 22).
 
 **Green (Oct 25, 2026; verified against 466b55a's message):** 466b55a (Red de3b698; evidence 6643329 and 68eae05 under `docs/evidence/MATTGPT-302/`). Role Match's four calls run on gpt-5.6-terra at reasoning_effort low with a 30 s read timeout and 2 retries; `NO_DASH_RULE` is in the assessment prompt; the Populate rule's parenthetical is dropped (`key_responsibilities` kept); `DEFAULT_CLASSIFICATION_MODEL` and `ASSESSMENT_TEMPERATURE` are deleted. "Recommendations unchanged from gpt-4o" left the bar, since `compute_recommendation()` has no `ui/` caller. Demo JD on this code: 14.3 to 15.4 s, against gpt-4o's 13.6 to 16.5 s. Stays In Progress for:
 - Cycle 2: delete `generate_competencies.py`, `generate_interview_questions.py` and `generate_use_cases.py`, and archive `echo_star_stories_interview_questions.jsonl` and `echo_star_stories_nlp_use_cases.jsonl` to `data/archive/{name}_{date}` (Matt, Oct 21 and 22; archive, not delete). Its commit carries the `Decision:` trailers naming each deleted function.
-- Cycle 3: the public tags script moves to `DEFAULT_CHAT_MODEL` (Matt runs it).
-- Cycle 4: openai 3.x (ADR 050).
-- Right after push: Streamlit Cloud end-to-end timing; revert 466b55a if any run is over 30 s or errors (Matt, Oct 25, 2026).
-
-**Observations from the runs (Oct 25, 2026; from 466b55a's message):**
-- AT&T reached Apply/High in 4 of 12 production-shaped Terra runs, against Consider/Medium in all of gpt-4o's. Not visitor-facing (no `ui/` caller); MATTGPT-244 tracks `RECOMMENDATION_STRONG_RATIO`.
-- hybrid_jd extracted 0 required in 2 of 12 runs, with every row in implicit (paren run 5, confirm run 1).
-- Two corpus titles have a double space after the colon (checked in `echo_star_stories_nlp.jsonl`, Oct 25): "Modernizing Railroad Revenue:  Transitioning from Legacy to Cloud" and "Launchpad:  Empowering Clients and Teams with AWS Enablement and Cloud Certifications". The model writes one space; chips still resolve because `_find_story_by_title_client()` collapses whitespace. 466b55a's runs flagged only the Railroad title.
+- Cycle 3: the public tags script moves to `DEFAULT_CHAT_MODEL` (Matt runs it). Update ARCHITECTURE.md's tag line and `080_Skill_Evidence_Approach.md`'s three gpt-4o lines when the tag script moves.
 
 ---
 
@@ -2888,7 +2877,7 @@ Any sentinel has to be translated in one place before anything uses it. With tha
 - **Priority:** Low
 - **Type:** Infra
 - **File:** `requirements.txt`
-- **Related:** MATTGPT-313
+- **Related:** MATTGPT-313, MATTGPT-360 (openai 3.x; `requirements.txt` pins `openai==2.5.0`)
 - **Logged:** October 15, 2026
 
 **Reported (Oct 15, 2026, MATTGPT-275 deploy):** Streamlit Cloud's in-place update installed pyarrow 26.0.0, which has a known segfault, until the reboot corrected it.
@@ -3488,6 +3477,40 @@ Verified Oct 22, 2026 (HEAD 5787bdf): `.gitignore` has `/probes/`; the run folde
 **Verified Oct 25, 2026 (HEAD 25a5a08):** `_render_degraded_banner()`'s docstring says "Keyword rows still render below when present". `_should_suppress_page_ui()` returns True whenever `reason == "fallback:pinecone_unavailable"`, "regardless of whether keyword matches were found", so keyword rows are hidden during an outage.
 
 **Fix:** correct the docstring. Per CLAUDE.md's scope rule, the next session that edits `explore_stories.py` fixes it as a trivial change and names it in its commit message. Driver 7 (dead code and hygiene).
+
+---
+
+### MATTGPT-360
+**openai 3.x: requirements.txt pins openai==2.5.0; move to 3.x deliberately, with tests**
+
+- **Status:** Open
+- **Priority:** Low
+- **Type:** Infra
+- **File:** `requirements.txt`, `ui/pages/ask_mattgpt/backend_service.py` (`_stream_response()`'s retry before first text)
+- **Related:** MATTGPT-302 (moved out of it, Oct 26, 2026), MATTGPT-314 (pins in `requirements.txt`), ADR 050 (Ask Agy's 30 s read timeout and one retry)
+- **Logged:** October 26, 2026
+
+**From 130febd (Oct 15, 2026):** `requirements.txt` listed openai with no version (since 0a41c02, June 2025), so each Streamlit Cloud build installed the newest release: 3.28.0 on the Oct 11 build, 3.31.0 on the Oct 15 reboot after the MATTGPT-275 push. 130febd pinned `openai==2.5.0`, the version every test, probe and gate ran on. openai 3.x moved to httpx2, so `_stream_response()`'s retry before first text, which catches `httpx.TransportError`, was inert in prod; the 30 s read timeout still applied (3.31.0 converts an `httpx.Timeout` to httpx2's). Answers worked on 3.31.0 (live check, Oct 15). `requirements-ci.txt` stays unpinned, per its own note: CI's unit tests replace `openai.OpenAI` with a fake.
+
+**Verified Oct 26, 2026 (HEAD 4f358cb):** `requirements.txt` line 3 is `openai==2.5.0`.
+
+**Fix:** move to openai 3.x deliberately, with tests, including the retry before first text (ADR 050) and Role Match's `httpx.Timeout` in `_get_openai_client()` (466b55a). Driver 7 (runtime and dependencies).
+
+---
+
+### MATTGPT-361
+**Role Match: hybrid_jd extracted 0 required in 2 of 12 gpt-5.6-terra runs, with every row in implicit**
+
+- **Status:** Open
+- **Priority:** Medium
+- **Type:** Issue
+- **File:** `services/jd_assessor.py` (`extract_requirements()`, `_REQUIRED_EXTRACTION_PROMPT`)
+- **Related:** MATTGPT-302 (moved out of it, Oct 26, 2026), MATTGPT-355 (0 requirements in total; here the total is not 0), MATTGPT-266 (section labels)
+- **Logged:** October 26, 2026
+
+**Observed (466b55a's message, Oct 25, 2026):** on gpt-5.6-terra at low effort, hybrid_jd extracted 0 required rows in 2 of 12 runs (paren run 5 in `docs/evidence/MATTGPT-302/paren_20261025_091309/`, confirm run 1 in `docs/evidence/MATTGPT-302/green_confirm_20261025_094412/`), with every row in implicit. Total extraction stayed 9 to 14 rows over the 12 runs, so -302's bar (required plus implicit never 0) held. Not a fit for -355, whose case is 0 requirements in total: here the visitor gets rows, but none under Required.
+
+**Next:** check the two runs' rows against the JD's required section, and measure the rate on more runs before any prompt change. Driver 4 (Role Match).
 
 ---
 

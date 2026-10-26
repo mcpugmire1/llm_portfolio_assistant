@@ -284,7 +284,7 @@ Fitness functions and open decisions: see "Role Match (drivers 4, 3, 5, 7 and 8)
 
 **Open tickets:** -244 (In Progress), -266, -249, -012 (J0), -014, -081, -099,
 -173, -079, -264, -267, -352 (`_flatten_extraction()` crashes on a string implicit item; relevant to RM-D1),
--353 (the assessor sees only the first 3 Action and Result items; Story edits put key facts in the Summary, the Situation or the first 3 Action or Result items, which work with or without the cap), -355 (0-requirement extraction logged as a success, no next step).
+-353 (the assessor sees only the first 3 Action and Result items; Story edits put key facts in the Summary, the Situation or the first 3 Action or Result items, which work with or without the cap), -355 (0-requirement extraction logged as a success, no next step), -361 (hybrid_jd: 0 required in 2 of 12 Terra runs).
 
 ## 5. Evidence parity (Ask Agy and Role Match)
 
@@ -363,7 +363,7 @@ experience reliably and sustainably; failures are visible, not silent.
 **Open tickets:**
 - Alarms and telemetry: -222, -223 (My Work only), -348 (the "Chrome/103.0.0.0" bot signature drops real Chrome 103 visitors), -351 (query rows carry no Session ID).
 - Latency: -299.
-- Runtime and dependencies: -313 (Python 3.11 in prod, 3.13 local), -314 (pin pyarrow<25).
+- Runtime and dependencies: -313 (Python 3.11 in prod, 3.13 local), -314 (pin pyarrow<25), -360 (openai 3.x; pinned at 2.5.0).
 - Model retirement: -302 (In Progress; gpt-4o family retires January 14, 2027).
 - Silent failures: -292 (silent file-order fallback, High), -288 (Ask Agy ignores the Pinecone fallback signal), -349 (an exception after startup init renders a blank page).
 - Regression gates and test reliability: -039, -233, -235, -153,
